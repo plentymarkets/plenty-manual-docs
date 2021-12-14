@@ -14,31 +14,31 @@ if [ -d build ]; then
   rm -rf build
 fi
 
-if [ -d adocOutput ]; then
-  rm -rf adocOutput
+if [ -d docs ]; then
+  rm -rf docs
 fi
 
-mkdir adocOutput
+mkdir docs
 
 echo '######################';
 echo '#    build doc DE    #';
 echo '######################';
 
-mkdir adocOutput/de
-mkdir adocOutput/de/modules
-mkdir adocOutput/de/modules/ROOT
-mkdir adocOutput/de/modules/ROOT/images
-mkdir adocOutput/de/modules/ROOT/pages
-mkdir adocOutput/de/modules/ROOT/partials
+mkdir docs/de-de
+mkdir docs/de-de/modules
+mkdir docs/de-de/modules/ROOT
+mkdir docs/de-de/modules/ROOT/images
+mkdir docs/de-de/modules/ROOT/pages
+mkdir docs/de-de/modules/ROOT/partials
 
 #create includes files
-mkdir -p "adocOutput/de/modules/_includes/pages"
-mkdir -p "adocOutput/de/modules/_includes/examples"
-mkdir -p "adocOutput/de/modules/_includes/images"
+mkdir -p "docs/de-de/modules/_includes/pages"
+mkdir -p "docs/de-de/modules/_includes/examples"
+mkdir -p "docs/de-de/modules/_includes/images"
 
-find gitRepo/de/ -name '*.adoc' -exec cp {} "adocOutput/de/modules/_includes/pages" \;
-cp -R gitRepo/de/_includes/_pdf adocOutput/de/modules/_includes/examples
-cp -R gitRepo/de/_includes/_plugin adocOutput/de/modules/_includes/examples
+find gitRepo/de/ -name '*.adoc' -exec cp {} "docs/de-de/modules/_includes/pages" \;
+cp -R gitRepo/de/_includes/_pdf docs/de-de/modules/_includes/examples
+cp -R gitRepo/de/_includes/_plugin docs/de-de/modules/_includes/examples
 
 ARRAY=()
 #navigate through all pages
@@ -56,66 +56,93 @@ for FILE in gitRepo/de/*.adoc;
   fi
 
   #create the directories
-  mkdir -p "adocOutput/de/modules/$PLUGINS"
-  mkdir -p "adocOutput/de/modules/$PLUGINS/images"
-  mkdir -p "adocOutput/de/modules/$PLUGINS/examples"
-  mkdir -p "adocOutput/de/modules/$PLUGINS/pages"
-  mkdir -p "adocOutput/de/modules/$PLUGINS/partials"
+  mkdir -p "docs/de-de/modules/$PLUGINS"
+  mkdir -p "docs/de-de/modules/$PLUGINS/images"
+  mkdir -p "docs/de-de/modules/$PLUGINS/examples"
+  mkdir -p "docs/de-de/modules/$PLUGINS/pages"
+  mkdir -p "docs/de-de/modules/$PLUGINS/partials"
 
+  #moving textblocks
+  find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
   #moving pages
-  find $PLUGINPATH -name '*.adoc' -exec cp {} "adocOutput/de/modules/$PLUGINS/pages" \;
+  find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/pages" \;
   #moving html & txt files
-  find $PLUGINPATH -name '*.html' -exec cp {} "adocOutput/de/modules/$PLUGINS/examples" \;
-  find $PLUGINPATH -name '*.txt' -exec cp {} "adocOutput/de/modules/$PLUGINS/examples" \;
+  find $PLUGINPATH -name '*.html' -exec cp {} "docs/de-de/modules/$PLUGINS/examples" \;
+  find $PLUGINPATH -name '*.txt' -exec cp {} "docs/de-de/modules/$PLUGINS/examples" \;
   #moving assets files
-  find $PLUGINPATH \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' \) -exec cp {} "adocOutput/de/modules/$PLUGINS/images" \;
+  find $PLUGINPATH \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' \) -exec cp {} "docs/de-de/modules/$PLUGINS/images" \;
   ARRAY+=(${PLUGINS})
 done
 
 echo '######################';
 echo '#  generate ANTORA   #';
 echo '######################';
-echo 'name: manual\ntitle: plentymarkets Handbuch\nversion: main\nnav:\n- modules/ROOT/nav.adoc' > adocOutput/de/antora.yml
+echo 'name: manual\ntitle: plentymarkets Handbuch\nversion: main\nnav:\n- modules/ROOT/nav.adoc' > docs/de-de/antora.yml
+
+
+find docs/de-de/ -name '*.adoc' -exec sed -i -e 's/include::{includedir}\/_header.adoc\[\]//g' {} \;
+find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).html/include::example$\2.html/g' {} \;
+find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).txt/include::example$\2.txt/g' {} \;
+find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_includes(.*)\/(.*).adoc/include::_includes:page$\3.adoc/g' {} \;
+
+find docs/de-de/modules/_includes/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).adoc/include::.\/\2.adoc/g' {} \;
+
 
 arraylength=${#ARRAY[@]}
 
 
 for i in "${ARRAY[@]}";
   do
-    echo "s/include::(.*)${i}(.*)\/(.*).adoc/include::${i}:page$\3.adoc/g"
-    find adocOutput/de/modules/ -name '*.adoc' -exec sed -i -e -r "s/include::(.*)${i}(.*)\/(.*).adoc/include::${i}:page$\3.adoc/g" {} \;
+    # Matches all cases: include::(\.\.\/)*(([a-z0-9\-]+)\/){0,1}(_textblocks\/){0,1}(.+).adoc
+
+    # Same module & Page
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(.+).adoc/include::page$\1.adoc/ig" {} \;
+
+    # Same module & Partial
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\/|\.\.\/)?_textblocks\/(.+\/)*(.+).adoc/include::partial$\3.adoc/ig" {} \;
+
+    # Same module & Image
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?\/?assets\/(.+).(png|jpg|gif)/image:\1\2.\3/ig" {} \;
+
+    # Different module & Page
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)+([a-z0-9\-]+)\/(.+).adoc/include::\2:page$\3.adoc/ig" {} \;
+
+    # Different module & Partial
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/(.+\/)*(.+).adoc/include::\2:partial$\4.adoc/ig" {} \;
+
+    # Different module & Image
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?([a-z0-9\-]+)\/assets\/(.+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
+
+    # Combined string replace statement
+    find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(.+).adoc/include::page$\1.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/(.+).adoc/include::\2:page$\3.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/(.+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/(.+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 done
 
-find adocOutput/de/ -name '*.adoc' -exec sed -i -e 's/a\|include/include/g' {} \;
-find adocOutput/de/ -name '*.adoc' -exec sed -i -e 's/include::{includedir}\/_header.adoc\[\]//g' {} \;
-find adocOutput/de/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)\/(.*).html/include::example$\2.html/g' {} \;
-find adocOutput/de/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)\/(.*).txt/include::example$\2.txt/g' {} \;
-find adocOutput/de/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)_includes(.*)\/(.*).adoc/include::_includes:page$\3.adoc/g' {} \;
-find adocOutput/de/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
+find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
 
-find adocOutput/de/modules/_includes/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)\/(.*).adoc/include::.\/\2.adoc/g' {} \;
+# Delete backup files
+find docs/de-de/ -name '*.adoc-e' -delete
 
 #STARTING GENERATING EN DOCS#
 
 echo '######################';
-echo '#    build doc DE    #';
+echo '#    build doc EN    #';
 echo '######################';
 
-mkdir adocOutput/en
-mkdir adocOutput/en/modules
-mkdir adocOutput/en/modules/ROOT
-mkdir adocOutput/en/modules/ROOT/images
-mkdir adocOutput/en/modules/ROOT/pages
-mkdir adocOutput/en/modules/ROOT/partials
+mkdir docs/en-gb
+mkdir docs/en-gb/modules
+mkdir docs/en-gb/modules/ROOT
+mkdir docs/en-gb/modules/ROOT/images
+mkdir docs/en-gb/modules/ROOT/pages
+mkdir docs/en-gb/modules/ROOT/partials
 
 #create includes files
-mkdir -p "adocOutput/en/modules/_includes/pages"
-mkdir -p "adocOutput/en/modules/_includes/examples"
-mkdir -p "adocOutput/en/modules/_includes/images"
+mkdir -p "docs/en-gb/modules/_includes/pages"
+mkdir -p "docs/en-gb/modules/_includes/examples"
+mkdir -p "docs/en-gb/modules/_includes/images"
 
-find gitRepo/en/ -name '*.adoc' -exec cp {} "adocOutput/en/modules/_includes/pages" \;
-cp -R gitRepo/en/_includes/_pdf adocOutput/en/modules/_includes/examples
-cp -R gitRepo/en/_includes/_plugin adocOutput/en/modules/_includes/examples
+find gitRepo/en/ -name '*.adoc' -exec cp {} "docs/en-gb/modules/_includes/pages" \;
+cp -R gitRepo/en/_includes/_pdf docs/en-gb/modules/_includes/examples
+cp -R gitRepo/en/_includes/_plugin docs/en-gb/modules/_includes/examples
 
 ARRAY=()
 #navigate through all pages
@@ -133,44 +160,70 @@ for FILE in gitRepo/en/*.adoc;
   fi
 
   #create the directories
-  mkdir -p "adocOutput/en/modules/$PLUGINS"
-  mkdir -p "adocOutput/en/modules/$PLUGINS/images"
-  mkdir -p "adocOutput/en/modules/$PLUGINS/examples"
-  mkdir -p "adocOutput/en/modules/$PLUGINS/pages"
-  mkdir -p "adocOutput/en/modules/$PLUGINS/partials"
+  mkdir -p "docs/en-gb/modules/$PLUGINS"
+  mkdir -p "docs/en-gb/modules/$PLUGINS/images"
+  mkdir -p "docs/en-gb/modules/$PLUGINS/examples"
+  mkdir -p "docs/en-gb/modules/$PLUGINS/pages"
+  mkdir -p "docs/en-gb/modules/$PLUGINS/partials"
 
+  #moving textblocks
+  find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
   #moving pages
-  find $PLUGINPATH -name '*.adoc' -exec cp {} "adocOutput/en/modules/$PLUGINS/pages" \;
+  find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/pages" \;
   #moving html & txt files
-  find $PLUGINPATH -name '*.html' -exec cp {} "adocOutput/en/modules/$PLUGINS/examples" \;
-  find $PLUGINPATH -name '*.txt' -exec cp {} "adocOutput/en/modules/$PLUGINS/examples" \;
+  find $PLUGINPATH -name '*.html' -exec cp {} "docs/en-gb/modules/$PLUGINS/examples" \;
+  find $PLUGINPATH -name '*.txt' -exec cp {} "docs/en-gb/modules/$PLUGINS/examples" \;
   #moving assets files
-  find $PLUGINPATH \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' \) -exec cp {} "adocOutput/en/modules/$PLUGINS/images" \;
+  find $PLUGINPATH \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' \) -exec cp {} "docs/en-gb/modules/$PLUGINS/images" \;
   ARRAY+=(${PLUGINS})
 done
 
 echo '######################';
 echo '#  generate ANTORA   #';
 echo '######################';
-echo 'name: manual\ntitle: plentymarkets Handbuch\nversion: main\nnav:\n- modules/ROOT/nav.adoc' > adocOutput/en/antora.yml
+echo 'name: manual\ntitle: plentymarkets Handbuch\nversion: main\nnav:\n- modules/ROOT/nav.adoc' > docs/en-gb/antora.yml
+
+find docs/en-gb/ -name '*.adoc' -exec sed -i -e 's/include::{includedir}\/_header.adoc\[\]//g' {} \;
+find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).html/include::example$\2.html/g' {} \;
+find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).txt/include::example$\2.txt/g' {} \;
+find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_includes(.*)\/(.*).adoc/include::_includes:page$\3.adoc/g' {} \;
+
+find docs/en-gb/modules/_includes/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).adoc/include::.\/\2.adoc/g' {} \;
+
 
 arraylength=${#ARRAY[@]}
 
 
 for i in "${ARRAY[@]}";
   do
-    echo "s/include::(.*)${i}(.*)\/(.*).adoc/include::${i}:page$\3.adoc/g"
-    find adocOutput/en/modules/ -name '*.adoc' -exec sed -i -e -r "s/include::(.*)${i}(.*)\/(.*).adoc/include::${i}:page$\3.adoc/g" {} \;
+    # Matches all cases: include::(\.\.\/)*(([a-z0-9\-]+)\/){0,1}(_textblocks\/){0,1}(.+).adoc
+
+    # Same module & Page
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(.+).adoc/include::page$\1.adoc/ig" {} \;
+
+    # Same module & Partial
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\/|\.\.\/)?_textblocks\/(.+\/)*(.+).adoc/include::partial$\3.adoc/ig" {} \;
+
+    # Same module & Image
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?\/?assets\/(.+).(png|jpg|gif)/image:\1\2.\3/ig" {} \;
+
+    # Different module & Page
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)+([a-z0-9\-]+)\/(.+).adoc/include::\2:page$\3.adoc/ig" {} \;
+
+    # Different module & Partial
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/(.+\/)*(.+).adoc/include::\2:partial$\4.adoc/ig" {} \;
+
+    # Different module & Image
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?([a-z0-9\-]+)\/assets\/(.+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
+
+    # Combined string replace statement
+    find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(.+).adoc/include::page$\1.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/(.+).adoc/include::\2:page$\3.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/(.+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/(.+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 done
 
-find adocOutput/en/ -name '*.adoc' -exec sed -i -e 's/a\|include/include/g' {} \;
-find adocOutput/en/ -name '*.adoc' -exec sed -i -e 's/include::{includedir}\/_header.adoc\[\]//g' {} \;
-find adocOutput/en/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)\/(.*).html/include::example$\2.html/g' {} \;
-find adocOutput/en/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)\/(.*).txt/include::example$\2.txt/g' {} \;
-find adocOutput/en/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)_includes(.*)\/(.*).adoc/include::_includes:page$\3.adoc/g' {} \;
-find adocOutput/en/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
+find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
 
-find adocOutput/en/modules/_includes/ -name '*.adoc' -exec sed -i -e -r 's/include::(.*)\/(.*).adoc/include::.\/\2.adoc/g' {} \;
+# Delete backup files
+find docs/en-gb/ -name '*.adoc-e' -delete
 
 #STARTING GENERATING THE MENU#
 
