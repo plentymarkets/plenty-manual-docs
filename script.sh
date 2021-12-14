@@ -167,7 +167,7 @@ for FILE in gitRepo/en/*.adoc;
   mkdir -p "docs/en-gb/modules/$PLUGINS/partials"
 
   #moving textblocks
-  find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
+  find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/partials" \;
   #moving pages
   find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/pages" \;
   #moving html & txt files
@@ -217,7 +217,7 @@ for i in "${ARRAY[@]}";
     # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?([a-z0-9\-]+)\/assets\/(.+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 
     # Combined string replace statement
-    find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(.+).adoc/include::page$\1.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/(.+).adoc/include::\2:page$\3.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/(.+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/(.+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
+    find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(.+).adoc/include::page$\1.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/(.+).adoc/include::\2:page$\3.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*(.+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/(.+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/(.+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 done
 
 find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
