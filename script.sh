@@ -65,7 +65,7 @@ for FILE in gitRepo/de/*.adoc;
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
   #moving pages
-  find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/pages" \;
+  find $PLUGINPATH -not -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/pages" \;
   #moving html & txt files
   find $PLUGINPATH -name '*.html' -exec cp {} "docs/de-de/modules/$PLUGINS/examples" \;
   find $PLUGINPATH -name '*.txt' -exec cp {} "docs/de-de/modules/$PLUGINS/examples" \;
@@ -169,7 +169,7 @@ for FILE in gitRepo/en/*.adoc;
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/partials" \;
   #moving pages
-  find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/pages" \;
+  find $PLUGINPATH -not -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/pages" \;
   #moving html & txt files
   find $PLUGINPATH -name '*.html' -exec cp {} "docs/en-gb/modules/$PLUGINS/examples" \;
   find $PLUGINPATH -name '*.txt' -exec cp {} "docs/en-gb/modules/$PLUGINS/examples" \;
