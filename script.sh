@@ -80,7 +80,7 @@ echo '######################';
 echo 'name: manual\ntitle: plentymarkets Handbuch\nversion: main\nnav:\n- modules/ROOT/nav.adoc' > docs/de-de/antora.yml
 
 
-# find docs/de-de/ -name '*.adoc' -exec sed -i -e 's/include::{includedir}\/_header.adoc\[\]//g' {} \;
+find docs/de-de/ -name '*.adoc' -exec sed -i -e '/include::{includedir}\/_header.adoc\[\]/d' {} \;
 find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).html/include::example$\2.html/g' {} \;
 find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).txt/include::example$\2.txt/g' {} \;
 find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_includes(.*)\/(.*).adoc/include::_includes:page$\3.adoc/g' {} \;
