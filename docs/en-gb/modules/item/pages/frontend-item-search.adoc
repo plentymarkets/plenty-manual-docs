@@ -1,0 +1,717 @@
+= Faceted search (filters)
+:lang: en
+include::{includedir}/_header.adoc[]
+:keywords: Filter, Filters, Filtering, Search filter, Search filters, Filter search, Facet, Facets, Facet search, Faceted search, Search facets, Webshop search function, Webshop search, Store search, Online store search, Search function, Search, Frontend, Front end, Frontend search, Front end search, Frontend item search, Front end item search, Weighting, Boost, Boost value
+:description: Add search filters (facets) to your online store and allow visitors to narrow down the products that are displayed.
+:position: 35
+:url: item/frontend-item-search
+:id: NKJXE3I
+:author: team-item
+
+////
+zuletzt bearbeitet 24.11.2021
+////
+
+Some customers know exactly what they’re looking for.
+For example, imagine you sell shoes.
+A customer searches for black Nike shoes that cost less than €150.
+Online shop visitors can use search filters to limit which products they see.
+The more products a shop category includes, the more important search filters are.
+
+image::data/importing-data/assets/best-practice-facets-initial-situation.png[]
+
+[TIP]
+.Filters or facets?
+====
+In plentymarkets, search filters are also called _facets_.
+Don’t get confused if someone talks about the so-called _faceted search_.
+This refers to the search filters in the plentyShop.
+====
+
+[discrete]
+=== Procedure
+
+This function is configured in several different steps:
+
+* <<item/frontend-item-search#10, Create the necessary filters>>.
+* <<item/frontend-item-search#120, Specify which plentyShop the filters should appear in>>.
+* <<item/frontend-item-search#150, Design the appearance in the plentyShop>>.
+
+[#10]
+== Creating and editing filters
+
+First, create all of the necessary filters.
+For example, if customers should be able to search for black Nike shoes that cost less than €150, then you’ll need to create the filters “Colour”, “Brand” and “Price range”.
+
+You can <<item/frontend-item-search#20, manually>> create and edit filters or you can <<item/frontend-item-search#80, import>> filters with the help of a CSV file.
+
+[#20]
+=== Manual procedure
+
+[#30]
+==== Creating new filters
+
+. Go to *Setup » Client » Settings » Services » Faceted search*.
+. Click on icon:plus[role="green"] *New*.
+. Carry out the settings. Note <<table-new-facet>>.
+. *Save* (icon:save[set=plenty, role="green"]) the settings. +
+→ The filter is created and opened for editing.
+Depending on which type of filter you chose, you’ll see some or all of the tabs explained further below.
+
+[[table-new-facet]]
+.Creating new filters
+[cols="1,4"]
+|====
+|Setting |Explanation
+
+| *Name (English)*
+|Enter a name for the filter.
+This name is displayed in the English language version of your plentyShop.
+In other words, the name is visible to customers.
+
+*_Other language versions_*: Is your plentyShop also available in other languages?
+Once you’ve created the filter, you’ll be able to <<item/frontend-item-search#50, save the name in other languages>>.
+
+| *Type*
+a|What sort of filter do you want to create?
+Allow your customers to filter products by the following criteria:
+attribute, characteristic, property, brand name, availability, price range.
+
+*_Note_*: This setting can not be changed once you’ve created the filter.
+
+[cols="1,4a"]
+!===
+
+! *Attribute/characteristic*
+!This type can be used for many different scenarios.
+The filter is linked to the attributes, characteristics or properties in your system.
+
+*_Example_*: Choose this type if you want to create the filter “Colour” or “Size”.
+
+! *Manufacturer*
+!This type of filter is linked to the manufacturers in your system.
+
+*_Example_*: Choose this type if you want to create the filter “Brand name”.
+
+*_Note_*: Make sure that you've also saved an <<item/settings/manufacturers#150, external name for your manufacturers>>.
+Otherwise the manufacturer will not be displayed in the brand name filter.
+
+! *Availability*
+!This type of filter is linked to the availabilities in your system.
+
+*_Example_*: Choose this type if you want customers to filter for items that ship within 24 hours.
+
+! *Price*
+!You do _not_ need to link this type of filter with values.
+
+*_Example_*: Choose this type if you want to create the filter “Price range”.
+Webshop visitors can individually limit the filter from the lowest to the highest price of a category.
+
+!===
+
+| *Position*
+|Where should the filter appear in the plentyShop?
+In other words, which filter should be displayed first, second, third, etc?
+Enter the position number here.
+
+*_Note_*: Filters that have the same position will be sorted alphabetically.
+
+|====
+
+[#40]
+==== Tab: Settings
+
+Here you can configure additional settings for the filter.
+
+. Go to *Setup » Client » Settings » Services » Faceted search*.
+. Open the facet and click on *Tab: Settings*.
+. Carry out the settings. Note <<table-edit-facet-settings>>.
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+
+[[table-edit-facet-settings]]
+.Additional settings for the filter
+[cols="1,4"]
+|====
+|Setting |Explanation
+
+| *Type*
+|Here you’ll see whichever type you selected <<item/frontend-item-search#30, while creating the filter>>.
+The type cannot be changed.
+If you accidentally created the wrong type, then you’ll need to delete the filter and create a new one.
+
+//diese Option noch ausführlicher beschreiben
+
+| *Sorting* +
+(Invisible for type "Price")
+|How should the values be sorted within the filter?
+
+*_Example_*: If you’re creating the filter “Brand name”, then you could sort the individual brands alphabetically.
+
+| *Position*
+|Here you’ll see the position number that you entered <<item/frontend-item-search#30, while creating the filter>>.
+You can change the position number if needed.
+The position number specifies where the filter should appear in the plentyShop.
+In other words, which filter should be displayed first, second, third, etc.
+
+*_Note_*: Filters that have the same position will be sorted alphabetically.
+
+| *CSS class*
+|This option currently has no function.
+Enter a CSS name.
+In the future, it will be possible to design the filter with CSS.
+
+//This name will be made available as a template variable in the CMS menu so that every facet can be saved as an individual class.
+
+
+| *Selection type* +
+(Invisible for type "Price")
+a|What should happen when customers select multiple filter criteria? Should they see products that fulfil _all of these criteria_ or _any one of the criteria_?
+
+* *Restricting* = Products will only be displayed if they fulfil _all of the selected criteria_.
+For example, imagine you sell grills.
+Webshop visitors should be able to filter for grills that have a warming rack _and_ a lid _and_ a temperature gauge.
+The results only include products that have all three functions.
+* *Multiple* = Products will be displayed if they fulfil _one of the selected criteria_.
+For example, imagine you sell grills.
+Webshop visitors should be able to filter for grills that were manufactured by the company Weber _or_ Tefal _or_ Coleman.
+
+| *Minimum number of hits* +
+(Invisible for type "Price")
+|Will customers be disappointed if they filter products (e.g. the brand “Nike”) and only get a few results?
+In this case, it makes sense to save a minimum number of hits.
+
+Enter a number into the field.
+This is the minimum number of results that a filter value must have, in order for it to be displayed in the plentyShop.
+Filter values will automatically be invisible in the plentyShop if they do not return the minimum number of results.
+
+*_Filter vs. filter value_*:
+In the example above, the filter would be “Brand”.
+The filter could have values like “Nike”, “Adidas” and “Puma”.
+
+//welche Werte fallen dann weg? Nach "Sortierung"? Nach Trefferanzahl?
+
+| *Maximum number of facet values shown* +
+(Invisible for type "Price")
+|How many values should be displayed within a filter at maximum?
+Enter a number into the field.
+
+*_Example_*: Imagine you’ve created a filter “Brand” with 30 different values like “Nike”, “Adidas”, “Puma” etc.
+If you enter the number 10 here, then only 10 of the 30 brand names will be displayed in the filter.
+
+*_Note_*: A maximum of 250 values can be displayed per filter.
+|====
+
+[#50]
+==== Tab: Name
+
+You already entered an English name <<item/frontend-item-search#30, while creating the filter>>.
+This name is displayed in the English language version of your plentyShop. In other words, the name is visible to customers.
+But what should you do if your plentyShop is also available in other languages?
+In this tab, you can save names in other languages.
+
+. Go to *Setup » Client » Settings » Services » Faceted search*.
+. Open the facet and click on *Tab: Name*.
+. Enter translations for every language version of your plentyShop.
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+
+[#60]
+==== Tab: Values
+
+Here you’ll create the individual values within the filter.
+For example, if you’re creating the filter “Colour”, then you’ll need values like “Blue”, “Red” and “Black”.
+There are two steps to the process:
+
+* <<item/frontend-item-search#63, Create>> the necessary values.
+* <<item/frontend-item-search#66, Link>> these values to existing data in your system, i.e. to existing attributes, characteristics, properties, manufacturers or availabilities.
+
+[#63]
+[discrete]
+===== Creating values
+
+. Go to *Setup » Client » Settings » Services » Faceted search*.
+. Open the facet and click on *Tab: Values*.
+. Click on *Add new value* (icon:plus[role="green"]) in the lower left corner. +
+→ The *Create new value* window opens.
+. Enter a *name* for the value in the system’s language.
+. Enter a *position*.
+. *Save* (icon:save[set=plenty, role="green"]) the settings. +
+→ The value is created.
+. *_Optional_*: In the *Name* tab, enter translations for the name of the value.
+. *_Optional_*: In the *Settings* tab, enter a CSS class.
+
+[#66]
+[discrete]
+===== Linking values
+
+. Go to *Setup » Client » Settings » Services » Faceted search*.
+. Open the facet and click on *Tab: Values*.
+. Open the value and click on *Tab: Link*.
+. Click on the back end value.
+. Click on icon:plus[role="green"] *Link* in the bottom left corner. +
+→ The back end value is linked to the facet’s value.
+. Repeat the process to link as many other values as needed.
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+
+image::item/online-store/assets/linking-values.gif[]
+
+[TIP]
+.Should I link multiple values?
+====
+Imagine you sell t-shirts in all different colours such as “light blue”, “dark blue” and “turquoise”.
+You want all three colours to be found with the blue colour filter.
+In this case, you’ll need to link all three back end values to the facet value.
+====
+
+[TIP]
+.Do I need to link items to the filter?
+====
+No.
+It’s not necessary to directly link items to the filter.
+Your items will automatically be assigned to the appropriate filters.
+How?
+When linking the filter to back end values, the filter is _also_ automatically linked to all of the items that have this back end value.
+====
+
+[#70]
+==== Tab: Images
+
+icon:warning[role="red"] This tab currently has no function.
+
+Here you can save optional images for the individual filter values.
+For example, imagine you’ve created the filter “Colour” with the values “Blue”, “Red” and “Black”.
+You want customers to see _colour tiles_ in the plentyShop, rather than colour names.
+There are two steps to the process:
+
+* <<item/frontend-item-search#73, Upload the necessary images>>.
+* <<item/frontend-item-search#76, Link these images with your filter values>>.
+
+[#73]
+[discrete]
+===== Uploading images
+
+. Go to *Setup » Client » Settings » Services » Faceted search*.
+. Open the facet and click on *Tab: Images*.
+. Add images by clicking on the icon:upload[set=plenty, role="purple"] *Upload files* button or by dragging and dropping them into the tab.
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+
+[#76]
+[discrete]
+===== Linking images
+
+. Go to *Setup » Client » Settings » Services » Faceted search*.
+. Open the facet and click on *Tab: Images*.
+. Move your mouse cursor over an image. +
+→ You’ll see a drop-down list with values at the bottom of the image.
+. Choose the appropriate value from the drop-down list.
+. *Save* (icon:save[set=plenty, role="green"]) the settings. +
+→ The image is linked with this value. It is displayed with a red frame.
+
+[TIP]
+.Number of links
+====
+* Each image can only be linked to one value.
+* It is not possible to link multiple images to the same value.
+Previously linked values are greyed out.
+====
+
+[TIP]
+.Additional setting: Make images available
+====
+<<item/frontend-item-search#120, In a later step>>, you’ll click on the option *Make images available* (icon:check-square[role="blue"]) to display the linked images in the plentyShop.
+====
+
+[#80]
+=== Data import
+
+plentymarkets has an import tool.
+The idea is simple.
+Rather than manually saving filter information in plentymarkets, you’ll enter the same information into a CSV file and then import this file into your system.
+
+
+[TIP]
+.Requirements
+====
+These instructions assume that you already:
+
+* <<data/importing-data/ElasticSync#, have a basic understanding of the import tool>>.
+====
+
+[#90]
+==== Practical example: Importing new facets
+
+[.collapseBox]
+.*Initial situation*
+--
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=initialsituation]
+
+[discrete]
+===== What about a price filter?
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=pricefilter]
+
+
+--
+
+[.collapseBox]
+.*Setting up the CSV file*
+--
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=csvfile]
+
+--
+
+[.collapseBox]
+.*Choosing the import settings*
+--
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=syncsettings]
+
+--
+
+[.collapseBox]
+.*Choosing the matching settings*
+--
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=matching]
+
+--
+
+[.collapseBox]
+.*Choosing the mapping settings*
+--
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=mapping]
+
+--
+
+[.collapseBox]
+.*Did it work?*
+--
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=check]
+
+[discrete]
+===== Do a trial run
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=testrun]
+
+[discrete]
+===== Resetting the cache
+
+include::../../data/importing-data/elasticsync-practical-examples/practical-example-elasticsync-facets.adoc[tag=cache]
+
+
+--
+
+[#100]
+==== Directory of matching and mapping fields
+
+:matching-table: pass:quotes[The table]
+:matching-data: pass:quotes[facet data]
+
+[.collapseBox]
+.*Matching fields*
+--
+
+include::../../data/importing-data/import-types/_textblocks/matching.adoc[]
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=table]
+
+--
+
+[.collapseBox]
+.*Mapping fields*
+--
+
+[discrete]
+=== Facet
+
+[discrete]
+==== CSS class
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=facetcssclass]
+
+'''
+[discrete]
+==== Position
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=facetposition]
+
+'''
+[discrete]
+==== Sorting
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=facetsorting]
+
+'''
+[discrete]
+==== Type
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=facettype]
+
+'''
+[discrete]
+==== Minimum number of hits
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=facetminimumhits]
+
+'''
+[discrete]
+==== Maximum number of facet values shown
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=facetmaximumvalues]
+
+'''
+[discrete]
+==== Selection type
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=selectiontype]
+
+'''
+[discrete]
+==== Delete facet
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=deletefacet]
+
+'''
+[discrete]
+=== Facet name
+
+[discrete]
+==== Name
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=facetname]
+
+'''
+[discrete]
+=== Facet value
+
+icon:exclamation-circle[role="blue"] Not relevant for the type "Price"
+
+[discrete]
+==== CSS class
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=valuecssclass]
+
+'''
+[discrete]
+==== Position
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=valueposition]
+
+'''
+[discrete]
+==== Delete facet value
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=deletevalue]
+
+'''
+[discrete]
+=== Facet value name
+
+icon:exclamation-circle[role="blue"] Not relevant for the type "Price"
+
+[discrete]
+==== Name
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=valuename]
+
+'''
+[discrete]
+=== Link
+
+icon:exclamation-circle[role="blue"] Not relevant for the type "Price"
+
+[discrete]
+==== Type
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=linktype]
+
+'''
+[discrete]
+==== Value ID
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=linkid]
+
+'''
+[discrete]
+==== Delete link
+
+include::../../data/importing-data/import-types/elasticSync-facets.adoc[tag=deletelink]
+
+--
+
+
+[#110]
+== plentyShop search settings
+
+[#120]
+=== Which plentyShops should the filters appear in?
+
+Once you’ve created the filters, you’ll need to specify which plentyShops they should be available in.
+This is done by linking the filters to a client.
+Decide which filters are relevant for each client and which ones are not.
+Changes that you make will go into effect in real time.
+
+[TIP]
+.Price filter
+====
+Only one price filter can be linked per client.
+====
+
+[.instruction]
+Linking the filters with a client:
+
+. Go to *Setup » Client » [Select client] » Services » Facet links*.
+. In the list on the left, click on whichever filter should appear in the plentyShop.
+. Click on icon:plus[role="green"] *Link facet* in the bottom left corner. +
+→ The filter is added to the overview on the right.
+. *_Optional_*: Did you <<item/frontend-item-search#70, upload images for the filter>>?
+Select the option *Make images available* (icon:check-square[role="blue"]) to display the images in the plentyShop.
+. Repeat this process for all of the other filters that should also be linked.
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+
+[#130]
+=== Optional: Which item data should be considered?
+
+include::./search-bar.adoc[tag=boost]
+
+[#140]
+=== Optional: Changing languages
+
+include::./search-bar.adoc[tag=sprachen]
+
+[#150]
+== Displaying filters in the plentyShop
+
+[#160]
+=== Creating content of the type "Category view"
+
+. Go to *CMS » ShopBuilder*.
+. Click on a grey item category on the left. +
+*_Note_*: Filters are not compatible with the yellow content categories.
+. Click on icon:plus[role="green"] *Add content*.
+. Select the type *Category view*.
+. Enter a name and choose a preset if desired.
+. Click on *Create*. +
+→ The new content will be displayed in the overview.
+
+image::item/online-store/assets/facets-create-content.gif[]
+
+[TIP]
+.Preset: pro and con
+====
+We provide a template, which you can modify and adapt to your product portfolio as needed.
+Of course, you can also work without a template if you would prefer to design the view from scratch.
+====
+
+[#170]
+=== Designing the content
+
+[#180]
+==== Adding filters to the toolbar
+
+. Go to *CMS » ShopBuilder*.
+. Open the <<item/frontend-item-search#160, "Category view" content>>.
+. Insert the widget *Item category » Toolbar* if it’s not already included in your category view.
+. Click on *Filter* to open the area for filter widgets (see GIF).
+. *_Optional_*: Insert a grid with multiple columns.
+. Insert some or all of the following widgets:
+.. *Item category » Filter for attributes, properties and characteristics*
+.. *Item category » Availability filter*
+.. *Item category » Price filter*
+.. *Item category » Category filter*
+.. *Item category » Manufacturer filter*
+. Click on icon:cog[role="darkGrey"] for each of the widgets and customise the settings.
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+
+image::item/online-store/assets/filter-toolbar.gif[]
+
+[#190]
+==== Adding filters to the sidebar
+
+. Go to *CMS » ShopBuilder*.
+. Open the <<item/frontend-item-search#160, "Category view" content>>.
+. Use structure widgets to create a sidebar. For example:
+.. Insert the widget *Structure » Two column grid*.
+.. Click on icon:cog[role="darkGrey"] and select the layout ratio *25% : 75%*.
+. Insert some or all of the following widgets into the left column:
+.. *Item category » Filter for attributes, properties and characteristics*
+.. *Item category » Availability filter*
+.. *Item category » Price filter*
+.. *Item category » Category filter*
+.. *Item category » Manufacturer filter*
+. Click on icon:cog[role="darkGrey"] for each of the widgets and customise the settings.
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+
+image::item/online-store/assets/filter-sidebar.gif[]
+
+[#200]
+==== Optional: Renaming texts
+
+You can change the texts in the plentyShop to meet your needs.
+For example, you could change the text in the toolbar from "Filter" to "Refine search".
+
+[.instruction]
+Renaming texts:
+
+. Go to *CMS » Multilingualism*.
+. Choose a source language and a target language from the drop-down lists. +
+*_Note_*: You can select the same language from both lists.
+. Expand the area *plentyShop LTS » Item* (icon:chevron-down[role="darkGrey"]).
+. Rename the text on the right side. +
+*_Example_*: Find the field *ITEMFILTER* and change the text from "Filter" to "Refine search".
+. *Save* (icon:save[set=plenty, role="green"]) the settings.
+. <<welcome/quick-start/quick-start-online-store#270, Deploy the plentyShop LTS plugin>> to apply the changes.
+
+[#210]
+=== Activating the content
+
+In order for the content to be displayed in the plentyShop, it needs to be activated.
+Active contents are highlighted in blue.
+
+[.instruction]
+Activating contents:
+
+. Go to *CMS » ShopBuilder*.
+. Click on the appropriate category.
+. Use the toggle button (icon:toggle-on[role="blue"]) to activate the content. +
+→ A pop-up window opens.
+. Decide which categories the content should apply to (icon:dot-circle-o[role="blue"]).
+For example, you can design the layout differently for each category.
+. Click on *Activate*. +
+→ The content is activated and is now highlighted in blue.
+
+[TIP]
+.Only activate one content of the same type
+====
+Within a grey item category, you can create many different contents of the type *Category view*.
+The contents can be activated or deactivated as needed.
+For example, this allows you to create different pages for each season of the year.
+However, only one content of the type "Category view" can be activated simultaneously.
+Activating one content automatically deactivates another content of the same type.
+====
+
+[#220]
+=== Checking the result in the plentyShop
+
+Check what the search filters look like in your plentyShop.
+Change the appearance as needed.
+Are you happy with the result?
+Then <<welcome/quick-start/quick-start-online-store#270, deploy the plentyShop LTS plugin>> to apply the changes.
+
+[#230]
+== Frequently Asked Questions (FAQ)
+
+[.collapseBox]
+.*A manufacturer isn't included in the brand name filter. Why not?*
+--
+
+Make sure you've saved an <<item/settings/manufacturers#150, external name for the manufacturer>>.
+If you don't save an external name, then the manufacturer will not appear in the brand name filter.
+
+*_Note_*: It can take a little while for the index to be updated and everything to be displayed correctly.
+If the manufacturer still doesn't appear in the brand name filter the next day, then contact the link:https://forum.plentymarkets.com/c/item[item team in the forum]{nbsp}icon:external-link[].
+
+--

@@ -1,0 +1,216 @@
+= Daten-Log
+:lang: de
+:keywords: Log, Logs, Datenlog, Log-Einträge, Logeintrag, Log-Level, Referenztyp, Referenzwert, Logs konfigurieren
+:description: Erfahre, wie du nach Log-Einträgen suchen kannst.
+:position: 40
+:url: daten/datenlog
+:id: 8PM1DPV
+:author: team-import-export
+
+Im Menü unter *Daten » Log* werden alle Log-Einträge angezeigt. Diese Log-Einträge sind für 4 Wochen verfügbar, bevor die Einträge gelöscht werden. Logs können einzeln aktiviert werden und zusätzlich kann für jeden Log-Eintrag die Dauer eingestellt werden, mit der festgelegt wird, wie lange der Log-Eintrag aktiv bleiben soll.
+
+[[tabelle-informationen-tabellen-header]]
+.Informationen im Tabellen-Header
+[cols="1,2"]
+|====
+|Titel |Info
+
+| *Zeitstempel*
+|Zeitstempel des jeweiligen Log-Eintrags
+
+| *Level*
+|Anzeige des Log-Levels wie *Info*, *Error* etc.
+
+| *Integration*
+|Bereich, in dem sich der Log-Eintrag im Code befindet
+
+| *Identifikator*
+|Unterbereich, zu dem der Log gehört
+
+| *Referenz*
+|Referenztyp mit der entsprechenden ID
+
+| *Nachricht*
+|Erklärung zum Log oder, falls vorhanden, zum Fehler
+|====
+
+Mit Klick auf eine Zeile öffnet sich die Detailansicht und es werden weitere Infos zum Log angezeigt. In diesem Fenster kann zum vorigen oder nächsten Eintrag gesprungen werden und die Anzeige kann ein- oder ausgeklappt werden.
+
+[#10]
+== Logs konfigurieren
+
+Damit Meldungen der entsprechenden Log-Bereiche angezeigt werden, müssen diese unter *Logs konfigurieren » Einstellungen* erst aktiv gesetzt werden. Sie werden maximal 4 Wochen auf dem Server gespeichert.
+Im Dropdown-Menü der Log-Level werden die verschiedenen Level mit aufsteigender Priorität angezeigt.
+Du kannst hier auch die Dauer einstellen, für die ein Log-Eintrag aktiv bleiben soll.
+
+[IMPORTANT]
+.Aktivierung notwendig
+Während die Log-Level Error, Critical, Alert und Emergency automatisch angezeigt werden, müssen Debug, Info, Notice und Warning erst aktiv gesetzt werden.
+
+[.instruction]
+Logs konfigurieren:
+
+. Öffne das Menü *Daten » Log*.
+. Klicke in der Toolbar auf *Logs konfigurieren* (icon:cog[]). +
+→ Das Fenster *Log-Konfiguration* wird geöffnet. Auf der linken Seite werden die bereits installierten Plugins sowie die Standardbereiche angezeigt. Auf der rechten Seite kannst du die Einstellungen vornehmen.
+. Wähle den Bereich, in dem du Logs konfigurieren möchtest.
+. Setze auf der rechten Seite das Häkchen im Feld *Aktiv*.
+. Wähle die Dauer, für die das Log-Level in diesem Bereich aktiv bleiben soll.
+. Wähle das Log-Level. Beachte dazu die Informationen in der <<tabelle-bedeutung-log-level>>.
+. Speichere (icon:save[role="green"]) die Einstellungen.
+
+[[tabelle-bedeutung-log-level]]
+.Bedeutung der verschiedenen Log-Level
+[cols="1,4,1"]
+|====
+|Log-Level |Bedeutung |Standardmäßig aktiviert
+
+| *Debug*
+|Detaillierte Statusmeldungen
+|Nein
+
+| *Info*
+|Allgemeine Informationen zum System
+|Nein
+
+| *Notice*
+|Eine zu klärende, aber nicht dringende Fehlermeldung
+|Nein
+
+| *Warning*
+|Etwas läuft nicht wie gewünscht. Es muss sich aber um keinen Fehler handeln.
+|Nein
+
+| *Error*
+|Standard-Systemfehler; bei Fehlern läuft das System in der Regel weiter.
+|Ja
+
+| *Critical*
+|Diese Fehler können zum Systemabsturz führen (Laufzeitfehler).
+|Ja
+
+| *Alert*
+|Es muss sofort reagiert werden (z.B. sind Webshop oder Datenbank nicht erreichbar).
+|Ja
+
+| *Emergency*
+|Absoluter Notfall. Das gesamte System funktioniert nicht.
+|Ja
+|====
+
+[#20]
+== Nach Log-Einträgen suchen
+
+Auf der linken Seite lassen sich verschiedene Filter setzen, mit denen eine Vielzahl von Log-Einträgen auf bestimmte Treffer reduziert werden kann. Die Einträge in den Dropdown-Menüs werden auf die Stichworte reduziert, die tatsächlich in den Suchergebnissen existieren.
+
+[IMPORTANT]
+.Nach Mandanten filtern
+====
+Im Log werden nur Einträge des Hauptmandanten angezeigt. Die Logs von anderen Mandanten werden zwar gespeichert, können aber nicht angezeigt werden.
+
+Wenn du Logs anderer Mandanten auslesen möchtest, musst du die <<daten/rest-api#, REST-API>> verwenden. Dafür musst du link:https://developers.plentymarkets.com/en-gb/plentymarkets-rest-api/index.html#/Log/get_rest_logs[die Route^]{nbsp}icon:external-link[] `/rest/logs` mit der Domain des entsprechenden Mandaten aufrufen.
+====
+
+[#30]
+== Nach Integration filtern
+
+Hier wird der Bereich angezeigt, aus dem der Log-Aufruf gemacht wurde.
+
+[.instruction]
+Nach der Variable *Integration* filtern:
+
+. Öffne das Menü *Daten » Log*.
+. Klicke auf das Feld *Integration*. +
+→ Eine Liste mit verschiedenen Optionen wird geöffnet.
+. Wähle einen Bereich aus.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die entsprechenden Log-Einträge werden angezeigt.
+
+[#40]
+== Nach Identifikator filtern
+
+Der Identifikator gibt an, zu welchem Unterbereich der Log gehört.
+
+[.instruction]
+Nach der Variable *Identifikator* filtern:
+
+. Öffne das Menü *Daten » Log*.
+. Klicke auf das Feld *Identifikator*. +
+→ Eine Liste mit verschiedenen Optionen wird geöffnet.
+. Wähle einen Identifikator aus.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die entsprechenden Log-Einträge werden angezeigt.
+
+[#50]
+== Nach Level filtern
+
+Hier werden verschiedene Log-Level wie *Error*, *Info* etc. angezeigt.
+
+[.instruction]
+Nach der Variable *Level* filtern:
+
+. Öffne das Menü *Daten » Log*.
+. Klicke auf das Feld *Level*. +
+→ Eine Liste mit verschiedenen Optionen wird geöffnet.
+. Wähle ein Level aus.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die entsprechenden Log-Einträge werden angezeigt.
+
+*_Hinweis:_* Hierfür müssen bereits alle Level aktiv gesetzt sein.
+
+[#60]
+== Nach Referenztyp filtern
+
+Hier wird der Referenztyp angegeben, zu dem der Eintrag gehört (z.B. VariationID, OrderID etc.).
+
+[.instruction]
+Nach der Variable *Referenztyp* filtern:
+
+. Öffne das Menü *Daten » Log*.
+. Klicke auf das Feld *Referenztyp*. +
+→ Eine Liste mit verschiedenen Optionen wird geöffnet.
+. Wähle einen Referenztyp aus.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die entsprechenden Log-Einträge werden angezeigt.
+
+[#70]
+== Nach Referenzwert filtern
+
+Hier wird der Wert der Referenz angegeben. Beispielsweise wäre das beim Referenztyp *ItemID* der Wert dieser ID. Die Suchergebnisse werden auf Treffer mit diesem Wert reduziert.
+
+[.instruction]
+Nach der Variable *Referenzwert* filtern:
+
+. Öffne das Menü *Daten » Log*.
+. Klicke auf das Feld *Referenzwert*.
+. Gib einen Referenzwert ein.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die entsprechenden Log-Einträge werden angezeigt.
+
+[#80]
+== Nach Datum filtern
+
+Hier können die Suchergebnisse individuell eingestellt und auf einen zeitlichen Rahmen begrenzt werden.
+
+[.instruction]
+Nach der Variable *Datum* filtern:
+
+. Öffne das Menü *Daten » Log*.
+. Wähle ein Startdatum.
+. Wähle ein Enddatum.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die im definierten Zeitfenster erstellten Log-Einträge werden angezeigt.
+
+[#90]
+== Nach Uhrzeit filtern
+
+Hier können die Suchergebnisse individuell eingestellt und auf einen zeitlichen Rahmen begrenzt werden.
+
+[.instruction]
+Nach der Variable *Uhrzeit* filtern:
+
+. Öffne das Menü *Daten » Log*.
+. Gib die Uhrzeit ein, ab der gesucht werden soll.
+. Gib die Uhrzeit ein, bis zu der gesucht werden soll.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die im definierten Zeitfenster erstellten Log-Einträge werden angezeigt.

@@ -1,0 +1,217 @@
+= Practical example: DHL Shipping (Versenden)
+:lang: en
+include::{includedir}/_header.adoc[]
+:keywords: DHL Shipping (Versenden), plugin, DHL plugin
+:description: Learn how to set up the “DHL Shipping (Versenden)” plugin in plentymarkets.
+:position: 10
+:url: fulfilment/practical-examples/practical-example-dhl
+:id: S6ALNG3
+:author: team-fulfillment
+
+This page describes how to set up the DHL Shipping (Versenden) plugin in plentymarkets. We will walk through the necessary steps in order that your customers can choose DHL as shipping method in your online shop and that you can successfully register the order via DHL Shipping.
+
+== Purchasing, installing and switching the DHL Shipping plugin to live
+
+This chapter describes how you purchase the DHL Shipping plugin in the plentyMarketplace and how you install and deploy it in the plentymarkets back end afterwards.
+
+=== Purchasing
+
+First, you have to establish a basis in order to successfully work with DHL in the future. It is required that you download the link:https://marketplace.plentymarkets.com/en/plugins/integration/DHLShipping_4871[DHL Shipping plugin^]{nbsp}icon:external-link[] from the plentyMarketplace.
+
+.Purchasing the DHL Shipping plugin
+image::fulfilment:DHL_plugin_purchase.png[width=640, height=360]
+
+The plugin is free of charge and can be purchased by clicking on *Go to checkout*. Please follow further instructions in the plentyMarketplace.
+
+=== Installing
+
+After you have purchased the plugin, you have to install it in your plentymarkets system. After the purchase, you will find the plugin in the *Plugins » Plugin set overview* menu. How to install the plugin in a plugin set and switch it to live is described on the <<plugins/installing-added-plugins#, Installing added plugins>> page.
+
+Once you have installed the plugin and saved and deployed it in a plugin set, the assistants *DHL Shipping (Versenden): Basic settings* and *DHL Shipping (Versenden): Settings combination* are available in the *Setup » Assistants » Plugins* menu in the relevant plugin set. Complete these two assistants to easily set up DHL Shipping (Versenden) in your plentymarkets system.
+
+But before you set up the DHL Shipping plugin, you have to carry out some settings in the plentymarkets back end.
+
+== Activating countries of delivery
+
+Since the plugin is basically ready, you can now proceed with the next steps. In this part, it is important that you thoroughly think about in which countries you want to deliver your items to. After you have determined these countries, you can activate them in the *Setup » Orders » Shipping » Settings » Tab: Countries of delivery* menu. The countries are then available for the next step. Please note that in plentymarkets it is necessary to create own "countries of delivery" for the special regions, such as Helgoland or the Canary Islands.
+
+The following options can be selected for the countries of delivery:
+
+[[table-activate-countries-of-delivery]]
+.Options for the countries of delivery
+[cols="1,3"]
+|====
+|Option |Description
+
+|Inactive
+|The country of delivery is not active.
+
+|Active
+|The country of delivery is unrestrictedly active.
+
+|Backoffice is active
+|Countries of delivery with this setting are only visible in the plentymarkets system and _not_ in the online shop.
+
+|Supplier is active
+|Countries of delivery with this setting cannot be selected as the standard country of delivery in the *Setup » Client* » _Select client_ » *Order process » Settings* menu.
+|====
+
+.Activating countries of delivery
+image::fulfilment:DHL_plugin_activate_countries_of_delivery.png[width=640, height=360]
+
+== Creating regions
+
+You have to group the activated countries of delivery now. You will find the shipping regions in the *Setup » Orders » Shipping » Settings » Tab: Regions* menu. Group the countries for which the same shipping conditions should apply to one common region.
+
+[TIP]
+.Example for different shipping costs
+====
+If you want to charge EUR 14.90 as shipping costs for both Spain and France, put those two countries into region. If you want to charge EUR 20.90 as shipping costs for Italy, however, it is not possible to put Italy together with Spain and France in one region. You have to create an own region for Italy.
+====
+
+On the left side of the region, you can see all available countries of delivery. On the right side, you can see all countries of delivery that are already linked with this region. Now add all active countries of delivery to a region. Please note that each country of delivery can only be saved in one region.
+
+.Setting up regions
+image::fulfilment:DHL_plugin_set_up_regions.png[width=640, height=360]
+
+== Creating a shipping service provider
+
+Besides the countries of delivery and the corresponding regions, you also need the correct shipping service provider in order to build a bridge between the plugin and the shipping profiles. Configure the shipping service provider in the *Setup » Orders » Shipping » Settings » Tab: Shipping service provider* menu.
+
+Here, you choose a name for the shipping service provider and select the service provider *DHL Shipping (Versenden)* from the drop-down list.
+
+.Creating a shipping service provider
+image::fulfilment:DHL_plugin_create_shipping_service_provider.png[width=640, height=360]
+
+[NOTE]
+.Tracking URL
+====
+Furthermore, you also add the tracking URL  *+http:nolp.dhl.de/nextt-online-public/setidentcodes.do?lang=de&zip=$PLZ&idc=$PaketNr+* in this menu. The tracking URL is required for sending emails at a later point in time.
+====
+
+== Creating a shipping profile
+
+All menu items that you have set up so far, will "meet" in the shipping profile. To do so, go to *Setup » Orders » Shipping » Settings » Tab: Shipping profiles*. By clicking on the *New* button (icon:plus-square[role="green"]), you create a new shipping profile and directly access the *Base* tab. The *Table of shipping charges* tab is only available after you have saved.
+
+=== Base
+
+In the *Base* tab, you determine the basic settings for your shipping profile.
+
+[[table-field-names-shipping-profile]]
+.Field name descriptions in the shipping profile
+[cols="1,3"]
+|====
+|Field name |Description
+
+|Shipping service provider
+|Select the shipping service provider that you have just created.
+
+|Name & Name (back end)
+|Select a name for the front and back end in the corresponding language.
+
+|Flag
+|Here, you can assign a flag to the profile (e.g. the DHL logo).
+
+|Priority
+|The priority determines in which order the shipping profiles are displayed in the online shop.
+
+|Category
+|The category option is another way to prioritise shipping profiles. An example of use can be found link:https://knowledge.plentymarkets.com/en/fulfilment/preparing-the-shipment#1300[here^]{nbsp}icon:external-link[].
+
+|Item extra shipping charge
+|You can activate extra shipping charges that are saved for the item.
+
+|Postident
+|Activate this option, if PostIdent is required. For example, in case of items that can only be purchased from age 18.
+
+|Activate for new items
+|Activate this option in order that the profile is always activate for new items.
+
+|Cash on delivery
+|Activate the option in order that your customer can select the payment method _Cash on delivery_ in your online shop.
+
+|Extra charge for islands
+|The set extra shipping charge will be calculated by means of a defined list in plentymarkets when delivery is made to certain islands.
+
+|Clients (stores)
+|Select the clients that should be linked with this shipping profile. Select at least one client in order that the shipping profile can be selected.
+
+|Order referrer
+|Here, you select the order referrers for which this shipping profile should be activated.
+
+|Blocked payment methods
+|Here, you select the payment methods for which the shipping profile should _not_ be available.
+
+|Blocked customer classes
+|Here, you select the customer classes for which the shipping profile should _not_ be available.
+
+|Shipping groups
+|Shipping profiles can be added to a shipping group. This simplifies the assignment of shipping profiles at the item.
+
+| *eBay*
+|
+
+|Account
+|Select an eBay account if you want to link one.
+
+|Listing type
+|Possible options: +
+*All* = All listing types +
+*Auction* = Only auctions +
+*Shop item / fixed price* = Only fixed price or shop item (shop item only for Hood)
+
+|Express delivery
+|Activate if you want to use this shipping profile for eBay express delivery.
+
+|Loyalty program
+|Here, you can link one or multiple loyalty programs such as eBay Plus or Amazon Prime to this shipping profile.
+
+|====
+
+=== Table of shipping charges
+
+The *table of shipping charges* tab is only available after you have saved the shipping profile. In this tab, the tables of shipping charges for the created regions are displayed. This means that you determine the prices and the calculation types for the individual regions.
+Select the calculation basis for the shipping costs. The following options are available: *Flat rate*, *Weight-dependent*, *Volume-dependent*, *Quantity-dependent*, *Price-dependent* and *Item shipping charge*.
+
+Depending on the type settings, you have to enter the correct prices. Furthermore, you can save for each table of shipping charges the amount from which shipping is free of charge, for example. Or you choose that shipping only costs EUR 2.50 instead of EUR 4.99 when the value of items ordered is EUR 100 at least.
+
+The limitation type limits the shipping profile. Pay attention that you allow for a seamless transition with your shipping profiles. For example: You have set the maximum weight of 20 kg in one shipping profile. Your customer puts two items with a weight of 11 kg each in the shopping cart. Therefore, another shipping profile should be selectable. In this way, an error message in the online shop will be avoided.
+
+You can save a pre-defined shipping package as standard package. A shipping package can be defined in the *Setup » Orders » Shipping » Shipping packages* menu. In this way, you can transfer fixed dimensions when you only use one package size for the shipment.
+
+[NOTE]
+.Calculation types
+====
+Please pay attention that it might be necessary to save the weight for the weight-dependent calculation at the individual items. Otherwise, calculation will not be possible.
+====
+
+.Calculation types in the table of shipping charges
+image::fulfilment:DHL_plugin_calculation_types_table_of_shipping_charges.png[width=640, height=360]
+
+[NOTE]
+.Activating the table of shipping charges
+====
+The table of shipping charges is only active after you have saved it. Otherwise, you will see the note `Region not used in shipping profile. Save price to use region. Save and reload table of shipping charges to show shipping service provider settings.`
+====
+
+== Activating the shipping profile for an item
+
+In the *Items » Edit item* menu in the *Global* tab, you have to link all items with the desired shipping profiles. This can also be done via the group function. Make sure that the checkmark is placed for the option *Delete old shipping profiles* since it is only possible to add further shipping profiles via the "shipping configuration".
+
+== Setting up the DHL Shipping plugin with the help of assistants
+
+After you set up the shipping profiles and linked them to the items, you can start to finally set up the DHL Shipping plugin with the help of the two assistants *DHL Shipping (Versenden): Basic settings* and *DHL Shipping (Versenden): Settings combination*. You find the assistants in the *Setup » Assistants » Plugins* menu in the relevant plugin set.
+
+[IMPORTANT]
+.Detailed description
+====
+For a detailed description on the individual steps within the two DHL assistants, refer to the <<fulfilment/shipping-service-provider-plugins/plugin-dhl-shipping-versenden#, DHL Shipping (Versenden)>> page.
+====
+
+
+[#2400]
+=== Deploying the plugin set once again after update
+
+After you have downloaded an update of the plugin, it is necessary that you deploy the plugin set once again. Downloading the update does not lead to the fact that new features or changes are also active in the new version.
+
+For further information, refer to the <<plugins/updating-installed-plugins#, Updating installed plugins>> page.

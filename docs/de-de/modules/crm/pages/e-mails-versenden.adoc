@@ -1,0 +1,1496 @@
+= E-Mails
+:lang: de
+:keywords: Infodienst, E-Mail-Vorlage, E-Mail, Template-Variablen, Template-Funktionen, automatische E-Mail
+:description: Erfahre, wie du E-Mail-Vorlagen einrichtest und E-Mails automatisiert an deine Kund:innen versendest.
+:position: 700
+:url: crm/e-mails-versenden
+:id: NIUDPCH
+:author: team-crm
+
+[IMPORTANT]
+.Neuer EmailBuilder zum Erstellen von Vorlagen
+====
+Beachte den neuen EmailBuilder im Menü *CRM » EmailBuilder (Testphase)*, mit dem du deine E-Mail-Vorlagen schnell und einfach per Drag-and drop und mit Hilfe vordefinierter Widgets erstellen und bearbeiten kannst.
+
+Alle Informationen zum neuen EmailBuilder findest du in unserem <<crm/emailbuilder-testphase#, Handbuch>>.
+====
+
+Alle E-Mails, die über plentymarkets versendet werden, basieren auf E-Mail-Vorlagen. E-Mail-Vorlagen werden im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* verwaltet. Erstelle beliebig viele E-Mail-Vorlagen in diesem Menü. Bei bestimmten Ereignissen, z.B. beim Eingehen neuer Bestellungen in deinem Webshop oder nachdem Kund:innen einen Newsletter abonniert hat, erstellt dein plentymarkets System automatisch E-Mails aus diesen Vorlagen und versendet diese an deine Kund:innen. Du legst fest, welche E-Mail wann automatisch versendet werden soll.
+
+Erfahre im folgenden Video-Tutorial, wie du dein E-Mail-Konto mit plentymarkets verknüpfst, deine Signatur einstellst und den Infodienst aktivierst:
+
+[[video-e-mail-konto-verknüpfen]]
+.Verknüpfe dein E-Mail-Konto mit plentymarkets
+video::211643476[vimeo, width=640, height=360]
+
+[#50]
+== Rechte für Backend-Benutzer:innen vergeben
+
+:rights-purpose: bestimmte Einstellungen im Bereich E-Mail vornehmen können
+:right-one: pass:quotes[*CRM > E-Mail > Automatischen Versand bearbeiten*]
+:right-two: pass:quotes[*CRM > E-Mail > HTML-Design bearbeiten*]
+:right-three: pass:quotes[*CRM > E-Mail > Infodienst bearbeiten*]
+:right-four: pass:quotes[*CRM > E-Mail > Newsletter bearbeiten*]
+:right-five: pass:quotes[*CRM > E-Mail > Signatur bearbeiten*]
+:right-six: pass:quotes[*CRM > E-Mail > Vorlagen bearbeiten*]
+:right-seven: pass:quotes[*CRM > E-Mail > Zugangsdaten bearbeiten*]
+
+include::_includes:page$rechte.adoc[]
+
+
+[#100]
+== E-Mail-Server-Zugangsdaten speichern
+
+Im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Zugangsdaten* speicherst du die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest, damit dein plentymarkets System E-Mails wie Auftragsbestätigungen und Versandbestätigungen von dieser E-Mail-Adresse versenden kann.
+
+[.instruction]
+E-Mail-Server-Zugangsdaten speichern:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Zugangsdaten*.
+. Nimm die gewünschten Einstellungen vor. Beachte dazu die Erläuterungen in <<#table-email-server-login-details>>.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[[table-email-server-login-details]]
+.E-Mail-Server-Zugangsdaten speichern
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Testmodus*
+| *Aktiv* oder *Inaktiv* wählen. +
+*Aktiv* = Der Testmodus ist aktiviert. Alle E-Mails werden nur an die eingegebene E-Mail-Adresse gesendet. So kann vor dem Live-Betrieb die korrekte Funktionsweise geprüft werden. +
+*Inaktiv* = Der Live-Modus ist aktiviert. +
+*_Wichtig:_* Der Testmodus gilt nur für diesen Webshop. Die Einstellungen für weitere Mandanten werden im Menü des Mandanten (Shops) konfiguriert.
+
+| *Name des Absenders*
+|Eigenen Namen oder Namen des Webshops eingeben. Der Name wird den Empfänger:innen angezeigt. Für die korrekte Darstellung die Verwendung von Sonderzeichen vermeiden.
+
+| *E-Mail-Adresse*
+|E-Mail-Adresse eingeben, wie sie auch im E-Mail-Programm steht.
+
+| *Postausgangsserver/SMTP-Server*
+|Postausgangsserver wie vom Provider angegeben eingeben (meist smtp.domain.de oder mail.domain.de). +
+*_mailbox.org:_* Für Postfächer bei mailbox.org den Postausgangsserver *smtp.mailbox.org* eingeben und Verschlüsselung *SSL* wählen.
+
+| *Benutzername*
+|Benutzer:innenname zu der E-Mail-Adresse eingeben. +
+*_mailbox.org:_* Der mailbox.org-Benutzer:innenname ist die vollständige E-Mail-Adresse des mailbox.org-Postfachs.
+
+| *Passwort*
+|Passwort zu dem Benutzer:innenname und der E-Mail-Adresse eingeben.
+
+| *Port (Standardport: 25)*
+|Wert *25* eingeben. Dieser Wert ist für fast alle Provider korrekt. Ggf. den korrekten Port beim Provider erfragen. +
+*_mailbox.org:_* Für Postfächer bei mailbox.org den Port *465* eingeben und unter *Verschlüsselung* die Einstellung *SSL* wählen.
+
+| *Verschlüsselung*
+| *SSL*, *TLS* oder *keine Verschlüsselung* wählen. Weitere Informationen findest du im Kapitel <<crm/e-mails-versenden#200, Verschlüsselung der E-Mail-Kommunikation wählen>>. +
+*_mailbox.org:_* Für Postfächer bei mailbox.org den Port *465* eingeben und Verschlüsselung *SSL* wählen.
+|====
+
+[TIP]
+.Newsletter-Zugangsdaten eingeben
+====
+Wenn du Newsletter an deine Kund:innen versenden möchtest, gibst du die Zugangsdaten im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Newsletter* ein. Weitere Informationen dazu findest du auf der Handbuchseite <<crm/newsletter-versenden#, Newsletter>> im Kapitel <<crm/newsletter-versenden#200, Newsletter-Zugangsdaten eingeben>>.
+====
+
+[#200]
+== Verschlüsselung der E-Mail-Kommunikation wählen
+
+Die Verschlüsselungsmethoden *SSL*, *TLS* und die Einstellung *keine Verschlüsselung* stehen dir in plentymarkets zur Verfügung. Wähle für die Kommunikation mit dem E-Mail-Server eine dieser Verschlüsselungsmethoden. Welche Einstellungen du für die Methode vornehmen musst, wird in den folgenden Unterkapiteln beschrieben.
+
+[#300]
+=== Sicherheit durch SSL-Verschlüsselung
+
+Richte für eine geschützte Datenübertragung zwischen deinen E-Mail-Programmen und deinem Postfach eine SSL-Verschlüsselung ein. <<#table-ssl-encryption>> listet die Einstellungen für die SSL-Verschlüsselung im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Zugangsdaten* auf.
+
+[[table-ssl-encryption]]
+.Einstellungen für SSL-Verschlüsselung
+[cols="1,3,3,3"]
+|====
+|Servertyp |Server |Verbindungssicherheit |Port
+
+| *IMAP*
+|mail.IHRE-DOMAIN.de
+|SSL/TLS
+|993
+
+| *POP3*
+|mail.IHRE-DOMAIN.de
+|SSL/TLS
+|995
+
+| *SMTP*
+|mail.IHRE-DOMAIN.de
+|SSL/TLS
+|587
+|====
+
+[#400]
+=== Sicherheit durch STARTTLS
+
+Um die Kompatibilität zu älteren E-Mail-Programmen zu gewährleisten, bietet plentymarkets auch STARTTLS an. <<#table-starttls-encryption>> listet die Einstellungen für die STARTTLS-Verschlüsselung im Menü *Einrichtung » Mandant » [Mandant wählen]» E-Mail » Zugangsdaten* auf.
+
+[[table-starttls-encryption]]
+.Einstellungen für STARTTLS-Verschlüsselung
+[cols="1,3,3,3"]
+|====
+|Servertyp |Server |Verbindungssicherheit |Port
+
+| *IMAP*
+|mail.IHRE-DOMAIN.de
+|STARTTLS
+|143
+
+| *POP3*
+|mail.IHRE-DOMAIN.de
+|STARTTLS
+|110
+
+| *SMTP*
+|mail.IHRE-DOMAIN.de
+|STARTTLS
+|25
+|====
+
+[#500]
+=== Unverschlüsselte Verbindung
+
+[WARNING]
+.Sicherheit nicht gewährleistet
+====
+In unverschlüsselter Form kann deine Kommunikation von Dritten eingesehen werden. Eine unverschlüsselte Übertragung entspricht nicht mehr den aktuellen Sicherheitsstandards.
+====
+
+<<#table-unencrypted-connection>> listet die Einstellungen für eine unverschlüsselte Verbindung im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Zugangsdaten* auf.
+
+[[table-unencrypted-connection]]
+.Einstellungen für eine unverschlüsselte Verbindung
+[cols="1,3,3,3"]
+|====
+|Servertyp |Server |Verbindungssicherheit |Port
+
+| *IMAP*
+|mail.IHRE-DOMAIN.de
+|keine
+|143
+
+| *POP3*
+|mail.IHRE-DOMAIN.de
+|keine
+|110
+
+| *SMTP*
+|mail.IHRE-DOMAIN.de
+|keine
+|25
+|====
+
+
+[#600]
+== E-Mail-Signatur speichern
+
+Im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Signatur* speicherst du deine Signatur, die dann in einer E-Mail-Vorlage automatisch eingefügt wird.
+
+[IMPORTANT]
+.Gesetzliche Vorgaben beachten
+====
+Beachte die für deinen Online-Shop geltenden gesetzlichen Vorgaben zum Inhalt einer E-Mail-Signatur, wie z.B. die Angabe der USt-IdNr. Die Pflichtangaben entsprechen denen der Geschäftsbriefe deines Unternehmens. Bei Nichtbeachten besteht die Gefahr eines Zwangsgeldes oder einer kostenpflichtigen Abmahnung durch einen Mitbewerber. Lasse dich im Zweifelsfall von einem kundigen Anwaltsbüro beraten.
+====
+
+[.instruction]
+E-Mail-Signatur speichern:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Signatur*.
+. Gib den Text deiner Signatur ein. Beachte dazu die Erläuterung in der grünen Box.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[TIP]
+.Signatur mit Hilfe des HTML-Editors formatieren
+====
+Entscheide, ob du den Text deiner Signatur als *reine Textsignatur* oder als *HTML-Signatur* speicherst. Wenn du den Text formatieren möchtest, empfiehlt es sich, den Text im Bereich *HTML-Signatur* einzugeben. Dort steht dir der integrierte HTML-Editor zur Verfügung.
+
+Im Menü *Einrichtung » Einstellungen » Editoren* legst du fest, welche Editoren für bestimmte Bereiche in deinem plentymarkets System zur Verfügung stehen sollen. Wähle zwischen *Editor*, *Syntax-Editor* und *Textfeld*.
+====
+
+[#700]
+== E-Mail-Infodienst einrichten
+
+Du hast im Menü *Einrichtung » Mandant » [Mandant wählen] » Email » Infodienst* die Möglichkeit, alle von deinem plentymarkets System ausgehenden E-Mails auf eine von dir gewählte E-Mail-Adresse als blinde Kopie (BCC) zu versenden. Besonders in der Anfangsphase deines Webshops erhältst du so eine gute Kontrolle über alle versendeten E-Mails und kannst erkennen, wo du Prozesse noch optimieren musst. Du kannst in diesem Menü auch einstellen, dass du bei Bestellungen automatisch eine Info-E-Mail erhältst.
+
+[.instruction]
+E-Mail-Infodienst einrichten:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Infodienst*.
+. Nimm die gewünschten Einstellungen vor. Beachte dazu die Erläuterungen in <<#table-email-info-service>>.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[[table-email-info-service]]
+.E-Mail-Infodienst einrichten
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Alle ausgehenden E-Mails werden als blinde Kopie (BCC) an die E-Mail-Adresse (nächste Zeile) gesendet*
+|Einstellen, ob alle ausgehenden E-Mails als BCC an eine oder mehrere E-Mail-Adressen gesendet werden. Die E-Mail-Adressen werden in der nächsten Zeile eingegeben. +
+*JA* = Option ist aktiviert. +
+*NEIN* = Option ist deaktiviert (Standardeinstellung).
+
+| *E-Mail-Adresse für blinde Kopie*
+|E-Mail-Adresse(n) eingeben. Mehrere E-Mail-Adressen kommagetrennt und ohne Leerzeichen eingeben.
+
+| *Blinde Kopien (BCC) für Newsletter deaktivieren*
+|Wählen, ob blinde Kopien (BCC) bei Newslettern versendet werden. +
+Option aktivieren = Es werden keine blinde Kopien bei Newslettern versendet. +
+Option deaktivieren = Es werden blinde Kopien bei Newslettern versendet (Standardeinstellung).
+
+| *Sende Hinweis bei Eingang einer neuen Bestellung an E-Mail (nächste Zeile)*
+|Einstellen, ob bei einer neuen Bestellung eine E-Mail versendet wird. Die E-Mail-Adressen werden in der nächsten Zeile eingegeben. +
+*JA* = Es wird eine E-Mail versendet, wenn eine Bestellung eingeht. +
+*NEIN* = Es wird keine E-Mail versendet (Standardeinstellung). +
+ *_Wichtig:_* Bei neuen Bestellungen über eBay ist diese Funktion nicht vorhanden. Es wird empfohlen stattdessen eine <<automatisierung/ereignisaktionen#, Ereignisaktion>> einzurichten.
+
+| *E-Mail-Adresse*
+|E-Mail-Adresse(n) eingeben. Mehrere E-Mail-Adressen kommagetrennt und ohne Leerzeichen eingeben.
+|====
+
+[#800]
+== HTML-Design verwenden
+
+Im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » HTML-Design* hast du die Möglichkeit, pro Mandant (Shop) ein HTML-Design einzustellen, das dann für E-Mail-Vorlagen zur Verfügung steht. Du kannst das Design für jede E-Mail-Vorlage aktivieren und auch wieder deaktivieren.
+
+Verwende diese Funktion, damit z.B. der Briefkopf inklusive Logo deines Unternehmens automatisch in den E-Mail-Vorlagen angezeigt wird und du diesen nicht bei jeder E-Mail-Vorlage separat einfügen musst. Wenn du in diesem Menü Änderungen vornimmst, änderst du das Design zentral für alle verknüpften E-Mail-Vorlagen.
+
+Wenn du deine E-Mail-Vorlagen ohne zentrales HTML-Design erstellen möchtest, fahre mit dem Kapitel <<crm/e-mails-versenden#1200, E-Mail-Vorlage erstellen>> fort.
+
+[#900]
+=== Unternehmenslogo im Webspace hochladen
+
+Du hast die Möglichkeit, deine E-Mail-Vorlagen an das Design deines Webshops anzupassen und z.B. dein Unternehmenslogo in das HTML-Design einzufügen. Lade zunächst das Logo im Webspace hoch. Nachdem du die E-Mail-Vorlage erstellt hast, füge das <<crm/e-mails-versenden#1750, Logo in das HTML-Design>> ein und <<crm/e-mails-versenden#1100, verknüpfe>> dieses mit der E-Mail-Vorlage.
+
+[.instruction]
+Unternehmenslogo im Webspace hochladen:
+
+. Öffne das Menü *CMS » Webspace*.
+. Klicke auf der linken Seite auf den Ordner, in den du das Logo hochladen möchtest. +
+icon:map-signs[] *_Oder:_* Erstelle einen neuen Ordner (icon:folder_add[set=plenty, role=green]).
+. Klicke auf *Datei hochladen* (icon:upload[role="purple"]) oder ziehe die Datei per Drag-and-drop in den Ordner. +
+→ Das Bild wird hochgeladen.
+. Klicke in der Zeile des Bildes auf *In Zwischenablage kopieren* (icon:copy_clipboard[set=plenty, role=purple]), um die URL des Bildes zu kopieren.
+
+[#1000]
+=== Template-Variablen in das HTML-Design einfügen
+
+Füge die Template-Variablen `$EmailContentHTML` und `$SignatureHTML` in das HTML-Design ein. Nachdem du die E-Mail-Vorlage erstellt hast, <<crm/e-mails-versenden#1100, verknüpfst>> du das HTML-Design mit der E-Mail-Vorlage.
+
+[IMPORTANT]
+.$EmailContentHTML muss vorhanden sein
+====
+Die Template-Variable `$EmailContentHTML` muss in das HTML-Design eingefügt werden. Andernfalls kann das HTML-Design nicht verwendet werden.
+====
+
+[.instruction]
+Template-Variablen in das HTML-Design einfügen:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » HTML-Design*.
+. Füge die Template-Variablen `$EmailContentHTML` und `$SignatureHTML` ein. +
+→ `$EmailContentHTML` gibt den Inhalt der E-Mail aus. `$SignatureHTML` gibt die Signatur aus.
+. Formatiere das HTML-Design nach deinen Wünschen.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+Erstelle nun die E-Mail-Vorlage wie in den folgenden Kapiteln beschrieben und füge anschließend das <<crm/e-mails-versenden#1750, Logo in das HTML-Design>> ein und <<crm/e-mails-versenden#1100, verknüpfe>> dieses mit der E-Mail-Vorlage.
+
+[#1200]
+== E-Mail-Vorlage erstellen
+
+Erstelle im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* neue E-Mail-Vorlagen. Im Ordner *Allgemeine E-Mail-Vorlagen* sind bereits vorkonfigurierte E-Mail-Vorlagen enthalten, die du selbstverständlich anpassen kannst.
+
+Für jede E-Mail-Vorlage kannst du bis zu 2 Anhänge definieren:
+
+* ein PDF-Dokument aus dem Menü *Aufträge » Fulfillment*, z.B. eine Rechnung
+
+* ein im Menü *CMS » Dokumente* hochgeladenes Dokument, z.B. ein Artikelprospekt oder eine Anleitung.
+
+Diese Anhänge können standardisiert über E-Mail-Vorlagen an deine Kund:innen versendet werden. Für die E-Mail-Vorlage *Eingangsbestätigung Webshop Bestellung* wären z.B. die Widerrufsbelehrung und deine AGB im PDF-Format eine sinnvolle Ergänzung.
+
+[TIP]
+.Stornobeleg und Rechnung zusammen in einer E-Mail-Vorlage versenden
+====
+Es ist möglich, in der E-Mail-Vorlage in der Dropdown-Liste *PDF-Anhang*, die Option *Stornobeleg und neue Rechnung* zu wählen. Im Falle einer Änderung am Auftrag nach dem Erstellen der Rechnung kannst du so deinen Kund:innen beide Dokumente in nur einer E-Mail senden.
+====
+
+Erfahre im folgenden Video-Tutorial, wie du eine E-Mail-Vorlage erstellst:
+
+[[video-e-mail-vorlagen-erstellen]]
+.E-Mail-Vorlagen erstellen
+video::217455306[vimeo, width=640, height=360]
+
+[.instruction]
+E-Mail-Vorlage erstellen:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*.
+. Klicke auf *Neue E-Mail-Vorlage*. +
+→ Das Fenster *Neue E-Mail-Vorlage* wird geöffnet.
+. Gib den Namen für die Vorlage ein.
+. Wähle aus der Dropdown-Liste *Eigner* den Eigner oder die Option *Alle*.
+. Klicke auf *Speichern*. +
+→ Die E-Mail-Vorlage wird erstellt und abhängig von der gewählten Einstellung in der Dropdown-Liste *Eigner* in einem der 3 Ordner gespeichert.
+. Nimm die restlichen Einstellungen vor. Beachte dazu die Erläuterungen in <<#table-email-template>>.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[[table-email-template]]
+.Einstellungen zum Erstellen einer E-Mail-Vorlage
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Speichern*
+|Speichert die Einstellungen in der E-Mail-Vorlage.
+
+| *Template-Variablen -und Funktionen*
+|Mit einem Klick auf icon:code[role="blue"] wird der Bereich *Template-Variablen -und Funktionen* geöffnet, aus dem die Template-Variablen bzw. Template-Funktionen für die E-Mail-Vorlage kopiert werden.
+
+2+| *Tab: Einstellungen*
+
+| *Eigner*
+|Wenn der Name des Eigners bereits beim Erstellen aus der Dropdown-Liste gewählt wurde, wird hier der Name des Eigners angezeigt. Andernfalls Eigner aus der Dropdown-Liste wählen. Diese Einstellung kann jederzeit geändert werden. +
+*Alle* = Die Vorlage wird unter *Allgemeine E-Mail-Vorlagen* gespeichert. +
+Eigener Benutzer:innenname = Die Vorlage wird unter *Meine E-Mail-Vorlagen* gespeichert. +
+Anderer Benutzer:innenname = Die Vorlage wird unter *E-Mail-Vorlagen anderer Benutzer* gespeichert. +
+*_Hinweis:_* Um eine eigene E-Mail-Vorlage unter *Meine E-Mail-Vorlagen* zu erstellen, muss man als Benutzer:in im System eingeloggt sein.
+
+| *Name*
+|Wenn der Name der E-Mail-Vorlage bereits beim Erstellen eingegeben wurde, wird hier der Name der E-Mail-Vorlage angezeigt. Andernfalls Namen eingeben, unter dem diese Vorlage gespeichert werden soll.
+Der Name kann jederzeit geändert werden. Der Name wird den Empfänger:innen nicht angezeigt.
+
+| *Inhalt*
+|Wählen, ob der Inhalt der E-Mail-Vorlage als *Nur reiner Text* oder *Nur HTML-formatierter Text* gespeichert werden soll. +
+*_Tipp:_* Verwende HTML-formatierten Text. Der Link zur Auftragsabwicklung, der über die Template-Funktion `{%Link_Checkout()%}` abgebildet wird, kann sehr lang sein. Bei reinen Text-E-Mails kann dies zu Zeilenumbrüchen führen, die den Link unter Umständen beschädigen. +
+*_Wichtig:_* Wenn du weitere Sprachen im HTML-Format hinzufügst, achte darauf, dass im Tab *Einstellungen* in der Dropdown-Liste *Inhalt* wieder die Einstellung *Nur HTML-formatierter Text* gewählt ist. Die Auswahl *Nur reiner Text* ist die Standardeinstellung für alle Sprachen.
+
+| *Template-Typ*
+|Wählen, in welchem Bereich die E-Mail-Vorlage als Auswahl zur Verfügung steht. Mögliche Optionen: *Alle* (Standardeinstellung), *Auftrag*, *Kunden*, *Webshop*, *Ticket* oder *Scheduler*. +
+*Alle* / *Webshop* = Die E-Mail-Vorlage steht in allen Bereichen als Auswahl zur Verfügung. +
+*Auftrag* = Die E-Mail-Vorlage steht ausschließlich für den gewählten Bereich als Auswahl zur Verfügung. Die Vorlage ist in anderen Bereichen nicht sichtbar. Wenn das Ticket mit einem Auftrag verknüpft ist, sind E-Mail-Vorlagen mit dem Template-Typ *Auftrag* ebenfalls im Ticket wählbar. +
+*Kunden* = Die E-Mail-Vorlage steht ausschließlich für den gewählten Bereich als Auswahl zur Verfügung. Die Vorlage ist in anderen Bereichen nicht sichtbar. +
+*Ticket* = Die E-Mail-Vorlage steht ausschließlich für den gewählten Bereich als Auswahl zur Verfügung. Die Vorlage ist in anderen Bereichen nicht sichtbar. +
+*Scheduler* = Die E-Mail-Vorlage steht in allen Bereichen, in denen auch der Template-Typ *Auftrag* sichtbar ist, als Auswahl zur Verfügung.
+
+| *PDF-Anhang*
+|Anhang aus der Dropdown-Liste wählen. Die Dokumente, die hier in der Dropdown-Liste zur Verfügung stehen, werden u.a. im Menü *Aufträge » Fulfillment* oder durch versandbezogene Prozesse erzeugt. +
+Aktuell mögliche Anhänge: Korrekturbeleg, Lieferschein, Mahnung, Nachbestellung (CSV), Nachbestellung (PDF), OpenTrans (XML), PO Lieferschein, Proformarechnung, Rechnung, Reparaturschein, Retourenlabel, Rücksendeschein, Sammelgutschrift, Sammelrechnung, SEPA-Lastschriftmandat, Stornobeleg Gutschrift, Stornobeleg Rechnung, Stornobeleg und neue Gutschrift, Stornobeleg und neue Rechnung, Versandlabel, Voucher. +
+*_Hinweis:_* Es ist möglich, Retourenlabel von allen in plentymarkets eingebundenen Versanddienstleistern – sowohl Plugin als auch feste Integration – zu versenden.
+
+| *Dokumentenanhang*
+|Auf Wunsch ein unter *CMS » Dokumente* hochgeladenes eigenes Dokumente wählen, das an die E-Mail-Vorlage anhängt werden soll. +
+Alle E-Mail-Vorlagen können mit bis zu 2 Anhängen standardisiert an Kund:innen versendet werden: PDF-Dokumente aus dem Bereich Fulfillment (z.B. Rechnungen) oder andere Dateien (z.B. ein Artikelprospekt oder eine Anleitung). Für die Vorlage *Eingangsbestätigung Webshop Bestellung* wären z.B. die Widerrufsbelehrung und die AGB im PDF-Format eine sinnvolle Ergänzung.
+
+| *Antwort an*
+|E-Mail-Adresse eingeben, an die die Antworten auf diese E-Mail-Vorlage gesendet werden sollen. Wenn keine E-Mail-Adresse eingegeben ist, werden Antworten auf diese Vorlage standardmäßig an die im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Zugangsdaten* gespeicherte E-Mail-Adresse versendet. Beispielsweise ist es sinnvoll, die E-Mail-Adresse der Buchhaltungsabteilung für die E-Mail-Vorlage *PDF-Rechnung* einzugeben. So gehen z.B. Rückfragen zur Rechnung direkt an die Buchhaltungsabteilung und müssen nicht erst weitergeleitet werden.
+
+| *Design verwenden*
+|Aktivieren, wenn der Inhalt der E-Mail mit dem im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » HTML-Design* gespeicherten Design versendet werden soll. Wird die Option nicht aktiviert, wird nur der Inhalt der E-Mail-Vorlage verwendet.
+
+| *Mandant (Shop)*
+|Einen, mehrere oder *ALLE* Mandanten (Shops) aktivieren. Die E-Mail-Vorlage ist nur für die gewählten Mandanten (Shops) gültig.
+
+2+| *Tab: E-Mail-Nachricht*
+
+| *Sprache wählen*
+|Ggf. andere Sprache aus der Dropdown-Liste wählen. +
+*_Hinweis:_* Die eingestellte Sprache im Kontaktdatensatz bestimmt, in welcher Sprache die E-Mail-Vorlage versendet wird.
+
+| *Betreff*
+|Betreff eingeben. Betreff sorgfältig wählen, damit die E-Mails im Postfach deiner Kund:innen leicht erkennbar sind und nicht als Spam-Nachricht eingestuft werden.
+
+| *Inhalt / Artikelliste*
+|Im Tab *Inhalt* können globale Template-Variablen verwendet werden, z.B. alle auftrags-, kontakt- und adressbezogenen Template-Variablen. +
+Im Tab *Artikelliste* können nur die Template-Variablen verwendet werden, die Werte der Auftragspositionen beinhalten. Würden diese Variablen im Tab *Inhalt* verwendet werden, so hätten sie keinen Inhalt. +
+Gib in diese Tabs den Text bzw. die Artikelauflistung als *reinen Text* oder als *HTML-formatierten Text* sowie Template-Variablen und Template-Funktionen ein.  +
+*_Hinweis:_* Nur der Inhalt des Tabs wird berücksichtigt, dessen Inhaltstyp im Tab *Einstellungen* unter *Inhalt* festgelegt wurde. Wenn dort also z.B. *Nur reiner Text* eingestellt wurde, jedoch nur das Tab *HTML-formatierter Text* Inhalt enthält, wird keine E-Mail versendet.
+
+|====
+
+[TIP]
+.Tipp: HTML-formatierten Text verwenden
+====
+plentymarkets empfiehlt die Verwendung von HTML-formatiertem Text, weil der Link zur Auftragsabwicklung beispielsweise sehr lang sein kann. Bei reinen Text-E-Mails kann dies zu Zeilenumbrüchen führen, die möglicherweise den Link beschädigen. Des Weiteren hast du bei der Verwendung von HTML-formatierten Text die Möglichkeit, den Text mit dem integrierten HTML-Editor zu formatieren.
+
+Im Menü *Einrichtung » Einstellungen » Editoren* legst du fest, welche Editoren für bestimmte Bereiche in deinem plentymarkets System zur Verfügung stehen sollen. Wähle den *Editor*, den *Syntax-Editor* oder das *Textfeld*.
+====
+
+[#1300]
+=== Template-Variablen und Template-Funktionen verwenden
+
+Lerne in dem folgenden Video-Tutorial Template-Variablen und if-Konstrukte in plentymarkets kennen:
+
+[[video-template-variablen-if-konstrukte]]
+.Lerne Template-Variablen und if-Konstrukte in plentymarkets kennen
+video::214836665[vimeo, width=640, height=360]
+
+Für E-Mail-Vorlagen stehen Template-Variablen und Template-Funktionen zur Verfügung. Statt der Variablen oder Funktion wird dann von deinem plentymarkets System automatisch der definierte Inhalt abgebildet, d.h. in der E-Mail wird dann der Inhalt dargestellt. Außerdem erfüllen einige Template-Variablen die Funktion von Zuordnungsparametern, wenn du mit dem <<crm/ticketsystem-nutzen#4800, Ticketsystem>> arbeitest.
+
+Um eine Liste aller Template-Variablen und Template-Funktionen, die dir für deine E-Mail-Vorlagen zur Verfügung stehen, anzuzeigen, öffne eine E-Mail-Vorlage im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* und klicke auf icon:code[role="blue"].
+
+Eine Übersicht der Template-Variablen und Template-Funktionen für E-Mail-Vorlagen findest du im Kapitel <<crm/e-mails-versenden#4000, Für E-Mail-Vorlagen verfügbare Template-Variablen und Template-Funktionen>> auf dieser Handbuchseite.
+
+[TIP]
+.Link zur Auftragsabwicklung
+====
+Wenn du möchtest, dass sich deine Kund:innen jederzeit über den aktuellen Status ihrer Aufträge informieren können, füge die Template-Funktion `Link_Checkout()` in die E-Mail-Vorlage ein. Für die korrekte Ausgabe der URL musst du die Template-Funktion folgendermaßen in die E-Mail-Vorlage einfügen: `{%Link_Checkout()%}`.
+
+*_Hinweis:_* Die Template-Funktion `{%Link_Checkout()%}` ist _nicht_ automatisch in der E-Mail-Vorlage *Webshop: Eingangsbestätigung Bestellung* enthalten.
+====
+
+[#1400]
+=== Anzeige der Artikelpositionen einrichten
+
+Der Aufbau einer Artikelpositionenzeile kann pro E-Mail-Vorlage und Sprache einzeln eingerichtet werden. Beim Einrichten der Artikelpositionen kannst du <<crm/e-mails-versenden#1500, if-Abfragen>> verwenden. Wird die Anzeige der Artikelpositionen nicht eingerichtet, wird von plentymarkets eine Standardauflistung der Artikelpositionen ausgegeben.
+
+[IMPORTANT]
+.Template-Variable $OrderProperties in der Artikelliste hinzufügen
+====
+Die Template-Variable `$OrderProperties`, die die Bestellmerkmale ausgibt, ist nicht in der Standardauflistung der Artikelpositionen in E-Mail-Vorlagen vom Template-Typ *Auftrag* enthalten. Das bedeutet, dass Bestellmerkmale nicht in den Artikelpositionen ausgegeben werden. Wenn du möchtest, dass die Bestellmerkmale in der Artikelliste enthalten sind, musst du die Template-Variable `$OrderProperties` manuell hinzufügen.
+====
+
+[.instruction]
+Anzeige der Artikelpositionen einrichten:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*.
+. Öffne die Vorlage.
+. Wechsele in das Tab *E-Mail-Nachricht*. +
+→ Das Tab *Inhalt* wird angezeigt.
+. Füge im Tab *HTML-formatierter Text* die Template-Variable `$ItemListHTML` oder im Tab *Reiner Text* die Template-Variable `$ItemListPlain` an der Stelle im Tab *Inhalt* der E-Mail ein, an der die Artikelpositionen angezeigt werden sollen.
+. Kopiere die Template-Variablen aus der Übersicht, die du für die Artikelpositionen benötigst und füge die Template-Variablen im Tab *Artikelliste* ein. +
+​→ Zur Formatierung füge z.B. Tabulatoren, die du aus einem Textprogramm kopiert hast, zwischen den Template-Variablen ein (siehe <<#image-crm-available-template-variables-item-list-part1>> und <<#image-crm-available-template-variables-item-list-part2>>).
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[[image-crm-available-template-variables-item-list-part1]]
+.Verfügbare Template-Variablen für die Artikelliste *ItemListPlain* (Bild 1)
+image::crm/assets/crm-verfuegbare-template-variablen-artikelliste-teil1.png[width=640, height=360, alt=Verfügbare Template-Variablen für die Artikelliste *ItemListPlain* (Bild 1)]
+
+[[image-crm-available-template-variables-item-list-part2]]
+.Verfügbare Template-Variablen für die Artikelliste *ItemListPlain* (Bild 2)
+image::crm/assets/crm-verfuegbare-template-variablen-artikelliste-teil2.png[width=640, height=360, alt=Verfügbare Template-Variablen für die Artikelliste *ItemListPlain* (Bild 2)]
+
+[discrete]
+==== Beispiel: Anzeige der Artikelpositionen
+
+Füge die Template-Variablen zur Anzeige von Artikel-ID (`$ItemID`), Artikelname (`$ItemName`) und Preis (`$ItemPrice`) der Artikelpositionen ein. Die Anzeige beginnt mit einem Bindestrich. Dieser wird dann jeweils zu Beginn einer Zeile auch bei mehreren Artikelpositionen angezeigt. Damit die Anzeige mehrzeilig funktioniert, füge am Ende der Zeile durch Drücken der Enter-Taste einen Zeilenumbruch ein.
+
+Wie du eine Vorschau öffnest, um deine E-Mail-Vorlage zu prüfen, ist im Kapitel <<crm/e-mails-versenden#1600, E-Mail-Vorlage anhand der Vorschau prüfen>> beschrieben.
+
+[#1500]
+=== if-Abfragen in E-Mail-Vorlagen verwenden
+
+Setze in E-Mail-Vorlagen Fallunterscheidungen nach den Prinzipien der if-Abfragen ein. Füge z.B. einen Code ein, der bewirkt, dass die Bankdaten in der E-Mail an deine Kund:innen nur angezeigt werden, wenn diese die Zahlungsart Vorkasse (ID{nbsp}={nbsp}0) gewählt haben. Diese if-Abfrage ist im folgenden Beispiel zu sehen.
+
+[source,plenty]
+----
+include::example$E-Mail-Vorlagen-MethodOfPayment.html[]
+
+----
+
+// Weitere Informationen findest auf der Handbuchseite <<webshop/webshop-einrichten/cms-syntax#grundlagen-if, Alter Webshop:{nbsp}CMS-Syntax>>.
+
+[#1600]
+=== E-Mail-Vorlage anhand der Vorschau prüfen
+
+Du hast die Möglichkeit anhand der E-Mail-Vorschau zu prüfen, ob die E-Mail-Vorlage deinen Vorstellungen entspricht. Prüfe auch die korrekte Funktionsweise des Links zur Auftragsabwicklung. Gehe wie im Folgenden beschrieben vor, um die Vorschau der E-Mail-Vorlage aufzurufen.
+
+[.instruction]
+E-Mail-Vorlage anhand der Vorschau prüfen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Öffne den Auftrag.
+. Wechsele in das Tab *Mail*.
+. Wähle im Tab *E-Mail-Vorlagen* die Sprache aus der Dropdown-Liste *Sprache wählen*.
+. Wechsele in das Tab, in das du die E-Mail-Vorlage gespeichert hast: *Allgemeine E-Mail-Vorlagen*, *Meine E-Mail-Vorlagen* oder *E-Mail-Vorlagen anderer Benutzer*.
+. Aktiviere die E-Mail-Vorlage.
+. Klicke auf *Vorschau*. +
+→ Das Fenster *E-Mail-Vorschau* wird geöffnet.
+
+[#1700]
+=== E-Mail-Vorlage bearbeiten
+
+Du hast die Möglichkeit, allgemeine E-Mail-Vorlagen, deine eigenen E-Mail-Vorlagen und E-Mail-Vorlagen anderer Benutzer:innen zu bearbeiten. Änderungen an den E-Mail-Vorlagen nimmst du im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* vor.
+
+[.instruction]
+E-Mail-Vorlage bearbeiten:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*.
+. Klicke auf den Ordner, in dem sich die E-Mail-Vorlage, die du bearbeiten möchtest, befindet.
+. Klicke auf die E-Mail-Vorlage. +
+→ Das Tab *Einstellungen* der E-Mail-Vorlage wird geöffnet.
+. Nimm die gewünschten Einstellungen vor. Beachte dazu die Erläuterungen in <<#table-email-template>> im Kapitel <<crm/e-mails-versenden#1200, E-Mail-Vorlage erstellen>>.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[TIP]
+.E-Mail-Vorlage nach jeder Änderung prüfen
+====
+Jede Änderung an einer Vorlage sollte über den Mailservice eines Auftrags getestet werden. Besonders die korrekte Funktionsweise des Links zur Auftragsabwicklung sollte geprüft werden. Gehe dazu, wie im Kapitel <<crm/e-mails-versenden#1600, E-Mail-Vorlage anhand der Vorschau prüfen>> beschrieben, vor.
+====
+
+[#1750]
+== Unternehmenslogo in das HTML-Design einfügen
+
+Füge nun das Logo über einen Bild-Link in das HTML-Design der bereits erstellten E-Mail-Vorlage ein. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Unternehmenslogo in das HTML-Design einfügen:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*.
+. Öffne die E-Mail-Vorlage, in der du das Logo einfügen möchtest.
+. Wechsele in das Tab *E-Mail-Nachricht*.
+. Wechsele im Tab *Inhalt* in das Tab *HTML-formatierter Text*.
+. Wähle aus der Dropdown-Liste rechts oben die Option *Editor*. +
+→ 2 Symbolleisten zum Formatieren des Textes werden eingeblendet.
+. Klicke in der Symbolleiste auf *Bild*. +
+→ Das Fenster *Bild-Eigenschaften* wird geöffnet.
+. Füge im Feld *URL* die absolute URL ein, die du soeben in der Bilder-Galerie kopiert hast.
+. Klicke auf *OK*. +
+→ Das Logo wird angezeigt.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[#1100]
+== HTML-Design mit der E-Mail-Vorlage verknüpfen
+
+Um das HTML-Design mit einer E-Mail-Vorlage zu verknüpfen, nimmst du die folgenden Einstellungen im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* vor. Der Inhalt der E-Mail-Vorlage muss im Tab *HTML-formatierter Text* vorhanden sein oder, wenn noch nicht, dort eingefügt werden. Dieser Inhalt wird dann über die Template-Variable `$EmailContentHTML` ausgegeben.
+
+[.instruction]
+HTML-Design mit der E-Mail-Vorlage verknüpfen:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*.
+. Wähle die E-Mail-Vorlage aus dem Ordner.
+. Wähle in der Zeile *Inhalt* die Option *Nur HTML-formatierter Text* aus der Dropdown-Liste.
+. Aktiviere die Option *Design verwenden*.
+. Gib im Tab *E-Mail-Nachricht* einen Betreff ein.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[#1800]
+== E-Mails versenden
+
+Für den Versand von E-Mails müssen im Menü *Einrichtung » Einstellungen » Benutzer » Konten* <<business-entscheidungen/benutzerkonten-zugaenge#10, Benutzerdaten>> gespeichert sein. Diese Daten sind von deinem Provider erhältlich und stimmen mit den Daten, die in deinem E-Mail-Programm gespeichert sind, überein.
+
+[#1900]
+=== Ticketnachrichten und Kommentare als E-Mails versenden
+
+Du musst im Menü *Einrichtung » CRM » Ticketsystem » E-Mail-Konten* ein <<crm/ticketsystem-nutzen#2100, E-Mail-Konto>> gespeichert haben, damit Nachrichten und Kommentare als E-Mails versendet werden. Außerdem musst du eine E-Mail-Vorlage, die die letzte Ticketnachricht oder den letzten Kommentar enthält, einrichten und diese in einer <<crm/ticketsystem-nutzen#2900, Ereignisaktion>> einstellen, damit der Versand per E-Mail durchgeführt wird. Weitere Informationen findest du auf der Handbuchseite <<crm/ticketsystem-nutzen#2100, Ticketsystem>>.
+
+[#2000]
+=== Gutscheine per E-Mail versenden
+
+Versende Gutschein-Codes oder Gutscheine als PDF-Dateien per E-Mail. Details dazu findest du auf der Handbuchseite <<auftraege/gutscheine#, Gutscheine>> in den Kapiteln <<auftraege/gutscheine#gutschein-codes-e-mail-versenden, Gutschein-Codes per E-Mail versenden>> und <<auftraege/gutscheine#gutscheinvorlage-einrichten, Gutscheinvorlage einrichten>>.
+
+[#2300]
+== Automatischen E-Mail-Versand einrichten
+
+Im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Automatischer Versand* stehen dir verschiedene Ereignisse zur Verfügung, die mit einer E-Mail-Vorlage verknüpft werden können. Wähle aus der Dropdown-Liste die E-Mail-Vorlage, die du zuvor im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* <<crm/e-mails-versenden#1200, erstellt>> hast. Dadurch wird bei Eintritt des Ereignisses die E-Mail-Vorlage automatisch an deine Kund:innen versendet.
+
+[IMPORTANT]
+.Verknüpfung vor Löschen der E-Mail-Vorlage entfernen
+====
+Das Löschen einer E-Mail-Vorlage, die mit einem Ereignis im Bereich *Automatischer Versand* verknüpft ist, kann zu unerwünschten Effekten führen. Entferne daher zunächst die Verknüpfung im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Automatischer Versand*, indem du in der Zeile des Ereignisses in der Dropdown-Liste die Option *Kein Versand* wählen. Anschließend löschst du die E-Mail-Vorlage im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*.
+====
+
+Lerne im folgenden Video-Tutorial, wie du deine E-Mail-Vorlagen mit festen Ereignissen verknüpfst und wie du Ereignisaktionen für den automatischen E-Mail-Versand einrichtest:
+
+[[video-e-mail-versand-automatisieren]]
+.Automatisiere deinen E-Mail-Versand
+video::214839643[vimeo, width=640, height=360]
+
+[.instruction]
+Automatischen E-Mail-Versand einrichten:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Automatischer Versand*.
+. Wähle die in der Zeile des Ereignisses die E-Mail-Vorlage aus der Dropdown-Liste. Beachte dazu die Erläuterungen in <<#table-events-automatic-email-dispatch>>.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+<<#table-events-automatic-email-dispatch>> listet Erläuterungen zu einigen der Ereignisse auf.
+
+[[table-events-automatic-email-dispatch]]
+.Erläuterungen zu einigen Ereignissen für den automatischen Versand
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Neue Bestellung über den Webshop*
+|Sendet Kund:innen eine E-Mail mit der Auftragsbestätigung, nachdem der Kaufvorgang im Webshop abgeschlossen wurde. +
+*Hinweis:_* Wenn du möchtest, dass dein:e Kund:in über diese E-Mail in die Auftragsabwicklung in deinem Webshop gelangen kann, um den Status der Bestellung einzusehen, musst du die Template-Funktion `{%Link_Checkout()%}` in die E-Mail-Vorlage, die du für dieses automatische Ereignis wählst, einfügen.
+
+| *Sende Kunde E-Mail zur Passwortänderung*
+|Sendet Kund:innen eine E-Mail mit einem Link zum neuen Passwort, der aktiv bestätigt werden muss. Die Template-Funktion `{%Link_ChangePassword()%}` muss in der E-Mail-Vorlage enthalten sein.
+
+| *Newsletter Opt-In*
+|Sendet Kund:innen eine E-Mail, wenn die Kund:innen sich für den Newsletter angemeldet haben. Die E-Mail-Vorlage sollte den Bestätigungslink, den die Kund:innen anklicken müssen, um die Newsletter-Anmeldung abzuschließen, enthalten.
+
+| *Bestätigung Newsletter Opt-In*
+|Sendet Kund:innen eine E-Mail als Bestätigung, sobald die Kund:innen den Bestätigungslink, der mit der E-Mail-Vorlage für das Ereignis *Newsletter Opt-In* versendet wurde, aktiviert haben.
+
+| *Erinnerung bei Kaufabbruch*
+|Sendet Kund:innen eine E-Mail als Erinnerung, dass ein oder mehrere Artikel im Warenkorb liegen, der Kaufvorgang jedoch nicht abgeschlossen wurde. Die E-Mail-Vorlage sollte den Link zum Warenkorb enthalten, damit die Kund:innen diesen aufrufen und die Bestellung abschließen können. Dazu an die URL des Webshops den Suffix */basket/* anfügen (Beispiel: *+https://www.meinshop.de/basket/+*). +
+Voraussetzung ist, dass die potenziellen Käufer:innen beim Besuch im Webshop angemeldet und eingeloggt waren, weil andernfalls die E-Mail-Adresse nicht vorliegt und der automatische Versand der E-Mail-Vorlage daher nicht funktionieren kann. +
+*_Wichtig:_* Diese Art von E-Mail-Versand kann aufgrund der fehlenden vorherigen Einwilligung als unzulässiger Spam gelten. Lasse dich daher von einem kundigen Anwaltsbüro beraten.
+
+| *Gewinnspielanmeldung*
+|Sendet Kund:innen, die sich zum Gewinnspiel angemeldet haben, eine E-Mail als Bestätigung.
+
+| *Benachrichtigung bei verfügbarem Artikel*
+|Sendet Kund:innen eine E-Mail mit dem Hinweis, dass ein bestimmter Artikel wieder verfügbar ist. Voraussetzung: Die Kund:innen haben zuvor ihre E-Mail-Adresse im Webshop bei dem nicht lieferbaren Artikel eingetragen.
+
+|====
+
+[discrete]
+=== Automatischer E-Mail-Versand am Beispiel einer neuen Bestellung über eBay
+
+Nachdem Kund:innen einen Artikel über eBay erworben haben, wird in plentymarkets automatisch ein Auftrag angelegt. Wenn du z.B. die E-Mail-Vorlage Auftragsbestätigung eBay <<crm/e-mails-versenden#1200, erstellt>> und diese im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Automatischer Versand* für das Ereignis *Neue Bestellung über eBay* aus der Dropdown-Liste definiert hast, wird automatisch eine E-Mail an die Kund:innen versendet.
+
+Parallel zum E-Mail-Versand kann den Kund:innen auch eine Nachricht über das eBay-Nachrichtensystem gesendet werden. Dazu musst du im Menü *Einrichtung » Märkte » eBay » Einstellungen* im Tab *Kontoeinstellungen* und dort im Untermenü *Nachricht nach Kauf* den Text speichern. Weitere Informationen findest du auf der Handbuchseite <<maerkte/ebay/ebay-einrichten#, eBay einrichten>> im Kapitel <<maerkte/ebay/ebay-einrichten#1500, Nachrichten nach Kauf versenden>>.
+
+[discrete]
+=== Ereignisaktion einrichten
+
+Du hast außerdem die Möglichkeit, Ereignisaktionen im Menü *Einrichtung » Aufträge » Ereignisse* einzurichten. Definiere ein Ereignis, setze einen oder mehrere Filter und lege Aktionen fest, die von deinem plentymarkets System automatisch im Ereignisfall ausgeführt werden.
+
+Richte z.B. ein, dass der E-Mail-Versand eines Gutscheins ausgelöst wird, wenn eine Person eine bestimmte Anzahl an Aufträgen generiert hat. Weitere Informationen findest du auf der Handbuchseite <<automatisierung/ereignisaktionen#, Ereignisaktionen>>.
+
+[#2500]
+== Gesendete E-Mail-Vorlagen pro Person anzeigen
+
+Im Menü *Aufträge » Aufträge bearbeiten » [Auftrag öffnen] » Tab: Mail » Tab: Gesendete E-Mails* hast du die Möglichkeit, alle E-Mail-Vorlagen, die du an die Person versendet hast, anzuzeigen. Beachte, dass in diesem Tab nur die gesendeten E-Mail-Vorlagen angezeigt werden, die mit einer eindeutigen Kontakt-ID verknüpft sind.
+
+[.instruction]
+Gesendete E-Mail-Vorlagen pro Person anzeigen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Öffne den Auftrag.
+. Wechsele in das Tab *Mail*.
+. Wechsele in das Tab *Gesendete E-Mails*. +
+→ Das Datum, die Uhrzeit, die E-Mail-Adresse, die ID und der Name der Vorlage sowie die Auftrags-ID werden angezeigt.
+
+Klappe den Bereich *Weitere an den Kunden gesendete E-Mails...* auf, um alle E-Mails anzuzeigen, die an diese Person gesendet wurden. Hier werden auch E-Mails angezeigt, die diese Person aus einem anderen Auftrag heraus erhalten hat. Mit einem Klick auf die Auftrags-ID wird die Auftragsübersicht dieses Auftrags in einem separaten Tab geöffnet.
+
+[#2600]
+== Alle versendeten E-Mail-Vorlagen anzeigen
+
+Im Menü *plentymarkets Logo (Start) » Statistik* erstellst du eine neue Statistik und wählst im Bereich *Aufträge* den Statistiktyp *Versendete E-Mail-Vorlagen*. Du erhältst somit Informationen der über dein plentymarkets System versendeten E-Mails mit der ID und dem Namen der E-Mail-Vorlage sowie der datumsbezogenen Anzahl der E-Mails. Die Standardeinstellung der Zeitspanne beträgt die letzten 30 Tage. Du kannst die Zeitspanne jedoch auch anpassen oder ein Startdatum und ein Enddatum wählen.
+
+Anhand dieser Statistik kannst du erkennen, welche E-Mail-Vorlage in welchem Zeitraum genutzt wurde und welche Vorgänge besonders häufig oder selten ausgeführt werden. Weitere Informationen dazu findest du auf der Handbuchseite <<business-entscheidungen/plenty-bi/statistiken#, Statistik>>.
+
+
+[#4000]
+== Für E-Mail-Vorlagen verfügbare Template-Variablen und Template-Funktionen
+
+[#4100]
+=== Template-Funktionen
+
+Für E-Mail-Vorlagen stehen dir die in <<#table-template-functions-emails>> aufgelisteten Link-Funktionen zur Verfügung.
+
+[TIP]
+.Korrekte Ausgabe von Template-Funktionen
+====
+Damit Template-Funktionen korrekt als URL ausgegeben werden, muss die Template-Funktion von `{%` und `%}` umschlossen sein.
+====
+
+[[table-template-functions-emails]]
+.Für E-Mail-Vorlagen verfügbare Template-Funktionen
+[cols="1,3"]
+|====
+|Funktion |Erläuterung
+
+| `Address($field, $subField?)`
+a|Diese Funktion gibt die Adresse des Kontakts aus und steht in E-Mail-Vorlagen des Typs *Kunde* und *Ticket* zur Verfügung. +
+Als `$field` kann sowohl der Feldname selbst als auch der Alternativwert (Alias) benutzt werden. +
+*_Beispiele:_* +
+
+* `Address('name1')` und `Address('companyName')` geben den Firmennamen der Kontaktadresse aus. `Address('address1')` und `Address('street')` geben die Straße der Kontaktadresse aus.
+* Adressoptionen können über deren Alternativwerte abgefragt werden. So gibt z.B. `Address('email')` die E-Mail-Adresse und `Address('taxIdNumber')` die Umsatzsteuer-ID der Kontaktadresse aus.
+* Weiterhin stehen die Daten zweier Sub-Datensätze von Adressen zur Verfügung, bei denen der zweite und optionale Parameter `$subField` zum Tragen kommt:
+** `Address('state', 'name')` gibt den Namen der Region/des Bundeslandes und `Address('state', 'isoCode')` den ISO-Code des selbigen aus.
+** `Address('country', 'name')` gibt den Namen des Landes, `Address('country', 'isoCode2')` den ISO-Code2 des Landes und `Address('country', 'isoCode3')` den ISO-Code3 des Landes aus.
+
+| `BillingAddress($field, $subField?)`
+a|Diese Funktion gibt Daten der Rechnungsadresse aus und steht in E-Mail-Vorlagen des Typs *Auftrag* und *Scheduler* zur Verfügung. +
+Als `$field` kann sowohl der Feldname selbst als auch der Alternativwert (Alias) benutzt werden. +
+*_Beispiele:_* +
+
+* `BillingAddress('name1')` und `BillingAddress('companyName')` geben den Firmennamen der Rechnungsadresse aus. `BillingAddress('address1')` und `BillingAddress('street')` geben die Straße der Rechnungsadresse aus.
+* Adressoptionen können über deren Alternativwerte abgefragt werden. So gibt z.B. `BillingAddress('email')` die E-Mail-Adresse und `BillingAddress('taxIdNumber')` die Umsatzsteuer-ID der Rechnungsadresse aus.
+* Weiterhin stehen die Daten zweier Sub-Datensätze von Rechnungsadressen zur Verfügung, bei denen der zweite und optionale Parameter `$subField` zum Tragen kommt:
+** `BillingAddress('state', 'name')` gibt den Namen der Region/des Bundeslandes und `BillingAddress('state', 'isoCode')` den ISO-Code des selbigen aus.
+** `BillingAddress('country', 'name')` gibt den Namen des Landes,  `BillingAddress('country', 'isoCode2')` den ISO-Code2 des Landes und `BillingAddress('country', 'isoCode3')` den ISO-Code3 des Landes aus.
+
+| `DeliveryAddress($field, $subField?)`
+a|Diese Funktion gibt Daten der Lieferadresse aus und steht in E-Mail-Vorlagen des Typs *Auftrag* und *Scheduler* zur Verfügung. +
+Als `$field` kann sowohl der Feldname selbst als auch der Alternativwert (Alias) benutzt werden. +
+*_Beispiele:_* +
+
+* `DeliveryAddress('name1')` und `DeliveryAddress('companyName')` geben den Firmennamen der Lieferadresse aus. `DeliveryAddress('address1')` und `DeliveryAddress('street')` geben die Straße der Lieferadresse aus.
+* Adressoptionen können über deren Alternativwerte abgefragt werden. So gibt z.B. `DeliveryAddress('email')` die E-Mail-Adresse und `DeliveryAddress('taxIdNumber')` die Umsatzsteuer-ID der Lieferadresse aus.
+* Weiterhin stehen die Daten zweier Sub-Datensätze von Lieferadressen zur Verfügung, bei denen der zweite und optionale Parameter `$subField` zum Tragen kommt:
+** `DeliveryAddress('state', 'name')` gibt den Namen der Region/des Bundeslandes und `DeliveryAddress('state', 'isoCode')` den ISO-Code des selbigen aus.
+** `DeliveryAddress('country', 'name')` gibt den Namen des Landes,  `DeliveryAddress('country', 'isoCode2')` den ISO-Code2 des Landes und `DeliveryAddress('country', 'isoCode3')` den ISO-Code3 des Landes aus.
+
+| `Link_Checkout()`
+|Diese Funktion gibt die URL zum Checkout-Bereich des Auftrags im Webshop aus. +
+*_Hinweis:_* Für die korrekte Ausgabe der URL `{%Link_Checkout()%}` in der E-Mail-Vorlage einfügen.
+
+| `Link_Basket()`
+|Diese Funktion gibt die URL zum Warenkorb aus. +
+*_Hinweis:_* Für die korrekte Ausgabe der URL `{%Link_Basket()%}` in der E-Mail-Vorlage einfügen.
+
+| `Link_TermsConditions()`
+|Diese Funktion gibt die URL zu den AGB aus. +
+*_Hinweis:_* Für die korrekte Ausgabe der URL `{%Link_TermsConditions()%}` in der E-Mail-Vorlage einfügen.
+
+| `Link_Webstore()`
+|Diese Funktion gibt die URL zum Webshop aus. +
+*_Hinweis:_* Für die korrekte Ausgabe der URL `{%Link_Webstore()%}` in der E-Mail-Vorlage einfügen.
+
+| `Link_Item()`
+|Diese Funktion gibt die URL zum Artikel aus. +
+*_Hinweis:_* Für die korrekte Ausgabe der URL `{%Link_Item()%}` in der E-Mail-Vorlage einfügen.
+
+| `Link_NewPassword()`
+|Diese Funktion gibt die URL zu einem Formular zum Erstellen eines neuen Passworts aus. Dort geben Kund:innen ihre E-Mail-Adresse ein. +
+*_Hinweis:_* Für die korrekte Ausgabe der URL `{%Link_NewPassword()%}` in der E-Mail-Vorlage einfügen.
+
+| `Link_ChangePassword()`
+|Diese Funktion gibt die URL zum Bereich *Passwort ändern* aus. Dort können Kund:innen ein neues Passwort eingeben. +
+*_Hinweis:_* Für die korrekte Ausgabe der URL `{%Link_ChangePassword()%}` in der E-Mail-Vorlage einfügen.
+
+|====
+
+[#4200]
+=== Template-Variablen
+
+Template-Variablen sind vordefinierte Variablen, die in E-Mail-Vorlagen eingefügt werden können. Beim Versand der E-Mails wird die Variable automatisch mit dem entsprechenden Inhalt gefüllt. Template-Variablen beginnen mit einem Dollarzeichen (`$`), darauf folgt ein Großbuchstabe. <<#table-template-variables-emails>> listet die für E-Mail-Vorlagen verfügbare Template-Variablen auf.
+
+
+[TIP]
+.Logik der Template-Variablen
+====
+Beachte, dass die Template-Variablen nur befüllt werden, wenn bestimmte Voraussetzungen erfüllt sind.
+
+Beispiele:
+
+* `$TicketLastMessage` wird nur befüllt, wenn eine Ereignisaktion eingerichet ist, die auf eine neue Ticketnachricht reagiert
+* `$OrderId` wird nur in Zusammenhang mit Aufträgen versendet. Das System würde z.B. bei der "Passwort vergessen"-Funktion gar nicht wissen, welche Auftrags-ID verwendet werden soll, weil der Bezug fehlt.
+====
+
+[[table-template-variables-emails]]
+.Für E-Mail-Vorlagen verfügbare Template-Variablen
+[cols="1,3"]
+|====
+|Variable |Erläuterung
+
+| `$OrderID`
+|ID des Auftrags
+
+| `$ParentOrderID`
+|ID des direkten Vorgängerauftrags. +
+*_Beispiel:_* Bei einer Gutschrift kann es die ID der Retoure oder des Auftrags sein, aus dem die Gutschrift erzeugt wurde. +
+*_Hinweis:_* Beachte auch das Beispiel zu `$OriginOrderID` in der folgenden Zeile.
+
+| `$OriginOrderID`
+|ID des obersten Vorgängerauftrags. Dies ist in der Regel ein normaler Auftrag. +
+*_Beispiel:_* Bei einer Gutschrift G1 aus einer Retoure R1 aus einem Auftrag A1 gibt `$ParentOrderID` die ID von R1 und `$OriginOrderID` die ID von A1 aus.
+
+| `$OrderStatusLabel`
+|Statustext des Auftrags
+
+| `$OrderStatusID`
+|ID des Orderstatus
+
+| `$OrderEarliestDeliveryDate`
+|Frühestes Lieferdatum des Auftrags
+
+| `$OrderEstimatedShipmentDate`
+|Voraussichtliches Versanddatum des Auftrags
+
+| `$OrderReturnDate`
+|Datum des Retoureneingangs
+
+| `$CustomerID`
+|ID des Kontakts
+
+| `$CustomerEmail`
+|E-Mail-Adresse des Kontakts
+
+| `$NewCustomerEmail`
+|Gibt den Link zum Bestätigen der E-Mail-Adressänderung des Kontakts aus.
+
+| `$CustomerFullName`
+|Vorname (Name2) und Nachname (Name 3) des Kontakts
+
+| `$CustomerState`
+|Region/Bezirk/Bundesland oder andere länderspezifische Einteilungen in der Kontaktadresse
+
+| `$CustomerAdditionalAddress`
+|Zusätzliche Adressinformationen in der Kontaktadresse
+
+| `$CustomerSign`
+|Kundenzeichen
+
+| `$EmailFrom`
+|Absender der E-Mail
+
+// |$ItemURLTellAFriend
+// |
+
+| `$EmailMessage`
+|Inhalt der E-Mail
+
+| `$EmailSubject`
+|Betreff der E-Mail
+
+| `$CustomerFirstName`
+|Vorname des Kontakts
+
+| `$CustomerLastName`
+|Nachname des Kontakts
+
+| `$CustomerSalutationKey`
+|Mögliche Werte: 0 = male und 1 = female. Der Inhalt dieser Template-Variable wird bei Gastbestellungen ohne Kontakt aus der Rechnungsadresse des Auftrags befüllt.
+
+| `$CustomerSalutationLabel`
+|Mögliche Werte: Herr und Frau. Der Inhalt dieser Template-Variable wird bei Gastbestellungen ohne Kontakt aus der Rechnungsadresse des Auftrags befüllt.
+
+| `$CustomerCompany`
+|Angegebene Firma des Kontakts
+
+| `$CustomerStreet`
+|Straße des Kontakts
+
+| `$CustomerCityWithZip`
+|Ort und Postleitzahl des Kontakts
+
+| `$CustomerCity`
+|Ort des Kontakts
+
+| `$CustomerZip`
+|Postleitzahl des Kontakts
+
+| `$CustomerCountry`
+|Land des Kontakts
+
+| `$CustomerCountryID`
+|Länder-ID des Kontakts
+
+| `$CustomerCountryIsoCode`
+|Länder-ISO-Code des Kontakts
+
+| `$CustomerPhone`
+|Telefonnummer des Kontakts
+
+| `$CustomerMobilePhone`
+|Mobilfunknummer des Kontakts
+
+| `$CustomerFax`
+|Faxnummer des Kontakts
+
+| `$CustomerEbayName`
+|eBay-Name des Kontakts
+
+| `$BillingAddressContactPerson`
+|Inhalt der Adressoption *Ansprechpartner* in der Rechnungsadresse
+
+| `$DeliveryAddressContactPerson`
+|Inhalt der Adressoption *Ansprechpartner* in der Lieferadresse
+
+| `$IsNewsletterActive`
+|Markierung, die angibt, ob der Kontakt dem Newsletter-Empfang zugestimmt hat.
+
+| `$NewsletterConfirmURL`
+|URL zur Bestätigung des Newsletter-Abonnements
+
+| `$CustomerLang`
+|Sprache des Kontakts
+
+| `$CustomerClass`
+|Kundenklasse
+
+| `$CustomerNumber`
+|Kundennnummer
+
+| `$CustomerTitle`
+|Titel des Kontakts
+
+| `$OrderCount`
+|Auftragsanzahl
+
+| `$ExternalOrderID`
+|Externe Auftrags-ID
+
+| `$Currency`
+|Währung
+
+| `$ReturnsCode`
+|Retouren-Code aus einer Retoure. +
+*_Hinweis:_* Bei anderen Auftragstypen ist der Inhalt dieser Variable leer.
+
+| `$ReturnReasonID`
+|ID des Rücksendegrunds. +
+Rücksendegründe werden im Menü *Einrichtung » Aufträge » Auftragstypen » Retoure* gespeichert.
+
+| `$ReturnReasonLabel`
+|Text des Rücksendegrunds. +
+Rücksendegründe werden im Menü *Einrichtung » Aufträge » Auftragstypen » Retoure* gespeichert.
+
+| `$VoucherCodes`
+|Alle Codes aller Gutscheine für einen Auftrag durch Komma getrennt
+
+| `$CustomerIBAN`
+|IBAN des Kontakts
+
+| `$CustomerBIC`
+|BIC des Kontakts
+
+| `$CustomerAccountOwner`
+|Name des Kontoinhabers
+
+| `$CustomerBankName`
+|Name der Bank des Kontakts
+
+| `$ContactOwnerName`
+|Vorname und Nachname des Systembenutzers, der als Eigner im Kontaktdatensatz gespeichert ist. Diese Template-Variable ist für die Template-Typen *Kunden* und *Auftrag* (sofern der Auftrag einen Kontakt hat) verfügbar.
+
+| `$ContactOwnerSignature`
+|Signatur des Systembenutzers, der als Eigner im Kontaktdatensatz gespeichert ist, im Textformat. Diese Template-Variable ist für die Template-Typen *Kunden* und *Auftrag* (sofern der Auftrag einen Kontakt hat) verfügbar.
+
+| `$ContactOwnerSignatureHTML`
+|Signatur des Systembenutzers, der als Eigner im Kontaktdatensatz gespeichert ist, im HTML-Format. Diese Template-Variable ist für die Template-Typen *Kunden* und *Auftrag* (sofern der Auftrag einen Kontakt hat) verfügbar.
+
+| `$GeneralTermsConditionsText`
+|AGB im reinen Textformat. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *Text* gespeichert.
+
+| `$GeneralTermsConditionsHTML`
+|AGB im HTML-Format. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *HTML* gespeichert.
+
+| `$CancellationRightsText`
+|Widerrufsrecht im reinen Textformat. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *Text* gespeichert.
+
+| `$CancellationRightsHTML`
+|Widerrufsrecht im HTML-Format. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *HTML* gespeichert.
+
+| `$PrivacyPolicyText`
+|Datenschutzerklärung im reinen Textformat. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » Sprache aufklappen* im Tab *Datenschutzerklärung* und dort im Tab *Text* gespeichert.
+
+| `$PrivacyPolicyHTML`
+|Datenschutzerklärung im HTML-Format. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Datenschutzerklärung* und dort im Tab *HTML* gespeichert.
+
+| `$LegalDisclosureText`
+|Impressum im reinen Textformat. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *Text* gespeichert.
+
+| `$LegalDisclosureHTML`
+|Impressum im HTML-Format. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *HTML* gespeichert.
+
+| `$WithdrawalFormText`
+|Widerrufsformular im reinen Textformat. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsformular* und dort im Tab *Text* gespeichert.
+
+| `$WithdrawalFormHTML`
+|Widerrufsformular im HTML-Format. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsformular* und dort im Tab *HTML* gespeichert.
+
+| `$DeliveryAddressFullName`
+|Vor- und Nachname in der Lieferadresse
+
+| `$DeliveryAddressAdditionalAddress`
+|Zusätzliche Adressinformationen in der Lieferadresse
+
+| `$DeliveryAddressFirstName`
+|Vorname in der Lieferadresse
+
+| `$DeliveryAddressLastName`
+|Nachname in der Lieferadresse
+
+| `$DeliveryAddressCompany`
+|Firma in der Lieferadresse
+
+| `$DeliveryAddressPhone`
+|Telefonnummer in der Lieferadresse
+
+| `$DeliveryAddressPostident`
+|Postident-Nummer in der Lieferadresse
+
+| `$DeliveryAddressStreet`
+|Straße in der Lieferadresse
+
+| `$DeliveryAddressCityWithZip`
+|Ort und Postleitzahl in der Lieferadresse
+
+| `$DeliveryAddressCity`
+|Ort in der Lieferadresse
+
+| `$DeliveryAddressZip`
+|Postleitzahl in der Lieferadresse
+
+| `$DeliveryAddressCountry`
+|Land in der Lieferadresse
+
+| `$DeliveryAddressCountryID`
+|Länder-ID in der Lieferadresse
+
+| `$DeliveryAddressCountryIsoCode`
+|Länder-ISO-Code in der Lieferadresse
+
+| `$DeliveryAddressState`
+|Region/Bezirk/Bundesland in der Lieferadresse
+
+| `$OrderEstimatedDeliveryDate`
+|Voraussichtliches Lieferdatum der Bestellung
+
+| `$OrderBillingAddressTaxId`
+|Umsatzsteuer-ID in der Rechnungsadresse des Auftrags
+
+| `$OrderDeliveryAddressTaxId`
+|Umsatzsteuer-ID in der Lieferadresse des Auftrags
+
+| `$ShippingCosts`
+|Versandkosten
+
+| `$ValueOfItems`
+|Wert der Artikel
+
+| `$CouponValue`
+|Wert des Gutscheins
+
+| `$InvoiceTotal`
+|Gesamtrechnungsbetrag in brutto und durch Komma getrennt
+
+| `$InvoiceTotalDecimalSeparatorDot`
+|Gesamtrechnungsbetrag in brutto und durch Punkt getrennt
+
+| `$InvoiceTotalNet`
+|Gesamtrechnungsbetrag in netto und durch Komma getrennt
+
+| `$TotalVAT`
+|Gesamtbetrag der Mehrwertsteuer am Auftrag
+
+| `$OrderTotalNet`
+|Gesamtbetrag des Auftrags in netto
+
+| `$OrderDate`
+|Datum und Uhrzeit der Auftragsanmeldung
+
+| `$PaymentDate`
+|Datum des Zahlungseingangs
+
+| `$TodaysDate`
+|Aktuelles Datum
+
+| `$PackageCount`
+|Paketnummern bzw. Tracking-Nummern. Werden nach erfolgreicher Auftragsanmeldung beim Versanddienstleister im Auftrag gespeichert.
+
+| `$TrackingURL`
+|Tracking-URL zur Sendungsverfolgung. +
+Die URL wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert.
+
+| `$BankAccount`
+|Kontonummer. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+
+| `$BankCode`
+|Bankleitzahl. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+
+| `$BankOwner`
+|Vorname und Nachname des Kontoinhabers. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+
+| `$BankName`
+|Name der Bank. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+
+| `$BankIBAN`
+|Internationale Bankleitzahl. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+
+| `$BankSwift`
+|Bank Identifier Code. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+
+| `$ShippingServiceProviderName`
+|Name des Versanddienstleisters, wie er im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert ist.
+
+| `$ShippingServiceProviderID`
+|ID des Versanddienstleisters. +
+Die ID wird vom System vergeben. Die IDs sind im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* aufgeführt.
+
+| `$MethodOfPaymentName`
+|Name der Zahlungsart wie im Menü *Einrichtung » Aufträge » Zahlung » Zahlungsarten* gespeichert.
+
+| `$MethodOfPaymentID`
+|ID der Zahlungsart. +
+Die ID wird vom System vergeben. Die IDs sind im Menü *Einrichtung » Aufträge » Zahlung » Zahlungsarten* aufgeführt.
+
+| `$ShippingProfileID`
+|ID des Versandprofils. +
+Die ID wird vom System vergeben. Die IDs sind im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versandprofile* aufgeführt.
+
+| `$ShippingProfileName`
+|Name des Versandprofils, wie er im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versandprofile* gespeichert ist.
+
+| `$ReferrerID`
+|ID der Herkunft. +
+Die ID wird vom System vergeben. Die IDs sind im Menü *Einrichtung » Aufträge » Auftragsherkunft* aufgeführt.
+
+| `$ReferrerName`
+|Name der Herkunft, wie er im Menü *Einrichtung » Aufträge » Auftragsherkunft* gespeichert ist.
+
+| `$PaidAmount`
+|Bezahlter Betrag
+
+| `$OpenAmount`
+|Ausstehender Betrag
+
+| `$OverpaidAmount`
+|Betrag der Überbezahlung
+
+| `$PartialPaymentAmount`
+|Teilzahlungsbetrag
+
+| `$PartialPaymentOpenAmount`
+|Ausstehender Teilzahlungsbetrag
+
+| `$WarehouseID`
+|ID des Lagers. +
+Die ID wird vom System vergeben und kann nicht geändert werden. Die ID ist im Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Einstellungen* gespeichert.
+
+| `$WebstoreID`
+|ID des Mandanten. +
+Die ID wird vom System vergeben und kann nicht geändert werden. Die ID ist im Menü *Einrichtung » Mandant » [Mandant wählen] » Einstellungen* gespeichert.
+
+| `$EbaySellerAccount`
+|eBay-Verkäuferkonto des Kontakts
+
+| `$EbayUniquePaymentID`
+|Eindeutige eBay-Zahlungs-ID des Kontakts
+
+| `$SignatureText`
+|Signatur im reinen Textformat. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Signatur* gespeichert.
+
+| `$SignatureHTML`
+|Signatur im HTML-Format. +
+Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Signatur* gespeichert.
+
+| `$RebateAmount`
+|Rabattbetrag
+
+| `$BarcodeOrderID`
+|Barcode der Auftrags-ID
+
+| `$ItemCategoryLevel1List`
+|ID der Kategorie, in der sich der Artikel befindet
+
+| `$CustomerSpecialWishes`
+|Kundenwunsch. Kund:innen können bei der Bestellung über den Webshop einen Wunsch angeben. Dieser Wunsch wird als Auftragsnotiz in den Auftragsdaten gespeichert.
+
+| `$CouponCode1`
+|Gutschein-Code 1. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode2`
+|Gutschein-Code 2. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode3`
+|Gutschein-Code 3. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode4`
+|Gutschein-Code 4. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode5`
+|Gutschein-Code 5. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode6`
+|Gutschein-Code 6. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode7`
+|Gutschein-Code 7. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode8`
+|Gutschein-Code 8. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode9`
+|Gutschein-Code 9. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$CouponCode10`
+|Gutschein-Code 10. +
+Kann immer nur einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
+
+| `$OrderType`
+|Auftragstyp
+
+| `$OrderAccessKey`
+|Mit einem Klick auf *Kaufabwicklung* in der Auftragsübersicht wird der Auftrag im Mein Konto-Bereich des Webshops geöffnet.
+
+| `$TrustedShopsRating`
+|Bewertungsergebnis der bei Trusted Shops abgegebenen Bewertungen
+
+| `$TrustedShopsRatingShopButton`
+|Schaltfläche für eine Trusted Shops-Bewertung zur Verwendung im Layout
+
+| `$TrustedShopsRatingEmailButton`
+|Schaltfläche für eine Trusted Shops-Bewertung zur Verwendung von E-Mails
+
+| `$TrustedShopsSeal`
+|Trusted Shop-Gütesiegl
+
+| `$SchedulerID`
+|ID des Scheduler-Auftrags
+
+| `$SchedulerStartDate`
+|Startdatum des Scheduler-Auftrags
+
+| `$SchedulerEndDate`
+|Enddatum des Scheduler-Auftrags
+
+| `$SchedulerExecutionCount`
+|Anzahl der Aufträge, die der Scheduler-Auftrag umfasst
+
+| `$SchedulerInterval`
+|Scheduler-Intervall
+
+| `$SchedulerTotalAmount`
+|Gesamtbetrag der Scheduler-Aufträge
+
+| `$TicketHistory`
+|Der zuletzt gespeicherte Text im Ticket, d.h. der Text eines Kommentars oder einer Nachricht. +
+Damit diese Variable befüllt wird, müssen eine E-Mail-Vorlage und Ereignisaktionen eingerichtet sein. Die Ereignisaktionen müssen auf dem Ereignis *Neuer Kommentar*, *Neue Nachricht vom Mitarbeiter* oder *Neue Nachricht vom Kunden* beruhen. Die Variable wird dann je nach Ereignis befüllt. Bei allen anderen Ereignissen wird die Variable nicht befüllt.
+
+| `$TicketLastComment`
+|Der zuletzt hinzugefügte Kommentar im Ticket. +
+Damit diese Variable befüllt wird, müssen eine E-Mail-Vorlage und eine Ereignisaktion eingerichtet sein. Die Ereignisaktion muss auf dem Ereignis *Neuer Kommentar* beruhen. Bei allen anderen Ereignissen wird die Variable nicht befüllt.
+
+| `$TicketLastMessage`
+|Die zuletzt hinzugefügte Nachricht im Ticket. +
+Damit diese Variable befüllt wird, müssen eine E-Mail-Vorlage und eine Ereignisaktion eingerichtet sein. Die Ereignisaktion muss auf einem der beiden Ereignisse *Neue Nachricht vom Mitarbeiter* oder *Neue Nachricht vom Kunden* beruhen. Am besten richtest du eine Ereignisaktion für beide Ereignisse ein und erhältst so eine E-Mail, egal ob deine Mitarbeiter:innen oder deine Kund:innen schreiben. Bei allen anderen Ereignissen wird die Variable nicht befüllt.
+
+| `$TicketURL`
+|Verlinkt zum Ticket im Bereich *Mein Konto* des Kontakts in deinem Webshop. +
+Damit diese Variable befüllt wird, muss eine E-Mail-Vorlage eingerichtet sein.
+
+| `$TicketBackendURL`
+|Die Variable enthält eine Ticket-URL, die zum Ticket im Menü *CRM » Ticketsystem* führt. Damit diese Variable befüllt wird, muss eine E-Mail-Vorlage eingerichtet sein.
+
+| `$TicketTitle`
+|Betreff des Tickets. Damit diese Variable befüllt wird, muss eine E-Mail-Vorlage eingerichtet sein.
+
+| `$TicketID`
+|Ticket-ID. Damit diese Variable befüllt wird, muss eine E-Mail-Vorlage eingerichtet sein.
+
+| `$TicketTags`
+|Zeigt die mit dem Ticket verknüpften Tags an. +
+Die Tags müssen zuvor im Menü *Einrichtung » Einstellungen » Tags* für den Bereich *Ticket* erstellt werden.
+
+| `$TicketStatus`
+|Status des Tickets. Damit diese Variable befüllt wird, muss eine E-Mail-Vorlage eingerichtet sein.
+
+| `$TicketPriority`
+|Priorität des Tickets. Damit diese Variable befüllt wird, muss eine E-Mail-Vorlage eingerichtet sein.
+
+| `$ReorderID`
+|ID der Nachbestellung
+
+| `$ReorderDeliveryDate`
+|Lieferdatum der Nachbestellung
+
+| `$EventType`
+|Typ des Events
+
+| `$EventInfo`
+|Informationen zum Event
+
+| `$EventDuration`
+|Dauer des Events
+
+| `$EventBilled`
+|Markierung für abgerechnetes Event
+
+| `$EventNotBilled`
+|Markierung für nicht abgerechnetes Event
+
+//|$EventBilledRequiringPayment
+//|
+
+//|$EventNotBilledRequiringPayment
+//|
+
+| `$EventBillable`
+|Markierung für Event, das abgerechnet werden kann
+
+//|$EventStaffer
+//|
+
+| `$ForumSubscription`
+|Anmeldung im Forum
+
+2+| `$ItemListPlain` / `$ItemListHTML` +
+(icon:exclamation-triangle[role="red"] Die im folgenden aufgelisteten Template-Variablen können nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.)
+
+| `$ItemID`
+|ID des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$OrderProperties`
+|Bestellmerkmale +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden. +
+Weitere Informationen findest du auf der Handbuchseite <<artikel/einstellungen/eigenschaften#, Merkmale und Eigenschaften>>.
+
+| `$ReturnItemStatusID`
+|Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ReturnItemStatusLabel`
+|Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemNumber`
+|Artikelnummer. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemName`
+|Artikelname. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemQuantity`
+|Anzahl des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemPrice`
+|Artikelpreis. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemPriceNet`
+|Nettopreis des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemReferrer`
+|Herkunft des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ExternalItemID`
+|Externe Artikel-ID. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ExternalVariationID`
+|Externe Varianten-ID. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$TransactionID`
+|Transaktions-ID. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$UnitString`
+|Einheit des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$VariationName`
+|Variantenname. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$VariationNumber`
+|Variantennummer. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$VariationId`
+|Varianten-ID. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$VariantName`
+|Variantenname. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemModel`
+|Modellbezeichnung des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemEAN`
+|Internationale Artikelnummer (EAN). +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemISBN`
+|ISBN-Code des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemASIN`
+|Amazon Standard Ident Number (ASIN) des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemAvailabilityLabel`
+|Text der Artikelverfügbarkeit des Nettowarenbestands. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemAvailabilityID`
+|ID der Artikelverfügbarkeit des Nettowarenbestands. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemAvailabilityPhysicalStockLabel`
+|Text der Artikelverfügbarkeit des physischen Warenbestands. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemAvailabilityPhysicalStockID`
+|ID der Artikelverfügbarkeit des physischen Warenbestands. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$Free`
+|Freitextfeld für die Artikel. Die Texte werden im Menü *Einrichtung » Artikel » Freitextfelder* gespeichert. Für die Ausgabe der Feldbezeichnungen die Feldnummer in eckigen Klammer dahinter schreiben. +
+*_Beispiel:_* `$Free[3]` gibt den Text, der unter *Feld 3* gespeichert ist, aus. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$DownloadLink`
+|Download-Link z.B. zu Produktinformationen, der im Mein Konto-Bereich des Webshops eingebunden werden kann. +
+*_Hinweis:_* Die Dateien werden im Tab *Media* des Artikels hochgeladen. +
+*_Wichtig:_* Im Tab *Media* hochgeladene Dateien können für den plentyShop nicht genutzt werden. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemImageURL`
+|URL zum Artikelbild. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemProducerName`
+|Name des Herstellers. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemVatRate`
+|Mehrwertsteuersatz für die einzelne Auftragsposition in Prozent (ohne Angabe des Prozentzeichens). +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemWarehouseID`
+|Lager-ID des Artikels. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$SchedulerItemStartDate`
+|Startdatum. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$SchedulerItemEndDate`
+|Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ReturnItemComment`
+|Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ReturnItemValuePercentage`
+|Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ReturnItemReasonID`
+|Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ReturnItemReasonLabel`
+|Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+| `$ItemVoucherCodes`
+|Codes eines Gutscheins pro Auftragsposition durch Komma getrennt. +
+Dies ist keine globale Template-Variable, sondern eine Variable, die pro Auftragsposition gesetzt wird. Sie kann nur im Tab *Artikelliste* der E-Mail-Vorlage genutzt werden.
+
+|====

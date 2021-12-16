@@ -1,0 +1,1297 @@
+= Nachbestellungen vornehmen
+:lang: de
+:description: Erfahre, wie du mit der Funktion zur Nachbestellung in plentymarkets arbeitest.
+:position: 10
+:id: SJ8T7XV
+:url: warenwirtschaft/nachbestellungen-verwalten/nachbestellungen-vornehmen
+:keywords: Nachbestellung, Bestellwesen, Rückstandsliste, Meldebestand, Bestellmengen, Nachbestellungs-Status, Nachbestellungsstatus, Nachbestellungsvorschlag, Nachbestellungs-Vorschlag, purchase order, Bestellungen, Warenbezugskosten, reorder, Dokument Nachbestellung, Nachbestellungsdokument
+:author: team-order-payment
+
+Im Menü *Waren » Bestellwesen » Bestellung* nimmst du nicht nur <<warenwirtschaft/umbuchungen-vornehmen#, Umbuchungen>> vor, sondern legst auch Nachbestellungen an. Über Nachbestellungen bildest du die Bestellung von Waren bei deinen Lieferant:innen ab.
+
+Eine Nachbestellung gliedert sich in folgende Arbeitsschritte:
+
+* <<#200, Varianten für die Nachbestellung identifizieren>>
+* <<#300, Nachbestellung anlegen>>
+* <<#400, Auftragspositionen hinzufügen>>
+* <<#500, Auftragspositionen bearbeiten>>
+* <<#600, Weitere Informationen hinterlegen>>
+* <<#700, Nachbestellung auslösen und übermitteln>>
+* <<#750, Warenbezugskosten zur Nachbestellung hinzufügen>>
+* <<#800, Rückstandsliste nutzen>>
+* <<#900, Waren einbuchen>>
+* <<#1000, Nachbestellung abschließen>>
+* <<#1050, Nachbestellung stornieren>>
+* <<#1100, Nachbestellung suchen>>
+* <<#1200, Nachbestellung automatisieren>>
+
+[#100]
+== Vorbereitende Einstellungen
+Die folgenden Kapitel beschreiben einige vorbereitende Einstellungen, die du vor dem Anlegen einer Nachbestellung vornehmen solltest. In der Regel sind diese Einstellungen nur einmalig notwendig. Richte den Meldebestand und den Bestellmengenvorschlag ein, um festzulegen, wann Artikel nachbestellt werden sollen. Erstelle neue Auftragsstatus speziell für die Nachbestellungen und lege Tags an, um dir die Übersicht zu erleichtern. Verpflichtend ist zudem die Einrichtung einer Dokumentenvorlage für das Dokument *Nachbestellung*.
+
+Die Übersichtstabelle im Menü *Waren » Bestellwesen » Bestellung* sowie die Tabellen in einer geöffneten Umbuchung sind individuell anpassbar. Das bedeutet, dass du selbst entscheiden kannst, welche Informationen dir in den Tabellenspalten angezeigt werden. Gehe dafür folgendermaßen vor:
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:cog[]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:drag_sort_handle[set=plenty]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+Wenn du eine Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabellen sind jederzeit anpassbar.
+
+[#110]
+=== Meldebestand, Bestellmengenvorschlag und weitere Standardeinstellungen festlegen
+
+Vor dem Anlegen der ersten Nachstellung solltest du die Einstellungen zum Meldebestand und zum Abverkaufszeitraum vornehmen. So legst du fest, ab welchem Restbestand Artikel nachbestellt werden.
+
+[.instruction]
+Meldebestand und Bestellmengenvorschlag festlegen:
+
+. Öffne das Menü *Einrichtung » Waren » Bestellwesen » Nachbestellung » Einstellungen*.
+. Nimm die Einstellungen anhand der Informationen in <<table-reorder-level-quantity-suggestion-reorder>> vor.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[[table-reorder-level-quantity-suggestion-reorder]]
+.Vorbereitende Einstellungen für das Bestellwesen
+[cols="1,3"]
+|====
+|Einstellung|Erläuterung
+
+| *Standard-Status*
+|Wähle einen Standard-Status, der beim Anlegen einer Nachbestellung vorausgewählt sein soll. Wie du spezielle Status für Nachbestellungen anlegst, erfährst du im Kapitel <<#120, Status für Nachbestellungen anlegen>>.
+
+| *Standard-Eigner*
+|Wähle eine der verfügbaren Optionen aus. +
+*Aktiver Benutzer vorausgewählt*: Die Benutzer:in, der die Nachbestellung im plentymarkets Backend anlegt, wird im Feld *Eigner* vorausgewählt. +
+*Kein Eigner vorausgewählt*: Bei dieser Auswahl bleibt das Feld *Eigner* beim Anlegen einer Nachbestellung leer.
+
+| *Abverkaufszeitraum*
+|Einen Zeitraum wählen. Der Zeitraum gibt vor, welcher Zeitraum für die Berechnung des durchschnittlichen Abverkaufs berücksichtigt wird. Dieser Durchschnittsverkauf fließt in die Berechnung des Nachbestellungsvorschlags von Varianten ein. Der Nachbestellungsvorschlag wird dir im Menü *Waren » Warenbestände* für die einzelnen Varianten angezeigt.
+
+| *Voreingetragener Wert für Meldebestand/Bestellmenge*
+a|Diese Einstellung bestimmt, wie die Bestellmenge im Nachbestellungsvorschlag berechnet wird. +
+Du kannst wählen zwischen: +
+*Meldebestand - Nettobestand - bestellte Menge* oder +
+*(Meldebestand - Nettobestand - bestellte Menge) + (Durchschnittsverbrauch (Wiederbeschaffungszeit + Lagerreichweite))* +
+ +
+Berechnungsparameter für den Bestellmengenvorschlag:
+
+* *Meldebestand* = Bestandsmenge, bei der nachbestellt werden soll. Du kannst entweder einen statischen oder einen dynamischen Meldebestand einstellen.
+* *Nettobestand* = Verkaufbare Menge des Lagerbestands.
+* *Bestellte Menge* = Bereits nachbestellt, aber noch nicht geliefert.
+* *Durchschnittsverbrauch* = Tagesdurchschnittsverkaufsmenge. Den Zeitraum, der zum Ermitteln des Tagesdurchschnitts verwendet wird, legst du mit dem Abverkaufszeitraum fest.
+* *Wiederbeschaffungszeit* = Lieferzeit eines Lieferanten. In einer Variante im Tab *Lieferant* wird die Lieferzeit in Tagen eingetragen.
+* *Lagerreichweite* = Eingetragene Lagerreichweite. Die Lagerreichweite wird pro Variante und Lager im Tab *Lager* einer Variante eingetragen und stellt einen Reichweitenwunsch dar, anhand dessen der Bestellmengenvorschlag ermittelt wird.
+
+| *Quelle für Artikelname*
+|Wähle aus der Dropdown-Liste aus, welcher Artikelname in der Nachbestellung angezeigt werden soll. *Name 1*, *Name 2* und *Name 3* vergibst du im Tab *Texte* der Artikeldaten eines Artikels.
+
+| *Standardsortierung*
+|Wähle aus der Dropdown-Liste aus, in welcher Reihenfolge die Artikelpositionen in einer Nachbestellung sortiert sein sollen.
+
+| *Voreingetragener Wert für Teillieferung*
+|Wähle aus, welcher Wert für die Spalte *Teilmenge* in den Artikelpositionen einer Nachbestellung voreingestellt sein soll. Unabhängig von der Auswahl bleiben die Werte anpassbar in der Nachbestellung. +
+*0* = Es wird kein Wert eingetragen. +
+*Offene Bestellmengen* = Die noch offenen Bestellmengen sind voreingetragen.
+
+| *Standard-Sender*
+|Wenn du aus deinen Lieferanten einen als Standard-Sender auswählst, ist dieser beim Anlegen einer Nachbestellung immer vorausgewählt.
+
+| *Standard-Empfänger*
+|Wenn du aus deinen Lagern eines als Standard-Empfänger auswählst, ist dieses beim Anlegen einer Nachbestellung immer vorausgewählt.
+
+|*Filteroption "Beschränken auf Lieferant" in der Artikelsuche vorausgewählt*
+|Aktiviere diese Option, damit sie für die Artikelsuche vorausgewählt ist. Angezeigt werden in den Suchergebnissen dann nur Artikel des Lieferanten, der in den Auftragsdetails ausgewählt wurde.
+
+|*Filteroption "Nur aktive Artikel anzeigen" in der Artikelsuche vorausgewählt*
+|Aktiviere diese Option, damit sie für die Artikelsuche in der Nachbestellung vorausgewählt ist. Aktiviere diese Option, damit sie für die Artikelsuche vorausgewählt ist. Angezeigt werden in den Suchergebnissen dann nur <<artikel/webshop/checkliste-artikel-anzeige#100, aktivierte Artikel>>.
+
+|*Anzeige von hinzugefügten Artikeln im Warenkorb*
+|Wähle aus, wie die Artikel zum Warenkorb hinzugefügt werden sollen. Die Standardeinstellung ist *Als eine Auftragsposition, Mengen werden erhöht*. +
+*Als separate Auftragspositionen.* = Auch gleiche Artikel werden einzeln hinzugefügt, d.h. jeder Artikel wird in einer eigene Zeile dargestellt. +
+*Als eine Auftragsposition, Mengen werden erhöht.* = Gleiche Artikel werden in einer Auftragsposition zusammengefasst und die Menge wird entsprechend angepasst.
+
+|====
+
+[#120]
+=== Status für Nachbestellungen anlegen
+In deinem plentymarkets System sind bestimmte Auftragsstatus voreingestellt. Diese voreingestellten Status stehen dir auch für die Nachbestellungen zur Verfügung. Du kannst aber auch beliebig viele individuelle Status für verschiedene Verwendungszwecke anlegen. Das Anlegen neuer Status wird im dazugehörigen Kapitel auf der Handbuchseite <<auftraege/auftraege-verwalten#1200, Aufträge verwalten>> beschrieben.
+
+[TIP]
+.Eigene Status für Nachbestellungen anlegen
+====
+Wir empfehlen, separate Status anzulegen, die du ausschließlich für den Auftragstyp *Nachbestellung* nutzt. Stelle sicher, dass sich mittels unterschiedlicher Namensgebung die Status der Nachbestellungen von den Status der weiteren Auftragstypen unterscheiden.
+====
+
+[#130]
+=== Tags für Nachbestellungen erstellen
+Tags sind Kennzeichnungen, die du zentral in deinem plentymarkets System erstellst und anschließend für verschiedene Bereiche nutzen kannst. Wie du Nachbestellungen mit Tags versiehst und welche Benutzerrechte notwendig sind, ist nachfolgend beschrieben.
+
+[#135]
+==== Rechte für Backend-Benutzer:innen vergeben
+
+include::_includes:page$tags-rights.adoc[]
+
+[#137]
+==== Tags erstellen
+
+include::_includes:page$tags-creation.adoc[]
+
+[#140]
+=== Dokument Nachbestellung einrichten
+Als Bestellschein für die Nachbestellung wird der speziell dafür vorgesehene Dokumententyp *Nachbestellung* genutzt. Dieses Dokument enthält alle nachzubestellenden Artikel und wird von dir als Händler an deinen Lieferanten übermittelt. +
+Vor der erstmaligen Nutzung des Dokuments *Nachbestellung* muss die Dokumentenvorlage erstellt werden. Solange keine Vorlage eingerichtet wurde, kann der Bestellschein nicht erzeugt werden. Um die Vorlage zu erstellen, kannst du entweder eine Standard-Vorlage übernehmen oder du nimmst eigene Einstellungen vor. Beide Möglichkeiten werden im Folgenden beschrieben.
+
+[.instruction]
+Standard-Dokumentenvorlage für das Dokument *Nachbestellung* übernehmen:
+
+. Öffne das Menü *Einrichtung » Waren » Bestellwesen » Nachbestellung » Dokumente » Nachbestellung*.
+. Öffne das Tab *Transfer*.
+. Wähle über dem Tab-Titel die *Sprache*.
+. Klicke im Bereich *Einstellungen aus Standard-Dokumentenvorlage* auf *Übernehmen*. +
+→ Die Standard-Einstellungen werden auf das Dokument angewendet.
+
+[.instruction]
+Eigene Einstellungen für das Dokument *Nachbestellung* übernehmen:
+
+. Öffne das Menü *Einrichtung » Waren » Bestellwesen » Nachbestellung » Dokumente » Nachbestellung*.
+. Bleibe im Tab *Vorlage*.
+. Nimm die Einstellungen gemäß <<table-document-settings-reorder>> vor. +
+→  Nutze die Vorschau (icon:eye[role="blue"]), um die Einstellungen zu überprüfen.
+. *Speichere* (icon:save[role="green"]) die Einstellungen. +
+→  Die gewählten Einstellungen werden auf das Dokument angewendet.
+
+[[table-document-settings-reorder]]
+.Einstellungen Dokumentenvorlage Nachbestellung
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+2+| *Grundeinstellungen: Nachbestellung*
+
+|*Schriftart*
+|Eine der Standard-Schriftarten *Arial / Helvetica*, *Times New Roman* oder *Courier* wählen. +
+Unter der Schriftartengruppe *Erweiterte Alphabete* kannst du zwischen den Optionen *East Asian*, *Arabic*, *Cyrillic* wählen, wenn du Dokumentenvorlagen für <<daten/interne-IDs#10, Sprachen>> wie Chinesisch oder Russisch einrichtest.
+
+|*Zeichensatz*
+|Wählen, ob der Zeichensatz *ISO-8859-1* oder *Unicode* verwendet werden soll. Beachte, dass die Erzeugung von PDF-Dokumenten mit der Auswahl *Unicode* länger dauern.
+
+|*Dokumenten-Vorlage*
+|Wählen, ob die Dokumenten-Vorlage nur auf der ersten Seite oder auch auf den folgenden Seiten angezeigt wird.
+
+|*Seitenumbruch*
+|Wählen, ob Absätze seitenübergreifend fortgesetzt werden oder auf eine neue Seite umgebrochen werden sollen.
+
+|*Aufbau der Lieferanschrift*
+|Wählen, aus welchen Bestandteilen die Lieferanschrift aufgebaut wird und in welcher Reihenfolge diese Bestandteile positioniert werden. +
+Die Option *Titel* aktivieren, wenn die im Menüpunkt *Adressen* des <<crm/kontakte-verwalten#100, Kontakts>> gespeicherte Titel vor dem Namen des Kontakts positioniert werden soll. +
+Die Option *Ansprechpartner* aktivieren, wenn die am <<crm/kontakte-verwalten#100, Kontakt>> gespeicherten Daten zum Ansprechpartner zusätzlich in Rechnungs- und Lieferanschriften ausgegeben werden soll.
+
+|*Sprache der Artikel*
+| Wähle aus, in welcher Sprache die Artikel auf dem Nachbestellungsdokument angezeigt werden. Wählst du *Sprache des Lieferanten*, müssen die Artikel entsprechend auch in dieser Sprache gepflegt sein. +
+*Attributwerte*: Wähle für die Attributwerte aus, ob sie in der zuvor gewählten Sprache angezeigt werden, oder ob die im Feld <<artikel/einstellungen/attribute#100, interner Name>> vergebene Bezeichnung für das Nachbestellungsdokument verwendet wird.
+
+2+| *Seitenränder*
+
+|*Oben*
+|Einen Wert für den oberen Seitenrand (in mm) eingeben. Standardmäßig sind 44.0 mm voreingestellt. Achte darauf, genug Platz für den Header mit deinem Firmenlogo zu lassen, um Überschneidungen zu vermeiden.
+
+|*Links*
+|Einen Wert für den linken Seitenrand (in mm) eingeben. Standardmäßig sind 20.0 mm voreingestellt.
+
+|*Unten*
+|Einen Wert für den unteren Seitenrand (in mm) eingeben. Standardmäßig sind 30.0 mm voreingestellt.
+
+2+| *Positionierung der Pflichtelemente*
+
+|*Adressfeld*
+|Positioniert das Feld, in dem die Anschrift des Lieferanten angezeigt wird. Lege zudem die Schriftgröße fest.
+
+|*Dokumentenname / -nummer (z.B.: Nachbestellung)*
+|Trage einen Namen für das Dokument ein, beispielsweise *Nachbestellung* oder *Nachbestellungs-Nr.*. Lege zudem die Positionierung und Größe des Feldinhaltes fest.
+
+|*Datum*
+|Aktuelles Datum des Dokuments. Lege die Positionierung und Größe des Feldinhaltes fest.
+
+|*Bestelldatum*
+|Datum, an dem die Bestellung ausgelöst wurde. Lege die Positionierung und Größe des Feldinhaltes fest.
+
+|*Währung*
+|Die Währung der zugehörigen Nachbestellung wird für das Dokument übernommen. Lege die Positionierung und Größe des Feldinhaltes fest.
+
+|*Liefertermin*
+|Der Liefertermin wird aus der zugehörigen Nachbestellung übernommen. Lege die Positionierung und Größe des Feldinhaltes fest.
+
+|*eigene Kundennummer*
+|Deine Kundennummer bei dem Lieferanten der Nachbestellung wird übernommen, wenn du diese im Kontaktdatensatz gepflegt hast. Lege die Positionierung und Größe des Feldinhaltes fest.
+
+|*Eigene USt-IdNr.*
+|Deine Umsatzsteuernummer wird für das Dokument übernommen. Lege die Positionierung und Größe des Feldinhaltes fest.
+
+|*Seitenzahl*
+|Gibt die Seitenzahl im Dokument pro Seite aus. Lege die Positionierung und die Größe fest.
+
+2+| *Spalte Artikelpositionen*
+
+|*Artikelpositionen*
+|Im Bereich *Spalten Artikelpositionen* positionierst du die Einträge in der Kopfzeile der Artikeltabelle. Trage zu jeder verfügbaren Spalte einen Feldnamen ein. Der Feldname wird in der Kopfzeile angezeigt. Damit die Feldnamen im Dokument angezeigt werden, muss außerdem für den Eintrag aus der Dropdown-Liste *Pos* ein Wert gewählt werden. Verbleibt die Auswahl auf *Pos*, wird die Spalte nicht angezeigt. Mit der Spalte *Pos* bestimmst du die Reihenfolge für die Anzeige der Feldnamen in der Kopfzeile.
+
+|*Anzahl Nachkommastellen bei Auftragspositionen*
+|Zwischen 2 und 4 Nachkommastellen für die Anzeige wählen. Diese Einstellung beeinflusst nur die Anzeige auf Dokumenten und bestimmt nicht mit wie vielen Nachkommastellen Preise berechnet werden.
+
+|*Position*
+|Diese Spalte ist für die Auflistung der Auftragspositionen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest. +
+Dies ist ein Pflichtfeld. +
+
+|*Menge*
+|Gibt jeweils die Menge der Artikelposition an. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest. +
+Dies ist ein Pflichtfeld.
+
+|*Artikel-ID*
+| Optional kannst du in dieser Spalte die Artikel-IDs auf dem Dokument ausgeben lassen. Die Artikel-IDs werden aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Varianten-ID*
+|Optional kannst du in dieser Spalte die Varianten-IDs auf dem Dokument ausgeben lassen. Die Varianten-IDs werden aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Varianten-Nr.*
+|Optional kannst du in dieser Spalte die Variantennummern auf dem Dokument ausgeben lassen. Die Variantennummern werden aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Gewicht*
+|Optional kannst du in dieser Spalte jeweils das Gewicht der Artikelposition auf dem Dokument ausgeben lassen. Das Gewicht wird aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Artikelbezeichnung*
+|Optional kannst du in dieser Spalte die Artikelbezeichnung auf dem Dokument ausgeben lassen. Die Artikelbezeichnung, die im Artikeldatensatz vergeben werden kann, wird aus der Nachbestellung übernommen. Du kannst über *Zusatz* weitere Felder aus dem Artikeldatensatz ausgeben lassen, wenn sie dort gepflegt und vergeben sind. Zudem kannst du entscheiden, welche Lagerinformationen und weitere Informationen ausgegeben werden. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest. +
+_Wichtig_: Das Feld ist aus systeminternen Gründen als Pflichtfeld markiert. Die Ausgabe auf dem Dokument ist aber _optional_. Wenn du die Position auf *Pos* stellst, wird dieses Feld nicht auf das Dokument übernommen.
+
+|*Lagerort*
+|Optional kannst du eine Spalte mit dem Lagerort der jeweiligen Artikelposition auf dem Dokument ausgeben lassen. Der Lagerort wird aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Einzelpreis*
+|Optional kannst du eine Spalte mit dem Einzelpreis der Artikelposition auf dem Dokument ausgeben lassen. Der Einzelpreis wird aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Gesamtpreis*
+|Gibt den Gesamtpreis der Artikelpositionen in der Nachbestellung auf dem Dokument aus. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest. +
+Dies ist ein Pflichtfeld.
+
+|*Einheit*
+| Optional kannst du eine Spalte mit der Einheit der Artikelpositionen auf dem Dokument ausgeben lassen. Die Einheit wird aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Variantenname*
+|Optional kannst du eine Spalte mit Variantennamen auf dem Dokument ausgeben lassen. Die Variantennamen werden aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Lieferanten-Artikelnummer*
+|Optional kannst du eine Spalte mit der Lieferanten-Artikelnummer auf dem Dokument ausgeben lassen. Die Lieferanten-Artikelnummer wird aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Lieferanten-Artikel-Bezeichnung*
+|Optional kannst du eine Spalte mit der Lieferanten-Artikel-Bezeichnung auf dem Dokument ausgeben lassen. Die Lieferanten-Artikel-Bezeichnung wird aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*GTIN*
+|Optional kannst du eine Spalte mit der GTIN auf dem Dokument ausgeben lassen. Die GTIN wird aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Attributauswahl*
+|Optional kannst du eine Spalte mit für den Artikel ausgewählten Attributen auf dem Dokument ausgeben lassen. Die Attribute werden aus der Nachbestellung übernommen. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Kommissionsnummer*
+|Optional kannst du eine Spalte mit deiner Kommissionsnummer auf dem Dokument ausgeben lassen. Die Kommissionsnummer kann nur ausgegeben werden, wenn diese am Kontaktdatensatz hinterlegt ist. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Kunden-ID (Kommission)*
+|Optional kannst du eine Spalte mit deiner Kunden-ID auf dem Dokument ausgeben lassen. Die Kunden-ID kann nur ausgegeben werden, wenn diese am Kontaktdatensatz hinterlegt ist. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+|*Kundenname (Kommission)*
+|Optional kannst du eine Spalte mit deinem Kundennamen auf dem Dokument ausgeben lassen. Der Kundenname kann nur ausgegeben werden, wenn diese am Kontaktdatensatz hinterlegt ist. Vergib einen Namen für die Spalte und lege die Tabellenposition sowie die Spaltengröße fest.
+
+2+| *Summen*
+
+|*Spaltenbreite*
+|Gib in mm ein, wie breit die Spalte für die Summen sein soll.
+
+|*Auftragssumme*
+|In der Spalte wird der Nettowarenwert als Auftragssumme ausgegeben. Vergib einen Namen für die Spalte und lege Schriftgröße fest.
+
+|*Zwischensumme (jede Seite)*
+|Ist das Nachbestellungsdokument mehrere Seiten lang, wird auf jeder Seite eine Zwischensumme ausgegeben. Vergib einen Namen für die Spalte und lege Schriftgröße fest.
+
+2+| *Optionale Elemente*
+
+|*Absender Adresszeile (1)*
+|Optional kannst du eine Adresszeile mit der Absenderadresse einfügen. Wähle dafür *JA* aus und lege anschließend die Positionierung sowie die Schriftgröße fest. Im Textfeld darunter kannst du die gewünschte Adresszeile eingeben, diese wird dann entsprechend auf dem Dokument ausgegeben. +
+Wählst du *NEIN*, wid dieses Feld nicht auf dem Dokument ausgegeben.
+
+2+| *Optionale Elemente unter Artikelpositionstabelle*
+
+|*Schriftgröße*
+|Wenn du optionale Elemente unter der Artikelpositionstabelle hinzufügst, kannst du hier die Schriftgröße sowie die Spaltenbreite dafür einstellen.
+
+|*Nachrichten für Nachbestellung drucken*
+|Wähle *JA*, wenn du die Nachrichten aus dem Bereich *Messenger* einer Nachbestellung auf dem Dokument ausgeben lassen möchtest. Es werden immer alle Messenger-Nachrichten ausgegeben. Lege zudem die Schriftgröße fest. +
+Wähle *NEIN*, wenn die Nachrichten nicht auf dem Dokument ausgegeben werden sollen.
+
+|*Hinweis*
+|Gib einen Hinweis oder kurzen Text in das Textfeld ein, um dies auf dem Dokument ausgeben zu lassen. Verfügbare Platzhalter für Lager sind ebenfalls einfügbar, wenn gewünscht. Lege zudem die Schriftgröße fest. +
+Lasse das Textfeld leer, wenn du keinen Textzusatz auf dem Dokument haben möchtest.
+
+|====
+
+Weitere Informationen zum Umgang mit Dokumentenvorlagen, zum Beispiel zur Verknüpfung einer PDF-Vorlage, findest du auf der Handbuchseite zum Thema <<auftraege/auftragsdokumente#1700, Auftragsdokumente>>.
+
+[#150]
+=== Versand des Bestellscheins vorbereiten
+Nachdem du im vorherigen Schritt die Dokumentenvorlage für den Bestellschein eingerichtet hast, solltest du im Folgenden noch Einstellungen zum Versand des Dokuments vornehmen, damit dein Lieferant die Nachbestellung auch erhält. Hierfür richtest du zunächst eine E-Mail-Vorlage ein, die den Bestellschein als PDF-Anhang enthält. Die grundlegenden Schritte zur Einrichtung der E-Mail-Vorlage werden im Folgenden beschrieben. Weitere Informationen zu E-Mail-Vorlagen findest du auf der Handbuchseite <<crm/e-mails-versenden#1200, E-Mail-Vorlage erstellen>>.
+
+[.instruction]
+E-Mail-Vorlage einrichten:
+
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*.
+. Klicke auf *Neue E-Mail-Vorlage*.
+. Trage einen Namen ein, z.B. "Bestellschein an Lieferant:in".
+. Wähle die oder den Eigner aus, für den oder die die E-Mail-Vorlage verfügbar sein soll.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+. Wähle aus der Dropdown-Liste *PDF-Anhang* die Option *Nachbestellung (PDF)*.
+. Wechsle in das Tab *E-Mail-Nachricht*.
+. Trage einen Betreff ein.
+. Trage den Text ein, den die E-Mail-Vorlage enthalten soll.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+Im zweiten Schritt kannst du den Versand des Bestellscheins an Lieferant:innen automatisieren. So wird direkt nach dem Erzeugen des Bestellscheins das Dokument automatisch per E-Mail an deine Lieferant:in gesendet.
+
+Richte dir dazu die folgende Ereignisaktion ein.
+
+[.collapseBox]
+.Senden des Bestellscheins an Lieferanten automatisieren:
+--
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klicke auf *Ereignisaktion hinzufügen*.  +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Gib einen Namen ein.
+. Wähle das *Ereignis* gemäß <<table-event-procedure-reorder-document-to-supplier>>.
+. *Speichere* die Einstellungen.
+. Nimm die Einstellungen gemäß <<table-event-procedure-reorder-document-to-supplier>> vor.
+. Aktiviere die Option *Aktiv*.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+--
+[[table-event-procedure-reorder-document-to-supplier]]
+.Ereignisaktion zum automatischen Senden eines Bestellscheins an Lieferanten
+[cols="1,3,3"]
+|====
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Bestellwesen*
+|*Nachbestellungsdokument generiert*
+
+| *Filter*
+| *Auftrag > Auftragstyp*
+| *Bestellung, Typ Nachbestellung*
+
+| *Aktion*
+| *Kunde*
+|*E-Mail versenden > Eigene Vorlage "Bestellschein an Lieferant*
+|====
+
+[#160]
+=== Meldebestand einer Variante festlegen
+Möchtest du zuverlässig benachrichtigt werden, sobald es Zeit wird, einzelne Varianten nachzubestellen, solltest du in deinem plentymarkets System für jede Variante einen Meldebestand pflegen. Der Meldebestand zeigt an, bei welcher Menge einer Variante eine Nachbestellung veranlasst werden sollte.
+
+[TIP]
+.Lager hinzufügen, um Meldebestand einzutragen
+====
+Ein statischer Meldebestand lässt sich nur eingeben, wenn der Variante ein Lager zugeordnet ist. Wenn kein Lager zugeordnet ist, füge zunächst das <<artikel/artikel-verwalten#312, Lager hinzu>>.
+====
+
+[.instruction]
+Statischen Meldebestand eingeben:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » Artikel öffnen » Variante öffnen » Tab: Lager*.
+. Trage eine Menge unter *Meldebestand* ein.
+. *Speichere* (icon:save[role="green"]) die Einstellung.
+
+[TIP]
+.Artikel, die den Meldebestand unterschreiten, direkt auf dem Dashboard anzeigen
+====
+Auf dem Dashboard deines Systems kannst du anzeigen lassen, wie viele Varianten eines Lagers den Meldebestand unterschritten haben. Angezeigt werden dort dann die Artikel, die den Meldebestand unterschritten haben, die aktiv sind und ohne Pakete. Füge dafür das Element *Artikel unter Meldebestand* hinzu. Ein Klick auf die Anzahl der Varianten öffnet das Menü *Waren » Warenbestände* und filtert nach Varianten unter Meldebestand. _Beachte_, dass auch die Artikel mit negativem Bestand, die keinen Meldebestand führen, auf dem Dashboard angezeigt werden.
+====
+
+[#dynamischerMeldebestand.subhead]
+Dynamischer Meldebestand
+
+Pro Lager kannst du entscheiden, ob du den dynamischen Meldebestand nutzt oder nicht. Wenn du den dynamischen Meldebestand nutzt, berechnet dein System den dynamischen Meldebestand jede Nacht im Hintergrund. Dieser berechnete dynamische Meldebestand wird dann im Menü *Waren » Meldebestände* in der Tabellenspalte *Meld* angezeigt. +
+Die Differenz zum Meldebestand, MeldΔ, basiert auch auf dem berechneten Meldebestand. Die Differenz wird dir z.B. in der Bestandsübersicht angezeigt. So kannst du anhand der Differenz absehen, wann eine Nachbestellung erfolgen sollte.
+
+[IMPORTANT]
+.Wenn dynamischer Meldebestand genutzt wird, keinen statischen Meldebestand pflegen
+====
+Wenn du den dynamischen Meldebestand nutzt, darfst du manuell keinen statischen Meldebestand eingeben. Belasse den Meldebestand für die Varianten in dem Lager auf 0. Wenn ein Meldebestand größer als 0 gespeichert ist, wird die Berechnung des dynamischen Meldebestands nicht ausgeführt.
+====
+
+Der dynamische Meldebestand wird jede Nacht anhand der folgenden Formel berechnet:
+
+latexmath:[\mbox{Dynamischer Meldebestand} = {(\mbox{Ø Abverkauf} \cdot \mbox{Lagerreichweite}) + (\mbox{Ø Abverkauf} \cdot \mbox{kürzeste Lieferzeit})}]
+
+Erläuterung der Formelparameter:
+
+* Ø Abverkauf = durschnittlich verkaufte Menge
+* kürzeste Lieferzeit = kürzeste Lieferzeit einer Variante egal von welchem Lieferanten
+
+Die Differenz zum dynamischen Meldebestand (MeldΔ) wird im System dargestellt und berechnet sich folgendermaßen:
+
+latexmath:[\mbox{MeldΔ} = {(\mbox{dynamischer Meldebestand} - (\mbox{Nettobestand} + (\mbox{nachbestellte Menge})}]
+
+Die Einstellung für den dynamischen Meldebestand triffst du für jedes Lager in den <<warenwirtschaft/lager-einrichten#300, Lagereinstellungen>>.
+
+[#170]
+=== Mindestabnahme einer Variante festlegen
+Die Mindestabnahme ist die Menge, die du deiner Lieferant:in mindestens bei einer Bestellung abnehmen musst. Wenn du eine Mindestabnahme für eine Variante einträgst, entspricht der Bestellmengenvorschlag für die Variante mindestens dieser Mindestabnahme. Ein Bestellmengenvorschlag wird wiederum nur angezeigt, wenn der Meldebestand erreicht wurde.
+
+[TIP]
+.Lieferant:in hinzufügen, um Mindestabnahme einzutragen
+====
+Eine Mindestabnahme lässt sich nur eingeben, wenn der Variante eine Lieferant:in zugeordnet ist. Wenn keine Lieferant:in zugeordnet ist, füge zunächst eine <<artikel/artikel-verwalten#310, Lieferant:in hinzu>>.
+====
+
+[.instruction]
+Mindestabnahme festlegen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » Artikel öffnen » Variante öffnen » Tab: Lieferant*.
+. Trage eine Menge unter Mindestabnahme ein.
+. *Speichere* (icon:save[role="green"]) die Einstellung.
+
+Wenn weder eine Mindestabnahme noch ein Meldebestand für eine Variante eingetragen ist, beträgt der Vorschlag 0.
+
+[#180]
+=== Rechte für Backend-Benutzer:innen vergeben
+
+Benutzer:innen vom Typ *Backend* <<business-entscheidungen/benutzerkonten-zugaenge#105, sehen nur bestimmte Bereiche und Menüs>> in plentymarkets. Sie können also nur eingeschränkt im System arbeiten. Sollen Mitarbeiter:innen mit dem Zugang *Backend* Nachbestellungen erstellen und abwickeln, benötigen diese Mitarbeiter:innen mindestens die folgenden Rechte:
+
+* *Artikel > Aktionen > Bearbeiten*
+* *Artikel > Artikel > Variante > Variante anzeigen*
+* *Aufträge > Anzeigen*
+* *Aufträge > Auftragsposition > Transaktionen*
+* *Aufträge > Bestellungen*
+* *Aufträge > Buchung*
+* *Aufträge > Dokumente > Anlegen*
+* *Aufträge > Dokumente > Anzeigen*
+* *CRM > Kontakt > Anzeigen*
+* *CRM > Nachricht > Anzeigen*
+* *Einrichtung > Eigenschaft > Anzeigen*
+* *Einrichtung > Tag > Anzeigen*
+* *Einrichtung > Tag > Löschen*
+* *Einrichtung > Tag > Tag-Verknüpfung*
+* *POS > Kasse anzeigen*
+* *Warenbestände > Anzeigen*
+* *Warenbestände > Lager*
+* *Warenbestände > Lagerort-Verwaltung*
+* *Warenbestände > Nachbestellung*
+
+[#190]
+=== Messenger nutzen
+
+Nutze den Messenger, um im Backend Nachrichten zu erstellen, die deinen Kontakten zugeordnet werden. Diese Nachrichten funktionieren wie Notizen, sind nur in deinem plentymarkets Backend sichtbar und können nicht von deinen Kontakten aufgerufen werden.
+Den Messenger nutzt du, indem du in einer geöffneten Nachbestellung auf der linken Seite auf *Messenger* klickst oder den Messenger im unteren Bereich der Nachbestellung aufklappst.
+
+[.instruction]
+So erstellst du eine neue Nachricht:
+
+. Klicke auf *Neue Nachricht* (icon:plus-square[role="green"]). +
+→ Ein Textfeld öffnet sich und ein Timer läuft mit.
+. Wähle einen oder mehrere Empfänger aus.
+. Gib einen Titel ein.
+. Gib den Text ins Textfeld ein. +
+→ Über dem Textfeld stehen dir Formatierungsmöglichkeiten für deine Nachricht zur Verfügung.
+. Hänge über *Dateien anhängen* eine Datei an, wenn gewünscht.
+. Klicke auf *Senden* (icon:envelope-o[role="purple"]).
+. Wähle aus, ob das Erstellen der Nachricht in Rechnung gestellt werden soll indem du *Kostenpflichtig* auswählst und die entsprechenden Minuten einträgst.
+
+Nach Absenden der Nachricht wird diese dann automatisch mit der Nachbestellungs-ID verknüpft. Die Nachricht kann nach der Bearbeitung als geschlossen markiert werden.
+
+Stelle noch die *Sortierung* im Messenger ein, indem du auswählst, ob dir die Nachrichten nach Datum auf- oder absteigend sortiert angezeigt werden sollen.
+
+Weitere Informationen zum Messenger allgemein findest du auf der Handbuchseite <<crm/messenger#, Messenger>>.
+
+[#200]
+== Varianten für die Nachbestellung identifizieren
+Für eine gut funktionierende Warenwirtschaft ist es wichtig, nachzubestellende Varianten zeitnah zu ermitteln. So vermeidest du, dass dir Artikel ausgehen und verhinderst somit unnötig lange Lieferzeiten für deine Kund:innen.
+
+Am einfachsten erkennst du nachzubestellende Varianten daran, dass sie den Meldebestand erreicht haben. Arbeitest du nicht mit dem Meldebestand, kannst du alternativ nach dem Netto-Warenbestand filtern.
+
+[.instruction]
+Varianten für die Nachbestellung identifizieren:
+
+. Öffne das Menü *Waren » Warenbestände*.
+. Wähle für den Filter *Beschränkung* die Option *Meldebestand erreicht/unterschritten*. +
+icon:map-signs[] *_Oder:_* Wähle die Option *Negativer Netto-Warenbestand oder Netto-Warenbestand gleich 0*, wenn du den Meldebestand nicht nutzt.
+. Wähle optional ein Lager.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Eine Liste mit Varianten, die nachbestellt werden sollten, wird angezeigt.
+
+[#300]
+== Nachbestellung anlegen
+
+Je nach Bedarf bietet dir dein plentymarkets System verschiedene Möglichkeiten an, Nachbestellungen anzulegen. Du kannst Artikel direkt nachbestellen, wenn diese den Meldebestand unterschritten haben, Artikel direkt pro Lager und Lieferant nachbestellen, eine Nachbestellung aus einem Auftrag heraus erstellen oder gezielt einzelne Varianten nachbestellen. In den folgenden Unterkapiteln werde alle Vorgehensweisen erklärt, so dass du abhängig von deiner Arbeitsweise den passenden Workflow für dich auswählen kannst.
+
+[#310]
+=== Artikel unter Meldebestand nachbestellen
+
+Wenn ein Artikel den Meldebestand erreicht oder unterschritten hat, kannst du eine Nachbestellung erstellen. Diese Artikel werden dir wie im Kapitel <<#200, Varianten für die Nachbestellung identifizieren>> beschrieben angezeigt. Die folgenden Schritte schließen sich an das dort erklärte Filtern an.
+
+[.instruction]
+Nachbestellung anlegen:
+
+. Öffne das Menü *Waren » Warenbestände*.
+. Führe wie im Kapitel <<#200, Varianten für die Nachbestellung identifzieren>> beschrieben eine Suche nach Artikeln durch, die den Meldebestand erreicht oder unterschritten haben.  +
+. Klicke auf *Vorschläge übernehmen*, um den errechneten Bestellmengenvorschlag zu übernehmen. +
+→ Trage in der Spalte *Menge* bei Bedarf eigene Werte ein.
+. Klicke auf *Bestellung erstellen*. +
+→ Die Nachbestellung wird erstellt und ist im Menü *Waren » Bestellung* in der Übersicht einzusehen und bearbeitbar.
+
+[#320]
+=== Artikel pro Lager und Lieferant nachbestellen
+Es kann vorkommen, dass du eine Nachbestellung bezogen auf ein spezielles Lager oder eine spezielle Lieferant:in erstellen möchtest. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Artikel pro Lager und Lieferant nachbestellen:
+
+. Öffne das Menü *Waren » Bestellwesen » Bestellung*.
+. Klicke auf das *grüne Plus* (icon:plus-square[role="green"]).
+. Klicke auf *Neue Nachbestellung*.
+. Wähle im Feld *Lieferant* den Lieferanten aus dem Dropdown-Menü aus.
+. Wähle im Feld *Lager* das Ziellager aus, an das die Nachbestellung geliefert werden soll.
+. *_Optional:_* Wähle ein oder mehrere *Tags* für die neue Nachbestellung aus.
+. *_Optional:_* Gib im Feld *Eigner* einen Eigner, also den bearbeitenden Nutzer, ein.
+. *Speichere* (icon:save[role="green"]) die Nachbestellung.
+
+Befolge anschließend die Instruktionen in den Kapiteln <<#400, Auftragspositionen hinzufügen>> bis <<#1000, Nachbestellung abschließen>>, um die Nachbestellung vollständig zu durchlaufen.
+
+[#330]
+=== Artikel aus einem Auftrag nachbestellen
+Es ist möglich, direkt aus einem regulären Auftrag hinaus eine Nachbestellung für einen oder mehrere Artikel anzulegen. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Artikel aus einem Auftrag nachbestellen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Öffne den Auftrag, für den du Artikel nachbestellen möchtest.
+. Öffne das Tab *Nachbestellung* des Auftrags.
+. Klicke auf *Alle Positionen nachbestellen*, wenn alle Auftragspositionen nachbestellt werden sollen. +
+icon:map-signs[] *_Oder:_* Wenn nicht alle im Auftrag enthaltenen Positionen nachbestellt werden sollen, wähle die nachzubestellenden Auftragspositionen aus und klicke auf *Markierte Positionen nachbestellen*. +
+→ Die Nachbestellung wird erstellt und ist im Menü *Waren » Bestellung* in der Übersicht einzusehen und bearbeitbar.
+
+Wenn du *Mengen für Varianten erhöhen* auswählst, kannst du in einem neuen Fenster die Bestellmenge für die Nachbestellung der im Auftrag enthaltenen Varianten nachträglich erhöhen.
+
+Befolge anschließend die Instruktionen in den Kapiteln <<#400, Auftragspositionen hinzufügen>> bis <<#1000, Nachbestellung abschließen>>, um die Nachbestellung vollständig zu durchlaufen.
+
+[TIP]
+.Zuordnung der Nachbestellung zum Auftrag
+====
+Bei Artikeln, die du wie oben beschrieben aus einem bestehenden Auftrag bestellst, wird der nachbestellte Bestand direkt dem entsprechenden Auftrag zugeordnet. Dies erkennst du in der Nachbestellung im Bereich *Auftragspositionen* am Einkaufswagen-Symbol (icon:cart-plus[role="green"]), das vor der Variante angezeigt wirst. Ein Klick auf das Symbol zeigt dir im Tooltip die ID des Auftrags an und öffnet den Tab *Übersicht* des bestehenden Auftrags.
+====
+
+[#335]
+=== Aus der Auftragsübersicht heraus nachbestellen
+
+Wenn du gerade Aufträge bearbeitest und bemerkst, dass Artikel aus einem Auftrag nicht mehr auf Lager sind und nachbestellt werden müssen, kannst du dies direkt aus der Auftragsübersicht heraus machen. Dies ist ein schneller Weg einzelne Artikel nachzubestellen. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Aus der Auftragsübersicht heraus nachbestellen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Suche (icon:search[role="blue"]) den gewünschten Auftrag anhand der Filtereinstellungen.
+. Klicke in der Zeile des Auftrags auf *Warenbestand ermitteln*. +
+→ Eine weitere Zeile wird aufgeklappt und der Warenbestand angezeigt. Ist der Warenbestand unterschritten, wird die Option *Nachbestellung anlegen* (icon:cart-plus[role="green"]) angezeigt.
+. Klicke auf *Nachbestellung anlegen* (icon:cart-plus[role="green"]).
+→ Ein Fenster öffnet sich.
+. Menge der nachzubestellenden Variante eingeben.
+. Lieferant:in auswählen und mit dieser Variante verknüpfen, falls noch keiner hinterlegt sein sollte.
+. Klicke auf speichern (icon:save[role="green"]), um die Bestellung anzulegen. +
+→ Die Nachbestellung wird erstellt und ist im Menü *Waren » Bestellung* in der Übersicht einzusehen und bearbeitbar.
+
+Befolge anschließend die Instruktionen in den Kapiteln <<#400, Auftragspositionen hinzufügen>> bis <<#1000, Nachbestellung abschließen>>, um die Nachbestellung vollständig zu durchlaufen.
+
+[#340]
+=== Einzelne Variante nachbestellen
+Diese Methode bietet sich an, wenn du gezielt nur eine Variante eines Artikels nachbestellen möchtest. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Einzelne Variante nachbestellen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten*.
+. Öffne den Artikel, den du nachbestellen möchtest.
+. Öffne die Variante, die du nachbestellen möchtest.
+. Öffne das Tab *Bestand* der Variante.
+. Öffne das Untertab *Warenbestand*.
+. Klicke auf *Vorschläge übernehmen* oder trage eine *Menge* ein.
+. Klicke auf *Bestellung erstellen*. +
+→ Die Nachbestellung wird erstellt und ist im Menü *Waren » Bestellung* in der Übersicht einzusehen und bearbeitbar.
+
+Darüber hinaus stehen dir hier die Funktionen *Warenbestände neu berechnen* und *Menge zurücksetzen* zur Verfügung.
+
+Befolge anschließend die Instruktionen in den Kapiteln <<#400, Auftragspositionen hinzufügen>> bis <<#1000, Nachbestellung abschließen>>, um die Nachbestellung vollständig zu durchlaufen.
+
+[#400]
+== Auftragspositionen hinzufügen
+
+In Kapitel 3 wurden die verschiedenen Wege beschrieben, wie du eine Nachbestellung in deinem plentymarkets System anlegen kannst. Du kannst nun weitere nachzubestellende Artikel in Form von Auftragspositionen hinzufügen. Wende die Suche (icon:search[set=material]) an, um die gewünschten Artikel zu finden und hinzuzufügen.
+
+[.collapseBox]
+.*Suchfunktionen*
+--
+Du hast mehrere Möglichkeiten, die Suche zu nutzen. Du kannst einen Wert im Suchfeld eingeben und dann den entsprechenden Filter auswählen. Gibst du z.B. eine Zahl ein, werden dir mögliche Filter in der diese Zahl vorkommt vorgeschlagen, wie IDs oder Variantennummer. Gib den Wert vollständig ein und wähle den passenden Filter aus den Vorschlägen. Wiederhole dies, um Filter miteinander zu kombinieren. Klicke auf icon:search[set=material], um die Suche auszuführen. +
+Möchtest du aus der verfügbaren Filterliste wählen, klicke auf die Liste und gib einen Wert im gewünschten Filter ein. Hast du alle benötigten Filter gesetzt, klicke auf *Suchen*. +
+Möchtest du einen gesetzten Filter löschen, entferne den Chip. In <<table-filter-item-search-reorder>> werden die verfügbaren Filter erläutert.
+
+Zudem kannst du mit der Komponente *Gespeicherte Filter* (icon:bookmarks[set=material]) ausgewählte Filter in der UI speichern. Gespeicherte Filtersets sind dann in dieser Komponente bei jedem Öffnen des Menüs auswählbar, ähnlich wie Lesezeichen. Jede:r Benutzer:in kann eigene Filter festlegen.
+
+[.instruction]
+Filter speichern:
+
+. Setze die gewünschten Filter mit den entsprechenden Werten.
+. Führe die Suche aus.
+. Klicke auf *Gespeicherte Filter* (icon:bookmarks[set=material]).
+. Klicke auf *Aktuellen Filter speichern*. +
+→ Das Fenster *Filter speichern* öffnet sich.
+. Vergib einen *Filternamen*.
+. Entscheide, ob das Filterset für alle Benutzer:innen zur Verfügung stehen soll.
+. Klicke auf *Speichern*.
+
+--
+
+[.instruction]
+Auftragspositionen hinzufügen:
+
+. Öffne das Menü *Waren » Bestellwesen » Bestellung*
+. Suche die gewünschte Nachbestellung und öffne sie.
+. Klicke im Bereich *Auftragspositionen* auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Ein Menü zum Hinzufügen der Auftragspositionen öffnet sich.
+. Suche die gewünschten Varianten. +
+. Gib die nachzubestellende Anzahl in der Spalte *Menge* der nachzubestellenden Variante ein.
+. Klicke auf den *Warenkorb* (icon:cart-plus[role="green"]). +
+→ Die Artikel und Varianten werden dem Warenkorb hinzugefügt.
+. Wiederhole die oben beschriebenen Schritte, bis alle nachzubestellenden Artikelvarianten in der gewünschten Menge im Warenkorb enthalten sind.
+. Klicke im Bereich *Warenkorb* auf *Speichern* (icon:save[role="green"]). +
+→ Der Warenkorb wird gespeichert. +
+→ Die Nachbestellung wird aktualisiert.
+
+_Beachte_, dass die Nachbestellung nun angelegt, aber noch nicht ausgelöst wurde. Die Nachbestellung wurde also noch nicht an die Lieferant:in übermittelt. Vor Auslösen der Nachbestellung kannst du im Bereich *Details* noch weitere Informationen hinterlegen, beachte dafür die nachfolgenden Kapitel. Löst du die Nachbestellung nun aus, lassen sich die Artikelpositionen nicht mehr bearbeiten.
+
+[[table-filter-item-search-reorder]]
+.Verfügbare Filter in der Artikelsuche
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Varianten-ID*
+|ID eingeben, um nach der Variante mit dieser ID zu suchen. Du kannst mehrere IDs kommasepariert eingeben.
+
+| *Artikel-ID*
+|ID eingeben, um nach dem Artikel mit dieser ID zu suchen. Du kannst mehrere IDs kommasepariert eingeben.
+
+| *Variantennummer*
+|Variantennummer eingeben, um nach der Variante mit dieser Nummer zu suchen. Du kannst mehrere Nummern kommasepariert eingeben.
+
+| *Barcode*
+|Barcode eingeben, um nach der Variante mit diesem Code zu suchen.
+
+| *Artikelname*
+|Artikelnamen eingeben, um nach dem Artikel mit diesem Namen zu suchen.
+
+| *Lieferantennummer*
+|Nummer der Lieferant:in eingeben, um nach Artikeln mit dieser Lieferantennummer zu suchen.
+
+| *Nur vorrätige Artikel anzeigen*
+|Wenn du diese Option wählst, werden in in den Suchergebnissen nur vorrätige Artikel angezeigt.
+
+| *Nur aktive Artikel anzeigen*
+|Wenn du diese Option wählst, werden in in den Suchergebnissen nur <<artikel/webshop/checkliste-artikel-anzeige#100, aktivierte Artikel>> angezeigt.
+
+|====
+
+[.collapseBox]
+.*Tabelle Auftragspositionen hinzufügen individualisieren*
+--
+
+Die Tabelle zum Hinzufügen von Auftragspositionen lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Status
+* Artikelname
+* Varianten-ID / Nr.
+* Lieferanten-Information
+* Attribute
+* Einkaufspreis
+* Einkaufspreis System
+* Menge Empfängerlager
+* Menge
+* Cart icon
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+* Barcode
+* Lieferanten-Artikel-Bez.
+* Modell
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:cog[]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:drag_sort_handle[set=plenty]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[.collapseBox]
+.*Warenkorbtabelle individualisieren*
+--
+
+Die Warenkorbtabelle lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Artikelname
+* Varianten-ID / Nr.
+* Lieferanten-Informationen
+* Attribute
+* Barcode
+* Einkaufspreis
+* Einkaufspreis System
+* Rabatt
+* Rabattierter Preis
+* Menge
+* Aktion
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+* Lieferanten-Artikel-Bez.
+* Modell
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:cog[]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:drag_sort_handle[set=plenty]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[.collapseBox]
+.*Auftragspositionstabelle individualisieren*
+--
+
+Die Auftragspositionstabelle lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Order icon
+* Artikelname
+* Varianten-ID / Nr.
+* Lieferanten-Information
+* Attribute
+* Lieferdatum
+* Einkaufspreis
+* Rabatt
+* Rabattierter Preis
+* Bestellt
+* Offen
+* Ausgehend
+* Eingehend
+* Teilmenge
+* Cancel icon
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+* Barcode
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:cog[]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:drag_sort_handle[set=plenty]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[#500]
+== Auftragspositionen bearbeiten
+
+Nachdem du die gewünschten Artikel zum Warenkorb hinzugefügt hast, kannst du sie im Bereich *Auftragspositionen* noch bearbeiten. Du kannst zum Beispiel die *Menge* ändern oder Artikel *löschen*.
+Im Feld *Einkaufspreis* kannst du den voreingetragenen Einkaufspreis ändern oder gewährten Rabatt eingeben, falls deine Lieferant:in dir beispielsweise kurzfristig einen veränderten Preis zugesagt hat. Im Feld *Artikelname* kannst du die Bezeichnung für den Artikel anpassen. Die Änderungen gelten nur für die Nachbestellung, in der sie vorgenommen wurden. Möchtest du die <<artikel/einstellungen#, Artikeleinstellungen>> generell anpassen, kannst du dies im Menü *Artikel » Artikel bearbeiten* im entsprechenden Tab machen.
+
+[IMPORTANT]
+.Einkaufspreis für Varianten bearbeiten
+====
+Das Bearbeiten des Einkaufspreises kann Auswirkungen auf deine im System gespeicherten Preise haben.
+Ist im Menü *Einrichtung » Waren » Warenbestand » Wareneingang* für den *Einkaufspreis* eine der Optionen *Einkaufspreis auf Variante übertragen* oder *Einkaufspreis auf Variante und Lieferant übertragen* aktiviert, wird der an der Variante hinterlegte Einkaufspreis durch deine Eingabe während der Nachbestellung überschrieben. Genauere Informationen dazu findest du auf der Handbuchseite <<warenwirtschaft/wareneingaenge-verwalten#300, Wareneingänge verwalten>>.
+====
+
+Hast du alle notwendigen Änderungen an den Auftragspositionen vorgenommen, klicke im Bereich *Warenkorb* auf *Speichern* (icon:save[role="green"]).
+
+[#600]
+== Weitere Informationen hinterlegen
+Der Bereich *Details* bietet dir die Möglichkeit, zur besseren Übersicht weitere Informationen an der Nachbestellung zu hinterlegen. <<table-additional-information-reorder>> beschreibt die möglichen Informationen.
+
+[[table-additional-information-reorder]]
+.Weitere Informationen für die Nachbestellung
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Lieferdatum*
+|Du kannst das Lieferdatum für die Nachbestellung manuell eintragen oder die Funktion *Lieferdatum ermitteln* nutzen. Das System berechnet dann auf Basis der *Lieferzeit*, die im Tab *Lieferant* der Varianten hinterlegt ist, das voraussichtliche Lieferdatum. Für die korrekte Berechnung müssen die Lieferzeiten vor Anlegen der Nachbestellung hinterlegt sein. Weitere Informationen zum Hinterlegen der Lieferzeit an der Variante findest du auf der Handbuchseite <<artikel/artikel-verwalten#180, Artikel verwalten>>. +
+Wenn du in den Auftragsdetails das Lieferdatum setzt, kannst du wählen, ob das gleiche Datum für die Auftragspositionen in der Tabelle ohne Lieferdatum übernommen werden soll. Bereits eingegebene Lieferdaten für Auftragspositionen in der Tabelle bleiben dabei erhalten. Diese Werte werden nicht überschrieben. +
+Du kannst in der Tabelle für jede Auftragsposition individuell ein Lieferdatum setzen. Die Lieferdaten bleiben bearbeitbar, solange die Bestellung nicht abgeschlossen ist. +
+_Beachte_, dass alle Lieferdaten in der Tabelle gelöscht werden, wenn du ein bereits gesetztes Lieferdatum in den Auftragsdetails löschst. Es ist nicht möglich ein Lieferdatum zu setzen, das vor dem Bestelldatum der Nachbestellung liegt. +
+Klicke auf *Speichern* (icon:save[role="green"]) nach Setzen oder Bearbeiten des Lieferdatums.
+
+| *Zahlungsziel*
+|Manuell das Datum auswählen, das als Zahlungsziel festgelegt wird. Über die Funktion *Zahlungsziel ermitteln* nutzen wird das aktuelle Datum eingetragen.
+
+| *Händlerzeichen*
+|Das zur Lieferant:in gehörende Händlerzeichen eingeben.
+
+| *Eigner*
+|Die Person auswählen, die als Eigner der Nachbestellung festgelegt werden soll. Alternativ werden hier, falls festgelegt, der <<#200, Standard-Eigner>> angezeigt.
+
+| *Währung*
+|Standardmäßig ist in diesem Feld die Systemwährung voreingestellt. Bei Bedarf eine abweichende *Währung* des Lieferanten plus den geltenden *Wechselkurs* für die gewählte Währung eingeben. Oben im Bereich *Details* der Nachbestellung wird dann der aktuell berechnete *Nettowarenwert* angezeigt.
+
+|====
+
+Über den Auftragsdetails einer erstellten Nachbestellung werden dir Infoboxen mit grundlegenden Informationen zu der Nachbestellung angezeigt. Über Farben wird der Status wiedergegeben.
+
+* Nettowarenwert = Der Nettowarenwert der bestellten Artikel wird angezeigt. Grau bedeutet, dass der Wert bei Null liegt (z.B., weil die Nachbestellung noch nicht ausgelöst wurde). Grün bedeutet, dass der Wert über Null liegt.
+* Bestellte Artikel = Die Anzahl der bestellten Artikel wird angezeigt. Diese Infobox ist immer grau.
+* Offene Artikel = Die Anzahl der noch nicht gelieferten Artikel wird angezeigt. Grau bedeutet, dass keine Artikel offen sind, da die Nachbestellung noch nicht ausgelöst wurde. Grün bedeutet, dass keine Artikel offen sind, da alle geliefert wurden. Orange bedeutet, dass Artikel offen sind.
+* Gelieferte Artikel = Die Anzahl der bereits gelieferten Artikel wird angezeigt. Grau bedeutet, dass noch keine Artikel geliefert wurden. Orange bedeutet, dass die Artikel teilweise geliefert wurden und grün, dass alle Artikel geliefert wurden.
+* Stornierte Artikel = Die Anzahl der stornierten Artikel wird angezeigt. Grau bedeutet, dass keine Artikel storniert wurden. Schwarz bedeutet, dass mindestens ein Artikel storniert wurde.
+* Gesamtsumme Warenbezugskosten = Die Gesamtsumme der Warenbzugskosten wird angezeigt. Grau bedeutet, dass die Gesamtsumme der Warenbezugskosten bei Null liegt. Rot bedeutet, dass die Warenbezuskosten über Null liegen.
+
+[#700]
+== Nachbestellung auslösen und übermitteln
+Nachdem du alle nachzubestellenden Varianten zur Nachbestellung hinzugefügt hast, setzt du das Bestelldatum. Klicke dazu auf *Bestellung auslösen* im Bereich *Details*. Die Nachbestellung wird ausgelöst und das aktuelle Datum wird als Bestelldatum gesetzt. +
+Alternativ kannst du über die Datumsauswahl (icon:calendar[]) manuell ein Datum wählen und setzen. Klicke nach der Auswahl des Datums auf *Bestellung auslösen*. Das ausgewählte Datum wird gesetzt und die Nachbestellung ausgelöst.
+
+[WARNING]
+.Auftragspositionen nicht mehr bearbeitbar
+====
+Sobald du das Bestelldatum gesetzt hast, kannst du in der Nachbestellung keine Auftragspositionen mehr hinzufügen oder löschen. Setze das Datum daher erst nach sorgfältiger Prüfung.
+====
+
+Nach dem Auslösen der Nachbestellung musst du noch deine Nachbestellung an die Lieferant:in übermitteln. Dazu erstellst du den Bestellschein in Form des Dokuments *Nachbestellung*. Im Kapitel <<#150, Versand der des Bestellscheins vorbereiten>> wurde bereits beschrieben, wie du die Dokumentenvorlage einrichtest und das Dokument automatisch an deine Lieferant:in übermittelst. Im Folgenden findest du jeweils eine Anleitung zum manuellen und zum automatisierten Erzeugen des Dokuments.
+
+[nachbestellung-loeschen]
+[TIP]
+.Nachbestellung löschen
+====
+Nachbestellungen können in der Detailansicht gelöscht werden, solange die Nachbestellung noch nicht durch Setzen des Bestelldatums ausgelöst wurde. Klicke zum Löschen auf *Bestellung löschen* (icon:trash-o[]) rechts oberhalb der Infoboxen.
+====
+
+[#710]
+=== Bestellschein manuell erstellen
+Gehe wie im Folgenden beschrieben vor, um den Bestellschein manuell zu erzeugen. Je nach Workflow kannst du auch einen bereits erstellten Bestellschein durch Hochladen des Scheins hinterlegen, falls dir das Dokument von Zulieferern übermittelt wurde.
+
+[.instruction]
+Bestellschein manuell erzeugen:
+
+. Öffne den Bereich *Dokumente*.
+. Klicke auf *Dokument hinzufügen*.
+. Wähle die Option *Bestellschein erzeugen*. +
+icon:map-signs[] *_Oder:_* Wähle die Option *Bestellschein hochladen*, um einen vom Lieferanten erstellten Bestellschein hochzuladen. +
+→ Der Bestellschein wird erstellt und ist im Bereich *Dokumente* verfügbar.
+. Klicke auf *Aktionen*, um das Dokument herunterzuladen oder zu löschen.
+
+[#720]
+=== Bestellschein automatisch erzeugen
+Richte die folgende Ereignisaktion ein, um den Bestellschein automatisch zu erzeugen, sobald du das Bestelldatum gesetzt hast.
+
+[.collapseBox]
+.Erzeugen des Bestellscheins automatisieren:
+--
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klicke auf *Ereignisaktion hinzufügen*.  +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Gib einen Namen ein.
+. Wähle das *Ereignis* gemäß <<table-event-procedure-generate-reorder-document>>.
+. *Speichere* die Einstellungen.
+. Nimm die Einstellungen gemäß <<table-event-procedure-generate-reorder-document>> vor.
+. Aktiviere die Option *Aktiv*.
+. *Speichere* die Einstellungen.
+--
+
+[[table-event-procedure-generate-reorder-document]]
+.Ereignisaktion zum automatischen Erzeugen des Bestellscheins
+[cols="1,3,3"]
+|====
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Bestellwesen*
+|*Bestellung ausgelöst*
+
+| *Filter*
+| *Auftrag > Auftragstyp*
+|*Bestellung, Typ Nachbestellung*
+
+| *Aktion*
+| *Bestellwesen*
+|*Nachbestellungsdokument erzeugen*
+|====
+
+[TIP]
+.Bestellschein automatisch an Lieferantin senden
+====
+Möchtest du im Anschluss an das automatische Erzeugen des Bestellscheins diesen auch automatisiert an die Lieferant:in senden, richte zusätzlich die im Kapitel <<#150, Versand des Bestellscheins vorbereiten>> beschriebene Ereignisaktion ein.
+====
+
+[#730]
+=== Bestellschein per E-Mail-Service versenden
+Neben dem automatischen Versand des Bestellscheins per Ereignisaktion kannst du aus der Nachbestellung heraus auf den E-Mail-Service zugreifen und so den erstellten Bestellschein manuell versenden. Bei Klick auf *E-Mail-Service* öffnet sich das Menü zum Versand der E-Mail.
+
+[IMPORTANT]
+.E-Mail Vorlage einrichten
+====
+Vor der Nutzung des E-Mail-Service für die Abwicklung der Nachbestellung musst du im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* eine E-Mail-Vorlage für diesen Zweck erstellen. Weitere Informationen findest du auf der Handbuchseite <<crm/e-mails-versenden#1200, E-Mails>>.
+====
+
+[.instruction]
+Bestellschein per E-Mail-Service versenden:
+
+. Klicke in der geöffneten Nachbestellung auf *E-Mail-Service*. +
+→ Ein Fenster zur Auswahl der E-Mail-Vorlage öffnet sich in einem neuen Tab.
+. Wähle die E-Mail-Vorlage aus, die an den Lieferanten gesendet werden soll.
+. Klicke auf das *Auge*, um die Vorschau zu öffnen.
+. Bearbeite den Text der E-Mail bei Bedarf. +
+*_Hinweis_*: Die Änderung gilt nur für die aktuell geöffnete E-Mail und wirkt sich nicht auf die E-Mail-Vorlage als solche aus.
+. Klicke auf den *Briefumschlag* (icon:envelope-o[role="purple"]), um die E-Mail zu versenden.
+
+[#750]
+== Warenbezugskosten zur Nachbestellung hinzufügen
+
+Wenn Waren nachbestellt werden entstehen verschiedene Kosten. Diese können im Bereich *Warenbezugskosten* zu einer Nachbestellung hinzugefügt werden. So werden die bekannten Zusatzkosten als Eigenschaften an der Nachbestellung gespeichert und in dieser auch mit angezeigt, damit du auf einen Blick alle relevanten Informationen zu einer Nachbestellung hast. Die Anzeige der zusätzlichen Warenbezugskosten erfolgt in der gleichen Währung, in der die Nachbestellung abgeschlossen wurde.
+
+Folgende Warenbezugskosten können hinterlegt werden:
+
+* Frachtkosten
+* Verpackungskosten
+* Transportversicherung
+* Rollgeld
+* Porto
+* Zölle
+* Vermittlungsgebühren
+* Mindermengenzuschläge
+* Sonstige Kosten
+
+Die Warenbezugskosten können erst hinterlegt werden, wenn die Nachbestellung angelegt und ausgelöst wurde. Vorher sind die Felder für die verschiedenen Kosten im Bereich *Warenbezugskosten* der Nachbestellung gesperrt.
+
+Sind noch keine Kosten hinzugefügt, wird *Nicht gesetzt* angezeigt. Klicke direkt in dieses Feld an den jeweiligen Kosten, die du hinzufügen möchtest, und gib manuell den entsprechenden Betrag ein. Erlaubt sind Beträge mit maximal 2 Dezimalstellen. Die Kosten werden automatisch in der *Währung* hinzugefügt, die für die Nachbestellung gesetzt wurde. *Speichere* (icon:save[role="green"]) nach dem Hinzufügen der Kosten die Nachbestellung. Diese wird dann aktualisiert.
+
+[IMPORTANT]
+.Kosten mit 0
+====
+Da die Kosten als Eigenschaften gespeichert werden, werden diese entfernt und nicht gespeichert, wenn in einem Feld die Kosten auf 0 gesetzt werden.
+====
+
+Kosten anpassen und löschen kannst du ebenfalls, indem du in das entsprechende Feld klickst und die gewünschten Änderungen vornimmst. Klicke danach auf *speichern* (icon:save[role="green"]), um die Kosten zu aktualisieren.
+
+[.discrete]
+=== Warenbezugskostenrechner für Umrechnung der Kosten nutzen
+
+Abhängig von deinen Arbeitsabläufen, Lieferant:innen und Nachbestellungen, kann es sein, dass nicht alle Zusatzkosten in der gleichen Währung anfallen. Damit in einer Nachbestellung aber alle Kosten in derselben Währung angezeigt werden, kannst du an jeder der oben aufgelisteten Kosten den *Warenbezugskostenrechner* zur Umrechnung nutzen. Dieser befindet sich jeweils rechts an dem entsprechenden Kostenfeld und öffnet sich durch einen Klick. Beachte für die Nutzung die Erläuterungen in <<table-settings-procurement-costs-calculator>>.
+
+[[table-settings-procurement-costs-calculator]]
+.Einstellungen Warenbezugskostenrechner für Zusatzkosten in der Nachbestellung
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Betrag*
+|Der Betrag ist standardmäßig auf 0 gesetzt. Trage den Betrag der entsprechenden Kosten ein, in der Höhe der Währung, wie er für diese Nachbestellung ausgezeichnet ist.
+
+| *Währung*
+|Wähle die Währung aus, in der der eingegebene Betrag ausgezeichnet ist.
+
+| *Umrechnungskurs*
+|Der Umrechnungskurs wird automatisch vom System berechnet, kann aber manuell angepasst werden. Umgerechnet wird die im Warenbezugskostenrechner ausgewählte Währung in die Währung der Nachbestellung.
+
+| *Vorschaubetrag in*
+|Hier wird dir der umgerechnete Betrag in der Währung der Nachbestellung angezeigt. Dies ist der Betrag, der für die ausgewählten Kosten hinzugefügt wird.
+|====
+
+Wenn alle Einstellungen vorgenommen und die Kosten korrekt sind, klicke auf *Kosten hinzufügen*. Beachte, dass die Kosten dadurch *noch nicht gespeichert* sind. Klicke in der Nachbestellung auf *speichern* (icon:save[role="green"]), um die Kosten zu speichern und die Nachbestellung zu aktualisieren.
+
+[#800]
+== Rückstandsliste nutzen
+Wenn du eine große Anzahl von Artikeln nachbestellt hast oder viele Nachbestellungen parallel laufen, nutze die Rückstandsliste, um den Überblick über nachbestellte, aber noch nicht gelieferte Artikel zu behalten. Diese Artikel werden dir im Menü *Waren » Bestellwesen » Rückstandsliste* angezeigt. Weitere Informationen zur Rückstandsliste findest du auf der Handbuchseite <<warenwirtschaft/nachbestellungen-verwalten/rueckstandsliste-verwalten#, Rückstandsliste nutzen>>.
+
+[#900]
+== Waren einbuchen
+Sobald die nachbestellten Artikel in deinem Lager eintreffen, müssen diese eingebucht werden. Je nachdem, ob du alle Artikel der Nachbestellung in einer zusammenhängenden Lieferung oder in separaten Lieferungen erhältst, buchst du entweder <<#910, Teilmengen>> oder <<#920, alle Artikel>> in einem Schritt ein. Beides ist in den folgenden beiden Abschnitten erklärt.
+
+[IMPORTANT]
+.Lagerort für die Einbuchung
+====
+Pflegst du keine separaten Lager und Lagerorte für deine Artikel in deinem plentymarkets System, werden die Artikel beim Einbuchen auf den im System standardmäßig vorhandenen Standard-Lagerort gebucht.
+====
+
+[.collapseBox]
+.*Warenbewegungstabelle individualisieren*
+--
+
+Die Warenbewegungstabelle lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Icon one
+* Icon two
+* Artikelname
+* Varianten-ID /Nr.
+* Lagerort
+* Erstellt am
+* Buchungs-ID
+* Menge
+* Aktion: Löschen
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+* MHD
+* Charge
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:cog[]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:drag_sort_handle[set=plenty]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+Im Bereich *Warenbewegung* einer Nachbestellung kannst du anhand der Filter *Offen*, *Gebucht* und *Storniert* die entsprechenden Warenbewegungen suchen. Du kannst den Filter auch auf *Alle anzeigen* stellen, wenn du alle Warenbewegungen einer Nachbestellungen auf einmal angezeigt bekommen möchtest. Dieser Filter ist die Standardeinstellung.
+
+[#910]
+=== Teilmengen einbuchen
+Gehe wie im Folgenden beschrieben vor, um Teilmengen aus verschiedenen Lieferungen derselben Nachbestellung einzubuchen.
+
+[.instruction]
+Teilmengen einbuchen:
+
+. Öffne das Menü *Waren » Bestellwesen » Bestellung*.
+. Öffne die Nachbestellung, zu der Waren eingebucht werden sollen.
+. Öffne den Bereich *Auftragspositionen*.
+. Trage in der Spalte *Teilmenge* die Anzahl der gelieferten Artikelpositionen ein.
+. Klicke auf *Teillieferung anlegen*. +
+→ Die Warenbewegungen für den Eingang der Teillieferung werden angelegt.
+. Gehen zum Bereich *Warenbewegungen*. Dort erkennst du an der grünen Markierung die vorbereiteten Wareneingänge.
+. Gib in der Spalte *Lagerort* die ID des Lagerorts an, in den die Artikel eingebucht werden sollen.
+. Setze jeweils ein Häkchen in der Zeile mit der einzubuchenden Artikelvariante.
+. Gib im Feld *Lieferschein-Nr.* die Nummer des Bestellscheins ein, der zur Nachbestellung gehört.
+. Klicke auf *Markierte Warenbewegungen buchen*. +
+→ Die Teilmenge wird auf die angegebenen Lagerorte gebucht.
+
+[#920]
+=== Alle Artikel einbuchen
+Gehe wie im Folgenden beschrieben vor, um alle in der Nachbestellung enthaltenen Artikel gleichzeitig einzubuchen.
+
+[.instruction]
+Vollständige Menge einbuchen:
+
+. Öffne das Menü *Waren » Bestellwesen » Bestellung*.
+. Öffne die Nachbestellung, zu der Waren eingebucht werden sollen.
+. Öffne den Bereich *Auftragspositionen*.
+. Klicke auf *Vollständige Lieferung anlegen*. +
+→ Die Warenbewegungen für den Eingang der vollständigen Lieferung werden angelegt.
+. Gehen zum Bereich *Warenbewegungen*. Dort erkennst du an der grünen Markierung die vorbereiteten Wareneingänge.
+. Gib in der Spalte *Lagerort* die ID des Lagerorts an, in den die Artikel eingebucht werden sollen.
+. Gib im Feld *Lieferschein-Nr.* die Nummer des Bestellscheins ein, der zur Nachbestellung gehört.
+. Klicke auf *Alle Warenbewegungen buchen*. +
+→ Die vollständige Menge wird auf die angegebenen Lagerorte gebucht.
+
+[#1000]
+== Nachbestellung abschließen
+Sobald du alle in der Nachbestellung enthaltenen Artikel erhalten und eingebucht hast, schließt du die Nachbestellung ab. Klicke dazu oben im Bereich *Details* der Nachbestellung auf *Bestellung abschließen*. Das aktuelle Datum wird als Abschlussdatum gesetzt und die Nachbestellung für die Bearbeitung gesperrt. +
+Alternativ kannst du über die Datumsauswahl (icon:calendar[]) manuell ein Datum wählen und setzen. Klicke nach der Auswahl des Datums auf *Bestellung abschließen*. Das ausgewählte Datum wird als Abschlussdatum gesetzt und die Nachbestellung ist für die Bearbeitung gesperrt. +
+Beachte, dass das Abschlussdatum zeitlich nicht vor dem Bestelldatum liegen kann. Wählst du ein Datum in der Zukunft, bleibt die Nachbestellung bearbeitbar. Sie wird erst gesperrt, wenn das Datum erreicht ist.
+
+[TIP]
+.Sperrung der Nachbestellung aufheben
+====
+Hast du die Nachbestellung versehentlich abgeschlossen, klicke erneut auf *Bestellung freischalten* (icon:undo[role="orange"]). So wird die Nachbestellung entsperrt und einzelne Informationen können erneut bearbeitet werden.
+====
+
+Schließe die Nachbestellung auch ab, wenn einzelne Artikel aus der Nachbestellung voraussichtlich nicht mehr nachgeliefert werden können, zum Beipiel aufgrund von Verlust auf dem Versandweg. So werden die ausstehenden Auftragspositionen auch aus der <<warenwirtschaft/nachbestellungen-verwalten/rueckstandsliste-verwalten#, Rückstandsliste>> entfernt.
+
+[#1050]
+== Nachbestellung stornieren
+
+In der Detailansicht stornierst du eine Nachbestellung zum Beispiel dann, wenn noch offene Mengen nicht mehr geliefert werden.
+
+[.instruction]
+Gehe dafür folgendermaßen vor:
+
+. Öffne das Menü *Waren » Bestellwesen » Bestellung*.
+. Wähle die entsprechende Nachbestellung aus und öffne die Detailansicht.
+. Klicke im Bereich *Artikelpositionen* auf *Offene Mengen stornieren*. +
+→ Noch nicht gelieferte Artikel werden storniert und aus dem *Zulauf* genommen.
+. Schließe danach die Nachbestellung ab, indem du in den Details auf *Bestellung abschließen* klickst. +
+→ Die offenen Positionen der Nachbestellung werden nicht mehr für den *Zulauf* anerkannt, sie wird auch nicht mehr in der Rückstandsliste geführt und die Nachbestellung ist abgeschlossen.
+
+[#1070]
+== Nachbestellung kopieren
+
+Du kannst eine bestehende Nachbestellung kopieren. Nutze dafür in einer geöffneten Nachbestellung die Funktion *Kopieren* (icon:copy[]) über den Auftragsdetails. Die dadurch erstellte Nachbestellung erhält eine eigene ID, wie andere Nachbestellungen auch. Die folgenden Daten werden in die neue Nachbestellung kopiert:
+
+* Lieferant
+* Lager
+* Wechselkurs
+* Währung
+* Händlerzeichen
+* Auftragspositionen (inkl. der Eigenschaften Rabatt, Verpackungseinheit, Mindestabnahme, Originalmenge, Lieferzeit in Tagen, Externe Artikel-ID, Lieferanten-Artikelbezeichnung)
+* Tags
+
+Es werden keine Datumsangaben kopiert, diese kannst du in der neuen Nachbestellung setzen. Auch der *Eigner* wird nicht kopiert. Es wird der aktuelle Benutzer, der die Nachbestellung kopiert, als Eigner gesetzt. Der *Status* wird auf den selbst gewählten <<warenwirtschaft/nachbestellungen-verwalten/nachbestellungen-vornehmen#120, Standardstatus für Nachbestellungen>> gesetzt.
+
+Darüber hinaus ist das Verhalten der neuen Nachbestellung das gleiche wie das anderer Nachbestellungen auch. Sie bleibt wie gewohnt bearbeitbar, bis die Bestellung <<warenwirtschaft/nachbestellungen-verwalten/nachbestellungen-vornehmen#1000, abgeschlossen>> wird.
+
+
+[#1100]
+== Nachbestellung suchen
+
+Beim Öffnen des Menüs *Waren » Bestellwesen » Bestellung* werden dir alle Nachbestellungen und <<warenwirtschaft/umbuchungen-vornehmen#, Umbuchungen>> in einer Übersichtstabelle angezeigt. Wende die Suche (icon:search[set=material]) an, um die angezeigten Umbuchungen und Nachbestellungen eingrenzen.
+
+Du hast mehrere Möglichkeiten, die Suche zu nutzen. Du kannst einen Wert im Suchfeld eingeben und dann den entsprechenden Filter auswählen. Gibst du z.B. eine Zahl ein, werden dir mögliche Filter in der diese Zahl vorkommt vorgeschlagen, wie IDs oder Variantennummer. Gib den Wert vollständig ein und wähle den passenden Filter aus den Vorschlägen. Wiederhole dies, um Filter miteinander zu kombinieren. Klicke auf icon:search[set=material], um die Suche auszuführen. +
+Möchtest du aus der verfügbaren Filterliste wählen, klicke auf die Liste und gib einen Wert im gewünschten Filter ein. Hast du alle benötigten Filter gesetzt, klicke auf *Suchen*. +
+Möchtest du einen gesetzten Filter löschen, entferne den Chip. In <<table-reorder-search>> werden die verfügbaren Filter erläutert.
+
+Zudem kannst du mit der Komponente *Gespeicherte Filter* (icon:bookmarks[set=material]) ausgewählte Filter in der UI speichern. Gespeicherte Filtersets sind dann in dieser Komponente bei jedem Öffnen des Menüs auswählbar, ähnlich wie Lesezeichen. Jede:r Benutzer:in kann eigene Filter festlegen.
+
+[.instruction]
+Filter speichern:
+
+. Setze die gewünschten Filter mit den entsprechenden Werten.
+. Führe die Suche aus.
+. Klicke auf *Gespeicherte Filter* (icon:bookmarks[set=material]).
+. Klicke auf *Aktuellen Filter speichern*. +
+→ Das Fenster *Filter speichern* öffnet sich.
+. Vergib einen *Filternamen*.
+. Entscheide, ob das Filterset für alle Benutzer:innen zur Verfügung stehen soll.
+. Klicke auf *Speichern*.
+
+[[table-reorder-search]]
+.Verfügbare Filter zum Suchen einer Nachbestellung
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Auftrags-ID*
+|Auftrags-ID der Nachbestellung eingeben, um diese konkrete Nachbestellung zu suchen.
+
+| *Auftrags-Typ*
+|Auftrags-Typ *Nachbestellung* eingeben, um nur Aufträge vom Typ *Nachbestellung* anzuzeigen.
+
+| *Sender*
+|Wenn du *Nachbestellung* im Filter *Auftrags-Typ* gewählt hast, werden dir für Sender deine im System hinterlegten Lieferanten in einer Dropdown-Liste angezeigt. Wähle einen der Lieferanten aus, wenn du Nachbestellungen, die du über diesen Lieferanten abwickelst, suchen möchtest.
+
+| *Empfänger*
+|Wenn du *Nachbestellung* im Filter *Auftrags-Typ* gewählt hast, werden dir für Empfänger deine im System hinterlegten Lager in einer Dropdown-Liste angezeigt. Wähle eines der Lager aus, wenn du Nachbestellungen suchst, für die eines der Lager angegeben wurde. +
+_Hinweis_: Kombiniere die Felder *Sender*, *Empfänger* und *Auftrags-Typ*, um gezielter nach Nachbestellungen zu suchen, die von einem bestimmten Lieferanten in ein bestimmtes Lager gebucht wurden.
+
+| *Stand der Nachbestellung*
+|Wähle aus der Dropdown-Liste zwischen *Offen*, *Bestellt* und *Abgeschlossen* aus.
+
+| *Artikel-ID*
+|Artikel-ID eingeben, um Nachbestellungen zu suchen, die einen Artikel mit dieser ID enthalten.
+
+| *Varianten-ID*
+|Varianten-ID eingeben, um Nachbestellungen zu suchen, die eine Variante mit dieser ID enthalten.
+
+| *Variantennumer*
+|Variantennummer eingeben, um Nachbestellungen zu suchen, die eine Variante mit dieser Nummer enthalten.
+
+|*Lieferanten-Artikel-Nr.*
+|Gib die Lieferantenartikelnummer, um Nachbestellungen zu suchen, die diese Information enthalten.
+
+| *Händlerzeichen*
+|Gib ein Händlerzeichen ein, um nach Nachbestellungen zu suchen, in denen dieses Händlerzeichen hinterlegt wurde.
+
+| *Artikeldaten*
+|Suchbegriffe oder Zahlenwerte eingeben, um Nachbestellungen zu suchen, die Artikel mit diesen Daten enthalten. Durchsucht werden folgende Datenfelder: *Artikel-ID*, *Artikelnummer* und *Name*. Beschreibungstexte wie der Artikeltext und der Vorschautext werden nicht durchsucht.
+Zusätzlich den Filter *Auftrags-Typ* auf die Option *Nachbestellung* setzen.
+
+| *Externe Lieferscheinnummer*
+|Gib eine externe Lieferscheinnummer ein, um die Nachbestellung zu suchen, in der der Lieferschein mit dieser Nummer hinterlegt wurde.
+
+| *Status von* und *Status bis*
+|Einen Statusbereich aus den Dropdown-Listen auswählen. Zusätzlich den Filter *Auftrags-Typ* auf die Option *Nachbestellung* setzen, um Nachbestellungen in diesem Statusbereich zu suchen. Möchtest du nur nach Nachbestellungen mit einem bestimmten Status suchen, wähle in beiden Feldern den gleichen Status aus.
+
+| *Eigner*
+|Einen Eigner aus der Liste auswählen. Zusätzlich den Filter *Auftrags-Typ* auf die Option *Nachbestellung* setzen, um Nachbestellungen mit diesem Eigner zu suchen.
+
+| *Datumstyp*
+|Wähle aus der Dropdown-Liste zwischen den Datumstypen *Bestelldatum*, *Abschlussdatum*, *Lieferdatum* oder *Erstellt am* aus und grenze mit den Filtern *Auftragsdatum von* und *Auftragsdatum bis* den Zeitraum ein. Mit dieser Auswahl werden dir dann Nachbestellungen angezeigt, die in dem gewählten Zeitraum bestellt, abgeschlossen oder erstellt wurden.
+
+| *Auftragsdatum von* und *Auftragsdatum bis*
+|Wähle ein Start- und Enddatum aus dem Kalender aus. In Kombination mit dem Filter *Datumstyp* werden dir dann die Nachbestellungen für diesen Zeitraum angezeigt, die bestellt, abgeschlossen oder erstellt wurden.
+
+|====
+
+[.collapseBox]
+.*Übersichtstabelle individualisieren*
+--
+
+Die Übersichtstabelle für Nachbestellungen und Umbuchungen lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Auftrags-Typ
+* Auftrags-ID
+* Bestelldatum
+* Abschlussdatum
+* Sender
+* Empfänger
+* Status
+* Artikelmenge
+* Lieferdatum
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Händlerzeichen / ext. Auftrags-ID
+* Erstellt am
+* Nettowarenwert
+* Zahlungsziel
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:cog[]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:drag_sort_handle[set=plenty]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[#1200]
+== Nachbestellungen automatisieren
+Mithilfe der in plentymarkets verfügbaren Ereignisaktionen kannst du die einzelnen Arbeitsschritte einer Nachbestellung automatisieren. Eine Möglichkeit zur Automatisierung des Bestellscheins wurde bereits im Kapitel <<#720, Bestellschein automatisch erzeugen>> beschrieben. Im Menü *Einrichtung » Aufträge » Ereignisse* stehen dir in den Ereignis-, Filter- und Aktionsgruppen *Bestellwesen* weitere Optionen zur Automatisierung einzelner Arbeitsschritte der Nachbestellung zur Verfügung. +
+
+Genauere Informationen zu diesen Einstellungsmöglichkeiten findest du auf der Handbuchseite <<automatisierung/ereignisaktionen#, Ereignisaktionen>>. Arbeitest du zum ersten Mal mit den Ereignisaktionen, findest du genauere Informationen zum Anlegen von Ereignisaktionen im Kapitel <<automatisierung/ereignisaktionen#100, Neue Ereignisaktion anlegen>>.

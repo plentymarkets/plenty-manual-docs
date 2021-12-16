@@ -1,0 +1,96 @@
+= Paketnummern von Versanddienstleistern importieren
+:lang: de
+:keywords: ElasticSync, Import, Aufträge, Best Practice, automatisiert, Paketnummern, Dienstleister
+:position: 110
+:url: daten/daten-importieren/elasticsync-best-practices/best-practices-elasticsync-paketnummern-fulfillment
+:id: NG7LSRE
+:author: team-fulfillment
+
+[#import-paketnummern]
+== Paketnummern von Versanddienstleistern importieren
+
+In diesem Beitrag wird beschrieben, wie ihr mit dem *Import-Tool* Paketnummern von Aufträgen, die ihr von einem Versanddienstleister abwickeln lasst, in euer plentymarkets System importieren könnt. In der Regel stellt euch der Versanddienstleister eine .csv- oder .txt-Datei zur Verfügung, in der die Auftrags-ID sowie die Paketnummer enthalten sind.
+
+=== Erstellen des Imports über das Import-Tool
+
+Für den Import von Paketnummern legt ihr unter *Daten » Import* einen eigenen Import vom Typ *Auftrag* an.
+
+[TIP]
+.Neuen Import anlegen
+====
+Für die reibungslose Zusammenarbeit mit eurem Versanddienstleister empfehlen wir, einen separaten Import für den Import von Paketnummern anzulegen und ihn ausschließlich für diesen Zweck zu nutzen. Wenn ihr die unten beschriebenen Felder einem bestehenden Import hinzufügt, kann es leicht zu falschen Zuordnungen und damit zu Fehlfunktionen kommen.
+====
+
+* Der Abgleich muss zwingend über die *Auftrags-ID* erfolgen. Weitere Abgleichfelder müssen nicht eingestellt werden.
+
+* Für die Paketnummer fügt Ihr dann eine neue *Zuordnung* hinzu. Als Zuordnungsfeld muss das Feld *Paketnummer* sowie eine Option für das  *Versandpaket* ausgewählt werden.
+
+* Innerhalb der Zuordnung *Standardpaket* den Namen der Spalte auswählen, deren Werte aus der Quelldatei importiert werden sollen.
+
+* Im Bereich *Einstellungen* wählt ihr die *Quelle*, über die ihr die Datei vom Versanddienstleister importiert.
+
+* Einstellungen *speichern*.
+
+Nachdem ihr die Einstellungen vorgenommen und gespeichert habt, solltet ihr über das Menü *Daten » Import » Tab: Abgleich* zuerst den Import testen. Nach erfolgreichem Import der *Paketnummer* wird diese im Reiter *Einstellungen* des jeweiligen Auftrags angezeigt.
+
+[#sync-datei-vorlage-importieren]
+== Vorlage für die Importdatei importieren
+
+Um dir die Arbeit zu erleichtern, haben wir eine Importvorlage für den Import von Paketnummern bereits für dich vorbereitet. Du kannst die Importdatei einfach im Menü *Daten » Import*  importieren.
+
+[#sync-datei-vorlage-herunterladen]
+=== Vorlage für die Importdatei herunterladen
+
+Lade die Importvorlage über den folgenden Link herunter: link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/ElasticSync_BestPractice/Paketnummernimport.json.zip[Vorlage für Importdatei herunterladen^]{nbsp}icon:external-link[].
+
+Bitte lies dir auf der Handbuchseite <<daten/daten-importieren/ElasticSync#, Import-Tool nutzen>> das Kapitel zum <<daten/daten-importieren/ElasticSync#1640, Import und Export>> durch. Dort wird beschrieben, wie du eine Importdatei importierst.
+
+Beachte die folgenden Hinweise:
+
+* Du wirst beim Import eine Fehlermeldung erhalten, dass der Mandant von deinem Mandanten abweicht. Das liegt daran, dass wir die Importdatei in unserem Testsystem erstellt haben. Diese Fehlermeldung kannst du ignorieren.
+* Nachdem du den Import ausgeführt hast, klicke auf *Suchen* in der Übersicht und öffne den Import.
+
+[#csv-datei-versanddienstleister-hochladen]
+=== CSV-Datei des Versanddienstleisters hochladen
+
+Öffne nun den Import und lade im Bereich *Quelle* die CSV-Datei des Versanddienstleisters hoch.
+
+.Datenquelle
+image::daten/daten-importieren/assets/BP-Paketnummern-Quelle-Dateiname.png[]
+
+*_Hinweis:_* Aktuell ist es nur möglich, CSV-Dateien über den manuellen Upload hochzuladen. Wenn du .txt-Dateien hochladen möchtest, musst du diese auf einem Webspace hochladen.
+
+*_Wichtig:_* Die Einstellung bezüglich der *Kopfzeile* ist entscheidend. Öffne vor dem Import die CSV-Datei des Dienstleisters und prüfe, ob diese eine Kopfzeile enthält, also ob die Datei Spaltenüberschriften hat. Wenn eine Kopfzeile enthalten ist, musst du einen Haken bei der Option *Kopfzeile enthalten* setzen.
+
+.Kopfzeile vorhanden?
+image::daten/daten-importieren/assets/BP-Paketnummern-Kopfzeile.png[]
+
+[.subhead]
+Mögliche Szenarien für den Import mit und ohne Kopfzeile:
+
+* Wenn die Datei eine Kopfzeile enthält, du den Haken aber nicht setzt, würde eine Fehlermeldung beim Abgleichen der Paketnummern erscheinen.
+
+* Wenn die Datei keine Kopfzeile enthält, du den Haken aber setzt, würde der erste Auftrag ignoriert werden, da der Abgleich dann erst ab der zweiten Zeile erfolgen würde.
+
+[#csv-datei-automatisch-abgleichen]
+=== CSV-Datei automatisch abgleichen
+
+Einige Versanddienstleister laden die Datei mit den Paketnummern auf einem FTP-Server hoch. Du kannst also statt die Datei manuell hochzuladen als Quelle auch *FTP* wählen und ein *Intervall* einstellen. Anhand dieses Intervalls wird der Import dann automatisch ausgeführt.
+
+Die Zugangsdaten für den FTP-Server sowie weitere Möglichkeiten bezüglich der Datenübergabe erhältst du von deinem Versanddienstleister.
+
+[#abgleich-auftragsid]
+=== Abgleich der Auftrags-ID
+
+Wie bereits weiter oben beschrieben, erfolgt der Abgleich ausschließlich über die Auftrags-ID. Damit es nicht zu Fehlern führt, musst du unbedingt im Bereich *Abgleich* des Imports wählen, in welcher Spalte der CSV-Datei deines Dienstleister die Auftrags-ID steht.
+
+.Spalte der Auftrags-ID
+image::daten/daten-importieren/assets/BP-Paketnummern-AuftragsID-andere-Spalte.png[]
+
+[#versandpaket-waehlen]
+=== Versandpaket wählen
+
+In diesem Import musst du das Ziel der importierten Paketnummern wählen, damit diese im Versandpaket gespeichert werden. Wähle also aus der Dropdown-Liste das Versandpaket, damit die Paketnummer diesem zugeordnet werden kann.
+
+.Versandpaket wählen
+image::daten/daten-importieren/assets/BP-Paketnummern-Versandpaket.png[]

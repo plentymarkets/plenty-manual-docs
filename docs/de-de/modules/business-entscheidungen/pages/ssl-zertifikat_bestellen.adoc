@@ -1,0 +1,453 @@
+= SSL-Zertifikate
+:lang: de
+:keywords: SSL, SSL, SSL, SSL-Zertifikat, SSL-Zertifikat, SSL-Zertifikat, SSL-Zertifikate, SSL-Zertifizierung, Zertifizierungsstelle, Zertifizierungsstellen, AlwaysOn, DigiCert, CertCenter, Comodo, DV, OV, EV, https
+:position: 50
+:url: business-entscheidungen/systemadministration/ssl-zertifikat_bestellen
+:id: LAF1PEI
+:author: team-cloud
+
+////
+zuletzt aktualisiert am 16.07.2021
+////
+
+Ein SSL-Zertifikat dient dazu, deine Website zu verschlüsseln und gewährleistet eine sichere Verbindung zu deiner Website und deinem Onlineshop.
+Du benötigst ein SSL-Zertifikat für bestimmte Marktplätze und zum Beispiel für die Zertifizierung mit Trusted Shops.
+Dass du ein SSL-Zertifikat verwendest, ist daran erkennbar, dass deine Website über _https_ erreichbar ist.
+
+plentymarkets enthält einen Assistenten, der dir bei der Bestellung und Verwaltung deines SSL-Zertifikats unterstützt.
+Beachte, dass solche Aufgaben normalerweise von einem _Systemadministrator_ durchgeführt werden.
+Diese Seite ist recht technisch, da sie als Referenz für Systemadministratoren dient und ihnen hilft, ihre Administratoraufgaben in plentymarkets zu erledigen.
+
+[#100]
+== Welche SSL-Zertifikate stehen zur Auswahl?
+
+SSL-Zertifikate werden von unabhängigen Zertifizierungsstellen ausgestellt.
+plentymarkets bietet verschiedene Arten von SSL-Zertifikaten an:
+
+[cols="1,4a"]
+|====
+|Art |Erläuterung
+
+|DV
+|
+* DV = Domain Validation (Domain-Überprüfung).
+** DV Zertifikate sind sehr weit verbreitet.
+** Sie werden nur anhand des Domainnamens verifiziert.
+* günstigstes SSL-Zertifizierungsmodell
+* ausgestellt von DigiCert
+
+|OV
+|
+* OV = Organizational Validation (Unternehmensüberprüfung).
+** OV Zertifikate sind mit einem umfangreicheren Verifizierungsprozess verbunden, bieten aber auch mehr Vertrauen.
+** Die Zertifizierungsstelle verifiziert das Unternehmen.
+Dazu werden Details wie Firmenname, Standort und Adresse mit Angaben aus dem Handelsregister verglichen.
+* mittleres Zertifizierungsmodell
+* ausgestellt von CertCenter
+//zukünftig werden OV und EV auch über DigiCert laufen, d.h. es wird auch möglich sein, sie automatisch zu verlängern (siehe Kapitel Bestellung)
+
+|EV
+|
+* EV = Extended Validation (erweiterte Überprüfung).
+** EV Zertifikate sind mit einem noch umfangreicheren Verifizierungsprozess verbunden, gelten aber als die sicherste und vertrauenswürdigste Lösung.
+** Die Zertifizierungsstelle führt einen vom link:https://cabforum.org/extended-validation/[CA/Browser Forum^]{nbsp}icon:external-link[] festgelegten Verifizierungsprozess durch.
+* sicherste und vertrauenswürdigste Zertifizierungsmodell
+* ausgestellt von CertCenter
+//zukünftig werden OV und EV auch über DigiCert laufen, d.h. es wird auch möglich sein, sie automatisch zu verlängern (siehe Kapitel Bestellung)
+|====
+
+[#200]
+[discrete]
+=== Aufschlüsselung der Preise
+
+[cols="2,1,1,1,1", options="header"]
+|====
+|
+^|Comodo InstantSSL +
+OV
+^|Comodo Positive +
+EV
+^|AlwaysOnSSL +
+DV
+^|RapidSSL Standard +
+DV
+
+|Laufzeit
+^|12 Monate
+^|12 Monate
+^|3 Monate
+^|12 Monate
+
+|Mtl. Gebühr
+^|2,- €
+^|2,- €
+^|2,- €
+^|2,- €
+
+|Kosten des SSL-Zertifikats
+^|118,80 €
+^|348,- €
+^|0,- €
+^|35,70 €
+
+|Einmalige Einrichtungsgebühr
+^|29,- €
+^|99,- €
+^|0,- €
+^|0,- €
+|====
+[.small]#Alle Preise sind in netto angegeben.#
+
+[#300]
+== Voraussetzungen für das Buchen eines SSL-Zertifikats
+
+[#400]
+=== Domain
+
+Die Domain, für die das SSL-Zertifikat bestellt werden soll, muss eine Primärdomain sein.
+Die Domain muss also im Menü *Einrichtung » Assistenten » Grundeinrichtung » Domains-Assistenten* als Primärdomain genannt werden.
+
+*_Tipp_*: Schaue dir deine Domains mit der Tabellenansicht an, um zu erkennen, welche die Primärdomain ist.
+
+.Domain-Assistent in Tabellenansicht
+image::business-entscheidungen/systemadministration/assets/hauptdomain.png[]
+
+Wenn du ein SSL-Zertifikat für eine andere Domain einrichten möchtest, musst du <<business-entscheidungen/systemadministration/domains#210a, diese Domain zunächst als Hauptdomain festlegen>>.
+
+Die Bestellung eines SSL-Zertifikats ist nicht möglich, wenn die entsprechende Domain als extern abgespeichert ist (also auf eine externe IP-Adresse verweist).
+
+image::business-entscheidungen/systemadministration/assets/extern-domain.png[]
+
+[#500]
+=== Aktiviertes Autoscaling
+
+Vereinzelt gibt es Systeme, die nicht auf link:https://aws.amazon.com/de/autoscaling/[Autoscaling^]{nbsp}icon:external-link[] (AS) umgestellt wurden.
+In den meisten Fällen liegt das daran, dass die Domain nicht bei plentymarkets gehostet wird.
+Aus diesem Grund muss die Person, der die Domain gehört, die DNS-Einstellungen der Domain manuell anpassen.
+Eine weitere mögliche Ursache ist, dass eine Domain erstmalig zu einem Mandanten hinzugeführt wurde.
+Diese Mandanten werden dann nicht automatisch auf Autoscaling umgestellt.
+Der plentymarkets Support muss Autoscaling manuell aktivieren.
+
+[#600]
+[discrete]
+==== Woran erkenne ich aktiviertes AS?
+
+Ob für das jeweilige System AS aktiviert ist oder nicht erkennt man anhand der dargestellten DNS-Einstellungen im Domain Assistenten.
+
+[.instruction]
+Autoscaling-Status prüfen:
+
+. <<business-entscheidungen/systemadministration/domains#50, Rufe den Domain-Assistenten auf>> und navigiere zum Schritt *Aktuelle DNS Einstellungen*. +
+*_Hinweis_*: Dieser Schritt wird nur angezeigt, wenn du im Schritt <<business-entscheidungen/systemadministration/domains#100, Domain Typ>> die Option *Neue, extern gehostete, Domain hinterlegen* gewählt hast.
+. Prüfe in der Spalte *DNS Record Type*, ob für die Domain ein CNAME-Eintrag vorhanden ist. +
+→ Wenn ein CNAME-Eintrag vorhanden ist, ist Autoscaling aktiviert.
+Ein SSL-Zertifikat kann bestellt werden. +
+→ Wenn kein CNAME-Eintrag vorhanden ist, sondern nur zwei A-Records, ist Autoscaling nicht aktiviert.
+. Wenn Autoscaling nicht aktiviert ist, bitte den plentymarkets Support über das link:https://forum.plentymarkets.com/t/46996/[plentymarkets Forum^]{nbsp}icon:external-link[], Autoscaling zu aktivieren.
+
+Beispiel der dargestellten DNS-Einstellungen bei einem System auf AS:
+
+image::business-entscheidungen/systemadministration/assets/aktuelle-dns-einstellungen.png[]
+
+[#700]
+=== Bei Subdomains: Vorhandene Parent-Domain
+
+Wenn du ein SSL-Zertifikat für eine Subdomain bestellen möchtest, muss auch die Parent-Domain im Assistenten existieren.
+Auch die Beziehung zwischen Domain und Subdomain muss im Assistenten korrekt eingetragen sein.
+<<business-entscheidungen/systemadministration/domains#50, Prüfe zunächst die Einstellungen im Assistenten>>.
+
+Falls die Parent-Domain aus dem Assistenten entfernt wurde, lege die Parent-Domain erneut an.
+Wenn diese Parent-Domain nicht auf plentymarkets zeigen soll, sondern z.B. auf Shopware, versehe die Parent-Domain mit einem externen A-Record, indem du eine <<business-entscheidungen/systemadministration/domains#210a, Systemverknüpfung erstellst>>.
+
+[#800]
+=== Bei externen Domains: DNS-Einstellungen
+
+Die Validierung der SSL-Bestellung erfolgt auf Dateiebene.
+Das bedeutet, dass die Domain, für die das Zertifikat bestellt werden soll, zwingend korrekt erreichbar sein muss.
+
+* Die beim <<business-entscheidungen/systemadministration/domains#160, externen Provider gespeicherten DNS-Einstellungen>> müssen mit den DNS-Einstellungen im Assistenten identisch sein. +
+→ Prüfe die Einstellungen im Service-Bereich deines Domain-Providers.
+* Für die Domain, für die das SSL-Zertifikat bestellt werden soll, darf kein IPv6-Eintrag (AAAA-Record) existieren. +
+→ Prüfe die Einstellungen im Service-Bereich deines Domain-Providers.
+* Für die Domain, für die das SSL-Zertifikat bestellt werden soll, müssen eventuell vorhandene link:https://de.wikipedia.org/wiki/DNS_Certification_Authority_Authorization[CAA-Records^]{nbsp}icon:external-link[] die Bestellung des gewünschten Zertifikats zulassen. +
+→ Prüfe die Einstellungen im Service-Bereich deines Domain-Providers.
+Der notwendige CAA-Record lautet wie folgt:
+
+[[table-dns-example]]
+[cols="1,1,2"]
+|====
+|DNS Source |DNS Record Type |DNS Target
+
+|@
+|CAA
+|issue digicert.com
+|====
+
+[#900]
+=== 301-Weiterleitungen für '/' entfernen
+
+Im Domain-Assistent der jeweiligen Domain darf <<business-entscheidungen/systemadministration/domains#domain-mailserver, keine 301-Weiterleitung für die Startseite>> angelegt sein, wie sie im nachfolgenden Beispiel dargestellt ist:
+
+`/;Ziel-URL;301;L`
+
+`/*;Ziel-URL;301;L`
+
+`^/*;Ziel-URL;301;L`
+
+[#1000]
+=== Keine manuell angelegte Sub-Domain für www.
+
+Eine manuell angelegte Sub-Domain für `www.deineDomain.tld` verhindert die Auslieferung des SSL-Zertifikats, da sie einen doppelten DNS-Eintrag für `www` erzeugen würde.
+Falls eine solche Sub-Domain manuell angelegt wurde, muss diese gelöscht werden.
+
+[#1100]
+=== Checkliste
+
+Bereit, ein SSL-Zertifikat zu bestellen?
+Gehe diese Checkliste durch, um sicherzustellen, dass du alle <<business-entscheidungen/systemadministration/ssl-zertifikat_bestellen#300, Voraussetzungen>> erfüllt hast.
+
+[%interactive]
+
+* [ ] Domain ist nicht gekündigt
+* [ ] Domain ist Hauptdomain
+* [ ] Domain ist auf AutoScaling (AS) umgestellt
+* [ ] Bei Sub-Domains: existierende Parent-Domain
+* [ ] DNS-Einstellungen gem. Angaben im Domain-Assistenten
+* [ ] Kein AAAA-Record für die Domain, für die das Zertifikat bestellt werden soll
+* [ ] Kein negativer CAA-Record
+* [ ] Keine 301-Weiterleitung auf der Startseite
+* [ ] Keine manuell angelegte Sub-Domain für www.
+
+[#1200]
+== Bestellen eines SSL-Zertifikats
+
+Nachdem du alle <<business-entscheidungen/systemadministration/ssl-zertifikat_bestellen#300, Voraussetzungen>> erfüllt hast, kannst du ein SSL-Zertifikat bestellen.
+Die Bestellung bei der Zertifizierungsstelle führt plentymarkets in deinem Auftrag durch und stellt dir den Kaufbetrag und die monatlichen Bereitstellungskosten in Rechnung.
+
+[WARNING]
+.Nur ein SSL-Zertifikat für die Domain
+====
+Eine Domain kann nur ein SSL-Zertifikat haben.
+Beispiel: Wenn deine Domain bereits ein SSL-Zertifikat besitzt, und du dann ein neues Zertifikat bestellst, wird das bestehende Zertifikat durch das neue überschrieben.
+====
+
+[#1240]
+=== SSL-Assistent durchlaufen
+
+. Öffne das Menü *Einrichtung » Assistenten » Grundeinrichtung*.
+. Klicke auf den Assistenten *SSL-Verwaltung*. +
+→ Deine SSL-Konfigurationen werden hier angezeigt.
+. Klicke auf eine der SSL-Konfigurationen, um ihre Einstellungen zu öffnen.
+. Gehe die einzelnen Schritte des Assistenten durch.
+Beachte <<table-setps-ssl-assistant>>.
+. *_OV und EV Zertifikate_*: Nachdem du die Bestellung im Assistenten aufgegeben hast, musst du noch einen <<business-entscheidungen/systemadministration/ssl-zertifikat_bestellen#1260, Validierungsprozess abschließen>>.
+
+image::business-entscheidungen/systemadministration/assets/ssl-assistent.png[]
+
+.Schritte des SSL-Assistenten
+[[table-setps-ssl-assistant]]
+[cols="1,4"]
+|====
+|Einstellung |Erläuterung
+
+2+| *Schritt: Zertifikat*
+
+| *Aktuelles SSL*
+|Dieser Bereich ist rein informativ.
+Hier siehst du z.B., welches Zertifikat du aktuell verwendest und wann es abläuft.
+
+| *Wählen Sie ein Zertifikat aus*
+|Wähle <<business-entscheidungen/systemadministration/ssl-zertifikat_bestellen#100, das gewünschte SSL-Zertifikat>> aus.
+
+| *Automatische Verlängerung*
+|Aktiviere diese Option (icon:toggle-on[role="blue"]), wenn das SSL-Zertifikat am Ende seiner Laufzeit automatisch verlängert werden soll.
+
+*_Hinweis_*: OV- und EV-Zertifikate können nicht automatisch verlängert werden.
+Kurz vor Ablauf deines Zertifikats erhältst du eine Benachrichtigung, die dich daran erinnert, ein neues Zertifikat zu bestellen.
+
+2+| *Schritt: Kontaktdaten*
+
+| *Kontaktperson*
+|Gib Informationen zu einer Kontaktperson ein.
+Diese Person muss zur Durchführung des Validierungsprozesses berechtigt sein, z.B. CIO oder CEO.
+
+| *Unternehmenskontakt*
+|Gib Informationen zu deiner Firma ein.
+Die Firmendaten müssen mit den Angaben im Handelsregister übereinstimmen.
+
+2+| *Schritt: Bestätigung*
+
+|
+|Lese eine Zusammenfassung deiner gewählten Dienstleistungen.
+Beim Abschließen des Assistenten bestätigst du, dass du diese kostenpflichtigen Leistungen buchen möchtest.
+
+2+| *Schritt: Zusammenfassung*
+
+|
+|Dieser Schritt ist rein informativ.
+|====
+
+[#1260]
+==== OV und EV Zertifikate: Validierungsprozess nach der Bestellung
+
+OV und EV Zertifikate sind mit einem umfangreicheren Verifizierungsprozess verbunden.
+Nach der Bestellung erhältst du eine Bestätigungs-E-Mail (SSL Subscriber Agreement) von Sectigo.
+Folge den Anweisungen in der E-Mail, um den Validierungsprozess abzuschließen.
+
+Grundsätzlich gibt es zwei Vorgehensweisen:
+
+* Folge dem Link in der E-Mail.
+Du wirst auf die Sectigo Website weitergeleitet.
+Gib dort den "verification code" ein, den du in der E-Mail erhalten hast. Folge den restlichen Schritten auf dem Bildschirm.
+Während des Validierungsprozesses wirst du einen Anruf von Sectigo erhalten.
+* Lade die in der E-Mail aufgeführten Dokumente herunter (Certificate Request Form & SSL Subscriber Agreement).
+Drucke die Dokumente aus, unterschreibe sie und schicke sie an Sectigo zurück.
+Während des Validierungsprozesses wirst du einen Anruf von Sectigo erhalten.
+
+Beachte, dass es einige Zeit dauern kann, bis alle Schritte abgeschlossen sind.
+Lass dir also genug Zeit, um die Formulare zu unterschreiben, an Sectigo zurückzuschicken, einen Anruf von Sectigo zu erhalten und den Validierungsprozess abzuschließen.
+
+[IMPORTANT]
+.Bist du befugt, den Prozess abzuschließen?
+====
+Der Validierungsprozess muss von einer berechtigten Person abgeschlossen werden, z.B. CIO oder CEO.
+Rechtlich bindende Dokumente müssen während des Prozesses von einer zeichnungsberechtigten Person unterschrieben werden.
+====
+
+[#1300]
+== Verlängern eines SSL-Zertifikats
+
+Du wirst kurz vor Ablauf deines SSL-Zertifikats benachrichtigt.
+Die Benachrichtigung enthält weitere Informationen und Handlungsanweisungen.
+Du kannst aber auch jederzeit selbst schauen, wann dein SSL-Zertifikat abläuft und ob dein Zertifikat automatisch verlängert wird.
+
+image::business-entscheidungen/systemadministration/assets/assistent-zusammenfassung.png[]
+
+[.instruction]
+Restlaufzeit prüfen:
+
+. Öffne das Menü *Einrichtung » Assistenten » Grundeinrichtung*.
+. Klicke auf den Assistenten *SSL-Verwaltung*. +
+→ Deine SSL-Konfigurationen werden hier angezeigt.
+. Klicke auf eine der SSL-Konfigurationen, um ihre Einstellungen zu öffnen.
+. Navigiere zum Schritt *Zusammenfassung*.
+. Klappe das Feld *Zertifikat* auf (icon:chevron-down[role="darkGrey"]).
+. In der Zeile *Aktiv bis* findest du das Datum, an dem das Zertifikat abläuft.
+. In der Zeile *Zertifikat automatisch verlängern* siehst du *Ja* oder *Nein*.
+. <<business-entscheidungen/systemadministration/ssl-zertifikat_bestellen#1200, Bestelle das Zertifikat bei Bedarf neu>>.
+
+[#1400]
+== Fragen und Antworten
+
+[.collapseBox]
+.*Für welche Domain wird ein SSL-Zertifikat bestellt?*
+--
+
+Du bestellst das SSL-Zertifikat für deine Primärdomain, also die Domain, die im Menü *Einrichtung » Assistenten » Grundeinrichtung » Domains-Assistenten* als Primärdomain eingestellt ist.
+Wenn du ein SSL-Zertifikat für eine andere Domain einrichten möchtest, musst du <<business-entscheidungen/systemadministration/domains#210a, diese Domain zunächst als Hauptdomain festlegen>>.
+
+Eine externe Domain kannst du beim externen Hoster belassen und <<business-entscheidungen/systemadministration/domains#160, die DNS-Einstellungen bei diesem externen Hoster speichern>>.
+Das SSL-Zertifikat muss jedoch systemnah liegen, also auch wenn die Domain bei einem anderen Hoster liegt, erfolgt die Verschlüsselung erst nach der Weiterleitung über die IP-Adresse bei plentymarkets im System.
+Daher muss das SSL-Zertifikat bei plentymarkets gebucht werden, da plentymarkets aus Sicherheitsgründen keine externen Zertifikate zulässt.
+
+Für gekündigte Domains sowie für Start-up-Domains und Testdomains, also Domains mit den Bestandteilen _plenty-testdrive.eu_, _plentymarkets-x1.com_ usw., können keine SSL-Zertifikate bestellt werden.
+
+--
+
+[.collapseBox]
+.*Was passiert, wenn ich die Hauptdomain ändere?*
+--
+
+SSL-Zertifikate sind domaingebunden.
+Das bedeutet, dass beispielsweise bei Umstellung der Hauptdomain das aktuelle Zertifikat inaktiv geschaltet wird, da eine neue Hauptdomain ohne bestelltes Zertifikat vorliegt.
+Inaktiv bedeutet nicht gelöscht - Sollte die Hauptdomain erneut auf die Domain umgestellt werden, die bereits ein SSL-Zertifikat besaß, kann dieses wieder aktiviert werden, sofern das SSL-Zertifikat noch gültig ist.
+
+--
+
+[.collapseBox]
+.*Kann ich das SSL-Zertifikat bei einem Domain-Umzug mitnehmen?*
+--
+
+SSL-Zertifikate können bei einem Domainumzug zu plentymarkets *nicht* mitgenommen werden.
+Aufgrund der technischen Gegebenheiten ist die Bestellung nur innerhalb unserer link:https://de.wikipedia.org/wiki/Public-Key-Infrastruktur[Public-Key-Infrastruktur^]{nbsp}icon:external-link[] möglich.
+Dies gilt für *_beide Richtungen_*.
+Sowohl von *_extern zu plentymarkets_*, als auch von *_plentymarkets zu extern_*.
+Ein über plentymarkets gebuchtes SSL-Zertifikat muss *_systemnah_* liegen und kann bei einem Domaintransfer nicht mitgenommen werden.
+Ein Export der Zertifikatsdaten (geheimer Private-Key) ist *nicht* möglich.
+Auch ein "Transfer" eines SSL-Zertifikats von einer Domain(-ID) auf eine andere ist nicht möglich.
+
+--
+
+[.collapseBox]
+.*Brauche ich ein Hostmaster-Postfach?*
+--
+
+Nein, für die Bestellung eines SSL-Zertifikats über das Backend wird kein Postfach `hostmaster@deineDomain.tld` vorausgesetzt.
+
+--
+
+[.collapseBox]
+.*Können Wildcard-SSL-Zertifikate ausgestellt werden?*
+--
+
+Nein, das Ausstellen von sogenannten Wildcard-SSL-Zertifikaten ist in unserer Infrastruktur nicht möglich.
+
+--
+
+[.collapseBox]
+.*Wie lange dauert es, bis mein SSL-Zertifikat ausgestellt wird?*
+--
+
+Wenn dein SSL-Zertifikat erfolgreich bestellt wurde, erhältst du eine Erfolgsmeldung:
+
+image::business-entscheidungen/systemadministration/assets/assistent-abgeschlossen.png[]
+
+DV Zertifikate werden nach ca. 2-3 Minuten aktiv.
+
+--
+
+[.collapseBox]
+.*Mein SSL-Zertifikat wird nicht ausgestellt oder ich erhalte eine Fehlermeldung im Assistenten. Was soll ich tun?*
+--
+
+Wenn dein DV Zertifikat nach ca. 2-3 Minuten nicht ausgestellt wird, dann:
+
+* öffne das Notification-Center (icon:bell[role="darkGrey"]) im plentymarkets Backend.
+In manchen Situationen erhältst du eine Nachricht, die dir die Ursache des Problems nennt.
+Zum Beispiel, dass du keine Telefonnummer eingegeben hast.
+* Wenn du das Problem nicht selbst lösen kannst oder wenn du eine Fehlermeldung im Assistenten erhalten hast, dann wende dich an das link:https://forum.plentymarkets.com/c/core[plenty-Core-Team im Forum^]{nbsp}icon:external-link[].
+
+--
+
+////
+[.collapseBox]
+.*Ich habe mein AlwaysOn oder COMODO Zertifikat bereits vor mehreren Stunden bestellt, meine Seite wird aber noch immer nicht als sicher eingestuft - Was kann ich machen?*
+--
+
+*Option 1:* Nachdem die Bestellung im Backend der Status "Abgeschlossen" erhalten hat muss der lokale Browser-Cache geleert werden (link:https://forum.plentymarkets.com/t/loeschen-des-lokalen-dns-cache/64288[Löschen des lokalen Browser- und/oder DNS-Cache]{nbsp}icon:external-link[]), damit das zwischengespeicherte Zertifikat aktualisiert wird.
+
+*Option 2:* Evtl. liegt bei der Erreichbarkeit deiner Domain ein Problem vor und das Zertifikat kann deswegen nicht korrekt ausgeliefert werden.
+Du kannst auf der nachfolgenden Seite prüfen, ob eine Installation von LetsEncrypt für deine Domain möglich ist: link:https://letsdebug.net/[https://letsdebug.net/]{nbsp}icon:external-link[] +
+*Validation method: HTTP-01*. Falls dort eine Fehlermeldung ausgegeben wird kannst du uns diese gern im Forum mitteilen, damit wir den Sachverhalt prüfen können.
+
+--
+
+[.collapseBox]
+.*Ich möchte von COMODO auf AlwaysOn umsteigen - was ist zu beachten?*
+--
+
+Im Falle einer Bestellung von AlwaysOn bei einem bereits aktiven SSL-Zertifikat von COMODO (alias RapidSSL), wird das COMODO-Zertifikat durch das von AlwaysOn ersetzt.
+Das "alte" Zertifikat wird jedoch nicht gelöscht, sondern auf inaktiv geschaltet.
+Das link:https://forum.plentymarkets.com/c/core[plenty-Core-Team]{nbsp}icon:external-link[] kann das Zertifikat innerhalb des Gültigkeitszeitraums reaktivieren.
+Es kann sein, dass die Domain für maximal eine Stunde als "nicht sicher" eingestuft wird, wenn das AlwaysOn-Zertifikat gerade erst bestellt wurde, da dies nach der Bestellung angefordert, generiert und installiert werden muss. Nachdem die Bestellung im Backend der Status "Abgeschlossen" erhalten hat muss der lokale Browser-Cache geleert werden, damit das zwischengespeicherte Zertifikat aktualisiert wird.
+
+--
+
+[.collapseBox]
+.*Der Status der Bestellung steckt fest bei "challengeSolved". Wie kann ich dieses Problem beheben?*
+--
+
+Prüfe, ob <<business-entscheidungen/systemadministration/ssl-zertifikat_bestellen#300, alle genannten Voraussetzungen>> zum erfolgreichen Bestellen eines SSL-Zertifikats erfüllt sind.
+Wenn die Voraussetzungen alle erfüllt sind, aber der Status weiterhin in "challengeSolved" festhängt, wende dich an link:https://forum.plentymarkets.com/c/core[das plenty-Core-Team im Forum]{nbsp}icon:external-link[].
+
+--

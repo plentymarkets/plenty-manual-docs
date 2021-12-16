@@ -1,0 +1,288 @@
+= Setting up processes
+:lang: en
+include::{includedir}/_header.adoc[]
+:author: team-mobile
+:keywords: Setting up processes, process setup, process settings, process element, import process
+:position: 10
+:url: automation/processes/setting-up-processes
+:id: ELDP3TZ
+
+Processes allow you to automate many complex tasks in plentymarkets.
+
+Take a look at the following video to learn the basic steps of creating and running a process.
+
+[.collapseBox]
+.*Video tutorial*
+--
+video::223469331[vimeo]
+--
+
+[IMPORTANT]
+.Install plentyBase
+====
+You need <<automation/processes/installing-plentybase#, plentyBase>> to create and run processes in the plentymarkets back end. You can find the installation files for plentyBase in the link:https://marketplace.plentymarkets.com/en/plugins/integration/plentybase_5053[plentyMarketplace^]{nbsp}icon:external-link[].
+====
+
+[#10]
+== Parts of a process
+
+The following process elements are available:
+
+* Work steps
+* Control elements
+* Procedures
+* Sub-procedures
+
+.Diagram of a simple process
+image::automation/processes/assets/process.png[]
+
+[#20]
+=== What are work steps?
+
+Every process is composed of one or more <<automation/processes/work-steps#, work steps>>. Work steps are the core of your processes. You’ll use work steps to define the tasks and sequences that you’d like to automate. Depending on which type of work step you use, you’ll either focus on an individual order, multiple orders or incoming items. You can add an unlimited number of work steps to your process. The following work steps are available:
+
+* <<automation/processes/work-steps#order-group-processing, Order group processing>>
+* <<automation/processes/work-steps#single-order-processing, Single order processing>>
+* <<automation/processes/work-steps#incoming-items, Incoming items>>
+
+[#30]
+=== What are procedures?
+
+<<automation/processes/procedures#, Procedures>> are added to a work step. Use procedures to specify which actions should be performed when the process runs.
+
+[#40]
+=== What are control elements?
+
+<<automation/processes/procedures#_control_elements, Control elements>> are a special type of procedure. They control how work steps, procedures and sub-procedures behave within a process. By adding control elements to a work step, you can control how individual procedures interact with each other. For example, you can repeat procedures, jump to a specific point within a work step or even create conditions that have to be met before a procedure is carried out.
+
+[#50]
+=== What are sub-procedures?
+
+<<automation/processes/sub-procedures#, Sub-procedures>> are added to a procedure. Use sub-procedures to specify which actions should be performed within the scope of a procedure. For example, use the sub-procedure *Print* to print the documents that were created by the procedure.
+
+[#180]
+== Controlling the visibility of processes
+
+The folders in the menu *Setup » Processes* are only visible to users who are allowed to edit the processes within those folders. <<table-visibility-processes>> explains which orders are available to users.
+
+[discrete]
+=== Assigning rights for back end users
+
+:rights-purpose: see and run processes
+:right-one: pass:quotes[*Processes > Edit*]
+:right-two: pass:quotes[*Processes > Show*]
+
+include::_includes:page$rights.adoc[]
+
+[[table-visibility-processes]]
+.Folder structure for processes
+[cols="1,3"]
+|====
+|Folder |Explanation
+
+| *Mine*
+|Processes that belong to whichever user is currently logged in.
+
+| *Others*
+|Other people’s processes. The folder is only visible to *Admin* users.
+
+| *Per role*
+|Processes that are visible to all users who belong to a specific role. If the user is not assigned to any roles, this folder is shown. *Admin* users can see the processes for all roles.
+
+| *Global*
+|Processes that are available for all user accounts.
+|====
+
+
+[#65]
+== Creating a process
+
+Go to *Setup » Processes* to create and manage processes. Proceed as described below to create a process.
+
+[.instruction]
+Creating a process:
+
+. Go to *Setup » Processes » New process*. +
+*_Note:_* If the menu *Setup » Processes* is not visible, install link:https://marketplace.plentymarkets.com/en/plugins/integration/plentybase_5053[plentyBase^]{nbsp}icon:external-link[].
+. Carry out the desired settings. Pay attention to the explanations given in <<table-process-settings>>.
+. *Save* the settings. +
+→ The process will appear in the menu tree.
+
+[[table-process-settings]]
+.Creating a process
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Name*
+|Enter a name for the process. +
+*_Tip:_* Use a unique and descriptive name so that users can easily understand what the process does.
+
+| *Visibility*
+|Decide which group the process should be visible for. Visible means that the process will appear in the *Processes* menu and that it can be started from there. +
+*Global* = The process is visible for everyone. +
+*User* = The process is only visible for a specific user. This user is selected from the *User* drop-down list. +
+*Role* = The process is only visible for a specific *role*. This role is selected from the *Role* drop-down list.
+
+| *User*
+|This option is only visible if you selected *User* from the *Visibility* drop-down list. Decide which person the process should be visible for. +
+*_Note:_* *Admin* users are able to see all processes.
+
+| *Role*
+|This option is only visible if you selected *Role* from the *Visibility* drop-down list. Decide which role the process should be visible for. +
+*_Note:_* *Admin* users are able to see all processes.
+
+| *Can be changed*
+|Decide who should be allowed to change the process. +
+Activated = Anyone who is allowed to see the process is also allowed to edit it. +
+Not activated = Only *Admins* are allowed to edit the process.
+
+| *Warehouse*
+|Select a warehouse. The warehouse with the ID 1 is selected by default.
+
+| *Colour*
+|Decide which colour the process should have in the *Processes* menu.
+|====
+
+[#70]
+=== Adding elements
+
+Once you’ve created a process, you can start adding as many <<automation/processes/work-steps#, work steps>>, <<automation/processes/procedures#, procedures>>, <<automation/processes/sub-procedures#, sub-procedures>> and <<automation/processes/procedures#_control_elements, control elements>> as you want.
+
+[TIP]
+.Use the context menu
+====
+If your process already includes an element, then you can use the context menu to add further elements. Simply right-click on an element and then select the desired option.
+====
+
+[#150]
+=== Dealing with errors
+
+Sometimes processes contain faulty orders, which throw everything off track. If you don’t want such processes to be aborted completely, then you can add specific combinations of procedures and sub-procedures, which guide your process in a different direction. These procedures only run if an error occurs. For example, if you add the procedure *Order* with the two sub-procedures *Change status* and *Add order notes*, then faulty orders will be assigned a new status. In addition, a note will be added to the order.
+
+[#160]
+==== Available procedures in case of error
+
+<<table-error-procedures>> shows the procedures that can run if an error occurs.
+
+[[table-error-procedures]]
+.Available procedures in case of error
+[cols="1,1,3"]
+|====
+|Procedure |Sub-procedure |Explanation
+
+| *Email*
+| *Send*
+|Use the *Email* procedure together with the *Send* sub-procedure to send an email template if an error occurs.
+
+| *Order*
+| *Change status*
+|Changes the status of the faulty order. The status changes to whichever status is selected from the drop-down list. +
+*_Tip:_* The easiest way to find faulty orders is to create a specific status that you exclusively use for errors. In the *Orders* menu, you can then filter all the orders that currently have this status.
+
+| *Order*
+| *Add order notes*
+|Adds a note to the faulty order. +
+*Individual input* = Allows the user to enter a message while running the process. This message is saved as an order note. +
+*Predefined input* = Opens a window. Enter a message into the Message area. This message will automatically be saved for faulty orders while running the process. +
+*None* = Neither an individual note nor a predefined note is saved for faulty orders. Use this option if you only want to save the error message as the order note. +
+*Save error message as additional note* = Place a check mark to save the error message displayed in the process as an order note.
+|====
+
+[#170]
+==== Adding a procedure to deal with errors
+
+Proceed as described below to add a procedure that deals with errors.
+
+[.instruction]
+Adding a procedure to deal with errors:
+
+. Go to *Setup » Processes » [Select folder] » [Select process]*.
+. Right-click on the procedure. +
+*_Tip:_* A grey beetle icon identifies the procedures that can be used to deal with errors. +
+→ The context menu opens.
+. Click on *Add procedure for occurring errors* in the context menu.
+. Select the procedure from the drop-down list.
+. *Save* the settings.
+. Carry out additional settings as desired. +
+→ The procedure is created. Procedures for dealing with errors are outlined in red.
+. *Save* the settings. +
+→ The procedure is created. Procedures for dealing with errors are outlined in red.
+
+[TIP]
+.Visualising errors
+====
+* Procedures that could potentially be set up to deal with errors have a grey bug icon in the top right corner.
+* Procedures that have already been set up to deal with errors have a red bug icon in the top right corner.
+* Click on the bug icon to show or hide procedures that deal with errors.
+* Procedures that deal with errors are outlined in red.
+====
+
+
+[#190]
+== Reusing a process
+
+Copy processes that you’d like to reuse in the same system. Or export processes and then import them into a different system.
+
+[#200]
+=== Copying a process
+
+Proceed as described below to copy a process.
+
+[.instruction]
+Copying a process:
+
+. Go to *Setup » Processes*.
+. Open the process that you want to copy.
+. Click on *Copy process*. +
+→ The *Copy process* window opens.
+. Enter a name for the process.
+. Click on *Copy process*. +
+→ The process will be created. It will open and you can continue editing it further.
+
+[#210]
+=== Exporting a process
+
+We recommend using the export and import functions to exchange processes between different plentymarkets systems. To do so, proceed as described below.
+
+[.instruction]
+Exporting a process:
+
+. Go to *Setup » Processes*.
+. Open the process that you want to export.
+. Click on *Export process*. +
+→ The process will be exported as a ZIP file and saved in the *Downloads* (MAC) or *Documents* (Windows) folder on your computer.
+
+[#220]
+=== Importing a process
+
+You can download processes, e.g. from the link:https://forum.plentymarkets.com/c/suche-biete/prozess-basar[process bazaar, window="_blank"]{nbsp}icon:external-link[] or from certain pages of the plentymarkets manual. Then you can import these processes into your own system.
+
+But keep in mind that you’ll need to modify a few system-specific settings. Watch our playful video to learn how this works.
+
+[.collapseBox]
+.*Video tutorial*
+--
+video::228964827[vimeo]
+--
+
+[.instruction]
+Importing a process:
+
+. Go to *Setup » Processes*.
+. Click on *Import*.
+. Enter a name for the process and click on *Select file*.
+. Select the ZIP file from your computer and click on *Open*. +
+→ The process will be imported. It will open and you can continue editing it further.
+
+[IMPORTANT]
+.System-specific settings will not be imported
+====
+System-specific settings, e.g. printer settings for the *Print* sub-procedure, will not be exported. As such, they will not be imported either. +
+*_Tip:_* It’s easy to check which procedures or sub-procedures were not imported. Simply open the *Processes* menu and click on the newly imported process. The error messages give you the IDs of any procedures and sub-procedures, where you’ll still need to modify the settings.
+====
+
+[#230]
+=== Swapping processes in the process bazaar
+
+You can find the plentymarkets process bazaar by opening up the link:https://forum.plentymarkets.com/c/suche-biete/prozess-basar[processes, window="_blank"]{nbsp}icon:external-link[] category in the plentymarkets forum. This is where sellers can share their processes with others.

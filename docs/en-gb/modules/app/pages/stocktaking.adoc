@@ -1,0 +1,174 @@
+= App stocktaking
+:lang: en
+include::{includedir}/_header.adoc[]
+:author: team-mobile
+:keywords: Stocktacking app, stocktaking mode app, stock app, items in stock app, stock data app
+:position: 50
+:url: app/functions/warehouse-management/stocktaking
+
+In addition to using the functionality in the <<stock-management/taking-stock#, plentymarkets back end>>, you can also take stock using the plentymarkets app. App users must be assigned the <<#300, right to take stock>>. In addition, <<stock-management/setting-up-a-warehouse#800, barcodes must be saved>> for the storage locations in your warehouse. You can activate the stocktaking mode to freeze stock during stocktaking. However, because the new stock data is saved to the variation automatically, activating the stocktacking mode is not mandatory.
+
+[TIP]
+.Hardware for the plentymarkets app
+====
+Check the <<welcome/quick-start/quick-start-system-requirements#400, system requirements page>> of the manual to see current hardware recommendations for stocktaking using the plentymarkets app.
+====
+
+[#100]
+== Preparing app stocktaking
+
+Carry out the settings described below to prepare stocktaking with the plentymarkets app.
+
+[TIP]
+.Labelling storage locations
+====
+To take stock with the plentymarkets app, you must assign barcodes to your storage locations. You can speed up the stocktaking process by <<stock-management/setting-up-a-warehouse#800, labelling your storage locations>>. During stocktaking, you can just scan the storage location's label.
+====
+
+[#200]
+=== Exporting stock with the data format Stock
+
+If you want to check store discrepancies resulting from stocktaking at once, use the <<data/exporting-data/elastic-export#, elastic export>>. Before stocktaking, use the data format <<data/export-import/data-formats/stock, Stock>> to export your current stock. Export the data again after finishing the stocktaking process and compare the stock data.
+
+[#300]
+=== Assigning rights for stocktaking
+
+Users with admin rights can take stock using the plentymarkets app by default. You need to grant this right to *Back end* users.
+
+[.instruction]
+Assigning rights for app stocktaking:
+
+. Go to *Setup » Settings » User » Accounts*.
+. Click on *Search* (icon:search[role="blue"]).
+. Open a *Backend* user account.
+. Click on the *Mobile* tab.
+. In the *Visible functions* area, activate the option *Stocktaking*. +
+. *Save* (icon:save[role="green"]) the settings.
+. Click on the Right tab.
+. Click on *Managing menu and REST API rights*. +
+→ The *Rights* view opens.
+. In the *Authorisations* area, activate the option *Stock  » Warehouses » Warehouse location » Show*.
+. *Save* (icon:save[role="green"]) the settings.
+
+[#400]
+=== Customising app stocktaking
+
+In the plentymarkets app, users can carry out additional settings to customise the stocktaking process.
+
+[.instruction]
+Customising app stocktaking:
+
+. Log into the plentymarkets App.
+. In the menu bar, tap the *menu symbol*.
+. Tap on *Settings*.
+. Tap on *Stocktaking*. +
+→ The *Stocktaking* settings menu opens.
+. Carry out the settings. Note <<table-stocktaking-app-settings>>. +
+*_Tip:_* The settings are saved automatically when you leave the menu.
+
+[[table-stocktaking-app-settings]]
+.Stocktaking settings in the app
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+2+|Storage location search
+
+| *Set focus on barcode*
+| Activate this option to set the cursor in the *Barcode* field of the storage location search. If the storage locations are labelled, users can then directly scan the storage location label.
+
+2+|Item search
+
+| *Set focus on barcode*
+| Activate this option to set the cursor in the *Barcode* field of the item search. If your items are labelled, users can start scanning the item label straight away.
+
+| *Scan items individually*
+| Select whether the item quantity is to be entered by scanning the individual items or by entering the count result manually. +
+Activated = Each piece of an item is scanned individually. +
+*_Tip:_* The scanned quantity can be corrected manually. To do so, tap the item and enter the correct quantity. +
+Deactivated = After scanning an item label, users enter the counted amount using the keypad.
+
+| *Allow manual item search*
+| Select if items can be searched manually. +
+Activated = Items can either be found by scanning the item label or by using the keypad to enter search criteria. +
+Deactivated = Items cannot be searched for manually. Items can only be opened by scanning the item label.
+
+| *Main warehouse only* +
+(app version 1.9.3 and higher)
+| Select if the item suggestions should be filtered. +
+Deactivated (default setting) = The items are not filtered. If the same item is stored at several storage locations, all storage locations are suggested for selection. +
+Activated = Only items whose the main warehouse is identical to the current stocktaking warehouse are suggested for selection.
+
+2+| Save stock
+
+| *Show Save button*
+| Deactivate this option to hide the *Save stock* button. +
+Activated = The stock present at a storage location can be saved either by tapping the *Save stock* button or by scanning the storage location label. +
+Deactivated = The stock present at a storage location can be saved by scanning the storage location label.
+
+| *Show confirmation dialog*
+| Activate this option to show a confirmation dialog before the new stock quantity is saved. +
+Activated = Users must confirm before the stock details are saved. +
+Deactivated = Stock details are saved immediately.
+|====
+
+[#500]
+== Stocktaking with the plentymarkets app
+
+When taking stock with the plentymarkets app, you can either scan each piece of an item individually or enter the counted quantity using the keypad. The option *Scan items individually* determines how stocktaking is performed.
+
+[IMPORTANT]
+.Stock at a storage location is set to zero if not counted
+====
+Always count or scan all items present at a storage location. If you store different items at the same storage location, any stock of items that you do not count or scan during stocktaking will be set to zero. Example: +
+The stock information for storage location 1 in plentymarkets is 10 x item A, 10 x item B and 2 x item C. During stocktaking, 10 x item A and 10 x item B is scanned. Item C is not scanned. +
+→ The app books item A x 10, item B x 10 and item C x 0\. Thus, stock for item C is set to zero. +
+If you only start creating further storage locations during stocktaking, these storage locations are not set to zero. This only applies to storage locations that are edited.
+====
+
+[#600]
+=== Scanning each piece of an item individually
+
+Users do not have to count the stock. Instead, they can scan the labels of each piece of an item individually until they have scanned all pieces of an item present at the storage location. The quantity is updated incrementally in the background. You need to activate the *Scan items individually* option to take stock by scanning each piece individually.
+
+[.instruction]
+Scanning each piece of an item individually:
+
+. Open the plentymarkets app.
+. In the menu bar, tap the *menu symbol*.
+. Tap on *Warehouse management » Stocktaking*. +
+→ The *Stocktaking* view opens.
+. Scan the storage location label. +
+→ The storage location is selected. The quantity of scanned items is booked to this storage location.
+. Scan the label of each piece until you have scanned all items present at the storage location. +
+*_Tip:_* If the storage location contains more than one type of item, the quantity of the correct item is increased automatically during scanning. +
+*_Note:_* To correct the scanned quantity manually, tap on the item and enter the correct quantity. +
+→ If best before dates, batches or both are managed for the variation in the selected warehouse, you are asked to enter a date, a batch or both. +
+*_Optional:_* Select the best before date and/or enter the batch and tap on *Add item*. +
+→ The stock is booked in.
+. To finish the count, scan the storage location label again or tap on *Save stock* if the button is shown. +
+→ The counted quantity is saved. +
+→ The counted stock is imported to the *Stock » Storage location management* menu of the plentymarkets back end. +
+→ The stock information is saved in the *Item » Managing items* menu of the variation.
+
+[#700]
+=== Entering the counted quantity
+
+Instead of scanning the labels of each piece stored at a storage location, users also can count how many pieces of an item are present at the storage location and enter the result manually. You need to activate the *Scan items individually* option to take stock by scanning each piece individually.
+
+[.instruction]
+Entering the counted quantity:
+
+. Open the plentymarkets app.
+. In the menu bar, tap the *menu symbol*.
+. Tap on *Warehouse management » Stocktaking*. +
+→ The *Stocktaking* view opens.
+. Scan the storage location label. +
+→ The storage location is selected. The quantity of scanned items is booked to this storage location.
+. Scan the label of an item or search for the item manually. +
+→ The *Enter quantity* window is displayed.
+. Enter the quantity that you counted for the item.
+. To finish the count, scan the storage location label again or tap on *Save stock* if the button is shown. +
+→ The counted quantity is saved. +
+→ The counted stock is imported to the *Stock » Storage location management* menu of the plentymarkets back end. +
+→ The stock information is saved in the *Item » Managing items* menu of the variation.
