@@ -1,0 +1,662 @@
+= Umbuchungen vornehmen
+:lang: de
+:description: Erfahre, wie du mit Lagerumbuchungen in deinem plentymarkets System arbeitest.
+:keywords: Umbuchung, Lagerumbuchung, PO Lieferschein, PO-Lieferschein, Umbuchungs-ID, Umbuchungs ID, purchase order, redistribution
+:position: 50
+:id: A5QIHYW
+:url: warenwirtschaft/umbuchungen-vornehmen
+:author: team-stock, team-order-payment
+
+Um Waren zwischen verschiedenen Lagern umzubuchen, legst du eine Umbuchung in deinem plentymarkets System an. Dies geschieht im gleichen Bereich wie die Erstellung und Bearbeitung von Nachbestellungen, im Menü *Waren » Bestellwesen » Bestellung*. Hier hast du nicht nur eine Übersichtstabelle mit deinen Umbuchungen und Nachbestellungen, du kannst auch neue Umbuchungen und Nachbestellungen anlegen oder bestehende suchen, um sie zu bearbeiten.
+Eine Umbuchung gliedert sich in folgende Arbeitsschritte:
+
+* <<#600, Umbuchung anlegen>>
+* <<#700, Auftragspositionen hinzufügen>>
+* <<#800, Lieferschein erstellen>>
+* <<#900, Waren ausbuchen>>
+* <<#1000, Waren einbuchen>>
+* <<#1100, Umbuchung abschließen>>
+
+Alle Arbeitsschritte werden auf dieser Handbuchseite erklärt. Zunächst empfehlen wir dir, vor der Abwicklung der ersten Umbuchungen einige vorbereitende Einstellungen vorzunehmen.
+
+[#100]
+== Vorbereitende Einstellungen
+Um deine Arbeit mit Lagerumbuchungen optimal zu organisieren, solltest du einige vorbereitende Einstellungen vornehmen. Erstelle neue Status speziell für Umbuchungen und lege Tags an, um dir die Übersicht zu erleichtern. Die Einrichtung einer Dokumentenvorlage für den *PO Lieferschein* ist zudem zwingend erforderlich.
+
+Die Übersichtstabelle im Menü *Waren » Bestellwesen » Bestellung* sowie die Tabellen in einer geöffneten Umbuchung sind individuell anpassbar. Das bedeutet, dass du selbst entscheiden kannst, welche Informationen dir in den Tabellenspalten angezeigt werden. Gehe dafür folgendermaßen vor:
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:settings[set=material]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:sort[set=material]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+Wenn du eine Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabellen sind jederzeit anpassbar.
+
+[#150]
+=== Standardeinstellungen vornehmen
+Um den Aufwand beim Anlegen einer neuen Umbuchung zu verringern, empfiehlt es sich, einige Standardeinstellungen vorzunehmen. Durch diese Einstellungen werden einzelne Felder mit Standardwerten vorausgefüllt, wenn du eine neue Umbuchung erstellst. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Standardeinstellungen vornehmen:
+
+. Öffne das Menü *Einrichtung » Waren » Bestellwesen » Umbuchung » Einstellungen*.
+. Nimm die Einstellungen anhand der Informationen in <<table-default-settings-redistribution>> vor.
+. *Speichere* (icon:save[role="green"]) die Einstellungen. +
+
+[[table-default-settings-redistribution]]
+.Standardeinstellungen für Umbuchungen
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Standard-Status*
+|Wähle einen Standard-Status, der beim Anlegen einer Umbuchung vorausgewählt sein soll. Wie du Status für Umbuchungen anlegst erfährst du im Kapitel <<warenwirtschaft/umbuchungen-vornehmen#200, Status für Umbuchungen anlegen>>.
+
+| *Standard-Eigner*
+|Wähle eine der verfügbaren Optionen aus. +
+*Aktiver Benutzer vorausgewählt*: Die Benutzer:in, die die Umbuchung erstellt, wird im Feld *Eigner* vorausgewählt. +
+*Kein Eigner vorausgewählt*: Das Feld *Eigner* bleibt beim Anlegen einer Umbuchung leer. +
+Des Weiteren werden dir die angelegten Nutzer:innen angezeigt. Wählst du einen von ihnen, ist dieser beim Anlegen einer neuen Umbuchung vorausgewählt.
+
+| *Quelle für Artikelname*
+|Wähle aus der Dropdown-Liste aus, welcher Artikelname in der Umbuchung angezeigt werden soll. *Name 1*, *Name 2* und *Name 3* vergibst du im Tab *Texte* der Artikdeldaten eines Artikels.
+
+| *Standard-Sender*
+|Wenn du aus deinen Lagern eines als Standard-Sender auswählst, ist dieses beim Anlegen einer Umbuchung immer ausgewählt als das Lager, aus dem die Ware ausgebucht wird.
+
+| *Standard-Empfänger*
+|Wenn du aus deinen Lagern eines als Standard-Empfänger (Empfängerlager) auswählst, ist dieses beim Anlegen einer Umbuchung immer ausgewählt als das Lager, in das die Ware eingebucht wird.
+
+|*Filteroption "Nur aktive Artikel anzeigen" in der Artikelsuche vorausgewählt*
+|Aktiviere diese Option, damit sie für die Artikelsuche in der Umbuchung vorausgewählt ist. Angezeigt werden in den Suchergebnissen dann nur <<artikel/webshop/checkliste-artikel-anzeige#100, aktivierte Artikel>>.
+
+|*Anzeige von hinzugefügten Artikeln im Warenkorb*
+|Wähle aus, wie die Artikel zum Warenkorb hinzugefügt werden sollen. Die Standardeinstellung ist *Als eine Auftragsposition, Mengen werden erhöht*. +
+*Als separate Auftragspositionen.* = Auch gleiche Artikel werden einzeln hinzugefügt, d.h. jeder Artikel wird in einer eigene Zeile dargestellt. +
+*Als eine Auftragsposition, Mengen werden erhöht.* = Gleiche Artikel werden in einer Auftragsposition zusammengefasst und die Menge wird entsprechend angepasst.
+
+|====
+
+[#200]
+=== Status für Umbuchungen anlegen
+In deinem plentymarkets-System sind bestimmte Auftragsstatus voreingestellt. Diese voreingestellten Status stehen dir auch für Umbuchungen zur Verfügung. Du kannst gesonderte Status für Umbuchungen anlegen, die du dann ausschließlich für diesen Auftragstyp nutzt. Das Anlegen neuer Status wird auf der Handbuchseite <<auftraege/auftraege-verwalten#1200, Aufträge verwalten>> beschrieben.
+
+[TIP]
+.Eigene Status für Umbuchungen anlegen
+====
+Wir empfehlen, separate Status anzulegen, die du ausschließlich für die Umbuchungen nutzt. So kannst du mittels unterschiedlicher Namensgebung die Status der Umbuchungen von den Status der weiteren Auftragstypen unterscheiden, beispielsweise bei der <<#1300, Automatisierung der Umbuchungen durch Ereignisaktionen>>.
+====
+
+[#300]
+=== Tags für Umbuchungen erstellen
+Tags sind Kennzeichnungen, die du zentral in deinem plentymarkets System erstellst und anschließend für verschiedene Bereiche nutzen kannst. Wie du Umbuchungen mit Tags versiehst und welche Benutzerrechte notwendig sind, ist nachfolgend beschrieben.
+
+[#350]
+==== Rechte für Backend-Benutzer:innen vergeben
+
+include::_includes:page$tags-rights.adoc[]
+
+[#400]
+==== Tags erstellen
+
+include::_includes:page$tags-creation.adoc[]
+
+[#500]
+=== Vorlage für PO Lieferschein einrichten
+Für die Umbuchung nutzt du den speziell dafür vorgesehenen Dokumententyp *PO Lieferschein* (PO = Purchase order, dt. Bestellwesen). Dieser Lieferschein listet die in der Umbuchung vorhandenen Auftragspositionen auf. So ist der Inhalt der Umbuchung beim Aus- und Einbuchen in das Empfängerlager für Lagermitarbeiter:innen und Logistikpartner:innen nachvollziehbar.
+
+[IMPORTANT]
+.Dokumentenvorlage muss eingerichtet sein
+====
+Vor der erstmaligen Nutzung des Dokumententyps *PO Lieferschein* muss die Dokumentenvorlage erstellt werden. Solange keine Vorlage eingerichtet wurde, wird der Lieferschein bei der Umbuchung nicht erstellt.
+====
+
+Im Folgenden wird beschrieben, wie du die Vorlage übernimmst, die in deinem plentymarkets System standardmäßig hinterlegt ist.
+
+[.instruction]
+Dokumentenvorlage für PO Lieferschein einrichten:
+
+. Öffne das Menü *Einrichtung » Waren » Bestellwesen » Umbuchung » Dokumente » PO Lieferschein*.
+. Öffne das Tab *Transfer*.
+. Wähle aus der Dropdown-Liste über dem Tab-Titel die Sprache aus, in der das Dokument erstellt werden soll.
+. Klicke im Bereich *Einstellungen aus Standard-Dokumentenvorlage* auf *Übernehmen*. +
+→ Wenn du die Abfrage bestätigst, werden die Standardeinstellungen auf das Dokument angewendet. Beachte, dass dadurch andere Einstellungen, die du eventuell bereits vorgenommen hast, überschrieben werden.
+
+Möchtest du das Dokument *PO Lieferschein* individueller zu gestalten, zum Beispiel das Logo deiner Firma oder zusätzliche Informationen darauf abbilden, dann gehe gemäß der Anleitungen auf der Handbuchseite zum Thema <<auftraege/auftragsdokumente#300, Dokumentenvorlage einrichten>> vor.
+
+[#550]
+=== Messenger nutzen
+
+Nutze den Messenger, um im Backend Nachrichten zu erstellen, die deinen Kontakten zugeordnet werden. Diese Nachrichten funktionieren wie Notizen, sind nur in deinem plentymarkets Backend sichtbar und können nicht von deinen Kontakten aufgerufen werden.
+Den Messenger nutzt du, indem du in einer geöffneten Umbuchung auf der linken Seite auf *Messenger* klickst oder den Messenger im unteren Bereich der Umbuchung aufklappst.
+
+[.instruction]
+So erstellst du eine neue Nachricht:
+
+. Klicke auf *Neue Nachricht* (icon:plus-square[role="green"]). +
+→ Ein Textfeld öffnet sich und ein Timer läuft mit.
+. Wähle einen oder mehrere Empfänger aus.
+. Gib einen Titel ein.
+. Gib den Text ins Textfeld ein. +
+→ Über dem Textfeld stehen dir Formatierungsmöglichkeiten für deine Nachricht zur Verfügung.
+. Hänge über *Dateien anhängen* eine Datei an, wenn gewünscht.
+. Klicke auf *Senden* (icon:envelope-o[role="purple"]).
+. Wähle aus, ob das Erstellen der Nachricht in Rechnung gestellt werden soll indem du *Kostenpflichtig* auswählst und die entsprechenden Minuten einträgst.
+
+Nach Absenden der Nachricht wird diese dann automatisch mit der Umbuchungs-ID verknüpft. Die Nachricht kann nach der Bearbeitung als geschlossen markiert werden.
+
+Stelle noch die *Sortierung* im Messenger ein, indem du auswählst, ob dir die Nachrichten nach Datum auf- oder absteigend sortiert angezeigt werden sollen.
+
+Weitere Informationen zum Messenger allgemein findest du auf der Handbuchseite <<crm/messenger#, Messenger>>.
+
+[#600]
+== Umbuchung anlegen
+Nachdem du die vorbereitenden Einstellungen vorgenommen hast, kannst du einen Auftrag vom Typ Umbuchung anlegen. Gehe dabei wie im Folgenden beschrieben vor.
+
+[.instruction]
+Neue Umbuchung anlegen:
+
+. Öffne das Menü *Waren » Bestellwesen » Bestellung*.
+. Klicke auf *Umbuchung* in der linken Navigation. +
+→ Die Detailansicht der Umbuchung öffnet sich.
+. Wähle im Feld *Status* einen <<#200, Status>> aus, mit dem die Umbuchung angelegt werden soll. Dieser Status ist später noch änderbar.
+. Gib im Feld *Sender* das Lager an, aus dem umgebucht werden soll.
+. Gib im Feld *Empfänger* das Lager an, in das umgebucht werden soll.
+. _Optional_: Wähle ein oder mehrere *Tags* für die neue Umbuchung aus.
+. _Optional_: Wähle einen *Eigner* für die Umbuchung aus.
+
+[TIP]
+.Eigner auswählen
+====
+Fehlt der gewünschte Eigner, liegt das daran, dass diese:r Benutzer:in nicht als Eigner aktiviert wurde. Eine Anleitung zum Aktivieren der Eigner findest du auf der Handbuchseite <<business-entscheidungen/benutzerkonten-zugaenge#40, Benutzer:innen-Konten und Zugänge>>. Prüfe außerdem die oben beschriebenen <<#400, Standardeinstellungen>> zu Eigner.
+====
+
+[#700]
+=== Auftragspositionen hinzufügen
+
+Im nächsten Schritt fügst du die Auftragspositionen hinzu, die von einem Lager in ein anderes Lager umgebucht werden sollen. Wende die Suche (icon:search[set=material]) an, um die gewünschten Auftragspositionen anhand der vorhandenen Artikel mit Bestand zu finden.
+
+[.collapseBox]
+.*Suchfunktionen*
+--
+Du hast mehrere Möglichkeiten, die Suche zu nutzen. Du kannst einen Wert im Suchfeld eingeben und dann den entsprechenden Filter auswählen. Gibst du z.B. eine Zahl ein, werden dir mögliche Filter in der diese Zahl vorkommt vorgeschlagen, wie IDs oder Variantennummer. Gib den Wert vollständig ein und wähle den passenden Filter aus den Vorschlägen. Wiederhole dies, um Filter miteinander zu kombinieren. Klicke auf icon:search[set=material], um die Suche auszuführen. +
+Möchtest du aus der verfügbaren Filterliste wählen, klicke auf die Liste und gib einen Wert im gewünschten Filter ein. Hast du alle benötigten Filter gesetzt, klicke auf *Suchen*. +
+Möchtest du einen gesetzten Filter löschen, entferne den Chip. In <<table-filters-item-search-redistribution>> werden die verfügbaren Filter erläutert.
+
+Zudem kannst du mit der Komponente *Gespeicherte Filter* (icon:bookmarks[set=material]) ausgewählte Filter in der UI speichern. Gespeicherte Filtersets sind dann in dieser Komponente bei jedem Öffnen des Menüs auswählbar, ähnlich wie Lesezeichen. Jede:r Benutzer:in kann eigene Filter festlegen.
+
+[.instruction]
+Filter speichern:
+
+. Setze die gewünschten Filter mit den entsprechenden Werten.
+. Führe die Suche aus.
+. Klicke auf *Gespeicherte Filter* (icon:bookmarks[set=material]).
+. Klicke auf *Aktuellen Filter speichern*. +
+→ Das Fenster *Filter speichern* öffnet sich.
+. Vergib einen *Filternamen*.
+. Entscheide, ob das Filterset für alle Benutzer:innen zur Verfügung stehen soll.
+. Klicke auf *Speichern*.
+
+--
+
+[.instruction]
+Auftragspositionen hinzufügen:
+
+. Klicke im Bereich *Auftragspositionen* auf *Hinzufügen* (icon:add[set=material]). +
+→ Ein Menü zum Hinzufügen der Artikelpositionen öffnet sich.
+. Suche die gewünschten Artikel oder Varianten. +
+→ Die Artikel und Varianten, die im Senderlager Bestand haben, werden angezeigt.
+. Gib die umzubuchende Anzahl in der Spalte *Menge* ein.
+. Klicke auf den *Zum Warenkorb hinzufügen* (icon:add_shopping_cart[set=material]). +
+→ Die Auswahl wird dem Warenkorb hinzugefügt.
+. Wiederhole Schritte 1 bis 4, bis alle umzubuchenden Auftragspositionen in der gewünschten Menge im Warenkorb enthalten sind.
+. Klicke im Bereich *Warenkorb* auf *Speichern* (icon:save[role="green"]). +
+→ Der Warenkorb wird gespeichert. +
+→ Die Umbuchung wird angelegt und geöffnet.
+
+[[table-filters-item-search-redistribution]]
+.Verfügbare Filter in der Artikelsuche
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Varianten-ID*
+|ID eingeben, um nach der Variante mit dieser ID zu suchen. Du kannst mehrere IDs kommasepariert eingeben.
+
+| *Artikel-ID*
+|ID eingeben, um nach dem Artikel mit dieser ID zu suchen. Du kannst mehrere IDs kommasepariert eingeben.
+
+| *Variantennummer*
+|Variantennummer eingeben, um nach der Variante mit dieser Nummer zu suchen. Du kannst mehrere Nummern kommasepariert eingeben.
+
+| *Barcode*
+|Barcode eingeben, um nach der Variante mit diesem Code zu suchen.
+
+| *Artikelname*
+|Artikelnamen eingeben, um nach dem Artikel mit diesem Namen zu suchen.
+
+| *Lieferantennummer*
+|Nummer der Lieferant:in eingeben, um nach Artikeln mit dieser Lieferant:innen-Nummer zu suchen.
+
+| *Nur aktive Artikel anzeigen*
+|Wenn du diese Option wählst, werden in in den Suchergebnissen nur <<artikel/webshop/checkliste-artikel-anzeige#100, aktivierte Artikel>> angezeigt.
+
+|====
+
+[IMPORTANT]
+.Ergebnisse der Artikelsuche
+====
+Die Artikelsuche in diesem Menü zeigt ausschließlich Artikel und Varianten, die Bestand im Senderlager haben. Werden Varianten oder Artikel nicht aufgeführt, überprüfe den Bestand im Menü *Waren » Warenbestände* oder im Tab *Bestand* der Artikelvariante.
+====
+
+[.collapseBox]
+.*Tabelle Auftragspositionen hinzufügen individualisieren*
+--
+
+Die Tabelle zum Hinzufügen von Auftragspositionen lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Status
+* Artikelname
+* Varianten-ID / Nr.
+* Attribute
+* Menge Senderlager
+* Menge Empfängerlager
+* Menge
+* Cart icon
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+* Barcode
+* Modell
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:settings[set=material]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:sort[set=material]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[.collapseBox]
+.*Warenkorbtabelle individualisieren*
+--
+
+Die Warenkorbtabelle lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Artikelname
+* Varianten-ID / Nr.
+* Attribute
+* Barcode
+* Bestandsinformation
+* Menge
+* Aktion
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:settings[set=material]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:sort[set=material]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[.collapseBox]
+.*Artikelpositionstabelle individualisieren*
+--
+
+Die Artikelpositionstabelle lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Order icon
+* Artikelname
+* Varianten-ID / Nr.
+* Attribute
+* Bestellt
+* Offen
+* Ausgehend
+* Eingehend
+* Teilmenge
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+* Barcode
+* Lieferdatum
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:settings[set=material]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:sort[set=material]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+Die Auftragspositionen sind bearbeitbar, solange die Bestellung noch nicht ausgelöst wurde. Du kannst zum Beispiel die *Menge* ändern oder Artikel *löschen*. +
+Im Feld *Artikelname* kannst du die Bezeichnung für den Artikel anpassen. Die Änderungen gelten nur für die Umbuchung, in der sie vorgenommen wurden. Möchtest du die <<artikel/einstellungen#, Artikeleinstellungen>> generell anpassen, kannst du dies im Menü *Artikel » Artikel bearbeiten* im entsprechenden Tab machen.
+
+Du kannst in den Auftragsdetails der Umbuchung ein *Lieferdatum* eintragen. Nutze dafür den Kalender oder gib es manuell ein. Wenn du in den Auftragsdetails das Lieferdatum setzt, kannst du wählen, ob das gleiche Datum für die Auftragspositionen in der Tabelle ohne Lieferdatum übernommen werden soll. Bereits eingegebene Lieferdaten für Auftragspositionen in der Tabelle bleiben dabei erhalten. Diese Werte werden nicht überschrieben. +
+Du kannst in der Tabelle für jede Auftragsposition individuell ein Lieferdatum setzen. Die Lieferdaten bleiben bearbeitbar, solange die Bestellung nicht abgeschlossen ist. +
+_Beachte_, dass alle Lieferdaten in der Tabelle gelöscht werden, wenn du ein bereits gesetztes Lieferdatum in den Auftragsdetails löschst. Es ist nicht möglich ein Lieferdatum zu setzen, das vor dem Bestelldatum der Umbuchung liegt. +
+Klicke auf *Speichern* (icon:save[role="green"]) nach Setzen oder Bearbeiten des Lieferdatums.
+
+[umbuchung-loeschen]
+[TIP]
+.Umbuchung löschen
+====
+Umbuchungen können in der Detailansicht gelöscht werden, solange die Umbuchung noch nicht durch Setzen des Bestelldatums ausgelöst wurde. Klicke zum Löschen auf *Bestellung löschen* (icon:delete[set=material]) rechts oberhalb der Infoboxen.
+====
+
+[#800]
+=== PO Lieferschein erstellen
+Nach dem Hinzufügen der Auftragspositionen werden die Warenbewegungen für die Ausbuchung bereits vorbereitet. Dies erkennst du an den roten Pfeilen in der Tabelle *Warenbewegungen*.
+Überprüfe hier unbedingt die vorbereiteten Warenbewegungen sowie die Mengen der einzelnen Artikelvarianten. Anschließend erstellst du Im Bereich *Dokumente* einen *PO Lieferschein*, der die auszubuchenden Auftragspositionen enthält.
+
+Im Bereich *Dokumente* der Umbuchung kannst du zudem auch weitere zu dieser Umbuchung gehörenden Dokumente hochladen.
+
+[#830]
+==== PO Lieferschein manuell erstellen
+Gehe wie im Folgenden beschrieben vor, um das Dokument *PO Lieferschein* manuell zu erstellen.
+
+[.instruction]
+PO Lieferschein manuell erstellen:
+
+. Öffne den Bereich *Dokumente* in einer Umbuchung.
+. Klicke auf *Dokument hinzufügen* (icon:add[set=material]).
+. Wähle die Option *Lieferschein erzeugen*. +
+→ Der *PO Lieferschein* wird erstellt.
+
+[#870]
+==== PO Lieferschein automatisch erstellen
+
+Richte die folgende Ereignisaktion ein, um das Dokument *PO Lieferschein* automatisch zu erstellen, sobald du im nächsten Schritt die in der Umbuchung enthaltenen Artikel aus dem Senderlager <<#900, ausgebucht>> hast.
+
+[.collapseBox]
+.Erzeugen des Dokuments PO Lieferschein automatisieren:
+--
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klicke auf *Ereignisaktion hinzufügen* (icon:plus-square[role="green"]).  +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Gib einen Namen ein.
+. Wähle das *Ereignis* gemäß <<table-event-procedure-create-po-delivery-note>>.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+. Nimm die Einstellungen gemäß <<table-event-procedure-create-po-delivery-note>> vor.
+. Setze die Ereignisaktion auf *Aktiv*.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+--
+[[table-event-procedure-create-po-delivery-note]]
+.Ereignisaktion zum automatischen Erzeugen des Bestellscheins
+[cols="1,3,3"]
+|====
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Bestellwesen*
+|*Bestellung ausgelöst*
+
+| *Filter*
+| *Auftrag > Auftragstyp*
+|*Bestellung, Typ Umbuchung*
+
+|*Aktion*
+|*Bestellwesen*
+|*PO Lieferschein erzeugen*
+
+|====
+
+Nach dem Erstellen ist der PO Lieferschein dauerhaft im Bereich *Dokumente* verfügbar und kann dort heruntergeladen oder gelöscht werden. Hat dein:e Lieferant:in dir einen externen Lieferschein übermittelt, ist es unter Umständen nicht nötig, deinen eigenen Lieferschein zu generieren. Den externen Lieferschein kannst du im Bereich *Dokumente* ebenfalls hochladen. Klicke dazu auf *Dokument hinzufügen* und wähle die Option *Lieferschein hochladen*.
+
+[#885]
+==== Weitere Dateien hochladen
+
+Optional kannst im Bereich *Dokumente* weitere Dateien hochladen, wenn du diese zu einer Umbuchung hinzufügen möchtest.
+
+[.instruction]
+Dateien hinzufügen:
+
+. Öffne den Bereich *Dokumente*.
+. Klicke auf *Dokument hinzufügen* (icon:add[set=material]).
+. Wähle die Option *Andere Dokumente hochladen*. +
+→ Das ausgwählte Dokument wird hochgeladen und ist wie der Lieferschein auch im Bereich *Dokumente* verfügbar.
+
+Dateien können als pdf, aber auch als csv, zip, doc, docx, xls, xlsx hochgeladen werden. Die Dateigröße kann bis zu 20MB umfassen.
+
+[#900]
+=== Waren ausbuchen
+Nach dem Hinzufügen aller umzubuchenden Artikel buchst du die Artikelpositionen aus dem Senderlager aus. Klicke dazu auf *Bestellung auslösen* im Bereich *Details*. Die Umbuchung wird ausgelöst und das aktuelle Datum wird als Bestelldatum gesetzt. +
+Alternativ kannst du über die Datumsauswahl (icon:calendar[]) manuell ein Datum wählen und setzen. Klicke nach der Auswahl des Datums auf *Bestellung auslösen*. Das ausgewählte Datum wird gesetzt und die Umbuchung ausgelöst.
+
+[WARNING]
+.Umbuchung kann nicht mehr bearbeitet werden
+====
+Sobald du den nachfolgend beschriebenen Schritt ausgeführt hast, kannst du die Umbuchung *nicht* mehr bearbeiten. Artikelpositionen können dann weder gelöscht noch hinzugefügt werden. Buche die Waren deshalb erst nach sorgfältiger Prüfung aus.
+====
+
+[#1000]
+=== Waren einbuchen
+Sobald die Artikel aus dem Senderlager im Empfängerlager eintreffen, buchst du die Auftragspositionen im Empfängerlager ein. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Waren einbuchen:
+
+. Öffne den Bereich *Auftragspositionen*.
+. Trage in der Spalte *Teilmenge* die angelieferten Artikelpositionen ein.
+. Klicke auf *Warenbewegungen anlegen* (icon:execute[set=plenty]). +
+→ Die Warenbewegung wird angelegt.
+. Gehe zum Bereich *Warenbewegungen*. Dort erkennst du an der grünen Markierung die vorbereiteten Warenbewegungen.
+. Gib in der Spalte *Lagerort* einen Lagerort an.
+. Wähle alle Zeilen mit den einzubuchenden Artikelvarianten.
+. Klicke auf *Warenbewegungen buchen*. +
+→ Der Wareneingang wird im Empfängerlager gebucht.
+
+[.collapseBox]
+.*Warenbewegungstabelle individualisieren*
+--
+
+Die Warenbewegungstabelle lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Icon one
+* Icon two
+* Artikelname
+* Varianten-ID /Nr.
+* Lagerort
+* Erstellt am
+* Buchungs-ID
+* Menge
+* Aktion: Löschen
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Artikel-ID
+* Varianten-ID
+* Variantenname
+* MHD
+* Charge
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:settings[set=material]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:sort[set=material]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[#1050]
+=== Paketinhaltsliste
+
+Die Paketinhaltsliste richtet sich in erster Linie an Mitarbeiter:innen im Lager oder Fulfillment-Dienstleister und gibt Auskunft über den Inhalt von Paletten und Paketen. Da eine Umbuchung bedeutet, dass Ware von einem deiner Lager aus- und in ein anderes deiner Lager eingebucht wird, sind hier in der Regel in erster Linie Lagermitarbeiter:innen involviert. Daher besteht die Möglichkeit die Pateinhaltsliste in der Umbuchung mit anzeigen zu lassen. Gehe dafür wie im Folgenden beschrieben vor.
+
+[.instruction]
+Paketinhaltsliste hinzufügen:
+
+. Gehe in einer geöffneten Umbuchung in den Bereich *Paketinhaltsliste*.
+. Klicke auf *Hinzufügen* (icon:add[set=material]). +
+→ Du wirst weitergeleitet zur Paketinhaltsliste der jeweiligen Umbuchung.
+. Suche mit den Filtern *Barcode*, *Varianten-ID* oder *Variantennummer* die gewünschten Varianten aus der Umbuchung. Du kannst nur Artikel hinzufügen, die auch in der Umbuchung enthalten sind. +
+→ Der Artikel wird direkt hinzugefügt und es wird angezeigt, wie viele Pakete und Paletten enthalten sind.
+. Klicke auf *Paket schließen* oder *Palette schließen*, um Paket oder Palette zu schließen. +
+→  _Beachte_, dass danach keine Änderungen mehr an diesem Paket und dieser Palette vorgenommen werden können, du müsstest eine neue hinzufügen.
+
+Wenn du danach in die Umbuchung zurückgehst, wird die erstellte Paketinhaltsliste im entsprechenden Bereich in der Umbuchung angezeigt. Solltest du weitere Paletten oder Pakete hinzufügen wollen, klicke auf *Bearbeiten* (icon:edit[set=material]) und du wirst wieder zur Paketinhaltsliste weitergeleitet. Ist eine Umbuchung bereits abgeschlossen, lässt sich auch die Paketinhaltsliste nicht mehr bearbeiten. Weitere Informationen findest du auch auf der Handbuchseite <<auftraege/paketinhaltsliste#, Paketinhaltsliste>>.
+
+[#1100]
+=== Umbuchung abschließen
+Wurde für alle Artikelvarianten im Empfängerlager der Wareneingang gebucht, schließt du die Umbuchung in deinem plentymarkets System ab. Klicke dazu im Bereich *Auftragsdetails* der Umbuchung auf *Bestellung abschließen*. Das aktuelle Datum wird als Abschlussdatum gesetzt und die Umbuchung für die Bearbeitung gesperrt.
+Alternativ kannst du über die Datumsauswahl (icon:calendar[]) manuell ein Datum wählen und setzen. Klicke nach der Auswahl des Datums auf *Bestellung abschließen*. Das ausgewählte Datum wird als Abschlussdatum gesetzt und die Umbuchung ist für die Bearbeitung gesperrt.
+
+[TIP]
+.Sperrung der Umbuchung aufheben
+====
+Hast du die Umbuchung versehentlich abgeschlossen, klicke auf *Bestellung freischalten* (icon:undo[role="orange"]). So wird die Umbuchung entsperrt und kann erneut bearbeitet werden.
+====
+
+[#1200]
+== Umbuchung suchen
+
+Beim Öffnen des Menüs *Waren » Bestellwesen » Bestellung* werden dir alle Umbuchungen und <<warenwirtschaft/nachbestellungen-verwalten/nachbestellungen-vornehmen#, Nachbestellungen>> in einer Übersichtstabelle angezeigt. Wende die Suche (icon:search[set=material]) an, um die angezeigten Umbuchungen und Nachbestellungen eingrenzen.
+
+Du hast mehrere Möglichkeiten, die Suche zu nutzen. Du kannst einen Wert im Suchfeld eingeben und dann den entsprechenden Filter auswählen. Gibst du z.B. eine Zahl ein, werden dir mögliche Filter in der diese Zahl vorkommt vorgeschlagen, wie IDs oder Variantennummer. Gib den Wert vollständig ein und wähle den passenden Filter aus den Vorschlägen. Wiederhole dies, um Filter miteinander zu kombinieren. Klicke auf icon:search[set=material], um die Suche auszuführen. +
+Möchtest du aus der verfügbaren Filterliste wählen, klicke auf die Liste und gib einen Wert im gewünschten Filter ein. Hast du alle benötigten Filter gesetzt, klicke auf *Suchen*. +
+Möchtest du einen gesetzten Filter löschen, entferne den Chip. In <<table-redistribution-search-filter>> werden die verfügbaren Filter erläutert.
+
+Zudem kannst du mit der Komponente *Gespeicherte Filter* (icon:bookmarks[set=material]) ausgewählte Filter in der UI speichern. Gespeicherte Filtersets sind dann in dieser Komponente bei jedem Öffnen des Menüs auswählbar, ähnlich wie Lesezeichen. Jede:r Benutzer:in kann eigene Filter festlegen.
+
+[.instruction]
+Filter speichern:
+
+. Setze die gewünschten Filter mit den entsprechenden Werten.
+. Führe die Suche aus.
+. Klicke auf *Gespeicherte Filter* (icon:bookmarks[set=material]).
+. Klicke auf *Aktuellen Filter speichern*. +
+→ Das Fenster *Filter speichern* öffnet sich.
+. Vergib einen *Filternamen*.
+. Entscheide, ob das Filterset für alle Benutzer:innen zur Verfügung stehen soll.
+. Klicke auf *Speichern*.
+
+[[table-redistribution-search-filter]]
+.Verfügbare Filter zum Suchen einer Umbuchung
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Auftrags-ID*
+|Auftrags-ID der Umbuchung eingeben, um diese konkrete Umbuchung zu suchen.
+
+| *Auftrags-Typ*
+|Auftrags-Typ *Umbuchung* auswählen, um nur Aufträge vom Typ *Umbuchung* anzuzeigen.
+
+| *Sender*
+|Wenn du *Umbuchung* im Filter *Auftrags-Typ* gewählt hast, werden dir für Sender deine im System hinterlegten Lager in einer Dropdown-Liste angezeigt. Das als *Sender* ausgewählte Lager ist das, aus dem die Waren ausgebucht werden.
+
+| *Empfänger*
+|Wenn du *Umbuchung* im Filter *Auftrags-Typ* gewählts hast, werden dir für Empfänger deine im System hinterlegten Lager in einer Dropdown-Liste angezeigt. Das als *Empfänger* ausgewählte Lager ist das, in das die Waren eingebucht werden. +
+
+| *Stand der Nachbestellung*
+|Wähle aus der Dropdown-Liste zwischen *Offen*, *Bestellt* und *Abgeschlossen* aus.
+
+| *Artikel-ID*
+|Artikel-ID eingeben, um Umbuchungen zu suchen, die einen Artikel mit dieser ID enthalten.
+
+| *Varianten-ID*
+|Varianten-ID eingeben, um Umbuchungen zu suchen, die eine Variante mit dieser ID enthalten.
+
+| *Variantennummer*
+|Variantennummer eingeben, um Umbuchungen zu suchen, die eine Variante mit dieser Nummer enthalten.
+
+| *Händlerzeichen*
+|Gib ein Händlerzeichen ein, um nach Umbuchungen zu suchen, in denen dieses Händlerzeichen hinterlegt wurde.
+
+| *Artikeldaten*
+|Suchbegriffe oder Zahlenwerte eingeben, um Umbuchungen zu suchen, die Artikel mit diesen Daten enthalten. Durchsucht werden *Artikel-ID*, *Artikelnummer* und *Name*. Zusätzlich den Filter *Auftrags-Typ* auf die Option *Umbuchung* setzen.
+
+| *Externe Lieferscheinnummer*
+|Gib eine externe Lieferscheinnummer ein, um die Umbuchung zu suchen, in der der Lieferschein mit dieser Nummer hinterlegt wurde.
+
+| *Status von* und *Status bis*
+|Einen Statusbereich aus den Dropdown-Listen auswählen. Zusätzlich den Filter *Auftrags-Typ* auf die Option *Umbuchung* setzen, um Umbuchungen in diesem Statusbereich zu suchen. Möchtest du nur nach Umbuchungen mit einem bestimmten Status suchen, wähle in beiden Feldern den gleichen Status aus.
+
+| *Eigner*
+|Eine:n Eigner:in aus der Liste auswählen. Zusätzlich den Filter *Auftrags-Typ* auf die Option *Umbuchung* setzen, um Umbuchungen mit dieser Eigner:in zu suchen.
+
+| *Datumstyp*
+|Wähle aus der Dropdown-Liste zwischen den Datumstypen *Bestelldatum*, *Abschlussdatum*, *Lieferdatum* oder *Erstellt am* aus und grenze mit den Filtern *Auftragsdatum von* und *Auftragsdatum bis* den Zeitraum ein. Mit dieser Auswahl werden dir dann Umbuchungen angezeigt, die in dem gewählten Zeitraum bestellt, abgeschlossen oder erstellt wurden.
+
+| *Auftragsdatum von* und *Auftragsdatum bis*
+|Wähle ein Start- und Enddatum aus dem Kalender aus. In Kombination mit dem Filter *Datumstyp* werden dir dann die Umbuchungen für diesen Zeitraum angezeigt, die bestellt, abgeschlossen oder erstellt wurden.
+
+|====
+
+[.collapseBox]
+.*Übersichtstabelle individualisieren*
+--
+
+Die Übersichtstabelle für Umbuchungen und Nachbestellungen lässt sich individuell anpassen. Du kannst wählen, welche Tabellenspalten dir in welcher Reihenfolge in der Tabelle angezeigt werden sollen. Standardmäßig werden dir beim Öffnen des Menüs folgende Tabellenspalten angezeigt:
+
+* Auftrags-Typ
+* Auftrags-ID
+* Bestelldatum
+* Abschlussdatum
+* Sender
+* Empfänger
+* Status
+* Artikelmenge
+* Lieferdatum
+
+Die folgenden Tabellenspalten können ausgewählt werden, werden aber standardmäßig nicht angezeigt:
+
+* Händlerzeichen / ext. Auftrags-ID
+* Erstellt am
+* Nettowarenwert
+* Zahlungsziel
+
+Passe die Tabelle deinen Bedürfnissen und deinem Arbeitsablauf an. Wenn du die Tabelle angepasst hast, wird diese Auswahl gespeichert. Die Tabelle ist jederzeit anpassbar.
+
+[.instruction]
+Tabelle individualisieren:
+
+. Klicke auf *Spalten konfigurieren* (icon:settings[set=material]). +
+→ Das Fenster *Spalten konfigurieren* öffnet sich.
+. Wähle aus, welche Spalten angezeigt werden sollen.
+. Verschiebe (icon:sort[set=material]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie brauchst.
+. Klicke auf *Bestätigen*, um deine Auswahl zu speichern.
+
+--
+
+[#1300]
+== Umbuchungen automatisieren
+Mithilfe von Ereignisaktionen kannst du die einzelnen Arbeitsschritte einer Umbuchung automatisieren. Die Automatisierung der Erzeugung des *PO Lieferscheins* wurde bereits im Kapitel <<#870, PO Lieferschein automatisch erzeugen>> beschrieben. Im Menü *Einrichtung » Aufträge » Ereignisse* stehen dir in den Ereignis-, Filter- und Aktionsgruppen *Bestellwesen* Möglichkeiten zur Automatisierung von Umbuchungen zur Verfügung. +
+
+Genauere Informationen zu diesen Einstellungsmöglichkeiten findest du auf der Handbuchseite <<automatisierung/ereignisaktionen#, Ereignisaktionen>>. +
+Falls du zum ersten Mal mit Ereignisaktionen arbeitest, findest du Informationen zum Anlegen von Ereignisaktionen im Kapitel <<automatisierung/ereignisaktionen#100, Neue Ereignisaktion anlegen>>.

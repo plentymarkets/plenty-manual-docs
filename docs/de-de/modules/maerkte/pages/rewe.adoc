@@ -1,0 +1,950 @@
+= REWE
+:lang: de
+:author: team-multi-channel
+:keywords: Rewe, Rewe, rewe.de, rewe.de
+:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz REWE in deinem plentymarkets System ein.
+:position: 210
+:url: maerkte/rewe
+:id: VCPKDKC
+:rewe:
+
+
+[WARNING]
+.REWE-Marktplatz schließt zum 31.12.2021
+====
+Der REWE-Marktplatz schließt zum 31. Dezember 2021. Danach wird das Portal voraussichtlich bis 31.01.2022 weiter betrieben. Bestellungen müssen bis zum 31.01.2022 abgearbeitet werden. Nähere Informationen erhalten Bestandskund:innen direkt von REWE.
+
+Die Informationen auf dieser Seite dienen deshalb nur noch als Referenz für Bestandskund:innen.
+====
+
+////
+[#50]
+== Über REWE
+
+REWE.de ist mit seinem Lieferservice der Pionier im deutschen Online-Lebensmittelhandel. Der Supermarkteinkauf lässt sich seitdem in 75 Städten bequem per Smartphone oder Desktop erledigen.
+
+Der deutschlandweit verfügbare REWE Marktplatz bietet alles rund um Lebensmittel, Küche und Haushalt. Verkaufen können dort ausschließlich ausgewählte Partner:innen, um die hohen REWE Qualitätsstandards sicherzustellen. Dieses One-Stop-Shopping-Konzept erleichtert Millionen Menschen den Alltag und macht REWE.de zur zentralen Adresse für den täglichen Einkauf. Der REWE Marktplatz basiert auf der E-Commerce-Plattform commercetools.
+
+[#100]
+== Bei REWE registrieren
+
+Der REWE-Marktplatz ist ein geschlossener Marktplatz. Damit du dich als Händler:in bei REWE registrieren kannst, ist eine Prüfung durch REWE erforderlich. Sende dazu eine E-Mail an partnersupport@rewe.de und gib folgende Informationen an:
+
+* Name deines Unternehmens
+* Website deines Unternehmens bzw. Onlineshop
+* Auflistung deines Sortiments (Anzahl SKUs, Kategorien, verpflichtende Kennzeichnung)
+* Kontaktinformationen
+
+Für weitere Informationen zur Prüfung und Registrierung kontaktiere REWE unter partnersupport@rewe.de.
+
+Nachdem du dich als Händler:in registriert hast, erhältst du Zugangsdaten von REWE.
+
+[IMPORTANT]
+.Rechte vergeben
+====
+Achte bei der Erstellung deiner API-Client-Zugangsdaten bei REWE darauf, dass du genügend Rechte vergibst. Wähle die Vorlage *Admin-Client* oder erstelle einen neuen Client und vergib alle verfügbaren Rechte.
+====
+////
+
+[#70]
+== Übersicht des automatischen Datenaustauschs
+
+Nachdem du das Plugin installiert und eingerichtet hast, stehen die in <<#datenaustausch-rewe>> gelisteten automatisierten Abläufe zur Verfügung:
+
+[[datenaustausch-rewe]]
+.Häufigkeit des Datenaustauschs
+[cols="1,3a"]
+|====
+|Daten |Intervall
+
+| Artikelexport
+| einmal täglich
+
+| Bestandsabgleich
+| viertelstündlich
+
+| Preisabgleich
+| stündlich
+
+| Auftragsimport
+| viertelstündlich
+|====
+
+////
+[#170]
+== REWE-Plugin installieren
+
+Um REWE in plentymarkets nutzen zu können, installiere zunächst das link:https://marketplace.plentymarkets.com/plugins/channels/marktplaetze/rewe_5901[REWE-Plugin^] in deinem plentymarkets System. Dieses Plugin und viele andere Plugins findest du im link:https://marketplace.plentymarkets.com/[plentyMarketplace^]{nbsp}icon:external-link[].
+
+:plugin: REWE
+include::_textblocks/instructions/plugin-installation.adoc[]
+
+[#300]
+=== Authentifizierung durchführen
+
+Nachdem du das REWE-Plugin installiert hast, musst du zunächst eine Authentifizierung durchführen, um den Zugang zur Schnittstelle zu ermöglichen.
+
+[.instruction]
+Zugang zur Schnittstelle aktivieren:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Konto-Einstellungen*.
+. Gib in die Felder *Benutzername*, *Passwort* und *Produktschlüssel* die Zugangsdaten ein, die du von REWE erhalten hast.
+. Speichere (icon:save[set=plenty]) die Einstellungen.
+////
+
+[#400]
+== Automatischen Datenaustausch aktivieren
+
+Richte den Marktplatz REWE im Menü *Einrichtung » Märkte » REWE » Grundeinstellungen* ein. Aktiviere zunächst den Artikelexport, den Bestands- und Preisabgleich und den Auftragsimport in diesem Menü, damit die Daten automatisch mit REWE ausgetauscht werden.
+
+[.instruction]
+Automatischen Datenaustausch aktivieren:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Grundeinstellungen*.
+. Aktiviere die folgenden Optionen, um den automatischen Datenaustausch mit REWE zu aktivieren:
+  ** *Artikelexport*
+  ** *Bestands- und Preisabgleich*
+  ** *Auftragsimport*
+. Speichere (icon:save[set=plenty]) die Einstellungen.
+
+[#450]
+== Bestandsübermittlung festlegen
+
+Standardmäßig werden für jede Variante die Bestandsinformationen übermittelt, die du über die Einstellung *Beschränkung* an der Variante festlegst. Du kannst diese Einstellung aber auch ignorieren und für alle Varianten den tatsächlichen Netto-Warenbestand an REWE übermitteln.
+
+[.instruction]
+Bestandsübermittlung festlegen:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Grundeinstellungen*.
+. Wähle eine Option für *Bestand übertragen*. Beachte <<#rewe-bestand>>.
+. Speichere (icon:save[set=plenty]) die Einstellungen.
+
+[[rewe-bestand]]
+.Bestandsübermittlung festlegen
+[cols="1,3a"]
+|====
+|Einstellung |Erläuterung
+
+| *Bestand übertragen*
+| Wählen, wie Bestand übertragen werden soll.
+[cols="1,3"]
+!===
+! *Varianteneinstellung 'Beschränkung' berücksichtigen* +
+(Standardeinstellung)
+! Der Bestand wird für jede Variante so übermittelt, wie an der Variante eingestellt. Die Beschränkung des Bestands wird im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Einstellungen » Bereich: Verfügbarkeit* über die Einstellung *Beschränkung* gesteuert. +
+*_Hinweis:_* Für Varianten, bei denen die Einstellung *Beschränkung* auf *Keinen WB für diese Variante führen* gestellt sind, wird ein Bestand von 1000 an REWE übertragen.
+
+! *Tatsächlichen Netto-Warenbestand übertragen*
+! Die an der Variante eingestellte *Beschränkung* des Bestands wird für alle Varianten, die an REWE übertragenen werden, ignoriert. Stattdessen wird für jede Variante der tatsächliche Netto-Warenbestand an REWE übermittelt. Den tatsächlichen Netto-Warenbestand findest du im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Bestand » Tab: Warenbestand* in der Spalte *Netto*. +
+*_Hinweis:_* Für Varianten, bei denen die Einstellung *Beschränkung* auf *Keinen WB für diese Variante führen* gestellt sind, wird ein Bestand von 0 an REWE übertragen. Die Variante ist also auf REWE nicht kaufbar. +
+*_Tipp:_* Der Netto-Warenbestand ist die Menge der Varianten, die zum Verkauf zur Verfügung steht. Der Netto-Warenbestand ist eine Teilmenge des physischen Bestands. Wenn vom physischen Warenbestand alle Reservierungen abgezogen werden, ergibt sich der Netto-Bestand.
+!===
+
+|====
+
+[#550]
+== Verkaufspreis festlegen
+
+:referrer-price: REWE
+
+include::_textblocks/instructions/verkaufspreis-festlegen.adoc[]
+
+[#1800]
+== Angebotspreise verwalten
+
+Optional kannst du zeitlich begrenzte Angebotspreise an REWE übermitteln.
+
+IMPORTANT: Der Angebotspreis wird nicht automatisch auf REWE gestartet und beendet. Der Angebotspreis wird erst gestartet und beendet, wenn du den Preis bearbeitest, der für den REWE-Aktionspreis in plentymarkets gespeichert ist.
+
+[#1801]
+=== Angebotspreis festlegen
+
+Voraussetzungen für den korrekten Export von Angebotspreisen:
+
+* Du hast einen Verkaufspreis des Typs *Aktionspreis* erstellt. +
+  *_Tipp:_* Vergiss nicht, für diesen Aktionspreis die Herkunft *REWE* zu aktivieren.
+* Du hast in den REWE-Katalogen die folgenden Zuordnungen vorgenommen:
+  ** Marktplatz-Datenfeld *Angebotspreis* = plentymarkets Verkaufspreis des Typs *Aktionspreis*
+  ** Marktplatz-Datenfeld *Angebot beginnt* = plentymarkets Eigenschaft *REWE Angebotspreis Startdatum*
+  ** Marktplatz-Datenfeld *Angebot endet* = plentymarkets Eigenschaft *REWE Angebotspreis Enddatum*
+
+[.instruction]
+Angebotspreis festlegen:
+
+. Verknüpfe den Verkaufspreis des Typs *Aktionspreis* mit der Variante.
+. Speichere einen Preis für den Aktionspreis.
+. Verknüpfe die Variante mit der Eigenschaft *REWE Angebotspreis Startdatum*.
+. Speichere ein Datum für die Eigenschaft. +
+*_Wichtig:_* Der Aktionspreis wird an diesem Datum nicht automatisch gestartet.
+. Verknüpfe die Variante mit der Eigenschaft *REWE Angebotspreis Enddatum*.
+. Speichere ein Datum für die Eigenschaft. +
+*_Wichtig:_* Der Aktionspreis wird and diesem Datum nicht automatisch beendet.
+. Setze dir eine Erinnerung für Startdatum und Enddatum. An diesen Tagen musst du den Angebotspreis selbst starten und beenden.
+
+[#1802]
+=== Angebotspreis am Startdatum starten
+
+Am Startdatum nimmst du eine Änderung an dem Preis vor, der für den REWE-Aktionspreis in plentymarkets gespeichert ist. Dadurch werden die Preisdaten bei REWE aktualisiert und der Angebotspreis gestartet.
+
+Du hast mehrere Möglichkeiten, die Preise zu ändern. Für welche Möglichkeit du dich entscheidest, hängt auch davon ab, für wie viele Varianten du den Aktionszeitraum starten möchtest.
+
+[.tabs]
+====
+Preisänderung für eine oder wenige Varianten::
++
+--
+. Öffne die Variante.
+. Nimm eine Preisänderung für den Angebotspreis vor. Ändere zum Beispiel die letzte Kommastelle des Angebotspreises.
+. Speichere die Änderung. +
+→ Der Angebotspreis für die Variante wird auf REWE gestartet. +
+*_Tipp:_* Du kannst die Änderung sofort wieder rückgängig machen. Es geht nur darum, dass der Preis neu gespeichert wird.
+--
+
+Preisänderung für viele Varianten::
++
+--
+. Öffne die Varianten-Gruppenfunktion.
+. Nimm eine Preisänderung für den Angebotspreis vor, zum Beispiel wie im Screenshot unten gezeigt.
+. Führe die Varianten-Gruppenfunktion aus. +
+→ Der Angebotspreis wird auf REWE für alle Varianten gestartet, die das in der Eigenschaft *REWE Angebotspreis Startdatum* gespeicherte Startdatum erreicht oder überschritten haben. +
+*_Tipp:_* Du kannst die Änderung sofort wieder rückgängig machen. Es geht nur darum, dass der Preis neu gespeichert wird.
+
+.Preisänderung: Preiserhöhung um einen Cent für alle REWE-Aktionspreise
+image::assets/rewe-aktionspreis-beispiel.png[]
+--
+====
+
+[#1802]
+=== Angebotspreis am Enddatum beenden
+
+Am Enddatum nimmst du eine Änderung an dem Preis vor, der für den REWE-Aktionspreis in plentymarkets gespeichert ist. Dadurch werden die Preisdaten bei REWE aktualisiert und der Angebotspreis beendet.
+
+Du hast mehrere Möglichkeiten, die Preise zu ändern. Für welche Möglichkeit du dich entscheidest, hängt auch davon ab, für wie viele Varianten du den Aktionszeitraum beenden möchtest.
+
+[.tabs]
+====
+Preisänderung für eine oder wenige Varianten::
++
+--
+. Öffne die Variante.
+. Nimm eine Preisänderung für den Angebotspreis vor. Ändere zum Beispiel die letzte Kommastelle des Angebotspreises.
+. Speichere die Änderung. +
+→ Der Angebotspreis für die Variante wird auf REWE beendet. +
+→ Als neuer Preis wird der normale Verkaufspreis angezeigt. +
+*_Tipp:_* Du kannst die Änderung sofort wieder rückgängig machen. Es geht nur darum, dass der Preis neu gespeichert wird.
+--
+
+Preisänderung für viele Varianten::
++
+--
+. Öffne die Gruppenfunktion.
+. Nimm eine Preisänderung für den Angebotspreis vor, zum Beispiel wie im Screenshot unten gezeigt.
+. Führe die Gruppenfunktion aus. +
+→ Der Angebotspreis wird auf REWE für alle Varianten beendet, die das in der Eigenschaft *REWE Angebotspreis Enddatum* gespeicherte Enddatum erreicht oder überschritten haben. +
+→ Als neuer Preis wird der normale Verkaufspreis angezeigt. +
+*_Tipp:_* Du kannst die Änderung sofort wieder rückgängig machen. Es geht nur darum, dass der Preis neu gespeichert wird.
+
+.Preisänderung: Preiserhöhung um einen Cent für alle REWE-Aktionspreise
+image::assets/rewe-aktionspreis-beispiel.png[]
+--
+====
+
+[#500]
+== Provision einstellen
+
+[TIP]
+.Provisionseinstellungen sind optional
+====
+Die Einstellungen zur Provision bei REWE sind optional. Wenn du keine Provision einstellst, werden Aufträge mit den Verkaufspreisen, die auf REWE angezeigt werden, in dein plentymarkets System importiert. +
+Wenn keine Provision eingestellt wird, werden die Preise auch auf dem Lieferschein ohne Provision angezeigt.
+====
+
+Im Menü *Einrichtung » Märkte » REWE » Grundeinstellungen* legst du die Standardprovision fest. Mit der Provision werden provisionsfreie Aufträgsbeträge berechnet.
+
+Provisionsfreie Auftragsbeträge werden folgendermaßen berechnet:
+
+* Verkaufspreis REWE = Verkaufspreis Endkund:in * (1 - Umrechnungsfaktor)
+* Umrechnungsfaktor = Provision * (1 + Mehrwertsteuersatz)
+
+Für die Berechnung werden die Prozentsätze für Provision und Mehrwertsteuersatz in den entsprechenden Faktor umgerechnet, also durch 100 geteilt. Der Umrechnungsfaktor wird auf die 3. Nachkommastelle gerundet, wie auch bei REWE.
+
+[.instruction]
+Provision einstellen:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Grundeinstellungen*.
+. Gib im Bereich *Provision* eine Zahl für die Provision in Prozent ein.
+. Speichere (icon:save[set=plenty]) die Einstellungen. +
+→ Die eingestellte Provision ist die Standardprovision für alle Artikel, außer Varianten, für die eine separate Provision eingestellt wurde.
+
+Für Varianten kann mit der Eigenschaft *REWE Provision* eine separate Provision eingestellt werden. Die Eigenschaft *REWE Provision* wird beim Installieren des REWE-Plugins automatisch erstellt. Um eine separate Provision für eine Variante festzulegen, verknüpfe die Variante mit der Eigenschaft *REWE Provision*.
+
+[.instruction]
+Separate Provision für Varianten einstellen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten*.
+. Öffne den Artikel.
+. Wechsele in das Tab *Varianten*.
+. Öffne die Variante, für die du eine separate Provision einstellen möchtest.
+. Wechsele in das Tab *Eigenschaften* der Variante.
+. Wähle aus der Dropdown-Liste *Eigenschaften* die Eigenschaft *REWE Provision*.
+. Klicke auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Die Eigenschaft wird mit der Variante verknüpft.
+. Gib in das Eingabefeld *Wert* eine Zahl oder Kommazahl für die Provision in Prozent ein.
+. Speichere (icon:save[set=plenty]) die Einstellungen.
+
+[#600]
+== Auftragsherkunft aktivieren
+
+:market: REWE
+:referrer: REWE
+:referrer-option: pass:quotes[Option *Rewe*]
+
+include::_textblocks/instructions/auftragsherkunft-aktivieren.adoc[]
+
+[#700]
+== Variantenverfügbarkeit einstellen
+
+:market-availability: REWE
+:option-availability: REWE
+
+include::partial$variantenverfuegbarkeit.adoc[]
+
+// Web-API NICHT erforderlich!
+
+[#800]
+== Varianten mit Eigenschaft REWE-Produkttyp verknüpfen
+
+Varianten, die du auf REWE verkaufen möchtest, müssen mit der Eigenschaft *REWE-Produkttyp* verknüpft werden. Diese Eigenschaft wird in deinem plentymarkets System erstellt, sobald du das REWE-Plugin installiert hast. Beispiele für REWE-Produkttypen sind:
+
+* Haushalt
+* Garten
+* Fashion
+
+:property-link: REWE-Produkttyp
+:property-selection:
+:property-link-info: Als Werte stehen die REWE-Produkttypen zur Auswahl.
+
+include::_textblocks/properties/instructions/properties-link-to-variation.adoc[]
+
+[#900]
+== Artikelexport einrichten
+
+Artikeldaten werden über Kataloge zu REWE übertragen. Mit dem Assistenten *REWE-Katalog erstellen* erstellst du einen Katalog pro Produktkategorie.
+
+* Du arbeitest zum ersten Mal mit den Katalogen? Dann mach dich zuerst <<daten/daten-exportieren/kataloge-verwalten#, mit dem Prinzip der Kataloge vertraut>>. Dort findest du auch weitere Informationen zu den plentymarkets <<daten/daten-exportieren/kataloge-verwalten#_datenquellen_zuordnen, Datenfeldern>>, die du zuordnen kannst.
+
+[IMPORTANT]
+.Artikel können auf commercetools nicht gelöscht werden
+====
+Ein Artikel kann auf commercetools nicht gelöscht werden, weder durch plentymarkets noch durch REWE oder commercetools. Deshalb solltest du vor der Artikelübertragung besonders sorgfältig prüfen, dass im Katalog die korrekten Datenfelder verknüpft wurden.
+====
+
+Zurzeit kannst du mit dem REWE-Plugin Kataloge für die folgenden REWE-Produktkategorien erstellen:
+
+* *AFG* (Alkoholfreie Getränke)
+* *Alkoholhaltige Getränke*
+* *Babybedarf*
+* *Bücher und Zeitschriften*
+* *Drogerie*
+* *Fashion*
+* *Freizeit/Sport*
+* *Garten*
+* *Haushalt*
+* *Multimedia*
+* *Kontaktlinsen*
+* *Lebensmittel* +
+_Hinweise zur Produktkategorie Lebensmittel:_ +
+  ** Alle Lebensmittelangaben müssen pro 100g angegeben werden.
+  ** Energieangaben müssen in kcal angegeben werden.
+  ** Wenn dem Feld *Nährwertangaben für zubereitete oder nicht zubereitete Lebensmittel* kein Wert zugeordnet wurde, wird standardmäßig der Wert *unbehandelt* an REWE übertragen.
+* *Neue Medien (DVD etc.)*
+* *Schreibwaren*
+* *Sets*
+* *Spielwaren*
+* *Tierbedarf*
+
+[#1001]
+=== Besonderheiten der REWE-Artikeldatenstruktur: Produktgruppen und Varianten
+
+Bei REWE wird zwischen *Produktgruppen* und *Variantengruppen* unterschieden.
+
+[cols="1,5a"]
+|====
+| Produktgruppe
+|
+* Die Varianten unterscheiden sich optisch voneinander.
+* Deshalb hat jede plentymarkets Variante eigene Bilder.
+* Produktgruppenattribute sind Attribute, die das Aussehen des Produkts beeinflussen
+
+*_Beispiele:_*
+
+* Ein Artikel wird in unterschiedlichen Farben und/oder mit unterschiedlichen Motiven angeboten.
+* Ein Artikel wird in unterschiedlichen Packungsgrößen angeboten, die sich optisch unterscheiden.
+
+*_Entsprechung in plentymarkets:_*
+
+In plentymarkets sind Produktgruppen also Artikel, deren Varianten je nach Produkttyp mindestens ein REWE-Gruppenattribut besitzen.
+
+*_Beispiel für Attribute:_*
+
+Für den Produkttyp Lebensmittel stehen die folgenden *Attribute für Produktgruppe* zur Verfügung (Stand: 05/2021):
+
+* Geschmacksrichtung
+* Packungsgröße
+* Sorte
+
+*_Besonderheiten bei der Katalog-Zuordnung:_*
+
+Artikel in plentymarkets können mehrere REWE-Gruppenattribute besitzen. Bei der Übertragung zu REWE kann aber nur ein REWE-Gruppenattribut verwendet werden, um Produktgruppen zu bilden. Deswegen muss im Katalog die Option *Attribut für Produktgruppe* so verknüpft werden, dass das erste Attribut immer das Attribut ist, über das du diese Gruppe bilden möchtest. Wenn sich zum Beispiel ein Artikel in Farbe und Motiv unterscheidet und das Motiv das REWE-Gruppenattribut sein soll, muss das Motiv für das Marktplatz-Datenfeld *Attribut für Produktgruppe* als erstes zugeordnet werden und erst dann die Farbe.
+
+*_Tipp:_*
+
+Welche REWE-Gruppenattribute für einen Produkttyp zur Verfügung stehen, siehst du, wenn du einen Katalog mit Template erstellt hast. Öffne dazu im Marktplatz-Format die Dropdown-Liste *Attribut für Produktgruppe*.
+
+| Varianten
+|
+* Die Varianten unterscheiden sich optisch nicht voneinander.
+* Die Bilder sind deshalb für alle Varianten des Artikels gleich.
+* Variantenattribute sind Attribute, die keinen Einfluss auf das Aussehen des Produktes haben.
+
+*_Beispiele:_*
+
+* Ein Artikel wird in verschiedenen Größen angeboten. Optisch unterscheiden sich diese Größen nicht voneinander.
+* Ein Artikel wird in verschiedenen Packungsgrößen angeboten. Die Bilder sind jedoch für alle Varianten gleich.
+
+*_Entsprechung in plentymarkets:_*
+
+In plentymarkets sind *Varianten* also Varianten eines Artikels, die je nach Produkttyp höchstens ein REWE-Variantenattribut besitzen.
+
+*_Beispiel für Attribute:_*
+
+Für den Produkttyp Lebensmittel stehen die folgenden *Attribute für Variantengruppe* zur Verfügung (Stand 05/2021):
+
+* Durchmesser
+* Abmessungen
+* Grösse
+
+*_Besonderheiten bei der Katalog-Zuordnung:_*
+
+* Bei REWE-Variantenattributen kann nur ein Variantenattribut gesetzt sein, zum Beispiel nur Größe oder nur Volumen.
+* Ein Artikel sollte nicht mit mehr als einem Attribut verknüpft sein, das im Katalog als REWE-Variantenattribut zugeordnet wurde.
+
+*_Tipp:_*
+
+Welche REWE-Variantenattribute für einen Produkttyp zur Verfügung stehen, siehst du, wenn du einen Katalog mit Template erstellt hast. Öffne dazu im Marktplatz-Format die Dropdown-Liste *Attribut für Variantengruppe*.
+|====
+
+[#catalogue-creation]
+=== Katalog mit dem Assistenten erstellen
+
+:catalogue-assistant-name: REWE-Katalog erstellen
+:number-of-boxes: Info-Boxen
+:catalogue-path: pass:quotes[*Einrichtung » Assistenten » Plugins » [Mandant öffnen]*]
+:catalogue-note: Für jede Produktkategorie benötigst du einen eigenen Katalog.
+:mapping-fields: weitere
+
+include::_textblocks/catalogues/instructions/catalogue-assistant-config.adoc[]
+
+[.collapseBox]
+.Schritt *Einstellungen*
+--
+[[table-rewe-catalogue-assistant]]
+[width="100%"]
+[cols="1,2a"]
+|====
+| Einstellung | Erläuterung
+
+| *Für welche REWE-Produktkategorie möchtest du diesen Katalog erstellen?*
+| Eine Produktkategorie aus der Dropdown-Liste wählen. +
+*_Hinweis:_* Für jede Produktkategorie benötigst du einen eigenen Katalog.
+
+| *Gib einen Namen für den REWE-Katalog ein.*
+a| Name für den Katalog eingeben. Der Katalog wird unter diesem Namen im Menü *Daten » Kataloge* angezeigt.
+|====
+--
+
+[.collapseBox]
+.Schritt *Basisfelder verknüpfen*
+--
+In diesem Schritt des Assistenten legst du fest, welche in plentymarkets gespeicherten Variantendaten an den Marktplatz gesendet werden sollen. Dazu ordnest du jedes angezeigte Feld des Marktplatzes dem plentymarkets Datenfeld zu, das die Daten enthält, die du an den Marktplatz exportieren möchtest. Statt ein vorhandenes Datenfeld zuzuordnen, kannst du für bestimmte Datenfelder auch ein neues Datenfeld erstellen.
+
+'''
+*SKU* = Wähle aus der Dropdown-Liste, welches Datenfeld als SKU übertragen werden soll. +
+*_Empfehlung:_* Die Varianten-ID ist der Variante eindeutig zugeordnet. Ordne dem Marktplatz-Datenfeld *SKU* deshalb das plentymarkets Datenfeld *Varianten-ID* zu. +
+*_Hinweis:_* Nachdem eine Variante auf commercetools erstellt wurde, dürfen die SKU und die Parent-SKU der Variante nicht mehr geändert werden.
+
+'''
+*Datenfeld wählen* = Ein bereits in plentymarkets vorhandenes Datenfeld wird an REWE exportiert. Ein Datenfeld aus der Dropdown-Liste *Datenfeld* wählen. +
+*_Hinweis:_* Die Zuordnungen, die du vornimmst, werden nicht auf Sinnhaftigkeit geprüft. Prüfe deshalb die Zuordnungen sorgfältig, bevor du den Export startest.
+
+'''
+*Eigenschaft anlegen* = Erstellt eine <<artikel/einstellungen/eigenschaften#500, Eigenschaft>> und ordnet diese Eigenschaft dem Datenfeld zu. Mit Eigenschaften kannst du Werte für Marktplatz-Datenfelder übergeben, die in plentymarkets standardmäßig nicht in den Artikeldaten gespeichert werden können, zum Beispiel *Durchmesser*.
+
+Automatisch erstellte Eigenschaften werden im Menü <<artikel/einstellungen/eigenschaften#500, Einrichtung » Einstellungen » Eigenschaften » Konfiguration>> gespeichert.
+
+Automatisch erstellte Eigenschaften haben die folgenden Einstellungen:
+
+* Bereich = Artikel
+* Typ = _je nach Marktplatz-Datenfeld_
+* Sprache = Deutsch
+* Name = _Name der Produktkategorie_
+* Gruppe = REWE
+
+'''
+*Verkaufspreis anlegen* = Erstellt einen neuen Verkaufspreis und ordnet diesen Verkaufspreis dem Datenfeld zu. Automatisch erstellte Verkaufspreise können im Menü <<artikel/einstellungen/preise#400, Einrichtung » Artikel » Verkaufspreise>> geprüft und bearbeitet werden.
+
+Automatisch erstellte Verkaufspreise haben die folgenden Einstellungen:
+
+* Abo-Intervall = Keins
+* Interner Name = REWE
+* Externer Name = REWE
+* Ab Menge = 1
+* Live umrechnen = Nein
+* Währung = Euro
+* Darstellung = Bei neuem Artikel immer anzeigen
+* Mandant = ALLE
+* Klasse = ALLE
+* Land = Deutschland
+
+'''
+*Barcode anlegen* = Erstellt einen Barcode *REWE* und ordnet diesen Barcode dem Datenfeld zu. Ist bereits ein Barcode mit dem Namen *REWE* im System, wird stattdessen dieser Barcode zugeordnet. Automatisch erstellte Barcodes können im Menü <<artikel/einstellungen/barcodes#100, Einrichtung » Artikel » Barcodes>> geprüft und bearbeitet werden.
+--
+
+[#catalogue-mapping]
+=== Weitere Datenfelder im Katalog zuordnen (nicht im Assistenten)
+
+Mit dem Assistenten hast du bereits wichtige Pflichtfelder für die gewählte Produktkategorie zugeordnet. Nachdem du den Assistenten abgeschlossen hast, musst du aber noch weitere Datenfelder zuordnen, um noch mehr Informationen zu deinen Produkten an REWE zu übermitteln.
+
+:catalogue-assistant:
+
+include::_textblocks/catalogues/instructions/catalogue-mapping.adoc[]
+
+[#905]
+=== Besonderheiten bei der Zuordnung von Datenfeldern
+
+Jeder Marktplatz strukturiert Artikeldaten anders. Deshalb treten beim Zuordnen von Datenfeldern bestimmte Sonderfälle auf. In <<#catalogue-rewe-mappings>> findest du Hinweise dazu, was du beim Zuordnen von Datenfeldern für REWE beachten solltest.
+
+[[catalogue-rewe-mappings]]
+.Besonderheiten bei der Katalogzuordnung
+[cols="1,3a"]
+|====
+| Marktplatz-Datenfeld | plentymarkets Datenfeld
+
+| *SKU*
+| Wir empfehlen, dem Marktplatz-Datenfeld *SKU* das plentymarkets Datenfeld *Varianten-ID* zuzuordnen, da die Varianten-ID der Variante eindeutig zugeordnet ist. +
+*_Hinweis:_* Nachdem eine Variante auf commercetools erstellt wurde, dürfen die SKU und die Parent-SKU der Variante nicht mehr geändert werden. Wenn du die SKU oder die Parent-SKU nachträglich änderst, findet für die Variante kein Datenabgleich mehr statt.
+
+| *Attribute für Produktgruppen*
+| Wie <<#1001, oben beschrieben>> unterscheidet REWE zwischen Produktgruppen und Variantengruppen.
+
+*_Zur Erinnerung:_* Eine REWE Produktgruppe wird benötigt, wenn die Varianten eines Artikels unterschiedliche Bilder haben, weil sie sich optisch unterscheiden. Produktgruppenattribute sind also REWE-Attribute, die das Aussehen des Produkts beeinflussen.
+
+Du ordnest einem Marktplatz-Datenfeld *Attribut für Produktgruppen* also folgendes plentymarkets Datenfeld zu:
+
+* *_Möglichkeit 1:_* Ein Attribut, das das Aussehen der Varianten verändert
+* *_Möglichkeit 2:_* Eine Eigenschaft, die das Aussehen der Varianten verändert
+
+Natürlich kannst du auch mit Ausweich-Datenfeldern arbeiten, wenn du für die Daten, die für das Marktplatz-Datenfeld *Attribut für Produktgruppen* exportiert werden sollen, in plentymarkets sowohl Attribute als auch Eigenschaften nutzt.
+
+[.collapseBox]
+.*_Beispiel 1:_* Farbinformationen für Produkttyp "Fashion" zuordnen
+--
+Als Beispiel wird hier beschrieben, wie du in einem Katalog für den Produkttyp "Fashion" Farbinformationen zuordnest.
+
+* Die Farben verändern das Aussehen der Varianten. Deshalb gibst du die Farben über das Marktplatz-Datenfeld *Attribut für Produktgruppe* an.
+* Zusätzlich muss dem Marktplatz-Datenfeld *Farbe* dasselbe plentymarkets Datenfeld zugeordnet werden.
+
+*_Kurzfassung für Katalog-Erfahrene:_*
+
+[.instruction]
+Farbinformationen für Produkttyp "Fashion" zuordnen:
+
+. Ordne dem Marktplatz-Datenfeld das folgende plentymarkets Datenfeld zu:
+  * *_Möglichkeit 1:_* Feld *Wertname* des Attributs für Farbe, Sprache *Deutsch*
+  * *_Möglichkeit 2:_* Eigenschaft für Farbe, Sprache *Deutsch*
+. Navigiere zum Bereich *Attribut für Produktgruppe*.
+. Ordne dem Marktplatz-Datenfeld *Attribut für Produktgruppen* das folgende plentymarkets Datenfeld zu:
+  * *_Möglichkeit 1:_* Dasselbe Attribut für Farbe
+  * *_Möglichkeit 2:_* Dieselbe Eigenschaft für Farbe
+
+*_Detaillierte Beschreibung für den Katalog-Einstieg:_*
+
+Hier findest du zwei detaillierte Beschreibungen:
+
+* Wie du für die Farbe ein Attribut zuordnest
+* Wie du für die Farbe eine Eigenschaft zuordnest
+
+[.instruction]
+Als Attribut gepflegte Farbinformationen für Produkttyp "Fashion" zuordnen:
+
+. Öffne den REWE-Katalog mit dem Format *Fashion*.
+. Navigiere zum Marktplatz-Datenfeld *Farbe*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Attribut*.
+. Klicke auf das Attribut. +
+→ Weitere Auswahlmöglichkeiten werden ausgeklappt.
+. Klicke auf *Wertname*.
+. Wähle aus der Dropdown-Liste unter *Wertname* die Sprache *Deutsch*.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+. Navigiere zum Marktplatz-Datenfeld *Attribut für Produktgruppe*.
+. Klicke in das Datenfeld *Attribut für Produktgruppe*. +
+→ Die Marktplatz-Attribute werden ausgeklappt.
+. Klicke auf das Marktplatz-Attribut *Farbe*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Attribut*.
+. Klicke auf das Plus rechts neben demselben Attribut.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+
+[.instruction]
+Als Eigenschaft gepflegte Farbinformationen für Produkttyp "Fashion" zuordnen:
+
+. Öffne den REWE-Katalog mit dem Format *Fashion*.
+. Navigiere zum Marktplatz-Datenfeld *Farbe*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Eigenschaft*.
+. Klicke auf die Gruppe, die die Eigenschaft enthält. +
+→ Die Eigenschaften der Gruppe werden ausgeklappt.
+. Klicke auf die Eigenschaft.
+. Wähle aus der Dropdown-Liste unter dem Namen der Eigenschaft die Sprache *Deutsch*.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+. Navigiere zum Marktplatz-Datenfeld *Attribut für Produktgruppe*.
+. Klicke in das Datenfeld *Attribut für Produktgruppe*. +
+→ Die Marktplatz-Attribute werden ausgeklappt.
+. Klicke auf das Marktplatz-Attribut *Farbe*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Eigenschaft*.
+. Klicke auf die Gruppe, die die Eigenschaft enthält.
+. Klicke auf das Plus rechts neben derselben Eigenschaft.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+--
+
+[.collapseBox]
+.*_Beispiel 2:_* Packungsgrößen für Produkttyp "Haushalt" zuordnen
+--
+Als Beispiel wird hier beschrieben, wie du in einem Katalog für den Produkttyp "Haushalt" Informationen zur Packungsgröße zuordnest.
+
+* Die Packungsgrößen verändern das Aussehen der Varianten. Deshalb gibst du die Packungsgröße über das Marktplatz-Datenfeld *Attribut für Produktgruppe* an.
+* Zusätzlich muss dem Marktplatz-Datenfeld *Größe* dasselbe plentymarkets Datenfeld zugeordnet werden.
+
+*_Kurzfassung für Katalog-Erfahrene:_*
+
+[.instruction]
+Packungsgrößen für Produkttyp "Haushalt" zuordnen:
+
+. Öffne den REWE-Katalog mit dem Format *Haushalt*.
+. Navigiere zum Marktplatz-Datenfeld *Größe*.
+. Ordne dem Marktplatz-Datenfeld das folgende plentymarkets Datenfeld zu:
+  * *_Möglichkeit 1:_* Feld *Wertname* des Attributs für Größe, Sprache *Deutsch*
+  * *_Möglichkeit 2:_* Eigenschaft für Größe, Sprache *Deutsch*
+. Navigiere zum Bereich *Attribut für Produktgruppe*.
+. Ordne dem Marktplatz-Datenfeld *Attribut für Produktgruppen* das folgende plentymarkets Datenfeld zu:
+  * *_Möglichkeit 1:_* Dasselbe Attribut für Größe
+  * *_Möglichkeit 2:_* Dieselbe Eigenschaft für Größe
+
+*_Detaillierte Beschreibung für den Katalog-Einstieg:_*
+
+Hier findest du zwei detaillierte Beschreibungen:
+
+* Wie du für die Packungsgröße ein Attribut zuordnest
+* Wie du für die Packungsgröße eine Eigenschaft zuordnest
+
+[.instruction]
+Als Attribut gepflegte Packungsgrößen für Produkttyp "Haushalt" zuordnen:
+
+. Öffne den REWE-Katalog mit dem Format *Haushalt*.
+. Navigiere zum Marktplatz-Datenfeld *Größe*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Attribut*.
+. Klicke auf das Attribut. +
+→ Weitere Auswahlmöglichkeiten werden ausgeklappt.
+. Klicke auf *Wertname*.
+. Wähle aus der Dropdown-Liste unter *Wertname* die Sprache *Deutsch*.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+. Navigiere zum Marktplatz-Datenfeld *Attribut für Produktgruppe*.
+. Klicke in das Datenfeld *Attribut für Produktgruppe*. +
+→ Die Marktplatz-Attribute werden ausgeklappt.
+. Klicke auf das Marktplatz-Attribut *Packungsgröße*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Attribut*.
+. Klicke auf das Plus rechts neben demselben Attribut.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+
+[.instruction]
+Als Eigenschaft gepflegte Packungsgrößen für Produkttyp "Haushalt" zuordnen:
+
+. Öffne den REWE-Katalog mit dem Format *Haushalt*.
+. Navigiere zum Marktplatz-Datenfeld *Größe*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Eigenschaft*.
+. Klicke auf die Gruppe, die die Eigenschaft enthält. +
+→ Die Eigenschaften der Gruppe werden ausgeklappt.
+. Klicke auf die Eigenschaft.
+. Wähle aus der Dropdown-Liste unter dem Namen der Eigenschaft die Sprache *Deutsch*.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+. Navigiere zum Marktplatz-Datenfeld *Attribut für Produktgruppe*.
+. Klicke in das Datenfeld *Attribut für Produktgruppe*. +
+→ Die Marktplatz-Attribute werden ausgeklappt.
+. Klicke auf das Marktplatz-Attribut *Packungsgröße*.
+. Klicke auf *+ Datenfeld hinzufügen*.
+. Klicke in der Liste der Datenfelder auf die Gruppe *Eigenschaft*.
+. Klicke auf die Gruppe, die die Eigenschaft enthält.
+. Klicke auf das Plus rechts neben derselben Eigenschaft.
+. Klicke auf *Bestätigen*. +
+→ Das plentymarkets Datenfeld wird zugeordnet.
+--
+
+| *Angebotspreis*; +
+*Angebot beginnt*; +
+*Angebot endet*
+| Mit diesen Marktplatz-Datenfeldern exportierst du zeitlich begrenzte Angebotspreise zu REWE. +
+*_Hinweis:_* Du gibst an den Varianten zwar ein Start- und Enddatum für die Angebotspreise an. Trotzdem starten und enden die Angebotspreise nicht automatisch. Du musst die Angebotspreise deshalb manuell verwalten. (<<#1800, Wie?>>)
+
+[cols="1,3"]
+!===
+! *Angebotspreis*
+! Ordne einen plentymarkets Verkaufspreis des Typs *Aktionspreis* zu.
+
+! *Angebot beginnt*
+! Ordne die plentymarkets Eigenschaft *REWE Angebotspreis Startdatum* zu. Diese Eigenschaft des Typs *Datum* wird automatisch in der Eigenschaftsgruppe *REWE* erstellt, wenn du das REWE-Plugin installierst.
+
+! *Angebot endet*
+! Ordne die plentymarkets Eigenschaft *REWE Angebotspreis Enddatum* zu. Diese Eigenschaft des Typs *Datum* wird automatisch in der Eigenschaftsgruppe *REWE* erstellt, wenn du das REWE-Plugin installierst.
+!===
+
+|====
+
+[#602]
+=== _Beispiel:_ Datenfeld "Produktbeschreibung" zuordnen
+
+Im Folgenden wird beispielhaft beschrieben, wie du das Pflichtfeld *Produktbeschreibung* den Artikeldaten aus plentymarkets zuordnest.
+
+. Öffne das Menü *Daten » Kataloge*.
+. Klicke auf den Katalog. +
+→ Der Katalog wird geöffnet.
+. Wähle für das REWE-Datenfeld *Produktbeschreibung* ein plentymarkets Datenfeld aus der Dropdown-Liste. +
+*_Beispiel:_* *Artikeltext > Name 1*, *Name 2* oder *Name 3*
+. Nimm die weiteren Zuordnungen analog vor. Ordne mindestens alle Pflichtfelder zu. +
+*_Tipp:_* Pflichtfelder sind mit Sternchen (*) gekennzeichnet.
+. Speichere (icon:save[set=plenty]) die Einstellungen. +
+→ Das gewählte plentymarkets Datenfeld wird auf REWE als Produktbeschreibung angezeigt.
+
+[#701]
+== Im Assistenten erstellte Datenfelder mit Varianten verknüpfen
+
+:property-group: REWE
+
+include::_textblocks/catalogues/instructions/catalogue-assistant-link-variations.adoc[]
+
+[#2000]
+== Katalogexport zu REWE aktivieren
+
+:interval: einmal täglich
+:market: REWE
+:if-active: pass:quotes[wenn im Menü *Einrichtung » Märkte » REWE » Grundeinstellungen* die Option *Artikelexport* aktiviert ist]
+
+include::_textblocks/catalogues/instructions/catalogue-activation.adoc[]
+
+[#1100]
+== Versanddienstleister verknüpfen
+
+Im Menü *Einrichtung » Märkte » REWE » Versanddienstleister-Verknüpfung* verknüpfst du die in plentymarkets gespeicherten Versanddienstleister mit den Versanddienstleistern von REWE. Wenn du keinen Versanddienstleister verknüpfst, wird automatisch der Versanddienstleister *unknown* zu REWE übertragen.
+
+[.instruction]
+Versanddienstleister verknüpfen:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Versanddienstleister-Verknüpfung*.
+. Wähle aus der Dropdown-Liste den REWE-Versanddienstleister.
+. Speichere (icon:save[set=plenty]) die Einstellungen.
+
+[#1200]
+== Retourengründe verknüpfen
+
+Im Menü *Einrichtung » Märkte » REWE » Retourengrund-Verknüpfung* verknüpfst du die in plentymarkets gespeicherten Retourengründe mit den Retourengründen von REWE. Wenn du keinen Retourengrund verknüpfst, wird automatisch der Retourengrund *Sonstiges* zu REWE übertragen. Weitere Informationen zu REWE-Retourengründen findest du in der Händlerdokumentation, die du von REWE erhalten hast.
+
+[.instruction]
+Retourengründe verknüpfen:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Retourengrund-Verknüpfung*.
+. Wähle aus der Dropdown-Liste den REWE-Retourengrund.
+. Speichere (icon:save[set=plenty]) die Einstellungen.
+
+[#1300]
+== Steuerklassen synchronisieren
+
+Wenn die Steuerklassen bei REWE geändert wurden, musst du die Steuerklassen in plentymarkets synchronisieren. Steuerklassen werden im Menü *Einrichtung » Märkte » REWE » Grundeinstellungen* im Bereich *Steuerklassen* mit REWE synchronisiert.
+
+[.instruction]
+Steuerklassen synchronisieren:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Grundeinstellungen*.
+. Klicke im Bereich *Steuerklassen* auf *Synchronisieren*. +
+→ Die Steuerklassen werden mit REWE abgeglichen.
+
+Unter *Letzte Aktualisierung* wird angezeigt, wann die Steuerklassen zuletzt mit REWE abgeglichen wurden.
+
+[WARNING]
+.Steuerklassen vor Wechsel auf REWE-Live-System synchronisieren
+====
+Bevor deine Artikel bei REWE von der Stage-Testumgebung auf das Live-System wechseln, musst du bei plentymarkets die Steuerklassen erneut synchronisieren, da dein Artikelkatalog sonst nicht übertragen wird. Gib für den Wechsel auf das Live-System zunächst deine Zugangsdaten und den Produktschlüssel für das Live-System ein und synchronisiere danach die Steuerklassen. Nachdem du die Steuerklassen synchronisiert hast, musst du sie in deinen REWE-Katalogen neu verknüpfen.
+====
+
+[#1400]
+== Marken manuell synchronisieren
+
+Marken werden einmal täglich automatisch mit REWE abgeglichen. Außerdem hast du die Möglichkeit, im Menü *Einrichtung » Märkte » REWE » Grundeinstellungen* Marken jederzeit manuell mit REWE abzugleichen.
+
+[.instruction]
+Marken manuell synchronisieren:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Grundeinstellungen*.
+. Klicke im Bereich *Marken* auf *synchronisieren*. +
+→ Die Marken werden mit REWE abgeglichen. +
+*_Tipp:_* Unter *Letzte Aktualisierung* wird angezeigt, wann die Marken zuletzt mit REWE abgeglichen wurden.
+
+[#1700]
+== Kontakterstellung deaktivieren
+
+Standardmäßig werden REWE-Aufträge immer dem Kontakt und der Rechnungsadresse von REWE zugeordnet. Optional kannst du die Option *Kontakterstellung deaktivieren* aktivieren, um keinen Kontakt zu pflegen und stattdessen nur die Adressen zu speichern. <<#rewe-kontakterstellung-deaktiveren>> beschreibt die Unterschiede zwischen den beiden Einstellungsmöglichkeiten.
+
+[[rewe-kontakterstellung-deaktiveren]]
+.Kontakterstellung deaktivieren
+[cols="1,3a"]
+|====
+|Einstellung |Erläuterung
+
+| *Kontakterstellung deaktivieren*
+a|
+* _Option deaktiviert_ (Standardeinstellung) = Die Kontakterstellung ist deaktiviert. Beim Import des ersten REWE-Auftrags wird für REWE ein Kontakt erstellt. Alle weiteren REWE-Aufträge werden mit diesem Kontakt verknüpft. Alle Rechnungsadressen werden diesem Kontakt zugeordnet.
+
+  ** Im Auftrag ist das Tab *Kontakt* verfügbar.
+  ** Über das Menü *CRM » Kontakte* ist der Kund:innendatensatz auffindbar.
+  ** Über das Menü *CRM » Schnellsuche* können die Adresseinträge und der zugehörige Auftrag gefunden werden.
+
+[.collapseBox]
+.Ablauf des Auftragsimports im Detail
+--
+. Es wird geprüft, ob REWE bereits als Firma im System gespeichert ist.
+. Wenn die Firma noch nicht im System gespeichert ist, wird die Firma erstellt.
+. Es wird geprüft, ob REWE bereits als Kontakt im System gespeichert ist.
+. Wenn der Kontakt noch nicht im System gespeichert ist, wird der Kontakt erstellt.
+. Wenn ein neuer Kontakt erstellt wird, wird der Kontakt mit der Firma verknüpft.
+. Es wird geprüft, ob die Rechnungsadresse bereits im System gespeichert ist.
+. Wenn die Rechnungsadresse noch nicht im System gespeichert ist, wird die Rechnungsadresse erstellt.
+. Die Rechnungsadresse wird mit dem Kontakt verknüpft.
+. Die Rechnungsadresse wird mit dem Auftrag verknüpft.
+. Eine Lieferadresse wird erstellt. Dabei wird nicht geprüft, ob die Lieferadresse bereits im System gespeichert ist. Die Lieferadresse wird außerdem nicht mit einem Kontakt verknüpft.
+. Die Lieferadresse wird mit dem Auftrag verknüpft.
+--
+
+* _Option aktiviert_ = Die Kontakterstellung ist deaktiviert. Beim Import von REWE-Aufträgen wird kein Kontakt erstellt. Rechnungsadresse und Lieferadresse werden erstellt und dem Auftrag zugeordnet.
+
+  ** Im Auftrag entfällt das Tab *Kontakt*.
+  ** Über das Menü *CRM » Kontakte* ist der Kund:innendatensatz nicht mehr auffindbar.
+  ** Über das Menü *CRM » Schnellsuche* können die Adresseinträge und der zugehörige Auftrag gefunden werden.
+
+[.collapseBox]
+.Ablauf des Auftragsimports im Detail
+--
+. Es wird geprüft, ob die Rechnungsadresse bereits im System gespeichert ist.
+. Wenn die Rechnungsadresse noch nicht im System gespeichert ist, wird die Rechnungsadresse erstellt.
+. Die Rechnungsadresse wird mit dem Auftrag verknüpft.
+. Eine Lieferadresse wird erstellt. Dabei wird nicht geprüft, ob die Lieferadresse bereits im System gespeichert ist. Die Lieferadresse wird außerdem nicht mit einem Kontakt verknüpft.
+. Die Lieferadresse wird mit dem Auftrag verknüpft.
+--
+|====
+
+[.instruction]
+Kontakterstellung deaktivieren:
+
+. Öffne das Menü *Einrichtung » Märkte » REWE » Grundeinstellungen*.
+. Navigiere zum Bereich *Auftragsimport*.
+. Aktiviere die Option *Kontakterstellung deaktivieren*.
+. Speichere (icon:save[set=plenty]) die Einstellung. +
+→ Pro Auftrag werden nur Rechnungsadresse und Lieferadresse erstellt und dem Auftrag zugeordnet. +
+→ Ein Kontakt wird nicht erstellt.
+
+[#1500]
+== Auftragsstatus bei REWE automatisch aktualisieren
+
+Richte <<automatisierung/ereignisaktionen#, Ereignisaktionen>> ein, um den Auftragsstatus bei REWE automatisch zu aktualisieren, wenn bestimmte Ereignisse eintreten. Folgende Ereignisaktionen können eingerichtet werden:
+
+* Auftragsposition als nicht vorrätig an REWE melden
+* Stornierung durch Käufer an REWE melden
+* Stornierung durch Händler an REWE melden
+* Versandvorbereitung an REWE melden
+* Versandvorbereitungsabschluss an REWE melden
+* Versandbestätigung an REWE melden
+* Paketzustellung an REWE melden
+* Retourenabschluss an REWE melden
+
+Beispielhaft wird hier eine Ereignisaktion beschrieben, mit der du die Versandbestätigung an REWE meldest. Richte weitere Ereignisaktionen analog dazu ein.
+
+:table-event-procedure: <<#rewe-ereignisaktion>>
+
+include::_includes:page$EA.adoc[]
+
+[[rewe-ereignisaktion]]
+.Ereignisaktion, um Auftragsstatus an REWE zu melden
+[cols="1,2,2"]
+|===
+| *Einstellung*
+| *Option*
+| *Auswahl*
+
+| *Ereignis*
+| *Auftragsänderung: Statuswechsel*
+| *Status* wählen.
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Herkunft*
+| *Rewe*
+
+| *Aktion*
+| *Plugin*
+| *Versandbestätigung an REWE melden*
+|===
+
+[IMPORTANT]
+.Retourengründe verknüpfen
+====
+Für Retouren müssen plentymarkets Retourengründe mit von REWE vorgegebenen Retourengründen verknüpft sein. Wenn beispielsweise die Ereignisaktion *Retourenabschluss an REWE melden* ausgelöst wird, muss ein Retourengrund gespeichert sein. Weitere Informationen zur Retourengrund-Verknüpfung findest du im Kapitel <<#1200, Retourengründe verknüpfen>>.
+====
+
+[#1600]
+== Informationen zu REWE-Lieferzeiten
+
+Die Variantenverfügbarkeiten in plentymarkets werden bei REWE Lieferzeiten zugeordnet. Eine Übersicht zu den Lieferzeiten bei REWE und den entsprechenden Verfügbarkeiten in plentymarkets erhältst du in <<#rewe-verfügbarkeit>>.
+
+[IMPORTANT]
+.Verfügbarkeit bei Fehlern
+====
+Wenn beim Zuordnen der Verfügbarkeit ein Fehler auftritt, wird bei REWE die Lieferzeit *länger als 3 Monate* angezeigt.
+====
+
+[[rewe-verfügbarkeit]]
+.REWE-Lieferzeiten
+[cols="1,2a"]
+|===
+| *plentymarkets Verfügbarkeit* | *Lieferzeit bei REWE*
+|1 |1-3 Werktage
+|2 |ca. 3-6 Werktage
+|3 |ca. 6-8 Werktage
+|4 |ca. 8-10 Werktage
+|5 |ca. 10-15 Werktage
+|6 |ca. 15-20 Werktage
+|7 |ca. 20-30 Werktage
+|8 |ca. 30-40 Werktage
+|9 |ca. 40-50 Werktage
+|10 |ca. 50-60 Werktage
+|===

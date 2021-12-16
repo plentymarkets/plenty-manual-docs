@@ -1,0 +1,3129 @@
+= Setting up eBay
+:lang: en
+include::{includedir}/_header.adoc[]
+:keywords: eBay, eBay listing, eBay Plus, ePID, eBay token, eBay shop categories, Second Chance Offer, SCO, eBay platform
+:description: Multi-Channel in plentymarkets: Set up the interface to the market eBay in your plentymarkets system.
+:position: 10
+:url: markets/ebay/ebay-setup
+:id: DWYPTTK
+:author: team-multi-channel
+
+With more than 120 million buyers worldwide, eBay provides an opportunity to sell on a global and growing market. The eBay API interface can be fully integrated with plentymarkets. For example, you can start <<#5100, listings>> and upload <<#6000, variation offers>>, process your <<#7400, returns>> and send <<#7100, dunning letters>>. You will also learn how to <<#10100, exchange data>> between eBay and plentymarkets.
+
+[#100]
+== Registering with eBay
+
+You need your eBay access data consisting of the user name and password. You will receive this data from eBay. First, you need to become an link:https://reg.ebay.co.uk/reg/PartialReg?src=oldbizreg[eBay member^]{nbsp}icon:external-link[] and create an eBay account.
+
+[#200]
+== Basic eBay settings in plentymarkets
+
+In this chapter, you will find information about the settings and functions for the market eBay.
+Watch this video tutorial to get an overview of the basic settings for eBay.
+
+.Basic settings for eBay
+video::196548931[vimeo]
+
+[#300]
+=== Activating and changing accounts
+
+Go to *Setup » Markets » eBay » Accounts » Auth'n'Auth* to activate new accounts for eBay. You need to have your access data consisting of the user name and password. When changing your eBay access data, you have to update and synchronise your account in plentymarkets. plentymarkets allows you to manage several eBay accounts. Proceed as follows to add one or more accounts.
+
+[.instruction]
+Activating a new account:
+
+. Go to *Setup » Markets » eBay » Accounts » Auth'n'Auth*.
+. Click on *Activate account*. +
+→ The *Unlock or change account* window opens.
+. Enter your eBay user name into the *User name* field.
+. Select the *platform* for eBay.
+. Click on the *gear-wheel icon* to unlock your account. +
+→ You are forwarded to eBay and have to authenticate your data. +
+→ The account is displayed in plentymarkets in the *Accounts* menu.
+
+[.instruction]
+Updating the token:
+
+. Go to *Setup » Markets » eBay » Accounts » Auth'n'Auth*.
+. Click on *update* to update your eBay token. +
+→ The *Unlock or change account* window opens.
+. Click on the *gear-wheel icon* to update your token. +
+→ You are forwarded to eBay and have to authenticate your data. +
+→ In plentymarkets, the validity of your eBay token is displayed in the *eBay token is valid until* column.
+
+[TIP]
+.Validity of the token
+====
+When activating or updating an account, a *token* with a validity of 18 months is generated. There is no automatic warning when the validity of the token expires. The token also becomes invalid if you change your eBay account data.
+====
+
+Go to *Setup » Markets » eBay » Accounts » Auth'n'Auth* to rename or delete accounts. For example, you have to rename your account in plentymarkets when changing your eBay user name.
+
+[.instruction]
+Renaming an account:
+
+. Go to *Setup » Markets » eBay » Accounts » Auth'n'Auth*.
+. Click on *Edit* (icon:pencil[role="yellow"]) next to the account you would like to rename.
+. Enter a new member name.
+. Save (icon:save[set=plenty]) the settings. +
+→ The account is renamed.
+
+[.instruction]
+Deleting an account:
+
+. Go to *Setup » Markets » eBay » Accounts » Auth'n'Auth*.
+. Click on *Delete account* (icon:times-circle[]) next to the account that you would like to delete. +
+→ A window opens and you need to confirm your decision. +
+*_Note:_* End all active eBay listings before deleting an eBay account.
+. Click on *OK* to delete the account. +
+→ The account is deleted.
+
+[#oauth2]
+=== Setting up OAuth2
+
+[TIP]
+.Valid SSL certificate
+====
+You need a valid <<business-decisions/system-administration/ssl-certificate#1200, SSL certificate>> for the eBay OAuth2 authentication.
+====
+
+Many calls already use the new eBay APIs. Those new APIs are based on the authentication method OAuth2 instead of the Auth-n-Auth method which was used before. The new authentication method OAuth2 is needed for more and more essential processes. Therefore, you should already authenticate your eBay accounts for OAuth2 when setting up eBay in plentymarkets.
+
+[IMPORTANT]
+.OAuth2 will become mandatory
+====
+Due to an adjustment on the part of eBay, processes relating to eBay business policies will soon not function any longer without OAuth2. Therefore you have to authenticate your eBay accounts for OAuth2 if you have not already done so.
+====
+
+==== Activating and changing accounts
+
+Go to *Setup » Markets » eBay » Accounts » OAuth2* to activate new accounts for eBay. To do so, you will need your eBay access data consisting of the user name and password. When changing your eBay access data, you have to update and synchronise your account in plentymarkets. plentymarkets allows you to manage several eBay accounts. Proceed as follows to add one or more accounts:
+
+[.instruction]
+Activating an account:
+
+. Go to *Setup » Markets » eBay » Accounts » OAuth2*.
+. Select *Add sandbox account* to activate an account for a test environment. +
+*_Or:_* Select *Add production account* if the new account is already productive. +
+→ You are forwarded to eBay and have to authenticate your data. +
+*_Important:_* Pay attention to correctly copying upper and lower case spelling when you enter the account details. +
+→ The account is activated. +
+→ The account is shown in the *Setup » Markets » eBay » Accounts » OAuth2* menu.
+
+When activating or updating an account, a token is generated. This token is valid for 18 months. There is no automatic warning when the validity of the token expires. The token also becomes invalid if you change your eBay access data.
+
+Go to *Setup » Markets » eBay » Accounts » OAuth2* to rename, update or delete accounts. For example, you have to rename your account in plentymarkets when changing your eBay user name.
+
+==== Assigning rights
+
+:rights-purpose: authenticate accounts with OAuth2
+
+:right-one: pass:quotes[*Rights > Markets > Credentials* and all subordinate rights]
+:right-two: pass:quotes[*Rights > Markets > eBay > Marketplace > Display*]
+
+
+include::_includes:page$rights.adoc[]
+
+[#500]
+=== Loading eBay shop categories
+
+Import the eBay shop categories to plentymarkets or synchronise them in this area. Shop categories can be selected in a listing or be transferred to a listing with a listing template. In order to display categories in a template, the *{% GetListingStoreCategories() %}* function must be used in layout templates. For further information, refer to the <<Managing layout templates, Managing layout templates>> chapter.
+
+[.instruction]
+Loading eBay shop categories:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
+. Expand (icon:plus-square-o[]) the *eBay shop categories* area to display an overview of your account’s shop categories. +
+→ The account data is synchronised.
+. Select *by position (as saved on eBay)* or *alphabetically by category name* from the *Import shop categories* drop-down list.
+. Click on *Add* (icon:plus-square[role="green"]) to import the eBay shop categories into plentymarkets.
+
+[TIP]
+.Updating shop categories and return policy
+====
+After changing the eBay account data, update your shop categories and return policy. Load the *shop categories* directly in this menu. Go to *Setup » Markets » eBay » Business policies » Tab: eBay return policy* to save the *return policy*.
+====
+
+[#600]
+=== Carrying out the basic settings
+
+Go to *Setup » Markets » eBay » Settings* to carry out the initial settings for the market eBay and to set up your accounts. Link shipping profiles to eBay platforms, synchronise eBay’s reasons for return and statuses with your plentymarkets settings and define status links for purchase cancellations.
+
+[.instruction]
+Carrying out the initial settings:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Initial settings*.
+. Carry out the settings. Pay attention to the explanations given in <<#ebay-initial-settings>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[ebay-initial-settings]]
+.Initial settings for eBay
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+| *UPC from EAN field*
+| Select whether to use the Universal Product Code (UPC) from an EAN field or not. +
+This setting is defined in the *Transfer as item number* option of a new market listing in the *Item » Edit item » [Open item] » New listing* menu. If the *Transfer UPC* option is activated in the *Item » Edit item » New listing* menu, select one of the *Use EAN 1 - 4* options here. +
+The barcodes from the item settings can be selected for this option.
+
+| *Use variation number as SKU*
+a| Should the variation number be used as the stock keeping unit? +
+
+* *No (recommended)* = The listing ID is transferred with the variation ID. The SKU is generated automatically with the following pattern: +
+For listings with only one variation: +
+Prefix `+#MLID#+` + _Market-listing-ID_ (e.g.: #MLID#123) +
+  ** For listings with more than one variation: +
+Prefix `+#MLID#+` + _Market-listing-ID_ `+-+` _AttributeValueSetId_ (e.g.: #MLID#123-456) +
+*_Tip:_* The AttributeValueSetId is an ID for an exact combination of attributes and attribute values. +
+* *Yes* = The variation number is transferred as the SKU. This setting is not recommended because after a variation was changed and the listing was not updated, no synchronisation will take place.
+
+| *Sort eBay variations based on position of item variation*
+|Select whether eBay variations should be sorted based on the position of item variations or not. +
+If you select *No*, the eBay variations are sorted according to the positions of the attribute values. The position of an attribute value is defined in the *Setup » Item » Attributes » [Open attribute] » Tab: Values* menu.
+
+| *Use eBay image service*
+a| Select whether to use the eBay image service. +
+
+* *Yes* = Item images are transferred directly to eBay and are saved there. This may result in additional costs. Multiple item images can be transferred to eBay when this option is selected. +
+* *No* = Only the URL of the first item image is transferred.
+
+| *Use image of first variation as gallery image if no gallery image is saved for item*
+a| Select whether the image of the first variation should be used as the gallery image if no gallery image is saved for the item. +
+
+* *Yes* = The first image of the first variation is used as the gallery image for eBay. +
+* *No* = No gallery image is transferred to eBay. +
+* *No* is recommended because eBay recommends a gallery image which shows all of an item’s variations.
+
+| *Add item details from the eBay catalogue*
+a| Select whether item details from the eBay catalogue are added. +
+
+* *Yes* = Further item details from the eBay catalogue are automatically added. For further details, refer to the link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/listing-item-product-details-catalogue?id=4653[eBay help^]{nbsp}icon:external-link[]. +
+* *No* = Item details are not transferred.
+
+| *Add item images from the eBay catalogue*
+a| Select whether item images from the eBay catalogue should be added. +
+
+* *Yes* = Further item images from the eBay catalogue are automatically added. For further details, refer to the link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/listing-item-product-details-catalogue?id=4653[eBay help^]{nbsp}icon:external-link[]. +
+* *Yes + Gallery image* = If an item exists in the eBay catalogue, it is added automatically and also used as gallery image. +
+* *No* = Item images are not added.
+
+| *Order item*
+a| * *Apply order item* = If a customer purchases 5 identical items, then the item is listed once in the order along with a quantity of 5. +
+* *One order item per piece* = If a customer purchases 5 identical items, then the item is listed 5 times in the order, each time with a quantity of 1.
+
+| *Place shipping & payment mark*
+| Select whether the shipment of an item is reported to eBay when the outgoing items have been booked.
+
+| *Activate automatic stock update*
+a|Activate or deactivate the <<Activating the automatic stock update, automatic stock update>> for GTC offers (= listings with a fixed price that are automatically restarted after 30 days) +
+
+* *Yes* = If the *limited (without reservation)* option is selected for the stock dependence of a listing, then the quantity is updated whenever changes of stock occur during the entire duration of the offer. Still, the offer is terminated when the stock is sold out and is re-listed when new stock is available. The eBay ranking remains. Additionally, you can use the *“out of stock” option* for GTC offers so that an item is still displayed on eBay but can no longer be purchased. +
+If you have listings with a specific duration, for example 7 days, then you can maintain the ranking by searching in *Active listings* for listings that were ended early, selecting them, clicking on *Group function* and selecting *End and restart* to restart the listings when stock is available again. +
+* *No* = There is no automatic stock update.
+
+| *Activate SCO function*
+| Submit a <<Setting up Second Chance Offers (SCO), Second Chance Offer>> to a defeated bidder. Defeated bidders then automatically receive an offer of the same item for their highest bids.
+
+| *Stock buffer (SCO function)*
+| Enter the number of items that should not be available for SCOs. If the net stock is 5 and 3 was entered as the buffer, then 2 SCOs are submitted if there are that many defeated bidders.
+
+| *Number of days after the submission of an offer in which a potential customer can complete the purchase*
+| Select whether the SCO should be ended after *1*, *3*, *5*, or *7 days*.
+|====
+
+[.instruction]
+Carrying out eBay account settings:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
+. Carry out the settings. Pay attention to the explanations given in <<#settings-ebay-accounts>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[settings-ebay-accounts]]
+.Settings for eBay accounts
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+| *Retrieve orders*
+a| Select the eBay platform used for automatically retrieving sales from all countries or *Do not retrieve sales*. +
+
+* *Retrieve sales from all countries with eBay* = Automatic synchronisation with all active listings. Listings are synchronised hourly. +
+Synchronisation is important in certain cases. For example, GTC listings must be synchronised when eBay automatically extends the end time. Furthermore, information such as the delivery address is synchronised. For example, synchronisation is important if the address was changed in the eBay order process. +
+* *Do not retrieve sales* = No synchronisation with active listings. If this option is selected, then sales cannot be retrieved manually either.
+
+| *Retrieve eBay returns*
+a| Select whether <<Processing returns, eBay returns>> should be retrieved or not. +
+
+* *Yes* = Activates the eBay return process in plentymarkets. New eBay returns are imported into plentymarkets every 20 minutes. +
+* *No* = The eBay return process is deactivated in plentymarkets. New eBay returns are not imported into plentymarkets. eBay returns must be edited in the seller’s My eBay area instead.
+
+| *Retrieve eBay purchase cancellations*
+| Select whether <<Processing purchase cancellations, eBay purchase cancellations>> are retrieved and imported into plentymarkets. Purchase cancellations are updated every 15 minutes.
+
+| *Update eBay return status*
+| Select whether the return status should be updated *In return order*, *In credit note* or *In return order and credit note* when the status is changed by eBay. Return statuses are updated once per hour.
+
+| *Automatically book payment in credit note at refund process*
+| Select whether an incoming payment is booked for orders of the type *credit note* when an eBay Payments order is successfully refunded.
+
+| *Automatically activate eBay Plus for new listings*
+| Select whether the loyalty programme eBay Plus should be activated for all new listings automatically. Listings can be edited afterwards and the setting can be deactivated.
+
+| *Use "out of stock" option*
+a| Select whether the out of stock option should be used. +
+
+* *Yes* = Listings are not ended if the items are unavailable. The offer is displayed but cannot be purchased. The number of items sold is not set to zero when the item is available again. Rather, the sales history remains as it is. In addition to this option, the <<Activating the automatic stock update, automatic stock update>> in the *Initial settings* tab must be activated. Furthermore, this option takes priority over the <<Setting up stock, End offers automatically>> option, i.e. offers are not ended but displayed and cannot be purchased. +
+* *No* = Listings are ended automatically if an item is not in stock.
+
+| *Price synchronisation*
+a| Select whether you want to update prices automatically. +
+
+* *Hourly (with description)* = Price changes are synchronised automatically every hour. The listing’s description is also updated. Use this option if you use a place holder for prices in the listing’s description. If the listings' price is tied to the item price, the price synchronisation takes place as soon as the item price is changed. If the listings' price is not tied to the item price, the price synchronisation takes place as soon as the price for the market listing is changed. +
+* *Hourly (without description)* = Price changes are synchronised automatically every hour. The listing’s description is not updated. If the listings' price is tied to the item price, the price synchronisation takes place as soon as the item price is changed. If the listings' price is not tied to the item price, the price synchronisation takes place as soon as the price for the market listing is changed. +
+* *No* = There is no automatic stock update.
+
+| *Price synchronisation for special sales*
+a| Select whether you want to use the price synchronisation for special sales. +
+
+* *Yes* = There is a price synchronisation for special sales. If you select *Yes*, special sales on eBay are ended. +
+* *No* = There is no price synchronisation for special sales.
+
+| *Automatically retrieve messages*
+| Select whether eBay messages are automatically retrieved every hour. +
+The eBay messages can be read in the *CRM » Ticket system* menu.
+
+| *Mark messages as read*
+| Select whether messages should be marked as read on eBay after they were retrieved in plentymarkets. Messages marked as read on eBay are not imported into plentymarkets again with the next retrieval.
+
+| *Message type*
+| Select the message type for eBay messages. +
+The type refers to the selected *type* in the *Setup » CRM » Ticket system* menu. You can also enter your own parameters for eBay there.
+
+| *Message status*
+| Select the message status for eBay messages. +
+The status refers to the selected *status* in the *Setup » CRM » Ticket system* menu. You can also enter your own parameters for eBay there.
+
+| *Send copy of eBay invoice to seller*
+a| * *Yes* = A copy of the eBay invoice is automatically sent to the seller. +
+* *No* = No copy of the eBay invoice is sent to the seller.
+
+| *Minimum stock to automatically start a listing*
+| Enter a value for the minimum stock that should be used for restarting listings automatically. If the entered value is higher then the current stock, listings are not started automatically. This option is useful, for example when all items of a listing have been sold and then the stock increases due to new incoming items or returns, but you want to restart the listing with a certain stock. +
+The entered value for minimum stock doesn’t affect GTC offers for which *Yes* was selected for the *Use "out of stock" option*.
+
+| *Stock buffer*
+|Enter a number for the stock buffer. +
+The stock is reduced by the value of this number.
+
+| *External eBay order number in order*
+a|Select which external eBay order number should be displayed in the order in plentymarkets. +
+
+* *eBay sales record number* (default setting) = The old eBay order number. This number is increased per customer and for each new order at eBay. +
+* *eBay order number* = The new eBay order number. This number is assigned individually for each order. eBay introduced the new order number 1 July 2019 and will distribute it stepwise. The new eBay order number replaces the old eBay sales record number. +
+
+| *Variation availability*
+| Select a specific *variation availability* or select *ALL* if you would like to use all of the items regardless of their availability. +
+Variation availabilities are organised in the *Setup » Item » Availability* menu and set in the *Availability* area of the *Item » Edit item » [Open item] » Tab: Variation ID » Variation tab: Settings* menu of each item.
+|====
+
+[TIP]
+.Manually retrieving orders
+====
+Orders are automatically retrieved from eBay when the *Retrieve orders* setting is activated for an account. Additionally, you can retrieve eBay orders manually in the *Setup » Markets » eBay » Data exchange* menu. Select the *date* for the retrieval and click on *Retrieve orders*. +
+If the *Do not retrieve sales* option is selected for the *Retrieve orders* setting, orders cannot be retrieved manually either.
+====
+
+[#700]
+=== Linking shipping profiles
+
+Go to *Setup » Markets » eBay » Settings » Tab: Shipping profile links* to link eBay shipping profiles to the plentymarkets shipping profiles. A linked shipping profile is automatically used during the order import if the shipping profile matches the order data, for example account and market settings, of a listing and is activated in the *Global* tab of an item. If the linked shipping profile is deactivated, the active shipping profile with the highest priority is automatically used instead.
+
+Before linking eBay shipping profiles to the plentymarkets shipping profiles, you have to enter terms of payment and shipping as well as general conditions in the *Setup » Markets » eBay » Business policies* menu.
+
+[#800]
+=== Linking return reasons and statuses
+
+Return reasons and return statuses have to be linked if you would like to process <<Processing returns, eBay returns>> in plentymarkets and ensure the automatic data exchange with eBay. Go to *Setup » Markets » eBay » Settings » Tab: Return settings* in order to link eBay return reasons with the reasons set up in the *Setup » Orders » Order types » Return* menu in plentymarkets. Reasons for return are assigned automatically when returns are imported.
+
+[.instruction]
+Linking return reasons:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Return settings*.
+. Click on the *Return reason links* tab.
+. Click on the tab of the eBay platform for which you would like to link return reasons, for example *Germany*.
+. Select a plentymarkets return reason for each *eBay return reason* from the drop-down lists.
+. Save (icon:save[set=plenty]) the settings.
+. Repeat this process for all remaining eBay platforms on which you offer items.
+
+[TIP]
+.Simplified return process
+====
+eBay’s simplified return process is currently available for Germany, USA, the UK, Canada and Australia. Further countries will be available soon.
+====
+
+Certain return statuses are used when editing returns in the eBay back end. To import eBay returns into plentymarkets and edit them, link the eBay return statuses to statuses set up in the *Setup » Orders » Status* menu.
+
+[.instruction]
+Linking return statuses:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Return settings*.
+. Click on the *Return status links* tab.
+. Select a plentymarkets return status for each *eBay return status* from the drop-down lists. +
+→ You can select an already existing status or you can <<orders/managing-orders#1220, create>> a new status that best suits your workflow.
+. Save (icon:save[set=plenty]) the settings.
+
+For further information about editing eBay returns and using event procedures for partial automation, refer to the <<Processing returns, Processing returns>> chapter.
+
+[IMPORTANT]
+.New or edited reasons for return
+====
+Import reasons for return that eBay edited or re-published. To do so, go to *Setup » Markets » eBay » Data exchange » Tab: Other* and use the *Synchronise return reasons* function. Newly imported reasons for return can be linked as described above.
+====
+
+[#1000]
+=== Updating stock
+
+For all listings with the duration *endless* (GTC), automatic stock synchronisation can be activated. The eBay *End* and *Relist* functions are automatically carried out every 15 minutes. The search ranking remains the same. As soon as a listing is relisted by means of the automatic stock update, all settings of this listing are reloaded and the offer is published on eBay with the new options. Stock is updated in plentymarkets and transferred to eBay every 20 minutes. If you want to update other data, for example description or price, the eBay *Update* function must be carried out manually in plentymarkets.
+
+[IMPORTANT]
+.Avoiding duplicate listings
+====
+After booking stock, wait at least one hour before manually starting a listing with the GTC function. This will help you avoid duplicate listings. Furthermore, the *Endless lister* function must be deactivated for listings with the duration *endless (GTC)* in the market listing’s *Base* tab.
+====
+
+Go to *Listings » Active listings* and set up the following filters to display all listings using the automatic stock update:
+
+*  Duration: *endless (GTC)*
+*  Relisted: *No*
+*  Stock dependence: *limited (without reservation)*
+
+All listings displayed when using these filters are affected by the automatic stock update, i.e. all endless listings with limited stock dependence without reservation that have not been relisted, are ended, updated or restarted via the automatic stock update depending on the current net stock.
+
+[#1100]
+==== Activating the automatic stock update
+
+The automatic stock update is available for listings with *limited (without reservation)* or *unlimited (with synchronisation)* stock dependence only. If a listing with the *limited (without reservation)* option is started, then the quantity is updated whenever changes of stock occur during the entire duration of the offer. The listing is ended when sold out and restarted as soon as stock is available. The eBay ranking remains the same. Listings with the *unlimited (with synchronisation)* option are not ended and restarted automatically. The ranking of a listing with a certain duration, for example 7 days, remains the same if you search for listings that were ended early and relist them using the *End and restart listing* group function as soon as stock is available.
+
+[.instruction]
+Activating the automatic stock update:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Initial settings*.
+. Select *Yes* for the *Activate automatic stock update* setting.
+. Save (icon:save[set=plenty]) the settings.
+
+[#1200]
+==== Relisting automatically
+
+In order to relist a listing on eBay, the listing must have been active at least once and it must not have ended more than 90 days ago. The automatic stock update detects when new stock for an item is available and activates eBay’s *Relist* function. In doing so, the existing eBay ID is transferred. A new offer is created on eBay and linked to your old offer. A new eBay ID is created in the process. The old eBay ranking is applied, assuming that no data, for example the price, has changed.
+
+When the *Use "out of stock" option* is set in the *Setup » Markets » eBay » Settings » Tab: Account settings* menu, the function of the automatic stock update changes. A listing is not ended when an item is out of stock. The item is still displayed but cannot be purchased. The number of items sold is not set to zero when the item is available again. Rather, the number remains in the sales history. Even when the *End offers automatically* setting is active in the *Setup » Listings » Stock* menu, listings are not ended. They cannot be purchased instead. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/relisting-items?id=4147[Relisting your item^]{nbsp}icon:external-link[] page.
+
+[#1300]
+=== Automatically posting feedback
+
+You can automate the process of giving customer feedback:
+
+* Procedure manager:
+  ** Automatically when you receive positive feedback.
+* Event procedure:
+  ** Triggered by a specific event.
+
+[.tabs]
+====
+Setting up the procedure manager::
++
+--
+The <<automation/procedure-manager#>> automatically retrieves the latest positive feedback at the same time every day and posts positive feedback for your customers.
+
+[discrete]
+===== Posting feedback automatically on eBay with the procedure manager
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
+. In the *Automatic feedback* area, enter up to four feedback texts which should be used automatically.
+. Save (icon:save[set=plenty]) the settings.
+. Go to *Setup » Orders » Procedures*.
+. Click on the *New procedure* tab.
+. Select the option *Active*.
+. Select a time from the *Execute every day at* drop-down list.
+. Enter a *Name* for the procedure.
+. Click on the *Filter* tab.
+. Select the *positive feedback received* option from the *eBay* drop-down list. +
+→ All other options are greyed out.
+. Click on the *Procedure* tab.
+. Select the *give positive feedback* option from the *eBay* drop-down list.
+. Save (icon:save[set=plenty]) the settings.
+--
+
+Setting up the event procedure::
++
+--
+With an <<automation/event-procedures#, event procedure>>, feedback is automatically given when a specific event occurs.
+
+:table-event-procedure: <<#automatic-feedback>>
+
+include::_includes:page$EA-tabbed.adoc[]
+
+[[automatic-feedback]]
+.Event procedure for automatically posting feedback on eBay
+[cols="1,3,3"]
+|======
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Outgoing items booked*
+|
+
+| *Filter 1*
+| *Order > Referrer*
+| *eBay*
+
+| *Procedure*
+| *Market listings > Post feedback on eBay*
+|
+|======
+--
+====
+
+[#1350]
+=== Defining SKU manually
+
+Whether or not you can manually set an SKU depends on the option you selected for the setting *Use variation number as SKU* in the initial settings of the *Setup » Markets » eBay » Settings » Tab: Initial settings* menu.
+
+[.tabs]
+====
+Option *No (recommended)*::
++
+--
+If you selected the option *No (recommended)* for the setting *Use variation number as SKU* in the *Setup » Markets » eBay » Settings » Tab: Initial settings* menu, SKU are generated automatically in the following format:
+
+* For listings with only one variation: +
+Prefix *+#MLID#+* \+ [Market listing ID] +
+*_Example:_* \#MLID#123 +
+* For listings with more than one variation: +
+Prefix *+#MLID#+* \+ [Market listing ID] *-* [AttributeValueSetId] +
+*_Example:_* \#MLID#123-456
+
+--
+Option *Yes*::
++
+--
+If you selected the option *Yes* for the setting *Use variation number as SKU*, you can add SKUs manually. To do so, go to *Item » Edit item » [Open item] » Item tab: Variations » [Open variation] » Variation tab: Settings* if needed.
+
+*_Note:_* *This setting is not recommended!* +
+Why? Why? After a variation was changed and the listing was not updated, no synchronisation will take place.
+
+[discrete]
+===== Add SKU
+
+. Go to *Item » Edit item » [Open item] » Item tab: Variations » [Open variation] » Variation tab: Settings*.
+. Enter the SKU into the *Variation No.* field.
+. Save (icon:save[set=plenty]) the settings.
+--
+====
+
+[#1400]
+=== Defining a sales price
+
+Proceed as described below to define a sales price for the eBay country platforms. This price is displayed on the country platforms.
+
+[.instruction]
+Defining the sales price for country platforms:
+
+. Go to *Setup » Item » Sales prices » [Open sales price] » Tab: Settings*.
+. In the *Referrer* area, activate the desired eBay country platform.
+. In the *eBay accounts* area, activate the desired eBay account.
+. Save (icon:save[set=plenty]) the settings.
+
+You can create multiple prices for eBay. For example, you can create separate prices for each eBay account or each eBay platform. Read the <<markets/ebay/best-practices-ebay-faq#400, eBay FAQ>> to learn how the sales prices are prioritised if you have created more than one sales price.
+
+[TIP]
+.Currency conversion for eBay listings
+====
+In the *Setup » Orders » Payment » Currencies* menu, you can set up currency conversion for listings by selecting *Yes* for the *Automatically update conversion factors daily* option. For all currencies that you use, a conversion factor must be entered. +
+If you do not want to use currency conversion, pay attention to linking the correct sales price. For example, if you do not want to convert USD into another currency for a listing, the same sales price must be selected for the currency USD and for the platform *eBay United States*.
+====
+
+[TIP]
+.Original currency and standard currency are different
+====
+Additional information is saved for orders that are imported with a different currency than the standard currency saved in plentymarkets. In this case, both the original currency and the original gross and net amounts are saved for every item included in the order.
+====
+
+[#1500]
+=== Sending messages after purchase
+
+An order is automatically created in plentymarkets after a customer has purchased an item on eBay. You can automatically send a confirmation to the customer when the order is created in plentymarkets:
+
+* By sending an email to the customer’s email address
+
+_or_
+
+* By sending a message to the customer’s eBay user account
+
+[.tabs]
+====
+Automatic email to email address::
++
+--
+
+[discrete]
+===== Customising the email template:
+
+. Go to *Setup » Client » [Select client] » Email » Templates*.
+. Expand the list *General email templates*. +
+→ For eBay, the templates *Ebay: Confirmation with bank details without checkout* and *Ebay: confirmation of store order* are available.
+. Edit the template text or create a new <<crm/sending-emails#1200, email template>>. +
+*_Note:_* The content of the template must be formatted as *Plain text only*. The template will not be sent if you select the *Only text in HTML format* setting. It is also not possible to send attachments.
+. Save (icon:save[set=plenty]) the settings. +
+*_Note:_* The language versions are assigned to the countries of delivery depending on the languages that were set for each country under *Setup » Orders » Shipping » Settings » Tab: Countries of delivery*.
+
+[discrete]
+===== Setting up the automatic email despatch:
+
+. Go to *Setup » Client » [Select client] » Email » Automatic*.
+. From the drop-down list *New order from eBay*, select the email template. Note <<#table-events-automatic-email-despatch>>.
+. Save (icon:save[set=plenty]) the setting.
+--
+
+Automatic message to eBay user account::
++
+--
+
+[discrete]
+===== Entering texts for messages after purchase:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
+. Expand the *Message after purchase* area and enter the messages for different languages. +
+*_Note:_* Make sure that the text does not contain more than 1000 characters. Otherwise, eBay will neither accept nor send this text.
+. Save (icon:save[set=plenty]) the settings. +
+*_Note:_* To deactivate the automatic messages, delete the text and save the menu.
+--
+====
+
+[#1501]
+=== Sending shipping confirmations to customers
+
+Set up an <<automation/event-procedures#, event procedure>> to automatically send eBay messages.
+
+:table-event-procedure: <<#automatic-ebay-messages>>
+
+include::_includes:page$EA.adoc[]
+
+[[automatic-ebay-messages]]
+.Event procedure for automatically sending eBay messages
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change > Outgoing items booked*
+|
+
+| *Filter 1*
+| *Order > Referrer*
+| *eBay*
+
+| *Procedure*
+| *Customer > Send eBay message*
+| *Template*
+|====
+
+[#1600]
+=== Setting up parts compatibility listings
+
+With link:https://www.ebay.co.uk/help/selling/selling/selling-vehicles-parts-accessories?id=4647[parts compatibility listings^]{nbsp}icon:external-link[], you link the items that you want to sell to the correct vehicles. That way you increase your sales prospects because items of parts compatibility listings have a higher ranking in the search results. Create, edit and delete parts compatibility listings in the *Setup » Markets » eBay » Parts compatibility listing* menu.
+
+TIP: You can also import and update parts compatibility listings with the import tool in the *Data » Import* menu. Use the <</data/importing-data/sync-types/elasticsync-parts-compatibility-listing#, parts compatibility listing>> import type. For further information, refer to the <<data/importing-data/elasticsync-best-practices/best-practices-elasticsync-parts-compatibility-listing#, Creating parts compatibility listings>> best practice.
+
+[.instruction]
+Creating a new parts compatibility listing:
+
+. Go to *Setup » Markets » eBay » Parts compatibility listing*.
+. Click on *New fitment list*.  +
+→ The *New parts compatibility listing* window opens.
+. Enter a name for the list. +
+→ The name can be changed afterwards.
+. Select an *eBay platform* for the list.
+. Select a *category*.
+. Save (icon:save[set=plenty]) the settings.
+. Carry out the settings. Pay attention to the explanations given in <<#settings-parts-compatibility-listing>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[settings-parts-compatibility-listing]]
+.Settings for a new parts compatibility listing
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+2+| Search
+
+| *Make/Year*; +
+*Model*; +
+*Platform/CCM*
+| Select the search filters. +
+*Make/Year*: Multiple selection is not allowed here. +
+If the eBay platform *Motors* is selected, the search filter *Year* is displayed instead of the search filter *Make*.  +
+*Platform/CCM*: If the category *Motorcycle* is selected, the search filter *CCM* is displayed instead of the search filter *Platform*.
+
+| *K-Type-No.*
+| Is only displayed if the category *Car* is selected. Search filters are not taken into consideration if the K-Type-No. is entered here.
+
+2+| List
+
+| *Vehicle list*
+| All available variations of a vehicle are displayed in the list. The list is limited to 1000 entries. With more than 1000 entries, a second list must be created for the item.
+
+| *Notes*
+| Enter a note. You can also enter a note and transfer it to the rest of the list. To do so, enter the note into the field on the right-hand side of the screen and click on the arrow on the right-hand side (*Save notes for all vehicles*).
+|====
+
+[#1630]
+==== Assigning a parts compatibility listing to a listing
+
+Once you have created the parts compatibility listing, link it to the listing. To do so, proceed as described below.
+
+[.instruction]
+Assigning a parts compatibility listing to a listing:
+
+. Go to *Listings » Edit listings*.
+. Open a market listing to assign a parts compatibility listing to the market listing.
+. Open the *Market* tab of the selected listing.
+. Click on *Add* under *Parts compatibility listing*. +
+→ The *Select parts compatibility listing* window opens.
+. Enter the name of a list or only a part of the name and select a list.
+. Click on *Select* to assign the list to the market listing.
+
+[#1650]
+==== Searching for parts compatibility listings
+
+Use the filter settings in the *Setup » Markets » eBay » Parts compatibility listing* menu to search for parts compatibility listings. The filter options *ID*, *Name*, *Category*, and *eBay platform* are available for the search.
+
+[#1700]
+=== Setting up Second Chance Offers (SCO)
+
+You can submit a Second Chance Offer to a defeated bidder after an auction has ended. Bidders will then receive a link:https://www.ebay.co.uk/help/buying/bidding/second-chance-offers?id=4017[Second Chance Offer^]{nbsp}icon:external-link[] and have the possibility to buy the item at their last bid amount via the *Buy it now* function. The bidder then receives a Second Chance offer via email in the *Messages* area of My eBay. SCOs are excluded from the eBay search. +
+
+Second Chance Offers can only be submitted for the listing type *auction*.
+
+[.instruction]
+Setting up a Second Chance Offer:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Initial settings*.
+. Select *Yes* for *Activate SCO function*.
+. Define the *number of days after the submission of an offer* in which a customer can accept the SCO.
+. Save (icon:save[set=plenty]) the settings.
+
+[.instruction]
+Applying individual SCO settings to a listing:
+
+. Go to *Listings » Edit listings*.
+. Open the listing.
+. In the listing’s *Base* tab, enter an amount into the *SCO minimum price* field to activate this function.
+. Save (icon:save[set=plenty]) the settings.
+
+[TIP]
+.Offering SCOs for minimum bids
+====
+Enter an amount for the item into the *SCO minimum price* field, for example 100.00 EUR. The highest bidder’s bid is 110.00 EUR and wins the auction. All defeated bidders with a bid equal to or higher than the entered amount of 100.00 EUR automatically receive an SCO to buy the item at their last bid amount. All defeated bidders with a lower bid than the entered amount do not receive an SCO. +
+If you enter the value *0.00*, the function is deactivated. However, you can still submit Second Chance Offers manually in the *Setup » Markets » eBay » Second Chance Offer* menu.
+====
+
+[.instruction]
+Viewing SCO errors:
+
+. Go to *Setup » Markets » eBay » Second Chance Offer*. +
+→ An overview of the last 150 SCOs of auctions that were last ended is displayed.
+. Click on the *Warning* icon in the *Error* column to view the error message.
+
+For further information about troubleshooting, refer to the <<markets/ebay/ebay-setup#11750, FAQ: Second Chance Offer>> chapter.
+
+[#1750]
+=== Managing holiday settings
+
+Use the holiday settings for your eBay shop to inform your customers that you are away. Texts informing your customers about your absence are displayed in your eBay shop and on your listings while you are away.
+
+[.instruction]
+Managing holiday settings:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
+. Carry out the settings. Pay attention to the explanations given in <<#table-holiday-settings>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[table-holiday-settings]]
+.Holiday settings
+[cols="1,3a"]
+|====
+|Setting |Explanation
+
+| *Activate*
+| * *Yes* = Select *Yes* to activate the holiday settings. This setting is effective immediately after you have saved it. A holiday notification is then displayed on the start page of your eBay shop. A text which is automatically generated by eBay and which informs your customers about your absence is displayed at your listings. +
+* *No* = This setting is activated by default. No holiday notice is displayed. +
+Select *No* to deactivate the holiday settings.
+
+| *Holiday notification*
+|Enter a text into the free text field. This text is displayed on the start page of your eBay shop if the holiday settings are activated. You can use html formatting to format your text.
+|====
+
+[#1800]
+=== Defining business policies
+
+This chapter teaches you how to define *Terms of payment*, *Shipping conditions*, and a *Return policy* for your eBay listings and how to create *Shipping profiles*. These settings must be carried out for every eBay account and every platform individually.
+
+Watch this video for a summary of the settings for eBay business policies:
+
+.eBay business policies
+video::198655889[vimeo]
+
+[IMPORTANT]
+.eBay seller profiles
+====
+If you already saved *Terms of payment*, *Shipping conditions* or a *Return policy* with the same name or settings on eBay, an error message is displayed in plentymarkets. The error message informs you that the business policy was already created even though it is not displayed in plentymarkets. Click on *Import eBay Seller Profiles* to solve this issue.
+====
+
+[#1900]
+==== Defining terms of payment
+
+An overview of all existing *Payment profiles* is displayed in this menu. Edit or delete existing profiles here or create new profiles.
+
+[.instruction]
+Creating a new profile:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay terms of payment » New*.
+. Carry out the desired settings. Pay attention to the explanations given in <<#ebay-terms-of-payment>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[ebay-terms-of-payment]]
+.eBay terms of payment
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+| *Profile name*
+| Enter a name for the profile.
+
+| *Payment methods*
+| Select one or several payment methods.
+
+| *PayPal account*
+| Select a PayPal account. You will only see those <<payment/payment-plugins/paypal#, PayPal accounts that were already set up>>.
+
+| *Immediate payment*
+| Activate in order to allow PayPal as the only payment method. +
+If you activate this option, customers need to complete the checkout prior to the purchase. This helps to avoid that customers do not complete the checkout and thus prevent orders from being processed.
+
+| *Payment instructions*
+| Enter payment instructions.
+|====
+
+[#2000]
+==== Defining shipping conditions
+
+Use this menu to define domestic and international shipping conditions. In addition to the region of delivery, select specific <<fulfilment/preparing-the-shipment#1000, shipping profiles>> or service providers for international shipping. Go to *Setup » Orders » Shipping » Settings » Tab: Countries of delivery* and check your language settings for the countries that you want to ship your eBay items to. For further information, refer to eBay’s link:https://sellercentre.ebay.co.uk/private/global-shipping-programme[Use the Global Shipping Programme^]{nbsp}icon:external-link[] page.
+
+[.instruction]
+Setting up domestic shipping:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay shipping conditions » Tab: New*.
+. Carry out the desired settings. Pay attention to the explanations given in <<#settings-domestic-shipping>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[settings-domestic-shipping]]
+.Settings for domestic shipping
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+| *Profile name*
+| Enter a name for the profile.
+
+| *Processing time*
+| Define a processing time in days for shipments.
+
+| *Processing time description*
+| Enter a description for the processing time.
+
+| *Shipping options*
+| In the *Domestic* area, select the *Shipping* methods.
+
+| *Costs*
+| Define the shipping costs.
+
+| *Additional fee of*
+| Specify a surcharge for shipping each additional item from this offer.
+
+| *Additional options*
+a| Select additional options, for example *Free shipping* or *Express shipping*. +
+
+* *Free shipping* = Activate in order to transfer the value 0.00 to the *Costs* field. +
+* *Express shipping* = Items are shipped the same day they were ordered if the order was placed before a certain time. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/posting-items/estimated-delivery-dates?id=4086[Estimated delivery dates for sellers^]{nbsp}icon:external-link[] page.
+
+| *Shipping discount for combined payment*
+| Select whether the shipping discount for combined payment should be applied. link:https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&UsingSSL=1&pUserId=&co_partnerId=2&siteid=0&ru=https%3A%2F%2Fcgi5.ebay.com%2Fws%2FeBayISAPI.dll%3FSellerShippingPreferences%26guest%3D1&pageType=3727[Shipping discount for combined payment^]{nbsp}icon:external-link[] must be set up on eBay.
+
+| *Rules governing shipping at a special rate*
+| Select whether the rule governing shipping at a special rate should be applied. link:https://www.ebay.com/help/selling/shipping-items/shipping-rates/shipping-discounts?id=4168[Rules governing shipping at a special rate^]{nbsp}icon:external-link[] must be set up on eBay.
+
+| *Rate tables (additional regions)*
+| Select whether the rate tables should be applied. Rate tables must be set up on eBay. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options?id=4089[Setting up your postage options^]{nbsp}icon:external-link[] page.
+
+| *Exclude shipping locations*
+| Exclude shipping locations, PO boxes and DHL pack stations. The options shown here depend on the *eBay platform* that was chosen. The countries listed here are related to the *Purchasers who are registered in a country that I do not ship items to* option in the *Buyer requirements* area. This option is found in an eBay shipping profile in the *Setup » Markets » eBay » Business policies » [Open shipping profile]* menu.
+|====
+
+[.instruction]
+Setting up international shipping:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay shipping conditions » Tab: New*.
+. Carry out the desired settings. Pay attention to the explanations given in <<#settings-domestic-shipping>> and <<#settings-international-shipping>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[settings-international-shipping]]
+.Settings for international shipping
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+| *Shipping options*
+| Select shipping options such as *Royal Mail International Economy* in the *International* area. You need to save at least one domestic shipping service and its costs before you can carry out international shipping settings.
+
+| *Regions*
+| Activate countries or regions of delivery. If several international shipping providers are set up and multiple of the regions that are activated here are covered by more than one shipping provider, the shipping provider with the lowest prices for that region will be available for the customer.
+
+| *International rate tables*
+| Select whether the rate tables should be applied. Rate tables must be set up on eBay. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options?id=4089[Setting up your postage options^]{nbsp}icon:external-link[] page.
+
+| *Additional ship to locations: buyers contact for costs*
+| Select the locations where costs should only be calculated upon request. Customers in these countries have to ask the seller how much the shipping costs are.
+
+| *Exclude shipping locations*
+| You can either exclude individual countries or whole regions from the shipping locations for international shipping.
+|====
+
+[TIP]
+.Selling internationally
+====
+For further information, refer to the <<Selling internationally, Selling internationally>> chapter and eBay’s link:https://sellercentre.ebay.co.uk/private/global-shipping-programme[Using the Global Shipping Programme^]{nbsp}icon:external-link[] page.
+====
+
+[#2100]
+==== Defining the return policy
+
+You can set up your return policy either on eBay or in the *Setup » Markets » eBay » Business policies » Tab: eBay return policy* menu. The return policy saved on eBay is overwritten when entering the return policy in plentymarkets. An overview of existing profiles for the return policy is displayed. Edit or delete existing profiles here or create new profiles.
+
+[.instruction]
+Creating a new profile:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay return policy » Tab: New*.
+. Carry out the settings as described in <<#ebay-return-policy>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[ebay-return-policy]]
+.Settings for *eBay return policy*
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+| *Profile name*
+| Enter a name for the profile.
+
+| *Description*
+| Enter a description that should be displayed in the *Return policy: Additional return policy options* field on eBay. This field must be filled in if returns are permitted.
+
+| *Return*
+| Select whether returns are accepted or not.
+
+| *Return deadline*
+| Select the return deadline that should be displayed in the *Return policy* on eBay.
+
+| *Return costs*
+| Select whether the buyer or the seller has to pay the return costs. *Update* the corresponding listings.
+
+| *Gutschrift* +
+(for some eBay platforms only, for example USA)
+a| Specify which options buyers should be given when they return an item. Available options are:
+
+* *Money back*
+* *Replacement or exchange*
+
+| *Cancellation fee* +
+(for some eBay platforms only, for example USA)
+| Specify whether a percentage of the purchase price should be charged as a fee when items are returned.
+|====
+
+[#2200]
+==== Creating shipping profiles
+
+The *Setup » Markets » eBay » Business policies » Tab: Shipping profiles* menu contains the tabs *Overview* and *New*. The *Overview* tab displays the previously created shipping profiles. Edit or delete existing profiles here or create new profiles. Create additional shipping profiles in the *New* tab.
+
+[.instruction]
+Creating a new profile:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: Shipping profiles » Tab: New*.
+. Carry out the desired settings. Pay attention to the explanations given in <<#settings-shipping-profiles>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[settings-shipping-profiles]]
+.Settings for *shipping profiles*
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+2+| General information
+
+| *Standard profile*
+| Activate to define this profile as the standard profile. +
+The standard profile is automatically used in new listings. There is only one standard profile. If a new standard profile is activated, the old standard profile is deactivated automatically. +
+The profiles in the *Overview* tab are either marked by *Y* (Yes) as the standard profile or by *N* (No).
+
+| *Profile name*
+| Enter a name for the profile.
+
+| *Country*
+| Select a country for the item location.
+
+| *Postcode*
+| Enter the postcode. If both the postcode and location were entered, but eBay found a different location for this postcode, then the location found by eBay is used for the listing.
+
+| *Location*
+| Enter the item location.
+
+| *eBay terms of payment*
+| Select the terms for the shipping profile in the *eBay terms of payment* tab.
+
+| *eBay shipping conditions*
+| Select the terms for the shipping profile in the *eBay shipping conditions* tab.
+
+| *eBay return policy*
+| Select the terms for the shipping profile in the *eBay return policy* tab.
+
+2+| Buyer requirements
+
+| *Deactivate the "buyer requirements"*
+| Place a check mark to deactivate the *buyer requirements*. The settings on eBay are also deactivated for this auction.
+
+| *Do not accept the following purchasers*
+a| Activate to exclude certain customers. +
+
+* *Activate* = Buyers must meet this requirement or they are excluded. +
+* *Deactivate* = Buyers do not have to meet this requirement.
+
+| *Maximum item quantity that a purchaser can buy during the entire duration of the listing*
+| Enter the item quantity that a buyer can buy during the entire duration of the listing. Enter the value *0* to deactivate this function.
+|====
+
+[#2250]
+== Activating the payment method
+
+The payment method eBay purchase on invoice is appropriate for items within the price range of 1.50 € - 1.500 €. In order to use eBay purchase on invoice the item must be paid for by PayPal.
+
+:market: eBay
+:payment-method: eBay purchase on invoice
+
+include::../_textblocks/instructions/activate-payment-method.adoc[]
+
+[#2300]
+== Preparing listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=listing-definition]
+
+[#2400]
+=== Carrying out the basic settings for listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=listing-basic-settings]
+
+[#2500]
+=== Setting up stock for listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=listings-stock]
+
+[#2600]
+=== Setting up the checkout process
+
+include::../_textblocks/listings/manage-listings.adoc[tag=listings-checkout]
+
+[#2700]
+=== Setting up the listing scheduler
+
+include::../_textblocks/listings/manage-listings.adoc[tag=listings-sales-planner]
+
+[#3200]
+=== Creating directories for grouping listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=group-listings]
+
+[#2800]
+=== Managing layout templates
+
+include::../_textblocks/listings/manage-listings.adoc[tag=manage-layout-templates]
+
+[#2900]
+==== Creating layout templates
+
+include::../_textblocks/listings/manage-listings.adoc[tag=create-layout-templates]
+
+[#2950]
+==== Example code for a layout template
+
+include::../_textblocks/listings/manage-listings.adoc[tag=layout-example-code]
+
+[#3000]
+==== Importing layout templates
+
+include::../_textblocks/listings/manage-listings.adoc[tag=import-layout]
+
+[#3100]
+==== Linking a layout template
+
+include::../_textblocks/listings/manage-listings.adoc[tag=link-layout]
+
+[#3050]
+==== Template variables and template functions
+
+Fill the HTML layout with the desired and necessary template variables and functions and this way, have the corresponding content of the listing placed in the layout. Pay attention to upper and lower case letters in the template variables and functions.
+
+Fill in the item description *{% GetItemDescription() %}* instead of the description that is saved with the listing. This way, you only need to maintain one description text for your plentyShop and listings.
+
+[IMPORTANT]
+.Activate the option Wildcard character in layout template (eBay)
+====
+If you use template variables which contain properties, such as *{% GetItemPropertyById() %}* and *{% GetItemPropertyByName() %}*, you have to activate the *Wildcard character in layout template (eBay)* option for the selected property, so that the property is displayed in the layout template. This is done in the *Setup » Item » Characteristics* menu.
+====
+
+:ebay:
+
+include::../_textblocks/listings/template-variables.adoc[]
+
+[#3150]
+==== Exporting items from eBay
+
+Items can also be created by importing data from eBay. Go to *Data » eBay listings* and carry out the data import. The whole description of the eBay listing is saved as the item or listing description in plentymarkets. All layout elements (HTML tags etc.) of the listing are imported. Therefore, you need to manually edit the listing after the import. If you still wish to immediately start your listings on eBay via plentymarkets, create a layout template containing only the template function *{% GetItemDescription() %}* and nothing else. This way, the existing description is used as the listing description without any additional specifications.
+//TODO: noch genauer beschreiben und Optionen erklären.
+//TODO: Move
+
+[#3400]
+== Creating listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=listings-creation]
+
+
+[#3500]
+=== Creating a new listing
+
+include::../_textblocks/listings/manage-listings.adoc[tag=create-listing]
+
+[#3550]
+=== Importing existing eBay listings
+
+If you already sell on eBay and have created listings on eBay, then you also have the possibility to import your existing eBay listings directly into plentymarkets. For instructions and further information, see the chapter <<Importing eBay listings, Importing eBay listings>>.
+
+[#3600]
+=== Adding a market listing to an existing listing
+
+include::../_textblocks/listings/manage-listings.adoc[tag=add-market-listing]
+
+[#3700]
+=== Creating multiple listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=create-multiple-listings]
+
+[#3800]
+== Editing listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=edit-listings]
+
+[#3900]
+=== Editing an individual listing
+
+include::../_textblocks/listings/manage-listings.adoc[tag=edit-one-listing]
+
+[#4000]
+==== Carrying out the basic settings for market listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=market-listing-base-settings]
+
+[#4100]
+==== Editing description and layout
+
+include::../_textblocks/listings/manage-listings.adoc[tag=description-layout]
+
+[#4200]
+==== Changing the market settings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=edit-market-settings]
+
+[#4300]
+=== Editing multiple listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=edit-multiple-listings]
+
+[#4400]
+== Copying listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=copy-listings]
+
+[#4500]
+=== Copying an individual listing
+
+include::../_textblocks/listings/manage-listings.adoc[tag=copy-one-listing]
+
+[#4600]
+=== Copying multiple listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=copy-several-listings]
+
+[#4700]
+== Searching for listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=find-listings]
+
+[#4800]
+=== Filtering by settings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=filter-by-settings]
+
+[#4900]
+=== Filtering by categories
+
+include::../_textblocks/listings/manage-listings.adoc[tag=filter-by-categories]
+
+[#5000]
+=== Filtering by directories
+
+include::../_textblocks/listings/manage-listings.adoc[tag=filter-by-groups]
+
+[#5100]
+== Starting listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=start-listings]
+
+[#5200]
+=== Manually starting listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=manually-start-listings]
+
+[#5250]
+=== Automatically starting listings with the listing scheduler
+
+include::../_textblocks/listings/manage-listings.adoc[tag=start-listings-sales-planner]
+
+[#5300]
+=== Automatically starting listings with the endless lister
+
+include::../_textblocks/listings/manage-listings.adoc[tag=start-listings-endless-lister]
+
+[#5400]
+=== Future listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=future-listings]
+
+[#5500]
+== Creating listing templates
+
+include::../_textblocks/listings/manage-listings.adoc[tag=create-listing-template]
+
+[#5600]
+== Active listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=active-listings]
+
+[#5700]
+=== Searching for active listings
+
+include::../_textblocks/listings/manage-listings.adoc[tag=search-active-listings]
+
+[#5800]
+=== Editing active listings via group function
+
+include::../_textblocks/listings/manage-listings.adoc[tag=group-edit-active-listings]
+
+[#5900]
+=== Editing active listings with batch processing
+
+include::../_textblocks/listings/manage-listings.adoc[tag=batch-edit-active-listings]
+
+[#5950]
+== Managing listing processes
+
+include::../_textblocks/listings/manage-listings.adoc[tag=listing-processes]
+
+[#6000]
+== Uploading offers with variations
+
+You can upload items with multiple variations as a single eBay offer. In order to create variations, you have to create attributes and link them with your items. Variations are <<item/introduction/structure#400, combinations of different attributes>>. Surcharges are applied to every combination, for example size, colour and material. Variations linked with a listing are also transferred to eBay when starting, restarting or updating the listing. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/creating-listings-variations?id=4150[Creating listings with variations^]{nbsp}icon:external-link[] page.
+
+[IMPORTANT]
+.Variations for eBay listings have to match
+====
+Variations must have the same attributes for eBay listings. It is not allowed to start listings that have variations with different attributes.
+====
+
+Sellers who list brand-name items in new or manufacturer-refurbished condition are required to include product identifiers in certain categories. Mandatory product identification also applies to eBay listings with variations in certain categories. The *manufacturer* and the MPN need to be specified for the entire listing. The *UPC* or *EAN* have to be specified for every variation.
+
+[#6100]
+=== Linking attributes with eBay properties
+
+The *eBay attribute link* function allows you to link every plentmarkets attribute with one eBay property. In the attribute link, you can link your plentymarkets attribute values with one eBay attribute value. For example, you can link the *Size* attribute with German and English values.
+
+[IMPORTANT]
+.No special characters
+====
+eBay does not allow special characters for attribute values. eBay will replace special characters by a space or period during the listing export.
+====
+
+[.instruction]
+Linking attributes with eBay properties:
+
+. Go to *Setup » Item » Attributes*.
+. Click on the attribute.
+. Click on the *Attribute link* tab.
+. Click on *eBay » New eBay attribute link* (icon:icon:plus-square[]) in the list on the left-hand side. +
+→ The *New eBay attribute link* window opens.
+. Select a *platform*.
+. Click on *Search* (icon:search[role="blue"]) to select an *eBay category*. +
+→ The *eBay category selection* window opens.
+. Select an *eBay category* and a subcategory and click on *Accept*.
+. Save (icon:save[set=plenty]) the settings. +
+→ The attribute and the *eBay property* drop-down list are displayed in the line below.
+. Select an *eBay property* or enter a *customised name*. +
+→ A table with the attribute values is displayed.
+. Select the values from the *eBay value* column.
+. Save (icon:save[set=plenty]) the settings.
+
+[IMPORTANT]
+.Availability of eBay properties in the drop-down list
+====
+In the *eBay property* drop-down list, only those properties are displayed that eBay did not deactivate for variations. As such, you may find that not as many eBay properties are displayed here as can be selected directly in the listing.
+====
+
+[#6200]
+=== Linking images with attribute values
+
+You can link your item images with attribute values if you activate the *Image link possible* option for an attribute in the *Setup » Item » Attributes » Tab: Basic settings* menu. Note that images can currently only be linked to one attribute.
+
+[TIP]
+.Number of images per attribute
+====
+250 variations can be transferred per offer. You can only create a maximum of 5 attributes with a maximum of 60 values per attribute. For each attribute value, up to 12 images can be transferred, but not more than 200 images in total. +
+Therefore, if you want to create offers with many variations, be sure to calculate the maximum possible number of images per attribute.
+====
+
+[.instruction]
+Linking images with attribute values:
+
+. Go to *Item » Edit item*.
+. Open an item.
+. Click on the *Images* tab.
+. Select the appropriate attribute value from the *Variation link* drop-down list.
+. Save (icon:save[set=plenty]) the settings.
+
+[#6300]
+=== Activating variations in an eBay listing
+
+If you have created several different variations for an item, then you can select whether you would like to activate all of them for an eBay listing or only one particular variation.
+
+[.instruction]
+Activating a particular variation:
+
+. Go to *Listings » Edit listings*.
+. Open a listing.
+. Click on the *Base* tab.
+. Select a *variation* from the drop-down list.
+. Save (icon:save[set=plenty]) the settings.
+
+[.instruction]
+Activating all variations:
+
+. Go to *Listings » Edit listings*.
+. Open a listing.
+. Click on the *Base* tab.
+. Activate the *List with all variations* setting.
+. Save (icon:save[set=plenty]) the settings.
+
+[#6400]
+=== Mandatory fields of eBay properties
+
+Pay attention to the eBay properties settings in the *Listings » Edit listings* menu. You find this setting in the *Market* tab of a listing. This option becomes available once you have saved the eBay category. The values have mandatory fields depending on which category was selected. For further information about mandatory fields of individual categories, refer to link:https://www.ebay.co.uk/help/listings/creating-managing-listings/creating-managing-listings?id=4105[eBay^]{nbsp}icon:external-link[]. All mandatory fields must be set up or filled in.
+
+[IMPORTANT]
+.Exception
+====
+All of the values that were already taken care of with the variation link must not be set here again.
+
+If you already set a value that should be linked to the attribute *size* for the corresponding listing, then you may not save another value for this attribute here.
+====
+
+[IMPORTANT]
+.Check the settings
+====
+In particular, be sure to check the settings for eBay properties. It is very important that you check the settings, because the listing cannot be started or updated if the settings are incorrect.
+
+Click on the *eBay properties* link in the listing's basic settings. Check to make sure that the attribute names, which were used for the item variations, for example size or colour, do not have values entered for them. If there are values entered in these text fields, delete them.
+====
+
+[#6500]
+=== Linking your own properties
+
+In order to be able to use your own properties for the eBay market, the properties have to be linked with eBay in the *Setup » Item » Characteristics* menu.
+
+[.instruction]
+Linking your own properties:
+
+. Go to *Setup » Item » Characteristics*.
+. Expand the property (icon:plus-square-o[]).
+. Activate the *Display as eBay property* setting.
+. Save (icon:save[set=plenty]) the setting. +
+→ The property is included in the item's list of properties on eBay.
+
+[TIP]
+.Wildcard character in layout template (eBay)
+====
+If the *Wildcard character in layout template (eBay)* function is activated, the property is also displayed in the layout template of a listing, provided that the wildcard character is used.
+====
+
+[#6525]
+== Using cross-selling
+
+Use cross-selling to offer further products related to an item. These products are displayed at your listing on eBay. +
+
+Use the template function *GetCrossSellingData* to add <<item/managing-items#970, cross-selling items>> that are linked to an item to a <<Managing layout templates, layout template>> and <<Linking a layout template, link>> this layout template to the desired listings. Add cross-selling items to layout templates in the *Setup » Listings » Layout* menu.
+The template function *GetCrossSellingData* displays the following data which can be displayed at a cross-selling item:
+
+ * *Item ID* of the item in plentymarkets
+ * *Title* of the active listing
+ * *External listing ID*
+ * *Listing type ID*
+ * *Variation ID*
+    - for individual listings, the ID of the listed variation is displayed
+    - for variation listings, the ID of the main variation is displayed
+ * *Variation number*
+    - for individual listings, the variation number of the listed variation is displayed
+    - for variation listings, the variation number of the main variation is displayed
+ * *Price*
+    - for individual listings, the price of the listed variation is displayed
+    - for variation listings, the price of the listed variation with the lowest price is displayed
+ - *Currency*
+ * *Image URL*
+    - Priority for individual listings: +
+        1. Image with the lowest position which is linked to the listed variation +
+        2. Image with the lowest position which is not linked to any variation
+      - Priority for variation listings: +
+        1. Image with the lowest position which is not linked to any variation +
+        2. Image with the lowest position which is linked to one of the variations
+ * *eBay-URL*
+ * *Account ID*
+
+Requirements for adding cross-selling items to an item with the template function *GetCrossSellingData*:
+
+- The cross-selling item has to be linked to the item to which it should be added. This is done in the *Item » Edit item » [Open item] » Item tab: Cross-Selling* menu.
+- The item which cross-selling items should be added to must have an active listing.
+
+A code example for a potential layout template which uses the template function *GetCrossSellingData* is displayed below. The image shows the preview of a listing that uses this layout template.
+
+[[ebay-cross-selling]]
+.Example of cross-selling products
+image::markets/ebay/assets/example-cross-selling.png[]
+
+[discrete]
+===== Main frame
+
+Example code tab: Main frame
+
+[source,plenty]
+----
+include::example$mainframe_cross-selling.html[]
+
+----
+
+[discrete]
+===== HTML structure
+
+Example code tab: HtmlStructure
+
+[source,plenty]
+----
+include::example$html_cross-selling.html[]
+
+----
+
+[discrete]
+===== CSS
+
+Example code tab: CSS
+
+[source,plenty]
+----
+include::example$css_cross-selling.html[]
+
+----
+
+[#6550]
+== Matching ePIDs
+
+Since 15 August 2018, it is mandatory to match products from specific categories which you want to offer on eBay with ePIDs. An ePID (eBay Product ID) is an eBay-specific product identification that is provided by eBay. ePIDs are used to display identical products in a cluster on eBay. When buyers click on the product, they can choose an offer. +
+
+A product which is sold on eBay as a single product and in a set can have multiple ePIDs.
+
+[TIP]
+.Automatic ePID matching
+====
+New listings are automatically matched with an ePID when they are started. If there is more than one ePID available for a listing, then the first ePID is automatically matched. Further ePIDs are saved in a log message. +
+For existing listings, you have to match ePIDs manually.
+====
+
+Link variations with ePIDs in the *Setup » Markets » eBay » ePID matching* menu.
+
+Requirements for matching variations with ePIDs:
+
+- The variation that you want to match with an ePID has to have an active or hidden listing.
+- The selection *Transmit ePID* must be selected for the *Transfer as item number* option within the *Listings » Edit listings » [Open listing ID] » Edit listing* menu.
+- An EAN must be saved for the variation within *Item » Edit item » [Open item] » Tab: Variation ID* in the *Barcode* area.
+- - In the *Setup » Markets » eBay » Settings » Tab: Initial settings* menu, the *Add item details from the eBay catalogue* option has to be set to *Yes*.
+- At the moment, ePID matching is only possible for the platforms eBay Germany, eBay UK, eBay United States, eBay Canada, and eBay Australia.
+- At the moment, only products from specific eBay categories can be matched with ePIDs. Further information about the affected categories is available link:https://developer.ebay.com/api-docs/sell/static/inventory/pbse-phase1-categories.html[here^]{nbsp}icon:external-link[].
+
+[IMPORTANT]
+.OAuth2 authentication required
+====
+In order to link ePIDs, you have to authenticate your eBay account for OAuth2 in the *Setup » Markets » eBay » Accounts » OAuth2* menu.
+====
+
+[.instruction]
+Matching ePIDs:
+
+. Go to *Setup » Markets » eBay » ePID matching*.
+. Click on *Search* (icon:search[role="blue"]). +
+→ All variations without an ePID from the last day are displayed in the overview.
+. Click on the variation that you want to match with an ePID. +
+→ All available ePIDs for this variation are displayed.
+. Cick on *Match ePID* in the field of the ePID that you want to match.
+
+[discrete]
+===== Filtering variations without ePIDs
+
+Go to *Setup » Markets » eBay » ePID matching* to filter variations without ePID matches. For example, you can search for MLIDs or item IDs, or you can display only variations which are sorted into a specific directory. For further information about filter options for variations without ePID matching, refer to <<#filter-epid>>.
+
+[[filter-epid]]
+.Filter options for variations without ePID match
+[cols="1,3a"]
+|====
+| Filter | Explanation
+
+| *MLID*
+| Enter a market listing ID to search for market listings without ePID.
+
+| *External listing ID*
+| Enter an external listing ID to search for listings without ePID that have this external listing ID.
+
+| *Item ID*
+| Enter an item ID to search for variations without ePID that have this item ID.
+
+| *Variation ID*
+| Enter a variation ID to search for variations without ePID that have this variation ID.
+
+| *Account*
+| Select an account or *ALL* to search for variations with this account.
+
+| *Platform*
+| Select a platform or *ALL* to search for variations that are listed for the saved platform.
+
+| *Category ID*
+| Enter an eBay category to search for variations in this category.
+
+| *Directory*
+| Enter a directory to search for variations that are sorted into this directory.
+|====
+
+[#6600]
+== Setting up eBay Plus
+
+Participate in the loyalty program and benefit from the advantages of eBay Plus in your plentymarkets system. In order to use eBay Plus, certain link:https://verkaeuferportal.ebay.de/ebay-plus-program-sellers-english#24899anchor1[requirements^] for sellers and listings must be met. For further information about the loyalty programme, refer to the link:https://verkaeuferportal.ebay.de/ebay-plus-program-sellers-english[eBay Plus program for sellers^]{nbsp}icon:external-link[] page.
+
+[#6700]
+=== Activate eBay Plus for listings
+
+Use the *Setup » Markets » eBay » Basic settings » Account settings* menu to decide whether the loyalty program should be activated for all new listings. Listings can also be activated or deactivated for eBay Plus later on.
+
+[IMPORTANT]
+.eBay does not accept all listings for eBay Plus
+====
+eBay may not accept all of your listings for eBay Plus even though they were activated for the loyalty programme in plentymarkets. In such cases, these listings are displayed as normal eBay listings.
+====
+
+[.instruction]
+Activating eBay Plus for all new listings:
+
+. Go to *Setup » Markets » eBay » Settings » Account settings*.
+. Select *Yes* for the *Automatically activate eBay Plus for new listings* setting.
+. *_Optional:_* Carry out additional settings as desired. Pay attention to the explanations given in <<#settings-ebay-accounts>>.
+. Save (icon:save[set=plenty]) the settings.
+
+Instead of activating eBay Plus for all new listings, you can also activate the function for individual listings.
+
+[.instruction]
+Activating eBay Plus for individual listings:
+
+. Go to *Listings » Edit listings*.
+. Click on an eBay market listing. +
+→ The market listing opens.
+. Click on the *Market* tab.
+. Select *Yes* for the *eBay Plus* option to activate the listing for eBay Plus.
+. Save (icon:save[set=plenty]) the settings.
+
+The *Basic settings* option for *eBay Plus* in the *Market* tab of the *Listings » Edit listings* menu is set by default. The setting selected for the *Automatically activate eBay Plus for new listings* option in the *Setup » Markets » eBay » Settings » Account settings* menu is transferred.
+
+[TIP]
+.Deactivate eBay Plus for individual listings
+====
+Even if you selected *Yes* for the *Automatically activate eBay Plus for new listings* option in the *Setup » Markets » eBay » Settings » Account settings* menu, it is still possible to deactivate individual listings for eBay Plus. To do so, select *No* for the *eBay Plus* option in the market listing’s *Market* tab.
+====
+
+[#6800]
+=== Activating eBay Plus for active listings
+
+It is also possible to activate eBay Plus for listings that are already active. However, these listings will only be activated for eBay Plus when they are relisted. If you want the active listing to be immediately available for eBay Plus, update the listing with the group function.
+
+The procedure *None* has to be selected in the group function in order to update listings in the *Listings » Active listings* menu.
+
+[.instruction]
+Updating active listings for eBay Plus with the group function:
+
+. Go to *Listings » Active listings*.
+. Activate the listings that you want to update.
+. Click on *Group function*. +
+→ The *Group function* window opens.
+. Activate the *eBay Plus* option in the *Update eBay options* area.
+. Click on *Execute* to update the listings.
+
+[IMPORTANT]
+.Delayed eBay Plus update
+====
+It may take up to 10 minutes for the listings to be updated.
+====
+
+[#6900]
+=== Using the eBay Plus filter
+
+All of your listings or active listings are displayed in the *Listings » Edit listings* and *Listings » Active listings* menus. You can use filters to search for listings activated for eBay Plus. To do so, select the filter option *eBay* for the market filter. The filter option *eBay Plus* is displayed. You may notice that both menus have different filter results if this option is selected. This is because the Listings » Active listings menu only displays eBay listings which are currently listed with eBay Plus. All eBay Plus listings are displayed in the *Listings » Edit listings* menu, including listings which are not currently listed on eBay.
+
+You can search for eBay Plus orders in the *Orders » Edit orders* menu. Set the filter *eBay Plus* in the *Filter* tab to *Yes* to filter eBay Plus orders.
+
+[#7000]
+=== Using appropriate shipping methods for eBay Plus
+
+One of the requirements of eBay Plus is link:https://verkaeuferportal.ebay.de/ebay-plus-program-sellers-english#24899anchor5[free and fast shipping^]{nbsp}icon:external-link[]. Not all shipping methods are appropriate for eBay Plus. For further information about appropriate shipping methods, refer to eBay. Select at least one permitted shipping method for eBay. Otherwise, an error message will be displayed when starting an eBay Plus listing.
+
+[#7010]
+== Setting up Click & Collect at Argos
+
+Set up Click & Collect at Argos in plentymarkets to benefit from it. With Click & Collect at Argos, customers can collect the items they ordered on eBay UK in one of the many Argos stores in the UK. Refer to link:https://sellercentre.ebay.co.uk/business/click-collect#what[eBay^]{nbsp}icon:external-link[] for further information about Click & Collect Argos. Click & Collect at Argos is available for the UK platform only.
+
+[#7020]
+=== Activating Click & Collect for listings
+
+Activate Click & Collect by activating the option *Buyers can collect the item at Argos with Click & Collect* in the *Setup » Markets » eBay » Business policies » Tab: eBay shipping conditions* menu. Next, you have to link the shipping conditions with the shipping profile from eBay that is saved for the listing.
+
+[.instruction]
+Activating Click & Collect for listings:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay shipping conditions*.
+. Open the desired shipping condition that is saved for the UK platform.
+. Activate the *Buyers can collect the item at Argos with Click & Collect* option.
+. Save (icon:save[set=plenty]) the settings.
+. Click on the *Shipping profiles* tab.
+. Now select the shipping condition that you just edited for the *eBay shipping conditions* setting within the *General information* area.
+. Save (icon:save[set=plenty]) the settings.
+
+Next, link the shipping profile with the listing. To do so, go to *Listings » Edit listings » Tab: Base*. Select the shipping profile that you just edited for the *Shipping profile* option.
+
+[#7030]
+=== Activating Click & Collect for active listings
+
+You can also activate Click & Collect for active listings.
+
+The procedure *Shipping information* has to be selected in the group function in order to update listings in the *Listings » Active listings* menu.
+
+[.instruction]
+Updating active listings for Click & Collect via the group function:
+
+. Go to *Listings » Active listings*.
+. Activate the listings that you want to update.
+. Click on *Group function*. +
+→ The *Group function* window opens.
+. Select the shipping profile that is linked with Click & Collect for the *Shipping information* option in the *Update eBay options* area.
+. Click on *Execute* to update the listings.
+
+[#7040]
+=== Applying Click & Collect filters
+
+Go to *Listings » Active listings* to see all your listings or active listings. You can use filters to search for listings that are activated for Click & Collect. To do so, select the filter option *eBay* for the market filter. The filter list contains the option *Click & Collect*.
+
+You can search for Click & Collect orders in the *Orders » Edit orders* menu. Set the filter *Click & Collect* in the *Filter* tab to *Yes* to display Click & Collect orders.
+
+[#7100]
+== Sending dunning letters
+
+There are different possibilities to dun customers who, for example, have not yet paid an item purchased on eBay. The following examples show you how to dun customers manually or automatically.
+
+[#7200]
+=== Manually sending dunning letters
+
+If you want to send your dunning letters manually, carry out the required settings directly in the eBay order. You can start dunning procedures in agreement with the buyer if:
+
+* the buyer no longer wants the item
+* the buyer made a bad buy
+* the buyer has returned the item and wants a refund
+* the buyer and the seller could not agree on the terms and conditions
+* there is another unspecified reason
+
+You can also start an eBay dispute process if:
+
+* the buyer does not respond within the 7 days waiting period
+* the buyer refuses to pay
+* the buyer is no longer a registered user
+* there is another unspecified reason
+
+[.instruction]
+Manually sending a dunning letter:
+
+. Open an eBay order in the *Orders » Edit orders* menu.
+. Click on the *Edit* tab. It is located in the lower part of the order next to the *Stock units* tab. +
+→ The editing mode for the stock units is activated.
+. Select a dunning procedure from the *eBay Start dunning procedure…​* drop-down list. +
+→ The *eBay Start dunning procedure* window opens.
+. Click on *OK* to start the dunning procedure.
+
+[#7300]
+=== Automatically sending dunning letters
+
+You need to set up an automatic procedure in the <<automation/procedure-manager#, procedure manager>> in order to automatically send dunning information. You can enter the conditions under which the procedures are carried out and define a time for them.
+
+The eBay dispute process can be started with plentymarkets. The customer receives a request for payment via eBay. The dispute process is intended for orders for which payment has been pending for more than 4 days. In plentymarkets, these orders are referred to as *outstanding orders*. These orders are displayed in the *Setup » Markets » eBay » Data exchange* menu and can be retrieved there.
+
+[.instruction]
+Automatically sending a dunning letter:
+
+. Go to *Setup » Orders » Procedures*.
+. Open the *New procedure* tab.
+. Carry out the desired settings. Pay attention to the explanations given in <<#automatic-dunning-procedures>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[automatic-dunning-procedures]]
+.Settings for automatic dunning procedures
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+2+| Settings
+
+| *Active*
+| Place a check mark to activate the procedure.
+
+| *Execute every day at*
+| Specify when the procedure should be carried out on a daily basis.
+
+| *Name*
+| Enter a name for the procedure.
+
+2+| Filter
+
+| *Status*
+| Select a status.
+
+| *Last status change*
+| Select *Enter the days* for the *Last status change* setting and enter the number of days into the text field below. All eBay orders that have *status 3* for this number of days are displayed.
+
+| *Payment due date was exceeded*
+| The dispute process is intended for orders for which payment has been pending for more than 4 days.
+
+2+| Procedure
+
+| *Send email template*
+| Automatically send the selected email template, forexample *[6] eBay dispute process*.
+
+| *Change order status*
+| Automatically change the order status.
+
+| *Change dunning level*
+| Automatically change the dunning level.
+
+| *eBay*
+| Select *Start dispute process* to automatically send a dunning letter to the customer.
+|====
+
+For further information about automatic procedures, refer to the <<automation/procedure-manager#, Procedure manager>> page of the manual.
+
+[#7400]
+== Processing returns
+
+Different ways of processing incoming return requests from eBay customers are available in plentymarkets:
+
+*  Accept a return request and reclaim the items.
+*  Accept a return request and do not reclaim the items, for example low price items.
+*  Offer your customer a partial refund of the purchase price.
+*  Reject a return request if your eBay terms of return allow it.
+
+[#7500]
+=== Importing returns
+
+eBay returns and return statuses of the last 14 days are automatically imported from eBay to plentymarkets and updated every hour. When importing, new returns are created with the *Standard status for returns* in the *Orders » Edit orders* menu. The reason for return chosen by the customer on eBay is assigned to a <<orders/managing-orders#410, reason for return>> in plentymarkets. Imported eBay returns are edited the same way as other <<orders/managing-orders#400, returns>> in plentymarkets.
+
+[#7600]
+=== Editing returns
+
+The return process depends on whether the customer paid with PayPal or another payment method. If PayPal was used to pay for the item, then initiate a (partial) refund which eBay will carry out for you. The refund amount is automatically booked from your PayPal account to the customer’s PayPal account. Due to the eBay Money Back Guarantee, eBay sets a return directly to the status *Ended* as soon as you have accepted the return if the item was paid for with PayPal. With other payment methods, you initiate refunds yourself and inform eBay about accepting the refund. The customer has to confirm the receipt of the refund. In both cases, you use event procedures to automatically inform eBay about the progress of the return process.
+
+[#7700]
+=== Automating returns
+
+Set up <<automation/event-procedures#, event procedures>> to automatically exchange information with eBay. With event procedures, you initiate refunds from PayPal payments, mark returns as received and inform eBay that you have paid the refund. Event procedures are triggered when you change a return’s status in the *Orders » Edit orders » [Open return]* menu.
+
+[IMPORTANT]
+.Editing returns in the order type "return" or "credit note"
+====
+Before you set up event procedures for refunds, decide whether refunds should be edited in the order type *Return* or whether credit notes should be created. If you create credit notes, then select the filter *Order type > Credit notes* for event procedures with refunds. Because edited eBay statuses are imported into both the credit note and into the return, the event procedure would otherwise be triggered twice, i.e. for the return and for the credit note.
+====
+
+[#7800]
+==== Accepting returns with eBay label
+
+Set up an <<automation/event-procedures#, event procedure>> to automatically inform eBay about accepting a return and processing it with a return label from eBay.
+
+:table-event-procedure: <<#event-procedure-accepting-returns>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-accepting-returns]]
+.Event procedure for automatically accepting returns with eBay label
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| *eBay: Accept return, with eBay label*
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Procedure*
+| *Market listings > eBay return*
+| *Accept return, with eBay label*
+|====
+
+[#7900]
+==== Accepting returns with your own label
+
+Set up an <<automation/event-procedures#, event procedure>> to automatically inform eBay about accepting a return and processing it with your own label, not with a return label from eBay.
+
+[IMPORTANT]
+.Returns with your own label are only available for ebay.de, ebay.co.uk, and ebay.com
+====
+Returns with your own label are only available for your customers on ebay.de, ebay.co.uk and ebay.com.
+====
+
+:table-event-procedure: <<#event-procedure-return-own-label>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-return-own-label]]
+.Event procedure for automatically accepting returns with your own label
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change > eBay: Accept return, with own label*
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Procedure*
+| *Market listings > eBay return*
+| *Accept return without label*
+|====
+
+[#8000]
+==== Rejecting returns
+
+Set up an <<automation/event-procedures#, event procedure>> to automatically inform eBay about rejecting a return.
+
+[IMPORTANT]
+.Pay attention to eBay’s terms of return
+====
+Only reject those returns that violate the terms specified in the menu *Setup » Markets » eBay » Business policies » Tab: eBay return policy*.
+====
+
+:table-event-procedure: <<#event-procedure-rejecting-returns>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-rejecting-returns]]
+.Event procedure for automatically rejecting returns
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| *eBay: Reject return*
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Procedure*
+| *Market listings > eBay return*
+| *Reject return*
+|====
+
+[#8100]
+==== Offer partial refund
+
+Set up an <<automation/event-procedures#, event procedure>> to offer your customer a partial refund of the purchase price.
+
+:table-event-procedure: <<#event-procedure-partial-refund>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-partial-refund]]
+.Event procedure for automatically offering partial refunds
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| *eBay: Offer partial refund*
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Procedure*
+| *Market listings > eBay return*
+| *Offer partial refund*
+|====
+
+[#8150]
+==== Uploading your own label to eBay
+
+Set up an <<automation/event-procedures#, event procedure>> to upload your own label to eBay.
+
+[TIP]
+.Creating a return label
+====
+You can upload a return label with an event procedure at eBay as described below or you can <<fulfilment/shipping-centre#retrieve-return-label, create>> and retrieve a return label in plentymarkets.
+====
+
+:table-event-procedure: <<#event-procedure-own-label>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-own-label]]
+.Event procedure for uploading your own label
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| *eBay: Upload own label to eBay*
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Procedure*
+| *Market-Listings > Upload own return label at eBay*
+|
+|====
+
+[#8200]
+==== Marking returns as received
+
+Set up an <<automation/event-procedures#, event procedure>> to inform eBay about having received the item that was returned by the customer.
+
+:table-event-procedure: <<#event-procedure-mark-return>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-mark-return]]
+.Event procedure for automatically marking returns as received
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| *eBay: Mark return as received*
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Procedure*
+| *Market listings > Mark eBay return as received*
+|
+|====
+
+[#8300]
+==== Issuing refunds
+
+Set up an <<automation/event-procedures#, event procedure>> to initiate a refund to the customer.
+
+[TIP]
+.OAuth2 authentication required
+====
+For this event procedure to work properly, you have to authenticate your eBay account for OAuth2 in the the *Setup » Markets » eBay » Accounts » OAuth2* menu.
+====
+
+You can also set up this event procedure if you use eBay's Managed Payments service. In this case, the refund will be sent directly to eBay. eBay Managed Payments enables users to pay directly at eBay without having to enter a third-party page. eBay takes care of the entire payment and return process. Depending on whether you use eBay Managed Payments or not, you have to set different filters in this event procedure. If you use eBay Managed Payments, select the filter *Order > Payment Method: eBay Payments*.
+
+The event procedure can be triggered in three different cases if you use eBay Managed Payments:
+
+1. A case was opened at eBay. +
+→ A refund for this case is sent to eBay.
+
+2. No case was opened at eBay. +
+→ Is there a return? If a return exists, a refund for this return is sent to eBay. You can also send a refund to eBay if the return was not imported into plentymarkets.
+
+3. No case was opened at eBay and there is no return. +
+→ A refund is sent to eBay.
+
+:table-event-procedure: <<#event-procedure-automatic-refund>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-automatic-refund]]
+.Event procedure for automatically initiating refunds via PayPal
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change > Issue eBay refund (PayPal)*
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Filter 3*
+| *Order > Payment method*
+|without eBay Managed Payments: *PayPal* +
+with eBay Managed Payments: *eBay Payments*
+
+| *Procedure*
+| *Market listings > Issue eBay refund to customer*
+|
+|====
+
+[#8400]
+==== Marking eBay refunds as sent (non-PayPal)
+
+Set up an <<automation/event-procedures#, event procedure>> to inform eBay about having initiated a refund for the customer. This event procedure only works for orders that were not paid for with PayPal.
+
+:table-event-procedure: <<#event-procedure-sent-refunds>>
+
+include::_includes:page$EA.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or <<orders/managing-orders#1220, create>> a new status.
+
+[[event-procedure-sent-refunds]]
+.Event procedure for automatically marking refunds as sent (non-PayPal)
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change > eBay: Mark refund as sent (non-PayPal)*
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Filter 3*
+| *Order > Payment method*
+| *All offered payment methods except PayPal*
+
+| *Procedure*
+| *Market listings > eBay refund sent*
+|
+|====
+
+[#8500]
+=== Examples of return processes
+
+The following section illustrates the return process. It describes returns when items are sent back, when items are not sent back and also returns with a partial refund. You have to create *order statuses for eBay returns* and link them with the eBay return statuses in order for the described processes to work. Additionally, you have to set up the event procedures described above.
+
+[TIP]
+.eBay returns can also be processed on eBay
+====
+Instead of partially automating the processes with plentymarkets as described here, you can choose to process eBay returns directly in your eBay account. The return status is automatically updated every hour in plentymarkets.
+====
+
+[#8600]
+==== Full refund with return of the item
+
+This section describes a possible scenario where the customer returns the item and receives a full refund. The following information gives an example of a return with your own label. If you work with eBay return labels, select the status *eBay: Accept return, with eBay label* and the event procedure *Accept return, with eBay label*.
+
+.  The buyer requests a return in his or her “My eBay” account.
+.  The return request is imported into plentymarkets and saved with the standard status for returns.
+.  The seller checks the reason for return under *Orders » Edit orders » [Open return] » Tab: Stock units » Note*.
+.  The seller accepts the return and sets the return to the status *eBay: Accept return*. +
+→ The event procedure *Accept return* is triggered and your decision is transferred to eBay.
+.  The seller generates the return label in the *Orders » Shipping-Center* menu.
+.  The seller sets the return to the status *eBay: Upload own label*. +
+→ The event procedure *Upload own label on eBay* is triggered.
+.  The buyer sends the item back and marks it as sent in his or her “My eBay” account. +
+→ The return changes to the status *eBay: purchaser sent return*.
+.  The seller receives the item.
+.  The seller checks the item and sets the status in the *Orders » Edit orders » [Open return]* menu to *eBay: Mark return as received*. +
+→ The event procedure *Mark eBay return as received* is triggered and the new status is transferred to eBay.
+.  The rest of the refund process depends on which payment method was used by the buyer:
+.  PayPal payment:
+*  The seller sets the return status to *Initiate eBay refund*. +
+→ The event procedure *Initiate eBay refund* is triggered and the new status is transferred to eBay. +
+→ The refund amount is directly booked from the seller’s PayPal account to the buyer’s PayPal account. +
+→ The return changes to the status *eBay: return closed*. The buyer does not have to confirm the receipt of the refund in order for the status to change.
+
+.  A different payment method:
+*  The seller carries out the refund.
+*  The seller sets the return status to *eBay: Mark refund as sent (non-PayPal)*. +
+→ The event procedure *Mark refund as sent (non-PayPal)* is triggered and the new status is transferred to eBay.
+*  The buyer confirms the receipt of the refund in his or her “My eBay” account. +
+→ The return changes to the status *eBay: Return closed*.
+
+[#8700]
+==== Full refund without return of the item
+
+This section describes a possible scenario where the customer keeps the item but still receives a full refund. This could be useful if customers want to return low-value items and the amount of work and return expenses are disproportionate to the value of the items.
+
+.  The buyer requests a return in his or her “My eBay” account.
+.  The return request is imported into plentymarkets and saved with the standard status for returns.
+.  The seller checks the reason for return under *Orders » Edit orders » [Open return] » Tab: Stock units » Note*.
+.  The seller accepts the return while the buyer selects one of the following statuses depending on the initial payment method:
+.  PayPal payment:
+*  The seller sets the return status to *Initiate eBay refund*. +
+→ The event procedure *Initiate eBay refund* is triggered and the new status is transferred to eBay. +
+→ The refund amount is directly booked from the seller’s PayPal account to the buyer’s PayPal account. +
+→ The return changes to the status *eBay: return closed*. The buyer does not have to confirm the receipt of the refund in order for the status to change.
+.  A different payment method:
+*  The seller carries out the refund.
+*  The seller sets the return status to *eBay: Mark refund as sent (non-PayPal)*. +
+→ The event procedure *Mark refund as sent (non-PayPal)* is triggered and the new status is transferred to eBay.
+*  The buyer confirms the receipt of the refund in his or her “My eBay” account. +
+→ The return changes to the status *eBay: Return closed*.
+
+[#8800]
+==== Partial refund
+
+This section describes a possible scenario where the customer receives a partial refund. A partial refund could be useful, e.g. if the buyer initiates a return for an item that has small blemishes or missing accessories.
+
+.  The buyer requests a return in his or her “My eBay” account.
+.  The return request is imported into plentymarkets and saved with the standard status for returns.
+.  The seller checks the reason for return under *Orders » Edit orders » [Open return] » Tab: Stock units » Note*.
+.  The seller offers a new price to the customer. The seller enters a suggestion for the new item price under *Orders » Edit orders » [Open return] » Tab: Edit* next to the option *Price [gross]*. +
+*_Or:_* Alternatively, the seller enters the new price into the *Credit note*.
+Afterwards, the seller sets the return status to *eBay: Offer partial refund*. +
+→ The event procedure *Offer partial refund* is triggered and your decision is transferred to eBay.
+.  The buyer accepts the partial payment in his or her “My eBay” account. +
+→ The return changes to the status *eBay: Partial refund accepted*.
+.  The partial refund process depends on which payment method was used by the buyer:
+.  PayPal payment:
+→ The refund amount is directly booked from the seller’s PayPal account to the buyer’s PayPal account. +
+→ The return changes to the status *eBay: return closed*. The buyer does not have to confirm the receipt of the refund in order for the status to change.
+
+.  A different payment method:
+*  The seller carries out the partial refund.
+*  The seller sets the return status to *eBay: Mark refund as sent (non-PayPal)*. +
+→ The event procedure *Mark refund as sent (non-PayPal)* is triggered and the new status is transferred to eBay.
+*  The buyer confirms the receipt of the refund in his or her “My eBay” account. +
+→ The return changes to the status *eBay: Return closed*.
+
+[IMPORTANT]
+.If the buyer rejects a partial refund
+====
+If the buyer rejects a partial refund, then either initiate a full refund or a return as described above. Alternatively, the case can be escalated to eBay.
+====
+
+[#900-0]
+== Manging purchase cancellations
+
+On eBay, purchases can be cancelled by either the customer or the seller. plentymarkets allows you to mostly automate purchase cancellations.
+
+The information in this chapter is structured as follows:
+
+* <<#900, Setting and linking purchase cancellation statuses>>
+* <<#8900-1, Managing purchase cancellations by customers>>
+* <<#9950, Managing purchase cancellations by the seller>>
+
+[#900]
+=== Setting and linking purchase cancellation statuses
+
+Basic process:
+
+* Create the order statuses (<<#900-1, How?)>>
+* Check that the status range for cancelled orders and adjust the range if necessary. (<<#900-2, How?)>>
+* Link the purchase cancellation status with the eBay status. (<<#900-3, How?)>>
+
+[#900-1]
+[discrete]
+===== Setting the order statuses
+
+Purchase cancellation statuses are used to process purchase cancellations in the eBay back end. You can either use existing order statuses or <<orders/managing-orders#1200, create new order statuses>>. To import and manage eBay purchase cancellation requests in plentymarkets, you need the following order statuses:
+
+* Purchase cancellation requested
+* eBay purchase cancellation accepted
+* eBay purchase cancellation rejected
+* eBay purchase cancellation closed
+
+The numbers of these statuses depends on the status range you use for cancellations. If you use the default status *[8] Cancelled* for cancellations, you should assign numbers in the range [8.xx].
+
+[.collapseBox]
+.Tip: How to create order statuses
+--
+. Go to Setup » Orders » Events.
+. Click on *Create new contact* (icon:plus-square[role="green"]).
+. Enter a status number. +
+→ The highest possible number is 19.9999.
+. Enter a name. +
+. Save (icon:save[set=plenty]) the settings. +
+→ Fields for additional settings are shown. +
+. If necessary, add additional languages for the order status.
+. Save (icon:save[set=plenty]) the settings.
+--
+
+[#900-2]
+[discrete]
+===== Checking the status range for cancelled orders
+
+Reserved stock needs to be released when a purchase is cancelled. Whether or not the stock is released depends on the status range you set up for cancelled orders. As such, check this status range and adjust the range if necessary.
+
+. Go to *Setup » Orders » Settings*.
+. Navigate to the setting *Status of cancelled orders (No reservation of stocks)*.
+. Check of the status range covers the statuses that you set for managing eBay purchase cancellations. +
+*_Tip:_* The default is a status range of *[8] Cancelled* to *[8.1] Cancelled by customer*.
+. If the status range does not cover the statuses for purchase cancellations, select the highest status that you set for purchase cancellations from the drop-down list *to*.
+. Save (icon:save[set=plenty]) the settings.
+
+[#900-3]
+[discrete]
+===== Linking purchase cancellation statuses
+
+Now link the order statuses that you specified for eBay purchase cancellations with eBay’s purchase cancellation statuses. When a purchase cancellation request is imported, the correct status is then automatically set in the order.
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Purchase cancellation*.
+. In the column *Own status*, select the appropriate plentymarkets status for each *eBay purchase cancellation status*. Note <<#table-ebay-status>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[table-ebay-status]]
+.Statuses for eBay purchase cancellations
+[cols="1,3a"]
+|====
+|eBay purchase cancellation status |Explanation
+
+| *Purchase cancellation requested*
+| This status is assigned to orders if customers request a purchase cancellation on eBay.
+
+| *Purchase cancellation request closed*
+| The status is assigned to eBay orders once the purchase cancellation has been completed and no further actions are required and/or possible.
+|====
+
+[#8900-1]
+=== Managing purchase cancellations by customers
+
+eBay’s link:https://www.ebay.co.uk/help/selling/getting-paid/cancelling-transaction?id=4136#respond[purchase cancellation^]{nbsp}icon:external-link[] function allows buyers to request a cancellation of a purchase within one hour after ordering if the item has not been shipped yet. As a seller, you have three days to accept or reject the request. If you do not process the request within three days, the request is accepted automatically if the buyer has not paid for the item yet. If the buyer already paid for the item, the purchase cancellation is automatically rejected.
+
+Basic process:
+
+* Automate the import of requests for purchase cancellations. (<<#9000, How?>>)
+* Create event procedures to automatically inform eBay of your decisions. (<<#9700, How?>>)
+* These event procedure are triggered whenever an order with a purchase cancellation request is moved to the specified status. This means that eBay is automatically informed.
+
+[#9000]
+==== Purchase cancellations: Importing requests automatically
+
+Carry out the following settings to import eBay purchase cancellation requests. After the import, the purchase cancellation status will be displayed in the *Orders » Edit orders* menu. The status displayed is the status that you linked to the eBay purchase cancellation status in the *Setup » Markets » eBay » Settings » Tab: Purchase cancellation* menu. Therefore, <<#900, link the statuses first>>.
+
+[.instruction]
+Importing purchase cancellation requests automatically:
+
+. Go to *Setup » Markets » eBay » Settings*.
+. Click on the *Account settings* tab.
+. Select *Yes* for the *Retrieve eBay purchase cancellations* option.
+. Save (icon:save[set=plenty]) the settings. +
+→ Cancellation requests are automatically imported. +
+→ The requests are assigned the status that you set for eBay purchase cancellation requests.
+
+Find information on how to process the requests in the following chapters. You can accept or reject every request.
+
+[#9700]
+==== Automatically informing eBay about purchase cancellation decisions
+
+Create the event procedures described in <<#notification-purchase-cancellation>> to automatically inform eBay about your decisions regarding purchase cancellation requests. These event procedures are triggered when the status of an order is changed for which a purchase cancellation was requested.
+
+[[notification-purchase-cancellation]]
+.Event procedures for automatically informing eBay about decisions regarding purchase cancellation requests
+[cols="1,3a"]
+|===
+|Event procedure |Setup
+
+| Accept eBay cancellation request
+a| Set up the following event procedure. This event procedure informs eBay automatically that you have accepted a purchase cancellation when an order is moved to the status for *eBay: Accept purchase cancellation*.
+
+[IMPORTANT]
+.Refund
+====
+If the item for which you accepted the purchase cancellation request was already paid for, then you have 10 days to refund the purchase price.
+====
+
+[cols="1,3,3"]
+!===
+!Setting !Option !Selection
+
+! *Event*
+! *Order change: Status change*
+! Select the status for *eBay: Purchase cancellation accepted*.
+
+! *Filter 1*
+! *Order > Order type*
+! *Order*
+
+! *Filter 2*
+! *Order > Referrer*
+! *eBay Germany*
+
+! *Procedure*
+! *Market listings > Accept eBay cancellation request*
+!
+!===
+
+* When processing purchase cancellation requests, you have two possibilities to accept purchase cancellation requests: You can either change the order status or delete outstanding orders. (<<#9300, How?>>)
+
+| Reject eBay cancellation request
+a| Set up the following event procedure. This event procedure informs eBay automatically that you have rejected a purchase cancellation when an order is moved to the status for *eBay: Reject purchase cancellation*.
+
+[cols="1,3,3"]
+!===
+!Setting !Option !Selection
+
+! *Event*
+! *Order change: Status change*
+! Select the status for *eBay: Purchase cancellation rejected*.
+
+! *Filter 1*
+! *Order > Order type*
+! *Order*
+
+! *Filter 2*
+! *Order > Referrer*
+! *eBay Germany*
+
+! *Procedure*
+! *Market listings > Reject eBay cancellation request*
+!
+!===
+
+* When processing purchase cancellation requests, there are two ways to reject requests: You can either change the order status or create an event procedure to automatically reject requests for cancelling paid orders. (<<#9400, How?>>)
+|===
+
+:table-event-procedure: <<#notification-purchase-cancellation>>
+
+include::_includes:page$EA.adoc[]
+
+[#9300]
+==== Processing purchase cancellations: accept requests
+
+You have two possibilities to accept purchase cancellation requests: You can either change the order status or delete outstanding orders.
+
+[IMPORTANT]
+.Refund
+====
+If the item for which you accepted the purchase cancellation request was already paid for, then you have 10 days to refund the purchase price.
+====
+
+[#9200]
+[.collapseBox]
+._Alternative 1:_ Accepting requests - Changing the order status
+--
+If you have linked the eBay purchase cancellation statuses with your own statuses yy#900, as described above>>, then purchase cancellation requests are imported with the status that you set for “eBay purchase cancellation requested”. By changing the order status, you can process each request individually.
+
+[.instruction]
+Changing the order status to accept purchase cancellation:
+
+. Go to *Orders » Edit orders*.
+. Search for orders with the status for *eBay purchase cancellation requested*
+. Select an order.
+. Change the order’s status to the status for *eBay purchase cancellation accepted*.
+. Save (icon:save[set=plenty]) the settings. +
+→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9800, Communicating a purchase cancellation acceptance>>.
+
+Use the group function to change multiple orders at once. If you want to accept the request for unpaid orders, then search for all unpaid orders with the appropriate status and change the orders’ status with the <<orders/managing-orders#1700, group function>>.
+
+It might be possible to set up an <<automation/event-procedures#, event procedure>> based on your specific workflows that accepts requests automatically using certain filters.
+--
+
+[.collapseBox]
+._Alternative 2:_ Accepting purchase cancellations - Deleting outstanding orders
+--
+
+Outstanding orders are those orders for which the buyer has not yet completed the checkout process on eBay. Outstanding orders are only displayed in plentymarkets if the *Shipping costs for new orders coming from eBay* option was set to *Transfer from eBay*. This option is found under *Setup » Listings » Checkout*. To accept a purchase cancellation request for an outstanding order, delete this outstanding order.
+
+[.instruction]
+Deleting outstanding orders to accept a purchase cancellation:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Search for orders with the error message *Purchase cancellation requested for this order*.
+. Select an order.
+. Delete the order. +
+→ Your decision is sent to eBay even if no event procedure is set up.
+--
+
+[#9400]
+==== Processing purchase cancellations: reject requests
+
+There are two ways to reject requests: You can either change the order status or create an event procedure to automatically reject requests for cancelling paid orders.
+
+[.collapseBox]
+._Alternative 1:_ Rejecting requests - Changing the order status
+--
+
+If you have linked the eBay purchase cancellation statuses with your own statuses yy#900, as described above>>, then purchase cancellation requests are imported with the status that you set for “eBay purchase cancellation requested”. By changing the order status, you can process each request individually.
+
+[.instruction]
+Changing the order status to reject requests:
+
+. Go to *Orders » Edit orders*.
+. Search for orders with the status for *eBay purchase cancellation requested*
+. Select an order.
+. Change the order’s status to the status for *eBay purchase cancellation rejected*.
+. Save (icon:save[set=plenty]) the settings. +
+→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9900, Communicating a purchase cancellation rejection>>.
+--
+
+[.collapseBox]
+._Alternative 2:_ Automatically reject purchase cancellations for paid orders with an event procedure
+--
+
+Set up two <<automation/event-procedures#, event procedures>> to always automatically reject purchase cancellation requests for paid orders.
+
+:table-event-procedure: <<#mark-paid-orders>>
+
+include::_includes:page$EA-tabbed.adoc[]
+
+[[mark-paid-orders]]
+.Event procedure for automatically marking paid orders
+[cols="1,3,3"]
+|======
+|Setting |Option |Selection
+
+| *Event*
+| *Payment: Complete*
+|
+
+| *Procedure*
+| *Order > Flag*
+| *Flag*
+|======
+
+:table-event-procedure: <<#automatically-reject-purchase-cancellation>>
+
+include::_includes:page$EA-tabbed.adoc[]
+
+[[automatically-reject-purchase-cancellation]]
+.Event procedure for automatically rejecting purchase cancellations for paid orders
+[cols="1,3,3"]
+|======
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| Select the status for *eBay: Purchase cancellation requested*.
+
+| *Filter 1*
+| *Order > Flag*
+| *Flag*
+
+| *Filter 2*
+| *Order > Referrer*
+| *eBay Germany*
+
+| *Procedure*
+| *Order > Change status*
+| *eBay: Purchase cancellation rejected*
+|======
+--
+
+[#9950]
+=== Managing purchase cancellations by the seller
+
+As a seller, you can start purchase cancellations on eBay.
+
+Basic process:
+
+* Create order statuses for the reasons allowed by eBay. <<9950-1, How?>>
+* Create event procedures for automatically starting purchase cancellations. <<9950-2, How?>>
+* To start a purchase cancellation, change the order status. <<9950-3, How?>>
+
+[#9950-1]
+[discrete]
+===== Setting up order statuses for the different reasons
+
+You need to specify a reason to start purchase cancellations on eBay. As such, set up one order status for each of the following reasons:
+
+* Buyer gave incorrect delivery address
+* Buyer wants to cancel the purchase
+* Item cannot be delivered as agreed upon
+
+You can either use existing order statuses or <<orders/managing-orders#1200, create new order statuses>>.
+
+[.collapseBox]
+.Tip: How to create order statuses
+--
+. Go to Setup » Orders » Events.
+. Click on *Create new contact* (icon:plus-square[role="green"]).
+. Enter a status number. +
+→ The highest possible number is 19.9999.
+. Enter a name. +
+. Save (icon:save[set=plenty]) the settings. +
+→ Fields for additional settings are shown. +
+. If necessary, add additional languages for the order status.
+. Save (icon:save[set=plenty]) the settings.
+--
+
+[#9950-2]
+[discrete]
+===== Creating event procedures for automatically starting purchase cancellations
+
+Set up an <<automation/event-procedures#, event procedure>> for each reason to automatically start a purchase cancellation on eBay.
+
+An example of an event procedure for cancelling a purchase because the buyer gave an incorrect delivery address is described below. Create additional event procedures for the reasons *Buyer wants to cancel the purchase* and *Item cannot be delivered as agreed upon*.
+
+:table-event-procedure: <<#starting-purchase-cancellations-ebay>>
+
+include::_includes:page$EA.adoc[]
+
+[[starting-purchase-cancellations-ebay]]
+.Event procedure for automatically creating purchase cancellations on eBay
+[cols="1,3,3"]
+|====
+|Setting |Option |Selection
+
+|Event
+| *Order change: Status change*
+| Select the status that you set for the reason *Buyer gave incorrect delivery address*.
+
+|Filter 1
+| *Order > Order type*
+| *Order*
+
+|Filter 2
+| *Order > Referrer*
+| Select an *eBay referrer*.
+
+|Procedure
+| *Market-Listings > Create an order cancellation on eBay*
+| *Buyer gave incorrect delivery address*
+|====
+
+[#9950-3]
+[discrete]
+===== Changing the order status to start a purchase cancellation
+
+To start a purchase cancellation for an order, you just need to change the order status of this order.
+
+. Go to *Orders » Edit orders*.
+. Select the order for which you want to start a purchase cancellation.
+. Change the status of the order to the status of the reason that you want to give eBay for the cancellation.
+. Save (icon:save[set=plenty]) the settings. +
+→ The event procedure is triggered, thus informing eBay about the purchase cancellation.
+
+[#10000]
+== Viewing the API log
+
+The menu *Data » API log » Tab: API log* contains a history of processes that run via the eBay interface. The following formats are available for eBay:
+
+* *EbayImportCancellations* (import of cancellations)
+* *EbayFullfilment* (payment confirmation, shipping confirmation)
+* *EBayImportReturns* (import of returns)
+* *TimeAction_Action_Ebay* (eBay procedure manager)
+* *EbayDispute* (dispute processes)
+* *ItemListingControllerEBay* (listings in general)
+* *ItemListingExternalPriceUpdateController* (price synchronization)
+* *ItemListingGroupAuction* (group function: listings)
+* *ItemListingHelperMarketLister* (start, relist, check: listings)
+* *ItemListingHelperMemberMessages* (eBay messages)
+* *ItemListingHelperSyncListingHistory* (group function: active listings)
+* *ItemListingExternalPriceUpdateController* (price synchronization)
+* *ItemListingMarketLister* (future listings, relisted listings)
+* *ItemListingPriceHelper* (item price updates)
+* *ItemListingSyncInventoryJob* (stock synchronisation)
+* *EbayMarkAsReceived* (event procedure: accept return)
+* *EbayMarkRefundSent* (event procedure: marking eBay refunds as sent)
+
+[.instruction]
+Viewing the API log:
+
+. Go to *Data » API log » Tab: API log*.
+. Select a format from the *Process* drop-down list.
+. *_Optional:_* Select a date if you only want to see entries for a specific day.
+. Select the number of results per page.
+. Click on *Search* (icon:search[role="blue"]) to display the results.
+
+[TIP]
+.Missing API format
+====
+It is possible that some API formats are missing in the drop-down list. These formats will only be available after activating functions in the settings. The format *ItemListingHelperSyncInventoryJob*, for example, will only be available in the drop-down list once the automatic stock update is activated in the *Setup » Markets » eBay » Settings » Tab: Initial settings* menu.
+====
+
+[#10100]
+== Synchronising data
+
+The *Data exchange* menu is composed of several tabs. The *Orders* tab allows you to manually import your orders and view orders where the buyer failed to complete the checkout process on eBay. In the *Listing* tab, you synchronise the listings uploaded on eBay but not yet sold with the listings in plentymarkets. In the *Other* tab you can manually start various synchronisation processes.
+
+[#10200]
+=== Manually retrieving orders
+
+In the *Orders* tab, you manually retrieve orders. Retrieving orders manually might be necessary if you do not use the automatic retrieval under *Setup » Markets » eBay » Settings* or if your token has expired and you now want to import the orders from this time period.
+
+[.instruction]
+Retrieving orders manually:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Select the *Orders* tab.
+. Select a country from the *Platform* drop-down list.
+. Use the *from* and *to* fields to select a time period.
+. Click on *Retrieve orders* to import the orders from the selected time period.
+
+[#10300]
+=== Importing outstanding orders
+
+Outstanding orders are those orders for which the buyer has not paid yet and thus not yet completed the checkout process on eBay. These orders cannot be found in the *Orders* menu. You can import outstanding orders so that they become available in the *Orders* menu.
+
+[IMPORTANT]
+.Outstanding orders
+====
+Outstanding orders only occur if the option *Shipping costs for new orders coming from eBay* was set to *Transfer from eBay*. This option is found under *Setup » Listings » Checkout*. It is only possible to import outstanding orders within 30 days.
+====
+
+[.instruction]
+Importing outstanding orders:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Select the *Orders* tab.
+. Select a country from the *Platform* drop-down list.
+. Select a *payment method* from the drop-down list. +
+→ The imported order is assigned to the selected payment method.
+. Use the *Shipping costs* drop-down list to select a service offered by the desired shipping service provider. +
+→ The imported order is assigned to the selected shipping costs.
+. Activate the *orders* that you want to import. +
+→ If you activate several orders that all belong to the same customer, then these orders are combined and imported as one order.
+. Click on the *gear-wheel icon* to import the outstanding orders. +
+→ The orders are now available in the *Orders* menu.
+
+[TIP]
+.Importing and combining orders
+====
+Several outstanding orders that belong to the same customer are automatically combined into one order if they are manually imported at the same time. Single orders from different customers can also be selected individually and then be imported. Define a time period for outstanding orders under *Setup » Listings » Checkout*. Once this time period has ended, outstanding orders are automatically imported and combined.
+====
+
+[#10400]
+=== Synchronising listings and orders
+
+Listings are retrieved on an hourly basis. When retrieving listings from eBay, plentymarkets searches for an existing customer account first to avoid double-entries. If no customer account is found, a new customer account is created automatically in plentymarkets.
+
+Then, the listing is assigned to an item. The assignment of listing and item will run smoothly if the listing on eBay was also listed with plentymarkets or if an item was created with the same title as the listing title. Either a new order is created or an existing eBay order is extended. The order is extended if it fulfils the following criteria:
+
+* Same buyer and identical delivery address
+* Identical payment method
+* The order is in *status 1* or *status 3*; or in *status 5* if the payment method is cash on delivery
+* The order is not yet marked as *paid* or *carried out*
+
+[TIP]
+.Tip
+====
+If there are differing item names, then you can access the item data, click on the *Multi-Channel* tab and enter the listing title for the item under *eBay title*.
+====
+
+If orders are found that meet the criteria mentioned above, the *shipping costs* are recalculated. There are two calculation types for shipping costs:
+
+* The shipping costs are calculated by plentymarkets the way that you defined in the shipping profiles.
+* The shipping costs are paid by eBay.
+
+If no matching item can be found, the item ID *-2* is always assigned instead.
+
+[IMPORTANT]
+.Transferring the package number
+====
+If you want to send the package number to eBay as part of the shipping information, then you can enter this number in the *settings* tab of the corresponding eBay order. This information is automatically sent to eBay.
+====
+
+[#10500]
+=== Synchronising listings
+
+In the *Listing* tab, you can import GTC offers where the end date changed, e.g. while your token expired.
+
+[.instruction]
+Importing listings:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Click on the *Listing* tab.
+. Select an account from the drop-down list.
+. Select the option *Start time* or *End time*. +
+→ The end time was selected in the example.
+. Use the *from* and *to* fields to select a time period.
+. Click on *Execute* to update the listings.
+
+[TIP]
+.Date selection from…​ to…​
+====
+For example, if you select *End time*, then enter the day when the token expired *+ \+ 30 days* into the *from* field. In the *to* field, enter the day when the token was reactivated *+ 30 days*. This imports all GTC offers that were extended during the inactive time and will therefore end during the selected time period.
+====
+
+[#10600]
+=== Synchronising special sales
+
+Create a new special sale directly on eBay. Special sales are automatically synchronised with plentymarkets. If the synchronisation is unexpectedly delayed, then you can manually synchronise the special sales here.
+
+[.instruction]
+Manually synchronising special sales:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Click on the *Other* tab.
+. Select an account from the drop-down list.
+. Click on *Start* to import the special sales. +
+→ The special sales are synchronised.
+
+[#10700]
+=== Synchronising shipping discounts for combined payments
+
+Furthermore, you can synchronise shipping discounts for combined payments.
+
+[.instruction]
+Synchronising shipping discounts for combined payments:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Click on the *Other* tab.
+. Select an account from the drop-down list.
+. Click on *Start* to import the shipping discounts for combined payments. +
+→ Your eBay account information is transferred to plentymarkets.
+
+[TIP]
+.Offering a shipping discount for combined payments
+====
+Go to *Setup » Markets » eBay » Business policies » Tab: eBay shipping conditions* to select the *shipping discounts for combined payments* that were imported from eBay.
+====
+
+[#10800]
+=== Synchronising the general conditions for shipping profiles
+
+In this menu, you can synchronise the general conditions for <<Creating shipping profiles, shipping profiles>>.
+
+[.instruction]
+Synchronising the general conditions for shipping profiles:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Click on the *Other* tab.
+. Select an account from the drop-down list.
+. Select the country from the drop-down list.
+. Click on *Start* to import the general conditions for shipping profiles.
+
+[#10900]
+=== Synchronising return reasons
+
+You can also synchronise the *eBay reasons of return*.
+
+[.instruction]
+Synchronising return reasons:
+
+. Go to *Setup » Markets » eBay » Data exchange*.
+. Click on the *Other* tab.
+. Click on *Start* next to the *Synchronise return reasons* option to import new or edited eBay reasons for return.
+
+[#11000]
+=== Importing eBay listings
+
+In this menu, eBay listings can be directly imported into plentymarkets. In doing so, both a set of item master data and a listing is created in plentymarkets. You have to carry out specific settings for the import. This not only includes selecting the *eBay account* and the *warehouse*, but also selecting which items should be imported.
+
+How to import listings that already exist on eBay into plentymarkets is also explained in this video:
+
+.Importing listings into plentymarkets
+video::267560178[vimeo]
+
+[TIP]
+.Creating items via data import
+====
+Items can be created by importing data from eBay. Go to *Data » eBay listings* and carry out the data import. The whole description of the eBay listing is saved as the item or listing description in plentymarkets. All layout elements (HTML tags etc.) of the listing are imported. Therefore, you need to manually edit the listing after the import. If you still wish to immediately start your listings on eBay via plentymarkets, create a layout template containing only the template function *{% GetItemDescription() %}* and nothing else. This way, the existing description is used as the listing description without any additional specifications.
+====
+
+[.instruction]
+Importing eBay listings:
+
+. Go to *Data » eBay listings*.
+. Carry out the desired settings. Pay attention to the explanations given in <<#ebay-importing-listings>>.
+. Click on *Import* to import the eBay listings. +
+→ A new area is displayed where you can see the processing status.
+
+[[ebay-importing-listings]]
+.Import of eBay listings
+[cols="1,3a"]
+|====
+| Setting | Explanation
+
+2+| Account, platform and stock settings
+
+| *eBay account*
+| Select an eBay account from the drop-down list.
+
+| *eBay platform*
+| Select a specific platform or select *ALL*. If you select a platform, only those market listings are imported that were listed on this platform. All listings from other platforms are not imported in this case. For example, this is useful if you have your German eBay listings translated by a service provider such as Webinterpret.
+
+| *Import into directory*
+| Select which <<Creating directories, directory>> the listings should be imported into. +
+If you did not create a special directory for this, then the standard directory is used.
+
+| *Warehouse for stock*
+| Select which warehouse the imported listings' items should be assigned to.
+
+| *Stock dependence*
+| Choose between *unlimited (with synchronisation)*, *unlimited (without synchronisation)*, *limited (with reservation)* and *limited (without reservation)*. +
+*_Important:_* If you select *Limited* (both) or *Unlimited (with synchronisation)*, then you should deactivate the following options until the listings are checked: +
+<<Activating the automatic stock update, Activate automatic stock update>> and <<Setting up stock, End offers automatically>>.
+
+2+| Import settings
+
+| *Import all listings (one item & one listing per eBay item number)*
+| Import all listings and create an item as well as a listing for every eBay item number.
+
+| *Import all listings (one item & one item per listing title)*
+| Import all listings and create a new item for every listing title.
+
+| *Import all listings (one item per listing title & one listing per eBay item number)*
+| Import all listings and create an item for every listing title as well as a listing for every eBay item number.
+
+| *Only import those listings that can be assigned to an item (one listing per eBay item number)*
+| Only import listings that should be assigned to an existing item. Additionally, a listing is created for each eBay item number. The synchronisation is carried out based on *Name*, *Name2* and *Name3*. +
+If you select this option, the following settings must be saved for the item: The item must be *active*, it must be *available* for eBay, and it must have a *sales price*. Further information can be found in the best practice <<markets/ebay/best-practices-ebay-activate-listings#, Activating listings>>.
+
+| *Only import those listings that can be assigned to an item (one listing per eBay item number)*
+| Only import listings that should be assigned to an existing item. Additionally, a listing is created for each eBay item number. The synchronisation is carried out based on *Name*, *Name2* and *Name3*. +
+If you select this option, the following settings must be saved for the item: The item must be *active*, it must be *available* for eBay, and it must have a *sales price*. Further information can be found in the best practice <<markets/ebay/best-practices-ebay-activate-listings#, Activating listings>>.
+
+| *Only import the stock from the imported listings*
+| Select this option if only the stock should be synchronised for items of the corresponding listings. +
+*_Important:_* If you select this option, then you need to completely delete the corresponding item’s stock beforehand. This is because the stock that is available on eBay is simply added and any existing stock in the plentymarkets system is not overwritten.
+
+2+| Other settings
+
+| *Preview function*
+| Activate the preview function to suggest assignment options of listings to existing or new items.
+
+| *Filter HTML (recommended)*
+| Remove JavaScript and all HTML elements from the listing description, except for <p>, <br>, <strong>, <b>, <i>, <u>, <hr>, <center>, <li>, <ul>, <h1> to <h6>.
+
+| *Compare SKU to variation number*
+| Activate to compare the SKU on eBay with the variation number in plentymarkets during the import.
+
+| *Create main variation without attributes (variation listings)*
+| Activate to create a main variation with no attributes when variation listings are imported.
+
+| *Import eBay store categories into the system*
+| Import eBay shop categories as item categories and activate them for items.
+
+| *All pages*
+| Activate to import all available pages. Single pages can be imported with the *Query the following page now* option.
+
+| *Importing parts compatibility listing*
+| Activate to import the parts compatibility listing into plentymarkets and activate it for appropriate listings. +
+*_Important:_* Importing will take longer when this option is activated.
+
+| *Query the following page now*
+| Select the page that you wish to import. 200 listings per page are imported.
+
+| *Import the following eBay listing*
+| Enter the external eBay listing ID in order to import a certain listing.
+|====
+
+//[#11010]
+//=== Importing Turbo Lister® items
+
+//The *eBay Turbo Lister* is a listing tool that is especially intended for sellers who upload thousands of items in bulk. The *eBay turbo lister* is a desktop-based offline tool. (Quelle: link:http://pages.ebay.de/turbo_lister/tips.html[eBay^]{nbsp}icon:external-link[]).
+
+//You are required to have a CSV file that contains your Turbo Lister data. plentymarkets only supports the *Turbo Lister format* CSV. If you do not have such a CSV file yet, then first export your items from Turbo Lister into a CSV file.
+
+//Go to *Data » Turbo Lister* to export items. Proceed as described below in order to import the CSV file to plentymarkets.
+
+//[.instruction]
+//Importing a CSV file:
+
+//. Go to *Data » Turbo lister*.
+//. Carry out the settings. Pay attention to the explanations given in the table below.
+//. Click on *Import* to import the file.
+
+//.Settings for the turbo lister
+//[cols="1,3a"]
+//|====
+//| Setting | Explanation
+
+//| *eBay user ID*
+//|Select an ID.
+
+//| *Field separator*
+//| Select a field separator for the import.
+
+//| *File*
+//| Select a CSV file.
+
+//| *Import into directory*
+//|Select a directory for the import.
+
+//| *Warehouse for stock*
+//|Select an ID.
+
+//| *Stock dependence*
+//| Select the stock dependence.
+//|====
+
+[#11100]
+=== Viewing the processing status
+
+The *Processing status* area gives you access to the current status of the process. In addition, you can cancel and restart the import here. Listings that were already imported are skipped when the import is restarted. Already completed imports can also be viewed in this area.
+
+.Processing status
+[cols="1,3a"]
+|====
+| Field | Explanation
+
+| *ID*
+| Process ID
+
+| *Status*
+a| View the current status of the import: +
+
+* *Scheduled* = The import has not yet started. +
+* *In progress* = The import is in progress. +
+* *Cancelled* = The import is cancelled. +
+* *Failed* = The import failed. +
+* *Completed* = The import is completed.
+
+| *Data*
+| Settings that have been saved for the *Import of eBay listings* area are summarised here.
+
+| *Percent completed*
+| The percentage of listings that have already been imported.
+
+| *Creation time*
+| Date and time when the import was started.
+
+| *Completion time*
+| Date and time when the import was completed.
+
+| *Last update*
+| Date and time of the last import update.
+
+| *Show process*
+| Details such as listing ID, item ID, item name, eBay item number and procedures are listed during and after the import.
+
+| *Cancel process*
+| The import process is cancelled. Click on the *green plus icon* to restart the import.
+
+| *Reload processing status*
+| The open overview is reloaded.
+
+| *Apply configuration*
+| Apply settings for the *Import of eBay listings* area. You can also change these settings before the import is restarted.
+|====
+
+[#11200]
+== Selling internationally
+
+Here, you will learn which settings are necessary for eBay in order to sell your eBay items internationally. Two ways of selling items are possible:
+
+* Uploading listings to your country’s eBay platform and offering international shipping
+* Uploading listings to other eBay platforms
+
+You must accept the International Selling Agreement before you can list items on a site other than where you registered or with international shipping options. You can accept the agreement link:https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&UsingSSL=1&pUserId=&co_partnerId=2&siteid=0&ru=http%3A%2F%2Fscgi.ebay.com%2Fws%2FeBayISAPI.dll%3FUserAgreementV2%26fId%3D4%26bc%3Dacbt%26ru%3Dhttp%253A%252F%252Fmy.ebay.com%252Fws%252FeBayISAPI.dll%253FMyEbay%26agrid%3D7%26aid%3D1%26UserAgreement%3D%26guest%3D1&pageType=5838[here^]{nbsp}icon:external-link[].
+
+[TIP]
+.Payment method PayPal
+====
+We recommend that you use <<payment/payment-providers/paypal#, PayPal>> as the payment method for international listings. This ensures that the transactions are quick and easy.
+====
+
+[#11300]
+=== Offering international shipping for listings
+
+Upload your listings to your country’s eBay platform, make them visible on other eBay platforms and set up international shipping. First, check the language settings for the *countries of delivery* to which you want to ship your eBay items. Select both the *global shipping region* and <<fulfilment/preparing-the-shipment#1000, shipping profiles>> or *shipping providers* for international shipping as the <<Defining shipping conditions, shipping conditions>>.
+
+[.instruction]
+Setting up international shipping:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay shipping conditions*.
+. Select an *eBay account* and a *platform*.
+. In the *International shipping options* area, select the *shipping method*.
+. Enter the *shipping costs*.
+. *_Optional:_* Enter a surcharge for shipping each additional item from this offer.
+. In the *Regions* column, select the setting *worldwide* or select specific regions.
+. *_Optional:_* Exclude countries of delivery.
+. Save (icon:save[set=plenty]) the settings.
+
+If you want to work with the *stock synchronisation*, then you need to carry out settings to limit the stock and specify how long the listing should be available.
+
+[.instruction]
+Setting up the stock synchronisation:
+
+. Go to *Item » Edit item*.
+. Find the item that you want to create a listing for and click on *New listing*. +
+→ A new editing window opens.
+. Select the setting *limited (without reservation)* from the *Stock dependence* drop-down list.
+. Save (icon:save[set=plenty]) the settings.
+. Click on the *Base* tab.
+. Select *endless (GTC)* for the *Duration* option.
+. Save (icon:save[set=plenty]) the settings.
+
+Enter a text into the eBay basic settings for each language that you require. A <<Sending messages after purchase, message after purchase>> with this text is sent to the customer.
+
+[.instruction]
+Entering a message text for each language:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
+. Open the *Message after purchase* sub-menu.
+. Enter a *message* text for each *language* that you require.
+. Save (icon:save[set=plenty]) the settings.
+
+[#11400]
+=== Uploading listings to international eBay platforms
+
+In this chapter, you will learn how to set up listings in order to upload items with translated item descriptions directly to international eBay platforms. You can use your existing eBay member account for creating offers for other platforms. Carry out country-specific settings, for example prices in a different currency or item data in a different language.
+
+[.instruction]
+Carrying out country-specific settings:
+
+. Go to *Listings » Edit listings*.
+. Open the listing.
+. In the *Base* tab, select a *platform* for the market *eBay*.
+. Select a *warehouse* if you have set up a warehouse in that country.
+. Save (icon:save[set=plenty]) the settings. +
+→ Country-specific parameters, such as shipping profiles, are changed.
+
+Enter the description, i.e. text content, and specify the listing’s layout in the *Setup » Listings » Layout* menu. You can *copy the item description* and for example translate it into another language. It is also possible to use templates.
+
+[.instruction]
+Setting up the listing’s layout:
+
+. Go to *Listings » Edit listings*.
+. Open the listing.
+. Select the *language* for the *platform* in the *Description and layout* tab.
+. Select a *layout template* if you have one for this country.
+. Save (icon:save[set=plenty]) the settings.
+
+Select both the *shipping region* and country-specific <<fulfilment/preparing-the-shipment#1000, shipping profiles>> or *shipping providers* for local domestic shipping as the <<Defining shipping conditions, shipping conditions>>. Here, you also set up shipping providers for international shipping when shipping items to other countries from the respective country.
+
+[.instruction]
+Settings for international shipping:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay shipping conditions*.
+. In the *Domestic shipping options* area, select the *shipping method*.
+. Enter the *shipping costs* and select *additional options* as needed.
+. In the *International shipping options* area, select the *shipping method*.
+. Enter the *shipping costs* and the *fee for every additional item* as needed.
+. In the *Regions* column, select a country of delivery or delivery regions.
+. *_Optional:_* Exclude countries of delivery.
+. Save (icon:save[set=plenty]) the settings.
+
+If you want to work with the *stock synchronisation*, then you need to carry out settings to limit the stock and specify how long the listing should be available.
+
+[.instruction]
+Setting up the stock synchronisation:
+
+. Go to *Item » Edit item*.
+. Find the item that you want to create a listing for and click on *New listing*. +
+→ A new editing window opens.
+. Select the setting *limited (without reservation)* from the *Stock dependence* drop-down list.
+. Save (icon:save[set=plenty]) the settings.
+. Click on the *Base* tab.
+. Select *endless (GTC)* for the *Duration* option.
+. Save (icon:save[set=plenty]) the settings.
+
+Enter a text into the eBay basic settings for each language that you require. A <<Sending messages after purchase, message after purchase>> with this text is sent to the customer.
+
+[.instruction]
+Entering a message text for each language:
+
+. Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
+. Open the *Message after purchase* sub-menu.
+. Enter a *message* text for each *language* that you require.
+. Save (icon:save[set=plenty]) the settings.
+
+Finally, enter the <<Defining the return policy, return policy>> for all relevant eBay platforms.
+
+[.instruction]
+Entering the return policy for an eBay platform:
+
+. Go to *Setup » Markets » eBay » Business policies » Tab: eBay return policy » Tab: New*.
+. Enter a *profile name*.
+. Enter a *description* for the *return policy*.
+. Decide whether *returns* should be accepted, when the *return deadline* should be and who should pay the *return costs*.
+. Save (icon:save[set=plenty]) the settings.
+
+[#11450]
+== Matching data with the import tool
+
+Use the import tool in the *Data » Import* menu to exchange data between plentymarkets and eBay. Listing data can be imported into plentymarkets with the <<data/importing-data/sync-types/elasticsync-market-listing#, Market listing>> import type. Use the <<data/importing-data/sync-types/elasticsync-parts-compatibility-listing#, parts compatibility listing>> import type to import or update parts compatibility listings.
+
+[#11700]
+== FAQ
+
+include::../_textblocks/ebay-faq/ebay-faq.adoc[]

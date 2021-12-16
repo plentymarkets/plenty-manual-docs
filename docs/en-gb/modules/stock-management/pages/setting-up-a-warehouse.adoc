@@ -1,0 +1,738 @@
+= Setting up a warehouse
+:lang: en
+:description: Learn how to create and structure a warehouse.
+include::{includedir}/_header.adoc[]
+:keywords: Planning a warehouse, plan a warehouse, Setting up a warehouse, set up a warehouse, warehouse settings, create a warehouse, creating a warehouse, warehouse structure, warehouse setup
+:position: 10
+:id: 5EKUCA2
+:url: stock-management/setting-up-a-warehouse
+:author: team-stock
+
+This chapter provides information about the different options for editing warehouses and other related settings.
+Here, you learn how to create a new warehouse that replicates your real-life warehouse 1:1 in your plentymarkets system.
+Furthermore, you learn how to set up box storage racks that can be used as interim storage for multi order picking.
+
+* Setting up your warehouse effectively is a crucial step for the shipping process and helps you save a lot of time.
+Thus, take some time beforehand to consider how to replicate your warehouse effectively and establish optimal picking routes.
+* To make optimal use of all tools, such as link:https://marketplace.plentymarkets.com/en/plugins/externe-tools/plentyBase_5053/[plentyBase^]{nbsp}icon:external-link[], assign a *label* with a barcode to each storage location.
+
+[IMPORTANT]
+.To register stock and book incoming orders, you need at least one warehouse.
+====
+Your plentymarkets system comes with 2 sample warehouses: one distribution warehouse (KS Sales) and one repair warehouse (KS Repair). You can either rename and continue using these warehouses or delete them and set up your own ones. To register stock and book incoming items, your system needs at least one warehouse. Consequently, you cannot manage your stock without a warehouse. Incoming orders are assigned to a warehouse according to item availability.
+====
+
+[discrete]
+=== Assigning rights for back end users
+
+:rights-purpose: work with warehouses
+:right-one: pass:quotes[*Stock > Warehouses > Edit*]
+
+include::_includes:page$rights.adoc[]
+
+[#100]
+== Planning a warehouse
+
+Warehouses consist of dimensions. All dimensions together constitute the layout of your warehouse. These dimensions can be freely defined. When defining the dimensions, start with the smallest dimension and then continue with all further dimensions in ascending order.
+
+[IMPORTANT]
+.Applying sample dimensions
+====
+The layout of sample warehouses and newly-created warehouses alike always provides 2 sample dimensions. These dimensions are not saved. You can apply, rename or delete dimensions. However, you need at least one dimension to create a storage location.
+====
+
+[[table-structuring-a-warehouse]]
+.Structuring a warehouse
+[cols="1,3"]
+|====
+|Setting|Explanation
+
+| *Dimension*
+|Dimensions are the basic structuring units of your warehouse. Later on, the dimensions function as a basis for the actual levels of a warehouse. Levels are the concrete applications of a dimension. For example, if you define a storage building as a dimension in your layout, storage buildings 1, 2 and 3 are its concrete applications. +
+*_Note:_* At least one dimension is needed to create storage locations.
+
+| *Storage location*
+|In plentymarkets, storage locations are no dimensions. Storage locations are the actual places in which you keep your products. You need at least one dimension to create a storage location. Dimensions are superior to storage locations.
+|====
+
+A pick list with optimal picking routes depends on the position of the storage locations. Your settings determine if a dimension influences the position of storage locations. A pick list begins with the lowest position and is sorted in ascending order.
+
+[#200]
+== Setting up a warehouse
+
+The process of setting up a warehouse consists of 3 basic steps. First, enter general information such as the name and the purpose of the warehouse. Then add further general information, such as the address of the warehouse. In step 2, you create dimensions that subdivide your warehouse. As a last step, you create storage locations.
+
+[#300]
+=== Managing general warehouse data
+
+You have to manage the following data for each warehouse, no matter if you edit and continue working with sample warehouses or if you create new warehouses.
+
+[.instruction]
+Creating a new warehouse:
+
+. Go to *Setup » Stock » Warehouse*.
+. Click on *New warehouse*.
+. Enter the name.
+. Select a *Warehouse type*.
+. Select a *Logistics type*.
+. *Save* (icon:save[role="green"]) the settings to create the warehouse. +
+→ The settings of the warehouse, in which you manage further general data, open.
+
+The new warehouse is added to the warehouse list in alphabetical order.
+
+[.instruction]
+Managing general warehouse data:
+
+. Go to *Setup » Stock » Warehouse*.
+. Open a warehouse.
+. Click on *Settings*.
+. Carry out the settings according to <<table-general-warehouse-data>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-general-warehouse-data]]
+.General warehouse data
+[cols="1,2"]
+|====
+|Setting |Explanation
+
+| *Warehouse ID*
+|ID of the warehouse. Is automatically assigned by the system and cannot be edited.
+
+| *Warehouse name*
+|Name of the warehouse
+
+| *Warehouse type*
+|Selecting a warehouse type according to purpose: +
+*Sales* = Standard warehouse. Warehouse for sales with automatic processes, such as stock reservation and status change for orders.  +
+*Repair* = Warehouse for returned items. This warehouse can be selected as an *Assigned warehouse for repairs* for *Sales* warehouses.  +
+*Storage* = Warehouse for items that are in stock. +
+*Transit* = Temporary warehouse for assigning items to the destination address when transferring items from one means of transport to another.  +
+*Distribution* = Distribution warehouse +
+*Other* = Special warehouse
+
+| *Logistics type*
+|Information about the party managing the warehouse.  +
+*Own warehouse* = Logistics are managed in your own warehouse.  +
+*Amazon* = Items are distributed by Amazon FBA Multi-Channel.  +
+*DHL Fulfilment* = Items are distributed via DHL Fulfilment.
+
+| *Warehouse assigned for repairs*
+|Here, you can select *Repair* warehouses. This selection links a warehouse to a repair warehouse, in which e.g. *returned items* can be stored for repairs. This way, faulty items are not mixed up with regular stock. Once the items have been repaired or replaced, re-assign them to the sales warehouse.  +
+The stock of a repair warehouse cannot be transferred to your online store or other platforms. The stock of a repair warehouse provides an overview of items that are currently being repaired. Thus, this stock cannot be sold. +
+Create the desired repair warehouse so that it becomes available in this drop-down list.
+
+| *Priority*
+|Determine the priority of the warehouse. From *pass:[+]* (lowest priority) to *pass:[+++++]* (highest priority).
+
+| *Split up according to shipping profile*
+|In case you are working with <<orders/managing-orders#300, Delivery orders>> select *Yes* here.
+
+| *Location*
+|Location of the warehouse.  +
+This is a selection of countries of delivery as defined in <<fulfilment/preparing-the-shipment#100, Setup » Orders » Shipping » Settings » Countries of delivery>>.
+
+| *Standard storage location type*
+|The standard storage location type which should be set as default for warehouse settings, e.g. in the *Warehouse* tab in the item settings.
+
+| *Dynamic reorder level*
+|Choose between active and inactive. +
+*active* = the difference between the actual order and the reorder level is calculated for variations stored in this warehouse on the basis of the dynamic reorder level. The dynamic reorder level itself is not yet displayed in your system. +
+*_Note:_* To calculate the difference to the reorder level on the basis of the dynamic reorder level for a variation, the reorder level of the variation has to be 0. +
+*inactive* = the difference to the reorder level for variations in this warehouse is not calculated based on the dynamic reorder level, but based on the manually defined reorder level. Thus, you can enter a reorder level bigger than 0 for a variation.
+
+| *Average price*
+|Choose how the average price for the warehouse is calculated. +
+*Purchase price of stock quantities* = the average purchase price for variations in this warehouse is calculated based on the purchase prices of the existing stock quantity. It is recalculated with all incoming items and outgoing items. This calculation method is called live average calculation. +
+*Purchase price of variations* = the average purchase price for variations in this warehouse is calculated based on the purchase price saved in the variation data. +
+*Moving average price of a variation* = the average purchase price for variations in this warehouse is flexibly calculated. In this case, the average purchase price is calculated with all incoming items, but not with outgoing items. +
+The calculation methods are described in depth in the chapter <<stock-management/new-incoming-items#250, Identifying the purchase price>>.
+
+
+| *Availability with stock* and +
+ *Availability without stock*
+|These options determine which availability is displayed if stock exists or does not exist. This setting takes priority over the symbol selected to represent *Availability* in the *Settings* tab of a variation. However, it is important that the options *Available, Not available* have been selected as well in the *Settings* tab of a variation. +
+The stock needs to be recalculated after any changes. This recalculation is carried out in the menu <<stock-management/managing-stocks#, Stock » Stocks>> by clicking on *Recalculate stocks*. +
+The availability symbols are displayed according to the settings made in the section *Online store icon* in the menu *Setup » Item » Availability*.
+
+| *Available for order referrers (with automatic warehouse selection)*
+|Here, you select the order referrers for which the warehouse should be preferred. If an order comes in via one of the selected referrers, this warehouse is selected during the process of automatic warehouse assignment. *_Important:_* The settings carried out for the option *Automatic warehouse selection* in the *<<orders/basic-settings#, Setup » Orders » Settings>>* menu are based on this setting. This means that the warehouse is assigned according to the activated order referrer first. The settings concerning the automatic warehouse selection are considered in the second step.
+
+| *Note*
+|Enter your notes, i.e. all additional information about the warehouse that you wish to save.
+
+| *Stocktaking mode active*
+|The <<stock-management/taking-stock#500, stocktaking mode>> freezes the stock of the warehouse while you are taking stock.
+|====
+
+[#400]
+=== Creating dimensions
+
+Create dimensions in order to divide your warehouse into basic elements. At least one dimension is needed to create storage locations. For example, a dimension can be a storeroom. You can create up to 10 dimensions for each warehouse. The dimensions are the basis for the levels of a warehouse. +
+Consider in advance which dimensions you want to create, and start with the smallest or rather most specific one (e.g. shelf). This one will receive the highest level (e.g. when creating 4 dimensions, it will have level 4). Thus, note that the dimension with the highest level will be the smallest one in the warehouse. Consequently, create the dimensions in ascending order of size (e.g. shelf (level 4) > rack (level 3) > zone (level 2) > storage building (level 1).
+
+[IMPORTANT]
+.Applying or deleting sample dimensions
+====
+The layout of each warehouse contains 2 sample dimensions. These dimensions are not saved. You can apply, rename or delete them. However, you need at least one dimension to create a storage location.
+====
+
+[.instruction]
+Creating a dimension:
+
+. Go to *Setup » Stock » Warehouse*.
+. Open a warehouse.
+. Click on *Dimensions*.
+. Enter a name for the dimension.
+. Carry out further optional settings. Pay attention to the information given in <<table-settings-dimensions>>.
+. Click on *Add new dimension* (icon:plus-square[role="green"]). +
+→ You can now add another dimension. To do so, repeat steps 4 to 6.
+. *Save* (icon:save[role="green"]) the settings in order to create the dimensions.
+
+New dimensions are automatically added as the biggest ones. If you add further dimensions, they take priority, i.e. they are bigger. Thus, you should begin with the smallest dimension.
+
+*_Note:_* As long as there are no storage locations, it is possible to delete all dimensions. If storage locations exist, there has to be at least one dimension.
+
+[[table-settings-dimensions]]
+.Creating a dimension
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Name*
+|Name is a mandatory field. The name can consist of 56 characters at most. You may use numbers, letters and special characters.
+
+| *Prefix*
+|Enter the prefix. Up to 3 characters are possible. You may use numbers, letters and special characters. The prefix is placed before the level numbering. If the dimension is included in the name of the storage location, the prefix is displayed in the name of the storage location as well.
+
+| *Separator*
+|Choose a separator that will be displayed after the dimension.
+
+| *Position*
+|Decide if the dimension should be considered for the position of storage locations or not. +
+*check mark* = active, i.e. the dimension is considered for the position of storage locations. +
+*no check mark* = inactive, i.e. the dimension is not considered for the position of storage locations.
+
+| *Display in name*
+|Decide whether or not the dimension should be included in storage location names. +
+*check mark* = active, i.e. the dimension is displayed in storage location names. +
+*no check mark* = inactive, i.e. the dimension is not displayed in storage location names.
+|====
+
+[#500]
+=== Creating storage locations
+
+Create storage locations to indicate the actual areas for storing your items. Variations can only be booked in actual storage locations, not in dimensions. In particular, creating multiple storage locations at once is very easy. Once storage locations are created, they are sorted by pick path.
+
+[discrete]
+=== Assigning rights for back end users
+
+:rights-purpose: work with storage locations
+:right-one: pass:quotes[*Stock > Warehouses > Warehouse location > Update*]
+:right-two: pass:quotes[*Stock > Warehouses > Warehouse location > Show*]
+:right-three: pass:quotes[*Stock > Warehouses > Warehouse location > Create*]
+
+include::_includes:page$rights.adoc[]
+
+[.instruction]
+Creating storage locations:
+
+. Go to *Setup » Stock » Warehouse*.
+. Open a warehouse.
+. Click on *Storage locations*.
+. Carry out the settings. Pay attention to the information given in <<table-creating-storage-locations>>.
+. *Save* (icon:save[role="green"]) the settings. +
+→ A preview containing sample storage location names is displayed.
+. Click on *Generate* to create storage locations.
+
+The storage locations are generated continuously in the background. Although the first storage locations are already displayed, the process is not finished yet. A notification is displayed once all storage locations have been created.
+
+[[table-creating-storage-locations]]
+.Storage location settings
+[cols="1,2"]
+|====
+|Setting |Explanation
+
+2+^| *Dimensions*
+
+| *Prefix*
+|The prefix is assigned automatically on the basis of the settings and can be entered there. It is displayed here.
+
+| *From* +
+*To*
+a|Enter the starting value and the end value. Letters, numbers and some combinations of letters and numbers are allowed. +
+Examples for possible starting and end values:
+
+* 1 to 10
+* A to Z
+* A1 to A10
+* AA to AZ
+* AA to ZZ
+
+The following combinations and values are not allowed:
+
+* A1 to Z1: The first letter has to remain the same
+* 1A to 1Z: Letters cannot be combined with numbers preceding them
+* Special characters
+
+| *Starting positions*
+|only visible if the dimension should be considered for the position of the storage locations. +
+Enter a starting position. Only numbers are allowed.
+
+| *Display in name*
+|Here, it is displayed whether the dimension is included in the storage location name or not. Whether the dimension is included in the storage location name is determined in the settings of the dimension.
+
+2+^| *Storage location*
+
+| *Prefix*
+|Enter the prefix for storage locations. The default setting is SL for storage location. Prefix is not a mandatory field.
+
+| *Create storage locations from* +
+*Create storage locations to*
+a|Enter the starting value and end value for storage locations. Letters, numbers and some combinations of letters and numbers are allowed. +
+Examples for possible starting and end values:
+
+* 1 to 10
+* A to Z
+* A1 to A10
+* AA to AZ
+* AA to ZZ
+
+The following combinations are not allowed:
+
+* A1 to Z1: The first letter has to remain the same
+* 1A to 1Z: Letters cannot be combined with numbers preceding them
+
+| *Starting positions*
+|Enter a starting position. Only numbers are allowed.
+
+| *Display in name*
+|Storage locations are always displayed in the name.
+
+2+^| *Details*
+
+|[#intable-purpose]*Purpose*
+|Select the purpose of the storage location. +
+Use the purpose *Box* for link:https://knowledge.plentymarkets.com/automation/processes/mobile-picking[mobile picking]{nbsp}icon:external-link[]. +
+*_Note:_* The purpose does not impact on other menus yet.
+
+|[#intable-status]*Status*
+|Select a status. The default setting is Active. +
+Note that the status *Locked in status 4* is the only one with a specific functionality; all other statuses are just activated.
+
+|[#intable-notes]*Notes*
+|Here you can take notes regarding the storage location.
+
+|*Storage location type*
+|Select the type of the storage location. Here you can decide, whether you want to select another storage location type than the one that has already been defined as standard storage location type in the warehouse settings.
+
+2+^| *Properties*
+
+| *Property*
+|Select the property of the storage location.
+
+| *Value*
+|Select the value. This field is only available, if the property is a selection property.
+|====
+
+[TIP]
+.Blocking stock with status *Locked in status 4*
+====
+Use the status *Locked in status 4* in order to block items in a storage location and to lock them for removal. If orders have stock in a locked storage location, they do not automatically switch from status 4 (In preparation for shipping) to status 5 (Cleared for shipping) anymore. To make this work, go to the *Setup » Orders » Settings* menu and activate the option *Status changes to 4 instead of 5 if stock is missing*. To ensure that orders still go into status 5, it is recommended to rebook the stock into active storage locations. +
+Note that blocked stock will still be available for the marketplaces.
+====
+
+[#520]
+=== Customising warehouse structures
+You can customise the structures of your warehouse, e.g. change the name of the level, modify the level position or add new levels and storage locations and directly place them at the desired location.
+If an element has been moved, all positions are updated automatically.
+
+[.instruction]
+Moving an existing element:
+
+. Go to *Setup » Stock » Warehouse*.
+. Select a warehouse.
+. Click on *Storage locations*. +
+→ The overview opens.
+. Click on *Adjust setup*. +
+→ The warehouse structure opens.
+. Click on the element you want to move.
+. Click on *Move*. +
+→ The settings open.
+. Select the placement.
+. Select the target and click on the check mark *Select*.
+. *Save* (icon:save[role="green"]) the settings. +
+→ The element is moved.
+
+[.instruction]
+Placing a new storage location in the warehouse structure:
+
+. Go to *Setup » Stock » Warehouse*.
+. Select a warehouse.
+. Click on Storage locations. +
+→ The overview opens.
+. Click on *Adjust setup*. +
+→ The overview opens.
+. Click on *New storage location*. +
+→ The settings open.
+. Carry out the settings. Pay attention to the information given in <<table-adjust-warehouse-structure>>.
+. *Save* (icon:save[role="green"]) the settings. +
+→ The structure is updated accordingly.
+
+[[table-adjust-warehouse-structure]]
+.Adjusting warehouse structure
+[cols=”1,3”]
+|====
+|Setting |Explanation
+
+| *Name*
+|Enter the name of the new storage location.
+
+| *Placement*
+|Select whether you want to insert it in front of or behind an existing element.
+
+| *Purpose*
+|Select the purpose from the drop-down list.
+
+| *Position*
+|Enter the position of the element.
+
+| *Target*
+|Select the target.
+
+| *Status*
+|Select the status from the drop-down list.
+
+| *Notes*
+|Here you can take notes regarding the storage location.
+
+| *Availability*
+|Indicates, whether a storage location is available. Green means that the storage location does not contain any items; red signals that at least one item is available.
+
+| *Property*
+|Select the property of the storage location.
+|====
+
+[IMPORTANT]
+.Deleting levels and storage locations
+====
+You can only delete a level if it does not contain any storage locations. When deleting a storage location, make sure that it does not contain any stock.
+====
+
+[#530]
+=== Limitations
+When creating dimensions or generating storage locations there are some limitations that need to be considered. Moreover, specific letter and number combinations should be used for inputs into the generator.
+
+[[table-limitations-for-dimensions]]
+.Limitations for dimensions
+[cols="3,1"]
+|====
+|Setting |Limitation
+
+| *Maximum number of dimensions that can be created*
+|10
+
+| *Minimum number of dimensions required*
+|1
+
+| *Number of characters for the name*
+|56
+
+| *Number of characters for the prefix (no numbers)*
+|3
+|====
+
+[[table-limitations-generating-storage-locations]]
+.Limitations for generating storage locations
+[cols="3,1"]
+|====
+|Setting |Limitation
+
+| *Maximum number of storage locations per dimension*
+|200
+
+| *Maximum number of storage locations per generation*
+|100,000
+
+|Only use letters or numbers, but no special characters like *!%
+|
+
+|No decimals
+|
+
+|No letters for the start position
+|
+
+| *Maximum number of characters in the note box*
+|500
+|====
+
+[[table-limitations-letter-and-number-combinations]]
+.Letter and number combinations for inputs into the generator
+[cols="3,1"]
+|====
+
+| *Can be used*
+|A to C +
+A1 to A10 +
+A to AC +
+AA to CC
+
+| *Cannot be used*
+|A1 to B1 +
+1A to 1C
+|====
+
+[#600]
+== Deleting stocks and warehouses
+
+You can either delete the stocks of a warehouse or a complete warehouse including all stocks. In both cases, the stock movements are deleted as well.
+
+[IMPORTANT]
+.Stocks cannot be restored.
+====
+It does not matter whether you only delete stocks and corresponding stock movements or the warehouse including all stocks and stock movements. Stocks and stock movements cannot be restored. In any case, use the delete function carefully, since it is linked to a variety of other menus, such as Listings. Deleting stocks may deactivate your offers on marketplaces.
+====
+
+[#630]
+=== Deleting stocks
+
+Deleting stocks completely empties a warehouse. Stock movements are deleted as well. However, dimensions and storage locations remain unchanged.
+
+[.instruction]
+Deleting stocks of a warehouse:
+
+. Go to *Setup » Stock » Warehouse*.
+. Open a warehouse.
+. Click on *Settings*.
+. Click on *Delete* (icon:minus-square[role="red"]).
+. To transfer pending orders to another warehouse, select a new warehouse via *Change warehouse to*.
+. Click on *Delete* (icon:minus-square[role="red"]) once again. +
+→ The warehouse and all its stocks are deleted.
+
+*_Note:_* It is not recommended to delete stocks that way, as this is not GoBD compliant (German guidelines for bookkeeping). Instead, it is advised to export stocks per dynamic export, to adapt the CSV file by setting the stocks to zero and to reimport the zeroed stocks afterwards. Thus, the stock movements don’t get lost and legally compliant working is guaranteed.
+
+[#670]
+=== Deleting a warehouse
+
+When deleting a warehouse, you remove all stocks, stock movements, storage locations and dimensions of the warehouse.
+
+[.instruction]
+Deleting a warehouse:
+
+. Go to *Setup » Stock » Warehouse*.
+. Open a warehouse.
+. Click on *Settings*.
+. Click on *Delete stock completely*. +
+→ You are asked to confirm your decision.
+. Click on *OK* to delete the stocks and stock movements.
+
+*_Note:_* Deleting the stock also deletes the stock movements. Thus, they can’t be restored, which is not GoBD compliant.
+
+[#700]
+== Creating box storage racks for packing
+
+Box storage racks are used as interim storage for multi order picking. Box storage racks are only available in <<automation/processes#, Processes>>.
+
+[TIP]
+.Maximum number of box storage racks
+====
+You can set up a maximum of 100 boxes for each box storage rack.
+====
+
+[.instruction]
+Setting up a box storage rack:
+
+. Go to *Setup » Stock » Warehouse » [select warehouse] » submenu: Box storage racks*.
+. Click on the *New box rack* tab.
+. Carry out the settings as desired. Pay attention to the information given in <<table-settings-box-storage-racks>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-settings-box-storage-racks]]
+.Settings for box storage racks
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Name*
+|Name of the box storage rack
+
+| *Start box*
+|Number of the first box of the box storage rack
+
+| *End box*
+|Number of the last box of the box storage rack
+|====
+
+[#800]
+== Labelling storage locations
+
+Scanning your items and the storage location in which they should be stored helps you to book items in quickly. In order to scan storage locations the locations need to be labelled. Image 1 shows example settings for a label that is as wide as the page:
+
+.Setting up a label
+image::warenwirtschaft/assets/DE-Lager-einrichten-04.png[]
+[.instruction]
+Setting up labels for storage locations:
+
+. Go to *Setup » Stock » Warehouse » [select warehouse] » submenu: Label*
+. Carry out the settings. Pay attention to the information given in <<table-label-settings>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[TIP]
+.Zero point of the coordinate system
+====
+The zero point of the coordinate system is located in the top left corner. The x-axis goes from left to right and the y-axis from top to bottom.
+
+Experiment with the settings until the label meets your requirements.
+====
+
+[[table-label-settings]]
+.Label settings
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Page*
+|Width and height of the paper used for printing in mm.
+
+| *Margin*
+|The margins define where the label will be placed on the page.
+
+| *Label*
+|Width and height of a storage location label in mm.
+
+| *Draw frame*
+|The label is framed.
+
+| *Lines per page*
+|Enter the number of lines to be printed per page. This number defines how many labels are printed one below the other on a page. The height of a single label also affects the number of labels that can be printed one below the other.
+
+| *Line spacing*
+|Line spacing defines the space in mm between two labels positioned one below the other.
+
+| *Columns per line*
+|Enter the number of columns to be printed per line. This number defines how many labels are printed side by side in a line. Make sure that the width of the labels allows positioning the labels next to each other according to their number.
+
+| *Column spacing*
+|Column spacing defines the space in mm between two labels that are next to each other.
+
+| *Storage location name*
+|Coordinates for printing the storage location name.
+
+| *Storage location ID*
+|Coordinates for printing the storage location ID.
+
+| *Storage location position*
+|Coordinates for printing the storage location position.
+
+| *Shelf name*
+|Coordinates for printing the shelf name.
+
+| *Rack name*
+|Coordinates for printing the rack name.
+
+| *Barcode* *Storage location*
+|Coordinates for printing the storage location barcode.
+
+| *Display code*
+|The barcode can also be displayed as an alphanumerical sequence of characters. +
+*below* = the characters are placed below the barcode +
+*within* = the characters are placed within the barcode +
+*do not show* = the characters are not displayed
+|====
+
+Once you have set up your warehouse, proceed with assigning variations to storage locations. Then, book the first incoming items of a variation so that stock is available in your system.
+
+[#850]
+== Managing properties
+
+Properties are frequently occurring information that you can use to further characterise your contacts. For example, you can use properties to specify which storage locations are appropriate for items requiring refrigeration.
+
+You can also create property groups to get a better overview in case you are working with a large number of properties.
+
+The following sub-chapters describe how to <<stock-management/setting-up-a-warehouse#900, create>>, <<stock-management/setting-up-a-warehouse#950, link>>, <<#group-properties, group>> and <<#search-property, search>> and how to <<#delete-property, delete>>, <<#import-properties, import>> and <<#export-properties, export>> properties.
+
+[#900]
+=== Creating new properties
+
+Go to *Setup » Settings » Properties » Configuration* to create properties that you will later use for characterising your storage locations.
+That way you can look for small, medium or large storage locations and all item IDs can be linked to it. Moreover, characterising your storage locations will hep you to directly place your items in the right spot. +
+Proceed as described below to create a property.
+
+:stock:
+include::_includes:page$creating-new-properties.adoc[]
+
+:!stock:
+
+[#950]
+=== Linking properties with a storage location
+
+After you have created the property in the *Setup » Settings » Properties » Configuration* menu, you can link the property with the storage location. To do so, proceed as described below.
+
+[.instruction]
+Linking properties with the storage location:
+
+. Go to *Setup » Stock » Warehouse » [select warehouse] » Storage locations*.
+. Use the search filters to search (icon:search[role="blue"] for the storage location. +
+→ The storage locations that correspond to the entered search criteria are displayed.
+. Click in the line of the storage location. +
+→ The detail view of the storage location opens.
+. Click on *Properties* on the left side in the context menu. +
+→ All properties that are available for the storage location are displayed and you can add them there. +
+*_Tip:_* If you want to link properties with several storage locations at the same time you can use the group function (icon:cogs[role="green"]). +
+. Select up to 3 properties and the corresponding values. The *Value* field is only available if the property is of the type Selection.
+. *Save* (icon:save[role="green"]) the settings. +
+→ The properties are linked with the storage location.
+
+[#group-properties]
+=== Grouping properties
+
+If you have lots of properties, then you can group them together so that it’s easier to keep track of them in your plentymarkets back end.
+
+[#create-new-group]
+==== Creating a new group
+
+:stock:
+include::_includes:page$creating-new-groups.adoc[]
+
+:!stock:
+
+[#work-with-properties]
+=== Working with existing properties
+
+[#search-properties]
+==== Searching for properties
+
+Previously created properties are displayed in an overview.
+
+include::_includes:page$searching-for-properties.adoc[]
+
+[#import-properties]
+==== Importing properties
+
+Use the import tool and the import type *Properties* to import properties into your plentymarkets system. The fields that you can use for mapping and matching are described on the page of the manual of the import type <<data/importing-data/sync-types/elasticSync-properties#, Properties>>.
+
+For general information about importing data into your plentymarkets system, refer to the <<data/importing-data/ElasticSync#, Using the import tool>> page of the manual.
+
+[#export-properties]
+==== Exporting properties
+
+:stock:
+include::_includes:page$exporting-properties.adoc[]
+
+:!stock:
+
+[#delete-properties]
+==== Deleting properties again
+
+include::_includes:page$deleting-properties.adoc[]
+
+[#1500]
+== Where can I find my warehouse IDs and storage location IDs?
+
+You will find the IDs of your warehouses in the menu *Setup » Stock » Warehouse » [select warehouse] » Settings* and the IDs of your storage locations in the menu *Setup » Stock » Warehouse » [select warehouse] » Storage locations*.
+
+[TIP]
+.ID of the standard storage location
+====
+The ID of the standard storage location is 0. However, the standard storage location is only a kind of placeholder. It is sensible to create own storage locations in order to indicate the actual storage location.
+====

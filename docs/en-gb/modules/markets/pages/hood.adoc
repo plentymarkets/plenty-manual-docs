@@ -1,0 +1,473 @@
+= Hood
+:lang: en
+include::{includedir}/_header.adoc[]
+:author: team-multi-channel
+:keywords: Hood, Hood, hood.de, hood.de
+:description: Multi-Channel in plentymarkets: Set up the interface to the market Hood in your plentymarkets system.
+:position: 100
+:url: markets/hood
+:id: VB8LKX7
+
+The market Hood.de is only available in German. List your items as auctions, set up fixed price offers or sell items in your own store. With plentymarkets, you have full access to Hood. Learn how to list your items, set up your Hood store and edit your listings. The checkout process is done in your plentymarkets system.
+
+[#100]
+== Registering with Hood
+
+First register with link:https://www.hood.de/kostenlos-registrieren.htm?sec=1[Hood^]{nbsp}icon:external-link[]. Create an API password which you need when setting up Hood in plentymarkets.
+
+[#200]
+== Setting up Hood in plentymarkets
+
+Carry out the following steps in order to activate Hood in plentymarkets.
+
+[.instruction]
+Entering Hood access data:
+
+. Go to *Setup » Markets » Hood*.
+. Enter the access data. Pay attention to the explanations given in <<#access-data>>.
+. Save (icon:save[set=plenty]) the settings.
+
+[[access-data]]
+.Access data for Hood
+[cols="1,3a"]
+|====
+|Setting |Explanation
+
+| *User name*
+|Enter the user name of your Hood account.
+
+| *API password*
+|Enter the password that you received from Hood.
+
+| *Account status*
+|Displays whether the interface is active.
+
+| *Store type*
+|Displays the shop package that was booked on Hood, for example link:https://www.hood.de/hood-shop-einrichten.htm[Platinum^]{nbsp}icon:external-link[].
+|====
+
+Connecting to this market allows for the following automatic processes to take place:
+
+* Hourly order import
+* Stock synchronisation (every 20 minutes)
+* Hourly listing synchronisation
+* Automatically end listings when no stock is available (every 15 minutes)
+* Automatically restart listings when new stock is available (every 15 minutes)
+* Automatically create a new customer data record during the order import. This is assuming no customer data record has already been saved in the database.
+
+[TIP]
+.Automatic order import
+====
+Orders from Hood are imported into your plentymarkets system every hour and will be available in the *Orders* menu. You can recognise Hood orders by the information displayed in the *Referrer* column. For lack of space, only the ID 125 is displayed. Point your cursor over an ID to view the referrer.
+====
+
+[#400]
+=== Setting up shipping profiles
+
+Proceed as follows to set up shipping profiles for Hood.
+
+[.instruction]
+Setting up shipping profiles:
+
+. Go to *Setup » Markets » Hood*.
+. Scroll down to the *Shipping profiles* area and click on the *New* tab.
+. Enter a *name* for the shipping profile.
+. Select a *region* from the drop-down list.
+. Select a *shipping method* from the drop-down list.
+. Enter the *shipping costs*. +
+→ Enter any additional shipping methods and shipping costs for this region.
+. Save (icon:save[set=plenty]) the settings. +
+→ The shipping profile is displayed in the *Overview* tab. It can be edited or deleted there.
+
+Create additional shipping profiles the same way. The shipping profiles are then available in the *Base* tab of a listing.
+
+[#450]
+=== Linking shipping profiles
+
+Open the *Setup » Markets » Hood » Shipping profile links* menu to link shipping methods with a shipping profile. Settings carried out in this menu are taken into consideration during the order import. If you do not link the shipping method, the shipping profile calculation is carried out automatically. Proceed as described below in order to link shipping methods to a shipping profile.
+
+[.instruction]
+Linking shipping profiles:
+
+. Go to *Setup » Markets » Hood » Shipping profile links*.
+. Select a *shipping profile* for the desired shipping method from the drop-down list.
+. Save (icon:save[set=plenty]) the settings.
+
+[#500]
+=== Setting up payment methods
+
+Set up the payment methods that you would like to use for this market. This is done within your account on Hood. Choose between different options, for example bank transfer (cash in advance), purchase on invoice or PayPal. The payment methods are then available in the listing.
+
+[#600]
+=== Automatically posting feedback
+
+Enter your feedback texts first. Then set up an <<automation/event-procedures#, event procedure>> to automatically send your feedback texts to your buyers. All buyers who gave you feedback then automatically receive a random feedback text in return.
+
+[.instruction]
+Entering feedback texts:
+
+. Go to *Setup » Markets » Hood*.
+. Enter up to four feedback texts in the *Automatic feedback* area.  +
+→ Those texts are chosen randomly.
+. Save (icon:save[set=plenty]) the settings.
+
+:table-event-procedure: <<#automatic-feedback>>
+
+include::_includes:page$EA.adoc[]
+
+[[automatic-feedback]]
+.Event procedure for automatically posting feedback on Hood
+[cols="1,3,3"]
+|====
+| Setting | Option | Selection
+
+| *Event*
+| *Order change: Outgoing items booked*
+|
+
+| *Filter*
+| *Order > Referrer*
+| *Hood*
+
+| *Procedure*
+| *Market listings > Post feedback on Hood*
+|
+|====
+
+[#700]
+=== Automatically sending shipping confirmations
+
+Set up an <<automation/event-procedures#, event procedure>> to automatically send a shipping confirmation to Hood when the outgoing items have been booked.
+
+:table-event-procedure: <<#automatic-shipping-confirmation>>
+
+include::_includes:page$EA.adoc[]
+
+[[automatic-shipping-confirmation]]
+.Event procedure for automatically sending shipping confirmations to Hood
+[cols="1,3,3"]
+|====
+| Setting | Option | Selection
+
+| *Event*
+| *Order change: Outgoing items booked*
+|
+
+| *Filter 1*
+| *Order > Referrer*
+| *Hood*
+
+| *Procedure*
+| *Shipping > Send shipping confirmation to Hood*
+|
+|====
+
+[#800]
+=== Automatically sending payment confirmations
+
+Set up an <<automation/event-procedures#, event procedure>> to automatically send payment confirmations to Hood.
+
+:table-event-procedure: <<#automatic-payment-confirmation>>
+
+include::_includes:page$EA.adoc[]
+
+[[automatic-payment-confirmation]]
+.Event procedure for automatically sending payment confirmations to Hood
+[cols="1,3,3"]
+|====
+| Setting | Option | Selection
+
+| *Event*
+| *Payment: Complete*
+|
+
+| *Filter 1*
+| *Order > Referrer*
+| *Hood*
+
+| *Procedure*
+| *Market listings > Send payment notification to Hood*
+|
+|====
+
+[#900]
+== Setting up items for the Hood store
+
+Hood allows you to upload items and retrieve orders without an active store. You are required to have a store for some options, for example uploading item variations. You can link:https://www.hood.de/hood-shop-einrichten.htm[book^] a silver, gold or platinum store at Hood.
+
+[#1000]
+=== Uploading item variations
+
+You need to book a store in order to upload item variations to Hood. Once you have booked a store on Hood, the items are integrated into Hood with category links. Set up the shop categories directly on link:https://www.hood.de/mein-shop.htm[Hood^]{nbsp}icon:external-link[]. To do so, go to *Mein Shop > Shop-Einstellungen > Kategorien*. Then load the categories into plentymarkets. This allows you to select them in the listing.
+
+[.instruction]
+Loading store categories for Hood:
+
+. Go to *Setup » Markets » Hood*.
+. In the *Store categories* area, click on *Update* (icon:undo[]). +
+→ The store categories are displayed.
+. Update the categories again if you added new store categories on Hood.
+
+[IMPORTANT]
+.Hood does not allow HTML tags in the short description of "store item" listings
+====
+HTML tags are not taken into consideration when transmitting the short description for Hood listings of the type *store item*. This is because Hood does not support such HTML tags. The item's *Preview text* is transferred from plentymarkets to Hood as the short description. This text is found by opening the item in the *Item » Edit item* menu and clicking on the *Texts* tab. Existing HTML tags are deleted and only plain text is transferred.  +
+HTML tags are permitted in the actual listing description.
+====
+
+[#1100]
+=== Displaying the stock status
+
+The status *Hidden* is assigned to Hood listings of the type *Store item* that do not have any stock. These listings are not ended.
+This applies to Hood listings of the type *Store item* with the stock dependence *limited (without reservation)* and *limited (with reservation)*. These listings are not ended in plentymarkets either. Instead, they are displayed with the status *Hidden*. As soon as the item is back in stock in plentymarkets, the listing is reactivated on Hood during an automatic stock update.
+
+[#1160]
+===  Linking your own properties
+
+In order to be able to use your own characteristics for the Hood market, the characteristics have to be activated for Hood in the *Setup » Item » Characteristics* menu. You can link up to 12 characteristics per item and use a maximum of 16 characters per name.
+
+[.instruction]
+Linking your own properties:
+
+. Go to *Setup » Item » Characteristics*.
+. Expand the characteristic (icon:plus-square-o[]).
+. Activate the option *Display as Hood property*.
+. Save (icon:save[set=plenty]) the settings. +
+→ The characteristic is included in the item's list of characteristics on Hood.
+
+[TIP]
+.Wildcard character in Layout template (Hood)
+====
+If the *Wildcard character in layout template (Hood)* function is activated, the property is also displayed in the layout template of a listing, provided that the wildcard character is used.
+====
+
+[#1200]
+== Preparing listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=listing-definition]
+
+[#1300]
+=== Carrying out the basic settings for listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=listing-basic-settings]
+
+[#1400]
+=== Setting up stock for listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=listings-stock]
+
+[#1500]
+=== Setting up the checkout process
+
+include::_textblocks/listings/manage-listings.adoc[tag=listings-checkout]
+
+[#1600]
+=== Setting up the listing scheduler
+
+include::_textblocks/listings/manage-listings.adoc[tag=listings-sales-planner]
+
+[#2100]
+=== Creating directories for grouping listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=group-listings]
+
+[#1700]
+===  Managing layout templates
+
+include::_textblocks/listings/manage-listings.adoc[tag=manage-layout-templates]
+
+[#2905]
+====  Creating layout templates
+
+include::_textblocks/listings/manage-listings.adoc[tag=create-layout-templates]
+
+[#1750]
+==== Example code for a layout template
+
+include::_textblocks/listings/manage-listings.adoc[tag=layout-example-code]
+
+[#1800]
+====  Importing layout templates
+
+include::_textblocks/listings/manage-listings.adoc[tag=import-layout]
+
+[#1850]
+====  Linking a layout template
+
+include::_textblocks/listings/manage-listings.adoc[tag=link-layout]
+
+[#1900]
+====  Template variables and template functions
+
+include::_textblocks/listings/template-variables.adoc[]
+
+[#2300]
+== Creating listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=listings-creation]
+
+[IMPORTANT]
+.Permanently keeping listings on Hood
+====
+The maximum runtime for a Hood listing is 14 days. The following requirements have to be met in order to permanently keep listings on the platform:
+
+* You have a Hood store (regardless of the booked store package).
+* The listing type is store item.
+* A store category is linked in the listing's *Market* tab.
+====
+
+[#2400]
+=== Creating a new listing
+
+include::_textblocks/listings/manage-listings.adoc[tag=create-listing]
+
+[IMPORTANT]
+.Error message and solution
+====
+Hood requires you to specify the EAN for a better Google ranking. If you carried out the settings so that neither an EAN nor any other item number is transferred, the error message *Hood: Error #0 Please enter a brand or a manufacturer.* is displayed. +
+Therefore, do not select the option *do not transmit* for the setting *Transfer as item number*. If the EAN is unavailable or should not be transferred, select the option *custom-made or no-name product*.
+====
+
+[#2500]
+=== Adding a market listing to an existing listing
+
+include::_textblocks/listings/manage-listings.adoc[tag=add-market-listing]
+
+[#2600]
+===  Creating multiple listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=create-multiple-listings]
+
+[#2700]
+==  Editing listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=edit-listings]
+
+[#2800]
+===  Editing an individual listing
+
+include::_textblocks/listings/manage-listings.adoc[tag=edit-one-listing]
+
+[#2900]
+==== Carrying out the basic settings for market listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=market-listing-base-settings]
+
+[#3000]
+====  Editing description and layout
+
+include::_textblocks/listings/manage-listings.adoc[tag=description-layout]
+
+[#3100]
+====  Changing the market settings
+
+include::_textblocks/listings/manage-listings.adoc[tag=edit-market-settings]
+
+[#3200]
+===  Editing multiple listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=edit-multiple-listings]
+
+[#3300]
+== Copying listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=copy-listings]
+
+[#3400]
+===  Copying an individual listing
+
+include::_textblocks/listings/manage-listings.adoc[tag=copy-one-listing]
+
+[#3500]
+===  Copying multiple listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=copy-several-listings]
+
+[#3600]
+==  Searching for listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=find-listings]
+
+[#3700]
+===  Filtering by settings
+
+include::_textblocks/listings/manage-listings.adoc[tag=filter-by-settings]
+
+[#3800]
+===  Filtering by categories
+
+include::_textblocks/listings/manage-listings.adoc[tag=filter-by-categories]
+
+[#3900]
+===  Filtering by directories
+
+include::_textblocks/listings/manage-listings.adoc[tag=filter-by-groups]
+
+[#4000]
+==  Starting listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=start-listings]
+
+[#4100]
+===  Manually starting listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=manually-start-listings]
+
+[#4200]
+===  Automatically starting listings with the listing scheduler
+
+include::_textblocks/listings/manage-listings.adoc[tag=start-listings-sales-planner]
+
+[#4300]
+===  Automatically starting listings with the endless lister
+
+include::_textblocks/listings/manage-listings.adoc[tag=start-listings-endless-lister]
+
+[#4400]
+===  Future listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=future-listings]
+
+[#4500]
+==  Creating listing templates
+
+include::_textblocks/listings/manage-listings.adoc[tag=create-listing-template]
+
+[#4600]
+==  Active listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=active-listings]
+
+[#4700]
+===  Searching for active listings
+
+include::_textblocks/listings/manage-listings.adoc[tag=search-active-listings]
+
+[#4800]
+===  Editing active listings via group function
+
+include::_textblocks/listings/manage-listings.adoc[tag=group-edit-active-listings]
+
+[#4900]
+===  Editing active listings with batch processing
+
+include::_textblocks/listings/manage-listings.adoc[tag=batch-edit-active-listings]
+
+[#5000]
+== Viewing error reports for Hood
+
+You can view error reports for Hood in the *Data » API log* menu.
+
+[.instruction]
+Viewing error reports:
+
+. Go to *Data » API log » Tab: API log*.
+. Select the *ItemListingControllerHood* option or the *LeaveFeedback* option from the *Process* drop-down list.
+. Select a date from the calendar.
+. Select the number of results per page.
+. Click on *Search* (icon:search[role="blue"]) to display the results.
+
+[#5100]
+== Matching data with the import tool
+
+Use the import tool in the *Data » Import* menu to exchange data between plentymarkets and Hood. Listing data can be imported into plentymarkets with the <<data/importing-data/sync-types/elasticsync-market-listing#, Market listing>> import type.

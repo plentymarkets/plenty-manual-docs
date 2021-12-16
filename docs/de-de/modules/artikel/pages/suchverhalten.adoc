@@ -1,0 +1,143 @@
+= Backend-Suchverhalten
+:lang: de
+:keywords: Suchverhalten, Artikelsuche, Backend, Backend-Artikelsuche, Suchindex, Artikelsuchindex, Merkmalsuchindex
+:description: Wie soll die Artikelsuche im Backend funktionieren? Du kannst das vordefinierte Suchverhalten an deine Bedürfnisse anpassen.
+:url: artikel/anwendungsfaelle/suchverhalten
+:position: 70
+:id: DY9U831
+:author: team-item
+
+////
+zuletzt bearbeitet 12.03.2021
+////
+
+Du weißt wahrscheinlich schon, dass du im Menü *Artikel » Artikel bearbeiten* gezielt nach Produkt-Datensätzen suchen kannst.
+Aber wusstest du auch, dass du das Suchverhalten an deine Bedürfnisse anpassen kannst?
+Zum Beispiel kannst du bestimmen:
+
+* welcher Verkaufspreis oder Barcode in den Suchergebnissen angezeigt werden soll.
+* welche Artikelparameter für die Suche relevant sind.
+
+[#100]
+== Welcher Preis oder Barcode wird bevorzugt?
+
+Standardmäßig wird in den Suchergebnissen im Menü *Artikel » Artikel bearbeiten* der erste für die Variante gespeicherte Verkaufspreis und Barcode angezeigt.
+Was aber, wenn diese vordefinierte Einstellung nicht deinen Bedürfnissen entspricht?
+Bestimme selbst, welchen Verkaufspreis oder Barcode du sehen möchtest.
+
+. Öffne das Menü *Einrichtung » Artikel » Einstellungen*.
+. Nimm die Einstellungen vor. Beachte <<table-price-barcode-settings>>.
+. *Speichere* (icon:save[set=plenty, role="green"]) die Einstellungen.
+
+[[table-price-barcode-settings]]
+.Welcher Preis oder Barcode soll in der Artikelübersicht angezeigt werden?
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Bevorzugter Preis in der Artikelsuche*
+|Wähle einen Verkaufspreis aus der Dropdown-Liste aus.
+Der Preis, den du hier wählst, wird in den Suchergebnissen im Menü *Artikel » Artikel bearbeiten* angezeigt.
+Er erscheint in der Spalte *Verkaufspreis*.
+
+*_Hinweis_*:
+Wenn eine Variante nicht mit diesem Verkaufspreis verknüpft ist, wird stattdessen einer der gespeicherten Preise angezeigt.
+
+| *Bevorzugter Barcode in der Artikelsuche*
+|Wähle einen Barcode aus der Dropdown-Liste aus.
+Der Barcode, den du hier wählst, wird in den Suchergebnissen im Menü *Artikel » Artikel bearbeiten* angezeigt.
+Er erscheint in der Spalte *Barcode*.
+
+*_Hinweis_*:
+Wenn eine Variante nicht mit diesem Barcode verknüpft ist, wird stattdessen einer der gespeicherten Barcodes angezeigt.
+|====
+
+[#200]
+== Welche Artikelparameter sind relevant?
+
+Welche Artikelparameter sollen berücksichtigt werden, wenn du nach Produkten im Menü *Artikel » Artikel bearbeiten* suchst?
+Erstens: Konfiguriere den Suchindex so, dass alle relevanten Artikeldaten durchsucht werden.
+Zweitens: Aktualisiere den Suchindex.
+
+[#300]
+=== Suchindex konfigurieren
+
+. Öffne das Menü *Einrichtung » Artikel » Suche » Backend » Suchindex*.
+. Wechsele in das Tab *Standard-Index*.
+. Wähle die Parameter (icon:check-square[role="blue"]), die bei der Artikelsuche berücksichtigt werden sollen.
+. Wechsele in das Tab *Erweiterter Index*.
+. Wähle die Parameter (icon:check-square[role="blue"]), die bei der Artikelsuche berücksichtigt werden sollen, wenn der Suchfilter <<artikel/einleitung/suche#intable-beschreibung, In Beschreibung>> verwendet wird.
+. *Speichere* (icon:save[set=plenty, role="green"]) die Einstellungen. +
+→ Die gewählten Parameter werden berücksichtigt.
+
+[TIP]
+.Standard-Index vs. Erweiterter Index
+====
+Mit dem Standard-Index legst du fest, welche Parameter bei der Backend-Suche berücksichtigt werden sollen.
+
+Mit dem erweiterten Index legst du fest, welche Parameter, bei der Backend-Suche berücksichtigt werden sollen, wenn der Suchfilter <<artikel/einleitung/suche#intable-beschreibung, In Beschreibung>> verwendet wird.
+====
+
+[TIP]
+.Begrenzte Anzahl an Zeichen
+====
+Der Standard- und erweiterte Suchindex lässt nur eine begrenzte Anzahl an Zeichen zu.
+Das heißt, wenn du alle Parameter aufnimmst, kann es passieren, dass nicht alle Parameter in den Index aufgenommen werden.
+Die zusätzlichen Zeichen werden abgeschnitten.
+====
+
+[#400]
+=== Suchindex manuell bauen
+
+Es ist möglich, den Suchindex manuell neu zu bauen.
+Dies ist z.B. sinnvoll, nachdem du die Konfiguration geändert hast.
+
+. Öffne das Menü *Einrichtung » Artikel » Suche » Backend » Suchindex*.
+. Speichere die Einstellungen im Tab *Standard-Index* oder *Erweiterter Index*.
+. Wechsele zurück in das Tab *Übersicht*.
+. Klicke auf *Artikelsuchindex aufbauen* (icon:execute[set=plenty]). +
+→ Pro Durchlauf werden maximal 3000 Artikel indiziert.
+Wenn du also mehr als 3000 Artikel hast, musst du mehrmals auf den Button klicken.
+
+[TIP]
+.Wann wird der Suchindex automatisch aufgebaut?
+====
+* *_Neuer Artikel_*: Der Suchindex wird automatisch aufgebaut, wenn ein neuer Artikel erstellt wird.
+* *_Artikel-Import_*: Wenn du Artikel importierst, wird der Suchindex über Nacht aktualisiert.
+Es findet nur ein Durchlauf mit maximal 3000 Artikel statt.
+Wenn also mehr als 3000 Artikel im System sind, dauert es mehrere Nächte, bis der Suchindex aktualisiert ist.
+Sollen die Artikel schneller indiziert werden, dann baue den Suchindex manuell auf.
+====
+
+[TIP]
+.Artikelstamm vs. Artikelmerkmale
+====
+* *_Artikelstamm_*: Hier siehst du, wie viele Artikel insgesamt vom Suchindex erfasst werden.
+* *_Artikelmerkmale_*: Hier siehst du, wie viele Artikel mit Merkmalen vom Suchindex erfasst werden.
+
+Die Bedienung ist für beide Tabs identisch.
+Du kannst also den Merkmalsuchindex auch wie oben beschrieben manuell aufbauen.
+====
+
+[#500]
+=== Mit der Übersicht arbeiten
+
+Die Übersicht im Menü *Einrichtung » Artikel » Suche » Backend » Suchindex* zeigt an, wie viele Artikel im System gespeichert sind und wie viele Artikel im Suchindex enthalten sind.
+
+[[table-searchindex-overview]]
+.Informationen in der Übersicht
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Indizierte Artikel*
+|Hier siehst du die Anzahl der Artikel pro Sprache, die im Suchindex enthalten sind. +
+
+
+| *Gesamtanzahl der Artikel*
+|Hier siehst du die Anzahl der Artikel im plentymarkets System. Die Zahl schließt neu importierte und noch nicht indizierte Artikel ein.
+
+
+| *Artikelsuchindex aufbauen* (icon:execute[set=plenty])
+|Klicken Sie auf diesen Button, um den <<artikel/anwendungsfaelle/suchverhalten#400, Suchindex manuell aufzubauen>>.
+|====
