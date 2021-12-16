@@ -1,0 +1,59 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+  repository_dispatch:
+    types: [ ContentSourceUpdate, UIBundleUpdate ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    concurrency: 
+      group: ${{ github.head_ref }}
+      cancel-in-progress: true
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
+          node-version: 12.x
+          # Set this option if you want the action to check for the latest available version that satisfies the version spec
+          check-latest: true
+
+      - name: Build site
+        run: |
+          npm i -g @antora/cli @antora/site-generator-default
+          antora antora-playbook-de.yml --fetch --stacktrace
+          antora antora-playbook-en.yml --fetch --stacktrace
+          
+      - name: Assemble site
+        run: |
+          # Move index to build directory
+          mv index.html ./build/index.html
+          mv 404.html ./build/404.html
+          
+      - name: Upload site to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          SOURCE_DIR: './build'
+          AWS_REGION: 'eu-central-1'
+      
+      - name: Invalidate CloudFront cache
+        uses: awact/cloudfront-action@master
+        env:
+          SOURCE_PATH: '/*'
+          AWS_REGION: 'eu-central-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION_ID: ${{ secrets.DISTRIBUTION_ID }}
