@@ -96,7 +96,7 @@ for i in "${ARRAY[@]}";
     # Matches all cases: include::(\.\.\/)*(([a-z0-9\-]+)\/){0,1}(_textblocks\/){0,1}(.+).adoc
 
     # Same module & Page
-    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::page$\1.adoc/ig" {} \;
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::page$\2.adoc/ig" {} \;
 
     # Same module & Partial
     # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\/|\.\.\/)?_textblocks\/(.+\/)*([a-z0-9\_\-]+).adoc/include::partial$\3.adoc/ig" {} \;
@@ -105,7 +105,7 @@ for i in "${ARRAY[@]}";
     # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?\/?assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig" {} \;
 
     # Different module & Page
-    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\_\-]+).adoc/include::\2:page$\3.adoc/ig" {} \;
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig" {} \;
 
     # Different module & Partial
     # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/(.+\/)*([a-z0-9\_\-]+).adoc/include::\2:partial$\4.adoc/ig" {} \;
@@ -114,7 +114,7 @@ for i in "${ARRAY[@]}";
     # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?([a-z0-9\-]+)\/assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 
     # Combined string replace statement
-    find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\_\-]+).adoc/include::\2:page$\3.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
+    find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 done
 
 # find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
@@ -208,7 +208,7 @@ for i in "${ARRAY[@]}";
     # find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?\/?assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig" {} \;
 
     # Different module & Page
-    # find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\_\-]+).adoc/include::\2:page$\3.adoc/ig" {} \;
+    # find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig" {} \;
 
     # Different module & Partial
     # find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/(.+\/)*([a-z0-9\_\-]+).adoc/include::\2:partial$\4.adoc/ig" {} \;
@@ -217,7 +217,7 @@ for i in "${ARRAY[@]}";
     # find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?([a-z0-9\-]+)\/assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 
     # Combined string replace statement
-    find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\_\-]+).adoc/include::\2:page$\3.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
+    find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::partial$\3.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/_textblocks\/([a-z0-9\-]+\/)*([a-z0-9\_\-]+).adoc/include::\2:partial$\4.adoc/ig;s/image:(:)?\/?assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/assets\/([a-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\3.\4/ig" {} \;
 done
 
 # find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
