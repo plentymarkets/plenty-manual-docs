@@ -31,7 +31,7 @@ mkdir docs/de-de/modules/ROOT/images
 mkdir docs/de-de/modules/ROOT/pages
 mkdir docs/de-de/modules/ROOT/partials
 
-cp -R ROOT-DE docs/de-de/modules/ROOT/
+cp -R ROOT-DE/* docs/de-de/modules/ROOT/
 
 #create includes files
 mkdir -p "docs/de-de/modules/_includes/pages"
@@ -142,7 +142,7 @@ mkdir docs/en-gb/modules/ROOT/images
 mkdir docs/en-gb/modules/ROOT/pages
 mkdir docs/en-gb/modules/ROOT/partials
 
-cp -R ROOT-EN docs/en-gb/modules/ROOT/
+cp -R ROOT-EN/* docs/en-gb/modules/ROOT/
 
 #create includes files
 mkdir -p "docs/en-gb/modules/_includes/pages"
