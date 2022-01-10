@@ -52,17 +52,17 @@ for FILE in gitRepo/de/*.adoc;
   PLUGINPATH=${FILE/.adoc/}
   #echo $PLUGINPATH
 
-  if [ "${PLUGINS}" == "glossar" ]; then
-    PLUGINS="_glossar"
-    PLUGINPATH=${PLUGINPATH/glossar/_glossar/}
-  fi
-
   #create the directories
   mkdir -p "docs/de-de/modules/$PLUGINS"
   mkdir -p "docs/de-de/modules/$PLUGINS/images"
   mkdir -p "docs/de-de/modules/$PLUGINS/examples"
   mkdir -p "docs/de-de/modules/$PLUGINS/pages"
   mkdir -p "docs/de-de/modules/$PLUGINS/partials"
+
+  if [ "${PLUGINS}" == "glossar" ]; then
+    PLUGINPATH=${PLUGINPATH/glossar/_glossar/}
+    find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
+  else
 
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
@@ -74,6 +74,8 @@ for FILE in gitRepo/de/*.adoc;
   #moving assets files
   find $PLUGINPATH \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' \) -exec cp {} "docs/de-de/modules/$PLUGINS/images" \;
   ARRAY+=(${PLUGINS})
+
+  fi
 done
 
 echo '######################';
@@ -118,8 +120,11 @@ for i in "${ARRAY[@]}";
     # Different module & Image
     # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?([a-z0-9\-]+)\/([A-Za-z0-9\_\-]+\/)*assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\4.\5/ig" {} \;
 
+    # Glossary entry
+    # find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::.*\/_glossar\/([A-Za-z0-9\_\-]+).adoc/include::glossar:partial$\1.adoc/ig" {} \;
+
     # Combined string replace statement
-    find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*_textblocks\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\4.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*(explanations|importants|instructions|notes|tables|tips|warnings)\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\5.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/([a-z0-9\-]+\/)*_textblocks\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:partial$\5.adoc/ig;s/image:(:)?\/?assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/([A-Za-z0-9\_\-]+\/)*assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\4.\5/ig" {} \;
+    find docs/de-de/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*_textblocks\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\4.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*(explanations|importants|instructions|notes|tables|tips|warnings)\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\5.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/([a-z0-9\-]+\/)*_textblocks\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:partial$\5.adoc/ig;s/image:(:)?\/?assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/([A-Za-z0-9\_\-]+\/)*assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\4.\5/ig;s/include::.*\/_glossar\/([A-Za-z0-9\_\-]+).adoc/include::glossar:partial$\1.adoc/ig" {} \;
 done
 
 # find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
@@ -161,17 +166,17 @@ for FILE in gitRepo/en/*.adoc;
   PLUGINPATH=${FILE/.adoc/}
   #echo $PLUGINPATH
 
-  if [ "${PLUGINS}" == "glossary" ]; then
-    PLUGINS="_glossary"
-    PLUGINPATH=${PLUGINPATH/glossary/_glossary/}
-  fi
-
   #create the directories
   mkdir -p "docs/en-gb/modules/$PLUGINS"
   mkdir -p "docs/en-gb/modules/$PLUGINS/images"
   mkdir -p "docs/en-gb/modules/$PLUGINS/examples"
   mkdir -p "docs/en-gb/modules/$PLUGINS/pages"
   mkdir -p "docs/en-gb/modules/$PLUGINS/partials"
+
+  if [ "${PLUGINS}" == "glossary" ]; then
+    PLUGINPATH=${PLUGINPATH/glossary/_glossary/}
+    find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/partials" \;
+  else
 
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/partials" \;
@@ -183,6 +188,8 @@ for FILE in gitRepo/en/*.adoc;
   #moving assets files
   find $PLUGINPATH \( -name '*.png' -o -name '*.jpg' -o -name '*.gif' \) -exec cp {} "docs/en-gb/modules/$PLUGINS/images" \;
   ARRAY+=(${PLUGINS})
+
+  fi
 done
 
 echo '######################';
@@ -226,8 +233,11 @@ for i in "${ARRAY[@]}";
     # Different module & Image
     # find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/image:(:)?([a-z0-9\-]+)\/([A-Za-z0-9\_\-]+\/)*assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\4.\5/ig" {} \;
 
+    # Glossary entry
+    # find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::.*\/_glossary\/([A-Za-z0-9\_\-]+).adoc/include::glossary:partial$\1.adoc/ig" {} \;
+
     # Combined string replace statement
-    find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*_textblocks\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\4.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*(explanations|importants|instructions|notes|tables|tips|warnings)\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\5.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/([a-z0-9\-]+\/)*_textblocks\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:partial$\5.adoc/ig;s/image:(:)?\/?assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/([A-Za-z0-9\_\-]+\/)*assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\4.\5/ig" {} \;
+    find docs/en-gb/modules/ -name '*.adoc' -exec sed -i -r -e "s/include::([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::page$\2.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*_textblocks\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\4.adoc/ig;s/include::(\.\/|\.\.\/)?(\.\.\/)*(explanations|importants|instructions|notes|tables|tips|warnings)\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::partial$\5.adoc/ig;s/include::(\.\.\/)+([a-z0-9\-]+)\/([a-z0-9\-]+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:page$\4.adoc/ig;s/include::(\.\.\/)*([a-z0-9\-]+)\/([a-z0-9\-]+\/)*_textblocks\/(.+\/)*([A-Za-z0-9\_\-]+).adoc/include::\2:partial$\5.adoc/ig;s/image:(:)?\/?assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2.\3/ig;s/image:(:)?([a-z0-9\-]+)\/([A-Za-z0-9\_\-]+\/)*assets\/([A-Za-z0-9\_\-]+).(png|jpg|gif)/image:\1\2:\4.\5/ig;s/include::.*\/_glossary\/([A-Za-z0-9\_\-]+).adoc/include::glossary:partial$\1.adoc/ig" {} \;
 done
 
 # find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
