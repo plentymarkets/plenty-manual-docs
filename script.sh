@@ -31,7 +31,7 @@ mkdir docs/de-de/modules/ROOT/images
 mkdir docs/de-de/modules/ROOT/pages
 mkdir docs/de-de/modules/ROOT/partials
 
-cp -R ROOT-DE docs/de-de/modules/ROOT/
+cp -R ROOT-DE/* docs/de-de/modules/ROOT/
 
 #create includes files
 mkdir -p "docs/de-de/modules/_includes/pages"
@@ -64,6 +64,8 @@ for FILE in gitRepo/de/*.adoc;
   mkdir -p "docs/de-de/modules/$PLUGINS/pages"
   mkdir -p "docs/de-de/modules/$PLUGINS/partials"
 
+  #moving root pages
+  find gitRepo/de/ -maxdepth 1 -name "$PLUGINS.adoc" -exec cp {} "docs/de-de/modules/$PLUGINS/pages" \;
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
   #moving pages
@@ -140,7 +142,7 @@ mkdir docs/en-gb/modules/ROOT/images
 mkdir docs/en-gb/modules/ROOT/pages
 mkdir docs/en-gb/modules/ROOT/partials
 
-cp -R ROOT-EN docs/en-gb/modules/ROOT/
+cp -R ROOT-EN/* docs/en-gb/modules/ROOT/
 
 #create includes files
 mkdir -p "docs/en-gb/modules/_includes/pages"
@@ -173,6 +175,8 @@ for FILE in gitRepo/en/*.adoc;
   mkdir -p "docs/en-gb/modules/$PLUGINS/pages"
   mkdir -p "docs/en-gb/modules/$PLUGINS/partials"
 
+  #moving root pages
+  find gitRepo/en/ -maxdepth 1 -name "$PLUGINS.adoc" -exec cp {} "docs/en-gb/modules/$PLUGINS/pages" \;
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/partials" \;
   #moving pages
