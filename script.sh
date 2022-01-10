@@ -4,15 +4,15 @@ echo '##########################';
 echo '#    set up workspace    #';
 echo '##########################';
 
-if [ -d gitRepo ]; then
-  rm -rf gitRepo
-fi
+# if [ -d gitRepo ]; then
+#   rm -rf gitRepo
+# fi
 
-git clone "https://github.com/plentymarkets/manual" gitRepo
+# git clone "https://github.com/plentymarkets/manual" gitRepo
 
-if [ -d build ]; then
-  rm -rf build
-fi
+# if [ -d build ]; then
+#   rm -rf build
+# fi
 
 if [ -d docs ]; then
   rm -rf docs
@@ -59,13 +59,14 @@ for FILE in gitRepo/de/*.adoc;
   mkdir -p "docs/de-de/modules/$PLUGINS/pages"
   mkdir -p "docs/de-de/modules/$PLUGINS/partials"
 
+  #moving root pages
+  find gitRepo/de/ -maxdepth 1 -name "$PLUGINS.adoc" -exec cp {} "docs/de-de/modules/$PLUGINS/pages" \;
+  
   if [ "${PLUGINS}" == "glossar" ]; then
     PLUGINPATH=${PLUGINPATH/glossar/_glossar/}
     find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
   else
 
-  #moving root pages
-  find gitRepo/de/ -maxdepth 1 -name "$PLUGINS.adoc" -exec cp {} "docs/de-de/modules/$PLUGINS/pages" \;
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/de-de/modules/$PLUGINS/partials" \;
   #moving pages
@@ -175,13 +176,14 @@ for FILE in gitRepo/en/*.adoc;
   mkdir -p "docs/en-gb/modules/$PLUGINS/pages"
   mkdir -p "docs/en-gb/modules/$PLUGINS/partials"
 
+  #moving root pages
+  find gitRepo/en/ -maxdepth 1 -name "$PLUGINS.adoc" -exec cp {} "docs/en-gb/modules/$PLUGINS/pages" \;
+  
   if [ "${PLUGINS}" == "glossary" ]; then
     PLUGINPATH=${PLUGINPATH/glossary/_glossary/}
     find $PLUGINPATH -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/partials" \;
   else
 
-  #moving root pages
-  find gitRepo/en/ -maxdepth 1 -name "$PLUGINS.adoc" -exec cp {} "docs/en-gb/modules/$PLUGINS/pages" \;
   #moving textblocks
   find $PLUGINPATH -path '*/_textblocks/*' -name '*.adoc' -exec cp {} "docs/en-gb/modules/$PLUGINS/partials" \;
   #moving pages
@@ -254,4 +256,4 @@ find docs/en-gb/ -name '*.adoc-e' -delete
 echo '######################';
 echo '#    build nav       #';
 echo '######################';
-sh generateNav.sh
+# sh generateNav.sh
