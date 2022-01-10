@@ -4,15 +4,15 @@ echo '##########################';
 echo '#    set up workspace    #';
 echo '##########################';
 
-# if [ -d gitRepo ]; then
-#   rm -rf gitRepo
-# fi
+if [ -d gitRepo ]; then
+  rm -rf gitRepo
+fi
 
-# git clone "https://github.com/plentymarkets/manual" gitRepo
+git clone "https://github.com/plentymarkets/manual" gitRepo
 
-# if [ -d build ]; then
-#   rm -rf build
-# fi
+if [ -d build ]; then
+  rm -rf build
+fi
 
 if [ -d docs ]; then
   rm -rf docs
@@ -256,4 +256,4 @@ find docs/en-gb/ -name '*.adoc-e' -delete
 echo '######################';
 echo '#    build nav       #';
 echo '######################';
-# sh generateNav.sh
+sh generateNav.sh
