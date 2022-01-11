@@ -253,6 +253,7 @@ echo '######################';
 echo '#   updating links   #';
 echo '######################';
 find docs/ -name '*.adoc' -exec sed -i -e -E "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig" {} \;
+find docs/ -name '*.adoc' -exec sed -i -e -r "s/\[\.tabs\]/\[tabs\]/ig" {} \;
 # Delete backup files
 find docs/en-gb/ -name '*.adoc-e' -delete
 
