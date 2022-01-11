@@ -248,6 +248,11 @@ done
 
 # find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
 
+# Update links
+echo '######################';
+echo '#   updating links   #';
+echo '######################';
+find docs/ -name '*.adoc' -exec sed -i -e -E "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig" {} \;
 # Delete backup files
 find docs/en-gb/ -name '*.adoc-e' -delete
 
