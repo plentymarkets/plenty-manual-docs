@@ -4,15 +4,15 @@ echo '##########################';
 echo '#    set up workspace    #';
 echo '##########################';
 
-if [ -d gitRepo ]; then
-  rm -rf gitRepo
-fi
+# if [ -d gitRepo ]; then
+#   rm -rf gitRepo
+# fi
 
-git clone "https://github.com/plentymarkets/manual" gitRepo
+# git clone "https://github.com/plentymarkets/manual" gitRepo
 
-if [ -d build ]; then
-  rm -rf build
-fi
+# if [ -d build ]; then
+#   rm -rf build
+# fi
 
 if [ -d docs ]; then
   rm -rf docs
@@ -94,6 +94,18 @@ find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_includes(.*)
 
 # find docs/de-de/modules/_includes/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).adoc/include::.\/\2.adoc/g' {} \;
 
+# Replace special cases not covered by the general solution below
+find docs/de-de/modules/artikel/partials/ -name 'artikel-einleitung.adoc' -exec sed -i -e "s/include::\.\.\/\.\.\/einleitung\/struktur.adoc/include::page\$struktur.adoc/ig" {} \;
+find docs/de-de/modules/artikel/pages/ -name 'kategorien.adoc' -exec sed -i -e "s/include::\.\.\/webshop\/checkliste-kategorien-anzeige.adoc/include::page\$checkliste-kategorien-anzeige.adoc/ig" {} \;
+find docs/de-de/modules/artikel/pages/ -name 'preise.adoc' -exec sed -i -e "s/include::\.\.\/import-export-anlage\/anlage\/verzeichnis.adoc/include::page\$verzeichnis.adoc/ig" {} \;
+find docs/de-de/modules/artikel/pages/ -name 'preise.adoc' -exec sed -i -e "s/include::\.\.\/import-export-anlage\/anlage\/massenbearbeitung.adoc/include::page\$massenbearbeitung.adoc/ig" {} \;
+find docs/de-de/modules/artikel/pages/ -name 'verfuegbarkeit.adoc' -exec sed -i -e "s/include::\.\.\/import-export-anlage\/anlage\/massenbearbeitung.adoc/include::page\$massenbearbeitung.adoc/ig" {} \;
+find docs/de-de/modules/business-entscheidungen/pages/ -name 'benutzerkonten-zugaenge.adoc' -exec sed -i -e "s/include::\.\/systemadministration\/\_textblocks\/instructions\/benutzerkonto-erstellen.adoc/include::partial\$benutzerkonto-erstellen.adoc/ig" {} \;
+find docs/de-de/modules/business-entscheidungen/pages/ -name 'benutzerkonten-zugaenge.adoc' -exec sed -i -e "s/include::\.\/systemadministration\/\_textblocks\/instructions\/rechte-vergeben.adoc/include::partial\$rechte-vergeben.adoc/ig" {} \;
+find docs/de-de/modules/changelog/pages/ -name '2021-08-04.adoc' -exec sed -i -e "s/include::\.\/changelog\/_textblocks\/otto-master-file.adoc/include::partial\$otto-master-file.adoc/ig" {} \;
+find docs/de-de/modules/daten/partials/ -name 'catalogues-faq.adoc' -exec sed -i -e "s/include::\.\.\/\.\.\/kataloge-verwalten\/katalog-formate\/artikel.adoc/include::page\$artikel.adoc/ig" {} \;
+find docs/de-de/modules/maerkte/partials/ -name 'mirakl-market-setup.adoc' -exec sed -i -e "s/include::\.\.\/properties\/instructions\/properties-creation.adoc/include::partial\$properties-creation.adoc/ig" {} \;
+find docs/de-de/modules/maerkte/partials/ -name 'mirakl-market-setup.adoc' -exec sed -i -e "s/include::\.\.\/properties\/instructions\/properties-creation-table.adoc/include::partial\$properties-creation-table.adoc/ig" {} \;
 
 arraylength=${#ARRAY[@]}
 
@@ -210,6 +222,17 @@ find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_includes(.*)
 
 # find docs/en-gb/modules/_includes/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).adoc/include::.\/\2.adoc/g' {} \;
 
+# Replace special cases not covered by the general solution below
+find docs/en-gb/modules/business-decisions/pages/ -name 'user-accounts-access.adoc' -exec sed -i -e "s/include::\.\/system-administration\/_textblocks\/instructions\/benutzerkonto-erstellen-en_gb.adoc/include::partial\$benutzerkonto-erstellen-en_gb.adoc/ig" {} \;
+find docs/en-gb/modules/business-decisions/pages/ -name 'user-accounts-access.adoc' -exec sed -i -e "s/include::system-administration\/_textblocks\/instructions\/rechte-vergen-en_gb.adoc/include::partial\$rechte-vergen-en_gb.adoc/ig" {} \;
+find docs/en-gb/modules/item/pages/ -name 'availability.adoc' -exec sed -i -e "s/include::\.\.\/import-export-create\/create\/mass-processing.adoc/include::page\$mass-processing.adoc/ig" {} \;
+find docs/en-gb/modules/item/pages/ -name 'categories.adoc' -exec sed -i -e "s/include::\.\.\/online-store\/checklist-categories-visibility.adoc/include::page\$checklist-categories-visibility.adoc/ig" {} \;
+find docs/en-gb/modules/item/partials/ -name 'item-introduction.adoc' -exec sed -i -e "s/include::\.\.\/\.\.\/introduction\/structure.adoc/include::page\$structure.adoc/ig" {} \;
+find docs/en-gb/modules/item/pages/ -name 'prices.adoc' -exec sed -i -e "s/include::\.\.\/import-export-create\/create\/directory.adoc/include::page\$directory.adoc/ig" {} \;
+find docs/en-gb/modules/item/pages/ -name 'prices.adoc' -exec sed -i -e "s/include::\.\.\/import-export-create\/create\/mass-processing.adoc/include::page\$mass-processing.adoc/ig" {} \;
+find docs/en-gb/modules/markets/partials/ -name 'prices.adoc' -exec sed -i -e "s/include::\.\.\/import-export-create\/create\/mass-processing.adoc/include::page\$mass-processing.adoc/ig" {} \;
+find docs/en-gb/modules/markets/partials/ -name 'mirakl-market-setup.adoc' -exec sed -i -e "s/include::\.\.\/properties\/instructions\/properties-creation.adoc/include::partial\$properties-creation.adoc/ig" {} \;
+find docs/en-gb/modules/markets/partials/ -name 'mirakl-market-setup.adoc' -exec sed -i -e "s/include::\.\.\/properties\/instructions\/properties-creation-table.adoc/include::partial\$properties-creation-table.adoc/ig" {} \;
 
 arraylength=${#ARRAY[@]}
 
