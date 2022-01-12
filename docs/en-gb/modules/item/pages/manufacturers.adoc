@@ -1,6 +1,5 @@
 = Manufacturers
 :lang: en
-include::{includedir}/_header.adoc[]
 :keywords: Manufacturer, Manufacturers, Commission, Manufacturer data, Manufacturer commission, Commission models, Commission model, Brand, Brands, Producer
 :description: plentymarkets helps you manage your manufacturers. Learn how to save your manufacturer data in plentymarkets.
 :url: item/settings/manufacturers
@@ -9,7 +8,7 @@ include::{includedir}/_header.adoc[]
 :author: team-item
 
 ////
-zuletzt bearbeitet 01.12.2021
+zuletzt bearbeitet 04.01.2022
 
 bei jeder Überarbeitung, schauen was der Stand hier ist.
 https://forum.plentymarkets.com/t/unterscheidet-plenty-zwischen-hersteller-hersteller/440009/3
@@ -22,28 +21,48 @@ plentymarkets helps you manage your manufacturer data.
 [discrete]
 === Procedure
 
-* First, create the necessary manufacturer data records <<item/settings/manufacturers#150, manually>> or <<item/settings/manufacturers#200, via import>>.
-* Then add <<item/settings/manufacturers#300, commission models>> as needed.
-* Finally, specify who manufactured each of your items. This is done by <<item/settings/manufacturers#400, linking your items to manufacturers>>.
+* First, xref:item:manufacturers.adoc#100[create the necessary manufacturer data records] manually or via import.
+* Then add xref:item:manufacturers.adoc#300[commission models] as needed.
+* Finally, specify who manufactured each of your items. This is done by xref:item:manufacturers.adoc#400[linking your items to manufacturers].
 * Should your customers be able to search in the plentyShop for products made by a specific manufacturer?
-Customise the <<item/settings/manufacturers#450, plentyShop settings>> as needed.
+Customise the xref:item:manufacturers.adoc#450[plentyShop settings] as needed.
 
 [#100]
 == Creating manufacturer data records
 
-[#150]
-=== Manual creation
-
+[tabs]
+====
+Manual creation::
++
+--
 . Go to *Setup » Item » Manufacturers*.
 . Click on icon:plus[role="green"] *New*. +
 → The *New manufacturer* tab opens.
-. Enter the manufacturer data. Note <<table-add-manufacturers>>.
+. Enter the manufacturer data.
 . *Save* (icon:save[set=plenty, role="green"]) the settings. +
 → The manufacturer is added.
 
+--
+Data import::
++
+--
+plentymarkets has an xref:data:ElasticSync.adoc#[import tool].
+The idea is simple. Rather than manually saving manufacturer information in plentymarkets, you’ll xref:data:elasticSync-manufacturer.adoc#[enter the same information into a CSV file] and then import this file into your system.
+
+--
+====
+
+[TIP]
+.Can I save my manufacturer data in the CRM menu instead?
+====
+Maybe you noticed that it’s possible to xref:crm:managing-contacts.adoc#90[create manufacturer data records in the CRM menu].
+But be careful.
+This data is _not_ transferred over to the menu *Setup » Item » Manufacturers*.
+Therefore, we recommend that you ignore the manufacturer data in the CRM menu for now.
+====
+
 :manual:
 
-[[table-add-manufacturers]]
 [cols="1,3a"]
 |====
 |Setting |Explanation
@@ -58,7 +77,7 @@ include::partial$name.adoc[]
 
 | *Logo URL*
 |
-include::../_textblocks/settings/manufacturer/logo-url.adoc[]
+include::partial$logo-url.adoc[]
 
 | *Homepage*
 |
@@ -70,7 +89,7 @@ include::partial$street.adoc[]
 
 | *House No.*
 |
-include::../_textblocks/settings/manufacturer/house-no.adoc[]
+include::partial$house-no.adoc[]
 
 | *Postcode*
 |
@@ -86,11 +105,11 @@ include::partial$country.adoc[]
 
 | *Telephone number*
 |
-include::../_textblocks/settings/manufacturer/telephone-number.adoc[]
+include::partial$telephone-number.adoc[]
 
 | *Fax number*
 |
-include::../_textblocks/settings/manufacturer/fax-number.adoc[]
+include::partial$fax-number.adoc[]
 
 | *Email*
 |
@@ -122,7 +141,7 @@ You will receive the manufacturer ID when setting up the market.
 
 | *External name*
 |
-include::../_textblocks/settings/manufacturer/external-name.adoc[]
+include::partial$external-name.adoc[]
 
 | *Position*
 |
@@ -134,38 +153,22 @@ include::partial$comment.adoc[]
 
 |====
 
-[TIP]
-.Can I save my manufacturer data in the CRM menu instead?
-====
-Maybe you noticed that it’s possible to <<crm/managing-contacts#90, create manufacturer data records in the CRM menu>>. But be careful. This data is _not_ transferred over to the menu *Setup » Item » Manufacturers*. Therefore, we recommend that you ignore the manufacturer data in the CRM menu for now.
-====
-
-[#200]
-=== Import
-
-plentymarkets has an <<data/importing-data/ElasticSync#, import tool>>.
-The idea is simple. Rather than manually saving manufacturer information in plentymarkets, you’ll <<data/importing-data/sync-types/elasticSync-manufacturer#, enter the same information into a CSV file>> and then import this file into your system.
-
 [#300]
 == Adding commissions
 
-Once you’ve <<item/settings/manufacturers#100, saved basic manufacturer data>>, you’re ready to add commission models as needed.
+Once you’ve xref:item:manufacturers.adoc#100[saved basic manufacturer data], you’re ready to add commission models as needed.
 
 [.instruction]
 Adding manufacturer commissions:
 
-. Go to *Setup » Item » Manufacturers*.
-. Click on *Edit* (icon:pencil[role="yellow"]). +
-→ The manufacturer data record opens in a new tab.
-. Open the *Commissions* tab.
+. Go to *Setup » Item » Manufacturers » [Open manufacturer] » Tab: Commissions*.
 . Click on *Add* (icon:plus[role="green"]). +
 → A new line for commissions is added to the table.
-. Enter information about the commission. Note <<table-add-manufacturer-commission>>.
+. Enter information about the commission.
 . *Save* (icon:save[set=plenty, role="green"]) the settings. +
 → An ID is assigned to the commission automatically.
 
-[[table-add-manufacturer-commission]]
-[cols="1,3"]
+[cols="1,3a"]
 |====
 |Setting |Explanation
 
@@ -177,16 +180,19 @@ Adding manufacturer commissions:
 
 | *Commission*
 |Enter a value in percent for the commission.
+
+| icon:copy[set=plenty, role="yellow"]
+|Do the same commission models apply to several different manufacturers?
+You don’t have to manually create each commission.
+Instead, you can copy a commission and apply it to other manufacturers.
+
+. Click on *Copy commission to other manufacturers* (icon:copy[set=plenty, role="yellow"]). +
+→ A pop-up window opens.
+. Upper part of the window: select the commission (icon:check-square[role="blue"]) that you want to copy.
+. Lower part of the window: select the manufacturers (icon:check-square[role="blue"]) that the commission should apply to.
+. Click on icon:save[set=plenty, role="green"] *Copy commission*.
+
 |====
-
-[TIP]
-.Transferring commissions to other manufacturers
-====
-Do the same commission models apply to several different manufacturers? You don’t have to manually save each commission! Simply copy a commission and transfer it to other manufacturers.
-
-First, click on *Copy commission to other manufacturers* (icon:copy[set=plenty, role="yellow"]). Then use check marks (icon:check-square[role="blue"]) to specify which commission you want to copy and which manufacturers you want to transfer it to.
-Finally, click on icon:save[set=plenty, role="green"] *Copy commission*.
-====
 
 [#400]
 == Linking manufacturers to items
@@ -195,10 +201,10 @@ Once you’ve saved your manufacturer data in plentymarkets, you’ll specify wh
 
 There are several different ways to link items to manufacturers:
 
-* Specify the manufacturer <<item/import-export-create/create/new-item#200, while you manually create a new item>>.
-* Specify the manufacturer <<item/managing-items#40, in an existing item’s Global tab>>.
-* <<item/import-export-create/create/mass-processing#100, Use the group function>> to manually specify the manufacturer for several existing items at once.
-* Do you want to import your items? Then <<data/importing-data/sync-types/elasticSync-item#2260, specify each item’s manufacturer in the CSV file>> that you will import.
+* Specify the manufacturer xref:item:new-item.adoc#200[while you manually create a new item].
+* Specify the manufacturer xref:item:managing-items.adoc#40[in an existing item’s Global tab].
+* xref:item:mass-processing.adoc#100[Use the group function] to manually specify the manufacturer for several existing items at once.
+* Do you want to import your items? Then xref:data:elasticSync-item.adoc#2260[specify each item’s manufacturer in the CSV file] that you will import.
 
 [#450]
 == Checking the plentyShop settings
@@ -206,24 +212,24 @@ There are several different ways to link items to manufacturers:
 Should your customers be able to search in the plentyShop for products made by a specific manufacturer?
 Then make sure that you’ve configured the following settings:
 
-* <<item/settings/manufacturers#150, External name>>: Have you saved an external name for the manufacturer?
-* <<item/online-store/search-bar#70, Search bar>>: Are manufacturers included in the search results?
-* <<item/frontend-item-search#, Search filters>>: Have you read the instructions on setting up the so-called faceted search?
+* xref:item:manufacturers.adoc#100[External name]: Have you saved an external name for the manufacturer?
+* xref:item:search-bar.adoc#70[Search bar]: Are manufacturers included in the search results?
+* xref:item:frontend-item-search.adoc#[Search filters]: Have you read the instructions on setting up the so-called faceted search?
 
 [#500]
 == Deleting manufacturers
 
 Before you can delete a manufacturer, you’ll have to delete all of the links to the manufacturer.
-The <<item/import-export-create/create/mass-processing#200, variation group function>> is a useful tool for doing so.
+The xref:item:mass-processing.adoc#200[variation group function] is a useful tool for doing so.
 
 [.instruction]
 Deleting links to the manufacturer:
 
 . Go to *Item » Edit item*.
 . Set the filters on the left as follows:
-.. Set the filter <<item/introduction/search#intable-table-type, Table type>> to *Item*.
-.. Set the filter <<item/introduction/search#intable-active, Active>> to *ALL*.
-.. Use the <<item/introduction/search#intable-manufacturer, Manufacturer>> filter to select the manufacturer from the drop-down list.
+.. Set the filter xref:item:search.adoc#intable-table-type[Table type] to *Item*.
+.. Set the filter xref:item:search.adoc#intable-active[Active] to *ALL*.
+.. Use the xref:item:search.adoc#intable-manufacturer[Manufacturer] filter to select the manufacturer from the drop-down list.
 . Click on *Search* (icon:search[role="blue"]). +
 → All items linked with this manufacturer are displayed.
 . Select all of the items (icon:check-square[role="blue"]).

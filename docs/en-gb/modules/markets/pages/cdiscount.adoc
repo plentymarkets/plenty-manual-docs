@@ -1,7 +1,6 @@
 = Cdiscount
 :lang: en
-include::{includedir}/_header.adoc[]
-:author: team-multi-channel
+:author: team-plenty-channel
 :keywords: Cdiscount, Cdiscount, Cdisount, C discount, Cdicount, Cdiscaunt
 :description: Multi-Channel in plentymarkets: Set up the interface to the market Cdiscount in your plentymarkets system.
 :position: 40
@@ -141,6 +140,35 @@ Connecting to this market allows for the following automatic functions to take p
 
 During the hourly order import, no invoice data or delivery information is transferred from Cdiscount when the order is first imported. The order remains in status [3]. It may take up to 48 hours for the invoice data and the delivery information to be transferred to plentymarkets, as Cdiscount carries out a credit rating for the end customer first.
 
+[#single-item-variations]
+== Distinction of single items and variation items
+
+Only specific product types, such as clothing, can be offered as variation items on Cdiscount. Therefore, all variations will be exported to Cdiscount as single items by default.
+
+Variations can only be listed as variation items on Cdiscount if the following settings were made: 
+
+* The variation is linked with <<#600, attributes>> for clothing size or clothing colour.
+* The item is linked with a <<#700, characteristic>> of the type *No* that is linked to the Cdiscount characteristic *Variation item*.
+
+If you use the same attribute for single items and variation items on Cdiscount, you can use a characteristic of the type *No* that is linked to the Cdiscount characteristic *No variation item* to list the item as single item.
+
+[discrete]
+=== Product names of single items
+
+Attributes are added to the product names of variations which are listed as single items on Cdiscount. The attributes are shown in square brackets behind the product name on Cdiscount. +
+For variations which are listed as variation items on Cdiscount, attributes will not be added to the product name.
+
+[[product-names-cdiscount]]
+.Example for product names on Cdiscount
+[cols="2,2,2"]
+|====
+| Name of the single item | Name of the attribute | Product name on Cdiscount
+
+| Ladies’ bicycle, 18 inch, mountain bike
+| blue
+| Ladies’ bicycle, 18 inch, mountain bike [blue]
+|====
+
 [#250]
 == Activating the order referrer
 
@@ -148,7 +176,7 @@ During the hourly order import, no invoice data or delivery information is trans
 :referrer: Cdiscount
 :referrer-option: pass:quotes[option *Cdiscount*]
 
-include::_textblocks/instructions/activate-referrer.adoc[]
+include::partial$activate-referrer.adoc[]
 
 [#300]
 == Setting the variation availability
@@ -156,7 +184,7 @@ include::_textblocks/instructions/activate-referrer.adoc[]
 :market-availability: Cdiscount
 :option-availability: Cdiscount
 
-include::_textblocks/instructions/variation-availability.adoc[]
+include::partial$variation-availability.adoc[]
 
 // Web API NOT required!
 
@@ -168,7 +196,7 @@ include::_textblocks/instructions/variation-availability.adoc[]
 :referrer-id: 143
 :sku-others:
 
-include::_textblocks/instructions/sku-manually.adoc[]
+include::partial$sku-manually.adoc[]
 
 // Marketplace account not required!
 
@@ -177,9 +205,9 @@ include::_textblocks/instructions/sku-manually.adoc[]
 
 :referrer-price: Cdiscount
 
-include::_textblocks/instructions/define-sales-price.adoc[]
+include::partial$define-sales-price.adoc[]
 
-Afterwards, <<item/settings/prices#240, link>> the sales price with the desired variations if you have not done so.
+Afterwards, xref:item:prices.adoc#240[link] the sales price with the desired variations if you have not done so.
 
 [#450]
 == Defining the barcode
@@ -193,7 +221,7 @@ Defining a barcode for Cdiscount:
 . Select the referrer *Cdiscount*.
 . Save (icon:save[set=plenty]) the settings.
 
-Afterwards, <<item/settings/barcodes#300, link>> the barcode with the desired variations if you have not done so.
+Afterwards, xref:item:barcodes.adoc#300[link] the barcode with the desired variations if you have not done so.
 
 [#500]
 == Linking categories
@@ -219,19 +247,21 @@ Linking categories:
 [#600]
 == Linking attributes
 
-If you have created <<item/settings/attributes#, attributes>> in your plentymarkets system, you have to link these attributes with Cdiscount. Proceed as described below to link the attribute Colour with Cdiscount. Link further attributes in the same way.
+If you have created xref:item:attributes.adoc#[attributes] in your plentymarkets system, you have to link these attributes with Cdiscount. Proceed as described below to link the attribute Colour with Cdiscount. Link further attributes in the same way.
 
 :attribute-option: Cdiscount.com
 :attribute: Colour
 :attribute-dropdown:
 :enter-attribute-values:
 
-include::_textblocks/instructions/link-attributes.adoc[]
+include::partial$link-attributes.adoc[]
+
+*_Note:_* Attributes will be added to the product names of single items on Cdiscount. For further information, see the chapter <<#single-item-variations, Distinction of single items and variation items>>.
 
 [#700]
 == Creating characteristics
 
-Next, create <<item/settings/properties#100, characteristics>> and link the characteristics to Cdiscount characteristics. Characteristics have to be created in French.
+Next, create xref:item:properties.adoc#100[characteristics] and link the characteristics to Cdiscount characteristics. Characteristics have to be created in French.
 
 [.instruction]
 Creating a characteristic:
@@ -276,7 +306,7 @@ Linking manufacturers:
 :market: Cdiscount
 :payment-method: Cdiscount
 
-include::_textblocks/instructions/activate-payment-method.adoc[]
+include::partial$activate-payment-method.adoc[]
 
 [#950]
 == Setting up the data exchange
@@ -396,7 +426,7 @@ Creating a CSV export:
 . Click on the *New export* tab.
 . Select *Cdiscount.com* from the *Data format* drop-down list.
 . Enter a name for the export.
-. Pay attention to the explanations given on the <<data/exporting-data/elastic-export#300, Elastic export>> page.
+. Pay attention to the explanations given on the xref:data:elastic-export.adoc#300[Elastic export] page.
 . Save (icon:save[set=plenty]) the settings. +
 → The export is created as a sub-folder in the *Exports* tab and the URL is generated.
 . Click on the *Exports* tab and open the subfolder *Cdiscount.com*.
@@ -411,7 +441,15 @@ Link the characteristics *Gender*, *Main colour*, *Note*, *Comment*, *Marketing 
 [#1200]
 == Automatically sending returns
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically send returns to Cdiscount.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send returns to Cdiscount.
+
+[IMPORTANT]
+.Credit notes for returns always for the sum of an order item 
+====
+If a Cdiscount order has more than one order item and the customer returns only a partial amount of this order item, Cdiscount will always refund the total sum of this order item. This is due to a limitation on Cdiscount. +
+*_Example:_*
+The customer orders two sweaters for 30€ each and a jacket for 50€ and returns one of the sweaters. A credit note for the sum of this order item is created, in this case this would be 60€.
+====
 
 :table-event-procedure: <<#event-procedure-returns-cdiscount>>
 
@@ -443,7 +481,7 @@ include::_includes:page$EA.adoc[]
 [#1300]
 == Automatically updating the order status
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically update the order status on Cdiscount whenever specific events occur. You can use event procedures to automatically assign the following statuses to orders on Cdiscount:
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically update the order status on Cdiscount whenever specific events occur. You can use event procedures to automatically assign the following statuses to orders on Cdiscount:
 
 * Refused by seller
 * Shipped by seller

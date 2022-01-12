@@ -1,6 +1,6 @@
 = Zalando
 :lang: de
-:author: team-multi-channel
+:author: team-plenty-channel
 :keywords: Zalando, Zalando, zalando.de, zalando.de, salando, zalando.com
 :description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz Zalando in deinem plentymarkets System ein.
 :position: 250
@@ -57,7 +57,7 @@ Du hast einen Vertrag mit Zalando abgeschlossen. Super. Wie geht es jetzt weiter
 * Richte die Schnittstelle zu Zalando wie auf dieser Seite beschreiben in deinem plentymarkets System ein.
 * Aktiviere dein Zalando-Konto im Assistenten. (<<#1500, Wie?>>)
 
-[#200]
+[#setup]
 == Zalando in plentymarkets einrichten
 
 Nachdem Zalando dich als Partner:in in das Programm aufgenommen hat, stellt dir Zalando ein Handbuch und Hilfestellung beim Einrichten der Schnittstelle zur Verfügung. In plentymarkets nimmst du die unten beschriebenen Grundeinstellungen vor.
@@ -117,7 +117,7 @@ Mit dem Assistenten *Kontoeinstellungen - Zalando* im Menü *Einrichtung » Assi
 :assistant-name: Kontoeinstellungen - Zalando
 :number-of-boxes: Info-Boxen
 
-include::_textblocks/instructions/assistant-basic-instructions.adoc[]
+include::partial$assistant-basic-instructions.adoc[]
 
 [.collapseBox]
 .Schritt *Aufträge*
@@ -142,10 +142,13 @@ a| Wählen, ob echte Daten oder Testdaten importiert werden sollen.
 |Mandant (Shop) wählen. Zalando-Aufträge werden diesem Mandanten zugeordnet.
 
 | *Sollen auch Reservierungen importiert werden?*
-|Artikel gelten als reserviert, wenn Kund:innen eine Bestellung aufgegeben haben, die Ware aber entweder noch nicht bezahlt haben oder der Auftrag noch nicht von Zalando für den Versand freigegeben wurde.
+|Artikel gelten als reserviert, wenn Kund:innen eine Bestellung aufgegeben haben, die Ware aber entweder noch nicht bezahlt haben oder der Auftrag noch nicht von Zalando für den Versand freigegeben wurde. +
+Wenn diese Option aktiviert wird, werden Reservierungen mit Status *[3] Warten auf Zahlung* in plentymarkets importiert. +
+Wenn die Zahlung des Auftrags von Zalando bestätigt und der Auftrag auf Zalando in den Status *approved* verschoben wird, wird der Auftrag in plentymarkets in Status *[5] Freigabe Versand* verschoben. Sobald ein Auftrag in Status *[5]* ist, kann er versendet werden. +
+*_Hinweis:_* Aufträge können erst in Status *[5] Freigabe Versand* versandt werden. Ein Auftrag, der noch in Status *[3] Warten auf Zahlung* ist, darf nicht versandt werden.
 
 |*Welcher Auftragsstatus soll Reservierungen zugewiesen werden?*
-|Entscheide, in welchen Status Aufträge verschoben werden sollen, für die eine Reservierung importiert wurde, die aber dann von Käufer:innen oder von Zalando storniert wurden. +
+|Reservierungen werden standardmäßig mit Status *[3] Warten auf Zahlung* importiert und müssen nach der Stornierung durch Kund:innen oder durch Zalando in einen anderen Status *[8.X]* verschoben werden. In diesem Schritt entscheidest du, in welchen Status stornierte Reservierungen verschoben werden sollen. +
 *_Hinweis:_* Wähle einen Status, bei dem durch den Statuswechsel keine Ereignisaktion an Zalando ausgelöst wird. Aufträge, die vor dem Import der Reservierung von Käufer:innen storniert werden, werden nicht importiert.
 
 | *plentymarkets Retourengrund verknüpfen mit*
@@ -292,14 +295,14 @@ Kategorien verknüpfen:
 :referrer: Zalando
 :referrer-option: pass:quotes[Option *Zalando*]
 
-include::_textblocks/instructions/auftragsherkunft-aktivieren.adoc[]
+include::partial$auftragsherkunft-aktivieren.adoc[]
 
 [#350]
 == Verkaufspreis festlegen
 
 :referrer-price: Zalando
 
-include::_textblocks/instructions/verkaufspreis-festlegen.adoc[]
+include::partial$verkaufspreis-festlegen.adoc[]
 
 [#300]
 == Variantenverfügbarkeit einstellen
@@ -319,14 +322,14 @@ include::partial$variantenverfuegbarkeit.adoc[]
 :referrer-id: 118
 :sku-others:
 
-include::_textblocks/instructions/sku-manuell.adoc[]
+include::partial$sku-manuell.adoc[]
 
 // Marktplatzkonto nicht erforderlich!
 
 [#500]
 == Silhouetten in Merkmale konvertieren
 
-Zalando gruppiert Produkte in sogenannte "Silhouetten". Zalando nennt diese Silhouetten inzwischen auch "Artikeltypen" oder "article types". Beispiele für Silhouetten sind "Röcke", "Kleider", "Hosen". Im Menü *Einrichtung » Märkte » Zalando » Einstellungen » Tab: Silhouetten* konvertierst du Zalando-Silhouetten in Artikelmerkmale. Silhouetten werden bei der Ersteinrichtung von Zalando in plentymarkets importiert. Wenn Zalando neue Silhouetten veröffentlicht, aktualisiert plentymarkets diese Silhouetten am darauffolgenden Mittwoch. Danach kannst du neue Silhouetten bei Bedarf in Merkmale konvertieren.
+Zalando gruppiert Produkte in "Silhouetten". Zalando nennt diese Silhouetten inzwischen auch "Artikeltypen" oder "article types". Beispiele für Silhouetten sind "Röcke", "Kleider", "Hosen". Im Menü *Einrichtung » Märkte » Zalando » Einstellungen » Tab: Silhouetten* konvertierst du Zalando-Silhouetten in Artikelmerkmale. Silhouetten werden bei der Ersteinrichtung von Zalando in plentymarkets importiert. Wenn Zalando neue Silhouetten veröffentlicht, aktualisiert plentymarkets diese Silhouetten am darauffolgenden Mittwoch. Danach kannst du neue Silhouetten bei Bedarf in Merkmale konvertieren.
 
 [.instruction]
 Silhouetten in Merkmale konvertieren:
@@ -367,7 +370,7 @@ Zalando-Artikelmerkmale exportieren:
 . Klicke auf *Zalando Artikel-Merkmale exportieren*. +
 → Eine Datei mit Informationen zu den Zalando-Merkmalen wird exportiert.
 . Speichere die Datei auf deinem Rechner.
-*_Tipp:_* <<#zalando-merkmale>> erläutert die Spalten der Datei. Weitere Informationen zu Merkmalen findest du auf der Handbuchseite <<artikel/einstellungen/eigenschaften#100, Merkmale und Eigenschaften>>.
+*_Tipp:_* <<#zalando-merkmale>> erläutert die Spalten der Datei. Weitere Informationen zu Merkmalen findest du auf der Handbuchseite xref:artikel:eigenschaften.adoc#100[Merkmale und Eigenschaften].
 
 [[zalando-merkmale]]
 .Zalando-Merkmale
@@ -399,7 +402,7 @@ a|
 *_Hinweis:_* Merkmale können auch in Abhängigkeit bereits gewählter Merkmale den Wert *1* erhalten. Beachte hierzu die von Zalando bereitgestellte Dokumentation.
 
 | *Sprache*
-| Die <<daten/interne-IDs#10, Sprache>> des Merkmals. Aktuell ist nur die deutsche Sprache verfügbar.
+| Die xref:daten:interne-IDs.adoc#10[Sprache] des Merkmals. Aktuell ist nur die deutsche Sprache verfügbar.
 |====
 --
 
@@ -412,7 +415,7 @@ Merkmal mit Artikel verknüpfen:
 . Aktiviere im Bereich *Weitere Merkmale aktivieren* das Merkmal.
 . Speichere (icon:save[set=plenty]) die Einstellungen. +
 → Die Merkmale werden im Bereich *Merkmale* angezeigt.
-. *_Optional:_* Nimm weitere Einstellungen vor. Beachte dazu die Erläuterungen zu den <<artikel/artikel-verwalten#80, Merkmalen>>.
+. *_Optional:_* Nimm weitere Einstellungen vor. Beachte dazu die Erläuterungen zu den xref:artikel:artikel-verwalten.adoc#80[Merkmalen].
 . Speichere (icon:save[set=plenty]) die Einstellungen.
 
 [#700]
@@ -440,7 +443,7 @@ NOTE: Pro Attribut kann nur ein Größenregister oder ein Längenregister verkn�
 :select-attribute-values:
 :attribute-example: pass:quotes[*_Beispiel:_* Wähle für die Farbe Lila aus der ersten Dropdown-Liste *dark purple* und aus der zweiten Dropdown-Liste *Lila*.]
 
-include::_textblocks/instructions/link-attributes.adoc[]
+include::partial$link-attributes.adoc[]
 
 [#800]
 == Zahlungsart aktivieren
@@ -538,13 +541,13 @@ Ein Auftrag muss folgende Bedingungen erfüllen, damit eine Versandbestätigung 
 --
 Du hast verschiedene Möglichkeiten, die Tracking-ID am Auftrag zu speichern:
 
-* <<fulfillment/versand-center#retourenetikett-hauptauftrag-abrufen, Ein Retourenetikett über Versandcenter erzeugen.>>
-* <<automatisierung/prozesse/aktionen#380, Ein Retourenetikett per Prozess-Aktion erzeugen.>>
+* xref:fulfillment:versand-center.adoc#retourenetikett-hauptauftrag-abrufen[Ein Retourenetikett über Versandcenter erzeugen.]
+* xref:automatisierung:aktionen.adoc#380[Ein Retourenetikett per Prozess-Aktion erzeugen.]
 * link:https://developers.plentymarkets.com/rest-doc#/Returns/put_rest_orders__orderId__shipping_returns_assign_label__returnsId_[Das Retourenetikett per REST hinzufügen.^]{nbsp}icon:external-link[]
 * link:https://developers.plentymarkets.com/rest-doc#/Order/put_rest_orders__orderId__shipping_packages__orderShippingPackageId_[Die Tracking-ID der Retoure per REST zu einem Paket am Auftrag hinzufügen.^]{nbsp}icon:external-link[]
 --
 
-Richte eine <<automatisierung/ereignisaktionen#, Ereignisaktion>> ein, um Versandbestätigungen automatisch an Zalando zu senden, nachdem ein Warenausgang gebucht wurde.
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Versandbestätigungen automatisch an Zalando zu senden, nachdem ein Warenausgang gebucht wurde.
 
 :table-event-procedure: <<#ereignisaktion-versandbestätigung-zalando>>
 
@@ -577,7 +580,7 @@ include::_includes:page$EA.adoc[]
 [#1300]
 === Stornierungen automatisch senden (zDirect)
 
-Richte eine <<automatisierung/ereignisaktionen#, Ereignisaktion>> ein, um Zalando automatisch über Stornierungen zu informieren. Beachte, dass als versendet markierte Aufträge nicht mehr storniert werden können.
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Zalando automatisch über Stornierungen zu informieren. Beachte, dass als versendet markierte Aufträge nicht mehr storniert werden können.
 
 :table-event-procedure: <<#ereignisaktion-stornierungen-zalando>>
 
@@ -610,7 +613,7 @@ include::_includes:page$EA.adoc[]
 [#1600]
 === Retouren automatisch senden (zDirect)
 
-Richte eine <<automatisierung/ereignisaktionen#, Ereignisaktion>> ein, um Zalando automatisch über Retouren zu informieren. Beachte, dass der Auftrag bereits als versendet markiert sein muss.
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Zalando automatisch über Retouren zu informieren. Beachte, dass der Auftrag bereits als versendet markiert sein muss.
 
 IMPORTANT: Retourengründe werden nur übermittelt, wenn die Ereignisaktion in Kombination mit einem Retourenauftrag verwendet wird und <<#1400, im Assistenten die Retourengründe zugeordnet wurden>>.
 
