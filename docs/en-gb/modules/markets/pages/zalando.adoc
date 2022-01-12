@@ -1,7 +1,6 @@
 = Zalando
 :lang: en
-include::{includedir}/_header.adoc[]
-:author: team-multi-channel
+:author: team-plenty-channel
 :keywords: Zalando, Zalando, zalando.de, zalando.de, salando, zalando.com
 :description: Multi-Channel in plentymarkets: Set up the interface to the market Zalando in your plentymarkets system.
 :position: 250
@@ -118,7 +117,7 @@ Use the assistant *Account settings - Zalando* in the *Setup » Assistants » Om
 :assistant-name: Account settings - Zalando
 :number-of-boxes: info boxes
 
-include::_textblocks/instructions/assistant-basic-instructions.adoc[]
+include::partial$assistant-basic-instructions.adoc[]
 
 [.collapseBox]
 .Step *Orders*
@@ -143,10 +142,13 @@ a| Select if real or test data is to be imported.
 |Select a client (store). Zalando orders will be assigned to this client.
 
 | *Do you also want to import reservations?*
-|tems are considered reserved if a customer has placed an order which has either not been paid for or has not been released for shipping by Zalando.
+|Items are considered reserved if a customer has placed an order which has either not been paid for or has not been released for shipping by Zalando. +
+If this option is activated, reservations will be imported into plentymarkets with the status *[3] Waiting for payment*. +
+If Zalando confirms the payment of the order and it changes to the status *approved* on Zalando, the order changes to status *[5] Cleared for shipping* in plentymarkets. As soon as an order is moved into status *[5]*, it can be shipped. +
+*_Note:_* Orders can only be shipped in status *[5] Cleared for shipping*. An order which is still in status *[3] Waiting for payment* must not be shipped.
 
 |*What order status do you want to assign to reservations?*
-|Decide which status is to be assigned to orders when a reservation was imported but the order was then cancelled by the customer or Zalando. +
+|Reservations are imported with status *[3] Waiting for payment* by default and have to be moved into another status *[8.X]* after they were cancelled by the customer or by Zalando. In this step, you decide which status cancelled reservations should be moved to. +
 *_Note:_* Select a status that does not trigger an event procedure to Zalando as a result of the status change. Any orders that customers cancel before the import of reservations is started are not imported.
 
 | *Map plentymarkets reason for return with*
@@ -293,14 +295,14 @@ Linking categories:
 :referrer: Zalando
 :referrer-option: pass:quotes[option *Zalando*]
 
-include::_textblocks/instructions/activate-referrer.adoc[]
+include::partial$activate-referrer.adoc[]
 
 [#350]
 == Defining a sales price
 
 :referrer-price: Zalando
 
-include::_textblocks/instructions/define-sales-price.adoc[]
+include::partial$define-sales-price.adoc[]
 
 [#300]
 == Setting the variation availability
@@ -309,7 +311,7 @@ include::_textblocks/instructions/define-sales-price.adoc[]
 :option-availability: Zalando
 :web-api:
 
-include::_textblocks/instructions/variation-availability.adoc[]
+include::partial$variation-availability.adoc[]
 
 // Web API required!
 
@@ -320,7 +322,7 @@ include::_textblocks/instructions/variation-availability.adoc[]
 :referrer-id: 118
 :sku-others:
 
-include::_textblocks/instructions/sku-manually.adoc[]
+include::partial$sku-manually.adoc[]
 
 // Marketplace account not required!
 
@@ -358,7 +360,7 @@ Link at least the following mandatory characteristics to export your variations 
 [.collapseBox]
 .*_Tip:_* Exporting a file with Zalando item characteristics
 --
-Several hundred characteristics are created in plentymarkets when you convert the Zalando silhouettes to characteristics. To make it easier to work with these characteristics, you can export the characteristics to a file. This gives you quick access to the IDs of your Zalando characteristics. This gives you easy access to the IDs of the Zalando characteristics. For example, this will help you to link the characteristics to your items <<data/importing-data/elasticsync-best-practices/best-practices-elasticsync-property-links#import_property_links, using the import tool>>.
+Several hundred characteristics are created in plentymarkets when you convert the Zalando silhouettes to characteristics. To make it easier to work with these characteristics, you can export the characteristics to a file. This gives you quick access to the IDs of your Zalando characteristics. This gives you easy access to the IDs of the Zalando characteristics. For example, this will help you to link the characteristics to your items xref:data:best-practices-elasticsync-property-links.adoc#import_property_links[using the import tool].
 
 [.instruction]
 Exporting Zalando item characteristics:
@@ -368,7 +370,7 @@ Exporting Zalando item characteristics:
 . Click on *Export Zalando item characteristics*. +
 → A file that contains the Zalando characteristics is exported.
 . Save the file on your computer.
-*_Tip:_* <<#zalando-characteristics>> explains the file’s columns. For further information on characteristics, refer to the <<item/settings/properties#100, Characteristics and properties>> page.
+*_Tip:_* <<#zalando-characteristics>> explains the file’s columns. For further information on characteristics, refer to the xref:item:properties.adoc#100[Characteristics and properties] page.
 
 [[zalando-characteristics]]
 .Zalando characteristics
@@ -400,7 +402,7 @@ a|
 *_Note:_* Characteristics may also contain the value *1* because links to other selected characteristics exist. Observe the documentation provided by Zalando.
 
 | *Language*
-| The <<data/internal-IDs#10, language>> of the characteristic. Currently, only German is available.
+| The xref:data:internal-IDs.adoc#10[language] of the characteristic. Currently, only German is available.
 |====
 --
 
@@ -413,7 +415,7 @@ Linking a characteristic to an item:
 . Activate the characteristic in the *Activate further characteristics* area.
 . Save (icon:save[set=plenty]) the settings. +
 → The characteristics are displayed in the *Characteristics* area.
-. *_Optional:_* Carry out additional settings. Pay attention to the explanations regarding <<item/managing-items#80, characteristics>>.
+. *_Optional:_* Carry out additional settings. Pay attention to the explanations regarding xref:item:managing-items.adoc#80[characteristics].
 . Save (icon:save[set=plenty]) the settings.
 
 [#700]
@@ -441,7 +443,7 @@ NOTE: You can only link one size register or one length register to each attribu
 :select-attribute-values:
 :attribute-example: pass:quotes[*_Example:_* For the colour Purple, from the first drop-down list select the option *dark purple* and from the second drop-down list select the option *Purple*.]
 
-include::_textblocks/instructions/link-attributes.adoc[]
+include::partial$link-attributes.adoc[]
 
 [#800]
 == Activating the payment method
@@ -449,7 +451,7 @@ include::_textblocks/instructions/link-attributes.adoc[]
 :market: Zalando
 :payment-method: Zalando Payment
 
-include::_textblocks/instructions/activate-payment-method.adoc[]
+include::partial$activate-payment-method.adoc[]
 
 [#1100]
 == _Check list_ for exporting variations
@@ -539,13 +541,13 @@ A shipping confirmation can only be sent if an order meets the following conditi
 --
 You can save the tracking ID in several different ways:
 
-* <<fulfilment/shipping-centre#retrieve-return-label-main-order, Create a return label via the shipping centre.>>
-* <<automation/processes/procedures#380, Create a return label with a process procedure.>>
+* xref:fulfilment:shipping-centre.adoc#retrieve-return-label-main-order[Create a return label via the shipping centre.]
+* xref:automation:procedures.adoc#380[Create a return label with a process procedure.]
 * link:https://developers.plentymarkets.com/rest-doc#/Returns/put_rest_orders__orderId__shipping_returns_assign_label__returnsId_[Add the return label via REST.^]{nbsp}icon:external-link[]
 * link:https://developers.plentymarkets.com/rest-doc#/Order/put_rest_orders__orderId__shipping_packages__orderShippingPackageId_[Add the tracking ID of the return to a package at the order via REST.^]{nbsp}icon:external-link[]
 --
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically send shipping confirmations to Zalando when the outgoing items have been booked.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send shipping confirmations to Zalando when the outgoing items have been booked.
 
 :table-event-procedure: <<#event-procedure-shipping-confirmation-zalando>>
 
@@ -578,7 +580,7 @@ include::_includes:page$EA.adoc[]
 [#1300]
 === Automatically sending cancellations (zDirect)
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically inform Zalando of cancellations. Note that orders marked as shipped can no longer be cancelled.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform Zalando of cancellations. Note that orders marked as shipped can no longer be cancelled.
 
 :table-event-procedure: <<#event-procedure-cancellations-zalando>>
 
@@ -611,7 +613,7 @@ include::_includes:page$EA.adoc[]
 [#1600]
 === Automatically sending returns (zDirect)
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically inform Zalando about returns. Note that the order must be flagged as shipped.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform Zalando about returns. Note that the order must be flagged as shipped.
 
 IMPORTANT: Return reasons will only be transmitted if the event procedure is used in combination with a return order and if <<#1400, the return reasons were mapped in the assistant>>.
 

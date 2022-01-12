@@ -1,12 +1,11 @@
 = OTTO Market
 :lang: en
-include::{includedir}/_header.adoc[]
 :keywords: OTTO Market, OTTO Market, OTTO, OTTO, ottomarket, otto.market
 :description: Multi-Channel in plentymarkets: Set up the interface to OTTO Market in your plentymarkets system.
 :position: 150
 :url: markets/otto/otto-market
 :id: SMKVRT7
-:author: team-multi-channel
+:author: team-plenty-channel
 :ea-queue:
 
 //tag::otto-market-page[]
@@ -41,7 +40,7 @@ If new stock is booked for such a variation, the variation is reactivated during
 | once per hour
 
 | Update of category groups/catalogue templates
-| twice a week
+| daily
 
 | Update of the brands list
 | every three hours
@@ -56,7 +55,7 @@ Use the assistant *Base settings - OTTO Market* in the *Setup » Assistants » O
 :assistant-name: Base settings - OTTO Market
 :number-of-boxes: info box
 
-include::_textblocks/instructions/assistant-basic-instructions.adoc[]
+include::partial$assistant-basic-instructions.adoc[]
 
 [.collapseBox]
 .Options in the assistant
@@ -146,7 +145,7 @@ a| Select the shipping service provider that is to be used if return tracking nu
 :referrer: OTTO Market
 :referrer-option: pass:quotes[option *OTTO Market*]
 
-include::_textblocks/instructions/activate-referrer.adoc[]
+include::partial$activate-referrer.adoc[]
 
 [#300]
 == Setting the variation availability
@@ -154,7 +153,7 @@ include::_textblocks/instructions/activate-referrer.adoc[]
 :market-availability: OTTO Market
 :option-availability: OTTO Market
 
-include::_textblocks/instructions/variation-availability.adoc[]
+include::partial$variation-availability.adoc[]
 
 // Web API NOT required!
 
@@ -179,7 +178,7 @@ Setting the availability for images:
 
 :referrer-price: OTTO Market
 
-include::_textblocks/instructions/define-sales-price.adoc[]
+include::partial$define-sales-price.adoc[]
 
 
 [#425]
@@ -188,14 +187,14 @@ include::_textblocks/instructions/define-sales-price.adoc[]
 :market: OTTO Market
 :payment-method: Otto Payment
 
-include::_textblocks/instructions/activate-payment-method.adoc[]
+include::partial$activate-payment-method.adoc[]
 
 [#450]
 == Setting up the item export
 
 Item data is exported to OTTO Market via catalogues. Use the assistant *Create catalogues - OTTO Market* to create a marketplace format for every OTTO category group.
 
-* Is this your first time working with catalogues? Then read up on the <<en/data/exporting-data/managing-catalogues, basic concept of the plentymarkets catalogues first>>. For information about the plentymarkets data fields that can be linked, refer to the <<data/exporting-data/managing-catalogues#_mapping_data_sources, Mapping data fields>> chapter.
+include::partial$catalogue-new-to-text.adoc[]
 
 [IMPORTANT]
 .Items cannot be deleted at OTTO Market
@@ -211,7 +210,7 @@ An item cannot be deleted at OTTO Market, neither by plentymarkets nor by OTTO. 
 :catalogue-note: You need a separate catalogue for each OTTO category group.
 :mapping-fields: more
 
-include::_textblocks/catalogues/instructions/catalogue-assistant-config.adoc[]
+include::partial$catalogue-assistant-config.adoc[]
 
 [.collapseBox]
 .Step *Name and category group*
@@ -247,7 +246,7 @@ In this step of the assistant, you decide which variation data saved in plentyma
 *_Note:_* The mappings you create will not be checked in terms of logic. As such, check your mappings carefully before starting the export.
 
 '''
-*Creating a property* = Creates a property and maps this property to the marketplace data field. This automatically created property will be saved in the <<item/settings/properties#, Setup » Settings » Properties » Configuration>> menu.
+*Creating a property* = Creates a property and maps this property to the marketplace data field. This automatically created property will be saved in the xref:item:properties.adoc#[Setup » Settings » Properties » Configuration] menu.
 
 The property is created with the following settings:
 
@@ -258,7 +257,7 @@ The property is created with the following settings:
 * Group = OTTO Market
 
 '''
-*Creating a sales price* = Creates a sales price and maps this sales price to the marketplace data field. You can check and edit this sales price in the <<en/item/settings/prices#400, Setup » Item » Sales prices>> menu.
+*Creating a sales price* = Creates a sales price and maps this sales price to the marketplace data field. You can check and edit this sales price in the xref:en:prices.adoc#400[Setup » Item » Sales prices] menu.
 
 The sales price is created with the following settings:
 
@@ -274,7 +273,7 @@ The sales price is created with the following settings:
 * Country = Germany
 
 '''
-*Create barcode* = Creates a barcode *OTTO Market* and maps this barcode to the data field. If a barcode with the name *OTTO Market* already exists in the system, that barcode is mapped instead. You can check and edit this barcode in the <<en/item/settings/barcodes#100, Setup » Item » Barcodes>> menu.
+*Create barcode* = Creates a barcode *OTTO Market* and maps this barcode to the data field. If a barcode with the name *OTTO Market* already exists in the system, that barcode is mapped instead. You can check and edit this barcode in the xref:en:barcodes.adoc#100[Setup » Item » Barcodes] menu.
 --
 
 [#600]
@@ -285,7 +284,7 @@ You have already mapped important mandatory fields for the OTTO category group i
 TIP: Map at least the marketplace data fields *Brand*, *Delivery type* and *Category* with plentymarkets data fields.
 
 :catalogue-assistant:
-include::_textblocks/catalogues/instructions/catalogue-mapping.adoc[]
+include::partial$catalogue-mapping.adoc[]
 
 
 [#905]
@@ -432,6 +431,18 @@ The workflow is the same in both cases:
 
 |====
 
+[#weee-take-back]
+==== Mapping attributes for electrical devices and WEEE take back
+
+As of 1 January 2022, sellers will be legally obliged to offer collection of old electrical devices if customers buy a new electrical device.
+
+For OTTO market, you can use the attributes *Geräteart laut ElektroG* (type of electrical device) and *WEEE-Reg.-Nr. DE* to indicate whether it is an electrical device or whether WEEE take back is possible. Match these attributes with plentymarkets data fields in the *Category group related attributes* section of the corresponding OTTO market catalogue.
+
+[discrete]
+===== Information about WEEE take back in the order
+
+If the order contains an electrical device and customers request WEEE take back, an *OrderItemProperty* with the ID 92 is added to the corresponding order item and the text "[inkl. Altgerätemitnahme/incl. WEEE take back]" is added to the item name.
+
 [#602]
 === _Example:_ Mapping the data field "Stock"
 
@@ -458,7 +469,7 @@ Mapping the data field "Stock":
 
 :property-group: OTTO Market
 
-include::_textblocks/catalogues/instructions/catalogue-assistant-link-variations.adoc[]
+include::partial$catalogue-assistant-link-variations.adoc[]
 
 [#475]
 == Linking variations with OTTO category groups
@@ -486,33 +497,33 @@ Linking a variation with an OTTO category group:
 :interval: once a day during the night
 :market: OTTO Market
 
-include::_textblocks/catalogues/instructions/catalogue-activation.adoc[]
+include::partial$catalogue-activation.adoc[]
 
 [#2200]
 == _Check list:_ Requirements for exporting variations
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-intro]
+include::partial$checklist-variations.adoc[tag=checklist-intro]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-variation-active]
+include::partial$checklist-variations.adoc[tag=checklist-variation-active]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-availability-active]
+include::partial$checklist-variations.adoc[tag=checklist-availability-active]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-net-stock]
+include::partial$checklist-variations.adoc[tag=checklist-net-stock]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-sales-price]
+include::partial$checklist-variations.adoc[tag=checklist-sales-price]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-categories-otto]
+include::partial$checklist-variations.adoc[tag=checklist-categories-otto]
 
 :anchor-catalogue-mapping: #600
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-catalogue-mapped-multi]
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-mapped-multi]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-catalogue-active]
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-active]
 
 :checklist-log-integration: pass:quotes[*Otto itemexport*]
 :checklist-log-reference: pass:quotes[*Plenty\\Modules\\Otto\\Item\\Services\\ItemExportService*]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-check-log]
+include::partial$checklist-variations.adoc[tag=checklist-check-log]
 
 [#1050]
 == OTTO Market order management
@@ -552,7 +563,7 @@ If customers paid an OTTO Market order per bank transfer, it might take longer t
 [#500]
 == Automating order processing
 
-Set up <<automation/event-procedures#, event procedures>> to automatically inform OTTO Market about order status changes. The following event procedures can be set up for OTTO Market:
+Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform OTTO Market about order status changes. The following event procedures can be set up for OTTO Market:
 
 * Generate return label (<<#550, How?>>)
 * Send shipping confirmation to OTTO (<<#700, How?>>)
@@ -644,12 +655,12 @@ include::_includes:page$EA.adoc[]
 [#550-3]
 ==== Generating Hermes return label
 
-With Hermes, return labels cannot be created via event procedures. Before the shipping label for OTTO Market is created, the return label for Hermes must be created via the <<fulfilment/shipping-centre#, shipping centre>> or via a <<automation/processes/procedures#, procedure>> in a process. For further information, refer to the Hermes plugin link:https://marketplace.plentymarkets.com/en/plugins/integration/hermesshippinginterface_5437[user guide^].
+With Hermes, return labels cannot be created via event procedures. Before the shipping label for OTTO Market is created, the return label for Hermes must be created via the xref:fulfilment:procedures.adoc#[procedure] in a process. For further information, refer to the Hermes plugin link:https://marketplace.plentymarkets.com/en/plugins/integration/hermesshippinginterface_5437[user guide^].
 
 [#700]
 === Sending shipping confirmations to OTTO
 
-Set up an <<automation/event-procedures#, event procedure>> to inform OTTO Market that an item has been shipped.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to inform OTTO Market that an item has been shipped.
 
 [TIP]
 .Save sender address
@@ -688,7 +699,7 @@ include::_includes:page$EA.adoc[]
 [#800]
 === Sending order cancellations to OTTO
 
-Set up an <<automation/event-procedures#, event procedure>> to inform OTTO Market about the cancellation of orders. It might be required to cancel orders because of different reasons. For example, if the customer cancels an order, select *Status [8.1] Cancelled by customer*.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to inform OTTO Market about the cancellation of orders. It might be required to cancel orders because of different reasons. For example, if the customer cancels an order, select *Status [8.1] Cancelled by customer*.
 
 :table-event-procedure: <<#order-cancellation-otto>>
 
@@ -721,7 +732,7 @@ include::_includes:page$EA.adoc[]
 [#900]
 === Accepting OTTO Market returns
 
-Set up an <<automation/event-procedures#, event procedure>> to notify OTTO Market when you accept returns.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to notify OTTO Market when you accept returns.
 
 *_Workflow of the return process:_*
 
@@ -766,7 +777,7 @@ a| *_Notes:_*
 [#1000]
 === Rejecting OTTO Market returns
 
-Set up an <<automation/event-procedures#, event procedure>> to notify OTTO Market when you reject returns.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to notify OTTO Market when you reject returns.
 
 :table-event-procedure: <<#return-rejection-otto>>
 
@@ -809,6 +820,6 @@ include::partial$viewing_logs.adoc[tag=data-log-config]
 [#1300]
 == FAQ
 
-include::_textblocks/otto-market/otto-faq.adoc[]
+include::partial$otto-faq.adoc[]
 
 //end::otto-market-page[]

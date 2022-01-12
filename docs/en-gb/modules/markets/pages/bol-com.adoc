@@ -1,7 +1,6 @@
 = bol.com
 :lang: en
-include::{includedir}/_header.adoc[]
-:author: team-multi-channel
+:author: team-plenty-channel
 :keywords: bol.com, bol.com, bol, bol, BolItemExport, setting up bol.com, bol.com, bol, Netherlands, Holland, bol.nl, bol.com setup, set up bol.com
 :description: Multi-Channel in plentymarkets: Set up the interface to the market bol.com in your plentymarkets system.
 :position: 30
@@ -78,7 +77,7 @@ The basic settings for bol.com are carried out in the *Setup » Assistants » Om
 :assistant-name: Base settings - bol.com
 :number-of-boxes: info box
 
-include::_textblocks/instructions/assistant-basic-instructions.adoc[]
+include::partial$assistant-basic-instructions.adoc[]
 
 [.collapseBox]
 .Options in the assistant
@@ -178,14 +177,14 @@ a|Select the stock quantity for the offer export. Select one of the following op
 :referrer: bol.com
 :referrer-option: pass:quotes[option *bol.com*]
 
-include::_textblocks/instructions/activate-referrer.adoc[]
+include::partial$activate-referrer.adoc[]
 
 [#500]
 === Selecting the sales price
 
 :referrer-price: bol.com
 
-include::_textblocks/instructions/define-sales-price.adoc[]
+include::partial$define-sales-price.adoc[]
 
 [#650]
 === Activating the payment method
@@ -193,14 +192,43 @@ include::_textblocks/instructions/define-sales-price.adoc[]
 :market: bol.com
 :payment-method: Bol.com
 
-include::_textblocks/instructions/activate-payment-method.adoc[]
+include::partial$activate-payment-method.adoc[]
+
+[#shipping-settings-bol-com]
+=== Preparing shipping settings
+
+Next, carry out settings for shipping. For bol.com, you have to save the shipping provider names in Dutch and activate the order referrer *bol.com* in the shipping profiles that you want to use for bol.com.
+
+[#shipping-service-providers-bol-com]
+==== Saving names for shipping service providers in Dutch
+
+For bol.com, you have to enter an link:https://api.bol.com/retailer/public/Retailer-API/v6/functional/orders-shipments.html#_transporters[API transporter code^]{nbsp}icon:external-link[] as name for the xref:en:preparing-the-shipment.adoc#800[shipping service provider]. In addition, the name of the shipping service provider has to be saved in Dutch. These settings are carried out in the *Setup » Orders » Shipping » Settings* menu.
+
+[.instruction]
+Saving names for shipping service providers:
+
+. Go to *Setup » Orders » Shipping » Settings*.
+. Click on the *Shipping service provider* tab.
+. In the *Filters* section, select the language *nl* from the *Language* drop-down list.
+. Click on *Search* (icon:search[role="blue"]). +
+→ The shipping service providers are displayed.
+. In the input field *Name (nl)*, enter the *API transporter code* for every shipping service provider that you want to use for bol.com. +
+*_Tip:_* The *API transporter codes* for the shipping service providers can be found in the link:https://api.bol.com/retailer/public/Retailer-API/v6/functional/orders-shipments.html#_transporters[developer documentation for bol.com^]{nbsp}icon:external-link[].
+. Save (icon:save[set=plenty]) the settings. +
+→ The Dutch names for bol.com shipping service providers were saved.
 
 [#550]
-=== Activating the referrer in shipping profiles
+==== Activating the referrer in shipping profiles
 
 :referrer: bol.com
 
-include::_textblocks/instructions/shipping-profile-activate.adoc[]
+include::partial$shipping-profile-activate.adoc[]
+
+[TIP]
+.Saving shipping service provider names in Dutch
+====
+Make sure that the <<#shipping-service-providers-bol-com, names for the shipping service providers>> in the shipping profiles for bol.com are saved in Dutch with the link:https://api.bol.com/retailer/public/Retailer-API/v6/functional/orders-shipments.html#_transporters[API transporter codes^]{nbsp}icon:external-link[] required by bol.com.
+====
 
 [#400]
 === Linking categories
@@ -226,7 +254,7 @@ Linking categories:
 
 Item data is exported to bol.com using catalogues. Use the assistant *Create catalogues - bol.com* to create a marketplace format for every bol.com category.
 
-* Is this your first time working with catalogues? Then read up on the <<en/data/exporting-data/managing-catalogues, basic concept of the plentymarkets catalogues first>>. For information about the plentymarkets data fields that can be linked, refer to the <<data/exporting-data/managing-catalogues#_mapping_data_sources, Mapping data fields>> chapter.
+include::partial$catalogue-new-to-text.adoc[]
 
 [#create-catalogue]
 === Creating a catalogue in the assistant
@@ -239,7 +267,7 @@ You need to create a separate catalogue for each combination of a bol.com catego
 :catalogue-note: You need a separate catalogue for each combination of bol.com category and language.
 :mapping-fields: the marketplace data fields with plentymarkets data fields
 
-include::_textblocks/catalogues/instructions/catalogue-assistant-config.adoc[]
+include::partial$catalogue-assistant-config.adoc[]
 
 [.collapseBox]
 .Settings in the assistant
@@ -267,10 +295,10 @@ After you have created a catalogue, map the market's data fields to item data sa
 [TIP]
 .Using properties
 ====
-Use <<item/managing-items#500, properties>> to export values for marketplace data fields that have no corresponding field in plentymarkets.
+Use xref:item:managing-items.adoc#500[properties] to export values for marketplace data fields that have no corresponding field in plentymarkets.
 ====
 
-include::_textblocks/catalogues/instructions/catalogue-mapping.adoc[]
+include::partial$catalogue-mapping.adoc[]
 
 ////
 [#special-mappings]
@@ -390,7 +418,7 @@ Linking variation to bol.com category:
 :market-availability: bol.com
 :option-availability: bol.com
 
-include::_textblocks/instructions/variation-availability.adoc[]
+include::partial$variation-availability.adoc[]
 
 // Web API NOT required!
 
@@ -421,7 +449,7 @@ To sell a variation with Fulfilment by bol.com (FBB or LVB), you need to activat
 [#automate-orders]
 == Automating order processing
 
-Set up <<automation/event-procedures#, event procedures>> to automatically inform bol.com about order status changes. The following event procedures can be set up for bol.com:
+Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform bol.com about order status changes. The following event procedures can be set up for bol.com:
 
 * Send shipping confirmation to bol.com (<<#700, How?>>)
 * Send order cancellation to bol.com (<<#900, How?>>)
@@ -431,7 +459,7 @@ Set up <<automation/event-procedures#, event procedures>> to automatically infor
 [#700]
 === Automatically sending shipping confirmations
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically send shipping confirmations to bol.com when the outgoing items have been booked.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send shipping confirmations to bol.com when the outgoing items have been booked.
 
 :table-event-procedure: <<#event-procedure-shipping-confirmation-bol>>
 
@@ -463,7 +491,7 @@ include::_includes:page$EA.adoc[]
 [#900]
 === Automatically sending cancellations
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically inform bol.com of cancellations. Whenever you are dealing with cancellations, you need to send bol.com a reason for the cancellation. Open the *Setup » Orders » Status* menu and create additional order statuses as needed. The following cancellation reasons can be transferred to bol.com:
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform bol.com of cancellations. Whenever you are dealing with cancellations, you need to send bol.com a reason for the cancellation. Open the *Setup » Orders » Status* menu and create additional order statuses as needed. The following cancellation reasons can be transferred to bol.com:
 
 * *Out of stock*
 * *Cancellation requested by customer*
@@ -508,7 +536,7 @@ include::_includes:page$EA.adoc[]
 [#800]
 === Automatically sending the return status
 
-Set up an <<automation/event-procedures#, event procedure>> to automatically inform bol.com of the status of a return. bol.com requests the status of returns. The following return statuses can be sent to bol.com:
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform bol.com of the status of a return. bol.com requests the status of returns. The following return statuses can be sent to bol.com:
 
 * *Return received*
 * *Item will be exchanged*
@@ -549,7 +577,7 @@ include::_includes:page$EA.adoc[]
 [#810]
 === Sending information on direct returns to bol.com
 
-In addition, set up an <<automation/event-procedures#, event procedure>> to automatically inform bol.com about returns that customers sent back to you directly without registering the return with bol.com first. bol.com requests the status of returns. The following return statuses can be sent to bol.com:
+In addition, set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform bol.com about returns that customers sent back to you directly without registering the return with bol.com first. bol.com requests the status of returns. The following return statuses can be sent to bol.com:
 
 * Return received
 * Item will be exchanged
@@ -590,7 +618,7 @@ include::_includes:page$EA.adoc[]
 
 :interval: once a day during the night
 
-include::_textblocks/catalogues/instructions/catalogue-activation.adoc[]
+include::partial$catalogue-activation.adoc[]
 
 [#troubleshooting]
 == Troubleshooting
@@ -598,28 +626,28 @@ include::_textblocks/catalogues/instructions/catalogue-activation.adoc[]
 [#1200]
 === _Check list:_ Why is my variation not exported?
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-intro]
+include::partial$checklist-variations.adoc[tag=checklist-intro]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-variation-active]
+include::partial$checklist-variations.adoc[tag=checklist-variation-active]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-availability-active]
+include::partial$checklist-variations.adoc[tag=checklist-availability-active]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-net-stock]
+include::partial$checklist-variations.adoc[tag=checklist-net-stock]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-sales-price]
+include::partial$checklist-variations.adoc[tag=checklist-sales-price]
 
 :anchor-catalogue-mapping: #map-data-fields
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-catalogue-mapped-multi]
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-mapped-multi]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-categories-bol]
+include::partial$checklist-variations.adoc[tag=checklist-categories-bol]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-catalogue-active]
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-active]
 
 :checklist-log-integration: pass:quotes[*bol.com*]
 :checklist-log-reference: pass:quotes[*Plenty\\Modules\\bol.com\\Item\\Services\\ItemExportService*]
 
-include::_textblocks/instructions/checklist-variations.adoc[tag=checklist-check-log]
+include::partial$checklist-variations.adoc[tag=checklist-check-log]
 
 [#1000]
 === Viewing log entries

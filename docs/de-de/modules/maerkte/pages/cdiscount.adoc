@@ -1,6 +1,6 @@
 = Cdiscount
 :lang: de
-:author: team-multi-channel
+:author: team-plenty-channel
 :keywords: Cdiscount, Cdiscount, Cdisount, C discount, Cdicount, Cdiscaunt
 :description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz Cdiscount in deinem plentymarkets System ein.
 :position: 40
@@ -140,6 +140,35 @@ Die Anbindung des Marktplatzes stellt folgende automatisierten Funktionen bereit
 
 Beim stündlichen Auftragsimport werden zunächst keine Rechnungs- und Lieferdaten von Cdiscount übermittelt. Der Auftrag bleibt solange in Status [3]. Es kann bis zu 48 Stunden dauern, bis die Rechnungs- und Lieferdaten übermittelt werden, da Cdiscount in dieser Zeit eine Bonitätsprüfung für Endkund:innen durchführt.
 
+[#einzelartikel-variantenartikel]
+== Unterscheidung von Einzelartikeln und Variantenartikeln
+
+Auf Cdiscount können nur bestimmte Produkttypen, darunter zum Beispiel Kleidung, als Variantenartikel angeboten werden. Deswegen werden alle Varianten standardmäßig als Einzelartikel zu Cdiscount exportiert.
+
+Varianten können bei Cdiscount nur als Variantenartikel eingestellt werden, wenn die folgenden Einstellungen vorgenommen wurden:
+
+* Die Variante ist mit <<#600, Attributen>> für Kleidungsgröße oder Kleidungsfarbe verknüpft.
+* Der Artikel ist mit einem <<#700, Merkmal>> des Typs *Kein* mit der Cdiscount.com-Merkmal-Verknüpfung *Variantenartikel* verknüpft.
+
+Wenn du auf Cdiscount das gleiche Attribut für Einzelartikel und Varianten verwendest, kannst du mit einem Merkmal des Typs *Kein* mit der Cdiscount.com-Merkmal-Verknüpfung *kein Variantenartikel* den Artikel als Einzelartikel einstellen.
+
+[discrete]
+=== Produktnamen bei Einzelartikeln
+
+Bei Varianten, die auf Cdiscount als Einzelartikel eingestellt sind, werden Attribute an den Produktnamen angehängt. Die Attribute werden auf Cdiscount in eckigen Klammern hinter dem Produktnamen angezeigt. +
+Bei Varianten, die auf Cdiscount als Variantenartikel eingestellt sind, werden Attribute nicht an den Produktnamen angehängt.
+
+[[produktnamen-cdiscount]]
+.Beispiel für Produktnamen auf Cdiscount
+[cols="2,2,2"]
+|====
+| Name des Einzelartikels | Name des Attributs | Produktname auf Cdiscount
+
+| Damenfahrrad, 28 Zoll, Mountainbike
+| blau
+| Damenfahrrad, 28 Zoll, Mountainbike [blau]
+|====
+
 [#250]
 == Auftragsherkunft aktivieren
 
@@ -147,7 +176,7 @@ Beim stündlichen Auftragsimport werden zunächst keine Rechnungs- und Lieferdat
 :referrer: Cdiscount
 :referrer-option: pass:quotes[Option *Cdiscount*]
 
-include::_textblocks/instructions/auftragsherkunft-aktivieren.adoc[]
+include::partial$auftragsherkunft-aktivieren.adoc[]
 
 [#300]
 == Variantenverfügbarkeit einstellen
@@ -167,7 +196,7 @@ include::partial$variantenverfuegbarkeit.adoc[]
 :referrer-id: 143
 :sku-others:
 
-include::_textblocks/instructions/sku-manuell.adoc[]
+include::partial$sku-manuell.adoc[]
 
 // Marktplatzkonto nicht erforderlich!
 
@@ -176,9 +205,9 @@ include::_textblocks/instructions/sku-manuell.adoc[]
 
 :referrer-price: Cdiscount
 
-include::_textblocks/instructions/verkaufspreis-festlegen.adoc[]
+include::partial$verkaufspreis-festlegen.adoc[]
 
-<<artikel/einstellungen/preise#240, Verknüpfe>> den Verkaufspreis im Anschluss mit den gewünschten Varianten, falls noch nicht verknüpft.
+xref:artikel:preise.adoc#240[Verknüpfe] den Verkaufspreis im Anschluss mit den gewünschten Varianten, falls noch nicht verknüpft.
 
 [#450]
 == Barcode festlegen
@@ -192,7 +221,7 @@ Barcode für Cdiscount festlegen:
 . Aktiviere die Herkunft *Cdiscount*.
 . Speichere (icon:save[set=plenty]) die Einstellungen.
 
-<<artikel/einstellungen/barcodes#300, Verknüpfe>> den Barcode im Anschluss mit den gewünschten Varianten, falls noch nicht verknüpft.
+xref:artikel:barcodes.adoc#300[Verknüpfe] den Barcode im Anschluss mit den gewünschten Varianten, falls noch nicht verknüpft.
 
 [#500]
 == Kategorien verknüpfen
@@ -218,19 +247,21 @@ Kategorien verknüpfen:
 [#600]
 == Attribute verknüpfen
 
-Wenn du <<artikel/einstellungen/attribute#, Attribute>> im plentymarkets System erstellt hast, müssen diese Attribute mit Cdiscount verknüpft werden. Nachfolgend wird beschrieben, wie du das Attribut Farbe mit Cdiscount verknüpfst. Verknüpfe weitere Attribute auf die gleiche Weise.
+Wenn du xref:artikel:attribute.adoc#[Attribute] im plentymarkets System erstellt hast, müssen diese Attribute mit Cdiscount verknüpft werden. Nachfolgend wird beschrieben, wie du das Attribut Farbe mit Cdiscount verknüpfst. Verknüpfe weitere Attribute auf die gleiche Weise.
 
 :attribute-option: Cdiscount.com
 :attribute: Farbe
 :attribute-dropdown:
 :enter-attribute-values:
 
-include::_textblocks/instructions/link-attributes.adoc[]
+include::partial$link-attributes.adoc[]
+
+*_Hinweis:_* Attribute werden bei Varianten, die als Einzelartikel gelistet sind, an den Produktnamen auf Cdiscount angehängt. Weitere Informationen dazu findest du im Kapitel <<#einzelartikel-variantenartikel, Unterscheidung von Einzelartikeln und Variantenartikeln>>.
 
 [#700]
 == Merkmale erstellen
 
-Als nächstes erstellst du <<artikel/einstellungen/eigenschaften#100, Merkmale>> und verknüpfst die erstellten Merkmale mit den Cdiscount-Merkmalen. Beachte, dass deine Merkmale hierfür auf Französisch erstellt sein müssen.
+Als nächstes erstellst du xref:artikel:eigenschaften.adoc#100[Merkmale] und verknüpfst die erstellten Merkmale mit den Cdiscount-Merkmalen. Beachte, dass deine Merkmale hierfür auf Französisch erstellt sein müssen.
 
 [.instruction]
 Merkmal erstellen:
@@ -396,7 +427,7 @@ CSV-Export erstellen:
 . Öffne das Tab *Neuer Export*.
 . Wähle *Cdiscount.com* aus der Dropdown-Liste *Datenformat*.
 . Gib einen Namen für den Export ein.
-. Nimm die Einstellungen gemäß der Handbuchseite <<daten/daten-exportieren/elastischer-export#300, Elastischer Export>> vor.
+. Nimm die Einstellungen gemäß der Handbuchseite xref:daten:elastischer-export.adoc#300[Elastischer Export] vor.
 . Speichere (icon:save[set=plenty]) die Einstellungen. +
 → Der Export wird als Unterordner im Tab *Exporte* angezeigt und die URL wird erstellt.
 . Öffne das Tab *Exporte* und dort den Unterordner *Cdiscount.com*.
@@ -411,7 +442,15 @@ Wenn du deinen Artikelkatalog über eine CSV-Datei an Cdiscount übermittelst, m
 [#1200]
 == Retouren automatisch senden
 
-Richte eine <<automatisierung/ereignisaktionen#, Ereignisaktion>> ein, um Retouren automatisch an Cdiscount zu senden.
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Retouren automatisch an Cdiscount zu senden.
+
+[IMPORTANT]
+.Gutschriften bei Retouren immer für die Gesamtsumme einer Auftragsposition 
+====
+Wenn ein Cdiscount-Auftrag mehrere Auftragspositionen hat und Kund:innen nur eine Teilmenge einer Auftragsposition retournieren, wird bei Cdiscount immer der Betrag der Gesamtmenge dieser Auftragsposition erstattet. Dies ist aufgrund einer Limitierung bei Cdiscount nicht anders möglich. +
+*_Beispiel:_*
+Ein:e Kund:in bestellt zwei Pullover für je 30€ und eine Jacke für 50€ und retourniert einen der Pullover. Bei Cdiscount wird eine Gutschrift für die Gesamtmenge dieser Auftragsposition erstellt, also in diesem Fall für 60€.
+====
 
 :table-event-procedure: <<#ereignisaktion-retouren-cdiscount>>
 
@@ -443,7 +482,7 @@ include::_includes:page$EA.adoc[]
 [#1300]
 == Auftragsstatus automatisch aktualisieren
 
-Richte eine <<automatisierung/ereignisaktionen#, Ereignisaktion>> ein, um den Auftragsstatus bei Cdiscount automatisch zu aktualisieren, wenn bestimmte Ereignisse eintreten. Du hast die Möglichkeit, Aufträge bei Cdiscount per Ereignisaktion automatisch in die folgenden Status zu setzen:
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um den Auftragsstatus bei Cdiscount automatisch zu aktualisieren, wenn bestimmte Ereignisse eintreten. Du hast die Möglichkeit, Aufträge bei Cdiscount per Ereignisaktion automatisch in die folgenden Status zu setzen:
 
 * Vom Händler abgelehnt
 * Vom Händler versendet
