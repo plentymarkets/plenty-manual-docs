@@ -8,7 +8,7 @@ if [ -d gitRepo ]; then
   rm -rf gitRepo
 fi
 
-# git clone "https://github.com/plentymarkets/manual" gitRepo
+git clone "https://github.com/plentymarkets/manual" gitRepo
 
 if [ -d build ]; then
   rm -rf build
