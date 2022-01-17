@@ -270,10 +270,10 @@ echo '######################';
 echo '#   Global actions   #';
 echo '######################';
 # Update links
-find docs/ -name '*.adoc' -exec sed -i -E -e "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig" {} \;
+# find docs/ -name '*.adoc' -exec sed -i -E -e "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig" {} \;
 
 # Update tabs class
-find docs/ -name '*.adoc' -exec sed -i -r -e "s/\[\.tabs\]/\[tabs\]/ig" {} \;
+# find docs/ -name '*.adoc' -exec sed -i -r -e "s/\[\.tabs\]/\[tabs\]/ig" {} \;
 
 # Global actions for all files
 find docs/ -name '*.adoc' -exec sed -i -E -e "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig;s/\[\.tabs\]/\[tabs\]/ig" {} \;
