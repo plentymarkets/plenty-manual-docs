@@ -87,7 +87,6 @@ echo '######################';
 echo 'name: manual\ntitle: plentymarkets Handbuch\nversion: main\nnav:\n- modules/ROOT/nav.adoc' > docs/de-de/antora.yml
 
 
-find docs/de-de/ -name '*.adoc' -exec sed -i -e '/include::{includedir}\/_header.adoc\[\]/d' {} \;
 find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).html/include::example$\2.html/g' {} \;
 find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).txt/include::example$\2.txt/g' {} \;
 find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_includes(.*)\/(.*).adoc/include::_includes:page$\3.adoc/g' {} \;
@@ -143,9 +142,6 @@ for i in "${ARRAY[@]}";
 done
 
 # find docs/de-de/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
-
-# Delete backup files
-find docs/de-de/ -name '*.adoc-e' -delete
 
 #STARTING GENERATING EN DOCS#
 
@@ -215,7 +211,6 @@ echo '#  generate ANTORA   #';
 echo '######################';
 echo 'name: manual\ntitle: plentymarkets Handbuch\nversion: main\nnav:\n- modules/ROOT/nav.adoc' > docs/en-gb/antora.yml
 
-find docs/en-gb/ -name '*.adoc' -exec sed -i -e '/include::{includedir}\/_header.adoc\[\]/d' {} \;
 find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).html/include::example$\2.html/g' {} \;
 find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)\/(.*).txt/include::example$\2.txt/g' {} \;
 find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_includes(.*)\/(.*).adoc/include::_includes:page$\3.adoc/g' {} \;
@@ -271,14 +266,38 @@ done
 
 # find docs/en-gb/ -name '*.adoc' -exec sed -i -r -e 's/include::(.*)_textblocks(.*)\/(.*).adoc/include::.\/\3.adoc/g' {} \;
 
+echo '######################';
+echo '#   Global actions   #';
+echo '######################';
 # Update links
-echo '######################';
-echo '#   updating links   #';
-echo '######################';
-find docs/ -name '*.adoc' -exec sed -i -e -E "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig" {} \;
-find docs/ -name '*.adoc' -exec sed -i -e -r "s/\[\.tabs\]/\[tabs\]/ig" {} \;
+# find docs/ -name '*.adoc' -exec sed -i -E -e "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig" {} \;
+
+# Update tabs class
+# find docs/ -name '*.adoc' -exec sed -i -r -e "s/\[\.tabs\]/\[tabs\]/ig" {} \;
+
+# Global actions for all files
+find docs/ -name '*.adoc' -exec sed -i -E -e "s/<<([A-Za-z0-9\_\-]+)(\/.+)?\/([A-Za-z0-9\_\-]+)(#([A-Za-z0-9\_\-]+)?)?(, ?(.*)?)>>/xref:\1:\3.adoc\4\[\7\]/ig;s/\[\.tabs\]/\[tabs\]/ig" {} \;
+
+# Update position header attribute
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/:index:\sfalse/ig;s/:position:\s[0-9]{5,}/:index: false/ig" {} \;
+
+# Remove remaining position header attributes
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:position:\s[0-9]+/d" {} \;
+
+# Remove lang header attribute
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:lang:\s[de|en]/d" {} \;
+
+# Remove header include
+find docs/*/pages/ -name '*.adoc' -exec sed -i -e "/include::{includedir}\/_header\.adoc\[\]/d" {} \;
+
+# Remove url header attribute
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:url:\s[a-z\/\-]+/d" {} \;
+
+# Remove nav-alias attribute
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:nav-alias:\s?[A-Za-zÄäÖöÜüß0-9\s\-]*/d" {} \;
+
 # Delete backup files
-find docs/en-gb/ -name '*.adoc-e' -delete
+find docs/ -name '*.adoc-e' -delete
 
 #STARTING GENERATING THE MENU#
 
