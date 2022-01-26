@@ -14,6 +14,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          - repository: plentymarkets/plenty-docs-ui
+          - path: plenty-docs-ui-repo
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
@@ -36,7 +40,9 @@ jobs:
           mv 404.html ./build/404.html
           mv sitemap.xml ./build/sitemap.xml
           mv robots.txt ./build/robots.txt
-          
+          mv ${GITHUB_WORKSPACE}/plenty-docs-ui-repo/src/lang/en-gb.json ./lang/en-gb.json
+          mv ${GITHUB_WORKSPACE}/plenty-docs-ui-repo/src/lang/de-de.json ./lang/de-de.json
+
       - name: Upload site to S3
         uses: jakejarvis/s3-sync-action@master
         with:
