@@ -284,18 +284,6 @@ find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/:index:\sf
 # Remove remaining position header attributes
 find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:position:\s[0-9]+/d" {} \;
 
-# Remove lang header attribute
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:lang:\s[de|en]/d" {} \;
-
-# Remove header include
-find docs/*/pages/ -name '*.adoc' -exec sed -i -e "/include::{includedir}\/_header\.adoc\[\]/d" {} \;
-
-# Remove url header attribute
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:url:\s[a-z\/\-]+/d" {} \;
-
-# Remove nav-alias attribute
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:nav-alias:\s?[A-Za-zÄäÖöÜüß0-9\s\-]*/d" {} \;
-
 # Create page aliases
 ALIASARRAY=(`grep -R -l ':url' docs/*/*/*/pages/*.adoc`)
 for i in "${ALIASARRAY[@]}";
@@ -311,6 +299,18 @@ for i in "${ALIASARRAY[@]}";
 ' $i #this newlines are a workaround for osx
     fi
 done
+
+# Remove url header attribute
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:url:\s[a-z\/\-]+/d" {} \;
+
+# Remove lang header attribute
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:lang:\s[de|en]/d" {} \;
+
+# Remove header include
+find docs/*/pages/ -name '*.adoc' -exec sed -i -e "/include::{includedir}\/_header\.adoc\[\]/d" {} \;
+
+# Remove nav-alias attribute
+find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:nav-alias:\s?[A-Za-zÄäÖöÜüß0-9\s\-]*/d" {} \;
 
 # Delete backup files
 find docs/ -name '*.adoc-e' -delete
