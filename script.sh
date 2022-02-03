@@ -296,6 +296,22 @@ find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:url:\s[a-z\/\-]+/d" {} \
 # Remove nav-alias attribute
 find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:nav-alias:\s?[A-Za-zÄäÖöÜüß0-9\s\-]*/d" {} \;
 
+# Create page aliases
+ALIASARRAY=(`grep -R -l ':url' docs/*/*/*/pages/*.adoc`)
+for i in "${ALIASARRAY[@]}";
+  do
+    fileName="$(basename $i | cut -d. -f1)" #get filename
+    theUrlObj="$(grep -e ':url' $i | cut -d':' -f3 | awk -F'/' '{print $NF}')" #get url string
+
+    if [ $fileName != $theUrlObj ]
+        then
+          echo $i $fileName $theUrlObj
+          sed -i -n '/^:url.*/a\
+:page-aliases: '$theUrlObj'.adoc
+' $i #this newlines are a workaround for osx
+    fi
+done
+
 # Delete backup files
 find docs/ -name '*.adoc-e' -delete
 
