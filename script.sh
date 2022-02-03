@@ -306,7 +306,7 @@ for i in "${ALIASARRAY[@]}";
     if [ $fileName != $theUrlObj ]
         then
           echo $i $fileName $theUrlObj
-          sed -i -n '/^:url.*/a\
+          sed -i '/^:url.*/a\
 :page-aliases: '$theUrlObj'.adoc
 ' $i #this newlines are a workaround for osx
     fi
