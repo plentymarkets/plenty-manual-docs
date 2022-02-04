@@ -279,22 +279,38 @@ echo '######################';
 find docs/ -name '*.adoc' -exec sed -r -i -E "s/<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)([a-zA-ZäöüÄÖÜß0-9\/\_\-]+)?\/([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#([a-zA-ZäöüÄÖÜß0-9\_\-]+)?)?(, ?([ a-zA-ZäöüÄÖÜß0-9\(\)\_\-]*)?)>>/xref:\1:\3.adoc\4\[\7]/g;s/\[\.tabs\]/\[tabs\]/ig" {} \;
 
 # Update position header attribute
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/:index:\sfalse/ig;s/:position:\s[0-9]{5,}/:index: false/ig" {} \;
+find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/:index:\sfalse/ig;s/:position:\s[0-9]{5,}/:index: false/ig" {} \;
 
 # Remove remaining position header attributes
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:position:\s[0-9]+/d" {} \;
+find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "/:position:\s[0-9]+/d" {} \;
 
-# Remove lang header attribute
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:lang:\s[de|en]/d" {} \;
+# Create page aliases
+ALIASARRAY=(`grep -R -l ':url' docs/*/*/*/pages/*.adoc`)
+for i in "${ALIASARRAY[@]}";
+  do
+    fileName="$(basename $i | cut -d. -f1)" #get filename
+    theUrlObj="$(grep -e ':url' $i | cut -d':' -f3 | awk -F'/' '{print $NF}')" #get url string
 
-# Remove header include
-find docs/*/pages/ -name '*.adoc' -exec sed -i -e "/include::{includedir}\/_header\.adoc\[\]/d" {} \;
+    if [ $fileName != $theUrlObj ]
+        then
+          echo $i $fileName $theUrlObj
+          sed -i '/^:url.*/a\
+:page-aliases: '$theUrlObj'.adoc
+' $i #this newlines are a workaround for osx
+    fi
+done
 
 # Remove url header attribute
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:url:\s[a-z\/\-]+/d" {} \;
+find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "/:url:\s[a-z\/\-]+/d" {} \;
+
+# Remove lang header attribute
+find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "/:lang:\s[de|en]/d" {} \;
+
+# Remove header include
+find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -e "/include::{includedir}\/_header\.adoc\[\]/d" {} \;
 
 # Remove nav-alias attribute
-find docs/*/pages/ -name '*.adoc' -exec sed -i -r -e "/:nav-alias:\s?[A-Za-zÄäÖöÜüß0-9\s\-]*/d" {} \;
+find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "/:nav-alias:\s?[A-Za-zÄäÖöÜüß0-9\s\-]*/d" {} \;
 
 # Delete backup files
 find docs/ -name '*.adoc-e' -delete
