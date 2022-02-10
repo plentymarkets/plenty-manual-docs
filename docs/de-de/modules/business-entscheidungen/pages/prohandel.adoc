@@ -1,18 +1,23 @@
 = Prohandel-Anbindung
-:lang: de
 :keywords: Prohandel, Prohandel-Anbindung, Prohandel-Connector, Prohandel-Erweiterung
 :description: Lerne, wie du dein Prohandel-System mit plentymarkets verbindest.
-:position: 0
-:url: business-entscheidungen/prohandel
+:index:sfalse
 :id: NCUBFL8
 :author: gretchen-bates
 
 ////
-zuletzt bearbeitet 14.09.2020
+zuletzt bearbeitet 03.02.2022
 ////
 
 //ToDo - change position to 60 once it should appear in the navigation
-//ToDo - fix last issues in the GoogleDoc with David Bohla
+
+////
+offene Fragen:
+-bei "Optionen für den Artikelimport > Gruppierungsschema > Beispiel supplierNumber-categoryNumber-supplierArticleNumber": Hier wäre es schön, wenn es eine Liste mit den möglichen Datenfeldern gäbe, die man eingeben kann. Zudem wäre eine Info zur Syntax nicht schlecht. Team Prohandel müsste uns diese Infos liefern.
+-bei "Optionen für den Artikelimport > Verhalten von Artikeln mit einem bestimmten Wert > Hinweis patternNumber Kunden können uns kontaktieren": Hier könnte man ergänzen, welcher Kontaktweg wir bevorzügen (Telefonnummer, Email, Forum). Team Prohandel müsste uns diese Infos liefern.
+-bei "Neu importierte Artikeldaten öffnen": Klären, ob das so bleiben wird (also, dass die Versandprofile nicht automatisch aktiviert werden, weil die API per REST arbeitet). Falls ja, dann ein Hinweis hier in diesem Kapitel einbauen, dass der Händler seine Versandprofile prüfen und aktivieren soll.
+https://forum.plentymarkets.com/t/api-prohandel-versandprofil-e-bei-neuen-artikeln-aktivieren/652140/7
+////
 
 Prohandel und plentymarkets – eine unschlagbare Kombination.
 Nutzt du bereits Prohandel als Warenwirtschaftslösung für den Mode-Einzelhandel?
@@ -238,23 +243,6 @@ In diesem Schritt legst du fest, welche Artikeldaten von Prohandel an plentymark
 |====
 |Einstellung |Erläuterung
 
-2+| *Importtyp*
-
-| icon:toggle-on[role="blue"] *Vollständiger Import*
-|Willst du alle Artikel oder nur kürzlich geänderten Artikel importieren?
-
-* icon:toggle-on[role="blue"] = Es werden alle Artikel importiert.
-* icon:toggle-off[role="grey"] = Es werden nur die Artikel importiert, die gestern geändert wurden.
-
-*_Empfehlung_*:
-Aktiviere zunächst die Umschalttaste (icon:toggle-on[role="blue"]), damit alle Artikel erstmalig von Prohandel nach plentymarkets übertragen werden.
-Deaktiviere die Umschalttaste (icon:toggle-off[role="grey"]) nach dem ersten Import.
-Dadurch werden bei zukünftigen Importen nur noch neue Datensätze berücksichtigt.
-Ein solcher Arbeitsablauf schont Ressourcen.
-
-*_Hinweis_*:
-Bei Deaktivierung verschwindet automatisch das Feld *Ab Datum* weiter unten.
-
 2+| *Artikelfilter*
 
 | *Filtergrundlage*; +
@@ -425,7 +413,7 @@ Wähle die passende Option aus der Dropdown-Liste aus.
 !Die eigene Artikel-Nummer wird nicht übertragen.
 
 ! *Name 1*
-!Die eigene Artikel-Nummer wird gespeichert unter: xref:artikel:artikel-verwalten.adoc#50[Artikel » Artikel bearbeiten » [Artikel öffnen] » Tab: Texte » Eingabefeld: Name 1]
+!Die eigene Artikel-Nummer wird gespeichert unter: <<artikel/artikel-verwalten#50, Artikel » Artikel bearbeiten » [Artikel öffnen] » Tab: Texte » Eingabefeld: Name 1>>
 
 ! *Eigenschaft der Variante*
 !Eine zweite Dropdown-Liste wird angezeigt.
@@ -448,7 +436,7 @@ Wähle die passende Option aus der Dropdown-Liste aus.
 !Die Lieferanten-Artikelnummer wird nicht übertragen.
 
 ! *Externe Varianten-ID*
-!Die Lieferanten-Artikelnummer wird gespeichert unter: xref:artikel:artikel-verwalten.adoc#190[Artikel » Artikel bearbeiten » [Variante öffnen] » Tab: Einstellungen » Bereich: Grundeinstellungen » Eingabefeld: Ext. Varianten-ID]
+!Die Lieferanten-Artikelnummer wird gespeichert unter: <<artikel/artikel-verwalten#190, Artikel » Artikel bearbeiten » [Variante öffnen] » Tab: Einstellungen » Bereich: Grundeinstellungen » Eingabefeld: Ext. Varianten-ID>>
 
 ! *Eigenschaft der Variante*
 !Eine zweite Dropdown-Liste wird angezeigt.
@@ -590,9 +578,13 @@ In diesem Schritt aktivierst du die Cron-Jobs, die automatisch ausgeführt werde
 
 | *Artikelimport*
 |Täglich
-|Der Import basiert auf den zuvor gewählten xref:business-entscheidungen:prohandel.adoc#70[Importeinstellungen].
-Es werden nur neue Artikel importiert und neue Varianten zu bestehenden Artikeln.
+|
+* Nachdem du den Assistenten abgeschlossen hast, werden _alle_ Artikel erstmalig von Prohandel nach plentymarkets übertragen.
+Dieser erstmalige vollständige Import kann, je nach Anzahl der Produkte, einige Tage in Anspruch nehmen.
+* Danach werden nur noch Teilimporte durchgeführt, die auf den zuvor gewählten xref:business-entscheidungen:prohandel.adoc#70[Importeinstellungen] basieren.
+* Es werden nur neue Artikel importiert und neue Varianten zu bestehenden Artikeln.
 Bestehende Artikel werden nicht über diesen Cron aktualisiert.
+* Der Artikelimport erfolgt am Ende des Tages bzw. in der Nacht.
 
 | *Artikelaktualisierung*
 |Stündlich
@@ -657,8 +649,8 @@ Klicke anschließend in der Übersicht auf eine Untervariante.
 Wenn du mit den übertragenen Artikeldaten zufrieden bist, dann kannst du deine Artikel für den Online-Verkauf vorbereiten.
 Zum Beispiel kannst du:
 
-* xref:artikel:artikel-verwalten.adoc#50[Metadaten] hinzufügen.
-* angeben, wo deine Produkte verkauft werden sollen, d.h. xref:artikel:artikel-verwalten.adoc#340[Mandanten] wählen.
+* xref:artikel:artikel-verwalten.adoc#50[Beschreibungstexte], xref:artikel:artikel-verwalten.adoc#90[Produktbilder] und relevante xref:artikel:artikel-verwalten.adoc#50[Metadaten] hinzufügen.
+* angeben, wo deine Produkte verkauft werden sollen, d.h. xref:artikel:artikel-verwalten.adoc#340[Auftragsherkünfte] und xref:artikel:artikel-verwalten.adoc#340[Mandanten] wählen.
 * deine Varianten xref:artikel:artikel-verwalten.adoc#200[aktivieren], sobald sie veröffentlicht werden sollen.
 
 Eine vollständige Liste aller Artikeldatenfelder in plentymarkets findest du auf der Handbuchseite xref:artikel:artikel-verwalten.adoc#[Verzeichnis der Datenfelder].
