@@ -290,8 +290,9 @@ for i in "${ALIASARRAY[@]}";
   do
     fileName="$(basename $i | cut -d. -f1)" #get filename
     theUrlObj="$(grep -e ':url' $i | cut -d':' -f3 | awk -F'/' '{print $NF}')" #get url string
+    fileNameInModule=$(find . -name "${theUrlObj}.adoc" | wc -l)
 
-    if [ $fileName != $theUrlObj ]
+    if [ $fileName != $theUrlObj ] && [ $fileNameInModule -eq 0 ]
         then
           echo $i $fileName $theUrlObj
           sed -i '/^:url.*/a\
