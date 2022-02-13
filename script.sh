@@ -284,15 +284,34 @@ find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/
 # Remove remaining position header attributes
 find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "/:position:\s[0-9]+/d" {} \;
 
-# Create page aliases
-ALIASARRAY=(`grep -R -l ':url' docs/*/*/*/pages/*.adoc`)
-for i in "${ALIASARRAY[@]}";
+# Remove url header attributes that aren't needed for page aliases
+URLARRAY=(`grep -R -l ':url' docs/*/*/*/pages/*.adoc`)
+echo "Start removing url attributes that won't be replaced"
+for i in "${URLARRAY[@]}";
   do
+    dirName="$(dirname "$i")"
     fileName="$(basename $i | cut -d. -f1)" #get filename
     theUrlObj="$(grep -e ':url' $i | cut -d':' -f3 | awk -F'/' '{print $NF}')" #get url string
-    fileNameInModule=$(find . -name "${theUrlObj}.adoc" | wc -l)
+    fileNameInModule=$(find $dirName/ -iname $theUrlObj.adoc | wc -l)
 
-    if [ $fileName != $theUrlObj ] && [ $fileNameInModule -eq 0 ]
+    if [ $fileNameInModule -ne 0 ]
+      then
+        sed -i -r -e "/:url:\s[a-z\/\-]+/d" $i
+    fi
+done
+echo "Done removing url attributes"
+
+# Create page aliases
+ALIASARRAY=(`grep -R -l ':url' docs/*/*/*/pages/*.adoc`)
+echo "Start creating page aliases"
+for i in "${ALIASARRAY[@]}";
+  do
+    dirName="$(dirname "$i")"
+    fileName="$(basename $i | cut -d. -f1)" #get filename
+    theUrlObj="$(grep -e ':url' $i | cut -d':' -f3 | awk -F'/' '{print $NF}')" #get url string
+    duplicatePageAliases=$(grep -i -R ":page-aliases: ${theUrlObj}.adoc" $dirName/ | wc -l | head -1)
+
+    if [ $duplicatePageAliases -eq 0 ]
         then
           echo $i $fileName $theUrlObj
           sed -i '/^:url.*/a\
@@ -300,8 +319,9 @@ for i in "${ALIASARRAY[@]}";
 ' $i #this newlines are a workaround for osx
     fi
 done
+echo "Done creating page aliases"
 
-# Remove url header attribute
+# Remove remaining url header attribute
 find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "/:url:\s[a-z\/\-]+/d" {} \;
 
 # Remove lang header attribute
