@@ -279,7 +279,7 @@ echo '######################';
 find docs/ -name '*.adoc' -exec sed -r -i -E "s/<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)([a-zA-ZäöüÄÖÜß0-9\/\_\-]+)?\/([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#([a-zA-ZäöüÄÖÜß0-9\_\-]+)?)?(, ?([ a-zA-ZäöüÄÖÜß0-9\(\)\_\-]*)?)>>/xref:\1:\3.adoc\4\[\7]/g;s/\[\.tabs\]/\[tabs\]/ig" {} \;
 
 # Update position header attribute
-find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/:index:\sfalse/ig;s/:position:\s[0-9]{5,}/:index: false/ig" {} \;
+find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/:page-index:\sfalse/ig;s/:position:\s[0-9]{5,}/:page-index: false/ig" {} \;
 
 # Remove remaining position header attributes
 find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "/:position:\s[0-9]+/d" {} \;
