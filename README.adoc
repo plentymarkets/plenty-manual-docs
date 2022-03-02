@@ -1,0 +1,81 @@
+= plenty-manual-docs
+:toc:
+
+preamble
+
+== Project structure
+
+=== Multilingual support
+
+=== Components
+
+=== Modules
+
+=== Page IDs
+
+=== Links
+
+== Local development
+
+== Supported functionality
+
+=== Material icons
+
+=== Overview pages
+
+Some pages only serve as an entry point to a section or subsection.
+These pages may not need a lot of content and only include an overview of the other pages in the section.
+
+To generate the contents of an overview page automatically, you can add the `page-layout: overview` attribute to the document header.
+Once published, the page will include a standard phrase and a list of child pages with links.
+
+=== Search index settings
+
+By default, the search engine indexes every page on the website.
+However, in some cases it's better if the engine skips a page during indexing.
+An example are changelog pages.
+When indexed, changelog pages tend to clutter up the search results.
+Therefore, the pages should be excluded from indexing.
+
+There are two ways to influence if the engine indexes a page:
+
+* *Attribute*:
+You can add the attribute `page-index: false` to the document header.
+Setting the `page-index` attribute to `false` adds the `noindex` and `nofollow` robots tags to the page.
+* *Page ID*:
+If the ID of the page contains the string `/_`, the engine skips that page during indexing.
+For example, the ID of every page in the `_includes` module has the pattern `{component}/{version}/_includes/{page}`.
+The pattern contains the string `/_`.
+As a result, no page in the `_includes` module is indexed.
+
+The attribute works across all search engines.
+The page ID exception only works with the current setup.
+To make it easy to potentially use other search engines in the future, using the attribute is preferable.
+
+=== Tabs
+
+The tabs block extension provides tab support.
+The extension was created by OpenDevise Inc. and is distributed under the Mozilla Public License, v. 2.0.
+
+To add a tabs block to a page, use the following formatting:
+
+[source, Asciidoc]
+----
+[tabs]
+====
+Tab A::
++
+--
+Contents of tab A.
+--
+Tab B::
++
+--
+Contents of tab B.
+--
+====
+----
+
+NOTE: If you want to use another block inside a tabs block, refer to the link:https://docs.asciidoctor.org/asciidoc/latest/blocks/delimited/#nesting[nested block formatting rules^] of the Asciidoc documentation.
+
+== Deployment
