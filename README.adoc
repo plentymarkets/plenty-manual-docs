@@ -1,0 +1,333 @@
+= plenty-manual-docs
+:toc: preamble
+:icons: font
+
+Welcome to the plenty-manual-docs project.
+This project contains the source files of the plentymarkets documentation.
+The documentation is available at link:[knowledge.plentymarkets.com^].
+The documentation is written in link:https://docs.asciidoctor.org/[Asciidoc^] and published using the content management system link:https://docs.antora.org/antora/2.3/[Antora^], version 2.3.
+
+== Local development
+
+Antora makes it easy to generate the site in your local environment.
+You just have to clone this repository and perform the setup from this section.
+When you generate the site locally, you can check what your changes are going to look like before publishing them.
+This section describes how to carry out the following steps:
+
+* Installing Antora locally
+* Configuring a local playbook
+* Running Antora to generate the site
+
+NOTE: Translatable layout elements are rendered locally as "Lorem ipsum".
+This includes the links in the header and footer, among others.
+
+=== Installing Antora
+
+You can install Antora via an npm package.
+Before you can install npm packages, you need a Node.js release.
+
+To install Antora, carry out the following steps:
+
+. If you don't already have Node.js, link:https://nodejs.org/en/download/[download the latest LTS version^].
+. Open your command line.
+. Run the command `npm i -g @antora/cli @antora/site-generator-default` +
+icon:arrow-right[] This installs Antora globally, meaning you can run Antora commands from anywhere on your system.
+. To check if the installation was successful, run the command `antora -v` +
+icon:arrow-right[] The command line should return the version `2.3.4`
+
+For other installation methods, refer to the link:https://docs.antora.org/antora/2.3/install/install-antora/[Antora documentation^].
+
+=== Configuring a local playbook
+
+Every Antora project has a playbook.
+The playbook is a set of configurations that determines how Antora compiles the documentation site.
+The configuration includes the locations of the content and the layout.
+It also specifies what Asciidoc attributes to apply globally and any libraries that extend core functionality.
+
+The published website has two playbooks, one for the English part of the site and one for the German part:
+
+* `antora-playbook-de.yml`
+* `antora-playbook-en.yml`
+
+For generating the site locally, it's best to add your own personal playbook.
+You can find playbook templates in the `templates` folder.
+Copy the playbook templates of the languages you need to the root folder of this project.
+As long as you don't modify the file names, they're ignored by version control.
+This means you can experiment with the configuration as you want, without accidentally pushing it to remote and affecting the live environment.
+
+You can use the playbooks as they are or modify them to suit your needs.
+For further information on the available configuration options, refer to the link:https://docs.antora.org/antora/2.3/playbook/set-up-playbook/[Antora documentation^].
+
+=== Running Antora
+
+With Antora installed and your playbooks configured, you can now generate the documentation locally.
+
+Each time you want to generate the documentation, carry out the following steps:
+
+. Open your command line.
+. Change directory to the plenty-manual-docs project.
+. Run the command `antora <playbook-name.yml>` +
+Example: `antora local-antora-playbook-en.yml` +
+icon:arrow-right[] Antora generates the documentation.
+You can find the output in the `build` folder of the project.
+
+NOTE: Just like the local playbooks, the build folder is ignored by version control.
+
+== Project structure
+
+This section covers the overall structure of the project.
+It explains some core Antora concepts and functionality and addresses how the project differs from the standard use case.
+
+To gain a more in-depth understanding of Antora, refer to the link:https://docs.antora.org/antora/2.3/[Antora documentation^].
+
+=== Multilingual support
+
+By default, Antora doesn't support multilingual projects yet.
+This project uses a workaround solution to provide support in more than one language.
+The workaround consists of generating separate sites, one for each language.
+The sites are combined when uploading the files to the website hosting service.
+Finally, the root `index.html` provides an entry point to the site from the base URL.
+
+Proper multilingual support is discussed in the link:https://gitlab.com/antora/antora/-/issues/208[Antora project on GitLab^].
+
+=== Components
+
+A component describes a distinct part of a project.
+Each component has its own versioning.
+To an extent, every component can also be configured separately from the rest of the site.
+
+For further information on components, refer to the link:https://docs.antora.org/antora/2.3/component-version/[Antora documentation^].
+For an overview of the current project components, refer to the playbook YAML files.
+
+=== Modules
+
+Each component contains one or more modules.
+Modules allow you to organise content within a component, for example by product.
+Each module may contain pages, as well as different families of resources.
+
+There's two types of modules: the ROOT module and any number of named modules.
+The main difference is that when generating a page's URL, ROOT module pages are considered the top level pages of the component.
+When a page is treated as a top level page, the name of the module isn't included in the page's URL.
+
+Each module contains various file families.
+
+For further information on modules, refer to the link:https://docs.antora.org/antora/2.3/module-directories/[Antora documentation^].
+
+=== File families & IDs
+
+Each file in an Antora project has a unique ID.
+The ID can be used to link to a page or to reference a resource.
+Resource include the following families:
+
+* Attachments (currently not used)
+* Examples
+* Images
+* Pages
+* Partials
+
+Depending on the resource family, you can add the resource with the `image` or `include` macro.
+
+In general, the ID of a file depends on where that file is located in the Antora project structure.
+This means the ID contains the file's version, component, module and file name.
+In the case of resources, the ID also contains the resource family.
+
+[source,Asciidoc]
+----
+// Page ID pattern
+version@component:module:page.adoc
+
+// Page ID example
+main@manual:plugins:faq-plugins.adoc
+
+// Resource ID pattern
+version@component:module:family$resource.ext
+
+// Resource ID examples
+main@manual:crm:example$emailbuilder-code-example-bank-details.txt
+main@manual:markets:image$amazon-logo.png
+main@manual:app:page$functions.adoc
+main@manual:data:partial$catalogues-faq.adoc
+----
+
+It's not necessary to specify the `version`, `component` and `module` if they're identical to the current file.
+
+For further information on link:https://docs.antora.org/antora/2.3/page/page-id/[page IDs^] and link:https://docs.antora.org/antora/2.3/page/resource-id/[resource IDs^], refer to the Antora documentation.
+
+=== Redirects
+
+When the ID of a page changes, it's useful to add a redirect from the old to the new destination.
+You can add a redirect with the `:page-aliases:` attribute.
+The attribute contains a comma separated list of IDs.
+Each list entry represents a former ID of the page.
+
+It's not necessary to specify the `version`, `component` and `module` if they're identical to the current file.
+
+For further information on page aliases and redirects, refer to the link:https://docs.antora.org/antora/2.3/page/page-aliases/[Antora documentation^].
+
+WARNING: As mentioned in the Antora documentation, the page aliases attribute shouldn't be used for bulk redirects.
+For example, when moving many pages to a new component, it's better to create a redirect via the website host.
+For further details, contact an administrator.
+
+=== Links
+
+There are three types of links:
+
+* Links to an anchor on the same page
+* Links to a different page on the site
+* Links to a page on a different site
+
+Depending on the type of link, the link has to be formatted differently.
+The following table describes the formatting for each link type.
+
+[cols="1,2,1"]
+|===
+|Link type |Formatting |Reference
+
+|Page anchor
+|`+<<anchor-id,link label>>+` +
+`+<<create-contact,Creating a contact>>+`
+|link:https://docs.asciidoctor.org/asciidoc/latest/macros/xref/[Cross references^]
+
+|Different page
+|`+xref:version@component:module:filename.adoc[link label]+` +
+`+xref:main@manual:plugins:faq-plugins.adoc[plugins FAQ]+`
+
+It's not necessary to specify the `version`, `component` and `module` if they're identical to the current page.
+|link:https://docs.antora.org/antora/2.3/navigation/xrefs-and-link-text/[Page xrefs and link text^]
+
+|Different site
+|`+link:target-url[link label]+` +
+`+link:https://www.plentymarkets.com/[plentymarkets]+` +
+`+link:{url-plentymarkets}[plentymarkets]+`
+
+For easier localisation, external URLs should be encoded in an attribute.
+For a complete example, refer to the reference on troubleshooting complex URLs.
+|link:https://docs.asciidoctor.org/asciidoc/latest/macros/link-macro/[Link macro^] +
+link:https://docs.asciidoctor.org/asciidoc/latest/macros/complex-urls/[Troubleshooting complex URLs^]
+
+|===
+
+== Supported functionality
+
+This project supports the default link:https://docs.asciidoctor.org/[Asciidoc^] and link:https://docs.antora.org/antora/2.3/[Antora^] functionality.
+In addition, the following features are available:
+
+* Material icons
+* Overview pages
+* Search index settings
+* Tabs
+
+This section describes how to use these features in greater detail.
+
+=== Material icons
+
+Asciidoc and Antora support Font Awesome 4.7 icons by default.
+The inline icon extension extends the icon support with Google Material icons.
+
+To add a Material icon, carry out the following steps:
+
+. Check the link:https://material.io/resources/icons/?style=baseline[Material icons guide^] to determine the name of the icon, for example `add_shopping_cart`.
+. To include the icon on a page, use the pattern +
+`+icon:add_shopping_cart[set=material]+`.
+. If you want to colour the icon, add the colour via the `role` attribute: +
+`+icon:add_shopping_cart[set=material, role=red]+`.
+
+The following colours are available:
+
+[cols="3"]
+|===
+|Role name |Colour group |Colour code
+
+|`blue`
+|Active
+|`#3f54d0`
+
+|`skyBlue`
+|Info
+|`#24b3e0`
+
+|`green`
+|Add
+|`#6ad26a`
+
+|`orange`
+|Warning
+|`#ff873e`
+
+|`purple`
+|Transfer
+|`#e468f3`
+
+|`red`
+|Alert
+|`#f11539`
+
+|`yellow`
+|Action
+|`#ffdb4c`
+
+|===
+
+NOTE: The colours and colour groups represent the way colours are used in the plentymarkets UI.
+The styling of elements on plentymarkets websites may be different.
+
+=== Overview pages
+
+Some pages only serve as an entry point to a section or subsection.
+These pages may not need a lot of content and only include an overview of the other pages in the section.
+
+To generate the contents of an overview page automatically, you can add the `:page-layout: overview` attribute to the document header.
+Once published, the page will include a standard phrase and a list of child pages with links.
+
+=== Search index settings
+
+By default, the search engine indexes every page on the website.
+However, in some cases it's better if the engine skips a page during indexing.
+An example are changelog pages.
+When indexed, changelog pages tend to clutter up the search results.
+Therefore, the pages should be excluded from indexing.
+
+There are two ways to influence if the engine indexes a page:
+
+* *Attribute*:
+You can add the attribute `:page-index: false` to the document header.
+Setting the `page-index` attribute to `false` adds the `noindex` and `nofollow` robots tags to the page.
+* *Page ID*:
+If the ID of the page contains the string `+/_+`, the engine skips that page during indexing.
+For example, the ID of every page in the `_includes` module has the pattern `{component}/{version}/_includes/{page}`.
+The pattern contains the string `+/_+`.
+As a result, no page in the `_includes` module is indexed.
+
+The attribute works across all search engines.
+The page ID exception only works with the current setup.
+To make it easy to potentially use other search engines in the future, using the attribute is preferable.
+
+CAUTION: If the index already contains a page, setting the attribute doesn't remove the page from the index.
+Instead, you have to remove the page from the index manually.
+However, deleted and redirected pages are removed automatically.
+
+=== Tabs
+
+The tabs block extension provides tabs support.
+The extension was created by OpenDevise Inc. and is distributed under the Mozilla Public License, v. 2.0.
+
+To add a tabs block to a page, use the following formatting:
+
+[source, Asciidoc]
+----
+[tabs]
+====
+Tab A::
++
+--
+Contents of tab A.
+--
+Tab B::
++
+--
+Contents of tab B.
+--
+====
+----
+
+NOTE: If you want to use another block inside a tabs block, refer to the link:https://docs.asciidoctor.org/asciidoc/latest/blocks/delimited/#nesting[nested block formatting rules^] of the Asciidoc documentation.
