@@ -1,11 +1,10 @@
 = Kontakt bearbeiten
 :keywords: Adresse, primäre Lieferadresse, primäre Rechnungsadresse, Firmen, Firma, Ustidnummer, Ust ID Nummer, Handelsvertreter, Gastzugang, Gastbestellung, eingeloggter Kunde, registrierter Kunde, regulärer Zugang, Passwort ändern, Passwortänderung, Kunde kann sich nicht einloggen, Login entsperren, Bankdaten, Kundendaten löschen, Datensatz löschen, Kunde löschen, Kontakt löschen, Adresslayout, Kundentyp, Rabattsystem, Rabatte vergeben, Rabatte für Kundenklasse, Kontaktoption, Adressoption, Provision, Kostenstelle, Kontakte importieren, Kundendaten importieren, Kundendaten exportieren, plentyShop-Login, Firma, Kontaktoptionen
-:page-index: false
 :id: D7GKDHM
 :author: team-crm
 
 [.previous-navigation]
-<<crm/kontakte/kontakt-suchen#, icon:long-arrow-left[] Kontakt suchen>>
+xref:crm:kontakt-erstellen.adoc#[icon:long-arrow-left[] Kontakt erstellen]
 
 '''
 
@@ -215,9 +214,11 @@ Die folgenden Bereiche werden erst nach einem Klick in der Navigation auf der li
 * <<#messenger, Messenger>>
 * <<#optionen, Optionen>>
 * <<#tickets, Tickets>>
+* <<#schnelllzugriff-adressen, Schnellzugriff: Adressen>>
+* <<#scheduler, Scheduler>>
 * <<#provision-kostenstellen, Provision & Kostenstellen>>
 * <<#statistik, Statistik>>
-// * <<#bankdaten-bearbeiten, Bankdaten bearbeiten>>
+* <<#schnellzugriff-bankdaten, Schnellzugriff: Bankdaten>>
 
 [#kontaktdetails]
 === Kontaktdetails
@@ -243,9 +244,6 @@ Wenn du den Kontaktdatensatz öffnest, ist dieser Bereich standardmäßig geöff
 *Nachname*
 |Gib den Vornamen und Nachnamen des Kontakts ein. +
 *_Hinweis:_* Das sind Pflichtfelder, wenn _keine_ Firma gewählt wird.
-
-| *Geburtsdatum*
-|Gib das Geburtsdatum des Kontakts nach dem Muster `tt.mm.jjjj` ein oder wähle das Datum aus dem Kalender (icon:calendar[]).
 
 | *Typ*
 | Wähle einen Typ. Standardmäßig stehen die Typen *Kunde*, *Handelsvertreter*, *Lieferant*, *Partner*, *Hersteller* und *Interessent* zur Auswahl. xref:crm:vorbereitende-einstellungen.adoc#typ-erstellen[Eigene Typen] erstellst du im Menü *Einrichtung » CRM » Typen*. +
@@ -278,11 +276,36 @@ Weitere Informationen zum Debitorenkonto findest du auf der Handbuchseite xref:a
 |Wähle einen Eigner für den Kontakt. Wenn kein Eigner gewählt werden soll, wähle die leere Option. +
 *_Hinweis:_* In der Liste werden alle Benutzer:innen (Eigner) angezeigt, bei denen im Benutzer:innenkonto im Menü *Einrichtung » Einstellungen » Benutzer » Konten » [Benutzer öffnen]* im Tab *Eigner* die Option *Kunde* aktiviert ist.
 
-| *Handelsvertreter*
-|Hier kannst du dem Kontakt einen Handelsvertreter zuordnen. Gib die ersten 3 Buchstaben des Namens ein, um die Vorschlagsliste aufzurufen. Mit einem Klick auf die ID bzw. den Namen ist der Handelsvertreter dem Kontakt zugeordnet.
+//| *Handelsvertreter*
+//|Hier kannst du dem Kontakt einen Handelsvertreter zuordnen. Gib die ersten 3 Buchstaben des Namens ein, um die Vorschlagsliste aufzurufen. Mit einem Klick auf die ID bzw. den Namen ist der Handelsvertreter dem Kontakt zugeordnet.
+
+| *Bewertung*
+|Speichere eine Bewertung für den Kontakt. Diese Einstellung dient nur für interne Zwecke. +
+5 gelbe Sterne stehen für die beste Bewertung und 5 rote Sterne für die schlechteste Bewertung.
+
+| *Geburtsdatum*
+|Gib das Geburtsdatum des Kontakts nach dem Muster `tt.mm.jjjj` ein oder wähle das Datum aus dem Kalender (icon:calendar[]).
 
 | *Newsletter*
-|Zeigt an, ob der Kontakt den Newsletter erhält. Es ist _nicht_ möglich, die Option manuell zu aktivieren. Um das Newsletter-Abonnement für den Kontakt zu deaktivieren, klicke auf icon:delete[set=material].
+|Zeigt an, ob der Kontakt den Newsletter erhält (icon:toggle_on[set=material, role=skyBlue]). Um das Newsletter-Abonnement für den Kontakt zu deaktivieren, klicke auf icon:toggle_off[set=material, role=darkGrey].
+
+| *Rechnung erlauben* / *Lastschrift erlauben*
+|Wenn du die beiden Zahlungsarten *Rechnung* und *Lastschrift* bereits in der xref:crm:vorbereitende-einstellungen.adoc#kundenklasse-erstellen[Kundenklasse] erlaubt hast, musst du hier _keine_ Einstellungen vornehmen. Denn: Die Einstellungen in der Kundenklasse haben Priorität vor den Einstellungen im Kontaktdatensatz. +
+
+icon:toggle_on[set=material, role=skyBlue] = Der Kontakt kann mit dieser Zahlungsart zahlen, selbst wenn du diese Zahlungsart sonst _nicht_ in deinem plentyShop anbietest. +
+icon:toggle_off[set=material, role=darkGrey] = Der Kontakt kann mit dieser Zahlungsart _nicht_ zahlen. +
+
+*_Beispiel:_* Ein Kontakt, der bereits mehrfach bei dir bestellt hat, soll auf Rechnung einkaufen können. +
+
+Notwendige Einstellungen: +
+- Aktiviere die xref:payment:zahlungsarten-verwalten.adoc#65[Zahlungsart] im Menü *Einrichtung » Aufträge » Zahlung » Zahlungsarten*, damit diese Zahlungsart im Auftrag zur Verfügung steht. +
+*_Wichtig:_* Wähle _keine_ Lieferländer, weil die Zahlungsart ansonsten in deinem plentyShop verfügbar ist und dies in diesem Fall nicht gewünscht ist. +
+
+- Die Zahlungsart *Rechnung* bzw. *Lastschrift* muss in mindestens einem xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofil] verfügbar sein, d.h. die Zahlungsart darf in dem Versandprofil _nicht_ gesperrt sein. +
+
+- Aktiviere das Versandprofil bei den Artikeln. +
+
+Prüfe die hier genannten notwendigen Einstellungen und aktiviere (icon:toggle_on[set=material, role=skyBlue]) dann die Zahlungsart, um dem Kontakt die Nutzung dieser Zahlungsart zu erlauben.
 
 |====
 
@@ -292,6 +315,10 @@ Weitere Informationen zum Debitorenkonto findest du auf der Handbuchseite xref:a
 Hier werden die primären Adressen des Kontakts angezeigt, wenn du im Bereich <<#adressen, Adressen>> die Rechnungsadresse und/oder die Lieferadresse auf die Einstellung *Ja, primär* gesetzt hast. Wenn du den Kontaktdatensatz öffnest, ist dieser Bereich standardmäßig geöffnet und die vorhandenen Daten werden geladen. 
 
 Mit einem Klick auf *Neue Adresse* (icon:add[set=material]) erstellst du eine <<#adressen, neue Adresse>>. Mit einem Klick auf icon:more_vert[set=material] kannst du die Adresse bearbeiten oder löschen. 
+
+[[image-primary-delivery-address-example]]
+.Beispiel: Primäre Lieferadresse
+image::crm:kontakte-lieferadresse-primaer.png[width=640, height=360, alt=Primäre Lieferadresse (Beispiel)]
 
 [discrete]
 [#logik-neue-adresse]
@@ -334,7 +361,7 @@ Beachte, dass sich die Suche immer nur auf den aktuell gewählten Ordner bezieht
 Dokumente suchen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf *Dokumente*. +
@@ -395,7 +422,7 @@ Gehe wie im Folgenden beschrieben vor, um manuell das Passwort für den Kontakt 
 Passwort manuell ändern:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf *plentyShop-Login*.
@@ -436,7 +463,7 @@ Weitere Informationen findest du auf der Handbuchseite xref:crm:emailbuilder-tes
 E-Mail zum Zurücksetzen des Passworts versenden:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf *plentyShop-Login*.
@@ -459,7 +486,7 @@ Wenn der Kontakt beim Login in deinem plentyShop das Passwort 4 Mal hintereinand
 Login des Kontakts entsperren:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf *plentyShop-Login*.
@@ -480,12 +507,12 @@ Mit einem Klick auf *Optionen* (icon:more_vert[set=material]) oben rechts erstel
 
 Mit einem Klick auf *Spalten konfigurieren* (icon:settings[set=material]) oben rechts entscheidest du, welche Spalten im Bereich *Aufträge* angezeigt werden. Klicke auf icon:sort[set=material], um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Die folgenden Spalten sind verfügbar:
 
-* ID 
-* Status
-* Typ
+* Auftrags-ID 
+* Auftragsstatus
+* Auftragstyp
 * Rechnungsnummer
-* Zahlungsmethode
-* Rechnungssumme
+* Zahlungsart
+* Auftragssumme (brutto)
 
 Ein Klick auf *Daten aktualisieren* (icon:refresh[set=material]) oben rechts lädt den Bereich *Aufträge* neu.
 
@@ -498,22 +525,28 @@ Mit einem Klick auf *Spalten konfigurieren* (icon:settings[set=material]) oben r
 
 * ID
 * Firma
-* Typ
+* Rechnung
+* Lieferung
 * Vorname
 * Nachname
 * Straße
 * PLZ
-* Stadt 
+* Ort 
 * Land
-* E-Mail
-* Telefon
-* Umsatzsteuer-ID
 
 Ein Klick auf *Daten aktualisieren* (icon:refresh[set=material]) oben rechts lädt den Bereich *Adressen* neu.
 
 Klicke in die Zeile der Adresse, um die Adresse zur weiteren Bearbeitung zu öffnen. Beachte die Erläuterungen in <<#table-new-address>>.
 
-Klicke auf *Neue Adresse* (icon:add[set=material]), um eine neue Adresse für den Kontakt zu speichern. <<#table-new-address>> listet die verfügbaren Felder der Adresse auf. +
+<<#image-address-table>> zeigt beispielhaft, dass es sich bei der Adresse um eine Rechnungsadresse (icon:done[set=material]) und die primäre Lieferadresse (icon:star[] icon:done[set=material]) handelt.
+
+// TODO: wenn alle material icons verfügbar sind, den Stern ersetzen durch: icon:grade[set=material] 
+
+[[image-address-table]]
+.Beispiel: Adresstabelle
+image::crm:kontakte-adresstabelle.png[width=640, height=360, alt=Adresstabelle (Beispiel)]
+
+Klicke auf *Neue Adresse* (icon:add[set=material]) oben rechts, um eine neue Adresse für den Kontakt zu speichern. <<#table-new-address>> listet die verfügbaren Felder der Adresse auf. +
 *_Hinweis:_* Jeder Adressdatensatz bekommt eine fortlaufende ID, die _nicht_ geändert werden kann. Die ID ist dabei jedoch nicht für einen Kontakt fortlaufend, sondern für alle Adressdatensätze, die du in deinem plentymarkets System erstellst.
 
 [[table-new-address]]
@@ -531,16 +564,16 @@ a| Um welchen Typen handelt es sich bei der neuen Adresse? Wähle eine der folge
 * *Ja* = Die neue Adresse ist die Rechnungsadresse. +
 * *Ja, primär* = Die neue Adresse ist die primäre Rechnungsadresse. +
 
-Bei Wahl dieser Option wird die Adresse dann im Bereich <<#primaere-adresse, Primäre Adresse>> in der Übersicht als icon:attach_money[set=material] *Rechnung* angezeigt.
+Bei Wahl der Option *Ja, primär* wird die Rechnungsadresse dann im Bereich <<#primaere-adresse, Primäre Adresse>> in der Übersicht als icon:attach_money[set=material] *Rechnung* angezeigt.
 
 | *Lieferadresse*
 a| Um welchen Typen handelt es sich bei der neuen Adresse? Wähle eine der folgenden Optionen: +
 
-* *Nein* (standardmäßig gesetzt) = Die neue Adresse ist _keine_ Lieferadresse. +
-* *Ja* = Die neue Adresse ist die Lieferadresse. +
+* *Ja* (standardmäßig gesetzt) = Die neue Adresse ist die Lieferadresse. +
+* *Nein* = Die neue Adresse ist _keine_ Lieferadresse. +
 * *Ja, primär* = Die neue Adresse ist die primäre Lieferadresse. +
 
-Bei Wahl dieser Option wird die Adresse dann im Bereich <<#primaere-adresse, Primäre Adresse>> in der Übersicht als icon:local_shipping[set=material] *Lieferung* angezeigt.
+Bei Wahl der Option *Ja, primär*  wird die Lieferadresse dann im Bereich <<#primaere-adresse, Primäre Adresse>> in der Übersicht als icon:local_shipping[set=material] *Lieferung* angezeigt.
 
 | *Firma (Name 1)*
 |Wie lautet der Name der Firma? +
@@ -641,7 +674,7 @@ Beim Erstellen des Kontaktdatensatz wird die Historie des Kontakts gespeichert. 
 Historie ansehen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf *Historie*.
@@ -706,7 +739,7 @@ Weitere Informationen zum Erstellen von Firmendatensätzen findest du auf der Ha
 
 ===== Firma bearbeiten
 
-Klicke in der Zeile der Firma auf icon:more_vert[set=material] und dann auf icon:edit[set=material] *Firma bearbeiten*, um die Firmendaten zu bearbeiten.
+Klicke in der Zeile der Firma, um den Firmendatensatz im Menü *CRM » Firmen* zu öffnen und die Firmendaten zu bearbeiten.
 
 ===== Verknüpfung zur Firma löschen
 
@@ -746,7 +779,7 @@ Hier siehst du alle Umsätze deines Kontakts. Gehe wie im Folgenden beschrieben 
 Kontoübersicht anzeigen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf *Konto*.
@@ -795,7 +828,7 @@ Diese Tabelle ist individuell anpassbar. Das bedeutet, dass du selbst entscheide
 [.instruction]
 Spalten konfigurieren:
 
-. Klicke oben rechts im Bereich *Konto* auf *Spalten konfigurieren* (icon:cog[]). +
+. Klicke im Bereich *Konto* auf *Spalten konfigurieren* (icon:settings[set=material]). +
 → Das Fenster *Spalten konfigurieren* öffnet sich.
 . Wähle, welche Spalten angezeigt werden sollen. Beachte <<#table-account-balance-contact>>.
 . Verschiebe (icon:drag_sort_handle[set=plenty]) die Spalten, so dass sie in der Reihenfolge angezeigt werden, in der du sie benötigst.
@@ -837,8 +870,8 @@ Rot = Der Auftrag ist noch nicht bezahlt und die Zahlung ist überfällig. +
 |[#intable-account-payment-due-date]*Zahlungsziel*
 |Das Zahlungsziel des Auftrags. Damit es hier angezeigt werden kann, muss es in den xref:auftraege:auftraege-verwalten.adoc#intable-zahlungsbedingungen-auftrag[Zahlungsbedingungen] am Auftrag hinterlegt sein und eine Rechnung muss erstellt worden sein. 
 
-|[#intable-account-amount]*Betrag*
-|Rechnungsbetrag des Auftrags. 
+|[#intable-account-order-sum]*Auftragssumme (brutto)*
+|Bruttosumme des Auftrags. 
 
 |[#intable-account-outstanding]*Ausstehend*
 |Der zur vollständigen Bezahlung des Auftrags noch ausstehende Betrag. 
@@ -910,7 +943,7 @@ Mit einem Klick auf *Option hinzufügen* (icon:add[set=material]) fügst du weit
 Kontaktoptionen hinzufügen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf *Optionen*. +
@@ -1035,7 +1068,7 @@ Möchtest du wissen, welche Typen und Subtypen in den Optionen verfügbar sind? 
 
 Hier siehst du alle zum Kontakt gehörigen Tickets aus dem Menü *CRM » Ticketsystem*. 
 
-Mit einem Klick auf *Spalten konfigurieren* (icon:settings[set=material]) oben rechts entscheidest du, welche Spalten im Bereich *Tickets* angezeigt werden. Klicke auf icon:sort[set=material], um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Die folgenden Spalten sind verfügbar:
+Mit einem Klick auf *Spalten konfigurieren* (icon:settings[set=material]) entscheidest du, welche Spalten im Bereich *Tickets* angezeigt werden. Klicke auf icon:sort[set=material], um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Die folgenden Spalten sind verfügbar:
 
 * ID
 * Typ
@@ -1049,6 +1082,13 @@ Mit einem Klick auf *Spalten konfigurieren* (icon:settings[set=material]) oben r
 
 Ein Klick auf icon:refresh[set=material] lädt den Bereich *Tickets* neu.
 Klicke auf *Neues Ticket hinzufügen* (icon:add[set=material]), um im Menü *CRM » Ticketsystem* ein neues Ticket zu erstellen. Der Kontakt ist in dem neuen Ticket bereits vorausgewählt und der Timer im Ticket wird automatisch gestartet.
+
+[#schnelllzugriff-adressen]
+=== Schnellzugriff: Adressen
+
+Im Bereich icon:map-marker[] *Adressen* siehst du alle Adressen, die du im Bereich <<#adressen, Adressen>> für diesen Kontakt geöffnet hast. Außerdem kannst du mit einem Klick auf icon:map-marker[] *Neu* einfach und schnell eine neue Adresse für den Kontakt erstellen.
+
+// TODO: wenn alle material icons verfügbar sind: icon:map-marker ersetzen durch icon:place[set=material] 
 
 [#scheduler]
 === Scheduler 
@@ -1067,7 +1107,7 @@ Das Menü ist nur in deinem plentymarkets System sichtbar, wenn du es gebucht ha
 Scheduler anzeigen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf icon:date_pick[set=plenty] *Scheduler*. +
@@ -1089,10 +1129,10 @@ Im Bereich *Kostenstellen* erstellst du Kostenstellen. Du hast auch die Möglich
 Kostenstelle hinzufügen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
-. Klicke auf der linken Seite auf *Provision & Kostenstellen*.
+. Klicke auf der linken Seite auf icon:point_of_sale[set=material] *Provision & Kostenstellen*.
 . Wechsele in das Tab *Neue Kostenstelle*.
 . Gib den *Kostenstellennamen*, das *Budget* und das *Restbudget* ein.
 . Wähle *Jahr* oder *Monat* als Budgetperiode.
@@ -1108,10 +1148,10 @@ Im Tab *Artikelprovisionen* gibst du artikelbezogene Provisionen für den Typ *H
 Provision eingeben:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
-. Klicke auf der linken Seite auf *Provision & Kostenstellen*.
+. Klicke auf der linken Seite auf icon:point_of_sale[set=material] *Provision & Kostenstellen*.
 . Wechsele in das Tab *Provisionen*.
 . Wechsele in das Tab *Artikelprovisionen*.
 . Klappe den Bereich *Neue Provision* (icon:plus-square-o[]) auf.
@@ -1129,11 +1169,11 @@ Im Bereich icon:assessment[set=material] *Statistik* erstellst du kontaktspezifi
 [.instruction]
 Statistik erstellen:
 
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke auf der linken Seite auf icon:assessment[set=material] *Statistik*.
-. Klicke auf *Neuer Bereich*.
+. Klicke auf icon:plus-square[role="green"] *Neuer Bereich*.
 . Gib einen Namen ein.
 . *Speichere* (icon:save[role="green"]) die Einstellungen. +
 → Ein Tab mit dem soeben eingegebenen Namen wird geöffnet.
@@ -1151,15 +1191,12 @@ Je nachdem, welchen Statistiktyp du gewählt hast, findest du auf der der Handbu
 
 Allgemeine Informationen, wie du z.B. Statistiken bearbeitest, findest du auf der Handbuchseite xref:business-entscheidungen:statistiken.adoc#[Statistiken verwalten].
 
-//// 
-[#bankdaten-bearbeiten]
-== Bankdaten bearbeiten
+[#schnelllzugriff-bankdaten]
+=== Schnellzugriff: Bankdaten
 
-TODO: Text ergänzen
+Im Bereich icon:pay_ec[set=plenty] *Bankdaten* siehst du alle Bankdatensätze, die du im Bereich <<#bankdaten, Bankdaten>> für diesen Kontakt geöffnet hast. Außerdem kannst du mit einem Klick auf icon:credit-card[] *Neu* einfach und schnell einen neuen Bankdatensatz für den Kontakt erstellen.
 
-////
-
-// was passiert mit dem Bereich "Verrechnungskonto"?
+// TODO: wenn alle material icons verfügbar sind: icon:credit-card[] ersetzen durch icon:credit_card[set=material] 
 
 [#vcard-herunterladen]
 == vCard herunterladen
@@ -1170,7 +1207,7 @@ Du hast die Möglichkeit, die Daten des Kontakts als elektronische Visitenkarte 
 vCard herunterladen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen.
 . Klicke ganz oben in der Symbolleiste auf *Kontakt als vCard herunterladen* (icon:address-card-o[]). +
@@ -1197,7 +1234,7 @@ Du hast jedoch die Möglichkeit, den Datensatz zu anonymisieren. Wie du dazu vor
 Kontakt in der Übersicht löschen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in der Zeile des Kontakts, den du löschen möchtest, auf icon:more_vert[set=material]. +
 → Eine Liste mit weiteren Optionen wird angezeigt.
@@ -1214,7 +1251,7 @@ Kontakt in der Übersicht löschen:
 Kontakt in der Detailansicht löschen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen. +
 → Die Detailansicht des Kontakts wird geöffnet.
@@ -1239,7 +1276,7 @@ Weitere Informationen zum Löschen von ungenutzten Datensätzen findest du auf d
 Kontaktdatensatz neu laden:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche den Kontakt, den du bearbeiten möchtest, anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Klicke in die Zeile des Kontakts, um den Datensatz zu öffnen. +
 → Die Detailansicht des Kontakts wird geöffnet.
@@ -1278,10 +1315,10 @@ a| Versendet die aus der Dropdown-Liste gewählte Vorlage an alle aktivierten Ko
 |Kopiert die E-Mail-Adressen der aktivierten Kontakte in den aus der Dropdown-Liste gewählten xref:crm:newsletter-versenden.adoc#300[E-Mail-Ordner] im Menü *Einrichtung » CRM » Newsletter » plentymarkets » E-Mail-Ordner* für den Newsletterversand. +
 *_Tipp_*: Eine detaillierte <<#schritt-fuer-schritt, Schritt-für-Schritt-Anleitung>> zum Hinzufügen von E-Mail-Adressen zu einem Newsletter-Ordner über die Gruppenfunktion findest du unterhalb dieser Tabelle.
 
-| *Zahlungsziel speichern*
-|Speichert das eingegebene Zahlungsziel in Tagen in den Kontaktdatensätzen aller aktivierten Kontakte. +
-*_Hinweis_*: Wenn du hier Kontakte wählst und _keinen Wert_ eingibst, wird für die gewählten Kontakte der bisher gespeicherte Wert _gelöscht_. +
-*_Tipp_*: Eine detaillierte <<#schritt-fuer-schritt, Schritt-für-Schritt-Anleitung>> zum Speichern des Zahlungsziels über die Gruppenfunktion findest du unterhalb dieser Tabelle.
+//| *Zahlungsziel speichern*
+//|Speichert das eingegebene Zahlungsziel in Tagen in den Kontaktdatensätzen aller aktivierten Kontakte. +
+//*_Hinweis_*: Wenn du hier Kontakte wählst und _keinen Wert_ eingibst, wird für die gewählten Kontakte der bisher gespeicherte Wert _gelöscht_. +
+//*_Tipp_*: Eine detaillierte <<#schritt-fuer-schritt, Schritt-für-Schritt-Anleitung>> zum Speichern des Zahlungsziels über die Gruppenfunktion findest du unterhalb dieser Tabelle.
 
 |====
 
@@ -1304,7 +1341,7 @@ Gehe wie im Folgenden beschrieben vor, um das Adressetikett mehrerer Kontakte ü
 Adressetikett für mehrere Kontakte herunterladen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Wähle (icon:check-square[role="blue"]) die Kontakte, für die du ein Adressetikett herunterladen möchtest. 
 . Klicke in der Symbolleiste oben auf *Adressetikett drucken* (icon:print[set=material]). +
@@ -1325,7 +1362,7 @@ Gehe wie im Folgenden beschrieben vor, um eine E-Mail-Vorlage an mehrere Kontakt
 E-Mail-Vorlage an mehrere Kontakte senden:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Wähle (icon:check-square[role="blue"]) die Kontakte, an die du eine E-Mail-Vorlage senden möchtest. 
 . Klicke in der Symbolleiste oben auf *E-Mail-Vorlage senden* (icon:forward_to_inbox[set=material]). +
@@ -1345,7 +1382,7 @@ Gehe wie im Folgenden beschrieben vor, um die E-Mail-Adressen mehrerer Kontakte 
 Mehrere E-Mail-Adressen zu Newsletter-Ordner hinzufügen:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Wähle (icon:check-square[role="blue"]) die Kontakte, deren E-Mail-Adressen du zu einem bestimmten Newsletter-Ordner hinzufügen möchtest. 
 . Klicke in der Symbolleiste auf *Zu Newsletter-Ordner hinzufügen* (icon:post_add[set=material]). +
@@ -1357,6 +1394,12 @@ Mehrere E-Mail-Adressen zu Newsletter-Ordner hinzufügen:
 
 --
 
+====
+
+////
+
+TODO: tabbing content wieder einbauen, sobald das Zahlungsziel wieder über die Gruppenfunktion gespeichert werden kann.
+
 Zahlungsziel für mehrere Kontakte speichern::
 +
 --
@@ -1366,7 +1409,7 @@ Gehe wie im Folgenden beschrieben vor, um für mehrere Kontakte über die Gruppe
 Zahlungsziel für mehrere Kontakte speichern:
 
 . Öffne das Menü *CRM » Kontakte (Testphase)*.
-. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu <<crm/kontakte/kontakt-suchen#table-search-contact>> auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
+. Suche die Kontakte anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern auf der Seite xref:crm:kontakt-suchen.adoc#[Kontakt suchen]. +
 → Die Kontakte, die den eingestellten Suchkriterien entsprechen, werden angezeigt.
 . Wähle (icon:check-square[role="blue"]) die Kontakte, für die du ein bestimmtes Zahlungsziel speichern möchtest. 
 . Klicke in der Symbolleiste auf *Zahlungsziel speichern* (icon:perm_contact_calendar[set=material]). +
@@ -1378,7 +1421,7 @@ Zahlungsziel für mehrere Kontakte speichern:
 
 --
 
-====
+////
 
 [#gastzugang-in-regulaeren-zugang-umwandeln]
 == Gastbestellung in regulären Kontaktdatensatz umwandeln
@@ -1447,4 +1490,4 @@ Importiere oder aktualisiere die Daten deiner Kontakte inklusive Adressoptionen,
 '''
 
 [.previous-next-navigation]
-<<crm/kontakte/kontakt-suchen#, icon:long-arrow-left[] Kontakt suchen>>
+xref:crm:kontakt-erstellen.adoc#[icon:long-arrow-left[] Kontakt erstellen]
