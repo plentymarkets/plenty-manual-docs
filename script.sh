@@ -4,11 +4,11 @@ echo '##########################';
 echo '#    set up workspace    #';
 echo '##########################';
 
-# if [ -d gitRepo ]; then
-#   rm -rf gitRepo
-# fi
+if [ -d gitRepo ]; then
+  rm -rf gitRepo
+fi
 
-# git clone "https://github.com/plentymarkets/manual" gitRepo
+git clone "https://github.com/plentymarkets/manual" gitRepo
 
 if [ -d build ]; then
   rm -rf build
@@ -338,7 +338,3 @@ find docs/ -name '*.adoc-e' -delete
 
 #STARTING GENERATING THE MENU#
 
-echo '######################';
-echo '#    build nav       #';
-echo '######################';
-sh generateNav.sh
