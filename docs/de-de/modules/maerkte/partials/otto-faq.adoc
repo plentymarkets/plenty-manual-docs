@@ -32,8 +32,8 @@ Ob ein Artikel ein Paketartikel oder ein Speditionsartikel ist, legst du am Arti
 
 Die von OTTO Market bereitgestellten Marken und Kategoriegruppen werden in den folgenden Intervallen in plentymarkets aktualisiert:
 
-Marken: alle 2 Stunden
-Kategoriegruppen: einmal täglich
+* Marken: alle 2 Stunden
+* Kategoriegruppen: einmal täglich
 
 Marken, die Händler:innen in OTTO Market erstellen, sind in plentymarkets erst nach der nächsten Aktualisierung verfügbar.
 --
@@ -76,13 +76,35 @@ Gehe deshalb so vor:
 . Nimm die Artikel bei OTTO manuell offline. +
 *_Tipp:_* Schalte die Artikel dazu inaktiv, indem du die Verfügbarkeit für OTTO Market entfernst.
 . Ändere die SKU und/oder die Parent SKU.
-. Aktiviere die Verfügbarkeit erneut.
+. Aktiviere die Verfügbarkeit erneut. +
 -> Mit dem nächsten nächtlichen Artikelexport werden deine Artikel mit der neuen SKU zu OTTO Market exportiert.
 --
 
 [#faq-items]
 === FAQ: Artikeldatenexport
 
+[.collapseBox]
+.*_Tipp:_* Kategoriegruppen, Kategorien und zugehörige Attribute
+--
+
+link:https://og2gether-my.sharepoint.com/:x:/g/personal/micha_saake_otto_de/EXg5Id8bTxNKuV8mRkQ1wrsBNFuBrjP8iQJINZjcezvjdg?rtime=3FovyUEf2Ug[Hier^] findest du Informationen zur Produktkategorisierung für Otto Market. Die Datei bietet eine Übersicht der Kategoriegruppen, Kategorien und der zugehörigen Attribute.
+
+--
+
+[.collapseBox]
+.Meine Artikel wurden zu OTTO exportiert, werden im OPC aber nicht angezeigt
+--
+
+Es kann durchaus sein, dass der Artikelexport an OTTO Market erfolgreich war, der Artikel aber trotzdem nicht im OPC angezeigt wird. Das könnte daran liegen, dass OTTO die Variante mit dessen Inhalt nicht akzeptiert. Meist liegt dann ein inhaltlicher Fehler innerhalb der Artikeldaten vor.
+
+Damit die Artikel überhaupt zu Otto übertragen werden können, müssen die folgenden Grundvoraussetzungen erfüllt sein:
+
+* Im Tab *Verfügbarkeit* der Variante muss die Verfügbarkeit *OTTO Market* aktiviert sein.
+* Im Tab *Eigenschaften* der Variante muss die Eigenschaft *OTTO Kategoriegruppe* verknüpft sein. Als Wert der Eigenschaft wird der *Formatname* des OTTO-Katalogs erwartet. Durch diese Verknüpfung wird die Variante dem OTTO-Katalog zugeordnet. Der Katalog entspricht dabei der OTTO-Kategoriegruppe. Es wird NICHT der von dir vergebene Name des Katalogs erwartet, sondern der Name des Formats.
+* Die Variante ist *Aktiv* geschaltet.
+* Der Nettowarenbestand der Variante ist in dem Lager positiv, das im Katalog zugeordnet ist.
+* Im Katalog sind alle Pflichtfelder zugeordnet. Pflichtfelder sind im Katalog mit einem Sternchen versehen.
+--
 
 [#1302]
 [.collapseBox]
@@ -90,7 +112,7 @@ Gehe deshalb so vor:
 --
 [TIP]
 ====
-Eine oder mehrere deiner Varianten wurden nicht exportiert? Gehe zunächst die <<#2200, _Checkliste:_ Voraussetzungen für den Variantenexport>> durch.
+Eine oder mehrere deiner Varianten wurden nicht exportiert? Gehe zuerst die <<#2200, _Checkliste:_ Voraussetzungen für den Variantenexport>> durch.
 ====
 
 Wenn für deine Varianten alle Voraussetzungen und alle Verknüpfungen hinterlegt sind und die Varianten trotzdem nicht exportiert werden, hilft dir das Log weiter. Durch eine Suche im Log kannst du feststellen, warum bestimmte Artikel nicht zu OTTO Market exportiert werden und deshalb dort nicht verfügbar sind.
@@ -165,8 +187,181 @@ _oder_
 |====
 --
 
+
+
+[#13026]
+=== FAQ: Auftragsbearbeitung
+
+In einigen Fällen kann es zu Fehlern bei der Verarbeitung der Aufträge kommen. Mögliche Ursachen und häufige Fehler werden hier beschrieben.
+
+[#13026-1]
+[.collapseBox]
+.Warum werden einige Aufträge ohne Adressdaten und mit dem Status *[1] Unvollständige Daten* importiert?
+--
+Wenn Kund:innen per Vorkasse zahlen und die Zahlung noch nicht erfolgt ist, gibt OTTO Market Aufträgen den Status ANNOUNCED. Aufträge mit diesem Status werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Sobald der Auftrag bei OTTO in den Status PROCESSABLE wechselt, werden die Adressen am Auftrag ergänzt und der Auftrag wird in Status *[3] Warten auf Zahlung* verschoben. +
+*_Wichtig:_* Standardmäßig wird für Aufträge im Status *[1] Unvollständige Daten* kein Warenbestand reserviert. Mit der unten beschriebenen Einstellung kannst du Warenbestand für diese Aufträge reservieren.
+
+[.instruction]
+Warenbestand für Aufträge mit Status 1 reservieren:
+
+. Öffne das Menü *Einrichtung » Aufträge » Einstellungen*.
+. Wähle die folgenden Optionen für die Einstellung *Status Auftragsreservierung (Reservierung von Beständen)*:
+  ** Option *von*: Status *[1] Unvollständige Daten*
+  ** Wähle in der letzten Dropdown-Liste die Option *Alle Aufträge*.
+. Speichere die Einstellungen. +
+→ Für die Aufträge mit diesem Status wird Warenbestand reserviert. +
+*_Hinweis:_* Diese Einstellung gilt für alle Aufträge, nicht nur für OTTO Market-Aufträge.
+--
+
+[#1303]
+[.collapseBox]
+.Wie ordne ich ein Retourenpaket dem richtigen Auftrag in plentymarkets zu?
+--
+
+Nachfolgend findest du ein exemplarisches DHL-Retourenetikett. Auf dem Etikett ist ersichtlich, welche Informationen dir zur Verfügung stehen.
+
+image::maerkte:dhl-retourenetikett.png[DHL-Retourenetikett]
+
+--
+
+[#incomplete-order-cancellation]
+[.collapseBox]
+.Warum werden unvollständige Aufträge manchmal nach der Stornierung trotzdem weiter bearbeitet und versendet?
+--
+*_Problem:_*
+
+Ein unvollständiger Auftrag mit Status *[1] Unvollständige Daten* wird auf Wunsch der Kundin storniert. Trotzdem bezahlt die Kundin nach einigen Tagen den Auftrag. Der Auftrag wird vervollständigt, weiterbearbeitet und automatisch versendet.
+
+*_Grund und Lösung:_*
+
+* OTTO Market-Aufträge in Status *[1] Unvollständige Daten* und *[3] Warten auf Zahlung* können nicht über plentymarkets storniert werden.
+* OTTO Market-Aufträge können erst in Status *[5] Freigabe Versand* über plentymarkets storniert werden.
+* Unvollständige Aufträge werden von OTTO Market nach einigen Tagen automatisch storniert, wenn keine Zahlung eingeht.
+
+--
+
+[#1304]
+[.collapseBox]
+.Wie finde ich bei Anfragen von Kund:innen einen Auftrag von OTTO Market in plentymarkets?
+--
+
+Im plentymarkets Forum wird öfters von *PositionID* (Beispiel: 715e9369-01e3-4d09-ae91-8688dfa139b2) und *SalesOrderID* (Beispiel: 4245eac7-4647-4f76-8c48-261afb19aa96) gesprochen, diese sind für dich als Händler:in jedoch nicht relevant. Diese IDs sind für dich nicht sichtbar - es handelt sich um die Bezeichnung des Auftrags und der enthaltenen Positionen in der plentymarkets Datenbank.
+
+Aufträge mit der Herkunft *OTTO Market* erhalten die übliche Auftrags-ID von deinem plentymarkets System, zur Identifikation des Auftrags wird jedoch eine “externe Auftragsnummer” an dem Auftrag gespeichert, mit welcher der Auftrag eindeutig zugeordnet werden kann.
+
+Nachfolgend findest du Screenshots mit einer kurzen Erläuterung, wie die Aufträge bei uns und bei OTTO Market im Bereich *Mein Konto* erstellt werden.
+
+image::maerkte:otto-market_auftragsnummer.png[OTTO Market-Auftragsnummer]
+
+Die Auftragsnummer wird in plentymarkets als externe Auftragsnummer am Auftrag gespeichert.
+
+Das Menü zum Suchen des Auftrags anhand der externen Auftragsnummer:
+
+image::maerkte:otto-market_suche_externe-auftragsnummer.png[Suche externe Auftragsnummer]
+
+Im Tab *Einstellungen* des Auftrags findest du die externe Auftragsnummer (*Ext. Auftragsnummer*):
+
+image::maerkte:plentymarkets_externe-auftragsnummer.png[externe Auftragsnummer in plentymarkets]
+
+Wenn Kund:innen eine Rückfrage zum Auftrag haben, findest du den Auftrag anhand der externen Auftragsnummer.
+
+Natürlich kannst du mit dem Filter *Herkunft* immer alle OTTO Market-Aufträge filtern.
+
+--
+
+[#13027]
+[.collapseBox]
+.Eine Versandbestätigung wurde nicht an OTTO Market gemeldet. Was kann ich tun?
+--
+Sollte eine Versandbestätigung nicht an OTTO Market gemeldet worden sein, findest du mögliche Ursachen im Log.
+
+[.instruction]
+Log durchsuchen:
+
+. Öffne das Menü *Daten » Log*.
+. Wähle in der Dropdown-Liste *Identifikator* die Option *Otto Market*.
+. Wähle in der Dropdown-Liste *Integration* das Log *Plenty\Modules\Otto\Order\Services\OrderShippingService*.
+. *_Optional:_* Filtere nach der Auftrags-ID, um das Ergebnis einzugrenzen:
+  * *Referenztyp* orderId
+  * *Referenzwert* deine Auftrags-ID
+. Filtere in mehreren Durchläufen in der Dropdown-Liste *Level* erst nach *warning* und dann nach *error*. +
+. Öffne die Logs mit der Nachricht *Variante ungültig*. +
+→ Im Log erhältst du die Varianten-ID und den Grund für die Ablehnung bzw. das fehlende Merkmal. +
+→ Im Kapitel <<#1305, Auftragsbearbeitung: Fehlermeldungen im Log>> findest du Informationen zu möglichen Fehlermeldungen und Lösungsansätze.
+--
+
+
+[.collapseBox]
+.Der Auftrag wurde ohne Rechnungsdokument importiert, obwohl ich die Rechnung im OPC bei Otto Market sehen kann. Was nun?
+--
+
+Wenn du für Otto Market im Einrichtungsassistenten die Option *Kaufbelege als externe Rechnungen importieren* aktiviert hast, werden Rechnungen erst importiert, wenn die Versandbestätigung an OTTO Market gesendet hast.
+
+image::maerkte:otto-faq-keine-rechnung.png[]
+
+Wenn diese Option aktiviert ist und kein Rechnungsdokument importiert wurde, prüfe die folgenden Punkte:
+
+* Wurde die Ereignisaktion *Versandinformation an OTTO melden* ausgelöst?
+* Gibt es ein Retourenlabel für jede Paketnummer?
+* Sind alle Versanddienstleister für Otto Market korrekt im Assistenten verknüpft?
+* Stimmt dein in plentymarkets konfigurierter Retourendienstleister mit dem Retourendienstleister im OPC von Otto Market überein?
+* Sind die Adressen deines Lagers korrekt?
+
+Um schneller eine Lösung finden zu können, empfehlen wir dir, das Log nach Fehlermeldungen zu durchsuchen.
+
+Beachte, dass der Rechnungsimport nachträglich nicht mehr automatisch stattfinden kann. Hier müssen wir für dich tätig werden und deine Rechnung manuell importieren.
+Poste daher die Auftrags-ID im link:https://forum.plentymarkets.com/t/sammelthread-fuer-nachtraegliche-dokumentenimporte-rechnungen/647738[Sammelthread für nachträgliche Dokumentenimporte - Rechnungen]
+--
+
+[#faq-errors]
+=== Fehlermeldungen im Log
+
+In diesem Kapitel findest du Informationen und Hilfestellungen zu den Fehlern im Log.
+
+[.collapseBox]
+.Wie prüfe ich Fehlermeldungen im Log?
+--
+
+Wenn deine Artikel nicht übertragen wurden, ist es immer sinnvoll, das Log zu prüfen. Viele Fehlermeldungen kannst du dort finden und die Fehler anschließend selbst bereinigen.
+Es gibt verschiedene Integrationen, die du nacheinander prüfen solltest.
+
+Wie das geht, erfährst du hier.
+
+. Öffne das Menü *Daten » Log*.
+. Filtere deine Suche, indem du für *Integration* nacheinander die folgenden Logs wählst:
+* Plenty\Modules\Otto\Item\Services\ItemExportService
+* Integration: Plenty\Modules\Otto\Item\Templates\Mutators\DefaultSkuMutator mit Identifikator: OTTO Market
+* Plenty\Modules\Otto\Item\Commands\ItemReportResultCommand
+* Plenty\Modules\Otto\Item\Templates\Mutators\MediaAssetsMutator +
+→ Alle Übertragungsversuche werden angezeigt.
+. Prüfe die Einträge. +
+*_Tipp:_* Anhand des *Level* erfährst du, ob ein Artikel erfolgreich übertragen wurde oder nicht.
+
+[cols="1,3a"]
+|===
+|Level |Erläuterung
+
+| *info*
+| Log-Einträge mit dieser Meldung deuten auf eine erfolgreiche Übertragung hin. Das kann zum Beispiel so aussehen:
+
+image::maerkte:otto-faq-logs-1.png[]
+
+| *error*
+| Log-Einträge mit dieser Meldung deuten auf einen Fehler bei der Übertragung hin. In der Regel bedeutet das, dass deine Variante nicht valide ist. Daher wurde die Variante auch nicht exportiert. Das kann zum Beispiel so aussehen:
+
+image::maerkte:otto-faq-logs-2.png[]
+
+
+Meldungen dieser Art kannst du öffnen und so die Details einblenden:
+
+image::maerkte:otto-faq-logs-3.png[]
+
+Im Screenshot handelt es sich zum Beispiel um einen Fehler in der Varianten-ID *1167*. Bemängelt wird das Feld "productDescription.category".
+|===
+--
+
 [#13016]
-==== Artikelexport: Fehlermeldungen im Log
+==== Fehlermeldungen im Log: Artikelexport
 
 Hier findest du mögliche Fehlermeldungen im Zusammenhang mit dem Artikelexport.
 
@@ -309,132 +504,80 @@ Es wird hiermit also ein *_zweites Datenfeld_* hinzugefügt. Beim nächsten Expo
 
 --
 
-[#13026]
-=== FAQ: Auftragsbearbeitung
 
-In einigen Fällen kann es zu Fehlern bei der Verarbeitung der Aufträge kommen. Mögliche Ursachen und häufige Fehler werden hier beschrieben.
-
-[#13026-1]
-[.collapseBox]
-.Warum werden einige Aufträge ohne Adressdaten und mit dem Status *[1] Unvollständige Daten* importiert?
---
-Wenn Kund:innen per Vorkasse zahlen und die Zahlung noch nicht erfolgt ist, gibt OTTO Market Aufträgen den Status ANNOUNCED. Aufträge mit diesem Status werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Sobald der Auftrag bei OTTO in den Status PROCESSABLE wechselt, werden die Adressen am Auftrag ergänzt und der Auftrag wird in Status *[3] Warten auf Zahlung* verschoben. +
-*_Wichtig:_* Standardmäßig wird für Aufträge im Status *[1] Unvollständige Daten* kein Warenbestand reserviert. Mit der unten beschriebenen Einstellung kannst du Warenbestand für diese Aufträge reservieren.
-
-[.instruction]
-Warenbestand für Aufträge mit Status 1 reservieren:
-
-. Öffne das Menü *Einrichtung » Aufträge » Einstellungen*.
-. Wähle die folgenden Optionen für die Einstellung *Status Auftragsreservierung (Reservierung von Beständen)*:
-  ** Option *von*: Status *[1] Unvollständige Daten*
-  ** Wähle in der letzten Dropdown-Liste die Option *Alle Aufträge*.
-. Speichere die Einstellungen. +
-→ Für die Aufträge mit diesem Status wird Warenbestand reserviert. +
-*_Hinweis:_* Diese Einstellung gilt für alle Aufträge, nicht nur für OTTO Market-Aufträge.
---
-
-[#1303]
-[.collapseBox]
-.Wie ordne ich ein Retourenpaket dem richtigen Auftrag in plentymarkets zu?
---
-
-Nachfolgend findest du ein exemplarisches DHL-Retourenetikett. Auf dem Etikett ist ersichtlich, welche Informationen dir zur Verfügung stehen.
-
-image::maerkte:dhl-retourenetikett.png[DHL-Retourenetikett]
-
---
-
-[#incomplete-order-cancellation]
-[.collapseBox]
-.Warum werden unvollständige Aufträge manchmal nach der Stornierung trotzdem weiter bearbeitet und versendet?
---
-*_Problem:_*
-
-Ein unvollständiger Auftrag mit Status *[1] Unvollständige Daten* wird auf Wunsch der Kundin storniert. Trotzdem bezahlt die Kundin nach einigen Tagen den Auftrag. Der Auftrag wird vervollständigt, weiterbearbeitet und automatisch versendet.
-
-*_Grund und Lösung:_*
-
-* OTTO Market-Aufträge in Status *[1] Unvollständige Daten* und *[3] Warten auf Zahlung* können nicht über plentymarkets storniert werden.
-* OTTO Market-Aufträge können erst in Status *[5] Freigabe Versand* über plentymarkets storniert werden.
-* Unvollständige Aufträge werden von OTTO Market nach einigen Tagen automatisch storniert, wenn keine Zahlung eingeht.
-
---
-
-[#1304]
-[.collapseBox]
-.Wie finde ich bei Anfragen von Kund:innen einen Auftrag von OTTO Market in plentymarkets?
---
-
-Im plentymarkets Forum wird öfters von *PositionID* (Beispiel: 715e9369-01e3-4d09-ae91-8688dfa139b2) und *SalesOrderID* (Beispiel: 4245eac7-4647-4f76-8c48-261afb19aa96) gesprochen, diese sind für dich als Händler:in jedoch nicht relevant. Diese IDs sind für dich nicht sichtbar - es handelt sich um die Bezeichnung des Auftrags und der enthaltenen Positionen in der plentymarkets Datenbank.
-
-Aufträge mit der Herkunft *OTTO Market* erhalten die übliche Auftrags-ID von deinem plentymarkets System, zur Identifikation des Auftrags wird jedoch eine “externe Auftragsnummer” an dem Auftrag gespeichert, mit welcher der Auftrag eindeutig zugeordnet werden kann.
-
-Nachfolgend findest du Screenshots mit einer kurzen Erläuterung, wie die Aufträge bei uns und bei OTTO Market im Bereich *Mein Konto* erstellt werden.
-
-image::maerkte:otto-market_auftragsnummer.png[OTTO Market-Auftragsnummer]
-
-Die Auftragsnummer wird in plentymarkets als externe Auftragsnummer am Auftrag gespeichert.
-
-Das Menü zum Suchen des Auftrags anhand der externen Auftragsnummer:
-
-image::maerkte:otto-market_suche_externe-auftragsnummer.png[Suche externe Auftragsnummer]
-
-Im Tab *Einstellungen* des Auftrags findest du die externe Auftragsnummer (*Ext. Auftragsnummer*):
-
-image::maerkte:plentymarkets_externe-auftragsnummer.png[externe Auftragsnummer in plentymarkets]
-
-Wenn Kund:innen eine Rückfrage zum Auftrag haben, findest du den Auftrag anhand der externen Auftragsnummer.
-
-Natürlich kannst du mit dem Filter *Herkunft* immer alle OTTO Market-Aufträge filtern.
-
---
-
-[#13027]
-[.collapseBox]
-.Eine Versandbestätigung wurde nicht an OTTO Market gemeldet. Was kann ich tun?
---
-Sollte eine Versandbestätigung nicht an OTTO Market gemeldet worden sein, findest du mögliche Ursachen im Log.
-
-[.instruction]
-Log durchsuchen:
-
-. Öffne das Menü *Daten » Log*.
-. Wähle in der Dropdown-Liste *Identifikator* die Option *Otto Market*.
-. Wähle in der Dropdown-Liste *Integration* das Log *Plenty\Modules\Otto\Order\Services\OrderShippingService*.
-. *_Optional:_* Filtere nach der Auftrags-ID, um das Ergebnis einzugrenzen:
-  * *Referenztyp* orderId
-  * *Referenzwert* deine Auftrags-ID
-. Filtere in mehreren Durchläufen in der Dropdown-Liste *Level* erst nach *warning* und dann nach *error*. +
-. Öffne die Logs mit der Nachricht *Variante ungültig*. +
-→ Im Log erhältst du die Varianten-ID und den Grund für die Ablehnung bzw. das fehlende Merkmal. +
-→ Im Kapitel <<#1305, Auftragsbearbeitung: Fehlermeldungen im Log>> findest du Informationen zu möglichen Fehlermeldungen und Lösungsansätze.
---
 
 
 [.collapseBox]
-.Der Auftrag wurde ohne Rechnungsdokument importiert, obwohl ich die Rechnung im OPC bei Otto Market sehen kann. Was nun?
+.code:"500001 - MANDATORY_LEGAL_ATTRIBUTE_MISSING" title:"Das Attribut 'Materialzusammensetzung' muss aus rechtlichen Gründen bei der Category 'Hoodie' gepflegt sein."
 --
 
-Wenn du für Otto Market im Einrichtungsassistenten die Option *Kaufbelege als externe Rechnungen importieren* aktiviert hast, werden Rechnungen erst importiert, wenn die Versandbestätigung an OTTO Market gesendet hast.
+In diesem Beispiel ist das Feld *Materialzusammensetzung* in deinem Katalog betroffen. Überprüfe deshalb deine Zuordnung für das Marktplatz-Datenfeld *Materialzusammensetzung*. Wir empfehlen dir, eine Eigenschaft zuzuordnen. Ist die Eigenschaft korrekt mit der Variante verknüpft?
+--
 
-image::maerkte:otto-faq-keine-rechnung.png[]
+[.collapseBox]
+.code:"400004 - NORMPRICE_IS_REQUIRED_FOR_CATEGORY" title:"Die von Ihnen gewählte Kategorie muss zwingend mit einem Grundpreis laut PAngV ausgezeichnet werden. Bitte ergänzen Sie diesen.
+--
 
-Wenn diese Option aktiviert ist und kein Rechnungsdokument importiert wurde, prüfe die folgenden Punkte:
+In diesem Fall erwartet OTTO sämtliche Informationen, die zur Berechnung des Grundpreises dienen. Schaue dir dazu die Antwort auf die FAQ "Ich möchte den Grundpreis meiner Varianten an OTTO übermitteln. Wie gehe ich vor?" an.
+--
 
-* Wurde die Ereignisaktion *Versandinformation an OTTO melden* ausgelöst?
-* Gibt es ein Retourenlabel für jede Paketnummer?
-* Sind alle Versanddienstleister für Otto Market korrekt im Assistenten verknüpft?
-* Stimmt dein in plentymarkets konfigurierter Retourendienstleister mit dem Retourendienstleister im OPC von Otto Market überein?
-* Sind die Adressen deines Lagers korrekt?
+[.collapseBox]
+.code:"300001 - IMAGE_TYPE_ELEMENT_MISSING" title:"Es muss mindestens ein Element vom Typ 'IMAGE' vorhanden sein.""
+--
 
-Um schneller eine Lösung finden zu können, empfehlen wir dir, das Log nach Fehlermeldungen zu durchsuchen.
+In diesem Fall erwartet Otto ein für Otto Market verknüpftes Bild.
+Im Tab *Bilder* des Artikels muss also mindestens ein Bild für Otto Market freigegeben sein.
+Das kannst du unter *Verfügbarkeit* prüfen.
 
-Beachte, dass der Rechnungsimport nachträglich nicht mehr automatisch stattfinden kann. Hier müssen wir für dich tätig werden und deine Rechnung manuell importieren.
-Poste daher die Auftrags-ID im link:https://forum.plentymarkets.com/t/sammelthread-fuer-nachtraegliche-dokumentenimporte-rechnungen/647738[Sammelthread für nachträgliche Dokumentenimporte - Rechnungen]
+image::maerkte:otto-faq-8.png[]
+--
+
+[.collapseBox]
+.code:"100005 - INVALID_VALUE_CATEGORY" title:"'LED GartenleuchteLED Gartenleuchte' ist keine gültige Produktkategorie. Bitte wählen Sie nur Kategorien aus, die Sie über den Categories-Endpunkt in der API abfragen können."
+--
+Diese Fehlermeldung deutet auf eine inkorrekte Kategoriezuordnung im Katalog hin.
+Für die Kategorien dürfen Werte nicht nebeneinander gepflegt, sondern bei Bedarf als Fallback (Ausweichfeld, *unter* dem ersten Feld) hinterlegt werden.
+
+Wenn es so aussehen sollte, bitte korrigieren, da sonst 2x der Kategoriewert übermittelt wird:
+
+image::maerkte:otto-faq-9.png[]
+
+Es sollte dann so aussehen, damit die Kategorie "Aussenleuchten" nur greift, wenn "LED Aussenleuchten" am Artikel nicht gepflegt wurde:
+
+image::maerkte:otto-faq-10.png[]
+
+--
+
+[.collapseBox]
+.Nachricht: Der Pfad für "media assets" ist ungültig. Gültige URL angeben.
+--
+
+Möglicher Inhalt der Meldung:
+
+```
+Object
+variationId:10792
+type:"PRODUCT_DATASHEET"
+location:""
+Trigger:"cli: artisan catalog:async-export"
+```
+
+Media Assets sind Dateien. Konkret bezieht sich dieser Fehler auf das Produktdatenblatt (siehe `type`). Die Variante mit der ID 10792 ist also entweder nicht mit der im Katalog zugeordneten Eigenschaft verknüpft oder es ist keine URL gespeichert.
+
+*_Wichtig:_* Dateien können nur in Form einer URL gespeichert werden. Eigenschaften ohne eine URL werden nicht exportiert.
+--
+
+[.collapseBox]
+.Warum werden meine Preise nicht aktualisiert?
+--
+
+Der Preisabgleich findet zusammen mit dem Artikelexport statt. Wenn Varianten Fehler aufweisen, kann der Preis nicht abgeglichen werden und wird deshalb bei Otto Market nicht aktualisiert.
+
+* Prüfe im Log, ob du Fehlermeldungen finden kannst.
 --
 
 [#1305]
-=== Auftragsbearbeitung: Fehlermeldungen im Log
+==== Fehlermeldungen im Log: Auftragsbearbeitung
 
 Hier findest du mögliche Fehlermeldungen im Zusammenhang mit der Auftragsbearbeitung.
 
