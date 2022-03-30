@@ -628,6 +628,45 @@ include::_includes:page$EA.adoc[]
 *_Hinweis:_* Du kannst bei Kaufland.de einzelne Artikelpositionen stornieren. Allerdings kann der Betrag der Stornierung nicht frei gewählt werden. Du kannst also für jede Auftragsposition nur den kompletten Verkaufspreis erstatten. Nachlässe/Preisreduzierungen sind also nicht möglich.
 |====
 
+////
+[#in-fulfillment]
+=== NEU: In-Fulfillment-Bestätigung senden
+
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um {market} darüber zu informieren, dass ein Auftrag an das Lager übergeben wurde.
+
+:table-event-procedure: <<#in-fulfillment-kaufland>>
+
+include::../_includes/textblocks/instructions/EA.adoc[]
+
+[[in-fulfillment-kaufland]]
+.Ereignisaktion, um In-Fulfillment-Bestätigung an {market} zu senden
+[cols="1,3a,3a"]
+|====
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| Ereignis wählen, zum Beispiel:
+
+* *Statuswechsel > [4] In Versandvorbereitung*
+_oder_
+
+* *Statuswechsel > [5] Freigabe Versand* +
+|
+| *Filter 1*
+| *Auftrag &gt; Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag &gt; Herkunft*
+| *Kaufland.de*
+
+| *Aktion*
+| *Auftrag*
+| *In-Fulfillment-Bestätigung an Kaufland.de senden* +
+*_Hinweis:_* Aufträge, für die keine In-Fulfillment-Bestätigung an {market} gesendet werden konnten, werden in den Status verschoben, den du für die Option *In-Fulfillment-Bestätigung* gewählt hast. Diese Option findest du im Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen*.
+|====
+////
+
 [#retouren]
 === Retouren bei Kaufland.de
 
@@ -670,3 +709,24 @@ a| Wähle einen Referenzwert, um nach bestimmten Ereignissen zu suchen.
 |
 
 |====
+
+
+[#faq]
+== FAQ und Fehlerbehebung
+
+Hier findest du Antworten auf häufig gestellte Fragen.
+
+[#no-shipping-confirmation]
+[.collapseBox]
+.Es wurde keine Versandbestätigung gesendet. Was nun?
+--
+
+Mit der Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> informierst du {market} automatisch darüber, dass die Artikel eines Auftrags versendet wurden. Wenn die Ereignisaktion nicht ausgeführt werden kann, wird der Auftrag in den Status geschoben, den du für die Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast.
+
+Prüfe Aufträge mit diesem Status:
+
+* Ist der Versanddienstleister korrekt verknüpft?
+* Ist eine Sendungsnummer an dem Auftrag gespeichert?
+
+Verschiebe Aufträge nach der Korrektur zurück in den Status, der die Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> auslöst.
+--
