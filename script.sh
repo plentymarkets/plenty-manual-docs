@@ -270,13 +270,16 @@ echo '######################';
 echo '#   Global actions   #';
 echo '######################';
 # Update links
-#find docs/ -name '*.adoc' -exec sed -r -i -E "s/<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)([a-zA-ZäöüÄÖÜß0-9\/\_\-]+)?\/([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#([a-zA-ZäöüÄÖÜß0-9\_\-]+)?)?(, ?([][ a-zA-ZäöüÄÖÜß0-9\(\)\_\»\:\-]*)?)>>/xref:\1:\3.adoc\4\[\7]/g" {} \;
+#find docs/ -name '*.adoc' -exec sed -r -i -E "s/<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)([a-zA-ZäöüÄÖÜß0-9\/\_\-]+)?\/([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#([a-zA-ZäöüÄÖÜß0-9\{\}\_\-]+)?)?(, ?([][ a-zA-ZäöüÄÖÜß0-9\(\)\{\}\_\&\*\/\,\»\"\.\:\-]*)?)>>/xref:\1:\3.adoc\4[\7]/g" {} \;
+
+# Update links in same module
+# find docs/ -name '*.adoc' -exec sed -r -i -E "s/<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#)([a-zA-ZäöüÄÖÜß0-9\_\-]+)?(, ?([][ a-zA-ZäöüÄÖÜß0-9\(\)\_\&\/\,\»\:\-]*)?)>>/xref:\1:\1.adoc\2[\5]/g" {} \;
 
 # Update tabs class
 # find docs/ -name '*.adoc' -exec sed -i -r -e "s/\[\.tabs\]/\[tabs\]/ig" {} \;
 
 # Global actions for all files
-find docs/ -name '*.adoc' -exec sed -r -i -E "s/<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)([a-zA-ZäöüÄÖÜß0-9\/\_\-]+)?\/([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#([a-zA-ZäöüÄÖÜß0-9\_\-]+)?)?(, ?([][ a-zA-ZäöüÄÖÜß0-9\(\)\_\»\:\-]*)?)>>/xref:\1:\3.adoc\4\[\7]/g;s/\[\.tabs\]/\[tabs\]/ig" {} \;
+find docs/ -name '*.adoc' -exec sed -r -i -E "<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)([a-zA-ZäöüÄÖÜß0-9\/\_\-]+)?\/([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#([a-zA-ZäöüÄÖÜß0-9\{\}\_\-]+)?)?(, ?([][ a-zA-ZäöüÄÖÜß0-9\(\)\{\}\_\&\*\/\,\»\"\.\:\-]*)?)>>/xref:\1:\3.adoc\4[\7]/g;s/<<([a-zA-ZäöüÄÖÜß0-9\_\-]+)(#)([a-zA-ZäöüÄÖÜß0-9\_\-]+)?(, ?([][ a-zA-ZäöüÄÖÜß0-9\(\)\_\&\/\,\»\:\-]*)?)>>/xref:\1:\1.adoc\2[\5]/g;s/\[\.tabs\]/\[tabs\]/ig" {} \;
 
 # Update position header attribute
 find docs/ -path '*/pages/*' -name '*.adoc' -exec sed -i -r -e "s/:position:\s0/:page-index: false/ig;s/:position:\s[0-9]{5,}/:page-index: false/ig" {} \;
