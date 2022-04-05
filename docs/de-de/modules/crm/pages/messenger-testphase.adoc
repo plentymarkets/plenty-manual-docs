@@ -1,0 +1,684 @@
+= Messenger (Testphase)
+:keywords:
+:description: Erfahre, wie du den Messenger in plentymarkets für den E-Mail-Versand und E-Mail-Empfang nutzt.
+:author: team-crm
+
+Im Menü *CRM » Messenger (Testphase)* verwaltest du sowohl die externe Kommunikation mit deinen Kund:innen in Form von E-Mails als auch die interne Kommunikation in Form von Nachrichten. Wenn du Nachrichten flüsterst, sind diese Nachrichten nur in deinem plentymarkets System sichtbar und können von deinen Kontakten _nicht_ eingesehen werden. 
+
+// TODO: Einleitung ergänzen
+
+Das Menü *CRM » Messenger (Testphase)* ist wie folgt aufgebaut:
+
+// TODO: farblich markierten Screenshot einfügen.
+
+* *Navigation*: Hier navigierst du durch die einzelnen Bereiche des Menüs. Der aktuell ausgewählte Bereich (blauer Hintergrund) wird im Hauptfenster rechts angezeigt. Klicke auf icon:bars[], um die Navigationsleiste ein- und auszublenden. +
+** Verfügbare Bereiche in der Navigation: icon:add[set=material] *Neue Nachricht*, Posteingang, <<#neue-nachrichten, Neue Nachrichten>>, <<#meine-nachrichten, Meine Nachrichten>>, <<#papierkorb, Papierkorb>>.
+* *Toolbar*: Hier kannst du nach <<#nachricht-suchen, Nachrichten suchen>>, die <<#spalten-konfigurieren, Spalten in der Übersicht anpassen>>, die Ergebnisse, die du pro Seite angezeigt haben möchtest, einstellen, und durch die Seiten mit den Nachrichten klicken.
+* *Hauptfenster*: Hier wird der aktuell geöffnete Bereich angezeigt. +
+** *Übersicht*: Wenn du eine Suche ausführst, siehst du die Ergebnisse in einer Übersicht. Die Übersicht liefert auf einen Blick Informationen zu den gefundenen Konversationen. Zum Beispiel siehst du die E-Mail-Adressen der Absender:innen, den Betreff, das Empfangsdatum der Nachricht, die zugeordneten Tags und anhand des Symbols icon:attach_file[set=material], ob die Nachricht einen Anhang hat. +
+** *Detailansicht*: Wenn du eine Nachricht öffnest, werden die Details unterhalb des Hauptfensters sichtbar. Die Detailansicht einer Nachricht ist unterteilt in die Konversation – also den Nachrichtenverlauf – und den Editor, in dem du deine Antwort verfassen kannst.
+
+[discrete]
+== Neue Features
+
+[.collapseBox]
+.Neue Features im Vergleich zum "alten" Messenger
+--
+Du findest die folgenden Neuerungen im neuen Messenger, die es vorher im "alten" Messenger nicht gab:
+
+* E-Mails von deinen Kund:innen empfangen
+* E-Mails an deine Kund:innen senden
+* Gruppenfunktion im Messenger nutzen
+* Konversationen abonnieren und Benachrichtigungen über neue Nachrichten innerhalb dieser Konversation erhalten
+* Anzeige im Backend, wenn andere Systembenutzer:innen gerade auf eine Nachricht antworten
+--
+
+[#vorbereitende-einstellungen]
+== Vorbereitende Einstellungen
+
+Wenn Benutzer:innen vom Typ *Backend* mit dem Messenger arbeiten sollen, muss eine Person mit *Admin*-Zugang zunächst Rechte für diese Benutzer:innen vergeben. Außerdem musst du Tags erstellen, damit diese für den Messenger zur Verfügung stehen und auch für die Tags bestimmte Rechte vergeben.
+
+[#benutzerrechte-backend-benutzer]
+=== Rechte für Backend-Benutzer:innen vergeben
+
+:rights-purpose: Nachrichten im Messenger sehen und erstellen
+:right-one: pass:quotes[*CRM > Nachricht > Anzeigen*]
+:right-two: pass:quotes[*CRM > Nachricht > Erstellen*]
+:right-three: pass:quotes[*Kommentare > Anzeigen*]
+:right-four: pass:quotes[*Kommentare > Erstellen*]
+:right-five: pass:quotes[*Einrichtung > Eigenschaft > Anzeigen*]
+:right-six: pass:quotes[*Einrichtung > Eigenschaft > Erstellen*]
+
+include::_includes:page$rechte.adoc[]
+
+[#tags-messenger]
+=== Tags für den Messenger erstellen
+
+Du hast die Möglichkeit, den Nachrichten im Messenger Tags zuzuordnen und nach diesen auch in der Übersicht zu filtern. Tags sind Schlagworte, die dir das Gruppieren von Nachrichten leichter machen.
+
+Welche Benutzer:innenrechte notwendig sind und wie du Tags erstellst, ist nachfolgend beschrieben.
+
+[#rechte-tags]
+==== Rechte für Backend-Benutzer:innen vergeben
+
+include::_includes:page$tags-rights.adoc[]
+
+[#tags-erstellen]
+==== Tags erstellen
+
+include::_includes:page$tags-creation.adoc[]
+
+[TIP]
+Wenn du Nachrichten erstellen möchtest, die über den Messenger _kostenpflichtig_ abgerechnet werden sollen, erstelle nach dem selben Schema Tags für den Bereich *Nachrichten (kostenpflichtig)*. Diese Tags musst du dann der <<#nachricht-erstellen, Nachricht>> hinzufügen.
+
+[#assistent-durchlaufen]
+=== Assistent durchlaufen
+
+Um mit dem Messenger Nachrichten senden und empfangen zu können, musst du den Assistenten *Messenger-Konfiguration* im Menü *Einrichtung » Assistenten » Grundeinrichtung* durchlaufen. Im Folgenden werden die einzelnen Schritte, die du in diesem Assistenten durchläufst, beschrieben.
+
+[TIP]
+Für jedes Postfach, das du erstellen möchtest, musst du den Assistenten jeweils einmal durchlaufen. +
+Du kannst jedem Postfach andere Tags zuweisen, um später nach diesen Tags <<#nachricht-suchen, filtern>> zu können.
+
+[#service-aktivierung]
+[discrete]
+==== Service-Aktivierung
+
+In diesem Schritt aktivierst du den Messenger-Service. Wenn die Schaltfläche blau (icon:toggle_on[set=material, role=skyBlue]) ist, ist der Service aktiviert. Wenn die Schaltfläche grau (icon:toggle_off[set=material, role=darkGrey]) ist, ist der Service _nicht_ aktiviert.
+
+[#e-mail-weiterleitung]
+[discrete]
+==== E-Mail-Weiterleitung
+
+In diesem Schritt wird automatisch eine kryptische E-Mail-Adresse, die die weiterleitende E-Mail-Adresse darstellt, erstellt. Verwende diese E-Mail-Adresse, um deinen E-Mail-Client einzurichten, damit deine E-Mails automatisch weitergeleitet werden. Beachte, dass du diese kryptische E-Mail-Adresse _nicht_ ändern kannst.
+
+Gib im unteren Bereich alle E-Mail-Adressen ein, die Nachrichten an die kryptische, weiterleitende E-Mail-Adresse oben senden dürfen.
+
+Du kannst beliebig viele E-Mail-Adressen mit einem Klick auf *Hinzufügen* (icon:plus-square[role="green"]) hinzufügen.
+
+[#verifizierung-e-mail-adressen]
+[discrete]
+==== Verifizierung der E-Mail-Adressen
+
+In diesem Schritt siehst du den Fortschritt des Verifizierungsvorgangs. plentymarkets sendet eine E-Mail an alle E-Mail-Adressen, die du im vorherigen Schritt <<#e-mail-weiterleitung, E-Mail-Weiterleitung>> eingegeben hast. Das System prüft dann, ob die E-Mail-Adressen valide sind und die Weiterleitungen funktionieren.
+
+[#einstellungen-e-mail-versand]
+[discrete]
+==== Einstellungen für den E-Mail-Versand
+
+// ehemals: SMTP-Konfiguration
+
+In diesem Schritt speicherst du die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest, damit dein plentymarkets System E-Mails wie Auftragsbestätigungen und Versandbestätigungen von dieser E-Mail-Adresse versenden kann. 
+
+Wähle nach Eingabe der Zugangsdaten (Host-Name, Benutzername, Port, Passwort) die Verschlüsselung und gib die Absender-E-Mail-Adresse sowie den Absendernamen ein. Diese E-Mail-Adresse und dieser Name wird den Empfänger:innen deiner E-Mails aus diesem Postfach angezeigt.
+
+*_Hinweis für Postfächer bei mailbox.org:_* Gib den Port *465* ein und wähle als Verschlüsselung die Einstellung *SSL*.
+
+// ggf. neue Tabelle einfügen mit aktuellen Zahlen analog zu dieser Tabelle hier: https://knowledge.plentymarkets.com/crm/e-mails-versenden#200
+
+// ggf. Tabelle mit weiteren Beispielen außer mailbox.org: Googlemail, Office365, ionos, sendgrid (Marvin fragen)
+
+Außerdem wählst du in diesem Schritt eine E-Mail-Vorlage für den E-Mail-Versand, die du vorher bereits im xref:crm:emailbuilder.adoc[EmailBuilder] erstellt hast. Beachte, dass die hier gewählte Vorlage Messenger-Variablen enthalten sollte. 
+
+Im EmailBuilder stehen dir die folgenden Messenger-bezogenen Variablen zur Verfügung:
+
+* ID der Nachricht
+* ID der Konversation
+* Inhalt der Nachricht
+* Titel der Nachricht
+* Vorschau der Nachricht
+* Minuten der Nachricht
+* Abrechenbare Minuten der Nachricht
+
+// TODO: Erklärung zu Messenger-Variablen ergänzen
+
+[#einstellungen-e-mail-empfang]
+[discrete]
+==== Einstellungen für den E-Mail-Empfang
+
+// ehemals: Inbox configuration
+
+In diesem Schritt wählst du den oder die Tags, die die Nachrichten erhalten sollen, wenn diese von weitergeleiteten Adressen empfangen werden.
+
+Im letzten Abschnitt wählst du die Abonnent:innen, die bei neuen Nachrichten informiert werden. Wähle entweder einzelne Benutzer:innen aus der Dropdown-Liste oder wähle Rollen, damit alle dieser Rolle zugewiesenen Benutzer:innen neue Nachrichten in diesem Postfach abonnieren.
+
+[#nachricht-erstellen]
+== Nachricht erstellen
+
+Gehe wie im Folgenden beschrieben vor, um eine neue Nachricht im Messenger zu erstellen.
+
+[.instruction]
+Nachricht erstellen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke oben links auf icon:add[set=material] *Neue Nachricht*.
+. Gib im Feld *Empfänger* einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste. +
+*_Beispiel:_* Wenn du eine Zahl eingibst, werden dir mögliche Empfänger:innen mit dieser Auftrags-ID oder Kontakt-ID vorgeschlagen (siehe <<#image-messenger-new-message-suggestion-list>>).
+. Gib den Betreff deiner Nachricht im Feld *Betreff* ein.
+. Klicke oben rechts auf *Tags* (icon:local_offer[set=material]), um Tags zu der Nachricht hinzuzufügen.
+. Gib im Textfeld die Nachricht ein.
+. Klicke auf icon:attach_file[set=material], um der Nachricht Anhänge hinzuzufügen.
+. Wähle mit einem Klick auf icon:more_vert[set=material] ggf. weitere Optionen.
+. Beachte dazu die Erläuterungen in <<#table-create-new-message>>.
+. Klicke auf icon:forward_to_inbox[set=material] *SENDEN*.
+
+[[image-messenger-new-message-suggestion-list]]
+.Beispiel: Vorschlagsliste nach Eingabe von "102" im Empfänger:innen-Feld
+image::messenger-new-message-suggestion-list.png[width=640, height=360]
+
+// <<#image-messenger-new-message-suggestion-list>> zeigt --> Erläuterung ergänzen. Am besten neues Beispiel wählen, da hier Joseph Waits sowohl Kontakt-ID 102 als auch Auftrags-ID 102 hat....
+
+[[table-create-new-message]]
+.Neue Nachricht im Messenger erstellen
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Empfänger:innen*
+|Gib hier einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste (siehe <<#image-messenger-new-message-suggestion-list>>).
+
+| *Betreff*
+|Gib einen Betreff für die Nachricht ein.
+
+| *Tags* (icon:local_offer[set=material])
+|Mit einem Klick auf icon:local_offer[set=material] kannst du der Nachricht <<#kontextmenue-tags, Tags hinzufügen>>.
+
+| *Textfeld*
+|Gib hier den Inhalt der Nachricht ein.
+
+| *Anhänge* (icon:attach_file[set=material])
+|Klicke auf icon:attach_file[set=material], um deiner Nachricht Anhänge hinzuzufügen. Wähle beliebig viele Anhänge von deinem Computer aus. +
+Die folgenden Dateitypen sind als Anhang in der Nachricht zulässig: +
+bmp, csv, gif, jpeg, json, pdf, png, tiff, txt, xlsx, zip.
+
+| *Abrechnen* (icon:more_vert[set=material)])
+|Du kannst eine Nachricht abrechnen, wenn es nicht um eine geflüsterte Nachricht handelt. Klicke dazu zunächst auf icon:more_vert[set=material]. Wenn du dann die Schaltfläche *Abrechnen* aktivierst (icon:toggle_on[set=material, role=skyBlue]), wird diese Nachricht abgerechnet. Die Schaltfläche icon:forward_to_inbox[set=material] *SENDEN* wird geändert in icon:forward_to_inbox[set=material] *ABRECHNEN UND SENDEN*. +
+*_Hinweis:_* Sobald die Schaltfläche *Abrechnen* aktiviert ist, kann für diese Nachricht nicht der Flüstermodus aktiviert werden.
+
+| *Timer* (icon:more_vert[set=material)])
+|Du kannst für jede Nachricht einen Timer starten. Klicke dazu zunächst auf icon:more_vert[set=material]. Wenn du dann die Schaltfläche *Timer* aktivierst (icon:toggle_on[set=material, role=skyBlue]), startet automatisch der Timer neben der Schaltfläche *SENDEN*. +
+Klicke auf icon:pause-circle-o[], um den Timer anzuhalten bzw. auf icon:play-circle[], damit die Zeit weiterläuft.
+
+| *Flüstern* (icon:more_vert[set=material)])
+|Du kannst Nachrichten flüstern, damit diese nur intern sichtbar sind. Klicke dazu zunächst auf icon:more_vert[set=material]. Wenn du dann die Schaltfläche *Flüstern* aktivierst (icon:toggle_on[set=material, role=skyBlue]), wird diese Nachricht geflüstert. Das bedeutet, dass diese nur für interne Zwecke genutzt wird und _nicht_ extern versendet wird. Du erkennst eine geflüsterte Nachricht in dieser Ansicht an der Schaltfläche *Flüstern* (icon:visibility_off[set=material]) neben der Schaltfläche *SENDEN*. +
+In der Übersicht werden geflüsterte Nachrichten in _kursiver Schrift_ dargestellt. +
+*_Hinweis:_* Sobald der Flüstermodus für diese Nachricht aktiviert ist, kann die Schaltfläche *Abrechnen* nicht mehr aktiviert werden.
+
+| *Senden*
+|Mit einem Klick auf icon:forward_to_inbox[set=material] *SENDEN* wird die Nachricht gesendet.
+
+|====
+
+[#konversation-suchen]
+== Konversation im Messenger suchen
+
+Über die Übersicht im Messenger kannst du alle Konversationen in einer Liste öffnen oder du wählst Filter (icon:tune[set=material]), um die Suchergebnisse einzugrenzen.
+
+[.instruction]
+Konversation im Messenger suchen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*. +
+* *_Möglichkeit 1:_* Klicke auf icon:search[set=material], um eine Liste aller Konversationen zu sehen.
+* *_Möglichkeit 2:_* Gib einen Suchbegriff aus dem Betreff der Konversation im Suchfeld ein und wähle dann den passenden Filter aus der Vorschlagsliste. 
+* *_Möglichkeit 3:_* Klicke auf icon:tune[set=material], um die Suchergebnisse mit Hilfe von Filtern einzugrenzen.
+. Beachte die Erläuterungen zu den Filtern in <<#table-search-message>>.
+
+[[table-search-message]]
+.Filteroptionen im Messenger
+[cols="1,3"]
+|====
+|Filter |Erläuterung
+
+| *Inhalt*
+|Gib einen Begriff ein, um nach Konversationen zu suchen, die die diesen Begriff im Betreff enthalten.
+
+| *Abgekürzte ID*
+|Gib die ID der Konversation ein, um nach der Konversation mit genau dieser ID zu suchen.
+
+| *Von* / *Bis*
+|Gib ein Datum ein oder wähle die Datumsangaben aus den Kalendern (icon:today[set=material]), um nach Konversationen in einem bestimmten Zeitraum zu suchen.
+
+| *Herkunft*
+|Wähle eine Herkunft, um nach Konversationen mit dieser Herkunft zu suchen. +
+Verfügbare Optionen: *Backend*, *REST*, *Plugin* und *PayPal Plugin*.
+
+| *Status*
+|Wähle einen Status, um nach Konversationen mit diesem Status zu suchen. +
+Verfügbare Werte: *Erledigt* und *Nicht erledigt*.
+
+| *Tags*
+|Wähle (icon:check-square[role="blue"]) Tags, um nach Konversationen mit diesen <<#tags-messenger, Tags>> zu suchen.
+
+| *Zurücksetzen*
+|Setzt die gewählten Filtereinstellungen zurück.
+
+| *Suchen*
+|Führt die Suche aus. Die gefundenen Konversationen werden in der Übersicht angezeigt. +
+*_Tipp:_* Setze keine Filter, wenn du alle Konversationen in der Übersicht sehen möchtest.
+
+|====
+
+
+[#aktuellen-filter-speichern]
+== Aktuellen Filter speichern
+
+Wenn du eine Suche ausführst, siehst du deine gewählten Filter oben als so genannte "Chips" dargestellt. Diese Filter kannst du speichern, um sie in Zukunft schneller und einfacher wieder verwenden zu können.
+
+[.instruction]
+Aktuellen Filter speichern: 
+
+. Führe eine Suche aus.
+. Klicke auf *Gespeicherte Filter* (icon:bookmarks[set=material]).
+. Klicke auf icon:bookmark_border[set=material] *Aktuellen Filter speichern*.
+. Gib einen Namen für den Filter ein.
+. Entscheide, ob
+** dieser <<#filter-als-standard, Filter als Standard>> festgelegt werden soll (icon:toggle-on[role="blue"])
+** dieser Filter für alle Benutzer:innen erstellt werden soll (icon:toggle-on[role="blue"]).
+. Klicke auf *SPEICHERN*. +
+→ Der Filter erscheint nun unter *Gespeicherte Filter* (icon:bookmarks[set=material]).
+
+[TIP]
+Lege die Reihenfolge der Filter per Drag-and-drop mit einem Klick auf *Verschieben* (icon:drag_indicator[set=material]) fest. Klicke auf icon:delete[set=material], um einen Filter zu löschen.
+
+[#gespeicherte-filter-anwenden]
+== Gespeicherte Filter anwenden
+
+Gehe wie im Folgenden vor, um einen gespeicherten Filter in der Suche anzuwenden.
+
+[.instruction]
+Gespeicherte Filter anwenden: 
+
+. Klicke auf *Gespeicherte Filter* (icon:bookmarks[set=material]).
+. Klicke auf einen bereits erstellten Filter. +
+→ Die Suche wird ausgeführt und die verwendeten Filtereinstellungen werden oben als so genannte "Chips" dargestellt.
+
+[#filter-als-standard]
+== Filter als Standard festlegen
+
+Damit du einen häufig verwendeten Filter nicht jedes Mal beim Öffnen des Menüs *CRM » Messenger (Testphase)* erst aus der Liste deiner <<#gespeicherte-filter-anwenden, gespeicherten Filter>> wählen musst, kannst du einen erstellten Filter als Standard festlegen. Jedes Mal, wenn du den Messenger öffnest, wird dieser Filter dann also automatisch ausgeführt.
+
+Du kannst einen Filter direkt beim Erstellen als Standard festlegen wie im Kapitel <<#aktuellen-filter-speichern, Aktuellen Filter speichern>> beschrieben oder du legst den Filter nachträglich aus der Übersicht heraus als Standard fest.
+
+Klicke in der Zeile des gespeicherten Filters auf icon:star-o[] *Als Standard festlegen*.
+
+Wenn du einen anderen Filter als Standard festlegen möchtest, deaktiviere den aktuell gewählten Standardfilter mit einem Klick auf icon:star[] *Nicht als Standard verwenden*.
+
+[#spalten-konfigurieren]
+=== Spalten konfigurieren
+
+In der Übersicht des Messenger kannst du dir die folgenden Spalten anzeigen lassen:
+
+* Auswahl
+** Diese Option zeigt die Checkbox für die Gruppenfunktion (icon:check_box_outline_blank[set=material]) in der Übersicht an.
+* Status
+* Abgekürzte ID
+* Herkunft
+* Von
+* Titel
+* Erstellt am
+* Tags
+* Anhang
+* Abonnement-Status
+* <<#kontextmenue, Kontextmenü>>
+
+Über die Schaltfläche *Spalten konfigurieren* (icon:settings[set=material]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+
+[#ansicht-wechseln]
+=== Ansicht wechseln
+
+Du hast die Möglichkeit, die Ansicht im Messenger von einer Tabelle zu einer Liste zu wechseln. Klicke dazu auf *Ansicht wechseln* (icon:list[set=material]) ganz oben rechts in der Übersicht. +
+Standardmäßig ist die Tabellenansicht gewählt.
+
+// ggf. Screenshots einfügen?
+// Tabellenansicht: im oberen Bereich werden alle gefundenen Konversationen als Tabelle (inklusive Tabellenüberschriften) angezeigt. Die ausgewählte Konversation mit allen darin enthaltenen Nachrichten wird unten links angezeigt und der Editor zum Beantworten der Nachricht unten rechts.
+// Listenansicht: im linken Bereich werden alle gefundenen Konversationen als Liste angezeigt (keine (Tabellen-)Überschriften). Die ausgewählte Konversation mit allen darin enthaltenen Nachrichten wird im oberen rechten Bereich angezeigt und der Editor zum Beantworten der Nachricht unten rechts.
+
+[#kontextmenue]
+== Konversationen in der Übersicht bearbeiten
+
+In der Messenger-Übersicht stehen dir über das Kontextmenü in der Zeile der Konversation mit einem Klick auf icon:more_vert[set=material] die folgenden Funktionen zur Verfügung:
+
+[[image-messenger-context-menu-overview]]
+.Konversation über das Kontextmenü bearbeiten
+image::messenger-context-menu-overview.png[width=640, height=360]
+
+* <<#kontextmenue-als-gelesen-ungelesen-markieren, Konversation als gelesen / ungelesen markieren>>
+* <<#kontextmenue-tags, Tags einer Konversation zuweisen>>
+* <<#kontextmenue-als-erledigt-nicht-erledigt-markieren, Konversation als erledigt / nicht erledigt markieren>>
+* <<#kontextmenue-konversation-loeschen, Konversation löschen>>
+
+[#kontextmenue-als-gelesen-ungelesen-markieren]
+=== Konversation als gelesen / ungelesen markieren
+
+Gehe wie in den folgenden Unterkapiteln beschrieben vor, um eine Konversation als <<#konversation-als-gelesen-markieren, gelesen>> oder <<#konversation-als-ungelesen-markieren, ungelesen>> zu markieren.
+
+[#konversation-als-gelesen-markieren]
+==== Konversation als gelesen markieren
+
+Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht heraus als gelesen zu markieren.
+
+[.instruction]
+Konversation als gelesen markieren:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation, die du als gelesen markieren möchtest auf icon:more_vert[set=material].
+. Klicke auf icon:mark_email_read[set=material] *Als gelesen markieren*. +
+→ Die Zeile der Konversation ist nicht mehr in Fettdruck dargestellt und der blaue Punkt icon:circle[role="blue"] am Zeilenanfang verschwindet.
+
+[#konversation-als-ungelesen-markieren]
+==== Konversation als ungelesen markieren
+
+Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht heraus als ungelesen zu markieren.
+
+[.instruction]
+Konversation als ungelesen markieren:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation, die du als ungelesen markieren möchtest auf icon:more_vert[set=material].
+. Klicke auf icon:mark_email_unread[set=material] *Als ungelesen markieren*. +
+→ Die Zeile der Konversation wird in Fettdruck dargestellt und ein blauer Punkt icon:circle[role="blue"] erscheint am Zeilenanfang.
+
+[#kontextmenue-tags]
+=== Tags einer Konversation zuweisen
+
+Gehe wie im Folgenden beschrieben vor, um einer Konversation aus der Übersicht heraus ein Tag zuzuweisen. Du hast auch die Möglichkeit, nach Tags zu suchen, die für den Messenger verfügbar sind. Dies kann zum Beispiel sinnvoll sein, wenn du sehr viele Tags für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* erstellt hast.
+
+[.instruction]
+Tags einer Konversation zuweisen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation auf icon:more_vert[set=material].
+. Klicke auf icon:local_offer[set=material] *Tags*, um eine Liste aller bereits für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* <<#tags-messenger, erstellten>> Tags zu sehen. +
+*_Tipp:_* Wenn du sehr viele Tags für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* erstellt hast, gib den Namen des Tags in das Suchfeld *Nach Tag suchen* ein.
+. Wähle (icon:check-square[role="blue"]) die Tags, die du der Konversation zuweisen möchtest. +
+→ Der Tag wird der Konversation zugewiesen und du siehst den Tag in der Übersicht in der Spalte *Tags*.
+
+[#tag-hinzufuegen]
+==== Tag hinzufügen
+
+Wenn du den gesuchten Tag nicht gefunden hast, wie im Kapitel <<#kontextmenue-tags, Tags zuweisen>> beschrieben, kannst du aus der Übersicht des Messengers heraus einen neuen Tag erstellen. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Neuen Tag erstellen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation auf icon:more_vert[set=material].
+. Klicke auf icon:local_offer[set=material] *Tags*.
+. Klicke auf icon:add[set=material] *Tag hinzufügen*, um ein neues Tag zu erstellen. +
+→ Du wirst automatisch in das Menü *Einrichtung » Einstellungen » Tags* weitergeleitet. Dort kannst du weitere Tags für den Bereich *Nachrichten* bzw. *Nachricht (kostenpflichtig)* erstellen.
+
+[#tag-bearbeiten]
+==== Tag bearbeiten
+
+Gehe wie im Folgenden beschrieben vor, um aus der Übersicht des Messengers heraus ein Tag zu bearbeiten.
+
+[.instruction]
+Tag bearbeiten:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation auf icon:more_vert[set=material].
+. Klicke auf icon:local_offer[set=material] *Tags*.
+. Klicke auf icon:edit[set=material] *Tag bearbeiten*, um ein bestehendes Tag zu bearbeiten. +
+→ Du wirst automatisch in das Menü *Einrichtung » Einstellungen » Tags* weitergeleitet. Dort kannst du die Tags bearbeiten.
+
+[#kontextmenue-als-erledigt-nicht-erledigt-markieren]
+=== Konversation als erledigt / nicht erledigt markieren
+
+Gehe wie in den folgenden Unterkapiteln beschrieben vor, um eine Konversation als <<#kontextmenue-als-erledigt-markieren, erledigt>> oder <<#kontextmenue-als-nicht-erledigt-markieren, nicht erledigt>> zu markieren.
+
+[#kontextmenue-als-erledigt-markieren]
+==== Konversation als erledigt markieren
+
+Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht heraus als erledigt zu markieren.
+
+[.instruction]
+Konversation als erledigt markieren:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation, die du als erledigt markieren möchtest auf icon:more_vert[set=material].
+. Klicke auf icon:done_all[set=material] *Als erledigt markieren*. +
+→ Am Zeilenanfang der Konversation wird das Symbol icon:done_all[set=material] angezeigt.
+
+[#kontextmenue-als-nicht-erledigt-markieren]
+==== Konversation als nicht erledigt markieren
+
+Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht heraus als nicht erledigt zu markieren.
+
+[.instruction]
+Konversation als nicht erledigt markieren:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation, die du als nicht erledigt markieren möchtest auf icon:more_vert[set=material].
+. Klicke auf icon:remove_done[set=material] *Als nicht erledigt markieren*. +
+→ Am Zeilenanfang der Konversation wird das Symbol icon:done_all[set=material] entfernt.
+
+[#kontextmenue-konversation-loeschen]
+=== Konversation löschen
+
+Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht heraus zu löschen.
+
+[.instruction]
+Konversation löschen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in der Zeile der Konversation, die du löschen möchtest auf icon:more_vert[set=material].
+. Klicke auf icon:delete[set=material] *Löschen*. +
+→ Ein Fenster mit einer Sicherheitsabfrage erscheint.
+. Klicke auf *Ja*. +
+→ Die Konversation wird gelöscht und in den <<#papierkorb, Papierkorb>> verschoben.
+
+[#konversationen-abonnieren]
+== Konversation abonnieren
+
+Du kannst Konversationen, an denen du nicht direkt beteiligt bist, jederzeit abonnieren, damit du bei Eingang neuer Nachrichten innerhalb dieser Konversation benachrichtigt wirst. Nicht direkt beteiligt bedeutet, dass du weder eine Empfänger:in noch eine Absender:in einer Nachricht innerhalb dieser Konversation bist. Selbstverständlich kannst du das Abonnement von Konversationen mit einem Klick auch einfach wieder kündigen bzw. abbestellen.
+
+[#konversation-abonnieren]
+=== Konversation abonnieren
+
+Gehe wie im Folgenden beschrieben vor, um eine Konversation zu abonnieren.
+
+[.instruction]
+Konversation abonnieren:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in die Zeile der Konversation, die du abonnieren möchtest. +
+→ Die Konversation wird geöffnet.
+. Klicke auf *Abonniert* (icon:notifications_active[set=material]), um die Konversation zu abonnieren. +
+→ Du erhältst oben rechts in deinem plentymarkets Backend eine Benachrichtigung über das Symbol icon:notifications[set=material].
+
+// Screenshot von der Glocke im Backend oben rechts hinzufügen / Text anpassen, da UI angepasst wurde.
+
+[#konversation-nicht-abonnieren]
+=== Konversation nicht mehr abonnieren
+
+Gehe wie im Folgenden beschrieben vor, um das Abonnement einer Konversation abzubestellen.
+
+[.instruction]
+Konversation nicht abonnieren:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke in die Zeile der Konversation, deren Abonnement du abbestellen möchtest. +
+→ Die Konversation wird geöffnet.
+. Klicke auf *Nicht abonniert* (icon:notifications_off[set=material]), um das Abonnement für diese Konversation abzubestellen. +
+→ Du erhältst ab sofort keine Benachrichtigungen mehr, wenn eine neue Nachricht in dieser Konversation eingeht.
+
+[#nachricht-abrechnen]
+== Nachricht abrechnen
+
+// TODO:  text ergänzen
+
+// TODO: Screenshot von abgerechneter Nachricht einfügen.
+
+[#einzelne-nachricht-bearbeiten]
+== Einzelne Nachricht bearbeiten
+
+Das <<#kontextmenue, Kontextmenü für die Konversationen>> hast du weiter oben auf dieser Seite bereits kennengelernt. Natürlich kannst du auch einzelne Nachrichten über ein Kontextmenü bearbeiten. Gehe dazu wie in den folgenden Unterkapiteln beschrieben vor.
+
+[[image-messenger-edit-single-message]]
+.Einzelne Nachricht über das Kontextmenü bearbeiten
+image::messenger-edit-single-message.png[width=640, height=360]
+
+[#einzelne-nachricht-oeffnen]
+=== Nachricht öffnen
+
+Um eine Nachricht zu öffnen, kannst du entweder direkt auf die Nachricht klicken. Oder du öffnest das Kontextmenü in der Zeile der Nachricht mit einem Klick auf icon:more_vert[set=material] und dann auf icon:open_link[set=material] *Nachricht öffnen*.
+
+[#einzelne-nachricht-tags-zuweisen]
+=== Tags einer Nachricht zuweisen
+
+Gehe wie im Folgenden beschrieben vor, um einer einzelnen Nachricht einen Tag zuzuweisen.
+
+[.instruction]
+Tags einer Nachricht zuweisen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Öffne die Konversation, die die Nachricht enthält, der du einen Tag zuweisen möchtest.  
+. Öffne die Nachricht mit einem Klick in die Zeile der Nachricht.
+. Klicke auf icon:local_offer[set=material] *Tags*, um eine Liste aller bereits für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* <<#tags-messenger, erstellten>> Tags zu sehen. +
+*_Tipp:_* Wenn du sehr viele Tags für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* erstellt hast, gib den Namen des Tags in das Suchfeld *Nach Tag suchen* ein.
+. Wähle (icon:check-square[role="blue"]) die Tags, die du der Nachricht zuweisen möchtest. 
+
+// FRAGE: Kann man hier wirklich nur einer einzelnen Nachricht einen Tag zuweisen oder bekommt dann die gesamte Konversation auch den Tag zugewiesen? Wenn nur die Nachricht den Tag erhält, wie verhält es sich dann mit den Filtern in der Suche? Wird der Tag an einzelnen Nachrichten in der Suche berücksichtigt? 
+
+[#einzelne-nachricht-loeschen]
+=== Nachricht löschen
+
+Gehe wie im Folgenden beschrieben vor, um eine einzelne Nachricht zu löschen.
+
+[.instruction]
+Einzelne Nachricht löschen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Öffne die Konversation, die die Nachricht enthält, die du löschen möchtest.  
+. Öffne die Nachricht mit einem Klick in die Zeile der Nachricht.
+. Klicke auf icon:more_vert[set=material].
+. Klicke auf icon:delete[set=material] *Löschen*. +
+→ Ein Fenster mit einer Sicherheitsabfrage erscheint.
+. Klicke auf *Ja*. +
+→ Die Nachricht wird gelöscht und in den <<#papierkorb, Papierkorb>> verschoben.
+
+// FRAGE: Die einzelne gelöschte Nachricht wird auch in den Papierkorb verschoben? Konnte ich im System nicht nachstellen.
+
+[#gruppenfunktion]
+== Gruppenfunktion nutzen
+
+Sobald du eine Nachricht in der Übersicht markiert hast (icon:check-square[role="blue"]), werden die verschiedenen Schaltflächen sichtbar (siehe <<#image-messenger-group-functions-conversations>>). In <<#table-group-functions-messenger>> sind die Bedienelemente aus der Gruppenfunktion sowie deren Erläuterungen aufgelistet.
+
+[[image-messenger-group-functions-conversations]]
+.Gruppenfunktion in der Übersicht
+image::messenger-group-functions-conversations.png[width=640, height=360]
+
+[[table-group-functions-messenger]]
+.Gruppenfunktion im Messenger nutzen
+[cols="2,1,6"]
+|====
+|Bedienelement |Symbol |Erläuterung
+
+| *Als gelesen markieren*
+|icon:mark_email_read[set=material]
+|Markiert alle gewählten Konversationen als gelesen.
+
+| *Als ungelesen markieren*
+|icon:mark_email_unread[set=material]
+|Markiert alle gewählten Konversationen als ungelesen.
+
+| *Als erledigt markieren*
+|icon:done_all[set=material]
+|Markiert alle gewählten Konversationen als erledigt.
+
+| *Als nicht erledigt markieren*
+|icon:remove_done[set=material]
+|Markiert alle gewählten Konversationen als nicht erledigt.
+
+| *Tags*
+|icon:local_offer[set=material]
+|Weist allen gewählten Konversationen den gewünschten Tag zu.
+
+| *Konversationen löschen*
+|icon:delete[set=material]
+|Löscht alle gewählten Konversationen nach dem Bestätigen der Sicherheitsabfrage.
+
+|====
+
+[#neue-nachrichten]
+== Neue Nachrichten
+
+In der Navigation auf der linken Seite des Messengers findest du unterhalb des Ordners icon:inbox[set=material] *Posteingang* den Ordner icon:mark_chat_unread[set=material] *Neue Nachrichten*.
+
+[discrete]
+[#spalten-konfigurieren-neue-nachrichten]
+=== Spalten konfigurieren
+
+Im Ordner *Neue Nachrichten* des Messengers kannst du dir die folgenden Spalten anzeigen lassen:
+
+* Auswahl
+** Diese Option zeigt die Checkbox für die Gruppenfunktion (icon:check_box_outline_blank[set=material]) in der Übersicht an.
+* Status
+* Abgekürzte ID
+* Herkunft
+* Von
+* Titel
+* Erstellt am
+* Tags
+* Anhang
+* Abonnement-Status
+* <<#kontextmenue, Kontextmenü>>
+
+Über die Schaltfläche *Spalten konfigurieren* (icon:settings[set=material]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+
+[#meine-nachrichten]
+== Meine Nachrichten
+
+In der Navigation auf der linken Seite des Messengers findest du unterhalb des Ordners icon:inbox[set=material] *Posteingang* den Ordner icon:3p[set=material] *Meine Nachrichten*. Hier siehst du alle Konversationen, die du <<#konversationen-abonnieren, abonniert>> hast. 
+
+[discrete]
+[#spalten-konfigurieren-meine-nachrichten]
+=== Spalten konfigurieren
+
+Im Ordner *Meine Nachrichten* des Messengers kannst du dir die folgenden Spalten anzeigen lassen:
+
+* Auswahl
+** Diese Option zeigt die Checkbox für die Gruppenfunktion (icon:check_box_outline_blank[set=material]) in der Übersicht an.
+* Status
+* Abgekürzte ID
+* Herkunft
+* Von
+* Titel
+* Erstellt am
+* Tags
+* Anhang
+* Abonnement-Status
+* <<#kontextmenue, Kontextmenü>>
+
+Über die Schaltfläche *Spalten konfigurieren* (icon:settings[set=material]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+
+[#papierkorb]
+== Papierkorb 
+
+In der Navigation auf der linken Seite des Messengers findest du den Ordner icon:delete[set=material] *Papierkorb*. Hier werden alle <<#kontextmenue-konversation-loeschen, gelöschten Konversationen>> und alle <<#einzelne-nachricht-loeschen, gelöschten Nachrichten>> abgelegt.
+
+// Wird es in Zukunft möglich sein, alle Nachrichten aus dem Papierkorb mit einem Klick zu entfernen (so wie bei "Papierkorb leeren" in E-Mail-Programmen? Oder werden die Nachrichten automatisch nach einem bestimmten Zeitraum gelöscht?
+
+[discrete]
+[#spalten-konfigurieren-papierkorb]
+=== Spalten konfigurieren
+
+In Papierkorb des Messenger kannst du dir die folgenden Spalten anzeigen lassen:
+
+* Auswahl
+** Diese Option zeigt die Checkbox für die Gruppenfunktion (icon:check_box_outline_blank[set=material]) in der Übersicht an.
+* Status
+* Abgekürzte ID
+* Herkunft
+* Von
+* Titel
+* Erstellt am
+* Tags
+* Anhang
+* Abonnement-Status
+* <<#kontextmenue, Kontextmenü>>
+
+Über die Schaltfläche *Spalten konfigurieren* (icon:settings[set=material]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+
+// Im Papierkorb gibt es auch eine Gruppenfunktion.
+
