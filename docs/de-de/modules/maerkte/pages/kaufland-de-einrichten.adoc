@@ -28,15 +28,14 @@ Richte den Marktplatz in plentymarkets ein.
 [#200]
 === Zugang zu Kaufland.de einrichten
 
-Um Artikel bei Kaufland.de anzubieten, richte Kaufland.de in plentymarkets ein. Dazu benötigst du deine Zugangsdaten für die Kaufland.de-Schnittstelle. Pro plentyShop/Mandant (Shop) kannst du ein Konto für Kaufland.de einrichten.
+Um Artikel bei Kaufland.de anzubieten, richte Kaufland.de in plentymarkets ein. Dazu benötigst du deine Zugangsdaten für die Kaufland.de-Schnittstelle. Pro plentyShop/Mandant (Shop) kannst du mehrere Konten für Kaufland.de einrichten.
 
 [.instruction]
 Zugang zu Kaufland.de einrichten:
 
 . Öffne das Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen*.
-. Öffne das Untermenü des Mandanten, bei dem du den Zugang einrichten möchtest.
-//. Klicke auf *Neues Konto*. +
-//*_Hinweis:_* Du kannst schon jetzt den Zugang zu mehreren Kaufland-Konten einrichten. Im Moment können aber nur mit einem Kaufland-Konto Daten ausgetauscht werden. Das Nutzen mehrerer Konten wird in den nächsten Wochen möglich sein. (Stand: 31.03.2022)
+. Öffne das Untermenü des Mandanten, für den du den Zugang einrichten möchtest.
+. Klicke auf *Neues Konto*.
 . Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<#einstellungen-Kaufland-de>>.
 . Speichere (icon:save[set=plenty]) die Einstellungen.
 
@@ -45,6 +44,21 @@ Zugang zu Kaufland.de einrichten:
 [cols="1,3a"]
 |====
 |Einstellung |Erläuterung
+
+| *Anzeigename der Konfiguration*
+| Gib einen aussagekräftigen Namen für diese Kombination aus Mandant (Shop)/plentyShop und Kaufland-Konto ein. Wenn du keinen Anzeigenamen eingibst, wird automatisch der Anzeigename `Standard` gespeichert. +
+*_Tipp:_* Der Anzeigename wird nur für die Liste der Konfigurationen verwendet. Der Anzeigename dient also nur dazu, dir im Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen » [Mandant öffnen]* einen besseren Überblick über die verschiedenen Konfigurationen zu geben.
+
+image::maerkte:kaufland-anzeigename.png
+
+| *Backend-Name* +
+(*_Pflichtfeld_*)
+| Gib einen einzigartigen Namen für diese Kombination aus Mandant (Shop)/plentyShop und Kaufland-Konto ein. Der Backend-Name wird an den folgenden Stellen im System verwendet:
+
+* *_Artikelexport:_* Der Backend-Name wird in einer Spalte der CSV-Dateien exportiert.
+* *_Auftragsimport:_* An Aufträgen wird der Backend-Name in der Auftragseigenschaft mit der ID 10 als Name des Verkäuferkontos gespeichert.
+
+*_Wichtig:_* Der Backend-Name ist nach dem ersten Speichern der Konfiguration nicht mehr änderbar.
 
 | *Schnittstelle zu Kaufland.de aktivieren*
 a| * *Ja* = Schnittstelle zu Kaufland.de aktivieren. Daten werden mit Kaufland ausgetauscht.
@@ -68,12 +82,12 @@ a| * *Ja* = Schnittstelle zu Kaufland.de aktivieren. Daten werden mit Kaufland a
 *_Wichtig:_* Du musst jeden deiner Dienstleister mit einem Dienstleister aus der Dropdown-Liste verknüpfen.
 
 | *Versandbestätigungen senden über*
-| Bisher wurden Versandbestätigungen über einen stündlichen Cron an Kaufland gesendet. Dieser Cron wird aber bald abgeschaltet. Richte deshalb jetzt die Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> ein und stelle die Option dann auf *Ereignisaktion*.
+| Bisher wurden Versandbestätigungen über einen stündlichen Cron an Kaufland gesendet. Dieser Cron wird aber Anfang Juni 2022 abgeschaltet. Richte deshalb jetzt die Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> ein und stelle die Option dann auf *Ereignisaktion*.
 
 [cols="1,3"]
 !===
 ! *stündlichen Cron*
-! Der stündliche Cron wird bald abgeschaltet. Richte deshalb jetzt die Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> ein. Stelle die Option *Versandbestätigungen senden über* dann auf *Ereignisaktion*.
+! Der stündliche Cron wird Anfang Juni 2022 abgeschaltet. Richte deshalb jetzt die Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> ein. Stelle die Option *Versandbestätigungen senden über* dann auf *Ereignisaktion*.
 
 ! *Ereignisaktion* +
 (empfohlen)
@@ -177,13 +191,13 @@ Die plentymarkets Verfügbarkeits-IDs 1-10 entsprechen der im Menü *Einrichtung
 |====
 
 [#data-exchange]
-=== Informationen zum Datenaustausch
+=== Häufigkeit des Datenaustauschs
 
 Nachdem du {market} in plentymarkets eingerichtet hast, stehen die in <<#data-exchange-market>> beschriebenen automatisierten Abläufe bereit:
 
 [[data-exchange-market]]
 .Häufigkeit des Datenaustauschs
-[cols="2,3a"]
+[cols="1,3a"]
 |====
 |Daten |Intervall
 
@@ -639,7 +653,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 :table-event-procedure: <<#in-fulfillment-kaufland>>
 
-iinclude::_includes:page$EA.adoc[]
+include::_includes:page$EA.adoc[]
 
 [[in-fulfillment-kaufland]]
 .Ereignisaktion, um In-Fulfillment-Bestätigung an {market} zu senden
