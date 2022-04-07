@@ -3,10 +3,10 @@
 :description: Lerne, wie du dein Prohandel-System mit plentymarkets verbindest.
 :page-index: false
 :id: NCUBFL8
-:author: gretchen-bates
+:author: team-plenty-channel
 
 ////
-zuletzt bearbeitet 05.04.2022
+zuletzt bearbeitet 07.04.2022
 
 Interner Hinweis zur Seite:
 Diese Seite richtet sich in erster Linie am plenty-Einrichtungs-Team.
@@ -16,12 +16,11 @@ Der Händler möchte seine Ware zukünftig auch online verkaufen und entscheidet
 Der Händler wäre also ganz neu bei plenty und würde sein System samt Prohandel-Plugin zusammen mit dem Einrichtungs-Team einrichten.
 ////
 
-//ToDo - change position to 60 once it should appear in the navigation
+//ToDo when the page can be made visible in the left navigation - remove the attribute :page-index: false from the header and add the page to the navigation file in the ROOT folder
 
 ////
 offene Fragen:
 -bei "Optionen für den Artikelimport > Gruppierungsschema > Beispiel supplierNumber-categoryNumber-supplierArticleNumber": Hier wäre es schön, wenn es eine Liste mit den möglichen Datenfeldern gäbe, die man eingeben kann. Zudem wäre eine Info zur Syntax nicht schlecht. Team Prohandel müsste uns diese Infos liefern.
--bei "Optionen für den Artikelimport > Verhalten von Artikeln mit einem bestimmten Wert > Hinweis patternNumber Kunden können uns kontaktieren": Hier könnte man ergänzen, welcher Kontaktweg wir bevorzügen (Telefonnummer, Email, Forum). Team Prohandel müsste uns diese Infos liefern.
 -bei "Neu importierte Artikeldaten öffnen": Klären, ob das so bleiben wird (also, dass die Versandprofile nicht automatisch aktiviert werden, weil die API per REST arbeitet). Falls ja, dann ein Hinweis hier in diesem Kapitel einbauen, dass der Händler seine Versandprofile prüfen und aktivieren soll.
 https://forum.plentymarkets.com/t/api-prohandel-versandprofil-e-bei-neuen-artikeln-aktivieren/652140/7
 ////
@@ -57,7 +56,7 @@ Das heißt, falls du dein plentymarkets System noch nicht eingerichtet hast, sol
 [#20]
 == Plugin herunterladen und installieren
 
-Das link:https://marketplace.plentymarkets.com/prohandel_54913[Prohandel-Plugin] steht auf plentyMarketplace zur Verfügung.
+Das Prohandel-Plugin steht auf plentyMarketplace zur Verfügung.
 Es stellt die Verbindung zwischen deinem Prohandel-System und plentymarkets her.
 
 Das Prohandel-Plugin kann:
@@ -75,7 +74,7 @@ Wenn in Prohandel Bestände oder Preise aktualisiert werden, dann wird diese Inf
 .*Schritt-für-Schritt-Anleitung*
 --
 
-. Lade das link:https://marketplace.plentymarkets.com/prohandel_54913[Prohandel-Plugin] von plentyMarketplace herunter. +
+. Lade das Prohandel-Plugin von plentyMarketplace herunter. +
 → Falls aufgefordert, melde dich bei plentyMarketplace an.
 Verwende die gleichen Zugangsdaten wie für den Bereich "Mein Konto".
 . Öffne das Menü *Plugins » Plugin-Set-Übersicht*.
@@ -414,12 +413,6 @@ Auf Prohandel wird jedes Muster durch eine eindeutige ID gekennzeichnet.
 Du willst nur die Produkte mit Musternummer 5 in plentymarkets importieren.
 Dazu wählst du den Feldnamen *patternNumber*, den Feldwert *5* und das Importverhalten *Nur Artikel mit angegebenem Wert importieren*.
 
-*_Hinweis_*:
-Derzeit ist es nur möglich, *patternNumber* als Feldnamen zu wählen.
-Soll ein anderes Feld für den Import berücksichtigt werden?
-Nimm Kontakt mit uns auf!
-Wir besprechen gerne deine Anforderungen und machen einen Kostenvoranschlag für die Implementierung.
-
 |====
 
 [#80]
@@ -559,13 +552,16 @@ In plentymarkets findest du die Tags eines Artikels im Menü *Artikel » Artikel
 [#90]
 === Zuordnung der Verkaufspreise
 
-In diesem Schritt ordnest du deine in Prohandel verwendeten Verkaufspreise den Verkaufspreisen in plentymarkets zu.
+* Im oberen Bereich ordnest du deine in Prohandel verwendeten Verkaufspreise den Verkaufspreisen in plentymarkets zu.
+* Im unteren Bereich ordnest du den in Prohandel verwendeten Aktionspreis einem Verkaufspreis in plentymarkets zu.
 
 [[table-sales-prices]]
 .Zuordnung der Verkaufspreise
 [cols="1,3"]
 |====
 |Einstellung |Erläuterung
+
+2+^| *Verkaufspreise*
 
 | *VK-Preis*
 |Welchen plentymarkets Verkaufspreis möchtest du für den VK-Preis in Prohandel verwenden?
@@ -580,6 +576,29 @@ Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste aus.
 
 *_Voraussetzung_*: Hast du bereits xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
 Diese Dropdown-Liste enthält nur die Verkaufspreise, die bereits in plentymarkets vorhanden sind.
+
+2+^| *Prohandel-Aktionspreis*
+
+| *ID des Prohandel-Aktionspreises*
+|Wie lautet die ID deines Aktionspreises in Prohandel?
+Gib die ID in dieses Feld ein.
+
+| *VK-Preis (Aktionspreis)*
+|Welchen plentymarkets Verkaufspreis willst du deinem Prohandel Aktionspreis zuordnen?
+Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste aus.
+
+*_Voraussetzung_*: Hast du bereits xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
+Diese Dropdown-Liste enthält nur die Verkaufspreise, die bereits in plentymarkets vorhanden sind.
+
+| *Von*; +
+*Bis*
+|In welchem Zeitraum soll dieser Verkaufspreis gelten?
+Wähle die Von- und Bis-Daten aus den Dropdown-Listen aus.
+
+*_Voraussetzung_*: Hast du bereits xref:artikel:eigenschaften.adoc#[Eigenschaften in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Eigenschaften, die bereits in plentymarkets vorhanden sind.
+Es ist sinnvoll, die Von- und Bis-Daten mit Eigenschaften vom Typ "Datum" umzusetzen.
+
 |====
 
 [TIP]
