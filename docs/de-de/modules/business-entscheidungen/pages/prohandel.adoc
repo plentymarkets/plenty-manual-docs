@@ -3,18 +3,24 @@
 :description: Lerne, wie du dein Prohandel-System mit plentymarkets verbindest.
 :page-index: false
 :id: NCUBFL8
-:author: gretchen-bates
+:author: team-plenty-channel
 
 ////
-zuletzt bearbeitet 03.02.2022
+zuletzt bearbeitet 07.04.2022
+
+Interner Hinweis zur Seite:
+Diese Seite richtet sich in erster Linie am plenty-Einrichtungs-Team.
+Es ist sehr unwahrscheinlich, dass ein bestehender plenty-Kunde sich spontan entscheidet Prohandel zu nutzen und versucht das Plugin selbst einzurichten.
+Viel eher ist der Anwendungsfall, dass ein Händler bereits Prohandel nutzt (z.B. für sein Mode-Einzelhandel).
+Der Händler möchte seine Ware zukünftig auch online verkaufen und entscheidet sich für plenty (u.a. weil wir diese Schnittstelle haben).
+Der Händler wäre also ganz neu bei plenty und würde sein System samt Prohandel-Plugin zusammen mit dem Einrichtungs-Team einrichten.
 ////
 
-//ToDo - change position to 60 once it should appear in the navigation
+//ToDo when the page can be made visible in the left navigation - remove the attribute :page-index: false from the header and add the page to the navigation file in the ROOT folder
 
 ////
 offene Fragen:
 -bei "Optionen für den Artikelimport > Gruppierungsschema > Beispiel supplierNumber-categoryNumber-supplierArticleNumber": Hier wäre es schön, wenn es eine Liste mit den möglichen Datenfeldern gäbe, die man eingeben kann. Zudem wäre eine Info zur Syntax nicht schlecht. Team Prohandel müsste uns diese Infos liefern.
--bei "Optionen für den Artikelimport > Verhalten von Artikeln mit einem bestimmten Wert > Hinweis patternNumber Kunden können uns kontaktieren": Hier könnte man ergänzen, welcher Kontaktweg wir bevorzügen (Telefonnummer, Email, Forum). Team Prohandel müsste uns diese Infos liefern.
 -bei "Neu importierte Artikeldaten öffnen": Klären, ob das so bleiben wird (also, dass die Versandprofile nicht automatisch aktiviert werden, weil die API per REST arbeitet). Falls ja, dann ein Hinweis hier in diesem Kapitel einbauen, dass der Händler seine Versandprofile prüfen und aktivieren soll.
 https://forum.plentymarkets.com/t/api-prohandel-versandprofil-e-bei-neuen-artikeln-aktivieren/652140/7
 ////
@@ -50,7 +56,7 @@ Das heißt, falls du dein plentymarkets System noch nicht eingerichtet hast, sol
 [#20]
 == Plugin herunterladen und installieren
 
-Das link:https://marketplace.plentymarkets.com/prohandel_54913[Prohandel-Plugin] steht kostenpflichtig auf plentyMarketplace zur Verfügung.
+Das Prohandel-Plugin steht auf plentyMarketplace zur Verfügung.
 Es stellt die Verbindung zwischen deinem Prohandel-System und plentymarkets her.
 
 Das Prohandel-Plugin kann:
@@ -68,7 +74,7 @@ Wenn in Prohandel Bestände oder Preise aktualisiert werden, dann wird diese Inf
 .*Schritt-für-Schritt-Anleitung*
 --
 
-. Lade das link:https://marketplace.plentymarkets.com/prohandel_54913[Prohandel-Plugin] von plentyMarketplace herunter. +
+. Lade das Prohandel-Plugin von plentyMarketplace herunter. +
 → Falls aufgefordert, melde dich bei plentyMarketplace an.
 Verwende die gleichen Zugangsdaten wie für den Bereich "Mein Konto".
 . Öffne das Menü *Plugins » Plugin-Set-Übersicht*.
@@ -89,11 +95,10 @@ Standardmäßig ist die neuste Version vorausgewählt.
 → Das Plugin wird installiert. +
 → Nachdem das Installieren abgeschlossen ist, wird das Plugin-Set angezeigt.
 . Ändere den Zustand des Plugins zu aktiv (icon:toggle-on[role="blue"]).
-. Speichere (icon:save[role="darkGrey"]) das Plugin-Set. +
-→ Wenn es beim Speichern ein Problem gibt, klicke auf *Details öffnen*, um weitere Informationen zu erhalten.
+. Stelle das Plugin-Set bereit (icon:cloud-upload[role="darkGrey"]).
 
 Ist das Thema Plugins neu für dich?
-Im <<plugins#, Plugins-Kapitel>> des Handbuchs erfährst du mehr über Plugins und wie sie in plentymarkets funktionieren.
+Im xref:plugins:plugins.adoc#[Plugins-Kapitel] des Handbuchs erfährst du mehr über Plugins und wie sie in plentymarkets funktionieren.
 
 --
 
@@ -145,6 +150,76 @@ Der Benutzername ist eine E-Mail-Adresse.
 | *Passwort*
 |Gib das Passwort deines Prohandel-Kontos ein.
 |====
+
+[#43]
+=== Standorte im Lager berücksichtigen
+
+In diesem Schritt entscheidest du, ob plentymarkets den genauen Standort jedes Artikels im Lager erfassen soll.
+
+*_Hintergrund-Wissen_*:
+
+* Mit plentymarkets kannst du nicht nur den Bestand eines Artikels nachverfolgen, sondern auch, wo sich der Artikel im Lager befindet.
+** In plentymarkets wird der Standort des Artikels als "Lagerort" bezeichnet.
+** In Prohandel wird der Standort des Artikels als "Shop" bezeichnet.
+
+[[table-storage-location-function]]
+.Standorte im Lager berücksichtigen
+[cols="1,3a"]
+|====
+|Einstellung |Erläuterung
+
+| *Standorte berücksichtigen*
+|Soll plentymarkets den genauen Standort jedes Artikels im Lager erfassen?
+
+icon:toggle-on[role="blue"] = Der genaue Lagerort des Artikels wird erfasst.
+Wenn sich der Lagerbestand ändert, d.h. wenn ein Artikel ein- oder ausgebucht wird, dann wird der spezifische Lagerort berücksichtigt.
+Hast du diese Funktion aktiviert, dann musst du auch die Einstellungen in Schritt *Zuordnung der Standorte* vornehmen.
+
+icon:toggle-off[role="darkGrey"] = Der Lagerort des Artikels wird nicht erfasst.
+In plentymarkets wird der Lagerort immer als "Standard" angegeben.
+
+|====
+
+[#46]
+=== Zuordnung der Standorte
+
+In diesem Schritt ordnest du deine Prohandel-Shops deinen plentymarkets Lagerorten zu.
+Die Lagerorte in plentymarkets werden dabei automatisch generiert.
+
+*_Beispiel_*:
+
+* Über den Artikelimport erhält plentymarkets die Information, dass ein Artikel im Prohandel-Shop 1234 liegt.
+* Daraus erstellt das Plugin automatisch einen passenden plentymarkets-Lagerort im Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte* und verknüpft ihn in diesem Schritt des Assistenten.
+
+[[table-storage-location-mapping]]
+.Zuordnung der Standorte
+[cols="1,3a"]
+|====
+|Einstellung |Erläuterung
+
+| *Prohandel-Filiale*
+|Dies sind die bestandsführenden Filialen in Prohandel.
+Wähle die passende Filiale aus der Dropdown-Liste aus.
+
+| *Prohandel-Shop*
+|Dies sind die Shop-Namen in Prohandel.
+Wähle den passenden Shop aus der Dropdown-Liste aus.
+
+| *plentymarkets-Lagerort*
+|Dies sind die Lagerort-IDs im plentymarkets-Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte*.
+
+|====
+
+[TIP]
+.Logik der Namensgebung
+====
+Deine automatisch generierten Lagerorte findest du im Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte*.
+Der Name des Lagerorts folgt immer einer bestimmten Logik.
+Die Lagerorte heißen: `Prohandel level:Prohandel SL for shop 1234`.
+Dabei steht `1234` für die Prohandel-Shopnummer.
+Diese Benennung kann man nicht anpassen.
+Sie ist fest vorgegeben.
+====
 
 [#50]
 === Zuordnung der Bestandsfilialen
@@ -252,9 +327,8 @@ In diesem Schritt legst du fest, welche Artikeldaten von Prohandel an plentymark
 . Wähle eine Grundlage aus der Dropdown-Liste aus.
 . Gib ein Datum in das Feld ein.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Grundlage !Erläuterung
 
 ! *Erstes Wareneingangsdatum*
 !Dies ist ein Zeitstempel für Artikel in Prohandel.
@@ -262,7 +336,7 @@ Der Zeitstempel wird erzeugt, wenn der Artikel erstmalig in Prohandel angelegt w
 Dieser Zeitstempel ändert sich nie.
 
 *_Hinweis_*:
-Dieser Zeitstempel ist nicht zu verwechseln mit dem _zweiten_ Wareneingangsdatum, welcher sich aktualisiert, sobald neuer Wareneingang auf den Artikel gebucht wird.
+Dieser Zeitstempel ist nicht zu verwechseln mit dem zweiten Wareneingangsdatum, welcher sich aktualisiert, sobald neuer Wareneingang auf den Artikel gebucht wird.
 
 ! *Zweites Verkaufsdatum*
 !Dies ist ein Zeitstempel für Artikel in Prohandel.
@@ -320,17 +394,16 @@ Wähle den Feldnamen und Feldwert.
 . Entscheide, was mit diesen Artikeln passieren soll.
 Wähle dazu das Importverhalten.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Verhalten !Erläuterung
 
 ! *Nur Artikel mit angegebenem Wert importieren*
-!Es werden _nur_ die Artikel importiert, die den angegebenen Feldwert und Feldnamen enthalten.
+!Es werden nur die Artikel importiert, die den angegebenen Feldwert und Feldnamen enthalten.
 Alle anderen Artikel werden ignoriert.
 
 ! *Alle Artikel mit angegebenem Wert überspringen*
 !Die Artikel, die den angegebenen Feldwert und Feldnamen enthalten, werden übersprungen.
-Das heißt, sie werden _nicht importiert_.
+Das heißt, sie werden nicht importiert.
 
 !===
 
@@ -339,12 +412,6 @@ Stell dir vor, du verkaufst Kleidung in vielen verschiedenen Mustern.
 Auf Prohandel wird jedes Muster durch eine eindeutige ID gekennzeichnet.
 Du willst nur die Produkte mit Musternummer 5 in plentymarkets importieren.
 Dazu wählst du den Feldnamen *patternNumber*, den Feldwert *5* und das Importverhalten *Nur Artikel mit angegebenem Wert importieren*.
-
-*_Hinweis_*:
-Derzeit ist es nur möglich, *patternNumber* als Feldnamen zu wählen.
-Soll ein anderes Feld für den Import berücksichtigt werden?
-Nimm Kontakt mit uns auf!
-Wir besprechen gerne deine Anforderungen und machen einen Kostenvoranschlag für die Implementierung.
 
 |====
 
@@ -405,15 +472,14 @@ Diese Dropdown-Liste enthält nur die Attribute, die bereits in plentymarkets vo
 |Welches plentymarkets Datenfeld passt zu deiner eigenen Artikel-Nummer in Prohandel?
 Wähle die passende Option aus der Dropdown-Liste aus.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Option !Erläuterung
 
 ! *Keine*
 !Die eigene Artikel-Nummer wird nicht übertragen.
 
 ! *Name 1*
-!Die eigene Artikel-Nummer wird gespeichert unter: xref:artikel:artikel-verwalten.adoc#50[Artikel » Artikel bearbeiten » [Artikel öffnen] » Tab: Texte » Eingabefeld: Name 1]
+!Die eigene Artikel-Nummer wird gespeichert unter: xref:artikel:artikel-verwalten.adoc#50[Artikel » Artikel bearbeiten » [Artikel öffnen\] » Tab: Texte » Eingabefeld: Name 1]
 
 ! *Eigenschaft der Variante*
 !Eine zweite Dropdown-Liste wird angezeigt.
@@ -428,15 +494,14 @@ Diese Dropdown-Liste enthält nur die Eigenschaften, die bereits in plentymarket
 |Welches plentymarkets Datenfeld passt zu deiner Prohandel-Lieferanten-Artikelnummer?
 Wähle die passende Option aus der Dropdown-Liste aus.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Option !Erläuterung
 
 ! *Keine*
 !Die Lieferanten-Artikelnummer wird nicht übertragen.
 
 ! *Externe Varianten-ID*
-!Die Lieferanten-Artikelnummer wird gespeichert unter: <<artikel/artikel-verwalten#190, Artikel » Artikel bearbeiten » [Variante öffnen] » Tab: Einstellungen » Bereich: Grundeinstellungen » Eingabefeld: Ext. Varianten-ID>>
+!Die Lieferanten-Artikelnummer wird gespeichert unter: xref:artikel:artikel-verwalten.adoc#190[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Grundeinstellungen » Eingabefeld: Ext. Varianten-ID]
 
 ! *Eigenschaft der Variante*
 !Eine zweite Dropdown-Liste wird angezeigt.
@@ -457,9 +522,8 @@ Diese Dropdown-Liste enthält nur die Eigenschaften, die bereits in plentymarket
 |Welche plentymarkets Eigenschaft passt zu dem Prohandel-Datenfeld?
 Wähle die passende Option aus der Dropdown-Liste aus.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Option !Erläuterung
 
 ! *Keine*
 !Das Prohandel-Datenfeld wird nicht übertragen.
@@ -488,13 +552,16 @@ In plentymarkets findest du die Tags eines Artikels im Menü *Artikel » Artikel
 [#90]
 === Zuordnung der Verkaufspreise
 
-In diesem Schritt ordnest du deine in Prohandel verwendeten Verkaufspreise den Verkaufspreisen in plentymarkets zu.
+* Im oberen Bereich ordnest du deine in Prohandel verwendeten Verkaufspreise den Verkaufspreisen in plentymarkets zu.
+* Im unteren Bereich ordnest du den in Prohandel verwendeten Aktionspreis einem Verkaufspreis in plentymarkets zu.
 
 [[table-sales-prices]]
 .Zuordnung der Verkaufspreise
 [cols="1,3"]
 |====
 |Einstellung |Erläuterung
+
+2+^| *Verkaufspreise*
 
 | *VK-Preis*
 |Welchen plentymarkets Verkaufspreis möchtest du für den VK-Preis in Prohandel verwenden?
@@ -509,6 +576,29 @@ Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste aus.
 
 *_Voraussetzung_*: Hast du bereits xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
 Diese Dropdown-Liste enthält nur die Verkaufspreise, die bereits in plentymarkets vorhanden sind.
+
+2+^| *Prohandel-Aktionspreis*
+
+| *ID des Prohandel-Aktionspreises*
+|Wie lautet die ID deines Aktionspreises in Prohandel?
+Gib die ID in dieses Feld ein.
+
+| *VK-Preis (Aktionspreis)*
+|Welchen plentymarkets Verkaufspreis willst du deinem Prohandel Aktionspreis zuordnen?
+Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste aus.
+
+*_Voraussetzung_*: Hast du bereits xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
+Diese Dropdown-Liste enthält nur die Verkaufspreise, die bereits in plentymarkets vorhanden sind.
+
+| *Von*; +
+*Bis*
+|In welchem Zeitraum soll dieser Verkaufspreis gelten?
+Wähle die Von- und Bis-Daten aus den Dropdown-Listen aus.
+
+*_Voraussetzung_*: Hast du bereits xref:artikel:eigenschaften.adoc#[Eigenschaften in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Eigenschaften, die bereits in plentymarkets vorhanden sind.
+Es ist sinnvoll, die Von- und Bis-Daten mit Eigenschaften vom Typ "Datum" umzusetzen.
+
 |====
 
 [TIP]
@@ -579,7 +669,7 @@ In diesem Schritt aktivierst du die Cron-Jobs, die automatisch ausgeführt werde
 | *Artikelimport*
 |Täglich
 |
-* Nachdem du den Assistenten abgeschlossen hast, werden _alle_ Artikel erstmalig von Prohandel nach plentymarkets übertragen.
+* Nachdem du den Assistenten abgeschlossen hast, werden alle Artikel erstmalig von Prohandel nach plentymarkets übertragen.
 Dieser erstmalige vollständige Import kann, je nach Anzahl der Produkte, einige Tage in Anspruch nehmen.
 * Danach werden nur noch Teilimporte durchgeführt, die auf den zuvor gewählten xref:business-entscheidungen:prohandel.adoc#70[Importeinstellungen] basieren.
 * Es werden nur neue Artikel importiert und neue Varianten zu bestehenden Artikeln.
@@ -634,10 +724,10 @@ Zum Beispiel:
 ====
 Prüfe die übertragenen Daten sowohl für die Hauptvariante als auch für die Untervarianten:
 
-* Die erste Variante eines Artikels wird als _Hauptvariante_ bezeichnet.
+* *_Hauptvariante_*: Die erste Variante eines Artikels wird als Hauptvariante bezeichnet.
 Sie steht nicht zum Verkauf, sondern ist rein virtuell und dient dazu, die weiteren Untervarianten des Artikels anhand von xref:artikel:vererbung.adoc#[Vererbung] zu verwalten.
 Wenn du einen Artikeldatensatz öffnest, öffnet sich automatisch auch die Hauptvariante.
-* Die _Untervarianten_ sind die verkaufbaren Ausführungen des Produkts.
+* *_Untervariante_*: Die Untervarianten sind die verkaufbaren Ausführungen des Produkts.
 Wird zum Beispiel ein T-Shirt in den Farben Blau und Rot und den Größen S, M, L angeboten, dann ist jede einzelne Kombination (Blau S, Blau M, Blau L, Rot S, Rot M, Rot L) eine Untervariante.
 Um eine Untervariante zu öffnen, klicke auf den Tab *Varianten* und dann auf *Suchen* (icon:search[role="blue"]).
 Klicke anschließend in der Übersicht auf eine Untervariante.
@@ -656,21 +746,18 @@ Zum Beispiel kannst du:
 Eine vollständige Liste aller Artikeldatenfelder in plentymarkets findest du auf der Handbuchseite xref:artikel:artikel-verwalten.adoc#[Verzeichnis der Datenfelder].
 
 [#150]
-== Aufträge und Ereignisaktionen
+== Aufträge abwickeln
 
 Wenn ein Produkt verkauft wird, landen die Auftragsdaten zunächst im plentymarkets Menü *Aufträge » Aufträge bearbeiten*.
 Hier kann der Auftrag abgewickelt werden und sein Fortschritt mit Hilfe eines Status verfolgt werden.
 
 Weitere Informationen zur Auftragsbearbeitung in plentymarkets findest du auf der Handbuchseite xref:auftraege:auftraege-verwalten.adoc#[Aufträge verwalten].
 
-//nicht vergessen - auf die Ereignis-Aktion Seite selbst, musst du die 4 Prohandel EAs in die Tabelle eränzen. Also hier:
-//https://knowledge.plentymarkets.com/automatisierung/ereignisaktionen#130
-
 [#160]
-=== Ereignisaktionen einrichten
+== Ereignisaktionen einrichten
 
 Natürlich sollen die Auftragsdaten nicht nur in plentymarkets bleiben, sondern auch nach Prohandel übertragen werden.
-Dazu musst du _vier sogenannte Ereignisaktionen_ einrichten.
+Dazu musst du vier sogenannte Ereignisaktionen einrichten.
 Diese müssen nur einmalig im Voraus eingerichtet werden, damit der Auftragsexport korrekt funktioniert.
 
 [.instruction]
@@ -681,19 +768,19 @@ Ereignisaktion einrichten:
 → Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
 . Gib einen eindeutigen Namen für die Ereignisaktion ein.
 . Wähle das Ereignis gemäß den folgenden Tabellen.
-. Klicke auf icon:save[role="green"] *Speichern*. +
+. Klicke auf icon:save[set=plenty, role="green"] *Speichern*. +
 → Die Ereignisaktion wird angelegt und kann weiter bearbeitet werden.
 . Klicke auf *Aktion hinzufügen* (icon:plus[role="green"]) und wähle die Aktion gemäß den folgenden Tabellen.
 . Optional: Klicke auf *Filter hinzufügen* (icon:plus[role="green"]) und wähle Filter, wenn die Ereignisaktion nur in bestimmten Szenarien gelten soll.
 Beispielsweise wenn die Ereignisaktion nur für bestimmte Verkaufskanäle oder Mandanten gelten soll.
 . Aktiviere die Ereignisaktion (icon:check-square[role="blue"]), sobald sie in Kraft treten soll.
 Ab dem Zeitpunkt der Aktivierung greift die Ereignisaktion mit den von dir gewählten Einstellungen.
-. Speichere (icon:save[role="green"]) die Einstellungen.
+. Speichere (icon:save[set=plenty, role="green"]) die Einstellungen.
 
 Weitere Informationen zur allgemeinen Verwendung von Ereignisaktionen findest du auf der Handbuchseite xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen].
 
 [#170]
-==== Prohandel über neue Aufträge benachrichtigen
+=== Prohandel über neue Aufträge benachrichtigen
 
 Sobald ein neuer Auftrag in plentymarkets landet, soll Prohandel über den Auftrag informiert werden.
 So wird der nötige Bestand in Prohandel reserviert, damit es nicht zu einem Überverkauf kommt.
@@ -714,7 +801,7 @@ Auftrag > Mandant (Shop)
 |====
 
 [#180]
-==== Prohandel über Zahlung und Versand benachrichtigen
+=== Prohandel über Zahlung und Versand benachrichtigen
 
 Fertig abgewickelte Aufträge befinden sich im Status 7.
 Dieser Status bedeutet, dass die Zahlung eingegangen ist und der Warenausgang gebucht wurde.
@@ -736,15 +823,17 @@ Auftrag > Mandant (Shop)
 |====
 
 [#190]
-==== Prohandel über Stornierungen benachrichtigen
+=== Prohandel über Stornierungen benachrichtigen
 
 Eine Stornierung:
 
 * bedeutet, dass der:die Kund:in es sich anders überlegt hat und den gekauften Artikel doch nicht haben möchte.
-* erfolgt, _bevor_ du die Zahlung erhalten und die Ware verschickt hast.
+* erfolgt, bevor du die Zahlung erhalten und die Ware verschickt hast.
+* kann als Aufhebung der Bestandsreservierung verstanden werden.
+plentymarkets teilt Prohandel mit, dass die erhaltene Bestandsreservierung nichtig ist.
 
 Um einen Auftrag zu stornieren, änderst du seinen Status auf 8.
-Zu diesem Zeitpunkt soll Prohandel auch über die Stornierung informiert werden, damit der Bestand nicht länger reserviert wird.
+Zu diesem Zeitpunkt soll Prohandel über die Stornierung informiert werden, damit der Bestand nicht länger reserviert wird.
 
 [[table-event-procedure-three]]
 [cols="1,2"]
@@ -762,12 +851,12 @@ Auftrag > Mandant (Shop)
 |====
 
 [#200]
-==== Prohandel über Retouren benachrichtigen
+=== Prohandel über Retouren benachrichtigen
 
 Eine Retoure:
 
 * bedeutet, dass der:die Kund:in es sich anders überlegt hat und den gekauften Artikel doch nicht haben möchte.
-* erfolgt, _nachdem_ du die Zahlung erhalten und die Ware verschickt hast.
+* erfolgt, nachdem du die Zahlung erhalten und die Ware verschickt hast.
 
 Da die Zahlung bereits eingegangen ist, muss in diesem Fall eine Rückzahlung erfolgen.
 Das bedeutet, dass du Prohandel über die Retoure informieren musst, damit die Umsätze wieder aus der Umsatzfiliale ausgebucht werden können.
