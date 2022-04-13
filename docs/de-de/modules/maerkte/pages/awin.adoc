@@ -4,19 +4,33 @@
 :description: Multi-Channel in plentymarkets: Richte die Artikeldatenübertragung zu AWIN in deinem plentymarkets System ein.
 :id: Q1P9Y6V
 
+:awin:
+:market: Awin
 :price-search-engine: Awin
 :plugin-name: Awin.com
 :plugin-link: https://marketplace.plentymarkets.com/plugins/channels/preisportale/elasticexportawincom_4762
 
-include::partial$plugin-download.adoc[]
-
-[#100]
-== Bei Awin.com registrieren
-
 Awin.com (früher zanox.de) bietet performance-basiertes Online- und Affiliate-Marketing an.
 
+[#item-export]
+== Artikeldaten exportieren
+
+* <<#old-export, _Möglichkeit 1:_ Artikelexport über Elastischen Export _(alte Methode)_>>
+* <<#catalogue-export, _Möglichkeit 2:_ Artikelexport über Katalog-Formate _(empfohlene Methode)_>>
+* <<#change-elastic-export-catalogue, _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog>>
+
+[#old-export]
+=== _Möglichkeit 1:_ Exportformat AwinCOM-Plugin _(alte Methode)_
+
+NOTE: Der Elastische Export und die Exportformate werden für den Marktplatz-Export nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, schon jetzt <<#catalogue-export, Kataloge zu erstellen>>.
+
+[#plugin-download]
+==== Plugins herunterladen und installieren
+
+include::partial$plugin-download.adoc[]
+
 [#200]
-== Das Format Awin.com-Plugin in plentymarkets einrichten
+==== Format Awin.com-Plugin in plentymarkets einrichten
 
 :export-format: AwinCOM-Plugin
 :price-search-engine: Awin.com
@@ -36,7 +50,7 @@ Awin.com (früher zanox.de) bietet performance-basiertes Online- und Affiliate-M
 include::partial$exportformate.adoc[]
 
 [#300]
-== Verfügbare Spalten der Exportdatei
+==== Verfügbare Spalten der Exportdatei
 
 :export-format: AwinCOM-Plugin
 
@@ -97,9 +111,118 @@ include::maerkte:partial$exportdatei-herunterladen.adoc[]
 |Die Einheit in Bezug auf den Grundpreis.
 |====
 
-[#400]
-== Lizenz
+[#catalogue-export]
+=== _Möglichkeit 2:_ Katalogexport _(empfohlene Methode)_
 
-:license-link: https://github.com/plentymarkets/plugin-elastic-export-awin-com/blob/master/LICENSE.md
+Mit dem Export über Kataloge machst du deinen Export zu {market} zukunftssicher und flexibel.
 
-include::partial$plugin-lizenz.adoc[]
+[#catalogue-creation]
+==== Katalog erstellen
+
+Artikeldaten werden über ein Marktplatz-Format exportiert. Um deine Artikel zu einem Preisportal zu exportieren, erstellst du im Menü *Daten » Kataloge* einen Katalog. Ordne dann im Marktplatz-Format die vom Katalog vorgegebenen Marktplatz-Datenfelder den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+* Für dieses Preisportal gibt es die Formate *Awin* und *Awin Fashion*.
+
+:catalogue-template-name: awin
+:format-item-new:
+:one-per-category:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Datenfelder im Katalog zuordnen
+
+Ordne nun die Marktplatz-Datenfelder im Katalog den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Empfehlungen für Datenfeld-Zuordnungen
+
+include::partial$recommendation-text.adoc[]
+
+* Informationen zu den Marktplatz-Datenfeldern findest du auch in der link:https://wiki.awin.com/index.php/Product_Feeds_for_Advertisers_DE/[Dokumentation von {market}].
+
+[.collapseBox]
+.Liste mit empfohlenen Datenfeld-Zuordnungen
+--
+include::partial$awin-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Nur bestimmte Artikel exportieren
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Katalogeinstellungen für Export vornehmen
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Katalog aktivieren
+
+:interval:
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Katalogdaten an {market} übergeben
+
+include::partial$catalogue-url.adoc[]
+
+[#change-elastic-export-catalogue]
+=== _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog
+
+:elastic-export-catalogue-mappings:
+include::partial$catalogue-change-from-elastic-export.adoc[]
+
+[[elastic-export-catalogue-mappings]]
+.Spalten und Datenfelder
+[cols="1,1"]
+|====
+|Spalte im elastischen Export |Datenfeld im Katalog
+
+| prod_number
+| Produkt-ID
+
+| prod_name
+| Produktname
+
+|prod_price
+| Preis
+
+|currency_symbol
+| Währung
+
+| category
+| Kategorie
+
+| prod_description
+| _Datenfeld gibt es im Katalog nicht mehr._
+
+| prod_description_long
+| Beschreibung
+
+| img_small
+| _Datenfeld gibt es im Katalog nicht mehr._
+
+| img_medium
+| _Datenfeld gibt es im Katalog nicht mehr._
+
+| img_large
+| Bild-URL
+
+| manufacturer
+| _Datenfeld gibt es im Katalog nicht mehr._
+
+| prod_url
+| Produkt-URL
+
+| shipping_costs
+| Versandkosten
+
+|====

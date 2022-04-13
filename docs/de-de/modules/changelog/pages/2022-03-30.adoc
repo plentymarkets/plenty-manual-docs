@@ -1,0 +1,209 @@
+= Changelog 30. März 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 24. März 2022
+:endWeekDate: 30. März 2022
+
+//ab diesem Eintrag weitermachen - https://forum.plentymarkets.com/t/bestell-e-mail-verlauf-purchase-order-email-history/675326
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+
+--
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *stable* veröffentlicht.
+
+[discrete]
+=== Ereignisaktionen
+
+* Es ist bei den Ereignisaktionen jetzt ein neuer Filter für den Typ der Auftragsposition verfügbar.
+
+[discrete]
+=== Neue Artikel-UI
+
+* In der neuen Artikel-UI lassen sich nun Produkt-Links für Artikel / Varianten aufrufen. Diese Links führen zu den Produktseiten im Shop oder auf Amazon. Für den Amazon Produkt-Link muss eine ASIN hinterlegt sein. Der Produkt-Link Button befindet sich in der Toolbar der Artikel- und Variantenansicht.
+
+[discrete]
+=== Neue Kontakte-UI
+
+* Wie bereits in link:https://forum.plentymarkets.com/t/ankuendigung-release-der-neuen-kontakt-ui-announcement-release-of-the-new-contact-ui/673537[diesem Beitrag] angekündigt, steht dir ab sofort die neue Kontakte-UI basierend auf MyView im Menü *CRM » Kontakte (Testphase)* zur Verfügung.
+In dem oben verlinkten Beitrag findest du neben den nächsten geplanten Schritten für die Kontakte-UI ein kurzes informatives Video, in dem wir dir die neue Kontakte-UI vorstellen.
+Detaillierte Informationen findest du in unserem link:https://knowledge.plentymarkets.com/crm/kontakte[Handbuch].
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *stable* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Zukünftig ist es nicht mehr möglich mehrere Auftragspositionen vom Typ Versandkosten (ID 6) für einen Auftrag zu haben.
+Bei Anlage eines Auftrages werden wenn mehrere Positionen vom Typ Versandkosten übergeben werden alle außer die Erste nicht beachtet.
+Bei Aktualisierung eines Auftrages kann nur eine bestehende Positionen vom Typ Versandkosten aktualisiert werden oder wenn bisher am Auftrag keine Positionen vom Typ Versandkosten existiert eine Neue hinzugefügt werden.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *stable* behoben.
+
+[discrete]
+=== Kataloge Format Warenbestände
+
+* Wenn man den Filter *Alle Lagerbestandseinträge von 0 ausblenden* verwendete, wurden auch die Pakete mit Bestand nicht exportiert.
+
+[discrete]
+=== Picklisten
+
+* Beim Laden von Picklisten über die Aktion *Picklisten-Suche* konnte es vorkommen, dass zuvor geladene Aufträge fälschlicherweise erneut geladen wurden. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Wenn im Arbeitsschritt Auftragsabwicklung die Sortierung nach Lagerort ausgewählt wurde, wurden die Aufträge nicht korrekt sortiert. Dieses Verhalten wurde behoben.
+
+--
+
+early::
++
+--
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *early* veröffentlicht.
+
+[discrete]
+=== Ereignisaktionen
+
+* Die Ereignisaktionen wurden um das Ereignis *Gelangensbestätigung generiert* erweitert.
+* Die Ereignisaktionen wurden um das Ereignis *Sammelrechnung generiert* erweitert.
+* Die Ereignisaktionen wurden um das Ereignis *Sammelgutschrift generiert* erweitert.
+
+[discrete]
+=== Kelkoo
+
+* Ab sofort kannst du Artikeldaten mit einem Katalog an das Preisportal Kelkoo exportieren. Das Marktplatz-Format Kelkoo findest du jetzt im Menü *Daten » Kataloge*.
++
+[NOTE]
+.Du exportierst schon Artikeldaten zu Kelkoo über den elastischen Export?
+======
+* Merkmale und Freitextfelder können für den Katalogexport nicht mehr verwendet werden. Prüfe deshalb, welche Merkmale du aktuell für das Preisportal verwendest. Erstelle Eigenschaften für alle Merkmale, die du weiterhin benötigst.
+* Beim Wechsel solltest du deinen alten Elastischen Export exakt in dem neuen Katalog nachbauen, damit der Artikelexport weiterhin funktioniert. Ordne also alle Datenfelder so zu, wie sie auch im Elastischen Export an das Preisportal übertragen wurden. Wenn du bestimmte Datenfelder anders als bisher zuordnest, werden möglicherweise beim Export neue Artikel erstellt.
+* Wie du einen Katalog für Kelkoo einrichtest, erfährst du wie immer im xref:maerkte:kelkoo.adoc[plentymarkets Handbuch].
+======
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *early* behoben.
+
+[discrete]
+=== Aufträge
+
+* Szenario: Auftrag hat eine Fremdwährung, die Zahlung ist in Systemwährung hinterlegt. Für die Berechnung des bezahlten Betrags wurde dann die Zahlung mit dem tagesaktuellem Wechselkurs in die Währung des Auftrags umgerechnet. Das konnte dazu führen, dass der Auftrag nicht exakt zu 100% bezahlt ist. Es wird nun die Zahlung mit dem Wechselkurs des Auftrags umgerechnet.
+* Beim Öffnen einer Nachbestellung wurde die Statushistorie nicht geladen. Dies ist nun behoben.
+
+[discrete]
+=== Dokumente
+
+* Der Wert von Bestelleigenschaften vom Typ *Kein* wurde auf den Auftragsdokumenten ausgegeben. Das ist falsch, denn solche Bestelleigenschaften können keinen Wert haben. Wurde aber trotzdem ein Wert bei der Auftragsanlage angegeben, wurde dieser Wert ausgegeben. Nun wird ein möglicherweise vorhandener Wert einer solchen Bestelleigenschaft einfach ignoriert und nicht auf dem Auftragsdokument ausgegeben.
+
+[discrete]
+=== Prozesse
+
+* Innerhalb der Aktion *Wareneingang (einfach)* konnte ein Problem auftreten, wenn mehr als 200 Varianten nachgeladen werden sollen. Dieses Verhalten wurde behoben.
+* Die Ergebnisliste innerhalb der Aktion *Wareneingang (einfach)* wurde zu klein dargestellt. Wir haben die Standard-Feldbreiten erhöht, sodass die Ergebnisse nun besser sichtbar sind. Diese Anpassung betrifft nur Benutzer, die die Tabelle nicht bereits selbst angepasst haben, also die Standardansicht verwenden.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/b2bshop_6574[B2B Shop^]
+|1.6.5
+|-
+
+|link:https://marketplace.plentymarkets.com/dpdshippinguk_5121[DPD Shipping UK^]
+|2.0.8
+|-
+
+|link:https://marketplace.plentymarkets.com/dpdshippingservices_6320[DPD Versand Services^]
+|1.7.9
+|-
+
+|link:https://marketplace.plentymarkets.com/infinityscroller_6660[Endlos-Scrollen in Artikellisten^]
+|1.4.4
+|-
+
+|link:https://marketplace.plentymarkets.com/tracking_6452[Google Tag Manager Tracking ENTERPRISE^]
+|5.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/hermesshippinginterface_5437[Hermes^]
+|1.0.24
+|-
+
+|link:https://marketplace.plentymarkets.com/matrixvarianten_6620[Mehrere Varianten gleichzeitig in den Warenkorb legen^]
+|1.3.4
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.5
+|-
+
+|link:https://marketplace.plentymarkets.com/payone_5434[PAYONE^]
+|2.5.0
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.10.6
+|-
+
+|link:https://marketplace.plentymarkets.com/d2gpmpluginsocialicons_55170[Social Icons Widget^]
+|1.0.0
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.1.7
+|-
+
+|link:https://marketplace.plentymarkets.com/d2gpmpluginshippingicons_6756[https://marketplace.plentymarkets.com/d2gpmpluginshippingicons_6756^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/d2gpmpluginpaymenticons_7033[Zahlungs Icons Widget^]
+|1.0.6
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
