@@ -1,5 +1,5 @@
 This chapter contains answers to frequently asked questions.
-The information was last updated on 21/12/2020.
+The information was last updated on 29/03/2022.
 
 [#13013]
 === FAQ: General questions and answers
@@ -26,9 +26,85 @@ For shipments to be carried out by a shipping company, enter a surcharge. This s
 Save information about how individual items are to be shipped in the item settings.
 --
 
-[#1302]
+[.collapseBox]
+.When are brands or category groups updated in plentymarkets?
+--
+
+The brands and category groups that OTTO Market provides are updated in plentymarkets in the following intervals:
+
+* Brands: every two hours
+* Category groups: once per day
+
+Brands that you or other sellers register are only available in plentymarkets after the next brand update.
+--
+
+[.collapseBox]
+.How can I activate (not delete) my items on Otto?
+--
+
+You might want to deactivate your items due to a vacation or for other reasons. To do so, remove the market availability for OTTO Market for the variations.
+
+To deactivate the availability for individual variations, go to *Item » Variation » Tab: Availability » Area: Markets*.
+
+image::markets:otto-faq-availability.png[]
+
+For more variations, you can of course use the group function, the import tool or batch processing.
+Read up on how that works xref:item:mass-processing.adoc#[here].
+
+*_Important:_* If you change the main item while the inheritance feature is activated for the availability, you also need to update the timestamp of the market exports. This is also possible using the group function, the import tool or batch processing.
+
+If you have deactivated the market availability, your items are deactivated on Otto Market within 15 minutes.
+
+*_Tip:_* Do not forget to reactivate the market availability when you want to publish your items again.
+--
+
+[.collapseBox]
+.How can I delete my items on OTTO Market?
+--
+Items cannot be *deleted* from the OTTO Market marketplace.
+If necessary, contact OTTO Market for more information.
+--
+
+[.collapseBox]
+.How do I change the SKU/Parent SKU of my items?
+--
+You can adjust the SKU manually. However, when you do this, the SKU **does not change on OTTO Market**.
+A unique SKU is assigned to your item.
+
+To do so:
+
+. Take the items offline on OTTO. +
+*_Tip:_* To do so, inactivate the items by removing the availability for OTTO Market.
+. Change the SKU and/or the Parent SKU.
+. Activate the availability again. +
+-> With the next nightly item export, your items are exported to OTTO Market with their new SKU.
+--
+
+[#faq-items]
 === FAQ: Item data export
 
+[.collapseBox]
+.*_Tip:_* Category groups, categories and associated attributes
+--
+
+OTTO Market publishes current information in the category list “Kategorienliste”. Open the tab link:https://og2gether-my.sharepoint.com/:x:/g/personal/micha_saake_otto_de/EXg5Id8bTxNKuV8mRkQ1wrsBNFuBrjP8iQJINZjcezvjdg?rtime=3FovyUEf2Ug["Attributsliste" (attribute list)^]. This document is only available in German. The file provides an overview of the category groups, categories and associated attributes.
+
+--
+
+[.collapseBox]
+.My items were exported to OTTO but are not shown in the OPC
+--
+
+In some cases the item export to OTTO Market is successful but an item is still not shown in OPC. The reason could be that OTTO did not accept the variation. Usually, this is because the item data contains an error.
+
+For items to be exported to OTTO, the following basic requirements must be met:
+
+* In the tab *Availability* of the variation, the availability *OTTO Market* must be activated.
+* In the tab *Properties* of the variation, the property *OTTO category group* must be linked. The *format name* of the OTTO catalogue is expected as the value of the property. This mapping assigns the variation to the OTTO catalogue. This OTTO catalogue is identical to the OTTO category group. OTTO expects the name of the format, NOT the name that you saved for the catalogue.
+* The variation is *active*.
+* The net stock of the variation is positive in the warehouse that is mapped in the catalogue.
+* All mandatory fields are mapped in the catalogue. Mandatory fields in the catalogue are marked with an asterisk.
+--
 
 [#1302]
 [.collapseBox]
@@ -36,7 +112,7 @@ Save information about how individual items are to be shipped in the item settin
 --
 [TIP]
 ====
-One or more of your variations were not exported? First, work through the <<#2200, _checklist:_ Requirements for exporting variations>>.
+One or more of your variations were not exported? First, go through the <<#2200, _checklist:_ Requirements for exporting variations>>.
 ====
 
 If your variations meet all requirements and all catalogue mappings are correct, you can consult the log to find out why variations are not exported. You can find out why some of your items are not exported to OTTO Market and therefore are not available on the online market by looking at the following logs.
@@ -111,122 +187,7 @@ _or_
 |====
 --
 
-[#13016]
-==== Item export: Error messages in the log
 
-We have listed possible error messages in relation to the item export below.
-
-[#13023]
-[.collapseBox]
-.*missing requirements: delivery.deliveryTime*
---
-Check the delivery time mapped in the catalogue in the field *Delivery time in days* and the variation. In most cases, you can map the availability of your variation:
-
-You can find a translation of the individual availability levels in the *Setup » Item » Availability* menu.
---
-
-[#13010]
-[.collapseBox]
-.*missing requirements: delivery.type*
---
-This error indicates that the shipping method is not linked. The shipping method can be defined via two different data fields:
-
-* via a shipping profile
-* via property
-
-Make sure that the data field saved in the catalogue is linked to the item. For the shipping profile, activate the shipping profile in the item’s *Global* tab. For the property, activate the property for the desired variation.
---
-
-
-[#13017]
-[.collapseBox]
-.*missing requirements: ean*
---
-* Check that the variation has a EAN.
-* Check that the barcode mapped in the *EAN* field of the catalogue matches the barcode type saved for the variation.
-* Go to *Setup » Item » Barcode* and check that the barcode type is activated for the market OTTO Market.
---
-
-[#1309]
-[.collapseBox]
-.*missing requirements: mediaAssets.IMAGE* or *mediaAssets*
---
-Both these error messages usually have the same cause. This error indicates that either you did not select a data field as the source in the catalogue or that none of your item images is linked to the referrer *OTTO Market*. To do so, open an item’s *Images* tab and activate the referrer *OTTO market* as described in the <<Setting the availability for images, Setting the availability for images>> chapter.
---
-
-[#13024]
-[.collapseBox]
-.*missing requirements: pricing.standardPrice.amount* or *pricing.standardPrice.currency*
---
-Both these error messages usually have the same cause. Check that the catalogue field *Sales price* has been mapped to the sales price of the variation. In addition, go to *Setup » Item » Sales prices* and make sure that the sales price you mapped in the catalogue has been activated for the referrer*OTTO Market*.
---
-
-[#1308]
-[.collapseBox]
-.*missing requirements: productDescription.brand*
---
-This error indicates that the variation’s brand that should be exported has not been mapped in the catalogue. Make sure that a source is saved for the brand in the catalogue and that the data field is linked to the item.
-
-The brand can be linked to the variation in two different ways:
-
-* By mapping the Manufacturer that is saved in the *Global* tab of an item
-*_Tip:_* If you want to map the manufacturer, the catalogue mapping should be *Add data field » Manufacturer » [Select manufacturer]*.
-* By creating a property
-
-*_Important:_* Select the OTTO brand from the drop-down list. Do not enter the brand yourself.
-
-*_Tip:_* If the brand you need is not available for selection in the OTTO brands field (left side), you can register the brand with OTTO Market. Go to the OTTO Market help desk to find out more. Brands that you or other sellers register are only available in plentymarkets after the next brand update. As such, it can take up to two hours until a newly created brand can be selected in the catalogue.
---
-
-[#13011]
-[.collapseBox]
-.*missing requirements: productDescription.category*
---
-This error indicates that the category mapping in the catalogue is missing. In the catalogue, check whether at least one category of the desired variation is linked to an OTTO Market category.
-
-* In the catalogue, check which data field is mapped to the marketplace data field *Category*. We recommend that you map either already existing categories (Tab: *Categories*) of your variations or properties (Tab: *Properties*).
---
-
-[#13018]
-[.collapseBox]
-.*missing requirements: sku*
---
-In the catalogue, check the mappings for the data fields *Parent-SKU* and *SKU*. Make sure that you have mapped at least two data fields to each of these fields, i.e. one field and one fallback field. You can find a recommendation for a possible mapping <<#13025, here>>.
---
-
-[#13019]
-[.collapseBox]
-.*missing requirements: stock*
---
-The variation does not have positive net stock in the warehouse that is mapped in the catalogue. If *no* warehouse is mapped in the catalogue, the sum of all sales warehouses is exported.
---
-
-[#13025]
-[.collapseBox]
-.*missing requirements: sku-validation-error, validation error found* or *Duplicate entry. Combination of the fields variationId, marketId and accountId must be unique.*
---
-
-This error is also indicated as *SKU 1234 not generated* or *0:sku* in the log.
-
-How SKUs should be generated is defined in the catalogue. There is a distinction between the *Parent SKU* and the *Variation SKU*. The source selected here should be a data record which exists only once. As such, it is not possible to use the same SKU for different items.
-
-For example, you could use the Item ID and the Variation ID. Both IDs are generated when the item is created and as such only ever exist once.
-
-However, it might happen that the item export is carried out with errors because of missing information in the catalogue. The SKU is created anyway and can now be found in the *Availability* tab of a variation. During the next export, your system will try again to create an SKU from the sources selected in the catalogue. However, as this SKU already exists, the following error occurs:
-
-* Duplicate entry. Combination of the fields variationId, marketId and accountId must be unique
-
-* SKU 1234 not generated
-
-As such, you need to add a fallback data field to the catalogue. The solution looks like this:
-
-image::markets:otto-market-add-source.png[Add data field]
-
-IMPORTANT: When adding another data field, it is mandatory to use the *Add fallback data field* button (icon:link[role="yellow"]) on the right-hand side of the catalogue. Do _not_ use the option *Add data field* (icon:plus-square[role="green"]) because in this case, your SKUs would be created twice and the error cannot be resolved.
-
-This adds a *_second_* data field. During the next export, the first data field will be retrieved first. Because the SKU is already included in this source, the second data field will be ignored. If the first data field does not contain an SKU, then a new SKU will be generated using the second data field.
-
---
 
 [#13026]
 === FAQ: Order processing
@@ -235,7 +196,7 @@ In some cases, errors can occur during order processing. Possible causes and fre
 
 [#13026-1]
 [.collapseBox]
-.Why are some orders imported without address details and with the status *[1] Incomplete data*?
+.Why are some orders imported without address details and with status *[1] Incomplete data*?
 --
 If customers want to pay cash in advance and have not paid yet, OTTO Market assigns the status ANNOUNCED to the order. Orders with this status are imported to plentymarkets without address details and with the status *[1] Incomplete data*. As soon as the order changes to the status PROCESSABLE at OTTO Market, the address is added tot he order and the order is moved to status *[3] Waiting for payment*. +
 *_Important:_* No stock is reserved for orders in status *[1] Invalid data* by default. Use the settings described below to reserve stock for these orders.
@@ -325,12 +286,298 @@ Searching the log:
   * *Reference value* your order ID
 . In the drop-down list *Level*, enter first *warning* and then *error* and check the results for each. +
 . Open the logs containing the message *Variation invalid*. +
-→ In the log, you will receive the variation ID and the reason for the rejection or the missing characteristic.
-. We have listed possible error messages and solutions below this description.
+→ In the log, you will receive the variation ID and the reason for the rejection or the missing characteristic. +
+→ The chapter <<#1305, Order processing: Error messages in the log>> provides information on possible error messages and solutions.
+--
+
+
+[.collapseBox]
+.An order was imported without an invoice document even though you can see the invoice in OTTO Market’s OPC. What now?
+--
+
+Did you activate the option *Import purchase receipts as external invoices* in the setup assistant? Then invoices are only imported after a shipping confirmation was sent to OTTO Market.
+
+image::market:otto-faq-no-invoice.png[]
+
+If this option is active and no invoice document was imported, check the following points:
+
+* Was the event procedure *Send shipping confirmation to OTTO* triggered?
+* Does a return label exist for each package number?
+* Are all shipping service providers for Otto Market linked correctly in the assistant?
+* Is the return service provider configured in plentymarkets the same as the return service provider in Otto Market’s OPC?
+* Are the addresses of your warehouses correct?
+
+We recommend that you check the log for error messages to find a solution more quickly.
+
+Note that a retroactive invoice import cannot be triggered automatically. In this case, the plentymarkets support needs to import your invoice manually.
+So post the order ID in the link:https://forum.plentymarkets.com/t/sammelthread-fuer-nachtraegliche-dokumentenimporte-rechnungen/647738[thread for retroactive document imports - invoices].
+--
+
+[#faq-errors]
+=== Error messages in the log
+
+This chapter provides information and solutions for error messages in the log.
+
+[.collapseBox]
+.How do I check error messages in the log?
+--
+
+Always check the log if your items were not exported. It provides many error messages so that you can correct the errors yourself.
+There are several integrations that you should check one after the other.
+
+Find out how here.
+
+. Go to *Data » Log*.
+. Filter the results by selecting the following logs one by one for the setting *Integration*:
+* Plenty\\Modules\\Otto\\Item\\Services\\ItemExportService
+* Integration: Plenty\\Modules\\Otto\\Item\\Templates\\Mutators\\DefaultSkuMutator with the identifier: OTTO Market
+* Plenty\\Modules\\Otto\\Item\\Commands\\ItemReportResultCommand
+* Plenty\\Modules\\Otto\\Item\\Templates\\Mutators\\MediaAssetsMutator +
+→ All export attempts are shown.
+. Check the entries. +
+*_Tip:_* The *level* tells you if an item was successfully exported or not.
+
+[cols="1,3a"]
+|===
+|Level |Explanation
+
+| *info*
+| Log entries with this message usually indicate a successful export. This is an example:
+
+image::markets:otto-faq-logs-1.png[]
+
+| *error*
+| Log entries with this message usually indicate an error during the export. This usually means that your variation is not valid. As such, the variation was not exported. This is an example:
+
+image::markets:otto-faq-logs-2.png[]
+
+
+Messages of this kind can be opened to show more details:
+
+image::markets:otto-faq-logs-3.png[]
+
+The example in the screenshot shows an error in the variation with the ID *1167*. The problem here is the data field "productDescription.category".
+|===
+--
+
+[#13016]
+==== Error messages in the log: item export
+
+We have listed possible error messages in relation to the item export below.
+
+[#13023]
+[.collapseBox]
+.*missing requirements: delivery.deliveryTime*
+--
+Check the delivery time mapped in the catalogue in the field *Delivery time in days* and the variation. In most cases, you can map the availability of your variation:
+
+You can find a translation of the individual availability levels in the *Setup » Item » Availability* menu.
+
+image::markets:otto-faq-5.png[]
+--
+
+[#13010]
+[.collapseBox]
+.*missing requirements: delivery.type*
+--
+This error indicates that the shipping method is not linked. The shipping method can be defined via two different data fields:
+
+* via a shipping profile
+* via property
+
+Make sure that the data field saved in the catalogue is linked to the item. For the shipping profile, activate the shipping profile in the item’s *Global* tab. For the property, activate the property for the desired variation.
+--
+
+
+[#13017]
+[.collapseBox]
+.*missing requirements: ean*
+--
+* Check that the variation has a EAN.
+* Check that the barcode mapped in the *EAN* field of the catalogue matches the barcode type saved for the variation.
+* Go to *Setup » Item » Barcode* and check that the barcode type is activated for the market OTTO Market.
+--
+
+[#1309]
+[.collapseBox]
+.*missing requirements: mediaAssets.IMAGE* or *mediaAssets*
+--
+Both these error messages usually have the same cause. This error indicates that either you did not select a data field as the source in the catalogue or that none of your item images is linked to the referrer *OTTO Market*.
+
+. Click on the tab *Images* of the item.
+. Activate the referrer *OTTO market* as described in the <<Setting the availability for images, Setting the availability for images>> chapter.
+
+image::markets:otto-faq-4.png[]
+--
+
+[#13024]
+[.collapseBox]
+.*missing requirements: pricing.standardPrice.amount* or *pricing.standardPrice.currency*
+--
+Both these error messages usually have the same cause. Check that the catalogue field *Sales price* has been mapped to the sales price of the variation. In addition, go to *Setup » Item » Sales prices* and make sure that the sales price you mapped in the catalogue has been activated for the referrer*OTTO Market*.
+--
+
+[#13024]
+[.collapseBox]
+.*missing requirements: pricing.vat*
+--
+
+This error refers to the VAT rate.
+
+* The VAT rate must be saved for the variation (*Item/Settings in the Costs area*).
+
+image::markets:otto-faq-5.png[]
+
+* The VAT rate must be mapped correctly in the catalogue. For example, the Otto value (under *VAT*) and the mapping to the VAT rate of the item must not be missing.
+
+image::markets:otto-faq-6.png[]
+--
+
+[#1308]
+[.collapseBox]
+.*missing requirements: productDescription.brand*
+--
+This error indicates that the variation’s brand that should be exported has not been mapped in the catalogue. Make sure that a source is saved for the brand in the catalogue and that the data field is linked to the item.
+
+The brand can be linked to the variation in two different ways:
+
+* By mapping the Manufacturer that is saved in the *Global* tab of an item
+*_Tip:_* If you want to map the manufacturer, the catalogue mapping should be *Add data field » Manufacturer » [Select manufacturer]*.
+* By creating a property
+
+*_Important:_* Select the OTTO brand from the drop-down list. Do not enter the brand yourself.
+
+*_Tip:_* If the brand you need is not available for selection in the OTTO brands field (left side), you can register the brand with OTTO Market. Go to the OTTO Market help desk to find out more. Brands that you or other sellers register are only available in plentymarkets after the next brand update. As such, it can take up to two hours until your newly created brand can be selected in the catalogue.
+--
+
+[#13011]
+[.collapseBox]
+.*missing requirements: productDescription.category*
+--
+This error indicates that the category mapping in the catalogue is missing. In the catalogue, check whether at least one category of the desired variation is linked to an OTTO Market category.
+
+* In the catalogue, check which data field is mapped to the marketplace data field *Category*. We recommend that you map either already existing categories (Tab: *Categories) of* your variations or properties (Tab: *Properties*).
+--
+
+[#13018]
+[.collapseBox]
+.*missing requirements: sku / productReference*
+--
+In the catalogue, check the mappings for the data fields *Parent-SKU* and *SKU*. Make sure that you have mapped at least two data fields to each of these fields, i.e. one field and one fallback field. You can find a recommendation for a possible mapping <<#13025, here>>.
+--
+
+[#13019]
+[.collapseBox]
+.*missing requirements: stock*
+--
+The variation does not have positive net stock in the warehouse that is mapped in the catalogue. If *no* warehouse is mapped in the catalogue, the sum of all sales warehouses is exported.
+Alternatively, you can map the *virtual warehouse*.
+
+Find more information on the catalogue mappings for the marketplace data field *Stock* <<markets/otto/otto-market#905, here>>
+[/details]
+--
+
+[#13025]
+[.collapseBox]
+.*missing requirements: sku-validation-error, validation error found* or *Duplicate entry. Combination of the fields variationId, marketId and accountId must be unique.*
+--
+
+This error is also indicated as *SKU 1234 not generated* or *0:sku* in the log.
+
+How SKUs should be generated is defined in the catalogue. There is a distinction between the *Parent SKU* and the *Variation SKU*. The source selected here should be a data record which exists only once. As such, it is not possible to use the same SKU for different items.
+
+For example, you could use the Item ID and the Variation ID. Both IDs are generated when the item is created and as such only ever exist once.
+
+However, it might happen that the item export is carried out with errors because of missing information in the catalogue. The SKU is created anyway and can now be found in the *Availability* tab of a variation. During the next export, your system will try again to create an SKU from the sources selected in the catalogue. However, this SKU does not exist. This is why the error happens:
+
+* Duplicate entry. Combination of the fields variationId, marketId and accountId must be unique
+
+* SKU 1234 not generated
+
+As such, you need to add a fallback data field to the catalogue. The solution looks like this:
+
+image::markets:otto-market-add-source.png[Add data field]
+
+IMPORTANT: When adding another data field, it is mandatory to use the *Add fallback data field* button (icon:link[role="yellow"]) on the right-hand side of the catalogue. Do _not_ use the option *Add data field* (icon:plus-square[role="green"]) because in this case, your SKUs would be created twice and the error cannot be resolved.
+
+This adds a *_second_* data field. During the next export, the first data field will be retrieved first. However, this data field already contains an SKU. As such, the second data field is ignored. If the first data field does not contain an SKU, then a new SKU will be generated using the second data field.
+
+--
+
+
+
+
+[.collapseBox]
+.code:"500001 - MANDATORY_LEGAL_ATTRIBUTE_MISSING" title:"Das Attribut 'Materialzusammensetzung' muss aus rechtlichen Gründen bei der Category 'Hoodie' gepflegt sein."
+--
+
+In this example, the data field *Material composition* of your catalogue is affected. As such, check your mapping for the marketplace data field *Material composition*. We recommend mapping a property. Is the property linked to the variation correctly?
+--
+
+[.collapseBox]
+.code:"400004 - NORMPRICE_IS_REQUIRED_FOR_CATEGORY" title:"Die von Ihnen gewählte Kategorie muss zwingend mit einem Grundpreis laut PAngV ausgezeichnet werden. Bitte ergänzen Sie diesen.
+--
+
+In this case, OTTO expects all the information needed to calculate the unit price. Check the answer to the question “I want to export the unit price of my variations to OTTO. How do I do that?”.
+--
+
+[.collapseBox]
+.code:"300001 - IMAGE_TYPE_ELEMENT_MISSING" title:"Es muss mindestens ein Element vom Typ 'IMAGE' vorhanden sein.""
+--
+
+In this case, Otto expects an image that is linked to the referrer Otto Market.
+So at least one image must be activated for Otto Market in the tab *Images* of the item.
+You can check that under *Availability*.
+
+image::markets:otto-faq-8.png[]
+--
+
+[.collapseBox]
+.code:"100005 - INVALID_VALUE_CATEGORY" title:"'LED GartenleuchteLED Gartenleuchte' ist keine gültige Produktkategorie. Bitte wählen Sie nur Kategorien aus, die Sie über den Categories-Endpunkt in der API abfragen können."
+--
+This error message usually indicates that categories were not mapped correctly in the catalogue.
+For categories, you cannot combine values in the same row of the catalogue. Instead, you need to map the categories as fallback data fields. In other words, the alternative data field should be in the row *below* the first data field.
+
+If your mappings look like in the screenshot, you need to correct them. Otherwise, the category value is exported twice:
+
+image::markets:otto-faq-9.png[]
+
+Instead, replicate the mappings below to make sure the category "Outdoor lights" is only exported if the category "LED outdoor lights" is not saved for the item:
+
+image::markets:otto-faq-10.png[]
+
+--
+
+[.collapseBox]
+.Message: Der Pfad für "media assets" ist ungültig. Enter a valid URL.
+--
+
+Possible content of the message:
+
+```
+Object
+variationId:10792
+type:"PRODUCT_DATASHEET"
+location:""
+Trigger:"cli: artisan catalog:async-export"
+```
+
+Media assets are files. This error refers to the product data sheet (see `type`). As such, the variation with the ID 10792 is either not linked to the property associated with this catalogue or you did not save a URL.
+
+*_Important:_* Files can only be saved by providing an URL. Properties without an URL are not exported.
+--
+
+[.collapseBox]
+.Why aren’t my prices being updated?
+--
+
+The price update happens at the same time as the item export. If variations are invalid, prices can not be synchronised. In other words, they are not updated on Otto Market.
+
+* Check the log for error messages.
 --
 
 [#1305]
-=== Order processing: Error messages in the log
+==== Error messages in the log: order processing
 
 We have listed possible error messages in relation to the order processing below.
 
@@ -341,6 +588,62 @@ We have listed possible error messages in relation to the order processing below
 This error usually occurs if the order has a tracking number but no return tracking number (return label). Go to *Orders » Shipping centre* to check this. Return labels are shown in the *Return labels* tab of the order. If no label exists, a label must be created and a new shipping confirmation must be sent.
 
 To send a new shipping confirmation, the event procedure with the procedure *Send shipping confirmation to OTTO* must be triggered again. Depending on the event, you might need to undo the event before triggering the event action again.
+
+NOTE: A separate return label must be created for each package/package number.
+
+To send a new shipping confirmation, the event procedure with the procedure *Send shipping confirmation to OTTO* must be triggered again.
+--
+
+[.collapseBox]
+.*Versandadresse am Lager nicht gefunden.* / *Postal code or town of the warehouse address is empty.*
+--
+
+The shipping confirmation that is sent to OTTO Market must contain a valid sender address. If this sender address does not exist or if it is incomplete, an error message is triggered for the shipping confirmation.
+
+Check the following settings:
+
+* Shipping confirmations will only be sent to OTTO Market if the warehouse address was saved. You can save the address in the settings of a warehouse under *Setup » Stock » Warehouse » [Select warehouse] » Settings*. You have to save the address for the warehouse that is used in the order.
+
+To send a new shipping confirmation, the event procedure with the procedure *Send shipping confirmation to OTTO* must be triggered again.
+--
+
+[.collapseBox]
+.*No order packages found.*
+--
+
+No package number and/or no return label were available at the time the shipping confirmation was sent. Check if the package number and the return label were available when the shipping confirmation was sent.
+
+To send a new shipping confirmation, the event procedure with the procedure *Send shipping confirmation to OTTO* must be triggered again.
+--
+
+[.collapseBox]
+.*Invalid return service provider.*
+--
+
+NOTE: OTTO Market only allows the return service providers DHL, Hermes and GLS.
+
+* Check that the order has a package number and a return tracking number (return label). To check this, go to *Orders » Shipping centre » [Search for order] » Tab: Return labels*.
+* If no label exists, a label must be created and a new shipping confirmation must be sent.
+
+To send a new shipping confirmation, the event procedure with the procedure *Send shipping confirmation to OTTO* must be triggered again.
+
+--
+
+[.collapseBox]
+.*Shipping service provider not found.*
+--
+
+Open the log message to understand which shipping service provider could not be found. There, you’ll find the following message:
+
+* message:"Carrier ID 123 not mapped in OTTO market config."
+
+This error usually means that the plentymarkets shipping service provider that is saved in the order is not correctly linked to an Otto Market shipping service provider.
+The carrier ID specified in the error message is the same as in the menu *Setup » Orders » Shipping » Settings » Tab: Shipping service provider*.
+
+* Open the Otto Market setup assistant. Check if the plentymarkets shipping service provider that is saved in the order is correctly linked to an Otto market shipping service provider. If necessary, carry out the mapping and save the settings.
+
+To send a new shipping confirmation, the event procedure with the procedure *Send shipping confirmation to OTTO* must be triggered again.
+
 --
 
 [#1307]
@@ -350,7 +653,7 @@ To send a new shipping confirmation, the event procedure with the procedure *Sen
 
 These errors indicate that you changed an OTTO item attribute. However, OTTO does not accept the change and it is not possible the change the attribute for this item. The indicated attribute can relate to a variation attribute or a title attribute. Other OTTO attributes are important here, too.
 
-TIP: An item _cannot be deleted_ at OTTO Market, neither by plentymarkets nor by OTTO. It is only possible to mark the item as *not available* at OTTO Market. Therefore, you should always make sure that the correct data fields are mapped in the catalogue prior to transferring your items.
+TIP: An item _cannot_ be deleted on OTTO Market, neither by plentymarkets nor by OTTO. It is only possible to mark the item as *not available* at OTTO Market. Therefore, you should always make sure that the correct data fields are mapped in the catalogue prior to transferring your items.
 
 --
 
