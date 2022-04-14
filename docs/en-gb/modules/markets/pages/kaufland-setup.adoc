@@ -9,7 +9,7 @@
 link:https://www.Kaufland.de/[Kaufland.de^] is one of the largest fixed price markets in Germany. You can sell items from various product categories on Kaufland.de. Kaufland.de also processes payments for you. In other words, you are neither charged with payment costs nor do you have to worry about debt collection. +
 
 ////
-Watch this video tutorial in order to learn how to set up the market Kaufland.de in plentymarkets:
+Wie du den Marktplatz Kaufland.de in plentymarkets einrichtest, erfährst du in diesem Video-Tutorial:
 
 .Setting up Kaufland.de in plentymarkets
 video::331004662[vimeo]
@@ -65,6 +65,29 @@ a| * *Yes* = Activate the interface to Kaufland.de. +
 |After the shipment has been confirmed, this option allows Kaufland.de to use the package number in order to send the customer an email with the correct tracking link. +
 *_Important:_* You have to assign each of your service providers to one of the service providers from the drop-down list.
 
+| *Send shipping confirmations via*
+| Up to now, shipping confirmations were sent to Kaufland with an hourly cron. However, this cron is deactivated very soon. As such, set up the event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> now and set the option to *event procedure*.
+
+[cols="1,3"]
+!===
+! *hourly cron*
+! The hourly cron is deactivated very soon. As such, set up the event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> now. Then set the option *Send shipping confirmations via* to *event procedure*.
+
+! *Event procedure* +
+(recommended)
+! Shipping confirmations are sent with the event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>>.
+!===
+
+| *Order status for orders with failed shipping confirmations*
+| Select a status. If no shipping confirmation could be sent to Kaufland.de, the order is moved to this status.
+
+*_Background:_* The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
+
+//| *Order status for orders with failed in fulfilment confirmations*
+//| Select a status. If no in fulfilment confirmation could be sent to Kaufland.de, the order is moved to this status.
+
+//*_Background:_* The event procedure <<#in-fulfillment, Send in fulfilment confirmation to Kaufland.de>> automatically informs {market} that an order has been handed over to the warehouse for fulfilment. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed in fulfilment confirmations*.
+
 2+^| Item settings
 
 | *Activate item export*
@@ -108,7 +131,7 @@ a| Select *Yes* or *No*. +
 *_Note:_* We recommend using the option *Yes* because bigger stock changes may result in errors.
 
 | *Item quantity for items that are not limited to stock*
-|Items for which *no limitation* has been selected in the xref:stock-management:managing-stocks.adoc#[Stock tab] of an item are offered on Kaufland.de with the quantity entered here. As soon as an item has been sold, the quantity saved here is newly transmitted for sale at the next full hour.
+|Items for which *no limitation* has been selected in the tab xref:stock-management:managing-stocks.adoc#[Stock] of an item are offered on Kaufland.de with the quantity entered here. As soon as an item has been sold, the quantity saved here is newly transmitted for sale at the next full hour.
 
 | *Minimum price*
 | Select a sales price for the minimum price to set up repricing (Tiefpreisautomatik) for Kaufland.de. +
@@ -175,10 +198,6 @@ After setting up {market} in plentymarkets, the automatic processes described in
 | Order import
 | every 15 minutes
 
-| Information *Sent*
-| Hourly +
-*_Note:_* The flag *Sent* is transferred to {market} after the outgoing items have been booked.
-
 | Additional data
 | * export of surcharges for attribute values (item variations)
 * transfer of the description text saved in the *Texts* tab
@@ -223,7 +242,7 @@ include::partial$activate-referrer.adoc[]
 [IMPORTANT]
 .Do not group Kaufland.de orders
 ====
-During the order import, Kaufland.de orders are synchronised by the external order number. However, because the external order number does not exist any longer in a grouped order, grouping orders might result in orders being created anew when they are retrieved again.
+During the order import, Kaufland.de orders are synchronised by the external order number. However, in grouped orders, the external order number no longer exists. As such, grouping orders might result in orders being created anew when they are retrieved again.
 ====
 
 [#800]
@@ -319,7 +338,7 @@ Creating a characteristic:
 . Activate the option *Kaufland.de*.
 . Save (icon:save[set=plenty]) the settings.
 
-For further information about linking characteristics with Kaufland.de, refer to the xref:markets:best-practices-kaufland-linking-characteristics.adoc#[Linking characteristics to attributes] best practice page.
+For further information about linking characteristics with Kaufland.de, refer to the best practice page xref:markets:best-practices-kaufland-linking-characteristics.adoc#[Linking characteristics to attributes].
 
 [#prepare-variations]
 == Preparing variations
@@ -353,7 +372,7 @@ include::partial$sku-manually.adoc[]
 [#mandatory-fields]
 === Pflichtangaben an Varianten speichern
 
-{market} requires some mandatory information. That means that a variation only can be exported to the market if this mandatory information is saved for the variation. For a functioning export to {market}, the variation has to conform with the following requirements:
+{market} requires some mandatory information. As a result, variations can only be exported to the market if this mandatory information is saved for the variation. For a functioning export to {market}, the variation has to conform with the following requirements:
 
 * A *EAN* or an *ISBN*
 
@@ -439,9 +458,51 @@ image::markets:kaufland_logo.png[]
 
 Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform {market} about changes to the order status. The following event procedures are available for {market}:
 
+* New: Send shipping confirmation (<<#shipping-confirmation, How?>>)
 * Generate invoice (<<#890, How?>>)
 * Upload invoice to Kaufland.de (<<#895, How?>>)
 * Send cancellation to Kaufland.de (<<#900, How?>>)
+//* New: Send in fulfilment confirmation (<<#in-fulfillment-confirmation, How?>>)
+
+[#shipping-confirmation]
+=== NEW: Send shipping confirmation
+
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform {market} when you have shipped the items of an order.
+
+:table-event-procedure: <<#shipping-confirmation-kaufland>>
+
+include::_includes:page$EA.adoc[]
+
+[[shipping-confirmation-kaufland]]
+.Event procedure to send shipping confirmations to {market}
+[cols="1a,3a,3a"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| Select an event, for example:
+
+* *Order change: Status change >* Select a status, for example *[7] Shipped]*
+
+_or_
+
+* *Order change > Package number*
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Referrer*
+| *Kaufland.de*
+
+| *Procedure*
+| *Plugin*
+| *Send shipping confirmation to Kaufland.de* +
+*_Note:_* If no shipping confirmation could be sent to {market}, the order is moved to the status that you selected for the option *Order status for orders with failed shipping confirmations*. Go to *Setup » Markets » Kaufland.de » Settings* to set this option. +
+<<#no-shipping-confirmation, How to deal with orders in this status>>
+|====
 
 [#890]
 === Automatically creating invoices
@@ -468,8 +529,8 @@ The status and filters listed in <<#creating-invoices-kaufland>> only serve as a
 |Setting |Option |Selection
 
 | *Event*
-| *Status change: [7] Outgoing items booked*
-|
+| *Order change: Status change*
+| *[7] Outgoing items booked*
 
 | *Filter 1*
 | *Order > Order type*
@@ -552,8 +613,8 @@ include::_includes:page$EA.adoc[]
 |Setting |Option |Selection
 
 | *Event*
-| *Status change: Status [8] Cancelled*
-|
+| *Order change: Status change*
+| *[8] Cancelled*
 
 | *Filter 1*
 | *Order > Order type*
@@ -569,14 +630,51 @@ include::_includes:page$EA.adoc[]
 *_Note:_* You can cancel individual order items for Kaufland.de. However, you cannot adjust the cancellation amount. As such, you can only refund the full sales price of an order item. You cannot grant discounts or reduce the price of cancelled order items.
 |====
 
-[discrete]
-===== Returns for Kaufland.de
+////
+[#in-fulfillment]
+=== NEU: In-Fulfillment-Bestätigung senden
 
-[TIP]
-.Returns for Kaufland.de
-====
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform {market} when an order is handed over to the warehouse.
+
+:table-event-procedure: <<#in-fulfillment-kaufland>>
+
+include::_includes:page$EA.adoc[]
+
+[[in-fulfillment-kaufland]]
+.Event procedure to send in fulfilment confirmations to {market}
+[cols="1,3a,3a"]
+|====
+|Setting |Option |Selection
+
+| *Event*
+| Select an event, for example *Order change: Status change*
+| Select a status, for example:
+
+* *[4] In preparation for shipping*
+
+_or_
+
+* *[5] Cleared for shipping*
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Referrer*
+| *Kaufland.de*
+
+| *Procedure*
+| *Order*
+| *Send in fulfilment confirmation to Kaufland.de* +
+*_Note:_* If no in fulfilment confirmation could be sent to {market}, the order is moved to the status that you selected for the option *Order status for orders with failed in fulfilment confirmations*. Go to *Setup » Markets » Kaufland.de » Settings* to set this option.
+|====
+////
+
+[#returns]
+=== Returns for Kaufland.de
+
 Unlike other marketplaces, you cannot send returns to Kaufland.de with an event procedure via plentymarkets yet. Process returns for Kaufland.de directly in your Kaufland.de seller account.
-====
 
 [#1000]
 == Viewing the log
@@ -615,3 +713,24 @@ a| Select a reference type to filter for specific events.
 |
 
 |====
+
+
+[#faq]
+== FAQ and troubleshooting
+
+This chapter contains answers to frequently asked questions.
+
+[#no-shipping-confirmation]
+[.collapseBox]
+.No shipping confirmation was sent. What now?
+--
+
+The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
+
+Check orders in this status:
+
+* Is the shipping service provider linked correctly?
+* Is a tracking number saved for the order?
+
+After correcting the order, move the order to the status that triggers the event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>>.
+--
