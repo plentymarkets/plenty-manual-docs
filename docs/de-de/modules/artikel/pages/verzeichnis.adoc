@@ -7,14 +7,14 @@
 :manual:
 
 ////
-zuletzt bearbeitet 12.04.2022
+zuletzt bearbeitet 20.04.2022
 ////
 
 //ToDo - once the UI texts are updated, check to make sure the UI texts match the texts in the manual page
 //ToDo - Positionsnummer auf 40 setzen, um wieder sichtbar zu schalten
 //ToDo - add non-included info (e.g. first sentences of chapters)
 //ToDo - check whether the data fields work the same way in the old and new ui and if not then modify the includes
-//ToDo - add descriptions for Variante > Zusätzliche SKU, Variante > Lager, Variante > Bestand, Variante > Paket
+//ToDo - add descriptions for Variante > Zusätzliche SKU
 //ToDo - move FAQ section to other pages where it makes more sense
 //ToDo - search for and fix comments
 //ToDo - add info that you have to reload the item after you link the images
@@ -1451,31 +1451,239 @@ Wenn die Rabattfähikgeit nicht gesetzt ist, wird der eingetragene Rabatt für N
 Gib die Verpackungseinheit (VPE) des Lieferanten ein, wenn sie von dem abweicht, was du xref:artikel:verzeichnis.adoc#180[im Varianten-Datensatz gespeichert] hast.
 |====
 
-////
+
 [#310]
 === Lager
+
+Wo wird diese Variante gelagert?
+Ordne deine Varianten dem passenden Lagerort zu.
+Indem du diese Daten in plentymarkets speicherst, kannst du später xref:warenwirtschaft:wareneingaenge-verwalten.adoc#450[den Wareneingang buchen].
+
+[TIP]
+.Hast du bereits Lager-Informationen gespeichert?
+====
+Bevor du Varianten mit Lagerorten verknüpfen kannst, musst du plentymarkets ein wenig über dein Lager mitteilen.
+Wie viele Zonen, Regale, Regalböden und Lagerorte gibt es in deinem Lager?
+xref:warenwirtschaft:lager-einrichten.adoc#[Richte dein Lager ein], bevor du fortfährst.
+====
+
+[.instruction]
+Lager hinzufügen:
+
+. Öffne das Menü *Artikel » Artikel-UI » [Variante öffnen] » Element: Lager*.
+. Klicke auf *Lager hinzufügen* (icon:plus[role="darkGrey"]). +
+→ Es öffnet sich ein Pop-up-Fenster.
+. Wähle das Lager aus, das du verknüpfen möchtest.
+. Klicke auf *Übernehmen*. +
+→ Die Daten werden als Tabelle dargestellt.
+. *Speichere* (icon:save[set=plenty, role="darkGrey"]) die Einstellungen.
+
+//zukunft - die beschreibungen in der tabelle verständlicher machen (siehe Schulung mit Oskar) und auch mit den Beschreibungen unter warenwirtschaft:wareneingaenge-verwalten.adoc#200 angleichen - dafür includes verwenden
 
 [cols="1,4a"]
 |====
 |Einstellung |Erläuterung
 
-|
-|
+| *Lager*
+|Hier siehst du das soeben ausgewählte Lager.
+Dies ist rein informativ und kann nicht geändert werden.
+
+| *Lagerorttyp*
+|Wähle anhand der Artikelgröße einen Lagerorttyp.
+
+//this doesn't make sense - in the ui you can choose 1-20 : it doesn't match the warehouse dimensions saved
+| *Zone*
+|Wähle eine Zone, wenn das Lager in Zonen eingeteilt wurde.
+
+| *Meldebestand*
+|Gib die Anzahl ein, bei der eine Nachbestellung der Variante erfolgen soll.
+Erst wenn die Variante auf diesen Meldebestand sinkt, wird ein Mengenvorschlag für die Variante angezeigt, da erst bei Erreichen des Meldebestands eine Nachbestellung erfolgen soll.
+
+*_Hinweis_*: Wenn du die xref:warenwirtschaft:lager-einrichten.adoc#Meldebestand_Variante_Lager[Differenz zum Meldebestand] dynamisch berechnen lässt, darf hier nur `0` gespeichert werden.
+
+| *Maximalbestand*
+|Gib den maximalen Bestand für das Lager ein.
+Der Maximalbestand wird für den Bestellmengenvorschlag berücksichtigt, sodass der Vorschlag den Maximalbestand nicht überschreitet.
+
+| *Lagerreichweite*
+|Gib die Anzahl der Tage ein, den der Warenbestand bis zur nächsten Nachbestellung reichen soll.
+Die Lagerreichweite fließt in die Berechnung des Nachbestellungsvorschlags ein.
+
+*_Hinweis_*:
+Wird hier kein Wert eingetragen, wird die Lagerreichweite bei der Berechnung eines Nachbestellungstermins nicht berücksichtigt.
+
+*_Praxisbeispiel_*:
+Ein Standardwert aus der Praxis für die Lagerreichweite ist z.B. 14 Tage.
+Wenn der Artikel den Meldebestand erreicht hat, werden die 14 Tage zur Berechnung der Nachbestellmenge berücksichtigt, d.h. es wird die Menge zur Nachbestellung vorgeschlagen, die für die folgenden 14 Tage ausreicht.
+
+| *Bestandspuffer*
+|Gib einen Bestandspuffer ein.
+Dies bewirkt, dass der Bestand für bestimmte Marktplätze um den eingetragenen Wert reduziert wird.
+
+*_Hinweis_*:
+Hier eingetragene Werte gelten für die Marktplätze xref:maerkte:amazon-einrichten.adoc#[Amazon] und xref:maerkte:shopgate.adoc#[Shopgate].
+Die Werte sind gegenüber den hinterlegten Bestandspufferwerten dieser Marktplätze dominant.
+Bei anderen Marktplätzen, die nicht hier aufgeführt sind, haben die Bestandspuffer-Einstellungen des jeweiligen Marktplatzes Vorrang vor dieser Einstellung.
+
+*_Beispiel_*: Der Artikel hat einen Bestand von 50.
+Du möchtest einen Bestandspuffer von 10 Artikeln, damit der Artikel nicht vollständig über den Marktplatz abverkauft wird.
+Dazu gibst du 10 als Bestandspuffer ein.
+Zum Marktplatz wird dann ein Bestandswert von 40 übertragen.
+
+| *Charge*
+|Wähle, ob für die Variante und das Lager die Charge der Produkte erfasst werden soll.
+
+*_Hinweis_*: Sobald Lagerbestand auf dem Lager vorhanden ist, kann diese Option nicht mehr deaktiviert werden.
+Ist der Lagerbestand auf dem Lager gleich 0, ist das Aktivieren und Deaktivieren der Option möglich.
+
+| *MHD*
+|Wähle, ob für die Variante und das Lager das Mindesthaltbarkeitsdatum der Produkte erfasst werden soll.
+
+*_Hinweis_*: Sobald Lagerbestand auf dem Lager vorhanden ist, kann diese Option nicht mehr deaktiviert werden.
+Ist der Lagerbestand auf dem Lager gleich 0, ist das Aktivieren und Deaktivieren der Option möglich.
+
+| *Lagerortvorschlag*
+|Wähle einen Lagerort, der bei Nachbestellungen automatisch vorgeschlagen werden soll.
+
+*_Hinweis_*: Der Standard-Lagerort bedeutet, dass kein Lagerort zugewiesen wurde.
 
 |====
 
 [#320]
 === Bestand
 
+Hier siehst du eine Übersicht deiner Bestände.
+Du erfährst also, wie viele Exemplare jeder Variante auf Lager sind.
+Hinter dem Drei-Punkte-Menü (icon:ellipsis-v[role="darkGrey"]) kannst du außerdem den Bestand korrigieren oder Bestand umbuchen.
+
+//zukunft - die beschreibungen in dieser tabelle (und der Tabelle unter Artikel-Ebene > Bestand) mit den Beschreibungen unter warenwirtschaft:warenbestaende-verwalten.adoc#400 angleichen - dafür includes verwenden
+
 [cols="1,4a"]
 |====
 |Einstellung |Erläuterung
 
-|
+| *Variantenname*; +
+*Variantennummer*; +
+*Barcode*; +
+*Attribute*
+|Die Übersicht gibt an, wie viele Exemplare jeder Variante auf Lager sind.
+Anhand der Varianten-ID, Variantenname, Variantennummer, Barcode und Attribute erkennst du, auf welche Variante sich die Bestandsangaben beziehen.
+
+| *Lager*; +
+*Verfügbarkeit*; +
+*Paket*
+|Hier siehst du allgemeine Informationen zur Variante.
+Du erfährst, in welchem xref:warenwirtschaft:lager-einrichten.adoc#[Lager] der Artikel liegt, welche xref:artikel:verfuegbarkeit.adoc#[Verfügbarkeitsstufe] er hat und ob es sich um ein xref:artikel:multipacks-pakete-sets-verwalten.adoc#[Artikelpaket] handelt.
+
+| *Einkaufspreis*
+|Der Einkaufspreis der Variante.
+
+*_Hinweis_*:
+Im Menü *Einrichtung » Waren » Warenbestand » Suche* legst du fest, ob der durchschnittliche EK oder der aktuell in einer Variante gespeicherte EK hier angezeigt werden soll.
+
+//Beachte, dass der aktuell in einer Variante gespeicherte Einkaufspreis auch der Durchschnittseinkaufpreis sein kann.
+//Dies hängt vom Einkaufspreis ab, der beim Wareneingang übertragen wird.
+//Wie der Wareneingang übertragen wird, stellst du im Menü *Einrichtung » Waren » Warenbestand » Wareneingang* ein.
+
+| *Warenwert*
+|Der Warenwert ergibt sich aus dem Einkaufspreis multipliziert mit dem physischen Bestand.
+
+*_Beispiel_*:
+
+* Einkaufspreis = 20 EUR
+* Physischer Bestand = 100 Exemplare
+* Warenwert = 20 x 100 = 2.000 EUR
+
+| *Physischer Bestand*
+|Gibt an, wie viele Exemplare sich tatsächlich im Lager befinden.
+
+| *Reservierter Bestand*
+|Gibt an, wie viele Exemplare derzeit reserviert sind.
+
+* Eine Reservierung liegt vor, wenn ein offener Auftrag oder eine Gewährleistung besteht.
+* Der Bestand bleibt reserviert, bis der Warenausgang gebucht wird oder bis der Auftrag / die Gewährleistung storniert wird.
+* Der reservierte Bestand ist eine Teilmenge des physischen Warenbestands, denn der Bestand befindet sich noch im Lager, wurde aber schon verkauft.
+
+| *Reservierter Bestand für Listings*
+|Gibt an, wie viele Exemplare derzeit in einer Auktion auf eBay, ricardo oder Hood angeboten werden und somit reserviert sind.
+
+*_Hintergrund-Info_*:
+Da Listings rechtlich als verbindliche Angebote an potenzielle Käufer gelten, ist es sinnvoll, die in Listings angebotene Ware auch ohne konkreten Auftrag zu reservieren.
+Andernfalls verkaufst du eventuell mehr Artikel, als du im Warenbestand hast.
+
+In plentymarkets entscheidest du, ob du Artikel aus aktiven Listings als reservierte Bestände führen möchtest oder nicht.
+
+. Beim Erstellen eines Market-Listings wählst du für die *Bestandsabhängigkeit* die Option *beschränkt (mit Reservierung)*, um die eingestellte Menge zu reservieren.
+. Sobald ein Listing erfolgreich abgeschlossen wurde, ist die Einstellung nicht mehr aktiv.
+Der verkaufte Artikel ist dann über den Auftrag reserviert.
+
+| *Reservierter Bestand für Artikelpakete*
+|Gibt an, wie viele Artikelpakete sich in offenen Aufträgen befinden. Bei den Bestandteilen eines Pakets ist der durch Pakete reservierte Bestand in der Spalte Reservierter Bestand mit angegeben.
+
+//zukunft - die beschreibung hier etwas klarer schreiben
+
+| *Meldebestand*
+|Du kannst dir diesen Wert als einen Zielwert vorstellen.
+Das heißt, wie viele Exemplare sich im Lager befinden sollen.
+
+| *Meldebestand Δ*
+|Die Differenz zum Meldebestand.
+Dieser Wert gibt an, wie viele Exemplare verkauft oder nachbestellt werden müssen, um wieder den Meldebestand zu erreichen.
+
+*_Beispiel 1_*:
+
+* Meldebestand = 30 Exemplare
+* Physischer Bestand = 10 Exemplare
+* Meldebestand Δ = 20 Exemplare
+
+In diesem Beispiel wollen wir 30 Exemplare haben.
+Aktuell sind aber nur noch 10 auf Lager.
+Daher müssen wir 20 Exemplare nachbestellen, um wieder den Zielwert zu erreichen.
+
+---
+
+*_Beispiel 2_*:
+
+* Meldebestand = 10 Exemplare
+* Physischer Bestand = 40 Exemplare
+* Meldebestand Δ = -30 Exemplare
+
+In diesem Beispiel wollen wir 10 Exemplare haben.
+Aktuell sind aber 40 auf Lager.
+Daher müssen wir noch 30 Exemplare verkaufen, um wieder den Zielwert zu erreichen.
+
+| *Netto-Bestand*
+|Gibt an, wie viele Exemplare derzeit zum Verkauf zur Verfügung stehen.
+Der Netto-Warenbestand ist eine Teilmenge des physischen Bestands.
+Wenn vom physischen Warenbestand alle Reservierungen abgezogen werden, ergibt sich der Netto-Bestand.
+
+| *Zulauf*
+|Hier siehst du, wie viele Exemplare auf dem Weg ins Lager sind.
+Dieser Nachschub-Wert gibt an, wie viele Einheiten derzeit an dein Lager geliefert werden.
+
+//zukunft - rausfinden, ob die Info unten auch für die neue Artikel-UI zutrifft
+
+//Menge bestellter Artikel. Ein Klick auf die Menge öffnet das Menü Waren » Bestellwesen » Nachbestellungen und listet die Nachbestellungen auf, in denen die Variante enthalten ist.
+//Hinweis: Auch wenn eine Nachbestellung noch offen ist, also noch nicht bestellt wurde, wird die in der Nachbestellung angegebene Menge zum Zulauf gerechnet.
+
+| icon:ellipsis-v[role="darkGrey"]
 |
 
+[cols="1,4a"]
+!===
+
+! icon:receipt[set=material] *Wareneingang*
+!Es öffnet sich ein Pop-up-Fenster, in dem du xref:warenwirtschaft:wareneingaenge-verwalten.adoc#450[den Wareneingang buchen] kannst.
+
+! icon:history[set=material] *Warenkorrektur*
+!Es öffnet sich ein Pop-up-Fenster, in dem du den neuen physischen Bestand und einen Grund für die Korrektur angeben kannst.
+
+! icon:swap_horiz[set=material] *Umbuchung*
+!Es öffnet sich ein Pop-up-Fenster, in dem du den Bestand von einem Lagerort zu einem anderen verschieben kannst.
+
+!===
+
 |====
-////
 
 [#330]
 === Bilder
@@ -1551,7 +1759,95 @@ Wenn du eigene Verkaufspreise an den Untervarianten pflegen möchtest, deaktivie
 ====
 ////
 
-//=== Paket
+=== Paket
+
+//zukunft - die Artikelpakete Seite gründlich überarbeiten und includes verwenden, um die Inhalte auch hier auszugeben
+
+Ein Artikelpaket besteht aus mehreren Produkten.
+Zum Beispiel ein Bartpflege-Kit bestehend aus einer Schere, einer Bürste, Bartöl und Bartwachs.
+
+In diesem Element:
+
+* siehst du die Bestandteile des Pakets.
+Falls erforderlich, kannst du weitere Bestandteile hinzufügen.
+* kannst du Einstellungen wählen, um das Gewicht und den Einkaufspreis automatisch für Artikelpakete berechnen zu lassen.
+
+---
+
+[discrete]
+==== Bestandteile zum Paket hinzufügen
+
+. Öffne das Menü *Artikel » Artikel-UI » [Variante öffnen] » Element: Paket*.
+. Klicke im Element auf icon:ellipsis-v[role="darkGrey"] und dann auf icon:plus[role="darkGrey"] *Paketbestandteile hinzufügen*. +
+→ Es öffnet sich ein Pop-up-Fenster.
+. Wähle die Varianten (icon:check-square[role="blue"]), die du zum Paket hinzufügen möchtest.
+. Klicke auf *Übernehmen*. +
+→ Die Daten werden als Tabelle dargestellt.
+. Gib die Menge ein.
+. *Speichere* (icon:save[set=plenty, role="darkGrey"]) die Einstellungen.
+
+---
+
+[discrete]
+==== Gewicht und Preis automatisch berechnen lassen
+
+Ein Artikelpaket ist eine Zusammenstellung mehrerer Bestandteile.
+Jeder Bestandteil verfügt wiederum über wichtige Kennzahlen, wie Gewicht und Einkaufspreis.
+Aber wie setzen sich diese Kennzahlen für das Artikelpaket insgesamt zusammen?
+Du kannst das Gewicht und den EK für das Artikelpaket selber eingeben.
+Es gibt aber auch die Möglichkeit, diese Kennzahlen automatisch berechnen zu lassen.
+
+. Öffne das Menü *Artikel » Artikel-UI » [Variante öffnen] » Element: Paket*.
+. Klicke im Element auf icon:ellipsis-v[role="darkGrey"] und dann auf icon:cog[role="darkGrey"] *Paketautomatiken konfigurieren*. +
+→ Es öffnet sich ein Pop-up-Fenster.
+. Wähle die gewünschten Automatismen (icon:toggle-on[role="blue"]).
+. Klicke auf *Übernehmen*.
+
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Paket: Bruttogewicht automatisch aus Bestandteilen berechnen*
+|Das Butto-Gewicht wird automatisch anhand der Bestandteile berechnet.
+Das heißt, im Element *Inhalt / Dimensionen* wird zukünftig das Feld xref:artikel:verzeichnis.adoc#180[Gewicht in Gramm brutto] ausgegraut sein.
+
+| *Paket: Nettogewicht automatisch aus Bestandteilen berechnen*
+|Das Netto-Gewicht wird automatisch anhand der Bestandteile berechnet.
+Das heißt, im Element *Inhalt / Dimensionen* wird zukünftig das Feld xref:artikel:verzeichnis.adoc#180[Gewicht in Gramm netto] ausgegraut sein.
+
+| *Paket: Nettoeinkaufspreis automatisch aus Bestandteilen berechnen*
+|Der Netto-Einkaufspreis wird automatisch anhand der Bestandteile berechnet.
+Das heißt, im Element *Kosten* wird zukünftig das Feld xref:artikel:verzeichnis.adoc#190[Einkaufspreis netto] ausgegraut sein.
+
+| *Paket: Gleitenden Nettoeinkaufspreis automatisch aus Bestandteilen berechnen*
+|Der gleitende Netto-Einkaufspreis automatisch anhand der Bestandteile berechnet.
+Das heißt, im Element *Kosten* wird zukünftig das Feld xref:artikel:verzeichnis.adoc#190[Gleitender Durchschnittseinkaufspreis netto] ausgegraut sein.
+
+|====
+
+////
+[TIP]
+.Mehrere Artikelpakete gleichzeitig anpassen
+====
+Verwende die xref:artikel:massenbearbeitung.adoc#[Varianten-Gruppenfunktion oder Stapelverarbeitung], um Gewicht und EK für mehrere Artikelpakete gleichzeitig berechnen zu lassen.
+====
+////
+
+[TIP]
+.Berechnungsautomatik standardmäßig aktivieren
+====
+Hast du nur wenige Artikel, die du von der automatischen Berechnung ausschließen möchtest?
+Kein Problem!
+Du kannst die Berechnungsautomatik standardmäßig aktivieren.
+
+. Öffne das Menü *Einrichtung » Artikel » Einstellungen*.
+. Bestimme welche Kennzahlen standardmäßig berechnet werden sollen.
+Verwende dabei folgende Optionen:
+* *Paketautomatik für Gewicht brutto*
+* *Paketautomatik für Gewicht netto*
+* *Paketautomatik für EKs*
+* *Paketautomatik für GLD EKs*
+====
 
 === Notizen
 
