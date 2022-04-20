@@ -6,7 +6,7 @@
 :startWeekDate: 14. April 2022
 :endWeekDate: 20. April 2022
 
-// Am 20.04.2022 wurden keine Änderungen von early zu stable gemerged. Für den Changelog am 27.04.2022 also die Einträge für early aus der Datei 2022-04-13.adoc in das stable-Tab übernehmen. Ansonsten ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Am 20.04.2022 wurden keine Änderungen von early zu stable gemerged. Für den Changelog am 27.04.2022 also die Einträge für early aus der Datei 2022-04-13.adoc in das stable-Tab übernehmen. Ansonsten ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/neue-artikelui-volltextsuche-new-itemui-fulltextsearch/677584
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -25,8 +25,23 @@ stable::
 [IMPORTANT]
 .Änderungen am kommenden Mittwoch verfügbar
 ======
-Aufgrund technischer Probleme wurden am 20. April 2022 keine Änderungen von *early* zu *stable* übernommen. Dies wird am 27. April 2022 nachgeholt. Es gab keine sonstigen Änderungen für die Version *stable*.
+Aufgrund technischer Probleme wurden am 20. April 2022 keine Änderungen von *early* zu *stable* übernommen. Dies wird am 27. April 2022 nachgeholt.
 ======
+
+[discrete]
+== Behoben
+ 
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Cdiscount
+
+* Bei der Übermittlung einer Retoure bzw. Gutschrift an Cdiscount mit einem Auftrag beliebigen Typs, bei dem sowohl ein Paketartikel und/oder mehrere seiner Paketbestandteile enthalten waren, kam es zu Problemen. Dabei wurde für sowohl für den Paketartikel als auch jeden enthaltenen Paketbestandteil, die gleiche SKU zur Erstattung an Cdiscount gemeldet.
+Also nehmen wir z.B. einen Auftrag an, dem ein Paketartikel mit der Cdiscount-SKU „CSKU1“ ist und dieser hat zwei Paketbestandteile. Dann wurde das Folgende an Cdiscount übermittelt:
++
+`Bitte erstattet aus dem Auftrag die Produkte mit der SKU „CSKU1“, „CSKU1“ und „CSKU1“.``
++
+Dies führt jetzt zu keiner zu hohen Erstattung oder ähnlichem, wir vermuten aber, dass es in dieser Konstellation zu einem unerwarteten Verhalten bei Cdiscount, wodurch die Versandkosten, wenn diese erstattet werden sollten, nicht erstattet werden. Dieses Problem sollte jetzt behoben sein, indem wir sicherstellen, dass jede SKU nur einmal pro Auftrag an Cdiscount übermittelt wird.
 
 --
 
@@ -104,7 +119,7 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 
 |link:https://marketplace.plentymarkets.com/b2bshop_6574[B2B Shop^]
 |1.6.6
-|
+|-
 
 |link:https://marketplace.plentymarkets.com/elasticexportidealode_4723[idealo.de^]
 |3.3.25
