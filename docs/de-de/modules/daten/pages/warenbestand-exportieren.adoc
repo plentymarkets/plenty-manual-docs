@@ -6,8 +6,10 @@
 :author: team-stock
 
 ////
-zuletzt bearbeitet 21.04.2022
+zuletzt bearbeitet 22.04.2022
 ////
+
+//ToDo - check whether the storage location name and ID are still being exported language-specific and delete the info as needed - see comment within storage location table
 
 Diese Seite beschreibt die Datenfelder und Filter, die dir beim Export von Warenbeständen über das Katalog-Tool zur Verfügung stehen.
 Diese Seite dient lediglich als Referenz und setzt voraus, dass du bereits Grundkenntnisse über das xref:daten:dateiexport.adoc#[Katalog-Tool] hast.
@@ -115,23 +117,38 @@ include::artikel:partial$hersteller-name.adoc[]
 |Feld |Erläuterung
 
 | *Physischer Bestand*
-|Physischer Warenbestand
+|Gibt an, wie viele Exemplare sich tatsächlich im Lager befinden.
+
+Entspricht dem Wert im Menü: xref:warenwirtschaft:warenbestaende-verwalten.adoc#400[Waren » Warenbestände » Spalte: Phy]
 
 | *Reservierter Bestand*
-|Reservierter Warenbestand
+|Gibt an, wie viele Exemplare derzeit reserviert sind.
+
+* Eine Reservierung liegt vor, wenn ein offener Auftrag oder eine Gewährleistung besteht.
+* Der Bestand bleibt reserviert, bis der Warenausgang gebucht wird oder bis der Auftrag / die Gewährleistung storniert wird.
+* Der reservierte Bestand ist eine Teilmenge des physischen Warenbestands, denn der Bestand befindet sich noch im Lager, wurde aber schon verkauft.
+
+Entspricht dem Wert im Menü: xref:warenwirtschaft:warenbestaende-verwalten.adoc#400[Waren » Warenbestände » Spalte: Res]
 
 | *Nettobestand*
-|Netto-Warenbestand
+|Gibt an, wie viele Exemplare derzeit zum Verkauf zur Verfügung stehen. Der Netto-Warenbestand ist eine Teilmenge des physischen Bestands. Wenn vom physischen Warenbestand alle Reservierungen abgezogen werden, ergibt sich der Netto-Bestand.
 
+Entspricht dem Wert im Menü: xref:warenwirtschaft:warenbestaende-verwalten.adoc#400[Waren » Warenbestände » Spalte: Netto]
+
+//zulauf?
 | *Nachbestellte Menge*
 |Menge des nachbestellten Warenbestands
 
 | *Lagerpriorität*
-|Priorität des Lagers
+|Die Priorität des Lagers.
 
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Dropdown-Liste: Priorität]
+
+//ergänzen
 | *Durchschnittlicher Einkaufspreis*
 |Durchschnittlicher EK
 
+//ergänzen
 | *Durchschnittlicher Verkauf*
 |Durchschnittlicher Verkauf
 
@@ -141,34 +158,54 @@ include::artikel:partial$hersteller-name.adoc[]
 [#70]
 === Lagerort
 
-//ergänzen
-
 [cols="1,3a"]
 |====
 |Feld |Erläuterung
 
 | *Lagerort-ID*
-|ID des Lagerortes
+|Die ID des Lagerorts.
+
+*_Hinweis_*: Der Standard-Lagerort hat die ID `0`.
+
+//löschen in zukunft - dazu habe ich eine Karte auf Azure angelegt, da diese Daten nicht mehrsprachig hinterlegt sind
+//https://dev.azure.com/plentymarkets/plentymarkets/_boards/board/t/CRM%20and%20Goods%20-%20PIM%20Stock/Backlog%20items/?workitem=5794
+Nachdem du dieses Datenfeld hinzugefügt hast, kannst du mit Hilfe der Dropdown-Liste angeben, welche Sprachversion des Textes exportiert werden soll.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: ID]
 
 | *Lagerortmenge*
-|Menge an Bestand, die auf dem Lagerort vorhanden ist
+|Die Menge an Bestand, die sich derzeit auf dem Lagerort befindet.
+
+Entspricht dem Wert im Menü: xref:warenwirtschaft:warenbestaende-verwalten.adoc#400[Waren » Warenbestände » (icon:search[role="blue"]) [Lagerort öffnen\] » Spalte: Bestand]
 
 | *Lagerortname*
-|Name des Lagerortes
+|Der Name des Lagerorts.
+
+//löschen in zukunft - dazu habe ich eine Karte auf Azure angelegt, da diese Daten nicht mehrsprachig hinterlegt sind
+//https://dev.azure.com/plentymarkets/plentymarkets/_boards/board/t/CRM%20and%20Goods%20-%20PIM%20Stock/Backlog%20items/?workitem=5794
+Nachdem du dieses Datenfeld hinzugefügt hast, kannst du mit Hilfe der Dropdown-Liste angeben, welche Sprachversion des Textes exportiert werden soll.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Lagerort]
 |====
 
 '''
 [#80]
 === Varianten-Barcode
 
-//ergänzen
-
 [cols="1,3a"]
 |====
 |Feld |Erläuterung
 
 | *Varianten-Barcode*
-|Barcode der Variante
+|Der Barcode der Variante.
+
+Nachdem du dieses Datenfeld hinzugefügt hast, kannst du mit Hilfe der Dropdown-Liste angeben, welcher xref:artikel:barcodes.adoc#100[Barcode-Typ] exportiert werden soll.
+
+* Die Dropdown-Liste enthält die Barcode-Typen, die du bereits im Menü *Einrichtung » Artikel » Barcode* konfiguriert hast.
+* Wenn du einen Barcode-Typ wählst, dann wird xref:artikel:barcodes.adoc#300[der eigentliche Code], der für diesen Barcode-Typ im Varianten-Datensatz gespeichert wurde, exportiert.
+
+Entspricht der Option im Menü: xref:artikel:artikel-verwalten.adoc#250[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Barcode]
+
 |====
 
 '''
@@ -188,10 +225,6 @@ include::artikel:partial$name1.adoc[]
 '''
 [#100]
 === Variante
-
-//nested tabelle überschriften raus nehmen in die include-dateien
-//uuid-beschreibung prüfen
-//pakete-berechnungsautomatik-beschreibungen prüfen
 
 [cols="1,3a"]
 |====
@@ -221,10 +254,8 @@ include::artikel:partial$modell.adoc[]
 include::artikel:partial$ek-netto.adoc[]
 
 | *UUID der Preiskalkulation*
-|UUID der Preiskalkulation.
+|Die UUID der Preiskalkulation.
 Beim Erstellen der Preiskalkulation wird die UUID automatisch vergeben und kann nicht geändert werden.
-
-//*_Tipp:_* Willst du die UUID kopieren? Öffne dazu die Preiskalkulation und klicke auf die UUID unten links. Die UUID wird in die Zwischenablage kopiert.
 
 | *Variantenname*
 |
@@ -235,7 +266,7 @@ include::artikel:partial$variantenname.adoc[]
 include::artikel:partial$zolltarifnummer.adoc[]
 
 | *Mit berechnetem Paketgewicht*
-|Gibt an, ob das Gewicht xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[automatisch anhand der Bestandteile] berechnet wird.
+|Gibt an, ob das Gewicht automatisch anhand der Bestandteile berechnet wird.
 
 [cols="1,3"]
 !===
@@ -247,9 +278,11 @@ include::artikel:partial$zolltarifnummer.adoc[]
 !Berechnungsautomatik ist aktiviert.
 
 !===
+
+Entspricht der Option im Menü: xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Paket » Checkbox: Automatisch aus Paketbestandteilen berechnen - Gewicht brutto]
 
 | *Mit berechnetem Netto-Paketgewicht*
-|Gibt an, ob das Nettogewicht xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[automatisch anhand der Bestandteile] berechnet wird.
+|Gibt an, ob das Nettogewicht automatisch anhand der Bestandteile berechnet wird.
 
 [cols="1,3"]
 !===
@@ -261,9 +294,11 @@ include::artikel:partial$zolltarifnummer.adoc[]
 !Berechnungsautomatik ist aktiviert.
 
 !===
+
+Entspricht der Option im Menü: xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Paket » Checkbox: Automatisch aus Paketbestandteilen berechnen - Gewicht netto]
 
 | *Mit berechnetem Paket-EK*
-|Gibt an, ob der Einkaufspreis xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[automatisch anhand der Bestandteile] berechnet wird.
+|Gibt an, ob der Einkaufspreis automatisch anhand der Bestandteile berechnet wird.
 
 [cols="1,3"]
 !===
@@ -275,9 +310,11 @@ include::artikel:partial$zolltarifnummer.adoc[]
 !Berechnungsautomatik ist aktiviert.
 
 !===
+
+Entspricht der Option im Menü: xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Paket » Checkbox: Automatisch aus Paketbestandteilen berechnen - EK netto]
 
 | *Mit berechnetem Paket-GLDEK*
-|Gibt an, ob der gleitende Durchschnittseinkaufspreis xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[automatisch anhand der Bestandteile] berechnet wird.
+|Gibt an, ob der gleitende Durchschnittseinkaufspreis automatisch anhand der Bestandteile berechnet wird.
 
 [cols="1,3"]
 !===
@@ -289,23 +326,29 @@ include::artikel:partial$zolltarifnummer.adoc[]
 !Berechnungsautomatik ist aktiviert.
 
 !===
+
+Entspricht der Option im Menü: xref:artikel:multipacks-pakete-sets-verwalten.adoc#2500[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Paket » Checkbox: Automatisch aus Paketbestandteilen berechnen - GLD EK netto]
+
 |====
 
 '''
 [#110]
 === Lager
 
-//ergänzen
-
 [cols="1,3a"]
 |====
 |Feld |Erläuterung
 
 | *Lager-ID*
-|ID des Lagers
+|Die ID des Lagers.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Option: Lager-ID]
 
 | *Lagername*
-|Name des Lagers
+|Der Name des Lagers.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Option: Lagername]
+
 |====
 
 [#20]
@@ -313,25 +356,35 @@ include::artikel:partial$zolltarifnummer.adoc[]
 
 Dieses Kapitel enthält eine Liste der Filter, mit denen du einschränken kannst, welche Daten in die Exportdatei aufgenommen werden sollen.
 
-//In der folgenden Tabelle findest du alle für das Export-Format *Warenbestände* verfügbaren Filter sowie eine Erläuterung zur Funktion des jeweiligen Filters. Du kannst auch mehrere Filter wählen und somit beispielsweise nach Warenbeständen aus einem bestimmten Lager mit einer bestimmten Markierung filtern.
+[TIP]
+.Filter können kombiniert werden
+====
+Du kannst mehrere Filter wählen und somit beispielsweise nach Warenbeständen aus einem bestimmten Lager mit einer bestimmten Markierung filtern.
+====
 
 [cols="1,3a"]
 |====
 |Filter |Erläuterung
 
 | *Aktiv*
-|Filtert nach aktiven oder inaktiven Varianten.
+|Beschränkt den Export auf Varianten, die entweder xref:artikel:artikel-verwalten.adoc#intable-aktiv[aktiv oder inaktiv] sind.
 
 | *Markierung 1*; +
 *Markierung 2*
-|Filtert nach der an der Variante gespeicherten Markierung.
-
-//|*Markierung 2*
-//|Filtert nach der an der Variante gespeicherten Markierung 2.
+|Wähle eine Markierung aus der Dropdown-Liste aus.
+Beschränkt den Export auf Artikel mit dieser xref:artikel:neue-artikel.adoc#200[Markierung].
 
 | *Datum*
-|Filtert nach einem bestimmten Datum, das du hier über den Kalender wählen kannst. Dieser Filter ermöglicht es dir somit, Warenbestand zu einem bestimmten Zeitpunkt zu exportieren.
-Die Bestandsmenge für das gewählte Datum wird anschließend im Datenfeld xref:daten:katalog-warenbestaende.adoc#60[Physischer Bestand] angezeigt.
+|Mit diesem Filter kannst du den physischen Warenbestand zu einem bestimmten Zeitpunkt exportieren.
+
+*_Beispiel_*:
+Stell dir vor, du möchtest im Rahmen einer Wirtschaftsprüfung herausfinden, wie viel Bestand sich zum Jahresende in deinem Lager befand.
+
+*_Formatierung_*:
+Gib das Datum im Format `TT.MM.JJJJ` ein.
+Klicke alternativ auf das Kalendersymbol (icon:calendar-o[role="darkGrey"]), wenn du das Datum lieber aus dem Kalender wählen möchtest.
+
+---
 
 *_Hinweis_*: Es ist nur möglich, maximal 3 Monate in die Vergangenheit zu filtern.
 
@@ -346,34 +399,47 @@ Aktiviere deshalb die folgenden Datenfelder _nicht_:
 * *Lagerortname*
 
 | *Hersteller*
-|Filtert nach Hersteller:in.
+|Wähle eine oder mehrere Hersteller aus der Dropdown-Liste aus.
+Beschränkt den Export auf Artikel, die xref:artikel:artikel-verwalten.adoc#_grundeinstellungen[von einem dieser Firmen hergestellt] wurden.
 
 | *Lager*
-|Filtert nach Varianten aus dem gewählten Lager. +
+|Beschränkt den Export auf Varianten innerhalb eines bestimmten Lagers.
 
-*_Hinweis:_* Wählst du kein Lager, wird automatisch der Bestand des Lagers mit der kleinsten ID gewählt.
+*_Hinweis_*: Wählst du kein Lager, wird automatisch der Bestand des Lagers mit der kleinsten ID gewählt.
 
 | *Leere Lagerbestandseinträge ausblenden*
-|Blendet alle Lagerbestandseinträge von 0 aus, die den im System definierten Zeitraum überschritten haben.
+|Wähle eine Option aus der Dropdown-Liste aus.
 
-//| *Leere Lagerbestandseinträge ausblenden:* +
-//*Lagerbestandseinträge von 0 nach definiertem Zeitraum ausblenden*
-//|Blendet alle Lagerbestandseinträge von 0 aus, die den im System definierten Zeitraum überschritten haben.
+[cols="1,3"]
+!===
 
-//|*Leere Lagerbestandseinträge ausblenden:* +
-//*Alle Lagerbestandseinträge von 0 ausblenden*
-//|Blendet alle Lagerbestandseinträge von 0 aus.
+! *Lagerbestandseinträge von 0 nach definiertem Zeitraum ausblenden*
+!Blendet die Bestandseinträge von 0 aus, die einen bestimmten Zeitraum überschritten haben.
+Definiere die Zeitspanne im Menü: *Einrichtung » Waren » Warenbestand » Wareneingang » Dropdown-Liste: Lagerbestandseintrag von "0" ausblenden nach*.
+
+! *Alle Lagerbestandseinträge von 0 ausblenden*
+!Blendet alle Bestandseinträge von 0 aus.
+!===
 
 | *Gruppieren nach*
-|Ermöglicht die Gruppierung nach Lager. Der Bestand einer Variante wird gesammelt, d.h. pro Lager in einer Zeile angezeigt (und nicht nach Lagerort, MHD oder Charge).
+|Gruppiert die Daten nach Lager.
+Der Bestand einer Variante wird gesammelt, d.h. pro Lager in einer Zeile angezeigt (anstatt nach Lagerort, MHD oder Charge).
 
 | *Artikelpaket*
-|Ermöglicht es, nach xref:artikel:multipacks-pakete-sets.adoc#2000[Artikelpaketen] zu filtern.
-Je nachdem, was du exportieren möchtest, kannst du zwischen den folgenden Optionen wählen:
+|Wähle eine oder mehrere Optionen aus der Dropdown-Liste aus.
 
-* *Nicht Teil eines Pakets*: Varianten, die nicht Teil eines Artikelpakets sind, werden exportiert.
-* *Paket*: Nur komplette Artikelpakete werden exportiert.
-* *Teil eines Pakets*: Bestandteile eines Artikelpakets werden exportiert.
+[cols="1,3"]
+!===
+
+! *Nicht Teil eines Pakets*
+!Beschränkt den Export auf Varianten, die weder ein Artikelpaket noch ein Paketbestandteil sind.
+
+! *Paket*
+!Beschränkt den Export auf xref:artikel:multipacks-pakete-sets.adoc#2000[Artikelpakete].
+
+! *Teil eines Pakets*
+!Beschränkt den Export auf xref:artikel:multipacks-pakete-sets.adoc#2000[Paketbestandteile].
+!===
 
 |====
 
