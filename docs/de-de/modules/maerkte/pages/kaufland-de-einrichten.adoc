@@ -95,7 +95,7 @@ a| * *Ja* = Schnittstelle zu Kaufland.de aktivieren. Daten werden mit Kaufland a
 !===
 
 | *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung*
-| In welchen Status sollen Aufträge verschoben werden, für die keine Versandbestätigung an Kaufland.de gesendet werden konnte?
+| In welchen Status sollen Aufträge verschoben werden, für die keine Versandbestätigung an Kaufland.de gesendet werden konnte? Erstelle bei Bedarf einen xref:auftraege:auftraege-verwalten.adoc#1230[neuen Status].
 
 *_Hintergrund:_* Mit der Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> informierst du {market} automatisch darüber, dass die Artikel eines Auftrags versendet wurden. Wenn die Ereignisaktion nicht ausgeführt werden kann, wird der Auftrag in den Status geschoben, den du für die Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast.
 
@@ -265,7 +265,7 @@ Beim Auftragsimport von Kaufland.de findet der Abgleich über die externe Auftra
 === Zahlungsart aktivieren
 
 :market: Kaufland.de
-:payment-method: Kaufland.de Payment
+:payment-method: Kaufland.de Payment (Zahlung über real.de)
 
 include::partial$zahlungsart_aktivieren.adoc[]
 
@@ -483,7 +483,10 @@ Richte xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen] ein, um {ma
 [#shipping-confirmation]
 === NEU: Versandbestätigung senden
 
-Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um {market} darüber zu informieren, dass die Artikel eines Auftrags versendet wurden.
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um {market} darüber zu informieren, dass die Artikel eines Auftrags versendet wurden. +
+*_Tipp:_* In der Liste *Aktion hinzufügen* findest du die Aktion *Versandbestätigung an Kaufland.de senden* im Ordner *Plugins*.
+
+* *_Wichtig:_* Diese Ereignisaktion ist nur aktiv, wenn die Einstellung *Versandbestätigungen senden über* auf die Option *Ereignisaktion* gestellt ist. Diese Einstellung findest du im Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen*.
 
 :table-event-procedure: <<#shipping-confirmation-kaufland>>
 
@@ -498,12 +501,13 @@ include::_includes:page$EA.adoc[]
 | *Ereignis*
 | Ereignis wählen, zum Beispiel:
 
-* *Statuswechsel > [Status wählen, zum Beispiel [7] Warenausgang gebucht]*
+* *Auftragsänderung: Statuswechsel >* Status wählen, zum Beispiel *[7] Warenausgang gebucht*
 
 _oder_
 
 * *Auftragsänderung > Paketnummer*
 |
+
 | *Filter 1*
 | *Auftrag &gt; Auftragstyp*
 | *Auftrag*
@@ -513,10 +517,11 @@ _oder_
 | *Kaufland.de*
 
 | *Aktion*
-| *Auftrag*
+| *Plugin*
 | *Versandbestätigung an Kaufland.de senden* +
-*_Hinweis:_* Aufträge, für die keine Versandbestätigung an {market} gesendet werden konnten, werden in den Status verschoben, den du für die Option *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast. Diese Option findest du im Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen*. +
-<<#no-shipping-confirmation, So behandelst du Aufträge in diesem Status.>>
+*_Hinweis:_* Aufträge, für die keine Versandbestätigung an {market} gesendet werden konnten, werden in den Status verschoben, den du für die Option *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast. Diese Option findest du im Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen*.
+
+* <<#no-shipping-confirmation, So behandelst du Aufträge in diesem Status.>>
 |====
 
 [#890]
@@ -544,8 +549,8 @@ Die in <<#ereignisaktion-rechnungen-Kaufland>> aufgeführten Status und Filter d
 |Einstellung |Option |Auswahl
 
 | *Ereignis*
-| *Statuswechsel: [7] Warenausgang gebucht*
-|
+| *Auftragsänderung: Statuswechsel*
+| *[7] Warenausgang gebucht*
 
 | *Filter 1*
 | *Auftrag &gt; Auftragstyp*
@@ -628,8 +633,8 @@ include::_includes:page$EA.adoc[]
 |Einstellung |Option |Auswahl
 
 | *Ereignis*
-| *Statuswechsel: Status [8] Storniert*
-|
+| *Auftragsänderung: Statuswechsel*
+| *[8] Storniert*
 
 | *Filter 1*
 | *Auftrag &gt; Auftragstyp*
@@ -662,14 +667,15 @@ include::_includes:page$EA.adoc[]
 |Einstellung |Option |Auswahl
 
 | *Ereignis*
-| Ereignis wählen, zum Beispiel:
+| *Auftragsänderung: Statuswechsel*
+| Status wählen, zum Beispel:
 
-* *Statuswechsel > [4] In Versandvorbereitung*
+* *[4] In Versandvorbereitung*
 
 _oder_
 
-* *Statuswechsel > [5] Freigabe Versand* +
-|
+* *[5] Freigabe Versand*
+
 | *Filter 1*
 | *Auftrag &gt; Auftragstyp*
 | *Auftrag*
@@ -739,9 +745,9 @@ Hier findest du Antworten auf häufig gestellte Fragen.
 .Es wurde keine Versandbestätigung gesendet. Was nun?
 --
 
-Mit der Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> informierst du {market} automatisch darüber, dass die Artikel eines Auftrags versendet wurden. Wenn die Ereignisaktion nicht ausgeführt werden kann, wird der Auftrag in den Status geschoben, den du für die Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast.
+Mit der Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> informierst du {market} automatisch darüber, dass die Artikel eines Auftrags versendet wurden. Wenn die Ereignisaktion nicht ausgeführt werden kann, wird der Auftrag automatisch in den Status geschoben, den du für die Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast.
 
-Prüfe Aufträge mit diesem Status:
+Prüfe Aufträge in diesem Status:
 
 * Ist der Versanddienstleister korrekt verknüpft?
 * Ist eine Sendungsnummer an dem Auftrag gespeichert?

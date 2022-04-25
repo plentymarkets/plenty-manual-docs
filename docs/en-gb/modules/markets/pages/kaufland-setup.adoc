@@ -95,7 +95,7 @@ a| * *Yes* = Activate the interface to Kaufland.de. Data is exchanged with Kaufl
 !===
 
 | *Order status for orders with failed shipping confirmations*
-| Select a status. If no shipping confirmation could be sent to Kaufland.de, the order is moved to this status.
+| Select a status. If no shipping confirmation could be sent to Kaufland.de, the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#1230[new status].
 
 *_Background:_* The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
 
@@ -265,7 +265,7 @@ During the order import, Kaufland.de orders are synchronised by the external ord
 === Activating the payment method
 
 :market: Kaufland.de
-:payment-method: Kaufland.de Payment
+:payment-method: Kaufland.de Payment (payment via real.de)
 
 include::partial$activate-payment-method.adoc[]
 
@@ -483,7 +483,10 @@ Set up xref:automation:event-procedures.adoc#[event procedures] to automatically
 [#shipping-confirmation]
 === NEW: Send shipping confirmation
 
-Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform {market} when you have shipped the items of an order.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform {market} when you have shipped the items of an order. +
+*_Tip:_* In the list *Add procedure*, you'll find the procedure *Send shipping confirmation to Kaufland.de* in the folder *Plugins*.
+
+*_Important:_* To activate this event procedure, you need to change the setting *Send shipping confirmations via* to *Event procedure*. Go to *Setup » Markets » Kaufland.de » Einstellungen* to change this setting.
 
 :table-event-procedure: <<#shipping-confirmation-kaufland>>
 
@@ -498,12 +501,13 @@ include::_includes:page$EA.adoc[]
 | *Event*
 | Select an event, for example:
 
-* *Status change > [Select a status, for example [7] Shipped]*
+* *Order change: Status change >* Select a status, for example *[7] Shipped]*
 
 _or_
 
 * *Order change > Package number*
 |
+
 | *Filter 1*
 | *Order > Order type*
 | *Order*
@@ -513,10 +517,11 @@ _or_
 | *Kaufland.de*
 
 | *Procedure*
-| *Order*
+| *Plugin*
 | *Send shipping confirmation to Kaufland.de* +
 *_Note:_* If no shipping confirmation could be sent to {market}, the order is moved to the status that you selected for the option *Order status for orders with failed shipping confirmations*. Go to *Setup » Markets » Kaufland.de » Settings* to set this option. +
-<<#no-shipping-confirmation, How to deal with orders in this status>>
+
+* <<#no-shipping-confirmation, How to deal with orders in this status>>
 |====
 
 [#890]
@@ -544,8 +549,8 @@ The status and filters listed in <<#creating-invoices-kaufland>> only serve as a
 |Setting |Option |Selection
 
 | *Event*
-| *Status change: [7] Outgoing items booked*
-|
+| *Order change: Status change*
+| *[7] Outgoing items booked*
 
 | *Filter 1*
 | *Order > Order type*
@@ -628,8 +633,8 @@ include::_includes:page$EA.adoc[]
 |Setting |Option |Selection
 
 | *Event*
-| *Status change: Status [8] Cancelled*
-|
+| *Order change: Status change*
+| *[8] Cancelled*
 
 | *Filter 1*
 | *Order > Order type*
@@ -662,14 +667,15 @@ include::_includes:page$EA.adoc[]
 |Setting |Option |Selection
 
 | *Event*
-| Select an event, for example:
+| Select an event, for example *Order change: Status change*
+| Select a status, for example:
 
-* *Status change > [4] In preparation for shipping*
+* *[4] In preparation for shipping*
 
 _or_
 
-* *Status change > [5] Cleared for shipping* +
-|
+* *[5] Cleared for shipping*
+
 | *Filter 1*
 | *Order > Order type*
 | *Order*
