@@ -1,58 +1,65 @@
 = Data log
-:keywords: log, data log, log entries
-:description: Find out how to search for log entries.
+:keywords: log, logs, data log, log entries, log level, reference type, reference value, configure logs, configuring logs
+:keywords: Find out how to search for log entries.
 :id: 8PM1DPV
 :author: team-plenty-channel
 
-The menu *Data » Log* contains all log entries. These are available for 4 weeks before they are deleted. Logs can be activated individually and in addition, for every log entry you can set the duration for which you want the log entry to stay active.
+Events in your system are logged in the menu *Data » Log*. This allows you to check the data log for errors without relying on our support.
 
-[[table-information-table-header]]
-.Information in the table header
-[cols="1,2"]
+Events with the severities *Error*, *Critical*, *Alert* and *Emergency* are logged automatically. You can activate logging of other events for a limited time if and needed.
+
+== What is the data log?
+
+The data log documents events that occur in your system.
+
+* Each log entry is equivalent to one event in your system.
+* Each log entry is available for four weeks after the event. After that time, the log entry is deleted automatically.
+* Events can have different degrees of severity. In plentymarkets, these different severities are called log levels.
+* Events with the log levels *Error*, *Critical*, *Alert* and *Emergency* are logged automatically.
+* The log levels *Debug*, *Info*, *Notice* and *Warning* are not logged by default. Instead, you need to activate them to document events with this severity. (<<#10, How?>>)
+* Each log entry contains the following information about the event:
+
+[cols="1,2a"]
 |====
-|Title |Info
-
 | *Timestamp*
-|Timestamp of the corresponding log entry
+| The date and time of the event
 
 | *Level*
-|Display of the log level such as *Info*, *Error* etc.
+| The severity of the event +
+(<<#log-levels, What do the log levels mean?>>)
 
 | *Integration*
-|Area in which the log entry is located in the code
+| The area of the system in which the event too place.
+
+*_Examples:_*
+
+* Ceres
+* DHLShipping
+* Etsy
 
 | *Identifier*
-|Sub-area to which the log belongs
+| The sub area of the system in which the event too place.
 
-| *Reference*
-|Reference type with the corresponding ID
+*_Examples:_*
+
+* AmazonCatalog
+
+| *Reference type*
+| The type of record: For example, is it an address ID, a catalogue name or the ID of an Etsy listing?
+
+| *Reference value*
+| The value of the record to which the event relates. For example, this could be the ID of an item, of a variation or of a category.
 
 | *Message*
-|Explanation of the log. If an error occurred, explanation of the error.
+| A description of the event
+
+| *Log details* +
+(in a separate window)
+| Click on the log entry to show more details. More information about the event is displayed. In this window, you can also jump to the previous or next log entry. In addition, you can show or hide the information.
 |====
 
-By clicking on a line, the detail view opens and further info regarding the log is displayed. This window enables you to switch from one entry to the next and you can fold in or fold out the view.
-
-[#10]
-== Configuring logs
-
-In order to see notifications of the corresponding log areas, you have to activate them first. To do so, go to *Configure logs » Settings*. They are saved on the server for a maximum of 4 weeks. The drop-down menu lists the different levels with increasing priority. You can also set the duration for which you want the log entry to stay active.
-
-[IMPORTANT]
-.Activation necessary
-While the log levels Error, Critical, Alert and Emergency are automatically displayed, Debug, Info, Notice and Warning have to be activated first.
-
-[.instruction]
-Configuring logs:
-
-. Go to *Data » Log*.
-. In the toolbar, click on *Configure logs* (icon:cog[]). +
-→ The window *Log configuration* opens. On the left you can see the plugins that are already installed as well as the standard areas. On the right you can carry out the settings.
-. Select the area in which you want to configure logs.
-. On the right, check the box *Active*.
-. Select the duration for which you want the log level to stay active in this area.
-. Select the log level. Pay attention to the information given in <<table-meaning-of-log-levels>>.
-. Save (icon:save[role="green"]) the settings.
+[#log-levels]
+== Meaning of log levels
 
 [[table-meaning-of-log-levels]]
 .Meaning of the different log levels
@@ -61,151 +68,141 @@ Configuring logs:
 |Log level |Description |Activated by default
 
 | *Debug*
-|Detailed status messages
-|No
+| Detailed status messages
+| No
 
 | *Info*
-|General information about the system
-|No
+| General information about the system
+| No
 
 | *Notice*
-|An error message that should be dealt with, but is not urgent.
-|No
+| An error message that should be dealt with, but is not urgent.
+| No
 
 | *Warning*
-|Something is not working as intended. However, it does not necessarily have to be an error.
-|No
+| Something is not working as intended. However, it might not be an error.
+| No
 
 | *Error*
-|Standard system error; when errors occur, the system usually keeps running.
-|Yes
+| Standard system error; when errors occur, the system usually keeps running.
+| Yes
 
 | *Critical*
-|These errors can cause a system crash (runtime errors).
-|Yes
+| These errors can cause a system crash.
+| Yes
 
 | *Alert*
-|It is necessary to take action immediately (the online store or the database may not be available).
-|Yes
+| You need to react immediately. +
+*_Example:_* The online store or database is not reachable.
+| Yes
 
 | *Emergency*
-|Absolute emergency. The system is unusable.
-|Yes
+| Absolute emergency. The system is unusable.
+| Yes
 |====
 
 [#20]
-== Searching for log entries
+== Finding log entries
 
-On the left you can set different filters that allow you to reduce a large number of log entries to specific matches. The entries in the drop-down menus are reduced to the keywords that actually exist in the search results.
+When you open the menu *Data » Log*, a list of all logged events for the default client is shown. This list is sorted by date and time. As such, the latest event is at the top of the list.
 
-[IMPORTANT]
-.Filtering by client
-====
-The log only displays entries from the main client. The logs of other clients are saved, but cannot be displayed here.
-
-To access logs from other clients, you have to use the xref:data:rest-api.adoc#[REST API]. To access the logs from a particular client, you have to call link:https://developers.plentymarkets.com/en-gb/plentymarkets-rest-api/index.html#/Log/get_rest_logs[the route] `/rest/logs` with the domain of that client.
-====
-
-[#30]
-== Filtering by integration
-
-Here you can see the area from which the log call was made.
+You can filter the log entries to reduce the list of events and make it more manageable.
 
 [.instruction]
-Filtering by the variable *Integration*:
+Filtering the list of log entries:
 
-. Go to *Data » Log*.
-. Click on *Integration*. +
-→ A list with different options opens.
-. Select an area.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The corresponding log entries are shown.
+. Go to *Data » Log*. +
+→ All logged events of the default client are shown.
+. At the top left of the toolbar, click on (icon:filter[set=material]). +
+→ The available filters are shown.
+. Select the filters you want to apply. Note the explanations in <<#log-filter>>. +
+*_Is a filter missing from the drop-down lists?_* +
+The drop-down lists only contain filters for events for which log entries exist. So if for example you cannot select a filter for *OTTO Market* from the list, that means that no events were logged for this market in the last four weeks.
+. Click on (icon:search[role="blue"]) *Search*. +
+→ The filtered log entries are shown. +
+*_Could not find the log entry you were looking for?_* +
+ Not all events are logged by default. So you might have to <<#10, activate the logging for the event you are trying to find>>.
 
-[#40]
-== Filtering by identifier
+[[log-filter]]
+.Available filters
+[cols="1,3a"]
+|===
+|Filter |Explanation
 
-The identifier indicates to which sub-area the log belongs.
+| *Client*
+| By default, the list is filtered to only show log entries for the default client. To show events for another client (store), select that client (store) from the drop-down list.
 
-[.instruction]
-Filtering by the variable *Identifier*:
+| *Integration*
+| The area of the system in which the event too place.
 
-. Go to *Data » Log*.
-. Click on *Identifier*. +
-→ A list with different options opens.
-. Select an identifier.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The corresponding log entries are shown.
+*_Examples:_*
 
-[#50]
-== Filtering by level
+* Ceres
+* DHLShipping
+* Etsy
 
-Here you can see the different log levels such as *Error*, *Info* etc.
+| *Identifier*
+| The sub area of the system in which the event too place.
 
-[.instruction]
-Filtering by the variable *Level*:
+*_Examples:_*
 
-. Go to *Data » Log*.
-. Click on *Level*. +
-→ A list with different options opens.
-. Select a level.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The corresponding log entries are shown.
+* AmazonCatalog
 
-*_Note:_* Activate all levels for this option.
+| *Level*
+| The severity of the event. +
+(<<#log-levels, What do the log levels mean?>>)
 
-[#60]
-== Filtering by reference type
+| *Reference type*
+| The type of record: For example, is it an address ID, a catalogue name or the ID of an Etsy listing?
 
-Here you can see the reference type to which the entry belongs (e.g. VariationID, OrderID etc.).
+| *Reference value*
+| The value of the record to which the event relates. For example, this could be the ID of an item, of a variation or of a category.
 
-[.instruction]
-Filtering by the variable *Reference type*:
+| *Date from*
+| Click on the calendar icon to select a date. +
+→ Only events from this date onwards are shown in the list. +
+*_Note:_* You can select any date you want. However, note that only events of the last four weeks can shown. Log entries are automatically deleted after four weeks.
 
-. Go to *Data » Log*.
-. Click on *Reference type*. +
-→ A list with different options opens.
-. Select a reference type.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The corresponding log entries are shown.
+| *Time from*
+| Enter a time in the format HH:MM:SS. +
+→ If you have selected a *Date from*, events starting from this time on the selected date are shown. +
+→ If you have not selected a *Date from*, events starting from this time today are shown.
 
-[#70]
-== Filtering by reference value
+| *Date to*
+| Click on the calendar icon to select a date. +
+→ Only events up to and including this date are shown in the list. +
+*_Note:_* You can select any date you want. However, note that only events of the last four weeks can shown. Log entries are automatically deleted after four weeks.
 
-Here you can see the value of the reference. As an example, for the reference type *ItemID*, this would be the value of this ID. The search results are reduced to matches with this value.
+| *Time to*
+| Enter a time in the format HH:MM:SS. +
+→ If you have selected a *Date to*, events up to this time on the selected date are shown. +
+→ If you have not selected a *Date to*, events up to this time today are shown.
+|===
 
-[.instruction]
-Filtering by the variable *Reference value*:
+[#10]
+== Activating optional logging
 
-. Go to *Data » Log*.
-. Click on *Reference value*.
-. Enter a reference value.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The corresponding log entries are shown.
+Events with the log levels *Error*, *Critical*, *Alert* and *Emergency* are logged automatically.
+However, to log events with the log levels *Debug*, *Info*, *Notice* or *Warning*, you need to activate logging first.
 
-[#80]
-== Filtering by date
-
-Here you can individually adjust the search results and reduce them to a specific time frame.
-
-[.instruction]
-Filtering by the variable *Date*:
-
-. Go to *Data » Log*.
-. Select a starting date.
-. Select an ending date.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The log entries created in the defined time frame are shown.
-
-[#90]
-== Filtering by time
-
-Here you can individually adjust the search results and reduce them to a specific time frame.
+* Logging ends automatically once the duration you set is up.
+* You are unsure about what to log and confused about integrations, reference types and identifiers? For many markets, you can find info on what to filter for on the manual page for that market. Or head to the forum to ask which system areas you need to log to find out what’s going on.
 
 [.instruction]
-Filtering by the variable *Time*:
+Activating optional logging:
 
-. Go to *Data » Log*.
-. Enter the time from which on you want to search.
-. Enter the time up to which you want to search.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The log entries created in the defined time frame are shown.
+. Go to *Data » Log*. +
+→ All events logged for the default client are shown.
+. In the top left of the toolbar, click on *Configure logs* (icon:cog[]). +
+→ The window *Log configuration* opens. +
+→ On the left side, the system areas and any installed plugins are listed.
+. Select the area in which you want to configure logs. +
+→ On the right side, the settings for the area you selected are shown.
+. Activate the option *Active*.
+. In the drop-down list *Duration*, select how long you want to log events for this area.
+. In the drop-down list *Log level*, select the events that you want to log. +
+<<#log-levels, What do the log levels mean?>>
+. *Save* (icon:save[role="green"]) the settings. +
+→ The logging of the events starts. +
+→ Logging ends automatically once the duration you set is up. +
+*_Important:_* The first log entry only becomes available once the event that you want to log next occurs.
