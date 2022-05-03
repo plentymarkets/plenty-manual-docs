@@ -4,57 +4,62 @@
 :id: 8PM1DPV
 :author: team-plenty-channel
 
-Im Menü unter *Daten » Log* werden alle Log-Einträge angezeigt. Diese Log-Einträge sind für 4 Wochen verfügbar, bevor die Einträge gelöscht werden. Logs können einzeln aktiviert werden und zusätzlich kann für jeden Log-Eintrag die Dauer eingestellt werden, mit der festgelegt wird, wie lange der Log-Eintrag aktiv bleiben soll.
+Im Menü *Daten » Log* werden Ereignisse protokolliert, die in deinem System stattfinden. Wenn also etwas schief gelaufen ist, kannst du im Daten-Log selbst nach dem Fehler suchen und bist nicht auf unseren Support angewiesen.
 
-[[tabelle-informationen-tabellen-header]]
-.Informationen im Tabellen-Header
-[cols="1,2"]
+Ereignisse mit den Schweregraden *Error*, *Critical*, *Alert* und *Emergency* werden automatisch protokolliert. Für andere Ereignisse kannst du optional die Protokollierung für einen bestimmten Zeitraum aktivieren.
+
+== Was ist das Daten-Log?
+
+Daten-Log bedeutet auf Deutsch "Datenprotokoll". Im Daten-Log werden also Ereignisse protokolliert, die in deinem System stattfinden.
+
+* Jeder Log-Eintrag steht für ein Ereignis in deinem System.
+* Jeder Log-Eintrag ist ab dem Ereignis vier Wochen verfügbar. Danach wird der Log-Eintrag automatisch gelöscht.
+* Ereignisse haben verschiedene Schweregrade. In plentymarkets heißen diese Schweregrade "Log-Levels".
+* Ereignisse mit den Log-Levels *Error*, *Critical*, *Alert* und *Emergency* werden automatisch protokolliert.
+* Die Log-Level *Debug*, *Info*, *Notice* und *Warning* müssen aktiviert werden, damit Ereignisse dieser Levels protokolliert werden. (<<#10, Wie?>>)
+* Jeder Log-Eintrag enthält die folgenden Informationen über das Ereignis:
+
+[cols="1,2a"]
 |====
-|Titel |Info
-
 | *Zeitstempel*
-|Zeitstempel des jeweiligen Log-Eintrags
+| Das Datum und die Uhrzeit des Ereignisses
 
 | *Level*
-|Anzeige des Log-Levels wie *Info*, *Error* etc.
+| Der Schweregrad des Ereignisses +
+(<<#log-levels, Was beuten die Log-Levels?>>)
 
 | *Integration*
-|Bereich, in dem sich der Log-Eintrag im Code befindet
+| Der Bereich des Systems, in dem das Ereignis stattgefunden hat.
+
+*_Beispiele:_*
+
+* Ceres
+* DHLShipping
+* Etsy
 
 | *Identifikator*
-|Unterbereich, zu dem der Log gehört
+| Der Unterbereich, in dem das Ereignis stattgefunden hat.
 
-| *Referenz*
-|Referenztyp mit der entsprechenden ID
+*_Beispiele:_*
+
+* AmazonCatalog
+
+| *Referenztyp*
+| Die Art des Datensatzes: Handelt es sich zum Beispiel um eine Adress-ID, einen Katalognamen oder um die ID des Esy-Listings?
+
+| *Referenzwert*
+| Der Wert des Datensatzes, der vom Ereignis betroffenen ist. Also zum Beispiel die ID eines Artikels, einer Variante oder einer Kategorie.
 
 | *Nachricht*
-|Erklärung zum Log oder, falls vorhanden, zum Fehler
+| Eine Beschreibung des Ereignisses
+
+| *Log-Details* +
+(in separatem Fenster)
+| Klicke auf einen Log-Eintrag, um die Detailansicht zu öffnen. Hier findest du weitere Informationen zum Ereignis. In diesem Fenster kannst du auch zum vorherigen oder zum nächsten Log-Eintrag springen. Außerdem kannst du die Informationen einklappen oder ausklappen.
 |====
 
-Mit Klick auf eine Zeile öffnet sich die Detailansicht und es werden weitere Infos zum Log angezeigt. In diesem Fenster kann zum vorigen oder nächsten Eintrag gesprungen werden und die Anzeige kann ein- oder ausgeklappt werden.
-
-[#10]
-== Logs konfigurieren
-
-Damit Meldungen der entsprechenden Log-Bereiche angezeigt werden, müssen diese unter *Logs konfigurieren » Einstellungen* erst aktiv gesetzt werden. Sie werden maximal 4 Wochen auf dem Server gespeichert.
-Im Dropdown-Menü der Log-Level werden die verschiedenen Level mit aufsteigender Priorität angezeigt.
-Du kannst hier auch die Dauer einstellen, für die ein Log-Eintrag aktiv bleiben soll.
-
-[IMPORTANT]
-.Aktivierung notwendig
-Während die Log-Level Error, Critical, Alert und Emergency automatisch angezeigt werden, müssen Debug, Info, Notice und Warning erst aktiv gesetzt werden.
-
-[.instruction]
-Logs konfigurieren:
-
-. Öffne das Menü *Daten » Log*.
-. Klicke in der Toolbar auf *Logs konfigurieren* (icon:cog[]). +
-→ Das Fenster *Log-Konfiguration* wird geöffnet. Auf der linken Seite werden die bereits installierten Plugins sowie die Standardbereiche angezeigt. Auf der rechten Seite kannst du die Einstellungen vornehmen.
-. Wähle den Bereich, in dem du Logs konfigurieren möchtest.
-. Setze auf der rechten Seite das Häkchen im Feld *Aktiv*.
-. Wähle die Dauer, für die das Log-Level in diesem Bereich aktiv bleiben soll.
-. Wähle das Log-Level. Beachte dazu die Informationen in der <<tabelle-bedeutung-log-level>>.
-. Speichere (icon:save[role="green"]) die Einstellungen.
+[#log-levels]
+== Bedeutung der Log-Levels
 
 [[tabelle-bedeutung-log-level]]
 .Bedeutung der verschiedenen Log-Level
@@ -63,151 +68,141 @@ Logs konfigurieren:
 |Log-Level |Bedeutung |Standardmäßig aktiviert
 
 | *Debug*
-|Detaillierte Statusmeldungen
-|Nein
+| Detaillierte Statusmeldungen
+| Nein
 
 | *Info*
-|Allgemeine Informationen zum System
-|Nein
+| Allgemeine Informationen zum System
+| Nein
 
 | *Notice*
-|Eine zu klärende, aber nicht dringende Fehlermeldung
-|Nein
+| Eine zu klärende, aber nicht dringende Fehlermeldung.
+| Nein
 
 | *Warning*
-|Etwas läuft nicht wie gewünscht. Es muss sich aber um keinen Fehler handeln.
-|Nein
+| Etwas läuft nicht wie gewünscht. Es muss sich aber nicht um einen Fehler handeln.
+| Nein
 
 | *Error*
-|Standard-Systemfehler; bei Fehlern läuft das System in der Regel weiter.
-|Ja
+| Standard-Systemfehler; bei Fehlern läuft das System in der Regel weiter.
+| Ja
 
 | *Critical*
-|Diese Fehler können zum Systemabsturz führen (Laufzeitfehler).
-|Ja
+| Diese Fehler können zum Systemabsturz führen.
+| Ja
 
 | *Alert*
-|Es muss sofort reagiert werden (z.B. sind Webshop oder Datenbank nicht erreichbar).
-|Ja
+| Es muss sofort reagiert werden. +
+*_Beispiel:_* Webshop oder Datenbank sind nicht erreichbar.
+| Ja
 
 | *Emergency*
-|Absoluter Notfall. Das gesamte System funktioniert nicht.
-|Ja
+| Absoluter Notfall. Das gesamte System funktioniert nicht.
+| Ja
 |====
 
 [#20]
-== Nach Log-Einträgen suchen
+== Log-Einträge finden
 
-Auf der linken Seite lassen sich verschiedene Filter setzen, mit denen eine Vielzahl von Log-Einträgen auf bestimmte Treffer reduziert werden kann. Die Einträge in den Dropdown-Menüs werden auf die Stichworte reduziert, die tatsächlich in den Suchergebnissen existieren.
+Wenn du das Menü *Daten » Log* öffnest, wird eine Liste aller protokollierten Ereignisse für den Standardmandanten angezeigt. Diese Liste ist nach Datum und Uhrzeit des Ereignisses sortiert. Das neueste Ereignis steht also ganz oben.
 
-[IMPORTANT]
-.Nach Mandanten filtern
-====
-Im Log werden nur Einträge des Hauptmandanten angezeigt. Die Logs von anderen Mandanten werden zwar gespeichert, können aber nicht angezeigt werden.
-
-Wenn du Logs anderer Mandanten auslesen möchtest, musst du die xref:daten:rest-api.adoc#[REST-API] verwenden. Dafür musst du link:https://developers.plentymarkets.com/en-gb/plentymarkets-rest-api/index.html#/Log/get_rest_logs[die Route^] `/rest/logs` mit der Domain des entsprechenden Mandaten aufrufen.
-====
-
-[#30]
-== Nach Integration filtern
-
-Hier wird der Bereich angezeigt, aus dem der Log-Aufruf gemacht wurde.
+Um die Liste der Ereignisse zu reduzieren und übersichtlicher zu machen, kannst du die Log-Einträge filtern.
 
 [.instruction]
-Nach der Variable *Integration* filtern:
+Liste der Log-Einträge filtern:
 
-. Öffne das Menü *Daten » Log*.
-. Klicke auf das Feld *Integration*. +
-→ Eine Liste mit verschiedenen Optionen wird geöffnet.
-. Wähle einen Bereich aus.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die entsprechenden Log-Einträge werden angezeigt.
+. Öffne das Menü *Daten » Log*. +
+→ Alle protokollierten Ereignisse des Standard-Mandanten werden angezeigt.
+. Klicke oben links in der Symbolleiste auf icon:funnel[set=material]. +
+→ Die verfügbaren Filter werden angezeigt.
+. Setze die gewünschten Filter. Beachte dazu die Erläuterungen in <<#log-filter>>. +
+*_Fehlt ein Filter in den Dropdown-Listen?_* +
+Die Dropdown-Listen enthalten nur Filter für Ereignisse, für die es auch Log-Einträge gibt. Wenn also zum Beispiel in der Liste kein eintrag für *OTTO Market* wählbar ist, wurden in den letzten vier Wochen keine Ereignisse für diesen Marktplatz protokolliert.
+. Klicke auf icon:search[role="blue"] *Suchen*. +
+→ Die Log-Einträge werden gefiltert angezeigt. +
+*_Du hast den gesuchten Eintrag nicht gefunden?_* +
+ Nicht alle Ereignisse werden standardmäßig protokolliert. Deshalb musst du möglicherweise <<#10, die Protokollierung für das gesuchte Ereignis erst aktivieren>>.
 
-[#40]
-== Nach Identifikator filtern
+[[log-filter]]
+.Verfügbare Filter
+[cols="1,3a"]
+|===
+|Filter |Erläuterung
 
-Der Identifikator gibt an, zu welchem Unterbereich der Log gehört.
+| *Mandant*
+| Standardmäßig ist als Filter der Standard-Mandant eingestellt. Einen anderen Mandanten aus der Dropdown-Liste wählen, um Ereignisse für diesen Mandanten anzuzeigen.
 
-[.instruction]
-Nach der Variable *Identifikator* filtern:
+| *Integration*
+| Der Bereich des Systems, in dem das Ereignis stattgefunden hat.
 
-. Öffne das Menü *Daten » Log*.
-. Klicke auf das Feld *Identifikator*. +
-→ Eine Liste mit verschiedenen Optionen wird geöffnet.
-. Wähle einen Identifikator aus.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die entsprechenden Log-Einträge werden angezeigt.
+*_Beispiele:_*
 
-[#50]
-== Nach Level filtern
+* Ceres
+* DHLShipping
+* Etsy
 
-Hier werden verschiedene Log-Level wie *Error*, *Info* etc. angezeigt.
+| *Identifikator*
+| Der Unterbereich, in dem das Ereignis stattgefunden hat.
 
-[.instruction]
-Nach der Variable *Level* filtern:
+*_Beispiele:_*
 
-. Öffne das Menü *Daten » Log*.
-. Klicke auf das Feld *Level*. +
-→ Eine Liste mit verschiedenen Optionen wird geöffnet.
-. Wähle ein Level aus.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die entsprechenden Log-Einträge werden angezeigt.
+* AmazonCatalog
 
-*_Hinweis:_* Hierfür müssen bereits alle Level aktiv gesetzt sein.
+| *Level*
+| Der Schweregrad des Ereignisses. +
+(<<#log-levels, Was beuten die Log-Levels?>>)
 
-[#60]
-== Nach Referenztyp filtern
+| *Referenztyp*
+| Die Art des Datensatzes: Handelt es sich zum Beispiel um eine Adress-ID, einen Katalognamen oder um die ID des Esy-Listings?
 
-Hier wird der Referenztyp angegeben, zu dem der Eintrag gehört (z.B. VariationID, OrderID etc.).
+| *Referenzwert*
+| Der Wert des Datensatzes, der vom Ereignis betroffenen ist. Also zum Beispiel die ID eines Artikels, einer Variante oder einer Kategorie.
 
-[.instruction]
-Nach der Variable *Referenztyp* filtern:
+| *Datum vom*
+| Auf das Kalendersymbol klicken, um ein Datum zu wählen. +
+→ Nur Ereignisse ab diesem Datum werden in der Liste angezeigt. +
+*_Hinweis:_* Du kannst ein beliebiges Datum wählen. Beachte jedoch, dass nur Ereignisse der letzten vier Wochen angezeigt werden können. Nach vier Wochen werden Log-Einträge automatisch gelöscht.
 
-. Öffne das Menü *Daten » Log*.
-. Klicke auf das Feld *Referenztyp*. +
-→ Eine Liste mit verschiedenen Optionen wird geöffnet.
-. Wähle einen Referenztyp aus.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die entsprechenden Log-Einträge werden angezeigt.
+| *Uhrzeit von*
+| Uhrzeit im Format HH:MM:SS eingeben. +
+→ Wenn du ein *Datum vom* wählst, werden Ereignisse ab dieser Uhrzeit am gewählten Datum angezeigt. +
+→ Wenn du kein *Datum vom* wählst, werden Ereignisse ab dieser Uhrzeit am heutigen Tag angezeigt.
 
-[#70]
-== Nach Referenzwert filtern
+| *Datum bis*
+| Auf das Kalendersymbol klicken, um ein Datum zu wählen. +
+→ Nur Ereignisse bis einschließlich diesem Datum werden in der Liste angezeigt. +
+*_Hinweis:_* Du kannst ein beliebiges Datum wählen. Beachte jedoch, dass nur Ereignisse der letzten vier Wochen angezeigt werden können. Nach vier Wochen werden Log-Einträge automatisch gelöscht.
 
-Hier wird der Wert der Referenz angegeben. Beispielsweise wäre das beim Referenztyp *ItemID* der Wert dieser ID. Die Suchergebnisse werden auf Treffer mit diesem Wert reduziert.
+| *Uhrzeit bis*
+| Uhrzeit im Format HH:MM:SS eingeben. +
+→ Wenn du ein *Datum bis* wählst, werden Ereignisse bis einschließlich dieser Uhrzeit am gewählten Datum angezeigt. +
+→ Wenn du kein *Datum bis* wählst, werden Ereignisse bis einschließlich dieser Uhrzeit am heutigen Tag angezeigt.
+|===
 
-[.instruction]
-Nach der Variable *Referenzwert* filtern:
+[#10]
+== Optionale Protokollierung aktivieren
 
-. Öffne das Menü *Daten » Log*.
-. Klicke auf das Feld *Referenzwert*.
-. Gib einen Referenzwert ein.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die entsprechenden Log-Einträge werden angezeigt.
+Ereignisse mit den Log-Levels *Error*, *Critical*, *Alert* und *Emergency* werden automatisch protokolliert.
+Damit aber Ereignisse mit den Log-Levels *Debug*, *Info*, *Notice* und *Warning* protokolliert werden, muss die Protokollierung erst aktiviert werden.
 
-[#80]
-== Nach Datum filtern
-
-Hier können die Suchergebnisse individuell eingestellt und auf einen zeitlichen Rahmen begrenzt werden.
-
-[.instruction]
-Nach der Variable *Datum* filtern:
-
-. Öffne das Menü *Daten » Log*.
-. Wähle ein Startdatum.
-. Wähle ein Enddatum.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die im definierten Zeitfenster erstellten Log-Einträge werden angezeigt.
-
-[#90]
-== Nach Uhrzeit filtern
-
-Hier können die Suchergebnisse individuell eingestellt und auf einen zeitlichen Rahmen begrenzt werden.
+* Die Protokollierung endet nach der eingestellten Dauer automatisch.
+* Du weißt nicht, was du protokollieren musst, und vor lauter Integrationen, Referenztypen und Identifikatoren dreht sich alles? Für viele Marktplätze findest du die nötigen Infos auf der Handbuchseite des Marktplatzes. Oder frag einfach im Forum nach, welche Bereiche du protokollieren musst.
 
 [.instruction]
-Nach der Variable *Uhrzeit* filtern:
+Optionale Protokollierung aktivieren:
 
-. Öffne das Menü *Daten » Log*.
-. Gib die Uhrzeit ein, ab der gesucht werden soll.
-. Gib die Uhrzeit ein, bis zu der gesucht werden soll.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die im definierten Zeitfenster erstellten Log-Einträge werden angezeigt.
+. Öffne das Menü *Daten » Log*. +
+→ Alle für den Standard-Mandanten protokollierten Ereignisse werden angezeigt.
+. Klicke oben links in der Toolbar auf *Logs konfigurieren* (icon:cog[]). +
+→ Das Fenster *Log-Konfiguration* wird geöffnet. +
+→ Auf der linken Seite werden die Systembereiche und die installierten Plugins angezeigt.
+. Wähle den Bereich, in dem du Logs konfigurieren möchtest. +
+→ Auf der rechten Seite werden die Einstellungen für  diesen Bereich angezeigt.
+. Aktiviere die Option *Aktiv*.
+. Wähle in der Dropdown-Liste *Dauer*, wie lange Ereignisse für diesen Bereich protokolliert werden sollen.
+. Wähle in der Dropdown-Liste *Log-Level*, welche Ereignisse du protokollieren möchtest. +
+<<#log-levels, Was beuten die Log-Level?>>
+. Speichere (icon:save[role="green"]) die Einstellungen. +
+→ Die Protokollierung wird gestartet. +
+→ Die Protokollierung endet nach der eingestellten Dauer automatisch. +
+*_Wichtig:_* Wann der erste Log-Eintrag verfügbar ist hängt davon ab, wann das Ereignis das nächste Mal auftritt, das du protokollierst.
