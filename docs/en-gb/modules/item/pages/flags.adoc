@@ -4,40 +4,148 @@
 :id: EQTFNT8
 :author: team-item
 
-plentymarkets includes several options for adding keywords and symbols to products.
-<<table-tags-flags>> compares the possibilities and uses examples to illustrate them.
+////
+zuletzt bearbeitet 03.05.2022
+////
 
-[[table-tags-flags]]
-.What’s the difference between tags and flags?
-[cols="1,3"]
+Do you want to keep track of your products in the back end?
+In plentymarkets, this is done with tags and flags.
+
+[cols="1,4a"]
 |====
-|Type |Explanation
 
-|Flags
-a|*_Examples_*:
+| xref:item:flags.adoc#400[Tags]
+|
+*_Technical specifications_*:
 
-* you want to keep track of several different items in the back end.
+* Tags are texts, like keywords or phrases.
+* Tags are linked at the variation level.
+* Your variations can be linked with as many tags as you want.
 
+*_Examples of use_*:
+
+* You want to keep track of several different variations in the back end.
+* You want to add keywords to some variations in the front end.
+
+| xref:item:flags.adoc#100[Flags] +
+(will not be developed further)
+
+|
 *_Technical specifications_*:
 
 * Flags are graphic symbols.
-* Flags can only be linked to entire item data records.
-* Assign one or two flags to each item.
+* Flags are linked at the item level.
+* Your items can be linked with a maximum of two flags.
 
-|Tags
-a|*_Examples_*:
+*_Example of use_*:
 
-* you want to keep track of several different variations in the back end.
-* you want to add keywords to some variations in the front end.
+* You want to keep track of several different items in the back end.
 
-*_Technical specifications_*:
-
-* Tags are texts like keywords or phrases.
-* Tags can be linked to individual variations.
-* Assign any number of tags to each variation.
-* Decide which tags should be visible to customers in the plentyShop.
-* Tags can also highlight other types of data, e.g. customers, orders, tickets, etc.
 |====
+
+[#400]
+== Tags
+
+Do you want to keep track of your variations in the back end?
+Or do you want to add keywords to some variations in the front end?
+Tags make it possible.
+
+* *_Back end overview_*: you’ll see the tags when you access your items and variations in the back end.
+Such visual aids help you find the right variation at a glance.
+You can even xref:item:search.adoc#intable-tags[search for variations in the back end] that have a specific tag.
+* *_Keywords in the plentyShop_*: you can decide which tags should be visible to customers in the plentyShop and which should not.
+
+[#500]
+=== Creating new tags
+
+include::_includes:page$tags-creation.adoc[]
+
+[#550]
+=== Finding existing tags
+
+include::_includes:page$tags-search.adoc[]
+
+[#600]
+=== Adding tags to variations
+
+Once you’ve created your tags, you can link them with variations.
+Tags can:
+
+* xref:item:managing-items.adoc#268[manually be linked to variations].
+* xref:data:elasticSync-item.adoc#2290[be linked with the help of an import file].
+* xref:item:mass-processing.adoc#300[be linked with the help of the variation group function].
+* xref:item:mass-processing.adoc#600[be linked with the help of the variation batch processing].
+
+[TIP]
+.Inheritance behaviour
+====
+Tags that you link to the main variation are passed on to the item’s sub-variations. To save other tags for a variation, deactivate inheritance and save different tags.
+====
+
+[#700]
+=== FAQ
+
+[.collapseBox]
+.*How do I find the variations that were linked to a specific tag?*
+--
+
+. Go to *Item » Edit item*.
+. Set the filters on the left as follows:
+.. Set the filter xref:item:search.adoc#intable-table-type[Table type] to *Variations*.
+.. Set the filter xref:item:search.adoc#intable-active[Active] to *ALL*.
+.. Use the filter xref:item:search.adoc#intable-tags[Click to add tags] to select the tags from the drop-down list.
+. Click on *Search* (icon:search[role="blue"]). +
+→ The search results display all of the variations that were linked to the tag.
+
+--
+
+[.collapseBox]
+.*How do I make tags visible to customers in the front end?*
+--
+
+. Go to *Setup » Settings » Tags » [Open tag]*.
+. Select the appropriate shop from the drop-down list *Client*. +
+*_Note_*: This option only appears if you selected the availability xref:item:flags.adoc#intable-availability[Variation].
+. *Save* (icon:save[set=plenty, role="darkGrey"]) the settings.
+. Use the ShopBuilder widget xref:online-store:shop-builder.adoc#_tags[Item » Tags] to control how the tags are displayed in your online shop.
+
+--
+
+[.collapseBox]
+.*Can tags also be created via import?*
+--
+
+No.
+Tags can not be created via import.
+Tags can only be created manually, as described in the instructions above.
+
+However, it is possible to link tags and variations via import.
+xref:data:elasticSync-item.adoc#2290[Further information].
+
+--
+
+[.collapseBox]
+.*Are tags inherited? Are they passed down from the main variation to the sub-variations?*
+--
+
+Tags that you link to the main variation are passed on to the item’s sub-variations. To save other tags for a variation, deactivate inheritance and save different tags.
+
+--
+
+[.collapseBox]
+.*I can’t create or edit any tags. Why not?*
+--
+
+People with xref:business-decisions:user-accounts-access.adoc#10[back end access rights] can only see this menu if an admin gave them access.
+
+. Find someone who has administrator rights for the plentymarkets system.
+. This person will open the menu *Setup » Settings » User » Rights » User*.
+. Then he or she opens your user account and activates the right:
+* *Setup > Tag*.
+. *Save* (icon:save[role="green"]) the settings.
+. If the problem persists, contact our link:https://forum.plentymarkets.com/c/item/18[support team in the forum^].
+
+--
 
 [#100]
 == Flags
@@ -84,44 +192,3 @@ Items can be assigned up to two flags:
 → On the far right side of the toolbar, you will find two buttons for flags.
 . Click on one or both of the buttons and choose a flag from the drop-down list.
 . *Save* (icon:save[set=plenty, role="green"]) the settings.
-
-
-[#400]
-== Tags
-
-The idea is simple.
-Assign any number of tags to each variation.
-These tags serve multiple purposes:
-
-* *_Back end overview_*: you’ll see the tags when you access your items and variations in the back end.
-Such visual aids help you find the right variation at a glance.
-You can also xref:item:search.adoc#intable-tags[search for variations in the back end] that have a specific tag.
-* *_Keywords in the plentyShop_*: you decide which tags should be visible to customers in the plentyShop and which should not.
-* *_Other types of data_*: you can even use tags to highlight other types of data, e.g. customers, orders, tickets, etc.
-
-[#450]
-=== Requirement: Necessary user rights
-
-include::_includes:page$tags-rights.adoc[]
-
-[#500]
-=== Creating tags
-
-include::_includes:page$tags-creation.adoc[]
-
-[#600]
-=== Adding tags to variations
-
-Once you’ve created your tags, you can link them with variations.
-Tags can:
-
-* xref:item:managing-items.adoc#268[manually be linked to variations].
-* xref:data:elasticSync-item.adoc#2290[be linked with the help of an import file].
-* xref:item:mass-processing.adoc#300[be linked with the help of the variation group function].
-* xref:item:mass-processing.adoc#600[be linked with the help of the variation batch processing].
-
-[TIP]
-.Inheritance behaviour
-====
-Tags that you link to the main variation are passed on to the item’s sub-variations. To save other tags for a variation, deactivate inheritance and save different tags.
-====
