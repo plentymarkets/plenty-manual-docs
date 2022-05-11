@@ -75,9 +75,16 @@ include::_includes:page$rechte.adoc[]
 
 [#600]
 ==== Abwicklungsprozesse anpassen
-//TODO: Haben wir sowas für Prozesse?
 
-Der Packvorgang der rollenden Kommissionierung kann im bestehenden xref:automatisierung:prozesse-einrichten.adoc#[Auftragsabwicklungsprozess] deines Unternehmens integriert werden. Dazu müssen jeweils eine Aktion und eine Subaktion zum bestehenden Abwicklungsprozess hinzugefügt werden.
+Du kannst die rollende Kommissionierung mit plentyWarehouse in den bestehenden xref:automatisierung:prozesse-einrichten.adoc#[Auftragsabwicklungsprozess] deines Unternehmens integrieren. Ergänze dazu deinen bestehenden Prozess im plentymarkets Backend um die folgende Aktion und Subaktion.
+
+
+[IMPORTANT]
+.Richtigen Zeitpunkt für die Trennung der Box vom Auftrag finden
+====
+Möchtest du die Box automatisch vom Auftrag lösen, sobald die Artikel nach der rollenden Kommissionierung gepackt wurden? Dann gehe wie im Folgenden beschrieben vor.
+Soll eine Box erst bei der Buchung des Warenausgangs für den Auftrag gelöst werden, gehe wie <<#1500, weiter unten beschrieben>> vor.
+====
 
 [.instruction]
 Bestehende Abwicklungsprozesse anpassen:
@@ -103,7 +110,7 @@ Bestehende Abwicklungsprozesse anpassen:
 [#700]
 === Einstellungen in der plentyWarehouse App vornehmen
 
-Bevor du <<#800, die rollende Kommissionierung nutzen kannst>>, musst du ein paar Einstellungen einmalig in der plentyWarehouse App vornehmen. Diese Einstellungen bestimmen z.B., wie viele Aufträge auf einmal gepickt werden sollen und wie die App im Fehlerfall vorgehen soll.
+Bevor du <<#800, die rollende Kommissionierung nutzen kannst>>, musst du ein paar Einstellungen einmalig in der plentyWarehouse App vornehmen. Diese Einstellungen bestimmen z.B., wie viele Aufträge auf einmal gepickt werden sollen und was im Fehlerfall geschehen soll.
 
 [.instruction]
 Einstellungen vornehmen:
@@ -126,7 +133,7 @@ Einstellungen vornehmen:
 |In welchem Lager möchtest du picken? Wenn du die rollende Kommissionierung später nutzt, werden nur Aufträge, die sich in diesem Lager befinden, auf deiner Artikelliste angezeigt. +
 *_Tipp:_* Die xref:warenwirtschaft:lager-einrichten.adoc#200[Lager] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets Systems unter *Einrichtung » Waren » Lager*.
 
-| *Standardanzahl Boxen*
+|[#intable-default-boxes]*Standardanzahl Boxen*
 |Eine Box steht für einen Auftrag, der kommissioniert wird. Wähle hier aus, wie viele Aufträge du standardmäßig auf einmal picken möchtest. Wenn du die rollende Kommissionierung später nutzt, ist die hier ausgewählte Anzahl voreingestellt. Bevor du mit der rollenden Kommissionierung beginnst, kannst du diese Anzahl manuell erhöhen oder verringern.
 
 | *Bestätigungsdialog vor Umbuchung anzeigen*
@@ -137,8 +144,10 @@ Einstellungen vornehmen:
 *Aktiviert* (icon:toggle-on[role="green"]) = Boxen _müssen_ per Scan ausgewählt werden, damit anschließend Artikel gebucht werden können. +
 *Nicht aktiviert* (icon:toggle-off[role="darkGrey"]) = Boxen können manuell ausgewählt werden, indem du auf sie tippst.
 
-| *Sortierung der Aufträge*
-|Diese Einstellung bestimmt, 
+//| *Sortierung der Aufträge*
+//|Diese Einstellung bestimmt genauer, nach welchem Kriterium Aufträge in die rollende Kommissionierung einbezogen werden sollen. +
+//*Auftrags-ID* = +
+//*Erstellungsdatum* = 
 
 2+^| Bereich *Status*
 
@@ -146,7 +155,7 @@ Einstellungen vornehmen:
 |Welche Aufträge möchtest du picken? Wenn du die rollende Kommissionierung später nutzt, werden nur Aufträge, die sich in diesem Status befinden, auf deiner Artikelliste angezeigt. +
 *_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Status*.
 
-| *Zielstatus*
+|[#intable-target-status]*Zielstatus*
 |Wie möchtest du Aufträge, die sich gerade im Pickvorgang befinden, kennzeichnen? Setze Aufträge in einen neuen Status, damit sie nicht aus Versehen mehrmals für den Pickvorgang zur Verfügung gestellt werden. +
 *_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Status*.
 
@@ -157,18 +166,26 @@ Einstellungen vornehmen:
 2+^| Bereich *Artikelerfassung*
 
 | *Scan verpflichtend*
-|
+|Verwende diese Option, um festzulegen, welche Regeln für das Erfassen von Artikeln während der rollenden Kommissionierung gelten sollen. +
+*Aktiviert* (icon:toggle-on[role="green"]) = Alle Artikel _müssen_ über ihr Etikett gescannt werden, um kommissioniert zu werden. Eine manuelle Auswahl von Artikeln über die Suche ist nicht möglich. +
+*Deaktiviert* (icon:toggle-off[role="darkGrey"]) = Artikel können entweder per Scan oder per manueller Auswahl hinzugefügt werden.
 
 | *Einzelerfassung bis Menge*
-|
+|Wenn du Artikel mit einem Scanner erfasst, kannst du mit dieser Einstellung bestimmen, ab wie vielen gescannten Exemplaren einer Variante automatisch die vorhandene in das Mengenfeld eingetragen wird. +
+*_Beispiel:_* Wenn du die Zahl *5* ins Mengenfeld eingibst, wird nach dem fünften Scannen der Variante automatisch die Gesamtmenge eingetragen.
 
 2+^| Bereich *Box-Auswahl*
 
 | *Lagerortsuchfelder*
-| 
+|Verwende die Umschaltflächen, um festzulegen, welche Kriterien während der rollenden Kommissionierung zur Suche nach Boxen genutzt werden sollen. Die Optionen *Barcode* und *Lagerortname* stehen zur Verfügung. +
+*Aktiviert* (icon:toggle-on[role="green"]) = Es wird möglich sein, Lagerorte anhand dieses Kriteriums zu suchen. +
+*_Tipp:_* Tippe und halte (icon:drag_handle[set=material]) für jedes aktivierte Suchkriterium, um die Reihenfolge der angezeigten Suchfelder anzupassen.
 
 | *Fokus auf Lagerortsuchfeld*
-|
+|Wirst du typischerweise die Box auswählen, indem du den Barcode der Box scannst oder indem du nach dem Namen der Box suchst und dann den passenden Eintrag aus einer Liste wählst? Falls du den Barcode scannen möchtest, kann diese Einstellung deine Arbeit beschleunigen. +
+*Kein Feld* = Der Mauszeiger wird in keinem Feld platziert. Natürlich ist es später trotzdem möglich, den Mauszeiger manuell in einem Feld zu platzieren. +
+*Barcode* = Dein Mauszeiger beginnt automatisch in dem Barcodefeld, wenn du eine Box auswählst. Das kann die Auswahl der Box beschleunigen.
+*Lagerortname* = Dein Mauszeiger beginnt im Eingabefeld für den Namen der Box.
 
 |====
 
@@ -196,10 +213,10 @@ Anzahl der Boxen festlegen:
 icon:map-signs[] *_Oder:_*: Finde die Kachel *Rollende Kommissionierung* im Bereich *Funktionen* auf dem Dashboard.
 . Tippe auf *Rollende Kommissionierung*. +
 → Der Startbildschirm wird angezeigt.
-. Tippe auf das Plus oder Minus, um die <<Einstellungen in der plentymarkets App vornehmen, vordefinierte Anzahl>> der Boxen zu erhöhen oder zu verringern. //TODO: intable link
+. Tippe auf das Plus oder Minus, um die xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-default-boxes[vordefinierte Anzahl der Boxen] zu erhöhen oder zu verringern.
 . Tippe auf *Start*, um fortzufahren. +
-→ Die entsprechenden Aufträge werden auf eine Artikelliste gestellt und in den von dir festgelegten Zielstatus //TODO: intable link gesetzt.
-
+→ Für die entsprechenden Aufträge wird eine Artikelliste erstellt. +
+→ Die Aufträge werden in den xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-target-status[von dir festgelegten Zielstatus]gesetzt.
 
 [#1000]
 === Artikel im Lager finden
@@ -250,9 +267,9 @@ Artikel picken:
 [#1300]
 === Zusätzliche Aktionen für Artikel
 
-Während du <<#1200, Artikel pickst>>, kann es zu Sonderfällen kommen. Beispielsweise kann es sein, dass du einen Artikel ans Ende der Liste verschieben möchtest, weil du erst später am Lagerort des Artikels ankommst. Außerdem kann es sein, dass ein Artikel am Lagerort nicht vorrätig ist oder du eine Notiz mit einem Hinweis zum Auftrag hinterlassen möchtest.
+Während du <<#1200, Artikel pickst>>, kann es zu Sonderfällen kommen. Beispielsweise kann es sein, dass du einen Artikel ans Ende der Liste verschieben möchtest, weil du erst später am Lagerort des Artikels ankommst. Oder es kommt vor, dass ein Artikel am Lagerort nicht vorrätig ist oder du eine Notiz mit einem Hinweis zum Auftrag hinterlassen möchtest.
 
-Dazu stehen dir in der Ansicht des jeweiligen Artikels einige Shortcuts zur Verfügung, mit denen du diese Aktionen schnell durchführen kannst. <<table-box-picking-shortcuts>> enthält weitere Informationen zu den verfügbaren Shortcuts.
+Für solche Fälle werden dir in der Ansicht des jeweiligen Artikels Shortcuts angezeigt, mit denen du diese Aktionen schnell durchführen kannst. <<table-box-picking-shortcuts>> enthält weitere Informationen zu den verfügbaren Shortcuts.
 
 [[table-box-picking-shortcuts]]
 .Verfügbare Shortcuts in der Artikelansicht
@@ -272,24 +289,53 @@ Dazu stehen dir in der Ansicht des jeweiligen Artikels einige Shortcuts zur Verf
 |icon:low_priority[set=material]
 | Verschiebt den Artikel an das Ende der Pickliste. Diese Funktion ist nützlich, wenn du einen Artikel vorerst überspringen möchtest, beispielsweise wenn er momentan nicht am angegebenen Lagerort vorhanden ist.
 
-| *Artikel entfernen*
+|[#intable-remove-item]*Artikel entfernen*
 |icon:cancel[set=material]
 | Entfernt den Artikel von der Artikelliste. Nutze diese Funktion, wenn der betreffende Artikel nicht am Lagerort vorhanden ist. Optional kannst du im selben Schritt auch einen Kommentar eingeben, der als Auftragsnotiz gespeichert wird und am jedem Auftrag, in dem der Artikel enthalten ist, im plentymarkets Backend einsehbar ist. Außerdem wird der Auftrag in den Fehlerstatus verschoben.
 
 | *Artikelinformationen* 
 |icon:info[set=material]
-| Öffnet eine Seite mit weiteren Informationen zum Artikel. Je nachdem, welche du Einstellung für die Option xref:warenwirtschaft:installation-und-ersteinrichtung.adoc#intable-other-settings[Shortcut-Verhalten]gewählt hast, erscheint eine Abfrage, ob du nach dem Aufrufen der Artikelinformationen automatisch zur Pickliste zurückgeleitet werden möchtest.
+| Öffnet eine Seite mit weiteren Informationen zum Artikel. Je nachdem, welche du Einstellung für die Option xref:warenwirtschaft:installation-und-ersteinrichtung.adoc#intable-other-settings[Shortcut-Verhalten] gewählt hast, erscheint eine Abfrage, ob du nach dem Aufrufen der Artikelinformationen automatisch zur Pickliste zurückgeleitet werden möchtest.
 
 |====
 
 [#1400]
 === Rollende Kommissionierung abschließen
 
-//TODO: Info über Endscreen
+Sobald alle für die Aufträge benötigten <<1200, Artikel gepickt>> und, falls notwendig, Aufträge mit nicht vorhandenen Artikeln xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-remove-item[in den Fehlerstatus verschoben wurden], wird automatisch ein Abschlussbildschirm angezeigt.
+
+Dieser enthält Informationen zu den Aufträgen, die kommissioniert wurden. Du kannst auf einen Blick sehen,
+
+* wie viele Aufträge kommmissioniert wurden
+* wie viele Artikel und wie viele Exemplare jeweils gepickt wurden
+* wie viele Aufträge unvollständig kommissioniert wurden
+* wie viel Zeit für die rollende Kommissionierung benötigt wurde.
+
+Tippe auf icon:done[set=material], um die rollende Kommissionierung abzuschließen.
 
 [#1500]
 === Artikel packen
 
-Sobald alle Boxen mit Artikeln befüllt sind, läuft das Lagerpersonal zum Packtisch zurück. Nun wird die erste Box gescannt und somit der entsprechende Auftrag aufgerufen. Das Lagerpersonal xref:automatisierung:prozesse-ausfuehren.adoc#[wickelt diesen Auftrag wie gewohnt ab]. Dabei wird der Warenausgang vom Transferlagerort, d.h. von der Box, gebucht.
+Sobald alle Boxen mit Artikeln befüllt sind, läuft das Lagerpersonal zum Packtisch zurück. Nun wird die erste Box gescannt und somit der entsprechende Auftrag aufgerufen. Das Lagerpersonal xref:automatisierung:prozesse-ausfuehren.adoc#[wickelt diesen Auftrag wie gewohnt ab]. Dabei wird der Warenausgang vom Transferlagerort, also von der Box, gebucht.
 
-Am Ende dieses Vorgangs wird die Verbindung zwischen Auftrag und Box aufgelöst. Somit steht die Box wieder zur Verfügung und kann vom Lagerpersonal beim nächsten Durchlauf erneut verwendet werden.
+Du kannst den bestehenden xref:automatisierung:prozesse-einrichten.adoc#[Auftragsabwicklungsprozess] deines Unternehmens so anpassen, dass beim Buchen des Warenausgangs die Verbindung zwischen Box und Auftrag automatisch aufgehoben wird. Ergänze dazu deinen bestehenden Prozess im plentymarkets Backend um die folgende Aktion und Subaktion.
+
+[.instruction]
+Bestehende Abwicklungsprozesse anpassen:
+
+. Öffne das Menü *Einrichtung » Prozesse » [Prozess wählen]*.
+. Füge die Aktion und die Subaktion hinzu. Nimm die Einstellungen gemäß <<table-procedure-subprocedure-packing>> vor.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[[table-procedure-subprocedure-packing]]
+.Aktion und Subaktion zur Trennung von Box und Auftrag beim Warenausgang
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+| *Aktion: Warenausgang*
+|Füge die Aktion xref:automatisierung:aktionen.adoc#190[Warenausgang] zum Arbeitsschritt xref:automatisierung:arbeitsschritte.adoc#auftragsabwicklung[Auftragsabwicklung] oder xref:automatisierung:arbeitsschritte.adoc#auftragsbearbeitung[Auftragsbearbeitung] hinzu. Diese Aktion sucht nach einzelnen Aufträgen, um im Anschluss den Warenausgang für diese Aufträge zu buchen.
+
+| *Subaktion: Buchung durchführen*
+|Füge die Subaktion xref:automatisierung:subaktionen.adoc#160[Buchung durchführen] zur Aktion xref:automatisierung:aktionen.adoc#190[Warenausgang] hinzu. Aktiviere in den Einstellungen der Subaktion die Option *Verbindung zu Box-Lagerort automatisch lösen*. Somit wird die Box bei der Buchung des Warenausgangs automatisch vom Auftrag getrennt. Die Box steht somit wieder zur Verfügung und kann beim nächsten Durchlauf der rollenden Kommissionierung erneut verwendet werden.
+|====
