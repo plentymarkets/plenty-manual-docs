@@ -7,26 +7,18 @@
 
 :marketplace-export:
 
-Use the marketplace formats of the catalogue to export variation and stock information to markets and price portals.
+Use the marketplace formats of the catalogue to export variation and stock information to many markets and price portals.plentymarkets is working on moving all markets to catalogue formats.
+
+On this page, find out how to use catalogues to export variation data to markets. Only the general workflow is explained.
+
+More detailed information about how you create an structure a catalogue can be found on the manual pages of the individual xref:markets:markets.adoc#[markets].
 
 include::_includes:page$new-page-info-box.adoc[]
 
-On this page, find out how to use catalogues to export variation data to markets. Only the general workflow is explained.
-More detailed information about how you create an structure a catalogue can be found on the manual pages of the individual xref:markets:markets.adoc#[markets].
+[#catalogue-menu]
+== Getting to know the catalogue menu for marketplace formats
 
-plentymarkets is working on moving all markets to catalogue formats. At the moment, you can export item data to the following markets using catalogues:
-
-* OTTO Market
-* Etsy
-* Voelkner
-* Conrad
-* Some Amazon flatfiles
-* Plugins by third parties
-
-[#first-contact]
-== First introduction
-
-include::partial$catalogues-first-contact.adoc[]
+include::partial$catalogue-menu.adoc[]
 
 [#market-formats]
 == What is a catalogue with marketplace format?
@@ -48,95 +40,6 @@ Catalogues with marketplace formats allow you to tailor your item information ex
 *_Let’s talk straight: Aren#t there any disadvantages?_*
 
 It really depends. The catalogues give you maximum flexibility. You can map data fields any way you like. However, that also means that mappings are not checked on whether or not they make any sense. As an example, the system will not prevent you from mapping the variation ID as the price. You might only notice such a mistake when your variations are either not exported to the market or when your t-shirts suddenly cost a few thousand bucks. However, this is only a disadvantage if you don’t work carefully. The more familiar you are with the catalogues, the easier it will be for you to map the data fields. You can always copy and adjust well configured catalogues. That also makes your work easier.
-
-[#properties]
-== Properties instead of characteristics
-
-[discrete]
-===== Properties are the new characteristics!
-
-You cannot map characteristics or free text fields in the catalogues. Instead, you use properties to export data to the markets.
-
-The properties are similar to the old characteristics and free text fields. As such, you use properties to save data for which there is no setting and no input field in the plentymarkets back end. In our context, the main difference is that you saved characteristics and free text fields for items. Instead, properties are saved for each variation separately. This gives you a lot of flexibility.
-
-Below are two examples on how to use properties.
-
-* <<#example-1, Example 1: Diameter information>>
-* <<#example-2, Example 2: Brand names>>
-
-Is this your first time working with properties? For further information, refer to the item xref:item:properties.adoc#500[Properties] page.
-
-[#example-1]
-=== Example 1: Diameter information
-
-*_Use case_*: +
-A sales channel allows you to send the *diameter* and the *diameter unit* of your products. However, there is no field in the plentymarkets item menu where you can save diameter information for a variation.
-
-*_Recommended:_* +
-To still export information about the diameter of a variation to the market, we recommend the following workflow:
-
-First, create the properties:
-
-. Go to *Setup » Settings » Properties » Configuration*.
-. Create a property *Diameter unit* with the following values:
-  ** Section: *Item* +
-  ** Property type: *Selection*
-. Save the necessary units as property values, for example `cm` and `mm`.
-. Create a property *Diameter* with the following values:
-  ** Section: *Item* +
-  ** Property type: *Decimal number*
-
-Now, link the properties with the variation and save values:
-
-. Go to *Item » Edit item » [Open item] » [Open variation]*.
-. Open the *Properties* tab.
-. Add the property *Diameter unit*.
-. Select the unit from the drop-down list.
-. Add the property *Diameter*.
-. Enter the diameter in the unit you selected for the property *Diameter unit*.
-
-To export the diameter of your variations to the market:
-
-. Go to *Data » Catalogues » [Open catalogue]*.
-. Navigate to the marketplace data field *Diameter unit*.
-. Click on *+ Add data field*.
-. In the list of plentymarkets data fields shown, expand the folder *Property*.
-. Click on the Plus icon to the right of the plentymarkets data field *Diameter unit*.
-. Navigate to the marketplace data field *Diameter*.
-. Click on *+ Add data field*.
-. In the list of plentymarkets data fields shown, expand the folder *Property*.
-. Click on the Plus icon to the right of the plentymarkets data field *Diameter*.
-
-[#example-2]
-=== Example 2: Brand names
-
-*_Use case_*: +
-The sales channel allows you to transfer the brand name of products. In plentymarkets, you can save manufacturers but there is no default data field for saving brand names. Manufacturer and brand name are identical in many cases. If not, properties are your friends once more.
-
-*_Recommended:_* +
-If the manufacturer names saved in your system are not identical to the products’ brand names, you can save brand names using properties. We recommend the following workflow for exporting brands in properties:
-
-First, create the property:
-
-. Go to *Setup » Settings » Properties » Configuration*.
-. Create a property *Brand* with the following settings:
-  ** Section: *Item*
-  ** Property type: *Text*
-
-Now, link the properties with the variation and save a value:
-
-. Go to *Item » Edit item » [Open item] » [Open variation]*.
-. Switch to the tab *Texts*.
-. Add the property *Brand*.
-. Save the brand name as the value of the property.
-
-To export the brand of your variations to the market:
-
-. Go to *Data » Catalogues » [Open catalogue]*.
-. Navigate to the marketplace data field *Brand*.
-. Click on *+ Add data field*.
-. In the list of plentymarkets data fields shown, expand the folder *Property*.
-. Click on the Plus icon to the right of the plentymarkets data field *Brand*.
 
 [#data-fields]
 == Which data fields are available?
@@ -181,6 +84,8 @@ image::data:plentymarkets-data-fields.png[]
 * A market expects product data that cannot be saved for a variation directly? Create a property. Then, link this property with your variations. Save product data as the values for this property.
 * Check out the manual page for the standard format xref:data:catalogues-item.adoc#[Item (new)] to find out which data is exported with which plentymarkets data fields.
 * You can map a fallback data field in addition to a plentymarkets data field. All plentymarkets data field are again available as fallback data fields. The difference is that the content of the fallback data field is only exported if the first mapped plentymarkets data field does not return a value.
+
+
 
 [#mappings]
 == Which mappings are available?
@@ -330,6 +235,112 @@ image::data:catalogue-diameter.png[]
 include::markets:partial$catalogue-mapping.adoc[tag=own-mappings-config]
 --
 
+[#properties]
+=== Excursion: Properties instead of characteristics
+
+[discrete]
+===== Properties are the new characteristics!
+
+You cannot map characteristics or free text fields in the catalogues. Instead, you use properties to export data to the markets.
+
+The properties are similar to the old characteristics and free text fields. As such, you use properties to save data for which there is no setting and no input field in the plentymarkets back end. In our context, the main difference is that you saved characteristics and free text fields for items. Instead, properties are saved for each variation separately. This gives you a lot of flexibility.
+
+Below are two examples on how to use properties.
+
+* <<#example-1, Example 1: Diameter information>>
+* <<#example-2, Example 2: Brand names>>
+
+Is this your first time working with properties? For further information, refer to the item xref:item:properties.adoc#500[Properties] page.
+
+[#example-1]
+==== Example 1: Diameter information
+
+*_Use case_*: +
+A sales channel allows you to send the *diameter* and the *diameter unit* of your products. However, there is no field in the plentymarkets item menu where you can save diameter information for a variation.
+
+*_Recommended:_* +
+To still export information about the diameter of a variation to the market, we recommend the following workflow:
+
+First, create the properties:
+
+. Go to *Setup » Settings » Properties » Configuration*.
+. Create a property *Diameter unit* with the following values:
+  ** Section: *Item* +
+  ** Property type: *Selection*
+. Save the necessary units as property values, for example `cm` and `mm`.
+. Create a property *Diameter* with the following values:
+  ** Section: *Item* +
+  ** Property type: *Decimal number*
+
+Now, link the properties with the variation and save values:
+
+. Go to *Item » Edit item » [Open item] » [Open variation]*.
+. Open the *Properties* tab.
+. Add the property *Diameter unit*.
+. Select the unit from the drop-down list.
+. Add the property *Diameter*.
+. Enter the diameter in the unit you selected for the property *Diameter unit*.
+
+To export the diameter of your variations to the market:
+
+. Go to *Data » Catalogues » [Open catalogue]*.
+. Navigate to the marketplace data field *Diameter unit*.
+. Click on *+ Add data field*.
+. In the list of plentymarkets data fields shown, expand the folder *Property*.
+. Click on the Plus icon to the right of the plentymarkets data field *Diameter unit*.
+. Navigate to the marketplace data field *Diameter*.
+. Click on *+ Add data field*.
+. In the list of plentymarkets data fields shown, expand the folder *Property*.
+. Click on the Plus icon to the right of the plentymarkets data field *Diameter*.
+
+[#example-2]
+==== Example 2: Brand names
+
+*_Use case_*: +
+The sales channel allows you to transfer the brand name of products. In plentymarkets, you can save manufacturers but there is no default data field for saving brand names. Manufacturer and brand name are identical in many cases. If not, properties are your friends once more.
+
+*_Recommended:_* +
+If the manufacturer names saved in your system are not identical to the products’ brand names, you can save brand names using properties. We recommend the following workflow for exporting brands in properties:
+
+First, create the property:
+
+. Go to *Setup » Settings » Properties » Configuration*.
+. Create a property *Brand* with the following settings:
+  ** Section: *Item*
+  ** Property type: *Text*
+
+Now, link the properties with the variation and save a value:
+
+. Go to *Item » Edit item » [Open item] » [Open variation]*.
+. Switch to the tab *Texts*.
+. Add the property *Brand*.
+. Save the brand name as the value of the property.
+
+To export the brand of your variations to the market:
+
+. Go to *Data » Catalogues » [Open catalogue]*.
+. Navigate to the marketplace data field *Brand*.
+. Click on *+ Add data field*.
+. In the list of plentymarkets data fields shown, expand the folder *Property*.
+. Click on the Plus icon to the right of the plentymarkets data field *Brand*.
+
+[#switch-to-catalogues]
+== Switching from old exports to catalogue export
+
+For some markets, you can either use an old export or a catalogue format. Find out how to switch here.
+
+. Analyse which characteristics and free text fields you currently use for exporting data to the market. Characteristics and free text fields cannot be used for the catalogue export. So create properties for all data that you still need. +
+*_Important:_* The values of the new properties must be identical to the values of the old characteristics. Otherwise, new items may be created during the export to the market.
+. Create a catalogue. For some markets, you have to install a new plugin first. Check the manual page of the individual markets to find out if this is the case.
+. Open the catalogue and check which data fields can be exported to the market.
+  * Map suitable plentymarkets data fields to the marketplace data fields. +
+  *_Important:_* Map the same plentymarkets data fields to the marketplace data fields that are currently exported with the elastic export. Otherwise, new items may be created during the export to the market.
+  * If necessary, create more properties.
+. Prepare your variations:
+  * If you have created new properties, then link these properties with the variations.
+  * For some markets, you also need a property to link the variation to the correct category of the marketplace. This property is created automatically. Check the manual page of the individual markets for this information.
+. Ready? Then activate the catalogue to start the data export.
+
 [#file-export]
 == _Optional:_ File export (no market export)
 
@@ -365,7 +376,7 @@ You can continue working during the export process. +
 *_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes.
 . Once the export is finished, you will be notified (icon:notifications_none[set=material]) that the export file can be downloaded.
 . In the notification centre, click on icon:link[set=material] *Download*. +
-*_Tip:_* The notification is no longer visible? You can access the file at any time using the URL shown in the *Download settings*.
+*_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
 . Save the file on your computer.
 --
  
@@ -399,38 +410,16 @@ Setting up regular file exports:
 
 2+^| Format settings
 
-include::page$exporting-standard-formats.adoc[tag=table-format-settings]
+include::page$export-standard-formats.adoc[tag=table-format-settings]
 
 2+^| Export settings
 
-include::page$exporting-standard-formats.adoc[tag=table-export-settings]
+include::page$export-standard-formats.adoc[tag=table-export-settings]
 |====
 
-[#switch-to-catalogues]
-== Switching from the old export to catalogue export
-
-For some markets, you can either use an old export or a catalogue format. Find out how to switch here.
-
-. Analyse which characteristics and free text fields you currently use for exporting data to the market. Characteristics and free text fields cannot be used for the catalogue export. So create properties for all data that you still need. +
-*_Important:_* The values of the new properties must be identical to the values of the old characteristics. Otherwise, new items may be created during the export to the market.
-. Create a catalogue. For some markets, you have to install a new plugin first. Check the manual page of the individual markets to find out if this is the case.
-. Open the catalogue and check which data fields can be exported to the market.
-  * Map suitable plentymarkets data fields to the marketplace data fields. +
-  *_Important:_* Map the same plentymarkets data fields to the marketplace data fields that are currently exported with the elastic export. Otherwise, new items may be created during the export to the market.
-  * If necessary, create more properties.
-. Prepare your variations:
-  * If you have created new properties, then link these properties with the variations.
-  * For some markets, you also need a property to link the variation to the correct category of the marketplace. This property is created automatically. Check the manual page of the individual markets for this information.
-. Ready? Then activate the catalogue to start the data export.
-
 [#faq]
-== FAQ
+== FAQ: Questions and answers
 
 include::partial$catalogues-faq.adoc[tag=rights]
 
-include::page$export-standard-formats.adoc[tag=manage-catalogues]
-
-[#manage-catalogues]
-== Managing catalogues: how to delete, copy, etc.
-
-include::partial$catalogues-manage.adoc[]
+include::partial$catalogues-faq.adoc[tag=faq-manage]
