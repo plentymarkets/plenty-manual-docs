@@ -1,0 +1,262 @@
+= Changelog 11. Mai 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 05. Mai 2022
+:endWeekDate: 11. Mai 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/kontakt-ui-hauptauftrag-im-auftraege-portlet-hinzugefuegt-contact-ui-main-order-added-to-orders-portlet/680296
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Dokumente
+
+* Wir haben einen neuen steuerlichen Hinweis für Rechnungen und Proformarechnungen für Lieferungen von der EU nach UK eingeführt. Dieser Hinweis wird ausgegeben:
+** wenn von der EU nach Großbritannien geliefert wird
+** der Auftrag brutto ist und
+** keine Steuernummer an den Adressen hinterlegt ist.
+
++
+Beispiel für den Inhalt des Hinweises, wenn von Deutschland aus geliefert wird:
+
+[code]
+------
+Es handelt sich im deutschen Steuerrecht um eine steuerfreie Ausfuhrlieferung nach §§ 4 Nr. 1a i.V.m. 6 UStG.
+------
+
+[discrete]
+=== Ereignisaktionen
+
+* In den Ereignisaktionen wurde ein neuen Filter *Menge der Auftragspositionen* hinzugefügt.
+Mit diesem ist es möglich nach der aufsummierten Menge von Auftragspositionen zu filtern. Dabei werden folgende Typen von Auftragspositionen beachtet:
+** Variante
+** Unzugeordnete Variante
+** Paket-Bestandteil
+** Set-Bestandteil
+** Geschenkverpackung
+
+[discrete]
+=== Kauflux
+
+* Ab sofort kannst du Artikeldaten mit einem Katalog an Kauflux exportieren. Das Marktplatz-Format für Kauflux findest du jetzt im Menü *Daten » Kataloge*. Bisher war der Export von Artikeldaten an Kauflux nur über den Elastischen Export möglich. Beim Wechsel auf den Artikeldatenexport mit Katalogen solltest du deshalb Folgendes beachten:
+** Merkmale und Freitextfelder können für den Katalogexport nicht mehr verwendet werden. Prüfe deshalb, welche Merkmale du aktuell für Kauflux verwendest. Erstelle Eigenschaften für alle Merkmale, die du weiterhin benötigst.
+** Beim Wechsel solltest du deinen alten Elastischen Export exakt in dem neuen Katalog nachbauen, damit der Artikelexport weiterhin funktioniert. Ordne also alle Datenfelder so zu, wie sie auch im Elastischen Export an den Marktplatz übertragen wurden. Wenn du bestimmte Datenfelder anders als bisher zuordnest, werden möglicherweise beim Export neue Artikel erstellt.
+** Wie du einen Katalog für Kauflux einrichtest, erfährst du auf der Handbuchseite xref:maerkte:kauflux.adoc[Kauflux].
+
++
+[NOTE]
+.Hinweis
+======
+Der Elastische Export und die Exportformate werden nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, schon jetzt Kataloge zu erstellen.
+======
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Im Menü *CRM » Kontakte* wurde im Portlet Aufträge das Icon zum Erstellen eines neuen Auftrags, Angebots und Abonnements geändert. Ab sofort wird ein Plus-Icon dargestellt.
+
+[discrete]
+=== OTTO
+
+:otto-master-date: 06.05.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/nQDUlecDnXh0GvhTLfADgUiyjdq.xlsx
+
+include::partial$otto-master-file.adoc[]
+
+[discrete]
+=== Plugins
+
+* Fügt man eine Plugin-Set-Beschreibung mit nicht erlaubten Zeichen hinzugefügt, dann wird nun eine Fehlermeldung mit den erlaubten Zeichen (Deutsches Alphabet inkl. Umlaute und ß, Zahlen sowie '-', '_', '.' und Leerzeichen). Zusätzlich ist der Button zum Speichern deaktiviert.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Es kommt unter *Einrichten » Waren » Bestellwesen » Umbuchung oder Nachbestellung » Einstellung* zu keinen Fehlern mehr, wenn die Einstellungen ohne einen Standard-Sender / Standard-Empfänger gespeichert werden.
+* Bei der manuellen Anlage von Lieferaufträgen war es möglich Bestelleigenschaften auszuwählen. Das hatte zu Folgeproblemen geführt. Es ist jetzt nicht mehr möglich Bestelleigenschaften auszuwählen. Wenn ein Artikel eine Bestelleigenschaft hat, dann wird diese automatisch in den Lieferauftrag kopiert.
+
+[discrete]
+=== Bol.com
+
+* Die Mehrfachauswahl für die Lager im Assistenten wurde nicht immer korrekt angezeigt. Dieses Verhalten wurde behoben.
+* Wenn die Einstellungen über die alten Einstellungen unter *Einrichtung » Märkte* gespeichert wurden und danach der Assistent aufgerufen wurde, fehlte dort der Mandant. Schloss man jetzt den Assistenten ab, ohne dass der Mandant neu gesetzt wurde, wurde der Mandant "leer" überschrieben, was zu Fehlern in Prozessen führen kann. Dieses Problem wurde behoben.
+* Bei der Nutzung des Assistenten für die Einstellungen wurden die Einstellungen bei jedem Klick auf *Weiter* oder *Zurück* gespeichert statt erst beim Abschließen des Assistenten. Dieses Problem wurde behoben.
+* Es wurde ein Fehler behoben, der dazu führte das nur die ersten 25 Kataloge geladen wurden. Dies hat dafür gesorgt, dass unvollständige Daten an BOL gesendet wurden.
+* Es wurde ein Fehler behoben, der dazu führte, dass alle Bilder, für den Produktexport an jede Variante verknüpft wurden.
+
+[discrete]
+=== CRM
+
+* Links im Ticketsystem (in neuen Tickets, Nachrichten und Kommentaren) öffnen sich jetzt wieder immer in einem neuen Fenster.
+* Wenn man ein Adress-Layout im Menü *Einrichtung » CRM » Adress-Layout* bearbeiten wollte, hat die Länderauswahl nicht funktioniert. Dieses Verhalten wurde behoben.
+* Wenn man die Option *Backoffice aktiv* im *Menü Einrichtung » Aufträge » Versand » Optionen* gesetzt hat, war dieses Land nicht sichtbar, wenn man im Kontaktdatensatz eine neue Adresse erstellt oder eine bestehende Adresse bearbeitet hat.
+
+[discrete]
+=== Handbuch
+
+* In der Handbuchsuche werden Umlaute in der Suchanfrage wieder richtig verarbeitet.
+* Die Paginierung hat keinen negativen Einfluss mehr auf die Suchergebnisse.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* gelöscht.
+
+[discrete]
+=== Bol.com
+
+* Der Menü-Eintrag für bol.com unter *Einrichtung » Märkte* wird entfernt, da dieser vollständig durch den Assistenten unter *Einrichtung » Assistenten » Omni-Channel* ersetzt wurde.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Prozesse
+
+* Für die Arbeitsschritte Auftragsabwicklung und Auftragsbearbeitung steht nun der Filter *Tag* zur Verfügung. Damit können Aufträge anhand der Tags gefiltert werden, die an ihnen hinterlegt sind. Außerdem kann innerhalb der Filtereinstellungen festgelegt werden, ob exakt oder mindestens nach den gewählten Tags gefiltert werden soll.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel
+
+* Die Preisberechnung der Kalkulation wird nun auch korrekt angestoßen, wenn der EK automatisch durch die Paketbestandteile berechnet wird.
+
+[discrete]
+=== Aufträge
+
+* Das Popup in der Abonnement-UI, wenn Nachrichten im Messenger gelöscht werden sollen, wurde angepasst und es lassen sich nun wieder Nachrichten löschen.
+
+[discrete]
+=== Prozesse
+
+* In der Aktion Retoure anlegen/bearbeiten wurden bereits retournierte Artikel nicht gezählt und standen somit dauerhaft für eine weitere Retoure zur Verfügung. Dieses Verhalten wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/blog_6103[Blog^]
+|2.0.2
+|-
+
+|link:https://marketplace.plentymarkets.com/bambooecourier_55144[eCourier (bamboo software)^]
+|1.0.1
+|-
+
+|link:https://marketplace.plentymarkets.com/infinityscroller_6660[Endlos-Scrollen in Artikellisten^]
+|1.4.5
+|-
+
+|link:https://marketplace.plentymarkets.com/formatdesigner_6483[FormatDesigner^]
+|1.3.1
+|-
+
+|link:https://marketplace.plentymarkets.com/glsshipping_6463[GLS Shipping^]
+|1.5.2
+|-
+
+|link:https://marketplace.plentymarkets.com/goexpress_55126[GO! Express^]
+|1.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/wesiocatalog_6759[Kataloggenerator - Kataloge schnell und einfach erstellen^]
+|1.1.5
+|-
+
+|link:https://marketplace.plentymarkets.com/metro_6600[Metro^]
+|2.2.1
+|-
+
+|link:https://marketplace.plentymarkets.com/mytoys_54776[MyToys^]
+|1.0.26
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.10
+|-
+
+|link:https://marketplace.plentymarkets.com/plentybaseitemcachepos_6313[plentyBase ItemCachePOS^]
+|1.0.8
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourshopadvantageswidget_5948[Shop Vorteile Widget^]
+|1.0.9
+|-
+
+|link:https://marketplace.plentymarkets.com/staticpagesmapper_6371[Statische Seiten im Shopbuilder^]
+|1.0.7
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.3
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourwidgetswundertuete_5993[Widget Collection^]
+|1.1.2
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====

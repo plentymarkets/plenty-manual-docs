@@ -116,8 +116,12 @@ include::partial$max-bestellmenge.adoc[]
 include::partial$altersfreigabe.adoc[]
 
 | *Aktionsgutschein/POS-Rabatt*
-|
-include::partial$aktionsgutschein.adoc[]
+|Soll es möglich sein, xref:pos:pos-einrichten.adoc#2100[Aktionsgutscheine] für diesen Artikel einzulösen?
+Wähle die passende Antwort aus der Dropdown-Liste.
+
+* *Möglich* = Beim Kauf einer Variante des Artikels kann ein xref:pos:pos-einrichten.adoc#2100[Aktionsgutschein] eingelöst werden. Beim Verkauf über plentyPOS kann Kassenpersonal einen Rabatt auf den Artikel geben. Kundenklassenrabatte werden automatisch angewendet. +
+* *Verboten* = Beim Kauf einer Variante des Artikels können keine xref:pos:pos-einrichten.adoc#2100[Aktionsgutscheine] eingelöst werden. Beim Verkauf über plentyPOS kann Kassenpersonal keinen Rabatt auf den Artikel geben. Kundenklassenrabatte werden nicht angewendet. +
+* *Nur mit Aktionsgutschein kaufbar* = Die Variant des Artikels kann nur gekauft werden, wenn der Code eines xref:pos:pos-einrichten.adoc#2100[Aktionsgutscheins] eingegeben wird. +
 
 | *Abonnement*
 |
@@ -751,14 +755,29 @@ Beachte, dass es auch den xref:artikel:artikel-verwalten.adoc#340[Tab: Verfügba
 |Einstellung |Erläuterung
 
 |[#intable-aktiv]*Aktiv*
-|
-include::partial$aktiv.adoc[]
+|Aktiviere die Variante (icon:check-square[role="blue"]), sobald sie veröffentlicht werden soll.
+
+*_Hintergrund-Info_*:
+Varianten werden erst im plentyShop oder auf Marktplätzen sichtbar, wenn sie aktiviert wurden. Mit anderen Worten, kannst du an inaktiven Varianten arbeiten, ohne dass deine Kunden es merken.
+
+*_Backend-Suche_*: inaktive Varianten werden nicht mit den xref:artikel:suche.adoc#100[Standard-Sucheinstellungen] gefunden.
+Setze also den Suchfilter *Aktiv* auf *Nein*, um inaktive Artikel in die Suchergebnisse mit einzubeziehen.
 
 2+^| *Verfügbarkeit*
 
 |[#intable-symbol]*Symbole 1-10*
 |
-include::partial$symbol.adoc[]
+Wie lang ist die Lieferzeit der Variante?
+Wähle (icon:dot-circle-o[role="blue"]) die passende Verfügbarkeitsstufe (1-10).
+
+*_Hinweis_*:
+Die Verfügbarkeitsstufen werden im Menü xref:artikel:verfuegbarkeiten.adoc#[Einrichtung » Artikel » Verfügbarkeit] konfiguriert.
+Dort findest du die Verfügbarkeits-IDs, Texte, Symbole und durchschnittliche Lieferzeiten in Tagen.
+
+*_Hinweis_*:
+Die Verfügbarkeitsstufe ist eine statische Einstellung.
+Das heißt, dass sich die gewählte Verfügbarkeitsstufe unabhängig vom tatsächlichen Warenbestand nicht ändert.
+Die Einstellung ist nur relevant, wenn keine xref:warenwirtschaft:lager-einrichten.adoc#300[automatische Warenbestandsanzeige] eingestellt ist.
 
 a|[#intable-webshop-verfuegbar]*Anzeige im Webshop:*
 
@@ -773,11 +792,11 @@ a|[#intable-webshop-verfuegbar]*Anzeige im Webshop:*
 
 ! *Automatisch verfügbar, wenn Netto-WB positiv*
 !
-include::partial$automatisch-verfuegbar.adoc[]
+Wähle diese Option (icon:check-square[role="blue"]), wenn die Variante bei positivem Nettowarenbestand automatisch im plentyShop verfügbar und käuflich sein soll.
 
 ! *Automatisch nicht verfügbar, wenn kein Netto-WB*
 !
-include::partial$automatisch-nicht-verfuegbar.adoc[]
+Wähle diese Option (icon:check-square[role="blue"]), wenn die Variante automatisch nicht käuflich sein soll, wenn kein Nettowarenbestand vorhanden ist.
 
 !===
 
@@ -796,11 +815,12 @@ a|[#intable-mandant-sichtbar]*Mandant:*
 
 ! *Automatisch sichtbar wenn Netto-WB positiv*
 !
-include::partial$automatisch-sichtbar.adoc[]
+Wähle diese Option (icon:check-square[role="blue"]), wenn die Variante bei positivem Netto-Warenbestand automatisch im plentyShop sichtbar sein soll.
 
 ! *Automatisch unsichtbar wenn kein Netto-WB*
 !
-include::partial$automatisch-unsichtbar.adoc[]
+Wähle diese Option (icon:check-square[role="blue"]), wenn die Variante automatisch unsichtbar sein soll, wenn kein Netto-Warenbestand vorhanden ist.
+Wenn dies passiert, kann die Variante auch nicht mehr über die xref:artikel:artikel-verwalten.adoc#intable-artikelauflistung[direkte URL] aufgerufen werden.
 
 !===
 
@@ -817,15 +837,24 @@ Oder sollen Kunden das Produkt in den Kategorien, Suchergebnissen und Artikellis
 
 ! *Immer unsichtbar*
 !
-include::partial$immer-unsichtbar.adoc[]
+Wähle diese Option (icon:check-square[role="blue"]), wenn die Variante ausschließlich über die direkte URL erreichbar sein soll.
+Wenn die Option aktiviert ist, wird die Variante immer in den Artikellisten deines Webshops unsichtbar sein.
+Das heißt, die Variante wird nicht in den Kategorien, Suchergebnissen, Shop-Aktionen, Cross-Selling-Listen und Listen der zuletzt gesehenen Artikel angezeigt.
 
 ! *Automatisch sichtbar wenn Netto-WB positiv*
 !
-include::partial$artikelauflistung-automatisch-sichtbar.adoc[]
+Wähle diese Option (icon:check-square[role="blue"]), wenn die Variante bei positivem Netto-Warenbestand in den Artikellisten deines Webshops sichtbar sein soll.
+Das heißt, die Variante wird in den Kategorien, Suchergebnissen, Shop-Aktionen, Cross-Selling-Listen und Listen der zuletzt gesehenen Artikel angezeigt.
+
+*_Hinweis_*: Die Funktionen *Automatisch sichtbar wenn Netto-WB positiv* und *Automatisch unsichtbar wenn kein Netto-WB* ergänzen sich und greifen nur, wenn die Option xref:artikel:artikel-verwalten.adoc#intable-beschraenkung[Beschränkung] auf *Auf Netto-WB* gestellt ist.
 
 ! *Automatisch unsichtbar wenn kein Netto-WB*
 !
-include::partial$artikelauflistung-automatisch-unsichtbar.adoc[]
+Wähle diese Option (icon:check-square[role="blue"]), wenn die Variante bei fehlendem Netto-Warenbestand in den Artikellisten deines Webshops unsichtbar sein soll.
+Wenn dies passiert, kann die Variante nur noch über die direkte URL aufgerufen werden.
+Die Variante wird nicht in den Kategorien, Suchergebnissen, Shop-Aktionen, Cross-Selling-Listen und Listen der zuletzt gesehenen Artikel angezeigt.
+
+*_Hinweis_*: Die Funktionen *Automatisch sichtbar wenn Netto-WB positiv* und *Automatisch unsichtbar wenn kein Netto-WB* ergänzen sich und greifen nur, wenn die Option xref:artikel:artikel-verwalten.adoc#intable-beschraenkung[Beschränkung] auf *Auf Netto-WB* gestellt ist.
 
 !===
 
@@ -1044,20 +1073,31 @@ include::partial$inhalt-einheit.adoc[]
 include::partial$laenge-breite-hoehe.adoc[]
 
 | *Gewicht brutto*
-|
-include::partial$gewicht-brutto.adoc[]
+|Gib das Bruttogewicht der Variante in Gramm oder Kilogramm ein.
+
+*_Hintergrund-Info_*: Bei einzeln verpackten Varianten ist das Bruttogewicht das Gewicht der Variante inklusive Verpackung.
+Der Wert wird für die Berechnung der Versandpakete und für gewichtsabhängige Einstellungen der Versandkosten verwendet.
+
+*_Artikelpakete_*: Das Bruttogewicht lässt sich xref:artikel:multipacks-pakete-sets.adoc#2500[automatisch anhand der Bestandteile berechnen].
 
 | *Gewicht netto*
-|
-include::partial$gewicht-netto.adoc[]
+|Gib das Nettogewicht der Variante in Gramm oder Kilogramm ein.
+
+*_Hintergrund-Info_*: Das Nettogewicht ist das Gewicht der Variante ohne Verpackung.
+
+*_Artikelpakete_*: Das Nettogewicht lässt sich xref:artikel:multipacks-pakete-sets.adoc#2500[automatisch anhand der Bestandteile berechnen].
 
 | *VPE*
 |
 include::partial$vpe.adoc[]
 
 |[#intable-grundpreis]*Grundpreisanzeige*
-|
-include::partial$grundpreisanzeige.adoc[]
+|Wähle diese Option (icon:check-square[role="blue"]), wenn der Grundpreis im plentyShop angezeigt werden soll.
+
+*_Hintergrund-Info_*:
+Der Grundpreis gibt die Kosten pro Pfund, Liter oder andere Maßeinheit an.
+Berechnet wird er auf Grundlage von xref:artikel:einheiten.adoc#[Einheit], xref:artikel:artikel-verwalten.adoc#intable-inhalt[Inhalt] und xref:artikel:artikel-verwalten.adoc#240[Preis] des Artikels.
+Der Grundpreis wird angegeben, um Verbrauchern einen einfachen Preisvergleich zu ermöglichen. Die deutsche Grundpreisverordnung schreibt vor, dass für Produkte, die nach Gewicht, Volumen, Länge oder Fläche verkauft werden, der Grundpreis in unmittelbarer Nähe des Endpreises anzugeben ist.
 
 |====
 
@@ -1136,7 +1176,12 @@ include::partial$lademittel.adoc[]
 
 ! *Anzahl*
 !
-include::partial$packstuecke-anzahl.adoc[]
+Wähle die Anzahl der Packstücke aus der Dropdown-Liste, wenn der Artikel aus mehreren Paketen besteht.
+
+*_Hinweis_*:
+Der Wert 0 bedeutet, dass ein Artikel immer in einem einzigen Paket verschickt werden soll, unabhängig von der Menge.
+Diese Einstellung greift auch bei unterschiedlichen Artikeln.
+Alle Artikel eines Auftrags mit Wert 0 werden in ein Paket verpackt.
 
 ! *Einheit*
 !
