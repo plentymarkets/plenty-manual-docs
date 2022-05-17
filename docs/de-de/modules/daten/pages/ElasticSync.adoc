@@ -6,22 +6,6 @@
 
 Diese Handbuchseite beschreibt den Datenimport in plentymarkets mit dem Import-Tool. Ein Import von Daten ist ratsam, wenn du z.B. neue Artikel, Kund:innen-Daten oder Lagerbestände in dein plentymarkets System einpflegen möchtest und die Daten bereits digital vorliegen. Das Import-Tool ermöglicht es über das Erstellen von Importen, Datenimporte auszuführen. Ein Import kann manuell oder automatisiert erfolgen.
 
-[discrete]
-=== Rechte für Backend-Benutzer:innen vergeben
-
-:rights-purpose: mit Importen und Zuordnungen arbeiten können
-:right-one: pass:quotes[*Daten > Sync > Aktualisieren*]
-:right-two: pass:quotes[*Daten > Sync > Anzeigen*]
-:right-three: pass:quotes[*Daten > Sync > Erstellen*]
-:right-four: pass:quotes[*Daten > Sync > Löschen*]
-:right-five: pass:quotes[*Daten > Sync > Zuordnung > Aktualisieren*]
-:right-six: pass:quotes[*Daten > Sync > Zuordnung > Anzeigen*]
-:right-seven: pass:quotes[*Daten > Sync > Zuordnung > Erstellen*]
-:right-eight: pass:quotes[*Daten > Sync > Zuordnung > Löschen*]
-:right-nine: pass:quotes[*Daten > Daten-Log*]
-
-include::_includes:page$rechte.adoc[]
-
 [#1700]
 == Datenimport mit Assistenten durchführen
 
@@ -812,14 +796,41 @@ Klicke in der Symbolleiste auf *Status* (icon:playlist_play[set=material]).
 [#1730]
 == Backups von Importen einspielen
 
-Wenn du Importdaten auf einen früheren Stand zurücksetzen oder gelöschte Importdaten wiederherstellen möchtest, kannst du dies über die Backup-Funktion tun.
+Du hast einen Import aus Versehen gelöscht? Oder jemand hat an einem gut konfigurierten Import Änderungen vorgenommen, die rückgängig gemacht werden müssen? Beides kannst du über die Backup-Funktion erledigen.
+
+*_Achtung:_*
+
+* Mit diesen Einstellungen setzt du die Importe selbst auf einen früheren Stand zurück. Du kannst so _keine ins System importieren Daten zurücksetzen_. Das geht auch, xref:daten:backup.adoc#[aber anders].
+* Es wird nur einmal täglich nachts ein Backup erstellt. Wenn du ein Backup importierst, werden die Daten auf diesen Stand zurückgesetzt.
+* Alle Importe werden zurückgesetzt. Du kannst also nicht nur einen einzigen Import zurücksetzen.
+* *_Beispiel:_* Jemand hat die Einstellungen des Imports für Artikeldaten aus Versehen geändert. Im Laufe des Tages wurde aber auch ein Import für Gutscheincodes erstellt. Wenn du das Backup der letzten Nacht einspielst, werden beide Importe auf den Stand der letzten Nacht zurückgesetzt. Der Import für Artikeldaten wird repariert. Der Import für Gutscheincodes wird aber gelöscht, weil er zum Zeitpunkt des Backups noch nicht existierte.
 
 [.instruction]
 Backups von Importen einspielen:
 
 . Öffne das Menü *Einrichtung » Einstellungen » Hosting » Backup*. +
 → Die Backup-Übersicht wird geöffnet.
-. Klicke in der Zeile des Backups, das du einspielen möchtest, rechts auf *Backup einspielen* (icon:upload[role="purple"]).
-. Wähle oben *Datenbank teilweise importieren* und setze einen Haken bei *Import*.
+. Klicke in der Zeile des Backups, das du einspielen möchtest, rechts auf *Backup einspielen* (icon:open_in_browser[set=material]). +
+→ Das Fenster *Backup importieren* wird angezeigt.
+. Wähle für die Einstellung *Backup importieren* die Option *Datenbank teilweise importieren*.
+. Aktiviere die Option *ElasticSync*. +
+*_Tipp:_* Das Import-Tool hieß früher mal *ElasticSync*. Deshalb heißt diese Option noch so.
 . Klicke auf *Backup einspielen*. +
-→ Das Backup wird eingespielt.
+→ Alle Importe werden auf den Stand des Backups zurückgesetzt. +
+→ Es gibt kein Zurück!
+
+[#import-rights]
+== Rechte für Backend-Benutzer:innen vergeben
+
+:rights-purpose: mit Importen und Zuordnungen arbeiten können
+:right-one: pass:quotes[*Daten > Sync > Aktualisieren*]
+:right-two: pass:quotes[*Daten > Sync > Anzeigen*]
+:right-three: pass:quotes[*Daten > Sync > Erstellen*]
+:right-four: pass:quotes[*Daten > Sync > Löschen*]
+:right-five: pass:quotes[*Daten > Sync > Zuordnung > Aktualisieren*]
+:right-six: pass:quotes[*Daten > Sync > Zuordnung > Anzeigen*]
+:right-seven: pass:quotes[*Daten > Sync > Zuordnung > Erstellen*]
+:right-eight: pass:quotes[*Daten > Sync > Zuordnung > Löschen*]
+:right-nine: pass:quotes[*Daten > Daten-Log*]
+
+include::_includes:page$rechte.adoc[]
