@@ -55,17 +55,26 @@ Du findest den Assistent *Daten hochladen* im Menü *Einrichtung » Assistenten 
 Anschließend kannst du den über den Assistenten erstellten Import in der Übersicht im Menü *Daten » Import* sehen. Ein Abgleich ist hier nicht vorhanden, da es sich um neue Daten handelt. Im Tab *Zuordnung* des Imports wurden bereits alle Felder deiner CSV-Datei automatisch den plentymarkets Datenfeldern zugewiesen.
 
 [#imports-intro]
-== Was sind Importe?
+== Importe kennenlernen
 
-Ein Import dient dazu, die Daten einer per FTP oder HTTPS zugänglichen Datei in plentymarkets zuzuordnen und zu importieren.
+Du kennst die Importe noch nicht? Dann bist du hier richtig.
+
+[#imports-define]
+=== Was sind Importe?
+
+Ein Import dient dazu, die Daten einer per Webspace oder HTTPS zugänglichen Datei in plentymarkets zuzuordnen und zu importieren.
 
 Die grundsätzliche Funktionsweise zum Erstellen und Ausführen eines Imports ist für alle Import-Typen gleich und wird hier einmal übergreifend beschrieben.
 
 Importe erstellst, bearbeitest und verwaltest du im Menü *Daten » Import*.
 
-
 [#imports-terms]
-== Wichtige Begriffe
+=== Wichtige Begriffe
+
+*Import* = Import kann sowohl den Importvorgang bedeuten als auch die Summe aller Einstellungen für Importvorgänge. Im Menü *Daten » Import* siehst du eine Liste aller Importe.
+
+*Import-Typen* = Je nachdem, welche Arten von Daten du importieren möchtest, verwendest du unterschiedliche Import-Typen. Jeder Import-Typ legt die Daten beim Import in unterschiedlichen Bereichen von plentymarkets ab. +
+*_Beispiele für Import-Typen:_* Artikel, Eigenschaften, Gutschein-Codes, Hersteller etc. (Eine vollständige Liste findest du <<#1210, hier.)
 
 *Datenquelle* = Die Importdatei. Diese Datei kannst du manuell hochladen. Du kannst aber auch einen Speicherort für die Datei angeben. Du kannst Dateien nutzen, die per HTTPS, FTP oder SFTP erreichbar sind. Für solche Dateien kannst du ein Importintervall festlegen. Die Dateien werden also automatisch immer wieder importiert.
 
@@ -75,32 +84,53 @@ Importe erstellst, bearbeitest und verwaltest du im Menü *Daten » Import*.
 *Zuordnung* = Mit der Zuordnung legst du fest, welche Spalte deiner Datei welchem Datenfeld in plentymarkets entspricht. +
 *_Beispiel:_* In deiner Datei gibt es eine Spalte *Produkt-ID*. Du möchtest, dass diese Produkt-ID in plentymarkets als Artikel-ID importiert wird. Du ordnest also der Spalte *Produkt-ID* das plentymarkets Feld *Artikel-ID* zu.
 
+[#import-videos]
+=== Videoeinführung: Manueller und automatischer Import
+
+Du bist noch neu in Sachen Importe? Dann schau dir erst einmal die folgenden beiden Videos über den Datenimport an.
+
+*_Hinweis zu den Videos:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt. Eine Gute Einführung in das Thema bieten die Videos trotzdem.
+
+[tabs]
+====
+Video zum manuellen Import::
++
+--
+In diesem Video erfährst du, wie du Dateien manuell importierst.
+
+video::321227748[vimeo]
+--
+ 
+Video zum automatischen Import::
++
+--
+In diesem Video erfährst du, wie du plentymarkets so konfigurierst, dass neue Dateien automatisch importiert und alte Dateien archiviert werden.
+
+video::322203826[vimeo]
+--
+====
+
 [#1210]
 == Import erstellen
 
-Importe erstellst, bearbeitest und verwaltest du im Menü *Daten » Import*.
-
-[NOTE]
-.Importintervall erst am Ende einstellen
-====
-Stelle das Importintervall am Ende ein, damit nicht schon ein Import ausgeführt wird, während du noch Abgleich- oder Zuordnungseinstellungen vornimmst.
-====
+Nun wird es Zeit, deinen ersten Import zu erstellen.
 
 [.instruction]
 Import erstellen:
 
 . Öffne das Menü *Daten » Import*. +
 → Die Import-Übersicht wird geöffnet.
-. Klicke auf *Import hinzufügen* (icon:plus[set=material]). +
+. Klicke auf *Import hinzufügen* (icon:add[set=material, role="darkGrey"]). +
 → Der Bearbeitungsbereich *Neuer Import* wird angezeigt.
-. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<tabelle-sync-erstellen>>.
-. *Speichere* (icon:save[role="green"]) die Einstellungen. +
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<tabelle-sync-erstellen>>. +
+*_Wichtig:_* Stelle das Importintervall erst ganz am Ende ein. Sonst wird möglicherweise schon der erste Import ausgeführt, während du noch Abgleich- oder Zuordnungseinstellungen vornimmst.
+. *Speichere* (icon:save[set=material, role="darkGrey"]) die Einstellungen. +
 → Der Import wird erstellt. +
 → Die Abgleicheinstellungen des Imports werden geöffnet.
 
 [[tabelle-sync-erstellen]]
 .Import erstellen
-[cols="1,3"]
+[cols="1,3a"]
 |====
 |Einstellung |Erläuterung
 
@@ -115,7 +145,7 @@ Mit der Option *Zeitplan* kann festgelegt werden, wie oft und zu welchem Zeitpun
 *_Wichtig:_* Stelle das Importintervall erst ein, wenn du alle anderen Importeinstellungen vorgenommen hast. Sonst wird möglicherweise schon der erste Import ausgeführt, während du noch die Abgleich- oder Zuordnungseinstellungen vornimmst.
 
 | *Typ*
-a| Welche Arten von Daten möchtest du importieren?
+| Welche Arten von Daten möchtest du importieren?
 
 * xref:daten:elasticSync-artikel.adoc#[Artikel] = Importiert Artikeldaten und Variantendaten
 * xref:daten:elasticSync-attribute.adoc#[Attribute] = Importiert Attributdaten
@@ -151,12 +181,13 @@ a| Welche Arten von Daten möchtest du importieren?
 | Wählen, ob die Importdatei eine Kopfzeile enthält.
 
 | *Globalen Cache nutzen*
-| Festlegen, ob der globale Cache für die Datei genutzt werden soll oder nicht. icon:check_box_outline_blank[set=material] = Ein und dieselbe Datei kann jederzeit erneut importiert werden. +
+| Festlegen, ob der globale Cache für die Datei genutzt werden soll oder nicht.
+
+icon:check_box_outline_blank[set=material] = Alle Daten der Datei werden bei jedem Importvorgang erneut importiert. +
 icon:check_box[set=material] = Nur geänderte Datenzeilen werden importiert.
 
 | *Automatische Zuordnung*
 |Wählen, ob die automatische Zuordnung verwendet werden soll. Die Spalten der CSV- oder TXT-Datei können automatisch den plentymarkets Datenfeldern zugeordnet werden. Damit die Zuordnung funktioniert, darf die Benennung der im FormatDesigner gewählten Felder nicht geändert werden.
-
 // TODO: Besser beschreiben!!!!
 // icon:check_box_outline_blank[set=material] = +
 // icon:check_box[set=material] =
@@ -169,70 +200,50 @@ Alternativ kann das Trennzeichen manuell gewählt werden. Mögliche Trennzeichen
 *_Tipp:_* Das Trennzeichen ist das Zeichen, das in der Importdatei verwendet wird, um die einzelnen Felder/Spalten eines Datensatzes voneinander zu trennen.
 
 | *Feldbegrenzungszeichen*
-| Welches Begrenzungszeichen wird in der Datei verwendet, wenn dasselbe Felder/dieselbe Spalte mehrere Werte enthält? +
-* " = Einzelne Werte innerhalb eines Feldes sind durch doppelte Anführungszeichen voneinander getrennt.
-* ' = Einzelne Werte innerhalb eines Feldes sind durch einfache Anführungszeichen voneinander getrennt.
+| Welches Begrenzungszeichen wird in der Datei verwendet, wenn dasselbe Felder/dieselbe Spalte mehrere Werte enthält?
+
+" = Einzelne Werte innerhalb eines Feldes sind durch doppelte Anführungszeichen voneinander getrennt. +
+' = Einzelne Werte innerhalb eines Feldes sind durch einfache Anführungszeichen voneinander getrennt.
 
 2+^| *Quelle*
 
 | *Quelle*
-a| *Manueller Upload*, *FTP*, *HTTPS* oder *SFTP* wählen. +
-Je nach gewählter Option werden weitere Einstellungen sichtbar:
+| *Manueller Upload* oder *HTTPS* wählen. +
+Je nach gewählter Option werden weitere Einstellungen eingeblendet.
 
-*Manueller Upload* = lokale Datei wählen und direkt hochladen. +
-Nachdem ein Import ausgeführt wurde, wird die Datei automatisch vom Webspace gelöscht. Dies ist standardmäßig voreingestellt. Um die Datei zu speichern, muss der Haken in der Checkbox entfernt werden. *_Hinweis_*: Das Speichern der Datei auf dem Webspace ist kostenpflichtig.
+[cols="1,3a"]
+!===
+! *Manueller Upload*
+!
+. Im Feld *Dateiname* auf *Datei wählen* (icon:more_horiz[set=material]) klicken. +
+→ Die im Webspace gespeicherten Dateien werden angezeigt.
+. Klicke auf *Datei hochladen* (icon:file_upload[set=material]). +
+. Wähle eine lokale Datei. +
+→ Die Datei wird in den Webspace hochgeladen. +
+*_Hinweis:_* Standardmäßig ist die Option *Datei löschen, nachdem der Import ausgeführt wurde* aktiviert. Die Datei wird also automatisch vom Webspace gelöscht, nachdem die Daten importiert wurden. Wenn die Datei im Webspace gespeichert bleiben soll, deaktiviere diese Option. *_Das Speichern der Datei auf dem Webspace ist kostenpflichtig._*
 
-*FTP* = Host, Port, Benutzername, Passwort und Dateiname werden als Einstellungen sichtbar.
+! *FTP*
+! _Ab 21.07.2022 unterstützt plentymarkets FTP-Server nicht mehr. Nutze deshalb diese Option nicht._
 
-    * *Host (Pflichtfeld)* = Host des FTP-Servers eingeben. +
-      *_Tipp:_* Nutze hierzu deinen plentymarkets FTP-Zugang.
-    * *Port* = Port des FTP-Servers. Wenn kein Port eingetragen ist, wird der Standard-Port (22) verwendet.
-    * *Benutzername (Pflichtfeld)* = Benutzer:in für FTP-Zugang eingeben.
-    * *Passwort (Pflichtfeld)* = Passwort für FTP-Zugang eingeben.
-    * *Dateiname* = Pfad und Name der Datei eingeben, aus der Daten importiert werden sollen. Der Dateiname muss auf .csv oder .txt enden. +
-    *_Hinweis:_* Wildcards können im Feld *Dateiname* verwendet werden, indem z.B. ein Teil des Dateinamens durch ein *** ersetzt wird. Wildcards nur in Kombination mit der Option *Datei nach erfolgreichem Import in Archiv verschieben* verwenden.
-    * *Datei nach erfolgreichem Import in Archiv verschieben* = Wenn diese Option aktiv ist, wird nach erfolgreichem Import die Importdatei automatisch in einen neuen Ordner *Archiv* auf dem FTP-Verzeichnis verschoben.
+! *HTTPS*
+! *Externe URL* wählen.
 
-*FTPS* = Wähle *FTP* als Quelle. Setze anschließend weiter unten bei *FTP mit SSL/TLS* einen Haken. +
-Nimm die Einstellungen vor, wie bei der Option *FTP* beschrieben.
+* *Externe URL* = URL eingeben, unter der die Importdatei erreichbar ist. +
+*_Tipp:_* Speichere die Datei auf dem plentymarkets Webspace.
+* *Authentifizierung*: Wählen, ob für den Zugriff auf die Datei eine Authentifizierung erforderlich ist oder nicht.
+** *keine* = keine Authentifizierung erforderlich
+** *HTTP-Authentifizierung* = Authentifizierung per Benutzer:in und Passwort erforderlich
+// In Konfig ändern.
 
-*HTTPS* = *Externe URL* wählen.
-
-        * *Externe URL* = URL eingeben, unter der die Importdatei erreichbar ist. +
-         *_Tipp:_* Speichere die Datei auf dem plentymarkets Webspace.
-          * *Authentifizierung*: Wählen, ob für den Zugriff auf die Datei eine Authentifizierung erforderlich ist oder nicht.
-            ** *keine* = keine Authentifizierung erforderlich
-            ** *HTTP-Authentifizierung* = Authentifizierung per Benutzer:in und Passwort erforderlich
-
-*SFTP* = Host, Port, Benutzername, Passwort und Dateiname werden als Einstellungen sichtbar.
-
-        * *Host (Pflichtfeld)* = Host des FTP-Servers eingeben. +
-        * *Port (Pflichtfeld)* = Port des FTP-Servers. Wenn kein Port eingetragen ist, wird der Standard-Port (22) verwendet.
-        * *Benutzername (Pflichtfeld)* = Benutzer:in für FTP-Zugang eingeben.
-        * *Passwort (Pflichtfeld)* = Passwort für FTP-Zugang eingeben.
-        * *Dateiname* = Pfad und Name der Datei eingeben, aus der Daten importiert werden sollen. Der Dateiname muss auf .csv oder .txt enden. +
-        *_Hinweis:_* Wildcards können im Feld *Dateiname* verwendet werden, indem z.B. ein Teil des Dateinamens durch ein *** ersetzt wird. Wildcards nur in Kombination mit der Option *Datei nach erfolgreichem Import in Archiv verschieben* verwenden.
-        * *Datei nach erfolgreichem Import in Archiv verschieben* = Wenn diese Option aktiv ist, wird nach erfolgreichem Import die Importdatei automatisch in einen neuen Ordner *Archiv* auf dem FTP-Verzeichnis verschoben.
+! *SFTP*
+! _Ab 21.07.2022 unterstützt plentymarkets FTP-Server nicht mehr. Nutze deshalb diese Option nicht._
+!===
 |====
 
 [#1300]
 == Importoptionen festlegen
 
 Die Importoptionen befinden sich im Bereich *Abgleich* und gelten sowohl für den Abgleich als auch für die Zuordnung.
-
-Bevor wir zu den konkreten Einstellungen der Importoptionen kommen, hast du hier die Möglichkeit, mehr über den Datenimport zu erfahren.
-Wie bereits erwähnt, kann dieser manuell oder automatisch erfolgen. Wenn du neu bei plentymarkets bist und deine Artikel einmalig manuell importieren möchtest, schaue dir dieses Video an und lerne, wie du Informationen wie beispielsweise Produkt- oder Kund:innen-Daten in deiner CSV-Datei einmalig manuell importierst. +
-*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
-
-.Importiere deine Daten einmalig manuell
-video::321227748[vimeo]
-
-In diesem Video erfährst du, wie du plentymarkets so konfigurierst, dass neue Dateien automatisch importiert und alte archiviert werden.
-
-.Lasse deine Daten automatisch importieren oder archivieren
-video::322203826[vimeo]
-
-Nun zurück zu den Importoptionen.
 
 [.instruction]
 Importoptionen festlegen:
@@ -266,18 +277,17 @@ a| *Deutsche Schreibweise* oder *Englische Schreibweise* wählen.
 
 | *Datumsformat*
 |Datumsformat eingeben. Wenn die Datumsangaben in der Datei dem Standardformat Y-m-d H:i:s entsprechen, muss nichts eingegeben werden. Andere Formate müssen eingetragen werden. Zulässig sind alle link:http://php.net/manual/de/function.date.php[php-konformen Datumsformate^].
-
 |====
 
 [#1400]
 == Abgleich festlegen
 
-Nachdem du einen Import erstellt hast, öffne diesen, um weitere Einstellungen vorzunehmen. Zunächst wählst du die Felder, die zum Abgleichen der Daten verwendet werden sollen. Lege außerdem fest, was passieren soll, wenn durch den Abgleich keine bestehenden Daten gefunden werden.
+Du hast einen Import erstellt. Öffnen nun diesen Import, um weitere Einstellungen vorzunehmen. Als erstes wählst du die Felder, die zum Abgleichen der Daten verwendet werden sollen. Außerdem legst du fest, was passieren soll, wenn beim Abgleich keine vorhandenen Daten gefunden werden.
 
 [NOTE]
 .Abgleich ist optional
 ====
-Bei den Abgleichfeldern handelt es sich um optionale Einstellungen. Wenn du kein Abgleichfeld wählst, können die Daten deiner Datei keinen bestehenden Daten in deinem System zugeordnet werden. Du kannst eins, mehrere oder alle Abgleichfelder festlegen. Die angezeigten Abgleichfelder unterscheiden sich für jeden Import-Typ.
+Die Abgleichfelder sind optionale Einstellungen. Wenn du aber kein Abgleichfeld wählst, können die Daten deiner Datei keinen vorhandenen Daten in deinem System zugeordnet werden. Es werden also beim Import neue Datensätze gespeichert. So kann es zu Du kannst ein, mehrere oder alle Abgleichfelder festlegen. Die angezeigten Abgleichfelder unterscheiden sich für jeden Import-Typ.
 ====
 
 [.instruction]
