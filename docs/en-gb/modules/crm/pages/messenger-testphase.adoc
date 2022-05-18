@@ -7,11 +7,13 @@ The *CRM » Messenger (Test phase)* menu allows you to manage the external commu
 
 The *CRM » Messenger (Test phase)* menu is structured as follows:
 
-* *Navigation*: Here you can navigate through different parts of the menu. The currently selected area (blue background) is displayed in the main window on the right. Click on icon:bars[] to expand or collapse the navigation bar. +
-** Available areas in the navigation: New message, inbox, new messages, my messages, trash.
+image::crm:messenger-menu-structure.png[width=640, height=360]
+
+* *Navigation*: Here you can navigate through different parts of the menu. The currently selected area (blue background) is displayed in the main window on the right. Click on icon:menu[set=material] to expand or collapse the navigation bar. +
+** Available areas in the navigation: icon:add[set=material] *New message*, Inbox, <<#new-messages, New messages>>, <<#my-messages, My messages>>, <<#trash, Trash>>.
 * *Toolbar*: Here you can <<#search-message, search>> for messages, <<#configure-columns, adjust the columns in the overview>>, set the results to be shown per page and click through the pages with the messages.
 * *Main window*: Here you can see whichever area is currently open. +
-** *Overview*: When you start a search, you’ll see the results in an overview. The overview provides information about the conversations found at a glance. You see, for example, the email addresses of the senders, the subject, the date when the message was received, the assigned tags and by means of the icon icon:attach_file[set=material], you can see whether the message has an attachment. +
+** *Overview*: When you start a search, you’ll see the results in an overview. The overview provides information about the conversations found at a glance. You see, for example, the email addresses of the senders, the subject, the date when the message was received, the assigned tags and the number of attachments. +
 ** *Detail view*: When you open a message, the details will become visible below the main window. The detail view of a message is divided into the conversation, i.e. the message stream, and the editor where you type in your replies.
 
 [discrete]
@@ -25,8 +27,8 @@ You can find the following improvements in the new Messenger that haven’t been
 * Receiving emails from your customers
 * Sending emails to your customers
 * Using the group function in the Messenger
-* Possibility to subscribe for conversations and receive notifications regarding new messages
-* Display when system user is replying to a message
+* Possibility to subscribe for conversations and receive notifications regarding new messages within this conversation
+* Display in the back end when other system users are replying to a message
 --
 
 [#preparatory-settings]
@@ -63,6 +65,7 @@ include::_includes:page$tags-rights.adoc[]
 ==== Creating tags
 
 include::_includes:page$tags-creation.adoc[]
+
 [TIP]
 If you want to create messages that should be *billed* via the Messenger, you have to create tags for the availability _Message (billable)_ in the same way. You have to add these tags to the <<#create-message, message>>.
 
@@ -107,17 +110,17 @@ After having entered the login details (host name, user name, port, password), s
 
 *_Note for mailbox.org mailboxes:_* Enter the port *465* and select *SSL* as encryption method.
 
-Select also in this step an email template for the email despatch. Be sure to have the email template created in the xref:crm:emailbuilder.adoc[EmailBuilder] in advance. Note that the template you select here should contain Messenger variables. 
+Select also in this step an email template for the email despatch. Be sure to have the email template created in the xref:crm:emailbuilder.adoc#[EmailBuilder] in advance. Note that the template you select here should contain Messenger variables. 
 
 The following Messenger-related variables are available in the EmailBuilder:
 
 * Message ID
 * Message conversation ID
 * Message content
-* Message title
+* Message subject
 * Message preview
 * Message minutes
-* Billable message minutes
+* Has billed minutes
 
 [#settings-email-receipt]
 [discrete]
@@ -140,16 +143,15 @@ Creating a message:
 . Enter a value in the *Receiver* field and select the appropriate value from the suggestion list. +
 *_Example:_* If you enter a number, possible receivers with this order ID or contact ID will be suggested (see <<#image-messenger-new-message-suggestion-list>>).
 . Enter the subject of the message in the *Subject* field.
-. Click on the top right on *Tags* (icon:local_offer[set=material]) to add tags to the message.
 . Enter the message in the text field.
-. Click on icon:attach_file[set=material] to add attachments to the message.
-. Select further options, if needed, by clicking on icon:more_vert[set=material].
-. Note <<#table-create-new-message>>.
+. Click on *Add attachments* (icon:attach_file[set=material]) to add attachments to the message.
+. Click on *Assign tags to message* (icon:local_offer[set=material]) to assign tags for the message.
+. Select further options, if needed, by clicking on icon:more_vert[set=material]. Note <<#table-create-new-message>>.
 . Click no icon:forward_to_inbox[set=material] *SEND*.
 
 [[image-messenger-new-message-suggestion-list]]
 .Example: Suggestion list in the receiver field after having entered “102”
-image::messenger-new-message-suggestion-list.png[width=640, height=360]
+image::crm:messenger-new-message-suggestion-list.png[width=640, height=360]
 
 [[table-create-new-message]]
 .Creating a new message in the messenger
@@ -158,37 +160,45 @@ image::messenger-new-message-suggestion-list.png[width=640, height=360]
 |Setting |Explanation
 
 | *Recipients*
-|Enter a value here and select the appropriate value from the suggestion list (see <<#image-messenger-new-message-suggestion-list>>).
+|Enter a name or ID here and select the appropriate value from the suggestion list (see <<#image-messenger-new-message-suggestion-list>>).
 
 | *Subject*
 |Enter a subject for the message.
 
-| *Tags* (icon:local_offer[set=material])
-|By clicking on icon:local_offer [set=material] you can <<#context-menu-tags, add tags>> to the message.
-
 | *Text field*
 |Enter the content of the message here.
 
-| *Attachments* (icon:attach_file[set=material])
+| *Add attachments* (icon:attach_file[set=material])
 |Click on icon:attach_file[set=material] to add attachments to your message. Select as many attachments as you like from your computer. +
-The following file types can be sent as an attachment: +
-bmp, csv, gif, jpeg, json, pdf, png, tiff, txt, xlsx, zip.
+The following file types can be sent as an attachment: bmp, csv, gif, jpeg, json, pdf, png, tiff, txt, xlsx, zip.
 
-| *Bill* (icon:more_vert[set=material)])
-|You can bill a message if it is not a whispered message. Click on icon:more_vert[set=material] first. If you activate the button *Bill* (icon:toggle_on[set=material, role=skyBlue], this message will be billed. The button icon:forward_to_inbox [set=material] *SEND* will be changed to icon:forward_to_inbox[set=material] *BILL AND SEND*. +
-*_Note:_* Once the button *Bill* is activated, it is not possible to activate the whisper mode for this message.
-
-| *Timer* (icon:more_vert[set=material)])
-|You can start a timer for every message. Click on icon:more_vert[set=material] first. If you activate the *Timer* button (icon:toggle_on[set=material, role=skyBlue]), the timer will automatically next to the *SEND* button. +
-Click on icon:pause-circle-o[] to stop the timer and on icon:play-circle[] to start the timer again.
-
-| *Whisper* (icon:more_vert[set=material)])
-|You can whisper messages to make these messages only visible for internal purposes. Click on icon:more_vert[set=material] first. If you activate the *Whisper* button (icon:toggle_on[set=material, role=skyBlue]), this message will be whispered. This means that this message can only be used for internal purposes and _cannot_ be sent to third parties. You may recognise a whispered message in this view by means of the *Whisper* button (icon:visibility_off[set=material]) next to the *SEND* button. +
+| *Whisper mode* (icon:visibility[set=material] / icon:visibility_off[set=material, role=skyBlue])
+|You can whisper messages to make these messages only visible for internal purposes but _not_ for your contacts. To do so, click on icon:visibility[set=material]. You can see in this view that a message is whispered by means of the button icon:visibility_off[set=material, role=skyBlue]. The button icon:forward_to_inbox[set=material] *SEND* is changed to icon:visibility_off[set material] *WHISPER*. +
 In the overview, whispered messages are shown in _italics_. +
-*_Note:_* Once the whisper mode has been activated for this message, it is not possible to activate the *Bill* button.
+*_Note:_* Once the whisper mode has been activated for this message, it is _no longer_ possible to activate the *Bill* button.
 
-| *Send*
-|By clicking on icon:forward_to_inbox[set=material] *SEND*, the message will be sent.
+| *Assign tags to message* (icon:local_offer[set=material])
+|Click on icon:local_offer[set=material] to search for tags and select already existing tags for the message (icon:check_box[set=material, role=skyBlue], add new tags (icon:add[set=material]) and edit existing tags (icon:edit[set=material]). +
+*_Note:_* Once you selected a tag for the message, the button is shown in blue icon:local_offer[set=material, role=skyBlue]. This way you can see at a glance whether the message has tags. +
+*_Important:_* To be able to bill the message, you have to create at least one tag of the type *Messages (billable)*.
+
+| *Bill message* (icon:more_vert[set=material])
+|You can bill a message if it is _not_ a whispered message. Click on icon:more_vert[set=material] first. If you activate the button *Bill* (icon:toggle_on[set=material, role=skyBlue]), this message will be billed. The button icon:forward_to_inbox [set=material] *SEND* will be changed to icon:forward_to_inbox[set=material] *BILL AND SEND*. +
+*_Note:_* Once the button *Bill* is activated, it is _not_ possible to activate the whisper mode for this message.
+
+| *Timer* (icon:more_vert[set=material])
+|You can start a timer for every message. Click on icon:more_vert[set=material] first. If you activate the *Timer* button (icon:toggle_on[set=material, role=skyBlue]), the timer next to the icon:forward_to_inbox[set=material] *SEND* button will start running automatically. +
+Click on icon:pause_circle[set=material] to stop the timer and on icon:play_circle[set=material] to start the timer again.
+
+| *Manage inboxes*
+|Click on icon:edit[set=material] *Manage inboxes* to be redirected to the *Setup » Assistants » Basic settings* menu. Here, you can edit the inboxes by using the *Messenger configuration* <<#complete-assistant, assistant>>.
+
+| _Name of the currently selected inbox_
+| Click on icon:arrow_drop_down[set=material] to select another inbox from the drop-down list. The list shows the names of the inboxes that you set up by <<#complete-assistant, completing the assistant>>.
+
+| *SEND*
+|By clicking on icon:forward_to_inbox[set=material] *SEND*, the message will be sent. +
+*_Note:_* If you bill the message, the button changes to icon:forward_to_inbox[set=material] *BILL AND SEND*. If you whisper the message, this button is changed to icon:visibility_off[set=material] *WHISPER*.
 
 |====
 
@@ -202,7 +212,7 @@ Searching for a conversation in the Messenger:
 
 . Go to *CRM » Messenger (Test phase)*. +
 * *_Option 1:_* Click on icon:search[set=material] to see a list of all conversations.
-* *_Option 2:_* Enter a value in the search field and select the appropriate filter from the suggestion list.
+* *_Option 2:_* Enter a search term from the conversation’s subject in the search field and select the appropriate filter from the suggestion list.
 * *_Option 3_*: Click on icon:tune[set=material] to narrow down the search results with filters.
 . Note the explanations about the filters in <<#table-search-message>>.
 
@@ -212,12 +222,12 @@ Searching for a conversation in the Messenger:
 |====
 |Filter |Explanation
 
-| *Content*
+| *Subject*
 |Enter a word to search for conversations containing this word in their subject line.
 
 | *Short ID*
-|Enter the ID of the message to only search for the message with this ID.
- 
+|Enter the ID of the conversation to only search for the conversation with this ID.
+
 | *From* / *To*
 |Enter a date or select the dates from the calendars (icon:today[set=material]) to search for conversations within a certain time period.
 
@@ -229,35 +239,135 @@ Available options: *Back end*, *REST*, *Plugin* and *PayPal plugin*.
 |Select a status to search for conversations with this specific status. +
 Available values: *Done* and *Not done*.
 
+| *Has attachments*
+|Select *Yes* to search for conversations with attached files. Select *No* to search for conversations that have no files attached. 
+
+| *Has billed messages*
+|Select *Yes* to search for conversations that contain billed messages. Select *No* to search for conversations that does not contain any billed messages.
+
+| *Contact ID*
+|Enter an ID to only search for conversations that are linked with this contact ID.
+
+| *Order ID*
+|Enter an ID to only search for conversations that are linked with this order ID.
+
+| *Email*
+|Enter an email address to search for conversations that contain this email address.
+
 | *Tags*
-|Select (icon:check-square[role="blue"]) tags to only search for conversations with these <<#tags-messenger, tags>>.
+|Select (icon:check_box[set=material, role=skyBlue]) tags to only search for conversations with these <<#tags-messenger, tags>>.
 
 | *Reset*
 |Resets the selected filter criteria.
 
 | *Search*
-|Executes the search. The conversations found are listed in the overview. +
+|Starts the search. The conversations found are listed in the overview. +
 *_Tip:_* Don’t choose any filters if you want to see all of the conversations in the overview.
 
 |====
+
+[#save-current-filter]
+== Saving the current filters
+
+When you start a search, your selected filters are displayed up top as so-called “chips”. You can save these filters to apply them again more quickly and easily in the future.
+
+[.instruction]
+Saving the current filters: 
+
+. Start a search.
+. Click on *Saved filters* (icon:bookmarks[set=material]).
+. Click on icon:bookmark_border[set=material] *Save current filter*.
+. Enter a name for the filter.
+. Decide whether
+** this filter should be <<#default-filter, set as default filter>> (icon:toggle_on[set=material, role=skyBlue])
+** this filter should be created for all users (icon:toggle_on[set=material, role=skyBlue]).
+. Click on *SAVE*. +
+→ The filter now appears under *Saved filters* (icon:bookmarks[set=material]).
+
+[TIP]
+Use drag-and-drop to arrange the filters in a specific order by clicking on *Move* (icon:drag_indicator[set=material]). Click on icon:delete[set=material] to delete a filter.
+
+[#apply-saved-filters]
+== Applying saved filters
+
+Proceed as follows to apply an already saved filter for the search.
+
+[.instruction]
+Applying saved filters: 
+
+. Click on *Saved filters* (icon:bookmarks[set=material]).
+. Click on a filter that you have already created. +
+→ The search is started and the filter settings are displayed up top as so-called “chips”.
+
+[#default-filter]
+== Setting a default filter
+
+To make sure that you don’t have to select a filter that you use quite often from the list of your <<#apply-saved-filters, saved filters>> every time when opening the *CRM » Contacts (Test phase)* menu, you can set a created filter as default filter. Every time when you open the messenger, this filter will be automatically applied.
+
+You can set the filter as default filter directly when creating it as described in <<#save-current-filter, Saving the current filter>> or you can set the filter as default in the overview afterwards.
+
+Click in the line of the saved filter on icon:star[set=material] *Set as default*. If you want to set another filter as default filter, deactivate the currently selected default filter by clicking on icon:star_outline[set=material] *Do not use as default*.
 
 [#configure-columns]
 === Configuring columns
 
 You can have the following columns displayed in the overview of the Messenger:
 
-* Selection
-** This option shows the checkbox for the group function (icon:check_box_outline_blank[set=material]) in the overview.
-* Status
-* Short ID
-* Referrer
-* From
-* Title
-* Created on
-* Tags
-* Attachment
-* Subscription status
-* <<#context-menu, Context menu>>
+[[table-configure-columns-overview]]
+.Messenger overview: Configure columns
+[cols="1,3"]
+|====
+|Column |Explanation
+
+|Extend relations
+|Opens the available relations that are linked with the conversation by clicking on icon:chevron_right[set=material].
+
+|Selection
+|Shows the checkbox for the <<#group-function, group function>> (icon:check_box_outline_blank[set=material]) in the overview.
+
+|Status
+|Shows with the symbol icon:circle[set=material, role=skyBlue] that the message is still unread. Shows with the symbol icon:circle[set=material, role=green] that the message is closed.
+
+
+|Short ID
+|Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the ID.
+
+|Referrer
+|Shows with the symbol the referrer of the message.
+
+|Relations
+|The message relations are shown here, for example icon:person[set=material] _Name of the contact (contact ID)_, icon:shopping_cart[set=material] _Order ID_, icon:mail[set=material] _Email address_ and the subscribers of the conversation. In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+
+|Subject
+|Shows the subject of the first message within the conversation.
+ 
+
+|Created on
+|Shows the date and the time when the message was created. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
+
+|Updated on
+|Shows the date and time when the message was updated. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
+
+|Tags
+|Shows the <<#context-menu-tags-conversation, tags>> that are assigned to the conversation.
+ 
+
+|Attachments
+|The symbol icon:attach_file[set=material] in the *Number of attachments* (icon:attach_file[set=material]) column shows whether the conversation has attachments. When you hover with your mouse over the symbol, you can see how many attachments the conversation has. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of orders.
+
+|Billed messages
+|The symbol icon:credit_card[set=material] in the *Billed messages* (icon:credit_card[set=material]) column shows whether the conversation has billed messages. When you hover with your mouse over the symbol, you can see the number of billed messages. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed messages.
+
+|Billed minutes
+|The symbol icon:av_timer[set=material] in the *Billed minutes* (icon:av_timer[set=material]) column shows whether the conversation has billed minutes. When you hover with your mouse over the symbol, you can see the number of billed minutes. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed minutes.
+
+|Subscribed
+|The column icon:notifications[set=material] shows with the symbol icon:done[set=material] whether you have <<#subscribe-conversation, subscribed for>> the conversation.
+
+|Context menu
+|Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
+
+|====
 
 Click on the button *Configure columns* (icon:settings[set=material]) on the top right to deactivate the columns that are already shown in the overview.
 
@@ -272,12 +382,17 @@ The table view is selected by default.
 
 In the Messenger overview the following functions are available when clicking in the line of the conversation on icon:more_vert[set=material].
 
-* <<#context-menu-mark-as-read-unread, Marking a conversation as read / unread>>
-* <<#context-menu-tags, Assigning tags to a conversation>>
-* <<#context-menu-mark-as-done-not-done, Marking a conversation as done / not done>>
+[[image-messenger-context-menu-overview]]
+.Editing a conversation via the context menu
+image::crm:messenger-context-menu-overview.png[width=640, height=360]
+
+* <<#context-menu-mark-conversation-as-read-unread, Marking a conversation as read / unread>>
+* <<#context-menu-tags-conversation, Assign tags to conversation>>
+* <<#context-menu-mark-conversation-as-done-not-done, Marking a conversation as done / not done>>
+* <<#context-menu-subscribe-unsubscribe-conversation, Subscribing for a conversation / Unsubscribing from a conversation>>
 * <<#context-menu-delete-conversation, Deleting a conversation>>
 
-[#context-menu-mark-as-read-unread]
+[#context-menu-mark-conversation-as-read-unread]
 === Marking a conversation as read / unread
 
 Proceed as described in the following sub-chapters to mark a conversation as <<#conversation-mark-as-read, read>> or <<#conversation-mark-as-unread, unread>>.
@@ -292,8 +407,8 @@ Marking a conversation as read:
 
 . Go to *CRM » Messenger (Test phase)*.
 . In the line of the conversation that you want to mark as read, click on icon:more_vert[set=material].
-. Click on icon:mark_email_read[set=material] *Mark as read*. +
-→ The line of the conversation is no longer shown in bold and the blue circle icon:circle[role="blue"] at the beginning of the line disappears.
+. Click on icon:mark_email_read[set=material] *Mark conversation as read*. +
+→ The line of the conversation is no longer shown in bold and the blue circle icon:circle[set=material, role=skyBlue] at the beginning of the line disappears.
 
 [#conversation-mark-as-unread]
 ==== Marking a conversation as unread
@@ -305,11 +420,11 @@ Marking a conversation as unread:
 
 . Go to *CRM » Messenger (Test phase)*.
 . In the line of the conversation that you want to mark as unread, click on icon:more_vert[set=material].
-. Click on icon:mark_email_unread[set=material] *Mark as unread*. +
-→ The line of the conversation is shown in bold and a blue circle icon:circle[role="blue"] appears at the beginning of the line.
+. Click on icon:mark_email_unread[set=material] *Mark conversation as unread*. +
+→ The line of the conversation is shown in bold and a blue circle icon:circle[set=material, role=skyBlue] appears at the beginning of the line.
 
-[#context-menu-tags]
-=== Assigning tags to a conversation
+[#context-menu-tags-conversation]
+=== Assign tags to conversation
 
 Proceed as described below to assign a tag to a conversation. You can also search for tags that are available for the Messenger. This might also be useful if you really created a lot of tags for the *Messages* or *Messages (billable)* areas.
 
@@ -318,9 +433,9 @@ Assigning tags to a conversation:
 
 . Go to *CRM » Messenger (Test phase)*.
 . Click in the line of the conversation on icon:more_vert[set=material].
-. Click on icon:local_offer[set=material] *Tags* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
+. Click on icon:local_offer[set=material] *Assign tags to conversation* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
 *_Tip:_* If you have created a lot of tags for the *Messages* or *Messages (billable)* areas, enter the name of the tag in the search field *Search for tag*.
-. Select (icon:check-square[role="blue"]) the tags that you want to assign to the conversation. +
+. Select (icon:check_box[set=material, role=skyBlue]) the tags that you want to assign to the conversation. +
 → The tag is assigned to the conversation and you see the tag in the overview in the *Tags* column.
 
 [#add-tag]
@@ -333,7 +448,7 @@ Creating a new tag:
 
 . Go to *CRM » Messenger (Test phase)*.
 . Click in the line of the conversation on icon:more_vert[set=material].
-. Click on icon:local_offer[set=material] *Tags*.
+. Click on icon:local_offer[set=material] *Assign tags to conversation*.
 . Click on icon:add[set=material] *Add tag* to create a new tag. +
 → You will automatically be redirected to the *Setup » Settings » Tags* menu. You can create more tags for the areas *Messages* or *Messages (billable)* there.
 
@@ -347,14 +462,14 @@ Editing a tag:
 
 . Go to *CRM » Messenger (Test phase)*.
 . Click in the line of the conversation on icon:more_vert[set=material].
-. Click on icon:local_offer[set=material] *Tags*.
+. Click on icon:local_offer[set=material] *Assign tags to conversation*.
 . Click on icon:edit[set=material] *Edit tag* to edit an existing tag. +
 → You will automatically be redirected to the *Setup » Settings » Tags* menu. There, you can edit the tags.
 
-[#context-menu-mark-as-done-not-done]
+[#context-menu-mark-conversation-as-done-not-done]
 === Marking a conversation as done / not done
 
-Proceed as described in the following sub-chapters to mark a conversation as <<#context-menu-mark-as-done, done>> or <<#context-menu-mark-as-not-done], not done>>.
+Proceed as described in the following sub-chapters to mark a conversation as <<#context-menu-mark-as-done, done>> or <<#context-menu-mark-as-not-done, not done>>.
 
 [#context-menu-mark-as-done]
 ==== Marking a conversation as done
@@ -366,8 +481,8 @@ Marking a conversation as done:
 
 . Go to *CRM » Messenger (Test phase)*.
 . In the line of the conversation that you want to mark as done, click on icon:more_vert[set=material].
-. Click on icon:done_all[set=material] *Mark as done*. +
-→ At the beginning of the conversation’s line, the icon icon:done_all[set=material] is shown.
+. Click on icon:circle[set=material] *Mark conversation as done*. +
+→ At the beginning of the conversation’s line, the symbol icon:task[set=material, role=skyBlue] is shown.
 
 [#context-menu-mark-as-not-done]
 ==== Marking a conversation as not done
@@ -379,8 +494,39 @@ Marking a conversation as not done:
 
 . Go to *CRM » Messenger (Test phase)*.
 . In the line of the conversation that you want to mark as not done, click on icon:more_vert[set=material].
-. Click on icon:remove_done[set=material] *Mark as not done*. +
-→ At the beginning of the conversation’s line, the icon icon:done_all[set=material] will be removed.
+. Click on icon:radio_button_unchecked[set=material] *Mark conversation as not done*. +
+→ At the beginning of the conversation’s line, the symbol icon:task[set=material, role=skyBlue] is shown.
+
+[#context-menu-subscribe-unsubscribe-conversation]
+=== Subscribing for / Unsubscribing from a conversation
+
+You can subscribe for conversations where you are not directly part of so that you will be informed in case of new messages within this conversation. Not being directly part of it means that you are neither a recipient nor a sender of a message within this conversation. Of course, you can unsubscribe from a conversation’s subscriber list any time with just one click.
+
+[#subscribe-for-conversation]
+==== Subscribing for conversations
+
+Proceed as follows to subscribe for a conversation.
+
+[.instruction]
+Subscribing for a conversation:
+
+. Go to *CRM » Messenger (Test phase)*.
+. In the line of the conversation that you want to subscribe for, click on icon:more_vert[set=material].
+. Click on icon:notifications_active[set=material] *Subscribe for conversation*. +
+→ The column icon:notifications[set=material] *Subscribed* shows the symbol icon:done[set=material].
+
+[#unsubscribe-conversation]
+==== Unsubscribing from a conversation
+
+Proceed as described below to unsubscribe from a conversation.
+
+[.instruction]
+Unsubscribing from a conversation:
+
+. Go to *CRM » Messenger (Test phase)*.
+. Click in the line of the conversation that you want to unsubscribe from on icon:more_vert[set=material].
+. Click on icon:notifications_off[set=material] *Unsubscribe from conversation*. +
+→ The column icon:notifications[set=material] *Subscribed* does not show the symbol icon:done[set=material] any longer.
 
 [#context-menu-delete-conversation]
 === Deleting a conversation
@@ -395,66 +541,105 @@ Deleting a conversation:
 . Click on icon:delete[set=material] *Delete*. +
 → A window opens and you need to confirm your decision.
 . Click on *Yes*. +
-→ The conversation is deleted and moved to trash.
-
-[#subscribe-for-conversations]
-== Subscribing for conversations
-
-You can subscribe for conversations where you are not directly part of so that you will be informed in case of new messages within this conversation. Not being directly part of it means that you are neither a recipient nor a sender of a message within this conversation. Of course, you can unsubscribe from a conversation’s subscriber list any time with just one click.
-
-[#subscribe-for-conversation]
-=== Subscribing for conversations
-
-Proceed as follows to subscribe for a conversation.
-
-[.instruction]
-Subscribing for a conversation:
-
-. Go to *CRM » Messenger (Test phase)*.
-. Click in the line of the conversation that you want to subscribe for. +
-→ The conversation opens.
-. Click on *Subscribed* (icon:notifications_active[set=material]) to subscribe for the conversation. +
-→ In the top right of your plentymarkets system, you will get a notification via the icon icon:notification[set=material].
-
-[#unsubscribe-conversation]
-=== Unsubscribing from a conversation
-
-Proceed as described below to unsubscribe from a conversation.
-
-[.instruction]
-Unsubscribing from a conversation:
-
-. Go to *CRM » Messenger (Test phase)*.
-. Click in the line of the conversation that you want to unsubscribe from +
-→ The conversation opens.
-. Click on *Not subscribed* (icon:notifications_off[set=material]) to unsubscribe from this conversation. +
-→ From now on, you will no longer receive notifications when a new message arrives in this conversation.
+→ The conversation is deleted and moved to <<#trash, trash>>.
 
 [#bill-message]
 == Billing a message
+
+You can bill a message if it is _not_ a whispered message.
+
+[.instruction]
+Billing a message:
+
+. Go to *CRM » Messenger (Test phase)*.
+. Click in the top left on icon:add[set=material] *New message*.
+. Enter a value in the *Receiver* field and select the appropriate value from the suggestion list. +
+*_Example:_* If you enter a number, possible receivers with this order ID or contact ID will be suggested (see <<#image-messenger-new-message-suggestion-list>>).
+. Enter the subject of the message in the *Subject* field.
+. Enter the message in the text field.
+. Click on icon:local_offer[set=material] to assign tags for the message. +
+*_Important:_* To be able to bill messages, you have to create a tag of the type *Messages (billable)* in the *Setup » Settings » Tags* menu.
+. Click on icon:more_vert[set=material].
+. Activate the button *Bill* (icon:toggle_on[set=material, role=skyBlue]).
+. Click on icon:forward_to_inbox[set=material] *BILL AND SEND*. +
+→ The window *Bill and send* opens.
+. In the *Timer* field, you can see the time that the timer has tracked so far.
+. You can adjust the value in the *Minutes* field, if needed.
+. Activate the field *Bill minutes* (icon:check_box[set=material, role=skyBlue]).
+. Click on *Confirm*.
 
 [#edit-single-message]
 == Editing a single message
 
 You already know the <<#context-menu, context menu for the conversations>> that is described earlier on this page. Of course, you can also edit single messages using a context menu. Proceed as described in the following sub-chapters.
 
+[[image-messenger-edit-single-message]]
+.Editing a single message via the context menu
+image::crm:messenger-edit-single-message.png[width=640, height=360]
+
+Once you selected a message within a conversation, you can display the messages’ content in plain text format by clicking on icon:chevron_right[set=material] at the beginning of the message. This way, you are able to see a preview of the message content already without <<#open-single-message, opening>> the entire message.
+
 [#open-single-message]
 === Opening a message
 
+To open a message, you can either directly click on the message. Or you open the context menu in the line of the message by clicking on icon:more_vert[set=material] and then on icon:open_link[set=material] *Open message*.
+
 [#assign-tags-to-single-message]
-=== Assigning tags to a message
+=== Assigning tags to the message
+
+Proceed as described below to assign a tag to a single message.
+
+[.instruction]
+Assigning tags to the message:
+
+. Go to *CRM » Messenger (Test phase)*.
+. Open the conversation that contains the message you want to assign a tag for.  
+. Open the message by clicking in the line of the message.
+. Click on icon:local_offer[set=material] *Assign tags to message* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
+*_Tip:_* If you have created a lot of tags for the *Messages* or *Messages (billable)* areas, enter the name of the tag in the search field *Search for tag*.
+. Select (icon:check_box[set=material, role=skyBlue]) the tags that you want to assign to the message. 
+
+[#attachments-single-message]
+=== Downloading attachments
+
+You can either download the attachments of the message one by one or download all attachments of the message as a ZIP file to your computer. 
+
+[.instruction]
+Downloading attachments:
+
+. Go to *CRM » Messenger (Test phase)*.
+. Open the conversation that contains the message whose attachment(s) you want to download.  
+. Open the message by clicking in the line of the message.
+. Click on icon:more_vert[set=material].
+. Click on icon:attach_file[set=material] *Attachments*.
+. Click on one attachment or on icon:file_download[set=material] *Download all files*. +
+→ A window opens and you can choose a location on your computer where to save the file(s).
 
 [#delete-single-message]
 === Deleting a message
 
+Proceed as described below to delete a single message.
+
+[.instruction]
+Deleting a single message:
+
+. Go to *CRM » Messenger (Test phase)*.
+. Open the conversation that contains the message you want to delete.  
+. Open the message by clicking in the line of the message.
+. Click on icon:more_vert[set=material].
+. Click on icon:delete[set=material] *Delete*. +
+→ A window opens and you need to confirm your decision.
+. Click on *Yes*. +
+→ The conversation is deleted and moved to <<#trash, trash>>.
+
 [#group-function]
 == Carrying out the group function
 
-Once you have selected a message in the overview (icon:check-square[role="blue"]), the different buttons become visible (see <<#image-messenger-group-functions-conversations>>). <<#table-group-functions-messenger>> lists the elements from the group functions as well as their explanations.
+Once you have selected a message in the overview (icon:check_box[set=material, role=skyBlue]), the different buttons become visible (see <<#image-messenger-group-functions-conversations>>). <<#table-group-functions-messenger>> lists the elements from the group functions as well as their explanations.
 
 [[image-messenger-group-functions-conversations]]
 .Group function in the overview
-image::messenger-group-functions-conversations.png[width=640, height=360]
+image::crm:messenger-group-functions-conversations.png[width=640, height=360]
 
 [[table-group-functions-messenger]]
 .Using the group function in the Messenger
@@ -462,23 +647,23 @@ image::messenger-group-functions-conversations.png[width=640, height=360]
 |====
 |Element |Symbol |Explanation
 
-| *Mark as read*
+| *Mark conversations as read*
 |icon:mark_email_read[set=material]
 |Marks all selected conversations as read.
 
-| *Mark as unread*
+| *Mark conversations as unread*
 |icon:mark_email_unread[set=material]
-|Marks all selected conversations as unread.
+|Marks all selected conversations as unread. The conversations are then displayed in bold.
 
-| *Mark as done*
-|icon:done_all[set=material]
+| *Mark conversations as done*
+|icon:circle[set=material]
 |Marks all selected conversations as done.
 
-| *Mark as not done*
-|icon:remove_done[set=material]
+| *Mark conversations as not done*
+|icon:radio_button_unchecked[set=material]
 |Marks all selected conversations as not done.
 
-| *Tags*
+| *Assign tags to conversations*
 |icon:local_offer[set=material]
 |Assigns the desired tag to all selected conversations.
 
@@ -491,16 +676,204 @@ image::messenger-group-functions-conversations.png[width=640, height=360]
 [#new-messages]
 == New messages
 
+In the navigation on the left-hand side of the messenger, you can find the folder icon:mark_chat_unread[set=material] *New messages* below the folder icon:inbox[set=material] *Inbox*.
+
+[discrete]
+[#configure-columns-new-messages]
+=== Configuring columns
+
+You can have the following columns displayed in the *New messages* folder of the Messenger:
+
+[[table-configure-columns-new-messages]]
+.New messages: Configure columns
+[cols="1,3"]
+|====
+|Column |Explanation
+
+|Extend relations
+|Opens the available relations that are linked with the conversation by clicking on icon:chevron_right[set=material].
+
+|Selection
+|Shows the checkbox for the <<#group-function, group function>> (icon:check_box_outline_blank[set=material]) in the overview.
+
+|Status
+|Shows with the symbol icon:circle[set=material, role=skyBlue] that the message is still unread. Shows with the symbol icon:circle[set=material, role=green] that the message is closed.
+
+
+|Short ID
+|Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the ID.
+
+|Referrer
+|Shows with the symbol the referrer of the message.
+
+|Relations
+|The message relations are shown here, for example icon:person[set=material] _Name of the contact (contact ID)_, icon:shopping_cart[set=material] _Order ID_, icon:mail[set=material] _Email address_ and the subscribers of the conversation. In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+
+|Subject
+|Shows the subject of the first message within the conversation.
+ 
+
+|Created on
+|Shows the date and the time when the message was created. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
+
+|Updated on
+|Shows the date and time when the message was updated. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
+
+|Tags
+|Shows the <<#context-menu-tags-conversation, tags>> that are assigned to the conversation.
+ 
+
+|Attachments
+|The symbol icon:attach_file[set=material] in the *Number of attachments* (icon:attach_file[set=material]) column shows whether the conversation has attachments. When you hover with your mouse over the symbol, you can see how many attachments the conversation has. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of orders.
+
+|Billed messages
+|The symbol icon:credit_card[set=material] in the *Billed messages* (icon:credit_card[set=material]) column shows whether the conversation has billed messages. When you hover with your mouse over the symbol, you can see the number of billed messages. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed messages.
+
+|Billed minutes
+|The symbol icon:av_timer[set=material] in the *Billed minutes* (icon:av_timer[set=material]) column shows whether the conversation has billed minutes. When you hover with your mouse over the symbol, you can see the number of billed minutes. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed minutes.
+
+|Subscribed
+|The column icon:notifications[set=material] shows with the symbol icon:done[set=material] whether you have <<#subscribe-conversation, subscribed for>> the conversation.
+
+|Context menu
+|Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
+
+|====
+
+Click on the button *Configure columns* (icon:settings[set=material]) on the top right to deactivate the columns that are already shown in the overview.
+
 [#my-messages]
 == My messages
+
+In the navigation on the left-hand side of the messenger, you can find the folder icon:3p[set=material] *My messages* below the folder icon:inbox[set=material] *Inbox*. You can see all conversations here that you <<#subscribe-conversations, subscribed for>>. 
+
+[discrete]
+[#configure-columns-my-messages]
+=== Configuring columns
+
+You can have the following columns displayed in the *My messages* folder of the Messenger:
+
+[[table-configure-columns-my-messages]]
+.My messages: Configure columns
+[cols="1,3"]
+|====
+|Column |Explanation
+
+|Extend relations
+|Opens the available relations that are linked with the conversation by clicking on icon:chevron_right[set=material].
+
+|Selection
+|Shows the checkbox for the <<#group-function, group function>> (icon:check_box_outline_blank[set=material]) in the overview.
+
+|Status
+|Shows with the symbol icon:circle[set=material, role=skyBlue] that the message is still unread. Shows with the symbol icon:circle[set=material, role=green] that the message is closed.
+
+
+|Short ID
+|Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the ID.
+
+|Referrer
+|Shows with the symbol the referrer of the message.
+
+|Relations
+|The message relations are shown here, for example icon:person[set=material] _Name of the contact (contact ID)_, icon:shopping_cart[set=material] _Order ID_, icon:mail[set=material] _Email address_ and the subscribers of the conversation. In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+
+|Subject
+|Shows the subject of the first message within the conversation.
+ 
+
+|Created on
+|Shows the date and the time when the message was created. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
+
+|Updated on
+|Shows the date and time when the message was updated. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
+
+|Tags
+|Shows the <<#context-menu-tags-conversation, tags>> that are assigned to the conversation.
+
+|Attachments
+|The symbol icon:attach_file[set=material] in the *Number of attachments* (icon:attach_file[set=material]) column shows whether the conversation has attachments. When you hover with your mouse over the symbol, you can see how many attachments the conversation has. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of orders.
+
+|Billed messages
+|The symbol icon:credit_card[set=material] in the *Billed messages* (icon:credit_card[set=material]) column shows whether the conversation has billed messages. When you hover with your mouse over the symbol, you can see the number of billed messages. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed messages.
+
+|Billed minutes
+|The symbol icon:av_timer[set=material] in the *Billed minutes* (icon:av_timer[set=material]) column shows whether the conversation has billed minutes. When you hover with your mouse over the symbol, you can see the number of billed minutes. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed minutes.
+
+|Subscribed
+|The column icon:notifications[set=material] shows with the symbol icon:done[set=material] whether you have <<#subscribe-conversation, subscribed for>> the conversation.
+
+|Context menu
+|Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
+
+|====
+
+Click on the button *Configure columns* (icon:settings[set=material]) on the top right to deactivate the columns that are already shown in the overview.
 
 [#trash]
 == Trash 
 
+In the navigation on the left-hand side of the Messenger, you can find the folder icon:delete[set=material] *Trash*. Here you can find all <<#context-menu-delete-conversation, deleted conversations>> and all<<#delete-single-message, deleted messages>>.
+
+[discrete]
+[#configure-columns-trash]
+=== Configuring columns
+
+You can have the following columns displayed in the trash folder of the Messenger:
+
+[[table-configure-columns-trash]]
+.Trash: Configure columns
+[cols="1,3"]
+|====
+|Column |Explanation
+
+|Extend relations
+|Opens the available relations that are linked with the conversation by clicking on icon:chevron_right[set=material].
+
+|Selection
+|Shows the checkbox for the <<#group-function, group function>> (icon:check_box_outline_blank[set=material]) in the overview.
+
+|Status
+|Shows with the symbol icon:circle[set=material, role=skyBlue] that the message is still unread. Shows with the symbol icon:circle[set=material, role=green] that the message is closed.
+
+
+|Short ID
+|Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the ID.
+
+|Referrer
+|Shows with the symbol the referrer of the message.
+
+|Relations
+|The message relations are shown here, for example icon:person[set=material] _Name of the contact (contact ID)_, icon:shopping_cart[set=material] _Order ID_, icon:mail[set=material] _Email address_ and the subscribers of the conversation. In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+
+|Subject
+|Shows the subject of the first message within the conversation.
  
 
-   
+|Created on
+|Shows the date and the time when the message was created. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
 
+|Updated on
+|Shows the date and time when the message was updated. Right next to the title bar, click on icon:arrow_upward[set=material] or icon:arrow_downward[set=material] to sort the table in ascending or descending order by the date.
 
- 
+|Tags
+|Shows the <<#context-menu-tags-conversation, tags>> that are assigned to the conversation.
 
+|Attachments
+|The symbol icon:attach_file[set=material] in the *Number of attachments* (icon:attach_file[set=material]) column shows whether the conversation has attachments. When you hover with your mouse over the symbol, you can see how many attachments the conversation has. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of orders.
+
+|Billed messages
+|The symbol icon:credit_card[set=material] in the *Billed messages* (icon:credit_card[set=material]) column shows whether the conversation has billed messages. When you hover with your mouse over the symbol, you can see the number of billed messages. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed messages.
+
+|Billed minutes
+|The symbol icon:av_timer[set=material] in the *Billed minutes* (icon:av_timer[set=material]) column shows whether the conversation has billed minutes. When you hover with your mouse over the symbol, you can see the number of billed minutes. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of billed minutes.
+
+|Subscribed
+|The column icon:notifications[set=material] shows with the symbol icon:done[set=material] whether you have <<#subscribe-conversation, subscribed for>> the conversation.
+
+|Context menu
+|Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
+
+|====
+
+Click on the button *Configure columns* (icon:settings[set=material]) on the top right to deactivate the columns that are already shown in the overview.
