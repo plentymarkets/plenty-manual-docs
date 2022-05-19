@@ -5,7 +5,7 @@
 :author: team-item
 
 ////
-zuletzt bearbeitet 12.01.2022
+zuletzt bearbeitet 16.05.2022
 ////
 
 Prices are an important topic for any business.
@@ -146,7 +146,7 @@ If so, then select all of the customer classes (icon:check-square[role="blue"]) 
 Example: If you create two different sales prices that are both valid for B2B customers, Amazon UK and the country UK, then plentymarkets will not know which sales price to use.
 plentymarkets will randomly choose one of the sales prices since both apply equally.
 
-*_Note_*: xref:crm:managing-contacts.adoc#15[Create the necessary customer classes] in advance, if they don’t already exist in your plentymarkets system.
+*_Note_*: xref:crm:preparatory-settings.adoc#create-customer-class[Create the necessary customer classes] in advance, if they don’t already exist in your plentymarkets system.
 
 | *Country*
 |Should the sales price only apply to specific countries of delivery? For example, you probably pay different tax rates in different countries. As such, you might want to sell an item for a slightly higher price in some countries, rather than pay the difference yourself.
@@ -232,7 +232,7 @@ An additional configuration step will appear. During this step, you’ll specify
 Example: If you create two different sales prices that are both valid for B2B customers, Amazon UK and the country UK, then plentymarkets will not know which sales price to use.
 plentymarkets will randomly choose one of the sales prices since both apply equally.
 
-*_Note_*: xref:crm:managing-contacts.adoc#15[Create the necessary customer classes] in advance, if they don’t already exist in your plentymarkets system.
+*_Note_*: xref:crm:preparatory-settings.adoc#create-customer-class[Create the necessary customer classes] in advance, if they don’t already exist in your plentymarkets system.
 
 | *Quantity-based dependency*
 |Should the sales price only apply if a customer buys multiple copies of the item?
@@ -414,6 +414,102 @@ There are a few different ways to link sales prices to variations and enter the 
 * If you want to save prices for lots of items, then we would recommend xref:item:import.adoc#800[importing the sales prices and monetary amounts].
 Alternatively, you could also import this data with an xref:welcome:assistants.adoc#[assistant].
 * Rather than manually entering the monetary amounts, you might want plentymarkets to xref:item:prices.adoc#1000[automatically calculate them for you].
+
+[#950]
+=== Frequently Asked Questions (FAQ)
+
+[.collapseBox]
+.*I want plentymarkets to automatically calculate my prices for me. Is that possible?*
+--
+
+Yes.
+This is done with the help of a so-called "price calculation".
+xref:item:prices.adoc#1000[Further information].
+
+--
+
+[.collapseBox]
+.*An item was sold for the wrong price. How can I check who changed the price and when?*
+--
+
+This can be done with the xref:item:changes.adoc#[change history], assuming that it was already activated in your system for a fee.
+
+. Open the menu *Data » Change history*.
+. Set the search filters as follows:
+* Data record = Sales price of the variation
+* Unique IDs = Variation. Then enter the variation ID as well.
+. Click on *Search* (icon:search[role="blue"]).
+
+--
+
+[.collapseBox]
+.*I am required to display the lowest price of the last 30 days. How can I do that?*
+--
+
+*_Background info_*:
+
+A new link:https://www.bmwk.de/Redaktion/DE/Downloads/P-R/novelle-der-preisangabenverordnung-pangv.pdf?__blob=publicationFile&v=4[regulation on specifying prices^] will go into effect on May 28th, 2022.
+In these regulations, § 11 (1) specifies how prices must be displayed when products are discounted.
+
+---
+
+*_What sellers need to do_*:
+
+The lowest price can manually be entered into plentymarkets, imported or automatically calculated.
+
+IMPORTANT: Currently, the lowest price can only be saved in the plentymarkets back end.
+Starting with link:https://marketplace.plentymarkets.com/ceres_4697[plentyShop LTS version 5.0.51^], it will also be possible to display this value in the webshop.
+
+[.instruction]
+Manual entry:
+
+. Open the menu *Item » Item UI » [Open variation] » Element: Sales prices*.
+. In a line, click on icon:ellipsis-v[role="darkGrey"] and then on icon:sell[set=material, role="darkGrey"] *Lowest price* icon:arrow_right[set=material, role="darkGrey"] icon:pencil[role="darkGrey"] *Activate manual entry*. +
+→ The column becomes editable and the gross price is automatically entered into it.
+. Enter a different value into the column if needed.
+. *Save* (icon:save[set=plenty, role="darkGrey"]) the settings.
+
+---
+
+[.instruction]
+Automatic calculation:
+
+. Open the menu *Item » Item UI » [Open variation] » Element: Sales prices*.
+. In a line, click on icon:ellipsis-v[role="darkGrey"] and then on icon:sell[set=material, role="darkGrey"] *Lowest price* icon:arrow_right[set=material, role="darkGrey"] icon:calculate_acquisition_pricepng[set=plenty, role="darkGrey"] *Activate automatic calculation*. +
+→ The lowest price of the last 30 days is automatically entered into the column.
+This value is calculated with the help of the xref:item:changes.adoc#[change history].
+If you have not yet activated the change history, then you will see a pop-up window, which informs you of the costs that will be incurred.
+You will have to confirm your decision to activate the change history.
+. *Save* (icon:save[set=plenty, role="darkGrey"]) the settings.
+
+TIP: The lowest price will automatically be calculated approximately 90 seconds after you have activated and saved the setting for the first time. Afterwards, it will automatically be calculated every night.
+
+---
+
+[.instruction]
+Import:
+
+. Open the menu *Data » Import*.
+. Create a new import of the type *Item*.
+. Use the mapping fields *Sales prices / Lowest price of the last 30 days* and *Sales prices / Calculate lowest price automatically* to control the settings via import.
+* xref:data:ElasticSync.adoc#[Further information about the import tool in general].
+* xref:data:elasticSync-item.adoc#2330[Further information about the mapping fields].
+
+--
+
+[.collapseBox]
+.*How do I display the RRP as a strikethrough price in the webshop?*
+--
+
+. Open the menu *Setup » Item » Sales prices*.
+* Make sure that you have a sales price without any price type selected and another sales price with the price type *RRP*.
+. Open the menu *Item » Edit item » [Open variation] » Tab: Settings » Area: Sales prices*.
+* Make sure that the variation is linked to the standard sales price and to the RRP price.
+* Make sure that the RRP price is higher than the standard sales price.
+
+If these conditions are met, then the RRP will be visible in the plentyShop. It will be displayed in strikethrough text and positioned next to the regular sales price.
+
+--
 
 [#1000]
 == New price calculation
