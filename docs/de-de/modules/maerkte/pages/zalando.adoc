@@ -10,9 +10,10 @@
 
 Durch das Zalando-Partnerprogramm können Online-Händler:innen und Hersteller:innen Zalando als zusätzlichen Absatzkanal für hochwertige Produkte nutzen und von der großen Markenbekanntheit von Zalando profitieren.
 
+//tag::zalando-countries[]
 In welchen Ländern du über Zalando verkaufen kannst, hängt von deinem Vertrag mit Zalando ab. Zurzeit können Aufträge aus den folgenden Ländern in plentymarkets importiert werden:
 
-*_Wichtig:_* Im Moment ist mit plentymarkets nur der Eigenversand durch Händler:innen möglich. Zalando nennt das Partner fulfillment (own logistics). Zalando Fulfillment Solutions (ZFS) wird noch nicht unterstützt.
+*_Wichtig:_* Mit plentymarkets ist nur Eigenversand durch Händler:innen möglich. Zalando nennt das *Partner Fulfillment (own logistics)*. Der Versand durch Zalando, also Zalando Fulfillment Solutions (ZFS), wird noch nicht unterstützt.
 
 * Deutschland
 * Belgien
@@ -27,9 +28,10 @@ In welchen Ländern du über Zalando verkaufen kannst, hängt von deinem Vertrag
 * Portugal
 * Slowakei
 * Slowenien
+//end::zalando-countries[]
 
 [#200]
-== Informationen zum automatischen Datenaustausch
+== Häufigkeit des Datenaustauschs
 
 Die Anbindung des Marktplatzes stellt die folgenden automatisierten Funktionen bereit:
 
@@ -39,7 +41,8 @@ Die Anbindung des Marktplatzes stellt die folgenden automatisierten Funktionen b
 |Daten |Intervall
 
 | Artikelexport
-| plentymarkets generiert die Artikeldaten einmal täglich nachts als XML-Datei (artikel.xml). Zalando ruft diese XML normalerweise einmal pro Tag ab.
+| Einmal täglich +
+plentymarkets generiert die Artikeldaten einmal täglich nachts als XML-Datei. Diese Datei heißt *artikel.xml*. Zalando ruft diese XML normalerweise einmal pro Tag ab.
 
 | Bestandsabgleich
 | Alle 15 Minuten, asynchron +
@@ -55,31 +58,91 @@ Normalerweise werden pro Minute 1.000 Bestände aktualisiert. Wenn die von Zalan
 [#100]
 == Bei Zalando registrieren
 
-Du möchtest am Partnerprogramm von Zalando teilnehmen? Dann link:https://www.zalando.de/partner-programm/[wende dich zunächst direkt an Zalando^].
+Du möchtest am Partnerprogramm von Zalando teilnehmen? Dann link:https://www.zalando.de/partner-programm/[wende dich direkt an Zalando^].
 
 [#150]
-== Schritte nach der Registrierung
+== Übersicht der notwendige Schritte
 
+Wie du vorgehst hängt davon ab, ob du Zalando zum ersten Mal in plentymarkets einrichtest oder schon auf Zalando verkaufst und eine weitere Zalando-Plattform nutzen möchtest.
+
+[tabs]
+====
+Schritte nach der Registrierung::
++
+--
 Du hast einen Vertrag mit Zalando abgeschlossen. Super. Wie geht es jetzt weiter?
 
-* Melde dich im Foren-Thread link:https://forum.plentymarkets.com/t/sammelthread-anfrage-des-csv-formulars-zum-abgleich-der-artikel-silhouetten/669460[CSV-Formular zum Abgleichen von Artikeln/Silhouetten anfordern^].
-* Im Forum erhältst du von unserem Support-Team ein Formular im CSV-Format. Dieses Formular enthält die folgenden Informationen:
-  ** Routen für Artikel
-  ** Benutzernamen und Kennwort
-  ** Zugangsdaten zum plentymarkets FTP-Server für Silhouetten +
-  *_Tipp:_* Auf diesen FTP-Server sendet Zalando deine Silhouetten, damit sie in dein System importiert werden können. plentymarkets importiert die Silhouetten jeden Mittwoch.
-* Leite das ausgefüllte Formular an deine:n Zalando-Ansprechpartner:in weiter.
-* Durchlaufe den Assistenten *Kontoeinstellungen - Zalando*.
-* Richte die Schnittstelle zu Zalando wie auf dieser Seite beschreiben in deinem plentymarkets System ein.
-* Aktiviere dein Zalando-Konto im Assistenten. (<<#1500, Wie?>>)
+Hier siehst du eine Übersicht der Schritte, die dich erwarten.
+
+. <<#api-user, Erstelle einen REST-API-Zugang>>.
+. <<#setup, Nimm die Grundeinstellungen im Menü *Einrichtung » Märkte » Zalando » Einstellungen* vor.>>
+. <<#zalando-csv-form, Fordere im plentymarkets Forum das CSV-Formular zum Abgleichen von Artikeln/Silhouetten an.>>
+  ** Trage deine Benutzerdaten in die CSV-Datei ein.
+  ** Leite das ausgefüllte Formular an deine:n Zalando-Ansprechpartner:in weiter.
+. <<#1400, Durchlaufe den Assistenten *Kontoeinstellungen - Zalando* zum ersten Mal.>> +
+*_Wichtig:_* Beim ersten Durchlauf kannst du nicht alle Einstellungen des Assistenten vornehmen.
+. <<#link-zDirect, Bitte unseren Support, dein Konto mit deinem zDirect-Konto zu verknüpfen.>> +
+*_Wichtig:_* Das geht erst, nachdem du den Assistenten zum ersten Mal durchlaufen hast.
+. <<#assistant-2, Durchlaufe den Assistenten *Kontoeinstellungen - Zalando* noch einmal, um die fehlenden Einstellungen vorzunehmen.>>
+. <<#more-setup, Nimm die weitere Einrichtung vor.>>
+. <<#order-documents, Bereite die Auftragsdokumente vor.>>
+. <<#prepare-variations, Bereite deine Varianten vor.>>
+. <<#1200-1, Automatisiere die Auftragsabwicklung.>>
+. <<#1500, Aktiviere dein Zalando-Konto im Assistenten, um den Datenaustausch mit Zalando zu starten.>>
+--
+ 
+Schritte, um weiteren Verkaufskanal hinzuzufügen::
++
+--
+Du verkaufst schon auf Zalando, möchtest deine Produkte jetzt aber auf einer weiteren Länderplattform anbieten? Kein Problem.
+
+Sobald du mit Zalando einen Vertrag über den zusätzlichen Verkaufskanal abgeschlossen hast, geht es so weiter:
+
+. Du forderst im Forum link:https://forum.plentymarkets.com/t/sammelthema-collective-thread-csv-formular-zum-abgleichen-von-artikeln-silhouetten-csv-form-for-synchronization-of-articles-silhouettes/669460[die API-Route für den neuen Verkaufskanal an]. +
+*_Wichtig:_* Benutzer und Kennwort sind für alle Zalando-Verkaufskanäle gleich. Zalando benötigt also nur die API-Route.
+. Du sendest dein:er Zalando-Ansprechpartner:in die neue API-Route mit der Zusatzinformation, dass alle anderen Daten vom ersten Verkaufskanal übernommen werden sollen. +
+→ Zalando schaltet den neuen Verkaufskanal frei.
+. Aktiviere die Auftragsherkunft für das neue Land im Menü *Einrichtung » Aufträge » Auftragsherkunft*.
+. Erstelle einen neuen Verkaufspreis. Vergiss nicht, die *Währung* und das *Land* korrekt zu speichern. Oder aktiviere die Herkunft *Zalando* in einem vorhandenen Verkaufspreis für das Land. +
+*_Wichtig:_* Aktiviere die Herkunft *Zalando*. Die Unterherkünfte für die einzelnen Zalando-Plattformen (Zalando DE, Zalando NL usw.) werden ignoriert.
+. Bereite die Auftragsdokumente für das Land vor.
+. Aktiviere den Verkaufspreis an den Varianten. +
+*_Wichtig:_* An den Varianten wird die Verfügbarkeit für die einzelnen Zalando-Plattformen (Zalando DE, Zalando NL usw.) ignoriert. Deshalb änderst du die Einstellungen für die Verfügbarkeit nicht.
+. <<#assistant-2, Durchlaufe den Assistenten, um das Land zu aktivieren und die Einstellungen für Preise und Bestände zu speichern.>>
+--
+====
+
 
 [#setup]
-== Zalando in plentymarkets einrichten
+== Konto- und Ländereinstellungen vornehmen
 
-Nachdem Zalando dich als Partner:in in das Programm aufgenommen hat, stellt dir Zalando ein Handbuch und Hilfestellung beim Einrichten der Schnittstelle zur Verfügung. In plentymarkets nimmst du die unten beschriebenen Grundeinstellungen vor.
+Nachdem Zalando dich als Partner:in in das Programm aufgenommen hat, stellt dir Zalando ein Handbuch und Hilfestellung beim Einrichten der Schnittstelle zur Verfügung. In plentymarkets nimmst du die hier beschriebenen Einstellungen vor.
+
+[#api-user]
+=== REST-API-Zugang erstellen
+
+Erstelle nun einen REST-API-Zugang.
 
 [.instruction]
-Zalando in plentymarkets einrichten:
+REST-API-Zugang erstellen:
+
+. Öffne das Menü *Einrichtung » Einstellungen » Benutzer » Konten*.
+. Klicke auf *Neu*. +
+→ Das Fenster *Neuen Benutzer anlegen* wird geöffnet.
+. Gib einen *Benutzernamen* ein.
+. Gib in das Feld *realen Namen* ein.
+. Gib ein *Passwort* ein.
+. Wiederhole das Passwort.
+. Wähle für die Einstellung *Zugang* die Option *REST-API*.
+. *Speichere* die Einstellungen. +
+→ Das Konto wird erstellt. +
+*_Tipp:_* Für das Konto müssen keine Rechte freigegeben werden. Es reicht, dass das Konto im System existiert.
+
+[#setup]
+=== Grundeinstellungen vornehmen
+
+[.instruction]
+Grundeinstellungen vornehmen:
 
 . Öffne das Menü *Einrichtung » Märkte » Zalando » Einstellungen*. +
 → Das Tab *Einstellungen* wird geöffnet.
@@ -95,7 +158,7 @@ Zalando in plentymarkets einrichten:
 2+^|Grundkonfiguration
 
 | *Benutzer*
-|API-Benutzerkonto wählen. Das API-Benutzerkonto wird bei der Ersteinrichtung deines plentymarkets Systems erstellt.
+| Das API-Konto wählen, das du <<#api-user, für Zalando erstellt hast>>.
 
 | *Artikelname*
 | *Name 1*, *Name 2* oder *Name 3* wählen. Der gewählte Name wird zu Zalando exportiert.
@@ -109,12 +172,29 @@ Zalando in plentymarkets einrichten:
 | *19 %* oder *7 %* wählen.
 |====
 
+[#zalando-csv-form]
+=== CSV-Formular zum Abgleichen von Artikeln/Silhouetten anfordern
+
+Fordere nun im plentymarkets Forum die FTP-Zugangsdaten und API-Daten an. Diese Daten benötigt Zalando, um einen Verkaufskanal für dich einzurichten.
+
+. Melde dich im Foren-Thread link:https://forum.plentymarkets.com/t/sammelthread-anfrage-des-csv-formulars-zum-abgleich-der-artikel-silhouetten/669460[CSV-Formular zum Abgleichen von Artikeln/Silhouetten anfordern^]. +
+→ Du erhältst von unserem Support-Team ein Formular im CSV-Format. Dieses Formular enthält die folgenden Informationen:
+  * Routen für Artikel
+  * Zugangsdaten zum plentymarkets FTP-Server für Silhouetten +
+  *_Tipp:_* Auf diesen FTP-Server sendet Zalando deine Silhouetten, damit sie in dein System importiert werden können. plentymarkets importiert die Silhouetten jeden Mittwoch.
+. Trage in Zeile 5 der Datei den Benutzernamen ein, den du im Menü *Einrichtung » Märkte » Zalando » Einstellungen* gewählt hast.
+. Trage in Zeile 6 der Datei das Kennwort ein, das du im Menü *Einrichtung » Märkte » Zalando » Einstellungen* als *Benutzer* gewählt hast.
+. Leite das ausgefüllte Formular an deine Kontaktperson bei Zalando weiter. +
+→ Zalando schaltet den Verkaufskanal für dich frei.
+
 [#1400]
-== Einstellungen im Assistenten vornehmen
+=== Assistent Teil 1: Kontoeinstellungen
 
-Mit dem Assistenten *Kontoeinstellungen - Zalando* im Menü *Einrichtung » Assistenten » Omni-Channel* richtest du dein Zalando-Konto schnell und einfach in plentymarkets ein.
+Im Assistenten *Kontoeinstellungen - Zalando* speicherst du nun Angaben zu deinem Zalando-Konto
 
-:menu-path: pass:quotes[*Einrichtung » Assistenten » Plugins » [Plugin-Set wählen]*]
+*_Wichtig:_* Du musst den Assistenten zweimal durchlaufen. Hier wird nur Teil 1 beschrieben.
+
+:menu-path: pass:quotes[*Einrichtung » Assistenten » Omni-Channel*]
 :assistant-name: Kontoeinstellungen - Zalando
 :number-of-boxes: Info-Boxen
 
@@ -132,6 +212,9 @@ include::partial$assistant-basic-instructions.adoc[]
 | *Möchtest du Zalando-Aufträge in plentymarkets importieren?*
 | Aktivieren, um Aufträge automatisch alle fünf Minuten zu importieren. +
 *_Hinweis:_* Artikeldaten und Bestandsinformationen können nur zu Zalando übertragen werden, wenn diese Option aktiviert ist.
+
+| *Aus welchen Ländern sollen Aufträge importiert werden?*
+| _Wenn du den Assistenten zum ersten Mal durchläufst, kannst du noch keine Länder wählen._
 
 | *Wähle eine Umgebung für den Auftragsimport.*
 a| Wählen, ob echte Daten oder Testdaten importiert werden sollen.
@@ -175,6 +258,66 @@ Zalando hat zurzeit die folgenden Retourengründe:
 .Schritt *Bestände*
 --
 
+_Wenn du den Assistenten zum ersten Mal durchläufst, kannst du in diesem Schritt noch keine Einstellungen vornehmen._
+--
+
+[.collapseBox]
+.Schritt *Preise*
+--
+_Wenn du den Assistenten zum ersten Mal durchläufst, kannst du in diesem Schritt noch keine Einstellungen vornehmen._
+--
+
+[.collapseBox]
+.Schritt *Konto-Aktivierung*
+--
+
+_Wenn du den Assistenten zum ersten Mal durchläufst, kannst du in diesem Schritt noch keine Einstellungen vornehmen._
+--
+
+[#link-zDirect]
+=== Konto mit zDirect-Konto verknüpfen lassen
+
+Du hast den Assistenten zum ersten mal durchlaufen und abgeschlossen. Lass nun dein Zalando-Konto freischalten: link:https://forum.plentymarkets.com/t/sammelthema-aktivierung-neuer-zalando-konten/600409[Melde dich in diesem Forum-Thread. Bitte unseren Support, dein Konto freizuschalten.]
+
+Gib in deinem Foren-Post die folgenden Informationen an:
+
+* Den Firmen-/ Markennamen, unter dem Du bei Zalando registriert bist
+* Deine plenty-ID
+* Die ID des Zalando-Kontos (accountId) in plentymarkets, das für die Zalando-Schnittstelle freigeschaltet werden soll +
+*_Hinweis:_* Pro Händler:innenkonto bei Zalando kann nur ein Konto bei plentymarkets verknüpft werden.
+
+[#assistant-2]
+=== Assistent Teil 2: Ländereinstellungen
+
+Der plentymarkets Support hat dein Konto mit deinem zDirect-Konto verknüpft? Dann kann es jetzt weitergehen.
+
+:menu-path: pass:quotes[*Einrichtung » Assistenten » Omni-Channel*]
+:assistant-name: Kontoeinstellungen - Zalando
+:number-of-boxes: Info-Boxen
+
+include::partial$assistant-basic-instructions.adoc[]
+
+[.collapseBox]
+.Schritt *Aufträge*
+--
+
+[[assistant-zalando-orders]]
+[cols="1,3a"]
+|====
+|Einstellung |Erläuterung
+
+| *Aus welchen Ländern sollen Aufträge importiert werden?*
+| include::page$zalando.adoc[tag=zalando-countries]
+
+*_Du kannst keine Länder wählen?_* Dann wurde dein Konto noch nicht mit mit dem zDirect-Konto verknüpft. (<<#link-zDirect, Was muss ich tun?>>)
+--
+
+[.collapseBox]
+.Schritte *Bestände*
+--
+
+Für jedes Land, das du im Schritt *Aufträge* gewählt hast, wird ein eigener Schritt *Bestände* zum Assistenten hinzugefügt. Die Einstellungen sind für alle Länder gleich:
+
 [[assistant-zalando-stock]]
 [cols="1,3a"]
 |====
@@ -209,8 +352,10 @@ a| In das Feld *Bestand ohne Bestandsführung* den Bestand eingeben, der für Va
 --
 
 [.collapseBox]
-.Schritt *Preise*
+.Schritte *Preise*
 --
+
+Für jedes Land, das du im Schritt *Aufträge* gewählt hast, wird ein eigener Schritt *Preise* zum Assistenten hinzugefügt. Die Einstellungen sind für alle Länder gleich:
 
 [[assistant-zalando-prices]]
 [cols="1,3a"]
@@ -259,22 +404,16 @@ Definiere bis zu drei geplante Preise. Geplante Preise geben dir mehr Sicherheit
 [.collapseBox]
 .Schritt *Konto-Aktivierung*
 --
-
 *Möchtest du dein Zalando-Konto jetzt aktivieren?*
 
-* _Aktiviert_ (icon:toggle-on[role="green"]) = Der Datenaustausch mit Zalando ist aktiv.
-* _Deaktiviert_ (icon:toggle-off[role="darkGrey"]) = Der Datenaustausch mit Zalando ist nicht aktiv.
-* *Dieses Konto kann nicht aktiviert werden.* = Der Datenaustausch mit Zalando ist nicht aktiv. Um die zDirect-API-Schnittstelle von Zalando zu aktivieren, muss dein Zalando-Konto mit dem plentymarkets Entwicklungskonto verknüpft werden. Diese Verknüpfung passiert im Verlauf der Integration automatisch. Allerdings muss plentymarkets in einem zusätzlichen Schritt Zugangsdaten für die API generieren und diese Zugangsdaten in deinem System speichern. Diese Zugangsdaten dürfen nicht von dir einsehbar sein. Deshalb kann plentymarkets dir die Zugangsdaten nicht bereitstellen. link:https://forum.plentymarkets.com/t/sammelthema-aktivierung-neuer-zalando-konten/600409[Melde dich in diesem Forum-Thread, um die Freischaltung deines Kontos zu erbitten.]
-Gib in deinem Foren-Post die folgenden Informationen an:
-
-    ** Den Firmen-/ Markennamen, unter dem Du bei Zalando registriert bist
-    ** Deine Plenty-ID
-    ** Die ID des Zalando-Kontos (accountId) in plentymarkets, das für die Zalando-Schnittstelle freigeschaltet werden soll +
-    *_Hinweis:_* Pro Händler:innenkonto bei Zalando kann nur ein Konto bei plentymarkets verknüpft werden.
+Du hast die Einrichtung noch nicht abgeschlossen. Aktiviere das Zalando-Konto deshalb noch nicht.
 --
 
+[#more-setup]
+== Weitere Einrichtung vornehmen
+
 [#400]
-== Kategorien verknüpfen
+=== Kategorien verknüpfen
 
 Verknüpfe deine plentymarkets Kategorien mit den Kategorien von Zalando, damit deine Varianten in diesen Zalando-Kategorien angezeigt werden.
 
@@ -290,7 +429,7 @@ Kategorien verknüpfen:
 → Neue Varianten, die du für eine plentymarkets Kategorie erstellst, werden automatisch auch der verknüpften Zalando-Kategorie zugewiesen.
 
 [#250]
-== Auftragsherkunft aktivieren
+=== Auftragsherkunft aktivieren
 
 :market: Zalando
 :referrer: Zalando
@@ -299,14 +438,61 @@ Kategorien verknüpfen:
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
 [#350]
-== Verkaufspreis festlegen
+=== Verkaufspreis festlegen
 
 :referrer-price: Zalando
 
 include::partial$verkaufspreis-festlegen.adoc[]
 
+[#700]
+=== Attribute mit Zalando verknüpfen
+
+Wenn du Attribute in deinem plentymarkets System erstellt hast, musst du diese Attribute mit Zalando verknüpfen. Im Folgenden wird beschrieben, wie du das Attribut Farbe mit Zalando verknüpfst. Verknüpfe anschließend weitere Attribute auf die gleiche Weise.
+
+Verknüpfe mindestens die folgenden Attribute, damit deine Varianten an Zalando übertragen werden können:
+
+* Größe (size register)
+
+_und/oder_
+
+* Farbe für 1. Farbcode / Herstellerfarbe
+
+_und/oder_
+
+* Länge (length register) bei Längenangaben (z.B. Hosenlänge)
+
+NOTE: Pro Attribut kann nur ein Größenregister oder ein Längenregister verknüpft werden.
+
+:attribute-option: Zalando
+:attribute: Farbe
+:attribute-dropdown:
+:select-attribute-values:
+:attribute-example: pass:quotes[*_Beispiel:_* Wähle für die Farbe Lila aus der ersten Dropdown-Liste *dark purple* und aus der zweiten Dropdown-Liste *Lila*.]
+
+include::partial$link-attributes.adoc[]
+
+[#500]
+=== Silhouetten in Merkmale konvertieren
+
+Zalando gruppiert Produkte in "Silhouetten". Zalando nennt diese Silhouetten inzwischen auch "Artikeltypen" oder "article types". Beispiele für Silhouetten sind "Röcke", "Kleider", "Hosen". Im Menü *Einrichtung » Märkte » Zalando » Einstellungen » Tab: Silhouetten* konvertierst du Zalando-Silhouetten in Artikelmerkmale. Silhouetten werden bei der Ersteinrichtung von Zalando in plentymarkets importiert. Wenn Zalando neue Silhouetten veröffentlicht, aktualisiert plentymarkets diese Silhouetten am darauffolgenden Mittwoch. Danach kannst du neue Silhouetten bei Bedarf in Merkmale konvertieren.
+
+[.instruction]
+Silhouetten in Merkmale konvertieren:
+
+. Öffne das Menü *Einrichtung » Märkte » Zalando » Einstellungen*.
+. Wechsele in das Tab *Silhouetten*.
+. Wähle die *Gruppen* für die Merkmale, die du konvertieren möchtest. +
+*_Hinweis:_* Werden keine Gruppen angezeigt? Dann hat Zalando entweder noch keine Silhouetten bereitgestellt oder du hast Zalando noch keine FTP-Zugangsdaten zukommen lassen (siehe <<#zalando-csv-form, CSV-Formular zum Abgleichen von Artikeln/Silhouetten anfordern>>).
+. Speichere (icon:save[set=plenty]) die Einstellungen. +
+→ Aus den Silhouetten werden Merkmale im plentymarkets System erstellt.
+
+[#prepare-variations]
+== Varianten vorbereiten
+
+Bereite nun deine Varianten vor.
+
 [#300]
-== Variantenverfügbarkeit einstellen
+=== Variantenverfügbarkeit einstellen
 
 :market-availability: Zalando
 :option-availability: Zalando
@@ -317,7 +503,7 @@ include::partial$variantenverfuegbarkeit.adoc[]
 // Web-API erforderlich!
 
 [#330]
-== _Optional:_ SKU speichern
+=== _Optional:_ SKU speichern
 
 :referrer-sku: Zalando
 :referrer-id: 118
@@ -327,23 +513,8 @@ include::partial$sku-manuell.adoc[]
 
 // Marktplatzkonto nicht erforderlich!
 
-[#500]
-== Silhouetten in Merkmale konvertieren
-
-Zalando gruppiert Produkte in "Silhouetten". Zalando nennt diese Silhouetten inzwischen auch "Artikeltypen" oder "article types". Beispiele für Silhouetten sind "Röcke", "Kleider", "Hosen". Im Menü *Einrichtung » Märkte » Zalando » Einstellungen » Tab: Silhouetten* konvertierst du Zalando-Silhouetten in Artikelmerkmale. Silhouetten werden bei der Ersteinrichtung von Zalando in plentymarkets importiert. Wenn Zalando neue Silhouetten veröffentlicht, aktualisiert plentymarkets diese Silhouetten am darauffolgenden Mittwoch. Danach kannst du neue Silhouetten bei Bedarf in Merkmale konvertieren.
-
-[.instruction]
-Silhouetten in Merkmale konvertieren:
-
-. Öffne das Menü *Einrichtung » Märkte » Zalando » Einstellungen*.
-. Wechsele in das Tab *Silhouetten*.
-. Wähle die *Gruppen* für die Merkmale, die du konvertieren möchtest. +
-*_Hinweis:_* Werden keine Gruppen angezeigt? Dann hat Zalando entweder noch keine Silhouetten bereitgestellt oder du hast Zalando noch keine FTP-Zugangsdaten zukommen lassen (siehe <<#150, Ablauf nach der Registrierung>>).
-. Speichere (icon:save[set=plenty]) die Einstellungen. +
-→ Aus den Silhouetten werden Merkmale im plentymarkets System erstellt.
-
 [#600]
-== Merkmale mit Artikeln verknüpfen
+=== Merkmale mit Artikeln verknüpfen
 
 Verknüpfe nun die Zalando-Merkmale mit den Artikeln, die du auf Zalando verkaufen möchtest.
 
@@ -419,43 +590,8 @@ Merkmal mit Artikel verknüpfen:
 . *_Optional:_* Nimm weitere Einstellungen vor. Beachte dazu die Erläuterungen zu den xref:artikel:artikel-verwalten.adoc#80[Merkmalen].
 . Speichere (icon:save[set=plenty]) die Einstellungen.
 
-[#700]
-== Attribute verknüpfen
-
-Wenn du Attribute in deinem plentymarkets System erstellt hast, musst du diese Attribute mit Zalando verknüpfen. Im Folgenden wird beschrieben, wie du das Attribut Farbe mit Zalando verknüpfst. Verknüpfe anschließend weitere Attribute auf die gleiche Weise.
-
-Verknüpfe mindestens die folgenden Attribute, damit deine Varianten an Zalando übertragen werden können:
-
-* Größe (size register)
-
-_und/oder_
-
-* Farbe für 1. Farbcode / Herstellerfarbe
-
-_und/oder_
-
-* Länge (length register) bei Längenangaben (z.B. Hosenlänge)
-
-NOTE: Pro Attribut kann nur ein Größenregister oder ein Längenregister verknüpft werden.
-
-:attribute-option: Zalando
-:attribute: Farbe
-:attribute-dropdown:
-:select-attribute-values:
-:attribute-example: pass:quotes[*_Beispiel:_* Wähle für die Farbe Lila aus der ersten Dropdown-Liste *dark purple* und aus der zweiten Dropdown-Liste *Lila*.]
-
-include::partial$link-attributes.adoc[]
-
-[#800]
-== Zahlungsart in Kundenklasse erlauben
-
-:market: Zalando
-:payment-method: Zalando
-
-include::partial$zahlungsart_aktivieren.adoc[]
-
 [#1100]
-== _Checkliste_ für den Variantenexport
+=== Checkliste für den Variantenexport
 
 Zalando erwartet bestimmte Pflichtangaben. Nur Varianten werden also an den Marktplatz exportiert, für die diese Angaben gespeichert sind. Die in <<#zalando-varianten-pflicht>> aufgeführten Angaben müssen an allen Varianten gespeichert sein, die an Zalando exportiert werden sollen.
 
@@ -527,14 +663,14 @@ include::partial$zalando-order-documents.adoc[]
 [#1200-1]
 == Auftragsabwicklung automatisieren
 
-Für die automatische Auftragsabwicklung über zDirect stehen die folgenden Ereignisaktionen zur Verfügung:
+Für die automatische Auftragsabwicklung stehen die folgenden Ereignisaktionen zur Verfügung:
 
-* Versandbestätigungen automatisch senden (zDirect) (<<#1200, Wie?>>)
-* Stornierungen automatisch senden (zDirect) (<<#1300, Wie?>>)
-* Retouren automatisch senden (zDirect) (<<#1600, Wie?>>)
+* Versandbestätigungen automatisch senden (<<#1200, Wie?>>)
+* Stornierungen automatisch senden (<<#1300, Wie?>>)
+* Retouren automatisch senden (<<#1600, Wie?>>)
 
 [#1200]
-=== Versandbestätigungen automatisch senden (zDirect)
+=== Versandbestätigungen automatisch senden
 
 Ein Auftrag muss folgende Bedingungen erfüllen, damit eine Versandbestätigung gesendet werden kann:
 
@@ -584,7 +720,7 @@ include::_includes:page$EA.adoc[]
 |====
 
 [#1300]
-=== Stornierungen automatisch senden (zDirect)
+=== Stornierungen automatisch senden
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Zalando automatisch über Stornierungen zu informieren. Beachte, dass als versendet markierte Aufträge nicht mehr storniert werden können.
 
@@ -617,7 +753,7 @@ include::_includes:page$EA.adoc[]
 |====
 
 [#1600]
-=== Retouren automatisch senden (zDirect)
+=== Retouren automatisch senden
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Zalando automatisch über Retouren zu informieren. Beachte, dass der Auftrag bereits als versendet markiert sein muss.
 
@@ -654,21 +790,22 @@ include::_includes:page$EA.adoc[]
 // include::partial$zalando-order-documents.adoc[]
 
 [#1500]
-== Zalando-Konto aktivieren
+== Datenaustausch starten: Zalando-Konto aktivieren
 
-Nachdem du Zalando eingerichtet hast, aktivierst du dein Zalando-Konto im Assistenten *Kontoeinstellungen - Zalando* im Menü *Einrichtung » Assistenten » Omni-Channel*.
+Du hast alle Einstellungen vorgenommen? Dann kann es jetzt losgehen!
+Ativiere dein Zalando-Konto im Assistenten *Kontoeinstellungen - Zalando*, um den Datenaustausch mit Zalando zu starten.
 
 [.collapseBox]
-.Vorgehen bei *Dieses Konto kann nicht aktiviert werden.*
+.Vorgehen bei "Dieses Konto kann nicht aktiviert werden."
 --
 Der Datenaustausch mit Zalando ist nicht aktiv. Um die zDirect-API-Schnittstelle von Zalando zu aktivieren, muss dein Zalando-Konto mit dem plentymarkets Entwicklungskonto verknüpft werden. Diese Verknüpfung passiert im Verlauf der Integration automatisch. Allerdings muss plentymarkets in einem zusätzlichen Schritt Zugangsdaten für die API generieren und diese Zugangsdaten in deinem System hinterlegen. Diese Zugangsdaten dürfen nicht von dir einsehbar sein. Deshalb kann plentymarkets dir die Zugangsdaten nicht bereitstellen. Melde dich in link:https://forum.plentymarkets.com/t/sammelthema-aktivierung-neuer-zalando-konten/600409[diesem Forum-Thread^], um die Freischaltung deines Kontos zu erbitten.
 
 Gib in deinem Foren-Post die folgenden Informationen an:
 
-    ** Den Firmen-/ Markennamen, unter dem Du bei Zalando registriert bist
-    ** Deine Plenty-ID
-    ** Die ID des Zalando-Kontos (accountId) in plentymarkets, das für die Zalando-Schnittstelle freigeschaltet werden soll +
-        *_Hinweis:_* Pro Händler:innenkonto bei Zalando kann nur ein Konto bei plentymarkets verknüpft werden.
+* Den Firmen-/ Markennamen, unter dem Du bei Zalando registriert bist
+* Deine Plenty-ID
+* Die ID des Zalando-Kontos (accountId) in plentymarkets, das für die Zalando-Schnittstelle freigeschaltet werden soll +
+*_Hinweis:_* Pro Händler:innenkonto bei Zalando kann nur ein Konto bei plentymarkets verknüpft werden.
 --
 
 [.instruction]
@@ -679,8 +816,9 @@ Zalando-Konto aktivieren:
 . Navigiere zum Schritt *Konto-Aktivierung*.
 . Aktiviere die Option *Benutzerkonto aktivieren*.
 . Schließe den Assistenten wie gewohnt ab. +
-→ Die Kontoeinstellungen werden gespeichert. +
 → Der Datenaustausch mit Zalando wird aktiviert.
+
+
 
 [#900]
 == Berichte herunterladen
