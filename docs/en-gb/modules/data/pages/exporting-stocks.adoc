@@ -1,211 +1,511 @@
 = Stocks
-:keywords: export stocks, export format stock
-:description: Learn how to export stocks from your plentymarkets system by using catalogues.
+:keywords: Download stock, Downloading stock, Download stock level, Download the stock levels, Export stock, Exporting stock, Export stock level, Exporting the stock levels, Stock export, Stock-Export, Export-Format Stock, Export-Format stocks, Export format Stock, Export format Stocks, Export-Type Stock, Export-Type Stocks, Export type Stock, Export types Stock, Standard format Stock, Standard format Stocks
+:description: This page describes the data fields and filters that are available when exporting stock data with the catalogue tool.
 :page-aliases: catalogues-stocks.adoc
 :id: 2HVY25P
 :author: team-stock
 
-This manual page contains information on the export format *Stocks*, which you can use in order to export stock data from your plentymarkets system by using catalogues.
-If you are not familiar with the usage of catalogues yet, refer to the manual page xref:data:file-export.adoc#[Catalogues: standard formats] first. There you will find out how to create and manage catalogues.
+////
+zuletzt bearbeitet 22.04.2022
+////
+
+//ToDo - check whether the storage location name and ID are still being exported language-specific and delete the info as needed - see comment within storage location table
+
+This page describes the data fields and filters that are available when exporting stock data with the catalogue tool.
+This page serves purely as a reference and it assumes that you already have a basic understanding of the xref:data:export-standard-formats#[catalogue tool].
+
+[discrete]
+==== Format type: Stocks
+
+The format type described on this page is found in the menu *Data » Catalogues*.
+When creating a new catalogue, you’ll select the standard format from the upper drop-down list.
+Then you can select the format type *Stocks* from the middle drop-down list.
+
+image::data:catalogue-stocks.png[]
 
 [TIP]
-.No export to marketplaces
+.What’s a standard format?
 ====
-The export format *Stocks* is a so-called standard format, which you can use to export data, but not to transfer data to a marketplace.
+
+* *_Definition_*:
+A standard format is used to export specific data from your plentymarkets system.
+If necessary, you can revise the data and import it again.
+
+* *_Example_*:
+Imagine you’re facing an audit and you need to find out how much stock was in your warehouse at the end of the year.
+You could export a CSV file with the stock data.
+
+* *_Differentiation_*:
+Note that standard formats only export data from your system.
+They do not transmit this data to marketplaces.
 ====
 
 [#10]
-== Available data fields
+== Data fields
 
-The following table lists all available data fields of the export format *Stocks* as well as an explanation on the meaning of these fields.
+This chapter lists all of the stock data fields that can be exported with the catalogue tool.
 
-[[table-stocks]]
-.Data fields for stocks
-[cols="2,3"]
+:catalogue:
+
+'''
+[#30]
+=== Item
+
+[cols="1,3a"]
 |====
-|Data field |Explanation
+|Field |Explanation
 
-2+^|*Item*
+| *Item ID*
+|
+include::item:partial$id.adoc[]
 
-|*Item ID*
-|ID of the item
+*_Note_*: Every “Export Key” needs to be unique.
+So if you use the item ID and the variation ID together, then make sure to give each “Export Key” a unique name.
+xref:data:exporting-stocks.adoc#120[Further information].
 
-|*Flag 1*
-|ID of item flag 1
+| *Flag 1*; +
+*Flag 2*
+|The ID of the xref:item:flags.adoc#100[item flag].
 
-|*Flag 2*
-|ID of item flag 2
+| *Variation tag*
+|The name of the xref:item:flags.adoc#400[tag].
+|====
 
-|*Variation tag*
-|Tag of the variation
+'''
+[#40]
+=== Manufacturer
 
-2+^|*Manufacturer*
+[cols="1,3a"]
+|====
+|Field |Explanation
 
-|*Manufacturer ID*
-|ID of the manufacturer
+| *Manufacturer ID*
+|
+include::item:partial$manufacturer-id.adoc[]
 
-|*Manufacturer name*
-|Name of the manufacturer
+| *Manufacturer name*
+|
+include::item:partial$manufacturer-name.adoc[]
 
-2+^|*Batch / BBD*
+|====
 
-|*Batch*
+'''
+[#50]
+=== Batch / BBD
+
+//ergänzen
+
+[cols="1,3a"]
+|====
+|Field |Explanation
+
+| *Batch*
 |Batch of the variation
 
-|*BBD*
+| *BBD*
 |Best before date of the variation
+|====
 
-2+^|*Stock*
+'''
+[#60]
+=== Stock
 
-|*Physical stock*
-|Physical stock
+//ergänzen
 
-|*Reserved stock*
-|Reserved stock
+[cols="1,3a"]
+|====
+|Field |Explanation
 
-|*Net stock*
-|Net stock
+| *Physical stock*
+|Indicates how many copies of the item are physically in the warehouse.
 
-|*Reordered quantity*
+Corresponds to the value in the menu: xref:stock-management:managing-stocks.adoc#400[Stock » Stocks » Column: Phy]
+
+| *Reserved stock*
+|Indicates how many copies of the item are currently reserved.
+
+* Stock is reserved when there is a pending order or a warranty.
+* The stock stays reserved until the outgoing items are booked or until the order / warranty is cancelled.
+* The reserved stock is part of the physical stock because the reserved stock is still present in the warehouse.
+
+Corresponds to the value in the menu: xref:stock-management:managing-stocks.adoc#400[Stock » Stocks » Column: Res]
+
+| *Net stock*
+|Indicates how many copies of the item are currently available for sale. The net stock is a subset of the physical stock. Substract all reserved quantities from the physical stock and you will get the net stock.
+
+Corresponds to the value in the menu: xref:stock-management:managing-stocks.adoc#400[Stock » Stocks » Column: Net]
+
+//zulauf?
+| *Reordered quantity*
 |Quantity of the reordered stock
 
-|*Warehouse priority*
-|The warehouse’s priority
+| *Warehouse priority*
+|The warehouse’s priority.
 
-|*Average purchase price*
+Corresponds to the option in the menu: xref:stock-management:setting-up-a-warehouse.adoc#300[Setup » Stock » Warehouse » [Open warehouse\] » Settings » Drop-down list: Priority]
+
+//ergänzen
+| *Average purchase price*
 |Average purchase price
 
-|*Average sale*
+//ergänzen
+| *Average sale*
 |Average sale
 
-2+^|*Storage location*
+|====
 
-|*Storage location ID*
-|ID of the storage location
-|*Storage location quantity*
-|Quantity of stock that is available on the storage location
-|*Storage location name*
-|Name of the storage location
+'''
+[#70]
+=== Storage location
 
-2+^|*Variation barcode*
+[cols="1,3a"]
+|====
+|Field |Explanation
 
-|*Variation barcode*
-|Barcode of the variation
+| *Storage location ID*
+|The ID of the storage location.
 
-2+^|*Item description*
+*_Note_*: The standard storage location has the ID `0`.
 
-|*Item name*
-|The item’s name 1
+//löschen in zukunft - dazu habe ich eine Karte auf Azure angelegt, da diese Daten nicht mehrsprachig hinterlegt sind
+//https://dev.azure.com/plentymarkets/plentymarkets/_boards/board/t/CRM%20and%20Goods%20-%20PIM%20Stock/Backlog%20items/?workitem=5794
+Once you’ve added this data field, you can use the drop-down list to specify which language version of the text should be exported.
 
-2+^|*Variation*
+Corresponds to the option in the menu: xref:stock-management:setting-up-a-warehouse.adoc#500[Setup » Stock » Warehouse » [Open warehouse\] » Storage locations » Column: ID]
 
-|*Variation ID*
-|ID of the variation
+| *Storage location quantity*
+|The amount of stock that is currently stored in this location.
 
-|*Is active*
-|The variation is active (1 = yes)
+Corresponds to the value in the menu: xref:stock-management:managing-stocks.adoc#400[Stock » Stocks » (icon:search[role="blue"]) [Open storage location\] » Column: Stock]
 
-|*Variation number*
-|Variation number
+| *Storage location name*
+|The name of the storage location.
 
-|*Model*
-|Model of the variation
+//löschen in zukunft - dazu habe ich eine Karte auf Azure angelegt, da diese Daten nicht mehrsprachig hinterlegt sind
+//https://dev.azure.com/plentymarkets/plentymarkets/_boards/board/t/CRM%20and%20Goods%20-%20PIM%20Stock/Backlog%20items/?workitem=5794
+Once you’ve added this data field, you can use the drop-down list to specify which language version of the text should be exported.
 
-|*Purchase price*
-|Purchase price of the variation
+Corresponds to the option in the menu: xref:stock-management:setting-up-a-warehouse.adoc#500[Setup » Stock » Warehouse » [Open warehouse\] » Storage locations » Column: Storage location]
+|====
 
-|*Price calculation UUID*
-|The price calculation’s UUID. The ID is automatically generated when the calculation is created. This ID cannot be changed. +
-*_Tip:_* Do you want to copy the UUID? To do so, open the price calculation and click on the UUID in the lower left corner. The UUID is copied to the clipboard.
+'''
+[#80]
+=== Variation barcode
 
-|*Variation name*
-|Name of the variation
+[cols="1,3a"]
+|====
+|Field |Explanation
 
-|*Customs tariff number*
-|The variation’s customs tariff number
+| *Variation barcode*
+|The barcode of the variation.
 
-|*Has calculated bundle weight*
-|Indicates whether the weight is xref:item:combining-products.adoc#2500[automatically calculated based on the individual components]. +
-1 = Automatic calculation is activated. +
-Empty field = Automatic calculation is not activated.
+Once you’ve added this data field, you can use the drop-down list to specify which xref:item:barcodes.adoc#100[barcode type] should be exported.
 
-|*Has calculated bundle net weight*
-|Indicates whether the net weight is xref:item:combining-products.adoc#2500[automatically calculated based on the individual components]. +
-1 = Automatic calculation is activated. +
-Empty field = Automatic calculation is not activated.
+* The drop-down list includes the barcode types that you’ve already configured in the menu *Setup » Item » Barcode*.
+* When you select a barcode type, xref:item:barcodes.adoc#300[the actual code] that was saved for this barcode type in the variation data record will be exported.
 
-|*Has calculated bundle purchase price*
-|Indicates whether the purchase price is xref:item:combining-products.adoc#2500[automatically calculated based on the individual components]. +
-1 = Automatic calculation is activated. +
-Empty field = Automatic calculation is not activated.
+Corresponds to the option in the menu: xref:item:managing-items.adoc#250[Item » Edit item » [Open variation\] » Tab: Settings » Area: Barcode]
 
-|*Has calculated bundle moving average price*
-|Indicates whether the moving average price is xref:item:combining-products.adoc#2500[automatically calculated based on the individual components]. +
-1 = Automatic calculation is activated. +
-Empty field = Automatic calculation is not activated.
+|====
 
-2+^|*Warehouse*
+'''
+[#90]
+=== Item description
 
-|*Warehouse ID*
-|ID of the warehouse
+[cols="1,3a"]
+|====
+|Field |Explanation
 
-|*Warehouse name*
-|Warehouse name
+| *Item name*
+|
+include::item:partial$name1.adoc[]
+
+|====
+
+'''
+[#100]
+=== Variation
+
+[cols="1,3a"]
+|====
+|Field |Explanation
+
+| *Variation ID*
+|The ID of the variation.
+
+*_Note_*: Every “Export Key” needs to be unique.
+So if you use the item ID and the variation ID together, then make sure to give each “Export Key” a unique name.
+xref:data:exporting-stocks.adoc#120[Further information].
+
+| *Is active*
+|
+include::item:partial$active.adoc[]
+
+| *Variation number*
+|
+include::item:partial$variation-no.adoc[]
+
+| *Model*
+|
+include::item:partial$model.adoc[]
+
+| *Purchase price*
+|
+include::item:partial$net-purchase-price.adoc[]
+
+| *Price calculation UUID*
+|The price calculation’s UUID.
+The UUID is automatically generated when the price calculation is created. The UUID cannot be changed.
+
+| *Variation name*
+|
+include::item:partial$variation-name.adoc[]
+
+| *Customs tariff number*
+|
+include::item:partial$customs-tariff-number.adoc[]
+
+| *Has calculated bundle weight*
+|Indicates whether the weight is automatically calculated. The calculation is based on the individual components.
+
+[cols="1,3"]
+!===
+
+!Line is blank
+!Automatic calculation is not activated.
+
+!`1`
+!Automatic calculation is activated.
+
+!===
+
+Corresponds to the option in the menu: xref:item:combining-products.adoc#2500[Item » Edit item » [Open variation\] » Tab: Settings » Area: Bundle » Checkbox: Automatically calculate from bundle components - Gross weight]
+
+| *Has calculated bundle net weight*
+|Indicates whether the net weight is automatically calculated. The calculation is based on the individual components.
+
+[cols="1,3"]
+!===
+
+!Line is blank
+!Automatic calculation is not activated.
+
+!`1`
+!Automatic calculation is activated.
+
+!===
+
+Corresponds to the option in the menu: xref:item:combining-products.adoc#2500[Item » Edit item » [Open variation\] » Tab: Settings » Area: Bundle » Checkbox: Automatically calculate from bundle components - Net weight]
+
+| *Has calculated bundle purchase price*
+|Indicates whether the purchase price is automatically calculated. The calculation is based on the individual components.
+
+[cols="1,3"]
+!===
+
+!Line is blank
+!Automatic calculation is not activated.
+
+!`1`
+!Automatic calculation is activated.
+
+!===
+
+Corresponds to the option in the menu: xref:item:combining-products.adoc#2500[Item » Edit item » [Open variation\] » Tab: Settings » Area: Bundle » Checkbox: Automatically calculate from bundle components - Net purchase price]
+
+| *Has calculated bundle moving average price*
+|Indicates whether the moving average purchase price is automatically calculated. The calculation is based on the individual components.
+
+[cols="1,3"]
+!===
+
+!Line is blank
+!Automatic calculation is not activated.
+
+!`1`
+!Automatic calculation is activated.
+
+!===
+
+Corresponds to the option in the menu: xref:item:combining-products.adoc#2500[Item » Edit item » [Open variation\] » Tab: Settings » Area: Bundle » Checkbox: Automatically calculate from bundle components - Moving average purchase price (net)]
+
+|====
+
+'''
+[#110]
+=== Warehouse
+
+[cols="1,3a"]
+|====
+|Field |Explanation
+
+| *Warehouse ID*
+|The ID of the warehouse.
+
+Corresponds to the option in the menu: xref:stock-management:setting-up-a-warehouse.adoc#300[Setup » Stock » Warehouse » [Open warehouse\] » Settings » Option: Warehouse ID]
+
+| *Warehouse name*
+|The name of the warehouse.
+
+Corresponds to the option in the menu: xref:stock-management:setting-up-a-warehouse.adoc#300[Setup » Stock » Warehouse » [Open warehouse\] » Settings » Option: Warehouse name]
+
 |====
 
 [#20]
-== Adding filters
+== Filters
 
-In order to only export specific stock data, you can select filters and thus narrow down the data. How to add filters is described in xref:data:file-export.adoc#257[this chapter].
+This chapter lists all of the filters that you can use to limit which data is included in the export file.
 
-[#30]
-=== Available filters
+[TIP]
+.Filters can be combined
+====
+You can select multiple filters and thus e.g. filter stock that is from a specific warehouse and has a specific flag.
+====
 
-The following table lists all available filters for the export format *Stocks* and gives an explanation on the usage of the respective filter. You may also select several filters and for example filter by stock from a specific warehouse and a specific flag.
-
-[[table-filter-stock]]
-.Filters for stocks
-[cols="2,3"]
+[cols="1,3a"]
 |====
 |Filter |Explanation
 
-|*Active*
-|Filters by active or inactive variations.
+| *Active*
+|Limits the export to variations that are either xref:item:managing-items.adoc#intable-active[active or inactive].
 
-|*Flag 1*
-|Filters by the flag 1 that is saved on the variation.
+| *Flag 1*; +
+*Flag 2*
+|Select a flag from the drop-down list.
+Limits the export to items with this xref:item:new-item.adoc#200[flag].
 
-|*Flag 2*
-|Filters by the flag 2 that is saved on the variation.
+| *Date*
+|Use this filter to export the physical stock level from a specific point in time.
 
-|*Date*
-|Filters by a particular date that you can select via the calendar. Thus, this filter allows you to export stock that existed at a specific date. +
-*_Note:_* With the date filter, the stock quantity can only be output per warehouse, but not per storage location. Thus, do _not_ activate the following data fields: *Storage location*, *Storage location ID*, *Storage location quantity*, *Storage location name*. +
-The stock quantity for the selected date will then be shown in the *Physical stock* data field of the *Stock* folder.
+*_Example_*:
+Imagine you’re facing an audit and you need to find out how much stock was in your warehouse at the end of the year.
 
-|*Manufacturer*
-|Filters by manufacturer.
+*_Formatting_*:
+Enter the date in the format `DD.MM.YYYY`.
+Alternatively, click on the calendar symbol (icon:calendar-o[role="darkGrey"]) if you would prefer to choose the date from the calendar.
 
-|*Warehouse*
-|Filters by variations from the selected warehouse. +
-*_Note:_* If you don’t select a warehouse, the stock from the warehouse with the lowest ID is selected automatically.
+---
 
-|*Hide empty stock entries:* +
-*Hide stock 0 entries after defined time period*
-|Hides all stock entries of 0 that have exceeded the defined time period.
+*_Note_*: It’s only possible to filter a maximum of 3 months in the past.
 
-|*Hide empty stock entries:* +
-*Hide all stock 0 entries*
-|Hides all stock entries of 0.
+*_Note_*: This filter _can not_ be used in combination with item bundles.
 
-|*Group by*
-|Allows to group by warehouse. The variation’s stock is shown per warehouse (not per storage location, BBD or batch).
+*_Note_*: The date filter can only export the stock quantity per warehouse, not per storage location.
+Therefore, _do not_ activate the following data fields:
 
-|*Item bundle*
-|Allows to filter by xref:item:combining-products.adoc#2000[item bundles]. +
-Depending on what you want to export, you can choose between the following options: +
-*Not part of a bundle*: Variations that are not part of an item bundle will be exported. +
-*Bundle*: Only complete item bundles will be exported. +
-*Part of a bundle*: Parts of an item bundle will be exported.
+* *Storage location*
+* *Storage location ID*
+* *Storage location quantity*
+* *Storage location name*
+
+| *Manufacturers*
+|Select one or more manufacturers from the drop-down list.
+Limits the export to items that were xref:item:managing-items.adoc#_basic_settings[manufactured by one of these companies].
+
+| *Warehouse*
+|Limits the export to variations within a specific warehouse.
+
+*_Note_*: If you don’t select a warehouse, then the warehouse with the lowest ID will automatically be selected.
+
+| *Hide empty stock entries*
+|Select an option from the drop-down list.
+
+[cols="1,3"]
+!===
+
+! *Hide stock 0 entries after defined time period*
+!Hides empty stock entries that exceed a specified timeframe.
+Define the timeframe in the menu: *Setup » Stock » Stock » Incoming items » Drop-down list: Hide stock entry of “0” after*.
+
+! *Hide all stock 0 entries*
+!Hides all empty stock entries.
+!===
+
+| *Group by*
+|Groups the data by warehouse.
+The variation’s stock is shown per warehouse (not per storage location, BBD or batch).
+
+| *Item bundle*
+|Select one or more options from the drop-down list.
+
+[cols="1,3"]
+!===
+
+! *Not part of a bundle*
+!Limits the export to variations that are neither an item bundle nor a bundle component.
+
+! *Bundle*
+!Limits the export to xref:item:combining-products#2000[item bundles].
+
+! *Part of a bundle*
+!Limits the export to xref:item:combining-products#2000[bundle components].
+!===
 
 |====
+
+[#120]
+== FAQ
+
+[.collapseBox]
+.*What does “Export Key” mean?*
+--
+
+The “Export Keys” are the names of the column headers, as they will appear in your export file.
+Every “Export Key” needs to be unique.
+
+* *_Negative example_*: You use the data fields xref:data:exporting-stocks.adoc#30[Item ID] and xref:data:exporting-stocks.adoc#100[Variation ID].
+You give both “Export Keys” the name “id”.
+As a result, the export file only includes one of the two IDs.
+A column is missing in the export file.
+* *_Positive example_*: You use the data fields xref:data:exporting-stocks.adoc#30[Item ID] and xref:data:exporting-stocks.adoc#100[Variation ID].
+You give one “Export Key” the name “VariationID” and the other “ItemID”.
+
+image::data:catalogue-export-keys.png[]
+
+--
+
+[.collapseBox]
+.*How do I export the file?*
+--
+
+. Click on icon:file_download[set=material] in the toolbar up top. +
+→ The export will start and it runs in the background.
+You can continue working during the export process.
+. After a while (ca. 30-60 minutes), a message will appear in the notification centre (icon:notifications_none[set=material]).
+. Click on icon:link[set=material] *Download* within the notification.
+
+image::data:catalogue-export.gif[]
+
+* xref:data:managing-catalogues.adoc#260[Further information about the export]
+* xref:data:managing-catalogues.adoc#255[Alternative: Export a preview]
+
+--
+
+[.collapseBox]
+.*My export file is missing a column. Why?*
+--
+
+You might have multiple data fields with the same “Export Key”.
+Every “Export Key” needs to be unique.
+
+* *_Negative example_*: You use the data fields xref:data:exporting-stocks.adoc#30[Item ID] and xref:data:exporting-stocks.adoc#100[Variation ID].
+You give both “Export Keys” the name “id”.
+As a result, the export file only includes one of the two IDs.
+A column is missing in the export file.
+* *_Positive example_*: You use the data fields xref:data:exporting-stocks.adoc#30[Item ID] and xref:data:exporting-stocks.adoc#100[Variation ID].
+You give one “Export Key” the name “VariationID” and the other “ItemID”.
+
+image::data:catalogue-export-keys.png[]
+
+--
+
+[.collapseBox]
+.*Can I revise the file and import it again?*
+--
+
+Yes.
+Export the file in CSV or TXT format.
+Then revise the file and import it again.
+Note that the xref:data:ElasticSync.adoc#[import tool] only accepts the file types CSV and TXT.
+
+--
