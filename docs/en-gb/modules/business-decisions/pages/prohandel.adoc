@@ -3,18 +3,24 @@
 :description: Learn how to connect your Prohandel system with plentymarkets.
 :page-index: false
 :id: NCUBFL8
-:author: gretchen-bates
+:author: team-plenty-channel
 
 ////
-zuletzt bearbeitet 03.02.2022
+zuletzt bearbeitet 07.04.2022
+
+Interner Hinweis zur Seite:
+Diese Seite richtet sich in erster Linie am plenty-Einrichtungs-Team.
+Es ist sehr unwahrscheinlich, dass ein bestehender plenty-Kunde sich spontan entscheidet Prohandel zu nutzen und versucht das Plugin selbst einzurichten.
+Viel eher ist der Anwendungsfall, dass ein Händler bereits Prohandel nutzt (z.B. für sein Mode-Einzelhandel).
+Der Händler möchte seine Ware zukünftig auch online verkaufen und entscheidet sich für plenty (u.a. weil wir diese Schnittstelle haben).
+Der Händler wäre also ganz neu bei plenty und würde sein System samt Prohandel-Plugin zusammen mit dem Einrichtungs-Team einrichten.
 ////
 
-//ToDo - change position to 60 once it should appear in the navigation
+//ToDo when the page can be made visible in the left navigation - remove the attribute :page-index: false from the header and add the page to the navigation file in the ROOT folder
 
 ////
 offene Fragen:
 -bei "Optionen für den Artikelimport > Gruppierungsschema > Beispiel supplierNumber-categoryNumber-supplierArticleNumber": Hier wäre es schön, wenn es eine Liste mit den möglichen Datenfeldern gäbe, die man eingeben kann. Zudem wäre eine Info zur Syntax nicht schlecht. Team Prohandel müsste uns diese Infos liefern.
--bei "Optionen für den Artikelimport > Verhalten von Artikeln mit einem bestimmten Wert > Hinweis patternNumber Kunden können uns kontaktieren": Hier könnte man ergänzen, welcher Kontaktweg wir bevorzügen (Telefonnummer, Email, Forum). Team Prohandel müsste uns diese Infos liefern.
 -bei "Neu importierte Artikeldaten öffnen": Klären, ob das so bleiben wird (also, dass die Versandprofile nicht automatisch aktiviert werden, weil die API per REST arbeitet). Falls ja, dann ein Hinweis hier in diesem Kapitel einbauen, dass der Händler seine Versandprofile prüfen und aktivieren soll.
 https://forum.plentymarkets.com/t/api-prohandel-versandprofil-e-bei-neuen-artikeln-aktivieren/652140/7
 ////
@@ -50,7 +56,7 @@ If you have not set up your plentymarkets system yet, then you should create the
 [#20]
 == Downloading and installing the plugin
 
-The link:https://marketplace.plentymarkets.com/en/prohandel_54913[Prohandel plugin] is available for a fee on plentyMarketplace.
+The Prohandel plugin is available on plentyMarketplace.
 It connects your Prohandel system with plentymarkets.
 
 The Prohandel plugin can:
@@ -68,7 +74,7 @@ Whenever stock levels or prices are updated in Prohandel, this information is tr
 .*Step-by-step instructions*
 --
 
-. Download the link:https://marketplace.plentymarkets.com/en/prohandel_54913[Prohandel plugin] from plentyMarketplace. +
+. Download the Prohandel plugin from plentyMarketplace. +
 → If prompted, sign into plentyMarketplace.
 Use the same access data as for the “My account” area.
 . Go to *Plugins » Plugin set overview*.
@@ -89,11 +95,10 @@ The newest version is selected by default.
 → The plugin is installed. +
 → After installation has finished, the plugin set opens.
 . Switch the plugin to active (icon:toggle-on[role="blue"]).
-. Save (icon:save[role="darkGrey"]) the plugin set. +
-→ If there’s a problem with saving the plugin set, click on *View details* to receive further information.
+. Deploy the plugin set (icon:cloud-upload[role="darkGrey"]).
 
 Are you new to plugins?
-The <<plugins#, plugins chapter>> of the manual teaches you more about plugins and how they work in plentymarkets.
+The xref:plugins:plugins.adoc#[plugins chapter] of the manual teaches you more about plugins and how they work in plentymarkets.
 
 --
 
@@ -145,6 +150,76 @@ The user name is an email address.
 | *Password*
 |Enter the password for your Prohandel account.
 |====
+
+[#43]
+=== Consider locations in the warehouse
+
+In this step, decide whether plentymarkets should track the exact location of each item in the warehouse.
+
+*_Background knowledge_*:
+
+* plentymarkets not only allows you to track an item’s stock levels, but also to track where the item is located within the warehouse.
+** In plentymarkets, the item’s location is called the “storage location”.
+** In Prohandel, the item’s location is called the “shop”.
+
+[[table-storage-location-function]]
+.Consider locations in the warehouse
+[cols="1,3a"]
+|====
+|Setting |Explanation
+
+| *Consider locations*
+|Should plentymarkets track the exact location of each item in the warehouse?
+
+icon:toggle-on[role="blue"] = The item’s exact storage location will be recorded.
+When stock levels change, i.e. when items are received or shipped out, the specific storage location will be taken into consideration.
+If you’ve activated this function, then you’ll also need to configure the settings in the step *Mapping of locations*.
+
+icon:toggle-off[role="darkGrey"] = The item’s storage location will not be recorded.
+In plentymarkets, the “default” storage location will always be used.
+
+|====
+
+[#46]
+=== Mapping of locations
+
+In this step, you match your Prohandel shops with your plentymarkets storage locations.
+The storage locations in plentymarkets are generated automatically.
+
+*_Example_*:
+
+* During the item import, plentymarkets learns that an item is stored in Prohandel shop 1234.
+* The plugin then automatically creates a matching plentymarkets storage location in the menu *Setup » Stock » Warehouse » [Open warehouse] » Storage locations* and links it in this step of the assistant.
+
+[[table-storage-location-mapping]]
+.Mapping of locations
+[cols="1,3a"]
+|====
+|Setting |Explanation
+
+| *Prohandel store*
+|These are the stock-keeping stores in Prohandel.
+Select the appropriate store from the drop-down list.
+
+| *Prohandel shop*
+|These are the shop names in Prohandel.
+Select the appropriate shop from the drop-down list.
+
+| *plentymarkets storage location*
+|These are the storage location IDs in the plentymarkets menu *Setup » Stock » Warehouse » [Open warehouse] » Storage locations*.
+
+|====
+
+[TIP]
+.Naming logic
+====
+You can find the automatically generated storage locations in the menu *Setup » Stock » Warehouse » [Open warehouse] » Storage locations*.
+The storage location’s name always follows a certain logic.
+The storage locations are called: `Prohandel level:Prohandel SL for shop 1234`.
+In this example, `1234` represents the Prohandel shop number.
+This name can not be changed.
+It is hard-coded.
+====
 
 [#50]
 === Mapping of stock-keeping stores
@@ -252,20 +327,18 @@ In this step, you’ll decide which item data should be transmitted from Prohand
 . Select a basis from the drop-down list.
 . Enter a date into the field.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Basis !Explanation
 
-! *Incoming goods - first date*
+! *Incoming goods - First date*
 !This is a timestamp for items in Prohandel.
 The timestamp is generated when the item is initially created in Prohandel.
 This timestamp never changes.
 
 *_Note_*:
-Don't confuse this timestamp with the _second date_ for incoming goods.
-It's updated every time new goods are received for the item.
+Don’t confuse this timestamp with the second date for incoming goods. It’s updated every time new goods are received for the item.
 
-! *Sale - second date*
+! *Sale - Second date*
 !This is a timestamp for items in Prohandel.
 The timestamp indicates when the item was last sold.
 This timestamp is updated in Prohandel every time the item is sold.
@@ -321,17 +394,16 @@ Select the field name and field value.
 . Decide what should happen to these items.
 Select the import behaviour.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Behaviour !Explanation
 
 ! *Only import those items with specified value*
-!_Only_ those items with the specified field value and field name will be imported.
+!Only those items with the specified field value and field name will be imported.
 All other items will be ignored.
 
 ! *Skip items with specified value*
 !The items with the specified field value and field name will be skipped.
-In other words, they _will not be imported_.
+In other words, they will not be imported.
 
 !===
 
@@ -340,12 +412,6 @@ Imagine you sell clothing that is available in various patterns.
 In Prohandel, each pattern is identified by a unique ID.
 You only want the products with pattern number 5 to be imported into plentymarkets.
 To do so, you’ll choose the field name *patternNumber*, the field value *5* and the import behaviour *Only import those items with specified value*.
-
-*_Note_*:
-It’s currently only possible to select *patternNumber* as the field name.
-Should another field also be taken into consideration for the import?
-Get in contact with us!
-We’d be happy to discuss your needs and give you an estimate for the costs of implementation.
 
 |====
 
@@ -406,15 +472,14 @@ This drop-down list only includes the attributes that already exist in plentymar
 |Which plentymarkets data field matches your individual item number in Prohandel?
 Select the appropriate option from the drop-down list.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Option !Explanation
 
 ! *None*
 !The individual item number will not be transferred.
 
 ! *Name 1*
-!The individual item number will be saved under: xref:item:managing-items.adoc#50[Item » Edit item » [Open item] » Tab: Texts » Entry field: Name 1]
+!The individual item number will be saved under: xref:item:managing-items.adoc#50[Item » Edit item » [Open item\] » Tab: Texts » Entry field: Name 1]
 
 ! *Variation property*
 !A second drop-down list opens.
@@ -429,15 +494,14 @@ This drop-down list only includes the properties that already exist in plentymar
 |Which plentymarkets data field matches your supplier item number in Prohandel?
 Select the appropriate option from the drop-down list.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Option !Explanation
 
 ! *None*
 !The supplier item number will not be transferred.
 
 ! *External variation ID*
-!The supplier item number will be saved under: xref:item:managing-items.adoc#190[Item » Edit item » [Open variation] » Tab: Settings » Area: Basic settings » Entry field: External variation ID]
+!The supplier item number will be saved under: xref:item:managing-items.adoc#190[Item » Edit item » [Open variation\] » Tab: Settings » Area: Basic settings » Entry field: External Variation ID]
 
 ! *Variation property*
 !A second drop-down list opens.
@@ -458,9 +522,8 @@ This drop-down list only includes the properties that already exist in plentymar
 |Which plentymarkets property matches the Prohandel data field?
 Select the appropriate option from the drop-down list.
 
-[cols="1,4a"]
+[cols="1,3a"]
 !===
-!Option !Explanation
 
 ! *None*
 !The Prohandel data field will not be transferred.
@@ -489,7 +552,8 @@ In plentymarkets, you can find an item’s tag in the menu *Item » Edit item »
 [#90]
 === Mapping of sales prices
 
-In this step, you map the sales prices used in Prohandel to the sales prices in plentymarkets.
+* In the upper area, you map the sales prices used in Prohandel to the sales prices in plentymarkets.
+* In the lower area, you map the special prices used in Prohandel to the sales prices in plentymarkets.
 
 [[table-sales-prices]]
 .Mapping of sales prices
@@ -497,19 +561,44 @@ In this step, you map the sales prices used in Prohandel to the sales prices in 
 |====
 |Setting |Explanation
 
-| *Prohandel sale price*
+2+^| *Sales prices*
+
+| *Sales price*
 |Which plentymarkets sales price do you want to use for the sale price in Prohandel?
 Select the appropriate plentymarkets sales price from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:prices.adoc#[configured sales prices in plentymarkets]?
 This drop-down list only includes the sales prices that already exist in plentymarkets.
 
-| *Prohandel label price*
+| *Sales price (label price)*
 |Which plentymarkets sales price do you want to use for the label price in Prohandel?
 Select the appropriate plentymarkets sales price from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:prices.adoc#[configured sales prices in plentymarkets]?
 This drop-down list only includes the sales prices that already exist in plentymarkets.
+
+2+^| *Prohandel special price*
+
+| *ID of the Prohandel special price*
+|What is the special price’s ID in Prohandel?
+Enter the ID into this field.
+
+| *Sales price (special price)*
+|Which plentymarkets sales price do you want to map to your Prohandel special price?
+Select the appropriate plentymarkets sales price from the drop-down list.
+
+*_Requirement_*: Have you already xref:item:prices.adoc#[configured sales prices in plentymarkets]?
+This drop-down list only includes the sales prices that already exist in plentymarkets.
+
+| *From*; +
+*To*
+|When should this sales price be valid?
+Select the “from” and “to” dates from the drop-down lists.
+
+*_Requirement_*: Have you already xref:item:properties.adoc#[configured properties in plentymarkets]?
+This drop-down list only includes the properties that already exist in plentymarkets.
+We recommend creating properties of the type “Date” for the from and to dates.
+
 |====
 
 [TIP]
@@ -580,7 +669,7 @@ In this step, you’ll activate the cron jobs that should run automatically (ico
 | *Item import*
 |Daily
 |
-* Once you have completed the assistant, _all_ of your items will initially be transmitted from Prohandel to plentymarkets.
+* Once you have completed the assistant, all of your items will initially be transmitted from Prohandel to plentymarkets.
 This initial, full import can take a few days to finish, depending on the number of products.
 * Afterwards, only a sub-set of items will be imported, based on the previously selected xref:business-decisions:prohandel.adoc#70[import settings].
 * Only new items are imported and new variations on existing items.
@@ -635,10 +724,10 @@ For example:
 ====
 Check the data that was transmitted for the main variation and for the sub-variations.
 
-* An item’s first variation is called its _main variation_.
+* *_Main variation_*: An item’s first variation is called its main variation.
 It is not for sale, but rather is purely virtual and helps you manage the sub-variations via xref:item:inheritance.adoc#[inheritance].
 When you open an item data record, the main variation automatically opens too.
-* The _sub-variations_ are the saleable versions of the product.
+* *_Sub-variation_*: The sub-variations are the saleable versions of the product.
 For example, if a t-shirt is sold in the colours blue and red and the sizes S, M, L, then every single combination (Blue S, Blue M, Blue L, Red S, Red M, Red L) is a sub-variation.
 To open a sub-variation, click on the tab *Variations* and then on *Search* (icon:search[role="blue"]).
 Finally, click on a sub-variation in the overview.
@@ -657,21 +746,18 @@ For example, you can:
 For a complete list of all the item data fields in plentymarkets, refer to the page xref:item:managing-items.adoc#[Directory of data fields].
 
 [#150]
-== Orders and event procedures
+== Processing orders
 
 When a product is sold, the order data lands in the plentymarkets menu *Orders » Edit orders*.
 The order can be processed here and its progress can be tracked with the help of a status.
 
 Further information about processing orders in plentymarkets can be found on the xref:orders:managing-orders.adoc#[Managing orders] page of the manual.
 
-//nicht vergessen - auf die Ereignis-Aktion Seite selbst, musst du die 4 Prohandel EAs in die Tabelle eränzen. Also hier:
-//https://knowledge.plentymarkets.com/automatisierung/ereignisaktionen#130
-
 [#160]
-=== Setting up event procedures
+== Setting up event procedures
 
 Of course, the order data shouldn’t just stay in plentymarkets. Rather, it should also be transmitted to Prohandel.
-You’ll set up _four so-called event procedures_ to do this.
+You’ll set up four so-called event procedures to do this.
 They only need to be set up once, in order for the export to work correctly.
 
 [.instruction]
@@ -682,19 +768,19 @@ Setting up an event procedure:
 → The *Create new event procedure* window opens.
 . Enter a distinct name for the event procedure.
 . Select the event as listed in the following tables.
-. Click on icon:save[role="green"] *Save*. +
+. Click on icon:save[set=plenty, role="green"] *Save*. +
 → The event procedure is created and can be edited further.
 . Click on *Add procedure* (icon:plus[role="green"]) and select the procedure as listed in the following tables.
 . Optional: Click on *Add filter* (icon:plus[role="green"]) and select filters if you only want the event procedure to apply in certain situations.
 For example, the event procedure could only apply to specific sales channels or clients.
 . Activate the event procedure (icon:check-square[role="blue"]) once it should go into effect.
 From the point of activation onwards, the event procedure applies your settings to the selected orders.
-. Save (icon:save[role="green"]) the settings.
+. Save (icon:save[set=plenty, role="green"]) the settings.
 
 For further information, refer to the xref:automation:event-procedures.adoc#[Event procedures] page of the manual.
 
 [#170]
-==== Notifying Prohandel of new orders
+=== Notifying Prohandel of new orders
 
 When a new order lands in plentymarkets, Prohandel should be informed of the order.
 This allows Prohandel to reserve the necessary stock and avoid overselling.
@@ -715,7 +801,7 @@ Order > Client (store)
 |====
 
 [#180]
-==== Notifying Prohandel of payment and shipment
+=== Notifying Prohandel of payment and shipment
 
 Fully processed orders are in status 7.
 This status means that payment has been received and items have been booked as outgoing.
@@ -737,12 +823,14 @@ Order > Client (store)
 |====
 
 [#190]
-==== Notifying Prohandel of cancellations
+=== Notifying Prohandel of cancellations
 
 A cancellation:
 
 * means that the customer changed his or her mind and no longer wants the item that was purchased.
-* happens _before_ you receive payment and ship the items.
+* happens before you receive payment and ship the items.
+* can be understood as reversing the stock reservation.
+plentymarkets notifies Prohandel that the stock reservation is null and void.
 
 You can cancel an order by changing its status to 8.
 At this point, Prohandel should be informed of the cancellation so that stock stops being reserved.
@@ -763,12 +851,12 @@ Order > Client (store)
 |====
 
 [#200]
-==== Notifying Prohandel of returns
+=== Notifying Prohandel of returns
 
 A return:
 
 * means that the customer changed his or her mind and no longer wants the item that was purchased.
-* happens _after_ you receive payment and ship the items.
+* happens after you receive payment and ship the items.
 
 Since payment has already been received, you need to refund the customer.
 In other words, you need to inform Prohandel of the return so that the revenue can be booked back out of the sales store.

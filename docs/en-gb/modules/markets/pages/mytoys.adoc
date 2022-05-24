@@ -161,7 +161,7 @@ Select one or several warehouses that contain the products that you want to sell
 include::partial$activate-referrer.adoc[]
 
 [#payment-method]
-=== Activating the payment method
+=== Permitting payment method in customer classes
 
 :payment-method: myToys
 
@@ -272,7 +272,8 @@ Every market structures item data differently. <<#catalogue-mappings>> contains 
 
 Also take note of the following general information:
 
-* Map at least all *mandatory fields*. To only show marketplace data fields that are mandatory, go to the toolbar and click on icon:more_vert[set=material]. Activate the toggle button (icon:toggle-on[role="green"]) *Only display mandatory fields*.
+* Map at least all *mandatory fields*. To only show marketplace data fields that are mandatory, go to the toolbar and click on icon:more_vert[set=material]. Activate the toggle button (icon:toggle-on[role="green"]) *Only display mandatory fields*. +
+→ *_Note:_* An overview of the mandatory fields for each category is available in link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys/Pflichtwerteliste_MyToys.xlsx[this list^]. Mandatory fields are labelled with *MUST*.
 
 * For some mappings, it makes sense to create xref:item:properties.adoc#500[properties] beforehand. You need to create and save these properties before you can map them in the catalogue. Thus, make sure you have created all necessary properties.
 
@@ -409,7 +410,7 @@ Use a property to specify material compositions in percent:
 ! *Textile component 1*
 ! As described above, the marketplace data field *General Components > Textile composition - 1. Material composition textile* is used to specify the material composition of a variation in percent. However, {market} does not know which part of the variation these percentages relate to. As such, the marketplace data field *Textile component 1* specifies to {market} which component of a variation the percentages relate to.
 
-Examples of textile components are Obermaterial (upper), Außenjacke (outer jacket), Beinfutter (leg lining), or Bündchen (cuffs). You can find a complete list of the textile components {market} uses link:https://raw.githubusercontent.com/plentymarkets/manual/master/de/maerkte/assets/mytoys-textilkomponenten.txt[here^].
+Examples of textile components are Obermaterial (upper), Außenjacke (outer jacket), Beinfutter (leg lining), or Bündchen (cuffs). You can find a complete list of the textile components {market} uses link:https://raw.githubusercontent.com/plentymarkets/plenty-manual-docs/main/docs/en-gb/modules/markets/examples/mytoys-textilkomponenten.txt[here^].
 
 Use a property to specify the textile components:
 
@@ -735,8 +736,8 @@ include::_includes:page$EA.adoc[]
 | *Selection*
 
 | *Event*
-| *Status change*
-| Select an event, for example [8] *Waiting for payment*.
+| *Order change: Status change*
+| Select a status, for example *[8] Waiting for payment*.
 
 | *Filter*
 | *Order > Referrer*
@@ -763,8 +764,8 @@ include::_includes:page$EA.adoc[]
 |Setting |Option |Selection
 
 | *Event*
-| *Status change*
-| Select an event, for example [7] *Outgoing items booked*.
+| *Order change: Status change*
+| Select a status, for example *[7] Outgoing items booked*.
 
 | *Filter 1*
 | *Order > Order type*
@@ -860,7 +861,7 @@ Activating Debug log level:
 . In the drop-down menu *Log level*, activate the option *Debug*.
 . *Save* (icon:save[set=plenty]) the settings.
 
-After the next export, you can click on *myToys* entries with the level *Debug* in the *Data » Log* menu. This way, the entries will expand and further details regarding missing mandatory fields is displayed.
+After the next export, you can click on *myToys* entries with the level *Info* in the *Data » Log* menu. This way, the entries will expand and further details regarding missing mandatory fields is displayed.
 
 [.instruction]
 Find variations with missing mandatory fields:
@@ -868,8 +869,7 @@ Find variations with missing mandatory fields:
 . Go to *Data » Log*.
 . In the column on the left, select the following filters:
   * Integration *myToys*
-  * Level *Debug*
-  * Reference type *variationId*
+  * Identifier *MyToys\Components\Catalog\CatalogComponent::logEmptyRequiredFields*
 . Click on *Search* (icon:search[role="blue"]). +
 → All variations with missing mandatory fields are listed.
 . Click on the entry to see details. +
