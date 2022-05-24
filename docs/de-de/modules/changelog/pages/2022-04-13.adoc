@@ -1,0 +1,241 @@
+= Changelog 13. April 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 07. April 2022
+:endWeekDate: 13. April 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/auftragsdokumente-pfand-wird-nicht-separat-aufgefuehrt-order-documents-deposit-is-not-shown-separately/677172
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+* Im Menü *Einrichtung » Märkte » Amazon » Einstellungen » [Amazon-Konto wählen] » Tab: Artikeleinstellungen* wurde im Bereich *Exporteinstellungen* die Einstellung *Verlängerte Bearbeitungszeit aktivieren* hinzugefügt. Wenn du diese Einstellung aktivierst, kannst du die maximale Bearbeitungszeit von Amazon-Aufträgen von 30 auf bis zu 120 Tage verlängern.
++
+*_Hinweis:_* Um die Einstellung *Verlängerte Bearbeitungszeit aktivieren* nutzen zu können, musst du bei Amazon dafür freigeschaltet sein.
+
+[discrete]
+=== Kataloge
+
+* In den Katalogen (*Daten » Kataloge*) steht nun ein Format zur Verfügung, um Zahlungen zu exportieren. Weitere Informationen findest du xref:daten:zahlungen-exportieren.adoc[im plentymarkets Handbuch]
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf {version} veröffentlicht.
+
+[discrete]
+=== OTTO Market
+
+:otto-master-date: 08.04.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/c78STmpOZkdZn0o0KYdaBKwtvLg.xlsx
+
+include::partial$otto-master-file.adoc[]
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Auftragsdokumente
+
+* Pfand wurde nicht mehr wie zuvor auf Dokumenten in den Summen separat ausgewiesen, sondern war verrechnet enthalten. Dies wurde behoben.
+
+[discrete]
+=== Bestellwesen
+
+* In einigen Fällen konnte es vorkommen, dass die Vorlage für die Nachbestellung an eine falsche E-Mail-Adresse gesendet wurde. Dieser Fehler wurde jetzt behoben.
+
+[discrete]
+=== Dokumente
+
+* Unter bestimmten Konstellationen wurden der Hinweis zur Differenzbesteuerung und zum Reverse Charge zusammen ausgegeben, obwohl nur einer der Hinweise richtig ist. Dies wurde behoben.
+* Die Sichtbarkeit der Bestelleigenschaften auf den Auftragsdokumenten (Rechnung, Lieferschein etc.) wurde nicht korrekt behandelt. Dies wurde behoben.
+* Auf Dokumenten konnte es dazu kommen das Versandkosten doppelt in der Zwischensumme eingerechnet werden. Dieses Verhalten konnte nur auftreten wenn in den Buchhaltungseinstellungen die Option *Umsatzsteuer der Versandkosten auf Rechnung ausweisen* auf *Nur Inland und EU* gestellt ist und ein entsprechender Auftrag vorlag. Dies wurde behoben.
+* Es konnte vorkommen, dass falsche Gutschein Codes auf Auftragsdokumenten angezeigt wurde. Die Summen waren nicht betroffen.
+* Bei Netto Aufträgen konnte es dazu kommen das der Gesamtpreis von einer Artikelpositionen in Brutto ausgegeben wurde wenn die Spalte *Gesamtpreis (brutto)* in den Dokumenteinstellung verwendet wird. Dies wurde behoben.
+
+[discrete]
+=== E-Mails
+
+* Die E-Mail-Variable `$MethodOfPaymentName` zeigte bei Zahlungsarten, die direkt von einem Marktplatz kamen, keinen Wert an. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Kataloge
+
+* Durch eine fehlerhafte Anpassung war kurzfristig nicht möglich mehr als 10.000 Aufträge über die Kataloge zu exportieren. Die Aufträge haben sich danach wiederholt.
+
+[discrete]
+=== Kontakte
+
+* In der (alten) Kontakt-UI werden die primären Sterne an den Tags der Liefer- und Rechnungsadressen jetzt wieder angezeigt.
+* Das wechseln der Seiten in der Address-Übersicht der Kontakt-UI hat aufgrund eines Fehlers nur noch Seite 1 angezeigt, dieses Verhalten wurde nun korrigiert.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{{version}}* veröffentlicht.
+
+[discrete]
+=== Awin
+
+* Ab sofort kannst du Artikeldaten mit einem Katalog an das Preisportal Awin exportieren. Das Marktplatz-Format Awin findest du jetzt im Menü *Daten » Kataloge*. Du exportierst schon Artikeldaten zu Awin über den elastischen Export?
+** Merkmale und Freitextfelder können für den Katalogexport nicht mehr verwendet werden. Prüfe deshalb, welche Merkmale du aktuell für das Preisportal verwendest. Erstelle Eigenschaften für alle Merkmale, die du weiterhin benötigst.
+** Beim Wechsel solltest du deinen alten Elastischen Export exakt in dem neuen Katalog nachbauen, damit der Artikelexport weiterhin funktioniert. Ordne also alle Datenfelder so zu, wie sie auch im Elastischen Export an das Preisportal übertragen wurden. Wenn du bestimmte Datenfelder anders als bisher zuordnest, werden möglicherweise beim Export neue Artikel erstellt.
+** Wie du einen Katalog für Awin einrichtest, erfährst du auf der Handbuchseite xref:maerkte:awin.adoc[Awin.com].
+
+[discrete]
+=== eBay
+
+* Bestimmte eBay-Listing-Prozesse laufen nun über die neue Feed-API. Diese Prozesse sind:
+** Bestandsabgleich
+** Listings prüfen
+** Listings aktualisieren
+
++
+_Hintergrund_: Bisher wurden die oben genannten Listing-Prozesse über die alte LMS-Logik gesteuert. Bei eBay laufen diese Prozesse jetzt über die neue Feed-API. Dies wurde auch in plentymarkets umgestellt.
+Die alte LMS-Logik wird Ende April abgeschaltet. Für die Kommunikation mit der neuen Feed-API wird OAuth2 benötigt. Damit die Prozesse über die neue Feed-API laufen können, muss dein eBay-Konto deshalb für OAuth2 authentifiziert sein.
+
++
+[IMPORTANT]
+.To-Do
+======
+Damit du die Listing-Prozesse Bestandsabgleich, Listing prüfen und Listing aktualisieren weiterhin nutzen kannst, musst du dein eBay-Konto für OAuth2 authentifizieren, wenn noch nicht geschehen.
+
+eBay-Konto für OAuth2 authentifizieren:
+
+. Öffne das Menü *Einrichtung » Märkte » eBay » Konten » OAuth2*.
+. Klicke oben auf *Production-Konto hinzufügen*. +
+→ Du wirst zu eBay weitergeleitet und musst dort deine Daten authentifizieren. +
+→ Das Konto wird für OAuth2 freigeschaltet. +
+→ Das Konto wird im Menü *Einrichtung » Märkte » eBay » Konten » OAuth2* angezeigt.
+
+Wenn du dein eBay-Konto bereits für OAuth2 authentifiziert hast, musst du nichts weiter tun. Du kannst dies im Menü *Einrichtung » Märkte » eBay » Konten » OAuth2* prüfen. Wenn du dein eBay-Konto bereits für OAuth2 authentifiziert hast, wird das Konto in diesem Menü angezeigt.
+
+Weitere Informationen zu OAuth2 findest du auf der Handbuchseite xref:maerkte:ebay-einrichten.adoc#oauth2[eBay einrichten].
+======
+
+[discrete]
+=== tracdelight
+
+* Ab sofort kannst du Artikeldaten mit einem Katalog an das Preisportal tracdelight exportieren. Das Marktplatz-Format tracdelight findest du jetzt im Menü *Daten » Kataloge*. Du exportierst schon Artikeldaten zu tracdelight über den elastischen Export?
+** Merkmale und Freitextfelder können für den Katalogexport nicht mehr verwendet werden. Prüfe deshalb, welche Merkmale du aktuell für das Preisportal verwendest. Erstelle Eigenschaften für alle Merkmale, die du weiterhin benötigst.
+** Beim Wechsel solltest du deinen alten Elastischen Export exakt in dem neuen Katalog nachbauen, damit der Artikelexport weiterhin funktioniert. Ordne also alle Datenfelder so zu, wie sie auch im Elastischen Export an das Preisportal übertragen wurden. Wenn du bestimmte Datenfelder anders als bisher zuordnest, werden möglicherweise beim Export neue Artikel erstellt.
+** Wie du einen Katalog für tracdelight einrichtest, erfährst du auf der Handbuchseite xref:maerkte:tracdelight.adoc[tracdelight].
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf **{{version}}** veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Bisher war bei der manuellen Kontakt- und Adressanlage immer *Deutschland* als Standardland gewählt. Dieses Verhalten wurde geändert. Ab sofort ist der Standard-Standort, der im Menü *Einrichtung » Mandant » [Mandant wählen] » Einstellungen* gespeichert ist, automatisch in neuen Kontakten und neuen Adressen vorausgewählt.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{{version}}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Die folgenden Korrekturen für die Komponente Eigenschaften an Auftragspositionen wurden durchgeführt:
+** Die Eigenschaften für Auftragspositionen für Typ Kein wurden nicht gespeichert. Dies ist nun behoben.
+** Die Eigenschaften für Auftragspositionen für die Typen Datum und Einzelauswahl wurden nicht korrekt angezeigt. Dies ist nun behoben.
+** Das Löschen einer gespeicherten Eigenschaft für Auftragspositionen funktionierte nicht richtig. Dies ist nun behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/adcelltracking_6493[ADCELL Conversion Tracking^]
+|2.0.14
+|-
+
+|link:https://marketplace.plentymarkets.com/blog_6103[Blog^]
+|2.0.1
+|-
+
+|link:https://marketplace.plentymarkets.com/dhlshipping_4871[DHL Shipping (Versenden)^]
+|3.1.18
+|-
+
+|link:https://marketplace.plentymarkets.com/dpdshippingservices_6320[DPD Versand Services^]
+|1.7.10
+|-
+
+|link:https://marketplace.plentymarkets.com/feed4ceres_6097[Feed4Ceres^]
+|4.0.10
+|-
+
+|link:https://marketplace.plentymarkets.com/io_4696[IO^]
+|5.0.49
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.7
+|-
+
+|link:https://marketplace.plentymarkets.com/ceres_4697[plentyShop LTS^]
+|5.0.49
+|Im Zuge des Releases von Ceres 5.0.49 gab es Änderungen an Template-Dateien, die für Theme-Entwickler relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+
+link:https://github.com/plentymarkets/plugin-ceres/pull/3265/files#diff-4c35af622ef09ba8949eb1c47557e3e6651b088291a0d2e2463c9244007b5516[resources/js/src/app/components/itemList/CategoryItem.vue^]
+
+|link:https://marketplace.plentymarkets.com/schufa_6360[Schufa Bonitätsprüfung^]
+|2.1.5
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
