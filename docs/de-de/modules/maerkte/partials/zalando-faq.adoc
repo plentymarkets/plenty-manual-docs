@@ -11,7 +11,7 @@ Um am Partnerprogramm von Zalando teilzunehmen, wende dich direkt an link:https:
 .Wie geht es nach der Registrierung beim Zalando-Partnerprogramm weiter?
 --
 Melde dich im link:https://forum.plentymarkets.com/t/sammelthema-collective-thread-csv-formular-zum-abgleichen-von-artikeln-silhouetten-csv-form-for-synchronization-of-articles-silhouettes/669460[plentymarkets Forum^]. Dort erhältst du von unserem Support-Team ein Formular im CSV-Format. Dieses Formular enthält die folgenden Informationen:
- 
+
     * Routen für Artikel
     * Benutzernamen und Kennwort
     * Zugangsdaten zum plentymarkets FTP-Server für Silhouetten
@@ -64,7 +64,7 @@ Dies sind die Pflichtfelder für Zalando:
     * Herstellerfarbe
     * Jahreszeiten-Code
     * Silhouetten-Typ
-    
+
 Um zu prüfen, ob es Fehler für deine Varianten gibt, stehen dir die unten aufgelisteten Berichte zur Verfügung. Dort kannst du (je nach Bericht) die Fehler deiner Artikel prüfen.
 --
 
@@ -76,6 +76,9 @@ Bei Zalando gibt es den Sonderfall, dass nachträgliche Änderungen von Artikeld
 
 [#faq-berichte-fehlermeldungen]
 === Berichte und Fehlermeldungen
+
+[#faq-reports]
+==== Berichte
 
 [.collapseBox]
 .Wo finde ich die Berichte von Zalando?
@@ -123,12 +126,13 @@ Das Merkmal *Zalando » Altersgruppe* für die VariantenID (=ValueID) fehlt.
 .errors (1234567) (ValueId:12345): sizeRegister
 --
 Das Merkmal *Zalando » Größen-Register* fehlt oder wurde nicht korrekt angelegt.
+*_Hinweis:_* Dies gilt nur, wenn du deine Größen _nicht_ über Attribute pflegst.
 
     * _Fall 1:_ Das Merkmal fehlt. +
     Das Merkmal muss hinzugefügt und mit dem entsprechenden Größenregister gepflegt werden.
     * _Fall 2:_ Das Merkmal ist gepflegt. +
     Hierbei muss zwingend das Format von Zalando eingehalten werden. Prüfe deshalb das Größenregister auf Richtigkeit.
-    
+
 *_Hinweis:_* Manuell angelegte Größenregister werden von Zalando nicht erkannt.
 --
 
@@ -160,7 +164,9 @@ Das Merkmal *Zalando » Jahreszeiten-Code* für die VariantenID (ValueID) fehlt.
 [.collapseBox]
 .errors (1234567) (ValueId:12345): size
 --
-Das Merkmal *Zalando » Größe* für die VariantenID (ValueID) fehlt.
+Das Merkmal *Zalando » Größe* für die VariantenID (ValueID) fehlt _oder_ das Attribut wurde noch nicht mit dem Merkmal verknüpft. +
+*_Hinweis:_* Für die Größen können Artikelattribute genutzt werden. Hierfür ist es zwingend notwendig, die Attribute mit dem Größenregister zu verknüpfen. +
+Wie du Attribute mit Merkmalen verknüpfen kannst, findest du xref:maerkte:zalando.adoc#700[hier].
 --
 
 [.collapseBox]
@@ -230,7 +236,7 @@ Als *Referenztyp* kannst du zum Beispiel die *Varianten-ID* oder die *EAN* wähl
 Ob Zalando diese Meldung erfolgreich angenommen hat, sehen wir im Response. Dieser wird in einem separaten Log geschrieben. Du findest im folgenden Screenshot eine *jobId*:
 
 image::maerkte:zalando-faq-jobid.png[jobid]
-    
+
 Nutze die *jobID* und filtere im Menü *Daten » Log* danach.
 
 image::maerkte:zalando-faq-job-id-filter.png[jobid-filter]
@@ -325,7 +331,7 @@ Stelle die folgenden Filter ein:
     * *Integration*: Plenty\Modules\Zalando\Orders\Procedures\OrderShippingProcedure
     * *Identifikator*: Zalando
     * *Level*: error
-    
+
 Bei Bedarf kann zusätzlich nach der Order-ID oder der externen Order-ID gefiltert werden:
 
     * *Referenztyp*: orderId / externalOrderId
@@ -359,14 +365,14 @@ Zalando sendet (neue) Silhouetten auf den plentymarkets FTP-Server, damit sie in
 Nutze dazu die Funktion *in Merkmale konvertieren*. Solltest du diesen Schritt zum ersten Mal durchlaufen und es sieht folgendermaßen aus:
 
 image::maerkte:zalando-faq-silhouetten.png[]
-    
+
 Dann liegt es entweder daran, dass
-    
+
     * Zalando noch keine Silhouetten für dich übersendet hat _oder_
     * plentymarkets deine Silhouetten noch nicht importiert hat.
-    
+
 Liegen Silhouetten für dein plentymarkets System vor und du möchtest diese in Merkmale konvertieren/aktualisieren, so sieht die Ansicht wie folgt aus:
-    
+
 image:maerkte::zalando-faq-silhouetten-konvertieren.png[]
 
 Wähle die gewünschten Gruppen und klicke auf *in Merkmale konvertieren*. +
@@ -381,4 +387,11 @@ Sämtliche Dokumente, welche Zalando von dir einfordert, müssen selbstständig 
 *_Hinweis:_* Da Zalando an dieser Stelle gewisse Anforderungen hat und du die Einstellungen der Dokumente nur global konfigurieren kannst, solltest du einen separaten Mandanten ausschließlich für Zalando anlegen, um deine bestehenden Einstellungen nicht zu überschreiben. Für jeden Mandanten hast du anschließend die Möglichkeit, die Dokumente individuell zu gestalten. +
 Einen zusätzlichen Mandanten buchst du unter *START (plentymarkets Logo) » Mein-Konto » Verträge*. +
 Wie die Einrichtung deiner Dokumente funktioniert, erfährst du auf der Handbuchseite xref:auftraege:auftragsdokumente.adoc#[Auftragsdokumente].
+--
+
+[.collapseBox]
+.Wann werden die "Master Data" importiert?
+--
+*_Hinweis:_* Die „Master Data“ enthalten u.a. deine SizeRegister (Größenregister) sowie die Silhouetten, die du nutzen möchtest. +
+Genau wie die Silhouetten werden die Größenregister ebenfalls jeden Mittwoch importiert.
 --
