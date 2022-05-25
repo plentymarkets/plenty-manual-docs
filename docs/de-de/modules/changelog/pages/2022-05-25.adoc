@@ -6,7 +6,7 @@
 :startWeekDate: 19. Mai 2022
 :endWeekDate: 25. Mai 2022
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/handbuch-facettensuche-manual-faceted-search/681855
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -37,14 +37,23 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 * Die Ereignisaktionen *Offene Mengen in Nachbestellung stornieren* und *Gewährleistung anlegen* sind nun im Menü *Einrichtung » Aufträge » Ereignisse* verfügbar.
 
-'''
-
 [discrete]
-== Geändert
+=== Kataloge
 
-Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+* Ab sofort kannst du Artikeldaten mit einem Katalog an belboon exportieren. Das Marktplatz-Format für belboon findest du jetzt im *Menü Daten » Kataloge*.
+Bisher war der Export von Artikeldaten an belboon nur über den Elastischen Export möglich. Beim Wechsel auf den Artikeldatenexport mit Katalogen solltest du deshalb Folgendes beachten:
 
+** Merkmale und Freitextfelder können für den Katalogexport nicht mehr verwendet werden. Prüfe deshalb, welche Merkmale du aktuell für belboon verwendest. Erstelle Eigenschaften für alle Merkmale, die du weiterhin benötigst.
 
+** Beim Wechsel solltest du deinen alten Elastischen Export exakt in dem neuen Katalog nachbauen, damit der Artikelexport weiterhin funktioniert. Ordne also alle Datenfelder so zu, wie sie auch im Elastischen Export übertragen wurden. Wenn du bestimmte Datenfelder anders als bisher zuordnest, werden möglicherweise beim Export neue Artikel erstellt.
+Wie du einen Katalog für belboon einrichtest, erfährst du im link:https://knowledge.plentymarkets.com/de-de/manual/main/maerkte/belboon.html[plentymarkets Handbuch^].
+
++
+[NOTE]
+.Hinweis
+======
+Der Elastische Export und die Exportformate werden nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, schon jetzt Kataloge zu erstellen.
+======
 
 '''
 
@@ -54,11 +63,32 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
 [discrete]
+=== Auftragsdokumente
+
+* Bei der Dokumenterstellung konnte es in Ausnahmefällen und bei bestimmten Konstellationen dazu kommen, dass die gleiche Dokumentnummer mehrfach vergeben wurde.
+Dieses Verhalten konnte nur auftreten, wenn ein Nummernkreis ohne Prefix und mit einer Nummer mit führenden Nullen angelegt ist. Dieses Verhalten wurde behoben.
+
+[discrete]
 === CRM
 
 * Nach Ändern der Tabellenspalten des Kontos wurden diese beim nächsten Aufruf nicht geladen. Dies ist nun behoben.
 
+* Die Datenbereinigung von ungenutzten Adressen und Kontakten konnte nicht ausgeführt werden. Dieser Fehler wurde behoben.
 
+[discrete]
+=== Nachbestellungen
+
+* Da die Nachrichten im Messenger in HTML gespeichert sind, kam es bei der Ausgabe einiger spezieller Zeichen der Nachrichten auf dem Nachbestellung-PDF dazu, dass deren HTML-Entität ausgegeben wurde (z.B. wurde statt `&` das Zeichen `&amp;` ausgegeben). Dies wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Es gab einen kleinen Fehler im Filter *Seriennummer*, sodass dieser nicht mehr korrekt funktionierte. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Warenwirtschaft
+
+* Wegen Umstellung einiger veralteten Terra-Komponente in der Lager UI wurden die Dimensionen im Filterbereich nicht mehr angezeigt. Der Fehler wurden nun behoben.
 
 --
 
@@ -73,15 +103,33 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Kontakt-UI
 
-
-'''
+* Wenn du im Kontaktdatensatz eine Änderung machst und diese noch nicht gespeichert hast, wird in der Navigation links ein Sternchen hinter dem Namen und der Kontakt-ID angezeigt.
++
+image::changelog:contact-ui1.png[width=640]
+Wenn du den Kontaktdatensatz schließen möchtest, ohne gespeichert zu haben, erscheint ein Abfrage, über die du entscheidest, wie du weiter vorgehen möchtest.
++
+image::changelog:contact-ui2.png[width=640]
 
 [discrete]
-== Geändert
+=== Warenwirtschaft
 
-Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+* Du kannst ab jetzt Dimensionen oder Lagerorte via Backend in der Lagerstruktur verschieben. Im Zuge des Updates musst du die folgenden Schritte vornehmen:
 
+** Klicke auf *Verschieben nach*.
++
+image::changelog:warehouse1.png[width=640]
+
+** Wähle die Dimension aus, die du verschieben möchtest.
+** Wähle die *Platzierung* und den *Zielbereich* aus.
++
+image:changelog:warehouse2.png[width=640]
+
+** Klicke auf *Speichern*.
++
+image:changelog:warehouse3.png[width=640]
 
 
 '''
@@ -90,6 +138,16 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 == Behoben
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Abonnement
+
+* Durch einen Fehler wurden die Artikel-Widgets zugeklappt angezeigt, aber sind nun wieder standardmäßig ausgeklappt.
+
+[discrete]
+=== Aufträge
+
+* Kategorierabatte wurden nicht korrekt in die Preise mit einberechnet. Dieses Verhalten wurde behoben.
 
 
 
@@ -240,7 +298,7 @@ Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest
 --
 
 plentymarkets App::
-*
++
 --
 
 [discrete]
@@ -251,6 +309,17 @@ Folgende Probleme wurden in Version 1.11.29 der *plentymarkets App* behoben.
 * Bei Verwendung von Ingenico Kartenterminals konnte die Erstellung des Tagesabschlussberichts nicht über die Kasse gestartet werden. Dieses Verhalten wurde behoben.
 
 * In manchen Fällen wurde die rollende Kommissionierung fälschlicherweise mehrfach gestartet. Dieses Verhalten wurde behoben.
+
+--
+
+Dokumentation::
++
+--
+
+[discrete]
+=== Handbuch
+
+* Wenn du die Suchfunktion im Handbuch verwendest, kannst du ab jetzt die Ergebnisse nach Modul filtern.
 
 --
 
