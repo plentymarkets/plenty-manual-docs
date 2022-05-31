@@ -1,0 +1,166 @@
+= Checking catalogue export status
+:keywords:
+:description:
+:page-index:
+:author: team-plenty-channel
+
+Open the menu *Data » Catalogue export status* to check the status of catalogue exports.
+
+include::_includes:page$new-page-info-box.adoc[]
+
+[#status-overview]
+== Getting to know the status overview
+
+You are in the menu *Data » Catalogue export status*. When you open the menu, a list of all exports is shown. This list is updated automatically every 20 seconds.
+
+[[table-overview-columns]]
+.Columns of the overview
+[cols="1,3a"]
+|===
+|*Column* |*Explanation*
+| *Export ID*
+| The ID of the export
+
+| *Type*
+| What type of export is it?
+
+//tag::export-types[]
+* *Preview* = The export creates a preview of the first five records of the catalogue.
+* *Direct* = The export is processed immediately.
+* *Async* = The export is split into jobs. These jobs are enqueued.
+* *Dev cache* = A cached version of the catalogue is exported. The cache is updated every 20 minutes. +
+*_Tip:_* Exports of the type *Dev cache* are not shown in the overview. However, you can filter by this type to show these exports.
+//end::export-types[]
+
+| *Catalogue name*
+| The name of the catalogue
+
+| *Template*
+| The template
+
+| *State*
+| * *Started* = The export has started.
+* *In queue* = The export has been enqueued.
+* *Processed* = The export has been processed.
+* *Finalized* = The export has been finalized.
+* *Completed* = The export has been completed.
+
+| *Progress*
+| Shows the progress of the export. If the export is still running, the number of jobs already processed is shown. +
+*_Important:_* Exports of the types *Direct* and *Debug* are carried out immediately. No progress bar is shown for these exports.
+
+//tag::what-is-a-job[]
+[.collapseBox]
+.What is a job?
+--
+When exports of the type *Async* are started, the data to be exported is split into packages. Each package contains 500 lines, the last package may contain fewer. Each of these packages is a job. Each of these jobs is enqueued.
+
+*_Example:_* An export contains 2,300 lines. The export is split into 5 jobs: 4 jobs with 500 lines each and one job with 300 lines. The progress bar shows how many of these 5 jobs have been exported so far.
+--
+//end::what-is-a-job[]
+
+| *Error*
+| How many errors occurred during the export? +
+*_Tip:_* Click on the export to <<#status-details, see details>>.
+
+| *Successful jobs*
+| How many jobs of the export were completed successfully?
+
+include::page$catalogues-status.adoc[tag=what-is-a-job]
+
+| *Initiator*
+| How was the export started?
+
+* *User* = The export was started by a user. Point your mouse at the name of the user to also show the user ID.
+* *Cron* = The export was automatically started by a cron. Point your mouse at the "cron" text to show which cron started the export. +
+  ** *20* = Export runs every 20 minutes. +
+  ** *60* = Export runs hourly. +
+  ** *1440* = Export runs once a day.
+* *Debug* = The export has started for debugging purposes.
+
+| *Start time*
+| When was the export started?
+
+| *State last changed*
+| When did the state of the export last change?
+
+|===
+
+[#overview-filters]
+== Filtering the list of exports
+
+By default, all exports except those of the type *Dev cache* are shown. You can reduce the number of exports shown by using filters.
+
+* icon:search[set=material] = Starts a new search.
+* icon:tune[set=material] = Shows the filters.
+
+[.collapseBox]
+.Which filters are available?
+--
+
+[cols="1,3a"]
+|===
+
+| *Export ID*
+| Reduces the list to the export with this ID. 
+
+| *Type*
+| Reduces the list to exports of this type. +
+
+include::page$catalogues-status.adoc[tag=export-types]
+
+| *Initiator*
+| Reduces the list to exports that were started in this way.
+
+| *Initiator ID*
+| Reduces the list to exports that were started by this person. +
+*_Tip:_* This filter is only available when the filter *Initiator* is set to *User*.
+
+| *Started from*
+| Reduces the list to exports that were started on or after this date.
+
+| *Started to*
+| Reduces the list to exports that were started up to this date.
+
+| *State last changed from*
+| Reduces the list to exports with state changes since this date. 
+
+| *State last changed to*
+| Reduces the list to exports with state changes up to this date.
+|===
+--
+
+[#status-details]
+== Details view
+
+Click on an export to see details about the export process.
+
+// TODO: Insert Screenshot of Details view.
+
+[[table-status-details]]
+.Details view of export
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+| *Details*
+| This lists detailed information about the export. This information is updated automatically every 20 seconds.
+
+| *Error*
+| A list of errors. This information is not updated automatically. Click on icon:refresh[set=material] to manually update the information.
+
+| *Progress logs* +
+(icon:playlist_play[set=material])
+| Click to show the logs.
+The list of logs is shown on the left. Click on one of the logs to show more details about the progress.
+
+| *Performance logs* +
+(icon:bar_chart[set=material])
+| This setting is currently without function. Stay tuned.
+
+| *Data* +
+(only available after export is completed)
+| Click to show the data that was exported. The data is shown in JSON format. +
+*_Important:_* Due to the data volume and complexity, the data cannot be shown as a table.
+
+|===

@@ -1,0 +1,166 @@
+= Katalogexportstatus prüfen
+:keywords:
+:description:
+:page-index:
+:author: team-plenty-channel
+
+Im Menü *Daten » Katalogexportstatus* kannst du den Status der Katalogexporte nachvollziehen.
+
+include::_includes:page$new-page-info-box.adoc[]
+
+[#status-overview]
+== Statusübersicht kennenlernen
+
+Du befindest dich im Menü *Daten » Katalogexportstatus*. Wenn du das Menü öffnest, wird eine Liste aller Exporte angezeigt. Diese Liste wird automatisch alle 20 Sekunden aktualisiert.
+
+[[table-overview-columns]]
+.Spalten der Übersicht
+[cols="1,3a"]
+|===
+|*Spalte* |*Erläuterung*
+| *Export-ID*
+| ID des Exports
+
+| *Typ*
+| Um welchen Exportvorgang handelt es sich?
+
+//tag::export-types[]
+* *Vorschau* = Der Export erstellt eine Vorschau der ersten fünf Datensätze des Katalogs.
+* *Direkt* = Der Export wird sofort verarbeitet.
+* *Async* = Der Export wird in Jobs zerlegt. Diese Jobs werden in die Warteschlange eingereiht.
+* *Dev-Cache* = Eine gecachte Version des Katalogs wird exportiert. Der Cache wird alle 20 Minuten aktualisiert. +
+*_Tipp:_* Exportvorgänge des Typs *Dev-Cache* werden nicht in der Übersicht angezeigt. Du kannst aber nach diesem Typ filtern, um die Exporte anzuzeigen.
+//end::export-types[]
+
+| *Katalogname*
+| Der Name des Katalogs
+
+| *Template*
+| Das Template
+
+| *Zustand*
+| * *Gestartet* = Der Exportvorgang wurde gestartet.
+* *In Warteschlange* = Der Exportvorgang befindet sich in der Warteschlange.
+* *Verarbeitet* = Der Exportvorgang wurde verarbeitet.
+* *Fertiggestellt* = Der Exportvorgang wurde fertiggestellt.
+* *Abgeschlossen* = Der Exportvorgang ist abgeschlossen.
+
+| *Fortschritt*
+| Zeigt den Fortschritt des Exportvorgangs an. Wenn der Export noch läuft, wird angezeigt, wie viele der Jobs bereits verarbeitet wurden. +
+*_Wichtig:_* Exporte des Typs *Direkt* und *Debug* werden sofort ausgeführt. Für diese Exporte wird kein Fortschrittsbalken angezeigt.
+
+//tag::what-is-a-job[]
+[.collapseBox]
+.Was ist ein Job?
+--
+Bei Exporten des Typs *Asynchron* werden die zu exportierenden Daten vor dem Export in Pakete zerlegt. Jedes Paket enthält 500 Zeilen, das letzte Paket ggf. weniger. Jedes dieser Pakete entspricht einem Job. Jeder dieser Jobs wird in die Warteschlange eingereiht.
+
+*_Beispiel:_* Mit einem Export sollen 2.300 Zeilen exportiert werden. Der Export wird in 5 Jobs zerlegt: 4 Jobs mit je 500 Zeilen und ein Job mit 300 Zeilen. Der Fortschrittsbalken zählt mit, wie viele dieser 5 Jobs abgearbeitet wurden.
+--
+//end::what-is-a-job[]
+
+| *Fehler*
+| Wie viele Fehler sind beim Export aufgetreten? +
+*_Tipp:_* Klicke auf den Export, um <<#status-details, Details anzuzeigen>>.
+
+| *Erfolgreiche Jobs*
+| Wie viele Jobs des Exports wurden erfolgreich abgeschlossen?
+
+include::page$catalogues-status.adoc[tag=what-is-a-job]
+
+| *Initiator:in*
+| Wie wurde der Export gestartet?
+
+* *Benutzer:in* = Der Exportvorgang wurde von einer Benutzer:in gestartet. Wenn du mit der Maus auf den Namen der Person zeigst, wird auch die ID der Benutzer:in angezeigt.
+* *Cron* = Der Exportvorgang wurde automatisch durch einen Cron gestartet. Wenn du mit der Maus auf das Wort "Cron"zeigst, wird angezeigt, welcher Cron den Export gestartet hat. +
+  ** *20* = Export läuft alle 20 Minuten. +
+  ** *60* = Export läuft einmal pro Stunde. +
+  ** *1440* = Export läuft einmal pro Tag.
+* *Debug* = Der Exportvorgang wurde zum Debuggen gestartet.
+
+| *Startzeit*
+| Wann wurde der Exportvorgang gestartet?
+
+| *Letzte Zustandsänderung*
+| Wann wurde der Zustand des Exportvorgangs zuletzt geändert?
+
+|===
+
+[#overview-filters]
+== Liste der Exporte filtern
+
+Standardmäßig werden alle Exporte außer Exporte des Typs *Dev-Cache* angezeigt. Du kannst die Anzahl der angezeigten Exporte reduzieren, indem du Filter setzt.
+
+* icon:search[set=material] = Führt eine neue Suche aus.
+* icon:tune[set=material] = Blendet die Filter ein.
+
+[.collapseBox]
+.Welche Filter gibt es?
+--
+
+[cols="1,3a"]
+|===
+
+| *Export-ID*
+| Reduziert die Liste auf den Export mit dieser ID. 
+
+| *Typ*
+| Reduziert die Liste auf Exporte dieses Typs. +
+
+include::page$catalogues-status.adoc[tag=export-types]
+
+| *Initiator:in*
+| Reduziert die Liste auf Exporte, die auf diese Art gestartet wurden.
+
+| *Initiator:in-ID*
+| Reduziert die Liste auf Exporte, die von dieser Person gestartet wurden. +
+*_Tipp:_* Dieser Filter ist nur verfügbar, wenn du den Filter *Initiator:in* auf *Benutzer:in* gestellt hast.
+
+| *Gestartet von*
+| Reduziert die Liste auf Exporte, die ab diesem Datum gestartet wurden.
+
+| *Gestartet bis*
+| Reduziert die Liste auf Exporte, die bis zu diesem Datum gestartet wurden.
+
+| *Letzte Zustandsänderung von*
+| Reduziert die Liste auf Exporte, deren Zustand sich seit diesem Datum geändert hat. 
+
+| *Letzte Zustandsänderung bis*
+| Reduziert die Liste auf Exporte, deren Zustand sich bis zu diesem Datum geändert hat.
+|===
+--
+
+[#status-details]
+== Detailansicht
+
+Klicke auf einen Export, um Details zum Exportvorgang anzuzeigen.
+
+// TODO: Insert Screenshot of Details view.
+
+[[table-status-details]]
+.Detailansicht des Exports
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *Details*
+| Hier werden die Details zum Export noch einmal aufgelistet. Die Informationen werden automatisch alle 20 Sekunden aktualisiert.
+
+| *Fehler*
+| Eine Liste der Fehler. Diese Informationen werden nicht automatisch aktualisiert. Klicke auf icon:refresh[set=material], um die Informationen manuell zu aktualisieren.
+
+| *Fortschritt-Logs* +
+(icon:playlist_play[set=material])
+| Klicken, um die Logs anzuzeigen.
+Links wird die Liste der Logs angezeigt. Klicke auf eines dieser Logs, um Informationen zum Fortschritt einzublenden.
+
+| *Performance-Logs* +
+(icon:bar_chart[set=material])
+| Diese Einstellung hat aktuell noch keine Funktion. Stay tuned.
+
+| *Daten* +
+(erst nach Abschluss des Exports wählbar)
+| Klicken, um die Daten anzuzeigen, die exportiert wurden. Die Daten werden im JSON-Format angezeigt. +
+*_Wichtig:_* Aufgrund der Datenmenge und -komplexität können die Daten nicht als Tabelle angezeigt werden.
+
+|===
