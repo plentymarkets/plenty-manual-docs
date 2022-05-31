@@ -4,9 +4,9 @@
 :id: 6Z40YCT
 :author: team-plenty-channel
 
-Diese Handbuchseite beschreibt den Datenimport in plentymarkets mit dem Import-Tool. Ein Import von Daten ist ratsam, wenn du zum Beispiel neue Artikel, Kund:innen-Daten oder Lagerbestände in dein plentymarkets System einpflegen möchtest und die Daten bereits digital vorliegen. Mit dem Import-Tool erstellst du Importe, mit denen du die Datenimporte ausfürst. Du kannst Daten manuell oder automatisiert importieren.
+Diese Handbuchseite beschreibt den Datenimport in plentymarkets mit dem Import-Tool. Ein Import ist ratsam, wenn du zum Beispiel neue Artikel, Kontakte oder Lagerbestände in dein plentymarkets System einpflegen möchtest und die Daten schon digital vorliegen. Du kannst Daten manuell oder automatisiert importieren.
 
-TIP: Du kennst das Import-Tool noch nicht? Dann xref::page$import-tool-intro.adoc#[mache dich erst mit dem Tool vertraut].
+TIP: Du kennst das Import-Tool noch nicht? Dann xref::page$import-tool-intro.adoc#[mache dich zuerst mit dem Tool vertraut].
 
 [#1700]
 == Grundeinrichtung: Datenimport mit Assistenten durchführen
@@ -327,6 +327,16 @@ Eigenen Wert zuordnen:
 
 Damit eine CSV- oder TXT-Datei beim Import wie gewünscht berücksichtigt wird, kann die sog. RegEx-Funktion (Regular Expression) genutzt werden. Diese Funktion sorgt dafür, dass Daten beim Import anhand von Befehlen manipuliert werden. In der Importdatei müssen also keine Änderungen mehr vorgenommen werden.
 
+[NOTE]
+.Vorsicht mit Regulären Ausdrücken!
+====
+Reguläre Ausdrücke sind ein mächtiges Hilfsmittel, aber auch knifflig. Du solltest reguläre Ausdrücke also mit Bedacht und erst nach eingehender Recherche verwenden. Weitere Informationen findest du zum Beispiel hier:
+
+* link:http://php.net/manual/en/reference.pcre.pattern.syntax.php[http://php.net/manual/en/reference.pcre.pattern.syntax.php^]
+* link:https://regexr.com/[https://regexr.com/^] +
+  Auf dieser Seite musst du zuerst die Einstellung der RegEx engine auf PCRE umgestellt werden. Verwende dazu die Dropdown-Liste oben rechts, in der *Javascript* voreingestellt ist.
+====
+
 [.collapseBox]
 .Video: Reguläre Ausdrücke
 --
@@ -348,7 +358,7 @@ Werte über RegEx-Funktion ersetzen:
 . Wechsele in die Ansicht *Zuordnung*.
 . Klicke auf eine Zuordnung. +
 → Die Zuordnung wird geöffnet.
-. Klicke auf *icon:plus[set=material, role="darkGrey") FELD*. +
+. Klicke auf *icon:plus[set=material, role="darkGrey"] FELD*. +
 → Eine neue Zeile wird eingefügt.
 . Wähle im Feld *Quelle* die Option *Regulärer Ausdruck*. +
 → Die Optionen für *Regulärer Ausdruck* werden angezeigt.
@@ -359,18 +369,8 @@ Werte über RegEx-Funktion ersetzen:
 . Speichere (icon:save[set=material, role="darkGrey"]) die Einstellungen. +
 → Die Datenfelder werden beim Import aktualisiert.
 
-[NOTE]
-.Infos zu RegEx
-====
-Reguläre Ausdrücke sind ein mächtiges Hilfsmittel, aber auch knifflig. Du solltest reguläre Ausdrücke also mit Bedacht und erst nach eingehender Recherche verwenden. Weitere Informationen findest du zum Beispiel hier:
-
-* link:http://php.net/manual/en/reference.pcre.pattern.syntax.php[http://php.net/manual/en/reference.pcre.pattern.syntax.php^]
-* link:https://regexr.com/[https://regexr.com/^] +
-  Auf dieser Seite musst du zuerst die Einstellung der RegEx engine auf PCRE umgestellt werden. Verwende dazu die Dropdown-Liste oben rechts, in der *Javascript* voreingestellt ist.
-====
-
 [.collapseBox]
-.*_Beispiel 1:_* "TT.MM.YYYY" in "YYYY-MM-TT" ändern
+.*_RegEx-Beispiel 1:_* "TT.MM.YYYY" in "YYYY-MM-TT" ändern
 --
 
 *Wert*: “24.12.2017” +
@@ -382,7 +382,7 @@ Reguläre Ausdrücke sind ein mächtiges Hilfsmittel, aber auch knifflig. Du sol
 --
 
 [.collapseBox]
-.*_Beispiel 2:_* "Nachname, Vorname" in "Vorname Nachname" ändern
+.*_RegEx-Beispiel 2:_* "Nachname, Vorname" in "Vorname Nachname" ändern
 
 --
 
@@ -417,7 +417,7 @@ Werte über mathematische Berechnungen ändern:
 . Wechsele in die Ansicht *Zuordnung*.
 . Klicke auf eine Zuordnung. +
 → Die Zuordnung wird geöffnet.
-. Klicke auf *icon:plus[set=material, role="darkGrey") FELD*. +
+. Klicke auf *icon:plus[set=material, role="darkGrey"] FELD*. +
 → Eine neue Zeile wird eingefügt.
 . Wähle im Feld *Quelle* die Option *Mathematische Berechnungen*. +
 → Die Optionen für *Mathematische Berechnungen* werden angezeigt.
@@ -427,7 +427,7 @@ Werte über mathematische Berechnungen ändern:
 . Wähle in der Dropdown-Liste *Ziel* das plentymarkets Datenfeld, das befüllt werden soll.
 . Speichere (icon:save[set=material, role="darkGrey"]) die Einstellungen. +
 → Die Zahlenwerte der Spalte werden beim Import neu berechnet. +
-*_Wichtig:_* Die Za
+*_Wichtig:_* Die Zahlen in der Importdatei bleiben gleich.
 
 [.collapseBox]
 .*_Beispiel:_* Preise um 5% erhöhen
@@ -438,7 +438,7 @@ Werte über mathematische Berechnungen ändern:
 *Wert*: 5
 *plentymarkets Datenfeld*: [Verkaufspreis wählen]
 
-*_Ergebnis:_* Beim Import werden zu den Preisen in der angegebenen Spalte 5% addiert. Dieser höhere Preis wird als Verkaufspreis in plentymarkets gespeichert.
+*_Ergebnis:_* Beim Import werden zu den Preisen in der angegebenen Spalte 5% addiert. Dieser höhere Preis wird als Preis in plentymarkets gespeichert.
 --
 
 [#1510]
