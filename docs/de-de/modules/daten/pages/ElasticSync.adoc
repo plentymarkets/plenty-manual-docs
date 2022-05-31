@@ -408,7 +408,7 @@ Die folgenden Rechenarten sind verfügbar:
 * Minus Prozentwert (-)
 
 [.instruction]
-Werte über mathematische Berechnungen ändern:
+Werte durch mathematische Berechnungen ändern:
 
 . Öffne das Menü *Daten » Import*. +
 → Die Import-Übersicht wird geöffnet.
@@ -440,6 +440,96 @@ Werte über mathematische Berechnungen ändern:
 
 *_Ergebnis:_* Beim Import werden zu den Preisen in der angegebenen Spalte 5% addiert. Dieser höhere Preis wird als Preis in plentymarkets gespeichert.
 --
+
+[#1520a]
+=== Benutzerdefinierte Zuordnung: Eigene Zuordnung
+
+Mit der Eigenen Zuordnung können vorhandene Werte einer CSV- oder TXT-Datei auf andere Werte im System gemappt werden. So kann definiert werden, für welche ID welcher Wert importiert werden soll. Zusätzlich kann ein Default-Wert angegeben werden, wenn für einen Wert in der CSV- oder TXT-Datei keine Zuordnung definiert ist. Ist kein Default-Wert angegeben, wird der Originalwert importiert.
+
+[.collapseBox]
+.Video: Eigene Zuordnungen
+--
+Lerne in diesem Video mehr über eigene Zuordnungen.
+
+*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
+
+video::328394174[vimeo]
+--
+
+[.instruction]
+Eigene Zuordnung festlegen:
+
+. Öffne das Menü *Daten » Import*. +
+→ Die Import-Übersicht wird geöffnet.
+. Klicke auf den Import. +
+→ Die Einstellungen werden geöffnet.
+. Wechsele in das Tab *Zuordnung*.
+. Klicke auf die Zuordnung. +
+→ Die Zuordnung wird geöffnet.
+. Wähle im Dropdown-Menü des Felds *Quelle* die Option *Eigene Zuordnung*.
+. Fülle die Felder aus. Beachte dazu die Erläuterungen in <<tabelle-eigene-zuordnung>>.
+. *Speichere* (icon:save[set=material, role="darkGrey"]) die Einstellungen.
+
+[[tabelle-eigene-zuordnung]]
+.Eigene Zuordnung
+[cols="1,3"]
+|===
+|Feld |Einstellung
+
+| Typ
+| In welcher Spalte der CSV- oder TXT-Datei befinden sich die Werte, die du ändern möchtest?
+
+| Standardwert
+| Welcher Wert soll in plentymarkets gespeichert werden, wenn ein Datensatz keinen der Werte enthält, die du unter "Von" eingegeben hast?
+
+| Von
+| Welchen Wert der Spalte möchtest du beim Import ändern?
+
+| Zu
+| Welcher Wert soll statt des Ursprungswerts "Von" in plentymarkets gespeichert werden?
+|===
+
+[#1530]
+=== Beispiel: Eigene Zuordnung verwenden
+
+Nehmen wir einmal an, du möchtest Versandprofile in plentymarkets per Import aktivieren. Deine Datei enthält die Artikel-ID und den Versanddienstleister. Um einen Artikel mit einem Versandprofil zu verknüpfen, wird aber die Versandprofil-ID benötigt. Denn allein mit dem Namen des Versandprofils kann das Versandprofil nicht aktiviert werden.
+
+*_Wichtig:_* Voraussetzung für diese Vorgehensweise ist, dass der Artikel und das Versandprofil schon in plentymarkets vorhanden sind.
+
+Die IDs der Versandprofile findest du im Menü *Einrichtung » Aufträge » Versand » Optionen » Tab: Versandprofile*. In unserem Beispiel hat das Versandprofil DPD die ID 7:
+
+[[bild-daten-importieren-versandprofil]]
+.Versandprofil
+image::daten:versandprofil.png[]
+
+Unsere Importdatei enthält zwar alle nötigen Daten, aber statt der ID ist dort der Name des Versandprofils angegeben:
+
+[[bild-daten-importieren-artikel-id]]
+.Artikel-ID
+image::daten:artikel-id.png[]
+
+In unserem Beispiel wäre es natürlich ein Leichtes, "DPD" durch "7" zu ersetzen. Aber im Alltag spielt der Import ja gerade seine Stärken aus, wenn es um große Datenvolumen geht. Also erstellen wir eine eigene Zuordnung, die die Änderung automatisch beim Import vornimmt.
+
+Als Quelle der Importdaten wählen wir den Wert *Eigene Zuordnung*:
+
+[[bild-daten-importieren-zuordnung]]
+.Eigene Zuordnung
+image::daten:eigene-zuordnung.png[]
+
+Als *Typ* wählen wir die Spalte aus der Importdatei, deren Daten wir manipulieren wollen. In unserem Beispiel ist das die Spalte *Versandprofil*:
+
+[[bild-daten-importieren-spalte]]
+.Spalte der Importdatei wählen
+image::daten:typ.png[]
+
+Nun wird es spannend: Wir legen fest, welcher Wert in der Importdatei zu welchem Wert geändert werden soll. In unserem Beispiel soll "DPD" zu "7" geändert werden, weil das die ID des Versandprofils in plentymarkets ist.
+Führe anschließend den Import aus. Das Versandprofil wird verknüpft.
+
+[[bild-daten-importieren-wert]]
+.Wert bestimmen
+image::daten:wert-bestimmen.png[]
+
+Die eigene Zuordnung eignet sich für viele weitere Fälle. Dies gilt insbesondere dort, wo interne IDs von plentymarkets eine Rolle spielen, wie z.B. bei Merkmalnamen, Artikelmarkierungen, Zahlungsmethoden, Länder/Staaten ISO Codes usw.
 
 [#1510]
 === Zeilen einer Zuordnung für den Import aktivieren
@@ -478,84 +568,6 @@ Mit Klick auf *Einstellungen* (icon:cog[role="black"]) in der Zuordnung werden d
 
 Wenn du mehrere Zuordnungen in einem Import pflegst, kannst du bestimmte Zuordnungen eines Imports in der Übersicht der Zuordnungen mit Klick auf die Umschaltfläche in der Spalte *Aktiv/Inaktiv* deaktivieren bzw. aktivieren. Neue Zuordnungen, die du erstellst, sind standardmäßig aktiv.
 
-[#1520a]
-=== Eigene Zuordnung
-
-Mit der Eigenen Zuordnung können vorhandene Werte einer CSV- oder TXT-Datei auf andere Werte im System gemappt werden. So kann definiert werden, für welche ID welcher Wert importiert werden soll. Zusätzlich kann ein Default-Wert angegeben werden, wenn für einen Wert in der CSV- oder TXT-Datei keine Zuordnung definiert ist. Ist kein Default-Wert angegeben, wird der Originalwert importiert.
-
-[.instruction]
-Eigene Zuordnung festlegen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf einen Import. +
-→ Die Einstellungen werden geöffnet.
-. Wechsele in das Tab *Zuordnung*.
-. Klicke auf eine Zuordnung. +
-→ Die Zuordnung wird geöffnet.
-. Wähle im Dropdown-Menü des Felds *Quelle* die Option *Eigene Zuordnung*.
-. Fülle die Felder aus. Beachte dazu die Erläuterungen in <<tabelle-eigene-zuordnung>>.
-. *Speichere* (icon:save[set=material, role="darkGrey"]) die Einstellungen.
-
-[[tabelle-eigene-zuordnung]]
-.Eigene Zuordnung
-[cols="1,3"]
-|===
-|Feld |Einstellung
-
-|Typ
-|Name der CSV- oder TXT-Spalte (z.B. Lieferland)
-
-|Standardwert
-|Wert, wenn keine Zuordnung gefunden wurde (z.B. 1)
-
-|Von
-|Ursprungswert in der CSV- oder TXT-Datei (z.B. DE für Deutschland)
-
-|Zu
-|Wert, auf den der Ursprungswert gemappt werden soll (z.B. 1 für DE, 10 für GB etc.)
-|===
-
-[#1530]
-=== Importdatei durch die Eigene Zuordnung manipulieren
-
-Im folgenden Abschnitt soll die Verwendung der Eigenen Zuordnung am Beispiel von *Versandprofil aktivieren* demonstriert werden. +
-Voraussetzung für diese Vorgehensweise ist, dass bereits ein Artikel/eine Variante sowie ein Versandprofil vorhanden ist. Das folgende Video bietet dir eine Einfürhung in die Funktionsweise der Eigenen Zuordnung. +
-*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
-
-.Nutze die Eigene Zuordnung zum Austauschen von Informationen
-video::328394174[vimeo]
-
-[[bild-daten-importieren-versandprofil]]
-.Versandprofil
-image::daten:versandprofil.png[]
-
-Um einen Artikel/eine Variante mit einem Versandprofil zu verknüpfen, wird die ID benötigt. Denn allein mit dem Namen des Versandprofils, der in der Importdatei steht, kann keine Verknüpfung erstellt werden.
-
-[[bild-daten-importieren-artikel-id]]
-.Artikel-ID
-image::daten:artikel-id.png[]
-
-Verwende dafür die eigene Zuordnung im Import-Tool, denn dort werden die Daten während des Imports manipuliert. Wähle dazu als Quelle der Importdaten den Wert *Eigene Zuordnung*.
-
-[[bild-daten-importieren-zuordnung]]
-.Eigene Zuordnung
-image::daten:eigene-zuordnung.png[]
-
-Wähle bei *Typ* die Spalte aus der Importdatei. In diesem Fall ist es die Spalte *Versandprofil*.
-
-[[bild-daten-importieren-spalte]]
-.Spalte der Importdatei wählen
-image::daten:typ.png[]
-
-Bestimme nun, welcher Wert in der Importdatei zu welchem Wert geändert werden soll, um den Import erfolgreich durchführen zu können. In diesem Fall soll DPD zur ID des Versandprofils (hier ID 7) geändert werden. Das Gleiche kannst du auch für mehrere Versandprofile tun, indem du noch weitere eigene Zuordnungen hinzufügst.
-Führe anschließend den Import aus. Das Versandprofil wird verknüpft.
-
-[[bild-daten-importieren-wert]]
-.Wert bestimmen
-image::daten:wert-bestimmen.png[]
-
-Die eigene Zuordnung eignet sich für viele weitere Fälle. Dies gilt insbesondere dort, wo interne IDs von plentymarkets eine Rolle spielen, wie z.B. bei Merkmalnamen, Artikelmarkierungen, Zahlungsmethoden, Länder/Staaten ISO Codes usw.
 
 [#1611]
 == Importdaten filtern
