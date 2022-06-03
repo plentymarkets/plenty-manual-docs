@@ -286,6 +286,11 @@ image::daten:import-mapping-colour.png[]
   * Du verwendest eigene Zuordnungen, um Werte einer Quelle beim Import durch andere Werte zu ersetzen. (<<#1520a, Wie?>>)
 . Du aktivierst die Quellen, die beim Import berücksichtigt werden sollen. (<<#1510, Wie?>>)
 
+[#1710]
+== Abarbeitung von Jobs in der Queue
+
+Die Queue sorgt dafür, dass auch große Datenmengen importiert werden können. Noch vor dem Import wird die Importdatei in Pakete zerlegt und anschließend in sogenannten Jobs abgearbeitet. Ein Job besteht aus 750 Zeilen einer CSV- oder TXT-Datei. Jedoch werden auch Importdateien, die weniger als 750 Zeilen enthalten, zu einem Job. Wird ein Import gestartet, wird die Datei in die entsprechenden Jobs aufgeteilt und in die Queue eingereiht. In der Queue werden neue Jobs ständig abgerufen und die Importe werden abgearbeitet. Dabei gibt es zwei verschiedene Status. Der Status *Offene Jobs* bedeutet, dass es Jobs gibt, die sich noch in der Queue befinden und darauf warten, abgearbeitet zu werden. *Abgeschlossene Jobs* hingegen wurden bereits bearbeitet und die Daten dementsprechend importiert.
+
 [#create-mappings]
 === Zuordnung erstellen
 
@@ -693,6 +698,9 @@ Import manuell ausführen:
 
 Im Menü *Daten » Status* kannst du einen gestarteten Import abbrechen. Die Funktion ist also nur verfügbar, wenn der Import gerade läuft.
 
+*_Wichtig:_* Wenn du einen laufenden Import abbrichst, werden schon importierte Datensätze nicht gelöscht. Diese Datensätze musst du also wenn nötig selbst löschen.
+
+
 [.instruction]
 Import abbrechen:
 
@@ -703,6 +711,24 @@ Import abbrechen:
 . Klicke auf *Import abbrechen*. +
 → Der Import wird abgebrochen. +
 → Nur die Datensätze sind im System, die zum Zeitpunkt des Abbruchs schon importiert waren.
+
+[#1650]
+== Importdatei von manuellen Imports ersetzen
+
+Du hast einen Import mit der Quelle *Manueller Upload* erstellt. Über diesen Import möchtest du eine Datei immer wieder importieren, die aber jedes Mal gleich aufgebaut ist. Wenn du dir sicher bist, dass sich am Aufbau der Spalten der Datei nichts geändert hat, kannst du die aktualisierte Datei direkt in der Import-Übersicht hochladen.
+
+[.instruction]
+Importdatei von manuellen Imports ersetzen:
+
+. Speichere die Datei auf deinem Rechner.
+. Öffne das Menü *Daten » Import*. +
+→ Die Import-Übersicht wird geöffnet.
+. Navigiere zu dem Import.
+. Klicke in der Spalte *Dateiname* auf *Datei hochladen* (icon:upload[set=material]). +
+→ Dein Dateiverzeichnis wird geöffnet.
+. Klicke auf die Datei. +
+→ Die Datei wird hochgeladen. +
+*_Wichtig:_* Wenn sich die Spaltenstruktur der Datei doch geändert hat, werden die Zuordnungen gelöscht. Prüfe also lieber noch einmal, dass die Importeinstellungen weiterhin korrekt sind.
 
 [#1625]
 == Erfolgs- und Fehlermeldungen von Imports einsehen
@@ -742,6 +768,33 @@ Lerne, wie du vorhandene Importe verwaltest.
 :right-nine: pass:quotes[*Daten > Daten-Log*]
 
 include::_includes:page$rechte.adoc[]
+
+[#1730]
+=== Ältere/gelöschte Importe wiederherstellen
+
+Du hast einen Import aus Versehen gelöscht? Oder jemand hat an einem gut konfigurierten Import Änderungen vorgenommen, die rückgängig gemacht werden müssen? Beides kannst du über die Backup-Funktion erledigen.
+
+*_Achtung:_*
+
+* Mit diesen Einstellungen setzt du die Importe selbst auf einen früheren Stand zurück. Du kannst so _keine ins System importieren Daten zurücksetzen_. Das geht auch, xref:daten:backup.adoc#[aber anders].
+* Backups werden nur einmal täglich nachts erstellt. Wenn du ein Backup importierst, werden die Daten auf diesen Stand zurückgesetzt.
+* Alle Importe werden zurückgesetzt. Du kannst also nicht nur einen einzigen Import zurücksetzen. +
+*_Beispiel:_* Jemand hat die Einstellungen des Imports für Artikeldaten aus Versehen geändert. Im Laufe des Tages wurde aber auch ein Import für Gutscheincodes erstellt. Wenn du das Backup der letzten Nacht einspielst, werden beide Importe auf den Stand der letzten Nacht zurückgesetzt. Der Import für Artikeldaten wird repariert. Der Import für Gutscheincodes wird aber gelöscht, weil er zum Zeitpunkt des Backups noch nicht existierte.
+
+[.instruction]
+Backups von Importen einspielen:
+
+. Öffne das Menü *Einrichtung » Einstellungen » Hosting » Backup*. +
+→ Die Backup-Übersicht wird geöffnet.
+. Klicke in der Zeile des Backups, das du einspielen möchtest, rechts auf *Backup einspielen* (icon:open_in_browser[set=material]). +
+→ Das Fenster *Backup importieren* wird angezeigt.
+. Wähle für die Einstellung *Backup importieren* die Option *Datenbank teilweise importieren*.
+. Aktiviere die Option *ElasticSync*. +
+*_Tipp:_* Das Import-Tool hieß früher *ElasticSync*. Deshalb heißt diese Option noch so.
+. Klicke auf *Backup einspielen*. +
+→ Alle Importe werden auf den Stand des Backups zurückgesetzt. +
+→ Es gibt kein Zurück!
+
 
 [#1630]
 === Import kopieren
@@ -812,48 +865,26 @@ Importvorlage importieren:
 . Lege <<#1400, Abgleichfelder fest>>.
 . Nimm <<#1500, die Zuordnungen vor>>.
 
-[#1650]
-== Dateien schnell und einfach hochladen
-
-Um Dateien schnell und einfach hochzuladen, klicke auf *Datei-Upload* (icon:upload[role="purple"]) in der Spalte *Dateiname*.
-
-[.instruction]
-Dateien schnell und einfach hochladen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke in der Spalte *Dateiname* auf *Datei hochladen* (icon:upload[role="purple"]). +
-→ Deine Dateien werden geöffnet.
-. Wähle eine Datei und klicke auf *Öffnen*. +
-→ Die Datei wird hochgeladen und der Dateiname wird in der Spalte angezeigt. Nach Ausführen des Imports verschwindet der Dateiname wieder.
-
-[#1710]
-== Abarbeitung von Jobs in der Queue
-
-Die Queue sorgt dafür, dass auch große Datenmengen importiert werden können. Noch vor dem Import wird die Importdatei in Pakete zerlegt und anschließend in sogenannten Jobs abgearbeitet. Ein Job besteht aus 750 Zeilen einer CSV- oder TXT-Datei. Jedoch werden auch Importdateien, die weniger als 750 Zeilen enthalten, zu einem Job. Wird ein Import gestartet, wird die Datei in die entsprechenden Jobs aufgeteilt und in die Queue eingereiht. In der Queue werden neue Jobs ständig abgerufen und die Importe werden abgearbeitet. Dabei gibt es zwei verschiedene Status. Der Status *Offene Jobs* bedeutet, dass es Jobs gibt, die sich noch in der Queue befinden und darauf warten, abgearbeitet zu werden. *Abgeschlossene Jobs* hingegen wurden bereits bearbeitet und die Daten dementsprechend importiert.
-
 [#1715]
 == Status von Importen nachvollziehen
 
 Den Status deiner Importvorgänge kannst du im Menü *Daten » Datenimport » Status* einsehen. Hier siehst du, welche Importe gestartet und abgeschlossen wurden. Ein Balken visualisiert den Fortschritt aller Exporte. Außerdem kannst du prüfen, ob Fehler aufgetreten sind und ob alle Datenzeilen von Importdateien importiert wurden.
 
 [#1715a]
-== Status von Importen verstehen
+=== Status von Importen aufrufen
 
 [.instruction]
-Status von Importen verstehen:
+Status von Importen aufrufen:
 
 . Öffne das Menü *Daten » Datenimport » Status*. +
 → Die Status-Übersicht wird geöffnet. +
-*_Tipp:_* Oder öffne das Statusmenü über das Menü *Daten » Import*. +
-Klicke in der Symbolleiste auf *Status* (icon:playlist_play[set=material]).
 . *_Optional:_* Du brauchst mehr Infos zum Import? Klicke auf eine Datenzeile, um <<#status-details, Details anzuzeigen>>.
 
 [[tabelle-sync-status]]
 .Import-Status
 [cols="1,3"]
 |===
-| Einstellung | Erläuterung
+| Spalte | Erläuterung
 
 | *Verarbeitungs-ID*
 | Jedes Mal, wenn ein Import gestartet wird, wird eine Verarbeitungs-ID erzeugt. So können die einzelnen Importe besser voneinander unterschieden werden.
@@ -890,7 +921,7 @@ Du hast jede Menge Importe? Dann kannst du die Liste filtern.
 Statusliste filtern:
 
 . Öffne das Menü *Daten » Datenimport » Status*. +
-. Blende in der Statusleiste die Filter ein (icon:filter_alt[set=material]).
+. Blende in der Statusleiste die Filter ein (icon:tune[set=material]).
 . Wähle die Filter, die du benötigst.
 . Klicke auf *Suchen*. +
 → Die Liste wird gefiltert.
@@ -983,29 +1014,3 @@ Klicke in der Symbolleiste auf *Status* (icon:playlist_play[set=material]).
 . Klicke oben links in der Symbolleiste auf *Protokoll* (icon:playlist_play[set=material]). +
 → Das Protokoll wird in einem neuen Fenster angezeigt.
 . *_Optional:_* Klicke auf *In Zwischenablage kopieren* (icon:content_copy[set=material]). Füge die Informationen bei Supportanfragen im Forum ein.
-
-[#1730]
-== Backups von Importen einspielen
-
-Du hast einen Import aus Versehen gelöscht? Oder jemand hat an einem gut konfigurierten Import Änderungen vorgenommen, die rückgängig gemacht werden müssen? Beides kannst du über die Backup-Funktion erledigen.
-
-*_Achtung:_*
-
-* Mit diesen Einstellungen setzt du die Importe selbst auf einen früheren Stand zurück. Du kannst so _keine ins System importieren Daten zurücksetzen_. Das geht auch, xref:daten:backup.adoc#[aber anders].
-* Backups werden nur einmal täglich nachts erstellt. Wenn du ein Backup importierst, werden die Daten auf diesen Stand zurückgesetzt.
-* Alle Importe werden zurückgesetzt. Du kannst also nicht nur einen einzigen Import zurücksetzen. +
-*_Beispiel:_* Jemand hat die Einstellungen des Imports für Artikeldaten aus Versehen geändert. Im Laufe des Tages wurde aber auch ein Import für Gutscheincodes erstellt. Wenn du das Backup der letzten Nacht einspielst, werden beide Importe auf den Stand der letzten Nacht zurückgesetzt. Der Import für Artikeldaten wird repariert. Der Import für Gutscheincodes wird aber gelöscht, weil er zum Zeitpunkt des Backups noch nicht existierte.
-
-[.instruction]
-Backups von Importen einspielen:
-
-. Öffne das Menü *Einrichtung » Einstellungen » Hosting » Backup*. +
-→ Die Backup-Übersicht wird geöffnet.
-. Klicke in der Zeile des Backups, das du einspielen möchtest, rechts auf *Backup einspielen* (icon:open_in_browser[set=material]). +
-→ Das Fenster *Backup importieren* wird angezeigt.
-. Wähle für die Einstellung *Backup importieren* die Option *Datenbank teilweise importieren*.
-. Aktiviere die Option *ElasticSync*. +
-*_Tipp:_* Das Import-Tool hieß früher *ElasticSync*. Deshalb heißt diese Option noch so.
-. Klicke auf *Backup einspielen*. +
-→ Alle Importe werden auf den Stand des Backups zurückgesetzt. +
-→ Es gibt kein Zurück!
