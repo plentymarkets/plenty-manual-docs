@@ -6,7 +6,7 @@
 :startWeekDate: 2. Juni 2022
 :startWeekDate: 8. Juni 2022
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/neue-auftragserstellung-ui-fehler-bei-weiterleitung-nach-auftragserstellung-new-order-create-ui-wrong-redirection-after-order-creation/683039
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -32,6 +32,7 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 * Beim Erstellen eines neuen Kontakts im Menü *CRM » Kontakte* wurde das Feld *Handelsvertreter, der dem Kontakt zugeordnet ist* hinzugefügt. Du kannst dieses Feld über die MyView mit einem Klick auf *Ansicht bearbeiten* hinzufügen.
 * Im EmailBuilder wird ab sofort die ID der Vorlage in Klammern vor dem Namen der Vorlage angezeigt.
+* In der Kontakt-UI im Menü *CRM » Kontakte* hast du ab sofort im Bereich *Adressen* die Möglichkeit, neue Rechnungs- und Lieferadressen abzuleiten. Beachte, dass eine neue Adresse mit einer ID erst erstellt wird, wenn du eines der Datenfelder änderst.
 
 '''
 
@@ -46,6 +47,14 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 * Im Zuge der Entfernung aller veralteten Komponenten haben wir nun alle Breadcrumbs in plenty durch die Seitennavigation ersetzt. Im Einstellungs-Baum wird dies allerdings nur eine temporäre Lösung sein, da möglicherweise 2 Seitennavigationen nebeneinander platziert sein können.
 * Im Zuge der Entfernung aller veralteten Komponenten haben wir nun alle TerraOverlays in plenty durch MaterialOverlays ersetzt.
 
+[discrete]
+=== OTTO
+
+:otto-master-date: 08.06.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/5vTOIEbFyI0EktPpQVLmZIUk8ce.xlsx
+
+include::partial$otto-master-file.adoc[]
+
 '''
 
 [discrete]
@@ -58,6 +67,7 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
 * Aufträge mit Bestelleigenschaften bei denen die Relation gefehlt hat werden nun wieder in der Auftragsssuche angezeigt.
 * Bei Aufträgen mit Lieferaufträgen konnte es unter Umständen vorkommen, dass sich der Standort des Hauptauftrages geändert hat.
+* Nicht-Administratoren konnten aufgrund eines fehlerhaften Rechte-Checks keine Umbuchungen mehr anlegen.
 
 [discrete]
 === Prozesse
@@ -77,7 +87,15 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Artikel
 
+* Die alte Tag-UI wurde modernisiert.
++
+image:changelog:modern-tag-ui.png[width=640]
+* Wir haben die Einstellungs-UI der Einheiten erneuert.
++
+image:changelog:modern-units-ui.png[width=640]
 
 '''
 
@@ -86,7 +104,24 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Kaufland.de
 
+* *_Hinweis:_* Dieser Changelog ist ein Update zum Changelog link:https://forum.plentymarkets.com/t/kaufland-jetzt-versandbestaetigung-per-ereignisaktion-einrichten-kaufland-set-up-event-procedure-for-shipping-confirmations-now/676273[Kaufland: Jetzt Versandbestätigung per Ereignisaktion einrichten^]. Wenn du die Ereignisaktion *Versandbestätigung an Kaufland.de senden* schon eingerichtet hast, musst du nichts tun.
++
+Bisher wurden Versandbestätigungen einmal stündlich automatisch per Cron an Kaufland gesendet. Dieser Cron wird jetzt abgeschaltet:
+
+** Auf Early-Systemen wird der Cron am 08.06.2022 abgeschaltet.
+** Auf Stable-Systemen wird der Cron am 15.06.2022 abgeschaltet.
+
++
+Da Versandbestätigungen jetzt nur noch per Ereignisaktion gesendet werden können, wird außerdem die Einstellung Versandbestätigungen senden über aus dem Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen* entfernt.
++
+[IMPORTANT]
+.To-Do
+======
+Wenn du die Ereignisaktion *Versandbestätigung an Kaufland.de senden* noch nicht eingerichtet hast, dann richte sie unbedingt jetzt ein. Ohne die Ereignisaktion können ab jetzt keine Versandbestätigungen mehr an Kaufland gesendet werden! Wie du die Ereignisaktion einrichtest, ist auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#shipping-confirmation[Kaufland.de einrichten] beschrieben.
+======
 
 '''
 
@@ -95,7 +130,11 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* Bei der Anlage eines neuen Auftrags-Status kam es zu einem Fehler bei der Weiterleitung in die Detailansicht des neuen Status. Der Status wurde trotzdem korrekt angelegt.
+* In der neuen UI zur Auftragserstellung wurde die Einstellung *Endpunkt nach Abschluss eines Auftrages* nach einer Änderung nicht übernommen. Dies ist nun behoben.
 
 --
 
