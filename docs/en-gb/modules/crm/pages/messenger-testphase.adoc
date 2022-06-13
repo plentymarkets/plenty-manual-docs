@@ -13,8 +13,8 @@ The *CRM » Messenger (Test phase)* menu is structured as follows:
 image::crm:messenger-menu-structure.png[width=640, height=360]
 
 * *Navigation*: Here you can navigate through different parts of the menu. The currently selected area (blue background) is displayed in the main window on the right. Click on icon:menu[set=material] to expand or collapse the navigation bar. +
-** Available areas in the navigation: icon:add[set=material] *New message*, Inbox, <<#new-messages, New messages>>, <<#my-messages, My messages>>, <<#trash, Trash>>.
-* *Toolbar*: Here you can <<#search-message, search>> for messages, <<#configure-columns, adjust the columns in the overview>>, set the results to be shown per page and click through the pages with the messages.
+** Available areas in the navigation: <<#create-message, New message>>, <<#group-function, Inbox>>, <<#new-messages, New messages>>, <<#my-messages, My messages>>, <<#trash, Trash>>.
+* *Toolbar*: Here you can <<#search-conversation, search>> for messages, <<#configure-columns, adjust the columns in the overview>>, set the results to be shown per page and click through the pages with the conversations.
 * *Main window*: Here you can see whichever area is currently open. +
 ** *Overview*: When you start a search, you’ll see the results in an overview. The overview provides information about the conversations found at a glance. You see, for example, the email addresses of the senders, the subject, the date when the message was received, the assigned tags and by means of the icon icon:attach_file[set=material], you can see whether the message has an attachment. +
 ** *Detail view*: When you open a message, the details will become visible below the main window. The detail view of a message is divided into the conversation, i.e. the message stream, and the editor where you type in your replies.
@@ -82,7 +82,7 @@ To be able to send and receive messages with the Messenger, you have to complete
 
 [TIP]
 You have to complete the assistant for every inbox that you want to create. +
-You can assign tags to each inbox to be able to <<#search-message, filter>> for these tags later.
+You can assign tags to each inbox to be able to <<#search-conversation, filter>> for these tags later.
 
 [#service-activation]
 ==== Service activation
@@ -174,7 +174,8 @@ image::crm:messenger-new-message-suggestion-list.png[width=640, height=360]
 The following file types can be sent as an attachment: bmp, csv, gif, jpeg, json, pdf, png, tiff, txt, xlsx, zip.
 
 |[#intable-whisper-mode]*Whisper mode* (icon:visibility[set=material] / icon:visibility_off[set=material, role=skyBlue])
-|You can whisper messages to make these messages only visible for internal purposes but _not_ for your contacts. To do so, click on *Whisper mode* (icon:visibility[set=material]). You can see in this view that a message is whispered by means of the button icon:visibility_off[set=material, role=skyBlue]. The button changes from icon:forward_to_inbox[set=material] *SEND* to icon:visibility_off[set=material] *WHISPER*. +
+|You can whisper messages to make these messages only visible for internal purposes but _not_ for your contacts. To do so, click on *Whisper mode* (icon:visibility[set=material]). +
+You can see in this view that a message is whispered by means of the button icon:visibility_off[set=material, role=skyBlue]. The button changes from icon:forward_to_inbox[set=material] *SEND* to icon:visibility_off[set=material] *WHISPER*. +
 In the overview, whispered messages are shown in _italics_. +
 *_Note:_* Once the whisper mode has been activated for this message, you can <<#intable-bill-message, bill the message>>.
 
@@ -207,6 +208,8 @@ Click on icon:pause_circle[set=material] to stop the timer and on icon:play_circ
 == Searching for a conversation in the Messenger
 
 Open all conversations in a list or select filters (icon:tune[set=material]) to narrow down the search results in the Messenger overview.
+
+Once you have found the desired conversation, you can <<#open-single-message, open>> the single messages that are contained in the conversation.
 
 [.instruction]
 Searching for a conversation in the Messenger:
@@ -257,6 +260,9 @@ Available values: *Done* and *Not done*.
 
 |[#intable-filter-tags]*Tags*
 |Select (icon:check_box[set=material, role=skyBlue]) tags to only search for conversations with these <<#tags-messenger, tags>>.
+
+|[#intable-filter-payment-id]*Payment ID*
+|Enter an ID to only search for conversations that are linked with this payment ID.
 
 |[#intable-filter-reset]*Reset*
 |Resets the selected filter criteria.
@@ -337,14 +343,16 @@ You can have the following columns displayed in the overview of the Messenger:
 Possible values: *Back end*, *REST*, *Plugin*, *PayPal Plugin*.
 
 |[#intable-overview-relations]*Relations*
-a|The conversation relations are shown here, for example
+a|The conversation relations are shown here, for example: 
 
 * icon:person[set=material] _Name of the contact (contact ID)_
 * icon:shopping_cart[set=material] _Order ID_
-* icon:mail[set=material] _Email address_ 
+* icon:mail[set=material] _Email address_
+* icon:credit_card[set=material] _Payment ID_
 * subscribers of the conversation.
 
-In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. +
+*_Note:_* The xref:crm:contacts.adoc#[contact], the xref:orders:managing-orders.adoc#[order] and the xref:payment:beta-managing-payments-new.adoc#[payment] have a direct link to the data record in the *CRM » Contacts* menu respectively in the *Orders » Edit orders* menu respectively in the *Orders » Payments* menu.
 
 |[#intable-overview-subject]*Subject*
 |Shows the subject of the first message within the conversation.
@@ -369,7 +377,6 @@ In the line of the conversation, click on icon:chevron_right[set=material] to se
 
 |[#intable-overview-subscribed]*Subscribed*
 |The symbol icon:done[set=material] in the column icon:notifications[set=material] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
-   
 
 |[#intable-overview-context-menu]*Context menu*
 |Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
@@ -580,11 +587,6 @@ Billing a message:
 
 You already know the <<#context-menu, context menu for the conversations>> that is described earlier on this page. Of course, you can also edit single messages using a context menu. Proceed as described in the following sub-chapters.
 
-////
-TODO: Screenshot von einer einzelnen Nachricht mit den Mini-Icons hier einfügen und erklären.
---> Absender / Datum / Uhrzeit ohne Sekunden / Tag-Namen (getrennt durch |-Zeichen) / Anhang-Symbol (Anzahl sichtbar beim drüber hovern) / Uhr-Symbol, Kreditkarten-Symbol und Anzahl der Minuten im Fall einer abgerechneten Nachricht.
-////
-
 [[image-messenger-edit-single-message]]
 .Editing a single message via the context menu
 image::crm:messenger-edit-single-message-en.png[width=640, height=360]
@@ -594,7 +596,7 @@ Once you selected a message within a conversation, you can display the messages�
 [#open-single-message]
 === Opening a message
 
-To open a message, you can either directly click on the message. Or you open the context menu in the line of the message by clicking on icon:more_vert[set=material] and then on icon:open_link[set=material] *Open message*.
+To open a message, you can either directly click on the message. Or you open the context menu in the line of the message by clicking on icon:more_vert[set=material] and then on icon:open_in_new[set=material] *Open message*.
 
 [#assign-tags-to-single-message]
 === Assigning tags to the message
@@ -610,10 +612,6 @@ Assigning tags to the message:
 . Click on icon:local_offer[set=material] *Assign tags to message* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
 *_Tip:_* If you have created a lot of tags for the *Messages* or *Messages (billable)* areas, enter the name of the tag in the search field *Search for tag*.
 . Select (icon:check_box[set=material, role=skyBlue]) the tags that you want to assign to the message. 
-
-////
-FRAGE: Kann man hier wirklich nur einer einzelnen Nachricht einen Tag zuweisen oder bekommt dann die gesamte Konversation auch den Tag zugewiesen? Wenn nur die Nachricht den Tag erhält, wie verhält es sich dann mit den Filtern in der Suche? Wird der Tag an einzelnen Nachrichten in der Suche berücksichtigt? 
-////
 
 [#attachments-single-message]
 === Downloading attachments
@@ -648,17 +646,13 @@ Deleting a single message:
 . Click on *Yes*. +
 → The conversation is deleted and moved to <<#trash, trash>>.
 
-////
-FRAGE: Wird die einzelne gelöschte Nachricht auch in den Papierkorb verschoben? Konnte ich im System nicht nachstellen.
-////
-
 [#group-function]
-== Carrying out the group function
+== Using the group function in the inbox
 
-Once you have selected a message in the overview (icon:check_box[set=material, role=skyBlue]), the different buttons become visible (see <<#image-messenger-group-functions-conversations>>). <<#table-group-functions-messenger>> lists the elements from the group functions as well as their explanations.
+Once you have selected a conversation in the overview in the *Inbox* area (icon:check_box[set=material, role=skyBlue]), the different buttons become visible (see <<#image-messenger-group-functions-conversations>>). <<#table-group-functions-messenger>> lists the elements from the group functions as well as their explanations.
 
 [[image-messenger-group-functions-conversations]]
-.Group function in the overview
+.Group function in the inbox
 image::crm:messenger-group-function.png[width=640, height=360]
 
 [[table-group-functions-messenger]]
@@ -727,14 +721,16 @@ You can have the following columns displayed in the *New messages* folder of the
 Possible values: *Back end*, *REST*, *Plugin*, *PayPal Plugin*.
 
 |[#intable-new-messages-relations]*Relations*
-a|The conversation relations are shown here, for example
+a|The conversation relations are shown here, for example:
 
 * icon:person[set=material] _Name of the contact (contact ID)_
 * icon:shopping_cart[set=material] _Order ID_
-* icon:mail[set=material] _Email address_ 
+* icon:mail[set=material] _Email address_
+* icon:credit_card[set=material] _Payment ID_
 * subscribers of the conversation.
 
-In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. +
+*_Note:_* The xref:crm:contacts.adoc#[contact], the xref:orders:managing-orders.adoc#[order] and the xref:payment:beta-managing-payments-new.adoc#[payment] have a direct link to the data record in the *CRM » Contacts* menu respectively in the *Orders » Edit orders* menu respectively in the *Orders » Payments* menu.
 
 |[#intable-new-messages-subject]*Subject*
 |Shows the subject of the first message within the conversation.
@@ -770,7 +766,7 @@ Click on the button *Configure columns* (icon:settings[set=material]) on the top
 [TIP]
 .Carrying out the group function
 ====
-You can also use the group function in the *New messages* area. The group function in the *New messages* area works the same way as the group function in the *Inbox* area. For further information, refer to the <<#group-function, Using the group function>> chapter.
+You can also use the group function in the *New messages* area. The group function in the *New messages* area works the same way as the group function in the *Inbox* area. For further information, refer to the <<#group-function, Using the group function in the inbox>> chapter.
 ====
 
 [#my-messages]
@@ -807,14 +803,16 @@ You can have the following columns displayed in the *My messages* folder of the 
 Possible values: *Back end*, *REST*, *Plugin*, *PayPal Plugin*.
 
 |[#intable-my-messages-relations]*Relations*
-a|The conversation relations are shown here, for example
+a|The conversation relations are shown here, for example:
 
 * icon:person[set=material] _Name of the contact (contact ID)_
 * icon:shopping_cart[set=material] _Order ID_
-* icon:mail[set=material] _Email address_ 
+* icon:mail[set=material] _Email address_
+* icon:credit_card[set=material] _Payment ID_
 * subscribers of the conversation.
 
-In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. +
+*_Note:_* The xref:crm:contacts.adoc#[contact], the xref:orders:managing-orders.adoc#[order] and the xref:payment:beta-managing-payments-new.adoc#[payment] have a direct link to the data record in the *CRM » Contacts* menu respectively in the *Orders » Edit orders* menu respectively in the *Orders » Payments* menu.
 
 |[#intable-my-messages-subject]*Subject*
 |Shows the subject of the first message within the conversation.
@@ -827,6 +825,7 @@ In the line of the conversation, click on icon:chevron_right[set=material] to se
 
 |[#intable-my-messages-tags]*Tags*
 |Shows the <<#context-menu-tags-conversation, tags>> that are assigned to the conversation.
+ 
 
 |[#intable-my-messages-attachments]*Attachments*
 |The symbol icon:attach_file[set=material] in the *Number of attachments* (icon:attach_file[set=material]) column shows whether the conversation has attachments. When you hover with your cursor over the symbol, you can see how many attachments the conversation has. Right next to the title bar, click on icon:arrow_upward[set=material] to sort the table by the number of orders.
@@ -850,17 +849,13 @@ Click on the button *Configure columns* (icon:settings[set=material]) on the top
 [TIP]
 .Carrying out the group function
 ====
-You can also use the group function in the *My messages* area. The group function in the *My messages* area works the same way as the group function in the *Inbox* area. For further information, refer to the <<#group-function, Using the group function>> chapter.
+You can also use the group function in the *My messages* area. The group function in the *My messages* area works the same way as the group function in the *Inbox* area. For further information, refer to the <<#group-function, Using the group function in the inbox>> chapter.
 ====
 
 [#trash]
 == Trash 
 
 In the navigation on the left-hand side of the Messenger, you can find the folder icon:delete[set=material] *Trash*. Here you can find all <<#context-menu-delete-conversation, deleted conversations>> and all<<#delete-single-message, deleted messages>>.
-
-//// 
-Wird es in Zukunft möglich sein, alle Nachrichten aus dem Papierkorb mit einem Klick zu entfernen (so wie bei "Papierkorb leeren" in E-Mail-Programmen? Oder werden die Nachrichten automatisch nach einem bestimmten Zeitraum gelöscht? Wird es möglich sein, Nachrichten aus dem Papierkorb "zurückzuholen", wenn ich die Konversation bzw. Nachricht auf "nicht abgeschlossen" setze?
-////
 
 [discrete]
 [#configure-columns-trash]
@@ -891,14 +886,16 @@ You can have the following columns displayed in the trash folder of the Messenge
 Possible values: *Back end*, *REST*, *Plugin*, *PayPal Plugin*.
 
 |[#intable-trash-relations]*Relations*
-a|The conversation relations are shown here, for example
+a|The conversation relations are shown here, for example:
 
 * icon:person[set=material] _Name of the contact (contact ID)_
 * icon:shopping_cart[set=material] _Order ID_
 * icon:mail[set=material] _Email address_
+* icon:credit_card[set=material] _Payment ID_
 * subscribers of the conversation.
 
-In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. The contact and the order have a direct link to the contact data record respectively to the order.
+In the line of the conversation, click on icon:chevron_right[set=material] to see all available relations at a glance. Click on icon:expand_more[set=material] to close the relation area again. +
+*_Note:_* The xref:crm:contacts.adoc#[contact], the xref:orders:managing-orders.adoc#[order] and the xref:payment:beta-managing-payments-new.adoc#[payment] have a direct link to the data record in the *CRM » Contacts* menu respectively in the *Orders » Edit orders* menu respectively in the *Orders » Payments* menu.
 
 |[#intable-trash-subject]*Subject*
 |Shows the subject of the first message within the conversation.
@@ -934,5 +931,5 @@ Click on the button *Configure columns* (icon:settings[set=material]) on the top
 [TIP]
 .Carrying out the group function
 ====
-You can also use the group function in the trash folder. The group function for the trash folder works the same way as the group function in the *Inbox* area. For further information, refer to the <<#group-function, Using the group function>> chapter.
+You can also use the group function in the trash folder. The group function for the trash folder works the same way as the group function in the *Inbox* area. For further information, refer to the <<#group-function, Using the group function in the inbox>> chapter.
 ====
