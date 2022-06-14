@@ -5,9 +5,10 @@
 
 
 == Auftrag [Beta]
-Unter Einrichtung - Aufträge - Auftragstypen - Auftrag [Beta]
-siehe auftraege-testphase.adoc
+Unter: Einrichtung - Aufträge - Auftragstypen - Auftrag [Beta]
 
+siehe auch auftraege-testphase.adoc
+Auftragsdokumente durch team-docs-automation
 
 == Lieferauftrag
 
@@ -37,15 +38,84 @@ Einstellungen für Aufträge in Lieferaufträge splitten
 * *Lager- und Netto-Warenbestand*
 
 
+[#order-type-delivery-order]
+== Auftragstyp Lieferauftrag nutzen
+
+Mithilfe des Auftragstyps *Lieferauftrag* werden aus einem Hauptauftrag Lieferaufträge für die enthaltenen Auftragspositionen generiert, so dass du diese einzeln oder in Teilen verschicken kannst. So kannst du beispielsweise Artikel, die du auf Lager hast, sofort losschicken und Artikel, die du erst noch geliefert bekommst, später nachsenden. Führe dies mit unterschiedlichen oder auch nur mit einem Versanddienstleister durch. +
+Lieferaufträge können *manuell*, *automatisch* oder per *Ereignisaktion* erstellt werden.
+
+[WARNING]
+.Alle Auftragspositionen in Lieferaufträge übernehmen
+====
+Erstellst du Lieferaufträge aus einem Auftrag, müssen _alle_ Auftragspositionen des Hauptauftrags in Lieferaufträge überführt werden. Übernimmst du nicht alle Auftragspositionen in Lieferaufträge, kommt es zu Fehlern im Bestand und den Lagern.
+====
+
+[#delivery-order-characteristics]
+=== Merkmale von Lieferaufträgen
+
+Im Allgemeinen besitzen Lieferaufträge folgende Eigenschaften:
+
+* Die Auftragspositionen eines Lieferauftrages lassen sich nach dem Erzeugen des Lieferauftrages *nicht* mehr anpassen.
+* Der *Preis* und das *Gewicht* eines Artikels werden aus dem Hauptauftrag übernommen.
+* Die Auftragssprache wird aus dem Hauptauftrag übernommen.
+* *Adressetikett*, *Lieferschein*, *Proformarechung* und *Gelangensbestätigung* können im Tab *Belege* ? eines Lieferauftrags generiert werden.
+* Die *Rechnung* und alle weiteren Dokumente werden zentral im Hauptauftrag generiert.
+* Die Bestandsreservierung für die in einem Lieferauftrag enthaltene Menge wird beim Anlegen eines Lieferauftrags vom Hauptauftrag auf den Lieferauftrag übertragen.
+
+[IMPORTANT]
+.Gemeinsamer Status
+====
+Der Hauptauftrag folgt immer dem Status des Lieferauftrags mit dem niedrigsten Status.
+Wenn z.B. ein Auftrag in Status *5.0* zwei Lieferaufträge hat und einer dieser Lieferaufträge wechselt in den Status *6.5*, ändert sich am Status des Hauptauftrages zunächst nichts. Erst wenn der zweite Lieferauftrag ebenfalls in den Status *6.5* wechselt, wird automatisch auch der Status des Hauptauftrages zu *6.5* geändert.
+====
+
+[#basic-settings-delivery-order]
+=== Grundeinstellungen für Lieferaufträge vornehmen
+
+[WARNING]
+.Lager pro Auftragsposition zuordnen
+====
+Im Menü *Einrichtung » Aufträge » Einstellungen* muss zwingend für die xref:auftraege:grundeinstellungen.adoc#intable-warehouse-assignment[Zuordnung des Lagers] die Option *b) pro Artikelposition kann ein Lager zugeordnet werden* ausgewählt werden.
+====
+// TODO: xref anpassen
+
+[#edit-orders-and-delivery-orders]
+=== Haupt- und Lieferaufträge bearbeiten
+
+// TODO: Text aus alter UI - anpassen
+Wenn du einen Hauptauftrag löschen möchtest, musst du zuerst die Lieferaufträge löschen. Lieferaufträge können einzeln oder über die Gruppenfunktion in der Auftragssuche gelöscht werden. Erst danach kann der Hauptauftrag gelöscht werden. Beachte aber, dass Aufträge nicht gelöscht werden können, sobald steuerrelevante Dokumente für diesen Auftrag existieren.
+
+Es können weitere Auftragspositionen zum Hauptauftrag hinzugefügt oder daraus gelöscht werden. Allerdings können nur Auftragspositionen, die nicht in Lieferaufträgen enthalten sind, aus dem Hauptauftrag gelöscht werden. Die Menge der Artikel im Hauptauftrag lässt sich erhöhen oder verringern. Löschen solltest du jedoch nur *nicht zu Lieferaufträgen zugeordnete Mengen*.
+
+[WARNING]
+.Löschen von Positionen in einem Lieferauftrag
+====
+Technisch möglich ist zwar auch das Löschen von Positionen, die bereits in einem Lieferauftrag enthalten sind. Dies solltest du jedoch vermeiden, um Fehlfunktionen zu verhindern.
+====
+
+
+[#create-order-from-existing-order]
+=== Auftrag über einen bestehenden Auftrag anlegen
+
+In einem Auftrag findest du das Symbol *Neuer Auftrag* (icon:plus-square[role="green"]) im Bereich *Allgemein*. Gehe folgendermaßen vor, um einen neuen Auftrag in einem bestehenden Auftrag anzulegen.
+. Öffne einen Auftrag.
+. Im Bereich *Allgemein* hast du die Möglichkeit, einen Auftragstyp zu wählen.
+. Wähle *Auftrag* oder *Vorbestellung*. 
+. Mache dann...
+// TODO: Was sollte dann passieren? Text auf neue UI anpassen
+
+
 [#create-delivery-order-manually]
 === Lieferaufträge manuell anlegen
 
 Bei Bedarf kannst du Lieferaufträge manuell über den Hauptauftrag anlegen. Bei dieser Methode wählst du für jeden Lieferauftrag einzeln die Auftragspositionen und -mengen aus, die der Lieferauftrag enthalten soll.
 
+:ordertype: Lieferauftrag
+
 [.instruction]
 Lieferaufträge manuell anlegen:
 
-// TODO: prüfen ob richtig erklärt: Portlet und Lieferauftrag anlegen
+// TODO: prüfen ob richtig erklärt
 . Öffne das Menü *Aufträge » Aufträge [Testphase]*.
 . Wähle über das Symbol *Filter* im Filter *Auftragstyp* die Option *Auftrag*.
 . Klicke auf *Suchen* (icon:search[role="blue"]). +
@@ -80,26 +150,136 @@ Lieferaufträge automatisch anlegen
 → Der Lieferauftrag wird angelegt.
 . Wiederhole den Prozess, um be Bedarf weitere Lieferaufträge anzulegen.
 
-// TODO: Text auf neue UI anpassen, nach Rücksprache mit Patrick Beispiele weiterhin nutzbar
-
 ////
+nach Rücksprache mit Patrick Beispiele weiterhin nutzbar
 Hier die Beispiele einfügen
 [#create-delivery-order-via-ea] 
 === Lieferaufträge per Ereignisaktion anlegen
 ////
 
+
+
 == Angebot
+
+:ordertype: Angebot
 ////
-https://knowledge.plentymarkets.com/de-de/manual/main/auftraege/angebot.html
+siehe https://knowledge.plentymarkets.com/de-de/manual/main/auftraege/angebot.html
 ////
-// TODO: neue UI 
+
+// TODO: fertigstellen
+neue UI:
+Kontakte - Kontextmenü icon:more_vert[set=material] - icon:shopping_cart[set=material] *Aufträge* - Auswahl:
+*Aufträge*
+*Neuer Auftrag*
+*Neues Angebot*
+*Neuer Auftrag [Beta]*
+*Neues Angebot [Beta]*
+*Neues Abonnement [Beta]*
+
+Um ein neues Angebot zu erstellen, muss beim Kontakt eine Rechnungsadresse hinterlegt sein.
+// TODO: Ansonsten Fehlermeldung: weiße Schrift auf rot: Fehler: Rechnungsadresse muss vorhanden sein.
+
+[.instruction]
+Neues Angebot anlegen:
+
+. Klicke auf *CRM*. Die Kontaktübersicht öffnet sich.
+. Wähle einen Kontakt und klicke auf icon:more_vert[set=material], um das Kontextmenü zu öffnen.
+. Wähle den Kontakt, zu dem du ein *Neues Angebot [Beta]* erstellen möchtest.
+→ ein neues Fenster öffnet sich.
+Level 1:
+Level 2: durch Icon Aufklappen kannst du das 2. Level *Auftragspositionen* aufklappen.
+
+// TODO: ausformulieren
+[[table-settings-new-offer]]
+.Neues Angebot
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+2+^| *Einstellungen*
+
+| *Auftrag/Angebot*
+|Voreingestellt ist *Angebot*. Alternativ könnte der Typ zu Auftrag geändert werden. +
+Rechts daneben siehst du Name und ID.
+
+| *Auftragsvorlage*
+|Voreingestellt ist Kunde. ??
+
+2+^| *Auftragsdetails*
+
+| *Rechnungsadresse*
+|Angezeigt wird die *Rechnungsadresse*. +
+Es muss eine Rechnungsadresse hinterlegt sein, um ein Angebot erstellen zu können.
+Über das Icon Auge rechts kannst du den Kontakt öffnen.
+// TODO: rotes Sternchen = Pflichtfeld
+
+| *Lieferadresse*
+|Angezeigt wird die *Lieferadresse*. +
+Es muss eine Lieferadresse hinterlegt sein, um ein Angebot erstellen zu können.
+Icon checkbox: Wie Rechnungsadresse. Du kannst wählen, ob die Lieferadresse gleich die Rechnungadresse sein soll.
+// TODO: rotes Sternchen = Pflichtfeld
+
+| *Zahlungsart*
+|Die hinterlegte *Zahlungsart* wird angezeigt.
+graues Sternchen = Pflichtfeld
+
+| *Währung*
+|Die hinterlegte *Währung* wird angezeigt. +
+Du kannst die Währung über die Dropdown-Liste ändern.
+graues Sternchen = Pflichtfeld
+
+| *Rabatt in %*
+|Der hinterlegte *Rabatt in %* wird angezeigt.
+
+| *Mandant*
+|Die hinterlegte *Zahlungsart* wird angezeigt. +
+graues Sternchen = Pflichtfeld
+
+| *Herkunft*
+|Die hinterlegte *Zahlungsart* wird angezeigt. +
+Über Dropwdown kannst du wählen zwischen *Abo-Aufträge* und *Manuelle Eingabe*.
+graues Sternchen = Pflichtfeld
+
+| *Lager*
+|Die hinterlegte *Lager* (Abhängig vom Warenbestand) wird angezeigt.
+
+| *Eigner*
+|Der *Eigner* wird angezeigt. +
+graues Sternchen = Pflichtfeld
+|====
+
+// TODO: ausformulieren
+Button "Pfeil Artikel hinzufügen"
+Das Fenster schließt sich.
+
+Rechts oben erscheint danach icon:shopping_cart[set=material], daneben mit weißer Zahl in blauem Kreis Anzahl der Artikel. Wenn du darauf klickst, öffnet sich der Warenkorb als Side cart.
+
+Der Warenkorb zeigt folgende Informationen:
+Bild
+Artikelname
+Code ??
+Preisauswahl mit Dropdown
+Preis
+Menge
+*Auftragspositionseigenschaften* über Icon Stift zu bearbeiten.
+Klicke auf den Stift, um die Eigenschaften zu bearbeiten: Name, Wert, Aufpreis.
+Eigenschaft währlen (Dropdown)
+Über Icon Plus kannst du *Eigenschaft hinzufügen*. Durch Eigenschaften speichern kannst du die Änderungen sichern.
+Über Icon roter Kreis minus kannst du *Artikel löschen*.
+Aufpreis, Rabatt, Summe pro Artikel
+
+Aufpreis gesamt
+Zwischensumme
+gelb hinterlegt Icon *Verkaufpreis aktualsieren*.
+
+Durch Klick auf x im schwarzen Kreis kannst du den Warenkorb schließen.
+
 
 
 == Retoure
 ////
 https://docs.google.com/document/d/150V8oNG2UrRsHYFXWacR0zbX17F7QP8DN1JxL3rRxnE/edit
 erlaubte Kindaufträge: Gewährleistung, Gutschrift, Reparatur
-Bereich: Rückbuchen
 ////
 
 [#order-type-return]
@@ -116,6 +296,8 @@ Der Standardstatus für Retouren ist Status 9. Jede Retoure, die erfasst wird, e
 === Retourengründe eingeben
 
 Du kannst bis zu 20 Retourengründe eingeben. Beim Erfassen einer Retoure wählst du für jede Auftragsposition einen Grund. Anhand von Retourengründen ist später nachvollziehbar, ob ein Artikel besonders häufig wegen desselben Grundes retourniert wurde. Die Retourengründe können in mehreren Sprachen hinterlegt werden.
+
+:ordertype: Retoure
 
 [.instruction]
 Retourengründe eingeben:
@@ -348,6 +530,8 @@ Je nachdem, welche Option du wählst, wird icon:shopping_cart[set=material] *Zum
 
 == Reparatur
 
+
+
 [#use-order-type-repair]
 === Auftragstyp Reparatur nutzen
 
@@ -358,6 +542,8 @@ Reparaturen werden in plentymarkets durch einen eigenen Auftragstyp abgebildet. 
 === Status für Reparaturen eingeben
 
 Hinterlege vor dem Anlegen von Reparaturen verschiedene *Status* für die einzelnen Stationen des Reparaturvorgangs, um den Reparaturverlauf in deinem plentymarkets System genau nachvollziehen zu können. Die Reparaturstatus können in mehreren Sprachen hinterlegt werden.
+
+:ordertype: Reparatur
 
 [.instruction]
 Status für Reparaturen eingeben:
@@ -386,8 +572,6 @@ Zustände für Reparaturen eingeben:
 
 [#create-repair]
 === Reparatur anlegen
-
-:ordertype: Reparatur
 
 [.instruction]
 Gehe folgendermaßen vor, um eine Reparatur anzulegen: 
@@ -744,7 +928,6 @@ Eine Gewährleistung anlegen:
 Beachte dazu die Erläuterungen in <<tabelle-{ordertype}-anlegen>>.
 . *Speichere* (icon:save[role="green"]) die Einstellungen. +
 → Die Gewährleistung wird angelegt und erscheint links in der Navigation unter der Retoure oder dem Hauptauftrag.
-// TODO: Tabelle ordertype
 
 Im Portlet *Historie* siehst du die Informationen: 
 * Datum der Erstellung
@@ -766,7 +949,7 @@ Im Portlet *Historie* siehst du die Informationen:
 | *Eigner*
 |Einen Eigner aus der Dropdown-Liste wählen. Voreingestellt ist der aktuelle Benutzer.
 
-// TODO: später abgleichen
+// TODO: abgleichen
 | *Versandkosten*
 |Wähle, ob die Versandkosten aus dem Hauptauftrag in die Gewährleistung übernommen werden sollen (Versandkosten kopieren). Die Option, die du für *Versandkosten in Gewährleistung übernehmen* im Menü *Einrichtung » Aufträge » Einstellungen* gespeichert hast, ist voreingestellt. Du kannst die gespeicherte Einstellung anpassen.
 * *JA* - die Versandkosten werden in den Warenkorb übernommen (nicht sichtbar).
@@ -831,7 +1014,7 @@ Gewährleistung bearbeiten:
 → Die Gewährleistung wird geöffnet.
 
 //// 
-Der Artikel kann über ... bearbeitet werden. Neu: Im Bereich *Allgemein* ändert sich der Auftragstyp zu *Gewährleistung*.
+Neu: Im Bereich *Allgemein* ändert sich der Auftragstyp zu *Gewährleistung*.
 ////
 
 [#finish-warranty]
@@ -850,7 +1033,8 @@ Gewährleistung durch Umtausch abschließen:
 → Ein neues Bearbeitungsfenster *Dokument erzeugen: Rechnung* öffnet sich. +
 . Gib ein Datum und einen Kommentar ein.
 //// 
-Aktionen: Auftragsstatus ändern. Wähle aus der Dropdown-Liste.
+Aktionen: Auftragsstatus ändern. 
+. Wähle aus der Dropdown-Liste.
 . *Speichere* (icon:save[role="green"]) die Einstellungen. +
 → Die Rechnung wird erzeugt und in einem eigenen Tab geöffnet.
 . Wechsle in den Bereich *?*.
@@ -876,79 +1060,9 @@ Gewährleistung durch Gutschrift abschließen:
 . Öffne den Haupt- oder Retourenauftrag zur Gewährleistung, für die du eine Gutschrift anlegen möchtest.
 . Öffne den Bereich *Übersicht*
 . Klicke auf ? die Dropdown-Liste *Gutschrift* und dort auf die Einstellung *anlegen*. +
-→ Der Gutschriftauftrag wird angelegt und in einem eigenen Tab geöffnet.
+→ Der Gutschriftauftrag wird angelegt und in einem eigenen Fenster geöffnet.
 ////
 Der weitere Bearbeitungsprozess läuft identisch mit dem regulären Anlegen einer Gutschrift und dem Erzeugen eines Gutschriftbelegs ab und wird im Kapitel xref:auftraege:auftraege-verwalten.adoc#500[Auftragstyp Gutschrift nutzen] detailliert beschrieben.
-
-
-// TODO: 
-:ordertype: Lieferauftrag
-== Lieferauftrag
-
-[#order-type-delivery-order]
-== Auftragstyp Lieferauftrag nutzen
-
-Mithilfe des Auftragstyps *Lieferauftrag* werden aus einem Hauptauftrag Lieferaufträge für die enthaltenen Auftragspositionen generiert, so dass du diese einzeln oder in Teilen verschicken kannst. So kannst du beispielsweise Artikel, die du auf Lager hast, sofort losschicken und Artikel, die du erst noch geliefert bekommst, später nachsenden. Führe dies mit unterschiedlichen oder auch nur mit einem Versanddienstleister durch. +
-Lieferaufträge können *manuell*, *automatisch* oder per *Ereignisaktion* erstellt werden.
-
-[WARNING]
-.Alle Auftragspositionen in Lieferaufträge übernehmen
-====
-Erstellst du Lieferaufträge aus einem Auftrag, müssen _alle_ Auftragspositionen des Hauptauftrags in Lieferaufträge überführt werden. Übernimmst du nicht alle Auftragspositionen in Lieferaufträge, kommt es zu Fehlern im Bestand und den Lagern.
-====
-
-[#delivery-order-characteristics]
-=== Merkmale von Lieferaufträgen
-
-Im Allgemeinen besitzen Lieferaufträge folgende Eigenschaften:
-
-* Die Auftragspositionen eines Lieferauftrages lassen sich nach dem Erzeugen des Lieferauftrages *nicht* mehr anpassen.
-* Der *Preis* und das *Gewicht* eines Artikels werden aus dem Hauptauftrag übernommen.
-* Die Auftragssprache wird aus dem Hauptauftrag übernommen.
-* *Adressetikett*, *Lieferschein*, *Proformarechung* und *Gelangensbestätigung* können im Tab *Belege* ? eines Lieferauftrags generiert werden.
-* Die *Rechnung* und alle weiteren Dokumente werden zentral im Hauptauftrag generiert.
-* Die Bestandsreservierung für die in einem Lieferauftrag enthaltene Menge wird beim Anlegen eines Lieferauftrags vom Hauptauftrag auf den Lieferauftrag übertragen.
-
-[IMPORTANT]
-.Gemeinsamer Status
-====
-Der Hauptauftrag folgt immer dem Status des Lieferauftrags mit dem niedrigsten Status.
-Wenn z.B. ein Auftrag in Status *5.0* zwei Lieferaufträge hat und einer dieser Lieferaufträge wechselt in den Status *6.5*, ändert sich am Status des Hauptauftrages zunächst nichts. Erst wenn der zweite Lieferauftrag ebenfalls in den Status *6.5* wechselt, wird automatisch auch der Status des Hauptauftrages zu *6.5* geändert.
-====
-
-[#basic-settings-delivery-order]
-=== Grundeinstellungen für Lieferaufträge vornehmen
-
-[WARNING]
-.Lager pro Auftragsposition zuordnen
-====
-Im Menü *Einrichtung » Aufträge » Einstellungen* muss zwingend für die xref:auftraege:grundeinstellungen.adoc#intable-warehouse-assignment[Zuordnung des Lagers] die Option *b) pro Artikelposition kann ein Lager zugeordnet werden* ausgewählt werden.
-====
-// TODO: xref
-
-[#edit-orders-and-delivery-orders]
-=== Haupt- und Lieferaufträge bearbeiten
-
-// TODO: Text aus alter UI - anpassen
-Wenn du einen Hauptauftrag löschen möchtest, musst du zuerst die Lieferaufträge löschen. Lieferaufträge können einzeln oder über die Gruppenfunktion in der Auftragssuche gelöscht werden. Erst danach kann der Hauptauftrag gelöscht werden. Beachte aber, dass Aufträge nicht gelöscht werden können, sobald steuerrelevante Dokumente für diesen Auftrag existieren.
-
-Es können weitere Auftragspositionen zum Hauptauftrag hinzugefügt oder daraus gelöscht werden. Allerdings können nur Auftragspositionen, die nicht in Lieferaufträgen enthalten sind, aus dem Hauptauftrag gelöscht werden. Die Menge der Artikel im Hauptauftrag lässt sich erhöhen oder verringern. Löschen solltest du jedoch nur *nicht zu Lieferaufträgen zugeordnete Mengen*.
-
-[WARNING]
-.Löschen von Positionen in einem Lieferauftrag
-====
-Technisch möglich ist zwar auch das Löschen von Positionen, die bereits in einem Lieferauftrag enthalten sind. Dies solltest du jedoch vermeiden, um Fehlfunktionen zu verhindern.
-====
-
-[#create-order-from-existing-order]
-=== Auftrag über einen bestehenden Auftrag anlegen
-
-In einem Auftrag findest du das Symbol *Neuer Auftrag* (icon:plus-square[role="green"]) im Bereich *Allgemein*. Gehe folgendermaßen vor, um einen neuen Auftrag in einem bestehenden Auftrag anzulegen.
-. Öffne einen Auftrag.
-. Im Bereich *Allgemein* hast du die Möglichkeit, einen Auftragstyp zu wählen.
-. Wähle *Auftrag* oder *Vorbestellung*. 
-. Mache dann...
-// TODO: Was sollte dann passieren? Text auf neue UI anpassen
 
 
 
