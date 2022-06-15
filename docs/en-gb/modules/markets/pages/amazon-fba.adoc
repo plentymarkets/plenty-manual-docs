@@ -485,8 +485,8 @@ include::_includes:page$EA.adoc[]
 | Setting | Option | Selection
 
 | *Event*
-| *Order change: Status change > [5] Cleared for shipping*
-|
+| *Order change: Status change*
+| *[5] Cleared for shipping*
 
 | *Filter 1*
 | *Order > Order warehouse*
@@ -743,7 +743,6 @@ Viewing FBA Inbound orders:
 
 | *Owner*
 | From the drop-down list, select an owner to search for FBA Inbound orders created by this person.
-// Eigentümer in Eigner ändern
 
 | *Warehouse*
 | Select a warehouse from the drop-down list to search for FBA Inbound orders that were redistributed to this warehouse.
@@ -751,24 +750,36 @@ Viewing FBA Inbound orders:
 | *Order ID*
 | Enter the ID of an FBA Inbound order to search for the order with this ID.
 
-| *Status*
+| *Order status*
 | Select a status to search for orders in this status. +
-The statuses *Open*, *Done* and *All* are available. +
+The order statuses *Open*, *Done* and *All* are available. +
 *_Note:_* If your parcels are shipped with an Amazon partnered carrier and you select the status *Done*, all orders that were confirmed are displayed. If you send your parcels with your own shipping service provider and you select the status *Done*, all orders that have a tracking number are displayed.
 
 2+^| Information listed
 
-| *Owner*
-|The person who created the redistribution
+| *Owner* (optional)
+|The person who created the redistribution. The *owner* column is not displayed by default.
 
 | *Sender warehouse*
 |The plentymarkets FBA warehouse
 
 | *Order ID*
-|plentymarkets ID of the FBA Inbound order
+|The plentymarkets ID of the FBA Inbound order
 
 | *Shipment ID*
-|The ID that Amazon assigned to the shipment when you created it in Amazon Seller Central
+|The ID that Amazon assigned to the shipment when you created it in Amazon Seller Central.
+
+| *Shipped items*
+|The total number of shipped items.
+
+| *Received items*
+|All items with the Amazon shipment status *RECEIVING* or *CLOSED*.
+
+| *Items' status*
+|The coloured dots show the status of the shipped items: +
+green: The shipment has the status *RECEIVING* or *CLOSED*. All shipped items have been received. +
+yellow: The shipment has the status *WORKING*, *SHIPPED*, *IN_TRANSIT*, *DELIVERED* or *CHECKED_IN*. The shipped items are still being processed. +
+red: The shipment has the status *RECEIVING* or *CLOSED*. However, not all shipped items have been received.
 
 | *Shipment status*
 a|The current status of the Amazon shipment. The following statuses available at Amazon are shown here: +
@@ -783,6 +794,59 @@ a|The current status of the Amazon shipment. The following statuses available at
 *DELETED*: The shipment was cancelled by the seller before the shipment was sent to the Amazon fulfillment center. +
 *ERROR*: There was an error with the shipment and it was not processed by Amazon.
 
+| *Order status*
+| The status of the order. +
+The order statuses *Open*, *Done* and *All* are available.
+
+|====
+
+[#customise-columns]
+=== Customising the overview
+
+You can adjust the overview to your needs.
+
+[cols="1,6a"]
+|====
+|Symbol |Explanation
+
+| icon:settings[set=material]
+|Which columns should be included in the overview?
+
+. Click on *Configure columns* (icon:settings[set=material]).
+. Select the desired columns (icon:check_box[set=material, role=skyBlue]).
+. Click on *Confirm*.
+
+[.collapseBox]
+.Available columns
+--
+* Owner
+* Sender warehouse
+* Order ID
+* Shipment ID
+* Shipped items
+* Items’ status
+* Received items
+* Shipment status
+* Order status
+
+--
+
+| icon:drag_indicator[set=material]
+|In which order should the columns be displayed?
+
+. Click on *Configure columns* (icon:settings[set=material]).
+. Move your mouse cursor over the entry with the symbol icon:drag_indicator[set=material]. +
+→ Your mouse cursor changes its shape (icon:open_with[set=material]).
+. Move the entry to the desired position.
+. Click on *Confirm*.
+
+| icon:arrow_downward[set=material] / icon:arrow_upward[set=material]
+|Should the results be displayed in ascending or descending order?
+
+. Move your mouse cursor over a column heading. +
+→ An arrow is displayed. +
+*_Note:_* Not all column headings can be sorted.
+. Click on icon:arrow_downward[set=material] or icon:arrow_upward[set=material] to change the sorting order.
 |====
 
 [#160]
@@ -829,7 +893,7 @@ Opening the package content list:
 → The filtered FBA Inbound orders are shown in the right column.
 . Click on the order. +
 → The options for editing the order are shown.
-. Click on *Package content list*. +
+. Click on *FBA Inbound Package content list*. +
 → The order is shown in the *Orders » Packet content list*.
 . Pick and pack the order based on the xref:orders:package-content-list.adoc#[package content list].
 
@@ -855,7 +919,7 @@ Registering the FBA Inbound order with Amazon (own shipping service provider):
 . Go to *Stock » Amazon FBA Inbound*.
 . Click on the order. +
 → The options for editing the order are shown.
-. Click on *Package content list*. +
+. Click on *FBA Inbound Package content list*. +
 → The order is shown in the *Orders » Packet content list*.
 . Click on *Register*. +
 *_Note:_* The *Register* button is only shown when you open the package content list from the *Stock » Amazon FBA Inbound* menu. +
@@ -892,7 +956,7 @@ Registering the FBA Inbound order with Amazon (Amazon Partnered Carrier):
 . Go to *Stock » Amazon FBA Inbound*.
 . Click on the order. +
 → The options for editing the order are shown.
-. Click on *Package content list*. +
+. Click on *FBA Inbound Package content list*. +
 → The order is shown in the *Orders » Packet content list*.
 . Click on *Register*. +
 *_Note:_* The *Register* button is only shown when you open the package content list from the *Stock » Amazon FBA Inbound* menu and closed all packages and pallets. +
@@ -1002,7 +1066,7 @@ Outbound orders have the following workflow:
 .Event procedures for fulfilment
 ====
 Configure the event procedures that are necessary for the fulfilment process. Such event procedures are having invoices generated and sent to your customers with the help of automatic emails, and having the order then switch to another status. +
-For further information, refer to the xref:automation:event-procedures.adoc#[Event procedures] and <<fulfilment#, Fulfilment>> pages of the manual.
+For further information, refer to the xref:automation:event-procedures.adoc#[Event procedures] and xref:fulfilment:fulfilment.adoc#[Fulfilment] pages of the manual.
 ====
 
 [IMPORTANT]

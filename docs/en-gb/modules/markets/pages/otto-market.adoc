@@ -3,20 +3,21 @@
 :description: Multi-Channel in plentymarkets: Set up the interface to OTTO Market in your plentymarkets system.
 :id: SMKVRT7
 :author: team-plenty-channel
+:page-aliases: otto.adoc
 :ea-queue:
 
 //tag::otto-market-page[]
 OTTO market is OTTO's marketplace. You are shown as the seller of your products. However, communication with customers is managed by OTTO.
 
 [#100]
-== Overview of automatic data exchange
+== Frequency of data exchange
 
 After setting up OTTO Market in plentymarkets, the automatic processes described in <<#data-exchange-market>> are available:
 
 [[data-exchange-market]]
 .Frequency of data exchange
 [cols="2,3a"]
-|====
+|===
 |Data |Interval
 
 | Item export
@@ -26,9 +27,7 @@ After setting up OTTO Market in plentymarkets, the automatic processes described
 | once per night at the time of item export
 
 | Stock synchronisation
-| every 15 minutes +
-*_Note:_* If stock for a variation drops to 0, this variation is deactivated automatically after 15 days. This is done to protect the product’s ranking on OTTO Market. +
-If new stock is booked for such a variation, the variation is reactivated during the nightly item export.
+| every 15 minutes
 
 | Order import
 | every 15 minutes
@@ -41,7 +40,7 @@ If new stock is booked for such a variation, the variation is reactivated during
 
 | Update of the brands list
 | every three hours
-|====
+|===
 
 [#market-setup]
 == Setting up the market in plentymarkets
@@ -97,8 +96,7 @@ a| Select the data to be exported. +
 *_Note:_* You need to automatically import orders to export item data and stock information.
 
 * *Item data* = Item data is synchronised once a day during the night.
-* *Stock information* = Stock is synchronised every 15 minutes. +
-*_Note:_* If stock for a variation drops to 0, this variation is deactivated automatically after 15 days. This is done to protect the product’s ranking on OTTO Market. If new stock is booked for such a variation, the variation is reactivated during the nightly item export.
+* *Stock information* = Stock is synchronised every 15 minutes.
 
 | *Would you like to import return announcements from OTTO market into plentymarkets?*
 | Activate to import returns that customers create on OTTO Market once per hour. Each returned order item is shown as a separate return in the *Orders* tab of an order.
@@ -148,9 +146,11 @@ a| Select the shipping service provider that is to be used if return tracking nu
 
 :market: OTTO Market
 :referrer: OTTO Market
-:referrer-option: pass:quotes[option *OTTO Market*]
+:referrer-option: pass:quotes[option *OTTO Market* with ID *160.1*]
 
 include::partial$activate-referrer.adoc[]
+
+image::markets:otto-market-referrer.png[]
 
 [#400]
 === Defining a sales price
@@ -160,7 +160,7 @@ include::partial$activate-referrer.adoc[]
 include::partial$define-sales-price.adoc[]
 
 [#425]
-=== Activating the payment method
+=== Permitting the payment method in a customer class
 
 :market: OTTO Market
 :payment-method: Otto Payment
@@ -196,7 +196,7 @@ include::partial$catalogue-assistant-config.adoc[]
 [[table-otto-market-catalogue-assistant]]
 [width="100%"]
 [cols="1,2a"]
-|====
+|===
 | Setting | Explanation
 
 | *Enter a name for the catalogue.*
@@ -205,7 +205,7 @@ a| Enter a name for the catalogue.
 | *Select the OTTO category group that should be added to the catalogue.*
 | Select an OTTO category group from the drop-down list. +
 *_Note:_* You need a separate catalogue for each OTTO category group.
-|====
+|===
 --
 
 [.collapseBox]
@@ -235,7 +235,7 @@ The property is created with the following settings:
 * Group = OTTO Market
 
 '''
-*Creating a sales price* = Creates a sales price and maps this sales price to the marketplace data field. You can check and edit this sales price in the xref:en:prices.adoc#400[Setup » Item » Sales prices] menu.
+*Creating a sales price* = Creates a sales price and maps this sales price to the marketplace data field. You can check and edit this sales price in the xref:item:prices.adoc#400[Setup » Item » Sales prices] menu.
 
 The sales price is created with the following settings:
 
@@ -251,7 +251,7 @@ The sales price is created with the following settings:
 * Country = Germany
 
 '''
-*Create barcode* = Creates a barcode *OTTO Market* and maps this barcode to the data field. If a barcode with the name *OTTO Market* already exists in the system, that barcode is mapped instead. You can check and edit this barcode in the xref:en:barcodes.adoc#100[Setup » Item » Barcodes] menu.
+*Create barcode* = Creates a barcode *OTTO Market* and maps this barcode to the data field. If a barcode with the name *OTTO Market* already exists in the system, that barcode is mapped instead. You can check and edit this barcode in the xref:item:barcodes.adoc#100[Setup » Item » Barcodes] menu.
 --
 
 [#600]
@@ -272,11 +272,12 @@ Every market structures item data differently. As such, there are some particula
 
 [[catalogue-otto-market-mappings]]
 .Notes on mapping data fields
-[cols="1,3a"]
-|====
+[cols="1a,3a"]
+|===
 | Marketplace data field | plentymarkets data field
 
-| *Category group related attributes*
+| Category group +
+related attributes
 | OTTO Market publishes current information in the category list “Kategorienliste”. Open the link:https://og2gether-my.sharepoint.com/:x:/g/personal/micha_saake_otto_de/EXg5Id8bTxNKuV8mRkQ1wrsBNFuBrjP8iQJINZjcezvjdg?rtime=3FovyUEf2Ug[tab "Attributsliste" (attribute list)^]. This document is only available in German.
 
 | *Delivery time in days* +
@@ -290,7 +291,7 @@ During the export, the values are converted to the delivery statements that cust
 [.collapseBox]
 .Delivery times: list and examples
 --
-[cols="1,3"]
+[cols="1a,3a"]
 !===
 ! *Delivery time*
 ! *OTTO delivery statement (in German)*
@@ -415,7 +416,7 @@ The workflow is the same in both cases:
 
 * To export stock of several warehouses:
   . Map the plentymarkets data field *Stock » [Select warehouse]*.
-  . Click on *Add fallback data field* (icon:link[role="yellow"]) and use the plentymarkets data field *Stock » [Selct warehouse]* to map another warehouse. You can add more than one fallback data field. +
+  . Click on *Add fallback data field* (icon:link[role="black"]) and use the plentymarkets data field *Stock » [Select warehouse]* to map another warehouse. You can also add more than one fallback data field. +
   → The total stock of all warehouses is exported that were added as data fields and fallback data fields.
 
 * To export the sum of net stock in all sales warehouses:
@@ -431,8 +432,98 @@ The workflow is the same in both cases:
 | *Sales price currency*; +
 *RRP currency*; +
 *Offer price currency*
-| OTTO Market can only process the currency EURO. For this reason, these data fields are filled with the value EUR automatically.
-|====
+| OTTO Market can only process the currency EURO. For this reason, these marketplace data fields are filled with the value “EUR” automatically.
+
+| *Sales price amount*; +
+*Sales price unit*; +
+*Unit price amount*; +
+*Unit price unit*
+| OTTO Market uses these marketplace data fields to calculate the unit price of variations.
+
+*_Important:_* To export the unit price to OTTO Market, content and unit information must be saved for the variation. To save this information, go to *Item » Edit item » [Open variation] » Tab: Settings » Area: Dimensions » Setting: Content*.
+
+For the setting *Content*, you enter a *Content value* and select a *Content unit*:
+
+image::markets:otto-unitprice-variation-setting.png[]
+
+We recommend the following mappings for unit price calculation:
+
+[cols="2,4a"]
+!===
+! *OTTO Market data field*
+! *Setting in plentymarkets*/ *explanation*
+
+! Sales price amount
+! * *Variation » Content quantity*
+
+The sales price amount is the quantity of the variation’s content. As such, you need to specify the content of the variation that is saved in the variation’s dimensions.
+
+! Unit price amount
+! * Property with the values that are allowed by OTTO (`1`, `100` and/or `1000`)
+
+The unit price amount is used to calculate the unit price. OTTO allows the values *1*, *100* or *1000*. Map this field to a property with the values *1*, *100* and/or *1000*. +
+*_Tip:_* If all variations for this catalogue have a unit price amount of *1*, you do not need to map the field *Unit price amount*. If the field is not mapped, the value *1* is exported by default.
+
+! Unit price unit
+! * *Variation » Content unit » [Enter ISO code of unit]*
+
+image::markets:otto-unitprice-mappings.png[]
+
+*_Tip:_* Go to *Setup » Item » Units* to find the ISO codes in the column *ISO*. +
+*_Example:_* For *Unit*, OTTO expects the value"C62".
+
+image::markets:otto-unitprice-iso.png[]
+
+_or_
+
+* Property with the values that are allowed by OTTO Market (ISO codes)
+
+image::markets:otto-unitprice-mappings-salesprice.png[]
+
+Go to *Setup » Item » Units* to find the ISO codes in the column *ISO*. +
+*_Example:_* For *Unit*, OTTO expects the value"C62".
+
+image::markets:otto-unitprice-iso.png[]
+
+The unit price unit relates to the content unit saved in the variation’s dimensions. OTTO Market expects the ISO code of the unit.
+
+*_Tip:_* You do not save the ISO code in the variation. Instead, select a unit from the drop-down list for the setting *Content*:
+
+image::markets:otto-unitprice-content.png[]
+
+! Sales price unit
+! * *Variation » Content unit » [Enter ISO code of unit]* +
+*_Tip:_* Go to *Setup » Item » Units* to find the ISO codes in the column *ISO*. +
+*_Example:_* For *Unit*, OTTO expects the value"C62".
+
+_or_
+
+* Property with the values that are allowed by OTTO (ISO codes)
+
+The sales price unit is the unit of the variation’s setting *Content*. OTTO Market expects the ISO code of the unit.
+!===
+
+2+^| Media Assets
+
+| *Image*
+| *_Recommendation:_* Map the plentymarkets data field *Image » item/catalogs/variation/image.image-image*.
+This data field exports all images that are made available for the referrer *OTTO Market*.
+
+| Other media asset data fields +
+(*Dimensional drawing*; +
+*Colour variations*; +
+*Energy efficiency label*; +
+*Material sample*; +
+*Product data sheet*; +
+*User manual* +
+etc.)
+| Only URLs to files can be exported for media asset data fields. The only exception to this rule is the data field *Images* (see above).
+
+*_Recommended mapping:_*
+
+* Properties of the type *Character string* for saving the URL to the appropriate file. +
+*_Important:_* You cannot link properties of the type *File* because OTTO Market can only read URLs. Every property can only contain one URL.
+|===
 
 [#weee-take-back]
 ==== Mapping attributes for electrical devices and WEEE take back
@@ -495,7 +586,8 @@ Linking a variation with an OTTO category group:
 . Click on the *Variations* tab.
 . Open the variation that should be linked.
 . Open the *Properties* tab.
-. In the *Variation properties* area, select the property *OTTO category group* from the *Properties* drop-down list and click on *Add* (icon:plus-square[role="green"]). +
+. In the area *Variation properties*, select the property *OTTO category group* from the *Properties* drop-down list.
+. Click on *Add* (icon:plus-square[role="green"]). +
 → The property is added.
 . Select the desired category group from the *Value* drop-down list for the *OTTO category group* property. +
 *_Note:_* The export to OTTO Market contains the name of the catalogue, not the name of the marketplace format. +
@@ -507,6 +599,8 @@ Linking a variation with an OTTO category group:
 === _Check list:_ Requirements for exporting variations
 
 include::partial$checklist-variations.adoc[tag=checklist-intro]
+
+include::partial$checklist-variations.adoc[tag=checklist-variation-referrer]
 
 include::partial$checklist-variations.adoc[tag=checklist-variation-active]
 
@@ -577,7 +671,7 @@ If customers paid an OTTO Market order per bank transfer, it might take longer t
 [#500]
 == Automating order processing
 
-Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform OTTO Market about order status changes. The following event procedures can be set up for OTTO Market:
+Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform OTTO Market about changes to the order status. The following event procedures can be set up for OTTO Market:
 
 * Generate return label (<<#550, How?>>)
 * Send shipping confirmation to OTTO (<<#700, How?>>)
@@ -612,13 +706,13 @@ include::_includes:page$EA.adoc[]
 [[dhl-return-label-otto]]
 .Event procedure to create a DHL return label
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| Select an event, for example *Status change: [5] Cleared for shipping* +
+| Select an event, for example *Order change: Status change* +
 *_Note:_* Select an event before the shipping confirmation. The event *New order* is _not_ recommended.
-|
+| *[5] Cleared for shipping*
 
 | *Filter 1*
 | *Order > Order type*
@@ -632,7 +726,7 @@ include::_includes:page$EA.adoc[]
 | *Plugins > Generate DHL Retoure Online label* +
 *_Note:_* This action is only available after the plugin link:https://marketplace.plentymarkets.com/plugins/integration/dhlretoureonline_6714[DHL Retoure Online^] has been installed, activated and set up.
 |
-|====
+|===
 
 [#550-2]
 ==== Generating GLS return label
@@ -644,13 +738,13 @@ include::_includes:page$EA.adoc[]
 [[gls-return-label-otto]]
 .Event procedure to create a GLS return label
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| Select an event, for example *Status change: [5] Cleared for shipping* +
+| Select an event, for example *Order change: Status change* +
 *_Note:_* Select an event before the shipping confirmation. The event *New order* is _not_ recommended.
-|
+| *[5] Cleared for shipping*
 
 | *Filter 1*
 | *Order > Order type*
@@ -664,12 +758,12 @@ include::_includes:page$EA.adoc[]
 | *Plugins > GLSShipping: Register return label* +
 *_Note:_* This action is only available after the plugin link:https://marketplace.plentymarkets.com/plugins/integration/glsshipping_6463[GLS Shipping^] has been installed, activated and set up.
 |
-|====
+|===
 
 [#550-3]
 ==== Generating Hermes return label
 
-With Hermes, return labels cannot be created via event procedures. Before the shipping label for OTTO Market is created, the return label for Hermes must be created via the xref:fulfilment:shipping-centre.adoc#[shipping centre] or via a xref:automation:procedures.adoc#[procedure] in a process. For further information, refer to the Hermes plugin link:https://marketplace.plentymarkets.com/en/plugins/integration/hermesshippinginterface_5437[user guide^].
+With Hermes, return labels cannot be created via event procedures. Before the shipping label for OTTO Market is created, the return label for Hermes must be created via the xref:fulfilment:shipping-centre.adoc#[shipping centre] or via a xref:automation:procedures.adoc#preamble[procedure] in a process. For further information, refer to the Hermes plugin link:https://marketplace.plentymarkets.com/en/plugins/integration/hermesshippinginterface_5437[user guide^].
 
 [#700]
 === Sending shipping confirmations to OTTO
@@ -689,11 +783,11 @@ include::_includes:page$EA.adoc[]
 [[shipping-confirmation-otto]]
 .Event procedure to send a shipping confirmation to OTTO Market
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| *Status change*
+| *Order change: Status change*
 | Select an event, for example *[7] Shipped*. +
 *_Note:_* If no return label has been created, the shipping confirmation cannot be sent to OTTO Market. As such, select an event that is triggered after the event procedure *Generate return label*.
 
@@ -708,7 +802,7 @@ include::_includes:page$EA.adoc[]
 | *Procedure*
 | *Plugins > Versandinformation an OTTO melden* (Send shipping confirmation to OTTO)
 |
-|====
+|===
 
 [#800]
 === Sending order cancellations to OTTO
@@ -722,12 +816,12 @@ include::_includes:page$EA.adoc[]
 [[order-cancellation-otto]]
 .Event procedure to send order cancellations to OTTO Market
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
 | *Order change: Status change*
-| Select an event, for example *[8.1] Cancelled by customer*. +
+| Select a status, for example *[8.1] Cancelled by customer* +
 *_Note:_* Orders that are cancelled by OTTO Market are imported to plentymarkets with the status *[8] Cancelled*. As such, select a different status to make sure that you do not notify OTTO Market of a cancellation they triggered.
 
 | *Filter 1*
@@ -741,7 +835,7 @@ include::_includes:page$EA.adoc[]
 | *Procedure*
 | *Plugins > Auftragsstornierung an OTTO melden* (Send order cancellation to OTTO)
 |
-|====
+|===
 
 [#900]
 === Accepting OTTO Market returns
@@ -764,13 +858,12 @@ include::_includes:page$EA.adoc[]
 [[return-otto]]
 .Event procedure to send returns to OTTO Market
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| Select an event, for example *Order change: Status change*. +
-*_Note:_* Select a status that suits your workflow. For example, you could create a status *[9.11] Send return to OTTO*.
-|
+| Select an event, for example *Order change: Status change*.
+| *_Note:_* Select a status that suits your workflow. For example, you could create a status *[9.11] Send return to OTTO*.
 
 | *Filter 1*
 | *Order > Order type*
@@ -786,7 +879,7 @@ a| *_Notes:_*
 
 * If the original order was part of a discount campaign, that discount campaign is also imported to the credit note order as an order item and the prices are applied.
 * OTTO will refund the complete sales price of an order item. You cannot notify OTTO Market of a partial refund for an order item. As such, even if you adjust the price of an order item, this adjustment does not affect the refund document that OTTO creates.
-|====
+|===
 
 [#1000]
 === Rejecting OTTO Market returns
@@ -800,13 +893,12 @@ include::_includes:page$EA.adoc[]
 [[return-rejection-otto]]
 .Event procedure to send the rejection of a return to OTTO market
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| Select an event, for example *Order change: Status change*. +
-*_Note:_* Select a status that suits your workflow. For example, you can create the status *[9.12] Reject OTTO return*.
-|
+| Select an event, for example *Order change: Status change*.
+| *_Note:_* Select a status that suits your workflow. For example, you can create the status *[9.12] Reject OTTO return*.
 
 | *Filter 1*
 | *Order > Order type*
@@ -819,7 +911,7 @@ include::_includes:page$EA.adoc[]
 | *Procedure*
 | *Plugins > Ablehnung der Retoure an OTTO melden* (Send rejection of return to OTTO)
 |
-|====
+|===
 
 [#10000]
 == Viewing the log

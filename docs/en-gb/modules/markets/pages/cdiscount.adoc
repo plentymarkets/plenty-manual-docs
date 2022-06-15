@@ -9,11 +9,36 @@ Cdiscount was the first online market in France. Today, it is still one of the m
 [#100]
 == Registering with Cdiscount
 
-You need to register with Cdiscount before setting up Cdiscount in plentymarkets. Click link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/Cdiscount_Terms_Conditions_EN.pdf[here] to download a PDF file of the Cdiscount terms and conditions (last updated: 16/10/2020).
+You need to register with Cdiscount before setting up Cdiscount in plentymarkets. Click link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/Cdiscount_Terms_Conditions_EN.pdf[here] to download a PDF file of the Cdiscount terms and conditions (as of 16/10/2020).
 
 Fill in the link:https://marketplace-registration.cdiscount.com/#[registration form^] and send your data to Cdiscount. One of the market's support employees will contact you to verify the registration.
 
 Change your API password before you save the access data in your plentymarkets system. A new password will be sent to the mailbox in your Cdiscount seller back end area.
+
+[#data-exchange]
+== Frequency of data exchange
+
+After you have set up Cdiscount in plentymarkets, data is exchanged with the market in the intervals described in <<#data-exchange-interval>>:
+
+[[data-exchange-interval]]
+.Frequency of data exchange
+[cols="1,1a"]
+|===
+|Data |Interval
+
+| Item export
+| daily
+
+| Stock synchronisation
+| every 15 minutes
+
+| Price synchronisation
+| every 15 minutes
+
+| Order import
+| Hourly +
+*_Note:_* During the hourly order import, no invoice data or delivery information is transferred from Cdiscount when the order is first imported. The order remains in status [3]. It may take up to 48 hours for the invoice data and the delivery information to be transferred to plentymarkets, as Cdiscount carries out a credit rating for the end customer first.
+|===
 
 [#200]
 == Setting up Cdiscount in plentymarkets
@@ -42,7 +67,7 @@ Use the API access data for the setup (user name and password). The user name in
 [[basic-settings-cdiscount]]
 .Basic settings for the market Cdiscount
 [cols="1,3a"]
-|====
+|===
 |Setting |Explanation
 
 | *Request product creation*
@@ -127,15 +152,7 @@ The options that can be selected here are the settings for Configuration 1 and C
 
 | *Item ID for instalment purchase fee*
 |Cdiscount charges a fee for instalment purchases. It is possible to create an item that bills customers for this fee. To do so, create an item in plentymarkets and enter the ID here.
-|====
-
-Connecting to this market allows for the following automatic functions to take place:
-
-* Daily item export
-* Hourly stock synchronisation
-* Hourly order import
-
-During the hourly order import, no invoice data or delivery information is transferred from Cdiscount when the order is first imported. The order remains in status [3]. It may take up to 48 hours for the invoice data and the delivery information to be transferred to plentymarkets, as Cdiscount carries out a credit rating for the end customer first.
+|===
 
 [#single-item-variations]
 == Distinction of single items and variation items
@@ -158,20 +175,20 @@ For variations which are listed as variation items on Cdiscount, attributes will
 [[product-names-cdiscount]]
 .Example for product names on Cdiscount
 [cols="2,2,2"]
-|====
+|===
 | Name of the single item | Name of the attribute | Product name on Cdiscount
 
 | Ladies’ bicycle, 18 inch, mountain bike
 | blue
 | Ladies’ bicycle, 18 inch, mountain bike [blue]
-|====
+|===
 
 [#250]
 == Activating the order referrer
 
 :market: Cdiscount
 :referrer: Cdiscount
-:referrer-option: pass:quotes[option *Cdiscount*]
+:referrer-option: pass:quotes[option *Cdiscount* with ID *143*]
 
 include::partial$activate-referrer.adoc[]
 
@@ -253,7 +270,7 @@ If you have created xref:item:attributes.adoc#[attributes] in your plentymarkets
 
 include::partial$link-attributes.adoc[]
 
-*_Note:_* Attributes will be added to the product names of single items on Cdiscount. For further information, see the chapter <<#single-item-variations, Distinction of single items and variation items>>.
+*_Note:_* Attributes are added to the product names of variations which are listed as single items on Cdiscount. For further information, see the chapter <<#single-item-variations, Distinction of single items and variation items>>.
 
 [#700]
 == Creating characteristics
@@ -298,7 +315,7 @@ Linking manufacturers:
 . Save (icon:save[set=plenty]) the settings.
 
 [#900]
-== Activating the payment method
+== Permitting the payment method in a customer class
 
 :market: Cdiscount
 :payment-method: Cdiscount
@@ -327,7 +344,7 @@ The following check list contains all mandatory settings for an item to be trans
 [[mandatory-settings-cdiscount]]
 .Mandatory settings for Cdiscount
 [cols="1,3a"]
-|====
+|===
 | Settings area  | Settings
 
 2+^| *Offer creation / Stock synchronisation*
@@ -387,7 +404,7 @@ a|
 a|
 *  An *SKU* is set.
 
-|====
+|===
 
 [#1000]
 === Downloading the item catalogue and stock synchronisation
@@ -455,7 +472,7 @@ include::_includes:page$EA.adoc[]
 [[event-procedure-returns-cdiscount]]
 .Event procedure for automatically sending returns to Cdiscount
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -473,7 +490,7 @@ include::_includes:page$EA.adoc[]
 | *Procedure*
 | *Return > Send return to Cdiscount*
 |
-|====
+|===
 
 [#1300]
 == Automatically updating the order status
@@ -499,13 +516,13 @@ include::_includes:page$EA.adoc[]
 [[event-procedure-order-status-cdiscount]]
 .Event procedure for automatically updating order statuses on Cdiscount
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| *Order change > Outgoing items booked* +
+| *Order change: Status change* +
 _or_ *Order change: Outgoing items booked*
-|
+| *[7] Outgoing items booked*
 
 | *Filter 1*
 | *Order > Order type*
@@ -518,7 +535,7 @@ _or_ *Order change: Outgoing items booked*
 | *Procedure*
 | *Order > Notify Cdiscount of order changes*
 | *Shipped by seller*
-|====
+|===
 
 [IMPORTANT]
 .Status: Accepted by seller
