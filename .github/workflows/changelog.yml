@@ -1,0 +1,27 @@
+name: Prepare changelog update
+
+on:
+  schedule:
+  - cron: '0 6 * * 3'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    - name: Create new changelog
+      run: node ./.github/scripts/changelog.js
+    - name: Create draft pull request
+      uses: peter-evans/create-pull-request@v4
+      with:
+        branch: changelog/update
+        branch-suffix: timestamp
+        commit-message: 'feat: create new changelog file'
+        title: 'feat: changelog update'
+        body: ''
+        draft: true
+        delete-branch: true
