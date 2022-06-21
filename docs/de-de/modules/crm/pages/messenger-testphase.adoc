@@ -8,10 +8,6 @@
 
 Im Menü *CRM » Messenger (Testphase)* verwaltest du sowohl die externe Kommunikation mit deinen Kund:innen in Form von E-Mails als auch die interne Kommunikation in Form von Nachrichten. Wenn du Nachrichten flüsterst, sind diese Nachrichten nur in deinem plentymarkets System sichtbar und können von deinen Kontakten _nicht_ eingesehen werden. 
 
-//// 
-TODO: Einleitung ergänzen
-////
-
 Das Menü *CRM » Messenger (Testphase)* ist wie folgt aufgebaut:
 
 image::crm:messenger-menu-structure.png[width=640, height=360]
@@ -80,8 +76,13 @@ include::_includes:page$tags-creation.adoc[]
 [TIP]
 .Tags für den Bereich *Nachrichten (kostenpflichtig)* erstellen
 ====
-Wenn du Nachrichten erstellen möchtest, die über den Messenger _kostenpflichtig_ abgerechnet werden sollen, erstelle nach dem selben Schema Tags für den Bereich *Nachrichten (kostenpflichtig)*. Diese Tags musst du dann der <<#nachricht-erstellen, Nachricht>> hinzufügen.
+Wenn du Nachrichten erstellen möchtest, die über den Messenger _kostenpflichtig_ <<#nachricht-abrechnen, abgerechnet>> werden sollen, erstelle nach dem selben Schema Tags für den Bereich *Nachrichten (kostenpflichtig)*. Diese Tags musst du dann der <<#nachricht-erstellen, Nachricht>> hinzufügen.
 ====
+
+[#tag-suchen]
+==== Tags suchen
+
+include::_includes:page$tags-search.adoc[]
 
 [#assistent-durchlaufen]
 === Assistent durchlaufen
@@ -95,7 +96,9 @@ Du kannst jedem Postfach andere Tags zuweisen, um später nach diesen Tags <<#ko
 [#service-aktivierung]
 ==== Service-Aktivierung
 
-In diesem Schritt aktivierst du den Messenger-Service. Wenn die Schaltfläche blau (icon:toggle_on[set=material, role=skyBlue]) ist, ist der Service aktiviert. Wenn die Schaltfläche grau (icon:toggle_off[set=material, role=darkGrey]) ist, ist der Service _nicht_ aktiviert.
+In diesem Schritt aktivierst du den Messenger-Service für diesen Posteingang. Wenn die Schaltfläche blau (icon:toggle_on[set=material, role=skyBlue]) ist, ist der Service aktiviert. Wenn die Schaltfläche grau (icon:toggle_off[set=material, role=darkGrey]) ist, ist der Service _nicht_ aktiviert.
+
+Wenn du spätere mehrere Posteingänge aktiviert hast, also den Assistenten mehrfach für die einzelnen Posteingänge durchlaufen hast, kannst du in diesem Schritt den jeweiligen Posteingang wieder deaktivieren.
 
 [#e-mail-weiterleitung]
 ==== E-Mail-Weiterleitung
@@ -116,9 +119,9 @@ In diesem Schritt siehst du den Fortschritt des Verifizierungsvorgangs. plentyma
 ehemals: SMTP-Konfiguration
 ////
 
-In diesem Schritt speicherst du die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest, damit dein plentymarkets System E-Mails wie Auftragsbestätigungen und Versandbestätigungen von dieser E-Mail-Adresse versenden kann. 
+In diesem Schritt speicherst du die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest. Dies ist erforderlich, damit dein plentymarkets System E-Mails über den Messenger versenden und empfangen kann. 
 
-Wähle nach Eingabe der Zugangsdaten (Host-Name, Benutzername, Port, Passwort) die Verschlüsselung und gib die Absender-E-Mail-Adresse sowie den Absendernamen ein. Diese E-Mail-Adresse und dieser Name wird den Empfänger:innen deiner E-Mails aus diesem Postfach angezeigt.
+Wähle nach Eingabe der Zugangsdaten die Verschlüsselung und gib die Absender-E-Mail-Adresse sowie den Absendernamen ein. Diese E-Mail-Adresse und dieser Name wird den Empfänger:innen deiner E-Mails aus diesem Postfach angezeigt.
 
 *_Hinweis für Postfächer bei mailbox.org:_* Gib den Port *465* ein und wähle als Verschlüsselung die Einstellung *SSL*.
 
@@ -143,8 +146,10 @@ Im EmailBuilder stehen dir die folgenden Messenger-bezogenen Variablen zur Verf�
 [TIP]
 .Standardvorlage verwenden
 ====
-Im Menü *CRM » EmailBuilder (Testphase)* gibt es den Ordner *Messenger*, der bereits eine Standardvorlage für den Messenger enthält. Du kannst diese Vorlage selbstverständlich nach deinen Wünschen anpassen. Die Vorlage enthält die folgenden Variablen:
+Im Menü *CRM » EmailBuilder (Testphase)* gibt es den Ordner *Messenger*, der bereits eine Standardvorlage für den Messenger enthält. Du kannst diese Vorlage nach deinen Wünschen anpassen. Die Vorlage enthält die folgenden Variablen:
 
+* Betreff der Nachricht in der Betreffzeile, dargestellt als `{{ messenger.title }}`
+** Im Betreff der Vorlage muss eine sogenannte _twig expression_ in doppelt geschweiften Klammern enthalten sein, weil in der Betreffzeile keine "normalen" Variablen verwendet werden können. Weitere Informationen dazu findest du auf der Handbuchseite xref:crm:emailbuilder.adoc#[EmailBuilder] im Kapitel xref:crm:emailbuilder.adoc#variablen-emailbuilder[Verfügbare Variablen und twig expressions].
 * Vollständiger Name
 * Inhalt der Nachricht
 * Signatur im HTML-Format
@@ -171,7 +176,7 @@ Damit du Nachrichten mit dem Messenger versenden kannst, ist es erforderlich, da
 Das Setzen des Testmodus auf *inaktiv* kannst du in diesem Schritt erledigen, ohne den Assistenten verlassen zu müssen. Aktiviere (icon:check_box[set=material, role=skyBlue]) dazu die Einstellung *Live-Modus aktivieren*.
 
 [#nachricht-erstellen]
-== Nachricht erstellen
+== Neue Nachricht erstellen
 
 Gehe wie im Folgenden beschrieben vor, um eine neue Nachricht im Messenger zu erstellen.
 
@@ -183,6 +188,7 @@ Nachricht erstellen:
 . Gib im Feld *Empfänger hinzufügen...* einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste. +
 *_Beispiel:_* Wenn du eine Zahl eingibst, werden dir mögliche Empfänger:innen mit dieser Auftrags-ID oder Kontakt-ID vorgeschlagen (siehe <<#image-messenger-new-message-suggestion-list>>).
 . Gib den Betreff deiner Nachricht im Feld *Betreff* ein.
+. Wähle den Posteingang aus der Dropdown-Liste.
 . Gib im Textfeld die Nachricht ein.
 . Klicke auf *Anhänge hinzufügen* (icon:attach_file[set=material, role=darkGrey]), um der Nachricht Anhänge hinzuzufügen.
 . Klicke auf *Der Nachricht Tags zuweisen* (icon:local_offer[set=material, role=darkGrey]), um der Nachricht Tags zuzuweisen.
@@ -204,6 +210,9 @@ image::crm:messenger-new-message-suggestion-list.png[width=640, height=360]
 
 |[#intable-subject]*Betreff*
 |Gib einen Betreff für die Nachricht ein.
+
+|[#intable-inbox]*Posteinang*
+|Wähle einen Posteingang aus der Dropdown-Liste. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten durchlaufen>> hast.
 
 |[#intable-text-field]*Textfeld*
 |Gib hier den Inhalt der Nachricht ein.
@@ -231,11 +240,11 @@ In der Übersicht werden geflüsterte Nachrichten in _kursiver Schrift_ dargeste
 |Du kannst für jede Nachricht einen Timer starten. Klicke dazu zunächst auf icon:more_vert[set=material, role=darkGrey]. Wenn du dann die Schaltfläche *Timer* aktivierst (icon:toggle_on[set=material, role=skyBlue]), startet automatisch der Timer neben der Schaltfläche icon:forward_to_inbox[set=material, role=skyBlue] *SENDEN*. +
 Klicke auf icon:pause_circle[set=material, role=darkGrey], um den Timer anzuhalten bzw. auf icon:play_circle[set=material, role=darkGrey], damit die Zeit weiterläuft.
 
-|[#intable-manage-inboxes]*Posteingänge verwalten*
-|Mit einem Klick auf icon:edit[set=material, role=darkGrey] *Posteingänge verwalten* wirst du in das Menü *Einrichtung » Assistenten » Grundeinrichtung* weitergeleitet. Hier kannst du die Posteingänge über den <<#assistent-durchlaufen, Assistenten>> *Messenger-Konfiguration* bearbeiten.
+|[#intable-manage-inboxes]*Posteingänge verwalten* (icon:more_vert[set=material, role=darkGrey])
+|Klicke zunächst auf icon:more_vert[set=material, role=darkGrey] und dann auf icon:edit[set=material, role=darkGrey] *Posteingänge verwalten*. Dadurch wirst du in das Menü *Einrichtung » Assistenten » Grundeinrichtung* weitergeleitet. Hier kannst du die Posteingänge über die dort sichtbaren <<#assistent-durchlaufen, Assistenten>> *Messenger-Konfiguration* bearbeiten.
 
-|[#intable-name-inbox]_Name des aktuell gewählten Posteingangs_
-| Mit einem Klick auf icon:arrow_drop_down[set=material, role=darkGrey] kannst du einen anderen Posteingang aus der Dropdown-Liste wählen. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten durchlaufen>> hast.
+//|[#intable-name-inbox]_Name des aktuell gewählten Posteingangs_
+//| Mit einem Klick auf icon:arrow_drop_down[set=material, role=darkGrey] kannst du einen anderen Posteingang aus der Dropdown-Liste wählen. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten durchlaufen>> hast.
 
 |[#intable-send]*SENDEN*
 |Mit einem Klick auf icon:forward_to_inbox[set=material, role=skyBlue] *SENDEN* wird die Nachricht gesendet. +
@@ -363,7 +372,7 @@ Du kannst einen Filter direkt beim Erstellen als Standard festlegen wie im Kapit
 Klicke in der Zeile des gespeicherten Filters auf icon:star[set=material, role=darkGrey] *Als Standard festlegen*. Wenn du einen anderen Filter als Standard festlegen möchtest, deaktiviere den aktuell gewählten Standardfilter mit einem Klick auf icon:star_outline[set=material, role=darkGrey] *Nicht als Standard verwenden*.
 
 [#spalten-konfigurieren]
-=== Spalten konfigurieren
+== Spalten konfigurieren
 
 In der Übersicht des Messenger kannst du dir die folgenden Spalten anzeigen lassen:
 
@@ -446,6 +455,19 @@ Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Ve
 |====
 
 Über die Schaltfläche *Spalten konfigurieren* (icon:settings[set=material, role=darkGrey]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+
+[#auf-nachricht-antworten]
+== Auf eine bestehende Nachricht antworten
+
+Suche die <<#konversation-suchen, Konversation>>, die die Nachricht enthält, auf die du antworten möchtest. Klicke dann auf die Nachricht, um darauf zu antworten.
+
+Der einzige Unterschied zum <<#nachricht-erstellen, Erstellen einer Nachricht>> ist, dass du beim Antworten auf eine bestehende Nachricht über das Symbol icon:more_vert[set=material, role=darkGrey] den Betreff ein- und ausblenden kannst (siehe <<#image-messenger-reply-to-message>>). 
+
+[[image-messenger-reply-to-message]]
+.Auf eine bestehende Nachricht antworten
+image::crm:messenger-auf-nachricht-antworten.png[width=640, height=360]
+
+Wenn der Betreff aktiviert ist (icon:toggle_on[set=material, role=skyBlue]), kannst du den Betreff auch anpassen. Wenn du über das Symbol icon:more_vert[set=material, role=darkGrey] den Betreff _nicht_ aktiviert hast (icon:toggle_off[set=material, role=darkGrey]), ist das Feld *Betreff* beim Antworten auf eine Nachricht nicht sichtbar.
 
 //// 
 TODO: wieder einfügen, wenn diese Funktion wieder eingebaut wurde.
@@ -567,7 +589,7 @@ Konversation als erledigt markieren:
 . Öffne das Menü *CRM » Messenger (Testphase)*.
 . Klicke in der Zeile der Konversation, die du als erledigt markieren möchtest, auf icon:more_vert[set=material, role=darkGrey].
 . Klicke auf icon:circle[set=material, role=darkGrey] *Konversation als erledigt markieren*. +
-→ Am Zeilenanfang der Konversation wird das Symbol icon:task[set=material, role=skyBlue] angezeigt.
+→ Am Zeilenanfang der Konversation wird das Symbol icon:circle[set=material, role=green] angezeigt.
 
 [#kontextmenue-als-nicht-erledigt-markieren]
 ==== Konversation als nicht erledigt markieren
@@ -580,7 +602,7 @@ Konversation als nicht erledigt markieren:
 . Öffne das Menü *CRM » Messenger (Testphase)*.
 . Klicke in der Zeile der Konversation, die du als nicht erledigt markieren möchtest, auf icon:more_vert[set=material, role=darkGrey]
 . Klicke auf icon:radio_button_unchecked[set=material, role=darkGrey] *Konversation als nicht erledigt markieren*. +
-→ Am Zeilenanfang der Konversation wird das Symbol icon:task[set=material, role=skyBlue] entfernt.
+→ Am Zeilenanfang der Konversation wird das Symbol icon:circle[set=material, role=green] entfernt.
 
 [#kontextmenue-konversation-abonnieren-nicht-abonnieren]
 === Konversation abonnieren / nicht mehr abonnieren
@@ -673,7 +695,7 @@ TODO: Screenshot von abgerechneter bzw. geflüsterter Nachricht einfügen.
 [#einzelne-nachricht-bearbeiten]
 == Einzelne Nachricht bearbeiten
 
-Das <<#kontextmenue, Kontextmenü für die Konversationen>> hast du weiter oben auf dieser Seite bereits kennengelernt. Natürlich kannst du auch einzelne Nachrichten über ein Kontextmenü bearbeiten. Gehe dazu wie in den folgenden Unterkapiteln beschrieben vor.
+Das <<#kontextmenue, Kontextmenü für die Konversationen>> hast du weiter oben auf dieser Seite bereits kennengelernt. Du kannst auch einzelne Nachrichten über ein Kontextmenü bearbeiten. Gehe dazu wie in den folgenden Unterkapiteln beschrieben vor.
 
 ////
 TODO: Screenshot von einer einzelnen Nachricht mit den Mini-Icons hier einfügen und erklären.
