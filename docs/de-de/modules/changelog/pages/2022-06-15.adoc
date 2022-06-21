@@ -1,0 +1,288 @@
+= Changelog 15. Juni 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 9. Juni 2022
+:startWeekDate: 15. Juni 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/behoben-fehlermeldung-bei-der-retourenetikettenerstellung-fix-error-message-during-return-label-creation/683911
+// Diesen Eintrag am 22. Juni mit aufnehmen: https://forum.plentymarkets.com/t/auftragsvorlagen-status-mit-mehr-als-2-nachkommastellen-order-templates-status-with-more-than-2-decimal-places/683644
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel
+
+* Die alte Tag-UI wurde modernisiert.
++
+image:changelog:modern-tag-ui.png[width=640]
+* Wir haben die Einstellungs-UI der Einheiten erneuert.
++
+image:changelog:modern-units-ui.png[width=640]
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Kaufland.de
+
+* *_Hinweis:_* Dieser Changelog ist ein Update zum Changelog link:https://forum.plentymarkets.com/t/kaufland-jetzt-versandbestaetigung-per-ereignisaktion-einrichten-kaufland-set-up-event-procedure-for-shipping-confirmations-now/676273[Kaufland: Jetzt Versandbestätigung per Ereignisaktion einrichten^]. Wenn du die Ereignisaktion *Versandbestätigung an Kaufland.de senden* schon eingerichtet hast, musst du nichts tun.
++
+Bisher wurden Versandbestätigungen einmal stündlich automatisch per Cron an Kaufland gesendet. Dieser Cron wird jetzt abgeschaltet:
+
+** Auf Early-Systemen wird der Cron am 08.06.2022 abgeschaltet.
+** Auf Stable-Systemen wird der Cron am 15.06.2022 abgeschaltet.
+
++
+Da Versandbestätigungen jetzt nur noch per Ereignisaktion gesendet werden können, wird außerdem die Einstellung Versandbestätigungen senden über aus dem Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen* entfernt.
++
+[IMPORTANT]
+.To-Do
+======
+Wenn du die Ereignisaktion *Versandbestätigung an Kaufland.de senden* noch nicht eingerichtet hast, dann richte sie unbedingt jetzt ein. Ohne die Ereignisaktion können ab jetzt keine Versandbestätigungen mehr an Kaufland gesendet werden! Wie du die Ereignisaktion einrichtest, ist auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#shipping-confirmation[Kaufland.de einrichten] beschrieben.
+======
+
+[discrete]
+=== OTTO
+
+:otto-master-date: 10.06.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/grbENpfr6rbU8RI3V411HXOSfLU.xlsx
+
+include::partial$otto-master-file.adoc[]
+
+[discrete]
+=== ShopBuilder
+
+* In der Benutzer:innenoberfläche des ShopBuilders wurden die Breadcrumbs entfernt und durch die neue Navigation auf der linken Seite ersetzt. Diese Navigation ist bereits aus anderen Menüpunkten, wie z.B. *Plugins » Plugin-Set-Übersicht* bekannt.
++
+Durch den Umbau haben sich ein paar Aspekte der UI verändert: Beispielsweise werden die Untermenüs *Beschreibung* und *Bilder* von Kategorien nun auch in der Navigation angezeigt. Eine wichtige Änderung ist, dass bei einem Wechsel des Mandanten oder des Plugin-Sets alle geöffneten Kategorien geschlossen werden. Wir freuen uns über Feedback zu dieser Änderung.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* Beim Abgleich der Berichte für VCS Lite/ VCS plentymarkets kam es zu einem Fehlverhalten, wenn es zu einer Amazon-Auftragsnummer mehrere Aufträge bzw. Lieferungen gab, wenn:
+** Der VCS-Bericht bereits zwei oder mehr der Lieferungen beinhaltete und
+** in plenty bisher nur eine der Lieferungen als Auftrag importiert wurde.
+
++
+In diesem Fall kam es dazu, dass der bereits importierte Auftrag allen Lieferungen zu dieser Auftragsnummer im VCS-Bericht zugeordnet wurde. Dies spiegelt sich im Auftrag dadurch wider, dass in dem Auftrag mehrere Male die Rechnung storniert und wieder generiert wurde. Eventuell sogar mit unterschiedlichen Auftragssummen.
+
+[discrete]
+=== Aufträge
+
+* Bei der Anlage eines neuen Auftrags-Status kam es zu einem Fehler bei der Weiterleitung in die Detailansicht des neuen Status. Der Status wurde trotzdem korrekt angelegt.
+* In der neuen UI zur Auftragserstellung wurde die Einstellung *Endpunkt nach Abschluss eines Auftrages* nach einer Änderung nicht übernommen. Dies ist nun behoben.
+
+[discrete]
+=== CRM
+
+* In einigen Fällen wurden E-Mail-Vorlagen über den EmailBuilder, die über eine Ereignisaktion versendet werden sollten, nicht versendet. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Bei der Retourenetikettenerstellung über die Prozesse kam es zu einer Fehlermeldung, wenn man z.B. eine Retoure ausgewählt hat und nicht den Hauptauftrag. Das Retourenetikett wurde dennoch erstellt. Dieser Fehler ist jetzt behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== plentyShop
+
+* Wenn Kund:innen für eine Eigenschaft vom Typ *Mehrfachauswahl* einen oder mehrere Eigenschaftswerte auswählen, so werden die ausgewählten Eigenschaftswerte nun als Array im plentyShop-Frontend ausgegeben. Vor dieser Änderung war es so, dass ein einzelner ausgewählter Eigenschaftswert als Objekt in einer Variablen ausgegeben wurde.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== CRM
+
+* Im Menü *CRM » Kontakte* war die Zahlungsart Rechnung als Standard-Zahlungsart in den Optionen nicht mehr verfügbar. Dies wurde behoben.
+* Durch Ereignisaktionen erstellte Ticketsystem-Nachrichten waren teilweise fehlerhaft. Dadurch konnte man die entsprechenden Tickets nicht mehr bearbeiten. Dieser Fehler wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/proslider_55225[18BITS PRO SLIDER^]
+|1.0.0
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportcriteo_5229[criteo^]
+|1.0.9
+|-
+
+|link:https://marketplace.plentymarkets.com/ebics_5098[EBICS^]
+|1.2.0
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportecondade_4774[econda^]
+|1.0.12
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexport_4763[Elastischer Export^]
+|1.7.0
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourcereselectronic5_6861[Electronic Theme^]
+|5.1.6
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourceresfashionadvanced_5403[Fashion PRO Theme^]
+|5.1.3
+|-
+
+|link:https://marketplace.plentymarkets.com/fruugo_6875[Fruugo.com^]
+|1.3.4
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportgeizhalsde_4743[Geizhals.de^]
+|1.1.9
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportguenstigerde_4745[guenstiger.de^]
+|1.0.18
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourhtmlwidget_6845[HTML Widget^]
+|1.0.4
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportkelkoode_5041[Kelkoo.de^]
+|1.0.10
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportkuponade_4756[KUPONA^]
+|1.0.15
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.1.67
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.14
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportmybestbrandsde_4731[MY BEST BRANDS^]
+|1.0.18
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal^]
+|5.6.9
+|-
+
+|link:https://marketplace.plentymarkets.com/ordertrackinglink_6361[Sendungsverfolgungs-Link^]
+|1.0.6
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.10.12
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportshoppingcom_4755[Shopping.com^]
+|1.0.17
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportshopping24de_4734[shopping24.de^]
+|1.0.24
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportshopzillade_4770[shopzilla.de^]
+|1.1.11
+|-
+
+|link:https://marketplace.plentymarkets.com/smartsupplivechat_55224[Smartsupp Live-Chat^]
+|1.0.4
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexporttracdelightcom_4771[tracdelight^]
+|1.0.15
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.2.0
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexporttwengacom_4746[Twenga^]
+|1.1.10
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+plentymarkets App::
++
+--
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in Version 1.11.30 der *plentymarkets App* behoben.
+
+* Nach der Anmeldung bei Zettle wurden Nutzer nicht korrekt in die App weitergeleitet. Dieses Verhalten wurde behoben.
+
+====
