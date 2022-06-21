@@ -4,9 +4,709 @@
 :id: 6Z40YCT
 :author: team-plenty-channel
 
-Diese Handbuchseite beschreibt den Datenimport in plentymarkets mit dem Import-Tool. Ein Import von Daten ist ratsam, wenn du z.B. neue Artikel, Kund:innen-Daten oder Lagerbestände in dein plentymarkets System einpflegen möchtest und die Daten bereits digital vorliegen. Das Import-Tool ermöglicht es über das Erstellen von Importen, Datenimporte auszuführen. Ein Import kann manuell oder automatisiert erfolgen.
+Diese Handbuchseite beschreibt den Datenimport in plentymarkets mit dem Import-Tool. Ein Import ist ratsam, wenn du zum Beispiel neue Artikel, Kontakte oder Lagerbestände in dein plentymarkets System einpflegen möchtest und die Daten schon digital vorliegen. Du kannst Daten manuell oder automatisiert importieren.
 
-[discrete]
+TIP: Du kennst das Import-Tool noch nicht? Dann xref::daten:import-introduction.adoc#[mache dich zuerst mit dem Tool vertraut].
+
+[#1210]
+== Import erstellen
+
+Erstelle einen Import.
+
+[.instruction]
+Import erstellen:
+
+. Öffne das Menü *Daten » Import*. +
+→ Die Import-Übersicht wird geöffnet.
+. Klicke auf *Import hinzufügen* (icon:add[set=material]). +
+→ Der Bearbeitungsbereich *Neuer Import* wird angezeigt.
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<tabelle-sync-erstellen>>. +
+*_Wichtig:_* Stelle das Importintervall erst ganz am Ende ein. Sonst wird möglicherweise schon der erste Import ausgeführt, während du noch Abgleich- oder Zuordnungseinstellungen vornimmst.
+. Speichere (icon:save[set=material]) die Einstellungen. +
+→ Der Import wird erstellt. +
+→ Die Abgleicheinstellungen des Imports werden geöffnet.
+
+[[tabelle-sync-erstellen]]
+.Import erstellen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+2+^| *Grunddaten*
+
+| *Name*
+| Einen Namen für den Import eingeben. Dieser Name wird in der Übersicht angezeigt und kann für die Suche genutzt werden.
+
+| *Intervall*
+| Intervall für den Import wählen. +
+Mit der Option *Zeitplan* kann festgelegt werden, wie oft und zu welchem Zeitpunkt ein Import gestartet werden soll. +
+*_Wichtig:_* Stelle das Importintervall erst ein, wenn du alle anderen Importeinstellungen vorgenommen hast. Sonst wird möglicherweise schon der erste Import ausgeführt, während du noch die Abgleich- oder Zuordnungseinstellungen vornimmst.
+
+| *Typ*
+| Welche Arten von Daten möchtest du importieren?
+
+* xref:daten:elasticSync-artikel.adoc#[Artikel] = Importiert Artikeldaten und Variantendaten
+* xref:daten:elasticSync-attribute.adoc#[Attribute] = Importiert Attributdaten
+* xref:daten:elasticSync-auftraege.adoc#[Aufträge] = Importiert Auftragsdaten
+* xref:daten:elasticSync-buchungen.adoc#[Buchungen] = Importiert Buchungen, zum Beispiel Bankbuchungen.
+* xref:daten:elasticSync-eigenschaften.adoc#[Eigenschaften] = Importiert Eigenschaften
+* xref:daten:elasticSync-facetten.adoc#[Facetten] = Importiert Facetten
+* xref:daten:elasticsync-fahrzeugverwendungsliste.adoc#[Fahrzeugverwendungsliste] = Importiert Daten der Fahrzeugverwendungsliste
+* xref:daten:elasticSync-gutschein-codes.adoc#[Gutschein-Codes] = Importiert Gutschein-Codes
+* xref:daten:elasticSync-hersteller.adoc#[Hersteller] = Importiert Herstellerdaten
+* xref:daten:elasticSync-kampagnen.adoc#[Kampagnen] = Importiert Gutscheinkampagnen
+* xref:daten:elasticSync-kategorien.adoc#[Kategorien] = Importiert Kategoriedaten
+* xref:daten:elasticSync-kontakte.adoc#[Kontakte, Firmen und Adressen] = Importiert Kontakt-, Firmen- und Adressdaten
+* xref:daten:elasticSync-lager.adoc#[Lager] = ImportiertLagerorte
+* xref:daten:elasticSync-merkmale.adoc#[Merkmale] = Importiert Merkmaldaten
+* xref:daten:elasticSync-newsletter-empfaenger.adoc#[Newsletter-Empfänger:in] = Importiert Newsletter-Daten
+* xref:daten:elasticSync-notizen.adoc#[Notizen] = Importiert Notizen
+* xref:daten:elasticSync-warenbestand.adoc#[Warenbestand] = Importiert Warenbestandsdaten
+* xref:daten:elasticSync-wareneingang.adoc#[Wareneingang] = Importiert Wareneingangsdaten
+
+2+^| *Import*
+
+| *Datentyp*
+| Zurzeit können nur CSV- oder TXT-Dateien importiert werden. Wähle deshalb die Option *CSV/TXT*.
+
+| *Zeichensatz*
+| Zeichensatz der Datei oder die Option *Automatisch erkennen* wählen.
+
+| *Beginne ab Zeile*
+| Wählen, ab welcher Zeile der Datei die Daten importiert werden sollen.
+
+| *Kopfzeile enthalten*
+| Wählen, ob die Importdatei eine Kopfzeile enthält.
+
+| *Globalen Cache nutzen*
+| Festlegen, ob der globale Cache für die Datei genutzt werden soll oder nicht.
+
+icon:check_box_outline_blank[set=material] = Alle Daten der Datei werden bei jedem Importvorgang erneut importiert. +
+icon:check_box[set=material] = Nur geänderte Datenzeilen werden importiert.
+
+| *Automatische Zuordnung*
+|Wählen, ob die automatische Zuordnung verwendet werden soll. Die Spalten der CSV- oder TXT-Datei können automatisch den plentymarkets Datenfeldern zugeordnet werden. Damit die Zuordnung funktioniert, darf die Benennung der im FormatDesigner gewählten Felder nicht geändert werden.
+// TODO: Besser beschreiben!!!!
+// icon:check_box_outline_blank[set=material] = +
+// icon:check_box[set=material] =
+
+2+^| *Trennzeichen*
+
+| *Trennzeichen*
+| Standardmäßig ist die Option *Automatisch erkennen* gewählt. +
+Alternativ kann das Trennzeichen manuell gewählt werden. Mögliche Trennzeichen sind *Semikolon*, *Komma*, *Tabulator* oder *Pipe*. +
+*_Tipp:_* Das Trennzeichen ist das Zeichen, das in der Importdatei verwendet wird, um die einzelnen Felder/Spalten eines Datensatzes voneinander zu trennen.
+
+| *Feldbegrenzungszeichen*
+| Welches Begrenzungszeichen wird in der Datei verwendet, wenn dasselbe Felder/dieselbe Spalte mehrere Werte enthält?
+
+" = Einzelne Werte innerhalb eines Feldes sind durch doppelte Anführungszeichen voneinander getrennt. +
+' = Einzelne Werte innerhalb eines Feldes sind durch einfache Anführungszeichen voneinander getrennt.
+
+2+^| *Quelle*
+
+| *Quelle*
+| *Manueller Upload* oder *HTTPS* wählen. +
+Je nach gewählter Option werden weitere Einstellungen eingeblendet.
+
+[cols="1,3a"]
+!===
+! *Manueller Upload*
+!
+. Klicke im Feld *Dateiname* auf *Datei wählen* (icon:more_horiz[set=material]). +
+→ Die im Webspace gespeicherten Dateien werden angezeigt.
+. Klicke auf *Datei hochladen* (icon:file_upload[set=material]). +
+. Wähle eine lokale Datei. +
+→ Die Datei wird in den Webspace hochgeladen. +
+*_Hinweis:_* Standardmäßig ist die Option *Datei löschen, nachdem der Import ausgeführt wurde* aktiviert. Die Datei wird also automatisch vom Webspace gelöscht, nachdem die Daten importiert wurden. Wenn die Datei im Webspace gespeichert bleiben soll, deaktiviere diese Option. *_Das Speichern der Datei auf dem Webspace ist kostenpflichtig._*
+
+! *FTP*
+! *_Ab 21.07.2022 unterstützt plentymarkets FTP-Server nicht mehr. Nutze diese Option deshalb nicht._*
+
+! *HTTPS*
+!
+. Gib in das Feld *URL* die URL ein, unter der die Importdatei erreichbar ist.  +
+*_Tipp:_* Speichere die Datei auf dem plentymarkets Webspace. +
+*_Das Speichern der Datei auf dem Webspace ist kostenpflichtig._*
+. Wähle, ob eine *Authentifizierung* erforderlich ist, um auf die Datei zuzugreifen.
+  * *keine* = keine Authentifizierung erforderlich
+  * *HTTP-Authentifizierung* = Authentifizierung per Benutzer:in und Passwort erforderlich
+. Wenn du *HTTP-Authentifizierung* gewählt hast, gib *Benutzername* und *Passwort* ein.
+
+! *SFTP*
+! *_Ab 21.07.2022 unterstützt plentymarkets FTP-Server nicht mehr. Nutze diese Option deshalb nicht._*
+!===
+
+|===
+
+[#1300]
+== Importoptionen festlegen
+
+Die Importoptionen findest du im Bereich *Abgleich*. Diese Importoptionen gelten für den Abgleich und für die Zuordnung.
+
+[.instruction]
+Importoptionen festlegen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*. +
+→ Die Ansicht *Einstellungen* wird geöffnet.
+. Wechsele in die Ansicht *Abgleich*.
+. Lege die Importoptionen fest. Beachte dazu die Erläuterungen in <<tabelle-Sync-Importoptionen>>.
+. Speichere (icon:save[role="green"]) die Einstellungen.
+
+[[tabelle-Sync-Importoptionen]]
+.Importoptionen für Importe
+[cols="1,4a"]
+|===
+|Importoption |Erläuterung
+
+| *Importoptionen*
+| Wie sollen die Daten importiert werden?
+
+* *Neue Daten importieren, vorhandene aktualisieren* = Wenn anhand der Abgleichfelder keine übereinstimmenden Datensätze gefunden werden, wird ein neuer Datensatz hinzugefügt, zum Beispiel ein neuer Artikel oder ein neuer Auftrag. Vorhandene Datensätze werden aktualisiert.
+* *Nur vorhandene Daten aktualisieren* = Vorhandene Datensätze werden aktualisiert. Wenn anhand der Abgleichfelder keine übereinstimmenden Datensätze gefunden werden, wird der Datensatz nicht importiert.
+* *Nur neue Daten importieren* = Nur neue Datensätze werden importiert, für die anhand der Abgleichfelder keine übereinstimmenden Datensätze gefunden werden.
+
+| *Dezimalzahl*
+| Wie sind Dezimalzahlen in der Importdatei formatiert?
+
+* *Deutsche Schreibweise* = Dezimalzahlen werden kommagetrennt angegeben. Als Tausendertrennzeichen wird ein Punkt verwendet. +
+  *_Beispiele:_* 13,95 Euro, 15.000 Stück
+* *Englische Schreibweise* = Dezimalzahlen werden punktgetrennt angegeben. Als Tausendertrennzeichen wird ein Komma verwendet. +
+  *_Beispiele:_* 13.95 Euro, 15,000 Stück
+
+| *Datumsformat*
+| Wie sind Datumsangaben in der Importdatei formatiert? +
+
+Wenn die Datumsangaben in der Datei im Standardformat Y-m-d H:i:s formatiert sind, muss nichts eingegeben werden. Alle anderen Formate müssen angegeben werden. Zulässig sind alle link:http://php.net/manual/de/function.date.php[php-konformen Datumsformate^].
+
+|===
+
+[#1400]
+== Abgleichfelder festlegen
+
+Du hast einen Import erstellt. Öffnen nun diesen Import, um weitere Einstellungen vorzunehmen. Als erstes wählst du die Felder, die zum Abgleichen der Datensätze verwendet werden sollen. Außerdem legst du fest, was passieren soll, wenn beim Abgleich keine vorhandenen Datensätze gefunden werden.
+
+Du kannst ein, mehrere oder alle Abgleichfelder festlegen. Die Abgleichfelder unterscheiden sich für jeden Import-Typ.
+
+[NOTE]
+.Die Abgleichfelder sind optional
+====
+Die Abgleichfelder sind optionale Einstellungen. Wenn du aber kein Abgleichfeld wählst, können die Daten deiner Datei keinen vorhandenen Daten in deinem System zugeordnet werden. Es werden also beim Import neue Datensätze gespeichert. So kann es zu doppelten Datensätzen in deinem System kommen.
+====
+
+[.instruction]
+Abgleichfelder festlegen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*. +
+→ Die Ansicht *Einstellungen* wird geöffnet.
+. Wechsele in die Ansicht *Abgleich*.
+. Nimm die Einstellungen vor. +
+*_Tipp:_* Jeder xref::page$import-typen.adoc#[Import-Typ hat andere Abgleichfelder].
+. Speichere (icon:save[set=material]) die Einstellungen.
+
+// TODO: Beispiel einfügen
+
+[#1500]
+== Zuordnungen vornehmen
+
+Mit den Zuordnungen legst du fest, welche Spalten deiner Datei in welchen Datenfeldern in plentymarkets gespeichert werden sollen. Ohne Zuordnungen können also keine Daten importiert werden. Neue Zuordnungen erstellst du im Tab *Zuordnung*. Für jede neue Zuordnung wird automatisch eine Position vergeben, die bei Bedarf im Tab *Einstellungen* angepasst werden kann.
+
+[#understand-mappings]
+=== Zuordnungen verstehen
+
+*_Was ist eine Zuordnung?_*
+
+Mit der Zuordnung legst du fest, welche Daten der Importdatei in welchen plentymarkets Datenfeldern gespeichert werden.
+
+In der Zuordnung ordnest du also die Quellen deiner Importdatei den plentymarkets Datenfeldern zu, in die die Daten importiert werden sollen.
+
+Du musst nicht alle Quellen deiner Importdatei zuordnen, sondern nur die, die du tatsächlich importieren möchtest.
+
+*_Was ist eine Quelle?_*
+
+Bei CSV-Dateien ist jede Spalte eine Quelle. TXT-Dateien sind zwar anders aufgebaut. Aber auch hier ist es am einfachsten, sich die darin enthaltenen Daten als Spalten vorzustellen.
+
+image::daten:import-mapping-colour.png[]
+
+*_Ablauf:_*
+
+. Du erstellst die Zuordnung. (<<#create-mappings, Wie?>>)
+. Du ordnest die Quellen deiner Importdatei den plentymarkets Datenfeldern zu, in die die Daten importiert werden sollen. (<<#do-mappings, Wie?>>) +
+*_Tipp:_* Optional hast du auch die Möglichkeit, die Daten der Importdatei beim Import auf verschiedene Arten zu ändern:
+  * Du legst einen eigenen Wert fest. Damit speicherst du für ein plentymarkets Datenfeld für alle Datensätze denselben Wert. (<<#own-value, Wie?>>)
+  * Du verwendest einen regulären Ausdruck, um die Daten der Quelle umzustellen. (<<#1520, Wie?>>)
+  * Du verwendest eine mathematische Berechnung, um die Zahlenwerte der Quelle beim Import neu zu berechnen. (<<#formula, Wie?>>)
+  * Du verwendest eigene Zuordnungen, um Werte einer Quelle beim Import durch andere Werte zu ersetzen. (<<#1520a, Wie?>>)
+. Du aktivierst die Quellen, die beim Import berücksichtigt werden sollen. (<<#1510, Wie?>>)
+
+[#1710]
+== Abarbeitung von Jobs in der Queue
+
+Die Queue sorgt dafür, dass auch große Datenmengen importiert werden können. Noch vor dem Import wird die Importdatei in Pakete zerlegt und anschließend in sogenannten Jobs abgearbeitet. Ein Job besteht aus 750 Zeilen einer CSV- oder TXT-Datei. Jedoch werden auch Importdateien, die weniger als 750 Zeilen enthalten, zu einem Job. Wird ein Import gestartet, wird die Datei in die entsprechenden Jobs aufgeteilt und in die Queue eingereiht. In der Queue werden neue Jobs ständig abgerufen und die Importe werden abgearbeitet. Dabei gibt es zwei verschiedene Status. Der Status *Offene Jobs* bedeutet, dass es Jobs gibt, die sich noch in der Queue befinden und darauf warten, abgearbeitet zu werden. *Abgeschlossene Jobs* hingegen wurden bereits bearbeitet und die Daten dementsprechend importiert.
+
+[#create-mappings]
+=== Zuordnung erstellen
+
+[.instruction]
+Zuordnung erstellen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*. +
+→ Die Ansicht *Einstellungen* wird geöffnet.
+. Wechsele in die Ansicht *Zuordnung*.
+. Klicke auf *Zuordnung hinzufügen* (icon:add[set=material]). +
+→ Das Fenster *Neue Zuordnung* wird geöffnet.
+. Gib einen Namen für die Zuordnung ein.
+. Speichere die Einstellung. +
+→ Die neue Zuordnung wird erstellt und geöffnet. +
+→ Neue Zuordnungen sind automatisch aktiv.
+
+*_Tipp:_* Die Position der Zuordnung wird automatisch aufsteigend vergeben. Die erste Zuordnung des Imports hat also die Position 1, die zweite Zuordnung die Position 2 usw.
+
+[.collapseBox]
+.Namen und/oder Position einer Zuordnung ändern
+--
+Du kannst den Namen und die Position von Zuordnungen jederzeit ändern:
+
+. Klicke in der Symbolleiste der Zuordnung auf *Einstellungen* (icon:cog[role="dark grey"]). +
+→ Rechts neben der Symbolleiste werden die Felder *Name* und *Position* eingeblendet.
+. Passe Namen und/oder Position an.
+. Speichere (icon:save[set=material]) die Einstellungen.
+--
+
+[#do-mappings]
+=== Datenfelder zuordnen
+
+In der Ansicht *Zuordnung* legst du nun fest, welche Spalte der Datei in welches plentymarkets Datenfeld importiert werden soll.
+
+* In der Spalte *Importdaten* werden alle Spalten der Importdatei angezeigt.
+* In der Spalte *Vorschau* werden die ersten 6 Werte in der Datei angezeigt.
+* In der Spalte *plentymarkets Datenfelder* wählst du, welches plentymarkets Datenfeld mit den Daten der Spalte befüllt werden soll.
+
+image::daten:import-mapping-colour.png[]
+
+[.instruction]
+Datenfelder zuordnen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen] » [Zuordnung öffnen]*.
+. Wähle für jede Spalte, die importiert werden soll, ein plentymarkets Datenfeld.
+. Speichere (icon:save[set=material]) die Zuordnungen.
+
+[#own-value]
+=== Benutzerdefinierte Zuordnung: Eigener Wert
+
+Die Option *Eigener Wert* erlaubt dir, für ein Datenfeld einen festen Wert zu importieren. Dieser feste Wert ist also für jeden Datensatz gleich, der durch diesen Import importiert wird.
+
+[.collapseBox]
+.Video: Eigenen Wert zuordnen
+--
+Willst du eine Datei in plentymarkets importieren, aber es fehlen einige wichtige Informationen? Du musst die Datei nicht manuell anpassen! Das Video zeigt dir, wie du mit dem Eigenen Wert die fehlenden Informationen hinzufügst.
+
+*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
+
+.Eigenen Wert nutzen, um Importdaten zu ergänzen
+video::328394037[vimeo]
+--
+
+[.instruction]
+Eigenen Wert zuordnen:
+
+. Navigiere in der Ansicht ganz nach unten.
+. Klicke auf icon:add[set=material] *FELD*. +
+→ Eine neue Zeile wird eingefügt. +
+→ Die Quelle *Eigener Wert* ist standardmäßig gewählt.
+. Gib in das Feld *Wert* die Informationen ein, die für alle Datensätze des Imports in das plentymarkets Datenfeld geschrieben werden sollen.
+. Wähle das plentymarkets Datenfeld, in das der Wert importiert werden soll.
+. Speichere (icon:save[set=material]) die Zuordnung.
+
+[#1520]
+=== Benutzerdefinierte Zuordnung: Reguläre Ausdrücke
+
+Damit eine CSV- oder TXT-Datei beim Import wie gewünscht berücksichtigt wird, kann die sog. RegEx-Funktion (Regular Expression) genutzt werden. Diese Funktion sorgt dafür, dass Daten beim Import anhand von Befehlen manipuliert werden. In der Importdatei müssen also keine Änderungen mehr vorgenommen werden.
+
+[NOTE]
+.Vorsicht mit Regulären Ausdrücken!
+====
+Reguläre Ausdrücke sind ein mächtiges Hilfsmittel, aber auch knifflig. Du solltest reguläre Ausdrücke also mit Bedacht und erst nach eingehender Recherche verwenden. Weitere Informationen findest du zum Beispiel hier:
+
+* link:http://php.net/manual/en/reference.pcre.pattern.syntax.php[http://php.net/manual/en/reference.pcre.pattern.syntax.php^]
+* link:https://regexr.com/[https://regexr.com/^] +
+  Auf dieser Seite musst du zuerst die Einstellung der RegEx engine auf PCRE umgestellt werden. Verwende dazu die Dropdown-Liste oben rechts, in der *Javascript* voreingestellt ist.
+====
+
+[.collapseBox]
+.Video: Reguläre Ausdrücke
+--
+Lerne in diesem Video mehr über die Anwendung der RegEx-Funktion. +
+
+*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
+
+.Ändere deine Daten mit der ReEx-Funktion
+video::329090839[vimeo]
+--
+
+[.instruction]
+Werte über RegEx-Funktion ersetzen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen] » [Zuordnung öffnen]*.
+. Klicke auf icon:add[set=material] *FELD*. +
+→ Eine neue Zeile wird eingefügt.
+. Wähle im Feld *Quelle* die Option *Regulärer Ausdruck*. +
+→ Die Optionen für *Regulärer Ausdruck* werden angezeigt.
+. Wähle im Feld *Wert* den Spaltennamen der Importdatei.
+. Gib im Feld *Suchen* ein Search pattern ein.
+. Gib im Feld *Ersetzen* ein Replace pattern ein.
+. Wähle in der Dropdown-Liste *Ziel* das plentymarkets Datenfeld, das befüllt werden soll.
+. Speichere (icon:save[set=material]) die Einstellungen. +
+→ Die Datenfelder werden beim Import aktualisiert.
+
+[.collapseBox]
+.*_RegEx-Beispiel 1:_* "TT.MM.YYYY" in "YYYY-MM-TT" ändern
+--
+
+*Wert*: “24.12.2017” +
+*Suchen*: /^(\d+)\.(\d+)\.(\d+)$/ +
+*Ersetzen*: $3﹣$2﹣$1 +
+
+*_Ergebnis:_* “2017-12-24”
+
+--
+
+[.collapseBox]
+.*_RegEx-Beispiel 2:_* "Nachname, Vorname" in "Vorname Nachname" ändern
+
+--
+
+*Wert*: “Mustermann, Max” +
+*Suchen*: /^(\w+), (\w+)$/ +
+*Ersetzen*: $2 $1 +
+
+*_Ergebnis:_* “Max Mustermann”
+--
+
+[#formula]
+=== Benutzerdefinierte Zuordnung: Mathematische Berechnungen
+
+Wähle in der Übersicht der Zuordnung die Quelle *Mathematische Berechnungen*, um Zahlenwerte der Importdatei während des Imports neu zu berechnen.
+
+Die folgenden Rechenarten sind verfügbar:
+
+* Addition (+++)
+* Subtraktion (-)
+* Multiplikation (*)
+* Division (/)
+* Plus Prozentwert (+)
+* Minus Prozentwert (-)
+
+[.instruction]
+Werte durch mathematische Berechnungen ändern:
+
+. Öffne das Menü *Daten » Import » [Import öffnen] » [Zuordnung öffnen]*.
+. Klicke auf icon:add[set=material] *FELD*. +
+→ Eine neue Zeile wird eingefügt.
+. Wähle im Feld *Quelle* die Option *Mathematische Berechnungen*. +
+→ Die Optionen für *Mathematische Berechnungen* werden angezeigt.
+. Wähle aus der Dropdown-Liste *CSV columns* den Spaltennamen der Importdatei.
+. Wähle aus der Dropdown-Liste *Operator* die Rechenart.
+. Gib in das Feld *Wert* einen Zahlenwert ein.
+. Wähle in der Dropdown-Liste *Ziel* das plentymarkets Datenfeld, das befüllt werden soll.
+. Speichere (icon:save[set=material]) die Einstellungen. +
+→ Die Zahlenwerte der Spalte werden beim Import neu berechnet. +
+*_Wichtig:_* Die Zahlen in der Importdatei bleiben gleich.
+
+[.collapseBox]
+.*_Beispiel:_* Preise um 5% erhöhen
+--
+
+*CSV columns*: [Spalte mit Preis wählen] +
+*Operator*: positive % +
+*Wert*: 5
+*plentymarkets Datenfeld*: [Verkaufspreis wählen]
+
+*_Ergebnis:_* Beim Import werden zu den Preisen in der angegebenen Spalte 5% addiert. Dieser höhere Preis wird als Preis in plentymarkets gespeichert.
+--
+
+[#1520a]
+=== Benutzerdefinierte Zuordnung: Eigene Zuordnung
+
+Mit der Eigenen Zuordnung können vorhandene Werte einer CSV- oder TXT-Datei auf andere Werte im System gemappt werden. So kann definiert werden, für welche ID welcher Wert importiert werden soll. Zusätzlich kann ein Default-Wert angegeben werden, wenn für einen Wert in der CSV- oder TXT-Datei keine Zuordnung definiert ist. Ist kein Default-Wert angegeben, wird der Originalwert importiert.
+
+Die eigene Zuordnung eignet sich besonders, wenn interne IDs von plentymarkets eine Rolle spielen, wie z.B. bei Merkmalnamen, Artikelmarkierungen, Zahlungsmethoden, Länder/Staaten ISO Codes usw. Schau dir das Video zu eigenen Zuordnungen an, um das Prinzip kennenzulernen.
+
+[.collapseBox]
+.Video: Eigene Zuordnungen
+--
+Lerne in diesem Video mehr über eigene Zuordnungen.
+
+*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
+
+video::328394174[vimeo]
+--
+
+[.instruction]
+Eigene Zuordnung festlegen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen] » [Zuordnung öffnen]*.
+. Wähle im Dropdown-Menü des Felds *Quelle* die Option *Eigene Zuordnung*.
+. Fülle die Felder aus. Beachte dazu die Erläuterungen in <<tabelle-eigene-zuordnung>>.
+. Speichere (icon:save[set=material]) die Einstellungen.
+
+[[tabelle-eigene-zuordnung]]
+.Eigene Zuordnung
+[cols="1,3"]
+|===
+|Feld |Einstellung
+
+| Typ
+| In welcher Spalte der CSV- oder TXT-Datei befinden sich die Werte, die du ändern möchtest?
+
+| Standardwert
+| Welcher Wert soll in plentymarkets gespeichert werden, wenn ein Datensatz keinen der Werte enthält, die du unter "Von" eingegeben hast?
+
+| Von
+| Welchen Wert der Spalte möchtest du beim Import ändern?
+
+| Zu
+| Welcher Wert soll statt des Ursprungswerts "Von" in plentymarkets gespeichert werden?
+|===
+
+////
+[#1530]
+=== Beispiel: Eigene Zuordnung verwenden
+
+Nehmen wir einmal an, du möchtest Versandprofile in plentymarkets per Import aktivieren. Deine Datei enthält die Artikel-ID und den Versanddienstleister. Um einen Artikel mit einem Versandprofil zu verknüpfen, wird aber die Versandprofil-ID benötigt. Denn allein mit dem Namen des Versandprofils kann das Versandprofil nicht aktiviert werden.
+
+*_Wichtig:_* Voraussetzung für diese Vorgehensweise ist, dass der Artikel und das Versandprofil schon in plentymarkets vorhanden sind.
+
+Die IDs der Versandprofile findest du im Menü *Einrichtung » Aufträge » Versand » Optionen » Tab: Versandprofile*. In unserem Beispiel hat das Versandprofil DPD die ID 7:
+
+[[bild-daten-importieren-versandprofil]]
+.Versandprofil
+image::daten:versandprofil.png[]
+
+Unsere Importdatei enthält zwar alle nötigen Daten, aber statt der ID ist dort der Name des Versandprofils angegeben:
+
+[[bild-daten-importieren-artikel-id]]
+.Artikel-ID
+image::daten:artikel-id.png[]
+
+In unserem Beispiel wäre es natürlich ein Leichtes, "DPD" durch "7" zu ersetzen. Aber im Alltag spielt der Import ja gerade seine Stärken aus, wenn es um große Datenvolumen geht. Also erstellen wir eine eigene Zuordnung, die die Änderung automatisch beim Import vornimmt.
+
+Als Quelle der Importdaten wählen wir den Wert *Eigene Zuordnung*:
+
+[[bild-daten-importieren-zuordnung]]
+.Eigene Zuordnung
+image::daten:eigene-zuordnung.png[]
+
+Als *Typ* wählen wir die Spalte aus der Importdatei, deren Daten wir manipulieren wollen. In unserem Beispiel ist das die Spalte *Versandprofil*:
+
+[[bild-daten-importieren-spalte]]
+.Spalte der Importdatei wählen
+image::daten:typ.png[]
+
+Nun wird es spannend: Wir legen fest, welcher Wert in der Importdatei zu welchem Wert geändert werden soll. In unserem Beispiel soll "DPD" zu "7" geändert werden, weil das die ID des Versandprofils in plentymarkets ist.
+Führe anschließend den Import aus. Das Versandprofil wird verknüpft.
+
+[[bild-daten-importieren-wert]]
+.Wert bestimmen
+image::daten:wert-bestimmen.png[]
+////
+
+[#1510]
+=== Quellen einer Zuordnung für den Import aktivieren
+
+Entscheide nun, welche Informationen aus deiner Importdatei du tatsächlich in plentymarkets importieren möchtest. Denn nur aktive Quellen werden beim Import berücksichtigt.
+
+*_Beispiel:_* Du hast eine CSV-Datei mit Produktdaten direkt vom Hersteller bekommen. Du möchtest aber erstmal nur den Einkaufspreis (EK) importieren und die restlichen Daten später in Ruhe prüfen und aufbereiten. Statt alle nicht benötigten Spalten aus der Datei zu löschen, aktivierst du nur den Import für die Quelle/Spalte der Datei, in der sich der Einkaufspreis befindet.
+
+[.instruction]
+Quellen für den Import aktivieren:
+
+
+
+[tabs]
+====
+Eine Quelle für Import aktivieren::
++
+--
+. Öffne das Menü *Daten » Import » [Import öffnen] » [Zuordnung öffnen]*.
+. Klicke links neben der Quelle auf die Umschaltfläche *Zeile aktivieren*. +
+* icon:toggle_off[set=material, role="darkGrey"] = Die Quelle ist inaktiv. Die Quelle wird beim Import nicht berücksichtigt. +
+* icon:toggle_on[set=material, role="blue"] = Die Quelle ist aktiv. Beim Import werden die Daten dieser Quelle importiert.
+. Speichere (icon:save[set=material, role="green"]) die Einstellungen.
+--
+
+Mehrere oder alle Quellen für Import aktivieren::
++
+--
+
+. Öffne das Menü *Daten » Import » [Import öffnen] » [Zuordnung öffnen]*.
+. Setze ganz links ein Häkchen bei allen Quellen, die du beim Import berücksichtigen möchtest. +
+*_Tipp:_* Klicke auf das Kontrollkästchen ganz oben, um bei allen Quellen der Zuordnung gleichzeitig ein Häkchen zu setzen.
+. Klicke oben in der Symbolleiste auf *Alle aktivieren* (icon:power-off[role="darkPurple"]). +
+→ Alle gewählten Quellen werden aktiviert. +
+*_Tipp:_* Genauso kannst du mit *Alle deaktivieren* (icon:power-off[role="darkPurple"]) mehrere oder alle Quellen auf einmal deaktivieren.
+. Speichere (icon:save[set=material, role="green"]) die Einstellungen.
+--
+====
+
+[#1515]
+=== Zuordnung aktivieren/deaktivieren
+
+Neue Zuordnungen sind automatisch aktiv, wenn du sie erstellst. Du kannst aber auch eine oder mehrere Zuordnungen deaktivieren und später wieder aktivieren.
+
+[.instruction]
+Zuordnung aktivieren/deaktivieren:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*.
+. Wechsele in die Ansicht *Zuordnung*. +
+→ Die Zuordnungen des Imports werden angezeigt.
+. Klicke in der Spalte Inaktiv/Aktiv auf die Umschaltfläche. +
+* icon:toggle_off[set=material, role="darkGrey"] = Die Zuordnung ist inaktiv. Beim Import werden die Einstellungen dieser Zuordnung nicht berücksichtigt. +
+* icon:toggle_on[set=material, role="blue"] = Die Zuordnung ist aktiv. Beim Import werden die Einstellungen dieser Zuordnung berücksichtigt. +
+*_Wichtig:_* Bei mehreren aktiven Zuordnungen wird die Zuordnung mit der niedrigsten ID als erstes importiert. Auch die weiteren aktiven Zuordnungen werden in aufsteigender Reihenfolge nach der Position importiert.
+
+[#1611]
+== Importdaten filtern
+
+Mit Filtern kannst du die Daten eingrenzen, die importiert werden. Die Filter findest du in der Ansicht *Zuordnung*.
+
+[.instruction]
+Filter hinzufügen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen] » [Zuordnung öffnen]*.
+. Klicke in der Symbolleiste auf *Filter* (icon:filter[role="yellow"]).
+. Klicke auf icon:add[set=material] *Filter*. +
+→ Eine neue Zeile wird eingeblendet.
+. Wähle die *Quelle* aus deiner Datei, die du filtern möchtest.
+. Wähle, welche *Regel* angewendet werden soll.
+. Gib einen Wert ein.
+. Wähle einen Operator. Dieser Operator entscheidet darüber, wie mehrere Filter kombiniert werden. +
+*_Wichtig:_* Wenn du den Operator *Und* wählst, werden nur Datensätze importiert, auf die *_alle_* Filter zutreffen.
+. Füge bei Bedarf weitere Filter hinzu.
+. Speichere (icon:save[set=material) die Einstellungen. +
+→ Die Filter werden gespeichert. +
+→ Nur die Daten werden importiert, auf die diese Filterregeln zutreffen.
+
+[#import-preview]
+== Importvorschau anzeigen
+
+Über die Vorschaufunktion kannst du die ersten fünf Zeilen deiner Importdatei als Tabelle anzeigen. Das ist zum Beispiel nützlich, wenn du dir nicht ganz sicher bist, wie die Datei aufgebaut ist.
+
+[.instruction]
+Importvorschau anzeigen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*.
+. Klicke in der Symbolleiste auf *Vorschau* (icon:eye[role="blue"]). +
+→ Im neuen Fenster *Vorschau* werden die ersten fünf Zeilen der Importdatei als Tabelle angezeigt.
+. Klicke neben das Fenster, um es zu schließen.
+
+[#1610]
+=== Importe vor dem Ausführen auf Fehler prüfen
+
+Du kannst Importe schon vor dem Ausführen auf Fehler prüfen.
+
+[.instruction]
+Importe vor dem Ausführen auf Fehler prüfen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*.
+. Klicke in der Symbolleiste auf *Validierung* (icon:bug[role="yellow"]). +
+→ In einem neuen Fenster wird eine Liste der Fehlermeldungen angezeigt.
+. Wenn Fehler aufgetreten sind und du Hilfe aus dem Forum brauchst:
+  * Klicke auf *Protokoll in Zwischenablage kopieren* (icon:content_copy[set=material]).
+  * Füge die Informationen im Forum ein.
+
+[#import-test]
+=== Import testen
+
+Mit der Option *Import testen* kannst du prüfen, ob alle Importeinstellungen stimmen, bevor du große Datenmengen importierst.
+
+*_Wichtig:_* Beim Testen des Imports werden die ersten zehn Zeilen der Importdatei importiert.
+
+[.instruction]
+Import testen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*.
+. Klicke in der Symbolleiste auf *Import testen* (icon:flask[role="blue"]). +
+→ Die ersten zehn Zeilen der Importdatei werden importiert.
+. Öffne das Menü, in das die Daten importiert wurden.
+. Prüfe, ob die Daten wie erwartet importiert wurden.
+. Passe die Importeinstellungen bei Bedarf an.
+
+[#import-manual]
+=== Import manuell ausführen
+
+Wenn du in den Importeinstellungen ein Intervall festgelegt hast, wird die Datei automatisch regelmäßig importiert. Du kannst den Import aber auch jederzeit manuell starten.
+
+[.instruction]
+Import manuell ausführen:
+
+. Öffne das Menü *Daten » Import » [Import öffnen]*.
+. Klicke in der Symbolleiste auf *Import ausführen* (icon:play-circle[role="grey"]). +
+→ Die Daten werden importiert.
+. Öffne das Menü, in das die Daten importiert wurden.
+. Prüfe, ob die Daten wie erwartet importiert wurden.
+
+[#1645]
+== Import abbrechen
+
+Im Menü *Daten » Status* kannst du einen gestarteten Import abbrechen. Die Funktion ist also nur verfügbar, wenn der Import gerade läuft.
+
+*_Wichtig:_* Wenn du einen laufenden Import abbrichst, werden schon importierte Datensätze nicht gelöscht. Diese Datensätze musst du also wenn nötig selbst löschen.
+
+
+[.instruction]
+Import abbrechen:
+
+. Öffne das Menü *Daten » Status*. +
+→ Die Status-Übersicht wird geöffnet. +
+. Klicke in der Zeile des Imports, den du abbrechen möchtest, ganz rechts auf *Import abbrechen* (icon:close[set=material]). +
+→ Ein Fenster mit einer Sicherheitsabfrage wird geöffnet.
+. Klicke auf *Import abbrechen*. +
+→ Der Import wird abgebrochen. +
+→ Nur die Datensätze sind im System, die zum Zeitpunkt des Abbruchs schon importiert waren.
+
+[#1650]
+== Importdatei von manuellen Imports ersetzen
+
+Du hast einen Import mit der Quelle *Manueller Upload* erstellt. Über diesen Import möchtest du eine Datei immer wieder importieren, die aber jedes Mal gleich aufgebaut ist. Wenn du dir sicher bist, dass sich am Aufbau der Spalten der Datei nichts geändert hat, kannst du die aktualisierte Datei direkt in der Import-Übersicht hochladen.
+
+[.instruction]
+Importdatei von manuellen Imports ersetzen:
+
+. Speichere die Datei auf deinem Rechner.
+. Öffne das Menü *Daten » Import*. +
+→ Die Import-Übersicht wird geöffnet.
+. Navigiere zu dem Import.
+. Klicke in der Spalte *Dateiname* auf *Datei hochladen* (icon:upload[set=material]). +
+→ Dein Dateiverzeichnis wird geöffnet.
+. Klicke auf die Datei. +
+→ Die Datei wird hochgeladen. +
+*_Wichtig:_* Wenn sich die Spaltenstruktur der Datei doch geändert hat, werden die Zuordnungen gelöscht. Prüfe also lieber noch einmal, dass die Importeinstellungen weiterhin korrekt sind.
+
+[#1625]
+== Erfolgs- und Fehlermeldungen von Imports einsehen
+
+Im Menü *Daten » Log* findest du Erfolgs- und Fehlermeldungen von Importen.
+
+[.instruction]
+Log-Einträge filtern und prüfen:
+
+. Öffne das Menü *Daten » Log*.
+. Klicke in der Symbolleiste auf icon:tune[set=material].
+. Wähle aus der Dropdown-Liste *Referenztyp* die Option *importId* oder *importName*.
+. *_Optional:_* Wähle Filter für Datum und/oder Uhrzeit, um nur Einträge anzuzeigen, die in einem bestimmten Zeitraum erstellt wurden. +
+*_Tipp:_* Informationen zu den Filtern findest du auf der Handbuchseite xref:daten:datenlog.adoc#[Daten-Log].
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die Ergebnisse werden angezeigt.
+. Prüfe vor allem Einträge mit den Levels *warning* und *error*. +
+*_Tipp:_* Klicke auf eine Meldung, um Details anzuzeigen.
+
+[#manage-imports]
+== Importe verwalten
+
+Lerne, wie du vorhandene Importe verwaltest.
+
+[#import-rights]
 === Rechte für Backend-Benutzer:innen vergeben
 
 :rights-purpose: mit Importen und Zuordnungen arbeiten können
@@ -22,784 +722,248 @@ Diese Handbuchseite beschreibt den Datenimport in plentymarkets mit dem Import-T
 
 include::_includes:page$rechte.adoc[]
 
-[#1700]
-== Datenimport mit Assistenten durchführen
-
-Du möchtest Kontakt- oder Artikeldaten importieren und fragst dich, wie du dies in deinem plentymarkets System am schnellsten tun kannst? Dann verwende die dafür vorgesehenen Assistenten, mit denen du eine Imporvorlage erstellen und mit deinen Daten befüllen kannst. Die Assistenten leiten dich Schritt für Schritt durch die notwendigen Einstellungen und du kannst genau festlegen, welche Daten importiert werden sollen. Im Anschluss kannst du - ebenfalls mithilfe eines Assistenten - deine mit Daten gefüllte Importvorlage direkt hochladen und den Import ausführen.
-
-[#1800]
-=== Assistent Kontaktdatenimport durchlaufen
-
-Für den Import von Kontaktdaten steht dir neben dem Import-Tool der Kontaktdatenimport-Assistent zur Verfügung. Dieser Assistent hilft dir dabei, eine auf deine Bedürfnisse zugeschnittene Importvorlage zu erstellen. Diese kannst du anschließend herunterladen und mit deinen Daten befüllen.
-
-Du findest den Kontaktdatenimport-Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*. In diesem Assistenten nimmst du die folgenden Einstellungen vor:
-
-* Du wählst den Namen des Imports, der später im System angezeigt werden soll.
-* Du wählst, welche Kontaktdaten, Adressdaten und Firmendaten du importieren möchtest.
-* Du wählst, welche Kontakte und Kontaktoptionen du importieren möchtest.
-* Du wählst, welche Adressen du importieren möchtest.
-* Du kannst die Importvorlage als CSV-Datei herunterladen. Beachte, dass die ersten 3 Zeilen nicht geändert werden dürfen.
-
-Wenn du nun den Import durchführen möchtest, kannst du den <<Daten hochladen-Assistenten>> verwenden. Alternativ kannst du die Importdatei auch im Menü *Daten » Import* im jeweiligen Import hochladen.
-
-
-[#1900]
-=== Assistent Artikelimport durchlaufen
-
-Für den Import von Artikeldaten steht dir neben dem Import-Tool der Artikelimport-Assistent zur Verfügung. Dieser Assistent hilft dir dabei, eine auf deine Bedürfnisse zugeschnittene Importvorlage zu erstellen. Diese kannst du anschließend herunterladen und mit deinen Daten befüllen.
-
-Du findest den Artikelimport-Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*. In diesem Assistenten nimmst du die folgenden Einstellungen vor:
-
-* Du wählst den Namen des Imports, der später im System angezeigt werden soll.
-* Du wählst, welche Artikeldaten du importieren möchtest.
-* Du wählst, welche Verkaufspreise du importieren möchtest und legst deren Formatierung fest.
-* Du kannst die Importvorlage als CSV-Datei herunterladen. Beachte, dass die ersten 3 Zeilen nicht geändert werden dürfen.
-
-Wenn du nun den Import durchführen möchtest, kannst du den <<Daten hochladen-Assistenten>> verwenden. Alternativ kannst du die Importdatei auch im Menü *Daten » Import* im jeweiligen Import hochladen.
-
-[#1200]
-=== Assistent Daten hochladen durchlaufen
-
-Den Daten hochladen-Assistenten kannst du verwenden, um eine mit deinen Daten gefüllte Importvorlage hochzuladen und den Import direkt auszuführen.
-
-Du findest den Daten hochladen-Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*. In diesem Assistenten nimmst du die folgenden Einstellungen vor:
-
-* Du lädst die mit deinen Daten gefüllte Importvorlage hoch. +
-*_Hinweis_*: Falls du noch keine Importvorlage besitzt, erstelle dir eine über den entsprechenden Import-Assistenten.
-* Du führst den Import aus. Hier kannst du bestimmen, ob du den Import mit Abschließen des Assistenten direkt ausführen möchtest. Alternativ kannst du den Import auch im Menü *Daten » Import* starten.
-
-Anschließend kannst du den über den Assistenten erstellten Import in der Übersicht im Menü *Daten » Import* sehen. Ein Abgleich ist hier nicht vorhanden, da es sich um neue Daten handelt. Im Tab *Zuordnung* des Imports wurden bereits alle Felder deiner CSV-Datei automatisch den plentymarkets Datenfeldern zugewiesen.
-
-[#1210]
-== Import erstellen
-
-Die grundsätzliche Funktionsweise zum Erstellen und Ausführen eines Imports ist für alle Import-Typen gleich und wird hier einmal übergreifend beschrieben.
-
-Importe erstellst, bearbeitest und verwaltest du im Menü **Daten » Import**. Hier siehst du eine Übersicht aller Importe. Ein Import dient dazu, die Daten einer per FTP oder HTTPS zugänglichen Datei in plentymarkets zuzuordnen und zu importieren. Beim Erstellen des Imports speicherst du Informationen zur Datenquelle. Wichtig für einen Import ist außerdem, dass du Daten für den Abgleich festlegst und zuordnest, welche Daten der Datei welchen Daten in plentymarkets entsprechen. Mit dem Abgleich bestimmst du, anhand welcher Daten versucht wird zu identifizieren, ob bereits ein Datensatz besteht oder nicht. Mit der Zuordnung legst du fest, welche Spalte deiner Datei welchem Datenfeld in plentymarkets entspricht. Am Ende legst du ein Importintervall fest. Gehe wie im Folgenden beschrieben vor, um einen Import zu erstellen.
-
-[NOTE]
-.Importintervall am Ende einstellen, damit nicht vorzeitig ein Import ausgeführt wird
-====
-Stelle das Importintervall am Ende ein, damit nicht schon ein Import ausgeführt wird, während du noch Abgleich- oder Zuordnungseinstellungen vornimmst.
-====
-
-[.instruction]
-Import erstellen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf *Import hinzufügen* (icon:plus-square[role="green"]). +
-→ Der Bearbeitungsbereich *Neuer Import* wird angezeigt.
-. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<tabelle-sync-erstellen>>.
-. *Speichere* (icon:save[role="green"]) die Einstellungen. +
-→ Der Import wird erstellt. +
-→ Die Abgleicheinstellungen des Imports werden geöffnet.
-
-[[tabelle-sync-erstellen]]
-.Import erstellen
-[cols="1,3"]
-|====
-|Einstellung |Erläuterung
-
-2+^| *Grunddaten*
-
-| *Name*
-|Name eingeben. Dieser Name wird in der Übersicht angezeigt und kann für die Suche genutzt werden.
-
-| *Intervall*
-|Intervall für den Import wählen. +
-Mit der Option *Zeitplan* kann festgelegt werden, wie oft und zu welchem Zeitpunkt ein Import gestartet werden soll.
-
-| *Typ*
-a|Typ aus Dropdown-Liste wählen.
-
-* xref:daten:elasticSync-artikel.adoc#[Artikel] = Wählen, um Artikeldaten und Variantendaten zu importieren.
-* xref:daten:elasticSync-attribute.adoc#[Attribute] = Wählen, um Attributdaten zu importieren.
-* xref:daten:elasticSync-auftraege.adoc#[Aufträge] = Wählen, um Auftragsdaten zu importieren.
-* xref:daten:elasticSync-buchungen.adoc#[Buchungen] = Wählen, um Buchungen, wie z.B. Bankbuchungen, zu importieren.
-* xref:daten:elasticSync-eigenschaften.adoc#[Eigenschaften] = Wählen, um Eigenschaften zu importieren.
-* xref:daten:elasticSync-facetten.adoc#[Facetten] = Wählen, um Facetten zu importieren.
-* xref:daten:elasticsync-fahrzeugverwendungsliste.adoc#[Fahrzeugverwendungsliste] = Wählen, um Daten der Fahrzeugverwendungsliste zu importieren.
-* xref:daten:elasticSync-gutschein-codes.adoc#[Gutschein-Codes] = Wählen, um Gutschein-Codes zu importieren.
-* xref:daten:elasticSync-hersteller.adoc#[Hersteller] = Wählen, um Herstellerdaten zu importieren.
-* xref:daten:elasticSync-kampagnen.adoc#[Kampagnen] = Wählen, um Gutscheinkampagnen zu importieren.
-* xref:daten:elasticSync-kategorien.adoc#[Kategorien] = Wählen, um Kategoriedaten zu importieren.
-* xref:daten:elasticSync-kontakte.adoc#[Kontakte, Firmen und Adressen] = Wählen, um Kontakt-, Firmen- und Adressdaten zu importieren.
-* xref:daten:elasticSync-lager.adoc#[Lager] = Wählen, um Lagerorte zu importieren.
-* xref:daten:elasticSync-merkmale.adoc#[Merkmale] = Wählen, um Merkmaldaten zu importieren.
-* xref:daten:elasticSync-newsletter-empfaenger.adoc#[Newsletter-Empfänger:in] = Wählen, um Newsletter-Daten zu importieren.
-* xref:daten:elasticSync-notizen.adoc#[Notizen] = Wählen, um Notizen zu importieren.
-* xref:daten:elasticSync-warenbestand.adoc#[Warenbestand] = Wählen, um Warenbestandsdaten zu importieren.
-* xref:daten:elasticSync-wareneingang.adoc#[Wareneingang] = Wählen, um Wareneingangsdaten zu importieren.
-
-2+^| *Import*
-
-| *Datentyp*
-|Dateiformat der Importdatei wählen. +
-Aktuell ist jedoch nur die Auswahl *CSV/TXT* verfügbar, da nur CSV- oder TXT-Dateien importiert werden können.
-
-| *Zeichensatz*
-|Zeichensatz der Datei oder die Option *Automatisch erkennen* wählen.
-
-| *Beginne ab Zeile*
-|Wählen, ab welcher Zeile der Datei Daten importiert werden sollen.
-
-| *Kopfzeile enthalten*
-|Wählen, ob die Importdatei eine Kopfzeile enthält.
-
-| *Globalen Cache nutzen*
-|Festlegen, ob der globale Cache für eine Datei genutzt werden soll oder nicht. Ist die Einstellung aktiviert, werden nur geänderte Datenzeilen importiert. Ist die Einstellung nicht aktiviert, kann ein und dieselbe Datei jederzeit erneut importiert werden.
-
-| *Automatische Zuordnung*
-|Wählen, ob die automatische Zuordnung verwendet werden soll. Die Spalten der CSV- oder TXT-Datei können automatisch den plentymarkets Datenfeldern zugeordnet werden. Damit die Zuordnung funktioniert, darf die Benennung der im FormatDesigner gewählten Felder nicht geändert werden.
-
-2+^| *Trennzeichen*
-
-| *Trennzeichen*
-|Das Trennzeichen der CSV- oder TXT-Datei wird automatisch erkannt. Diese Einstellung ist standardmäßig aktiviert. +
-Alternativ kann das Trennzeichen, das in der Importdatei verwendet wird, um die Datenfelder (Spalten) eines Datensatzes voneinander zu trennen, manuell gewählt werden. +
-Mögliche Trennzeichen sind *Semikolon*, *Komma*, *Tabulator* oder *Pipe*.
-
-| *Feldbegrenzungszeichen*
-|Begrenzungszeichen innerhalb von Feldern wählen, die mehrere Werte enthalten können. +
-* " = einzelne Werte innerhalb eines Feldes sind durch doppelte Anführungszeichen voneinander getrennt.
-* ' = einzelne Werte innerhalb eines Feldes sind durch einfache Anführungszeichen voneinander getrennt.
-
-2+^| *Quelle*
-
-| *Quelle*
-a| *Manueller Upload*, *FTP*, *HTTPS* oder *SFTP* wählen. +
-Je nach gewählter Option werden weitere Einstellungen sichtbar:
-
-*Manueller Upload* = lokale Datei wählen und direkt hochladen. +
-Nachdem ein Import ausgeführt wurde, wird die Datei automatisch vom Webspace gelöscht. Dies ist standardmäßig voreingestellt. Um die Datei zu speichern, muss der Haken in der Checkbox entfernt werden. *_Hinweis_*: Das Speichern der Datei auf dem Webspace ist kostenpflichtig.
-
-*FTP* = Host, Port, Benutzername, Passwort und Dateiname werden als Einstellungen sichtbar.
-
-    * *Host (Pflichtfeld)* = Host des FTP-Servers eingeben. +
-      *_Tipp:_* Nutze hierzu deinen plentymarkets FTP-Zugang.
-    * *Port* = Port des FTP-Servers. Wenn kein Port eingetragen ist, wird der Standard-Port (22) verwendet.
-    * *Benutzername (Pflichtfeld)* = Benutzer:in für FTP-Zugang eingeben.
-    * *Passwort (Pflichtfeld)* = Passwort für FTP-Zugang eingeben.
-    * *Dateiname* = Pfad und Name der Datei eingeben, aus der Daten importiert werden sollen. Der Dateiname muss auf .csv oder .txt enden. +
-    *_Hinweis:_* Wildcards können im Feld *Dateiname* verwendet werden, indem z.B. ein Teil des Dateinamens durch ein *** ersetzt wird. Wildcards nur in Kombination mit der Option *Datei nach erfolgreichem Import in Archiv verschieben* verwenden.
-    * *Datei nach erfolgreichem Import in Archiv verschieben* = Wenn diese Option aktiv ist, wird nach erfolgreichem Import die Importdatei automatisch in einen neuen Ordner *Archiv* auf dem FTP-Verzeichnis verschoben.
-
-*FTPS* = Wähle *FTP* als Quelle. Setze anschließend weiter unten bei *FTP mit SSL/TLS* einen Haken. +
-Nimm die Einstellungen vor, wie bei der Option *FTP* beschrieben.
-
-*HTTPS* = *Externe URL* wählen.
-
-        * *Externe URL* = URL eingeben, unter der die Importdatei erreichbar ist. +
-         *_Tipp:_* Speichere die Datei auf dem plentymarkets Webspace.
-          * *Authentifizierung*: Wählen, ob für den Zugriff auf die Datei eine Authentifizierung erforderlich ist oder nicht.
-            ** *keine* = keine Authentifizierung erforderlich
-            ** *HTTP-Authentifizierung* = Authentifizierung per Benutzer:in und Passwort erforderlich
-
-*SFTP* = Host, Port, Benutzername, Passwort und Dateiname werden als Einstellungen sichtbar.
-
-        * *Host (Pflichtfeld)* = Host des FTP-Servers eingeben. +
-        * *Port (Pflichtfeld)* = Port des FTP-Servers. Wenn kein Port eingetragen ist, wird der Standard-Port (22) verwendet.
-        * *Benutzername (Pflichtfeld)* = Benutzer:in für FTP-Zugang eingeben.
-        * *Passwort (Pflichtfeld)* = Passwort für FTP-Zugang eingeben.
-        * *Dateiname* = Pfad und Name der Datei eingeben, aus der Daten importiert werden sollen. Der Dateiname muss auf .csv oder .txt enden. +
-        *_Hinweis:_* Wildcards können im Feld *Dateiname* verwendet werden, indem z.B. ein Teil des Dateinamens durch ein *** ersetzt wird. Wildcards nur in Kombination mit der Option *Datei nach erfolgreichem Import in Archiv verschieben* verwenden.
-        * *Datei nach erfolgreichem Import in Archiv verschieben* = Wenn diese Option aktiv ist, wird nach erfolgreichem Import die Importdatei automatisch in einen neuen Ordner *Archiv* auf dem FTP-Verzeichnis verschoben.
-|====
-
-[#1300]
-== Importoptionen festlegen
-
-Die Importoptionen befinden sich im Bereich *Abgleich* und gelten sowohl für den Abgleich als auch für die Zuordnung.
-
-Bevor wir zu den konkreten Einstellungen der Importoptionen kommen, hast du hier die Möglichkeit, mehr über den Datenimport zu erfahren.
-Wie bereits erwähnt, kann dieser manuell oder automatisch erfolgen. Wenn du neu bei plentymarkets bist und deine Artikel einmalig manuell importieren möchtest, schaue dir dieses Video an und lerne, wie du Informationen wie beispielsweise Produkt- oder Kund:innen-Daten in deiner CSV-Datei einmalig manuell importierst. +
-*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
-
-.Importiere deine Daten einmalig manuell
-video::321227748[vimeo]
-
-In diesem Video erfährst du, wie du plentymarkets so konfigurierst, dass neue Dateien automatisch importiert und alte archiviert werden.
-
-.Lasse deine Daten automatisch importieren oder archivieren
-video::322203826[vimeo]
-
-Nun zurück zu den Importoptionen.
-
-[.instruction]
-Importoptionen festlegen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke in der Import-Übersicht auf den Import. +
-→ Die Einstellungen werden geöffnet.
-. Wechsele in das Tab *Abgleich*.
-. Lege die Importoptionen fest. Beachte dazu die Erläuterungen in <<tabelle-Sync-Importoptionen>>.
-. *Speichere* (icon:save[role="green"]) die Einstellungen.
-
-[[tabelle-Sync-Importoptionen]]
-.Importoptionen für Importe
-[cols="1,2"]
-|====
-|Importoption |Erläuterung
-
-| *Importoption wählen*
-a|
-
-* *Neue Daten importieren, vorhandene aktualisieren* = Wenn anhand der Abgleichfelder keine übereinstimmenden Daten gefunden werden, wird ein neuer Datensatz, z.B. ein neuer Artikel oder ein neuer Auftrag, hinzugefügt. Gleichzeitig werden bereits vorhandene Daten aktualisiert.
-* *Nur vorhandene Daten aktualisieren* = Vorhandene Daten werden aktualisiert. Wenn anhand der Abgleichfelder keine übereinstimmenden Daten gefunden werden, wird der Datensatz nicht importiert.
-* *Nur neue Daten importieren* = Es werden ausschließlich neue Datensätze importiert, für die anhand der Abgleichfelder keine übereinstimmenden Daten gefunden werden.
-
-| *Dezimalzahl*
-a| *Deutsche Schreibweise* oder *Englische Schreibweise* wählen.
-
-* *Deutsche Schreibweise* = Dezimalzahlen werden kommasepariert angegeben und ein Punkt dient als Tausendertrennzeichen.
-* *Englische Schreibweise* = Dezimalzahlen werden punktsepariert angegeben und ein Komma dient als Tausendertrennzeichen.
-
-| *Datumsformat*
-|Datumsformat eingeben. Wenn die Datumsangaben in der Datei dem Standardformat Y-m-d H:i:s entsprechen, muss nichts eingegeben werden. Andere Formate müssen eingetragen werden. Zulässig sind alle link:http://php.net/manual/de/function.date.php[php-konformen Datumsformate^].
-
-|====
-
-[#1400]
-== Abgleich festlegen
-
-Nachdem du einen Import erstellt hast, öffne diesen, um weitere Einstellungen vorzunehmen. Zunächst wählst du die Felder, die zum Abgleichen der Daten verwendet werden sollen. Lege außerdem fest, was passieren soll, wenn durch den Abgleich keine bestehenden Daten gefunden werden.
-
-[NOTE]
-.Abgleich ist optional
-====
-Bei den Abgleichfeldern handelt es sich um optionale Einstellungen. Wenn du kein Abgleichfeld wählst, können die Daten deiner Datei keinen bestehenden Daten in deinem System zugeordnet werden. Du kannst eins, mehrere oder alle Abgleichfelder festlegen. Die angezeigten Abgleichfelder unterscheiden sich für jeden Import-Typ.
-====
-
-[.instruction]
-Abgleich festlegen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke in der Import-Übersicht auf den Import. +
-→ Die Einstellungen werden geöffnet.
-. Wechsele in das Tab *Abgleich*.
-. Nimm die Einstellungen vor.
-. *Speichere* (icon:save[role="green"]) die Einstellungen.
-
-[#1500]
-== Zuordnung erstellen
-
-Mithilfe einer Zuordnung legst du fest, welche Spalte deiner Datei welchem Datenfeld in deinem System entspricht. Ohne Zuordnung können keine Daten importiert werden. Neue Zuordnungen erstellst du im Tab Zuordnung. Für jede neue Zuordnung wird automatisch eine Position vergeben, die bei Bedarf im Tab Einstellungen angepasst werden kann.
-
-[.instruction]
-Zuordnung erstellen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf einen Import. +
-→ Die Einstellungen werden geöffnet.
-. Gehe in das Tab *Zuordnung*.
-. Klicke auf *Zuordnung hinzufügen* (icon:plus-square[role="green"]). +
-→ Ein Fenster wird geöffnet.
-. Gib einen Namen für die Zuordnung ein.
-. *Speichere* (icon:save[role="green"]) die Einstellungen. +
-→ Die neue Zuordnung wird geöffnet. Die verfügbaren Zuordnungsfelder unterscheiden sich je nach Import-Typ.
-. Wähle Datenfelder für die Zuordnung aus, indem du Häkchen bei diesen Feldern setzt. +
-→ Die gewählten Datenfelder werden zur Zuordnung hinzugefügt.
-. Wähle für jedes Datenfeld eine Spalte aus deiner Datei oder die Option *Eigener Wert*.
-. *Speichere* (icon:save[role="green"]) die Einstellungen.
-
-Willst du eine Datei in plentymarkets importieren, aber es fehlen einige wichtige Informationen? Du musst die Datei nicht manuell anpassen! Das Video zeigt dir, wie du mit dem Eigenen Wert die fehlenden Informationen hinzufügst. +
-*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
-
-.Nutze den Eigenen Wert, um Informationen zu deiner Datei hinzuzufügen
-video::328394037[vimeo]
-
-[NOTE]
-.Eigener Wert
-====
-Die Option *Eigener Wert* erlaubt dir, für ein Datenfeld einen festen Wert zu importieren. Dieser feste Wert ist somit für jeden Datensatz, der durch diesen Import importiert wird, gleich.
-====
-
-[NOTE]
-.Mathematische Berechnungen
-====
-Wähle in der Übersicht der Zuordnung die Quelle *Mathematische Berechnungen*, um Werte der CSV- oder TXT-Datei während des Imports anzupassen. Zur Auswahl stehen die Addition (+++), die Subtraktion (-), die Multiplikation (*), die Division (/) und die Anpassung des Prozentsatzes (+)/(-). Bei dem Wert, der in der CSV- oder TXT-Spalte angepasst wird, muss es sich um eine Zahl handeln.
-====
-
-[#1510]
-=== Zeilen einer Zuordnung für den Import aktivieren
-
-Im Bereich *Zuordnung* kannst du mit nur einem Klick alle gewählten Zeilen für den Import gesammelt aktivieren und auch wieder deaktivieren. Alternativ kannst du bei jeder Zeile individuell entscheiden, ob sie aktiv oder inaktiv sein soll, sprich, ob sie beim Import berücksichtigt werden soll oder nicht.
-
-[.instruction]
-Zeilen für den Import aktivieren:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf einen Import. +
-→ Die Einstellungen werden geöffnet.
-. Wechsele in das Tab *Zuordnung*.
-. Klicke auf eine Zuordnung. +
-→ Die Zuordnung wird geöffnet.
-. Hake am linken Rand alle Zeilen an, die du beim Import berücksichtigen möchtest.
-. Klicke anschließend oben auf *Alle aktivieren* (icon:power-off[role="green"]). Mit Klick auf *Alle deaktivieren* (icon:power-off[role="red"]) kannst du die gewählten Zeilen auch wieder gesammelt deaktivieren.
-. Klicke alternativ auf *Zeile aktivieren* (icon:toggle-off[role="red"]) am rechten Rand, um Zeilen für den Import einzeln zu aktivieren.
-. *Speichere* (icon:save[role="green"]) die Einstellungen.
-
-[NOTE]
-.Ansicht in der Zuordnung
-====
-Auf der linken Seite der Zuordnung sind die Importdaten aus der CSV- oder TXT-Datei dargestellt, die auf der plentymarkets Seite zugeordnet werden müssen. Auf der rechten Seite sind die plentymarkets Datenfelder aufgeführt. Die Vorschau (icon:eye[role="blue"]) zeigt die ersten 6 Werte der Datei.
-====
-
-[TIP]
-.Position und Name bearbeiten
-====
-Mit Klick auf *Einstellungen* (icon:cog[role="black"]) in der Zuordnung werden die Felder *Name* und *Position* sichtbar und können angepasst werden.
-====
-
-[#1515]
-=== Zuordnung aktivieren/deaktivieren
-
-Wenn du mehrere Zuordnungen in einem Import pflegst, kannst du bestimmte Zuordnungen eines Imports in der Übersicht der Zuordnungen mit Klick auf die Umschaltfläche in der Spalte *Aktiv/Inaktiv* deaktivieren bzw. aktivieren. Neue Zuordnungen, die du erstellst, sind standardmäßig aktiv.
-
-[#1520]
-=== Werte mit der RegEx-Funktion ersetzen
-
-Damit eine CSV- oder TXT-Datei beim Import wie gewünscht berücksichtigt wird, kann die sog. RegEx-Funktion (Regular Expression) genutzt werden. Diese sorgt dafür, dass Daten anhand von Befehlen beim Import manipuliert werden und folglich in der CSV- oder TXT-Datei keine Änderungen mehr vorgenommen werden müssen. Lerne in diesem Video mehr über die Anwendung der RegEx-Funktion. +
-*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
-
-.Ändere deine Daten mit der ReEx-Funktion
-video::329090839[vimeo]
-
-Die zwei folgenden Beispiele sollen den Vorgang näher veranschaulichen.
-
-*Beispiel 1*: +
-*Input*: “24.12.2017” +
-*Search pattern*: /^(\d+)\.(\d+)\.(\d+)$/ +
-*Replace pattern*: $3﹣$2﹣$1 +
-*Result*: “2017-12-24”
-
-*Beispiel 2*: +
-*Input*: “Mustermann, Max” +
-*Search pattern*: /^(\w+), (\w+)$/ +
-*Replace pattern*: $2 $1 +
-*Result*: “Max Mustermann” +
-
-*Erläuterung der Beispiele*: +
-Ganz am Anfang steht das Input. Im ersten Schritt wird im sog. Search pattern das Muster eingefügt, nach dem gesucht werden soll. Anschließend wird dieses im sog. Replace pattern so modifiziert, wie es beim Import ausgegeben werden soll und als Result kommt das gewünschte Muster heraus, das schließlich in der CSV- oder TXT-Datei berücksichtigt wird.
-
-[.instruction]
-Werte ersetzen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf einen Import. +
-→ Die Einstellungen werden geöffnet.
-. Wechsele in das Tab *Zuordnung*.
-. Klicke auf eine Zuordnung. +
-→ Die Zuordnung wird geöffnet.
-. Wähle im Feld *Quelle* die Option *Regulärer Ausdruck*. +
-→ Die Optionen für *Regulärer Ausdruck* werden geöffnet.
-. Gib im Feld *Wert* den Spaltennamen der CSV- oder TXT-Datei ein (z.B. Paketnummer, Auftrags-ID etc.).
-. Gib im Feld *Suchen* das Search pattern ein.
-. Gib im Feld *Ersetzen* das Replace pattern ein.
-. *Speichere* (icon:save[role="green"]) die Einstellungen. +
-→ Die Datenfelder werden aktualisiert.
-
-[NOTE]
-.Infos zu RegEx
-====
-Weitere Informationen zu RegEx findest du auf link:http://php.net/manual/en/reference.pcre.pattern.syntax.php[dieser^] oder link:https://regexr.com/[dieser^] Seite.
-Auf letzterer muss die Einstellung der RegEx engine auf PCRE umgestellt werden. Dies geschieht über das Dropdown-Menü oben rechts, in dem Javascript voreingestellt ist.
-====
-
-[#1520]
-=== Eigene Zuordnung
-
-Mit der Eigenen Zuordnung können vorhandene Werte einer CSV- oder TXT-Datei auf andere Werte im System gemappt werden. So kann definiert werden, für welche ID welcher Wert importiert werden soll. Zusätzlich kann ein Default-Wert angegeben werden, wenn für einen Wert in der CSV- oder TXT-Datei keine Zuordnung definiert ist. Ist kein Default-Wert angegeben, wird der Originalwert importiert.
-
-[.instruction]
-Eigene Zuordnung festlegen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf einen Import. +
-→ Die Einstellungen werden geöffnet.
-. Wechsele in das Tab *Zuordnung*.
-. Klicke auf eine Zuordnung. +
-→ Die Zuordnung wird geöffnet.
-. Wähle im Dropdown-Menü des Felds *Quelle* die Option *Eigene Zuordnung*.
-. Fülle die Felder aus. Beachte dazu die Erläuterungen in <<tabelle-eigene-zuordnung>>.
-. *Speichere* (icon:save[role="green"]) die Einstellungen.
-
-[[tabelle-eigene-zuordnung]]
-.Eigene Zuordnung
-[cols="1,3"]
-|====
-|Feld |Einstellung
-
-|Typ
-|Name der CSV- oder TXT-Spalte (z.B. Lieferland)
-
-|Standardwert
-|Wert, wenn keine Zuordnung gefunden wurde (z.B. 1)
-
-|Von
-|Ursprungswert in der CSV- oder TXT-Datei (z.B. DE für Deutschland)
-
-|Zu
-|Wert, auf den der Ursprungswert gemappt werden soll (z.B. 1 für DE, 10 für GB etc.)
-|====
-
-[#1530]
-=== Importdatei durch die Eigene Zuordnung manipulieren
-
-Im folgenden Abschnitt soll die Verwendung der Eigenen Zuordnung am Beispiel von *Versandprofil aktivieren* demonstriert werden. +
-Voraussetzung für diese Vorgehensweise ist, dass bereits ein Artikel/eine Variante sowie ein Versandprofil vorhanden ist. Das folgende Video bietet dir eine Einfürhung in die Funktionsweise der Eigenen Zuordnung. +
-*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
-
-.Nutze die Eigene Zuordnung zum Austauschen von Informationen
-video::328394174[vimeo]
-
-[[bild-daten-importieren]]
-.Versandprofil
-image::daten:versandprofil.png[]
-
-Um einen Artikel/eine Variante mit einem Versandprofil zu verknüpfen, wird die ID benötigt. Denn allein mit dem Namen des Versandprofils, der in der Importdatei steht, kann keine Verknüpfung erstellt werden.
-
-[[bild-daten-importieren]]
-.Artikel-ID
-image::daten:artikel-id.png[]
-
-Verwende dafür die eigene Zuordnung im Import-Tool, denn dort werden die Daten während des Imports manipuliert. Wähle dazu als Quelle der Importdaten den Wert *Eigene Zuordnung*.
-
-[[bild-daten-importieren]]
-.Eigene Zuordnung
-image::daten:eigene-zuordnung.png[]
-
-Wähle bei *Typ* die Spalte aus der Importdatei. In diesem Fall ist es die Spalte *Versandprofil*.
-
-[[bild-daten-importieren]]
-.Spalte der Importdatei wählen
-image::daten:typ.png[]
-
-Bestimme nun, welcher Wert in der Importdatei zu welchem Wert geändert werden soll, um den Import erfolgreich durchführen zu können. In diesem Fall soll DPD zur ID des Versandprofils (hier ID 7) geändert werden. Das Gleiche kannst du auch für mehrere Versandprofile tun, indem du noch weitere eigene Zuordnungen hinzufügst.
-Führe anschließend den Import aus. Das Versandprofil wird verknüpft.
-
-[[bild-daten-importieren]]
-.Wert bestimmen
-image::daten:wert-bestimmen.png[]
-
-Die eigene Zuordnung eignet sich für viele weitere Fälle. Dies gilt insbesondere dort, wo interne IDs von plentymarkets eine Rolle spielen, wie z.B. bei Merkmalnamen, Artikelmarkierungen, Zahlungsmethoden, Länder/Staaten ISO Codes usw.
-
-[#1611]
-== Importdaten filtern
-
-Mithilfe von Filtern kannst du die Daten eingrenzen, die importiert werden. Die Filter findest du im Bereich *Zuordnung*.
-
-[NOTE]
-.Mehrere Filter sind durch Und verknüpft
-====
-Wenn du mehrere Filter verwendest, werden nur Datensätze importiert, auf die alle Filter zutreffen. Es handelt sich also um eine Und-Verknüpfung der Filter.
-====
-
-[.instruction]
-Filter hinzufügen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke in der Import-Übersicht auf einen Import. +
-→ Die Einstellungen werden geöffnet.
-. Wechsele in das Tab *Zuordnung*.
-. Klicke auf eine *Zuordnung*. +
-→ Die Zuordnung wird geöffnet.
-. Klicke in der Symbolleiste auf *Filter* (icon:filter[role="yellow"]).
-. Wähle die Spalte aus deiner Datei, die du filtern möchtest.
-. Wähle einen Operator.
-. Gib einen Wert ein.
-. Klicke auf *Filter hinzufügen* (icon:plus-square[role="green"]). +
-→ Der Filter wird gespeichert.
-. Füge bei Bedarf weitere Filter hinzu. +
-→ Nur die Daten, auf die alle hinzugefügten Filter zutreffen, werden importiert.
-
-
-//[#1620]
-//== Report zu einem Import
-
-//In der Übersicht eines Imports steht ein Report zur Verfügung. Dieser zeigt die importierten Zeilen und die Erfolgs- und Fehlermeldungen an, die mit Klick auf den Eintrag in der Spalte *Nachricht* eingesehen werden können. Verwende den Filter, um bestimmte Importdaten abzurufen.
-
-[#1605]
-== Fehlermeldungen und Fehlerbehebung im Import-Tool
-
-Das Import-Tool bietet dir verschiedene Möglichkeiten, fehlerhafte Importe frühzeitig zu identifizieren und die Fehlerbehebung durchzuführen. So kannst du beispielweise Importe vor der Ausführung auf Fehler überprüfen oder nach dem Import konkrete Fehlermeldungen in Form eines Protokolls einsehen. Nachfolgend sind die verschiedenen Möglichkeiten aufgeführt.
-[#1610]
-=== Importe vor der Ausführung auf Fehler prüfen
-
-Mithilfe der Validierung können Importe bereits vor der Ausführung auf Fehler geprüft werden, um sicherzustellen, dass ein reibungsloser Import möglich ist.
-
-[.instruction]
-Importe vor der Ausführung auf Fehler prüfen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf einen Import. +
-→ Die Einstellungen werden geöffnet.
-. Klicke im Tab Einstellungen, Abgleich oder Zuordnung auf *Validierung* (icon:bug[role="yellow"]). +
-→ Ein Fenster wird geöffnet und zeigt eine Tabelle mit den entsprechenden Fehlermeldungen an.
-. Wenn Fehler aufgetreten sind und du Hilfe aus dem Forum benötigst, klicke auf *In Zwischenablage kopieren* (icon:clone[role="yellow"]) und füge die Informationen im Forum ein.
-
-[#1615]
-=== Import testen und Beispieldaten importieren
-
-In der Import-Übersicht kannst du einen Import testen (icon:flask[role="yellow"]) und ausführen (icon:play-circle[role="grey"]). Das Testen erlaubt es dir, schnell festzustellen, ob deine Datei korrekt importiert werden kann.
-
-[NOTE]
-.Importe testen
-====
-Beachte, dass beim Testen des Imports bereits Bestand importiert wird. Wenn du *Import testen* (icon:flask[role="yellow"]) wählst, werden nur die ersten zehn Zeilen der Importdatei importiert.
-====
-
-[#1620]
-=== Protokoll eines verarbeiteten Imports ansehen
-
-Für jeden verarbeiteten Import wird automatisch ein Protokoll erstellt, das eventuell aufgetretene Fehler anzeigt.
-
-[.instruction]
-Protokoll eines verarbeiteten Imports ansehen:
-
-. Öffne das Menü *Daten » Status*. +
-→ Die Status-Übersicht wird geöffnet. +
-icon:map-signs[] *_Oder:_* Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf *Status* (icon:bars[role="yellow"]). +
-→ Die Status-Übersicht wird geöffnet.
-. Klicke auf einen verarbeiteten Import. +
-→ Die Detailansicht wird geöffnet.
-. Klicke oben auf *Protokoll* (icon:bars[role="yellow"]). +
-→ Ein Fenster wird geöffnet und zeigt das Protokoll des verarbeiteten Imports an.
-. Wenn Fehler aufgetreten sind und du Hilfe aus dem Forum benötigst, klicke auf *In Zwischenablage kopieren* (icon:clone[role="yellow"]) und füge die Informationen im Forum ein.
-
-[#1625]
-=== Erfolgs- und Fehlermeldungen von Imports einsehen
-
-Im Menü *Daten » Log* können die Erfolgs- und Fehlermeldungen von Importen eingesehen werden. Um gezielt nach Meldungen zu einem bestimmten Import zu suchen, als Referenztyp *importId* oder *importName* wählen und den entsprechenden Referenzwert eingeben. Die konkrete Erfolgs- oder Fehlermeldung kann der Spalte *Nachricht* entnommen werden.
-
-[#1630]
-== Import kopieren
-
-Du kannst Importe einzeln oder mehrere gleichzeitig kopieren. So kannst du bereits gut konfigurierte Importe nutzen, um schnell einen neuen Import anzulegen.
-
-[.instruction]
-Import kopieren:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Markiere einen oder mehrere Importe.
-. Klicke auf *Import kopieren*. +
-→ Der Import wurde kopiert. Einem kopierten Import wird *(copy)* hinzugefügt.
-
-[#1640]
-== Import und Export durchführen
-
-Importe können importiert und exportiert werden. So kannst du sowohl Importe lokal sichern als auch Importe von anderen Nutzer:innen importieren.
-Dieses Video zeigt dir, wie du beim Import von Daten Zeit sparst, indem du vorkonfigurierte Importvorlagen nutzt. +
-*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
-
-.Import und Export durchführen
-video::342189758[vimeo]
-[.instruction]
-Import und Export durchführen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Markiere einen oder mehrere Importe.
-. Klicke auf *Format exportieren* (icon:download[role="purple"]). +
-→ Der Import wird automatisch heruntergeladen.
-. Klicke auf *Format importieren* (icon:upload[role="purple"]). +
-→ Die Übersicht der Dateien wird geöffnet.
-. Klicke auf *Datei hochladen* (icon:upload[role="purple"]) und wähle eine Datei.
-. Markiere die Datei, die du hochladen möchtest und klicke auf *Wählen*. +
-→ Es wird abgefragt, ob der Import ausgeführt werden soll.
-. Klicke auf *Ok*, um die Abfrage zu bestätigen. +
-→ Es erscheint die Meldung, dass der Import aus einem anderen Mandanten stammt. +
-→ Der Import wurde erfolgreich ausgeführt.
-
-
-[NOTE]
-.Importe aus einem anderen plentymarkets System importieren
-====
-Wenn du Importe aus einem anderen plentymarkets System importierst, musst du deinen Abgleich und die Zuordnung anpassen. Es können nur *.json* Dateien importiert werden.
-====
-
-[NOTE]
-.Importe importieren und aktualisieren
-====
-Wenn du einen Import importieren und aktualisieren möchtest, müssen eine Zuordnung und ein Abgleich gesetzt sein. Ansonsten ist es nicht möglich, einen Import zu testen oder auszuführen. Um den Import speichern zu können, muss in der Zuordnung ein Datenfeld aktiviert sein. +
-Zum Importieren genügt die Zuordnung allein.
-====
-
-[#1645]
-== Import abbrechen
-
-Im Menü *Daten » Status* kannst du den bereits gestarteten Import abbrechen. Die Funktion ist somit nur verfügbar, wenn der Import gerade verarbeitet wird.
-
-[.instruction]
-Import abbrechen:
-
-. Öffne das Menü *Daten » Status*. +
-→ Die Status-Übersicht wird geöffnet. +
-icon:map-signs[] *_Oder:_* Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf *Status* (icon:bars[role="yellow"]). +
-→ Die Status-Übersicht wird geöffnet.
-. Klicke in der Zeile des Imports, den du abbrechen möchtest, ganz rechts auf *Import abbrechen* (icon:window-close[role="red"]). +
-→ Ein Fenster mit einer Sicherheitsabfrage wird geöffnet.
-. Klicke auf *Import abbrechen*. +
-→ Der Import wird abgebrochen und nur die Zeilen, die zum Zeitpunkt des Abbruchs bereits importiert waren, befinden sich im System.
-
-[#1650]
-== Dateien schnell und einfach hochladen
-
-Um Dateien schnell und einfach hochzuladen, klicke auf *Datei-Upload* (icon:upload[role="purple"]) in der Spalte *Dateiname*.
-
-[.instruction]
-Dateien schnell und einfach hochladen:
-
-. Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke in der Spalte *Dateiname* auf *Datei hochladen* (icon:upload[role="purple"]). +
-→ Deine Dateien werden geöffnet.
-. Wähle eine Datei und klicke auf *Öffnen*. +
-→ Die Datei wird hochgeladen und der Dateiname wird in der Spalte angezeigt. Nach Ausführen des Imports verschwindet der Dateiname wieder.
-
-[#1710]
-== Abarbeitung von Jobs in der Queue
-
-Die Queue sorgt dafür, dass auch große Datenmengen importiert werden können. Noch vor dem Import wird die Importdatei in Pakete zerlegt und anschließend in sogenannten Jobs abgearbeitet. Ein Job besteht aus 750 Zeilen einer CSV- oder TXT-Datei. Jedoch werden auch Importdateien, die weniger als 750 Zeilen enthalten, zu einem Job. Wird ein Import gestartet, wird die Datei in die entsprechenden Jobs aufgeteilt und in die Queue eingereiht. In der Queue werden neue Jobs ständig abgerufen und die Importe werden abgearbeitet. Dabei gibt es zwei verschiedene Status. Der Status *Offene Jobs* bedeutet, dass es Jobs gibt, die sich noch in der Queue befinden und darauf warten, abgearbeitet zu werden. *Abgeschlossene Jobs* hingegen wurden bereits bearbeitet und die Daten dementsprechend importiert.
-
-[#1715]
-== Status von Importen einsehen
-
-Die Status-Übersicht der Importe bietet einen Überblick über den aktuellen Fortschritt von Import-Jobs und zeigt Details zu eventuell aufgetretenen Fehlern während des Importvorgangs an.
-
-[.instruction]
-Status von Importen einsehen:
-
-. Öffne das Menü *Daten » Status*. +
-→ Die Status-Übersicht wird geöffnet. +
-icon:map-signs[] *_Oder:_* Öffne das Menü *Daten » Import*. +
-→ Die Import-Übersicht wird geöffnet.
-. Klicke auf *Status* (icon:bars[role="yellow"]). +
-→ Die Status-Übersicht wird geöffnet. +
-
-In jeder Import-Zeile steht außerdem eine separate Status-Schaltfläche zur Verfügung, die allein den Status des jeweiligen Imports aufruft.
-
-[[tabelle-sync-status]]
-.Import-Status
-[cols="1,3"]
-|====
-| Einstellung | Erläuterung
-
-| *Verarbeitungs-ID*
-|Jedes mal, wenn ein Import gestartet wird, wird eine Verarbeitungs-ID erzeugt, um die einzelnen Importe besser voneinander unterscheiden zu können.
-
-| *Import-ID*
-|ID des Imports
-
-| *Name*
-|Name des Imports
-
-| *Fortschritt*
-|Fortschritt der Import-Jobs. Sobald alle Import-Jobs abgeschlossen sind, wird das Datum und die Endzeit angezeigt.
-
-| *Fehler*
-|In den Import-Jobs aufgetretene Fehler
-
-| *Importierte Zeilen*
-|Anzahl der Zeilen, die aus der CSV- oder TXT-Datei importiert wurden
-
-| *Zeilen insgesamt*
-|Gesamtanzahl der Zeilen in der CSV- oder TXT-Datei
-
-| *Startzeit*
-|Startzeit des Imports
-|====
-
-[NOTE]
-.Abbruch bei zu hoher Fehleranzahl
-====
-Treten bei der Verarbeitung der Import-Jobs zu viele Fehler auf, wird der Vorgang abgebrochen und es erscheint eine Fehlermeldung.
-====
-
-=== Nach Importen filtern
-
-Mit dem Filter in der Status-Übersicht kannst du nach Importen der letzten 7 Tage filtern und so den Status von bestimmten Importen einsehen.
-
-[[tabelle-filteroptionen]]
-.Filteroptionen
-[cols="1,3"]
-|====
-| Einstellung | Erläuterung
-
-| *Import-ID*
-|ID des Imports
-
-| *Name*
-|Name des Imports
-
-| *Status*
-|Aktueller Status des Imports. Hier kannst du zwischen *In Arbeit* und *Abgeschlossen* wählen.
-
-| *Startdatum von*
-|Datum wählen, ab dem gefiltert werden soll.
-
-| *Startzeit von*
-|Uhrzeit wählen, ab der gefiltert werden soll. Die Startzeit bezieht sich auf den Start des Imports.
-
-| *Startdatum bis*
-|Datum wählen, bis zu dem gefiltert werden soll.
-
-| *Startzeit bis*
-|Uhrzeit wählen, bis zu der gefiltert werden soll. Die Startzeit bezieht sich auf den Start des Imports.
-|====
-
-=== Detailansicht zu Fehlern eines Imports
-
-Mit Klick auf die Zeile eines Imports innerhalb der Status-Übersicht gelangst du in die Detailansicht, in der nähere Informationen zu eventuell aufgetretenen Fehlern aufgeführt sind. Mit Klick auf die Zeile eines Fehlers in der Detailansicht öffnet sich wiederum ein Fenster, in dem du den Namen des Spaltenkopfes, die Rohdaten sowie die konkrete Fehlermeldung einsehen kannst.
-
-[[tabelle-detailansicht-fehler]]
-.Details zu Import-Status
-[cols="1,3"]
-|====
-| Einstellung | Erläuterung
-
-2+^| *Fehler*
-
-| *Zeile*
-|Zeile, in der der Fehler aufgetreten ist
-
-| *Spaltenname*
-|Name der Spalte, in der der Fehler aufgetreten ist
-
-| *Fehler*
-|Konkrete Beschreibung des aufgetretenen Fehlers
-
-2+^| *Ergebnis*
-
-| *Rohdaten*
-|Rohdaten des Fehlers
-|====
-
 [#1730]
-== Backups von Importen einspielen
+=== Ältere/gelöschte Importe wiederherstellen
 
-Wenn du Importdaten auf einen früheren Stand zurücksetzen oder gelöschte Importdaten wiederherstellen möchtest, kannst du dies über die Backup-Funktion tun.
+Du hast einen Import aus Versehen gelöscht? Oder jemand hat an einem gut konfigurierten Import Änderungen vorgenommen, die rückgängig gemacht werden müssen? Beides kannst du über die Backup-Funktion erledigen.
+
+*_Achtung:_*
+
+* Mit diesen Einstellungen setzt du die Importe selbst auf einen früheren Stand zurück. Du kannst so _keine ins System importieren Daten zurücksetzen_. Das geht auch, xref:daten:backup.adoc#[aber anders].
+* Backups werden nur einmal täglich nachts erstellt. Wenn du ein Backup importierst, werden die Daten auf diesen Stand zurückgesetzt.
+* Alle Importe werden zurückgesetzt. Du kannst also nicht nur einen einzigen Import zurücksetzen. +
+*_Beispiel:_* Jemand hat die Einstellungen des Imports für Artikeldaten aus Versehen geändert. Im Laufe des Tages wurde aber auch ein Import für Gutscheincodes erstellt. Wenn du das Backup der letzten Nacht einspielst, werden beide Importe auf den Stand der letzten Nacht zurückgesetzt. Der Import für Artikeldaten wird repariert. Der Import für Gutscheincodes wird aber gelöscht, weil er zum Zeitpunkt des Backups noch nicht existierte.
 
 [.instruction]
 Backups von Importen einspielen:
 
 . Öffne das Menü *Einrichtung » Einstellungen » Hosting » Backup*. +
 → Die Backup-Übersicht wird geöffnet.
-. Klicke in der Zeile des Backups, das du einspielen möchtest, rechts auf *Backup einspielen* (icon:upload[role="purple"]).
-. Wähle oben *Datenbank teilweise importieren* und setze einen Haken bei *Import*.
+. Klicke in der Zeile des Backups, das du einspielen möchtest, rechts auf *Backup einspielen* (icon:open_in_browser[set=material]). +
+→ Das Fenster *Backup importieren* wird angezeigt.
+. Wähle für die Einstellung *Backup importieren* die Option *Datenbank teilweise importieren*.
+. Aktiviere die Option *ElasticSync*. +
+*_Tipp:_* Das Import-Tool hieß früher *ElasticSync*. Deshalb heißt diese Option noch so.
 . Klicke auf *Backup einspielen*. +
-→ Das Backup wird eingespielt.
+→ Alle Importe werden auf den Stand des Backups zurückgesetzt. +
+→ Es gibt kein Zurück!
+
+
+[#1630]
+=== Import kopieren
+
+Du kannst einen oder mehrere Importe kopieren. So kannst du gut konfigurierte Importe nutzen, um schnell einen neuen Import zu erstellen.
+
+[.instruction]
+Import kopieren:
+
+. Öffne das Menü *Daten » Import*. +
+→ Die Import-Übersicht wird geöffnet.
+. Markiere in der Spalte ganz links einen oder mehrere Importe.
+. Klicke in der Taskleiste auf *Import kopieren* (icon:content_copy[set=material]). +
+→ Der Import wird kopiert. +
+→ Der Name des kopierten Imports ist `Copy of [Name des Originalimports]`.
+
+[#import-export]
+=== Importeinstellungen exportieren
+
+Du kannst Importe als JSON-Datei exportieren. So kannst du Importe zum Beispiel lokal sichern oder sie mit anderen teilen.
+
+[.instruction]
+Importeinstellungen exportieren:
+
+. Öffne das Menü *Daten » Import*. +
+→ Die Import-Übersicht wird geöffnet.
+. Markiere einen oder mehrere Importe.
+. Klicke auf *Format exportieren* (icon:system_update_alt[set=material]). +
+→ Die Importeinstellungen werden als JSON-Datei auf deinem Rechner gespeichert.
+
+[#import-import]
+=== Importvorlage importieren
+
+Vielleicht bekommst du von unserem Support-Team eine Importvorlage. Auch im Handbuch sind einige Best-Practice-Dateien verfügbar. Oder ein netter Mensch aus dem Forum stellt einen gut konfigurierten Import zur Verfügung.
+
+Diese Vorlagen kannst du in plentymarkets importieren.
+
+[.collapseBox]
+.Video: Importvorlage importieren
+--
+Dieses Video zeigt dir, wie du beim Import von Daten Zeit sparst, indem du vorkonfigurierte Importvorlagen nutzt.
+
+*_Hinweis:_* Der Begriff *ElasticSync* ist veraltet und wurde durch *Import* ersetzt.
+
+video::342189758[vimeo]
+--
+
+[.instruction]
+Importvorlage importieren:
+
+. Speichere die Importvorlage auf deinem Rechner. +
+*_Tipp:_* Importvorlagen sind immer JSON-Dateien.
+. Öffne das Menü *Daten » Import*. +
+→ Die Import-Übersicht wird geöffnet.
+. Klicke auf *Format importieren* (icon:open_in_browser[set=material]). +
+→ Eine Übersicht der Dateien in deinem Webspace wird geöffnet.
+. Klicke auf *Datei hochladen* (icon:upload[set=material]).
+. Klicke auf die Importvorlage. +
+→ Die Datei wird in den Webspace hochgeladen.
+. Klicke in plentymarkets auf die Datei. +
+→ Du wirst gefragt: "Möchtest du den Import wirklich ausführen?"
+. Klicke auf *Ja*, um die Abfrage zu bestätigen. +
+→ Die Meldung wird angezeigt, dass die Importvorlage aus einem anderen Mandanten stammt und du bestimmte Einstellungen anpassen musst.
+. Klicke auf *OK*. +
+→ Die Importvorlage wird in plentymarkets importiert.
+. Öffne den Import.
+. Prüfe die Importeinstellungen.
+. Lege <<#1400, Abgleichfelder fest>>.
+. Nimm <<#1500, die Zuordnungen vor>>.
+
+[#1715]
+== Status von Importen nachvollziehen
+
+Den Status deiner Importvorgänge kannst du im Menü *Daten » Datenimport » Status* einsehen. Hier siehst du, welche Importe gestartet und abgeschlossen wurden. Ein Balken visualisiert den Fortschritt aller Exporte. Außerdem kannst du prüfen, ob Fehler aufgetreten sind und ob alle Datenzeilen von Importdateien importiert wurden.
+
+[#1715a]
+=== Status von Importen aufrufen
+
+[.instruction]
+Status von Importen aufrufen:
+
+. Öffne das Menü *Daten » Datenimport » Status*. +
+→ Die Status-Übersicht wird geöffnet. +
+. *_Optional:_* Du brauchst mehr Infos zum Import? Klicke auf eine Datenzeile, um <<#status-details, Details anzuzeigen>>.
+
+[[tabelle-sync-status]]
+.Import-Status
+[cols="1,3"]
+|===
+| Spalte | Erläuterung
+
+| *Verarbeitungs-ID*
+| Jedes Mal, wenn ein Import gestartet wird, wird eine Verarbeitungs-ID erzeugt. So können die einzelnen Importe besser voneinander unterschieden werden.
+
+| *Import-ID*
+| Die ID des Imports +
+*_Tipp:_* Die ID deiner Importe wird in der Liste der Importe Menü *Daten » Import* in der Spalte *ID* angezeigt.
+
+| *Name*
+| Der Name des Imports
+
+| *Fortschritt*
+| Der Fortschritt des Importvorgangs als Balken. Sobald alle Importvorgänge abgeschlossen sind, wird das Datum und die Endzeit angezeigt, wenn du mit der Maus auf den Fortschrittsbalken zeigst.
+
+| *Fehler*
+| In den Importvorgängen aufgetretene Fehler +
+*_Wichtig:_* Treten beim Importvorgang zu viele Fehler auf, wird der Import abgebrochen und eine Fehlermeldung angezeigt.
+
+| *Importierte Zeilen*
+| Die Anzahl der Zeilen, die aus der CSV- oder TXT-Datei importiert wurden
+
+| *Zeilen insgesamt*
+| Die Anzahl der Zeilen in der CSV- oder TXT-Datei
+
+| *Startzeit*
+| Die Startzeit des Imports
+|===
+
+=== Statusliste filtern
+
+Du hast jede Menge Importe? Dann kannst du die Liste filtern.
+
+[.instruction]
+Statusliste filtern:
+
+. Öffne das Menü *Daten » Datenimport » Status*. +
+. Blende in der Statusleiste die Filter ein (icon:tune[set=material]).
+. Wähle die Filter, die du benötigst.
+. Klicke auf *Suchen*. +
+→ Die Liste wird gefiltert.
+
+*_Tipp:_* Die angewendeten Filter werden in der Symbolleiste als einzelne "Chips" angezeigt. Lösche einen oder mehrere dieser Chips, um Filter schnell zu entfernen. Klicke dann auf *Suchen* (icon:search[set=material]), um die Liste zu aktualisieren.
+
+[.collapseBox]
+.Welche Filter gibt es?
+--
+
+[cols="1,4"]
+|===
+| Filter | Erläuterung
+
+| *Import-ID*
+| Reduziert die Liste auf Importe mit dieser ID.
+
+| *Name*
+| Reduziert die Liste auf Importe mit diesem Namen.
+
+| *Status*
+|  Reduziert die Liste auf Importe mit diesem Status. Du kannst nach *In Arbeit* oder nach *Abgeschlossen* filtern.
+
+| *Startdatum von*
+| Reduziert die Liste auf Importe, die ab diesem Datum gestartet wurden. +
+*_Wichtig:_* Du kannst nach Importen der letzten 7 Tage filtern. Danach werden die Statusinformationen automatisch gelöscht.
+
+| *Startzeit von*
+| Reduziert die Liste auf Importe, die ab dieser Uhrzeit gestartet wurden.
+
+| *Startdatum bis*
+| Reduziert die Liste auf Importe, die bis zu diesem Datum gestartet wurden. +
+*_Wichtig:_* Du kannst nach Importen der letzten 7 Tage filtern. Danach werden die Statusinformationen automatisch gelöscht.
+
+| *Startzeit bis*
+| Reduziert die Liste auf Importe, die bis zu dieser Uhrzeit gestartet wurden.
+|===
+--
+
+[#status-details]
+=== Details zum Importstatus anzeigen
+
+Du kannst weitere Details zum Import anzeigen.
+
+[.instruction]
+Details zum Importstatus anzeigen:
+
+. Öffne das Menü *Daten » Status*. +
+→ Die Status-Übersicht wird geöffnet.
+. Klicke auf die Zeile des Imports. +
+→ Die Detailansicht wird geöffnet. +
+→ Eine Liste der Fehler wird angezeigt. Optional kannst du in die Ansicht *Ergebnis* wechseln.
+. *_Optional:_* Klicke auf die Zeile eines Fehlers. +
+→ In einem neuen Fenster wird der Name des Spaltenkopfes, die Rohdaten und die Fehlermeldung angezeigt.
+
+[[tabelle-detailansicht-fehler]]
+.Details zum Fehler
+[cols="1,3"]
+|===
+| Information | Erläuterung
+
+| *Zeile*
+| Die Zeile, in der der Fehler aufgetreten ist
+
+| *Spaltenname*
+| Der Name der Spalte, in der der Fehler aufgetreten ist
+
+| *Fehler*
+| Eine Beschreibung des aufgetretenen Fehlers
+
+| *Rohdaten*
+| Die Rohdaten des Fehlers
+// TODO: Was heißt das?
+|===
+
+[#1620]
+=== Protokoll eines Imports aufrufen
+
+Für jeden Importvorgang wird automatisch ein Protokoll erstellt. Dieses Protokoll enthält Informationen zum Importvorgang und hilft unserem Support-Team, dich bei der Fehleranalyse zu unterstützen.
+
+[.instruction]
+Protokoll eines Imports aufrufen:
+
+. Öffne das Menü *Daten » Datenimport » Status*. +
+→ Die Status-Übersicht wird geöffnet. +
+*_Tipp:_* Oder öffne das Statusmenü über das Menü *Daten » Import*. +
+Klicke in der Symbolleiste auf *Status* (icon:playlist_play[set=material]).
+. Klicke auf den Import. +
+→ Die Detailansicht wird geöffnet.
+. Klicke oben links in der Symbolleiste auf *Protokoll* (icon:playlist_play[set=material]). +
+→ Das Protokoll wird in einem neuen Fenster angezeigt.
+. *_Optional:_* Klicke auf *In Zwischenablage kopieren* (icon:content_copy[set=material]). Füge die Informationen bei Supportanfragen im Forum ein.
