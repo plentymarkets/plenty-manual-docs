@@ -132,7 +132,7 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *stable* behoben.
 
 * Durch einen falschen Datentyp in einer Datenbanktabelle kam es zu einem Fehler beim Speichern der processStatusId, welche wir für den asynchronen Abgleich beim Produkt-Upload benötigen. Die entsprechende Spalte war als Integer definiert, wodurch der Wert auf maximal 2147483647 beschränkt war und größere Werte auf diesen reduziert wurden. Da der Wert dann faktisch nicht mehr der richtige war, schlugen entsprechende Abfragen mit dieser ID fehl und betroffene Händler hatten die folgende Fehlermeldung in ihrem Log:
 +
-`Datum: XX.X.XX XX:XX:XX Zeile: 314 Nachricht: GET-HTTP-Anfrage an den Endpoint process-status/{process-status-id} fehlgeschlagen mit Fehlercode 404: "Not Found".`
+`Datum: XX.X.XX XX:XX:XX Zeile: 314 Nachricht: GET-HTTP-Anfrage an den Endpoint process-status/\{process-status-id\} fehlgeschlagen mit Fehlercode 404: "Not Found".`
 +
 Der Datentyp wird jetzt über eine Migration korrigiert und entsprechende Einträge gelöscht. Dadurch wirklich betroffen war maximal die Produktanlage und die entsprechend dadurch geblockten Produkte werden in den nächsten laufenden Prozessen automatisch neu übertragen.
 
