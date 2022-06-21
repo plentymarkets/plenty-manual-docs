@@ -9,8 +9,6 @@
 
 With more than 9 million orders per year and over 4 million active customers, {market} is the leading platform for family shopping in Germany. {market} offers you sales opportunities for the 3 online shops {market}, mirapodo and yomonda by using only one technical integration.
 
-
-
 [#150]
 == Becoming a {market} partner
 
@@ -23,17 +21,15 @@ After registering, you will receive login details from {market}. You need these 
 Find more information about the integration processes on the link:https://partnerprogramm-mytoysgroup.de/plentymarkets[myToys website] (German only).
 
 [#200]
-== Overview of automatic data exchange
+== Frequency of data exchange
 
 After installing and setting up the plugin, the automatic processes described in <<#data-exchange>> become available.
 
 [[data-exchange]]
 .Frequency of data exchange
 [cols="1,3a"]
-|====
+|===
 |Data |Interval
-
-2+^| Item data
 
 | Item export
 | daily +
@@ -42,12 +38,10 @@ After installing and setting up the plugin, the automatic processes described in
 | Stock synchronisation
 | every 15 minutes
 
-2+^| Order data
-
 | Order import
 | every 15 minutes +
 *_Note:_* Customers make their payments to {market}. Thus, all orders are imported with the status *[5] Paid*. If no stock is available or no SKU is assigned, the order remains in the order status *[4] In preparation for shipping*.
-|====
+|===
 
 [#250]
 == Workflow of a {market} order
@@ -56,7 +50,7 @@ After installing and setting up the plugin, the automatic processes described in
 * Customers place an order on {market}.
 * Customers make their payments to {market}.
 * → The order is imported to plentymarkets. +
-*_Note:_* Because customers make their payments to {market}, orders are imported with the status *[5] Paid*.
+*_Note:_* Customers make their payments to {market}. Therefore, all orders are imported with the status *[5] Paid*.
 * When you receive the order, you ship the products (drop shipping).
 
 [#300]
@@ -160,13 +154,6 @@ Select one or several warehouses that contain the products that you want to sell
 
 include::partial$activate-referrer.adoc[]
 
-[#payment-method]
-=== Permitting payment method in customer classes
-
-:payment-method: myToys
-
-include::partial$activate-payment-method.adoc[]
-
 [#450]
 === Defining a sales price
 
@@ -174,12 +161,167 @@ include::partial$activate-payment-method.adoc[]
 
 include::partial$define-sales-price.adoc[]
 
-[#500]
-=== Activating the referrer in shipping profiles
+[#payment-method]
+=== Permitting the payment method in a customer class
 
-:referrer: myToys
+:payment-method: myToys
 
-include::partial$shipping-profile-activate.adoc[]
+include::partial$activate-payment-method.adoc[]
+
+[#mytoys-shipping-profile]
+=== Creating a shipping profile
+
+Next, create a shipping profile for myToys.
+
+[.collapseBox]
+.What is a shipping profile?
+--
+The individual shipping profiles are different shipping methods which your customers can choose later on during checkout or which are assigned automatically to certain types of orders by the online shop. For example, you can offer your customers a cheap standard delivery and a more expensive express delivery.
+--
+
+[.instruction]
+Creating a shipping profile:
+
+. Go to *Setup » Orders » Shipping » Settings*.
+. Click on the *Shipping profiles* tab.
+. Click on *New* (icon:plus-square[role="green"]).
+. Carry out the desired settings. Pay attention to the explanations given in <<#table-shipping-profile>>.
+. *Save* (icon:save[role="green"]) the settings. +
+→ The *Table of shipping charges* tab is displayed.
+. In the table of shipping charges for Germany, enter the value *0.00* EUR for *flat rate shipping charge*.
+. *Save* (icon:save[role="green"]) the settings.
+
+[.collapseBox]
+.Settings for shipping profiles
+--
+[[table-shipping-profile]]
+.Creating a new shipping profile
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *ID*
+|The ID of the shipping profile is assigned by the system and cannot be changed. Once you saved the shipping profile, the ID is displayed in the *Overview* tab.
+
+| *Shipping service provider*
+|Select the shipping service provider from the drop-down list.
+
+| *Name*
+|The name in this field is displayed in the online shop to your customers. Enter a name, e.g. `Standard` or `Express`. If you operate your online shop in multiple languages, use the drop-down list to save names for every language that you need.
+
+| *Name (back end)*
+|Enter an internal name for the shipping profile. The name is only displayed in your system. It is _not_ visible for customers in the online shop.
+
+| *Flag*
+|Select a flag from the drop-down list that is shown in the order overview. The flag indicates which shipping profile is saved at a glance.
+
+| *Priority*
+|Select the priority from the drop-down list. The priority determines which shipping profile is displayed first, second, third, etc.
+
+| *Category*
+|Select a category from the drop-down list. The category is another way to prioritise shipping profiles in the shopping cart. Category *1* is selected by default. This means that all of the shipping profiles are given the same priority. For further information, refer to the xref:fulfilment:preparing-the-shipment.adoc#1300[Preparing the shipment] page of the manual.
+
+| *Item extra shipping charge*
+|Place a check mark to activate the item extra shipping charge that are saved in the item data record. Up to 2 extra shipping charges can be saved for the item's main variation in the *Shipping* area. *Extra shipping charge 1* is added to the shipping costs for the first item. *Extra shipping charge 2* is added to the shipping costs for all additional items. Extra shipping charges are useful for large or bulky items that are particularly expensive to ship. +
+For further information, refer to the xref:fulfilment:preparing-the-shipment.adoc#1100[Preparing the shipment] page of the manual.
+
+| *PostIdent*
+|PostIdent is the authority verification by the Deutsche Post AG. It serves to verify customers, e.g. in connection with the proof of age for 18+ items. If you want to activate this option, place a check mark. +
+*_Note:_* Items with an 18+ age rating have to be linked to a shipping profile that the PostIdent option was activated for.
+
+| *Activate for new items*
+|Select the option if you want the shipping profile to automatically be assigned to new items. +
+You should select this option for new items for at least one shipping profile. In doing so, new items are always assigned automatically to this shipping profile. An item cannot be shipped if it is not linked to at least one shipping profile. +
+*_Note:_* This setting only applies when you manually create items, but _not_ via REST or import.
+
+| *Cash on delivery*
+|Select the option. This allows your customers to select the payment method _Cash on delivery_ in your plentyShop. +
+*_Important:_* Installing the cash on delivery plugin is required. You can find the plugin in the link:https://marketplace.plentymarkets.com/en/plugins/payment/cashondelivery_5255[plentyMarketplace^].
+
+| *Packing station active*
+|Select the option. This allows your customers to enter the field *Packing station* in an optimised way in your plentyShop. +
+*_Important:_* It is required that the plugins link:https://marketplace.plentymarkets.com/en/plugins/templates/Ceres_4697[plentyShop LTS^] and link:https://marketplace.plentymarkets.com/en/plugins/templates/IO_4696[IO^] are installed.
+
+| *Post office active*
+|Select the option. This allows your customers to enter the field *Post office* in an optimised way in your plentyShop. +
+*_Important:_* It is required that the plugins link:https://marketplace.plentymarkets.com/en/plugins/templates/Ceres_4697[plentyShop LTS^] and link:https://marketplace.plentymarkets.com/en/plugins/templates/IO_4696[IO^] are installed.
+
+| *Agreement upon data transfer*
+|If you select the option, your customers will see a checkbox in your plentyShop where they have to place a check mark to agree that their phone number and email address might be transferred to the shipping service provider.
+
+| *Transfer email and telephone number*
+|Select whether the email address and the telephone number should be transferred to the shipping service provider or not or whether an alternative value should be transferred. +
+If you select the option *Transfer if available, otherwise transfer alternative*, it will be checked whether an email address and a telephone number are available at the delivery address of the order. If this data is _not_ available, the alternative values that you saved in the fields *Alternative email* and *Alternative telephone number* will be transferred. +
+*_Note:_* By default, this data is _not_ transferred to the service provider (GDPR conformity).
+
+| *Alternative email*
+|This setting is only visible if the option *Transfer alternative* or *Transfer if available, otherwise transfer alternative* was selected in the drop-down list *Transfer email and telephone number*. Enter an alternative email address that should be transferred to the service provider.
+
+| *Alternative telephone number*
+|This setting is only visible if the option *Transfer alternative* or *Transfer if available, otherwise transfer alternative* was selected in the drop-down list *Transfer email and telephone number*. Enter an alternative telephone number that should be transferred to the service provider.
+
+| *Extra charge for islands*
+|Many shipping service providers charge a higher fee when shipping to island regions. You as seller should not be left with these costs. Therefore, open each shipping profile and define a surcharge that is added when shipping to island regions. Postcodes for island regions are saved in the system. The order is automatically synchronised. If you activated the extra charge for islands, this charge is only calculated if the system recognises this postcode as an island region. +
+The island surcharge applies for each item when using the calculation type *Item shipping charge*. +
+Would you like to know which island regions are saved on the system side in your plentymarkets system? Have a look at the <<#list-postcodes-island-regions, list of postcodes for island regions>> in the expandable box below this table.
+
+| *Clients (stores)*
+|Select one of the options or select the option *ALL* if the shipping profile should apply to all clients (shops). +
+This option is only displayed if at least one client (shop) is set up.
+
+| *Order referrer*
+|Activate the referrer *myToys*.
+
+| *Blocked payment methods*
+|Select all the payment methods that should _not_ be offered for the shipping profile. If you have shipping profiles that should not include a cash on delivery option, make sure to select all of the options that are used in connection with cash on delivery.
+
+| *Blocked customer classes*
+|Block one or more customer classes for the shipping profile by placing a check mark.
+
+| *Shipping groups*
+|If you want to create groups for your shipping profiles, enter a name for a shipping group here and click on *Add*. Enter this name into every shipping profile that should belong to this group. You end up with various groups which contain different shipping profiles. +
+*_Example:_* Shipping group A contains the shipping profiles 1 and 2. Shipping group B contains the shipping profiles 3 and 4. If you want to assign an item to shipping profiles 3 and 4, open the item and select shipping group B from the drop-down list in the item's *Global* tab in the *Shipping profiles* area. +
+This function allows you to easily and quickly assign the shipping profile to new items.
+
+| *Shipping identification*
+|This field is currently without any function.
+
+| *Last change*
+|The date of the last change of the shipping profile is shown here.
+
+2+^|eBay
+
+| *Account*
+|This is an eBay setting and therefore not relevant for myToys.
+
+| *Listing type*
+|This is an eBay setting and therefore not relevant for myToys.
+
+2+^|Further options
+
+| *Express delivery*
+|Select the option if you want to use this shipping profile for express delivery. +
+*_Important:_* Make sure that the shipping service provider offers express delivery. This is required to use the option.
+
+| *Loyalty program*
+|This setting is for Amazon and eBay and therefore not relevant for myToys.
+|====
+--
+
+[discrete]
+==== Activating the shipping profile
+
+Afterwards, activate the shipping profile for all items that you want to sell on myToys. To do so, use the *Item group function*.
+
+[.instruction]
+Activating the shipping profile:
+
+. Go to *Item » Edit item*.
+. Place a check mark next to all items that you want to sell on myToys.
+. Click on *Item group function*.
+. In the *Shipping* section, place a check mark next to *Shipping configuration*.
+. For the setting *Shipping configuration*, select the shipping profile that you created for myToys.
+. Click on icon:execute[set=plenty, role="darkGrey"] *Execute* to apply the settings to the items.
 
 [#prepare-variations]
 == Activating variations for the market
@@ -194,32 +336,38 @@ Continue with preparing your variations.
 
 include::partial$variation-availability.adoc[]
 
-[IMPORTANT]
-.Deactivating variation availability
-====
-If you deactivate the market availability for {market} of a variation in the *Item » Edit item » [Open item] » [Open variation] » Tab: Availability*menu, the variation is deactivated on {market}. If you reactivate the availability of such a variation, the variation is only reactivated on {market} during the nightly item export. +
-*_Note:_* To deactivate the variation, the property *{market} category group* has to be remain saved in the *Properties* tab of the respective variation.
-====
-
 [#link-category-property]
 === Linking variation to market category
 
-After you created the first marketplace format for {market} with the assistant, the property *{market} category group* is created in your plentymarkets system. For each category that you create a catalogue for, a new selection value is added to this property. This selection value has the same name as the category.
+After you created the first marketplace format for {market} with the assistant, the property *{market} category group* is created in your plentymarkets system. In addition, a first property value is created for the property. This property value has the same name as the {market} category that you created the catalogue for.
 
-In order for your variations to be exported in the appropriate catalogue, they have to be linked to the *{market} category group* property in the *Properties* tab of the variation.
+Each time you create a new catalogue for {market}, a new selection value is added to this property. This selection value has the same name as the {market} category.
+
+This property defines in which {market} category the variation should be listed. To do so, link the variation to the appropriate property value of the property.
 
 [.instruction]
-Linking a variation to the {market} category group:
+Linking a variation to a {market} category:
 
 . Go to *Item » Edit item » [Open item]*.
 . Click on the *Variations* tab.
-. Open the variation that should be linked.
+. Open the variation that you want to sell on {market}.
 . Open the *Properties* tab.
-. In the *Variation properties* area, select the property *{market} category group* from the *Properties* drop-down list and click on *Add* (icon:plus-square[role="green"]). +
-→ The property is added.
+. Open the *Variation properties* section.
+. From the *Properties* drop-down list, select the property *{market} category group*.
+. Click on *Add* (icon:plus-square[role="green"]). +
+→ The property is linked to the variation.
 . Select the desired category group from the *Value* drop-down list for the *{market} category group* property. +
-→ The variation is exported in the catalogue for this category.
+*_Tip:_* Categories  are only added as a selection value for the property after you have created a catalogue for this {market} category. +
+→ The variation is listed in this {market} category.
 . Save (icon:save[set=plenty]) the settings.
+
+=== Deactivating variations on {market}
+
+A variation has already been exported to myToys, but you do not want to offer this variation on myToys any longer? In this case, it is not enough to exclude this variation from the export. Instead, the variation has to be transferred as inactive once. To do so, proceed as follows.
+
+* In the *Availability* tab of the variation, de-select the market availability *myToys*. +
+* To deactivate the variation, the property *myToys category group* has to remain saved in the *Properties* tab of the respective variation.
+*_Important:_* If you reactivate the availability of such a variation, the variation is only reactivated on {market} during the nightly item export.
 
 [#550]
 == Setting up the item export
@@ -284,7 +432,7 @@ Also take note of the following general information:
 [[catalogue-mappings]]
 .Notes on mapping data fields
 [cols="1,3a"]
-|====
+|===
 | Marketplace data field | Explanation
 
 | *Product name*
@@ -347,10 +495,10 @@ RRP are shown on {market} based on the following logic:
 * If the sales price is lower than the RRP, the RRP is shown on {market} as a strikethrough price.
 * If the sales prices is higher than or equal to the RRP, the RRP will not be displayed on {market}.
 
-*_Note:_* Don't have a RRP, for example because you are the manufacturer? Then assign the same sales price as for the marketplace data field *Net sales price*. This way, no strikethrough price will be displayed on {market}.
+*_Note:_* Do you not have any RRP, for example because you are the manufacturer? Then assign the same sales price as for the marketplace data field *Net sales price*. This way, no strikethrough price will be displayed on {market}.
 
 | [option-bulletpoints]*Bullet points*
-| Additional information on an item is displayed on the {market} item page using bullet points.
+| Additional information on an item is displayed on the {market} item page by means of bullet points.
 
 The following rules apply for bullet points:
 
@@ -468,7 +616,7 @@ The following values can be used:
 (_mandatory_)
 | This is the country of origin (COO) of the variation. This field cannot be mapped in the catalogue. Instead, the country that you selected from the drop-down list *Manufacturing country* of the item is exported automatically. This means that the same country of origin is exported for all variations of an item. +
 *_Tip:_* Go to *Item » Edit item » [Open item] » Tab: Global » Area: Basic settings » Drop-down list: Manufacturing country* to save the country of origin.
-|====
+|===
 
 [#850]
 === Activating the catalogue
@@ -520,7 +668,7 @@ image::maerkte:mytoys-lieferschein-20220303.png[]
 Uploading a PDF template for delivery notes:
 
 . Download the PDF template for {market} delivery notes to your computer:
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-01-Lieferschein-Vorlage-20220303.pdf[Download PDF template (last updated: 03/03/2022)]
+  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-01-Lieferschein-Vorlage-20220303.pdf[Download PDF template (as of 03/03/2022)]
 . Go to *Setup » Client » Select client » Locations » Location: Germany » Documents » Delivery note*.
 . Click on the tab *PDF template*.
 . Click on *Add template*. +
@@ -568,7 +716,7 @@ Adjusting template for delivery notes:
 2+^| *Columns stock units* area
 
 | *Item name*
-| Activate option *EAN*.
+| |Activate option *EAN*.
 
 | *Unit price*; +
 *Total price (net)*; +
@@ -651,17 +799,17 @@ image::maerkte:myToys-retourenschein-20220303.png[]
 The {market} letterhead has to be included on return slips for {market} orders.
 Proceed as described below to upload a xref:orders:order-documents.adoc#170[PDF template] for return slips for {market} in plentymarkets.
 
-NOTE: Return slips also need to contain the return note that myToys specifies. As such, we recommend that you upload the template that already contains the return reasons. Alternatively, you can also use the template that does not contain the return reasons. If so, go to *Setup » Client » [Open client] » Standorte » Deutschland » Dokumente » Return slip » Tab: Template* and enter the return note for the payment method *Plugin: myToys Payment*. However, the layout won’t conform to the layout specified by myToys. As such, have your documents approved by myToys in advance.
+NOTE: Return slips also need to contain the return note that myToys specifies. As such, we recommend that you upload the template that already contains the return reasons. Alternatively, you can also use the template that does not contain the return reasons. If so, go to *Setup » Client » [Open client] » Locations » Deutschland » Documents » Return slip » Tab: Template* and enter the return note for the payment method *Plugin: myToys Payment*. However, the layout won’t conform to the layout specified by myToys. As such, have your documents approved by myToys in advance.
 
 [.instruction]
 Uploading template for return slips:
 
 . Download the template for {market} return slips to your computer. You can download the template as a PDF or a DOCX file:
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-mit-gruenden-20220303.pdf[Download PDF template with return reasons (last updated: 03/03/2022)]
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-mit-gruenden-20220303.docx[Download DOCX template with return reasons (last updated: 03/03/2022)] +
+  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-mit-gruenden-20220303.pdf[Download PDF template with return reasons (as of 03/03/2022)]
+  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-mit-gruenden-20220303.docx[Download DOCX template with return reasons (as of 03/03/2022)] +
   *_Important:_* Download this template as a PDF file after editing.
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-ohne-gruenden-20220303.pdf[Download PDF template without return reasons (last updated: 03/03/2022)]
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-ohne-gruenden-20220303.docx[Download DOCX template without return reasons (last updated: 03/03/2022)] +
+  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-ohne-gruenden-20220303.pdf[Download PDF template without return reasons (as of 03/03/2022)]
+  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-ohne-gruenden-20220303.docx[Download DOCX template without return reasons (as of 03/03/2022)] +
   *_Important:_* Download this template as a PDF file after editing.
 . Go to *Setup » Client » Select client » Locations » Location: Germany » Documents » Return slip*.
 . Click on the tab *PDF template*.
@@ -709,7 +857,6 @@ Adjusting template for return slips:
 include::page$mytoys.adoc[tag=document-settings]
 |===
 
-
 [#order-processing]
 == Automating order processing
 
@@ -738,7 +885,7 @@ include::_includes:page$EA.adoc[]
 
 | *Event*
 | *Order change: Status change*
-| Select a status, for example *[8] Waiting for payment*.
+| Select a status, for example *[8] Cancelled*.
 
 | *Filter*
 | *Order > Referrer*
@@ -810,7 +957,7 @@ include::_includes:page$EA.adoc[]
 [[event-procedure-returns-myToys]]
 .Event procedure for automatically notifying {market} of returns
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -829,7 +976,7 @@ include::_includes:page$EA.adoc[]
 | *Plugins*
 | *Send return notification to myToys* +
 *_Note:_* The procedure *Send return notification to {market}* triggers a credit note. This means that customers will receive a refund. Thus, make sure the event procedure is only triggered after you have received and checked the returned items.
-|====
+|===
 
 [#1350]
 == Troubleshooting

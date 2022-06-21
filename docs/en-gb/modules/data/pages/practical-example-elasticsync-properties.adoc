@@ -1,0 +1,671 @@
+= Importing properties
+:keywords: Import property, Import properties, Importing properties, Property import, Properties import, Import characteristic, Import characteristics, Importing characteristics, Characteristic import, Characteristics import, Import item properties, Importing item properties, Import selection properties, Importing selection properties, Import multi-selection properties, Importing multi-selection properties
+:description: This page guides you step-by-step through the process of importing properties, property groups and selection values.
+:id: BPPCB08
+:author: team-item
+
+////
+zuletzt bearbeitet 04.02.2022
+////
+
+You might already know what properties are and how to manually create them in plentymarkets.
+But what if you need to create lots of properties?
+It would take forever to create them all manually.
+Don’t worry, you can save lots of time by importing your properties into plentymarkets.
+This page of the manual guides you through the process step-by-step.
+
+[discrete]
+=== Procedure
+
+* Create the necessary xref:data:practical-example-elasticsync-properties.adoc#20[groups], xref:data:practical-example-elasticsync-properties.adoc#80[properties] and xref:data:practical-example-elasticsync-properties.adoc#140[selection values].
+* xref:data:practical-example-elasticsync-properties.adoc#200[Link the properties] to the appropriate products.
+
+Instead of doing this manually, you will import the data.
+
+[TIP]
+.Requirements
+====
+This page assumes that you already:
+
+* Have a basic understanding of the xref:data:ElasticSync.adoc#[import tool].
+* Have a basic understanding of xref:item:properties.adoc#500[properties].
+You should know what properties are and how to create them manually.
+Take a look at xref:item:properties.adoc#500[this page] if you need a refresher on these topics.
+====
+
+[#10]
+== Practical example: Initial situation
+
+Imagine you want to highlight the technical features and USPs of your headphones.
+Specifically, you want to create the following properties:
+
+* The keyword “Bluetooth”.
+* The reach of 10 metres.
+* The date when they will become available.
+* The information that the headphones have a built-in microphone.
+* The supported Bluetooth profiles.
+
+Furthermore, you want to:
+
+* group the properties together into a group called “Headphones”.
+* import the properties, rather than create them manually in plentymarkets.
+
+image::data:properties-import-initialsituation.png[]
+
+[#20]
+== Creating groups
+
+First, we will create the necessary property groups.
+In this example, I will create a group called “Headphones”, which I will use for all of the properties that relate to my Bluetooth headphones.
+
+[#30]
+=== Setting up the CSV file
+
+If you were to create a group manually, then you would enter information like the name, position, group type and sales price into the plentymarkets back end.
+Since you want to import the group, you will enter the same data into a CSV file.
+
+image::data:properties-import-group-csv.png[]
+
+[TIP]
+.List of valid import values
+====
+How do you know which combinations of characters you can use in the CSV file?
+Take a look at the manual.
+xref:data:elasticSync-properties.adoc#[Here] you can see which data fields are mandatory and how you must enter the individual options into your CSV file in order for them to be correctly interpreted by plentymarkets.
+====
+
+[#40]
+=== Choosing the import settings
+
+Once you have finished entering all of the group information into your CSV file, open the menu *Data » Import* and create a new import of the type *Properties*.
+
+[TIP]
+.How do I create an import?
+====
+If you haven’t worked with the import tool yet, then you can learn the basics xref:data:ElasticSync.adoc#[here].
+This page doesn’t describe every import option in detail.
+Rather, the page concentrates on a practical example for importing properties and groups.
+====
+
+[#50]
+=== Choosing the matching settings
+
+Once you have finished configuring the import settings, you can switch to the *Matching settings*.
+
+* The ID options are useful if you want to modify existing properties or groups.
+* The name options are useful if you want to create new properties or groups.
+
+Since we want to import a _new group_ in this example, configure the settings as follows:
+
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Property group name*
+|Which column of your CSV file lists the group name? Choose this column here.
+This option is useful if you want to _create new groups_.
+
+Then specify which language the name is written in.
+
+| *Import options*
+|Since you’ll be importing new groups, choose the option *Only import new data* or *Import new, update existing data*.
+|===
+
+image::data:properties-import-group-matching.png[]
+
+[#60]
+=== Choosing the mapping settings
+
+Let’s continue with the *Mapping settings*.
+Here you will specify which column of the CSV file corresponds to which data field in plentymarkets.
+For example, your CSV file might include a position number.
+On the right side, you will tell plentymarkets that this is the group position.
+
+image::data:properties-import-group-mapping.png[]
+
+[TIP]
+.List of data fields
+====
+Take a look at the manual if you’re not sure what a specific option does or which plentymarkets data field it relates to.
+The information is listed xref:data:elasticSync-properties.adoc#[here].
+====
+
+[#70]
+=== Starting the import
+
+Are you ready to import the data?
+Start the import and make sure the data was correctly imported into plentymarkets.
+
+[.instruction]
+Starting the import and checking the result:
+
+. Activate all lines of the CSV file that should be imported (icon:toggle-on[role="blue"]).
+. Test the import (icon:plugin_stage_deploy[set=plenty]) or start the import (icon:play-circle-o[role="darkGrey"]). +
+*_Note:_* This can take a few minutes.
+. Go to *Setup » Settings » Properties » Groups*.
+. Search for and open a few groups to check their settings.
+
+[TIP]
+.Do a trial run
+====
+We recommend testing the import (icon:plugin_stage_deploy[set=plenty]) before you start it for the first time.
+This imports the first 10 rows of the file and bypasses the cache.
+It gives you time to check whether the import works correctly. If the import does not perform as expected, you can correct it before importing the entire file.
+====
+
+[TIP]
+.Resetting the cache
+====
+Directly within the import, you’ll find the button *Reset cache* (icon:reload[set=plenty]).
+This button allows you to reset the import cache in order to reimport a file that does not contain any changes.
+====
+
+[#80]
+== Creating properties
+
+Next we’ll create the properties.
+In this example, I’ll import a text property, a whole number, a selection property and a multi-selection property.
+
+[#90]
+=== Setting up the CSV file
+
+If you were to create the properties manually, then you would enter information about them into the plentymarkets back end.
+Since you want to import the properties, you will enter the same data into a CSV file.
+
+image::data:properties-import-property-csv.png[]
+
+[TIP]
+.List of valid import values
+====
+How do you know which combinations of characters you can use in the CSV file?
+Take a look at the manual.
+xref:data:elasticSync-properties.adoc#[Here] you can see which data fields are mandatory and how you must enter the individual options into your CSV file in order for them to be correctly interpreted by plentymarkets.
+====
+
+[IMPORTANT]
+.Visibilities and options can not be imported
+====
+Neither the area *Visibilities* nor the area *Options* can be configured via import.
+If you want to use these settings, then you will need to configure them manually after you have finished the import.
+====
+
+[#100]
+=== Choosing the import settings
+
+Once you have finished entering all of the property information into your CSV file, open the menu *Data » Import* and create a new import of the type *Properties*.
+
+[TIP]
+.How do I create an import?
+====
+If you haven’t worked with the import tool yet, then you can learn the basics xref:data:ElasticSync.adoc#[here].
+This page doesn’t describe every import option in detail.
+Rather, the page concentrates on a practical example for importing properties and groups.
+====
+
+[#110]
+=== Choosing the matching settings
+
+Once you have finished configuring the import settings, you can switch to the *Matching settings*.
+
+* The ID options are useful if you want to modify existing properties or groups.
+* The name options are useful if you want to create new properties or groups.
+
+Since we want to import _new properties_ in this example, configure the settings as follows:
+
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Property name*
+|Which column of your CSV file lists the property name? Choose this column here.
+This option is useful if you want to _create new properties_.
+
+Then specify which language the name is written in.
+
+| *Import options*
+|Since you’ll be importing new properties, choose the option *Only import new data* or *Import new, update existing data*.
+|===
+
+image::data:properties-import-property-matching.png[]
+
+[#120]
+=== Choosing the mapping settings
+
+Let’s continue with the *Mapping settings*.
+Here you will specify which column of the CSV file corresponds to which data field in plentymarkets.
+
+image::data:properties-import-property-mapping.png[]
+
+[TIP]
+.List of data fields
+====
+Take a look at the manual if you’re not sure what a specific option does or which plentymarkets data field it relates to.
+The information is listed xref:data:elasticSync-properties.adoc#[here].
+====
+
+[#130]
+=== Starting the import
+
+Are you ready to import the data?
+Start the import and make sure the data was correctly imported into plentymarkets.
+
+[.instruction]
+Starting the import and checking the result:
+
+. Activate all lines of the CSV file that should be imported (icon:toggle-on[role="blue"]).
+. Test the import (icon:plugin_stage_deploy[set=plenty]) or start the import (icon:play-circle-o[role="darkGrey"]). +
+*_Note:_* This can take a few minutes.
+. Go to *Setup » Settings » Properties » Configuration*.
+. Search for and open a few properties to check their settings.
+. If necessary, manually configure the settings in the areas *Visibilities* and *Options*.
+
+[TIP]
+.Do a trial run
+====
+We recommend testing the import (icon:plugin_stage_deploy[set=plenty]) before you start it for the first time.
+This imports the first 10 rows of the file and bypasses the cache.
+It gives you time to check whether the import works correctly. If the import does not perform as expected, you can correct it before importing the entire file.
+====
+
+[TIP]
+.Resetting the cache
+====
+Directly within the import, you’ll find the button *Reset cache* (icon:reload[set=plenty]).
+This button allows you to reset the import cache in order to reimport a file that does not contain any changes.
+====
+
+[IMPORTANT]
+.Visibilities and options can not be imported
+====
+Neither the area *Visibilities* nor the area *Options* can be configured via import.
+If you want to use these settings, then you will need to configure them manually after you have finished the import.
+====
+
+[#140]
+== Creating selection values
+
+Do you have properties of the type *Selection* or *Multi-selection*?
+The unique thing about these two property types is that they have individual _values_ that are available for _selection_.
+Such selection values can also be imported.
+
+This is done with the import type *Properties: Selection values*.
+The only requirement for this import type is that the properties must already exist in your system.
+In other words, it’s not possible to create the properties and their selection values together in one import.
+This needs to be done in two separate imports.
+
+[#150]
+=== Setting up the CSV file
+
+If you were to create the selection values manually, then you would enter their names into the plentymarkets back end.
+Since you want to import the selection values, you will enter their names into a CSV file.
+The CSV file is very simple.
+It only includes the property ID and the names of all the corresponding selection values.
+
+image::data:properties-import-selectionvalues-csv.png[]
+
+[TIP]
+.List of valid import values
+====
+How do you know which combinations of characters you can use in the CSV file?
+Take a look at the manual.
+xref:data:elasticSync-properties-selection-values.adoc#[Here] you can see which data fields are mandatory and how you must enter the individual options into your CSV file in order for them to be correctly interpreted by plentymarkets.
+====
+
+[#160]
+=== Choosing the import settings
+
+Once you have finished entering all of the selection values into your CSV file, open the menu *Data » Import* and create a new import of the type *Properties: Selection values*.
+
+[TIP]
+.How do I create an import?
+====
+If you haven’t worked with the import tool yet, then you can learn the basics xref:data:ElasticSync.adoc#[here].
+This page doesn’t describe every import option in detail.
+Rather, the page concentrates on a practical example for importing properties and groups.
+====
+
+[#170]
+=== Choosing the matching settings
+
+Once you have finished configuring the import settings, you can switch to the *Matching settings*.
+
+* The *Selection ID* option is useful if you want to update existing selection values.
+* The *Selection name* option is useful if you want to create new selection values.
+Note that this option can only be used together with the matching field *Property ID* or *Property name*.
+You can find further information in the table below.
+
+Since we want to import _new selection values_ in this example, configure the settings as follows:
+
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Selection name*
+|Which column of your CSV file contains the selection value’s name?
+Choose this column here.
+Then select the name’s language from the second drop-down list.
+This option is useful if you want to create _new selection values_.
+
+*_Additional settings_*: This option can only be used together with the matching field *Property ID* or *Property name*.
+Why?
+It’s possible to save the same selection name for multiple properties.
+The selection name alone isn’t a unique identifier.
+Therefore, use the selection name together with the property ID or the property name.
+
+| *Import options*
+|Since you’ll be importing new selection values, choose the option *Only import new data* or *Import new, update existing data*.
+|===
+
+image::data:properties-import-selectionvalues-matching.png[]
+
+[#180]
+=== Choosing the mapping settings
+
+Let’s continue with the *Mapping settings*.
+Here you will specify which column of the CSV file corresponds to which data field in plentymarkets.
+
+image::data:properties-import-selectionvalues-mapping.png[]
+
+[TIP]
+.List of data fields
+====
+Take a look at the manual if you’re not sure what a specific option does or which plentymarkets data field it relates to.
+The information is listed xref:data:elasticSync-properties-selection-values.adoc#[here].
+====
+
+[#190]
+=== Starting the import
+
+Are you ready to import the data?
+Start the import and make sure the data was correctly imported into plentymarkets.
+
+[.instruction]
+Starting the import and checking the result:
+
+. Activate all lines of the CSV file that should be imported (icon:toggle-on[role="blue"]).
+. Test the import (icon:plugin_stage_deploy[set=plenty]) or start the import (icon:play-circle-o[role="darkGrey"]). +
+*_Note:_* This can take a few minutes.
+. Go to *Setup » Settings » Properties » Configuration*.
+. Search for and open a few properties of the type *Selection* or *Multi-selection*.
+. Check the selection values.
+
+[TIP]
+.Do a trial run
+====
+We recommend testing the import (icon:plugin_stage_deploy[set=plenty]) before you start it for the first time.
+This imports the first 10 rows of the file and bypasses the cache.
+It gives you time to check whether the import works correctly. If the import does not perform as expected, you can correct it before importing the entire file.
+====
+
+[TIP]
+.Resetting the cache
+====
+Directly within the import, you’ll find the button *Reset cache* (icon:reload[set=plenty]).
+This button allows you to reset the import cache in order to reimport a file that does not contain any changes.
+====
+
+[#200]
+== Linking properties with variations
+
+Finally, you’ll specify which properties apply to which products.
+This can also be done via import.
+You’ll use the import type *Item*.
+This import type is extremely versatile.
+You can use it to import all of the information that’s found in an item data record.
+Among other things, the property links.
+
+[#210]
+=== Setting up the CSV file
+
+If you were to link the properties manually, then you would enter information about them into the plentymarkets back end.
+Since you want to import the links, you will enter the same data into a CSV file.
+
+[TIP]
+.It can be easier to import every property type separately
+====
+In this example, I created a separate CSV file and import for every property type.
+Since the various property types require different information, this allows me to keep the process as simple as possible.
+Of course, you can proceed differently if that fits better with your own workflows.
+====
+
+[TIP]
+.List of valid import values
+====
+How do you know which combinations of characters you can use in the CSV file?
+Take a look at the manual.
+xref:data:elasticSync-item.adoc#2410[Here] you can see which data fields are mandatory and how you must enter the individual options into your CSV file in order for them to be correctly interpreted by plentymarkets.
+====
+
+[.collapseBox]
+.*Type: Whole number*
+--
+
+I entered the following information into my CSV file:
+
+* *Variation ID* = Which variation should the property be linked to?
+For example, the Bluetooth headphones.
+They have the ID 1157.
+* *Property ID* = Which property should be linked?
+For example, the reach.
+This property has the ID 49.
+* *Value* = What value does the property have?
+For example, the value “10” metres.
+
+image::data:properties-import-link-csv-wholenumber.png[]
+
+--
+
+[.collapseBox]
+.*Type: HTML*
+--
+
+I entered the following information into my CSV file:
+
+* *Variation ID* = Which variation should the property be linked to?
+For example, the Bluetooth headphones.
+They have the ID 1157.
+* *Property ID* = Which property should be linked?
+For example, the product text.
+This property has the ID 51.
+* *Value* = What value does the property have?
+For example, the actual text.
+* *Language* = Texts are language-specific.
+So in this column, I’ll specify which language the text was written in.
+
+image::data:properties-import-link-csv-html.png[]
+
+--
+
+[.collapseBox]
+.*Type: Selection*
+--
+
+I entered the following information into my CSV file:
+
+* *Variation ID* = Which variation should the property be linked to?
+For example, the Bluetooth headphones.
+They have the ID 1157.
+* *Property ID* = Which property should be linked?
+For example, the question whether the headphones have a built-in microphone.
+This property has the ID 50.
+* *Selection ID* = Which option applies in this case?
+For example: “Yes”, the headphones have a built-in microphone.
+This selection value has the ID 54.
+
+image::data:properties-import-link-csv-selection.png[]
+
+--
+
+[.collapseBox]
+.*Type: Multi-selection*
+--
+
+I entered the following information into my CSV file:
+
+* *Variation ID* = Which variation should the property be linked to?
+For example, the Bluetooth headphones.
+They have the ID 1157.
+* *Property ID* = Which property should be linked?
+For example, the question which Bluetooth profiles the headphones support.
+This property has the ID 52.
+* *Multi-selection IDs* = Which options apply in this case?
+For example: The headphones support the profiles A2DP, AVRCP, HFP and HSP.
+These selection values have the IDs 56, 57, 58 and 59.
+
+image::data:properties-import-link-csv-multi.png[]
+
+--
+
+[#220]
+=== Choosing the import settings
+
+Once you have finished entering all of the property links into your CSV file, open the menu *Data » Import* and create a new import of the type *Item*.
+
+[TIP]
+.How do I create an import?
+====
+If you haven’t worked with the import tool yet, then you can learn the basics xref:data:ElasticSync.adoc#[here].
+This page doesn’t describe every import option in detail.
+Rather, the page concentrates on a practical example for importing properties and groups.
+====
+
+[#230]
+=== Choosing the matching settings
+
+Once you have finished configuring the import settings, you can switch to the *Matching settings*.
+
+* The ID options are useful if you want to modify existing variations.
+* The name options are useful if you want to create new variations.
+
+Since we want to import _existing variations_ in this example, configure the settings as follows:
+
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Variation ID*
+|Which column of the CSV file lists the variation IDs? Choose this column here.
+This option is useful if you want to _update existing variations_.
+
+| *Import options*
+|Since you’ll be updating existing variations, choose the option *Only update existing data* or *Import new, update existing data*.
+|===
+
+image::data:properties-import-link-matching.png[]
+
+[#240]
+=== Choosing the mapping settings
+
+Let’s continue with the *Mapping settings*.
+Here you will specify which column of the CSV file corresponds to which data field in plentymarkets.
+
+[TIP]
+.It can be easier to import every property type separately
+====
+In this example, I created a separate CSV file and import for every property type.
+Since the various property types require different information, this allows me to keep the process as simple as possible.
+Of course, you can proceed differently if that fits better with your own workflows.
+====
+
+[TIP]
+.List of data fields
+====
+Take a look at the manual if you’re not sure what a specific option does or which plentymarkets data field it relates to.
+The information is listed xref:data:elasticSync-item.adoc#[here].
+====
+
+[.collapseBox]
+.*Type: Whole number*
+--
+
+I selected the mapping settings as follows:
+
+* *Property ID*
+* *Value*
+* *Variation ID* = I have already used the variation ID as the matching field.
+I do not need to use it as a mapping field too.
+Therefore, I leave this line inactive (icon:toggle-off[role="darkGrey"]).
+
+image::data:properties-import-link-mapping-wholenumber.png[]
+
+--
+
+[.collapseBox]
+.*Type: HTML*
+--
+
+I selected the mapping settings as follows:
+
+* *Property ID*
+* *Value*
+* *Language*
+* *Variation ID* = I have already used the variation ID as the matching field.
+I do not need to use it as a mapping field too.
+Therefore, I leave this line inactive (icon:toggle-off[role="darkGrey"]).
+
+image::data:properties-import-link-mapping-html.png[]
+
+--
+
+[.collapseBox]
+.*Type: Selection*
+--
+
+I selected the mapping settings as follows:
+
+* *Property ID*
+* *Selection ID*
+* *Variation ID* = I have already used the variation ID as the matching field.
+I do not need to use it as a mapping field too.
+Therefore, I leave this line inactive (icon:toggle-off[role="darkGrey"]).
+
+image::data:properties-import-link-mapping-selection.png[]
+
+--
+
+[.collapseBox]
+.*Type: Multi-selection*
+--
+
+I selected the mapping settings as follows:
+
+* *Property ID*
+* *Multi-selection IDs*
+* *Variation ID* = I have already used the variation ID as the matching field.
+I do not need to use it as a mapping field too.
+Therefore, I leave this line inactive (icon:toggle-off[role="darkGrey"]).
+
+image::data:properties-import-link-mapping-multi.png[]
+
+--
+
+[#250]
+=== Starting the import
+
+Are you ready to import the data?
+Start the import and make sure the data was correctly imported into plentymarkets.
+
+[.instruction]
+Starting the import and checking the result:
+
+. Activate all lines of the CSV file that should be imported (icon:toggle-on[role="blue"]).
+. Test the import (icon:plugin_stage_deploy[set=plenty]) or start the import (icon:play-circle-o[role="darkGrey"]). +
+*_Note:_* This can take a few minutes.
+. Go to *Item » Edit item*.
+. Search for and open a few items.
+. Check whether the properties were correctly linked in the tabs *Properties* and *Texts*.
+
+[TIP]
+.Do a trial run
+====
+We recommend testing the import (icon:plugin_stage_deploy[set=plenty]) before you start it for the first time.
+This imports the first 10 rows of the file and bypasses the cache.
+It gives you time to check whether the import works correctly. If the import does not perform as expected, you can correct it before importing the entire file.
+====
+
+[TIP]
+.Resetting the cache
+====
+Directly within the import, you’ll find the button *Reset cache* (icon:reload[set=plenty]).
+This button allows you to reset the import cache in order to reimport a file that does not contain any changes.
+====
