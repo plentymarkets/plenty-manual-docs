@@ -35,29 +35,25 @@ Schnittstelle zu Check24 einrichten:
 . Gib dein Passwort für den FTP-Zugang ein.
 . Speichere (icon:save[set=plenty]) die Einstellungen.
 
-Die Anbindung des Marktplatzes stellt folgende automatisierte Prozesse bereit:
-
-* stündlicher Auftragsabgleich
+[TIP]
+.Häufigkeit des Datenaustauschs
+====
+Nachdem du Check24 in plentymarkets eingerichtet hast, findet der Datenaustausch in den folgenden Intervallen statt: +
+- Auftragsimport alle 15 Minuten
+====
 
 [#250]
 === Auftragsherkunft aktivieren
 
 :referrer: Check24
-:referrer-option: pass:quotes[Option *Check24*]
+:referrer-option: pass:quotes[Option *Check24* mit der ID *150*]
 
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
 [#300]
 === Variantenverfügbarkeit einstellen
 
-:market-availability: Check24
-:option-availability: Check24
-:web-api:
-
-include::partial$variantenverfuegbarkeit.adoc[]
-
-// Web-API erforderlich!
-
+Welche Varianten zu {market} exportiert werden, steuerst du nicht über die Variantenverfügbarkeit, sondern über die <<#filter-export, Katalogfilter>>.
 
 [#400]
 === _Optional:_ SKU speichern
@@ -78,7 +74,7 @@ include::partial$sku-manuell.adoc[]
 include::partial$verkaufspreis-festlegen.adoc[]
 
 [#700]
-=== Zahlungsart aktivieren
+=== Zahlungsart in Kundenklasse erlauben
 
 :payment-method: check24
 
@@ -90,6 +86,21 @@ include::partial$zahlungsart_aktivieren.adoc[]
 * <<#500, _Möglichkeit 1:_ Artikelexport über Elastischen Export _(alte Methode)_>>
 * <<#catalogue-export, _Möglichkeit 2:_ Artikelexport über Katalog-Formate _(empfohlene Methode)_>>
 * <<#change-elastic-export-catalogue, _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog>>
+
+[#check24-offer-product-exports]
+[discrete]
+==== Angebotsexport und Produktexport bei Check24
+
+Bei Check24 wird zwischen Angebotsdaten und Produktdaten unterschieden. Deswegen gibt es bei Check24 zwei verschiedene Exporte: den Angebotsexport und den Produktexport. +
+
+* Für den Angebotsexport wird das Katalog-Format *Check24 Offer* verwendet.
+* Für den Produktexport wird das Katalog-Format *Check24* verwendet.
+
+*_Hinweis:_* Zusätzlich zu den beiden oben genannten Katalog-Formaten gibt es auch das Format *Check24 Fashion*. Da es die Fashion-Kategorie bei Check24 jedoch nicht mehr gibt, ist das Format veraltet und sollte deshalb nur in Ausnahmefällen und in Absprache mit Check24 verwendet werden.
+
+Check24 ruft Artikeldaten über eine URL ab. Diese URL findest du in deinem Katalog für Check24 im Menü *Daten » Kataloge*. Du musst die URL direkt bei Check24 speichern, damit Artikeldaten an Check24 exportiert werden können. +
+*_Hinweis:_* Da es zwei Exporte gibt, den Angebotsexport (Katalog-Format *Check24 Offer*) und den Produktexport (Katalog-Format *Check24*), gibt es auch zwei URLs, über die Artikeldaten von Check24 abgerufen werden. Du kannst in deinem Konto bei Check24 aber nur _eine_ URL speichern. Du solltest deshalb <<#url-check24-katalog, die URL des _Angebotsexports_ (Katalog-Format *Check24 Offer*) bei Check24 speichern>>. +
+Die URL für den Produktexport (Katalog-Format *Check24*) kannst du nicht selbst auf Check24 speichern. Kontaktiere deine Ansprechpartner:innen bei Check24, damit sie die URL des Produktexports in deinen Kontaktdaten hinterlegen.
 
 [#500]
 === _Möglichkeit 1:_ Elastischer Export _(alte Methode)_
@@ -106,19 +117,21 @@ NOTE: Der Elastische Export und das Exportformat für Check24 werden für den Ma
 
 include::partial$plugin-download.adoc[]
 
-Erstelle zunächst das Exportformat Check24DE und übermittele im Anschluss die URL an Check24.
+Erstelle zunächst das Exportformat *Check24DE-Plugin* und übermittele im Anschluss die URL an Check24.
+
+*_Hinweis:_* Zusätzlich zu dem Exportformat *Check24DE-Plugin* gibt es das Exportformat *Check24DE Fashion*. Dieses Exportformat ist jedoch veraltet, da es die Fashion-Kategorie auf Check24 nicht mehr gibt. Das Exportformat *Check24DE Fashion* sollte deshalb nur in Ausnahmefällen und in Absprache mit Check24 verwendet werden.
 
 [#500-1]
 ==== Exportformat Check24DE
 
-Erstelle wie unten beschrieben das Exportformat *Check24DE* für Check24. Beachte vorher die folgenden Besonderheiten:
+Erstelle wie unten beschrieben das Exportformat *Check24DE-Plugin* für Check24. Beachte vorher die folgenden Besonderheiten:
 
 * Wenn du eine oder mehrere Einstellungen änderst, musst du den neuen Link an Check24 übergeben.
 * Pro Export werden maximal 4000 Artikel exportiert. Wenn du mehr Artikel exportierst, wird automatisch ein zweiter Export ausgeführt. Um den zweiten Export anzuzeigen, setze den Parameter *&amp;Page* = im Export-Link auf *2*.
 * Technische Daten werden in der letzten Spalte der Exportdatei an Check24 übergeben.
 
 [.instruction]
-.Exportformat Check24DE erstellen:
+.Exportformat Check24DE-Plugin erstellen:
 
 . Öffne das Menü *Daten » Elastischer Export*.
 . Klicke auf *Neuer Export*.
@@ -131,7 +144,7 @@ Erstelle wie unten beschrieben das Exportformat *Check24DE* für Check24. Beacht
 [[einstellungen-artikelexport-check24]]
 .Einstellungen für das Datenformat *Check24DE-Plugin*
 [cols="1,3a"]
-|====
+|===
 |Einstellung |Erläuterung
 
 2+^| *Einstellungen*
@@ -249,7 +262,7 @@ Erstelle wie unten beschrieben das Exportformat *Check24DE* für Check24. Beacht
 
 | *Artikelverfügbarkeit*
 | Option *überschreiben* aktivieren und in die Felder *1* bis *10*, die die ID der Verfügbarkeit darstellen, Artikelverfügbarkeiten eintragen. Somit werden die Artikelverfügbarkeiten, die im Menü *System » Artikel » Verfügbarkeit* eingestellt wurden, überschrieben.
-|====
+|===
 
 [#500-2]
 ==== Check24DE: Verfügbare Spalten der Exportdatei
@@ -261,7 +274,7 @@ include::partial$exportdatei-herunterladen.adoc[]
 [[spalten-exportdatei-check24]]
 .Check24DE: Verfügbare Spalten der Exportdatei
 [cols="1,3"]
-|====
+|===
 | Spaltenbezeichnung | Erläuterung
 
 | id +
@@ -319,7 +332,24 @@ gewählten Mandanten in den Formateinstellungen.
 
 | weight
 | Das *Gewicht* wie im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Einstellungen » Maße* definiert.
-|====
+|===
+
+[#url-check24-elastischer-export]
+==== URL bei Check24 speichern
+
+Check24 ruft Artikeldaten über eine URL ab. Damit Artikeldaten an Check24 exportiert werden, musst du eine URL direkt bei Check24 speichern. Die Artikeldaten werden dann automatisch in regelmäßigen Abständen von Check24 abgerufen. +
+Kopiere die URL des Exportformats im Menü *Daten » Elastischer Export* und speichere sie anschließend im Backend von Check24. +
+*_Hinweis:_* Du musst die URL des Exportformats *Check24DE-Plugin* bei Check24 speichern. Dieses Exportformat enthält die Daten, die Check24 benötigt, damit deine Artikel auf Check24 verkauft werden können.
+
+[.instruction]
+URL kopieren:
+
+. Öffne das Menü *Daten » Elastischer Export*. +
+→ Die Übersicht der Exportformate wird geöffnet.
+. Klicke auf das Exportformat *Check24DE-Plugin*. +
+→ Das Exportformat wird geöffnet.
+. Kopiere die *URL* im Bereich *Einstellungen*.
+. Speichere die URL im Backend von Check24.
 
 [#catalogue-export]
 === _Möglichkeit 2:_ Katalogexport _(empfohlene Methode)_
@@ -328,13 +358,22 @@ Du kannst Artikeldaten jetzt auch über Katalog-Formate zu Check24 übertragen. 
 
 include::partial$catalogue-new-to-text.adoc[]
 
-
 [#catalogue-creation]
 ==== Katalog erstellen
 
-Artikeldaten werden über das Marktplatz-Format *Check24* zu Check24 übertragen. Um deine Artikel zu Check24 zu übertragen, erstellst du im Menü *Daten » Kataloge* den Katalog. Verknüpfe dann im Marktplatz-Format die von Check24 vorgegebenen Felder mit in plentymarkets gespeicherten Artikeldaten. Die Katalogdaten werden automatisch in regelmäßigen Abständen zu Check24 exportiert, wenn du den Katalog aktivierst.
+Artikeldaten werden über das Marktplatz-Format *Check24* zu Check24 übertragen. Um deine Artikel zu Check24 zu übertragen, erstellst du im Menü *Daten » Kataloge* den Katalog. Verknüpfe dann im Marktplatz-Format die von Check24 vorgegebenen Felder mit in plentymarkets gespeicherten Artikeldaten.
 
-include::partial$catalogue-new-to-text.adoc[]
+Check24 ruft die Artikeldaten über eine URL ab. Diese URL findest du in deinem Katalog für Check24 im Menü *Daten » Kataloge*. Damit deine Artikeldaten zu Check24 exportiert werden können, musst du diese <<#url-check24-katalog, URL kopieren und in deinem Konto bei Check24 speichern>>, nachdem du den Katalog erstellt hast.
+
+[TIP]
+.Katalog-Formate für Check24
+====
+Für Check24 gibt es die Katalog-Formate *Check24*, *Check24 Offer* und *Check24 Fashion*. +
+Das Format *Check24 Offer* enthält Angebotsdaten. +
+Das Katalog-Format *Check24* enthält Produktdaten. +
+Das Katalog-Format *Check24 Fashion* ist veraltet, da es die Fashion-Kategorie auf Check24 nicht mehr gibt. Es sollte nur in Ausnahmefällen und in Absprache mit Check24 genutzt werden. +
+Weitere Informationen zu den verschiedenen Formaten findest du im Kapitel <<#check24-offer-product-exports, Angebotsexport und Produktexport bei Check24>>.
+====
 
 :catalogue-template-name: Check24
 :catalogue-plugin:
@@ -382,6 +421,25 @@ include::partial$catalogue-settings.adoc[]
 
 :interval: einmal täglich nachts
 
+[#url-check24-katalog]
+==== URL bei Check24 speichern
+
+Check24 ruft Artikeldaten über eine URL ab. Damit Artikeldaten an Check24 exportiert werden, musst du eine URL direkt bei Check24 speichern. Die Artikeldaten werden dann automatisch in regelmäßigen Abständen von Check24 abgerufen. +
+Kopiere die URL des Katalogs im Menü *Daten » Kataloge* und speichere sie anschließend im Backend von Check24. +
+*_Hinweis:_* Du musst die URL des Katalog-Formats *Check24 Offer* für den Angebotsexport bei Check24 speichern. Die URL des Katalog-Formats *Check24* für den Produktexport kannst du nicht selbst bei Check24 speichern. Kontaktiere deine Ansprechpartner:innen bei Check24, damit die URL in deinen Kontaktdaten bei Check24 hinterlegt wird.
+
+[.instruction]
+URL kopieren:
+
+. Öffne das Menü *Daten » Kataloge*. +
+→ Die Katalog-Übersicht wird geöffnet.
+. Klicke auf den Katalog für das Format *Check24 Offer*. +
+→ Der Katalog wird geöffnet.
+. Öffne in der Navigation links das Tab *Einstellungen* (icon:settings[set=material]).
+. Klicke unter *Download-Einstellungen* im Bereich *Optionen für öffentlichen Link* auf *URL kopieren* (icon:content_copy[set=material]).
+→ Die URL wird in die Zwischenablage kopiert.
+. Speichere die URL im Backend von Check24.
+
 include::partial$catalogue-activation.adoc[]
 
 [#change-elastic-export-catalogue]
@@ -395,7 +453,7 @@ Das Format Check24 Offer ist neu. Daher gibt es dafür kein vergleichbares Forma
 [[elastic-export-catalogue-mappings]]
 .Spalten und Datenfelder
 [cols="1,1"]
-|====
+|===
 |Spalte im elastischen Export |Datenfeld im Katalog
 
 2+^| Check24
@@ -450,12 +508,12 @@ Das Format Check24 Offer ist neu. Daher gibt es dafür kein vergleichbares Forma
 | weight
 | Gewicht
 
-|====
+|===
 
 [#950]
 == Auftragsimport
 
-Beim stündlichen Auftragsimport wird der Auftrag automatisch in *Status [5] Freigabe Versand* gesetzt. Als Rechnungsadresse wird immer Check24 übermittelt. Die Adresse von Kund:innen dient lediglich als Lieferadresse.
+Beim viertelstündlichen Auftragsimport wird der Auftrag automatisch in *Status [5] Freigabe Versand* gesetzt. Als Rechnungsadresse wird immer Check24 übermittelt. Die Adresse von Kund:innen dient lediglich als Lieferadresse.
 
 [#975]
 == Versandbestätigungen senden

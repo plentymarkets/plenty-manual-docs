@@ -1,8 +1,14 @@
 = Kauflux
 :author: team-plenty-channel
-:keywords: Kauflux, Kauflux, kauf lux, kaufluchs
+:keywords: Kauflux, Kauflux, Kaufluchs
 :description: Multi-Channel in plentymarkets: Set up the interface to the market Kauflux in your plentymarkets system.
 :id: GKYZVIJ
+
+:kauflux:
+:market: Kauflux
+:price-search-engine: Kauflux
+:plugin-name: Kauflux.de-Plugin
+:plugin-link: https://marketplace.plentymarkets.com/en/plugins/sales/marktplaetze/elasticexportkaufluxde_4737
 
 link:https://www.kauflux.de/[Kauflux.de^] is an open marketplace with independent providers from various fields. Kauflux.de markets your items and services and provides you with direct contact to buyers.
 
@@ -10,20 +16,6 @@ link:https://www.kauflux.de/[Kauflux.de^] is an open marketplace with independen
 ==  Registering with Kauflux
 
 You have to register with link:http://www.kauflux.de/konto[Kauflux^] before you can set up Kauflux in your plentymarkets system.
-
-[IMPORTANT]
-.Install plugins
-====
-You need the following plugins to send item data to Kauflux: +
-link:https://marketplace.plentymarkets.com/en/plugins/sales/marktplaetze/elasticexport_4763[Elastic Export^] +
-link:https://marketplace.plentymarkets.com/en/plugins/channels/marktplaetze/elasticexportkaufluxde_4737[Kauflux^]
-====
-
-:plugin: Elastic Export
-include::partial$plugin-installation.adoc[]
-
-:plugin: Kauflux
-include::partial$plugin-installation.adoc[]
 
 [#200]
 ==  Setting up Kauflux in plentymarkets
@@ -53,7 +45,8 @@ Setting up Kauflux in plentymarkets:
 |Select whether you would like to transfer your stock and if so, whether you would like it to be *publicly* visible or not.
 
 | *API URL for the order import*
-|Kauflux uses this link to transfer orders to plentymarkets. This link is needed for importing orders from Kauflux and not for creating the item catalogue. The item catalogue is created with the elastic export in the *Data » Elastic export* menu. Further information in German can be found on link:https://www.kauflux.de/shop-anmelden/automatischer-auftragsdatenexport[Kauflux^].
+|Kauflux uses this link to transfer orders to plentymarkets. This link is needed for importing orders from Kauflux and not for creating the item catalogue. The item catalogue is created <<#catalogue-export, with a catalogue in the *Data » Catalogues* menu>> or <<old-export, with the elastic export in the *Data » Elastic export* menu>>. +
+Further information in German can be found on link:https://www.kauflux.de/shop-anmelden/automatischer-auftragsdatenexport[Kauflux^].
 |====
 
 [#250]
@@ -69,7 +62,7 @@ include::partial$activate-referrer.adoc[]
 == Setting the variation availability
 
 :market-availability: Kauflux
-:market-availability: Kauflux
+:option-availability: Kauflux
 
 include::partial$variation-availability.adoc[]
 
@@ -104,7 +97,7 @@ include::partial$activate-characteristic.adoc[]
 [#600]
 == Linking categories
 
-Go to *Setup » Markets » Kauflux » Category link* to link your plentymarkets categories with the categories on Kauflux. You need the Kauflux CSV file for setting up a category link. This file contains the *category IDs* for Kauflux. You can download the link:http://support.expeedo.de/f/kl/kauflux-Kategorien.xls[Kauflux CSV file^] from the seller area on the Kauflux website. In the next steps, export a list of categories in your plentyShop, link these categories and then import the category links.
+Go to *Setup » Markets » Kauflux » Category link* to link your plentymarkets categories with the categories on Kauflux. You need the Kauflux CSV file for setting up a category link. This file contains the *category IDs* for Kauflux. You can download the link:http://support.expeedo.de/f/kl/kauflux-Kategorien.xls[Kauflux CSV file^] from the seller area on the Kauflux website. In the next steps, export your plentymarkets categories, link these categories and then import the category links.
 
 [.instruction]
 Exporting links:
@@ -132,20 +125,27 @@ Importing links:
 . Save (icon:save[set=plenty]) the settings. +
 → The links are imported and displayed in the *Links* area.
 
-[#700]
-== Transmitting item data to Kauflux
+[#item-export]
+== Exporting item data
 
-[IMPORTANT]
-.Install plugins
-====
-You need the following plugins to send item data to Kauflux: +
-link:https://marketplace.plentymarkets.com/plugins/sales/marktplaetze/elasticexport_4763[Elastic Export^] +
-link:https://marketplace.plentymarkets.com/plugins/channels/marktplaetze/elasticexportkaufluxde_4737[Kauflux^]
-====
+* <<#old-export, _Alternative 1:_ Item export with the Elastic Export _(old method)_>>
+* <<#catalogue-export, _Alternative 2:_ Catalogue export _(recommended method)_>>
+* <<#change-elastic-export-catalogue, _Alternative 3:_ Changing from elastic export to catalogue>>
 
-=== Setting up the data format KaufluxDE-Plugin in plentymarkets
+[#old-export]
+=== _Alternative 1:_ Export format KaufluxDE-Plugin _(old method)_
 
-:export-format: Kauflux-Plugin
+NOTE: No new features are planned for the Elastic Export and the export formats. As such, we recommend that you <<#catalogue-export, create catalogues instead>>.
+
+[#plugin-download]
+==== Downloading and installing the plugins
+
+include::partial$plugin-download.adoc[]
+
+[#kaufluxde-plugin]
+==== Setting up the data format KaufluxDE-Plugin in plentymarkets
+
+:export-format: KaufluxDE-Plugin
 :price-search-engine: Kauflux
 :table-price-search-engine: <<#export-format>>
 :file-format: pass:quotes[*.csv* or *.txt*]
@@ -161,9 +161,10 @@ link:https://marketplace.plentymarkets.com/plugins/channels/marktplaetze/elastic
 
 include::partial$export-formats.adoc[]
 
-=== Available columns for the export format
+[#export-file-kauflux]
+==== Available columns for the export file
 
-<<#kauflux-columns>> shows the columns available for the export file.
+include::partial$download_export-file.adoc[]
 
 [[kauflux-columns]]
 .Available columns for the export format
@@ -180,7 +181,7 @@ include::partial$export-formats.adoc[]
 |EAN
 |According to the format setting *Barcode*.
 
-|Manufacturer
+|Hersteller
 |The *name of the manufacturer* of the item. The *external name* saved in the *Setup » Item » Manufacturers* menu is preferred if existing.
 
 |BestandModus
@@ -195,13 +196,13 @@ include::partial$export-formats.adoc[]
 |VersandKlasse
 |According to the format setting *Shipping costs*.
 
-|Delivery time
+|Lieferzeit
 |The name of the item availability saved in the *Setup » Item » Item availability* or the translation according to the format setting *Item availability*.
 
 |Umtausch
 |The exchange period after delivery in days, according to *Setup » Markets » Kauflux » Settings*.
 
-|Name
+|Bezeichnung
 |According to the format setting *Item name*.
 
 |KurzText
@@ -222,16 +223,16 @@ include::partial$export-formats.adoc[]
 |Bild3
 |URL of the image. Variation images are prioritised over item images.
 
-|Weight
+|Gewicht
 |The overall weight in grams.
 
-|Price
+|Preis
 |The sales price.
 
-|VAT
+|MwSt
 |The VAT in %.
 
-|RRP
+|UVP
 |The recommended retail price (RRP) of the variation. If the RRP is activated in the format setting and is higher than the sales price, the RRP is exported.
 
 |Katalog1
@@ -272,11 +273,182 @@ a|Status of the item: +
 |The model of the variation.
 |====
 
+[#catalogue-export]
+=== _Alternative 2:_ Catalogue export _(recommended method)_
+
+Catalogue formats provide you with a long-term and flexible way to export your item data to {market}.
+
+[#catalogue-creation]
+==== Creating a catalogue
+
+Item data is exported using a marketplace format. To export your items to a market, create a catalogue in the *Data » Catalogue* menu. Link the data fields in the catalogue with item data saved in plentymarkets in the marketplace format afterwards.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+:catalogue-template-name: Kauflux
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Mapping data fields in the catalogue
+
+Now, map the data fields in the catalogue to the item data saved in plentymarkets.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.List of recommended data field mappings
+--
+include::partial$kauflux-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Exporting specific items
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Setting up catalogue export
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+===== Activating the catalogue
+
+:interval:
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Exporting catalogue data to {market}
+
+include::partial$catalogue-url.adoc[]
+
+[#change-elastic-export-catalogue]
+=== _Alternative 3:_ Changing from elastic export to catalogue
+
+:elastic-export-catalogue-mappings:
+include::partial$catalogue-change-from-elastic-export.adoc[]
+
+[[elastic-export-catalogue-mappings]]
+.Columns and data fields
+[cols="1,1"]
+|====
+|Column in elastic export |Data field in catalogue
+
+| ProductID
+| ID
+
+| BestellNr
+| SKU
+
+| EAN
+| Barcode
+
+| Hersteller
+| Manufacturer
+
+| BestandModus
+| Type of stock management
+
+| BestandAbsolut
+| Net stock
+
+| Liefertyp
+| Shipment type
+
+| VersandKlasse
+| Shipping class
+
+| Lieferzeit
+| Item availability
+
+| Umtausch
+| Exchange period
+
+| Bezeichnung
+| Item name
+
+| KurzText
+| Preview text
+
+| DetailText
+| Description
+
+| Keywords
+| Keywords
+
+| Bild1
+| Image URL 1
+
+| Bild2
+| Image URL 2
+
+| Bild3
+| Image URL 3
+
+| Gewicht
+| Weight
+
+| Preis
+| Sales price
+
+| MwSt
+| VAT
+
+| UVP
+| RRP
+
+| Katalog1
+| Category
+
+| Flags
+| Store special
+
+| _Data field was not available for the Elastic Export._
+| Cross selling
+
+| ExtLinkDetail
+| URL path
+
+| Status
+| Item status
+
+| FreeVar1
+| Free text field 1
+
+| FreeVar2
+| Free text field 2
+
+| FreeVar3
+| Free text field 3
+
+| InhaltMenge
+| Quantity
+
+| InhaltEinheit
+| Unit of quantity
+
+| InhaltVergleich
+| Comparative amount
+
+| HerstellerArtNr
+| Model
+
+|====
+
 === Exporting item data
 
-After you set up Kauflux in plentymarkets, you can export your item data. To do so, go to *Data » Elastic export*.
+After you set up Kauflux in plentymarkets, you can export your item data. To do so, go to *Data » Catalogues*.
 
-For an automatic item data export, you have to copy the complete URL and save it at Kauflux. The prerequisites for this are that you have carried out at least one export of your item data manually and that you have assigned the individual fields in Kauflux. Additionally, the automatic item data export from Kauflux has to be activated.
+For an automatic item data export, you have to copy the complete URL of your Kauflux catalogue and save it at Kauflux. The prerequisites for this are that you have carried out at least one export of your item data manually and that you have assigned the individual fields in Kauflux. Additionally, the automatic item data export from Kauflux has to be activated.
 
 [#800]
 === Exporting variation data
