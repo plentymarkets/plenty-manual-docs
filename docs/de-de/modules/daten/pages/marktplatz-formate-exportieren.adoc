@@ -7,12 +7,12 @@
 
 :marketplace-export:
 
-Mit den Marktplatz-Formaten des Katalogs exportierst du Varianten- und Bestandsdaten an viele Marktplätze und Preisportale.
+Mit den Marktplatz-Formaten des Katalogs exportierst du Variantendaten und Bestandsdaten an viele Marktplätze und Preisportale.
 plentymarkets arbeitet daran, nach und nach alle Marktplätze auf den Katalogexport umzuziehen.
 
-Auf dieser Handbuchseite erfährst du, wie du Kataloge verwendest, um Variantendaten an Marktplätze zu exportieren. Dabei wird nur die allgemeine Vorgehensweise beschrieben.
+Auf dieser Handbuchseite erfährst du, wie du mit Katalogen Variantendaten an Marktplätze exportierst. Dabei wird nur die allgemeine Vorgehensweise beschrieben.
 
-Genauere Informationen dazu, wie du einen Katalog für die einzelnen Marktplätze erstellst und aufbaust, findest du aber auf den Handbuchseiten der einzelnen xref:maerkte:maerkte.adoc#[Marktplätze].
+Wie du einen Katalog für die einzelnen Marktplätze erstellst und aufbaust erfährst du auf den Handbuchseiten der einzelnen xref:maerkte:maerkte.adoc#[Marktplätze].
 
 include::_includes:page$new-page-info-box.adoc[]
 
@@ -22,9 +22,9 @@ include::_includes:page$new-page-info-box.adoc[]
 include::partial$catalogue-menu.adoc[]
 
 [#market-formats]
-== Was ist ein Katalog mit Marktplatz-Format?
+== Was sind Kataloge mit Marktplatz-Format?
 
-Jeder Marktplatz strukturiert Produktdaten anders. Häufig werden sogar an denselben Marktplatz unterschiedliche Produktdaten für verschiedene Produktkategorien (Tierfutter, Haushalt, Lebensmittel) exportiert.
+Jeder Marktplatz strukturiert Produktdaten anders. Oft werden sogar an denselben Marktplatz für verschiedene Produktkategorien unterschiedliche Produktdaten exportiert. Klar: Für Kinderschuhe sind deine Produktdaten anders als für Katzenfutter. Für Kinderschuhe gibst du zum Bespiel die Schuhgröße und das Material an. Für Katzenfutter zum Beispiel Grundpreisangaben, die Zutatenliste, für welche Katzen das Futter geeignet ist und so weiter.
 
 Mit Katalogen mit Marktplatz-Format schneidest du die Informationen über dein Produktsortiment genau auf die Anforderungen des Marktplatzes zu. Denn darin ordnest du jedem Datenfeld eines Marktplatzes ein passendes plentymarkets Datenfeld zu. Beim Export deiner Variantendaten zu den Marktplatz werden dann die Datenfelder des Marktplatzes mit den richtigen Daten aus plentymarkets befüllt.
 
@@ -235,111 +235,34 @@ image::daten:catalogue-durchmesser.png[]
 include::maerkte:partial$catalogue-mapping.adoc[tag=own-mappings-config]
 --
 
-[#properties]
-=== Exkurs: Eigenschaften statt Merkmale
+[#formula]
+=== Zahlenwerte neu berechnen (Formel)
 
 [discrete]
-===== Eigenschaften sind die neuen Merkmale!
+===== Du speicherst eine Formel, die beim Export auf Zahlenwerte angewendet wird
 
-Merkmale und Freitextfelder kannst du in Katalogen nicht mehr zuordnen. Stattdessen verwendest du Eigenschaften, um Daten zu den Marktplätzen zu exportieren.
+Mit mathematischen Berechnungen passt du Werte während des Exports automatisch an.
 
-Die Eigenschaften funktionieren ähnlich wie früher die Merkmale und Freitextfelder. Mit Eigenschaften speicherst du also Daten, für die es keine Einstellung und kein Eingabefeld im plentymarkets Backend gibt. In unserem Kontext ist der wichtigste Unterschied, dass du Merkmale und Freitextfelder für Artikel gespeicherst hast. Eigenschaften speicherst du stattdessen pro Variante. So bist du wesentlich flexibler.
+* Diese Funktion ist neu und noch nicht für alle Marktplatzformate verfügbar.
+* Diese Funktion funktioniert nur bei Datenfeldern, die Zahlenwerte enthalten.
 
-Unten findest du zwei Beispiele dafür, wie du Eigenschaften nutzt.
+Du legst also fest:
 
-* <<#example-1, Beispiel 1: Durchmesserangaben>>
-* <<#example-2, Beispiel 2: Markennamen>>
+* Ich möchte, dass der Zahlenwert eines plentymarkets Datenfelds beim Export neu berechnet wird. Für die Formeln sind die Grundrechenarten verfügbar.
 
-Du arbeitest zum ersten Mal mit Eigenschaften? Weitere Informationen findest du auf der Artikel-Handbuchseite zum Thema xref:artikel:eigenschaften.adoc#500[Eigenschaften].
+*_Beispiel:_*
 
-[#example-1]
-==== Beispiel 1: Durchmesserangaben
+Du möchtest einen Bestandspuffer für den Marktplatz einrichten. Vom Bestand wird also beim Export eine festgelegte Menge abgezogen. Im Katalog erstellst du dazu die folgende Formel:
 
-*_Anwendungsfall:_* +
-An den Verkaufskanal können die Variantendaten *Durchmesser* und *Durchmesser Einheit* übergeben werden. In plentymarkets gibt es aber standardmäßig kein Feld, in dem du die Durchmesserangaben für eine Variante speichern kannst.
+[[katalog-formel]]
+.Formel für Bestandspuffer
+image::daten:catalogue-stock-buffer.png[]
 
-*_Vorgehensweise:_* +
-Um Informationen zum Durchmesser einer Variante trotzdem an den Verkaufskanal zu übergeben, empfehlen wir die folgende Vorgehensweise:
-
-Erstelle als Erstes die Eigenschaften:
-
-. Öffne das Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration*.
-. Erstelle eine Eigenschaft *Durchmesser Einheit* mit den folgenden Einstellungen:
-  ** Bereich: *Artikel* +
-  ** Eigenschaftstyp: *Auswahl*
-. Speichere die benötigten Einheiten als Eigenschaftwerte, zum Beispiel `cm` und `mm`.
-. Erstelle eine Eigenschaft *Durchmesser* mit den folgenden Einstellungen:
-  ** Bereich: *Artikel* +
-  ** Eigenschaftstyp: *Kommazahl*
-
-Nun verknüpfst du die Eigenschaften mit der Variante und speicherst Werte:
-
-. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen]*.
-. Wechsele in das Tab *Eigenschaften*.
-. Füge die Eigenschaft *Durchmesser Einheit* hinzu.
-. Wähle die Einheit aus der Dropdown-Liste.
-. Füge die Eigenschaft *Durchmesser* hinzu.
-. Gib den Durchmesser in der Einheit ein, die du für die Eigenschaft *Durchmesser Einheit* gewählt hast.
-
-Damit der Durchmesser deiner Varianten an den Marktplatz exportiert werden:
-
-. Öffne das Menü *Daten » Kataloge » [Katalog öffnen]*.
-. Navigiere zu dem Marktplatz-Datenfeld *Durchmesser Einheit*.
-. Klicke auf *+ Datenfeld hinzufügen*.
-. Klappe in der angezeigten Liste der plentymarkets Datenfelder den Ordner *Eigenschaft* auf.
-. Klicke auf das Plus rechts nebem dem plentymarkets Datenfeld *Durchmesser Einheit*.
-. Navigiere zu dem Marktplatz-Datenfeld *Durchmesser*.
-. Klicke auf *+ Datenfeld hinzufügen*.
-. Klappe in der angezeigten Liste der plentymarkets Datenfelder den Ordner *Eigenschaft* auf.
-. Klicke auf das Plus rechts nebem dem plentymarkets Datenfeld *Durchmesser*.
-
-[#example-2]
-==== Beispiel 2: Markennamen
-
-*_Anwendungsfall:_* +
-An den Verkaufskanal kann die Marke von Produkten übergeben werden. In plentymarkets kannst du zwar standardmäßig Hersteller:innen, aber keine Markennamen speichern. In vielen Fällen sind Hersteller:in und Markenname identisch. Wenn nicht, helfen dir hier auch die Eigenschaften.
-
-*_Vorgehensweise:_* +
-Wenn die Hersteller:innen in deinem System nicht den Markennamen der Produkte widerspiegeln, speicherst du die Marken als Eigenschaften. Wir empfehlen die folgende Vorgehensweise, um Marken als Eigenschaften an Marktplätze zu exportieren:
-
-Erstelle als erstes die Eigenschaft:
-
-. Öffne das Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration*.
-. Erstelle eine Eigenschaft *Marke* mit den folgenden Einstellungen:
-  ** Bereich: *Artikel*
-  ** Eigenschaftstyp: *Text*
-
-Nun verknüpfst du die Eigenschaft mit der Variante und speicherst einen Wert:
-
-. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen]*.
-. Wechsele in das Tab *Texte*.
-. Füge die Eigenschaft *Marke* hinzu.
-. Speichere den Markennamen als Wert der Eigenschaft.
-
-Damit die Marke deiner Varianten an den Marktplatz exportiert wird:
-
-. Öffne das Menü *Daten » Kataloge » [Katalog öffnen]*.
-. Navigiere zu dem Marktplatz-Datenfeld *Marke*.
-. Klicke auf *+ Datenfeld hinzufügen*.
-. Klappe in der angezeigten Liste der plentymarkets Datenfelder auf den Ordner *Eigenschaft*.
-. Klicke auf das Plus rechts nebem dem plentymarkets Datenfeld *Marke*.
-
-[#switch-to-catalogues]
-== Von alten Exporten auf Katalogexport wechseln
-
-Für manche Marktplätze gibt es einen alten Export und einen Katalogexport. Hier erfährst du, wie du wechselst.
-
-. Analysiere, welche Merkmale und Freitextfelder du für den Datenexport zu dem Marktplatz nutzt. Merkmale und Freitextfelder können für den Katalogexport nicht mehr verwendet werden. Erstelle deshalb Eigenschaften für alle Daten, die du weiterhin benötigst. +
-*_Wichtig:_* Die Werte der neuen Eigenschaften müssen mit den Werten der alten Merkmale identisch sein. Sonst kann es passieren, dass beim Export zum Marktplatz neue Artikel erstellt werden.
-. Erstelle einen Katalog. Je nach Marktplatz musst du unter Umständen vorher ein neues Plugin installieren. Ob das der Fall ist, erfährst du auf der Handbuchseite des Marktplatzes.
-. Öffne den Katalog und prüfe, welche Datenfelder an den Marktplatz exportiert werden können.
-  * Ordne im Katalog den Marktplatz-Datenfeldern passende plentymarkets Datenfelder zu. +
-  *_Wichtig:_* Ordne den Marktplatz-Datenfeldern dieselben plentymarkets Datenfelder zu, die zurzeit auch über den alten Export exportiert werden. Sonst kann es passieren, dass beim Export zum Marktplatz neue Artikel erstellt werden.
-  * Wenn nötig, erstelle weitere Eigenschaften.
-. Bereite deine Varianten vor:
-  * Wenn du neue Eigenschaften erstellt hast, verknüpfe diese Eigenschaften mit den Varianten.
-  * Für manche Marktplätze benötigst du auch eine Eigenschaft, um die Variante der richtigen Kategorie des Marktplatzes zuzuordnen. Diese Eigenschaft wird automatisch erstellt. Informationen dazu findest du auf der Handbuchseite des Marktplatzes.
-. Kann's losgehen? Dann aktiviere deinen Katalog, um den Datenexport zu starten.
+[.collapseBox]
+.Zuordnung mit mathematischer Berechnung erstellen
+--
+include::maerkte:partial$catalogue-mapping.adoc[tag=formula-config]
+--
 
 [#file-export]
 == _Optional:_ Dateiexport (kein Markplatzexport)
