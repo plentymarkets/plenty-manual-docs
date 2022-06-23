@@ -52,13 +52,6 @@ jobs:
           mv sitemap.xml ./build/sitemap.xml
           mv robots.txt ./build/robots.txt
           
-      - name: Upload site as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: ./build
-          retention-days: 1
-
       - name: Upload site to S3
         uses: jakejarvis/s3-sync-action@master
         with:
@@ -78,6 +71,13 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DISTRIBUTION_ID: ${{ secrets.DISTRIBUTION_ID }}
+          
+      - name: Upload site as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ./build
+          retention-days: 1
 
   notification: 
     name: Google chat notification
