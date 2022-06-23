@@ -51,6 +51,13 @@ jobs:
           mv 404.html ./build/404.html
           mv sitemap.xml ./build/sitemap.xml
           mv robots.txt ./build/robots.txt
+          
+      - name: Upload site as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ./build
+          retention-days: 1
 
       - name: Upload site to S3
         uses: jakejarvis/s3-sync-action@master
