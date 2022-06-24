@@ -220,7 +220,7 @@ Mit einer Zuordnung legst du fest, welche Daten der Importdatei in welchen plent
 
 In der Zuordnung ordnest du also die Quellen deiner Importdatei den plentymarkets Datenfeldern zu, in die die Daten importiert werden sollen.
 
-Du musst nicht alle Quellen deiner Importdatei zuordnen, sondern nur die, die du tatsächlich importieren möchtest.
+Du musst nicht alle Quellen deiner Importdatei zuordnen. Ordne stattdessen nur die Quellen zu, die du importieren möchtest.
 
 *_Was ist eine Quelle?_*
 
@@ -240,7 +240,7 @@ image::daten:import-mapping-colour.png[]
 . Du aktivierst die Quellen, die beim Import berücksichtigt werden sollen. (<<#1510, Wie?>>)
 
 [#1710]
-== Abarbeitung von Jobs in der Queue
+=== Abarbeitung von Jobs in der Queue
 
 Die Queue sorgt dafür, dass auch große Datenmengen importiert werden können. Noch vor dem Import wird die Importdatei in Pakete zerlegt und anschließend in sogenannten Jobs abgearbeitet. Ein Job besteht aus 750 Zeilen einer CSV- oder TXT-Datei. Jedoch werden auch Importdateien, die weniger als 750 Zeilen enthalten, zu einem Job. Wird ein Import gestartet, wird die Datei in die entsprechenden Jobs aufgeteilt und in die Queue eingereiht. In der Queue werden neue Jobs ständig abgerufen und die Importe werden abgearbeitet. Dabei gibt es zwei verschiedene Status. Der Status *Offene Jobs* bedeutet, dass es Jobs gibt, die sich noch in der Queue befinden und darauf warten, abgearbeitet zu werden. *Abgeschlossene Jobs* hingegen wurden bereits bearbeitet und die Daten dementsprechend importiert.
 
@@ -279,7 +279,7 @@ Du kannst den Namen und die Position von Zuordnungen jederzeit ändern:
 In der Ansicht *Zuordnung* legst du nun fest, welche Spalte der Datei in welches plentymarkets Datenfeld importiert werden soll.
 
 * In der Spalte *Importdaten* werden alle Spalten der Importdatei angezeigt.
-* In der Spalte *Vorschau* werden die ersten 6 Werte in der Datei angezeigt.
+* In der Spalte *Vorschau* werden die ersten 6 Werte der Spalte in der Datei angezeigt.
 * In der Spalte *plentymarkets Datenfelder* wählst du, welches plentymarkets Datenfeld mit den Daten der Spalte befüllt werden soll.
 
 image::daten:import-mapping-colour.png[]
@@ -372,15 +372,15 @@ Werte über RegEx-Funktion ersetzen:
 --
 
 [.collapseBox]
-.*_RegEx-Beispiel 2:_* "Nachname, Vorname" in "Vorname Nachname" ändern
+.*_RegEx-Beispiel 2:_* "[Nachname], [Vorname]" in "[Vorname] [Nachname]" ändern
 
 --
 
-*Wert*: “Mustermann, Max” +
+*Wert*: “Musterberg, Maxi” +
 *Suchen*: /^(\w+), (\w+)$/ +
 *Ersetzen*: $2 $1 +
 
-*_Ergebnis:_* “Max Mustermann”
+*_Ergebnis:_* “Maxi Musterberg”
 --
 
 [#formula]
@@ -419,7 +419,7 @@ Werte durch mathematische Berechnungen ändern:
 
 *CSV columns*: [Spalte mit Preis wählen] +
 *Operator*: positive % +
-*Wert*: 5
+*Wert*: 5 +
 *plentymarkets Datenfeld*: [Verkaufspreis wählen]
 
 *_Ergebnis:_* Beim Import werden zu den Preisen in der angegebenen Spalte 5% addiert. Dieser höhere Preis wird als Preis in plentymarkets gespeichert.
@@ -430,7 +430,9 @@ Werte durch mathematische Berechnungen ändern:
 
 Mit der Eigenen Zuordnung können vorhandene Werte einer CSV- oder TXT-Datei auf andere Werte im System gemappt werden. So kann definiert werden, für welche ID welcher Wert importiert werden soll. Zusätzlich kann ein Default-Wert angegeben werden, wenn für einen Wert in der CSV- oder TXT-Datei keine Zuordnung definiert ist. Ist kein Default-Wert angegeben, wird der Originalwert importiert.
 
-Die eigene Zuordnung eignet sich besonders, wenn interne IDs von plentymarkets eine Rolle spielen, wie z.B. bei Merkmalnamen, Artikelmarkierungen, Zahlungsmethoden, Länder/Staaten ISO Codes usw. Schau dir das Video zu eigenen Zuordnungen an, um das Prinzip kennenzulernen.
+Eine eigene Zuordnung eignet sich besonders, wenn interne IDs von plentymarkets eine Rolle spielen.
+Anwendungsbeispiele sind Merkmalnamen, Artikelmarkierungen, Zahlungsmethoden, Länder/Staaten, ISO-Codes usw.
+Schau dir das Video zu eigenen Zuordnungen an, um das Prinzip kennenzulernen.
 
 [.collapseBox]
 .Video: Eigene Zuordnungen
@@ -460,13 +462,13 @@ Eigene Zuordnung festlegen:
 | In welcher Spalte der CSV- oder TXT-Datei befinden sich die Werte, die du ändern möchtest?
 
 | Standardwert
-| Welcher Wert soll in plentymarkets gespeichert werden, wenn ein Datensatz keinen der Werte enthält, die du unter "Von" eingegeben hast?
+| Welcher Wert soll in plentymarkets gespeichert werden, wenn ein Datensatz keinen der Werte enthält, die du in das Feld *Von* eingegeben hast?
 
 | Von
 | Welchen Wert der Spalte möchtest du beim Import ändern?
 
 | Zu
-| Welcher Wert soll statt des Ursprungswerts "Von" in plentymarkets gespeichert werden?
+| Welcher Wert soll statt des Ursprungswerts *Von* in plentymarkets gespeichert werden?
 |===
 
 ////
@@ -514,7 +516,7 @@ image::daten:wert-bestimmen.png[]
 [#1510]
 === Quellen einer Zuordnung für den Import aktivieren
 
-Entscheide nun, welche Informationen aus deiner Importdatei du tatsächlich in plentymarkets importieren möchtest. Denn nur aktive Quellen werden beim Import berücksichtigt.
+Entscheide nun, welche Informationen aus deiner Importdatei du in plentymarkets importieren möchtest. Denn nur aktive Quellen werden beim Import berücksichtigt.
 
 *_Beispiel:_* Du hast eine CSV-Datei mit Produktdaten direkt vom Hersteller bekommen. Du möchtest aber erstmal nur den Einkaufspreis (EK) importieren und die restlichen Daten später in Ruhe prüfen und aufbereiten. Statt alle nicht benötigten Spalten aus der Datei zu löschen, aktivierst du nur den Import für die Quelle/Spalte der Datei, in der sich der Einkaufspreis befindet.
 
@@ -563,7 +565,7 @@ Zuordnung aktivieren/deaktivieren:
 . Klicke in der Spalte Inaktiv/Aktiv auf die Umschaltfläche. +
 * icon:toggle_off[set=material, role="darkGrey"] = Die Zuordnung ist inaktiv. Beim Import werden die Einstellungen dieser Zuordnung nicht berücksichtigt. +
 * icon:toggle_on[set=material, role="blue"] = Die Zuordnung ist aktiv. Beim Import werden die Einstellungen dieser Zuordnung berücksichtigt. +
-*_Wichtig:_* Bei mehreren aktiven Zuordnungen wird die Zuordnung mit der niedrigsten ID als erstes importiert. Auch die weiteren aktiven Zuordnungen werden in aufsteigender Reihenfolge nach der Position importiert.
+*_Wichtig:_* Wenn mehrere Zuordnungen aktiv sind, wird die Zuordnung mit der niedrigsten ID als erstes importiert. Auch die anderen aktiven Zuordnungen werden in aufsteigender Reihenfolge nach ihrer Position importiert.
 
 [#1611]
 == Importdaten filtern
@@ -583,7 +585,7 @@ Filter hinzufügen:
 . Wähle einen Operator. Dieser Operator entscheidet darüber, wie mehrere Filter kombiniert werden. +
 *_Wichtig:_* Wenn du den Operator *Und* wählst, werden nur Datensätze importiert, auf die *_alle_* Filter zutreffen.
 . Füge bei Bedarf weitere Filter hinzu.
-. Speichere (icon:save[set=material) die Einstellungen. +
+. Speichere (icon:save[set=material]) die Einstellungen. +
 → Die Filter werden gespeichert. +
 → Nur die Daten werden importiert, auf die diese Filterregeln zutreffen.
 
@@ -668,7 +670,7 @@ Import abbrechen:
 [#1650]
 == Importdatei von manuellen Imports ersetzen
 
-Du hast einen Import mit der Quelle *Manueller Upload* erstellt. Über diesen Import möchtest du eine Datei immer wieder importieren, die aber jedes Mal gleich aufgebaut ist. Wenn du dir sicher bist, dass sich am Aufbau der Spalten der Datei nichts geändert hat, kannst du die aktualisierte Datei direkt in der Import-Übersicht hochladen.
+Du hast einen Import mit der Quelle *Manueller Upload* erstellt. Über diesen Import möchtest du eine Datei immer wieder importieren. Diese Datei ist aber jedes Mal gleich aufgebaut. Wenn sich am Aufbau der Spalten der Datei wirklich nichts geändert hat, kannst du die aktualisierte Datei direkt in der Import-Übersicht hochladen.
 
 [.instruction]
 Importdatei von manuellen Imports ersetzen:
@@ -732,7 +734,7 @@ Du hast einen Import aus Versehen gelöscht? Oder jemand hat an einem gut konfig
 * Mit diesen Einstellungen setzt du die Importe selbst auf einen früheren Stand zurück. Du kannst so _keine ins System importieren Daten zurücksetzen_. Das geht auch, xref:daten:backup.adoc#[aber anders].
 * Backups werden nur einmal täglich nachts erstellt. Wenn du ein Backup importierst, werden die Daten auf diesen Stand zurückgesetzt.
 * Alle Importe werden zurückgesetzt. Du kannst also nicht nur einen einzigen Import zurücksetzen. +
-*_Beispiel:_* Jemand hat die Einstellungen des Imports für Artikeldaten aus Versehen geändert. Im Laufe des Tages wurde aber auch ein Import für Gutscheincodes erstellt. Wenn du das Backup der letzten Nacht einspielst, werden beide Importe auf den Stand der letzten Nacht zurückgesetzt. Der Import für Artikeldaten wird repariert. Der Import für Gutscheincodes wird aber gelöscht, weil er zum Zeitpunkt des Backups noch nicht existierte.
+*_Beispiel:_* Jemand hat die Einstellungen des Imports für Artikeldaten aus Versehen geändert. Im Laufe des Tages wurde aber auch ein Import für Gutscheincodes erstellt. Wenn du das Backup der letzten Nacht einspielst, werden beide Importe auf den Stand der letzten Nacht zurückgesetzt. Der Import für Artikeldaten wird repariert. Der Import für Gutscheincodes wird aber gelöscht, weil er zum Zeitpunkt des Backups noch nicht existierte. Die Lösung? Exportiere die Importeinstellungen von Importen, die seit dem letzten Backup erstellt oder geändert wurden. Nach dem Backup kannst du sie dann wieder in dein System importieren.
 
 [.instruction]
 Backups von Importen einspielen:
@@ -810,7 +812,7 @@ Importvorlage importieren:
 . Klicke in plentymarkets auf die Datei. +
 → Du wirst gefragt: "Möchtest du den Import wirklich ausführen?"
 . Klicke auf *Ja*, um die Abfrage zu bestätigen. +
-→ Die Meldung wird angezeigt, dass die Importvorlage aus einem anderen Mandanten stammt und du bestimmte Einstellungen anpassen musst.
+→ Weil die Importvorlage aus einem anderen Mandanten stammt wirst du aufgefordert, Einstellungen anzupassen.
 . Klicke auf *OK*. +
 → Die Importvorlage wird in plentymarkets importiert.
 . Öffne den Import.
@@ -840,17 +842,17 @@ Status von Importen aufrufen:
 | Spalte | Erläuterung
 
 | *Verarbeitungs-ID*
-| Jedes Mal, wenn ein Import gestartet wird, wird eine Verarbeitungs-ID erzeugt. So können die einzelnen Importe besser voneinander unterschieden werden.
+| Wenn ein Import gestartet wird, wird jedes Mal eine Verarbeitungs-ID erzeugt. So können die einzelnen Importe besser voneinander unterschieden werden.
 
 | *Import-ID*
 | Die ID des Imports +
-*_Tipp:_* Die ID deiner Importe wird in der Liste der Importe Menü *Daten » Import* in der Spalte *ID* angezeigt.
+*_Tipp:_* Die ID deiner Importe wird im Menü *Daten » Import* in der Spalte *ID* angezeigt.
 
 | *Name*
 | Der Name des Imports
 
 | *Fortschritt*
-| Der Fortschritt des Importvorgangs als Balken. Sobald alle Importvorgänge abgeschlossen sind, wird das Datum und die Endzeit angezeigt, wenn du mit der Maus auf den Fortschrittsbalken zeigst.
+| Der Fortschritt des Importvorgangs als Balken. Sobald alle Importvorgänge abgeschlossen sind, wird das Datum und die Uhrzeit angezeigt, wenn du mit der Maus auf den Fortschrittsbalken zeigst.
 
 | *Fehler*
 | In den Importvorgängen aufgetretene Fehler +
