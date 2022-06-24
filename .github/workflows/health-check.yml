@@ -24,8 +24,8 @@ jobs:
           mv ${GITHUB_WORKSPACE}/plenty-docs-ui-repo/src/lang/en-gb.json ./lang/en-gb.json
           mv ${GITHUB_WORKSPACE}/plenty-docs-ui-repo/src/lang/de-de.json ./lang/de-de.json
 
-      - name: Use htmltest
-        run: curl https://htmltest.wjdp.uk | bash
+      # - name: Use htmltest
+      #   run: curl https://htmltest.wjdp.uk | bash
 
       - name: Use Node.js 16
         uses: actions/setup-node@v3
@@ -45,18 +45,25 @@ jobs:
           mv 404.html ./build/404.html
           mv sitemap.xml ./build/sitemap.xml
 
-      - name: Run htmltest
-        run: bin/htmltest
+      # - name: Run htmltest
+      #   run: bin/htmltest
 
-      - name: Upload test results as artifact
+      # - name: Upload test results as artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: health-check
+      #     path: ./tmp/.htmltest/htmltest.log
+      #     retention-days: 14
+
+      - name: Upload build as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: health-check
-          path: ./tmp/.htmltest/htmltest.log
-          retention-days: 14
+          name: build
+          path: ./build
+          retention-days: 7
 
-      - name: Create notification
-        run: node ./.github/scripts/health-check.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUN_ID: ${{ github.run_id }}
+      # - name: Create notification
+      #   run: node ./.github/scripts/health-check.js
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     RUN_ID: ${{ github.run_id }}
