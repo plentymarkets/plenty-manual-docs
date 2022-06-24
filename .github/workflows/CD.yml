@@ -12,7 +12,6 @@ concurrency:
 
 jobs:
   build:
-    if: ${{ github.event.label.name != 'skip-build' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -71,13 +70,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DISTRIBUTION_ID: ${{ secrets.DISTRIBUTION_ID }}
-          
-      - name: Upload site as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: ./build
-          retention-days: 1
 
   notification: 
     name: Google chat notification
