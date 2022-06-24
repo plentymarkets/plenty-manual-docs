@@ -28,13 +28,14 @@ Set up the market in plentymarkets.
 [#200]
 === Setting up access to Kaufland.de
 
-Set up Kaufland.de in plentymarkets to offer items on Kaufland.de. To set up Kaufland.de in plentymarkets, you need your Kaufland.de interface access data. You can set up a Kaufland.de account for each plentyShop or client (store).
+Set up Kaufland.de in plentymarkets to offer items on Kaufland.de. To set up Kaufland.de in plentymarkets, you need your Kaufland.de interface access data. You can set up several Kaufland.de accounts for each plentyShop/client (store).
 
 [.instruction]
 Setting up the access to Kaufland.de:
 
 . Go to *Setup » Markets » Kaufland.de » Settings*.
-. Open the submenu of the plentyShop that you would like to set up access for.
+. Open the submenu of the client that you would like to set up access for.
+. Click on *New account*.
 . Carry out the settings. Pay attention to the explanations given in <<#kaufland-de-settings>>.
 . Save (icon:save[set=plenty]) the settings.
 
@@ -44,9 +45,15 @@ Setting up the access to Kaufland.de:
 |====
 |Setting |Explanation
 
+| *Display name of configuration*
+| Enter a meaningful name for this combination of a client (store)/plentyShop and a Kaufland account. If you do not enter a display name, the name `Default` is saved. +
+*_Tip:_* The display name is only used for the list of configurations. As such, the display name’s purpose is to help you better keep track of the list of configurations in the menu *Setup » Markets » Kaufland.de » Settings » [Open client]*.
+
+image::markets:kaufland-display-name.png[]
+
 | *Activate interface to Kaufland.de*
-a| * *Yes* = Activate the interface to Kaufland.de. +
-* *No* = Do not activate the interface to Kaufland.de.
+a| * *Yes* = Activate the interface to Kaufland.de. Data is exchanged with Kaufland.
+* *No* = Do not activate the interface to Kaufland.de. No data is exchanged with Kaufland.
 
 2+^| API data
 
@@ -57,6 +64,11 @@ a| * *Yes* = Activate the interface to Kaufland.de. +
 |Enter the secret key that you received from Kaufland.de.
 
 2+^| Order settings
+
+| *Use configuration for legacy orders*
+| This setting is *activated* by default for your previous Kaufland account. This is to make sure that old orders which were generated on Kaufland before the link:https://forum.plentymarkets.com/t/mehrere-konten-fuer-kaufland-einrichten-set-up-several-accounts-for-kaufland/681351[update^] can be properly processed in your plentymarkets system. +
+Your previous Kaufland account is listed in the *Setup » Markets » Kaufland.de » Settings » Tab: Accounts* menu. +
+This setting is not relevant for new Kaufland accounts which can be added in the *New account* tab. The setting is therefore *deactivated* by default in a new configuration.
 
 | *Book incoming payment*
 |This setting applies to the order import. Orders are imported either as paid or not paid. Regardless of this setting, items will immediately be cleared for shipping when they have sufficient stock. With the option *open*, you could also set the order to paid when the actual incoming payment from Kaufland.de is received. In this way, Kaufland.de can be tested.
@@ -225,6 +237,12 @@ Link warehouses with the option *Link warehouses* in the menu *Setup » Markets 
 :referrer-option: pass:quotes[option *Kaufland.de*]
 
 include::partial$activate-referrer.adoc[]
+
+[IMPORTANT]
+.Do not activate subordinate Kaufland referrers
+====
+The referrers *102.01 Kaufland DE*, *102.02 Kaufland CZ*, and *102.03 Kaufland SK* are currently without function and therefore, they must be deactivated. If these referrers are activated, this can result in errors during the stock and price updates. 
+====
 
 [IMPORTANT]
 .Do not group Kaufland.de orders
@@ -457,11 +475,9 @@ Set up xref:automation:event-procedures.adoc#[event procedures] to automatically
 Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform {market} when you have shipped the items of an order. +
 *_Tip:_* In the list *Add procedure*, you'll find the procedure *Send shipping confirmation to Kaufland.de* in the folder *Plugins*.
 
-*_Important:_* To activate this event procedure, you need to change the setting *Send shipping confirmations via* to *Event procedure*. Go to *Setup » Markets » Kaufland.de » Einstellungen* to change this setting.
-
 :table-event-procedure: <<#shipping-confirmation-kaufland>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[shipping-confirmation-kaufland]]
 .Event procedure to send shipping confirmations to {market}
@@ -503,7 +519,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 :table-event-procedure: <<#event-procedure-invoices-kaufland>>
 :ea-queue:
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 :!ea-queue:
 
@@ -544,7 +560,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 :table-event-procedure: <<#event-procedure-invoice-upload-kaufland>>
 :ea-queue:
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 :!ea-queue:
 
@@ -593,7 +609,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 :table-event-procedure: <<#event-procedure-cancellations-kaufland>>
 :ea-queue:
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 :!ea-queue:
 
@@ -629,7 +645,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 
 :table-event-procedure: <<#in-fulfillment-kaufland>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[in-fulfillment-kaufland]]
 .Event procedure to send in fulfilment confirmations to {market}

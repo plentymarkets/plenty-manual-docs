@@ -41,7 +41,7 @@ fs.readdirSync(changelogFolder).forEach(file => {
             ':startWeekDate: DD. Monat JJJJ', `:startWeekDate: ${startWeekDate}`
         )
         newChangelogUpdated = newChangelogUpdated.replace(
-            ':endWeekDate: DD. Monat JJJJ', `:startWeekDate: ${endWeekDate}`
+            ':endWeekDate: DD. Monat JJJJ', `:endWeekDate: ${endWeekDate}`
         )
         newChangelogUpdated = newChangelogUpdated.replace(
             regStable, newStableChanges

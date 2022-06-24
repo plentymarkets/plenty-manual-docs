@@ -28,15 +28,14 @@ Richte den Marktplatz in plentymarkets ein.
 [#200]
 === Zugang zu Kaufland.de einrichten
 
-Um Artikel bei Kaufland.de anzubieten, richte Kaufland.de in plentymarkets ein. Dazu benötigst du deine Zugangsdaten für die Kaufland.de-Schnittstelle. Pro plentyShop/Mandant (Shop) kannst du ein Konto für Kaufland.de einrichten.
+Um Artikel bei Kaufland.de anzubieten, richte Kaufland.de in plentymarkets ein. Dazu benötigst du deine Zugangsdaten für die Kaufland.de-Schnittstelle. Pro plentyShop/Mandant (Shop) kannst du mehrere Konten für Kaufland.de einrichten.
 
 [.instruction]
 Zugang zu Kaufland.de einrichten:
 
 . Öffne das Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen*.
-. Öffne das Untermenü des Mandanten, bei dem du den Zugang einrichten möchtest.
-//. Klicke auf *Neues Konto*. +
-//*_Hinweis:_* Du kannst schon jetzt den Zugang zu mehreren Kaufland-Konten einrichten. Im Moment können aber nur mit einem Kaufland-Konto Daten ausgetauscht werden. Das Nutzen mehrerer Konten wird in den nächsten Wochen möglich sein. (Stand: 31.03.2022)
+. Öffne das Untermenü des Mandanten, für den du den Zugang einrichten möchtest.
+. Klicke auf *Neues Konto*.
 . Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<#einstellungen-Kaufland-de>>.
 . Speichere (icon:save[set=plenty]) die Einstellungen.
 
@@ -45,6 +44,12 @@ Zugang zu Kaufland.de einrichten:
 [cols="1,3a"]
 |===
 |Einstellung |Erläuterung
+
+| *Anzeigename der Konfiguration*
+| Gib einen aussagekräftigen Namen für diese Kombination aus Mandant (Shop)/plentyShop und Kaufland-Konto ein. Wenn du keinen Anzeigenamen eingibst, wird automatisch der Anzeigename `Standard` gespeichert. +
+*_Tipp:_* Der Anzeigename wird nur für die Liste der Konfigurationen verwendet. Der Anzeigename dient also nur dazu, die Liste der Konfigurationen im Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen » [Mandant öffnen]* übersichtlicher zu machen.
+
+image::maerkte:kaufland-anzeigename.png[]
 
 | *Schnittstelle zu Kaufland.de aktivieren*
 a| * *Ja* = Schnittstelle zu Kaufland.de aktivieren. Daten werden mit Kaufland ausgetauscht.
@@ -60,11 +65,16 @@ a| * *Ja* = Schnittstelle zu Kaufland.de aktivieren. Daten werden mit Kaufland a
 
 2+^| Auftragseinstellungen
 
+| *Konfiguration für alte Aufträge verwenden*
+| Diese Einstellung ist für dein bisheriges Kaufland-Konto standardmäßig *aktiviert*. Damit wird sichergestellt, dass alte Aufträge, die vor dem link:https://forum.plentymarkets.com/t/mehrere-konten-fuer-kaufland-einrichten-set-up-several-accounts-for-kaufland/681351[Update^] auf Kaufland generiert wurden, in deinem plentymarkets System verarbeitet werden können. +
+Dein bisheriges Kaufland-Konto findest du unter *Einrichtung » Märkte » Kaufland.de » Einstellungen » Tab: Konten*. +
+Für neue Kaufland-Konten, die du im *Tab: Neues Konto* hinzufügst, ist diese Einstellung nicht relevant und deshalb in einer neuen Konfiguration standardmäßig *deaktiviert*.
+
 | *Zahlungseingang buchen*
-|Diese Einstellung greift für den Auftragsimport. Aufträge werden als bezahlt oder nicht bezahlt importiert. Unabhängig von dieser Einstellung werden Artikel bei ausreichend Bestand sofort für den Versand freigegeben. Mit der Option *offen* könntest du bei tatsächlichem Zahlungseingang von Kaufland.de den Auftrag auf bezahlt setzen und somit eine Kontrolle von Kaufland.de durchführen.
+| Diese Einstellung greift für den Auftragsimport. Aufträge werden als bezahlt oder nicht bezahlt importiert. Unabhängig von dieser Einstellung werden Artikel bei ausreichend Bestand sofort für den Versand freigegeben. Mit der Option *offen* könntest du bei tatsächlichem Zahlungseingang von Kaufland.de den Auftrag auf bezahlt setzen und somit eine Kontrolle von Kaufland.de durchführen.
 
 | *Versanddienstleister verknüpfen*
-|Diese Einstellung ist erforderlich, damit Kaufland.de nach Bestätigung des Versands mit Hilfe der richtigen Paketnummer den korrekten Tracking-Link an Kund:innen per E-Mail versenden kann. +
+| Diese Einstellung ist erforderlich, damit Kaufland.de nach Bestätigung des Versands mit Hilfe der richtigen Paketnummer den korrekten Tracking-Link an Kund:innen per E-Mail versenden kann. +
 *_Wichtig:_* Du musst jeden deiner Dienstleister mit einem Dienstleister aus der Dropdown-Liste verknüpfen.
 
 | *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung*
@@ -227,6 +237,12 @@ Lager verknüpfst du über die Einstellung *Lager verknüpfen* im Menü *Einrich
 :referrer-option: pass:quotes[Option *Kaufland.de* mit der ID *170*]
 
 include::partial$auftragsherkunft-aktivieren.adoc[]
+
+[IMPORTANT]
+.Untergeordnete Kaufland-Herkünfte nicht aktivieren
+====
+Die Herkünfte *102.01 Kaufland DE*, *102.02 Kaufland CZ* und *102.03 Kaufland SK* haben momentan noch keine Verwendung und müssen deshalb deaktiviert werden. Wenn diese Herkünfte aktiviert sind, kann es zu Fehlern beim Bestands- und Preisabgleich kommen. 
+====
 
 [IMPORTANT]
 .Kaufland.de-Aufträge nicht gruppieren
@@ -459,11 +475,9 @@ Richte xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen] ein, um {ma
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um {market} darüber zu informieren, dass die Artikel eines Auftrags versendet wurden. +
 *_Tipp:_* In der Liste *Aktion hinzufügen* findest du die Aktion *Versandbestätigung an Kaufland.de senden* im Ordner *Plugins*.
 
-* *_Wichtig:_* Diese Ereignisaktion ist nur aktiv, wenn die Einstellung *Versandbestätigungen senden über* auf die Option *Ereignisaktion* gestellt ist. Diese Einstellung findest du im Menü *Einrichtung » Märkte » Kaufland.de » Einstellungen*.
-
 :table-event-procedure: <<#shipping-confirmation-kaufland>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[shipping-confirmation-kaufland]]
 .Ereignisaktion, um Versand an {market} zu melden
@@ -505,7 +519,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, dam
 :table-event-procedure: <<#ereignisaktion-rechnungen-Kaufland>>
 :ea-queue:
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 :!ea-queue:
 
@@ -546,7 +560,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, dam
 :table-event-procedure: <<#ea-rechnungen-upload-Kaufland>>
 :ea-queue:
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 :!ea-queue:
 
@@ -595,7 +609,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 :table-event-procedure: <<#ereignisaktion-stornierungen-Kaufland>>
 :ea-queue:
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 :!ea-queue:
 
@@ -631,7 +645,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 :table-event-procedure: <<#in-fulfillment-kaufland>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[in-fulfillment-kaufland]]
 .Ereignisaktion, um In-Fulfillment-Bestätigung an {market} zu senden
