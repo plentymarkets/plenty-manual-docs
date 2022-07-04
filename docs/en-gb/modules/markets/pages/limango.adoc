@@ -8,7 +8,7 @@
 :market: limango
 :limango:
 
-limango, a member of the Otto Group, is the number one platform for young families. In addition to its private Shopping Club, limango also operates the link:https://www.limango.de/shop[online shop^] which is accessible without registration. Since the marketplace was launched in 2017, end users also take advantage of a broad and permanent product range that is now provided by more than 300 merchants.
+limango, a member of the Otto Group, is the number one platform for young families. In addition to its private Shopping Club, limango also operates the link:https://www.limango.de/shop[online shop^] which is accessible without registration. Since the market was launched in 2017, end users also take advantage of a broad and permanent product range that is now provided by more than 300 merchants.
 
 [#150]
 == Becoming a limango partner
@@ -31,7 +31,7 @@ After installing and setting up the plugin, the automatic processes described in
 |Data |Interval
 
 | Item export
-| once every 4 hours
+| once every 4 hours if changes were made to the item or the catalogue
 
 | Stock synchronisation
 | Hourly +
@@ -270,8 +270,6 @@ etc.)
 
 Material information is exported to limango using a property of the type *Text*. Create a separate property for each marketplace data field.
 
-The names of these properties must be identical to the values that limango allows:
-
 * link:https://raw.githubusercontent.com/plentymarkets/manual/master/de/maerkte/assets/limango-material-composite-types.txt[Valid values for material composite types^]{nbsp}icon:external-link[]
 
 Link the properties to the main variation of the item and save all components of a material mix in this property. If the variations of the same item have different material mixes, deactivate the inheritance function for properties and save the material mixes separately for each variation. However, note that this deactivates the inheritance for all properties for the item. As such, you also need to manually manage all other properties for each variation.
@@ -313,7 +311,7 @@ Mapping lining and saving material mix for a variation:
 --
 
 | Shoes: Upper shoe materials
-| For shoes, only the following material values are allowed: `Leder` (leather), `beschichtetes Leder` (coated leather), `Textil` (textile) and `sonstiges Material` (other material)
+| For shoes, only the following materials can be specified: `Leder` (leather), `beschichtetes Leder` (coated leather), `Textil` (textile) and `sonstiges Material` (other material).
 
 . Create a property with the following settings:
 * Name: Shoes: Upper shoe materials
@@ -510,6 +508,14 @@ Imagine that you want to export the volume of variations to {market}. To do so, 
 | You need to provide an energy data sheet for all products that are subject to energy labelling law. As such, a URL of the energy data sheet must be exported for these products.
 
 *_Recommendation:_* Create a property of the type *Text* in which you save the URL to the energy data sheet of a variation.
+
+| *Taking back old appliances according to ElektroG3*
+| Since 1st of January 2022, new regulations are in force in Germany requiring you to take back old electronic devices. For devices that require you to take back old devices, the value *DE* must be exported to limango. As such, the value *DE* means yes. No value means no.
+
+*_Recommendation:_*
+
+. Create a property of the type *Selection* with the value *DE*.
+. Link the variations for which you offer device take back to this property and select the value *DE*.
 |===
 
 [#900]
@@ -590,16 +596,16 @@ include::partial$recommendation-text.adoc[]
 include::partial$limango-recommended-mappings.adoc[]
 
 [#filter-export]
-==== NEW: Only exporting specific items (_optional_)
+==== NEW: Exporting specific items (_optional_)
 
 include::partial$catalogue-filters.adoc[]
 
 [#preview]
-=== NEW: Previewing item export data (_optional_)
+=== Previewing item export data (_optional_)
 
-When you have finished mapping all data fields, you can test the first five data rows of the export using the preview function.
+When you have finished mapping all data fields, you can check the first five products of the export using the preview function.
 
-include::data:page$export-standard-formats.adoc[tag=catalogue-preview]
+include::partial$catalogue-preview.adoc[]
 
 [#904]
 === Activating the catalogue
@@ -916,18 +922,44 @@ include::_includes:partial$event-procedure.adoc[]
 The shipping costs are defined in your contract with limango. limango then saves it in the limango backend. As such, you need to contact your limango partner manager if you want to change the shipping costs. As such, there are no settings for the shipping costs in plentymarkets.
 
 [#1100]
-== Troubleshooting: Viewing log entries
+== Troubleshooting and FAQ
 
-NOTE: Your variations were not exported to limango? No variation data is exported if one or more variations do not meet the requirements of limango. As such, none of your variations will be exported to limango if one of your variations is invalid. To find the error, check the entries in the data log.
+Did something go wrong? This chapter provides troubleshooting information.
+(last updated 30/07/2022)
+
+* <<#catalogue-errors, Other error messages>>
+* <<#check-log, Viewing log entries>>
+* <<#faq-errors, Item export: Error messages in the log>>
+* <<#faq-checklist, _Checklist:_ Why is my variation not exported?>>
+
+[#catalogue-errors]
+=== Error messages in the catalogue
+
+[.collapseBox]
+.Select a valid export format.
+--
+
+*_Problem:_*
+
+* You probably copied a limango catalogue with the old format *limango* and changed the format to the new format *limango new*. Now, the error message *Select a valid export format* is shown and you cannot save the catalogue.
+
+*_Solution:_*
+
+. Open the *Settings* view.
+. Navigate to the section *Format settings*.
+. For the setting *Format*, select the option *XML*.
+. Save the catalogue.
+
+*_Background:_* From plugin version 1.4.3., the new format *limango new* is used. This format is based on XML and not on CSV like the old format.
+--
+
+[#check-log]
+=== Viewing log entries
 
 include::partial$viewing_logs.adoc[tag=data-log-intro]
 
 * *Integration* » *limango*
-* *Reference type* » *ItemId*
 
 include::partial$viewing_logs.adoc[tag=data-log-config]
-
-[#faq]
-== FAQ
 
 include::partial$limango-faq.adoc[]
