@@ -26,7 +26,7 @@ Grundeinstellungen ändern:
 |Einstellung |Erläuterung
 
 | [#intable-match-automatic-assignment]*Übereinstimmung für automatische Zuordnung*
-|Zwischen *0.7* (nicht so genaue Übereinstimmung zur Zuordnung nötig) und *1.0* (genaue Übereinstimmung nötig) wählen. Ist dieser Wert höher eingestellt, kann das Problem auftreten, dass Zahlungen nicht zugeordnet werden können. Daher ist in der *Standard-Einstellung* ein Wert von *0,75* eingestellt.
+|Wähle *0.7* (nicht so genaue Übereinstimmung zur Zuordnung erforderlich) oder *1.0* (genaue Übereinstimmung erforderlich). Wenn dieser Wert höher eingestellt ist, kann das Problem auftreten, dass Zahlungen nicht zugeordnet werden können. Daher ist in der *Standard-Einstellung* ein Wert von *0,75* eingestellt.
 
 | [#intable-goodwill-payment]*Zahlungskulanz*
 |Damit z.B. interne Nachkommabeträge (ab der dritten Nachkommastelle) nicht zu falschen Buchungen führen, sollte ein *Mindestbetrag* von *0,01* eingetragen sein (Standard-Einstellung). Wenn z.B. *0,05* eingestellt ist, werden Fehlbeträge bis 5 Cent trotzdem als korrekte Buchung behandelt.
@@ -37,18 +37,18 @@ Grundeinstellungen ändern:
 
 | [#intable-assign-paypal-payment-ebay-listing]*PayPal Zahlung nur entsprechendem eBay Listing zuordnen, sofern an der Zahlung hinterlegt*
 | *_Hinweis:_* Diese Funktionalität bezieht sich ausschließlich auf die alte PayPal-Schnittstelle für plentymarkets Callisto-Shops und *_nicht_* auf das PayPal-Plugin! +
-Falls du eBay-Listings in Kombination mit der Zahlungsart PayPal verwendest, empfehlen wir, bei dieser Option *JA* auszuwählen. So wird sichergestellt, dass entsprechende PayPal-Zahlungen den dazugehörigen Aufträgen von eBay korrekt zugeordnet werden. Sollte an einer PayPal Zahlung eine eBay Listing-ID hinterlegt sein, so wird bei aktivierter Option diese Zahlung nur dem Auftrag zugeordnet, der über eine übereinstimmende eBay Listing-ID verfügt.
+Falls du eBay-Listings in Kombination mit der Zahlungsart PayPal verwendest, empfehlen wir, bei dieser Option *JA* auszuwählen. So wird sichergestellt, dass entsprechende PayPal-Zahlungen den dazugehörigen Aufträgen von eBay korrekt zugeordnet werden. Wenn an einer PayPal Zahlung eine eBay Listing-ID gespeichert ist, so wird bei aktivierter Option diese Zahlung nur dem Auftrag zugeordnet, der über eine übereinstimmende eBay Listing-ID verfügt.
 
 | [#intable-ignore-woocommerce-transactions]*WooCommerce PayPal Zahlung ignorieren*
 | *_Hinweis:_* Diese Funktionalität bezieht sich ausschließlich auf die alte PayPal-Schnittstelle für plentymarkets Callisto-Shops und *_nicht_* auf das PayPal-Plugin! +
 Wähle die Option *JA*, um bei Aufträgen mit der Zahlungsart PayPal, die über WooCommerce importiert werden, den automatischen Zahlungsimport zu deaktivieren.
 
 | [#intable-exclude-orders-payment-method-automatic-assignment]*Aufträge mit folgenden Zahlungsarten von der automatischen Zuordnung ausschließen*
-|Wähle hier Zahlungsarten aus, für die _keine_ Zahlungen ins System eingehen. Diese werden dann bei der automatischen Zahlungszuordnung nicht beachtet. +
+|Wähle hier Zahlungsarten, für die _keine_ Zahlungen ins System eingehen. Diese werden dann bei der automatischen Zahlungszuordnung _nicht_ beachtet. +
 Eine Mehrfachauswahl ist über die Tastatur möglich.
 
 | [#intable-exclude-orders-referrer-automatic-assignment]*Aufträge mit folgenden Herkünften von der automatischen Zuordnung ausschließen*
-|Wähle hier Herkünfte aus, für die _keine_ Zahlungen ins System eingehen. Diese werden dann bei der automatischen Zahlungszuordnung nicht beachtet. +
+|Wähle hier Herkünfte, für die _keine_ Zahlungen ins System eingehen. Diese werden dann bei der automatischen Zahlungszuordnung _nicht_ beachtet. +
 Eine Mehrfachauswahl ist über die Tastatur möglich.
 
 |====
@@ -56,7 +56,7 @@ Eine Mehrfachauswahl ist über die Tastatur möglich.
 [#10]
 == Neue Zahlungen im System
 
-Zahlungen gehen entweder automatisch im System ein oder werden manuell eingebucht. Nach dem Eingang in plentymarkets werden die Zahlungen Aufträgen über eine unscharfe Suche automatisch zugeordnet. Wenn die Zuordnung fehlschlägt, können Zahlungen Aufträgen manuell zugeordnet werden. Verwalte und bearbeite Zahlungen im Menü *Aufträge » Zahlungsverkehr*. Unzugeordnete Zahlungen erkennst du am Kreditkartensymbol (material:credit_card[]). Du kannst Zahlungen Aufträgen direkt in der Übersicht oder in der Detailansicht der <<#30, Zahlung zuordnen>>. +
+Zahlungen gehen entweder automatisch im System ein oder werden manuell eingebucht. Nach dem Eingang in plentymarkets werden die Zahlungen Aufträgen über eine unscharfe Suche automatisch zugeordnet. Wenn die Zuordnung fehlschlägt, können Zahlungen Aufträgen manuell zugeordnet werden. Verwalte und bearbeite Zahlungen im Menü *Aufträge » Zahlungsverkehr*. Unzugeordnete Zahlungen erkennst du am Kreditkartensymbol (material:credit_card[]). Du kannst Zahlungen Aufträgen direkt in der Übersicht oder in der Detailansicht der Zahlung <<#30, zuordnen>>. +
 In der Übersicht werden die Zahlungen in deiner gewählten xref:payment:waehrungen.adoc#30[Systemwährung] angezeigt. Wenn die Zahlung in einer Fremdwährung getätigt wurde, wird dieser Betrag hinter der Systemwährung in Klammern ebenfalls angezeigt.
 
 [TIP]
@@ -68,26 +68,27 @@ Der Zahlungseingang als Ereignis spielt in der Auftragsbearbeitung eine wichtige
 [#bankbuchungsimport]
 === Bankbuchungen importieren
 
-Zahlungsvorgänge bei der Zahlungsart Vorkasse und sonstigen Überweisungen fallen in Form von Bankbuchungen an. Bei diesen Zahlungsarten müssen die auf deinem Konto gebuchten Zahlungen an das System gemeldet und den Aufträgen korrekt zugeordnet werden. Nutze den Import-Typ xref:daten:elasticSync-bankbuchungen.adoc#[Bankbuchung], um deine Bankbuchungen in dein plentymarkets System zu importieren. Ein Praxisbeispiel für den Buchungsimport findest du auf der Handbuchseite xref:daten:best-practices-elasticsync-buchungen.adoc#[Neue Buchungen importieren]. +
+Zahlungsvorgänge bei der Zahlungsart *Vorkasse* und sonstigen Überweisungen fallen in Form von Bankbuchungen an. Bei diesen Zahlungsarten müssen die auf deinem Konto gebuchten Zahlungen an das System gemeldet und den Aufträgen korrekt zugeordnet werden. Nutze den Import-Typ xref:daten:elasticSync-bankbuchungen.adoc#[Bankbuchung], um deine Bankbuchungen in dein plentymarkets System zu importieren. Ein Praxisbeispiel für den Buchungsimport findest du auf der Handbuchseite xref:daten:best-practices-elasticsync-buchungen.adoc#[Neue Buchungen importieren]. +
 Nach dem Import werden die Bankbuchungen wie andere Zahlungen auch automatisch Aufträgen zugeordnet und können wie gewohnt im Menü *Aufträge » Zahlungsverkehr* bearbeitet werden.
 
 [#paypal-zahlungsimport]
 === PayPal Import
 
-Der Eintrag *PayPal Import* mit dem PayPal-Icon in der linken Navigation wird nur angezeigt, wenn das xref:payment:paypal.adoc#[PayPal-Plugin] installiert ist. Dafür ist das PayPal-Plugin mindestens in Version 6.0.0 erforderlich. +
-Mit der Funktion *PayPal Import* kannst du PayPal-Zahlungen über Transaktionsnummern von deinem PayPal-Konto direkt in dein plentymarkets System importieren. Dabei werden nur neue Zahlungen importiert, es werden keine bereits existierenden Zahlungen aktualisiert. Gehe für den Import wie folgt vor:
+Der Eintrag *PayPal Import* mit dem PayPal-Icon in der linken Navigation des Menüs *Aufträge » Zahlungsverkehr* wird nur angezeigt, wenn das xref:payment:paypal.adoc#[PayPal-Plugin] installiert ist. Dafür ist das PayPal-Plugin _mindestens in Version 6.0.0_ erforderlich. +
+Mit der Funktion *PayPal Import* kannst du PayPal-Zahlungen über Transaktionsnummern von deinem PayPal-Konto direkt in dein plentymarkets System importieren. Dabei werden nur neue Zahlungen importiert. Es werden _keine_ bereits existierenden Zahlungen aktualisiert. Gehe für den Import wie folgt vor:
 
 [.instruction]
 PayPal-Zahlungen importieren:
 
+. Öffne das Menü *Aufträge » Zahlungsverkehr*.
 . Klicke in der linken Navigation auf *PayPal Import*.
 . Wähle im Feld *PayPal-Konto* das passende Konto.
 . Gib im Feld *Transaktionsnummer(n)* die Transaktionsnummern der Zahlungen ein, die du importieren möchtest. +
 → Du kannst mehrere Transaktionsnummern kommasepariert eingeben.
-. Klicke auf *Ausführen* (material:import_export[]). +
+. Klicke auf *Importieren* (material:import_export[]). +
 → Die Zahlungen mit den eingegebenen Transaktionsnummern werden importiert und der Übersichtstabelle hinzugefügt.
 
-Nach dem Import der PayPal-Zahlungen werden sie wie andere Zahlungen auch automatisch Aufträgen zugeordnet. Für die automatische Zuordnung ist zu beachten, dass diese von der <<#intable-match-automatic-assignment, Einstellung>> *Übereinstimmung für automatische Zuordnung (0.7 - 1.0)* im Menü *Einrichtung » Aufträge » Zahlung » Eingänge* abhängt. Der Wert 0.7 steht für 70% Übereinstimmung, der Wert 1.0 für 100% Übereinstimmung. Sollte eine Zahlung nicht automatisch zugeordnet werden können, kannst du die Zahlung manuell <<#30, zuordnen>>. +
+Nach dem Import der PayPal-Zahlungen werden diese wie andere Zahlungen auch automatisch Aufträgen zugeordnet. Für die automatische Zuordnung ist zu beachten, dass diese von der <<#intable-match-automatic-assignment, Einstellung>> *Übereinstimmung für automatische Zuordnung (0.7 - 1.0)* im Menü *Einrichtung » Aufträge » Zahlung » Eingänge* abhängt. Der Wert 0.7 steht für 70% Übereinstimmung, der Wert 1.0 für 100% Übereinstimmung. Wenn eine Zahlung nicht automatisch zugeordnet werden kann, kannst du die Zahlung manuell <<#30, zuordnen>>. +
 *_Beachte:_* Nach dem Import kann es bis zu 15 Minuten dauern, bis die automatische Zuordnung erfolgt ist.
 
 [#spalten-konfigurieren]
@@ -250,8 +251,7 @@ Wenn du in diesen Bereichen noch keine eigene Ansicht erstellt hast, wird hier d
 . Klicke auf material:add[] *Neue Ansicht erstellen ...*.
 . Gib einen Namen ein.
 . Klicke auf *Ansicht erstellen*. +
-→ Die neue Ansicht wird erstellt und automatisch geöffnet, d.h. sie wird angewendet.
-Es ist jetzt möglich, zwischen den Ansichten zu wechseln.
+→ Die neue Ansicht wird erstellt und automatisch geöffnet, d.h. sie wird angewendet. Es ist jetzt möglich, zwischen den Ansichten zu wechseln.
 
 [#create-grid]
 === Ein Raster erstellen
@@ -472,21 +472,21 @@ Zahlung buchen:
 |Gib den vollen Betrag oder einen Teilbetrag ein, der gebucht werden soll.
 
 | *Haben/Soll*
-| Wähle *Haben* oder *Soll*. Die Auswahl richtet sich nach dem offenen Betrag. Standardmäßig ist *Haben* gewählt. Bei negativen offenen Beträgen, z.B. bei einer Überzahlung, ist *Soll* gewählt. Die Auswahl kann geändert werden.
+| Wähle *Haben* oder *Soll*. Die Auswahl richtet sich nach dem offenen Betrag. Standardmäßig ist *Haben* gewählt. Bei negativen offenen Beträgen, z.B. bei einer Überzahlung, ist *Soll* gewählt. Du kannst diese Auswahl ändern.
 
 | *Währung*
 |Wähle die Währung, in der die Zahlung vorgenommen werden soll.
 
 | *Wechselkurs*
 |Bei Bedarf einen von der aktuellen System-Wechselkurs-Konfiguration abweichenden Wechselkurs eingeben. +
-*_Wichtig_*: Wenn die Zahlung in einer anderen Währung als der für die Zahlung eingestellten Währung (Standard-Währung) gebucht werden soll, z.B. in US-Dollar, unter *Währung* die Option *USD* wählen und unter *Betrag* den erhaltenen Betrag eingeben. +
+*_Wichtig_*: Wenn die Zahlung in einer anderen Währung als der für die Zahlung eingestellten Währung (xref:payment:waehrungen.adoc#30[Standard-Währung]) gebucht werden soll, z.B. in US-Dollar, wähle unter *Währung* die Option *USD* und gib unter *Betrag* den erhaltenen Betrag ein. +
 Wenn der xref:payment:waehrungen.adoc#20[Wechselkurs] im Menü *Einrichtung » Aufträge » Zahlung » Währungen* ermittelt wurde und verwendet werden soll, gib für *Wechselkurs* nichts ein, weil dieser Kurs automatisch angewendet wird. Die Option *Wechselkurs* wird nur benötigt, wenn ein anderer Wechselkurs für diese Zahlung angewendet werden soll, z.B. der Kurs zum Zeitpunkt des Zahlungseingangs. In diesem Fall den zu diesem Zeitpunkt zutreffenden Wechselkurs eingeben.
 
 | *Verwendungszweck*
 |Hier ist die Auftrags-ID vorausgefüllt. Du kannst diesen Eintrag anpassen.
 
 | *Zahlungseingang*
-|Datum des Zahlungseingangs wählen. Standardmäßig ist das aktuelle Datum voreingestellt.
+|Wähle das Datum des Zahlungseingangs. Standardmäßig ist das aktuelle Datum voreingestellt.
 |====
 
 Manuell gebuchte Zahlungseingänge erkennst du an dem Symbol material:extension[] *Manuelle Buchung*.
@@ -494,16 +494,21 @@ Manuell gebuchte Zahlungseingänge erkennst du an dem Symbol material:extension[
 [#40]
 == Zahlungen lösen
 
-Es gibt zwei Möglichkeiten, Zahlungen von einem Auftrag zu lösen. Im Menü *Aufträge » Zahlungsverkehr* kannst du Zuordnung der Zahlungen entweder direkt in der Übersicht oder in der Detailansicht einer Zahlung aufheben.
-Gehe wie im Folgenden beschrieben vor, um die Zuordnung einer Zahlung in der Übersicht zu lösen.
+Es gibt zwei Möglichkeiten, Zahlungen von einem Auftrag zu lösen. Im Menü *Aufträge » Zahlungsverkehr* kannst du die Zuordnung der Zahlung entweder direkt in der <<#zahlung-loesen-uebersicht, Übersicht>> oder in der <<#zahlung-loesen-detailansicht, Detailansicht>> einer Zahlung aufheben.
+
+[#zahlung-loesen-uebersicht]
+=== Zahlung in der Übersicht lösen
 
 [.instruction]
 Zahlung in der Übersicht lösen:
 
 . Öffne das Menü *Aufträge » Zahlungsverkehr*.
-. <<#20, Suche>> (material:search[]) die gewünschte Zahlung.
+. Suche (material:search[]) die gewünschte Zahlung wie im Kapitel <<#20, Zahlungen suchen>> beschrieben.
 . Klicke in der Zeile der Zahlung, für die du die Zuordnung lösen möchtest, auf *Zahlung lösen* (material:money_off[]). +
 → Die Zahlung wird vom Auftrag gelöst und wird wieder als unzugeordnete Zahlung angezeigt.
+
+[#zahlung-loesen-detailansicht]
+=== Zahlung in der Detailansicht lösen
 
 Eine Zahlung lässt sich auch in der Detailansicht lösen. Gehe dafür wie im Folgenden beschrieben vor:
 
@@ -515,7 +520,7 @@ Zahlung in Detailansicht lösen:
 . Klicke in die Zeile der Zahlung, für die du die Zuordnung lösen möchtest. +
 → Du wirst weitergeleitet zur Detailansicht dieser Zahlung.
 . Öffne die Tabelle *Zuordnung*. +
-→ Wenn sich die Tabelle öffnet wird die bestehende Auftragszuordnung wird angezeigt.
+→ Wenn sich die Tabelle öffnet, wird die bestehende Auftragszuordnung angezeigt.
 . Klicke auf *Zahlung lösen* (material:money_off[]). +
 → Die Zahlung wird vom Auftrag gelöst. Es werden wieder die höchsten Übereinstimmungen für diese Zahlung angezeigt.
 
@@ -528,7 +533,7 @@ Das Lösen von Zahlungen von einem Auftrag ist technisch zu jedem Zeitpunkt mög
 [#50]
 == Zahlungen teilen
 
-Manuell gebuchte Zahlungseingänge, importierte Bankbuchungen sowie EBICS-Zahlungen können geteilt werden. Das bedeutet, dass der Betrag einer Zahlung auf mehrere Aufträge aufgeteilt werden kann. Dies machst du im Menü *Aufträge » Zahlungsverkehr*. Beachte, dass Vormerkposten von der Zahlungsaufteilung ausgenommen sind. Um Zahlungen aufzuteilen, gehe wie im Folgenden beschrieben vor.
+Manuell gebuchte Zahlungseingänge, importierte Bankbuchungen sowie EBICS-Zahlungen können im Menü *Aufträge » Zahlungsverkehr* geteilt werden. Das bedeutet, dass der Betrag einer Zahlung auf mehrere Aufträge aufgeteilt werden kann. Beachte, dass Vormerkposten von der Zahlungsaufteilung ausgenommen sind. Um Zahlungen aufzuteilen, gehe wie im Folgenden beschrieben vor.
 
 [.instruction]
 Zahlung aufteilen:
@@ -542,7 +547,7 @@ Zahlung aufteilen:
 . Klicke auf *Speichern* (material:save[]). +
 → Die Zahlung wird aufgeteilt und den ausgewählten Aufträgen in der Reihenfolge der Tabelle von oben nach unten zugeordnet und du wirst zur Zahlungsübersicht zurückgeleitet. Hier lassen sich die entstandenen Teilzahlungen wie in den anderen Kapiteln beschrieben bearbeiten.
 
-Beim Aufteilen einer Zahlung wird der Betrag dieser Zahlung immer um den jeweiligen Zahlungsbetrag der Aufträge, die beim Aufteilen ausgewählt werden, reduziert. Sowohl der ursprüngliche Gesamtbetrag der Zahlung als auch der Restbetrag werden in dieser Ansicht angezeigt. Wenn ein Restbetrag entsteht, kann dieser bei Bedarf erneut aufgeteilt werden.
+Beim Aufteilen einer Zahlung wird der Betrag dieser Zahlung immer um den jeweiligen Zahlungsbetrag der Aufträge, die beim Aufteilen ausgewählt werden, reduziert. Sowohl der ursprüngliche Gesamtbetrag der Zahlung als auch der Restbetrag werden in dieser Ansicht angezeigt. Wenn ein Restbetrag entsteht, kann dieser erneut aufgeteilt werden.
 
 *_Beispiel:_* Stell dir vor, du möchtest eine Zahlung mit dem Betrag von 120 Euro aufteilen auf Auftrag A, mit einem offenen Rechnungsbetrag von 80 Euro, und Auftrag B, mit einem offenen Rechnungsbetrag von 20 Euro. Durch das Aufteilen und die Auswahl von genau diesen Aufträgen werden Auftrag A = 80 Euro und Auftrag B = 20 Euro zugewiesen. Die durch das Teilen entstehenden Zahlungen sind durch deine Auswahl diesen Aufträgen zugeordnet worden. Es bleibt ein Restbetrag von 20 Euro als nicht zugeordneter Eintrag übrig. Diesen Restbetrag kannst du einem anderen Auftrag zuordnen oder bei Bedarf ebenfalls aufteilen.
 
@@ -560,7 +565,7 @@ In der Ansicht zum Teilen einer Zahlung geben die folgende Infoboxen einen schne
 * Verwendungszweck
 * Restbetrag
 
-Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) Infoboxen entfernen oder die Anordnung im Portlet verändern, indem du sie per Drag-and-drop verschiebst. Die Benennung der Infoboxen ist optional ebenfalls anpassbar. Entscheide in den *Einstellungen* des Portlets außerdem, wie viele Kacheln (Infoboxen) dir in einer Zeile angezeigt werden sollen.
+Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) Infoboxen entfernen oder die Anordnung im Portlet verändern, indem du sie per Drag-and-drop verschiebst. Die Namen der Infoboxen können optional ebenfalls angepasst werden. Entscheide in den *Einstellungen* des Portlets außerdem, wie viele Kacheln (Infoboxen) in einer Zeile angezeigt werden sollen.
 
 Die Suchtabelle ist konfigurierbar. Standardmäßig werden alle zur Verfügung stehenden Spalten angezeigt:
 
@@ -573,13 +578,16 @@ Die Suchtabelle ist konfigurierbar. Standardmäßig werden alle zur Verfügung s
 * Offener Betrag
 
 Mit der Funktion *Spalten konfigurieren* (material:settings[]) kannst du selbst bestimmen, welche Spalten in welcher Reihenfolge angezeigt werden. +
-Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) außerdem in den *Einstellungen* des Portlets *Suche* festlegen, ob es beim Öffnen der Ansicht Zahlung teilen standardmäßig aus- oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
+Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) außerdem in den *Einstellungen* des Portlets *Suche* festlegen, ob es beim Öffnen der Ansicht Zahlung teilen standardmäßig ausgeklappt oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
 Möchtest du den Namen des Portlets ändern? Dann gib im Feld *Titel* den gewünschten Namen ein.
 
 [#60]
 == Zahlungen löschen
 
-Du kannst eine Zahlung nur löschen, wenn sie keinem Auftrag zugeordnet ist und keine untergeordneten Zahlungen existieren, die aus dem Teilen der Zahlung entstanden sind. Das Löschen kann entweder direkt in der Übersicht oder in der Detailansicht des Zahlung vorgenommen werden. Um eine Zahlung aus der Übersicht zu löschen, gehe wie im Folgenden beschrieben vor.
+Du kannst eine Zahlung nur löschen, wenn sie keinem Auftrag zugeordnet ist und keine untergeordneten Zahlungen existieren, die aus dem Teilen der Zahlung entstanden sind. Das Löschen kann entweder direkt in der <<#zahlung-loeschen-uebersicht, Übersicht>> oder in der <<#zahlung-loeschen-detailansicht, Detailansicht>> der Zahlung vorgenommen werden.
+
+[#zahlung-loeschen-uebersicht]
+=== Zahlung aus der Übersicht löschen
 
 [.instruction]
 Zahlung aus der Übersicht löschen:
@@ -590,7 +598,17 @@ Zahlung aus der Übersicht löschen:
 . Klicke in der Abfrage auf *Ja*. +
 → Die Zahlung wird gelöscht und die Übersicht aktualisiert.
 
-Des Weiteren steht dir die Funktion *Löschen* auch in der Detailansicht einer Zahlung zur Verfügung. Gehe dafür wie im Folgenden beschrieben vor.
+[.collapseBox]
+.*Was mache ich, wenn ich eine Zahlung löschen möchte, das Löschen aber deaktiviert ist?*
+--
+Zahlungen können nur gelöscht werden, wenn sie keinem Auftrag zugeordnet sind und keine untergeordneten Zahlungen existieren, die aus dem Teilen einer Zahlung entstanden sind. Wenn etwas davon zutrifft, ist die Funktion *Zahlung löschen* (material:delete[]) nicht verfügbar. Wenn du die Zahlung dennoch löschen möchtest, musst du dafür sorgen, dass sie weder zugeordnet ist, noch zugehörige Teilzahlungen existieren. Gehe dafür wie im Folgenden beschrieben vor:
+
+* Zahlung ist einem Auftrag zugeordnet: <<#40, Löse>> die Zahlung vom Auftrag. Prüfe vorher aber genau, ob das Lösen der Zahlung vom Auftrag ohne Bedenken durchgeführt werden kann. Die Zahlung kann nun gelöscht werden.
+* Zahlung wurde geteilt und Teilzahlungen existieren: Du musst zuerst die Teilzahlungen löschen. Dies geht nur, wenn sie keinem Auftrag zugeordnet sind. Sind sie zugeordnet, musst du die Zahlungen erst vom jeweiligen Auftrag <<#40, lösen>>. Prüfe vorher aber genau, ob das Lösen der Zahlung vom Auftrag ohne Bedenken durchgeführt werden kann. Lösche danach die Teilzahlungen. Die ursprüngliche Zahlung kann nun gelöscht werden.
+--
+
+[#zahlung-loeschen-detailansicht]
+=== Zahlung aus der Detailansicht löschen
 
 [.instruction]
 Zahlung aus der Detailansicht heraus löschen:
@@ -615,7 +633,7 @@ Zahlungen können nur gelöscht werden, wenn sie keinem Auftrag zugeordnet sind 
 [#70]
 == Gruppenfunktion nutzen
 
-Mit der Gruppenfunktion bearbeitest du beliebig viele Zahlungen gleichzeitig. Um die Gruppenfunktion nutzen zu können, muss mindestens eine Zahlung ausgewählt sein. Nutze die Suche, um die gewünschten Zahlungen zu filtern. Nachdem du die gewünschten Zahlungen ausgewählt hast, kannst du diese entweder alle auf einmal automatisch zuordnen oder sie alle auf einmal löschen. Denk daran, dass nur unzugeordnete Zahlungen gelöscht werden können.
+Mit der Gruppenfunktion bearbeitest du beliebig viele Zahlungen gleichzeitig. Um die Gruppenfunktion nutzen zu können, muss mindestens eine Zahlung ausgewählt sein. Nutze die <<#20, Suche>>, um die gewünschten Zahlungen zu filtern. Nachdem du die gewünschten Zahlungen ausgewählt hast, kannst du diese entweder alle auf einmal automatisch zuordnen oder sie alle auf einmal löschen. Denke daran, dass nur unzugeordnete Zahlungen gelöscht werden können.
 
 Gehe wie im Folgenden beschrieben vor, um Zahlungen mit der Gruppenfunktion automatisch zuzuordnen oder zu löschen.
 
@@ -652,7 +670,7 @@ In der Standardansicht werden im Portlet *Details* folgende grundlegende Informa
 * Verwendungszweck
 
 Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) noch das Element *Absender der Zahlung* hinzufügen oder andere Elemente entfernen. Verändere die Anordnung der Elemente im Portlet, indem du sie per Drag-and-drop verschiebst. +
-Entscheide in den *Einstellungen* des Portlets außerdem, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig aus- oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
+Entscheide in den *Einstellungen* des Portlets außerdem, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig ausgeklappt oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
 Möchtest du den Namen des Portlets ändern? Dann gib im Feld *Titel* den gewünschten Namen ein.
 
 .Portlet Details bearbeiten
@@ -668,7 +686,7 @@ Der Status der Zahlung wird zusätzlich über einen farbigen Statusbalken an der
 * Orange = Die Zahlung ist in Bearbeitung. Steht entweder für warten auf Erneuerung, warten auf Bestätigung oder teilweise erfasst.
 * Rot = Die Zahlung wurde nicht verarbeitet. Steht entweder für abgelehnt, storniert oder abgelaufen.
 
-Optional kannst du über Ansicht bearbeiten (terra:design_inline_edit[]) Elemente entfernen oder noch folgende Infoboxen als zusätzliche Elemente zu diesem Portlet hinzufügen:
+Optional kannst du über Ansicht bearbeiten (terra:design_inline_edit[]) Elemente entfernen oder die folgenden Infoboxen noch als zusätzliche Elemente zu diesem Portlet hinzufügen:
 
 * Eingangsdatum
 * Wechselkurs
@@ -686,7 +704,7 @@ image::payment:portlet-infoboxen-bearbeiten.png[]
 [#assignment]
 === Zuordnung
 
-Das Portlet *Zuordnung* bietet eine Auflistung der höchsten Übereinstimmungen mit Aufträgen für unzugeordnete Zahlungen. Ist eine Zahlung bereits zugeordnet, wird hier nur dieser entsprechende Eintrag angezeigt. Nur wenn die Zahlung vom Auftrag <<#40, gelöst>> wird, werden hier wieder die höchsten Übereinstimmungen angezeigt. +
+Das Portlet *Zuordnung* bietet eine Auflistung der höchsten Übereinstimmungen mit Aufträgen für unzugeordnete Zahlungen. Wenn eine Zahlung bereits zugeordnet ist, wird hier nur dieser entsprechende Eintrag angezeigt. Nur wenn die Zahlung vom Auftrag <<#40, gelöst>> wird, werden hier wieder die höchsten Übereinstimmungen angezeigt. +
 Die Übereinstimmungen zwischen Zahlungen und Aufträgen werden anhand einer Matrix im Hintergrund überprüft. Diese Überprüfung wird ausgelöst, sobald du diesen Bereich *Zuordnung* öffnest. Dann werden absteigend maximal die 10 Aufträge mit den höchsten Übereinstimmungsraten angezeigt.
 
 Außerdem kannst du eine zugeordnete Zahlung in der Zuordnungstabelle lösen. Klicke dafür auf *Zahlung lösen* (material:money_off[]). Beachte allerdings, dass das <<#40, Lösen von Zahlungen>> nicht unbedacht geschehen sollte.
@@ -700,7 +718,7 @@ Die Zuordnungstabelle ist konfigurierbar. Standardmäßig werden alle zur Verfü
 * Name des Kontaktes
 
 Mit der Funktion *Spalten konfigurieren* (material:settings[]) kannst du selbst bestimmen, welche Spalten in welcher Reihenfolge angezeigt werden. +
-Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) außerdem in den *Einstellungen* des Portlets *Zuordnung* festlegen, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig aus- oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
+Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) außerdem in den *Einstellungen* des Portlets *Zuordnung* festlegen, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig ausgeklappt oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
 Möchtest du den Namen des Portlets ändern? Dann gib im Feld *Titel* den gewünschten Namen ein.
 
 .Portlet-Einstellungen
@@ -726,7 +744,7 @@ Du siehst auf einen Blick, wann (Datum) von wem (Benutzer:in oder sonstige Quell
 Die Tabelle ist konfigurierbar. Standardmäßig werden dir mit *Datum*, *Benutzer / Quelle*, *Aktion* und *Wert* alle zur Verfügung stehenden Spalten angezeigt. +
 Beachte, dass die Einträge in der Spalte *Wert* immer auf Englisch sind, weil diese Daten direkt aus der Datenbank entnommen werden. Über *Spalten konfigurieren* (material:settings[]) kannst du selbst bestimmen, welche Spalten in welcher Reihenfolge angezeigt werden.
 
-Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) außerdem in den *Einstellungen* des Portlets *Historie* festlegen, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig aus- oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
+Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) außerdem in den *Einstellungen* des Portlets *Historie* festlegen, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig ausgeklappt oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
 Möchtest du den Namen des Portlets ändern? Dann gib im Feld *Titel* den gewünschten Namen ein.
 
 [#properties]
@@ -734,7 +752,7 @@ Möchtest du den Namen des Portlets ändern? Dann gib im Feld *Titel* den gewün
 
 Das Portlet *Eigenschaften* (= Properties) zeigt alle weiteren Informationen, die die Zahlung betreffen. Diese Informationen gehen in der Regel über die Details hinaus. Welche Informationen hier angezeigt werden, hängt von der Zahlung selber, z.B. der Zahlungsart und welche Informationen vom Zahlungsanbieter übermittelt werden, ab.
 
-Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) in den *Einstellungen* des Portlets *Eigenschaften* festlegen, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig aus- oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
+Optional kannst du über *Ansicht bearbeiten* (terra:design_inline_edit[]) in den *Einstellungen* des Portlets *Eigenschaften* festlegen, ob es beim Öffnen der Detailansicht einer Zahlung standardmäßig ausgeklappt oder eingeklappt sein soll. Nutze dafür die Option *Portlet eingeklappt*. +
 Möchtest du den Namen des Portlets ändern? Dann gib im Feld *Titel* den gewünschten Namen ein.
 
 [#100]
@@ -751,7 +769,7 @@ Die unzugeordneten Zahlungen solltest du mindestens einmal wöchentlich bearbeit
 ====
 
 [TIP]
-.Tipp: Zahlungen von SOFORT Überweisung
+.Zahlungen von SOFORT Überweisung
 ====
 Zahlungen von SOFORT Überweisung werden unmittelbar nach dem Zahlungsvorgang per Schnittstelle bestätigt, tauchen dann aber erneut als Bankbuchungen im System auf. Diese Bankbuchungen kannst du aus der Liste der unzugeordneten Zahlungen löschen, weil den Aufträgen die Zahlung ja bereits zugewiesen wurde.
 ====
