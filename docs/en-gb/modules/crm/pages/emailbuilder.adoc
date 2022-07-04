@@ -21,7 +21,7 @@ The EmailBuilder is a modular construction kit for quickly creating and editing 
 
 You can then use the header and footer templates in the email templates as desired. Header and footer are globally active; changes you make to the header and footer affect the rest of all existing templates and all other templates that you will create in the future.
 
-The header, the footer and the settings in the template such as the name, the subject etc. form the framework of your email, so to say. The content of the template is formed with <<#insert-widgets, widgets>> and <<#variables-emailbuilder, variables>>. In the emails that are sent to your customer, the variables will then be replaced with the correct content. For example: The variable `Delivery address First name and last name` will be replaced in the email with the first name and the last name of the contact from the delivery address.
+The header, the footer and the settings in the template such as the name, the subject etc. form the framework of your email, so to say. The content of the template is formed with <<#insert-widget, widgets>> and <<#variables-emailbuilder, variables>>. In the emails that are sent to your customer, the variables will then be replaced with the correct content. For example: The variable `Delivery address First name and last name` will be replaced in the email with the first name and the last name of the contact from the delivery address.
 
 In case of certain events, e.g. if a new order is placed in your plentyShop or when a contact subscribes to a newsletter, your plentymarkets system automatically <<#automate-email-despatch, creates emails from these templates>> and sends them to your contacts.
 
@@ -858,12 +858,14 @@ If you want to use a twig expression in the template’s subject line, this expr
 
 *_Example:_* If you want to display the shipping service provider in your template’s subject line, open the expandable area *Order / Shipping*, search for the variable *Shipping service provider* and insert the corresponding twig expression in the subject line of your template as follows: `&#123;&#8288;&#123;order.formattedShipping.providerName&#125;&#8288;&#125;`.
 
+You can find code examples for the subject line in the Code-Beispiele für den Betreff findest du im Kapitel <<#code-examples-subject, Code examples for the subject line>> chapter.
+
 [#twig-code-widget]
 ==== Twig expression in the code widget
 
-If you use link:https://twig.symfony.com/doc/3.x/tags/if.html[if queries^] in your code widget, for example, there is no need to insert double curly brackets in the if query itself, but in the body text. For further information about twig, refer to the link:https://twig.symfony.com/doc/3.x/[Twig documentation^].
+If you use link:https://twig.symfony.com/doc/3.x/tags/if.html[if queries^] or link:https://twig.symfony.com/doc/2.x/tags/for.html[for loops^] in your code widget, for example, there is no need to insert double curly brackets in the if query or for loop itself, but in the body text. For further information about twig, refer to the link:https://twig.symfony.com/doc/3.x/[Twig documentation^].
 
-In the <<#code-examples-code-widget, Code examples for the code widget>> chapter, you can find some if queries that you can simply copy to your code widget.
+In the <<#code-examples-code-widget, Code examples for the code widget>> chapter, you can find some if queries and for loops that you can simply copy to your code widget.
 
 [#available-variables]
 === Available variables
@@ -878,9 +880,9 @@ The available variables for the EmailBuilder are grouped into the following cate
 ** <<#variables-order-order-items, Order items (only for item list widget)>>
 ** <<#variables-order-shipping, Shipping>>
 
-* <<#variables-contact, Contact>>
+* <<#variables-contact-general, Contact>>
 
-** <<#variables-contact, General contact variables>>
+** <<#variables-contact-general, General contact variables>>
 ** <<#variables-contact-delivery-address, Delivery address>>
 ** <<#variables-contact-invoice-address, Invoice address>>
 ** <<#variables-contact-options, Options>>
@@ -1989,7 +1991,7 @@ As an alternative, you can find the saved IBAN in the *Setup » Settings » Bank
 [#code-examples-code-widget]
 == Code examples for the code widget
 
-Use if queries in your email templates to display specific information on a case-by-case basis. In the following, you find some if queries that you can simply copy to your <<#intable-widget-code, code widget>>.
+Use if queries or for loops in your email templates to display specific information on a case-by-case basis. In the following sub-chapters, you find some if queries and for loops that you can simply copy to your <<#intable-widget-code, code widget>>.
 
 [#code-example-shipping-profile]
 === Code example: Shipping profile
@@ -2011,6 +2013,14 @@ Click on link:https://raw.githubusercontent.com/plentymarkets/plenty-manual-docs
 In the <<#intable-widget-code, code widget>>, insert a code that causes the order items with the variation IDs, the item names, the item quantity and the price to be shown in a table.
 
 Click on link:https://raw.githubusercontent.com/plentymarkets/plenty-manual-docs/main/docs/en-gb/modules/crm/examples/emailbuilder-code-example-order-items.txt[this link^] to see the code example.
+
+[#code-example-item-list]
+=== Code example: Items of the order shown as list
+
+In the <<#intable-widget-code, code widget>>, insert a code that causes the item IDs and quantities of all items that are contained in the order to be shown in a list.
+
+Click on link:https://raw.githubusercontent.com/plentymarkets/plenty-manual-docs/main/docs/en-gb/modules/crm/examples/emailbuilder-code-example-item-list.txt[this link^] to see the code example.
+
 
 [#code-examples-subject]
 == Code examples for the subject line

@@ -1,39 +1,3 @@
-In diesem Kapitel findest du Antworten auf häufig gestellte Fragen.
-(Stand: 18.02.2022)
-
-* <<#faq-checklist, _Checkliste:_ Warum wird meine Variante nicht exportiert?>>
-* <<#faq-errors, Artikelexport: Fehlermeldungen im Log>> +
-  → Nur die betroffenen Varianten werden nicht exportiert.
-* <<#faq-xsd-errors, Artikelexport: XSD-Validierungsfehler im Log>> +
-  → Der gesamte Export wird gestoppt.
-
-
-[#faq-checklist]
-=== _Checkliste:_ Warum wird meine Variante nicht exportiert?
-
-include::partial$checklist-variations.adoc[tag=checklist-intro]
-
-include::partial$checklist-variations.adoc[tag=checklist-variation-referrer]
-
-include::partial$checklist-variations.adoc[tag=checklist-variation-active]
-
-include::partial$checklist-variations.adoc[tag=checklist-availability-active]
-
-include::partial$checklist-variations.adoc[tag=checklist-net-stock]
-
-include::partial$checklist-variations.adoc[tag=checklist-sales-price]
-
-include::partial$checklist-variations.adoc[tag=checklist-catalogue-mapped-one]
-
-include::partial$checklist-variations.adoc[tag=checklist-timestamp]
-
-include::partial$checklist-variations.adoc[tag=checklist-catalogue-active]
-
-:checklist-log-integration: pass:quotes[*limango*]
-:checklist-log-reference: pass:quotes[*Referenztyp* » *variationId*]
-
-include::partial$checklist-variations.adoc[tag=checklist-check-log]
-
 [#faq-errors]
 === Artikelexport: Fehlermeldungen im Log
 
@@ -50,7 +14,7 @@ Bei diesen Fehlern werden Variantendaten zu {market} exportiert. Nur Varianten w
 *_Lösung:_*
 
 . Prüfe im Katalog, welche plentymarkets Eigenschaft du dem Marktplatz-Datenfeld *Altersgruppe* zugeordnet hast. +
-    *_Tipp:_* Ordne entweder eine Eigenschaft des Typs *Auswahl* oder des Typs *Text* zu. Eigenschaften des Typs *Keine* können nicht zugeordnet werden.
+  *_Tipp:_* Ordne entweder eine Eigenschaft des Typs *Auswahl* oder des Typs *Text* zu. Eigenschaften des Typs *Keine* können nicht zugeordnet werden.
 . Öffne die Variante und prüfe:
     * Ist die Variante mit dieser Eigenschaft verknüpft?
     * Ist ein gültiger Wert für die Variante gespeichert?
@@ -129,38 +93,24 @@ Prüfe, dass du allen Farbwerten einen Eigenschaftswert zugeordnet hast, die du 
 * Wenn nötig, verknüpfe die Variante mit einem der Eigenschaftswerte, die im Katalog zugeordnet sind.
 --
 
-[#faq-xsd-errors]
-=== Artikelexport: XSD-Validierungsfehler im Log
-
-Bei XSD-Validierungsfehler findet _kein_ Export zu {market} statt. Der gesamte Katalog _wird also nicht an {market} exportiert_. Auch wichtig zu wissen: Der Export wird beim ersten XSD-Validierungsfehler gestoppt. Deshalb gibt es für den Fehler auch nur eine Fehlermeldung im Log. Aber:
-
-* derselbe Fehler kann bei weiteren Varianten auftreten.
-* weitere XSD-Validierungsfehler anderer Art können auftreten.
-
-Beides wird dir aber erst angezeigt, wenn du den ersten XSD-Validierungsfehler behebst und der Export erneut ausgeführt wird.
-
 [.collapseBox]
 .The value has a length of ...; this exceeds the allowed maximum length of ‚80‘.
 --
 
-NOTE: Wenn dieser Fehler auftritt, wird der gesamte Katalog _nicht an {market} exportiert_. Auch wichtig zu wissen: Der Export wird beim ersten XSD-Validierungsfehler gestoppt. Deshalb gibt es auch nur eine Fehlermeldung im Log. Es kann aber sein, dass der Fehler mehrere Varianten betrifft.
-
 *_Problem:_*
 
-* Der Produktname einer der Varianten ist zu lang.
+* Der Produktname der Variante ist zu lang.
 
 *_Lösung:_*
 
-* Der Produktname darf höchstens 80 Zeichen lang sein. Stelle sicher, dass diese Länge für _keine der Varianten überschritten wird_, die für {market} aktiviert sind. +
-*_Wichtig:_* Auch Leerzeichen werden mitgezählt.
+* Der Produktname darf höchstens 80 Zeichen lang sein. Kürze den Produktnamen. +
+*_Wichtig:_* Leerzeichen werden mitgezählt.
 
 --
 
 [.collapseBox]
 .EnergyEfficiency’: Missing child element(s). Expected is one of ( {http://schema.limango.de}EnergyLabel, {http://schema.limango.de}DataSheet
 --
-
-NOTE: Wenn dieser Fehler auftritt, wird der gesamte Katalog _nicht an {market} exportiert_. Auch wichtig zu wissen: Der Export wird beim ersten XSD-Validierungsfehler gestoppt. Deshalb gibt es auch nur eine Fehlermeldung im Log. Es kann aber sein, dass der Fehler mehrere Varianten betrifft.
 
 *_Problem:_*
 
@@ -173,7 +123,7 @@ NOTE: Wenn dieser Fehler auftritt, wird der gesamte Katalog _nicht an {market} e
 
 . Prüfe im Katalog, welche plentymarkets Eigenschaften du den Marktplatz-Datenfeldern *Energielabel-URL* und *Energiedatenblatt-URL* zugeordnet hast.
 *_Tipp:_* Ordne entweder eine Eigenschaft des Typs *Auswahl* oder des Typs *Text* zu. Eigenschaften des Typs *Keine* können nicht zugeordnet werden.
-. Prüfe für _alle_ Varianten:
+. Prüfe für die Variante:
     * Ist die Variante mit diesen Eigenschaften verknüpft?
     * Ist ein gültiger Wert für die Variante gespeichert?
     * Wenn die Eigenschaft mit der Hauptvariante verknüpft ist: Funktioniert die Vererbung wie geplant? +
@@ -184,13 +134,39 @@ NOTE: Wenn dieser Fehler auftritt, wird der gesamte Katalog _nicht an {market} e
 .message:„Error 1824: in xml file (Line:467), (Column: 0):Element ‚{http://schema.limango.de}Stock‘: ‚10.25‘ is not a valid value of the atomic type ‚xs:nonNegativeInteger‘ Trigger:„cli: artisan cron:run“
 --
 
-NOTE: Wenn dieser Fehler auftritt, wird der gesamte Katalog _nicht an {market} exportiert_. Auch wichtig zu wissen: Der Export wird beim ersten XSD-Validierungsfehler gestoppt. Deshalb gibt es auch nur eine Fehlermeldung im Log. Es kann aber sein, dass der Fehler mehrere Varianten betrifft.
-
 *_Problem:_*
 
-Der Bestand kann nur in ganzen Zahlen angegeben werden. Du hast aber wahrscheinlich eine oder mehrere Varianten, bei denen der Bestand als Kommazahl exportiert wird.
+Der Bestand kann nur in ganzen Zahlen angegeben werden. Du hast aber wahrscheinlich für die Variante den Bestand als Kommazahl exportiert.
 
 *_Lösung:_*
 
-* Prüfe deine Varianten. Deaktiviere die Herkunft *{market}* für _alle_ Varianten, für die du den Bestand als Kommazahl pflegst.
+* Prüfe die Variante. Deaktiviere die Herkunft *{market}* oder gibt den Bestand als ganze Zahl an.
 --
+
+[#faq-checklist]
+=== _Checkliste:_ Warum wird meine Variante nicht exportiert?
+
+include::partial$checklist-variations.adoc[tag=checklist-intro]
+
+include::partial$checklist-variations.adoc[tag=checklist-variation-referrer]
+
+include::partial$checklist-variations.adoc[tag=checklist-variation-active]
+
+include::partial$checklist-variations.adoc[tag=checklist-availability-active]
+
+include::partial$checklist-variations.adoc[tag=checklist-net-stock]
+
+include::partial$checklist-variations.adoc[tag=checklist-sales-price]
+
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-mapped-one]
+
+include::partial$checklist-variations.adoc[tag=checklist-check-filters]
+
+include::partial$checklist-variations.adoc[tag=checklist-timestamp]
+
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-active]
+
+:checklist-log-integration: pass:quotes[*limango*]
+:checklist-log-reference: pass:quotes[*Referenztyp* » *variationId*]
+
+include::partial$checklist-variations.adoc[tag=checklist-check-log]
