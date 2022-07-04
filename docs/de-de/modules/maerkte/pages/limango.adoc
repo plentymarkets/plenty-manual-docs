@@ -31,7 +31,7 @@ Nachdem du das Plugin installiert und eingerichtet hast, stehen die in <<#datena
 |Daten |Intervall
 
 | Artikelexport
-| einmal alle 4 Stunden
+| einmal alle 4 Stunden, wenn eine Änderung am Artikel oder am Katalog stattgefunden hat
 
 | Bestandsabgleich
 | stündlich +
@@ -83,7 +83,7 @@ Grundeinstellungen vornehmen:
 . Klicke auf das Plugin *limango*. +
 → Die Plugin-Einstellungen werden geöffnet.
 . Nimm die Einstellungen vor. Beachte die Hinweise in <<#limango-setup>>.
-. Speichere (icon:save[set=plenty]) die Einstellungen in jedem Bereich, in dem du Einstellungen vornimmst.
+. Speichere (terra:save[]) die Einstellungen in jedem Bereich, in dem du Einstellungen vornimmst.
 
 [[limango-setup]]
 .limango einrichten
@@ -270,8 +270,6 @@ etc.)
 
 Materialangaben werden mit Eigenschaften des Typs *Text* zu limango exportiert. Erstelle für jedes Marktplatz-Datenfeld eine eigene Eigenschaft.
 
-Der Name dieser Eigenschaften muss mit den von limango erlaubten Werten für die Materialkomponenten übereinstimmen:
-
 * link:https://raw.githubusercontent.com/plentymarkets/manual/master/de/maerkte/assets/limango-material-composite-types.txt[Gültige Werte für Materialkomponenten^]{nbsp}icon:external-link[]
 
 Die Eigenschaften verknüpfst du mit der Hauptvariante des Artikels und speicherst alle Bestandteile eines Materialmix in dieser Eigenschaft. Wenn die Varianten desselben Artikels unterschiedliche Materialzusammensetzungen haben, deaktiviere die Vererbung für Eigenschaften und pflege die Materialzusammensetzungen pro Variante. Beachte jedoch, dass dadurch die Vererbung für alle Eigenschaften des Artikels deaktiviert werden. Du musst also auch alle anderen Eigenschaften pro Variante pflegen.
@@ -313,7 +311,7 @@ Futterstoff zuordnen und an der Variante speichern:
 --
 
 | Schuhe: Obermaterial
-| Für Schuhe dürfen nur die folgenden Materialwerte verwendet werden: `Leder`, `beschichtetes Leder`, `Textil` und `sonstiges Material`.
+| Für Schuhe dürfen nur die folgenden Materialien angegeben werden: `Leder`, `beschichtetes Leder`, `Textil` und `sonstiges Material`.
 
 . Eigenschaft mit den folgenden Einstellungen erstellen:
 * Name: Schuhe: Obermaterial
@@ -510,6 +508,14 @@ Stell dir vor, du möchtest Angaben zum Volumen von Varianten an {market} export
 | Für energiekennzeichnungspflichtige Produkte ist ein Energiedatenblatt verpflichtend. Deshalb muss für diese Produkte die URL zum Energieldatenblatt exportiert werden.
 
 *_Empfehlung:_* Erstelle eine Eigenschaft des Typs *Text*, in der du die URL des Energieldatenblatts an der Variante speicherst.
+
+| *Altgeräterücknahme nach ElektroG3*
+| Seit 1. Januar 2022 gelten neue Regeln für die Rücknahme von Altgeräten. Für Geräte mit Altgeräterücknahme muss an limango der Wert *DE* exportiert werden. Der Wert *DE* entspricht also einem Ja. Kein Wert entspricht einem Nein.
+
+*_Empfehlung:_*
+
+. Erstelle eine Eigenschaft des Typs *Auswahl* mit dem Wert *DE*.
+. Verknüpfe die Varianten, für die du Altgeräterücknahme anbietest, mit dieser Eigenschaft und wähle den Wert *DE*.
 |===
 
 [#900]
@@ -595,11 +601,11 @@ include::partial$limango-recommended-mappings.adoc[]
 include::partial$catalogue-filters.adoc[]
 
 [#preview]
-=== NEU: Vorschau der Exportdaten erstellen (_optional_)
+=== Vorschau der Exportdaten erstellen (_optional_)
 
-Nachdem du alle Datenfelder zugeordnet hast, kannst du die ersten fünf Datenzeilen des Exports über die Vorschaufunktion testen.
+Nachdem du alle Datenfelder zugeordnet hast, kannst du die ersten fünf Produkte des Exports über die Vorschaufunktion prüfen.
 
-include::daten:page$standardformate-exportieren.adoc[tag=catalogue-preview]
+include::partial$catalogue-preview.adoc[]
 
 [#904]
 === Katalog aktivieren
@@ -666,11 +672,11 @@ Personalisierte PDF-Vorlage für Lieferscheine hochladen:
 . *_Tipp:_* Die Zahlungsart *Plugin: limango Payment* wird nicht in der Dropdown-Liste angezeigt?
   .. Öffne das Menü *Einrichtung » Aufträge » Einstellungen*.
   .. Wähle für die Einstellung *Inaktive Plugin-Zahlungsarten anzeigen* die Option *Ja*.
-  .. Speichere (icon:save[set=plenty]) die Einstellung.
+  .. Speichere (terra:save[]) die Einstellung.
 . Wähle in der Dropdown-Liste *Sprache* die Option *de*.
 . Klicke in der Zeile *Vorlage* auf *Vorlage auswählen*.
 . Wähle die PDF-Vorlage für Lieferscheine von limango.
-. Klicke auf *Vorlage hochladen* (icon:save[set=plenty]). +
+. Klicke auf *Vorlage hochladen* (terra:save[]). +
 → Die Vorlage wird hochgeladen.
 
 [#16003]
@@ -685,7 +691,7 @@ Kundennummer und Bestellnummer von {market} auf Lieferscheinen anzeigen:
 . Scrolle zum Bereich *Optionale Elemente unter Artikelpositionstabelle*.
 . Wähle für die Einstellung *Externe Auftragsnummer* aus der Dropdown-Liste die Option *Ja*.
 . Wähle für die Einstellung *Externe Kundennummer* aus der Dropdown-Liste die Option *Ja*.
-. Speichere (icon:save[set=plenty]) die Einstellungen. +
+. Speichere (terra:save[]) die Einstellungen. +
 → Die externe Kundennummer wird unterhalb der Artikelpositionen positioniert. +
 *_Tipp:_* Füge in diesem Menü gleich auch den <<#16002, Retourenhinweis>> hinzu.
 
@@ -705,7 +711,7 @@ Hinweis für limango-Lieferscheine eingeben:
 . Wähle aus der Dropdown-Liste *Zahlungsart: bitte wählen* dieses Eingabefelds die Option *Plugin: limango Payment*.
 . Kopiere den Retourenhinweis von limango in das Eingabefeld.
 . Ersetze die beiden Platzhalter "xxx" durch den Namen deines Unternehmens.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 [#16003-1]
 [.collapseBox]
@@ -916,18 +922,44 @@ include::_includes:partial$event-procedure.adoc[]
 Die Versandkosten werden in deinem Vertrag mit limango festgelegt. limango speichert sie im limango-Backend. Versandkosten kannst du deshalb nur in Absprache mit dem limango-Partnermanagement anpassen. In plentymarkets gibt es deshalb keine Einstellungen für die Versandkosten.
 
 [#1100]
-== Fehlersuche: Log-Einträge abrufen
+== Fehlersuche und FAQ
 
-NOTE: Deine Varianten wurden nicht zu limango exportiert? Wenn mindestens eine Variante die Anforderungen von limango nicht erfüllt, werden keine Variantendaten exportiert. Deine Varianten werden also schon bei einer einzigen ungültigen Variante nicht zu limango exportiert. Um den Fehler zu finden, prüfe die Einträge im Daten-Log.
+Ist etwas schiefgelaufen? In diesem Kapitel findest du Informationen zur Fehlersuche.
+(Stand: 30.07.2022)
+
+* <<#catalogue-errors, Sonstige Fehlermeldungen>>
+* <<#check-log, Log-Einträge abrufen>>
+* <<#faq-errors, Artikelexport: Fehlermeldungen im Log>>
+* <<#faq-checklist, _Checkliste:_ Warum wird meine Variante nicht exportiert?>>
+
+[#catalogue-errors]
+=== Fehlermeldungen im Katalog
+
+[.collapseBox]
+.Wähle ein gültiges Exportformat.
+--
+
+*_Problem:_*
+
+* Du hast wahrscheinlich einen limango-Katalog mit dem alten Format *limango* kopiert und das Format auf *limango new* geändert. Jetzt wird die Fehlermeldung *Wähle ein gültiges Exportformat.* angezeigt und du kannst den Katalog nicht speichern.
+
+*_Lösung:_*
+
+. Wechsle in die Ansicht *Einstellungen*.
+. Navigiere zum Bereich *Formateinstellungen*.
+. Wähle für die Einstellung *Format* die Option *XML*.
+. Speichere den Katalog.
+
+*_Hintergrund:_* Ab Plugin-Version 1.4.3. wird das neue Format *limango new* verwendet. Dieses Format basiert auf XML, nicht mehr auf CSV wie das alte Format.
+--
+
+[#check-log]
+=== Log-Einträge abrufen
 
 include::partial$logs_abrufen.adoc[tag=data-log-intro]
 
 * *Integration* » *limango*
-* *Referenztyp* » *ItemId*
 
 include::partial$logs_abrufen.adoc[tag=data-log-config]
-
-[#faq]
-== FAQ
 
 include::partial$limango-faq.adoc[]
