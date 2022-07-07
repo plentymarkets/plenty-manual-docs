@@ -1,0 +1,285 @@
+= Changelog 6. Juli 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 30. Juni 2022
+:endWeekDate: 6. Juli 2022
+
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/sammelrechnungen-falsche-bestelleigenschaften-collective-invoices-incorrect-order-properties/686659
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel
+
+* Wir haben den Bilderupload in der neuen Artikel-UI vereinheitlicht und im gleichen Zug die Buttons zum Umschalten in den Uploadmodus und den Übersetzungsmodus entfernt.
+
+[discrete]
+=== Dokumente
+
+* Wir haben Hinweise hinzugefügt, wie viele Zeichen für den Startwert und den Nummernkreis erlaubt sind. Somit können nicht mehr als die erlaubte Anzahl an Zeichen in den Eingabefelder eingetragen werden.
+
+[discrete]
+=== OTTO
+
+:otto-master-date: 01.07.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/69TH46Glhm3Nr8fo3URvAmNYt3T.xlsx
+
+include::partial$otto-master-file.adoc[]
+
+[discrete]
+=== Prozesse
+
+* In der Auftragssuche / Auftragsauswahl wurde bei den Adressen keine Firma und kein Kundenname angezeigt. Diese werden nun angezeigt, sofern sie in der Adresse angegeben sind.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der alten UI wurde für die Auftragsanlage die ausgewählte Herkunft nicht übernommen, wenn eine Auftragsvorlage verwendet wurde.
+* Bei den Nachbestellungen wurde das Format von mehreren Tabellen angepasst und Widgets sind nun standardmäßig nicht mehr zugeklappt.
+
+[discrete]
+=== Bol.com
+
+* Wegen eines Problems bei den Bildern kam es bei der Produkt-Anlage zu einem Fehlverhalten. In den Logs sehen betroffene Händler die Einträge mit folgenden Filtern:
+** *Level*: `error`
+** *Referenztyp*: `endpoint`
+** *Referenzwert*: `CreateProductContent`
+
++
+Die Fehlermeldung ist `POST-HTTP-Anfrage an den Endpoint content/product fehlgeschlagen mit Fehlercode 400: „Bad Request“.` Die Details der Meldung lauten sind folgende:
+
++
+[code]
+------
+"{
+  \"type\" : \"https://api.bol.com/problems\",
+  \"title\" : \"Error validating request. Consult the bol.com API documentation for more information.\",
+  \"status\" : 400,
+  \"detail\" : \"Bad request\",
+  \"host\" : \"Instance-111\",
+  \"instance\" : \"https://api.bol.com/retailer/content/product\",
+  \"violations\" : [ {
+    \"reason\" : \"Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`).\"
+  } ]
+}"
+------
+
++
+Dieses Fehlverhalten entstand, wenn an einer Variante bzw. einem Artikel nur Bilder verknüpft waren, die entweder für alle Marktplätze freigegeben waren oder nicht für bol.com. Das Problem wurde jetzt behoben, sodass Bilder, die für alle Märkte freigegeben sind, als valide für die Übertragung an bol.com betrachtet werden und das Folgeproblem der invaliden Anfrage damit behoben wird.
+
+[discrete]
+=== CRM
+
+* Wenn man im Menü *CRM » Kontakte* zum Beispiel einen Filter für die Kundenklasse und einen für die Kontaktdaten gesetzt hatte, konnte es in manchen Fällen vorkommen, dass die Sortierung der PLZ nicht funktionierte. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Wurden Rechnungen als Sammeldokument unter *Aufträge » Fulfillment* erzeugt, die Bestelleigenschaften enthalten, die unter den Summen angezeigt werden sollen, so wurden die ermittelten Bestelleigenschaften des Auftrages auch in den nächsten Rechnungen mit ausgegeben, sodass von Auftrag zu Auftrag die Anzahl der gelisteten Bestelleigenschaften unter den Summen gestiegen sind. Dies wurde behoben.
++
+Die überzähligen Bestelleigenschaften in den Summen wurden zwar mit Preisen gelistet, diese sind aber nicht in die Auftragssumme eingeflossen und die Rechnungssumme wurde korrekt angezeigt.
+
+[discrete]
+=== Prozesse
+
+* In der Aktion Retouren anlegen/bearbeiten wurde bei der Artikelauswahl kein GTIN-Code angezeigt. Dieser Fehler wurde behoben.
+
+[discrete]
+=== Spezialexport
+
+* Beim Datenexport des Spezialexports *Finanzbuchhaltung* konnte es unter Umständen zu einem Fehler kommen. Dieser Fehler wurde behoben.
+
+[discrete]
+=== Warenwirtschaft
+
+* Das Verknüpfung von Lagerorteigenschaften während sie erstellt werden ist nun wieder möglich. Zusätzlich wurde ein Fehler in der Gruppenfunktion zum Verknüpfung dieser Eigenschaften behoben.
+
+[discrete]
+=== Zalando
+
+* Bei der Generierung der Produkt-Datei wurde immer der erste Barcode der Variante verwendet, unabhängig davon, ob es sich bei dem Barcode um eine GTIN-13 handelte oder der Barcode überhaupt für Zalando freigegeben war. War der Barcode keine GTIN-13 wurde die EAN als fehlend deklariert.
++
+Dies wurde jetzt behoben, sodass der Barcode-Typ und die Freigabe für Zalando korrekt berücksichtigt werden. Der Barcode mit der niedrigsten ID, der diese Anforderungen erfüllt, wird dann in der Produkt-Datei ausgegeben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel
+
+* Wir haben die Option Neuer Sammelauftrag an den folgenden Stellen im Menü *CRM » Kontakte* hinzugefügt:
+** in der Übersicht im Kontextmenü unter *Aufträge*
+** im Kontaktdatensatz im Portlet *Aufträge* (Plus-Zeichen)
+
+[discrete]
+=== Kataloge
+
+* m Katalog (Format: *Artikel Neu*) lassen sich nun die Felder *Niedrigster Preis der letzten 30 Tage* und *Niedrigster Preis automatisch ermittelt* exportieren.
+* Es gab eine Änderung im Katalog, dass man nun im Baum der Exportfelder das Feld *Verkaufspreise* wählt. In dem hinzugefügten Feld lässt sich dann per Dropdown der Preis auswählen.
++
+[NOTE]
+.Kein To-do
+======
+Es gab eine Migration, so dass ihr nichts nacharbeiten müsst.
+======
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+* Als erster Schritt des Amazon-Schnittstellen-Upgrades auf die neue Selling Partner API (SP-API) wurde der Autorisierungs-Workflow umgestellt. Damit gehen folgende Änderungen einher:
+** Der Amazon-Assistent für die *Grundeinstellungen* wurde im Schritt zur Autorisierung aktualisiert. Ein Button leitet Benutzer:innen in das Amazon-Backend, um plentymarkets zu erlauben, im Namen der Händler:in mit der SP-API zu kommunizieren und plentymarkets die notwendigen Rechte zu gewähren.
+** Abgelaufene Tokens für die MWS-API müssen jetzt durch Händler:innen aufgrund des neuen SP-API-Autorisierungs-Workflows manuell erneuert werden.
+** Bestehende und gültige Autorisierungen für die MWS-API werden automatisch um die Autorisierung zur SP API erweitert und von plentymarkets migriert. Dies erlaubt einen fließenden Übergang beim Wechsel auf die neue Schnittstelle.
+
++
+[NOTE]
+.Hinweis
+======
+Der neue Autorisierungsworkflow kann sowohl für eine neue Autorisierung als auch die Verlängerung einer bestehender Authorisierung für *MWS und SP-API* genutzt werden.
+======
+
+[discrete]
+=== CRM
+
+* Wenn man im Suchfeld im Menü *CRM » Kontakte* einen Wert eingegeben hat, wurde bisher an erster Stelle der Suchparameter `ID` angezeigt. Dies wurde geändert. Ab sofort wird an erster Stelle der Suchparameter `Name` angezeigt.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel
+
+* Es gab einen Fehler, dass sich die neue Tagübersicht nicht nach dem Namen sortieren ließ. Diesen Fehler konnten wir beheben.
+
+[discrete]
+=== CRM
+
+* Wenn man zwei Mal nacheinander auf das Hauptmenü *CRM* geklickt hat, öffnete sich beim ersten Klick zwar das Menü *CRM » Kontakte*, beim zweiten Klick auf CRM jedoch ein leeres Tab. Dieses Verhalten wurde behoben.
+* Menü *CRM » Kontakte*: Wenn ein Kunde sich über den Abmelde-Link vom Newsletter abgemeldet hat, wurde zwar die E-Mail-Adresse aus dem entsprechenden Ordner entfernt. Jedoch waren das Datum des Newsletter-Abonnements im Kontaktdatensatz und der Haken in der Kontakte-Übersicht in der Spalte *Newsletter* immer noch sichtbar. Dieses Verhalten wurde behoben.
+* Im Menü *CRM » Kontakte* waren nicht nur Tags sichtbar und auswählbar, die für den Bereich *Kontakte* erstellt worden sind, sondern auch solche Tags, die für andere Bereiche in plentymarkets erstellt worden sind. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Bei der Erstellung von Auftragsdokumenten konnte es zu einem Fehler kommen, wenn Varianten des Auftrags nicht mehr existiert haben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/formatdesigner_6483[FormatDesigner^]
+|1.3.7
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportgoogleshopping_4722[Google Shopping^]
+|1.2.14
+|-
+
+|link:https://marketplace.plentymarkets.com/legalapi_6429[Händlerbund AGB Schnittstelle^]
+|1.2.0
+|-
+
+|link:https://marketplace.plentymarkets.com/io_4696[IO^]
+|5.0.53
+|-
+
+|link:https://marketplace.plentymarkets.com/mytoys_54776[MyToys^]
+|1.0.33
+|-
+
+|link:https://marketplace.plentymarkets.com/payever_5623[payever^]
+|2.6.0
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.0.10
+|-
+
+|link:https://marketplace.plentymarkets.com/ceres_4697[plentyShop LTS^]
+|5.0.53
+a|Mit der nächsten plentyShop Version 5.0.52 wird die `$Basket`-Variable aus dem GlobalContext entfernt, um eine bessere Performance zu erzielen.
+
+plentyShop-Nutzer:innen sollten die nächste plentyShop-Version unbedingt zunächst xref:webshop:best-practices.adoc#updates[in einer Plugin-Set-Kopie testen], da externe Plugins noch auf diese Variable zugreifen könnten, wodurch es zu Fehlern kommen könnte.
+
+Im Zuge des Releases von Ceres 5.0.52 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+
+* link:https://github.com/plentymarkets/plugin-ceres/pull/3290/files#diff-969624803dfeb696a58e16de0d95c285a458ec83a615026882d9b1e65386935b[resources/views/Customer/Components/AddressSelect/AddressSelect.twig^]
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.12.0
+|-
+
+|link:https://marketplace.plentymarkets.com/neoprismatimeline_55191[Timeline für den ShopBuilder^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.2.2
+|-
+
+|link:https://marketplace.plentymarkets.com/cytitemavailabilitynotification_6906[Verfügbarkeitsbenachrichtigung mit Statistik^]
+|1.5.1
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
