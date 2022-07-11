@@ -376,24 +376,16 @@ Wähle die passende Channel Store Number aus der Dropdown-Liste.
 
 |===
 
+////
+
+Hinweis: Zum Schritt "Cron-Einstellungen" gab es keinen Screenshot in der PowerPoint-Datei, deshalb fehlen hier noch Infos. Das Kapitel wurde von der ProHandel-Seite kopiert und muss noch angepasst werden. "Prohandel" wurde schon global durch "SPoCC ersetzt."
+
 [#cron-settings]
 === [TODO] Schritt "Cron-Einstellungen"
 
 Der Datenaustausch zwischen SPoCC und plentymarkets erfolgt mit sogenannten Crons.
 
-[.collapseBox]
-.Was ist ein Cron?
---
-Ein Cron dient der zeitbasierten Ausführung von Prozessen. Diese Ausführung erfolgt in einzelnen Cronjobs.
-
-Cronjobs sind wiederkehrende Aufgaben (Jobs), die automatisch in festen Intervallen ausgeführt werden. Diese Intervalle werden normalerweise in Minuten angegeben. Ein Cron 60 wird zum Beispiel alle 60 Minuten ausgeführt.
-
-*_Beispiel:_* Bilder werden alle 60 Minuten von SPoCC in plentymarkets importiert. Jeder dieser Importe ist ein Cronjob.
-
-Fun Fact: Cron steht für Command Run On Notice, spielt aber auch auf Chronos an, den altgriechischen Gott der Zeit.
-
-Warum du wissen musst, was ein Cron ist? Eigentlich musst du das gar nicht wissen. Du aktivierst nur den Austausch von Daten in plentymarkets. Die Intervalle sind fest hinterlegt und werden automatisch ausgeführt.
---
+include::_includes:partial$crons.adoc[]
 
 In diesem Schritt aktivierst du die Cron-Jobs, die automatisch ausgeführt werden sollen (icon:check-square[role="blue"]).
 
@@ -431,6 +423,7 @@ Folgende Daten werden über diesen Cron aktualisiert:
 |Alle 15 Minuten
 |
 |===
+////
 
 [#120]
 == Neu importierte Artikeldaten öffnen und ergänzen
@@ -517,7 +510,7 @@ Ab dem Zeitpunkt der Aktivierung greift die Ereignisaktion mit den von dir gewä
 Weitere Informationen zur allgemeinen Verwendung von Ereignisaktionen findest du auf der Handbuchseite xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen].
 
 [#170]
-=== SPoCC über neue Aufträge benachrichtigen
+=== SPoCC über neue Aufträge informieren
 
 Sobald ein neuer Auftrag in plentymarkets landet, soll SPoCC über den Auftrag informiert werden.
 So wird der nötige Bestand in SPoCC reserviert, damit es nicht zu Überverkäufen kommt.
@@ -535,4 +528,24 @@ Auftrag > Mandant (Shop)
 
 |Aktion
 |Plugins > SPoCC: Bestand reservieren
+|===
+
+[#180]
+=== SPoCC über Versand informieren
+
+Informiere SPoCC automatisch darüber, dass der Auftrag versandbereit ist.
+
+[[table-event-procedure-two]]
+[cols="1,2"]
+|===
+
+|Ereignis
+|Warenausgang gebucht
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+|Aktion
+|Plugins > SPoCC: Versand an SPoCC melden
 |===
