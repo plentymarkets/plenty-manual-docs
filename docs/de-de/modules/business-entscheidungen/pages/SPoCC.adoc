@@ -493,7 +493,7 @@ Weitere Informationen zur Auftragsbearbeitung in plentymarkets findest du auf de
 [#160]
 == Ereignisaktionen einrichten
 
-Natürlich sollen die Auftragsdaten nicht nur in plentymarkets bleiben, sondern auch nach SPoCC übertragen werden.
+Natürlich sollen die Auftragsdaten nicht nur in plentymarkets bleiben, sondern auch zu SPoCC übertragen werden.
 Dazu musst du vier sogenannte Ereignisaktionen einrichten.
 Diese müssen nur einmalig im Voraus eingerichtet werden, damit der Auftragsexport korrekt funktioniert.
 
@@ -520,7 +520,7 @@ Weitere Informationen zur allgemeinen Verwendung von Ereignisaktionen findest du
 === SPoCC über neue Aufträge benachrichtigen
 
 Sobald ein neuer Auftrag in plentymarkets landet, soll SPoCC über den Auftrag informiert werden.
-So wird der nötige Bestand in SPoCC reserviert, damit es nicht zu einem Überverkauf kommt.
+So wird der nötige Bestand in SPoCC reserviert, damit es nicht zu Überverkäufen kommt.
 
 [[table-event-procedure-one]]
 [cols="1,2"]
@@ -535,80 +535,4 @@ Auftrag > Mandant (Shop)
 
 |Aktion
 |Plugins > SPoCC: Bestand reservieren
-|===
-
-[#180]
-=== SPoCC über Zahlung und Versand benachrichtigen
-
-Fertig abgewickelte Aufträge befinden sich im Status 7.
-Dieser Status bedeutet, dass die Zahlung eingegangen ist und der Warenausgang gebucht wurde.
-Zu diesem Zeitpunkt soll SPoCC auch über die Änderungen am Auftrag informiert werden.
-
-[[table-event-procedure-two]]
-[cols="1,2"]
-|===
-
-|Ereignis
-|Warenausgang gebucht
-
-|Filter (optional)
-|Auftrag > Herkunft +
-Auftrag > Mandant (Shop)
-
-|Aktion
-|Plugins > SPoCC: Versand und Zahlung an SPoCC melden
-|===
-
-[#190]
-=== SPoCC über Stornierungen benachrichtigen
-
-Eine Stornierung:
-
-* bedeutet, dass der:die Kund:in es sich anders überlegt hat und den gekauften Artikel doch nicht haben möchte.
-* erfolgt, bevor du die Zahlung erhalten und die Ware verschickt hast.
-* kann als Aufhebung der Bestandsreservierung verstanden werden.
-plentymarkets teilt SPoCC mit, dass die erhaltene Bestandsreservierung nichtig ist.
-
-Um einen Auftrag zu stornieren, änderst du seinen Status auf 8.
-Zu diesem Zeitpunkt soll SPoCC über die Stornierung informiert werden, damit der Bestand nicht länger reserviert wird.
-
-[[table-event-procedure-three]]
-[cols="1,2"]
-|===
-
-|Ereignis
-|Statuswechsel auf 8
-
-|Filter (optional)
-|Auftrag > Herkunft +
-Auftrag > Mandant (Shop)
-
-|Aktion
-|Plugins > SPoCC: Auftragsstornierung an SPoCC melden
-|===
-
-[#200]
-=== SPoCC über Retouren benachrichtigen
-
-Eine Retoure:
-
-* bedeutet, dass der:die Kund:in es sich anders überlegt hat und den gekauften Artikel doch nicht haben möchte.
-* erfolgt, nachdem du die Zahlung erhalten und die Ware verschickt hast.
-
-Da die Zahlung schon eingegangen ist, muss in diesem Fall eine Rückzahlung erfolgen.
-Das bedeutet, dass du SPoCC über die Retoure informieren musst, damit die Umsätze wieder aus der Umsatzfiliale ausgebucht werden können.
-
-[[table-event-procedure-four]]
-[cols="1,2"]
-|===
-
-|Ereignis
-|Neue Retoure
-
-|Filter (optional)
-|Auftrag > Herkunft +
-Auftrag > Mandant (Shop)
-
-|Aktion
-|Plugins > SPoCC: Retoure an SPoCC melden
 |===
