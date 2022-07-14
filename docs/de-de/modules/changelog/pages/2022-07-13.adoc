@@ -1,0 +1,363 @@
+= Changelog 13. Juli 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 7. Juli 2022
+:endWeekDate: 13. Juli 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/fix-tickets-are-not-retrieved-anymore-fix-tickets-werden-nicht-mehr-abgerufen/687601
+// Auch diesen Eintrag beachten: https://forum.plentymarkets.com/t/ereignisaktionen-neue-aktion-stornobeleg-mahnung-erzeugen-event-procedures-new-procedure-generate-reversal-dunning-letter/687437
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel
+
+* Wir haben die Option Neuer Sammelauftrag an den folgenden Stellen im Menü *CRM » Kontakte* hinzugefügt:
+** in der Übersicht im Kontextmenü unter *Aufträge*
+** im Kontaktdatensatz im Portlet *Aufträge* (Plus-Zeichen)
+
+[discrete]
+=== Global
+
+* Die Liste von verfügbaren Sprachen wurde erweitert. Dies betrifft zum Beispiel die verfügbare Sprachauswahl bei Aufträgen und Dokumenteinstellungen. Hinzugefügte Sprachen:
+** Finnisch (war bereits an einigen Stellen verfügbar)
+** Irisch
+** Litauisch
+** Lettisch
+** Estnisch
+** Kroatisch
+** Ungarisch
+
++
+Die Liste aller intern verfügbaren Sprachen kann auf der Handbuchseite xref:daten:interne-IDs.adoc#10[Interne IDs in plentymarkets] eingesehen werden.
+
+[discrete]
+=== Kataloge
+
+* m Katalog (Format: *Artikel Neu*) lassen sich nun die Felder *Niedrigster Preis der letzten 30 Tage* und *Niedrigster Preis automatisch ermittelt* exportieren.
+* Es gab eine Änderung im Katalog, dass man nun im Baum der Exportfelder das Feld *Verkaufspreise* wählt. In dem hinzugefügten Feld lässt sich dann per Dropdown der Preis auswählen.
++
+[NOTE]
+.Kein To-do
+======
+Es gab eine Migration, so dass ihr nichts nacharbeiten müsst.
+======
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+* Als erster Schritt des Amazon-Schnittstellen-Upgrades auf die neue Selling Partner API (SP-API) wurde der Autorisierungs-Workflow umgestellt. Damit gehen folgende Änderungen einher:
+** Der Amazon-Assistent für die *Grundeinstellungen* wurde im Schritt zur Autorisierung aktualisiert. Ein Button leitet Benutzer:innen in das Amazon-Backend, um plentymarkets zu erlauben, im Namen der Händler:in mit der SP-API zu kommunizieren und plentymarkets die notwendigen Rechte zu gewähren.
+** Abgelaufene Tokens für die MWS-API müssen jetzt durch Händler:innen aufgrund des neuen SP-API-Autorisierungs-Workflows manuell erneuert werden.
+** Bestehende und gültige Autorisierungen für die MWS-API werden automatisch um die Autorisierung zur SP API erweitert und von plentymarkets migriert. Dies erlaubt einen fließenden Übergang beim Wechsel auf die neue Schnittstelle.
+
++
+[NOTE]
+.Hinweis
+======
+Der neue Autorisierungsworkflow kann sowohl für eine neue Autorisierung als auch die Verlängerung einer bestehender Authorisierung für *MWS und SP-API* genutzt werden.
+======
+
+[discrete]
+=== CRM
+
+* Wenn man im Suchfeld im Menü *CRM » Kontakte* einen Wert eingegeben hat, wurde bisher an erster Stelle der Suchparameter `ID` angezeigt. Dies wurde geändert. Ab sofort wird an erster Stelle der Suchparameter `Name` angezeigt.
+
+[discrete]
+=== OTTO
+
+:otto-master-date: 08.07.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/kMMKE9mBo98dSg95xALe0Xzhf24.xlsx
+
+include::partial$otto-master-file.adoc[]
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel
+
+* Es gab einen Fehler, dass sich die neue Tagübersicht nicht nach dem Namen sortieren ließ. Diesen Fehler konnten wir beheben.
+
+[discrete]
+=== CRM
+
+* Wenn man zwei Mal nacheinander auf das Hauptmenü *CRM* geklickt hat, öffnete sich beim ersten Klick zwar das Menü *CRM » Kontakte*, beim zweiten Klick auf CRM jedoch ein leeres Tab. Dieses Verhalten wurde behoben.
+* Menü *CRM » Kontakte*: Wenn ein Kunde sich über den Abmelde-Link vom Newsletter abgemeldet hat, wurde zwar die E-Mail-Adresse aus dem entsprechenden Ordner entfernt. Jedoch waren das Datum des Newsletter-Abonnements im Kontaktdatensatz und der Haken in der Kontakte-Übersicht in der Spalte *Newsletter* immer noch sichtbar. Dieses Verhalten wurde behoben.
+* Im Menü *CRM » Kontakte* waren nicht nur Tags sichtbar und auswählbar, die für den Bereich *Kontakte* erstellt worden sind, sondern auch solche Tags, die für andere Bereiche in plentymarkets erstellt worden sind. Dieses Verhalten wurde behoben.
+* In einigen Systemen konnte es vorkommen, dass E-Mail-Vorlagen, die mit dem EmailBuilder erstellt wurden, nicht versendet werden konnten. Dieses Verhalten wurde behoben.
+* Die Gutschein-Vorschau in der Gutschein-Vorlage der Kampagne konnte nicht geöffnet werden. Eine Fehlermeldung wurde angezeigt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Bei der Erstellung von Auftragsdokumenten konnte es zu einem Fehler kommen, wenn Varianten des Auftrags nicht mehr existiert haben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Im EmailBuilder wurde eine Funktion zum Kopieren von Vorlagen hinzugefügt. Mit einem Klick auf das Kontextmenü an der Vorlage kopierst du die Vorlage und kannst sie anschließend nach deinen Wünschen anpassen.
+
+[discrete]
+=== Ereignisaktionen
+
+* In den Ereignisaktionen wurde ein neuen Filter *Vorhandene Dokumente* hinzugefügt. Mit diesem ist es möglich nach Aufträgen zu Filtern bei denen alle ausgewählten Typen von Auftragsdokumenten vorhanden sind. Weitere Informationen findest du auf der Handbuchseite xref:automatisierung:ereignisaktionen.adoc#events-filters-order[Ereignisaktionen].
+* In der Ereignisgruppe Dokumente wurde das neue Ereignis *Dokument generiert* hinzugefügt. Das Ereignis wird ausgelöst wenn eines der ausgewählten Dokumente generiert wird. Es können mehrere Dokumenttypen ausgewählt werden bei denen das Ereignis ausgelöst werden soll. Weitere Informationen findest du auf der Handbuchseite xref:automatisierung:ereignisaktionen.adoc#events-documents[Ereignisaktionen].
+
+[discrete]
+=== Fulfillment
+
+* Im Assistenten *eBay Fulfillment by Orange Connex* wurde der Schritt *Outbound-Auftragsdokumente* hinzugefügt. Hier entscheidest du, welche Dokumente zusammen mit dem Outbound-Auftrag übermittelt werden sollen. Zur Auswahl stehen die Dokumente *Lieferschein*, *Rücksendeschein* und *Retourenlabel*.
+* Im Versand-Center 2.0 wurden in der Detailansicht im Bereich *Pakete* die Funktionen zum Hinzufügen eines neuen Pakets und zum Löschen eines bestehenden Pakets hinzugefügt. Beim Klick auf das Plus (*Paket hinzufügen*) öffnet sich ein weiteres Fenster, in dem man den Pakettyp, den Typ der Verpackungseinheit und das Paketgewicht festlegen kann.
+
+[discrete]
+=== Kaufland
+
+* Du kannst Artikeldaten ab sofort per Katalogexport an Kaufland übertragen. Kataloge für Kaufland werden im Menü *Einrichtung » Assistenten » Omni-Channel* mit dem Assistenten *Kaufland - Kataloge* erstellen erstellt.
++
+[NOTE]
+.Hinweis
+======
+Für jede Produktkategorie von Kaufland, in der du deine Artikel anbieten möchtest, muss ein eigener Katalog erstellt werden.
+
+Wenn du für eine Kaufland-Produktkategorie noch keinen Katalog erstellt hast, werden Artikel dieser Produktkategorie über den alten Artikelexport zu Kaufland exportiert.
+
+Weitere Informationen zur Erstellung von Katalogen findest du auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#catalogue-export[Kaufland.de einrichten].
+======
+
+[IMPORTANT]
+.To-Do
+======
+Wenn du Artikeldaten mit Katalogen an Kaufland übertragen willst, erstelle Kataloge mit dem Assistenten Kaufland - Kataloge erstellen.
+
+*_Hinweis:_* Momentan können Kataloge für Kaufland nur mit dem Assistenten Kaufland - Kataloge erstellen und nicht über das Menü Daten » Kataloge erstellt werden.
+
+. Öffne das Menü Einrichtung » Assistenten » Omni-Channel.
+. Klicke auf den Assistenten Kaufland - Kataloge erstellen.
+. Durchlaufe den Assistenten. +
+Weitere Informationen zum Assistenten findest du auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#catalogue-export[Kaufland.de einrichten]. +
+→ Im Menü Daten » Kataloge wird ein Katalog für Kaufland erstellt.
+
+Nachdem du den Assistenten durchlaufen hast, wird im Menü *Daten » Kataloge* ein Katalog für Kaufland erstellt. In diesem Katalog verknüpfst du anschließend in plentymarkets gespeicherte Artikeldaten mit den Datenfeldern von Kaufland. So legst du fest, welche Artikeldaten an Kaufland übertragen werden sollen.
+======
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Im Menü *Einrichtung » Einstellungen » Benutzer » Konten* im Tab *Eigner* wurde die Option *Kunde* in *Kontakt* umbenannt.
+
+[discrete]
+=== plentyShop
+
+* Im Zuge der Vereinfachung des plentymarkets Backends wurden einige Einstellungen im Systembaum an andere Stellen bewegt. Dabei handelt es sich zunächst nur um Einstellungen, die für plentyShops relevant sind oder für dessen Vorgänger Callisto relevant waren. Es handelt sich dabei ausschließlich um kosmetische/organisatorische Änderungen. Die folgenden Einstellungen/Menüs wurden an anderer Stelle im Systembaum untergebracht, um Einstellungen kund:innenfreundlicher zu bündeln. Die folgende Tabelle listet die Änderungen an den Einstellungen auf:
++
+[cols="2"]
+|======
+|Alter Pfad |Neuer Pfad
+
+|Einrichtung » Mandant » Global » Live-Shopping
+|Einrichtung » Mandant » Global » Webshop » Live-Shopping
+
+|Einrichtung » Mandant » Global » Dienste » Facettensuche
+|Einrichtung » Mandant » Global » Webshop » Facettensuche
+
+|Einrichtung » Mandant » (Mandanten wählen) » Version
+|Einrichtung » Mandant » Global » Version
+
+|Einrichtung » Mandant » (Mandanten wählen) » Webshop » Webshop sperren
+|Einrichtung » Mandant » Global » Webshop » Shop sperren
+
+|Einrichtung » Mandant » (Mandanten wählen) » SEO
+|Einrichtung » Mandant » (Mandanten wählen) » Webshop » SEO
+
+|Einrichtung » Mandant » (Mandanten wählen) » Kategorien » Rabatte
+|Einrichtung » Mandant » (Mandanten wählen) » Kategorierabatte
+
+|Einrichtung » Mandant » (Mandanten wählen) » Dienste » Facettenverknüpfung
+|Einrichtung » Mandant » (Mandanten wählen) » Webshop » Facettenverknüpfung
+|======
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== CRM
+
+* In der Vorschau im EmailBuilder gab es einen Anzeigefehler bei den Variablen `Datum des Auftragseingangs` und `Datum und Uhrzeit des Auftragseingangs`:
+** Bei der Variable `Datum des Auftragseingangs` wurde zusätzlich die Zeit mit angezeigt.
+** Die Variable `Datum und Uhrzeit des Auftragseingangs` wurde in der Vorschau gar nicht angezeigt.
+
++
+Dieses Verhalten wurde behoben. Die Variablen werden nun mit den korrekten Werten in der Vorschau angezeigt.
+* In einigen Fällen konnte es vorkommen, dass beim Öffnen der Vorschau oder beim Senden der Vorlage im Menü *Aufträge » Aufträge bearbeiten* ein Fehler angezeigt wurde. Die E-Mail-Vorschau und der Versand der Vorlage funktionierten nicht. Außerdem gab es Fälle, in denen die E-Mail-Vorlage nicht gespeichert werden konnte, wenn man versuchte Variablen wie Rechnungsadresse oder Lieferadresse zu verwenden. Dieses Verhalten wurde behoben.
+* Wenn man die Telefonnummer nachträglich in den Adressoptionen und den Kontaktoptionen im Menü *CRM » Kontakte* ändern wollte und diese einen Bindestrich enthält, wurde ein Fehler angezeigt und die geänderte Telefonnummer konnte nicht gespeichert werden. Dieses Verhalten wurde behoben.
+* Wenn man im EmailBuilder 2 statische Anhänge an die Vorlage anhängen wollte, wurde nur der zweite Anhang versendet. Dieses Verhalten wurde behoben.
+* Wenn man im Kontaktdatensatz im Menü *CRM » Kontakte* eine bereits gespeicherte Bewertung von beispielsweise 2 Sternen auf 0 Sterne ändern wollte, konnte diese Änderung nicht gespeichert werden. Dieses Verhalten wurde behoben.
+* In einigen Systemen wurde ein Validierungsfehler angezeigt, wenn man im Kontaktdatensatz im Menü *CRM » Kontakte* Änderungen, beispielsweise an den Eigenschaften oder Kontaktoptionen, vorgenommen hat. Außerdem gab es in einigen Systemen Probleme mit Eigenschaften, die als Pflichtfeld gekennzeichnet waren.
++
+Dieses Verhalten wurde behoben. Wenn es einen Fehler beim Speichern der Eigenschaften gibt, wird nun angezeigt, welche Eigenschaft fehlerhaft ist. Der Fehler, dass man die Option *Pflichtfeld* bei den Eigenschaften nicht ändern konnte, wurde behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen von *{version}* gelöscht.
+
+[discrete]
+=== Payment
+
+* Wie in link:https://forum.plentymarkets.com/t/update-abschaltung-alte-benutzeroberflaeche-zahlungsverkehr-announcement-abandonment-of-old-user-interface-payments/655278[diesem Beitrag^] angekündigt, wurde die alte Bedienoberfläche *Zahlungsverkehr* aus dem Menü *Aufträge* entfernt.
+
+[discrete]
+=== plentyShop
+
+* Im Zuge der Vereinfachung des plentymarkets Backends haben wir einige veraltete Menüpfade und Einstellungen entfernt. Dabei handelt es sich zunächst nur um Einstellungen, die für plentyShops relevant sind oder für dessen Vorgänger Callisto relevant waren. Es handelt sich dabei ausschließlich um kosmetische/organisatorische Änderungen; durch das Entfernen von Menüs werden keine Funktionalitäten entfernt. Die folgenden Einstellungen wurden aus dem plentymarkets Backend entfernt:
+** Einrichtung » Mandant » Global » Sprachpakete
+** Einrichtung » Mandant » Global » Feedback
+** Einrichtung » Mandant » Global » Geschenke
+** Einrichtung » Mandant » Global » Gewinnspiel
+** Einrichtung » Mandant » Global » Dienste » bit.ly
+** Einrichtung » Mandant » Global » Dienste » Dropbox
+** Einrichtung » Mandant » Global » Dienste » Facebook
+** Einrichtung » Mandant » Global » Dienste » Familienkarte
+** Einrichtung » Mandant » Global » Dienste » Lionbridge
+** Einrichtung » Mandant » Global » Dienste » Picalike
+** Einrichtung » Mandant » Global » Dienste » Testberichte.de
+** Einrichtung » Mandant » Global » Dienste » Twitter
+** Einrichtung » Mandant » Global » Dienste » Dropbox
+** Einrichtung » Mandant » (Mandanten wählen) » Webshop » Währung (kann im plentyShop-Assistenten eingestellt werden)
+** Einrichtung » Mandant » (Mandanten wählen) » Webshop » Weiterleitung
+** Einrichtung » Mandant » (Mandanten wählen) » Webshop » Seiten
+** Einrichtung » Mandant » (Mandanten wählen) » Webshop » Artikelsuche
+** Einrichtung » Mandant » (Mandanten wählen) » Artikelansichten » Verfügbarkeit
+** Einrichtung » Mandant » (Mandanten wählen) » Kategorien
+** Einrichtung » Mandant » (Mandanten wählen) » Kategorien » Einstellungen
+** Einrichtung » Mandant » (Mandanten wählen) » Kategorien » Aktivieren
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » DHL Packstation
+** Einrichtung » Mandant » (Mandanten wählen) » Mein Konto » Auftragsinformationen
+** Einrichtung » Mandant » (Mandanten wählen) » Dienste
+** Einrichtung » Mandant » (Mandanten wählen) » Affiliate
+** Einrichtung » Mandant » (Mandanten wählen) » Module
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/cfourfullcrossselling_6125[Crossselling Artikellisten für die Produkt Seite^]
+|1.0.12
+|-
+
+|link:https://marketplace.plentymarkets.com/customerclasshomepage_6067[Customer Class HomePage^]
+|2.2.7
+|-
+
+|link:https://marketplace.plentymarkets.com/paymentmethods_6828[Meine Zahlungsarten^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/paymentmethodspro_6829[Meine Zahlungsarten Professional^]
+|1.4.1
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.1.69
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.11
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.16
+|-
+
+|link:https://marketplace.plentymarkets.com/mytoys_54776[MyToys^]
+|1.0.34
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.0.12
+|Wenn SEPA als Zahlungsart bisher nicht im Webshop angezeigt wurde, muss der Assistent noch einmal durchlaufen werden.
+
+|link:https://marketplace.plentymarkets.com/sendcloudplugin_6985[Sendcloud shipping^]
+|1.0.13
+|-
+
+|link:https://marketplace.plentymarkets.com/uniservaddresscleansing_6869[Uniserv Address Cleansing^]
+|2.0.1
+|-
+
+|link:https://marketplace.plentymarkets.com/prepayment_4758[Vorkasse^]
+|3.0.8
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
