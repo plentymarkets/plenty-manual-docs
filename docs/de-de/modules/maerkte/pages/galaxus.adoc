@@ -1,0 +1,864 @@
+= Galaxus
+:author: team-plenty-channel
+:keywords: Galaxus
+:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz Galaxus in deinem plentymarkets System ein.
+:page-index: false
+
+:galaxus:
+:market: Galaxus
+:price-search-engine: Galaxus
+:plugin-name: Galaxus
+:main-client:
+:plugin-link: https://marketplace.plentymarkets.com/galaxus_4788
+
+Der Schweizer Onlinemarktführer Galaxus ist Spezialist für IT, Unterhaltungselektronik und Telekommunikation. Als größtes Online-Warenhaus der Schweiz verfügt Galaxus über ein stetig wachsendes Sortiment. Immer zu günstigen Preisen und zuverlässig und schnell geliefert.
+
+[#register]
+== Bei Galaxus registrieren
+
+Registriere Dich online für das link:https://www.galaxus.ch/de/page/werden-sie-haendler-12462[Digitec Galaxus Händler Programm^] oder kontaktiere Galaxus über die E-Mail-Adresse mailto:haendlerprogramm@digitecGalaxus.ch[haendlerprogramm@digitecGalaxus.ch].
+
+[#plugin-download]
+== Plugins herunterladen und installieren
+
+include::partial$plugin-download.adoc[]
+
+[#activate-referrer]
+== Auftragsherkunft aktivieren
+
+:referrer: Galaxus
+:referrer-option: pass:quotes[Option *Galaxus*]
+
+include::partial$auftragsherkunft-aktivieren.adoc[]
+
+[#market-setup]
+== Auftragsschnittstelle in plentymarkets einrichten
+
+Nimm die folgenden Einstellungen in plentymarkets vor, um die Auftragsschnittstelle zu Galaxus einzurichten.
+Halte dazu die FTP-Verbindungsdaten bereit, die du nach der Registrierung per E-Mail von Galaxus erhalten hast.
+
+include::partial$plugin-market-not-in-menu.adoc[]
+
+[.instruction]
+Auftragsschnittstelle zu Galaxus einrichten:
+
+. Öffne das Menü *Einrichtung » Märkte » Galaxus » Auftragsimport*.
+. Nimm die Einstellungen vor. Beachte die Erläuterungen in <<#order-settings>>.
+. Speichere (terra:save[]) die Einstellungen.
+
+[[order-settings]]
+.Galaxus-Einstellungen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *Auftragsschnittstelle aktivieren*
+| Aktivieren, um den Datenaustausch für Aufträge mit Galaxus zu ermöglichen.
+
+| *Füge '&#124;Kundenreferenznummer' nach der Ext.Auftragsnummer*
+| Aktivieren, wenn du die Kundenreferenznummer für zollbezogene Dokumente benötigst (EU-HUB USER).
+
+*_Hinweis:_* Wenn diese Option aktiv ist, kann eine Auftragssuche nur mit dem volständigem String *GalaxusAuftragsnummer&#124; GalaxusKundenreferenznummer* durchgeführt werden.
+
+//| *Ich nutze den Galaxus EU-Hub und habe eine Fiskalvertretung in der Schweiz*
+//|
+//TODO !!!
+
+2+| FTP-Konfiguration
+
+| *Gastgeber*
+| Gastgeber-Namen nach dem Muster *ftp.dg.ch* eingeben.
+
+| *User* +
+*Passwort*
+| Benutzernamen und Passwort eingeben, das du von Galaxus erhalten hast.
+
+| *Port-Nummer*
+| Gib die Port-Nummer ein.
+
+| *plentymarkets2DG* +
+| Wähle den *plentymarkets2DG* Ordner für den ausgewählten Gastgeber. +
+→ Auf diesem FTP-Pfad schreibt das Plugin Antworten an Galaxus.
+
+| *DG2plentymarkets*
+| Wähle den *DG2plentymarkets* Ordner für den ausgewählten Gastgeber. +
+→ Das Plugin liest neue Aufträge und Galaxus-Anfragen von hier. +
+*_Wichtig:_* Die gepflegten Ordnerpfade beginnen immer mit *(/... /...)*, nur wenn der eingetragene Gastgeber-Name aus *Schritt 3.* nicht mit *( / )* endet.
+
+2+| Auftrag Status-Konfiguration
+
+| *Auftrag-Status für Stornierungsanforderungen*
+| Mit welchem Auftragsstatus sollen neue Stornoanfragen importiert werden?
+
+| *Auftrag-Status für Rücksendeanfragen*
+| Mit welchem Auftragsstatus sollen neue Retourenanfragen importiert werden?
+
+| *Stornierungsanfragen für eingegangene Aufträge ab folgendem Status automatisch ablehnen*
+| Ab welchem Auftragsstatus sollen eingehene Stornoanfragen automatisch abgelehnt werden?
+
+|===
+
+== Artikelexport einrichten
+
+Der Artikelexport läuft über die folgenden Elastic-Export-Formate. Wenn du das Plugin bereitstellst, werden diese Formate automatisch installiert.
+
+* *GalaxusProductDataExport*
+* *GalaxusProductPropertiesExport*
+* *GalaxusStockPricingExport*
+
+Formatrelevante Einrichtungsoptionen nimmst du im Menü *Einrichtung » Märkte » Galaxus » Artikel Export* vor.
+
+[.instruction]
+Artikelexport zu Galaxus einrichten:
+
+. Öffne das Menü *Einrichtung » Märkte » Galaxus » Artikel Export » Product Data*.
+. Nimm die Einstellungen vor. Beachte die Erläuterungen in <<#export-settings>>.
+. Speichere (terra:save[]) die Einstellungen.
+//TODO: Optionen erklären
+
+[[export-settings]]
+.Einstellungen für den Artikelexport
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+2+^| *Product Data* (Format *GalaxusProductDataExport*)
+
+| *Beschreibung*
+| Auswahlmöglichkeiten:
+
+* *Standard Beschreibung*
+* *Technische Daten*
+* *Vorschautext*
+* *Freitextfeld 1* bis *Freitextfeld 20*
+
+| *Exportiere Zolltarifnummer als*
+| Auswahlmöglichkeiten:
+
+* *TARES*
+* *TARIC*
+
+2+^| *Product Properties » Item Characteristics* (Format *GalaxusProductPropertiesExport*)
+
+|*Export freigeschaltete Merkmale*
+|Auswahlmöglichkeiten:
+
+* Alle
+* Nur ausgewählte Merkmale
+
+| *Whitelist*
+|
+
+[.instruction]
+Whitelist-Element erstellen:
+
+. Öffne das Menü *Einrichtung » Märkte » Galaxus » Artikelexport » Item Characteristics / Variation Properties*.
+. Klicke auf *Hinzufügen*.
+. Wähle ein *Merkmal* / eine *Eigenschaft* aus.
+. *Speichere* die Einstellungen.
+
+2+^| *Product Properties » Variation Properties* (Format *GalaxusProductPropertiesExport*)
+
+| *Export freigeschaltete Eigenschaften*
+| Auswahlmöglichkeiten:
+
+* Alle
+* Nur ausgewählte Eigenschaften
+* Keine
+
+| *Whitelist*
+|
+
+[.instruction]
+Whitelist-Element erstellen:
+
+. Öffne das Menü *Einrichtung » Märkte » Galaxus » Artikelexport » Item Characteristics / Variation Properties*.
+. Klicke auf *Hinzufügen*.
+. Wähle ein *Merkmal* / eine *Eigenschaft* aus.
+. *Speichere* die Einstellungen.
+
+2+^| *Product Stock Pricing* (Format *GalaxusStockPricingExport*)
+
+| *Währung*
+| Auswahlmöglichkeiten für den Export der Währung:
+
+* CHF
+* EUR
+
+| *Berechne Verkaufspreis excl. MwSt.anhand Elastic Export Einstellungn 'Zielland'*
+| Markiere diese Option wenn die Elastic Export-Einstellung für *Zielland* beachtet werden soll.
+
+| *Positive Bestände sollen immer exportiert werden, unabhängig von der durchschnittlichen Lieferzeit*
+| Auswahlmöglichkeiten:
+
+* An
+* Aus
+
+*_Hinweis:_* Für ein besseres Verständnis, folge der Standard-Export-Matrix für aktive Varianten aus *Tabelle 5*.
+
+| *Verkaufspreis der als Einkaufspreis excl. MwSt. exportiert wird*
+| Wähle einen relevanten, bereits eingerichteten Verkaufspreis. Diese Option wird von *Berechne Verkaufspreis excl. MwSt.anhand Elastic Export Einstellungn 'Zielland'* auch beeinflusst.
+
+| *Verkaufspreis der als Einkaufspreis excl. Gebühr und MwSt. exportiert wird*
+| Wähle einen relevanten, bereits eingerichteten Verkaufspreis aus. Diese Option wird von *Berechne Verkaufspreis excl. MwSt.anhand Elastic Export Einstellungn 'Zielland'* auch beeinflusst.
+
+| *Exportiere Warenbestände aus:*
+| Auswahlmöglichkeiten:
+
+* Alle verfügbaren Lager (Vertrieb)
+* Ein Lager meiner Wahl (Vertrieb)
+
+|===
+
+=== Standard-Export-Matrix für aktive Varianten
+
+Die Grundlogik von Galaxus funktioniert wie folgt:
+
+Sobald ein positiver Lagerbestand an Galaxus übermittelt wird, verwendet Galaxus die Standardlieferfrist, die bei Galaxus für das Konto hinterlegt ist. Weist ein Artikel keinen positiven Bestand auf, wird die Wiederbeschaffungsdauer verwendet.
+
+*_Hinweise:_*
+
+* Bei Lagerartikeln geht Galaxus von einer durchschnittlichen Lieferzeit von 2 Tagen aus. Wenn ein Artikel sowohl Bestand als auch eine Verfügbarkeit mit einer höheren durchschnittlichen Lieferzeit von 2 Tagen aufweist, wird der Artikel standardmässig mit einem Bestand von 0 und der Lieferfrist als Wiederbeschaffungsdauer exportiert. Bei Artikeln mit 0 oder negativem Bestand und einer durchschnittlichen Lieferfrist von kleiner oder gleich zwei Tagen, gehen wir von einem Konfigurationsfehler aus und der Artikel wird nicht exportiert.
+
+* Artikeldaten werden unabhängig von den Warenbestand-Exportbedingungen für den Export verarbeitet.
+
+* Bündel werden nicht exportiert, wenn eines der enthaltenen Stücke nicht auf Lager ist. Außerdem ist die exportierte Bestandsmenge die der Bundle-Komponente mit dem höchsten Bestand.
+
+Die folgende Tabelle zeigt eine Standard-Export-Matrix für aktive Varianten.
+
+[[standard-export-matrix]]
+.Standard-Export-Matrix für aktive Varianten
+[cols="1,1,1"]
+|===
+|Netto Warenbestand| Durchschnittliche Lieferzeit| Auswirkung
+
+| Bestand positiv
+| Lieferfrist *<= 2*
+| Warenbestand wird exportiert.
+
+|Bestand positiv
+| Lieferfrist *> 2*
+| Nur Lieferfrist wird exportiert.
+
+|Bestand positiv
+| Keine *Lieferfrist*
+| Warenbestand wird exportiert.
+
+|Bestand 0/negativ
+| *Lieferfrist <= 2*
+| Kein Export.
+
+|Bestand 0/negativ
+| *Lieferfrist > 2*
+| Nur Lieferfrist wird exportiert.
+
+|Bestand 0/negativ
+| *Keine Lieferfrist*
+| Kein Export.
+
+|===
+
+== Verkaufspreis einrichten
+
+Mit Verkaufspreisen legst du die Bedingungen fest, unter denen eine Variante zu einem bestimmten Preis und über einen bestimmten Verkaufskanal verkauft wird.
+
+//TODO: Include
+
+. Öffne das Menü *Einrichtung » Artikel » Verkaufspreise*.
+. Klick auf *[+] Neu*.
+. Gib eine *Position-Nummer* ein.
+. Fülle den *Internen* und *Externen* *Namen*.
+. Setze einen Wert für *Ab Menge*.
+. Wähle *CHF* oder *EUR* als *Währung*.
+. Wähle den zuständigen *Mandanten*.
+. Wähle die *Verkaufsländer*.
+. Wähle die Herkunft *Galaxus*.
+. Speichere die Einstellungen.
+
+*_Hinweis:_* Alternativ kannst du die Herkunft *Galaxus* in einem schon existierenden Verkaufspreis aktivieren lassen.
+
+== Varianten für den Export vorbereiten
+
+* Die Varianten müssen *Aktiv* sein: +
+  . Öffne das Menü *Artikel » Variante » Einstellungen » Bereich Verfügbarkeit*, setze das Kontrollkästchen *Aktiv*.
+
+*  Die *Artikelverfügbarkeit* für den Marktplatz *Galaxus* muss gesetzt sein. +
+  . Öffne das Menü *Artikel » Variante » Reiter Verfügbarkeit » Bereich Märkte*.
+  . Wähle den Martkplatz *Galaxus*.
+
+* Eine Galaxus *SKU* muss gesetzt sein. +
+  . Öffne das Menü *Artikel » Variante » Reiter Verfügbarkeit » Bereich SKU*.
+  . Erstelle eine *SKU* für Herkunft *Galaxus*.
+
+* Ein Galaxus *Verkaufspreis* muss gesetzt sein. +
+  . Öffne das Menü *Artikel » Variante » Reiter Einstellungen » Bereich Verkaufspreise*.
+  . Öffne den Verkaufspreis.
+  . Aktiviere die Herkunft *Galaxus*.
+
+* Erlaubte *Merkmale* und/oder *Eigenschaften* müssen mit den Varianten verknüpft sein. +
+  . Öffne das Menü *Artikel » Merkmale » Galaxus Merkmale*.
+  . Verknüpfe die relevanten Elemente.
+  . *_Oder:_* Öffne das Menü *Einstellungen » Eigenschaften*.
+  . Verknüpfe die relevanten Elemente.
+
+* Mit dem Artikel verknüpfte *Attribute* werden auch exportiert.
+
+* Die *Verfügbarkeiten 1-10* müssen an der Variante gepflegt sein. +
+  . Öffne das Menü *Einrichtung » Artikel » Verfügbarkeit*.
+  . Pflege Business-Relevante *Durchschnittliche Lieferzeiten*.
+  . Stelle sicher, dass für Galaxus aktivierte Varianten die relevante *Verfügbarkeit 1-10* verknüpft ist. +
+  *_Wichtig:_* Die Einstellung *Positive Bestände sollen immer exportiert werden, unabhängig von der durchschnittlichen Lieferzeit* funktioniert ohne eine *Verfügbarkeit 1-10* nicht.
+
+== Artikel zu Galaxus exportieren
+
+Das Galaxus Plugin exportiert die Artikeldaten über das *Elastic Export Plugin*. Weitere Details zum *Elastic Export Plugin* findest du auf der Handbuchseite xref:daten:elastischer-export.adoc#[Elastischer Export].
+
+=== Elastic Export Formate einrichten
+
+Der Artikelexport läuft über die folgenden Elastic-Export-Formate. Wenn du das Plugin bereitstellst, werden diese Formate automatisch installiert.
+
+* *GalaxusProductDataExport*
+* *GalaxusProductPropertiesExport*
+* *GalaxusStockPricingExport*
+
+. Öffne das Menü *Daten » Elastic Export » Neuer Export [+]*. +
+→ Jedes Format behandelt einen spezifischen Teil des Artikelexports.
+. Wähle eines der Galaxus-Formate:
+  * *GalaxusProductDataExport*
+  * *GalaxusProductPropertiesExport*
+  * *GalaxusProductStockPricingExport*
+. Richte die Exportformate ein.
+. *Speichere* die Einstellungen.
+
+[.collapseBox]
+.Eingabefelder Exportformat *GalaxusProductDataExport*
+--
+
+[[export-format]]
+.Das GalaxusProductData Exportformat
+[cols="1,2a"]
+|===
+|Galaxus Ausgabe |plentymarkets Eingabefeld
+
+| *Product Key, _Pflichtfeld, Text(100)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-ID*
+
+| *GTIN, _Pflichtfeld, Ganzzahl(8-14)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Barcode*
+
+Entspricht der Barcode-Typ Auswahl aus dem Elastic Export filter dieses Formats
+
+| *ManufacturerKey, _Text(200)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Model*
+
+| *Brandname, _Pflichtfeld, Text(100)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Global » Hersteller*
+
+| *ProductTypeIdDigitecGalaxus, _Ganzzahl(200)_*
+| *-*
+
+| *Category, _Pflichtfeld, Text(200)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Kategorien » Standardkategorie*
+
+| *CategoryGroup_1, _Text(200)_*
+| *-*
+
+| *CategoryGroup_2, _Text(200)_*
+| *-*
+
+| *CategoryGroup_3, _Text(200)_*
+| *-*
+
+| *CategoryGroup_4, _Text(200)_*
+| *-*
+
+| *TARESCode, _Text(20)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Grundinstellungen » Zolltarifnummer*
+
+| *TARICode, _Text(20)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Grundinstellungen » Zolltarifnummer*
+
+Diese Angabe wird bei Verwendung des EU-Hubs empfohlen.
+
+| *CountryOfOrigin, _Text(20)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » ReiterGrundinstellungen » Herstellungsland*
+
+Diese Angabe wird bei Verwendung des EU-Hubs empfohlen.
+
+| *SuggestedRetailPriceIncludingVat, _Pflichtfeld, Dezimalzahl(14,4)_*
+| *Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Verkaufspreise*
+
+UVP Galaxus Verkaufspreis
+
+| *VatRatePercentage, _Pflichtfeld, Dezimalzahl(2.4)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Kosten  » Umsatzsteuer*
+
+| *ImageURL (1 bis 10), _Pflichtfeld, text(300)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Bilder*
+
+| *VideoURL (1 bis 3), _Text(300)_*
+| *-*
+
+| *ProductLink (1 bis 3), _Text(300)_*
+| *-*
+
+| *WeightG, _EU-Hub Pflichtfeld, Ganzzahl(10)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Maße: Gewicht brutto.*
+
+| *WidthM, _Dezimalzahl(14,4)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Maße: Länge/Breite/Höhe*
+
+| *HeightM, _Dezimalzahl(14,4)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Maße: Länge/Breite/Höhe*
+
+| *WidthM, _Dezimalzahl(14,4)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Maße: Länge/Breite/Höhe*
+
+| *ReleaseDate, _Format (JJJJ-MM-TT)_*
+| *-*
+
+| *GlobalSalesRank_Ganzzahl(10)_*
+| *-*
+
+| *MinimumAge, _Ganzzahl(10)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Global » Altersfreigabe*
+
+| *ProductTitle_DE, _Pflichtfeld (Mindestens eine der vier Sprachen), (Text100)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Name 1 (de) oder Name 2,3 * Auswählbar in der Elastic Export Konfiguration für dieses Format.*
+
+| *ProductTitle_EN, _(Text100)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Name 1 (en) oder Name 2,3 * Auswählbar in der Elastic Export Konfiguration für dieses Format*
+
+| *ProductTitle_FR, _(Text100)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Name 1 (fr) oder Name 2,3 * Auswählbar in der Elastic Export Konfiguration für dieses Format*
+
+| *ProductTitle_IT, _(Text100)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Name 1 (it) oder Name 2,3 * Auswählbar in der Elastic Export Konfiguration für dieses Format*
+
+| *ProductTitleTagLine_DE, _Text_*
+| *-*
+
+| *ProductTitleTagLine_EN, _Text_*
+| *-*
+
+| *ProductTitleTagLine_FR, _Text_*
+| *-*
+
+| *ProductTitleTagLine_IT, _Text_*
+| *-*
+
+| *ProductDescription_DE, _Pflichtfeld (Mindestens eine der vier Sprachen), Text_*
+| *Standard: Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Artikeltext (de) oder Eingabefeldauswahl von: *System »  Märkte »  Galaxus » Artikel Export » Product Data  Artikel » Eingabefeldzuordnungen.*
+
+| *ProductDescription_EN, _Text_*
+| *Standard: Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Artikeltext (en) oder Eingabefeldauswahl von: *System »  Märkte »  Galaxus » Artikel Export » Product Data  Artikel » Eingabefeldzuordnungen.*
+
+| *ProductDescription_FR, _Text_*
+| *Standard: Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Artikeltext (fr) oder Eingabefeldauswahl von: *System »  Märkte »  Galaxus » Artikel Export » Product Data  Artikel » Eingabefeldzuordnungen.*
+
+| *ProductDescription_IT, _Text_*
+| *Standard: Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Texte » Artikeltext (it)* oder Eingabefeldauswahl von: *System »  Märkte »  Galaxus » Artikel Export » Product Data  Artikel » Eingabefeldzuordnungen.*
+
+| *MinimumOrderQuantity, _Pflichtfeld, Ganzzahl(10)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Verfügbarkeit: Min.-Bestellmenge*
+
+| *RetailUnitQuantityPackingUnit, _Ganzzahl(10_*
+| *-*
+
+| *RetailUnitQuantityOnPallet, _Ganzzahl(10)_*
+| *-*
+
+| *RetailUnitQuantity, _Pflichtfeld, Ganzzahl(10)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Versand: Packstücke*
+
+| *ProductSuperType*
+| *Artikel »  Artikel-Id*
+
+|===
+--
+
+[.collapseBox]
+.Eingabefelder Exportformat *GalaxusProductStockPricingExport*
+--
+
+[[GalaxusProductStockPricingExport]]
+.Das GalaxusProductStockPricingExport Exportformat
+[cols="1,3a"]
+|===
+|Galaxus Ausgabe |plentymarkets Eingabefeld
+
+| *ProductKey, _Pflichtfeld, Text(100)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-ID*
+
+| *QuantityOnStock,  _Pflichtfeld, Ganzzahl(10)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Bestand » Reiter Warenbestand » Netto*
+
+| *IsOnStock, _Pflichtfeld, Boolean(0/1)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Bestand »  ReiterWarenbestand » Netto*
+
+| *DeliveryDate, _Format (JJJJ-MM-TT)_*
+| *Artikel »  Variante »  Reiter Esintelungen  »  Abschnitt: Verfügbarkeit »  Kontrollkästchen Auswahl von 1 bis 10*
+
+Diese Auswahl entspricht den Benutzer Eistellungen unter *System » Artikel » Verfügbarkeit » Durchschnittliche Lieferzeit*
+
+| *PurchasePriceExcludingVat, _Pflichtfeld, Dezimalzahl(14,4)_*
+| *-*
+
+| *SalesPriceExcludingVat, _Pflichtfeld, Dezimalzahl(14,4)_*
+| *Artikel » Artikel bearbeiten » [Artikel öffnen] » Reiter Varianten-ID » Reiter Einstellungen » Verkaufspreise: Netto-Preis*
+
+*_Hinweis:_* Der Exportierte Verkaufspreis nutzt den MwSt.Satz der ausgewählten Export-Währung nur wenn im Elastic Export Format das *Zielland* angegeben ist.
+
+| *SalesPriceIncludingVat, _Pflichtfeld, Dezimalzahl(14,4)_*
+| *-*
+
+| *Currency, _Pflichtfeld, Text(3)_*
+| *System » Artikel » Verkaufspreise » [Galaxus Verkaufspreis öffnen] » Währung EUR / CHF*
+
+| *WarehouseOriginCountry, _Text(2)_*
+| *-*
+
+| *ShipmentType, _Pflichtfeld, Ganzahl(1)_*
+| *-*
+
+|===
+--
+
+[.collapseBox]
+.Eingabefelder Exportformat *GalaxusProductPropertiesExport*
+--
+
+[[GalaxusProductPropertiesExport]]
+.Das GalaxusProductPropertiesExport Exportformat
+[cols="1,3a"]
+|===
+|Galaxus Ausgabe |plentymarkets Eingabefeld
+
+| *ProductKey, _Pflichtfeld, Text(100)_*
+| *Artikel » Artikel bearbeiten » Varianten-ID*
+
+| *SpecificationKey, _Pflichtfeld, Text(80)_*
+| *-*
+
+| *SpecificationGroup_DE,  _Text(80)_*
+| *Merkmal Gruppenname / Attribut (DE)*
+
+*_Hinweis:_* Das Plugin wählt die erste Gruppe aus der Liste der Eigenschaftsgruppen in der Reihenfolge aus, in der sie der Eigenschaft hinzugefügt wurden.
+
+Folgender Workaround sollte *GroupWeWantExported* als erste in der Liste für den Export festlegen:
+
+Beispielsweise haben wir eine Eigenschaft *Property1* welche in 3 Gruppen existieren soll *GroupA, GroupWeWantExported* and *GroupB*
+
+* *_Schritt 1:_* Alle Gruppen von der Eigenschaft trennen.
+* *_Schritt 2:_* *GroupWeWantExported* mit *Property1* verknüpfen und speichern.
+* *_Schritt 3:_* Alle anderen Gruppen mit *Property1* verknüpfen und speichern.
+
+| *SpecificationGroup_EN,  _Text(80)_*
+| *Merkmal Gruppenname / Attribut (EN)*
+
+| *SpecificationGroup_FR,  _Text(80)_*
+| *Merkmal Gruppenname / Attribut (FR)*
+
+| *SpecificationGroup_IT,  _Text(80)_*
+| *Merkmal Gruppenname / Attribut (IT)*
+
+| *SpecificationKey_DE,  _Pflichtfeld, Text(80)_*
+| *Merkmal Bezeichnung / Attribut (DE)*
+
+| *SpecificationKey_EN,  _Pflichtfeld, Text(80)_*
+| *Merkmal Bezeichnung / Attribut (EN)*
+
+| *SpecificationKey_FR,  _Pflichtfeld, Text(80)_*
+| *Merkmal Bezeichnung / Attribut (FR)*
+
+| *SpecificationKey_IT,  _Pflichtfeld, Text(80)_*
+| *Merkmal Bezeichnung / Attribut (IT)*
+
+| *SpecificationValue_DE,  _Pflichtfeld, Text(80)_*
+| *Merkmal Wert / Attribut (DE)*
+
+| *SpecificationValue_EN,  _Pflichtfeld, Text(80)_*
+| *Merkmal Wert / Attribut (EN)*
+
+| *SpecificationValue_FR,  _Pflichtfeld, Text(80)_*
+| *Merkmal Wert / Attribut (FR)*
+
+| *SpecificationValue_IT,  _Pflichtfeld, Text(80)_*
+| *Merkmal Wert / Attribut (IT)*
+|===
+--
+
+=== Formate im Elastischen Export einrichten
+
+//TODO: Optionen durchgehen.
+
+[.instruction]
+Den Elastischen Export einrichten:
+
+. Öffne das Menü *Daten » Elastic Export*.
+. Klicke auf *Neuer Export*.
+. Konfiguriere den Export wie <<#elastic-export-configuration>> beschrieben.
+. Speichere die Einstellungen.
+
+[[elastic-export-configuration]]
+.Plugin-Relevante Elastic Export Einrichtungsoptionen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| Name
+| Name eingeben
+
+* Unter diesem Namen wird das Exportformat in der Übersicht des Tabs *Exporte* angezeigt.
+
+| Typ
+| Typ *Artikel* aus der Dropdown-Liste wählen.
+
+| Format
+| Eines der drei relevanten Datenexportformate wählen.
+
+* *GalaxusProductDataExport*
+* *GalaxusProductPropertiesExpor*
+* *GalaxusProductStockPricingExport*
+
+| Limit
+| Gib eine ganze Zahl ein. Diese Zahl bestimmt, wie viele Artikel maximal exportiert werden sollen. Ganze Zahl von *0* bis *9999* eingeben.
+
+| Cache-Datei generieren
+| Häkchen setzen, wenn mehr als 9999 Datensätze exportiert werden sollen. Um eine optimale Performance des Elastic Export zu gewährleisten, darf diese Option für Maximal 20 Formate Aktiv sein. Cache-Datei kann abhängig von der Userkonfiguration, Datenmenge, mehr als 24h benötigen um aktualisiert zu werden.
+
+| Bereitstellung
+| Die Bereitstellung über *URL* oder *FTP*. Bei Auswahl der Methode *FTP* müssen die FTP-Credentials und das Übertragungsintervall *Täglich/Stündlich* angegeben werden
+
+| URL
+| Bei Auswahl der Option *URL*, klicke auf *Token generieren* um ein Zugriffstoken zu erstellen.
+
+| Dateiname
+| Benenne Deine Exportdateien wie folgt:
+
+* GalaxusProductDataExport = *ProductData_deinHändlername.csv*
+* GalaxusProductStockPricingExport = *ProductStockPricing_deinHändlername.csv*
+* GalaxusProductPropertiesExport = *ProductProperties_deinHändlername.csv*
+
+| Artikelfilter
+| Erlauben dir den Export granularer zu gestalten und so sicherzustellen, dass nur ein gezieltes Artikelsubset nach Galaxus exportiert wird. Bitte beachte, dass das Plugin mit folgenden *Elastic Export* Filtern nicht arbeiten kann:
+
+* Erstellungsdatum des Artikels
+* Standard, Paket, Paketbestandteil
+* Artikeltyp
+* Positiver Warenbestand im gewählten Lager
+* Positiver physischer Warenbestand im gewählten Lager
+* Preise
+* Tags UND-Modus
+* Tags ODER-Modus
+* Aktualisierungsdatum des Artikels
+
+| Artikelfilter hinzufügen
+| Plugin-Relevante Artikelfilter sind: *Aktiv* und: *Märkte » Galaxus*
+
+Artikelfilter aus der Dropdown-Liste wählen und *Hinzufügen*. Standardmäßig sind keine Filter ausgewählt.
+
+| Mandant
+| Standard-Mandant
+
+| Auftragsherkunft
+| Wähle die Auftragsherkunft aus der Drop-Down-Liste aus, die beim Auftragsimport zugeordnet werden soll, in unserem Fall: *Galaxus*
+
+| Barcode
+| Wähle ASIN, ISBN oder eine EAN aus der Dropdown-Liste aus. Auswahl muss mit  der Auftragsherkunft *Galaxus* verknüpft sein, anderenfalls wird die Barcode-Auswahl nicht exportiert
+
+| Verkaufspreis
+| Exportierter Verkaufspreis ist immer der *Verkaufspreis-Netto*. Auswahl von *Verkaufspreis-Brutto* wird beim Export ignoriert.
+
+|===
+
+[#order-processing]
+=== Aufträge verwalten
+
+Die folgenden Unterkapitel erklären die Einrichtung und Besonderheiten der Auftragsschnittstelle.
+
+[#order-processing]
+=== Auftragsabwicklung automatisieren
+
+Richte Ereignisaktionen ein, um Galaxus automatisch über Auftragsänderungen zu informieren.
+
+[#order-processing]
+==== Verfügbare Ereignisaktionen
+
+Für Galaxus sind die in <<#galaxus-event-procedures>> aufgeführten Ereignisaktionen verfügbar.
+
+//TODO: Tabelle checken
+[[galaxus-event-procedures]]
+.Galaxus Ereignisaktionen
+[cols="1,1,3a"]
+|===
+|Ereignisaktion Name |Empfohlenes Ereignis |Erläuterung
+
+| *Ereignisaktion Name*
+| *Empfolenes Ereignis*
+| *Erläuterung*
+
+| Auftragsbestätigung an Galaxus melden
+| Beliebig
+| * Informiert Galaxus über vorgenommene Änderungen im plentymarkets Auftrag.
+* *_Wichtig:_* Das Standard-Lieferdatum ist, das aktuelles Datum + 2 Arbeitstage * kann abhängig von der Artikel-Verfügbarkeit und den unternommenen Aritkel-Einstellungn abweichen.
+
+| Versandbestätigung an Galaxus melden
+| Statuswechsel
+| Informiert Galaxus, dass der Auftrag für den Versand freigeschaltet wurde.
+
+| 'Galaxus Storno-Anfrage akzeptiert' an Galaxus melden
+| Statuswechsel
+| informiert Galaxus, dass die erhaltene Storno-Anfrage akzeptiert wurde. +
+Stornos für einzelne Positionen werden automatisch abgelehnt(Begründung zur Auto-Ablehnung ist: *Nicht stornierbar*). Stornos für ganze Bestellungen werden automatisch akzeptiert, wenn der Initialauftrag noch nicht im Status *Versendet* liegt.
+
+| 'Galaxus Storno-Anfrage abgelehnt' an Galaxus melden
+| Statuswechsel
+| Informiert Galaxus, dass die Storno-Anfrage abgelehnt wurde. +
+Eine Begründung zur Ablehnung kann auf der Auftragsnotiz, vor dem Ausführen dieser Prozedur, hinterlegt werden. +
+Storno für einzelne Positionen werden automatisch abgelehnt (Begrüdung zur Auto-Ablehnung ist: *Nicht stornierbar*). Storno für ganze Bestellungen werden automatisch akzeptiert, wenn der Initialauftrag noch nicht im Status *Versendet* liegt
+
+| 'Händler-storniert' an Galaxus melden
+| Statuswechsel
+| informiert Galaxus, dass der Auftrag vom Händler storniert wurde.
+
+| 'Galaxus Retouren-Anfrage akzeptiert' an Galaxus melden.
+| Statuswechsel
+| informiert Galaxus, dass die erhaltene Retouren-Anfrage akzeptiert wurde.
+
+| 'Galaxus Retouren-Anfrage abgelehnt' an Galaxus melden.
+| Statuswechsel
+| Informiert Galaxus, dass die erhaltene Retouren-Anfrage abgelehnt wurde.
+
+Eine Begründung zur Ablehnung kann auf der Auftragsnotiz, vor dem Ausführen dieser Prozedur, hinterlegt werden.
+
+| 'Retoure an Händler akzeptiert' an Galaxus melden
+| Statuswechsel
+| Informiert Galaxus, dass eine Retoure zum Hädnler akzeptiert wurde.
+
+| 'Retoure an Händler abgelehnt' an Galaxus melden
+| Statuswechsel
+| Informiert Galaxus, dass die Retoure vom Händler abgelehnt wurde.
+
+Eine Begründung zur Ablehnung kann auf der Auftragsnotiz, vor dem Ausführen dieser Prozedur, hinterlegt werden.
+
+| Rechnung an Galaxus senden
+| Statuswechsel
+| Sendet die Auftrag enthaltene Rechnung.pdf an Galaxus.
+
+*_Hinweis:_* Du kannst eine PDF-Vorlage für deine Galaxus Rechnungen, unter *Mandant » Betroffener Mandant » Standorte » betroffener Standort » Dokumente » Rechnung » Tab PDF-Vorlage* für die Zahlungsart: *Plugin: Galaxus Direct Checkout* hizufügen. Dieses Template wird nach Erstellung, automatisch für den Galaxus PDF-Upload eingesetzt.
+|===
+
+==== Beispiel: Ereignisaktion "Auftragsbestätigung an Galaxus senden" einrichten
+
+Richte, Beispielsweise, eine Ereignisaktion ein, um die Auftragsbestätigung Automatisch an Galaxus zu übermitteln:
+
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klick auf *Ereignisaktion hinzufügen*. +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Trage einen *Namen* ein.
+. Wähle, dass Ereignis: *Auftragsänderung » Statuswechsel*.
+. *Speichere* die Einstellungen. +
+→ Die Einstellungen der Ereignisaktion werden angezeigt.
+. Füge einen *Filter* mit Auswahl *Auftrag » Auftragstyp » Auftrag* hinzu.
+. Füge einen *Filter* mit Auswahl *Auftrag » Herkunft » Galaxus* hinzu.
+. Füge eine *Aktion* mit Auswahl *Plugins » Auftragsbestätigung an Galaxus senden* hinzu.
+. *Speichere* die Einstellungen.
+
+=== Besonderheiten der Galaxus-Auftragsabwicklung
+
+* Aufträge mit Rechnungsadresse in der Schweiz und Lieferadresse in der EU werden als Netto-Aufträge importiert.
+
+* In allen Szenarien bei denen nur ein Teil der Bestellung weiterbearbeitet (Retoure / Versand) werden soll, muss die importierte Bestellung aufgeteilt werden. Die resultierenden Aufträge sind separat zu bearbeiten.
+
+* Status zur Ablehnung von Teilstorno-Anfragen und Storno-anfragen muss vom Benutzer gesetzt werden, unter *Einrichtung » Märkte » Galaxus » Auftragsimport » Auftrag Status-Konfiguration*. Ohne Benutzer-Auswahl, wird der Status *[5] Freigabe Versand eingesetzt* Standardmäsig eingesetzt.
+
+* Das Plugin kann nach dem Aufteilen eines Auftrags, ohne zusätzliche Benutzereingaben, zum korrekten Galaxus Auftrag zurückmelden.
+
+* Galaxus Retoure-Anfragen generieren neue plentymarkets Aufträge vom Typ *Retoure* * diese werden zum Initial-Auftrag verknüpft. Die resultierenden Aufträge sind separat zu bearbeiten.
+
+* Das Standard Lieferdatum für Galaxus Aufträge ist: Tag an dem die Ereignisaktion *Auftragsbestätigung an Galaxus senden* ausgelöst wurde *+ 2 Arbeitstage*,es sei denn, ein anderes Lieferdatum ist unter *Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum* im Voraus eingetragen worden. Ein Versanddatum wird auch nicht gesetzt, wenn die zur  Auftragserfüllung benötigte Warenmenge, nicht als Warenbestand-Netto  vorhanden ist. Das geplante Lieferdatum kann anahnd der Plugin-Option  *Positive Bestände sollen immer exportiert werden...* unter *Einrichtung » Märkte » Galaxus » Product Stock Price Tab*  weiteren Änderungen unterliegen.
+
+* Nehme, neben deinen standardmäsigen Lieferschein-Einstellungen, noch folgende Einstellungen für Galaxus Lieferscheine vor:
+
+. Öffne das Menü *Einrichtung » Mandant » Standorte » Standort wählen » Dokumente » Lieferschein*.
+. Wähle im Abschnitt *Optionale Elemente unter Artikelposition* für die Option *Externe Auftragsnummer* die Einstellung *Ja*.
+. Gebe im Eingabefeld *Hinweis* folgenden von Galaxus vorgegebenen Hinweis ein: +
+  *Vielen Dank für Ihre Bestellung!* +
+*Bestellungen über www.galaxus.ch unterliegen den AGB der Digitec Galaxus AG. Bei einer allfälligen Retoure bitten wir Sie unbedingt den geführten Retourenprozess in Ihrem Kundenkonto auf www.galaxus.ch zu nutzen. So ersparen Sie uns und Digitec Galaxus unnötige Aufwände und erhalten die Gutschrift via Galaxus unverzüglich.*
+. *Speichere* die Änderungen.
+
+==== Auftrag teilen, ein Beispiel
+
+. Öffne das Menü *Auftrag » Auftrags-ID*.
+. Teile den Auftrag unter *Auftrag » Übersicht » Zahnrad » (Teilen)*. +
+→ Das Fenster *Auftrag teilen* wird geöffnet.
+. Wähle die Artikelmengen für den neuen Auftrag. +
+*_Wichtig:_* Die Versandkosten des ursprünglichen Auftrags werden nicht geändert.
+
+=== Auftragsdatenaustausch: Szenarien
+
+Folgende Szenarien werden vom Galaxus Plugin unterstützt:
+
+*_Wichtig:_* Szenarien, ausser Storno-Anfragen, können für Ganz/Teil -Auftrag ausgeführt werden. Deshalb, um doppelten Inhalt zu minimieren, haben wir Szenarien wo der ganze Auftrag bearbeitet wird nicht mehr beschrieben.
+
+=== Importierter Auftrag ist versandbereit
+
+Der importierte Auftrag enthält alle erforderlichen Angaben, ist jetzt Versandbereit:
+
+. Der Auftragsimport wurde Automatisch durch die Ereignisaktion *Auftragsbestätigung an Galaxus melden* zurückgemeldet.
+. Sobald der Auftrag Versandbereit ist, löse die Ereignisaktion *Versandbestätigung an Galaxus melden* aus.
+
+=== Nur ein Teil des importierten Auftrags kann erfüllt werden
+
+Nur ein Teil des importierten Auftrags kann zu diesem Zeitpunkt erfüllt werden. Der Kunde erklärt sich damit Einverstanden, die Hälfte der Bestellung jetzt zu erhalten, die andere Hälfte wird an einem späteren Zeitpunkt versendet:
+
+. Öffne das Menü *Auftrag » Auftrags-ID*.
+. Klick auf Auftrag *Teilen*.
+. Wenn der nächste Liefertermin mit dem Kunden vereinbart wurde, gehe zum *Neuen Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum*.
+. Trage das Lieferdatum ein.
+. *Speichere* die Einstellungen.
+. Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus, um Galaxus vom neuen Lieferdatum zu informieren.
+. Wenn soweit, löse die Ereignisaktion *Versandbestätigung an Galaxus senden* aus.
+
+=== Teil der Auftrag enthaltenen Artikel kann nicht erfüllt werden
+
+Du hast festgestellt, dass ein Teil des Auftrags nicht erfüllt werden kann, zum Beispiel weil der Artikel keinen Bestand hat.
+
+. Öffne das Menü *Auftrag » Auftrags-ID*.
+. Klick auf Auftrag *Teilen*.
+. Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus.
+. Löse die Ereignisaktion *Händler-storniert' an Galaxus melden* aus.
+. Galaxus antwortet Automatisch mit einer *Storno-Anfrage*.
+. Die Storno-Anfrage kann *Abgelehnt* oder *Angenommen* werden, indem die Ereignisaktion *Galaxus Storno-Anfrage akzeptiert* oder *Galaxus Storno-Anfrage abgelehnt, mit Begründung* ausgelöst wird.
+
+=== Der Kunde hat eine Teil-Retoure beantragt
+
+Der Kunde hat beantragt, dass ein Teil seines Auftrags an den Lieferanten zurückgegeben wird.
+
+. *Retourenanfrage* wird von Galaxus erhalten.
+. Das System erstellt einen neuen Auftrag vom Typ *Retoure*, der mit dem initialen Auftrag verknüpft ist.
+. Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus.
+. Löse die Ereignisaktion *Galaxus Retourenanfrage akzeptieren* oder *Galaxus Retourenanfrage ablehnen mit Begründung* aus.
+
+=== Der Kunde hat das Paket abgelehnt
+
+Der Kunde hat die Lieferung aus einem ungerechtfertigten Grund nicht akzeptiert, das Paket ist nun zurückgekommen:
+
+. Öffne den Betroffenen Auftrag.
+. Erstelle einen neuen Auftrag vom Typ: *Retoure*.
+	* Öffne das Menü *Auftrag » Übersicht*.
+	* Öffne die Dropdown-Liste *Retoure*.
+	* Klick auf *Anlegen*.
+. Erstelle eine Retoure für die benötigte Menge.
+. Löse das Ereignis *Storno an Händler akzeptiert* oder *Storno an Händler abgelehnt mit Begründung* aus.
+
+*_Hinweis:_*
+
+* Teilstornoanfragen und Bestellungen die einen höheren Status als *[5] In Versandvorbereitung* haben werden automatisch mit der Begründung *Nicht erstattbar* abgelehnt.
+* Der Trigger-Status kann unter *System » Märkte » Galaxus » Auftrag Status-Konfiguration*  mit einem für Dich relevanten Auftragsstatus angepasst werden.
+
+[#faq]
+== FAQ und Fehlersuche
+
+include::partial$plugin-market-not-in-menu.adoc[]
