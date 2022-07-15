@@ -5,7 +5,7 @@
 :author: team-item
 
 ////
-zuletzt bearbeitet 14.07.2022
+zuletzt bearbeitet 15.07.2022
 ////
 
 Dein Business läuft und du hast bereits ein solides Produktportfolio aufgebaut.
@@ -51,7 +51,7 @@ Wähle dabei die zu bearbeitenden Artikel oder Varianten direkt aus.
 Mit der Gruppenfunktion kannst du, zum Beispiel:
 
 * die Artikel auswählen, die in einem Sonderverkauf angeboten werden sollen.
-* den Preis aller Artikel eines bestimmten Herstellers erhöhen.
+* den Preis aller Varianten eines bestimmten Herstellers erhöhen.
 
 [#200]
 === Artikel-Gruppenfunktion
@@ -67,7 +67,7 @@ Wähle (icon:check-square[role="blue"]) die entsprechenden Aktionen aus der Drop
 . Konfiguriere die Einstellungen im unteren Teil des Fensters.
 . Führe die Gruppenfunktion aus.
 
-#GIF#
+image::artikel:gruppenfunktion-artikel.gif[]
 
 [cols="1,3"]
 |===
@@ -185,23 +185,65 @@ Wähle (icon:check-square[role="blue"]) die entsprechenden Aktionen aus der Drop
 . Konfiguriere die Einstellungen im unteren Teil des Fensters.
 . Führe die Gruppenfunktion aus.
 
-#GIF#
+//#GIF#
 
-[cols="1,3"]
+[cols="1,3a"]
 |===
 | Aktion | Erläuterung
 
 2+| *Lager und Versand*
 
 | *Hauptlager*
-|
+|Wähle das Hauptlager der Varianten aus der Dropdown-Liste aus.
 
 | *Lagereinstellungen*
-|
+|Wähle ein Lager aus der Dropdown-Liste aus.
+Dadurch wird das Lager mit den gewählten Varianten verknüpft.
+Zusätzliche Einstellungen werden eingeblendet.
+
+[cols="1,4"]
+!===
+
+! *Maximalbestand*
+!Gib den maximalen Bestand für das Lager ein.
+Der Maximalbestand wird für den Bestellmengenvorschlag berücksichtigt, sodass der Vorschlag den Maximalbestand nicht überschreitet.
+
+! *Meldebestand*
+!Gib die Anzahl ein, bei der eine Nachbestellung der Variante erfolgen soll.
+Erst wenn die Variante auf diesen Meldebestand sinkt, wird ein Mengenvorschlag für die Variante angezeigt, da erst bei Erreichen des Meldebestands eine Nachbestellung erfolgen soll.
+
+*_Hinweis_*: Wenn du die xref:warenwirtschaft:lager-einrichten.adoc#Meldebestand_Variante_Lager[Differenz zum Meldebestand] dynamisch berechnen lässt, darf hier nur `0` gespeichert werden.
+
+! *Lagerreichweite*
+!Gib die Anzahl der Tage ein, den der Warenbestand bis zur nächsten Nachbestellung reichen soll.
+Die Lagerreichweite fließt in die Berechnung des Nachbestellungsvorschlags ein.
+
+*_Hinweis_*:
+Wird hier kein Wert eingetragen, wird die Lagerreichweite bei der Berechnung eines Nachbestellungstermins nicht berücksichtigt.
+
+*_Praxisbeispiel_*:
+Ein Standardwert aus der Praxis für die Lagerreichweite ist z.B. 14 Tage.
+Wenn der Artikel den Meldebestand erreicht hat, werden die 14 Tage zur Berechnung der Nachbestellmenge berücksichtigt, d.h. es wird die Menge zur Nachbestellung vorgeschlagen, die für die folgenden 14 Tage ausreicht.
+
+! *Lagerorttyp*
+!Wähle anhand der Artikelgröße einen Lagerorttyp.
+
+! *Zone*
+!Wähle eine Zone, wenn das Lager in Zonen eingeteilt wurde.
+
+!===
 
 | *Portoaufschlag 1*; +
 *Portoaufschlag 2*
-|
+|Gib eine Gebühr ein, die zusätzlich zu den normalen Versandkosten erhoben werden soll.
+Solche Portoaufschläge bieten sich für größere oder sperrige Artikel an, deren Versand teurer ist.
+
+* Portoaufschlag 1 gilt für den ersten Artikel.
+* Portoaufschlag 2 gilt für jeden weiteren Artikel.
+
+*_Zusätzliche Einstellungen_*: Gib in jedem deiner xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofile] an, ob die Aufschläge zum Grundporto hinzugefügt werden sollen.
+
+*_Hinweis_*: Das Handbuch enthält auch einige xref:fulfillment:versand-vorbereiten.adoc#1100[Rechenbeispiele für Portoaufschläge].
 
 2+| *Paketeinstellungen*
 
@@ -268,78 +310,232 @@ Das heißt, wenn die vorhandenen Tags zuerst aus dem Variantendatensatz entfernt
 
 2+| *Varianteneinstellungen*
 
-| *Gewicht brutto*
-|
-
-| *Gewicht netto*
-|
+//old
+| *Gewicht brutto*; +
+*Gewicht netto*
+|Gib einen Wert in Gramm ein.
+Dieses Gewicht wird für die gewählten Varianten gespeichert.
 
 | *Grundpreis anzeigen*
-|
+|Soll der Grundpreis im plentyShop angezeigt werden?
+
+icon:toggle-on[role="blue"] = Ja, der Grundpreis wird für die gewählten Varianten angezeigt. +
+icon:toggle-off[role="darkGrey"] = Nein, der Grundpreis wird _nicht_ für die gewählten Varianten angezeigt.
 
 | *GTIN generieren*
-|
+|Wähle einen GTIN-Typ aus der Dropdown-Liste.
+GTINs dieses Typs werden für die gewählten Varianten xref:artikel:barcodes.adoc#300[aus dem Nummernkreis generiert].
 
 | *Kategorien*
-|
+|Wähle eine Kategorie und klicke auf *Übernehmen*.
+Die Kategorie wird mit den gewählten Varianten verknüpft.
+
+*_Hinweis_*:
+Bereits vorhandene Kategorieverknüpfungen bleiben standardmäßig bestehen.
+Wähle also die Option *Aktuelle Kategorieverknüpfungen löschen*, wenn die neue Kategorie alle vorhandenen Kategorien ersetzen soll. Das heißt, wenn die vorhandenen Kategorien zuerst aus dem Variantendatensatz entfernt werden sollen.
+
+*_Hinweis_*:
+Es kann nur eine Kategorie auf einmal verknüpft werden.
+Du musst die Gruppenfunktion also mehrmals ausführen, wenn du mehrere Kategorien verknüpfen willst.
+Nutze dazu den Button *Ausführen* anstatt *Ausführen & Schließen*.
+So kannst du eine Kategorie direkt nach der anderen verknüpfen, ohne die Gruppenfunktion jedes Mal neu zu starten und die Kategorie-Aktion neu zu wählen.
+
+*_Hinweis_*:
+Wenn du eine Hauptkategorie wählst, d.h. eine Kategorie, in der Unterkategorien verschachtelt sind, dann wird nur die Hauptkategorie verlinkt.
+Die Unterkategorien werden nicht mit verknüpft.
+Dies liegt daran, dass nur eine Kategorie auf einmal verknüpft werden kann.
 
 | *Varianten-Zeitstempel für Marktplatzexporte aktualisieren*
-|
+|Setzt den Zeitstempel *Letzte Änderung* auf das aktuelle Datum und die aktuelle Uhrzeit.
 
 | *Vererbung*
-|
+|Ändert das xref:artikel:vererbung.adoc#[Vererbungsverhalten] für Preise, Verfügbarkeitsstufen, Kategorien, usw.
+Bestimmt also, ob die Daten von der Hauptvariante an die in der Übersicht markierten Untervarianten vererbt werden.
+
+. Wähle aus der linken Dropdown-Liste die passenden Daten aus (Preise, Verfügbarkeiten, Kategorien, usw.).
+. Wähle aus der rechten Dropdown-Liste, ob die Vererbung aktiviert oder deaktiviert werden soll.
+
+[cols="1,4"]
+!===
+
+! *Aktivieren*
+!Die Daten (Preise, Verfügbarkeiten, Kategorien, usw.) werden von der Hauptvariante an die in der Übersicht markierten Untervarianten weitergegeben.
+Bisher an der Variante gespeicherte Daten werden überschrieben.
+
+! *Deaktivieren*
+!Deaktiviert die Vererbung.
+Die Daten der Hauptvariante werden an der Untervariante gespeichert.
+!===
+
+*_Hinweis_*: Diese Gruppenfunktion steuert die Vererbung aller an der Hauptvariante gespeicherte Preise, Kategorien, Lieferanten usw.
+Eine Vererbung einzelner Preise, Kategorien, Lieferanten usw. ist nicht möglich.
 
 | *Zolltarifnummer*
-|
+//nach Umstrukturierung, includes verwenden, da Inhalt gleich ist wie für das Varianten-Datenfeld
+//wird von 11 auf 14 Zeichen gehoben
+
+|Gib die xref:auftraege:buchhaltung.adoc#620[Zolltarifnummer] ein.
+In plentymarkets ist es möglich, für jede Variante eine unterschiedliche Zolltarifnummer zu speichern.
+
+*_Beispiel_*: In manchen Ländern wird Kinderkleidung je nach Größe unterschiedlich besteuert.
+In diesem Fall macht es Sinn, die Zolltarifnummer für jede einzelne Variante zu speichern.
+
+*_Vererbung_*: Die Zolltarifnummer wird automatisch von der Hauptvariante an die Untervarianten xref:artikel:vererbung.adoc#[vererbt]. Das heißt:
+
+* du brauchst keine Zolltarifnummern für deine Untervarianten einzugeben, wenn sie dieselbe Zolltarifnummer wie die Hauptvariante haben sollen.
+* gib eine abweichende Zolltarifnummer für alle Untervarianten ein, die sich von der Hauptvariante unterscheiden sollen.
 
 2+| *Verfügbarkeit und Sichtbarkeit*
 
 | *Aktiv*
 |
 
+icon:toggle-on[role="blue"] = Aktiviert die gewählten Varianten. +
+icon:toggle-off[role="darkGrey"] = Deaktiviert die gewählten Varianten.
+
+*_Hintergrund-Info_*:
+Varianten werden erst im plentyShop oder auf Marktplätzen sichtbar, wenn sie aktiviert wurden.
+Mit anderen Worten, kannst du an inaktiven Varianten arbeiten, ohne dass deine Kunden es merken.
+xref:artikel:checkliste-artikel-anzeige.adoc#[Vollständige Checkliste zur Sichtbarkeit].
+
 | *Angezeigte Lieferzeit*
-|
+|Wie lang ist die Lieferzeit der gewählten Varianten?
+Wähle die passende Verfügbarkeitsstufe aus der Dropdown-Liste.
 
 | *Bestandsbeschränkung*
-|
+|Soll plentymarkets den Lagerbestand der gewählten Varianten überwachen?
+
+[cols="1,4a"]
+!===
+
+! *Keine*
+!Diese Einstellung ist nützlich für Situationen, in denen du zwar den Bestand zählen könntest, es aber keine Rolle spielt, ob der Bestand negativ wird.
+Das Produkt steht zur Verfügung, nur ohne einen bestimmten Bestandswert.
+
+*_Hinweis_*: Manche Marktplätze berücksichtigen ausschließlich den Bestandswert, der der Variante zugeordnet ist.
+Wenn du also diese Einstellung wählst, kann es sein, dass der Marktplatz nie ein aktives Angebot für das Produkt hat, da es nie als ein positiver Bestandswert verstanden wird.
+Prüfe, wie deine Ziel-Marktplätze die Einstellungen zur Bestandsbegrenzung interpretieren, bevor du mit dem Verkauf beginnst.
+
+! *Auf Netto-WB*
+!Dies ist die am häufigsten verwendete Option.
+Sie verhindert, dass Artikel versehentlich überverkauft werden.
+Der Warenbestand wird auf den Netto-Bestand beschränkt.
+Dieser Netto-Bestand wird an Marktplätze übermittelt.
+
+*_Was bedeutet Netto-Bestand?_* +
+Diese Zahl gibt an, wie viele Exemplare derzeit zum Verkauf zur Verfügung stehen.
+Der Netto-Warenbestand ist eine Teilmenge des physischen Bestands.
+Wenn vom physischen Warenbestand alle Reservierungen abgezogen werden, ergibt sich der Netto-Bestand.
+xref:warenwirtschaft:warenbestaende-verwalten.adoc#100[Weitere Informationen].
+
+! *Keinen WB für diese Variante führen*
+!Diese Einstellung ist nützlich für Situationen, in denen es sehr mühsam wäre, die Bestandseinheiten zu zählen.
+Stell dir zum Beispiel vor, du verkaufst Baumaterial und hast Millionen Exemplare einer Schraube.
+
+*_Hinweis_*: Manche Marktplätze berücksichtigen ausschließlich den Bestandswert, der der Variante zugeordnet ist.
+Wenn du also diese Einstellung wählst, kann es sein, dass der Marktplatz nie ein aktives Angebot für das Produkt hat, da es nie als ein positiver Bestandswert verstanden wird.
+Prüfe, wie deine Ziel-Marktplätze die Einstellungen zur Bestandsbegrenzung interpretieren, bevor du mit dem Verkauf beginnst.
+
+*_Hinweis_*: Wenn diese Einstellung gewählt wird, werden im Tab *Bestand* der Variante die Tabs *Korrektur*, *Warenbestand*, *Zulauf* und *Warenbewegung* ausgeblendet.
+
+!===
 
 | *Für Mandanten trotz negativem netto Warenstand sichtbar stellen*
-|
+|Entspricht dem Button *Temporär verfügbar machen* im Menü xref:artikel:verzeichnis.adoc#290[Artikel » Artikel-UI » [Variante öffnen\] » Element: Mandant (Shop)].
+
+*_Hintergund-Info_*: plentymarkets kann Varianten automatisch aus dem plentyShop entfernen, wenn sie nicht mehr vorrätig sind.
+Dieser Automatismus wird durch die Einstellungen im Menü xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit] gesteuert.
+
+Verwende diese Gruppen-Funktion, wenn du die Variante manuell im plentyShop sichtbar machen möchtest, trotz fehlender Lagerbestände.
+
+Diese Einstellung gilt, bis neuer Wareneingang für die Variante gebucht wird. Danach greifen die Einstellungen zur Nettowarenbestandsabhängigkeit erneut.
 
 | *Immer unsichtbar in Artikelauflistung*
-|
+|Entspricht der Option xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit » Listen Sichtbarkeitsautomatik » Immer unsichtbar in Artikelauflistung].
 
 | *In Artikelauflistung sichtbar, wenn positiver Netto-Warenbestand*
-|
+|Entspricht der Option xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit » Listen Sichtbarkeitsautomatik » In Artikelauflistung sichtbar, wenn positiver Netto-Warenbestand].
 
 | *In Artikelauflistung unsichtbar, wenn negativer Netto-Warenbestand*
-|
+|Entspricht der Option xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit » Listen Sichtbarkeitsautomatik » In Artikelauflistung unsichtbar, wenn negativer Netto-Warenbestand].
 
 | *Lieferbar, wenn positiver Netto-Warenbestand*
-|
+|Entspricht der Option xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit » Mandanten Verfügbarkeitsautomatik » Lieferbar, wenn positiver Netto-Warenbestand].
 
 | *Mandanten (Shops)*
-|
+|In welchen plentyShops möchtest du die gewählten Varianten verkaufen?
+Aktiviere alle zutreffenden Mandanten.
+
+icon:toggle-on[role="blue"] = Aktiviert den Mandanten für die gewählten Varianten. +
+icon:toggle-off[role="darkGrey"] = Deaktiviert den Mandanten für die gewählten Varianten.
 
 | *Nicht lieferbar, wenn negativer Netto-Warenbestand*
-|
+|Entspricht der Option xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit » Mandanten Verfügbarkeitsautomatik » Nicht lieferbar, wenn negativer Netto-Warenbestand].
 
 | *Sichtbar, wenn positiver Netto-Warenbestand*
-|
+|Entspricht der Option xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit » Mandanten Sichtbarkeitsautomatik » Sichtbar, wenn positiver Netto-Warenbestand].
 
 | *Unsichtbar, wenn negativer Netto-Warenbestand*
-|
+|Entspricht der Option xref:artikel:verzeichnis.adoc#220[Artikel » Artikel-UI » [Variante öffnen\] » Element: Verfügbarkeit und Sichtbarkeit » Mandanten Sichtbarkeitsautomatik » Unsichtbar, wenn negativer Netto-Warenbestand].
 
 | *Verkaufskanäle*
-|
+|Auf welchen Marktplätzen möchtest du die Variante verkaufen?
+
+. Wähle (icon:check-square[role="blue"]) alle zutreffenden Märkte aus der Dropdown-Liste aus.
+. Aktiviere (icon:toggle-on[role="blue"]) oder deaktiviere die Märkte bei Bedarf.
 
 2+| *Verkaufspreise*
 
 | *Preiskalkulation*
-|
+|Wähle eine bereits erstellte xref:artikel:preise.adoc#1000[Preiskalkulation] aus der Dropdown-Liste aus.
+Dadurch wird die Preiskalkulation mit den gewählten Varianten verknüpft. Die Preise der Varianten werden entsprechend berechnet.
 
 | *Verkaufspreis*
-|
+|Bearbeitet die Preise aller gewählten Varianten. Wie genau die Preise bearbeitet werden, hängt davon ab, wie du die Einstellungen konfigurierst.
+
+. Wähle einen Quell- und Zielpreis.
+. Wähle einen Operator und gib einen absoluten oder prozentualen Wert ein.
+
+---
+
+*_Beispiele_*:
+
+* Stell dir vor, du willst die Preise aller gewählten Varianten um 2,50 EUR auf Amazon erhöhen.
+. Wähle dazu für Quelle und Ziel denselben Verkaufspreis.
+In diesem Fall den Amazon-Verkaufspreis.
+. Wähle den Typ Absolute, den Operator + und den Wert 2,50.
+
+* Stell dir vor, du willst, dass die gewählten Varianten 3% teurer auf Zalando sind als in deinem plentyShop.
+. Wähle den plentyShop-Verkaufspreis als Quelle und den Zalando-Verkaufspreis als Ziel.
+. Wähle den Typ Prozentual, den Operator + und den Wert 3.
+
+[cols="1,4"]
+!===
+
+!*Quellpreis*
+!Wähle den Verkaufspreis aus der Dropdown-Liste, der als Ausgangspunkt dienen soll.
+
+!*Zielpreis*
+!Wähle den Verkaufspreis aus der Dropdown-Liste, der aktualisiert werden soll.
+
+*_Hinweis_*: Wenn für den Zielverkaufspreis noch kein Preis an der Variante gespeichert ist, wird der Verkaufspreis verknüpft und der neue Preis gespeichert. +
+
+*_Hinweis_*: Bei aktivierter Vererbung wird die Vererbung aller Preise für die gewählten Varianten deaktiviert und alle Preise werden direkt an der Variante gespeichert.
+
+!*Absolut*
+!Wähle einen Operator und gib einen absoluten Wert ein. +
+= Der eingegebene Wert wird als neuer Preis gespeichert. +
++ Der bisherige Preis wird um den eingegebenen Betrag erhöht. +
+- Der bisherige Preis wird um den eingegebenen Betrag gesenkt. +
+* Der bisherige Preis wird mit dem eingegebenen Wert multipliziert. +
+/ Der bisherige Preis wird durch den eingegebenen Wert geteilt. +
+
+!*Prozentual*
+!Wähle einen Operator und gib einen Prozentwert ein. +
++ Der bisherige Preis wird um den eingegebenen Prozentwert erhöht. +
+- Der bisherige Preis wird um den eingegebenen Prozentwert gesenkt. +
+
+!===
 
 |===
 
@@ -427,43 +623,55 @@ Kopiere in diesem Fall das bestehende Produkt.
 [.instruction]
 Artikel kopieren:
 
-. Öffne das Menü *Artikel » Artikel bearbeiten*.
-. xref:artikel:suche.adoc#100[Suche] und öffne den Artikel.
-. Klicke auf *Kopieren* (terra:copy[role="yellow"]) in der oberen Symbolleiste. +
-→ Das Fenster *Kopieren* wird geöffnet.
-. Klicke auf terra:save[role="green"] *Kopieren*. +
-→ Der Artikel wird kopiert und in einem neuen Tab geöffnet.
+. Öffne das Menü *Artikel » Artikel-UI*.
+. xref:artikel:artikelsuche.adoc#100[Suche] und öffne den Artikel.
+. In der oberen Symbolleiste, klicke auf icon:ellipsis-v[role="darkGrey"] und dann auf terra:copy[role="yellow"] *Artikel kopieren*. +
+→ Das Fenster *Artikel kopieren* wird geöffnet.
+. Klicke auf *Bestätigen*. +
+→ Der Artikel wird kopiert und in der linken Navigationsleiste geöffnet.
 
-[discrete]
-===== Was wird genau kopiert?
-
+[TIP]
+.Was wird genau kopiert?
+====
 Es wird eine Kopie des Artikels und seiner Varianten erstellt.
-Du kannst den neuen Artikel xref:artikel:artikel-verwalten.adoc#[weiter bearbeiten].
-Prüfe z.B. die xref:artikel:artikel-verwalten.adoc#240[Verkaufspreise], xref:artikel:artikel-verwalten.adoc#250[Barcodes] und xref:artikel:artikel-verwalten.adoc#200[Verfügbarkeiten] besonders sorgfältig und passe sie bei Bedarf an.
+Du kannst den neuen Artikel weiter bearbeiten.
+Prüfe z.B. die xref:artikel:verzeichnis.adoc#340[Verkaufspreise], xref:artikel:verzeichnis.adoc#260[Barcodes] und xref:artikel:verzeichnis.adoc#220[Verfügbarkeiten] besonders sorgfältig und passe sie bei Bedarf an.
 
-[cols="1,1,1"]
+[cols="1a,1a,1a"]
 |===
-| Wird kopiert | Wird nicht kopiert |Wird automatisch vergeben
 
-a|* Artikeldaten, die du im Tab **Global** eingibst
-* Artikeltexte
-* Freitextfelder
-* Merkmale
-* Bilder
-* Cross-Selling-Einstellungen
-* Verkaufspreise samt hinterlegter Werte
-* Barcodes samt hinterlegter Werte
-* Artikelpakete
-* Eigenschaften
-a|* Listings
-* Media-Dateien
+| *_Wird kopiert_*:
+
+* Daten auf der Artikel- und Varianten-Ebene. Zum Beispiel:
+** Artikeltexte
+//* Freitextfelder
+//* Merkmale
+** Bilder
+** Cross-Selling-Einstellungen
+** Verkaufspreise samt hinterlegter Werte
+** Barcodes samt hinterlegter Werte
+** Artikelpakete
+** Eigenschaften
+
+| *_Wird nicht kopiert_*:
+
+* Listings
+//* Media-Dateien
 * Verfügbarkeit der Hauptvariante, d.h. der Artikel wird deaktiviert
-* Maße
-* Kosten
-a|* Eine neue Artikel-ID wird vergeben.
+//* Maße
+//* Kosten
+
+| *_Wird automatisch vergeben_*:
+
+* Eine neue Artikel-ID wird vergeben.
 * Neue Varianten-IDs werden vergeben.
 * Neue Variantennummern werden vergeben.
 |===
+====
+
+////
+scheint (noch) nicht möglich in die neue Artikel-UI zu sein
+falls es irgendwann diese funktion gibt, dann den Text unten sichtbar stellen und die Beschreibung von der alten UI auf die neue UI anpassen
 
 [TIP]
 .Varianten können auch kopiert werden!
@@ -477,3 +685,4 @@ Kopiere eine Variante, um sie in verschiedenen Mengen anzubieten. Sämtliche Var
 . Klicke auf terra:save[role="green"] *Kopieren*. +
 → Die Variante wird kopiert und in einem neuen Tab geöffnet.
 ====
+////
