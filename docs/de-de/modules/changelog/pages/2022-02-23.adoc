@@ -50,7 +50,7 @@ Weitere Informationen dazu findest du in link:https://forum.plentymarkets.com/t/
 
 ** Beim Wechsel solltest du deinen alten Elastischen Export exakt in dem neuen Katalog nachbauen, damit der Artikelexport weiterhin funktioniert. Ordne also alle Datenfelder so zu, wie sie auch im Elastischen Export an den Marktplatz übertragen wurden. Wenn du bestimmte Datenfelder anders als bisher zuordnest, werden möglicherweise beim Export neue Artikel erstellt.
 
-** Wie du einen Katalog für MyBestBrands einrichtest, erfährst du im link:https://knowledge.plentymarkets.com/maerkte/preisportale/mybestbrands[plentymarkets Handbuch^]
+** Wie du einen Katalog für MyBestBrands einrichtest, erfährst du im xref:maerkte:mybestbrands.adoc#[plentymarkets Handbuch]
 
 * *_Hinweis:_* Der Elastische Export und die Exportformate werden nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, schon jetzt Kataloge zu erstellen.
 
@@ -64,9 +64,9 @@ Weitere Informationen dazu findest du in link:https://forum.plentymarkets.com/t/
 
 * Die folgenden REST-Routen können Variantennummer anstelle von Varianten-ID verwenden:
 ** /rest/stockmanagement/stock/redistribute
-** /rest/stockmanagement/warehouses/{warehouseId}/stock/bookIncomingItems
-** /rest/stockmanagement/warehouses/{warehouseId}/stock/bookOutgoingItems
-** /rest/stockmanagement/warehouses/{warehouseId}/stock/correction
+** /rest/stockmanagement/warehouses/\{warehouseid\}/stock/bookIncomingItems
+** /rest/stockmanagement/warehouses/\{warehouseid\}/stock/bookOutgoingItems
+** /rest/stockmanagement/warehouses/\{warehouseid\}/stock/correction
 
 '''
 
@@ -102,11 +102,11 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *stable* veröffentlicht.
 ** /rest/stockmanagement/stock/redistribute
 *** aktuelle Lagerort ID ist jetzt optional
 *** neue Lagerort ID ist jetzt optional
-** /rest/stockmanagement/warehouses/{warehouseId}/stock/bookIncomingItems
+** /rest/stockmanagement/warehouses/\{warehouseid\}/stock/bookIncomingItems
 *** Währung ist jetzt optional
-** /rest/stockmanagement/warehouses/{warehouseId}/stock/bookOutgoingItems
+** /rest/stockmanagement/warehouses/\{warehouseid\}/stock/bookOutgoingItems
 *** Währung ist jetzt optional
-** /rest/stockmanagement/warehouses/{warehouseId}/stock/correction
+** /rest/stockmanagement/warehouses/\{warehouseid\}/stock/correction
 *** ID des Lagerortes ist jetzt optional
 
 '''
@@ -132,7 +132,7 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *stable* behoben.
 
 * Durch einen falschen Datentyp in einer Datenbanktabelle kam es zu einem Fehler beim Speichern der processStatusId, welche wir für den asynchronen Abgleich beim Produkt-Upload benötigen. Die entsprechende Spalte war als Integer definiert, wodurch der Wert auf maximal 2147483647 beschränkt war und größere Werte auf diesen reduziert wurden. Da der Wert dann faktisch nicht mehr der richtige war, schlugen entsprechende Abfragen mit dieser ID fehl und betroffene Händler hatten die folgende Fehlermeldung in ihrem Log:
 +
-`Datum: XX.X.XX XX:XX:XX Zeile: 314 Nachricht: GET-HTTP-Anfrage an den Endpoint process-status/{process-status-id} fehlgeschlagen mit Fehlercode 404: "Not Found".`
+`Datum: XX.X.XX XX:XX:XX Zeile: 314 Nachricht: GET-HTTP-Anfrage an den Endpoint process-status/\{process-status-id\} fehlgeschlagen mit Fehlercode 404: "Not Found".`
 +
 Der Datentyp wird jetzt über eine Migration korrigiert und entsprechende Einträge gelöscht. Dadurch wirklich betroffen war maximal die Produktanlage und die entsprechend dadurch geblockten Produkte werden in den nächsten laufenden Prozessen automatisch neu übertragen.
 

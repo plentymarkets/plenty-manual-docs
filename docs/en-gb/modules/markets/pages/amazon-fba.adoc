@@ -89,10 +89,10 @@ Creating a warehouse:
 . Select a *Warehouse type*. +
 *_Note:_* If you only want to use this warehouse for FBA stock, i.e. if you only want to offer the stock of this warehouse for Amazon FBA and not in your plentyShop or on other markets, then select the warehouse type *Repair*.
 . Select *Amazon* as *Logistics type*.
-. Save (icon:save[set=plenty]) the settings. +
+. Save (terra:save[]) the settings. +
 → The warehouse is listed in the overview in alphabetical order and opened.
 . Carry out further settings according to the explanations on the xref:stock-management:setting-up-a-warehouse.adoc#[Setting up a warehouse] page of the manual.
-. Save (icon:save[set=plenty]) the settings. +
+. Save (terra:save[]) the settings. +
 → The warehouse is created.
 
 [TIP]
@@ -116,7 +116,7 @@ Selecting the label type for FBA inbound shipments:
 
 . Go to *Setup » Stock » Amazon FBA » Basic settings*.
 . Select a *Printer profile for labels* from the drop-down list.
-. Save (icon:save[set=plenty]) the setting.
+. Save (terra:save[]) the setting.
 
 [#110]
 ==== Saving contact details for FBA Inbound shipments
@@ -128,7 +128,7 @@ Saving contact details for FBA Inbound shipments:
 
 . Go to *Setup » Stock » Amazon FBA » Contact*.
 . Carry out the settings. Note <<#fba-contact>>.
-. Save (icon:save[set=plenty]) the settings. +
+. Save (terra:save[]) the settings. +
 → The contact details are saved.
 
 [[fba-contact]]
@@ -157,7 +157,7 @@ Setting up FBA outbound orders:
 . Select the Amazon account for which you want to activate FBA.
 . Click on the *Order settings* tab.
 . Carry out the settings. Note <<#fba-order-settings>>.
-. Save (icon:save[set=plenty]) the settings.
+. Save (terra:save[]) the settings.
 
 [[fba-order-settings]]
 .Settings in the *Order settings* tab
@@ -345,7 +345,7 @@ Activating the automatic credit note import:
 . Select the Amazon account.
 . Click on the *Order settings* tab.
 . For the setting *Credit note import*, select the option *Yes*.
-. Save (icon:save[set=plenty]) the settings.
+. Save (terra:save[]) the settings.
 
 [#3700]
 == Setting up Amazon Multi-Channel
@@ -384,7 +384,7 @@ Activating the variation availability for Amazon Multi-Channel:
 . Open the item.
 . Click on the *Multi-Channel* tab.
 . Carry out the settings in the *Amazon* area. Pay attention to the explanations given in <<item-availability-amazon>> in the <<#700, Setting the variation availability>> chapter.
-. Save (icon:save[set=plenty]) the settings.
+. Save (terra:save[]) the settings.
 
 [#4000]
 === Carrying out settings for Amazon Multi-Channel
@@ -397,7 +397,7 @@ Setting up Amazon Multi-Channel:
 . Go to *Setup » Markets » Amazon » Settings*.
 . Click on the *Order settings* tab.
 . Carry out the settings in the *Shipment by Amazon (FBA)* area. Pay attention to the explanations given in <<#amazon-multi-channel>>.
-. Save (icon:save[set=plenty]) the settings.
+. Save (terra:save[]) the settings.
 
 [[amazon-multi-channel]]
 .Setting up Amazon Multi-Channel
@@ -476,7 +476,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 
 :table-event-procedure: <<#event-procedure-fba-shipping-clearance>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[event-procedure-fba-shipping-clearance]]
 .Event procedure for automatically transferring the shipping permission to FBA
@@ -566,7 +566,7 @@ Manually synchronising stock:
 . Click on the *Manual* tab.
 . Select the Amazon account.
 . Click on *Select file* to select the CSV file that you have just saved.
-. Save (icon:save[set=plenty]) the settings to carry out the synchronisation.
+. Save (terra:save[]) the settings to carry out the synchronisation.
 --
 ====
 '''
@@ -677,10 +677,10 @@ Creating a redistribution for the shipment:
 . *_Optional:_* Select filters from the right column to limit the FBA Inbound shipments shown. Note <<#fba-inbound-redistribution>>.
 . Click on *Search* (icon:search[role="blue"]). +
 → The shipments are shown on the right.
-. In the column *Purchase order*, click on *Create redistribution* (icon:stock[set=plenty]). +
+. In the column *Purchase order*, click on *Create redistribution* (terra:stock[]). +
 → The *Create redistribution* menu opens.
 . Pay attention to the explanations given in <<#fba-inbound-redistribution>>.
-. *Save* (icon:save[set=plenty]) the settings. +
+. *Save* (terra:save[]) the settings. +
 → A redistribution for this shipment is created that contains all variations of the shipment. +
 → An FBA Inbound order is created in the *Stock » Amazon FBA Inbound* menu. +
 → The FBA Inbound order can be processed.
@@ -743,7 +743,6 @@ Viewing FBA Inbound orders:
 
 | *Owner*
 | From the drop-down list, select an owner to search for FBA Inbound orders created by this person.
-// Eigentümer in Eigner ändern
 
 | *Warehouse*
 | Select a warehouse from the drop-down list to search for FBA Inbound orders that were redistributed to this warehouse.
@@ -751,24 +750,36 @@ Viewing FBA Inbound orders:
 | *Order ID*
 | Enter the ID of an FBA Inbound order to search for the order with this ID.
 
-| *Status*
+| *Order status*
 | Select a status to search for orders in this status. +
-The statuses *Open*, *Done* and *All* are available. +
+The order statuses *Open*, *Done* and *All* are available. +
 *_Note:_* If your parcels are shipped with an Amazon partnered carrier and you select the status *Done*, all orders that were confirmed are displayed. If you send your parcels with your own shipping service provider and you select the status *Done*, all orders that have a tracking number are displayed.
 
 2+^| Information listed
 
-| *Owner*
-|The person who created the redistribution
+| *Owner* (optional)
+|The person who created the redistribution. The *owner* column is not displayed by default.
 
 | *Sender warehouse*
 |The plentymarkets FBA warehouse
 
 | *Order ID*
-|plentymarkets ID of the FBA Inbound order
+|The plentymarkets ID of the FBA Inbound order
 
 | *Shipment ID*
-|The ID that Amazon assigned to the shipment when you created it in Amazon Seller Central
+|The ID that Amazon assigned to the shipment when you created it in Amazon Seller Central.
+
+| *Shipped items*
+|The total number of shipped items.
+
+| *Received items*
+|All items with the Amazon shipment status *RECEIVING* or *CLOSED*.
+
+| *Items' status*
+|The coloured dots show the status of the shipped items: +
+green: The shipment has the status *RECEIVING* or *CLOSED*. All shipped items have been received. +
+yellow: The shipment has the status *WORKING*, *SHIPPED*, *IN_TRANSIT*, *DELIVERED* or *CHECKED_IN*. The shipped items are still being processed. +
+red: The shipment has the status *RECEIVING* or *CLOSED*. However, not all shipped items have been received.
 
 | *Shipment status*
 a|The current status of the Amazon shipment. The following statuses available at Amazon are shown here: +
@@ -783,6 +794,59 @@ a|The current status of the Amazon shipment. The following statuses available at
 *DELETED*: The shipment was cancelled by the seller before the shipment was sent to the Amazon fulfillment center. +
 *ERROR*: There was an error with the shipment and it was not processed by Amazon.
 
+| *Order status*
+| The status of the order. +
+The order statuses *Open*, *Done* and *All* are available.
+
+|====
+
+[#customise-columns]
+=== Customising the overview
+
+You can adjust the overview to your needs.
+
+[cols="1,6a"]
+|====
+|Symbol |Explanation
+
+| material:settings[]
+|Which columns should be included in the overview?
+
+. Click on *Configure columns* (material:settings[]).
+. Select the desired columns (material:check_box[role=skyBlue]).
+. Click on *Confirm*.
+
+[.collapseBox]
+.Available columns
+--
+* Owner
+* Sender warehouse
+* Order ID
+* Shipment ID
+* Shipped items
+* Items’ status
+* Received items
+* Shipment status
+* Order status
+
+--
+
+| material:drag_indicator[]
+|In which order should the columns be displayed?
+
+. Click on *Configure columns* (material:settings[]).
+. Move your mouse cursor over the entry with the symbol material:drag_indicator[]. +
+→ Your mouse cursor changes its shape (material:open_with[]).
+. Move the entry to the desired position.
+. Click on *Confirm*.
+
+| material:arrow_downward[] / material:arrow_upward[]
+|Should the results be displayed in ascending or descending order?
+
+. Move your mouse cursor over a column heading. +
+→ An arrow is displayed. +
+*_Note:_* Not all column headings can be sorted.
+. Click on material:arrow_downward[] or material:arrow_upward[] to change the sorting order.
 |====
 
 [#160]
@@ -829,7 +893,7 @@ Opening the package content list:
 → The filtered FBA Inbound orders are shown in the right column.
 . Click on the order. +
 → The options for editing the order are shown.
-. Click on *Package content list*. +
+. Click on *FBA Inbound Package content list*. +
 → The order is shown in the *Orders » Packet content list*.
 . Pick and pack the order based on the xref:orders:package-content-list.adoc#[package content list].
 
@@ -855,7 +919,7 @@ Registering the FBA Inbound order with Amazon (own shipping service provider):
 . Go to *Stock » Amazon FBA Inbound*.
 . Click on the order. +
 → The options for editing the order are shown.
-. Click on *Package content list*. +
+. Click on *FBA Inbound Package content list*. +
 → The order is shown in the *Orders » Packet content list*.
 . Click on *Register*. +
 *_Note:_* The *Register* button is only shown when you open the package content list from the *Stock » Amazon FBA Inbound* menu. +
@@ -892,7 +956,7 @@ Registering the FBA Inbound order with Amazon (Amazon Partnered Carrier):
 . Go to *Stock » Amazon FBA Inbound*.
 . Click on the order. +
 → The options for editing the order are shown.
-. Click on *Package content list*. +
+. Click on *FBA Inbound Package content list*. +
 → The order is shown in the *Orders » Packet content list*.
 . Click on *Register*. +
 *_Note:_* The *Register* button is only shown when you open the package content list from the *Stock » Amazon FBA Inbound* menu and closed all packages and pallets. +
@@ -1035,6 +1099,6 @@ Manually generating FBA reports:
 . Select an ending date. +
 *_Tip:_* The end date must not be in future. Also, start date and end date must not be more than one week in apart. +
 *_Note:_* The FBA reports contain orders from 00:00 AM on the start date to 00:00 AM on the end date. As such, the reports do not contain any orders of the selected end date. The time zone of the plentymarkets system is applied.
-. Click on *Generate report* (icon:execute[set=plenty]). +
+. Click on *Generate report* (terra:execute[]). +
 → The FBA report is generated. +
 → Missing, deleted or incorrect FBA orders are imported into plentymarkets.
