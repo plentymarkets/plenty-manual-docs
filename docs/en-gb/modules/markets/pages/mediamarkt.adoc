@@ -17,6 +17,7 @@ include::partial$mirakl-first-steps.adoc[]
 
 :valid-values-zip: https://drive.google.com/file/d/1a_QY4VOIuC2-qYFbNkCMUX-9jerGDAOmYP72907Xt/view?usp=sharing
 :market-backend-shipping: Platform Settings » Shipping
+:mirakl-menu-shipping: Platform Settings » Shipping
 :referrer-name: pass:quotes[referrer *MediaMarkt*]
 
 [#api-key]
@@ -90,24 +91,10 @@ Use xref:item:managing-items.adoc#500[properties] to export values for marketpla
 
 include::partial$catalogue-mapping.adoc[]
 
-[IMPORTANT]
-====
-Do not map plentymarkets data fields to the following marketplace data fields for the market {market}:
-
-* Main Product Image
-* Additional Product Image 1
-* Additional Product Image 2
-
-You can ignore the warning shown when you save the mapping.
-
-_*Note:*_ Do not map any attributes “xy (ES)” when creating items. The items will be exported to MIRAKL anyway.
-====
-
-
 [[catalogue-mirakl-mappings]]
 .{market} mappings
 [cols="1,2a"]
-|====
+|===
 |Marketplace data field |plentymarkets data field
 
 | *Brand*
@@ -181,7 +168,22 @@ a| Map the following plentymarkets data field to this marketplace data field:
 a| Map the following plentymarkets data field to this marketplace data field:
 
 * *Variation » Length mm*
-|====
+
+| _Data fields for images_
+| Mappings for product images are currently ignored for {market}. Instead, variation images are exported automatically. The images are prioritised based on the image position.
+
+*_Example:_* For the marketplace data field *Main Product Image*, the variation image with the lowest position is exported.
+
+As such, the following marketplace data field are filled automatically, no matter which plentymarkets data field you map:
+
+* Main Product Image
+* Additional Product Image 1
+* Additional Product Image 2
+
+| _Data fields *[data field] (ES)*_
+|
+Do not map any plentymarkets data field to marketplace data fields with the addition *(ES)*. Your products will be exported to MIRAKL anyway.
+|===
 
 [#link-variation-to-catalogue-category]
 == Linking variations to a {market} catalogue category
@@ -247,11 +249,11 @@ include::partial$variation-availability.adoc[]
 [#automating-order-processing]
 == Automating order processing
 
-Orders from MediaMarkt are automatically imported in your plentymarkets system every 15 minutes. 
+Orders from MediaMarkt are automatically imported in your plentymarkets system every 15 minutes.
 
 This is how orders are processed at MediaMarkt:
 
-* The seller accepts the order via an event procedure. 
+* The seller accepts the order via an event procedure.
 * The payment is collected by MediaMarkt.
 * With the payment confirmation, the invoice and delivery address on the order are updated in your plentymarkets system.
 * Via an event procedure, the shipping service provider as well as the package number are updated on the order in Mirakl.
@@ -289,7 +291,7 @@ include::partial$mirakl-EP-order-rejection.adoc[]
 include::partial$mirakl-EP-shipping-confirmation.adoc[]
 
 [#order-cancellation-mediamarkt]
-=== Report order cancellatiom to MediaMarkt
+=== Report order cancellation to MediaMarkt
 
 include::partial$mirakl-EP-cancellation.adoc[]
 
@@ -302,3 +304,6 @@ include::partial$mirakl-EP-refund.adoc[]
 === Send invoice to MediaMarkt
 
 include::partial$mirakl-EP-send-invoice.adoc[]
+
+//FAQ
+include::partial$mirakl-markets-faq.adoc[]

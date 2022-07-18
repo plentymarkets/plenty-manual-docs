@@ -4,26 +4,18 @@
 :description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz Kauflux in deinem plentymarkets System ein.
 :id: GKYZVIJ
 
+:kauflux:
+:market: Kauflux
+:price-search-engine: Kauflux
+:plugin-name: Kauflux.de-Plugin
+:plugin-link: https://marketplace.plentymarkets.com/plugins/channels/marktplaetze/elasticexportkaufluxde_4737
+
 link:http://www.kauflux.de/[Kauflux.de^] ist ein offener Marktplatz mit unabhängigen Anbietern aus verschiedenen Bereichen. Kauflux.de vermarktet deine Produkte und Dienstleistungen und stellt für dich den direkten Kontakt zu Käufer:innen her.
 
 [#100]
 ==  Bei Kauflux registrieren
 
 Du musst dich zunächst bei link:http://www.kauflux.de/konto[Kauflux^] registrieren, um dein plentymarkets System für Kauflux einzurichten.
-
-[IMPORTANT]
-.Plugins installieren
-====
-Um Artikeldaten an Kauflux exportieren zu können, benötigst du die folgenden Plugins: +
-link:https://marketplace.plentymarkets.com/plugins/sales/marktplaetze/elasticexport_4763[Elastischer Export^] +
-link:https://marketplace.plentymarkets.com/plugins/channels/marktplaetze/elasticexportkaufluxde_4737[Kauflux^]
-====
-
-:plugin: Elastischer Export
-include::partial$plugin-installation.adoc[]
-
-:plugin: Kauflux
-include::partial$plugin-installation.adoc[]
 
 [#200]
 ==  Kauflux in plentymarkets einrichten
@@ -35,12 +27,12 @@ Kauflux in plentymarkets einrichten:
 
 . Öffne das Menü *Einrichtung » Märkte » Kauflux » Einstellungen*.
 . Nimm die Einstellungen gemäß <<#grundeinstellungen-kauflux>> vor.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 [[grundeinstellungen-kauflux]]
 .Grundeinstellungen für Kauflux
 [cols="1,3a"]
-|====
+|===
 |Einstellung |Erläuterung
 
 | *Umtauschfrist*
@@ -53,15 +45,16 @@ Kauflux in plentymarkets einrichten:
 |Wählen, ob der Warenbestand übermittelt werden soll und ob der Warenbestand in diesem Fall *öffentlich* sichtbar sein soll, oder nicht.
 
 | *API-URL für den Auftragsimport*
-|Über diesen Link überträgt Kauflux die Aufträge zu plentymarkets. Dieser Link wird für den Auftragsimport von Kauflux benötigt und nicht für die Erstellung des Artikelkatalogs. Der Artikelkatalog wird über den elastischen Export im Menü *Daten » Elastischer Export* erstellt. Weitere Informationen findest du bei Kauflux unter link:http://www.kauflux.de/shop-anmelden/automatischer-auftragsdatenexport[Auftragsdatenexport^].
-|====
+|Über diesen Link überträgt Kauflux die Aufträge zu plentymarkets. Dieser Link wird für den Auftragsimport von Kauflux benötigt und nicht für die Erstellung des Artikelkatalogs. Der Artikelkatalog wird <<#catalogue-export, über einen Katalog im Menü *Daten » Kataloge*>> oder <<#old-export, über den elastischen Export im Menü *Daten » Elastischer Export*>> erstellt. +
+Weitere Informationen findest du bei Kauflux unter link:http://www.kauflux.de/shop-anmelden/automatischer-auftragsdatenexport[Auftragsdatenexport^].
+|===
 
 [#250]
 == Auftragsherkunft aktivieren
 
 :market: Kauflux
 :referrer: Kauflux
-:referrer-option: pass:quotes[Option *Kauflux*]
+:referrer-option: pass:quotes[Option *Kauflux* mit der ID *12*]
 
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
@@ -129,23 +122,30 @@ Verknüpfung importieren:
 . Klicke bei *Datei* auf *Datei auswählen*.
 . Wähle die CSV-Datei von der Festplatte deines Rechners.
 . Klicke auf *Öffnen*.
-. Speichere (icon:save[set=plenty]) die Einstellungen. +
+. Speichere (terra:save[]) die Einstellungen. +
 → Die Verknüpfungen werden importiert und im Bereich *Verknüpfungen* angezeigt.
 
-[#700]
-== Artikeldaten an Kauflux übermitteln
+[#item-export]
+== Artikeldaten exportieren
 
-[IMPORTANT]
-.Plugins installieren
-====
-Um Artikeldaten an Kauflux exportieren zu können, benötigst du die folgenden Plugins: +
-link:https://marketplace.plentymarkets.com/plugins/sales/marktplaetze/elasticexport_4763[Elastischer Export^] +
-link:https://marketplace.plentymarkets.com/plugins/channels/marktplaetze/elasticexportkaufluxde_4737[Kauflux^]
-====
+* <<#old-export, _Möglichkeit 1:_ Artikelexport über Elastischen Export _(alte Methode)_>>
+* <<#catalogue-export, _Möglichkeit 2:_ Artikelexport über Katalog-Formate _(empfohlene Methode)_>>
+* <<#change-elastic-export-catalogue, _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog>>
 
-=== Das Format KaufluxDE-Plugin in plentymarkets einrichten
+[#old-export]
+=== _Möglichkeit 1:_ Exportformat KaufluxDE-Plugin _(alte Methode)_
 
-:export-format: Kauflux-Plugin
+NOTE: Der Elastische Export und die Exportformate werden für den Marktplatz-Export nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, schon jetzt <<#catalogue-export, Kataloge zu erstellen>>.
+
+[#plugin-download]
+==== Plugins herunterladen und installieren
+
+include::partial$plugin-download.adoc[]
+
+[#200a]
+==== Das Format KaufluxDE-Plugin in plentymarkets einrichten
+
+:export-format: KaufluxDE-Plugin
 :price-search-engine: Kauflux
 :table-price-search-engine: <<#export-format>>
 :file-format: pass:quotes[*.csv* oder *.txt*]
@@ -161,14 +161,15 @@ link:https://marketplace.plentymarkets.com/plugins/channels/marktplaetze/elastic
 
 include::partial$exportformate.adoc[]
 
-=== Verfügbare Spalten der Exportdatei
+[#exportdatei-kauflux]
+==== Verfügbare Spalten der Exportdatei
 
-<<#kauflux-spalten>> zeigt die in der Exportdatei verfügbaren Spalten.
+include::maerkte:partial$exportdatei-herunterladen.adoc[]
 
 [[kauflux-spalten]]
 .Verfügbare Spalten der Exportdatei
 [cols="1,3a"]
-|====
+|===
 | Spaltenbezeichnung | Erläuterung
 
 |ProductID
@@ -270,13 +271,184 @@ a|Status des Artikels: +
 
 |HerstellerArtNr
 |Das Modell der Variante.
-|====
+|===
+
+[#catalogue-export]
+=== _Möglichkeit 2:_ Katalogexport _(empfohlene Methode)_
+
+Mit dem Export über Kataloge machst du deinen Export zu {market} zukunftssicher und flexibel.
+
+[#catalogue-creation]
+==== Katalog erstellen
+
+Artikeldaten werden über ein Marktplatz-Format exportiert. Um deine Artikel zu einem Marktplatz zu exportieren, erstellst du im Menü *Daten » Kataloge* einen Katalog. Ordne dann im Marktplatz-Format die vom Katalog vorgegebenen Marktplatz-Datenfelder den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+:catalogue-template-name: Kauflux
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Datenfelder im Katalog zuordnen
+
+Ordne nun die Marktplatz-Datenfelder im Katalog den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Empfehlungen für Datenfeld-Zuordnungen
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.Liste mit empfohlenen Datenfeld-Zuordnungen
+--
+include::partial$kauflux-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Nur bestimmte Artikel exportieren
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Katalogeinstellungen für Export vornehmen
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+===== Katalog aktivieren
+
+:interval:
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Katalogdaten an {market} übergeben
+
+include::partial$catalogue-url.adoc[]
+
+[#change-elastic-export-catalogue]
+=== _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog
+
+:elastic-export-catalogue-mappings:
+include::partial$catalogue-change-from-elastic-export.adoc[]
+
+[[elastic-export-catalogue-mappings]]
+.Spalten und Datenfelder
+[cols="1,1"]
+|===
+|Spalte im elastischen Export |Datenfeld im Katalog
+
+| ProductID
+| ID
+
+| BestellNr
+| SKU
+
+| EAN
+| Barcode
+
+| Hersteller
+| Hersteller
+
+| BestandModus
+| Art der Bestandsführung
+
+| BestandAbsolut
+| Netto-Warenbestand
+
+| Liefertyp
+| Liefertyp
+
+| VersandKlasse
+| Versandklasse
+
+| Lieferzeit
+| Verfügbarkeit
+
+| Umtausch
+| Umtauschfrist
+
+| Bezeichnung
+| Artikelname
+
+| KurzText
+| Vorschautext
+
+| DetailText
+| Beschreibung
+
+| Keywords
+| Keywords
+
+| Bild1
+| Bild-URL 1
+
+| Bild2
+| Bild-URL 2
+
+| Bild3
+| Bild-URL 3
+
+| Gewicht
+| Gewicht
+
+| Preis
+| Verkaufspreis
+
+| MwSt
+| Mehrwertsteuer
+
+| UVP
+| UVP
+
+| Katalog1
+| Kategorie
+
+| Flags
+| Shop-Aktion
+
+| _Datenfeld war im Elastischen Export nicht verfügbar._
+| Cross-Selling
+
+| ExtLinkDetail
+| URL-Pfad
+
+| Status
+| Artikelstatus
+
+| FreeVar1
+| Freitextfeld 1
+
+| FreeVar2
+| Freitextfeld 2
+
+| FreeVar3
+| Freitextfeld 3
+
+| InhaltMenge
+| Menge
+
+| InhaltEinheit
+| Mengeneinheit
+
+| InhaltVergleich
+| Vergleichsmenge
+
+| HerstellerArtNr
+| Modell
+
+|===
 
 === Artikeldaten exportieren
 
-Nachdem du Kauflux eingerichtet hast, kannst du deine Artikeldaten unter *Daten » Elastischer Export* exportieren.
+Nachdem du Kauflux eingerichtet hast, kannst du deine Artikeldaten unter *Daten » Kataloge* exportieren.
 
-Für einen automatischen Artikeldatenexport musst du die komplette URL kopieren und bei Kauflux speichern. Voraussetzung dafür ist, dass du mindestens einen Export deiner Artikeldaten manuell durchgeführt hast und die einzelnen Felder in Kauflux zugeordnet hast. Zudem muss der automatische Artikeldatenexport von Kauflux aktiviert werden.
+Für einen automatischen Artikeldatenexport musst du die komplette URL deines Katalogs für Kauflux kopieren und bei Kauflux speichern. Voraussetzung dafür ist, dass du mindestens einen Export deiner Artikeldaten manuell durchgeführt hast und die einzelnen Felder in Kauflux zugeordnet hast. Zudem muss der automatische Artikeldatenexport von Kauflux aktiviert werden.
 
 [#800]
 === Variantendaten exportieren
@@ -304,6 +476,6 @@ E-Mail bei Auftragsimport senden:
 
 . Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Automatischer Versand*.
 . Wähle bei *Neue Bestellung über Kauflux* die zuvor erstellte E-Mail-Vorlage.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Über *E-Mail-Vorlage bearbeiten* wechselst du in das Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* und kannst dort die E-Mail-Vorlage bearbeiten.

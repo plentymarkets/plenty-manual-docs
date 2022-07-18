@@ -119,6 +119,9 @@ The event *New return (by customer)* refers to returns that are initiated by cus
 |====
 |Event |Explanation
 
+|*Documents generated*
+|Select this option in order to choose several documents at once from the drop-down list. This event procedure is triggered, if one of the selected documents is generated for an order.
+
 |*[Document] generated*
 |The event procedure is triggered when one of the documents listed is generated. Note that the corresponding xref:orders:order-documents.adoc#300[document template] has to be set up before the document can be generated. +
 xref:orders:generating-invoices.adoc#[Invoice] +
@@ -317,6 +320,10 @@ For more information on Amazon Prime and eBay orders, refer to the respective ma
 | *Document*
 |Orders are filtered according to the documents generated in the order. You can choose between *Current invoice* and *Reversal invoice* as well as *Not available* and *Available*.
 
+| *Available documents*
+|Orders are filtered according to the available documents in the order. Select from the drop-down list, which documents should be available. You can select several types of order documents at once. +
+Note that all documents need to exist for the order.
+
 | *Incoming order*
 |Orders are filtered according to the date the order was received. Select a time period between *until 1 day* and *until 31 days* from the drop-down list. Reference for this is the current date.
 
@@ -337,7 +344,7 @@ _Example:_ If you enter the value “34”, all postcodes beginning with “34�
 |Orders are filtered based on whether they have a return package number or not. Select the filter *Yes* or *No* from the drop-down list.
 
 |*Tag*
-|This filter only applies to reorders, redistributions and subscriptions because these are the only order types where xref:item:flags.adoc#400[tags] can be assigned. By using this filter, orders of these types are filtered based on the tags assigned to them. Use the option *Orders with exactly these tags* or *Orders with at least these tags* to determine exactly how tags will be filtered.
+|With this filter, you can assign xref:item:flags.adoc#400[tags] to an order type. By using this filter, orders of these types are filtered based on the tags assigned to them. Use the option *Orders with exactly these tags* or *Orders with at least these tags* to determine exactly how tags will be filtered.
 
 | *Order item type*
 | Orders are filtered based on the order item type they contain. Select an order item type for this filter. Then select whether the event procedure should be applied to orders which contain the selected order item type or to orders, which do not contain this order item type. +
@@ -554,6 +561,9 @@ Select one of the following settings for the *Date* option: +
 *Return date* = The credit note order is created with the date of the return. +
 *Order date* = The credit note order is created with the date of the creation of the order.
 
+| *Create warranty*
+|The procedure automatically creates a warranty for an order.
+
 | [#intable-order-template]*Use order template*
 |The procedure automatically applies a previously set up order template to an order. Select a template from the drop-down list. +
 Order templates are created in the *Setup » Orders » Order template* menu.
@@ -593,7 +603,7 @@ _Note_ that you have to have at least two groups for splitting to take place.
 |The procedure changes the xref:item:flags.adoc#[flag] in an order. Select either *Delete flag* or the flag the order should get from the drop-down list.
 
 |*Add/delete tags*
-|This procedure only applies to reorders, redistributions and subscriptions because these are the only order types where tags can be assigned. The procedures adds to or deletes tags from an order of this order type, depending on the selection. Select either the function *Add tag* or the function *Delete tag*. Then use the input field to determine the flags that are to be added or deleted. +
+|The procedure adds to or deletes tags from an order of this order type, depending on the selection. Select either the function *Add tag* or the function *Delete tag*. Then use the input field to determine the flags that are to be added or deleted. +
 The procedure can be added more than once so that tags can be added and deleted within the same event procedure, if necessary. +
 
 | *Change dunning level*
@@ -635,7 +645,7 @@ The available template variables are listed within the procedure. +
 
 | *Assign sales representative to order*
 |The procedure saves a sales representative in an order. The sales representative is assigned according to the postcode of the address linked to the recipient of the order. For a sales representative to be assigned, it is mandatory that a range of postcodes is saved in the representative’s contact data. The contact ID of the sales representative is saved instead of the name. +
-For further information, refer to the xref:crm:managing-contacts.adoc#[Contacts] page of the manual.
+For further information, refer to the xref:crm:edit-contact.adoc#contact-details[Editing a contact] page of the manual.
 
 | *Send order confirmation to Fruugo*
 |The procedure sends an order confirmation to the market xref:markets:fruugo.adoc#[Fruugo].
@@ -744,6 +754,10 @@ Use the drop-down list *Date* to select which date is displayed on the document.
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items. +
 Use the drop-down list *Date* to select which date is displayed on the document. By selecting *Standard*, the current date is displayed on the document. By selecting *Credit note date*, the same date as on the invoice is displayed on the document.
 
+| *Generate reversal dunning letter*
+|The procedure generates a xref:orders:generating-dunning-letters.adoc#400[reversal dunning letters] for an order. A reversal document cancels the dunning letter and not the order itself. Thus, the reversal document is only generated if a dunning letter exists for the order. +
+Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
+
 | *Generate pro forma invoice*
 |The procedure generates a xref:orders:generating-pro-forma-invoice.adoc#[pro forma invoice] for an order. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
@@ -785,10 +799,10 @@ You can delete (icon:minus-circle[role="red"]) the added procedure or you can ad
 |The procedure sends an eBay message to customers. Select a template from the drop-down list.
 
 | *Assign sales representative to customer*
-|The procedure automatically saves sales representatives in contact data. For a sales representative to be assigned, a range of postcodes has to be saved in the sales representative’s contact data. The *Contact ID* of the sales representative is saved, not the name. For further information, refer to the xref:crm:managing-contacts.adoc#[Contacts] page of the manual.
+|The procedure automatically saves sales representatives in contact data. For a sales representative to be assigned, a range of postcodes has to be saved in the sales representative’s contact data. The *Contact ID* of the sales representative is saved, not the name. For further information, refer to the xref:crm:edit-contact.adoc#contact-details[Editing a contact] page of the manual.
 
 | *Change customer class*
-|The procedure changes the xref:crm:managing-contacts.adoc#15[customer class] of a contact. Select which customer class the contact should get from the drop-down list. You can choose from the customer classes saved in your system.
+|The procedure changes the xref:crm:preparatory-settings.adoc#create-customer-class[customer class] of a contact. Select which customer class the contact should get from the drop-down list. You can choose from the customer classes saved in your system.
 
 |====
 
@@ -913,29 +927,6 @@ For the procedure *Create an order cancellation on eBay* you can additionally se
 
 |====
 
-[#events-procedures-board]
-[discrete]
-==== Procedure group Board
-
-[[table-event-procedures-procedure-group-board]]
-[cols="1,3"]
-|====
-|Procedure |Explanation
-
-| *Create card*
-|The procedures adds a xref:welcome:customise-system.adoc#370[new card] in the *plentymarkets logo (Start) » Boards* menu. +
-Select the *Board* and the *Column* as the place for the new card within the procedure. Within the procedure, you can assign an optional *Prefix* for the new card. The prefix can be used for better distinction between the cards and is automatically added at the beginning of the card title.
-
-| *Delete cards*
-|The procedure xref:welcome:customise-system.adoc#380[deletes] selected cards in the *plentymarkets logo (Start) » Boards* menu. +
-Select the *Board* and the *Column(s)* whose cards should be deleted within the procedure.
-
-| *Move cards*
-|The procedure xref:welcome:customise-system.adoc#380[moves] selected cards in the *plentymarkets logo (Start) » Boards* menu. +
-Select the *Board* and the *Column(s)* from and to which the cards should be moved within the procedure.
-
-|====
-
 [#events-procedures-purchase-order]
 [discrete]
 ==== Procedure group Purchase order
@@ -960,6 +951,8 @@ Select the *Board* and the *Column(s)* from and to which the cards should be mov
 | *Generate PO delivery note*
 |The procedure generates a xref:stock-management:working-with-redistributions.adoc#500[PO delivery note] for redistributions.
 
+| *Cancel open quantities in reorder*
+|The procedure cancels all open quantities in a xref:stock-management:working-with-reorders.adoc#[reorder].
 |====
 
 [#events-procedures-plugins]
