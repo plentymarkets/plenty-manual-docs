@@ -18,15 +18,31 @@
 :referrer-name: pass:quotes[Herkunft *Voelkner*]
 :category-example: VHS Kassetten
 
-Auf Voelkner werden Artikel aus den Bereichen Elektrotechnik, Werkzeug, IT und Haushalt angeboten. Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest.
+Auf Voelkner werden Artikel aus den Bereichen Elektrotechnik, Werkzeug, IT und Haushalt angeboten.
+
+Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest.
+
+//Erste Schritte
+include::partial$mirakl-first-steps.adoc[]
+
+Aufträge, die auf Voelkner erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
+
+[#order-process]
+== Ablauf der Auftragsabwicklung
+
+So läuft die Auftragsabwicklung bei Voelkner ab:
+
+* Voelkner akzeptiert den Auftrag und zieht die Zahlung ein.
+* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
+* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
+* Im nächsten Schritt wird Voelkner über eine weitere Ereignisaktion über den Versand informiert.
+* Die von Voelkner erstellte Rechnung wird zum Auftrag in dein plentymarkets System importiert.
+* Über eine Ereignisaktion wird eine Rechnung an Voelkner gesendet.
 
 [#allgemeine-informationen]
 == Häufigkeit des Datenaustauschs
 
 include::partial$mirakl-data-exchange-table.adoc[]
-
-//Erste Schritte
-include::partial$mirakl-first-steps.adoc[]
 
 [#api-schluessel]
 == API-Schlüssel erzeugen
@@ -98,6 +114,7 @@ include::partial$catalogue-assistant-config.adoc[]
 === Datenfelder im Katalog zuordnen
 
 Ordne nun die Marktplatz-Datenfelder im Katalog den in plentymarkets gespeicherten Artikeldaten zu.
+
 Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
 
 include::partial$catalogue-mapping.adoc[]
@@ -137,7 +154,7 @@ In der ZIP-Datei link:{valid-values-zip}[{market}: Gültige Werte^] findest du C
 [#prepare-variations]
 == Varianten vorbereiten
 
-Bereite nun deine Varianten vor.
+Bereite nun deine Varianten für {market} vor.
 
 [#variantenverfuegbarkeit]
 === Variantenverfügbarkeit einstellen
@@ -178,18 +195,7 @@ include::partial$catalogue-activation.adoc[]
 [#auftragsabwicklung-automatisieren]
 == Auftragsabwicklung automatisieren
 
-Aufträge, die auf Voelkner erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
-
-So läuft die Auftragsabwicklung bei Voelkner ab:
-
-* Voelkner akzeptiert den Auftrag und zieht die Zahlung ein.
-* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
-* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
-* Im nächsten Schritt wird Voelkner über eine weitere Ereignisaktion über den Versand informiert.
-* Die von Voelkner erstellte Rechnung wird zum Auftrag in dein plentymarkets System importiert.
-* Über eine Ereignisaktion wird eine Rechnung an Voelkner gesendet.
-
-Die folgenden Schritte der Auftragsabwicklung kannst du automatisieren, indem du Ereignisaktionen einrichtest:
+Die folgenden Schritte der Auftragsabwicklung kannst du mit Ereignisaktionen automatisieren:
 
 * Informiere Voelkner darüber, dass der Versand bestätigt wurde. <<#versandbestaetigung-voelkner, Wie?>>
 

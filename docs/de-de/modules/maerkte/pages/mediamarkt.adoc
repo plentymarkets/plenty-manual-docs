@@ -11,22 +11,52 @@
 :registration-url: https://www.mediamarkt.de/de/about-us/marketplace
 :marketplace-url: https://marketplace.plentymarkets.com/mediamarkt_6918
 :assistant-name: MediaMarkt
-
-Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest. Auf MediaMarkt finden Kund:innen eine große Produktauswahl rund um Technik, Elektronik und Multimedia.
-
-include::partial$mirakl-first-steps.adoc[]
-
 :valid-values-zip: https://drive.google.com/file/d/1a_QY4VOIuC2-A-9jerGDAOmYP72907Xt/view?usp=sharing
 :mirakl-menu-shipping: Platform Settings » Shipping
 :referrer-name: pass:quotes[Herkunft *MediaMarkt*]
+:category-example: VIDEO CASSETTES
+
+Auf MediaMarkt finden Kund:innen eine große Produktauswahl rund um Technik, Elektronik und Multimedia.
+
+Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest.
+
+include::partial$mirakl-first-steps.adoc[]
+
+[#order-process]
+== Ablauf der Auftragsabwicklung
+
+Aufträge, die auf MediaMarkt erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
+
+So läuft die Auftragsabwicklung bei MediaMarkt ab:
+
+* Die Händler:in akzeptiert den Auftrag über eine Ereignisaktion.
+* Die Zahlung wird von MediaMarkt eingezogen.
+* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
+* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
+* Über eine Ereignisaktion wird eine Rechnung an MediaMarkt gesendet.
+
+[#allgemeine-informationen]
+== Häufigkeit des Datenaustauschs
+
+include::partial$mirakl-data-exchange-table.adoc[]
 
 [#api-schluessel]
 == API-Schlüssel erzeugen
 
 include::partial$mirakl-api-key.adoc[]
 
+[#300]
+== Marktplatz in plentymarkets einrichten
+
+Du hast die Plugins *Mirakl Connector* und *Mediamarkt* installiert und einen API-Schlüssel erzeugt? Super. Nun richtest du den Marktplatz in plentymarkets ein.
+
+[#marktplatz-assistent-durchlaufen]
+=== Einrichtungsassistenten durchlaufen
+
+include::partial$mirakl-market-assistant.adoc[]
+
 [#auftragsherkunft]
-== Auftragsherkunft aktivieren
+=== Auftragsherkunft aktivieren
 
 :market: {market}
 :referrer: {market}
@@ -36,7 +66,7 @@ include::partial$mirakl-api-key.adoc[]
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
 [#verkaufspreis]
-== Verkaufspreis festlegen
+=== Verkaufspreis festlegen
 
 :referrer-price: {market}
 :mirakl-verkaufspreis:
@@ -48,17 +78,7 @@ include::partial$verkaufspreis-festlegen.adoc[]
 
 include::partial$mirakl-creating-properties.adoc[]
 
-[#marktplatz-assistent-durchlaufen]
-== {market} Assistent durchlaufen
 
-include::partial$mirakl-market-assistant.adoc[]
-
-:category-example: VIDEO CASSETTES
-
-[#allgemeine-informationen]
-== Häufigkeit des Datenaustauschs
-
-include::partial$mirakl-data-exchange-table.adoc[]
 
 [#artikelexport-katalog]
 == Artikelexport einrichten
@@ -81,7 +101,9 @@ include::partial$catalogue-assistant-config.adoc[]
 [#datenfelder-zuordnen]
 === Datenfelder im Katalog zuordnen
 
-Nachdem du einen Katalog erstellt hast, ordnest du die Datenfelder des Marktplatzes den in plentymarkets gespeicherten Artikeldaten zu. Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
+Ordne nun die Marktplatz-Datenfelder im Katalog den in plentymarkets gespeicherten Artikeldaten zu.
+
+Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
 
 include::partial$catalogue-mapping.adoc[]
 
@@ -182,8 +204,23 @@ Die folgenden Marktplatz-Datenfeld werden also automatisch befüllt, egal welche
 Ordne Marktplatz-Datenfelder mit dem Zusatz *(ES)* kein plentymarkets Datenfeld zu. Deine Produkte werden trotzdem zu MIRAKL exportiert.
 |===
 
+[#prepare-variations]
+== Varianten vorbereiten
+
+Bereite nun deine Varianten für {market} vor.
+
+[#variantenverfuegbarkeit]
+=== Variantenverfügbarkeit einstellen
+
+:market-availability: {market}
+:option-availability: {market}
+:mirakl-variantenverfuegbarkeit-aktivieren:
+:mirakl-herkunft:
+
+include::partial$variantenverfuegbarkeit.adoc[]
+
 [#varianten-mit-katalog-kategorie-verknüpfen]
-== Varianten mit {market} Katalog-Kategorie verknüpfen
+=== Varianten mit {market} Katalog-Kategorie verknüpfen
 
 include::partial$mirakl-data-link-categories.adoc[]
 
@@ -233,30 +270,10 @@ Gib im Katalog eine gültige EAN an und übertrage diese an MediaMarkt.
 
 include::partial$mirakl-data-product-data-export.adoc[]
 
-[#variantenverfuegbarkeit]
-== Variantenverfügbarkeit einstellen
-
-:market-availability: {market}
-:option-availability: {market}
-:mirakl-variantenverfuegbarkeit-aktivieren:
-:mirakl-herkunft:
-
-include::partial$variantenverfuegbarkeit.adoc[]
-
 [#auftragsabwicklung-automatisieren]
 == Auftragsabwicklung automatisieren
 
-Aufträge, die auf MediaMarkt erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
-
-So läuft die Auftragsabwicklung bei MediaMarkt ab:
-
-* Die Händler:in akzeptiert den Auftrag über eine Ereignisaktion.
-* Die Zahlung wird von MediaMarkt eingezogen.
-* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
-* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
-* Über eine Ereignisaktion wird eine Rechnung an MediaMarkt gesendet.
-
-Die folgenden Schritte der Auftragsabwicklung kannst du automatisieren, indem du Ereignisaktionen einrichtest:
+Die folgenden Schritte der Auftragsabwicklung kannst du mit Ereignisaktionen automatisieren:
 
 * Informiere MediaMarkt darüber, dass der Auftrag bestätigt wurde. <<#auftragsbestaetigung-mediamarkt, Wie?>>
 
