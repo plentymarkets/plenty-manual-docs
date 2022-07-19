@@ -6,6 +6,8 @@
 
 :conrad:
 :market: Conrad
+:plugin-name: Conrad
+:plugin-link: https://marketplace.plentymarkets.com/conradextension_6948
 :type-of-market: B2B-Marktplatz
 :registration-url: https://www.conrad.de/de/service/bestellung-und-beschaffung/marketplace.html
 :marketplace-url: https://marketplace.plentymarkets.com/conradextension_6948
@@ -16,18 +18,48 @@
 :referrer-name: pass:quotes[Herkunft *Conrad*]
 :category-example: VHS Kassetten
 
+Conrad ist ein B2B-Marktplatz, auf dem ein Produktsortiment von Elektronik über Multimedia bis hin zu Haushalts- und Freizeitprodukten angeboten wird.
 
-Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest. Conrad ist ein B2B-Marktplatz, auf dem ein Produktsortiment von Elektronik über Multimedia bis hin zu Haushalts- und Freizeitprodukten angeboten wird.
+Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest.
 
 include::partial$mirakl-first-steps.adoc[]
+
+[#order-process]
+== Ablauf der Auftragsabwicklung
+
+Aufträge, die auf Conrad erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
+
+So läuft die Auftragsabwicklung bei Conrad ab:
+
+* Die Händler:in akzeptiert den Auftrag über eine Ereignisaktion.
+* Die Zahlung wird von Conrad eingezogen.
+* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
+* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
+* Im nächsten Schritt wird Conrad über eine weitere Ereignisaktion über den Versand informiert.
+* Die von Conrad erstellte Rechnung wird zum Auftrag in dein plentymarkets System importiert.
+
+[#allgemeine-informationen]
+== Häufigkeit des Datenaustauschs
+
+include::partial$mirakl-data-exchange-table.adoc[]
 
 [#api-schluessel]
 == API-Schlüssel erzeugen
 
 include::partial$mirakl-api-key.adoc[]
 
+[#300]
+== Marktplatz in plentymarkets einrichten
+
+Du hast die Plugins *Mirakl Connector* und *Conrad* installiert und einen API-Schlüssel erzeugt? Super. Nun richtest du den Marktplatz in plentymarkets ein.
+
+[#marktplatz-assistent-durchlaufen]
+=== Einrichtungsassistenten durchlaufen
+
+include::partial$mirakl-market-assistant.adoc[]
+
 [#auftragsherkunft]
-== Auftragsherkunft aktivieren
+=== Auftragsherkunft aktivieren
 
 :market: {market}
 :referrer: {market}
@@ -37,7 +69,7 @@ include::partial$mirakl-api-key.adoc[]
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
 [#verkaufspreis]
-== Verkaufspreis festlegen
+=== Verkaufspreis festlegen
 
 :referrer-price: {market}
 :mirakl-verkaufspreis:
@@ -45,19 +77,16 @@ include::partial$auftragsherkunft-aktivieren.adoc[]
 include::partial$verkaufspreis-festlegen.adoc[]
 
 [#eigenschaften-erstellen]
-== Eigenschaften erstellen
+=== Eigenschaften erstellen
 
 include::partial$mirakl-creating-properties.adoc[]
 
-[#marktplatz-assistent-durchlaufen]
-== {market} Assistent durchlaufen
+[#attribut-hilfetool]
+=== Attribut-Hilfetool nutzen
 
-include::partial$mirakl-market-assistant.adoc[]
+:market-attribute-help-tool: conrad
 
-[#allgemeine-informationen]
-== Informationen zum automatischen Datenaustausch
-
-include::partial$mirakl-data-exchange-table.adoc[]
+include::partial$mirakl-data-attribute-tool.adoc[]
 
 [#artikelexport-katalog]
 == Artikelexport einrichten
@@ -77,33 +106,20 @@ Gehe wie im Folgenden beschrieben vor, um einen Katalog im Assistenten zu erstel
 
 include::partial$catalogue-assistant-config.adoc[]
 
+*_Hinweis:_* Steht im Assistenten keine Marktplatzkategorie zur Auswahl, dann ist im Assistenten *{assistant-name}* im Schritt *Authentifizierung* wahrscheinlich die falsche API-Umgebung ausgewählt.
+
 [#datenfelder-zuordnen]
 === Datenfelder im Katalog zuordnen
 
-Nachdem du einen Katalog erstellt hast, ordnest du die Datenfelder des Marktplatzes den in plentymarkets gespeicherten Artikeldaten zu. Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
+Ordne nun die Marktplatz-Datenfelder im Katalog den in plentymarkets gespeicherten Artikeldaten zu.
 
-*_Hinweis:_* Pflichtfelder, die an den Marktplatz übertragen werden müssen, sind mit *** gekennzeichnet. Diesen Feldern muss ein plentymarkets Datenfeld zugeordnet werden, da ansonsten keine Daten für das Feld des Marktplatzes übertragen werden können.
-
-[TIP]
-.Eigenschaften verwenden
-====
-Verwende xref:artikel:eigenschaften.adoc#500[Eigenschaften], um Daten für Marktplatz-Datenfelder zu übertragen, für die es keine eigene Einstellung in plentymarkets gibt.
-====
+Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
 
 include::partial$catalogue-mapping.adoc[]
 
-[IMPORTANT]
-====
-Beim Marktplatz {market} darf folgenden Marktplatz-Datenfeldern _kein_ plentymarkets Datenfeld zugeordnet werden:
+=== Empfehlungen für Datenfeld-Zuordnungen
 
-* Produktbild 1
-* Produktbild 2
-* Produktbild 3
-* Produktbild 4
-* Produktbild 5
-
-Die Warnmeldung beim Speichern der Zuordnung kannst du dabei ignorieren.
-====
+include::partial$recommendation-text.adoc[]
 
 :mirakl-conrad-inhalt-einheit:
 :mirakl-attribut-hilfetool:
@@ -129,37 +145,30 @@ Prüfen, wo Inhalt hingehört, wenn einkommentiert wird.
 In der ZIP-Datei link:{valid-values-zip}[{market}: Gültige Werte^] findest du CSV-Dateien für jedes Marktplatzattribut. Innerhalb einer CSV-Datei sind die gültigen Werte für das Attribut abgebildet. Den zu übertragenden Wert findest du immer in der Spalte *Code*.
 ////
 
+[#prepare-variations]
+== Varianten vorbereiten
+
+Bereite nun deine Varianten für {market} vor.
+
+[#variantenverfuegbarkeit]
+=== Variantenverfügbarkeit einstellen
+
+:market-availability: {market}
+:option-availability: {market}
+:mirakl-variantenverfuegbarkeit-aktivieren:
+:mirakl-herkunft:
+
+include::partial$variantenverfuegbarkeit.adoc[]
+
 [#varianten-mit-katalog-kategorie-verknüpfen]
-== Varianten mit {market} Katalog-Kategorie verknüpfen
+=== Varianten mit {market}-Kategorie verknüpfen
 
 include::partial$mirakl-data-link-categories.adoc[]
 
 [#eigenschaften-mit-varianten-verknuepfen]
-== Eigenschaften mit Varianten verknüpfen und Werte speichern
+=== Eigenschaften mit Varianten verknüpfen und Werte speichern
 
 include::partial$properties-link.adoc[]
-
-[#catalogue-activation]
-== Katalogexport aktivieren
-
-:interval: täglich
-:market: {market}
-
-include::partial$catalogue-activation.adoc[]
-
-[#marktplatzspezifische-werte]
-=== Markplatzspezifische Werte übertragen
-
-Der Marktplatz verlangt für die Übertragung von Produktdaten bei den meisten Attributen spezifische Werte. Diese sind derzeit allerdings noch nicht in dieser Form an der Variante hinterlegt. +
-*_Beispiel:_* Für das Attribut *Brand* ist beispielsweise *test* nicht erlaubt. Hier muss der entsprechende Code übergeben werden - in diesem Beispiel *BRAND_12345678*.
-
-[#attribut-hilfetool]
-== Das Attribut-Hilfetool verwenden
-
-:market-attribute-help-tool: conrad
-
-include::partial$mirakl-data-attribute-tool.adoc[]
-
 
 [#produkt-und-angebotsdaten]
 == Produkt- und Angebotsdaten übertragen
@@ -169,32 +178,18 @@ include::partial$mirakl-data-attribute-tool.adoc[]
 
 include::partial$mirakl-data-product-data-export.adoc[]
 
+[#catalogue-activation]
+== Katalogexport aktivieren
 
-[#variantenverfuegbarkeit]
-== Variantenverfügbarkeit einstellen
+:interval: täglich
+:market: {market}
 
-:market-availability: {market}
-:option-availability: {market}
-:mirakl-variantenverfuegbarkeit-aktivieren:
-:mirakl-herkunft:
-
-include::partial$variantenverfuegbarkeit.adoc[]
+include::partial$catalogue-activation.adoc[]
 
 [#auftragsabwicklung-automatisieren]
 == Auftragsabwicklung automatisieren
 
-Aufträge, die auf Conrad erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
-
-So läuft die Auftragsabwicklung bei Conrad ab:
-
-* Die Händler:in akzeptiert den Auftrag über eine Ereignisaktion.
-* Die Zahlung wird von Conrad eingezogen.
-* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
-* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
-* Im nächsten Schritt wird Conrad über eine weitere Ereignisaktion über den Versand informiert.
-* Die von Conrad erstellte Rechnung wird zum Auftrag in dein plentymarkets System importiert.
-
-Die folgenden Schritte der Auftragsabwicklung kannst du automatisieren, indem du Ereignisaktionen einrichtest:
+Die folgenden Schritte der Auftragsabwicklung kannst du mit Ereignisaktionen automatisieren:
 
 * Informiere Conrad automatisch darüber, dass der Auftrag bestätigt wurde. <<#auftragsbestaetigung-conrad, Wie?>>
 

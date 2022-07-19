@@ -1,0 +1,131 @@
+= Praxisbeispiel: Tracking-URL an Kund:innen senden
+:keywords:
+:description: Dieses Praxisbeispiel beschreibt, wie du die Tracking-URL automatisch an deine Kund:innen sendest, wenn die Paketnummer des Versanddienstleisters am Auftrag verfügbar ist.
+:author: team-crm
+
+Ich möchte eine Tracking-URL an meine Kund:innen senden, sobald die Paketnummer am Auftrag verfügbar ist. Was muss ich tun?
+
+[discrete]
+== Erforderliche Schritte (Kurzform)
+
+* Tracking-URL am Versanddienstleister speichern
+* E-Mail-Vorlage im EmailBuilder einrichten
+** Variable `Tracking-URL` in Vorlage einfügen
+* Ereignisaktion verknüpfen, die die Vorlage versendet, wenn das Paket beim Dienstleister registriert wurde und eine Paketnummer am Auftrag erstellt ist.
+
+[#tracking-url-speichern]
+== Tracking-URL am Versanddienstleister speichern
+
+Viele Versanddienstleister bieten eine Sendungsverfolgung mittels Tracking-URL an. Eine funktionsfähige Tracking-URL enthält die Paketnummer und oftmals die Postleitzahl der Person, die das Paket empfangen soll.
+Du kannst deinen Kund:innen die Tracking-URL in einer E-Mail zur Versandmitteilung senden, damit deine Kund:innen den aktuellen Status ihrer Sendungen beim Versanddienstleister sowie den voraussichtlichen Zeitpunkt der Zustellung einsehen können.
+
+Speichere daher also zunächst die Tracking-URL am Versanddienstleister. Gehe dazu ins Menü *Einrichtung » Aufträge » Versand » Optionen* in das Tab *Versanddienstleister*. Gib dort im Feld *Tracking-URL* die Tracking-URL ein.
+
+Die Tracking-URL von DHL ist bereits in deinem System gespeichert und sieht folgendermaßen aus:
+`+http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=[PLZ]&idc=[PaketNr]+`.
+
+[TIP]
+.Du kennst die Tracking-URL nicht?
+====
+Wenn du die Tracking-URL des Versanddienstleisters nicht kennst, gehe folgendermaßen vor:
+
+* Wirf einen Blick in unser Handbuch. Wir haben dort die aktuell gültigen, uns bekannten Tracking-URLs in den jeweiligen Unterkapiteln zum Versanddienstleister aufgelistet. Über das Kapitel xref:fulfillment:versand-vorbereiten.adoc#2500[Versanddienstleister im Überblick] gelangst du auf die Unterkapitel der Versanddienstleister und kannst nachschauen, ob dort die Tracking-URL aufgelistet ist.
+
+* Wenn du dort die gewünschte Information nicht findest, wende dich bitte an deine Ansprechpartner:in bei dem jeweiligen Versanddienstleister und erfrage die korrekte, aktuell gültige Tracking-URL.
+====
+
+[#vorlage-mit-variable-erstellen]
+== E-Mail-Vorlage mit Variable der Tracking-URL erstellen
+
+//// 
+TODO: Dieses Praxisbeispiel auch auf der EmailBuilder-Seite verlinken
+////
+
+Erstelle nun eine E-Mail-Vorlage, die die Variable für die Tracking-URL enthält. Du kannst auch eine der xref:crm:emailbuilder.adoc#standardvorlagen-verwenden[vorhandenen Standardvorlagen verwenden] und diese dann anschließend xref:crm:emailbuilder.adoc#vorlage-bearbeiten[anpassen]. +
+*_Hinweis:_* Wir erläutern im Folgenden, wie du eine neue Vorlage erstellst und nicht, wie du eine vorhandene Vorlage bearbeitest.
+
+[.instruction]
+E-Mail-Vorlage mit dem EmailBuilder erstellen:
+
+. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Klicke in der Zeile des Ordners, in dem du eine Vorlage erstellen möchtest, auf material:more_vert[]. +
+→ Ein Fenster wird geöffnet.
+. Klicke auf material:add[] *Neue Vorlage*.
+. Gib einen Namen für die Vorlage ein, z.B. `Paketverfolgung`.
+. Gib einen Betreff für die Vorlage ein, z.B. `Dein Paket kommt bald`.
+. Wähle je einen xref:crm:emailbuilder.adoc#vorlage-header-footer[Header und Footer] aus den Dropdown-Listen (siehe <<#image-example-practical-example-template-settings>>).
+. *Speichere* die Einstellungen. +
+→ Das Speichern ist erforderlich, damit du nun den Inhalt der Vorlage bearbeiten kannst (siehe <<#image-example-practical-example-template-editor>>).
+. Klicke in der Zeile material:expand_more[] *Inhalt* auf *Bearbeiten* (material:edit[]). +
+→ Der Editor mit den Widgets wird geöffnet.
+. Ziehe das Widget *Text* in den schraffierten Bereich.
+. Klicke auf material:edit[].
+. Gib im Textfeld den gewünschten Text ein und suche dir über das Textfeld *Suche* in der Spalte *Variablen* die passenden Variablen, die du benötigst.
+
+[[image-example-practical-example-template-settings]]
+.Beispiel: Einstellungen der Vorlage mit Musterdaten in der Vorschau
+image::praxisbeispiel-vorlage-einstellungen.png[width=640, height=360]
+
+So sieht der Inhalt der Vorlage im Editor aus, nachdem du auf material:edit[] geklickt hast:
+
+[[image-example-practical-example-template-editor]]
+.Editor-Ansicht der Vorlage
+image::praxisbeispiel-vorlage-editor.png[width=640, height=360]
+
+[.collapseBox]
+.E-Mail-Vorlage über den Mandanten erstellen ("alte" Vorgehensweise)
+--
+*_Hinweis:_* Das Erstellen von E-Mail-Vorlagen funktioniert aktuell auch noch über den alten Weg, also über die Vorlagen direkt am Mandant. 
+
+Erstelle die E-Mail-Vorlage im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen*. Füge nun die Template-Variable `$TrackingURL` direkt in deine Vorlage ein.
+
+--
+
+[#ereignisaktion einrichten]
+== Ereignisaktion einrichten
+
+Richte nun eine Ereignisaktion ein, die den Versand der E-Mail-Vorlage für die Paketverfolgung auslöst, sobald die Paketnummer am Auftrag verfügbar ist.
+
+[instruction]
+Ereignisaktion einrichten:
+
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klicke unten links auf *Ereignisaktion hinzufügen* (material:add[role=green]). +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Gib einen eindeutigen Namen für die Ereignisaktion ein, z.B. `Paketnummer generiert`.
+. Wähle das Ereignis gemäß <<#table-event-procedure-package-number>>.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+. Nimm die Einstellungen gemäß <<#table-event-procedure-package-number>> vor.
+. Aktiviere die Option *Aktiv*.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+
+[[table-event-procedure-package-number]]
+.Ereignisaktion "Paketnummer generiert" einrichten
+[cols="2,4,3"]
+|====
+|Einstellung |Option |Auswahl
+
+|Ereignis
+|Auftragsänderung > Paketnummer
+|
+
+|Filter
+|Auftrag > Auftragstyp
+|Auftrag
+
+|Aktion
+|Kunde > E-Mail versenden
+|Wähle als Vorlage die soeben <<#vorlage-mit-variable-erstellen, erstellte Vorlage für die Paketverfolgung>>. Wähle als *Empfänger* die Option *Kunde*.
+
+|====
+
+[[image-event-procedure-package-number]]
+.Einstellungen der Ereignisaktion "Paketnummer generiert"
+image::praxisbeispiel-ereignisaktion-paketnummer.png[width=640, height=360]
+
+[#weiterfuehrende-links]
+== Weiterführende Handbuch-Links
+
+* xref:fulfillment:versand-vorbereiten.adoc#800[Versanddienstleister erstellen]
+* xref:crm:emailbuilder.adoc#[EmailBuilder]
+* xref:crm:e-mails-versenden.adoc[E-Mails versenden] (alte Vorgehensweise)
