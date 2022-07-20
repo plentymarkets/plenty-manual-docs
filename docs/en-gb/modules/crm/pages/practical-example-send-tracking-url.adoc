@@ -1,0 +1,131 @@
+= Practical example: Sending tracking URLs to customers
+:keywords:
+:description: This practical example describes how to automatically send the tracking URL to your customers as soon as the package number from the shipping service provider is available at the order.
+:author: team-crm
+
+I would like to send the tracking URL to my customers once the package number is available at the order. What can I do?
+
+[discrete]
+== Required steps (short version)
+
+* Save the tracking URL at the shipping service provider
+* Set up an email template in the EmailBuilder
+** Insert the variable `Tracking URL` in the template
+* Link event procedure that sends the template when the package has been registered at the service provider and a package number is available at the order.
+
+[#save-tracking-url]
+== Save the tracking URL at the shipping service provider
+
+Many shipping service providers allow customers to track their packages with tracking URLs. A functional tracking URL should include the package number and the recipient's postcode.
+You can send your customers an email that contains the tracking URL. This way, your customers can see the current status of their shipments at the shipping service provider as well as the estimated time of delivery.
+
+Therefore, first save the tracking URL at the shipping service provider. Go to *Setup » Orders » Shipping » Settings* and switch to the *Shipping service provider* tab. Enter the tracking URL in the *Tracking URL* field.
+
+The DHL tracking URL is already saved in your system and looks as follows:
+`+http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&zip=[PLZ]&idc=[PaketNr]+`.
+
+[TIP]
+.You don’t know the tracking URL?
+====
+If you don’t know the tracking URL of the shipping service provider, proceed as follows:
+
+* Check our user manual. We listed the currently valid, known tracking URLs in the corresponding sub-chapters of the shipping service provider. You can access the sub-chapters of the shipping service provider via the xref:fulfilment:preparing-the-shipment.adoc#2500[Overview of shipping service providers] chapter and have a look whether the tracking URL is listed there.
+
+* If you don’t find the information you are looking for, please contact your contact person at the corresponding shipping service provider and ask for the correct, currently valid tracking URL.
+====
+
+[#create-template-with-variable]
+== Creating an email template with the variable for the tracking URL
+
+//// 
+TODO: Dieses Praxisbeispiel auch auf der EmailBuilder-Seite verlinken
+////
+
+Now create an email template that contains the variable for the tracking URL. You can also use one of the xref:crm:emailbuilder.adoc#use-default-templates[availale default templates] and xref:crm:emailbuilder.adoc#edit-template[adjust] it afterwards. +
+*_Note:_* We will explain how you create a new template and not how you edit an existing template.
+
+[.instruction]
+Creating an email template with the EmailBuilder:
+
+. Go to *CRM » EmailBuilder (Test phase)*.
+. In the line of the folder or sub-folder in which you want to create a template, click on material:more_vert[]. +
+→ A window opens.
+. Click on material:add[] *New template*.
+. Enter a name for the template, e.g. `Package tracking`.
+. Enter a subject for the template, e.g. `Your parcel will arrive soon`.
+. Select a xref:crm:emailbuilder.adoc#template-header-footer[header and footer] each from the drop-down lists (see <<#image-example-practical-example-template-settings>>).
+. *Save* the settings. +
+Saving is required to be able to edit the template’s content (see <<#image-example-practical-example-template-editor>>).
+. In the line material:expand_more[] *Content*, click on *Edit* (material:edit[]). +
+→ The editor with the widgets opens.
+. Drag the *Text* widget to the shaded area.
+. Click on material:edit[].
+. In the text field, enter the desired text and search the appropriate variables that you need by using the *Search* text field in the *Variables* column.
+
+[[image-example-practical-example-template-settings]]
+.Example: Template settings with dummy data in the preview
+image::practical-example-template-settings.png[width=640, height=360]
+
+This is how the template content looks in the editor after you clicked on material:edit[]:
+
+[[image-example-practical-example-template-editor]]
+.Template’s editor view
+image::practical-example-template-editor.png[width=640, height=360]
+
+[.collapseBox]
+.Creating an email template via the client (“old” method)
+--
+*_Note:_* Creating email templates currently still also works using the old method, thus via the templates directly at the client. 
+
+Create the email template in the *Setup » Client » [Select client] » Email » Templates* menu. Enter the template variable `$TrackingURL` into your email template.
+
+--
+
+[#set-up-event-procedure]
+== Setting up an event procedure
+
+Now set up an event procedure that triggers the email template despatch for the package tracking once the package number is available at the order.
+
+[instruction]
+Setting up an event procedure:
+
+. Go to *Setup » Orders » Events*.
+. Click on *Add event procedure* at the bottom left (material:add[role=green]). +
+→ The *Create new event procedure* window opens.
+. Enter a distinct name for the event procedure, e.g. `Package number generated`.
+. Select the event as listed in <<#table-event-procedure-package-number>>.
+. *Save* (icon:save[role="green"]) the settings.
+. Carry out the settings as listed in <<#table-event-procedure-package-number>>.
+. Activate the option *Active*.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-event-procedure-package-number]]
+.Setting up the “Package number generated” event procedure
+[cols="2,4,3"]
+|====
+|Setting |Option |Selection
+
+|Event
+|Order change > Package number
+|
+
+|Filter
+|Order > Order type
+|Order
+
+|Procedure
+|Customer > Send email
+|Select as template the <<#create-template-with-variable, template for package tracking>> that you have just created. Select as *recipient* the option *Customer*.
+
+|====
+
+[[image-event-procedure-package-number]]
+.Settings in the “Package number generated” event procedure
+image::practical-example-event-procedure-package-number.png[width=640, height=360]
+
+[#more-links]
+== More user manual links
+
+* xref:fulfilment:preparing-the-shipment.adoc#800[Creating a shipping service provider]
+* xref:crm:emailbuilder.adoc#[EmailBuilder]
+* xref:crm:sending-emails.adoc#[Sending emails] (old method)
