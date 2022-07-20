@@ -3,4 +3,1314 @@
 :keywords: Galaxus
 :description: Multi-Channel in plentymarkets: Set up the interface to the market Galaxus in your plentymarkets system.
 
-This page is coming soon. Until then, please refer to the user guide for the plugin Galaxus on link:https://marketplace.plentymarkets.com/en/galaxus_4788[plentyMarketplace].
+:galaxus:
+:market: Galaxus
+:price-search-engine: Galaxus
+:plugin-name: Galaxus
+:main-client:
+:plugin-link: https://marketplace.plentymarkets.com/galaxus_4788
+
+Swiss online market leader Galaxus specializes in IT, consumer electronics and telecommunications. As the largest online department store in Switzerland, Galaxus has a steadily growing product range. Reliable, fast delivery and reasonable prices.
+
+[#register]
+== Registering with Galaxus
+
+Register online for the link:https://www.galaxus.ch/en/page/werden-sie-haendler-12462[Digitec Galaxus Merchant Program^] or contact Galaxus using the email address mailto:haendlerprogramm@digitecGalaxus.ch[anmelden@digitecgalaxus.ch].
+
+[#order-workflow]
+== Orders via Galaxus
+
+Your company is based in Germany and you delivery to Galaxus end customers in Switzerland.
+As such, three scenarios are possible:
+
+. You send the order directly to the address of the end customer in Switzerland.
+. You use the Galaxus EU hub and _do not_ have fiscal representation in Switzerland.
+. You use Galaxus EU hub and have fiscal representation in Switzerland.
+
+[.collapseBox]
+.What is the EU Hub?
+--
+The EU Hub is a cross border customs clearance solution offered by Galaxus. It provides easy access to the Swiss market.
+As a EU merchant, you can use the EU Hub both with and without fiscal representation.
+The Digitec Galaxus AG acts as a service provider to handle logistics to Switzerland including declaration, customs clearance and VAT payment.
+
+https://partner.digitecgalaxus.ch/hc/en-us/articles/360016297139-How-do-I-benefit-from-the-customs-clearance-solution-of-Digitec-Galaxus-AG-[Additional information and requirements for using the EU hub are provided by Galaxus^].
+--
+
+[.collapseBox]
+.What is fiscal representation?
+--
+Foreign mail order companies are subject to VAT in Switzerland if they achieve an annual turnover of 100,000.00 or more from small consignments to Swiss customers.
+Small consignments are defined as consignments with a value of goods of up to 65 CHF.
+
+These merchants must designate a person resident in Switzerland as their VAT fiscal representative. The fiscal representative registers the merchant in the Swiss VAT register.
+--
+
+[.collapseBox]
+.How do orders via the EU hub work?
+--
+
+When you use the EU hub, orders work like so:
+
+. A customer in Switzerland orders and pays for a product on Galaxus.
+. You confirm receipt of the order to Galaxus.
+. You ship the package to the EU Hub.
+. You inform Galaxus that the package is on its way.
+. In the EU hub, the package is processed according to Swiss customs laws:
+  * Package is labelled with shipping labels for Swiss Post.
+  * The export steps that are legally required are carried out.
+. The package is transported to the Swiss central warehouse.
+. The central warehouse handles the steps necessary for import.
+. The package is handed over to Swiss Post.
+. Customer receives the package.
+
+https://partner.digitecgalaxus.ch/hc/en-us/articles/360016297139-How-do-I-benefit-from-the-customs-clearance-solution-of-Digitec-Galaxus-AG-[Additional information and requirements for using the EU hub are provided by Galaxus^].
+--
+
+[.collapseBox]
+.How do returns via the EU hub work?
+--
+
+When you use the EU hub, returns work like so:
+
+. Customer announces that they want a return in the Galaxus shop.
+. Galaxus informs you about the return.
+. Customer sends the return to Digitec Galaxus AG in Switzerland.
+. In the Swiss central warehouse, the package is processed according to Swiss customs laws:
+  * Package is labelled with shipping labels for DHL.
+  * The export steps that are legally required are carried out.
+. The package is transported to the EU hub.
+. The EU hub handles the steps necessary for import.
+. The package is handed over to DHL.
+. You receive the return.
+. You inform Galaxus that you accepted the return.
+
+https://partner.digitecgalaxus.ch/hc/en-us/articles/360016297139-How-do-I-benefit-from-the-customs-clearance-solution-of-Digitec-Galaxus-AG-[Additional information and requirements for using the EU hub are provided by Galaxus^].
+--
+
+[#difference-fiscal-representation]
+=== Difference: EU Hub without and with fiscal representation
+
+[[eu-hub-fiscal-representation]]
+.EU Hub without and with fiscal representation
+[cols="1,2a,2a"]
+|===
+|  |EU Hub without fiscal representation |EU Hub with fiscal representation
+
+| VAT
+| * Orders with invoice addresses in Switzerland and delivery addresses in the EU are imported as net orders.
+* You do _not_ pay Swiss VAT on orders via the EU hub.
+| * You pay Swiss VAT on orders via the EU hub.
+
+| plentymarkets +
+Settings
+| * You use the payment method *Galaxus Direct Checkout*.
+| * You use the payment method *Galaxus Direct Checkout Fisc Rep*.
+* You activate the option *I use Galaxus EU hub and have fiscal representation in Switzerland* in the menu *Setup » Markets » Galaxus » Order import*.
+* Your VAT ID for Switzerland is saved in the location *Switzerland*.
+
+| Workflow of order import
+|* A net invoice with the currency Swiss Francs is created in plentymarkets. The invoice address is the address of the customer.
+* You set up the system so that the address of the EU hub is used as the delivery address.
+| * The main order is created. This main order contains the Swiss address of the customer.
+* A delivery order is created. The delivery address of this delivery order is the EU hub. This address of the EU hub is inserted automatically. The address of the EU hub is also inserted on the shipping labels.
+* A gross invoice with the currency Swiss Francs is created in plentymarkets. The invoice address is the address of the customer.
+|===
+
+=== Particularities of the Galaxus order processing
+
+* Orders with invoice addresses in Switzerland and delivery addresses in the EU are imported as net orders. +
+*_Exception:_* You have fiscal representation in Switzerland.
+
+* In all scenarios where only a part of the order is to be processed (return/shipping), the imported order must be split. The resulting orders must be processed separately.
+
+* Statuses for rejecting partial cancellation requests and cancellation requests must be set by the user. Go to *Setup » Markets » Galaxus » Order import » Order status configuration*. If no option is selected, the status *[5] Cleared for shipping* is automatically set.
+
+* After splitting an order, the plugin can inform Galaxus without any additional user input.
+
+* Galaxus return requests generate new plentymarkets orders of the type *Return*. These orders are linked to the initial order. The resulting orders must be processed separately.
+
+* The default delivery date for Galaxus orders is: Day on which the event procedure *Send order confirmation to Galaxus* was triggered *+ 2 working days* unless a different delivery date was entered in the menu *Order » Overview » Item » Edit » Delivery date* earlier. A shipping date is also not set if the item quantity needed to fulfil the order is not available as net stock. The planned delivery date can change based on the plugin option *Positive stock quantities are always exported, independent of the average delivery period* in the menu *Setup » Markets » Galaxus » Tab: Product Stock Price*.
+
+=== Splitting an order: an example
+
+. Go to *Order » Order ID*.
+. Split the order from *Order » Overview » Gear (split)*. +
+→ The window *Split order* opens.
+. Select the item quantities for the new order. +
+*_Important:_* The shipping costs of the original order will not be changed.
+
+* After splitting an order, the plugin can inform Galaxus without any additional user input.
+* Galaxus return requests generate new plentymarkets orders of the type *Return*. These orders are linked to the initial order. The resulting orders must be processed separately.
+* The default delivery date for Galaxus orders is: Day on which the event procedure *Send order confirmation to Galaxus* was triggered *+ 2 working days* unless a different delivery date was entered in the menu *Order » Overview » Item » Edit » Delivery date* earlier. A shipping date is also not set if the item quantity needed to fulfil the order is not available as net stock. The planned delivery date can change based on the plugin option *Positive stock quantities are always exported, independent of the average delivery period* in the menu *Setup » Markets » Galaxus » Tab: Product Stock Price*.
+* For Galaxus delivery notes, carry out the following settings in addition to your default delivery note settings:
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Documents » Delivery note*.
+. In the area *Optional elements below stock unit table*, select *Yes* for the option *External Order Number*.
+. Insert the note agreed on with Galaxus in the field *Note*. +
+`Thank you for your order.` +
+`Orders placed on www.galaxus.ch are subject to the general terms and conditions of Digitec Galaxus AG. In case of a return, please use the guided return process in your customer account on www.galaxus.ch.\`
+. *Save* the changes.
+
+[#plugin-download]
+== Installing the plugins
+
+include::partial$plugin-download.adoc[]
+
+[#activate-referrer]
+== Activating the order referrer
+
+:referrer: Galaxus
+:referrer-option: pass:quotes[option *Galaxus*]
+
+include::partial$activate-referrer.adoc[]
+
+[#market-setup]
+== Setting up the order interface in plentymarkets
+
+Carry out the following settings in plentymarkets in order to set up the order interface to Galaxus.
+Keep the FTP connection details ready that Galaxus emails you after your registration.
+
+include::partial$plugin-market-not-in-menu.adoc[]
+
+[.instruction]
+Setting up the order interface to Galaxus:
+
+. Go to *Setup » Markets » Galaxus » Order import*.
+. Carry out the settings. Note the explanations in <<#order-settings>>.
+. Save (terra:save[]) the settings.
+
+[[order-settings]]
+.Galaxus settings
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+| *Activate Order Interface*
+| Activate to enable data exchange with Galaxus for orders.
+
+| *Add '|customer reference number' after externalorder number*
+| Activate if you need the customer reference number for customs documents (EU-HUB USER).
+
+*_Note:_* When this option is active, you can only search order numbers by entering the complete string *GalaxusOrderNumber| GalaxusCustomerReferenceNumber*.
+
+| *I use Galaxus EU hub and I have fiscal representation in Switzerland*
+|
+
+[.collapseBox]
+.What is fiscal representation?
+--
+Foreign mail order companies are subject to VAT in Switzerland if they achieve an annual turnover of 100,000.00 or more from small consignments to Swiss customers.
+Small consignments are defined as consignments with a value of goods of up to 65 CHF.
+
+These merchants must designate a person resident in Switzerland as their VAT fiscal representative. The fiscal representative registers the merchant in the Swiss VAT register.
+--
+//TODO !!!
+
+2+| FTP configuration
+
+| *Host*
+| Enter the host name based on the pattern *ftp.dg.ch*.
+
+| *User* +
+*Password*
+| Enter the user name and password that you received from Galaxus.
+
+| *Port number*
+| Enter the port number.
+
+| *plentymarkets2DG* +
+| Select the *plentymarkets2DG* folder for the selected host. +
+→ On this FTP-path the plugin responds back to Galaxus.
+
+| *DG2plentymarkets*
+| Select the *DG2plentymarkets* folder for the selected host. +
+→ From this FTP path, the plugin will read new orders and requests from Galaxus. +
+*_Important:_* The specified folder paths begin with *(/... /...)*, only if the hostname submitted on *Step 4* does not end with *( / )*.
+
+2+| Order status configuration
+
+| *Order status for cancellation requests*
+| Which order status do you want to assign to new cancellation requests during import?
+
+| *Order status for return requests*
+| Which order status do you want to assign to new return requests during import?
+
+| *Automatically reject cancellation requests for orders from this status*
+| From which order status do you want to reject cancellation requests automatically?
+
+|===
+
+== Setting up the item export
+
+The following Elastic Export formats are used for the item export. When you provision the plugin, these formats are installed automatically.
+
+* *GalaxusProductDataExport*
+* *GalaxusProductPropertiesExport*
+* *GalaxusStockPricingExport*
+
+For format relevant setup options, go to *Setup » Markets » Galaxus » Item export*.
+
+[.instruction]
+Setting up the item export to Galaxus:
+
+. Go to *Setup » Markets » Galaxus » Item export » Product data*.
+. Carry out the settings. Note the explanations in <<#export-settings>>.
+. Save (terra:save[]) the settings.
+//TODO: Explain options
+
+[[export-settings]]
+.Settings for the item export
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+2+^| *Product Data* (Format *GalaxusProductDataExport*)
+
+| *Description*
+| Possible options:
+
+* *Product Description*
+* *Technical data*
+* *Preview text*
+* *Free text field 1* to *Free text field 20*
+
+| *Export Customs tariff number as*
+| Possible options:
+
+* *TARES*
+* *TARIC*
+
+2+^| *Product Properties » Item Characteristics* (Format *GalaxusProductPropertiesExport*)
+
+|*Export activated characteristics*
+|Possible options:
+
+* All
+* Only selected
+
+| *Whitelist*
+|
+
+[.instruction]
+Creating a whitelist element:
+
+. Go to *Setup » Markets » Galaxus » Item export » Item Characteristics / Variation Properties*.
+. Click on *Add*.
+. Select a *characteristic* / a *property*.
+. *Save* the settings.
+
+2+^| *Product Properties » Variation Properties* (Format *GalaxusProductPropertiesExport*)
+
+| *Export activated properties*
+| Possible options:
+
+* All
+* Only selected properties
+* None
+
+| *Whitelist*
+|
+
+[.instruction]
+Creating a whitelist element:
+
+. Go to *Setup » Markets » Galaxus » Item export » Item Characteristics / Variation Properties*.
+. Click on *Add*.
+. Select a *characteristic* / a *property*.
+. *Save* the settings.
+
+2+^| *Product Stock Pricing* (Format *GalaxusStockPricingExport*)
+
+| *Currency*
+| Possible settings for exporting the currency:
+
+* CHF
+* EUR
+
+| *Calculate "Sales price excl. VAT" based on Elastic Export setting "Target country"*
+| Activate this option to use Elastic Export setting *Target country*.
+
+| *Positive stock quantities are always exported, independent of the average delivery period*
+| Possible options:
+
+* On
+* Off
+
+*_Note:_* To clarify, check the default export matrix for active variations in *table 5*.
+
+| *Sales price that is exported as purchase price excl. VAT*
+| Select a relevant sales price that already exists. This option is also influenced by *Calculate "Sales price excl. VAT" based on Elastic Export setting "Target country"*.
+
+| *Sales price that is exported as purchase price excl. fees and VAT*
+| Select a relevant sales price that already exists. This option is also influenced by *Calculate "Sales price excl. VAT" based on Elastic Export setting "Target country"*.
+
+| *Export stock from:*
+| Possible options:
+
+* All warehouses
+* A warehouse of my choice
+
+|===
+
+=== Default export matrix for active variations
+
+The basic logic of Galaxus is like this:
+
+If positive stock is transmitted, Galaxus uses the default delivery time that is saved for the account in the Galaxus back end. If an item does not have positive stock, the reorder time is used instead.
+
+*_Notes:_*
+
+* Galaxus assumes an average delivery time of 2 days for items that are in stock. If an item has stock and an availability that results in a delivery time of 2 or more days, the item is exported with a stock of 0\. The delivery time is exported as the reorder time. For items with 0 or negative stock and an average delivery time of two days or less, the system assumes a configuration error and the item is not exported.
+
+* Item data is processed irrespective of the stock export conditions for export.
+
+* Bundles are not exported if one of the items in it are not in stock. Also, the exported stock amount is based on the bundle component with the highest stock.
+
+The following table shows a default export matrix for active variations.
+
+[[standard-export-matrix]]
+.Default export matrix for active variations
+[cols="1,1,1"]
+|===
+|Net stock| Average delivery period| Result
+
+| Positive stock
+| Delivery time *<= 2*
+| Stock is exported.
+
+|Positive stock
+| Delivery time *> 2*
+| Only delivery time is exported.
+
+|Positive stock
+| No *Delivery time*
+| Stock is exported.
+
+|Stock 0/negative
+| *Delivery time <= 2*
+| No export.
+
+|Stock 0/negative
+| *Delivery time > 2*
+| Only delivery time is exported.
+
+|Stock 0/negative
+| *No delivery time*
+| No export.
+
+|===
+
+== Setting up a sales price
+
+Sales prices define the conditions under which a variation is sold at a specific price and on a specific sales channel.
+
+//TODO: Include
+
+. Go to *Setup » Item » Sales prices*.
+. Click on *[+] New*.
+. Enter a *position number*.
+. Enter an *internal* and an *external* *name*.
+. Enter a value for *Minimum quantity*.
+. Select *CHF* or *EUR* as the *currency*.
+. Select the *Client*.
+. Select the *sales countries*.
+. Select the referrer *Galaxus*.
+. Save the settings.
+
+*_Note:_* Alternatively, you can activate the referrer *Galaxus* in an existing sales price.
+
+== Preparing variations for the export
+
+* The variations must be *Active*: +
+  . Go to *Item » Variation » Settings » Area: Availability* and activate the option *Active*.
+
+* The *item availability* for the market *Galaxus* must be activated. +
+  . Go to *Item » Variation » Tab: Availability » Area: Markets*.
+  . Select the market *Galaxus*.
+
+* A Galaxus *SKU* must exist. +
+  . Go to *Item » Variation » Tab: Availability » Area: SKU*.
+  . Create an *SKU* for the referrer *Galaxus*.
+
+* A Galaxus *sales price* must exist. +
+  . Go to *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Area: Sales prices*.
+  . Open the sales price.
+  . Activate the referrer *Galaxus*.
+
+* Permitted *characteristics* and/or *properties* must be linked to the variations. +
+  . Go to *Item » Characteristics » Galaxus characteristics*.
+  . Link the relevant elements.
+  . *_Or:_* Go to *Setup » Settings » Properties*.
+  . Link the relevant elements.
+
+* *Attribute* linked to the item are also exported.
+
+* The *Availabilities 1-10* must be saved for the variation. +
+  . Go to *Setup » Item » Availability*.
+  . Save business relevant *Average delivery times*.
+  . Ensure that variations activated for Galaxus are linked to the relevant *Availability 1-10*. +
+  *_Important:_* The setting *Positive stock quantities are always exported, independent of the average delivery period* does not work if no *Availability 1-10* is set.
+
+== Exporting items to Galaxus
+
+The Galaxus plugin exports the item data using the *Elastic Export plugin*. For more information on the *Elastic Export Plugin*, visit the xref:data:elastic-export.adoc#[Elastic Export] page.
+
+=== Setting up Elastic Export formats
+
+The following Elastic Export formats are used for the item export. When you provision the plugin, these formats are installed automatically.
+
+* *GalaxusProductDataExport*
+* *GalaxusProductPropertiesExport*
+* *GalaxusStockPricingExport*
+
+. Go to *Data » Elastic Export » New export [+]*. +
+→ Each format works for a specific part of the item export.
+. Select a Galaxus format:
+  * *GalaxusProductDataExport*
+  * *GalaxusProductPropertiesExport*
+  * *GalaxusProductStockPricingExport*
+. Set up the export formats.
+. *Save* the settings.
+
+[.collapseBox]
+.Input fields export format *GalaxusProductDataExport*
+--
+
+[[export-format]]
+.The GalaxusProductData export format
+[cols="1,2a"]
+|===
+|Galaxus output |plentymarkets input field
+
+| *Product Key, _Mandatory, Text(100)_*
+| *Item » Edit item » [Open item] » [Open variation] »Variation-ID*
+
+| *GTIN, _mandatory, integer (8-14)_*
+| *Item » Edit item » [Open item] » [Open variation] » Barcode*
+
+Corresponds to barcode type Selection in the elastic export filter of this format
+
+| *ManufacturerKey, _Text(200)_*
+| *Item » Edit item » [Open item] » [Open variation]» Model*
+
+| *Brandname, _mandatory, Text(100)_*
+| *Item » Edit Item » [Open item] » Tab: Global » Manufacturer*
+
+| *ProductTypeIdDigitecGalaxus, _Integer(200)_*
+| *-*
+
+| *Category, _mandatory, Text(200)_*
+| *Item » Edit Item » [Open item] » [Open variation] » Tab: Categories » Standard category*
+
+| *CategoryGroup_1, _Text(200)_*
+| *-*
+
+| *CategoryGroup_2, _Text(200)_*
+| *-*
+
+| *CategoryGroup_3, _Text(200)_*
+| *-*
+
+| *CategoryGroup_4, _Text(200)_*
+| *-*
+
+| *TARESCode, _Text(20)_*
+| *Item » Edit Item » [Open item] » Tab: Basic Settings » Customs tariff number*
+
+| *TARICode, _Text(20)_*
+| *Item » Edit Item » [Open item] » Tab: Basic Settings » Customs tariff number*
+
+This information is recommended when using the EU Hub.
+
+| *CountryOfOrigin, _Text(20)_*
+| *Item » Edit Item » [Open item] » Tab: Basic Settings » Manufacturing country*
+
+This information is recommended when using the EU Hub.
+
+| *SuggestedRetailPriceIncludingVat, _Mandatory, float(14,4)_*
+| *Item » Edit item » [Open item] » Open variation » Tab: Settings » Sales prices*
+
+PPP Galaxus Salesprice
+
+| *VatRatePercentage, _mandatory, float(2.4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings*
+
+| *ImageURL (1 to 10), _mandatory, text(300)_*
+| *Item » Edit item » [Open item] » Tab: Images*
+
+| *VideoURL (1 to 3), _Text(300)_*
+| *-*
+
+| *ProductLink (1 to 3), _Text(300)_*
+| *-*
+
+| *WeightG, _EU-Hub mandatory, integer(10)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Gross weight*
+
+| *WidthM, _float(14,4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Length/Width/Height*
+
+| *HeightM, _float(14,4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Length/Width/Height*
+
+| *WidthM, _float(14,4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Length/Width/Height*
+
+| *ReleaseDate, _Format (YYYY-MM-DD)_*
+| *-*
+
+| *GlobalSalesRank_Ganzzahl(10)_*
+| *-*
+
+| *MinimumAge, _integer(10)_*
+| *Item » Edit Item » [Open item] » Tab: Global » Ager rating*
+
+| *ProductTitle_DE, _Mandatory (at least one of four languages), (Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (de) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitle_EN, _(Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (en) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitle_FR, _(Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (fr) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitle_IT, _(Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (it) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitleTagLine_DE, _Text_*
+| *-*
+
+| *ProductTitleTagLine_EN, _Text_*
+| *-*
+
+| *ProductTitleTagLine_FR, _Text_*
+| *-*
+
+| *ProductTitleTagLine_IT, _Text_*
+| *-*
+
+| *ProductDescription_DE, _mandatory (at least one of four languages), Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (de)* +
+or input field selection under: *System » Markets » Galaxus » Item export » Product Data » input field mappings*
+
+| *ProductDescription_EN, _Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (en)* +
+or input field selection under: *System » Markets » Galaxus » Item export » Product Data » input field mappings*
+
+| *ProductDescription_FR, _Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (fr)* +
+or input field selection under: *System » Markets » Galaxus » Item export » Product Data » input field mappings*
+
+| *ProductDescription_IT, _Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (it)* +
+or input field selection under: *System » Markets » Galaxus » Item export » Product Data » input field mappings*
+
+| *MinimumOrderQuantity, _mandatory, integer(10)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Availability: Min. order quantity*
+
+| *RetailUnitQuantityPackingUnit, _integer(10_*
+| *-*
+
+| *RetailUnitQuantityOnPallet, _integer(10)_*
+| *-*
+
+| *RetailUnitQuantity, _mandatory, integer(10)_*
+| *Item » Edit item » Open item » Open variation » Tab: Settings » Shipping: Packing units*
+
+| *ProductSuperType*
+| *Item » Item ID*
+
+|===
+--
+
+[.collapseBox]
+.Input fields export format *GalaxusProductStockPricingExport*
+--
+
+[[GalaxusProductStockPricingExport]]
+.The GalaxusProductStockPricingExport export format
+[cols="1,3a"]
+|===
+|Galaxus output |plentymarkets input field
+
+| *ProductKey, _Mandatory, Text(100)_*
+| *Item » Edit item » [Open item] » [Open variation] »Variation-ID*
+
+| *QuantityOnStock, _mandatory, integer(10)_*
+| *Item » Edit item » [Open item] » Tab: Stock » Tab: Stock » Net*
+
+| *IsOnStock, _mandatory, boolean(0/1)_*
+| *Item » Edit item » [Open item] » Tab: Stock » Tab: Stock » Net*
+
+| *DeliveryDate, _format (YYYY-MM-DD)_*
+| *Item » Variant » Tab: Settings » Section: Availability » Checkmark selection from 1 to 10*
+
+This selection is equivalent to the settings in the menu *Setup » Item » Availability » Average delivery time*
+
+| *PurchasePriceExcludingVat, _mandatory, fload(14,4)_*
+| *-*
+
+| *SalesPriceExcludingVat, _mandatory, fload(14,4)_*
+| *Item » Edit Item » [Open item] » [Open variation] » Tab: Settings » Sales prices: Net price*
+
+*_Note:_* The exported sales price uses the VAT.rate of the selected export currency only if the *Target country* is specified in the Elastic Export format.
+
+| *SalesPriceIncludingVat, _mandatory, fload(14,4)_*
+| *-*
+
+| *Currency, _mandatory, Text(3)_*
+| *Setup » Item » Sales prices » [Open Galaxus sales price] » Currency EUR / CHF*
+
+| *WarehouseOriginCountry, _Text(2)_*
+| *-*
+
+| *ShipmentType, _mandatory, integer(1)_*
+| *-*
+
+|===
+--
+
+[.collapseBox]
+.Input fields export format *GalaxusProductPropertiesExport*
+--
+
+[[GalaxusProductPropertiesExport]]
+.The GalaxusProductPropertiesExport export format
+[cols="1,3a"]
+|===
+|Galaxus output |plentymarkets input field
+
+| *ProductKey, _Mandatory, Text(100)_*
+| *Item » Edit item » Variation ID*
+
+| *SpecificationKey, _mandatory, Text(80)_*
+| *-*
+
+| *SpecificationGroup_DE, _Text(80)_*
+| *Characteristic group name / Attribute (DE)*
+
+*_Note:_* The plugin selects the first group from the list of property groups in the order in which they were added to the property.
+
+The following workaround should set *GroupWeWantExported* as the first in the list for the export:
+
+For example, the property *Property1* is to exist in the 3 groups *GroupA, GroupWeWantExported* and *GroupB*
+
+* *_Step 1:_* Unlink all groups from the property.
+* *_Step 2:_* Link *GroupWeWantExported* with *Property1* and save the setting.
+* *_Step 3:_* Link all other groups with *Property1* and save the setting.
+
+| *SpecificationGroup_EN, _Text(80)_*
+| *Characteristic group name / Attribute (EN)*
+
+| *SpecificationGroup_FR, _Text(80)_*
+| *Characteristic group name / Attribute (FR)*
+
+| *SpecificationGroup_IT, _Text(80)_*
+| *Characteristic group name / Attribute (IT)*
+
+| *SpecificationKey_DE, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (DE)*
+
+| *SpecificationKey_EN, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (EN)*
+
+| *SpecificationKey_FR, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (FR)*
+
+| *SpecificationKey_IT, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (IT)*
+
+| *SpecificationValue_DE, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (DE)*
+
+| *SpecificationValue_EN, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (EN)*
+
+| *SpecificationValue_FR, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (FR)*
+
+| *SpecificationValue_IT, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (IT)*
+|===
+--
+
+=== Configuring formats in the elastic export
+
+//TODO: Go through options.
+
+[.instruction]
+Configuring the Elastic Export:
+
+. Go to *Data » Elastic Export*.
+. Click on *New export*.
+. Configure the export as described in <<#elastic-export-configuration>>.
+. Save the settings.
+
+[[elastic-export-configuration]]
+.Plugin relevant Elastic Export setup options
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+| Name
+| Enter a name
+
+* The export format is listed under this name in the overview of the *Exports* tab.
+
+| Type
+| Select the type *item* from the drop-down list.
+
+| Format
+| Select one of the three relevant data export formats.
+
+* *GalaxusProductDataExport*
+* *GalaxusProductPropertiesExpor*
+* *GalaxusProductStockPricingExport*
+
+| Limit
+| Enter a whole number. This number determines how many items are exported at maximum. Enter an integer between *0* and *9999*.
+
+| Generate cache file
+| Place a check mark if you want to export more than 9999 data records to the interface. We recommend that you do not activate this setting for more than 20 export formats. This is to ensure a high performance of the Elastic Export. Depending on the user configuration and amount of data, it can take more than 24 hours to update the cache file.
+
+| Provisioning
+| Privisioning via *URL* or *FTP*. If you select the method *FTP*, the FTP credentials and the export interval *Daily/Hourly* must be specified
+
+| URL
+| If you select the option *URL*, click on *Generate token* to create an access token.
+
+| File name
+| Name your export files as follows:
+
+* GalaxusProductDataExport = *ProductData_Merchantname.csv*
+* GalaxusProductStockPricingExport = *ProductStockPricing_Merchantname.csv*
+* GalaxusProductPropertiesExport = *ProductProperties_Merchantname.csv*
+
+| Item filter
+| Allow you to set up the export more granularly and thus ensure that only a specific subset of items is exported to Galaxus. Note that the plugin cannot use the following *Elastic Export* filters:
+
+* Item creation date
+* Default, Bundle, Bundle component
+* Item type
+* Positive stock for given warehouse
+* Positive physical stock in the selected warehouse
+* Prices
+* Tags AND mode
+* Tags OR mode
+* Item update date
+
+| Add item filters
+| Plugin relevant item filters are *Active* and *Markets » Galaxus*
+
+Select an item filter from the drop-down list and click on *Add*. There are no filters selected by default.
+
+| Client
+| Default client
+
+| Order referrer
+| Select the order referrer that should be assigned during the order import from the drop-down list. In this case, this is: *Galaxus*
+
+| Barcode
+| Select the ASIN, ISBN or an EAN from the drop-down list. Selection must be linked to the referrer *Galaxus*. Otherwise, the barcode selection is not exported
+
+| Sales price
+| The exported sales price is always the *Sales price net*. The select *Sales price gross* is ignored during export.
+
+|===
+
+
+[#order-documents]
+== Preparing order documents
+
+You need the following order documents for Galaxus:
+
+* Invoice
+* Delivery note
+
+Adjust these order documents to the requirements of {market}. Check the following chapters to find out how. This information is structured like this:
+
+* <<#invoices, Prepare invoices>>
+* <<#delivery-notes, Prepare delivery notes>>
+
+Are you new to order documents? Then refer to the xref:orders:order-documents.adoc#[Order documents] page of the manual before continuing.
+
+[#invoices]
+=== Preparing invoices
+
+Your invoice layout depends on whether or not you use the EU Hub and whether or not you have fiscal representation in Switzerland.
+
+*_Important:_* This information is accurate as of 15th of July 2022. Check if these requirements are still up to date in the link:https://partner.digitecgalaxus.ch/hc/de/articles/360016297139-Wie-kann-ich-die-Verzollungs-L%C3%B6sung-der-Digitec-Galaxus-AG-nutzen-[Galaxus documentation^].
+
+[tabs]
+====
+EU Hub without fiscal representation::
++
+--
+
+*_Export invoices for merchants without fiscal representation must contain the following information:_*
+
+* Name and address of the invoice issuer
+* Invoice address of customer in Switzerland
+* Galaxus order number, in other words the purchase order number of Digitec Galaxus AG
+* Note `Posting: DAP`
+* Net invoice amount, in other words without VAT
+* Legal note that invoice belongs to a tax-free delivery: +
+ `Tax-free export delivery in accordance with § 4 No. 1a) in conjunction with§ 6 UstG`
+* Note regarding payment digitec.ch/galaxus.ch: +
+`Thank you for your order. The invoice amount has already been paid on www.galaxus.ch.` +
+`Orders placed on www.galaxus.ch are subject to the general terms and conditions of Digitec Galaxus AG. In case of a return, please use the guided return process in your customer account on www.galaxus.ch.`
+
+*_The following information is not allowed on invoices:_*
+
+* A return address in the EU
+* The delivery address of the EU Hub in Efringen-Kirchen
+
+*_Below is a sample export invoice for merchants without fiscal representation:_*
+
+.*_Pattern:_* Export invoice for merchants WITHOUT fiscal representation
+image::markets:201120_DIGGAX_ohne_Fiskalvertreter_EN.png[]
+
+To show this information on the invoices, proceed as described below.
+
+[.instruction]
+Uploading PDF template for invoices:
+
+. Create a PDF template for invoices based on the requirements of Galaxus. +
+*_Tip:_* Check the additional settings in <<#table-invoices-no-fiscal-rep>>. Can you place any of the notes directly on your PDF template for Galaxus invoices?
+. Go to *Setup » Client » [Select client] » Locations »Location: Switzerland » Documents » Invoice*.
+. Click on the tab *PDF template*.
+. Click on *Add template*. +
+→ The editing window *Upload new PDF template* opens.
+. From the drop-down list *Payment method*, select the option *Galaxus Direct Checkout*.
+. *_Tip:_* Can’t find the payment method in the drop-down list?
+  .. Go to *Setup » Orders » Settings*.
+  .. For the setting *Show inactive plugin payment methods*, select the option *Yes*.
+  .. Save (terra:save[]) the setting.
+. In the drop-down list *Language*, select the option *de*.
+. In the line *Template*, click on *Choose template file*.
+. Select the PDF template for {market} invoices.
+. Click on *Upload template* (terra:save[]). +
+→ The template is uploaded. +
+*_Tip:_* In the same menu, also carry out the settings for the plentymarkets template for invoices. The next chapter shows you how.
+
+[.instruction]
+Adjusting PDF template for invoices:
+
+. Go to *Setup » Client » [Open standard client] » Locations » Location: Switzerland » Documents » Invoice » Tab: Template*.
+. Scroll down to the area *Optional elements below stock unit table*.
+. Carry out the settings described in <table-delivery-notes>. +
+*_Tip:_* Depending on your layout, you might be able to place all notes in just one input field *Payment instruction*.
+. Check the link:https://partner.digitecgalaxus.ch/hc/en-us/articles/360016297139-How-do-I-benefit-from-the-customs-clearance-solution-of-Digitec-Galaxus-AG-[Galaxus documentation^] to see if any other adjustments to your template are required. +
+*_Important:_* The template is used for all invoices for this country, not just for {market}.
+. Save (terra:save[]) the settings. +
+→ The necessary information is shown on invoices.
+
+[[table-invoices-no-fiscal-rep]]
+.EU hub without fiscal representation: settings for invoices
+[cols="2,3a"]
+|===
+|Requirement |Settings in the template
+
+| Purchase order number of Digitec Galaxus AG
+| . Scroll down to the area *Optional elements below stock unit table*.
+. For the setting *External order number*, select the option *Yes* from the drop-down list.
+
+image::markets:mytoys-delivery-note-settings-2.png[]
+
+| Note about posting
+| Use the input field *Payment instruction*.
+
+. Scroll down to the area *Optional elements below stock unit table*.
+. Find a field that does not contain any payment instructions.
+. From the drop-down list *Payment method* of this field, select the option *Galaxus Direct Checkout*.
+. Copy the following text into the field: +
+`Posting: DAP`
+
+*_Tip:_* Alternatively, you can place this note directly on your PDF template for Galaxus invoices.
+
+| Legal note regarding tax-free delivery
+| Use the input field *Payment instruction*.
+
+. Scroll down to the area *Optional elements below stock unit table*.
+. Find a field that does not contain any payment instructions.
+. From the drop-down list *Payment method* of this field, select the option *Galaxus Direct Checkout*.
+. Copy the following text into the field: +
+`Tax-free export delivery in accordance with § 4 No.1a) i.V.m. §6 UStG`
+
+*_Tip:_* Alternatively, you can place this note directly on your PDF template for Galaxus invoices.
+
+| Payment note
+| Use the input field *Payment instruction*.
+
+. Scroll down to the area *Optional elements below stock unit table*.
+. Find a field that does not contain any payment instructions.
+. From the drop-down list *Payment method* of this field, select the option *Galaxus Direct Checkout*.
+. Copy the return instructions into the input field:
+
+`Thank you for your order. The invoice amount has already been paid on www.galaxus.ch.` +
+`Orders placed on www.galaxus.ch are subject to the general terms and conditions of Digitec Galaxus AG. In case of a return, please use the guided return process in your customer account on www.galaxus.ch.`
+
+*_Tip:_* Alternatively, you can place this note directly on your PDF template for Galaxus invoices.
+
+|===
+
+--
+ 
+EU Hub with fiscal representation::
++
+--
+*_Requirements:_*
+
+* You activated the option *I use Galaxus EU hub and have fiscal representation in Switzerland* in the menu *Setup » Markets » Galaxus » Order import*.
+* Your have created the location *Switzerland* and saved your VAT ID for Switzerland.
+
+
+*_Export invoices for merchants with fiscal representation must contain the following information:_*
+
+* Name and address of the invoice issuer
+* Invoice address of customer in Switzerland
+* Galaxus order number, in other words the purchase order number of Digitec Galaxus AG
+* Information about the importer, incl. Swiss VAT number (tax representative)
+* Note `Posting: DDP` (Delivered Duty Paid) Incoterm
+* Total invoice amount incl. VAT (plus separate disclosure of VAT)
+* Legal note that invoice belongs to a tax-free delivery: +
+`Tax-free export delivery in accordance with § 4 No. 1a) in conjunction with§ 6 UstG`
+* Note regarding payment digitec.ch/galaxus.ch: +
+`Thank you for your order. The invoice amount has already been paid on www.galaxus.ch.` +
+`Orders placed on www.galaxus.ch are subject to the general terms and conditions of Digitec Galaxus AG. In case of a return, please use the guided return process in your customer account on www.galaxus.ch.`
+
+*_The following information is not allowed on invoices:_*
+
+* A return address in the EU
+* The delivery address of the EU Hub in Efringen-Kirchen
+
+*_Below is a sample export invoice for merchants with fiscal representation:_*
+
+.*_Pattern:_* Export invoice for merchants WITH fiscal representation
+image::markets:201120_DIGGAX_Exporthandelsrechnung_mit_Fiskalvertreter_EN.png[]
+
+To show this information on the invoices, proceed as described below.
+
+[.instruction]
+Uploading PDF template for invoices:
+
+. Create a PDF template for invoices based on the requirements of Galaxus. Pay special attention to the information about fiscal representation needed in the footer. +
+*_Tip:_* Check the additional settings in <<#table-invoices-fiscal-rep>>. Can you place any of the notes directly on your PDF template for Galaxus invoices?
+. Go to *Setup » Client » [Select client] » Locations »Location: Switzerland » Documents » Invoice*.
+. Click on the tab *PDF template*.
+. Click on *Add template*. +
+→ The editing window *Upload new PDF template* opens.
+. From the drop-down list *Payment method*, select the option *Galaxus Direct Checkout Fisc Rep*.
+. *_Tip:_* Can’t find the payment method in the drop-down list?
+  .. Go to *Setup » Orders » Settings*.
+  .. For the setting *Show inactive plugin payment methods*, select the option *Yes*.
+  .. Save (terra:save[]) the setting.
+. In the drop-down list *Language*, select the option *de*.
+. In the line *Template*, click on *Choose template file*.
+. Select the PDF template for {market} invoices.
+. Click on *Upload template* (terra:save[]). +
+→ The template is uploaded. +
+*_Tip:_* In the same menu, also carry out the settings for the plentymarkets template for invoices. The next chapter shows you how.
+
+[.instruction]
+Adjusting invoice template:
+
+. Go to *Setup » Client » [Open standard client] » Locations » Location: Switzerland » Documents » Invoice » Tab: Template*.
+. Scroll down to the area *Optional elements below stock unit table*.
+. Carry out the settings described in <<#table-invoices-fiscal-rep>>. +
+*_Tip:_* Depending on your layout, you might be able to place all notes in just one input field *Payment instruction*.
+. Check the link:https://partner.digitecgalaxus.ch/hc/en-us/articles/360016297139-How-do-I-benefit-from-the-customs-clearance-solution-of-Digitec-Galaxus-AG-[Galaxus documentation] to see if any other adjustments to your template are required. +
+*_Important:_* The template is used for all invoices for this country, not just for {market}.
+. Save (terra:save[]) the settings. +
+→ The information is shown on invoices.
+
+[[table-invoices-fiscal-rep]]
+.EU hub with fiscal representation: settings for invoices
+[cols="2,3a"]
+|===
+|Requirement |Settings in the template
+
+| Purchase order number of Digitec Galaxus AG
+| . Scroll down to the area *Optional elements below stock unit table*.
+. For the setting *External order number*, select the option *Yes* from the drop-down list.
+
+image::markets:mytoys-delivery-note-settings-2.png[]
+
+| Note about posting
+| Use the input field *Payment instruction*.
+
+. Scroll down to the area *Optional elements below stock unit table*.
+. Find a field that does not contain any payment instructions.
+. From the drop-down list *Payment method* of this field, select the option *Galaxus Direct Checkout Fisc Rep*.
+. Copy the following text into the field: +
+`Posting: DDP`
+
+*_Tip:_* Alternatively, you can place this note directly on your PDF template for Galaxus invoices.
+
+| Legal note regarding tax-free delivery
+| Use the input field *Payment instruction*.
+
+. Scroll down to the area *Optional elements below stock unit table*.
+. Find a field that does not contain any payment instructions.
+. From the drop-down list *Payment method* of this field, select the option *Galaxus Direct Checkout*.
+. Copy the following text into the field: +
+`Tax-free export delivery in accordance with § 4 No.1a) i.V.m. §6 UStG`
+
+*_Tip:_* Alternatively, you can place this note directly on your PDF template for Galaxus invoices.
+
+| Payment note
+| Use the input field *Payment instruction*.
+
+. Scroll down to the area *Optional elements below stock unit table*.
+. Find a field that does not contain any payment instructions.
+. From the drop-down list *Payment method* of this field, select the option *Galaxus Direct Checkout*.
+. Copy the return instructions into the input field:
+
+`Thank you for your order. The invoice amount has already been paid on www.galaxus.ch.` +
+`Orders placed on www.galaxus.ch are subject to the general terms and conditions of Digitec Galaxus AG. In case of a return, please use the guided return process in your customer account on www.galaxus.ch.`
+
+*_Tip:_* Alternatively, you can place this note directly on your PDF template for Galaxus invoices.
+
+--
+====
+
+[#delivery-notes]
+=== Preparing delivery notes
+
+Delivery notes for {market} orders must contain specific information. These requirements are listed on link:https://partner.digitecgalaxus.ch/hc/en-us/articles/360016260840-What-documents-do-I-enclose-with-the-delivery-[Galaxus^].
+
+Below, we describe how you show the following information on delivery notes for {market}:
+
+* Galaxus order reference
+* Legal information
+
+To make sure that this information is shown on delivery notes, adjust the template for delivery note as described below.
+
+[.instruction]
+Adjusting template for delivery notes:
+
+. Go to *Setup » Client » Standard » Locations » Location: Switzerland » Documents » Delivery note » Tab: Template*.
+. Scroll down to the area *Optional elements below stock unit table*.
+. Carry out the settings described in <table-delivery-notes>.
+. Check the link:https://partner.digitecgalaxus.ch/hc/en-us/articles/360016260840-What-documents-do-I-enclose-with-the-delivery-[Galaxus documentation] to see if any other adjustments to your template are required. +
+*_Important:_* The template is used for all delivery notes for this country, not just for {market}.
+. Save (terra:save[]) the settings. +
+→ The necessary information is shown on delivery notes.
+
+[[table-delivery-notes]]
+.Settings for {market} delivery notes
+[cols="2,3a"]
+|===
+|Setting |Option
+
+| Purchase order number of Digitec Galaxus AG
+| . Scroll down to the area *Optional elements below stock unit table*.
+. For the setting *External order number*, select the option *Yes* from the drop-down list.
+
+image::markets:mytoys-delivery-note-settings-2.png[]
+
+| *Payment instruction*
+| . Find a field that does not contain any payment instructions.
+. Click on the drop-down list *Payment method* of this field.
+  .. If you _do not_ have fiscal representation in Switzerland:
+  * Select the option *Galaxus Direct Checkout*.
+  .. If you have fiscal representation in Switzerland:
+  * Select the option *Galaxus Direct Checkout Fisc Rep*.
+. Copy the following Galaxus return instructions into the input field (correct as of 15th July 2022):
+
+`Payment has already been made directly to Digitec Galaxus AG.`
+
+`In the event of a return, we kindly ask you to use the returns process in your customer account on digitec.ch or www.galaxus.ch.`
+
+`Orders placed via digitec.ch and galaxus.ch are subject to the General Terms and Conditions of Digitec Galaxus AG. If you have any questions or uncertainties, the customer care team of digitec and Galaxus will be happy to help: haendlersupport@digitecgalaxus.ch.`
+|===
+
+[#order-processing]
+== Automating order processing
+
+Set up event procedures to notify Galaxus about order changes automatically.
+
+[#event-procedures]
+=== Available event procedures
+
+For Galaxus, the event procedures listed in <<#galaxus-event-procedures>> are available.
+
+//TODO: Check table
+[[galaxus-event-procedures]]
+.Galaxus event procedures
+[cols="1,1,3a"]
+|===
+|Event procedure name |Recommended event |Explanation
+
+| *Event procedure name*
+| *Recommended event*
+| *Explanation*
+
+| Send order confirmation to Galaxus
+| Any
+| * Informs Galaxus about changes made to the plentymarkets order.
+* *_Important:_* The default delivery date is the current date + 2 working days. This can differ depending on item availability and item settings.
+
+| Send shipping confirmation to Galaxus
+| Status change
+| Informs Galaxus that the order is ready for shipping.
+
+| 'Send a cancel request accepted notification to Galaxus
+| Status change
+| Informs Galaxus that the cancellation request was accepted. +
+Cancellations for individual order items are rejected automatically (Reason given for auto rejection: *Non-refundable*). Cancellations of complete orders are accepted automatically if the initial order does not yet have the status *Shipped*.
+
+| 'Send a cancel request not accepted notification to Galaxus
+| Status change
+| Informs Galaxus that the cancellation request was rejected. +
+A reason for the rejection can be entered in the order note before executing this procedure. +
+Cancellations for individual order items are rejected automatically (Reason given for auto rejection: *Non-refundable*). Cancellations of complete orders are accepted automatically if the initial order does not yet have the status *Shipped*
+
+| 'Merchant Cancels' notification to Galaxus
+| Status change
+| Informs Galaxus that the order was cancelled by the merchant.
+
+| 'Send a 'return registration accepted' response to Galaxus.
+| Status change
+| Informs Galaxus that the return request was accepted.
+
+| 'Send a 'return registration not accepted' response to Galaxus.
+| Status change
+| Informs Galaxus that the return request was rejected.
+
+A reason for the rejection can be entered in the order note before executing this procedure.
+
+| 'Send a 'Return to merchant accepted' notification to Galaxus
+| Status change
+| Informs Galaxus that a return to the merchant was accepted.
+
+| 'Send a 'Return to merchant denied' notification to Galaxus
+| Status change
+| Informs Galaxus that the return request was rejected by the merchant.
+
+A reason for the rejection can be entered in the order note before executing this procedure.
+
+| Send invoice to Galaxus
+| Status change
+| Sends the invoice PDF of the order to Galaxus.
+
+*_Note:_* You can create a PDF template for your Galaxus invoices in the menu *Client » [Open client] » Locations » [Open location] » Documents » Invoice » Tab: PDF template* for the payment method *Plugin: Galaxus Direct Checkout*. This template is automatically used for the Galaxus PDF upload after you create it.
+|===
+
+==== Example: Setting up the event procedure "Send order confirmation to Galaxus"
+
+For example, set up an event procedure to send automatic order confirmations to Galaxus:
+
+. Go to *Setup » Orders » Events*.
+. Click on *Add event procedure*. +
+→ The *Create new event procedure* window opens.
+. Enter a *name*.
+. Select the order event *Order change > Status change*.
+. *Save* the settings. +
+→ The settings of the event procedure are shown.
+. Add a *Filter* with the selection *Order » Order type » Order*.
+. Add a *Filter* with the selection *Order » Referrer » Galaxus*.
+. Add an *Action* with the selection *Plugins » Send order confirmation to Galaxus*.
+. *Save* the settings.
+
+=== Particularities of the Galaxus order processing
+
+* Orders with invoice addresses in Switzerland and delivery addresses in the EU are imported as net orders.
+
+* In all scenarios where only a part of the order is to be processed (return/shipping), the imported order must be split. The resulting orders must be processed separately.
+
+* Statuses for rejecting partial cancellation requests and cancellation requests must be set. Go to *Setup » Markets » Galaxus » Order import » Order status configuration* to do so. If no option is selected, the status *[5] Cleared for shipping* is automatically set.
+
+* After splitting an order, the plugin can inform Galaxus about each of these orders without any additional user input.
+
+* Galaxus return requests generate new plentymarkets orders of the type *Return*. These orders are linked to the initial order. The resulting orders must be processed separately.
+
+* The default delivery date for Galaxus orders is: Day on which the event procedure *Send order confirmation to Galaxus* was triggered *+ 2 working days* unless a different delivery date was entered in the menu *Order » Overview » Item » Edit » Delivery date* earlier. A shipping date is also not set if the item quantity needed to fulfil the order is not available as net stock. The planned delivery date can change based on the plugin option *Positive stock quantities are always exported, independent of the average delivery period* in the menu *Setup » Markets » Galaxus » Tab: Product Stock Price*.
+
+* For Galaxus delivery notes, carry out the following settings in addition to your default delivery note settings:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Documents » Delivery note*.
+. In the area *Optional elements below stock unit table*, select *Yes* for the option *External Order Number*.
+. Insert the note agreed on with Galaxus in the field *Note*. +
+`Thank you for your order.` +
+`Orders placed on www.galaxus.ch are subject to the general terms and conditions of Digitec Galaxus AG. In case of a return, please use the guided return process in your customer account on www.galaxus.ch.\`
+. *Save* the changes.
+
+==== Splitting an order: an example
+
+. Go to *Order » Order ID*.
+. Split the order from *Order » Overview » Gear (split)*. +
+→ The window *Split order* opens.
+. Select the item quantities for the new order. +
+*_Important:_* The shipping costs of the original order will not be changed.
+
+=== Order data exchange: scenarios
+
+The Galaxus plugin supports the following scenarios:
+
+*_Important:_* All scenarios except cancellation requests can be executed for either the whole or a part of the order. Therefore, to minimize duplicate content, these scenarios only describe workflows for partial orders.
+
+=== The imported order is ready for shipping
+
+The imported order contains all required information and is now ready to be shipped:
+
+. The order import was automatically reported back to Galaxus by the event procedure *Send Order confirmation to Galaxus*.
+. Once your order is ready to be shipped, trigger event procedure *Send shipping confirmation to Galaxus*.
+
+=== Only part of the imported order can be fulfilled
+
+Only part of the imported order can be fulfilled at this time. The customer agrees to receive half of the order now, the other half is to be sent at an agreed upon delivery date:
+
+. Go to *Order » Order ID*.
+. Click on *Split* order.
+. If a later delivery date has been agreed upon with the customer, go to *New order » Overview » Item » Edit » Delivery date*.
+. Enter the delivery date.
+. *Save* the settings.
+. Trigger the event procedure *Send Order Confirmation to Galaxus* to inform Galaxus about the new delivery date.
+. When finished, trigger event procedure *Send Shipping Confirmation to Galaxus*.
+
+=== Part of the items contained in the order can't be fulfilled anymore
+
+You realised that part of the order cannot be fulfilled, for example because the item is out of stock.
+
+. Go to *Order » Order ID*.
+. Click on *Split* order.
+. Trigger the event procedure *Send Order Confirmation to Galaxus*.
+. Trigger the event procedure *Merchant Cancels notification to Galaxus*.
+. Galaxus automatically replies with a *Cancellation request*.
+. The cancellation request can be *rejected* or *accepted* by triggering either the event procedure *Accept Galaxus cancellation request* or *Reject Galaxus cancellation request with justification*.
+
+=== The customer has requested a partial return
+
+The customer requests that part of his order be returned to the supplier.
+
+. Galaxus receives the *return request*.
+. The system creates a new order of the type *Return* that is linked to the initial order.
+. Trigger the event procedure *Send Order Confirmation to Galaxus*.
+. Trigger the event procedure *Accept Galaxus Return Request* or *Reject Galaxus Return Request with Explanation*.
+
+=== The customer has rejected the package
+
+The customer did not accept your delivery for an unjustified reason. The package has now been returned:
+
+. Open the order.
+. Create a new order of the type: *Return*.
+	* Go to *Order » Overview*.
+	* Open the drop-down list *Return*.
+	* Click on *Create*.
+. Create a return for the necessary quantity.
+. Trigger the event *Accept cancellation to merchant* oder *Cancellation to merchant denied with justification*.
+
+*_Note:_*
+
+* Partial cancellation requests and cancellation requests for orders with a higher status than *[5] In preparation for shipping* are automatically rejected with the reason *Non-refundable*.
+* The trigger status can be adjusted to a more suitable status in the menu *Setup » Markets » Galaxus » Order status configuration*.
+
+[#faq]
+== FAQ and troubleshooting
+
+include::partial$plugin-market-not-in-menu.adoc[]
