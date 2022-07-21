@@ -6,6 +6,8 @@
 
 :conrad:
 :market: Conrad
+:plugin-name: Conrad
+:plugin-link: https://marketplace.plentymarkets.com/conradextension_6948
 :type-of-market: B2B marketplace
 :registration-url: https://www.conrad.de/de/service/bestellung-und-beschaffung/marketplace.html
 :marketplace-url: https://marketplace.plentymarkets.com/en/conradextension_6948
@@ -16,18 +18,48 @@
 :referrer-name: pass:quotes[referrer *Conrad*]
 :category-example: VHS cassettes
 
+Conrad is a B2B market specialised in electronics, multimedia, household and leisure products.
 
-On this page you will learn how to set up the interface to {market} in plentymarkets. Conrad is a B2B market specialised in electronics, multimedia, household and leisure products.
+On this page you will learn how to set up the interface to {market} in plentymarkets.
 
 include::partial$mirakl-first-steps.adoc[]
+
+[#order-process]
+== Order processing workflow
+
+Orders from Conrad are automatically imported in your plentymarkets system every 15 minutes.
+
+This is how orders are processed at Conrad:
+
+* The seller accepts the order via an event procedure.
+* Conrad collects the payment.
+* With the payment confirmation, the invoice and delivery address on the order are updated in your plentymarkets system.
+* Via an event procedure, the shipping service provider as well as the package number are updated on the order in Mirakl.
+* In the next step, the shipping notification is reported to Conrad via another event procedure.
+* The invoice created by Conrad is imported to the order in your plentymarkets system.
+
+[#general-information]
+== Frequency of data exchange
+
+include::partial$mirakl-data-exchange-table.adoc[]
 
 [#api-key]
 == Generating the API key
 
 include::partial$mirakl-api-key.adoc[]
 
+[#300]
+== Setting up the market in plentymarkets
+
+You have installed the plugins *Mirakl Connector* and *Conrad* and generated an API key? Great. Now, set up the market in plentymarkets.
+
+[#complete-market-assistant]
+=== Completing the setup assistant
+
+include::partial$mirakl-market-assistant.adoc[]
+
 [#order-referrer]
-== Activating the order referrer
+=== Activating an order referrer
 
 :market: {market}
 :referrer: {market}
@@ -37,7 +69,7 @@ include::partial$mirakl-api-key.adoc[]
 include::partial$activate-referrer.adoc[]
 
 [#sales-price]
-== Defining a sales price
+=== Defining a sales price
 
 :referrer-price: {market}
 :mirakl-sales-price:
@@ -45,19 +77,16 @@ include::partial$activate-referrer.adoc[]
 include::partial$define-sales-price.adoc[]
 
 [#create-properties]
-== Creating properties
+=== Creating properties
 
 include::partial$mirakl-creating-properties.adoc[]
 
-[#complete-market-assistant]
-== Completing the {market} assistant
+[#attribute-help-tool]
+=== Using the attribute help tool
 
-include::partial$mirakl-market-assistant.adoc[]
+:market-attribute-help-tool: conrad
 
-[#general-information]
-== About automatic data exchange
-
-include::partial$mirakl-data-exchange-table.adoc[]
+include::partial$mirakl-data-attribute-tool.adoc[]
 
 [#item-export-catalogue]
 == Setting up the item export
@@ -77,33 +106,20 @@ Proceed as described below to create a catalogue in the assistant.
 
 include::partial$catalogue-assistant-config.adoc[]
 
+*_Note:_* Is there no marketplace category available in the assistant? Then you may have entered the wrong API environment in the *Authentication* step of the assistant *{assistant-name}*.
+
 [#map-data-fields]
 === Mapping data fields in the catalogue
 
-After you have created a catalogue, map the market's data fields to item data saved in plentymarkets. Check the documentation of the sales channel to find out what data the market expects for the individual data fields.
+Now, map the data fields in the catalogue to the item data saved in plentymarkets.
 
-*_Note:_* Mandatory fields which have to be transferred to the market are marked with ***. Those fields have to be mapped with a plentymarkets data field. Otherwise, data cannot be transferred for this field.
-
-[TIP]
-.Using properties
-====
-Use xref:item:managing-items.adoc#500[properties] to export data for marketplace data fields that have no corresponding setting in plentymarkets.
-====
+Check the documentation of the sales channel to find out what data the market expects for the individual data fields.
 
 include::partial$catalogue-mapping.adoc[]
 
-[IMPORTANT]
-====
-Do _not_ map plentymarkets data fields to the following marketplace data fields for the market {market}:
+=== Recommendations for data field mappings
 
-* Product image 1
-* Product image 2
-* Product image 3
-* Product image 4
-* Product image 5
-
-You can ignore the warning shown when you save the mapping.
-====
+include::partial$recommendation-text.adoc[]
 
 :mirakl-conrad-content-unit:
 :mirakl-attribute-help-tool:
@@ -129,8 +145,23 @@ Prüfen, wo Inhalt hingehört, wenn einkommentiert wird.
 The link:{valid-values-zip}[{market}: valid values^] ZIP file contains CSV files for each marketplace attribute. Each CSV file contains the valid values for the respective attribute. During mapping, always use the value in the *Code* column.
 ////
 
+[#prepare-variations]
+== Preparing variations
+
+Now prepare your variations for {market}.
+
+[#variation-availability]
+=== Setting the variation availability
+
+:market-availability: {market}
+:option-availability: {market}
+:mirakl-activate-variation-availability:
+:mirakl-referrer:
+
+include::partial$variation-availability.adoc[]
+
 [#link-variation-to-catalogue-category]
-== Linking variations to a {market} catalogue category
+=== Linking variations to a {market} category
 
 include::partial$mirakl-data-link-categories.adoc[]
 
@@ -138,28 +169,6 @@ include::partial$mirakl-data-link-categories.adoc[]
 === Linking properties with variations and saving values
 
 include::partial$properties-link.adoc[]
-
-[#{market}]
-== Activating the catalogue export
-
-:interval: daily
-:market: {market}
-
-include::partial$catalogue-activation.adoc[]
-
-[#marketplace-specific-values]
-=== Transferring marketplace-specific values
-
-The marketplace requires specific values for most of the attributes in order to be able to transfer product data. Currently, these values are, however, not yet saved at the variation. +
-*_Example:_* For example, it is not allowed to enter *test* for the attribute *Brand*. You have to transfer the corresponding code in this case - in this example *BRAND_12345678*.
-
-[#attribute-help-tool]
-== Using the attribute help tool
-
-:market-attribute-help-tool: conrad
-
-include::partial$mirakl-data-attribute-tool.adoc[]
-
 
 [#product-and-offer-data]
 == Transferring product and offer data
@@ -169,32 +178,18 @@ include::partial$mirakl-data-attribute-tool.adoc[]
 
 include::partial$mirakl-data-product-data-export.adoc[]
 
+[#catalogue-activation]
+== Activating the catalogue export
 
-[#variation-availability]
-== Setting the variation availability
+:interval: daily
+:market: {market}
 
-:market-availability: {market}
-:option-availability: {market}
-:mirakl-activate-variation-availability:
-:mirakl-referrer:
-
-include::partial$variation-availability.adoc[]
+include::partial$catalogue-activation.adoc[]
 
 [#automating-order-processing]
 == Automating order processing
 
-Orders from Conrad are automatically imported in your plentymarkets system every 15 minutes.
-
-This is how orders are processed at Conrad:
-
-* The seller accepts the order via an event procedure.
-* Conrad collects the payment.
-* With the payment confirmation, the invoice and delivery address on the order are updated in your plentymarkets system.
-* Via an event procedure, the shipping service provider as well as the package number are updated on the order in Mirakl.
-* In the next step, the shipping notification is reported to Conrad via another event procedure.
-* The invoice created by Conrad is imported to the order in your plentymarkets system.
-
-The following order processing steps can be automated by setting up event procedures:
+You can automate the following order processing steps using event procedures:
 
 * Inform Conrad that the order was confirmed. <<#order-confirmation-conrad, How?>>
 
