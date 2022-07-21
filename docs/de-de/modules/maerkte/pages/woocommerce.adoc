@@ -1,0 +1,411 @@
+= WooCommerce
+:author: team-plenty-channel
+:keywords: woocommerce, woocommerce.com
+:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zu Woocommerce in deinem plentymarkets System ein.
+
+:galaxus:
+:market: Woocommerce
+:price-search-engine: Woocommerce
+:plugin-name: Woocommerce
+:main-client:
+:plugin-link: https://marketplace.plentymarkets.com/en/woocommerce_5102
+
+WooCommerce ist eine flexible Open-Source-E-Commerce-Lösung, die auf WordPress basiert. Egal, ob Du ein Unternehmen gründest, ein bestehendes stationäres Geschäft online schaltest oder Websites für Kunden entwirfst: Du kannst schnell loslegen und genau das Geschäft aufbauen, dass Du möchtest.
+
+== Wordpress installieren
+
+link:https://wordpress.org/[WordPress.org] dient als Content-Management-System und Startplattform für deinen Online-Handel mit WooCommerce. Einzelheiten zur Installation von WordPress findest Du auf der Seite link:https://wordpress.org/support/article/how-to-install-wordpress/[How to install WordPress].
+
+== WooCommerce installieren
+
+Sobald Du Wordpress eingerichtet hast, installiere das WooCommerce-Plugin von der Wordpress-Seite link:https://docs.woocommerce.com/document/installing-uninstalling-woocommerce/[Installing and Uninstalling WooCommerce].
+
+
+== WooCommerce API-Credentials generieren
+
+Generiere WooCommerce API-Credentials aus dem WooCommerce-Dashboard. Diese Anmeldeinformationen sind erforderlich, wenn Du plentymarkets mit WooCommerce verbindest.
+
+. Gehe zum *WooCommerce Dashboard*.
+. Öffne *WooCommerce » Einstellungen » Erweitert » REST-API*.
+. Klicke auf *Schlüssel hinzufügen*.
+. Erstelle eine *Beschreibung*. +
+*_Wichtig:_* Stelle sicher, dass alle *Berechtigungen* auf *Lesen/Schreiben* gestellt sind.
+. Klicke auf *API-Schlüssel erstellen*.
+. Kopiere den API-Schlüssel sofort. Der API-Schlüssel wird beim Verlassen der Seite permanent ausgeblendet.
+
+== Unterstützte Permalink-Struktur zuweisen
+
+. Gehe zum *WooCommerce Dashboard*.
+. Öffne *Einstellungen » Permalinks*.
+. Wähle eine der unterstützten  Permalink-Strukturen.
+. *Speichere* die Einstellungen. +
+*_Wichtig:_* Das Plugin unterstützt alle URL-Strukturen außer *Einfach*.
+
+
+== Auftragsherkunft WooCommerce aktivieren
+
+Die Plugin-Benutzeroberfläche wird sichtbar, sobald die Auftragsherkunft WooCommerce aktiv ist.
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsherkunft*.
+. Aktiviere *WooCommerce*.
+. *Speichere* die Einstellungen. +
+→ Die Plugin-Benutzeroberfläche ist unter *Einrichtung » Märkte » WooCommerce* sichtbar.
+
+*_Wichtig:_*
+
+* Das Plugin kann keine manuell erstellte Auftragsherknft verwenden.
+* Das Plugin muss in dem Plugin-Set installiert sein, das mit dem Standard-Mandanten verknüpft ist.
+
+== Plugin konfigurieren
+
+Die folgenden Unterkapitel führen Dich durch die Plugin-Optionen und ihre Konfiguration.
+
+== Verbindung zur WooCommerce-API herstellen
+
+Stelle eine Verbindung zur WooCommerce-API her. Dazu benötigst du die von WooCommerce bereitgestellten Zugangsdaten.
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Tab: Verbindungsdetails*.
+. Wähle, über welchen *Mandanten* deine WooCommerce-Verbindung laufen soll.
+. Trage den *Host-Namen* ein. +
+*_Beispiel:_* `http://yourWebShopName.domain/ +
+*_Wichtig:_* Der *Rückstrich [ / ]* am Ende der eingetragenen *URL* ist Pflicht.
+. Gib den *Verbraucherschlüssel* ein.
+. Gib das *Verbraucher-Geheimnis* ein.
+. Klicke auf *Verbindung testen*.
+. Speichere die Einstellungen. +
+→ Dein Plugin ist mit der WooCommerce-API verbunden.
+
+=== Zusätzliche WooCommerce-Webshops verbinden
+
+Für jede neue Verbindung sind separate plentymarkets Mandanten und WooCommerce-Konten erforderlich.
+
+Um eine zusätzliche Verbindung einzurichten:
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Tab: Verbindungsdetails*.
+. Klicke auf *[ + ] Hinzufügen*.
+. Folge denselben Schritten wie bei der vorherigen Verbindung. +
+*_Hinweis:_* Um zu einer anderen Plugin-Konfiguration zu wechseln, wähle den anderen WooCommerce-Webshop im Abschnitt *Webshops*.
+
+=== Germanized-Bereitschaft einrichten
+
+"Germanized" erweitert WooCommerce um wichtige Funktionen für den deutschen Markt. Das Ziel dieses Plugins ist es, dein WooCommerce-Plugin an die speziellen Anforderungen des deutschen Marktes anzupassen.
+
+. Verwende die Installationsanleitung auf https://wordpress.org/plugins/woocommerce-germanized/ um *Germanized* zu installieren.
+. In plentymarkets, öffne das Menü *Einrichtung » Märkte » WooCommerce » Einstellungen » Abschnitt: Datenaustausch*.
+. Aktivierie die Option *Exportiere Daten zu 'Germanized-Plugin' spezifischen Eingabefeldern*.
+. Speichere die Einstellungen.
+
+=== Verarbeitung von Germanized-Eingabefeldern
+
+Hier siehst du eine Liste der Germanized-Eingabefelder, die zum Zeitpunkt des Artikelexports/der Aktualisierung verarbeitet werden:
+
+* *Varianten » Kosten » Zolltarifnummerarif* zu WooCommerce *Produkt » Versand » Zolltarifnummer (HS-Code, Zoll)*.
+* *Variante » Modell* zu WooCommerce *Produkt  » Varianten » VAriante » MPN*.
+* *Variante » [Erster Barcode mit Herkunft WooCommerce]* zu WooCommerce *Produkt » Varianten » Variante » GTIN*.
+* *Artikel » Global »  Herstellungsland* zu WooCommerce *Produkt » Versand » Herstellungsland (Zoll)*.
+* Beim *Auftragsimport*: Die WooCommerce *DHL post number* importiert als *CRM » Kontante » Betroffener Kontat » Adressen Adresse » Typ: Postnummer*
+* Der *pro-Einheit-Basispreis* der Variante. Dieser Preis wird folgenderweise generiert: +
+*_Wichtig:_* _Der exportierte Basispreis berechnet sich aus dem der Variante zugeordneten WooCommerce-Verkaufspreis. Wenn auf deiner Variante auch ein Aktionspreis für WooCommerce definiert ist, wird auch dafür ein Basispreis generiert und exportiert._ +
+  ** Für *Größe*: Meter, Zentimeter und Millimeter werden zum Zeitpunkt des Exports als Meterwerte ausgedrückt. Zoll werden als Zoll ausgedrückt.
+  ** For *Gewicht*:Kilogramm, Gramm und Milligramm werden zum Zeitpunkt des Exports als Kilogramm-Werte ausgedrückt, Unzen werden als Unzen ausgedrückt.
+  ** Für *Volumen*: Liter und Milliliter *_bis 250ml_* werden beim Export als Milliliter ausgedrückt. *_Ab 250ml_* wird der exportierte Wert als Liter ausgedrückt. Exportierte Werte, die Du in Litern definierst, halten sich an dieselbe Regel wie Liter und Milliliter.
+
+=== Plugin konfigurieren
+
+*_Wichtig:_* Artikelbezogene *Import-/Exportprozesse* können nicht gleichzeitig aktiviert sein.
+
+[[table-plugin-settings]]
+.Plugin-Einstellungen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+|*Webshops*
+| Auswahl wechselt zwischen verfügbaren wooCommerce-Verbindungen.
+
+2+|*Prozesse*
+
+|*Auftragsimport*
+| Läuft alle 15 Minuten.<br /><br /> Importiert nur Aufträge aus den Status, die Du unter *Auftragsimportstatus* freigeschaltet hast. <br /> <br /> Folgende Daten werden importiert: <br /> * *Auftragstyp* <br /> * *Status* <br /> * *Währung*  <br /> * *Externe Auftrag-Id* <br /> * *Rechnungsadresse* <br /> * *Lieferadresse* <br /> * *Kontakt* <br /> → als Auftragsempfänger verknüpft <br /> * *Artikel* und *Varianten Id's* <br /> * *Auftragsherkunft* <br /> * *Artikel Beschreibung* <br /> * *Bestellte Mengen* <br /> * *MwSt.* <br /> * *MwSt.-Satz* <br /> * *Verkaufspreis* <br /> → ohne Zuschläge und Rabatte <br /> * *Rabatte* <br /> * *Kunden Notizen* <br /> <br /> Das korrekte plentymarkets Versandprofil wird beim Auftragsimport nur dann zugewiesen, wenn die Versandprofilnamen zwischen WooCommerce und plentymarkets übereinstimmen. <br /> <br /> Das Plug-in erkennt nur Rabattartikel, die auf WooCommerce-Aufträgen enthalten sind, Rabatt-Campagnen werden nicht unterstützt. Der rabattierte Wert aus dem WooCommerce-Auftrag wird als separates Line-Item importiert. <br /><br /> Der Auftragsimport  führt auch eine *Paymantstatus-Aktualisierung* für schon importierte Aufträge durch.
+
+|*Warenbestand-Export*
+| Wird dynamisch ausgeführt, basierend auf der Anzahl der zu aktualisierenden Varianten
+
+* Alle 15 Minuten für bis zu *500* Varianten.
+* Stündlich für *500 zu 1500* Varianten.
+* Einmal am Tag für über *1500* Varianten.
+
+*_Wichtig:_* SKU Matching muss existieren, damit dieser Prozess korrekt laufen kann.
+
+|*Preisexport*
+| Läuft alle *15 Minuten.*
+
+*_Wichtig:_* SKU Matching muss existieren, damit dieser Prozess korrekt laufen kann. Das Plugin verwendet die Benutzerauswahl von WooCommerce *Einstellungen » Mehrwertsteuer » Preise mit Steuern eingegeben* um zu entscheiden, ob der exportierte Preis *Brutto* oder *NETTO* sein wird.
+
+|*Kundenimport*
+| Läuft einmal am Tag.
+
+Importiert den WooCommerce-Kundenstamm nach plentymarkets.
+
+*_Hinweis:_* Während des Auftragsimports speichert das Plugin auftragsrelevante Kontaktdaten. Weitere Informationen hierzu findest Du unter <<*Überlegungen zur DSGVO* am Ende der Pluginbeschreibung.
+
+|*Kategorieexport*
+| Läuft einmal am Tag. Exportiert alle Kategorien die Du für die Auftragsherkunft WooCommerce freigeschaltet hast. <br /> <br /> *HINWEIS:* Verwenden diese Funktion nicht, um Artikel-verknüpfte Kategorien zu exportieren. Verwende zu diesem Zweck stattdessen den Artikelexport. Diese Funktion ist für einen einfachen Export deines gesamten plentymarkets Kategoriebaums gedacht.<br /><br /> Bitte beachte, dass das Plugin bestimmte WooCommerce-Kategorien löschen kann, wenn: <br /> * Die verknüpte plentymarkets-Kategorie gelöscht wird.<br /> * Oder die Mandantenzuweisung der verknüpften plentymarkets-Kategorie entfernt wurde.
+
+|*Kategorieimport*
+|Läuft ein Mal am Tag. Importiert alle Kategorien aus WooCommerce.
+
+*_Hinweis:_* Artikel verknüpfte Kategorien können auch beim *Artikelimport*, importiert werden.
+
+|*Artikelexport*
+| * Läuft ein Mal am Tag für den ersten Import. <br /> * Stündlich für nachfolgende Artikelaktualisierungen. <br /> <br /> *_Wichtig:_* Das Plugin verarbeitet nur WooCommerce Produkttypen *Einfaches Produkt* und *Variables Produkt*. <br > <br /> Folgende Daten werden exportiert: <br /> * *Name 1* als *Produktname* <br /> * *Vorschautext* als *Produkt Kurzbeschreibung* <br /> * *Artikeltext* als *Produkt Beschreibung* <br /> * *Erstelldatum* als *Veröffentlicht am:*  <br /> * *Verkaufspreis* als *Regulärer Preis* <br /> → Verkaufspreis mit der kleinsten Postion im Artikel, der für WooCommerce freigeschaltet ist. <br /> * *Aktionspreis* als *Angebotspreis* <br />* Artikel verlinkte *Kategorien*  <br /> → Die für WooCommerce freigeschaltet sind. <br /> * *Gewicht Brutto* als *Gewicht* <br /> * *Maße* als *Maße* <br /> * *MwSt.-Satz* <br /> * *Artikelbilder* auf die *Produktgalerie* <br /> * Das verlinkte *Varianten-Bild* mit der kleinsten Position.<br /> * *Verlinkte Attribute* als *Attribute*  <br /> * *Merkmale* als *Attribute * Sichtbar auf der Produktseite* <br /> * *Eigenschaften* als *Attribute * Sichtbar auf der Produktseite* <br /> * *Meta-Keywords* als *Tags* <br /> * *SKU* als *SKU*  <br /> * *WB NETTO* als *Lagerbestandsmenge*|
+
+|*Artikelimport*
+| Läuft ein Mal am Tag <br /> <br /> Das Plugin verarbeitet nur WooCommerce Produkttypen *Einfaches Produkt* und *Variables Produkt*. <br > <br /> Folgende Daten werden importiert: <br /> * *Produktname* als *Name 1* <br /> * *Produkt Kurzbeschreibung* als *Vorschautext* <br /> * Verknüpfte *Kategorien* als *Artikel verlinkte Kategorien* <br /> * *Regulärer Preis* als *Verkaufspreis* <br /> → Ein Verkaufspreis für die Auftragsherkunft WooCommerce wird erstellt, falls keiner existiert.<br /> * *Angebotspreis* als *Aktionspreis* <br /> * *Gewicht* als *Gewicht Brutto* *Maße* als *Maße* <br /> * *Produkt Bilder*  <br /> * *Varianten verknüpftes Bild* als *Varianten verknüpftes Bild* <br /> * *Attribute * Sichtbar auf der Produktseite* als * Eigenschaften* <br /> * *Tags* als *Meta-Keywords* <br /> * *Lagerbestandsmenge* als *Physischer Warenbestand* <br /> * *SKU* as *SKU*|
+
+2+| *Datenaustausch*
+| *Hersteller als Attribut exportieren*
+| *Aktiviere / Deaktiviere* den Export des verlinkten Herstellers als *Attribut * Sichtbar auf der Produktseite*.
+
+|*Exportiere Artikel zugewiesene Merkmale*
+| *Aktiviere / Deaktiviere* den Export der verknüpften Merkmale als *Attribute * Sichtbar auf der Produktseite*.
+
+|*Neuen Artikel als 'Entwurf' exportieren*
+| *Aktiviere / Deaktiviere* den Export neuer Artikel als *Entwürfe*.
+
+|*Automatische SKU-Erstellung basiert auf:*
+|Generiert SKUs für exportierte Varianten basierend auf Benutzerauswahl.<br /> <br /> Auswahlmöglichkeiten sind: <br /> * *Leer* → erstellt keine SKU.  <br /> * *Variantennr.* <br /> * *Varianten Id* <br /> -*Barcode* <br /> <br /> *_Wichtig:_* Wir empfehlen, dass Du für alle WooCommerce-Webshops, die über das Plugin verwaltet werden, dasselbe Eingabefeld zur SKU-Generierung benutzt.
+
+|*Artikel-Sprache für Export / Import*
+| Wähle eine Sprache für den Artikel Import / Export aus. <br /> <br /> *_Wichtig:_* Bitte beachte, dass alle übersetzbaren Eingabefelder eingerichtet sein müssen, damit der Export korrekt laufen kann.
+
+|*WooCommerce-Artikel deaktivieren, wenn der verknüpfte plentymarkets-Artikel deaktiviert ist*
+| *Aktiviere / Deaktiviere* das Löschen von WooCommerce-Artikeln, die auf plentymarkets deaktiviert wurden.
+
+|*Exportiere Eigenschaften als WooCommerce Attribute*
+| Entscheide welche verknüpften Eigenschaften beim Artikelexport beachtet werden sollen. <br /><br /> Verfügbare Optionen sind: <br /> * *Keine* <br /> * *Alle* <br /> * *Nur ausgewählte Eigenschaften* <br /> → Benutze den Reiter *Eigenschaften Export* um auszuwählen welche Eigenschaften für den Export freigeschaltet werden.
+
+|*Tags für Export / Import*
+| Tags aus folgender Quelle exportieren:<br />-Meta Keywords <br />* Varianten zugewiesene Tags
+
+|*Bestandspuffer*
+| Beim Senden von Beständen an WooCommerce subtrahiert das Plugin immer die Menge, die hier eingetragen wird.
+
+2+^| *Importiere und exportiere Warenbestände aus:*
+
+|*Alle verfügbaren Lager (Vertrieb)*
+| Exportiert Mengen aus allen Lagern vom Typ Vertrieb, die mit dem Artikel verknüpft sind.
+
+|*Lager meine Wahl*
+| Wähle die Lager (Vertrieb) aus, aus denen die Mengen exportiert werden.
+
+2+^|*Auftragsimport Optionen*
+
+|*Auftragsimport Startdatum*
+|Das Auftragsimportdatum wird bei jedem Auftragsimportlauf aktualisiert, um das Datum des letzten imports wiederzugeben. Um ältere Aufträge zu importieren, trage, als Startdatum, des ältesten verpassten Auftrags ein.
+
+|*Auftragsimportstatus*
+| Wähle aus, welche Aufträge nach plentymarkets importiert werden sollen. <br /> <br /> Auswahlmöglichkeiten sind: <br /> * *Zahlung ausstehend* <br /> * *In Bearbeitung* <br /> * *In Wartestellung* <br /> * *Fertiggestellt*
+
+|*Identifiziere die Hausnummer aus dem WooCommerce-Eingabefeld 'Adresszeile 1'*
+|*Aktiviere / Deaktiviere* die Extraktion der *Hausnummer* aus WooCommerce *Adresszeile 1*. Dieser Wert wird auf das plentymarkets Eingabefeld *ADDRESSE 2* importiert.
+
+2+^|*Auftragsimportstatus*
+
+|*Auftrag Status für eingehende Storno Anfragen:*
+|Wähle einen Auftragsstatus für eingehende Storno-Anfragen.
+
+|*Ab folgenden Status automatisch ablehnen:*
+|Eingehende Storno-Anfragen werden, ab diesem Status und höher, automatisch abgelehnt.
+
+|*Kontakt Import Optionen*
+| Wähle aus welche Kundenklasse deinen Kunden beim Import zugewiesen wird.
+
+|===
+
+=== Eigenschaften für den Artikelexport freischalten
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Tab: Eigenschaften Export*.
+. Wähle den Webshop, für den du diese Funktion konfigurieren möchtest.
+. Klick auf *[ + ] Hinzufügen*.
+. Wähle eine *Eigenschaft*.
+. Speichere die Einstellungen. +
+→ Die freigeschaltete Eigenschaft wird in der Liste angezeigt.
+
+*_Wichtig:_* WooCommerce akzeptiert für Eigenschaften keine Datensätze, die länger 28 Zeichen sind.
+
+=== plentymarkets MwSt.-Sätze mit WooCommerce Steuerklassen verknüpfen
+
+Ermöglicht dem Plugin, die Mehrwertsteuersätze aus plentymarkets mit den Steuerklassen aus WooCommerce beim Artikelexport zu korrelieren.
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » MwSt.-Satz Zuordnungen*.
+. Klick auf *[ + ] Hinzufügen*. +
+→ Das Fenster *Verknüpfe plentymarkets MwSt.-Sätze mit WooCommerce MwSt.-Klassen* wird geöffnet.
+. Wähle einen *plentymarkets MwSt.-Satz*.
+. Wähle eine *WooCommerce Steuerklasse*.
+. Speichere die Einstellungen. +
+→ Die erstellte Verknüpfung wird in der Liste angezeigt. +
+*_Hinweis:_* Der verknüpfte MwSt.-Satz unter *Artikel » Variante » Einstellungen » Kosten » MwSt.* wird auf WooCommerce in *Produkt » Allgemein » Steuerklasse* geschrieben.
+
+=== Plugin-Hilfe nutzen
+
+Im plentymarkets Backend findest du das Menü *Einrichtung » Märkte » WooCommerce » Hilfe*. Mit dieser Plugin-Hilfe kannst Du:
+
+* die Plugin-Bereitschaft prüfen.
+* Varianten-Exportbedingungen überprüfen.
+* das Startdatum für Warenbestandsexporte und Preisexporte anpassen.
+* alle 10 Minuten einen Artikel manuell exportieren.
+* alle 5 Minuten den Warenbestand einer Variante oder eines ganzen Artikels exportieren.
+
+===== Plugin-Bereitschaft prüfen
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Hilfe » Plugin Bereitschaft*.
+. Klick auf *Überprüfen*. +
+→ Die Prüfung wird durchgeführt. +
+→ Erfüllte Bedingungen sind mit einem grünen *OK* gekennzeichnet. +
+→ Fehlgeschlagene Bedingungen sind mit einem roten *X* gekennzeichnet.
+
+*_Was wird geprüft?_*
+
+* Ist die Herkunft "WooCommerce" muss unter *System » Aufträge » Auftragsherkunft* aktiviert?
+* Gibt es mehr als eine "WooCommerce" Herkunft unter *Einrichtung » Aufträge » Auftragsherkunft*? Achte darauf, dass die ID mit der höchsten Nummer aktiviert ist.
+* Konnte eine Verbindung zu WooCommerce.com hergestellt werden?
+* Wird die SDK-Datei korrekt bereitgestellt?
+
+==== Exportbedingungen einer Variante prüfen
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Hilfe » Exportbedingungen*.
+. Wähle den Webshop, für den Du diese Variante prüfen möchtest.
+. Gib eine gültige *Varianten ID* ein.
+. Klicke auf *Überprüfen*. +
+→ Die Prüfung wird durchgeführt. +
+→ Erfüllte Bedingungen sind mit einem grünen *OK* gekennzeichnet. +
+→ Fehlgeschlagene Bedingungen sind mit einem roten *X* gekennzeichnet.
+
+*_Was wird geprüft?_*
+
+* Variante muss aktiv sein. +
+  ** *Artikel » Variante » Einstellungen » Bereich Verfügbarkeit* Häkchen *Aktiv* muss gesetzt sein.
+* Variante muss für den Marktplatz WooCommerce verfügbar sein. +
+  ** *Artikel » Variante » Verfügbarkeit » Bereich: Märkte*, *WooCommerce* muss erteilt sein.
+* Variante muss eine SKU für den Marktplatz WooCommerce enthalten. +
+  ** *Variante » Verfügbarkeit » Bereich: SKU* muss eine *SKU* für Auftragsherkunft *WooCommerce* enthalten.
+* Variante muss einen WooCommerce Verkaufspreis enthalten, welcher die Standard System-Währung nutzt und für den ausgewählten Webshop freigeschaltet ist.
+* Artikel muss *Name 1* enthalten. +
+  ** *Artikel » Texte » Name 1* muss gepflegt sein.
+* Varianten *Mandat(Shop)* Zuweisung stimmt mit der Webshop-Auswahl aus der Plugin-Konfiguration überein.
+* Die Variante muss mindestens eine verknüpfte Kategorie mit Übersetzung für die ausgewählte Exportsprache enthalten.
+* Varianten Attribut-Name existiert für die ausgewählte Artikel-Exportsprache.
+* Varianten  Attribut-Wert existiert für die ausgewählte Artikel-Exportsprache.
+* Die ausgewählte Variante hat keine aktuellen Änderungen und ist vom nächsten Artikelexport / -update ausgeschlossen.
+
+==== Stardatum für Warenbestandsexport und Preisexport anpassen
+
+Wenn der Warenbestandsabgleich oder Preisabgleich nicht alle erwarteten Artikel exportiert, kannst Du das Startdatum des Exports für diesen Prozess auf ein beliebiges Datum zurücksetzen. Das Plugin berücksichtigt dein definiertes Startdatum beim nächsten Lauf anstelle des notierten *last-run* Zeitstempels.
+
+==== Einen Artikel manuell exportieren
+
+Zu Testzwecken kannst Du mit dem Plugin alle 10 Minuten einen Artikel manuell exportieren.
+
+*_Hinweis:_* Verwende diese Funktion, um zu testen wie Exporte aussehen, bevor Du einen Bulk-Export von Artikeldaten durchführst.
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Hilfe » Artikelexport*.
+. Wähle den Webshop, für den du den Artikel exportieren möchtest.
+. Gib eine gültige *Artikel ID* ein.
+. Klick auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, werden der Artikel und seine Varianten exportiert.
+
+*_Hinweis:_* Du hast einen oder mehrere Artikel auf WooCommerce gelöscht und möchtest die Daten nur noch einmal exportieren? Der nächste Export bereinigt nur die Plugin-Datenbank. Deshalb wird erst im Export danach dein Artikel wieder zu WooCommerce exportieren.
+
+=== Tab: Warenbestand Export
+
+Zu Testzwecken kannst Du mit dem Plugin alle 5 Minuten Warenbestände für einen Artikel manuell exportieren. Für eine Variante kannst Du einen Export alle 3 Minuten anstossen.
+
+==== Warenbestand und Verkaufspreis für eine Variante manuell exportieren
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Hilfe » Warenbestand Export*.
+. Wähle den Webshop, auf dem Du Warenbestände aktualisieren möchtest.
+. Gib eine gültige Varianten-ID ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand exportiert.
+
+==== Warenbestand und Verkaufspreis für einen Artikel, manuell exportieren
+
+. Öffne das Menü *Einrichtung » Märkte » WooCommerce » Hilfe » Warenbestand Export*
+. Wähle den Webshop, auf dem du Warenbestände aktualisieren möchtest.
+. Gib eine gültige Artikel-ID ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand exportiert.
+
+=== Die Plugin-Ereignisaktionen
+
+Mit den Ereignisaktionen des Plugins kannst Du mit WooCommerce Informationen über deine Aufträge austauschen. Weitere Informationen zum Thema plentymarkets Ereignisaktionen findest Du xref:automatisierung:ereignisaktionen.adoc[hier].
+
+==== Eine Beispiel-Ereignisaktion einrichten
+
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisaktionen*.
+. Klicke auf *[ + ]Hinzufügen*. +
+→ Das Fenster *Erstelle eine neue Ereignisaktion* wird angezeigt.
+. Gib einen *Namen* ein.
+. Wähle zum Beispiel das Ereignis *Auftragsänderung » Warenausgang Gebucht*.
+. Speichere die Einstellungen.
+. Setze einen *Filter mit Typ: Auftrag » Auftragstyp » Auftrag*.
+. Setze einen zweiten *Filter mit Typ: Auftrag » Herkunft » WooCommerce*.
+. Wähle eine *Aktion mit Typ: Plugin » Versandbestätigung an WooCommerce senden*.
+. *Speichere* die Einstellungen.
+
+
+*Tabelle 2* _Die WooCommerce Ereignisaktionen_.
+
+[[table-woocommerce-event-procedures]]
+.WooCommerce-Ereignisaktionen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *Sende Auftrag "Zahlung ausstehend" an WooCommerce*
+| Verschiebt den WooCommerce-Auftrag in den Status *Zahlung ausstehend*.
+
+| *Sende Auftrag "In Bearbeitung" an WooCommerce*
+| Verschiebt den WooCommerce-Auftrag in den Status *In Bearbeitung*.
+
+| *Sende Auftrag "In Wartestellung" an WooCommerce*
+| Verschiebt den WooCommerce-Auftrag in den Status *In Wartestellung*.
+
+| *Sende Auftrag "Fertiggestellt" an WooCommerce*
+| Verschiebt den WooCommerce-Auftrag in den Status *Fertiggestellt*.
+
+| *Sende Auftrag "Storniert/Abgebrochen" an WooCommerce*
+| Verschiebt den WooCommerce-Auftrag in den Status *Storniert/Abgebrochen*.
+
+| *Sende Auftrag "Rückerstattet" an WooCommerce*
+| Verschiebt den WooCommerce-Auftrag in den Status *Rückerstattet*.
+
+| *Sende Auftrag "Fehlgeschlagen" an WooCommerce*
+|Verschiebt den WooCommerce-Auftrag in den Status *Fehlgeschlagen*.
+
+|===
+
+=== Überlegungen zur DSGVO
+
+Aufgrund der DSGVO-Spezifikationen wurden folgende Richtlinien in Bezug auf Kunden beim Auftragsimport implementiert:
+
+[[table-dsgvo-order-import]]
+.DSGVO beim Auftragsimport
+[cols="1,3a"]
+|===
+|Szenario |Erläuterung
+
+| *Kontakt wird als Gast importiert*
+|
+* Käufer:in hat keine plentymarkets Kontaktdetails.
+* Die Echtheit des Kontakts wird von keiner Partei garantiert, selbst wenn die Kontaktdaten bei jedem Auftragsimport identisch sind. +
+*_Hinweis:_* Bei Bedarf kannst Du Kontakte manuell vom Typ *Gast* in reguläre Kontakte umwandeln.
+
+| *Käufer wird als plentymarkets Kontakt importiert*
+| Das Plugin erstellt einen plentymarkets Kontakt, wenn die Authentizität des WooCommerce-Kontakts durch eine eindeutige externe Kontakt-ID garantiert wird.
+
+| *Ein existierender plentymarkets Kontakt wird mit dem importierten Auftrag verknüpft*
+| Das Plugin prüft, ob in der Vergangenheit ein Kontakt von WooCommerce mit dieser externen Kontakt-ID importiert wurde. Wenn ein Kontakt existiert, wird der Import der neuen Bestellung an diesen Kontakt angehängt.
+
+|===
