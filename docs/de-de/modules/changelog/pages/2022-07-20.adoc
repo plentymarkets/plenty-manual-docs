@@ -6,7 +6,7 @@
 :startWeekDate: 14. Juli 2022
 :endWeekDate: 20. Juli 2022
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/eigner-im-kontaktdatensatz-in-alphabetischer-reihenfolge-owner-in-contact-data-record-sorted-by-alphabet/688411
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -43,6 +43,7 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 * Im Assistenten *eBay Fulfillment by Orange Connex* wurde der Schritt *Outbound-Auftragsdokumente* hinzugefügt. Hier entscheidest du, welche Dokumente zusammen mit dem Outbound-Auftrag übermittelt werden sollen. Zur Auswahl stehen die Dokumente *Lieferschein*, *Rücksendeschein* und *Retourenlabel*.
 * Im Versand-Center 2.0 wurden in der Detailansicht im Bereich *Pakete* die Funktionen zum Hinzufügen eines neuen Pakets und zum Löschen eines bestehenden Pakets hinzugefügt. Beim Klick auf das Plus (*Paket hinzufügen*) öffnet sich ein weiteres Fenster, in dem man den Pakettyp, den Typ der Verpackungseinheit und das Paketgewicht festlegen kann.
+* Das Erstellen einer Umbuchung im Menü *Waren » Amazon: Shipments* hat nicht funktioniert. Beim Klick auf Umbuchung erstellen hat die Oberfläche nicht reagiert. Dieses Verhalten wurde behoben.
 
 [discrete]
 === Kaufland
@@ -86,6 +87,25 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 === CRM
 
 * Im Menü *Einrichtung » Einstellungen » Benutzer » Konten* im Tab *Eigner* wurde die Option *Kunde* in *Kontakt* umbenannt.
+* Das Feld *FSK* in den Adressoptionen im Menü *CRM » Kontakte* war bisher ein Eingabefeld, in das man die Altersfreigabe manuell eintragen konnte. Wir haben das Feld *FSK* umbenannt in *Altersfreigabe* und in eine Dropdown-Liste mit vorgegebenen Werten umgewandelt. Diese Liste ist nun identisch mit den Dropdown-Listen in der Rechnungsadresse des Auftrags sowie in den Ereignisaktionen.
+
+[discrete]
+=== Kaufland
+
+* Für Lager und Versandprofile gibt es in den Kaufland-Katalogen jetzt komplexe Zuordnungen. Es handelt sich um die folgenden Datenfelder:
+** `id_shipping_group`: Hier verknüpfst du Versandprofile.
+** `id_warehouse`: Hier verknüpfst du Lager.
+
++
+Bei komplexen Zuordnungen gibt es für ein Marktplatz-Datenfeld verschiedene Werte zur Auswahl, die zugeordnet werden können. Bei der Zuordnung von Versandprofilen kannst du also zum Beispiel verschiedene Kaufland-Versandprofile auswählen, die du deinen plentymarkets Versandprofilen zuordnest. Weitere Informationen zur komplexen Zuordnung und zu den neuen Datenfeldern findest du auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#data-field-mappings[Kaufland.de einrichten].
+
+[discrete]
+=== OTTO
+
+:otto-master-date: 15.07.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/2wHq1kpv52EKksABCZ0itWjTxGZ.xlsx
+
+include::partial$otto-master-file.adoc[]
 
 [discrete]
 === plentyShop
@@ -141,6 +161,16 @@ Dieses Verhalten wurde behoben. Die Variablen werden nun mit den korrekten Werte
 * In einigen Systemen wurde ein Validierungsfehler angezeigt, wenn man im Kontaktdatensatz im Menü *CRM » Kontakte* Änderungen, beispielsweise an den Eigenschaften oder Kontaktoptionen, vorgenommen hat. Außerdem gab es in einigen Systemen Probleme mit Eigenschaften, die als Pflichtfeld gekennzeichnet waren.
 +
 Dieses Verhalten wurde behoben. Wenn es einen Fehler beim Speichern der Eigenschaften gibt, wird nun angezeigt, welche Eigenschaft fehlerhaft ist. Der Fehler, dass man die Option *Pflichtfeld* bei den Eigenschaften nicht ändern konnte, wurde behoben.
+* Bei einigen Kunden wurden die Tickets mit einer mehrstündigen Verzögerung importiert. Dies wurde dadurch verursacht, dass der Import-Cron mehrfach gleichzeitig gestartet wurde. Dieses Verhalten wurde behoben.
++
+Auch wenn eine E-Mail vom Import übersprungen wurde (z. B. weil sie von einem Mailer-Daemon generiert wurde), blieb die E-Mail als nicht gelesen und der Import-Cron versuchte erneut, sie zu importieren, wenn er das nächste Mal ausgeführt wurde. Dieses Verhalten wurde geändert, die E-Mail wird nun als gelesen markiert.
+* Beim Erstellen neuer Kontakte wurden in der Bezirksauswahl initial immer die deutschen Bundesländer angezeigt. Dieser Fehler wurde behoben, sodass die Bezirke nun zur Vorauswahl des Landes passen.
+* Wenn eine EmailBuilder-Vorlage für einen anderen als den Standardmandanten erstellt wurde, konnte die Vorlage nicht in der Auftrags-UI als Vorschau angezeigt oder gesendet werden. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Ereignisaktionen
+
+* Bei der Ereignisaktion *Mail versenden* kam es zu einem Fehler wodurch keine Mail versendet werden konnte, wenn es sich bei dem Auftrag um eine Umbuchung gehandelt hat. Dies wurde behoben.
 
 '''
 
@@ -198,16 +228,15 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== CRM
 
-
-'''
+* Im EmailBuilder wurden Abonnement-bezogene Variablen hinzugefügt. Diese neuen Variablen befinden sich als Unterkategorie *Abonnement* in der Kategorie *Auftrag*.
 
 [discrete]
-== Geändert
+=== Ereignisaktionen
 
-Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
-
-
+* Wir haben die fehlende Aktion *Stornobeleg Mahnung erzeugen* hinzugefügt.
 
 '''
 
@@ -216,7 +245,15 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Artikel
 
+* Aufgrund von leeren Spracheinträgen in den Texteigenschaften kam es vor, dass die Änderungserkennung in der neuen Artikel-UI direkt beim Öffnen einer Variante aktiv wurde. Wir haben dieses Verhalten nun korrigiert.
+
+[discrete]
+=== CRM
+
+* Die Dropdown-Liste Eigner im Bereich *Kontaktdetails* des Kontaktdatensatzes im Menü *CRM » Kontakte* war bisher anhand der Benutzer-ID sortiert. Ab sofort sind die Benutzer:innen in der Dropdown-Liste *Eigner* in alphabetischer Reihenfolge sortiert.
 
 --
 
@@ -230,9 +267,53 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/persistentshoppingcart_55154[Bleibender Warenkorb^]
+|1.0.6
+|-
+
+|link:https://marketplace.plentymarkets.com/customerclasshomepage_6067[Customer Class HomePage^]
+|2.2.8
+|-
+
+|link:https://marketplace.plentymarkets.com/googletagmanagerultimate_54789[Google Tag Manager + Conversions API | 18 Tools in einem^]
+|1.3.0
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourmanufacturersliderwidget_6905[Hersteller Slider Widget^]
+|1.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportidealode_4723[idealo.de^]
+|3.3.33
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.1.70
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.17
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.0.13
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.12.1
+|-
+
+|link:https://marketplace.plentymarkets.com/d2gpmpluginsocialicons_55170[Social Icons Widget^]
+|1.0.1
+|-
+
+|link:https://marketplace.plentymarkets.com/d2gpmpluginshippingicons_6756[Versand Icons Widget^]
+|1.0.4
+|-
+
+|link:https://marketplace.plentymarkets.com/d2gpmpluginpaymenticons_7033[Zahlungs Icons Widget^]
+|1.0.7
+|-
 
 |===
 
