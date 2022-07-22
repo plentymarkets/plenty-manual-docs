@@ -6,29 +6,61 @@
 
 :voelkner:
 :market: Voelkner
+:plugin-name: Voelkner
+:plugin-link: https://marketplace.plentymarkets.com/voelknerextension_6949
 :type-of-market: Marktplatz
 :registration-url: https://www.voelkner.de/marktplatz-seller.html
 :marketplace-url: https://marketplace.plentymarkets.com/voelknerextension_6949
 :video-id: wPiXwdETXEo
-:marketplace-url: https://marketplace.plentymarkets.com/voelknerextension_6949
 :assistant-name: VoelknerExtension
 :valid-values-zip: https://drive.google.com/file/d/1zs0Cy_08E-qYFbNkCMUX-Zp15QghLvih/view?usp=sharing
 :mirakl-menu-shipping: Plattformeinstellungen » Versand
 :referrer-name: pass:quotes[Herkunft *Voelkner*]
 :category-example: VHS Kassetten
 
+Auf Voelkner werden Artikel aus den Bereichen Elektrotechnik, Werkzeug, IT und Haushalt angeboten.
 
-Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest. Auf Voelkner werden Artikel aus den Bereichen Elektrotechnik, Werkzeug, IT und Haushalt angeboten.
+Auf dieser Seite erfährst du, wie du die Schnittstelle zu {market} in plentymarkets einrichtest.
 
+//Erste Schritte
 include::partial$mirakl-first-steps.adoc[]
+
+Aufträge, die auf Voelkner erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
+
+[#order-process]
+== Ablauf der Auftragsabwicklung
+
+So läuft die Auftragsabwicklung bei Voelkner ab:
+
+* Voelkner akzeptiert den Auftrag und zieht die Zahlung ein.
+* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
+* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
+* Im nächsten Schritt wird Voelkner über eine weitere Ereignisaktion über den Versand informiert.
+* Die von Voelkner erstellte Rechnung wird zum Auftrag in dein plentymarkets System importiert.
+* Über eine Ereignisaktion wird eine Rechnung an Voelkner gesendet.
+
+[#allgemeine-informationen]
+== Häufigkeit des Datenaustauschs
+
+include::partial$mirakl-data-exchange-table.adoc[]
 
 [#api-schluessel]
 == API-Schlüssel erzeugen
 
 include::partial$mirakl-api-key.adoc[]
 
+[#300]
+== Marktplatz in plentymarkets einrichten
+
+Du hast die Plugins *Mirakl Connector* und *Voelkner* installiert und einen API-Schlüssel erzeugt? Super. Nun richtest du den Marktplatz in plentymarkets ein.
+
+[#marktplatz-assistent-durchlaufen]
+=== Einrichtungsassistenten durchlaufen
+
+include::partial$mirakl-market-assistant.adoc[]
+
 [#auftragsherkunft]
-== Auftragsherkunft aktivieren
+=== Auftragsherkunft aktivieren
 
 :market: {market}
 :referrer: {market}
@@ -38,7 +70,7 @@ include::partial$mirakl-api-key.adoc[]
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
 [#verkaufspreis]
-== Verkaufspreis festlegen
+=== Verkaufspreis festlegen
 
 :referrer-price: {market}
 :mirakl-verkaufspreis:
@@ -50,15 +82,13 @@ include::partial$verkaufspreis-festlegen.adoc[]
 
 include::partial$mirakl-creating-properties.adoc[]
 
-[#marktplatz-assistent-durchlaufen]
-== {market} Assistent durchlaufen
+//TODO: Wo soll das Kapitel hin!?!?!?
+[#attribut-hilfetool]
+=== Attribut-Hilfetool nutzen
 
-include::partial$mirakl-market-assistant.adoc[]
+:market-attribute-help-tool: voelkner
 
-[#allgemeine-informationen]
-== Informationen zum automatischen Datenaustausch
-
-include::partial$mirakl-data-exchange-table.adoc[]
+include::partial$mirakl-data-attribute-tool.adoc[]
 
 [#artikelexport-katalog]
 == Artikelexport einrichten
@@ -68,7 +98,7 @@ include::partial$mirakl-data-catalogue-intro.adoc[]
 [#katalog-im-assistenten]
 === Katalog im Assistenten erstellen
 
-Gehe wie im Folgenden beschrieben vor, um einen Katalog im Assistenten zu erstellen.
+Gehe wie unten beschrieben vor, um einen Katalog im Assistenten zu erstellen.
 
 :catalogue-assistant-name: {market}-Katalog
 :number-of-boxes: Info-Box
@@ -78,18 +108,21 @@ Gehe wie im Folgenden beschrieben vor, um einen Katalog im Assistenten zu erstel
 
 include::partial$catalogue-assistant-config.adoc[]
 
+*_Hinweis:_* Steht im Assistenten keine Marktplatzkategorie zur Auswahl, dann ist im Assistenten *{assistant-name}* im Schritt *Authentifizierung* wahrscheinlich die falsche API-Umgebung ausgewählt.
+
 [#datenfelder-zuordnen]
 === Datenfelder im Katalog zuordnen
 
-Nachdem du einen Katalog erstellt hast, ordnest du die Datenfelder des Marktplatzes den in plentymarkets gespeicherten Artikeldaten zu. Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
+Ordne nun die Marktplatz-Datenfelder im Katalog den in plentymarkets gespeicherten Artikeldaten zu.
 
-[TIP]
-.Eigenschaften verwenden
-====
-Verwende xref:artikel:eigenschaften.adoc#500[Eigenschaften], um Werte für Marktplatz-Datenfelder zu übergeben, für die es keine Entsprechung in plentymarkets gibt.
-====
+Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
 
 include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+=== Empfehlungen für Datenfeld-Zuordnungen
+
+include::partial$recommendation-text.adoc[]
 
 :mirakl-attribut-hilfetool:
 :mirakl-voelkner-eindeutige-nummer:
@@ -98,11 +131,7 @@ include::partial$catalogue-mapping.adoc[]
 
 include::partial$katalog-mirakl-zuordnungen.adoc[]
 
-[IMPORTANT]
-.Fehlende Marken
-====
-Wenn dir auffällt, dass eine Marke fehlt, wende dich an stefanie.schlosser@re-in.de.
-====
+
 
 ////
 Wird noch überarbeitet
@@ -119,39 +148,33 @@ Prüfen, wo Inhalt hingehört, wenn einkommentiert wird.
 
 :valid-values-zip: https://drive.google.com/file/d/1zs0Cy_08E-qYFbNkCMUX-Zp15QghLvih/view?usp=sharing
 
-In der ZIP-Datei link:{valid-values-zip}[{market}: Gültige Werte^] findest du CSV-Dateien für jedes Marktplatzattribut. Innerhalb einer CSV-Datei sind die gültigen Werte für das Attribut abgebildet. Den zu übertragenden Wert findest du immer in der Spalte *Code*.
+In der ZIP-Datei link:{valid-values-zip}[{market}: Gültige Werte^] findest du CSV-Dateien für jedes Marktplatzattribut. Innerhalb einer CSV-Datei sind die gültigen Werte für das Attribut abgebildet. Den Wert, der übertragen werden muss, findest du immer in der Spalte *Code*.
 ////
 
+[#prepare-variations]
+== Varianten vorbereiten
+
+Bereite nun deine Varianten für {market} vor.
+
+[#variantenverfuegbarkeit]
+=== Variantenverfügbarkeit einstellen
+
+:market-availability: {market}
+:option-availability: {market}
+:mirakl-variantenverfuegbarkeit-aktivieren:
+:mirakl-herkunft:
+
+include::partial$variantenverfuegbarkeit.adoc[]
+
 [#varianten-mit-katalog-kategorie-verknüpfen]
-== Varianten mit {market} Katalog-Kategorie verknüpfen
+=== Varianten mit {market}-Kategorie verknüpfen
 
 include::partial$mirakl-data-link-categories.adoc[]
 
 [#eigenschaften-mit-varianten-verknuepfen]
-== Eigenschaften mit Varianten verknüpfen und Werte speichern
+=== Eigenschaften mit Varianten verknüpfen und Werte speichern
 
 include::partial$properties-link.adoc[]
-
-[#catalogue-activation]
-== Katalogexport aktivieren
-
-:interval: täglich
-:market: {market}
-
-include::partial$catalogue-activation.adoc[]
-
-[#marktplatzspezifische-werte]
-=== Markplatzspezifische Werte übertragen
-
-Der Marktplatz verlangt für die Übertragung von Produktdaten bei den meisten Attributen spezifische Werte. Diese sind derzeit allerdings noch nicht in dieser Form an der Variante hinterlegt. +
-*_Beispiel:_* Für das Attribut *Brand* ist beispielsweise *test* nicht erlaubt. Hier muss der entsprechende Code übergeben werden - in diesem Beispiel *BRAND_12345678*.
-
-[#attribut-hilfetool]
-== Das Attribut-Hilfetool verwenden
-
-:market-attribute-help-tool: voelkner
-
-include::partial$mirakl-data-attribute-tool.adoc[]
 
 [#produkt-und-angebotsdaten]
 == Produkt- und Angebotsdaten übertragen
@@ -161,31 +184,18 @@ include::partial$mirakl-data-attribute-tool.adoc[]
 
 include::partial$mirakl-data-product-data-export.adoc[]
 
-[#variantenverfuegbarkeit]
-== Variantenverfügbarkeit einstellen
+[#catalogue-activation]
+== Katalogexport aktivieren
 
-:market-availability: {market}
-:option-availability: {market}
-:mirakl-variantenverfuegbarkeit-aktivieren:
-:mirakl-herkunft:
+:interval: täglich
+:market: {market}
 
-include::partial$variantenverfuegbarkeit.adoc[]
+include::partial$catalogue-activation.adoc[]
 
 [#auftragsabwicklung-automatisieren]
 == Auftragsabwicklung automatisieren
 
-Aufträge, die auf Voelkner erzeugt wurden, werden alle 15 Minuten in dein plentymarkets System importiert.
-
-So läuft die Auftragsabwicklung bei Voelkner ab:
-
-* Voelkner akzeptiert den Auftrag und zieht die Zahlung ein.
-* Mit der Zahlungszusicherung werden die Rechnungs- und Lieferadresse am Auftrag in deinem plentymarkets System aktualisiert.
-* Über eine Ereignisaktion werden Versanddienstleister und Paketnummer am Auftrag in Mirakl aktualisiert.
-* Im nächsten Schritt wird Voelkner über eine weitere Ereignisaktion über den Versand informiert.
-* Die von Voelkner erstellte Rechnung wird zum Auftrag in dein plentymarkets System importiert.
-* Über eine Ereignisaktion wird eine Rechnung an Voelkner gesendet.
-
-Die folgenden Schritte der Auftragsabwicklung kannst du automatisieren, indem du Ereignisaktionen einrichtest:
+Die folgenden Schritte der Auftragsabwicklung kannst du mit Ereignisaktionen automatisieren:
 
 * Informiere Voelkner darüber, dass der Versand bestätigt wurde. <<#versandbestaetigung-voelkner, Wie?>>
 
