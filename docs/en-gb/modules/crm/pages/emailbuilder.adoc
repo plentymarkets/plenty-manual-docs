@@ -895,6 +895,7 @@ The available variables for the EmailBuilder are grouped into the following cate
 ** <<#variables-order-invoice-address, Invoice address>>
 ** <<#variables-order-order-items, Order items (only for item list widget)>>
 ** <<#variables-order-shipping, Shipping>>
+** <<#variables-subscription, Subscription>>
 
 * <<#variables-contact-general, Contact>>
 
@@ -906,6 +907,8 @@ The available variables for the EmailBuilder are grouped into the following cate
 * <<#variables-global, Global>>
 
 * <<#variables-newsletter, Newsletter>>
+
+* <<#variables-ticket, Ticket>>
 
 [#variables-order]
 ==== Variables: Order general
@@ -1557,8 +1560,46 @@ The QR code is shown as an URL in the email of your customers. After clicking on
 | `order.formattedShipping.providerId`
 
 | `Tracking URL`
-|The tracking URL is used to track shipments. The xref:fulfilment:preparing-the-shipment.adoc#840[tracking URL] of the shipping service provider is saved in the *Setup » Orders » Shipping » Settings* menu in the *Shipping service provider* tab.
+|The tracking URL is used to track shipments. The xref:fulfilment:preparing-the-shipment.adoc#840[tracking URL] of the shipping service provider is saved in the *Setup » Orders » Shipping » Settings* menu in the *Shipping service provider* tab. +
+*_Note:_* Have a look at our xref:crm:practical-example-send-tracking-url.adoc#[practical example about this topic]. Learn which settings you need to carry out to send the tracking URL to your customers.
 | `order.formattedShipping.trackingURL`
+
+|====
+
+[#variablen-order-subscription]
+==== Variables: Order / Subscription
+
+[[table-variables-order-subscription]]
+.Variables in the *Order / Subscription* sub-category
+[cols="2,4,3"]
+|====
+|Name of the variable |Explanation |Twig expression
+
+| `Subscription ID`
+|ID of the subscription. The ID is automatically assigned by the system and _cannot_ be changed.
+| `order.formattedSubscription.id`
+
+| `Subscription start date`
+|
+| `order.formattedSubscription.startDate`
+
+| `Subscription end date`
+|
+| `order.formattedSubscription.endDate`
+
+| `Subscription: Number of executions`
+|Number of orders that were created based on a subscription. +
+*_Example:_* If the subscription was started in May 2021 with an interval of 3 months, 4 orders were created until May 2022. In this case, this variable would return the value `4` in the email template. 
+| `order.formattedSubscription.numberOfExecutions`
+
+| `Subscription interval`
+|Interval of the subscription as determined in the *Setup » Orders » Subscription* menu. The interval determines the regularly recurrent times at which the items are sent to the customers. + 
+Possible values: *1 month*, *3 months*, *6 months*, *12 months*.
+| `order.formattedSubscription.interval`
+
+| `Subscription total amount`
+|
+| `order.formattedSubscription.totalAmount \| number_format(2, '.', ',')`
 
 |====
 
@@ -2001,6 +2042,59 @@ As an alternative, you can find the saved IBAN in the *Setup » Settings » Bank
 | `URL for confirming the newsletter receipt`
 |Returns the URL to confirm the xref:crm:sending-newsletters.adoc#[newsletter subscription].
 | `newsletter.formattedConfirmUrl`
+
+|====
+
+[#variables-ticket]
+==== Variables: Ticket
+
+[[table-variables-ticket]]
+.Variables in the *Ticket* category
+[cols="2,5,2"]
+|====
+|Name of the variable |Explanation |Twig expression
+
+| `Ticket backend URL`
+|Links to the ticket in the xref:crm:using-the-ticket-system.adoc#[CRM » Ticket system] menu.
+| `ticket.formattedUrl.backendUrl`
+
+| `Ticket messages history`
+|Returns the text that was last saved in the ticket. This is either the text of a comment or a message.
+| `ticket.formattedMessage.history`
+
+| `Ticket ID`
+|Returns the ID of the ticket from which the email was sent.
+| `ticket.id`
+
+| `Ticket last comment`
+|Returns the text of the last xref:crm:using-the-ticket-system.adoc#2500[comment]. +
+*_Note:_* Comments serve for internal communication and are _not_ visible to your customers.
+| `ticket.formattedMessage.lastComment`
+
+| `Ticket last message`
+|Returns the text of the last xref:crm:using-the-ticket-system.adoc#2400[message].
+| `ticket.formattedMessage.lastMessage`
+
+| `Ticket priority`
+|Returns the priority of the ticket as an ID. The values of the stars are shown in ascending order with numbers from `0` (grey star, lowest priority) to `5` (2 yellow stars, highest priority).
+| `ticket.priorityId`
+
+| `Ticket status`
+|Returns the status of the ticket.
+| `ticket.formattedStatus`
+
+| `Ticket tags`
+|Returns the tags of the ticket.
+| `ticket.formattedTags`
+
+| `Ticket title`
+|Returns the title of the ticket.
+| `ticket.title`
+
+| `Ticket URL`
+|Links to the ticket in the customer's *My account* area. Customers can read the message there and directly enter and send a reply. +
+Note also the xref:crm:using-the-ticket-system.adoc#5500[Creating tickets in the My account area] chapter on the xref:crm:using-the-ticket-system.adoc#[Ticket system] page.
+| `ticket.formattedUrl.url`
 
 |====
 
