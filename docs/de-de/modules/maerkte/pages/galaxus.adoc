@@ -118,37 +118,22 @@ Einstellungen
 
 === Besonderheiten der Galaxus-Auftragsabwicklung
 
-* Aufträge mit Rechnungsadresse in der Schweiz und Lieferadresse in der EU werden als Netto-Aufträge importiert. +
-*_Ausnahme:_* Du hast eine Fiskalvertretung in der Schweiz.
+* Galaxus Retoure-Anfragen generieren neue plentymarkets Aufträge vom Typ *Retoure*. Diese Aufträge werden mit dem Initial-Auftrag verknüpft. Die resultierenden Aufträge müssen separat bearbeitet werden.
+
+* Das Standard-Lieferdatum für Galaxus-Aufträge trägst du im Galaxus Backend im Menü *Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum* ein. Wenn dort kein Lieferdatum gespeichert ist, wird das Lieferdatum so berechnet: +
+[Tag, an dem die Ereignisaktion *Auftragsbestätigung an Galaxus senden* ausgelöst wurde] + 2 Arbeitstage
+
+* Ein Versanddatum wird außerdem nicht gesetzt, wenn die zur Auftragserfüllung benötigte Warenmenge nicht als Netto-Warenbestand vorhanden ist. Das geplante Lieferdatum kann aufgrund der Plugin-Option *Positive Bestände sollen immer exportiert werden...* im Menü *Einrichtung » Märkte » Galaxus » Product Stock Price Tab*  weiteren Änderungen unterliegen.
 
 * In allen Szenarien, in denen nur ein Teil der Bestellung weiterbearbeitet werden soll, muss die importierte Bestellung aufgeteilt werden. Die resultierenden Aufträge müssen separat bearbeitet werden.
 
-* Status zur Ablehnung von Teilstorno-Anfragen und Storno-anfragen muss vom Benutzer gesetzt werden, unter *Einrichtung » Märkte » Galaxus » Auftragsimport » Auftrag Status-Konfiguration*. Ohne Auswahl wird der Status *[5] Freigabe Versand* standardmässig eingesetzt.
-
-* Das Plugin kann nach dem Aufteilen eines Auftrags, ohne zusätzliche Benutzereingaben, zum korrekten Galaxus Auftrag zurückmelden.
-
-* Galaxus Retoure-Anfragen generieren neue plentymarkets Aufträge vom Typ *Retoure* * diese werden zum Initial-Auftrag verknüpft. Die resultierenden Aufträge sind separat zu bearbeiten.
-
-* Das Standard Lieferdatum für Galaxus Aufträge ist: Tag an dem die Ereignisaktion *Auftragsbestätigung an Galaxus senden* ausgelöst wurde *+ 2 Arbeitstage*,es sei denn, ein anderes Lieferdatum ist unter *Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum* im Voraus eingetragen worden. Ein Versanddatum wird auch nicht gesetzt, wenn die zur  Auftragserfüllung benötigte Warenmenge, nicht als Warenbestand-Netto  vorhanden ist. Das geplante Lieferdatum kann anahnd der Plugin-Option  *Positive Bestände sollen immer exportiert werden...* unter *Einrichtung » Märkte » Galaxus » Product Stock Price Tab*  weiteren Änderungen unterliegen.
-
-=== Auftrag teilen, ein Beispiel
-
-. Öffne das Menü *Auftrag » Auftrags-ID*.
-. Teile den Auftrag unter *Auftrag » Übersicht » Zahnrad » (Teilen)*. +
-→ Das Fenster *Auftrag teilen* wird geöffnet.
-. Wähle die Artikelmengen für den neuen Auftrag. +
-*_Wichtig:_* Die Versandkosten des ursprünglichen Auftrags werden nicht geändert.
-
-* Das Plugin kann nach dem Aufteilen eines Auftrags, ohne zusätzliche Benutzereingaben, zum korrekten Galaxus Auftrag zurückmelden.
-* Galaxus Retoure-Anfragen generieren neue plentymarkets Aufträge vom Typ *Retoure* * diese werden zum Initial-Auftrag verknüpft. Die resultierenden Aufträge sind separat zu bearbeiten.
-* Das Standard Lieferdatum für Galaxus Aufträge ist: Tag an dem die Ereignisaktion *Auftragsbestätigung an Galaxus senden* ausgelöst wurde *+ 2 Arbeitstage*,es sei denn, ein anderes Lieferdatum ist unter *Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum* im Voraus eingetragen worden. Ein Versanddatum wird auch nicht gesetzt, wenn die zur  Auftragserfüllung benötigte Warenmenge, nicht als Warenbestand-Netto  vorhanden ist. Das geplante Lieferdatum kann anahnd der Plugin-Option  *Positive Bestände sollen immer exportiert werden...* unter *Einrichtung » Märkte » Galaxus » Product Stock Price Tab*  weiteren Änderungen unterliegen.
-* Nehme, neben deinen standardmässigen Lieferschein-Einstellungen, noch folgende Einstellungen für Galaxus Lieferscheine vor:
-. Öffne das Menü *Einrichtung » Mandant » Standorte » Standort wählen » Dokumente » Lieferschein*.
-. Wähle im Abschnitt *Optionale Elemente unter Artikelposition* für die Option *Externe Auftragsnummer* die Einstellung *Ja*.
-. Gebe im Eingabefeld *Hinweis* folgenden von Galaxus vorgegebenen Hinweis ein: +
-`Vielen Dank für Ihre Bestellung!` +
-`Bestellungen über www.galaxus.ch unterliegen den AGB der Digitec Galaxus AG. Bei einer allfälligen Retoure bitten wir Sie unbedingt den geführten Retourenprozess in Ihrem Kundenkonto auf www.galaxus.ch zu nutzen. So ersparen Sie uns und Digitec Galaxus unnötige Aufwände und erhalten die Gutschrift via Galaxus unverzüglich.`
-. *Speichere* die Änderungen.
+* So teilst du einen Auftrag:
+  . Öffne das Menü *Auftrag » Auftrags-ID*.
+  . Teile den Auftrag unter *Auftrag » Übersicht » Zahnrad » (Teilen)*. +
+  → Das Fenster *Auftrag teilen* wird geöffnet.
+  . Wähle die Artikelmengen für den neuen Auftrag. +
+  *_Wichtig:_* Die Versandkosten des ursprünglichen Auftrags werden nicht geändert. +
+  → Das Plugin kann nach dem Aufteilen eines Auftrags, ohne zusätzliche Benutzereingaben, zum korrekten Galaxus Auftrag zurückmelden.
 
 [#plugin-download]
 == Plugins installieren
@@ -236,6 +221,8 @@ Diese Händler:innen müssen eine Person mit Wohnsitz in der Schweiz als Mehrwer
 
 | *Stornierungsanfragen für eingegangene Aufträge ab folgendem Status automatisch ablehnen*
 | Ab welchem Auftragsstatus sollen eingehene Stornoanfragen automatisch abgelehnt werden?
+
+*_Wichtig:_* Wenn du keinen Status wählst, wird automatisch der Status *[5] Freigabe Versand* eingesetzt.
 
 |===
 
