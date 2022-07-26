@@ -118,25 +118,6 @@ https://partner.digitecgalaxus.ch/hc/de/articles/360016297139-Wie-kann-ich-die-V
 * In plentymarkets wird eine Bruttorechnung mit der Währung Schweizer Franken generiert. Die Rechnungsadresse ist die Adresse der Kund:in.
 |===
 
-=== Besonderheiten der Galaxus-Auftragsabwicklung
-
-* Galaxus Retoure-Anfragen generieren neue plentymarkets Aufträge vom Typ *Retoure*. Diese Aufträge werden mit dem Initial-Auftrag verknüpft. Die resultierenden Aufträge müssen separat bearbeitet werden.
-
-* Das Standard-Lieferdatum für Galaxus-Aufträge trägst du im Galaxus Backend im Menü *Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum* ein. Wenn dort kein Lieferdatum gespeichert ist, wird das Lieferdatum so berechnet: +
-[Tag, an dem die Ereignisaktion *Auftragsbestätigung an Galaxus senden* ausgelöst wurde] + 2 Arbeitstage
-
-* Ein Versanddatum wird außerdem nicht gesetzt, wenn die zur Auftragserfüllung benötigte Warenmenge nicht als Netto-Warenbestand vorhanden ist. Das geplante Lieferdatum kann aufgrund der Plugin-Option *Positive Bestände sollen immer exportiert werden...* im Menü *Einrichtung » Märkte » Galaxus » Product Stock Price Tab*  weiteren Änderungen unterliegen.
-
-* In allen Szenarien, in denen nur ein Teil der Bestellung weiterbearbeitet werden soll, muss die importierte Bestellung aufgeteilt werden. Die resultierenden Aufträge müssen separat bearbeitet werden.
-
-* So teilst du einen Auftrag:
-  . Öffne das Menü *Auftrag » Auftrags-ID*.
-  . Teile den Auftrag unter *Auftrag » Übersicht » Zahnrad » (Teilen)*. +
-  → Das Fenster *Auftrag teilen* wird geöffnet.
-  . Wähle die Artikelmengen für den neuen Auftrag. +
-  *_Wichtig:_* Die Versandkosten des ursprünglichen Auftrags werden nicht geändert. +
-  → Das Plugin kann nach dem Aufteilen eines Auftrags, ohne zusätzliche Benutzereingaben, zum korrekten Galaxus Auftrag zurückmelden.
-
 [#plugin-download]
 == Plugins installieren
 
@@ -1199,57 +1180,77 @@ Richte, Beispielsweise, eine Ereignisaktion ein, um die Auftragsbestätigung Aut
 . Füge eine *Aktion* mit Auswahl *Plugins » Auftragsbestätigung an Galaxus senden* hinzu.
 . *Speichere* die Einstellungen.
 
+== Besonderheiten der Galaxus-Auftragsabwicklung
+
+* Galaxus Retoure-Anfragen generieren neue plentymarkets Aufträge vom Typ *Retoure*. Diese Aufträge werden mit dem Initial-Auftrag verknüpft. Die resultierenden Aufträge müssen separat bearbeitet werden.
+
+* Das Standard-Lieferdatum für Galaxus-Aufträge trägst du im Galaxus Backend im Menü *Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum* ein. Wenn dort kein Lieferdatum gespeichert ist, wird das Lieferdatum so berechnet: +
+[Tag, an dem die Ereignisaktion *Auftragsbestätigung an Galaxus senden* ausgelöst wurde] + 2 Arbeitstage
+
+* Ein Versanddatum wird außerdem nicht gesetzt, wenn die zur Auftragserfüllung benötigte Warenmenge nicht als Netto-Warenbestand vorhanden ist. Das geplante Lieferdatum kann aufgrund der Plugin-Option *Positive Bestände sollen immer exportiert werden...* im Menü *Einrichtung » Märkte » Galaxus » Product Stock Price Tab*  weiteren Änderungen unterliegen.
+
+* In allen Szenarien, in denen nur ein Teil der Bestellung weiterbearbeitet werden soll, muss die importierte Bestellung aufgeteilt werden. Die resultierenden Aufträge müssen separat bearbeitet werden.
+
+* So teilst du einen Auftrag:
+  . Öffne das Menü *Auftrag » Auftrags-ID*.
+  . Teile den Auftrag unter *Auftrag » Übersicht » Zahnrad » (Teilen)*. +
+  → Das Fenster *Auftrag teilen* wird geöffnet.
+  . Wähle die Artikelmengen für den neuen Auftrag. +
+  *_Wichtig:_* Die Versandkosten des ursprünglichen Auftrags werden nicht geändert. +
+  → Das Plugin kann nach dem Aufteilen eines Auftrags, ohne zusätzliche Benutzereingaben, zum korrekten Galaxus Auftrag zurückmelden.
+
+
 == Auftragsdatenaustausch: Szenarien
 
-Folgende Szenarien werden vom Galaxus Plugin unterstützt:
+Folgende Szenarien werden vom Galaxus Plugin unterstützt.
 
-*_Wichtig:_* Alle Szenarien ausser Storno-Anfragen können für komplette und für Teilaufträe ausgeführt werden. Um doppelte Inhalte zu minimieren werden deshalb Szenarien, in denen der ganze Auftrag bearbeitet wird, nicht separat beschrieben.
+*_Wichtig:_* Ausser Storno-Anfragen können alle Szenarien für komplette und für Teilaufträe ausgeführt werden. Um doppelte Inhalte zu minimieren werden deshalb Szenarien, in denen der ganze Auftrag bearbeitet wird, nicht separat beschrieben.
 
 === Importierter Auftrag ist versandbereit
 
-Der importierte Auftrag enthält alle erforderlichen Angaben, ist jetzt Versandbereit:
+Der importierte Auftrag enthält alle erforderlichen Angaben und ist versandbereit:
 
-. Der Auftragsimport wurde Automatisch durch die Ereignisaktion *Auftragsbestätigung an Galaxus melden* zurückgemeldet.
-. Sobald der Auftrag Versandbereit ist, löse die Ereignisaktion *Versandbestätigung an Galaxus melden* aus.
+. Der Auftragsimport wurde automatisch durch die Ereignisaktion *Auftragsbestätigung an Galaxus melden* zurückgemeldet.
+. Wenn der Auftrag versandbereit ist, löse die Ereignisaktion *Versandbestätigung an Galaxus melden* aus.
 
 === Nur ein Teil des importierten Auftrags kann erfüllt werden
 
-Nur ein Teil des importierten Auftrags kann zu diesem Zeitpunkt erfüllt werden. Der Kunde erklärt sich damit Einverstanden, die Hälfte der Bestellung jetzt zu erhalten, die andere Hälfte wird an einem späteren Zeitpunkt versendet:
+Nur ein Teil des importierten Auftrags kann zu diesem Zeitpunkt erfüllt werden. Die Kund:in erklärt sich damit einverstanden, die Hälfte der Bestellung jetzt zu erhalten. Die andere Hälfte wird zu einem späteren Zeitpunkt versendet:
 
-. Öffne das Menü *Auftrag » Auftrags-ID*.
-. Klick auf Auftrag *Teilen*.
-. Wenn der nächste Liefertermin mit dem Kunden vereinbart wurde, gehe zum *Neuen Auftrag » Übersicht » Artikel » Bearbeiten » Lieferdatum*.
-. Trage das Lieferdatum ein.
-. *Speichere* die Einstellungen.
-. Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus, um Galaxus vom neuen Lieferdatum zu informieren.
+. Öffne das Menü *Auftrag » [Auftrags-ID]*.
+. Klick auf *Auftrag teilen*.
+. Wenn der nächste Liefertermin mit der Kund:in vereinbart wurde, gehe zu *[Neuer Auftrag] » Übersicht » Artikel » Bearbeiten » Lieferdatum*.
+. Gib das Lieferdatum ein.
+. Speichere die Einstellungen.
+. Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus, um Galaxus über das neue Lieferdatum zu informieren.
 . Wenn soweit, löse die Ereignisaktion *Versandbestätigung an Galaxus senden* aus.
 
 === Teil der Auftrag enthaltenen Artikel kann nicht erfüllt werden
 
 Du hast festgestellt, dass ein Teil des Auftrags nicht erfüllt werden kann, zum Beispiel weil der Artikel keinen Bestand hat.
 
-. Öffne das Menü *Auftrag » Auftrags-ID*.
-. Klick auf Auftrag *Teilen*.
+. Öffne das Menü *Auftrag » [Auftrags-ID]*.
+. Klick auf *Teilen*.
 . Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus.
-. Löse die Ereignisaktion *Händler-storniert' an Galaxus melden* aus.
-. Galaxus antwortet Automatisch mit einer *Storno-Anfrage*.
+. Löse die Ereignisaktion *'Händler-storniert' an Galaxus melden* aus.
+. Galaxus antwortet automatisch mit einer *Storno-Anfrage*.
 . Die Storno-Anfrage kann *Abgelehnt* oder *Angenommen* werden, indem die Ereignisaktion *Galaxus Storno-Anfrage akzeptiert* oder *Galaxus Storno-Anfrage abgelehnt, mit Begründung* ausgelöst wird.
 
-=== Der Kunde hat eine Teil-Retoure beantragt
+=== Die Kund:in hat eine Teilretoure beantragt
 
-Der Kunde hat beantragt, dass ein Teil seines Auftrags an den Lieferanten zurückgegeben wird.
+Die Kund:in hat beantragt, dass ein Teil ihres Auftrags an dich zurückgegeben wird.
 
-. *Retourenanfrage* wird von Galaxus erhalten.
-. Das System erstellt einen neuen Auftrag vom Typ *Retoure*, der mit dem initialen Auftrag verknüpft ist.
+. Galaxus erhält die *Retourenanfrage*.
+. plentymarkets erstellt einen neuen Auftrag vom Typ *Retoure*, der mit dem initialen Auftrag verknüpft ist.
 . Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus.
 . Löse die Ereignisaktion *Galaxus Retourenanfrage akzeptieren* oder *Galaxus Retourenanfrage ablehnen mit Begründung* aus.
 
-=== Der Kunde hat das Paket abgelehnt
+=== Die Kund:in hat das Paket abgelehnt
 
-Der Kunde hat die Lieferung aus einem ungerechtfertigten Grund nicht akzeptiert, das Paket ist nun zurückgekommen:
+Die Kund:in hat die Lieferung aus einem ungerechtfertigten Grund nicht akzeptiert. Das Paket ist zurückgekommen.
 
-. Öffne den Betroffenen Auftrag.
-. Erstelle einen neuen Auftrag vom Typ: *Retoure*.
+. Öffne den Auftrag.
+. Erstelle einen neuen Auftrag vom Typ *Retoure*.
 	* Öffne das Menü *Auftrag » Übersicht*.
 	* Öffne die Dropdown-Liste *Retoure*.
 	* Klick auf *Anlegen*.
@@ -1258,8 +1259,8 @@ Der Kunde hat die Lieferung aus einem ungerechtfertigten Grund nicht akzeptiert,
 
 *_Hinweis:_*
 
-* Teilstornoanfragen und Bestellungen die einen höheren Status als *[5] In Versandvorbereitung* haben werden automatisch mit der Begründung *Nicht erstattbar* abgelehnt.
-* Der Trigger-Status kann unter *Einrichtung » Märkte » Galaxus » Auftrag Status-Konfiguration* mit einem für Dich relevanten Auftragsstatus angepasst werden.
+* Teilstornoanfragen und Bestellungen mit einem Status höher als *[5] In Versandvorbereitung* werden automatisch mit der Begründung *Nicht erstattbar* abgelehnt.
+* Im Menü *Einrichtung » Märkte » Galaxus » Auftrag Status-Konfiguration* kannst du einen anderen Status eingeben, ab dem solche Anfragen automatisch abgelehnt werden.
 
 [#faq]
 == FAQ und Fehlersuche
