@@ -12,6 +12,22 @@ plentymarkets berechnet die Kennzahl *Nachrichten* ausgehend von der Anzahl der 
 
 Du entscheidest im Bereich xref:business-entscheidungen:nachrichten.adoc#100[Berechnung], ob nach der Anzahl der Nachrichten oder der Summe der Minuten berechnet wird. Wähle zusätzlich xref:business-entscheidungen:nachrichten.adoc#200[Dimensionen] und xref:business-entscheidungen:nachrichten.adoc#300[Filter], um zu konkretisieren, nach welchen Kriterien die Nachrichten berechnet werden sollen.
 
+[#400]
+== Benötigte Rohdaten
+
+:kennzahl: Nachrichten
+
+include::partial$kennzahlen-voraussetzungen-rohdaten.adoc[]
+
+* xref:business-entscheidungen:messages.adoc#[messages]
+
+include::partial$plentyBI-rohdaten-aktivieren.adoc[]
+
+[#500]
+== plentyBI Edition
+
+include::partial$kennzahlen-voraussetzungen-edition.adoc[]
+
 [#100]
 == Berechnung
 
@@ -35,10 +51,9 @@ include::partial$summe-minuten.adoc[]
 === Erstellt am
 
 :kennzahl: Die Kennzahl Nachrichten
-:filtered-data: der Nachrichten
 :das-bedeutet: Bei der Berechnung wird dementsprechend das Datum, an dem die Nachrichten erstellt wurden, einbezogen.
 
-include::partial$erstellt-am.adoc[]
+include::partial$erstellungsdatum.adoc[]
 
 === Erstellungsdatum, Benutzer
 
@@ -57,7 +72,7 @@ include::partial$erstellungsdatum-tag.adoc[]
 === Erstellungsdatum, Tag, Benutzer
 
 :kennzahl: die Kennzahl Nachrichten
-:das-bedeutet: So erkennst du auf einen Blick, wann die Nachrichten erstellt wurden. Differenziert wird zusätzlich nach den Tags, die mit der Nachricht verknüpft sind, sowie dem Benutzer, der die Nachricht erstellt hat.
+:das-bedeutet: So erkennst du auf einen Blick, wann die Nachrichten erstellt wurden. Differenziert wird zusätzlich nach den Tags, die mit der Nachricht verknüpft sind, sowie der Benutzer:in, die die Nachricht erstellt hat.
 
 include::partial$erstellungsdatum-tag-benutzer.adoc[]
 
@@ -66,22 +81,23 @@ include::partial$erstellungsdatum-tag-benutzer.adoc[]
 
 include::partial$filter-einleitung.adoc[]
 
-// Erstellt am
+// Abgeschlossen am
 
-:filtered-data: der Nachrichten
+:filtered-data: die Nachrichten
 
-include::partial$erstellt-am.adoc[]
+
+include::partial$abgeschlossen-am.adoc[]
+
 
 [.collapseBox]
 .Vergleichsoperatoren für diesen Filter
 --
 
-
-:filter-endung: gewählten Terminen (icon:calendar[])
-:filter: gewählten Termine (icon:calendar[])
+:filter-endung: gewählten Terminen
+:filter: gewählten Termine
 :kommas:
 
-[[table-key-figures-operators-created-at]]
+[[table-key-figures-operators-done-at]]
 [cols="1,1,3"]
 |====
 | Vergleichsoperator | Zeichen | Erklärung
@@ -103,23 +119,49 @@ include::partial$kleiner-als.adoc[]
 
 --
 
-// Abgeschlossen am
+// Auftrags-ID
 
-:filtered-data: die Nachrichten
-
-
-include::partial$abgeschlossen-am.adoc[]
-
+include::partial$auftrags-id.adoc[]
 
 [.collapseBox]
 .Vergleichsoperatoren für diesen Filter
 --
 
-:filter-endung: gewählten Terminen (icon:calendar[])
-:filter: gewählten Termine (icon:calendar[])
+:filter-endung: eingegebenen Auftrags-IDs
+:kommas: Verwende Kommas, um mehrere Auftrags-IDs zu trennen.
+
+[[table-key-figures-operators-order-id]]
+[cols="1,1,3"]
+|====
+| Vergleichsoperator | Zeichen | Erklärung
+
+include::partial$ist-gleich.adoc[]
+
+include::partial$ist-nicht-gleich.adoc[]
+
+include::partial$entspricht-einem-dieser-werte.adoc[]
+
+|====
+
+--
+
+
+// Erstellt am
+
+:filtered-data: der Nachrichten
+
+include::partial$erstellt-am.adoc[]
+
+[.collapseBox]
+.Vergleichsoperatoren für diesen Filter
+--
+
+
+:filter-endung: gewählten Terminen
+:filter: gewählten Termine
 :kommas:
 
-[[table-key-figures-operators-done-at]]
+[[table-key-figures-operators-created-at]]
 [cols="1,1,3"]
 |====
 | Vergleichsoperator | Zeichen | Erklärung
@@ -151,8 +193,8 @@ include::partial$geaendert-am.adoc[]
 .Vergleichsoperatoren für diesen Filter
 --
 
-:filter-endung: gewählten Terminen (icon:calendar[])
-:filter: gewählten Termine (icon:calendar[])
+:filter-endung: gewählten Terminen
+:filter: gewählten Termine
 :kommas:
 
 [[table-key-figures-operators-updated-at]]
@@ -187,8 +229,8 @@ include::partial$geloescht-am.adoc[]
 .Vergleichsoperatoren für diesen Filter
 --
 
-:filter-endung: gewählten Terminen (icon:calendar[])
-:filter: gewählten Termine (icon:calendar[])
+:filter-endung: gewählten Terminen
+:filter: gewählten Termine
 :kommas:
 
 [[table-key-figures-operators-deleted-at]]
@@ -207,143 +249,6 @@ include::partial$kleiner-als-oder-gleich.adoc[]
 include::partial$groesser-als.adoc[]
 
 include::partial$kleiner-als.adoc[]
-
-|====
-
---
-
-// Minuten
-
-include::partial$minuten.adoc[]
-
-[.collapseBox]
-.Vergleichsoperatoren für diesen Filter
---
-
-:filter-endung: eingegebenen Minuten
-:filter: eingegebenen Minuten
-:kommas:
-
-[[table-key-figures-operators-minutes]]
-[cols="1,1,3"]
-|====
-| Vergleichsoperator | Zeichen | Erklärung
-
-include::partial$ist-gleich.adoc[]
-
-include::partial$ist-nicht-gleich.adoc[]
-
-include::partial$kleiner-als.adoc[]
-
-include::partial$kleiner-als-oder-gleich.adoc[]
-
-include::partial$groesser-als.adoc[]
-
-include::partial$groesser-als-oder-gleich.adoc[]
-
-|====
-
---
-
-// Kostenpflichtig
-
-include::partial$kostenpflichtig.adoc[]
-
-
-
-// Von Benutzer
-
-include::partial$von-benutzer.adoc[]
-
-[.collapseBox]
-.Vergleichsoperatoren für diesen Filter
---
-
-:filter-endung: gewählten Benutzer:innen
-:unbestimmter-artikel: einem
-:filter: gewählten Benutzer:innen
-:keinem-keiner: keinem
-:kommas:
-
-[[table-key-figures-operators-from-user]]
-[cols="1,1,3"]
-|====
-| Vergleichsoperator | Zeichen | Erklärung
-
-include::partial$ist-gleich.adoc[]
-
-include::partial$ist-nicht-gleich.adoc[]
-
-include::partial$entspricht-einem-dieser-werte.adoc[]
-
-include::partial$entspricht-keinem-dieser-werte.adoc[]
-
-|====
-
---
-
-
-
-// Von E-Mail
-
-include::partial$von-e-mail.adoc[]
-
-[.collapseBox]
-.Vergleichsoperatoren für diesen Filter
---
-
-:filter-endung: eingegebenen E-Mail-Adressen
-:unbestimmter-artikel: einer
-:filter: eingegebenen E-Mail-Adressen
-:keinem-keiner: keiner
-:kommas:
-
-[[table-key-figures-operators-from-email]]
-[cols="1,1,3"]
-|====
-| Vergleichsoperator | Zeichen | Erklärung
-
-include::partial$ist-gleich.adoc[]
-
-include::partial$ist-nicht-gleich.adoc[]
-
-include::partial$entspricht-einem-dieser-werte.adoc[]
-
-include::partial$entspricht-keinem-dieser-werte.adoc[]
-
-|====
-
---
-
-
-
-
-// Von Kontakt-ID
-
-include::partial$von-kontakt-id.adoc[]
-
-[.collapseBox]
-.Vergleichsoperatoren für diesen Filter
---
-
-:filter-endung: eingegebenen Kontakt-IDs
-:unbestimmter-artikel: einer
-:filter: eingegebenen Kontakt-IDs
-:keinem-keiner: keiner
-:kommas: :kommas: Verwende Kommas, um mehrere Kontakt-IDs zu trennen.
-
-[[table-key-figures-operators-from-contact-id]]
-[cols="1,1,3"]
-|====
-| Vergleichsoperator | Zeichen | Erklärung
-
-include::partial$ist-gleich.adoc[]
-
-include::partial$ist-nicht-gleich.adoc[]
-
-include::partial$entspricht-einem-dieser-werte.adoc[]
-
-include::partial$entspricht-keinem-dieser-werte.adoc[]
 
 |====
 
@@ -408,19 +313,23 @@ include::partial$entspricht-einem-dieser-werte.adoc[]
 
 --
 
+// Kostenpflichtig
 
-// Auftrags-ID
+include::partial$kostenpflichtig.adoc[]
 
-include::partial$auftrags-id.adoc[]
+// Minuten
+
+include::partial$minuten.adoc[]
 
 [.collapseBox]
 .Vergleichsoperatoren für diesen Filter
 --
 
-:filter-endung: eingegebenen Auftrags-IDs
-:kommas: Verwende Kommas, um mehrere Auftrags-IDs zu trennen.
+:filter-endung: eingegebenen Minuten
+:filter: eingegebenen Minuten
+:kommas:
 
-[[table-key-figures-operators-order-id]]
+[[table-key-figures-operators-minutes]]
 [cols="1,1,3"]
 |====
 | Vergleichsoperator | Zeichen | Erklärung
@@ -429,7 +338,13 @@ include::partial$ist-gleich.adoc[]
 
 include::partial$ist-nicht-gleich.adoc[]
 
-include::partial$entspricht-einem-dieser-werte.adoc[]
+include::partial$kleiner-als.adoc[]
+
+include::partial$kleiner-als-oder-gleich.adoc[]
+
+include::partial$groesser-als.adoc[]
+
+include::partial$groesser-als-oder-gleich.adoc[]
 
 |====
 
@@ -466,22 +381,98 @@ include::partial$entspricht-keinem-dieser-werte.adoc[]
 
 --
 
+// Von Benutzer
 
-[#400]
-== Benötigte Rohdaten
+include::partial$von-benutzer.adoc[]
 
-:kennzahl: Nachrichten
+[.collapseBox]
+.Vergleichsoperatoren für diesen Filter
+--
 
-include::partial$kennzahlen-voraussetzungen-rohdaten.adoc[]
+:filter-endung: gewählten Benutzer:innen
+:unbestimmter-artikel: einem
+:filter: gewählten Benutzer:innen
+:keinem-keiner: keinem
+:kommas:
 
-* xref:business-entscheidungen:messages.adoc#[messages]
+[[table-key-figures-operators-from-user]]
+[cols="1,1,3"]
+|====
+| Vergleichsoperator | Zeichen | Erklärung
 
-include::partial$plentyBI-rohdaten-aktivieren.adoc[]
+include::partial$ist-gleich.adoc[]
 
-[#500]
-== Edition
+include::partial$ist-nicht-gleich.adoc[]
 
-include::partial$kennzahlen-voraussetzungen-edition.adoc[]
+include::partial$entspricht-einem-dieser-werte.adoc[]
+
+include::partial$entspricht-keinem-dieser-werte.adoc[]
+
+|====
+
+--
+
+// Von E-Mail
+
+include::partial$von-e-mail.adoc[]
+
+[.collapseBox]
+.Vergleichsoperatoren für diesen Filter
+--
+
+:filter-endung: eingegebenen E-Mail-Adressen
+:unbestimmter-artikel: einer
+:filter: eingegebenen E-Mail-Adressen
+:keinem-keiner: keiner
+:kommas:
+
+[[table-key-figures-operators-from-email]]
+[cols="1,1,3"]
+|====
+| Vergleichsoperator | Zeichen | Erklärung
+
+include::partial$ist-gleich.adoc[]
+
+include::partial$ist-nicht-gleich.adoc[]
+
+include::partial$entspricht-einem-dieser-werte.adoc[]
+
+include::partial$entspricht-keinem-dieser-werte.adoc[]
+
+|====
+
+--
+
+// Von Kontakt-ID
+
+include::partial$von-kontakt-id.adoc[]
+
+[.collapseBox]
+.Vergleichsoperatoren für diesen Filter
+--
+
+:filter-endung: eingegebenen Kontakt-IDs
+:unbestimmter-artikel: einer
+:filter: eingegebenen Kontakt-IDs
+:keinem-keiner: keiner
+:kommas: :kommas: Verwende Kommas, um mehrere Kontakt-IDs zu trennen.
+
+[[table-key-figures-operators-from-contact-id]]
+[cols="1,1,3"]
+|====
+| Vergleichsoperator | Zeichen | Erklärung
+
+include::partial$ist-gleich.adoc[]
+
+include::partial$ist-nicht-gleich.adoc[]
+
+include::partial$entspricht-einem-dieser-werte.adoc[]
+
+include::partial$entspricht-keinem-dieser-werte.adoc[]
+
+|====
+
+--
 
 ////
 [#600]
