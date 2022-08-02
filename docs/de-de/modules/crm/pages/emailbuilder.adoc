@@ -923,6 +923,7 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 ** <<#variablen-auftrag-rechnungsadresse, Rechnungsadresse>>
 ** <<#variablen-auftrag-auftragspositionen, Auftragspositionen (nur für Artikellisten-Widget)>>
 ** <<#variablen-auftrag-versand, Versand>>
+** <<#variablen-auftrag-abonnement, Abonnement>>
 
 * <<#variablen-kontakt-allgemein, Kontakt>>
 
@@ -934,6 +935,8 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 * <<#variablen-global, Global>>
 
 * <<#variablen-newsletter, Newsletter>>
+
+* <<#variablen-ticket, Ticket>>
 
 [#variablen-auftrag]
 ==== Variablen: Auftrag allgemein
@@ -1585,8 +1588,46 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedShipping.providerId`
 
 | `Tracking-URL`
-|Dient zur Sendungsverfolgung. Die xref:fulfillment:versand-vorbereiten.adoc#840[Tracking-URL] des Versanddienstleisters wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert.
+|Dient zur Sendungsverfolgung. Die xref:fulfillment:versand-vorbereiten.adoc#840[Tracking-URL] des Versanddienstleisters wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert. +
+*_Hinweis:_* Schau auch in unser xref:crm:praxisbeispiel-tracking-url-senden.adoc#[Praxisbeispiel zu diesem Thema]. Dort wird beschrieben, welche Einstellungen du vornehmen musst, um die Tracking-URL an deine Kund:innen zu senden.
 | `order.formattedShipping.trackingURL`
+
+|====
+
+[#variablen-auftrag-abonnement]
+==== Variablen: Auftrag / Abonnement
+
+[[table-variables-order-subscription]]
+.Variablen in der Unterkategorie *Auftrag / Abonnement*
+[cols="2,4,3"]
+|====
+|Name der Variable |Erläuterung |Twig expression
+
+| `Abonnement-ID`
+|ID des Abonnements. Wird automatisch vom System vergeben und kann _nicht_ geändert werden.
+| `order.formattedSubscription.id`
+
+| `Startdatum des Abonnements`
+|Beginn des Abonnements.
+| `order.formattedSubscription.startDate`
+
+| `Enddatum des Abonnements`
+|Ende des Abonnements.
+| `order.formattedSubscription.endDate`
+
+| `Abonnement: Anzahl der Ausführungen`
+|Anzahl der Aufträge, die basierend auf einem Abonnement, angelegt wurde. +
+*_Beispiel:_* Wenn das Abonnement im Mai 2021 mit einem Intervall von 3 Monaten gestartet hat, wurden bis Mai 2022 4 Aufträge angelegt. In diesem Fall würde für diese Variable der Wert `4` in der E-Mail-Vorlage ausgegeben werden.
+| `order.formattedSubscription.numberOfExecutions`
+
+| `Abonnementintervall`
+|Intervall des Abonnements wie im Menü *Einrichtung » Aufträge » Abonnement* festgelegt. Das Intervall legt fest, in welchen Zeitabständen Artikel an Kund:innen versendet werden. + 
+Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
+| `order.formattedSubscription.interval`
+
+| `Gesamtbetrag des Abonnements`
+|
+| `order.formattedSubscription.totalAmount \| number_format(2, '.', ',')`
 
 |====
 
@@ -2029,6 +2070,59 @@ Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellung
 | `URL zur Bestätigung des Newsletter-Abonnements`
 |Gibt die URL zum Bestätigen des xref:crm:newsletter-versenden.adoc#[Newsletter-Abonnements] aus.
 | `newsletter.formattedConfirmUrl`
+
+|====
+
+[#variablen-ticket]
+==== Variablen: Ticket
+
+[[table-variables-ticket]]
+.Variablen in der Kategorie *Ticket*
+[cols="2,5,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression
+
+| `Ticket Backend-URL`
+|Verlinkt zum Ticket im Menü xref:crm:ticketsystem-nutzen.adoc#[CRM » Ticketsystem].
+| `ticket.formattedUrl.backendUrl`
+
+| `Ticket: Nachrichtenhistorie`
+|Gibt den zuletzt gespeicherten Text im Ticket aus. Das ist entweder der Text eines Kommentars oder einer Nachricht.
+| `ticket.formattedMessage.history`
+
+| `Ticket-ID`
+|Gibt die ID des Tickets aus, aus dem die E-Mail versendet wurde.
+| `ticket.id`
+
+| `Ticket: Letzter Kommentar`
+|Gibt den Text des letzten xref:crm:ticketsystem-nutzen.adoc#2500[Kommentars] aus. +
+*_Hinweis:_* Kommentare dienen der internen Kommunikation und sind für deine Kund:innen _nicht_ sichtbar.
+| `ticket.formattedMessage.lastComment`
+
+| `Ticket: Letzte Nachricht`
+|Gibt den Text der letzten xref:crm:ticketsystem-nutzen.adoc#2400[Nachricht] aus.
+| `ticket.formattedMessage.lastMessage`
+
+| `Ticket-Priorität`
+|Gibt die Priorität des Tickets als ID aus. Die Werte der Sterne werden aufsteigend mit Zahlen von `0` (grauer Stern, niedrigste Priorität) bis `5` (2 gelbe Sterne, höchste Priorität) angezeigt.
+| `ticket.priorityId`
+
+| `Ticket-Status`
+|Gibt den Status des Tickets aus.
+| `ticket.formattedStatus`
+
+| `Ticket-Tags`
+|Gibt die Tags des Tickets aus.
+| `ticket.formattedTags`
+
+| `Ticket-Titel`
+|Gibt den Titel des Tickets aus.
+| `ticket.title`
+
+| `Ticket-URL`
+|Verlinkt zum Ticket im Bereich *Mein Konto* des Kunden. Kund:innen können dann dort die Nachricht lesen und direkt eine Antwortnachricht eingeben und versenden. +
+Beachte dazu das Kapitel xref:crm:ticketsystem-nutzen.adoc#5500[Tickets im Mein Konto-Bereich erstellen] auf der Handbuchseite xref:crm:ticketsystem-nutzen.adoc#[Ticketsystem].
+| `ticket.formattedUrl.url`
 
 |====
 
