@@ -28,7 +28,7 @@ Import erstellen:
 
 [[tabelle-sync-erstellen]]
 .Import erstellen
-[cols="1,3a"]
+[cols="1,4a"]
 |===
 |Einstellung |Erläuterung
 
@@ -106,7 +106,7 @@ Alternativ kann das Trennzeichen manuell gewählt werden. Mögliche Trennzeichen
 2+^| *Quelle*
 
 | *Quelle*
-| *Manueller Upload* oder *HTTPS* wählen. +
+| *Manueller Upload*, *FTP*, *HTTPS* oder *SFTP* wählen. +
 Je nach gewählter Option werden weitere Einstellungen eingeblendet.
 
 [cols="1,3a"]
@@ -121,9 +121,16 @@ Je nach gewählter Option werden weitere Einstellungen eingeblendet.
 *_Hinweis:_* Standardmäßig ist die Option *Datei löschen, nachdem der Import ausgeführt wurde* aktiviert. Die Datei wird also automatisch vom Webspace gelöscht, nachdem die Daten importiert wurden. Wenn die Datei im Webspace gespeichert bleiben soll, deaktiviere diese Option. *_Das Speichern der Datei auf dem Webspace ist kostenpflichtig._*
 
 ! *FTP*
-! *_Ab 21. Juli 2022 werden plentymarkets FTP-Server nicht mehr unterstützt._* +
+!  *_Wichtig:_* plentymarkets stellt keinen FTP-Server mehr bereit. Nutze diese Option also nur, wenn die Importdatei auf einem externen FTP-Server gespeichert ist.
 
-Eigene FTP-Server kannst du aber weiterhin nutzen. Nutze diese Option deshalb nur, wenn du einen eigenen FTP-Server verwendest.
+* *Host* (Pflichtfeld) = Host des FTP-Servers eingeben.
+* *Port* = Port des FTP-Servers. Wenn kein Port eingetragen ist, wird der Standard-Port 22 verwendet.
+* *Benutzername (Pflichtfeld)* = Benutzer:in für FTP-Zugang eingeben.
+* *Passwort (Pflichtfeld)* = Passwort für FTP-Zugang eingeben.
+* *Dateiname* = Pfad und Name der Datei eingeben, aus der Daten importiert werden sollen. Der Dateiname muss auf .csv oder .txt enden. +
+  *_Hinweis:_* Im Feld *Dateiname* können Wildcards verwendet werden. Ersetze zum Beispiel einen Teil des Dateinamens durch ein Sternchen (*).
+Verwende Wildcards aber nur in Kombination mit der Option *Datei nach erfolgreichem Import in Archiv verschieben*.
+* *Datei nach erfolgreichem Import in Archiv verschieben* = Wenn diese Option aktiv ist, wird die Importdatei nach dem Import automatisch in einen neuen Ordner *Archiv* auf dem FTP-Verzeichnis verschoben.
 
 ! *HTTPS*
 !
@@ -136,9 +143,17 @@ Eigene FTP-Server kannst du aber weiterhin nutzen. Nutze diese Option deshalb nu
 . Wenn du *HTTP-Authentifizierung* gewählt hast, gib *Benutzername* und *Passwort* des Servers ein.
 
 ! *SFTP*
-! *_Ab 21. Juli 2022 werden plentymarkets FTP-Server nicht mehr unterstützt._* +
+! *_Wichtig:_* plentymarkets stellt keinen FTP-Server mehr bereit. Nutze diese Option also nur, wenn die Importdatei auf einem externen FTP-Server gespeichert ist.
 
-Eigene FTP-Server kannst du aber weiterhin nutzen. Nutze diese Option deshalb nur, wenn du einen eigenen FTP-Server verwendest.
+* *Host* (Pflichtfeld) = Host des FTP-Servers eingeben.
+* *Port* (Pflichtfeld) = Port des FTP-Servers. Wenn kein Port eingetragen ist, wird der Standard-Port 22 verwendet.
+* *Benutzername* (Pflichtfeld) = Benutzer:in für FTP-Zugang eingeben.
+* *Passwort* (Pflichtfeld) = Passwort für FTP-Zugang eingeben.
+* *Dateiname* = Pfad und Name der Datei eingeben, aus der Daten importiert werden sollen. Der Dateiname muss auf .csv oder .txt enden. +
+  *_Hinweis:_* Im Feld *Dateiname* können Wildcards verwendet werden. Ersetze zum Beispiel einen Teil des Dateinamens durch ein Sternchen (*).
+Verwende Wildcards aber nur in Kombination mit der Option *Datei nach erfolgreichem Import in Archiv verschieben*.
+* *Datei nach erfolgreichem Import in Archiv verschieben* = Wenn diese Option aktiv ist, wird die Importdatei nach dem Import automatisch in einen neuen Ordner *Archiv* auf dem FTP-Verzeichnis verschoben.
+
 !===
 
 |===
@@ -246,7 +261,7 @@ image::daten:import-mapping-colour.png[]
 [#1710]
 === Abarbeitung von Jobs in der Queue
 
-Die Queue sorgt dafür, dass auch große Datenmengen importiert werden können. Noch vor dem Import wird die Importdatei in Pakete zerlegt. Jedes Paket entspricht einem job. Ein Job besteht aus 750 Zeilen einer CSV- oder TXT-Datei. Aber auch Importdateien mit weniger als 750 Zeilen werden zu einem Job. Wenn ein Import gestartet wird, wird die Datei in Jobs aufgeteilt und in eine Warteschlange eingereiht. In der Warteschlange werden neue Jobs ständig abgerufen und die Importe werden abgearbeitet. Dabei gibt es zwei verschiedene Status. Der Status *Offene Jobs* bedeutet, dass sich noch Jobs in der Warteschlange befinden. *Abgeschlossene Jobs* wurden bereits bearbeitet und die Daten importiert.
+Die Queue sorgt dafür, dass auch große Datenmengen importiert werden können. Noch vor dem Import wird die Importdatei in Pakete zerlegt. Jedes Paket entspricht einem Job. Ein Job besteht aus 750 Zeilen einer CSV- oder TXT-Datei. Aber auch Importdateien mit weniger als 750 Zeilen werden zu einem Job. Wenn ein Import gestartet wird, wird die Datei in Jobs aufgeteilt und in eine Warteschlange eingereiht. In der Warteschlange werden neue Jobs ständig abgerufen und die Importe werden abgearbeitet. Dabei gibt es zwei verschiedene Status. Der Status *Offene Jobs* bedeutet, dass sich noch Jobs in der Warteschlange befinden. *Abgeschlossene Jobs* wurden bereits bearbeitet und die Daten importiert.
 
 [#create-mappings]
 === Zuordnung erstellen
