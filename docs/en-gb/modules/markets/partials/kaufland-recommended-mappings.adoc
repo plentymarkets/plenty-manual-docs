@@ -1,0 +1,154 @@
+[discrete]
+===== Different data fields in the Kaufland product categories
+
+You have to create a separate catalogue for each Kaufland product category that you want to offer your items in. +
+Catalogues for different product categories contain different data fields. This is because different item data has to be specified in each product category. For example, you export different item data in a catalogue for *TVs* than in a catalogue for *Cameras*. +
+However, some data fields are the same in each category. Only the recommended mappings for those data fields are described here.
+
+* Further information about the mandatory fields for Kaufland can be found link:https://www.kaufland.de/product-data/en/mandatory-attributes/[here^].
+
+* A list of mandatory fields for the different Kaufland product categories can be found link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/Kaufland_mandatory-attributes.xlsx[here^].
+
+[[table-recommended-mappings]]
+[cols="2,1,4a"]
+|===
+|Marketplace data field |Mandatory? |Recommended plentymarkets mapping
+
+3+| Offer data +
+*_Note:_* The data specified here are required for creating offers on Kaufland and are the same for each product category. Offers are created for products which already exist on Kaufland.
+
+| Category
+| yes
+| The Kaufland category. +
+This data field is assigned automatically.
+
+| SKU
+| yes
+| This data field is assigned automatically.
+
+| SKU base
+| yes
+| This data field is assigned automatically.
+
+| SKU status
+| yes
+| This data field is assigned automatically.
+
+| Condition
+| yes
+a| Indicates the condition of the variation. This data field contains a complex mapping. This means that you can select from different values of the marketplace data field. In this case, the values are the Kaufland item statuses. The values are then assigned to a plentymarkets data field. +
+For *Condition*, you first select the Kaufland condition and the assign the appropriate plentymarkets condition. +
+
+recommended mapping:
+
+* *Item » Condition ID* +
+
+*_Note:_* Enter a plentymarkets xref:data:elasticSync-item.adoc#70[condition ID] in the *Comparative value* field.
+
+_or_
+
+* Property of the type *Selection*
+
+| Sales price
+| yes
+| * *Sales price »* [Sales price for Kaufland]
+
+| Minimum price
+| yes
+| * *Sales price »* [Sales price for Kaufland] +
+*_Note:_* The sales price linked here has to be lower than the sales price for the _listing_price_ to use repricing (Tiefpreisautomatik) for Kaufland. +
+If other sellers offer the same product, your price is automatically reduced. Your price plus shipping is then always once cent cheaper than the prices of your competitors.
+
+| Stock
+| yes
+a| The stock of the variation.
+
+* *Stock »* [Select 1 or more warehouses]
+
+*_Tip:_* Use the data fields in the group *Virtual warehouse* to export the stock quantity sum of all sales warehouses.
+
+| Additional description of condition
+| no
+a| Additional information about the condition of the variation (for used items).
+
+* Property of the type *Text*
+
+| Processing time
+| yes
+a| The processing time in days.
+
+* Property of the type *Int* (whole number)
+
+3+a| Shipping profiles +
+*_Note:_* In the Kaufland catalogues, the mappings for *shipping profiles* are shown for every Kaufland account. Make sure that you map the data fields for the correct Kaufland account, i.e. the Kaufland catalogue for which you want to use this catalogue. +
+The name and the ID of the Kaufland account are displayed above the mappings: *Account name (ID: account ID)*.
+
+image::markets:kaufland-kontoname-versandprofil.png[]
+
+| Kaufland shipping group ID
+| yes
+a| Here you assign Kaufland shipping groups to your shipping profiles in plentymarkets. This data field contains a complex mapping. This means that you can select from different values of the marketplace data field. The values are then assigned to a plentymarkets data field. For *Kaufland shipping group ID*, first select the Kaufland shipping group and then assign the appropriate plentymarkets shipping profile. +
+*_Note:_* The ID of the Kaufland shipping group is shown here. +
+
+recommended mapping:
+
+* *Shipping profile »* [Select shipping profile]
+
+3+a| Warehouse +
+*_Note:_* In the Kaufland catalogues, the mappings for *warehouses* are shown for every Kaufland account. Make sure that you map the data fields for the correct Kaufland account, i.e. the Kaufland account for which you want to use this catalogue. +
+The name and the ID of the Kaufland account are displayed above the mappings: *Account name (ID: account ID)*.
+
+image::markets:kaufland-kontoname-lager.png[]
+
+| Kaufland warehouse ID
+| yes
+| Here you map Kaufland warehouses. This data field contains a complex mapping. This means that you can select from different values of the marketplace data field. In this case, the values are your Kaufland warehouses. The values are then assigned to a plentymarkets data field. In this case, you have to use a property. +
+For *Kaufland warehouse ID*, first select the Kaufland warehouse and then assign a property. +
+*_Note:_* The ID of the Kaufland warehouse is shown here. +
+
+recommended mapping:
+
+* Property of the type *Selection* +
+*_Tip:_* For example, you can use the names of your Kaufland warehouses as selection values for the property.
+
+3+| Product data +
+*_Note:_* This data are required to create new products on Kaufland. The data which can be linked here differ in each product category.
+
+| EAN
+| yes
+| * *Barcode* » [Select barcode of the type GTIN]
+
+| Title
+| yes
+| * *Item text » Name 1*, language depending on the selected Kaufland country platform
+
+_or_
+
+* *Item text » Name 2*, language depending on the selected Kaufland country platform
+
+_or_
+
+* *Item text » Name 3*, language depending on the selected Kaufland country platform
+
+| Description
+| yes
+| * *Item text » Item text*, language depending on the selected Kaufland country platform
+
+| Image
+| yes
+a| * *Image » Variation images » Single image*, Image information *Full image URL*
+
+_or_
+
+for several images:
+
+* *Image » Variation images » Image list*, image information *Full image URL*
+
+| Category
+| yes
+| * *Default category » Category ID*
+
+| Manufacturer
+| yes
+| * *Item » Manufacturer name*
+|===

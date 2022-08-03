@@ -38,7 +38,8 @@ For each marketplace data field, you have the following mapping options. These m
   * *1:1 mapping with fallback data fields*
   * *1:n mapping*
   * *Own value mapping*
-. Save (terra:save[]) the catalogue. +
+  * *Mapping with mathematical calculations*
+. Save (terra:save[role="darkGrey"]) the catalogue. +
 → The mappings are saved.
 
 [.collapseBox]
@@ -78,19 +79,21 @@ image::markets:gif-catalogue-mapping-simple-en.gif[]
 --
 
 //tag::complex-mappings[]
-Like with the simple 1:1 mappings, you map a plentymarkets setting or property to a marketplace data field. Complex mappings are necessary whenever a marketplace data field has more than one possible value. Instead of mapping data fields, for complex mappings you instead map the values of these data fields. For example, you cannot simply map the plentymarkets data field *Shipping profile* to the marketplace data field *Shipping method*. Why? The market cannot know which of your shipping profiles in plentymarkets corresponds to which of their shipping methods.
+Like with the simple 1:1 mappings, you map a plentymarkets setting or property to a marketplace data field. Complex mappings are necessary whenever a marketplace data field has more than one possible value. Instead of mapping data fields, for complex mappings you map individual values of these data fields. For example, you cannot simply map the plentymarkets data field *Shipping profile* to the marketplace data field *Shipping method*. Why? The market cannot know which of your shipping profiles in plentymarkets corresponds to which of their shipping methods.
 
 IMPORTANT: Do not enter own values for complex mappings. All values that you enter must be saved for the variations, either in a setting or as a property value. This also applies if the value *Comparative value* is shown. You still need to enter exactly the value of the setting or property that you mapped.
 
-Examples for complex 1:1 mappings:
-
-* Categories
-* Brands
-* Shipping setting
+In complex mappings, the value of the market is always exported. Only when you map an own value, the own value that you enter is exported.
 
 You can recognise complex mappings from the field that is shown below the name of the marketplace data field. Click on the field to show the values available for the marketplace data field.
 
 image::markets:catalogue-complex-mappings.png[]
+
+Examples for complex 1:1 mappings are:
+
+* Categories
+* Brands
+* Shipping setting
 
 *_Important:_* For complex mappings, do not map own values or properties of the type *None*.
 
@@ -110,7 +113,7 @@ Creating a complex 1:1:n mapping:
 → The plentymarkets data fields of the group are shown.
 . Click on the plentymarkets data field for which you want to map values. +
 *_Important:_* Do not map own values or properties of the type *None*. +
-→ Your next steps depend on the plentymarkets data field you selected:
+. Your next steps depend on the plentymarkets data field you selected:
 
 * *_Alternative 1:_* The available values for the plentymarkets data value are shown on the left. +
   ** Next to the value you want to select, click on the plus. +
@@ -121,7 +124,9 @@ Creating a complex 1:1:n mapping:
   ** Click on *Confirm*.
 * *_Alternative 3:_* The plentymarkets data field is inserted and a drop-down list is shown.
   ** Select a value from the drop-down list.
-  ** Click on *Confirm*.
+  ** Click on *Confirm*. +
+→ The value of the marketplace data field is exported, not the value of the plentymarkets data field. +
+*_Exception:_* Only when you map an own value, the own value that you enter is exported.
 
 *_Example:_* Delivery time in days for Otto Market
 
@@ -133,16 +138,46 @@ image::markets:gif-catalogue-mapping-complex-en.gif[]
 --
 
 [.collapseBox]
-.*1:1 mapping with fallback data fields* 1 marketplace data field, 1 plentymarkets data field with alternatives
+.*1:1 mapping with fallback data fields:* 1 marketplace data field, 1 plentymarkets data field with alternative(s)
 --
 
-In a 1:1 mapping with one or more fallback data fields, you map a plentymarkets data field to the marketplace data field. In addition, you specify one or more fallback data fields. This ensures that the system keeps looking if the first plentymarkets data field is empty or contains an invalid value.
+In a 1:1 mapping with one or more fallback data fields, you map a plentymarkets data field to the marketplace data field. In addition, you specify one or more fallback data fields. This ensures that the system keeps looking if the first plentymarkets data field is missing or empty.
 
 So this mapping specifies:
 
-* I want to fill this marketplace data field with the data from this plentymarkets setting.
-* If that data field is empty or invalid for a variation, the first fallback data field is checked and the value of that fallback data field is exported instead.
-* If the first fallback data field is also empty or invalid for a variation, the value of the second fallback data field is exported and so on.
+* I want to fill the marketplace data field with the data from the selected plentymarkets setting.
+* If that data field is missing or empty for a variation, the first fallback data field is checked. The value of that fallback data field is exported instead.
+* If the first fallback data field is also missing or empty for the variation, the second fallback data field is checked. If a value is found, the value of the second fallback data field is exported for the variation etc.
+
+Two separate fallback conditions are available:
+
+[cols="1,4a"]
+|===
+
+| *Null (Standard)*
+| The fallback data field is used if the data field above is mapped in the catalogue but not linked to the variation.
+
+The condition "Null" is useful when you want to map fallback data fields for the following types of plentymarkets data fields:
+
+* SKU
+* Barcodes
+* Sales prices
+* Properties
+
+*_Important:_* When you add a fallback data field, the fallback condition "null" is selected automatically. To apply the fallback condition "leer", you need to change the default setting.
+
+| *Empty*
+| The fallback data field is used if the data field above is mapped in the catalogue and linked to the variation, but is empty.
+
+The condition "Empty" is useful when you want to map fallback data fields for the following type of plentymarkets data fields:
+
+* plentymarkets data fields that are available for variations by default
+
+*_Important:_* When you add a fallback data field, the fallback condition "null" is selected automatically. To apply the fallback condition "leer", you need to change the default setting.
+
+|===
+
+*_Note:_* Even if you assign one or more fallback data fields, the value of only one of those fields is exported. For each variation, the mapped plentymarkets data fields are checked in the order in which you mapped them. This means that if the first data field does not provide a value for a variation, the first fallback data field is exported etc.
 
 [.instruction]
 Creating a 1:1 mapping with fallback data fields:
@@ -155,13 +190,25 @@ Creating a 1:1 mapping with fallback data fields:
 . Click on the plus to the right of the plentymarkets data field you want to select. +
 → The plentymarkets data field is added to the right.
 . In the list of plentymarkets data fields, click on the plus icon next to the plentymarkets data field that you want to map. +
-→ The fallback data field is exported when the first data field does not exist or is empty. +
-*_Note:_* Even if you assign one or more fallback data fields, the value of only one of those fields is exported. For each variation, the mapped plentymarkets data fields are checked in the order in which you mapped them. This means that if the first data field does not provide a value for a variation, the first fallback data field is exported etc.
-. Click on *Confirm*.
+→ The fallback data field is added with the fallback condition "null".
+. *_Alternative 1:_* To add the fallback data field with the fallback condition "null":
+.. Click on *Confirm*. +
+→ The fallback data field is exported if the data field above is not linked to the variation.
+. *_Alternative 2:_* To add the fallback data field with the fallback condition "empty":
+.. To the left of the fallback data field, click on the cog (icon:cog[role="darkGrey"]). +
+→ The window *Data column settings* is shown.
+.. For the setting *Fallback condition*, select the option *Empty*.
+.. Click on *Save*. +
+→ The fallback data field is added with the fallback condition "empty".
+.. Click on *Confirm*. +
+→ The fallback data field is exported if the data field above is empty for the variation.
 
-*_Example:_* Fallback data field for SKU for Otto Market
+[.instruction]
+_Example:_ Fallback data field for SKU for Otto Market
 
-This gif shows you how to map the plentymarkets data field *SKU* and the fallback data field *Variation ID* to the marketplace data field *SKU* for Otto Market:
+This GIF shows you the mapping for the OTTO Market marketplace data field *SKU*. The plentymarkets data field *SKU* is mapped to this marketplace data field. The plentymarkets data field *Variation ID* is mapped as the fallback data field. The fallback condition "null" is applied automatically.
+
+*_Result:_* The fallback data field *Variation ID* is exported if the data field *SKU* is not linked to the variation.
 
 image::markets:gif-catalogue-mapping-fallback-en.gif[]
 //end::fallback-mappings-config[]
@@ -195,7 +242,7 @@ Creating a 1:n mapping:
 . To the very right of the row, click on *Settings* (icon:cog[]).
 . Select a separator from the drop-down list *Separator* or add a custom separator.
 . Click on *Save*.
-. Save (terra:save[]) the catalogue. +
+. Save (terra:save[role="darkGrey"]) the catalogue. +
 → The mappings are saved. +
 → During the export, the content of the plentymarkets data fields is combined and exported as one field.
 //end::1-to-n-mappings-config[]
@@ -211,7 +258,7 @@ You are sure that you want to export the same value for all variations of a cata
 
 So this mapping specifies:
 
-* For this marketplace data field, I want to export the value that I entered in the field *Own value* for _all_ variations of this catalogue.
+* For this marketplace data field, I want to export the value that I entered in the field *Own value* for _all_ variations of this catalogue. The value you enter is always exported. The value overwrites the market value also in complex mappings where usually the value of the market is exported. As such, make sure you enter an own value that the market accepts for this marketplace data field.
 
 [.instruction]
 Creating an own value mapping:
@@ -261,7 +308,7 @@ Recalculating numerical values:
 *_Tip:_* Use the search function. This helps you to find data fields quickly.
 . *_Optional:_* If the symbol material:more_vert[] is shown in the data field, select the correct assignment for the data field. +
 *_Tip:_* A number tells you how many assignments are necessary for the data field.
-    .. Click on the symbol material:more_vert[]. +
+    .. Click on the icon material:more_vert[]. +
     .. In the window shown, select the assignments from the drop-down list.
     .. *Save* the settings.
 . Enter numbers and mathematical operators with the on-screen calculator or the keyboard.
@@ -270,3 +317,30 @@ Recalculating numerical values:
 → The calculation will be carried out in the next export.
 //end::formula-config[]
 --
+
+ifdef::own-data-fields[]
+[.collapseBox]
+.Assigning own data fields: 1 own data field, 1 plentymarkets data field
+--
+
+You want to transfer item data that do not have a designated data field in the market’s catalogue? Then you have the possibility to create own data fields and assign them to item data saved in plentymarkets.
+
+*_Note:_* Own data fields are not transferred automatically to the market. During the export, the market decides whether the data field should be included in the product catalogue.
+
+[.instruction]
+Creating an own data field:
+
+. In the navigation, click on *Own data fields* (terra:order_return_create_edit[]). +
+→ To the left, the list of available plentymarkets data fields are shown in groups.
+. Click on the plentymarkets data field that you want to assign. +
+→ *_Tip:_* It is possible to assign more than one data field. The data fields assigned here will then be combined during the export.
+. Enter a name for the own data field into the *Export key* field. +
+→ The data field will be exported to the market with this name.
+. *_Optional:_* Enter a value for *Comparative value*. +
+→ Comparative values can be entered for most, but not for all plentymarkets data fields. Comparative values are only required in specific cases. However, in most cases, you can leave the field empty. +
+*_Example:_* If you map a property *Brand*, you could for example enter the brand name as *Comparative value*.
+. **_Optional:_* Select a fallback data field, if desired. +
+→ The fallback data field is exported when the first data field does not exist or is empty.
+. Save (terra:save[]) the settings after you have created your own data fields.
+--
+endif::own-data-fields[]

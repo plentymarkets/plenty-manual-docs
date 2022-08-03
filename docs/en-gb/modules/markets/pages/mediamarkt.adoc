@@ -5,28 +5,59 @@
 
 :mediamarkt:
 :market: MediaMarkt
+:plugin-name: MediaMarkt
+:plugin-link: https://marketplace.plentymarkets.com/mediamarkt_6918
 :type-of-market: marketplace
 :registration-url: https://www.mediamarkt.de/de/about-us/marketplace
 :marketplace-url: https://marketplace.plentymarkets.com/en/mediamarkt_6918
 :assistant-name: MediaMarkt
-
-
-On this page you will learn how to set up the interface to {market} in plentymarkets. MediaMarkt offers an extensive product selection, including technology, electronics, and multi-media products.
-
-include::partial$mirakl-first-steps.adoc[]
-
 :valid-values-zip: https://drive.google.com/file/d/1a_QY4VOIuC2-qYFbNkCMUX-9jerGDAOmYP72907Xt/view?usp=sharing
 :market-backend-shipping: Platform Settings » Shipping
 :mirakl-menu-shipping: Platform Settings » Shipping
 :referrer-name: pass:quotes[referrer *MediaMarkt*]
+:category-example: VIDEO CASSETTES
+
+MediaMarkt offers an extensive product selection, including technology, electronics, and multi-media products.
+
+On this page you will learn how to set up the interface to {market} in plentymarkets.
+
+include::partial$mirakl-first-steps.adoc[]
+
+[#order-process]
+== Order processing workflow
+
+Orders from MediaMarkt are automatically imported in your plentymarkets system every 15 minutes.
+
+This is how orders are processed at MediaMarkt:
+
+* The seller accepts the order via an event procedure.
+* The payment is collected by MediaMarkt.
+* With the payment confirmation, the invoice and delivery address on the order are updated in your plentymarkets system.
+* Via an event procedure, the shipping service provider as well as the package number are updated on the order in Mirakl.
+* Via an event procedure, an invoice is sent to MediaMarkt.
+
+[#general-information]
+== Frequency of data exchange
+
+include::partial$mirakl-data-exchange-table.adoc[]
 
 [#api-key]
 == Generating the API key
 
 include::partial$mirakl-api-key.adoc[]
 
+[#300]
+== Setting up the market in plentymarkets
+
+You have installed the plugins *Mirakl Connector* and *Mediamarkt* and generated an API key? Great. Now, set up the market in plentymarkets.
+
+[#complete-market-assistant]
+=== Completing the setup assistant
+
+include::partial$mirakl-market-assistant.adoc[]
+
 [#order-referrer]
-== Activating the order referrer
+=== Activating an order referrer
 
 :market: {market}
 :referrer: {market}
@@ -36,29 +67,22 @@ include::partial$mirakl-api-key.adoc[]
 include::partial$activate-referrer.adoc[]
 
 [#sales-price]
-== Defining a sales price
+=== Defining a sales price
 
 :referrer-price: {market}
 :mirakl-sales-price:
 
 include::partial$define-sales-price.adoc[]
 
+[#volume-discount]
+=== _Optional:_ Defining graduated prices
+
+include::partial$mirakl-volume-discounts.adoc[]
+
 [#create-properties]
 == Creating properties
 
 include::partial$mirakl-creating-properties.adoc[]
-
-[#complete-market-assistant]
-== Completing the {market} assistant
-
-include::partial$mirakl-market-assistant.adoc[]
-
-:category-example: VIDEO CASSETTES
-
-[#general-information]
-== About automatic data exchange
-
-include::partial$mirakl-data-exchange-table.adoc[]
 
 [#item-export-catalogue]
 == Setting up the item export
@@ -81,42 +105,27 @@ include::partial$catalogue-assistant-config.adoc[]
 [#map-data-fields]
 === Mapping data fields in the catalogue
 
-After you have created a catalogue, map the market's data fields to item data saved in plentymarkets. Check the documentation of the sales channel to find out what data the market expects for the individual data fields.
+Now, map the data fields in the catalogue to the item data saved in plentymarkets.
 
-[TIP]
-.Using properties
-====
-Use xref:item:managing-items.adoc#500[properties] to export values for marketplace data fields that have no corresponding field in plentymarkets.
-====
+Check the documentation of the sales channel to find out what data the market expects for the individual data fields.
 
 include::partial$catalogue-mapping.adoc[]
 
-[IMPORTANT]
-====
-Do not map plentymarkets data fields to the following marketplace data fields for the market {market}:
+[#recommended-mappings]
+=== Recommendations for data field mappings
 
-* Main Product Image
-* Additional Product Image 1
-* Additional Product Image 2
-
-You can ignore the warning shown when you save the mapping.
-
-_*Note:*_ Do not map any attributes “xy (ES)” when creating items. The items will be exported to MIRAKL anyway.
-====
-
+include::partial$recommendation-text.adoc[]
 
 [[catalogue-mirakl-mappings]]
 .{market} mappings
 [cols="1,2a"]
-|====
+|===
 |Marketplace data field |plentymarkets data field
 
 | *Brand*
-a| Create a property of type *Text* for this marketplace data field. Create a property value for each type of unit that you use for your products. Be sure to enter the code, not the label. +
+a| Create a property of type *Text* for this marketplace data field.
 
 *_Tip:_* You can find all possible values in the respective CSV file. +
-
-*_Note:_* For this marketplace data field, you _cannot_ use properties of the type *Multiple selection*. Mapping a property of the type *Multiple selection* in the catalogue will cause an incorrect transfer.
 
 | *Title*
 a| Map one or more of the following plentymarkets data fields to this marketplace data field. Use at least 20 and not more than 100 characters. +
@@ -159,7 +168,7 @@ Map the following plentymarkets data field as fallback data field:
 
 * *Variation » Variation ID*
 
-| *Weight (according to the manufacturer)**
+| *Weight (according to the manufacturer)*
 a| Map the following plentymarkets data field to this marketplace data field:
 
 * *Variation » Gross weight g*
@@ -182,25 +191,22 @@ a| Map the following plentymarkets data field to this marketplace data field:
 a| Map the following plentymarkets data field to this marketplace data field:
 
 * *Variation » Length mm*
-|====
 
-[#link-variation-to-catalogue-category]
-== Linking variations to a {market} catalogue category
+| _Data fields for images_
+| Catalogue mappings for product images are currently ignored for {market}. Instead, variation images are exported automatically. The images are prioritised based on the image position.
 
-include::partial$mirakl-data-link-categories.adoc[]
+*_Example:_* For the marketplace data field *Main Product Image*, the variation image with the lowest position is exported.
 
-[#link-properties-with-variations]
-=== Linking properties with variations and saving values
+As such, the following marketplace data field are filled automatically, no matter which plentymarkets data field you map:
 
-include::partial$properties-link.adoc[]
+* Main Product Image
+* Additional Product Image 1
+* Additional Product Image 2
 
-[#catalogue-activation]
-== Activating the catalogue export
-
-:interval: daily
-:market: {market}
-
-include::partial$catalogue-activation.adoc[]
+| _Data fields with the addition *(ES)*_
+|
+Do not map any plentymarkets data field to marketplace data fields with the addition *(ES)*. Your products will be exported to MIRAKL anyway.
+|===
 
 [#marketplace-specific-values]
 === Transferring marketplace-specific values
@@ -227,16 +233,13 @@ When a product that does not have a marketplace SKU yet is transferred, the vari
 
 Enter a valid EAN in the catalogue and transfer it to MediaMarkt.
 
-[#product-and-offer-data]
-== Transferring product and offer data
+[#prepare-variations]
+== Preparing variations
 
-:profile-free-shipping: Free Shipping (FS)
-:market-backend-shipping: Platform Settings » Shipping
-
-include::partial$mirakl-data-product-data-export.adoc[]
+Now prepare your variations for {market}.
 
 [#variation-availability]
-== Setting the variation availability
+=== Setting the variation availability
 
 :market-availability: {market}
 :option-availability: {market}
@@ -245,20 +248,37 @@ include::partial$mirakl-data-product-data-export.adoc[]
 
 include::partial$variation-availability.adoc[]
 
+[#link-variation-to-catalogue-category]
+=== Linking variations to a {market} catalogue category
+
+include::partial$mirakl-data-link-categories.adoc[]
+
+[#link-properties-with-variations]
+=== Linking properties with variations and saving values
+
+include::partial$properties-link.adoc[]
+
+[#product-and-offer-data]
+== Transferring product and offer data
+
+:profile-free-shipping: Free Shipping (FS)
+:market-backend-shipping: Platform Settings » Shipping
+
+include::partial$mirakl-data-product-data-export.adoc[]
+
+[#catalogue-activation]
+== Activating the catalogue export
+
+:interval: daily
+:market: {market}
+
+include::partial$catalogue-activation.adoc[]
+
+
 [#automating-order-processing]
 == Automating order processing
 
-Orders from MediaMarkt are automatically imported in your plentymarkets system every 15 minutes.
-
-This is how orders are processed at MediaMarkt:
-
-* The seller accepts the order via an event procedure.
-* The payment is collected by MediaMarkt.
-* With the payment confirmation, the invoice and delivery address on the order are updated in your plentymarkets system.
-* Via an event procedure, the shipping service provider as well as the package number are updated on the order in Mirakl.
-* Via an event procedure, an invoice is sent to MediaMarkt.
-
-The following order processing steps can be automated by setting up event procedures:
+You can automate the following order processing steps using event procedures:
 
 * Inform MediaMarkt that the order was confirmed. <<#order-confirmation-mediamarkt, How?>>
 

@@ -4,9 +4,9 @@
 :id: 6Z40YCT
 :author: team-plenty-channel
 
-This manual page describes how to import data using the import tool. Importing data is recommended if you want to add new items, customer data or stock etc. to your plentymarkets system and you already have this data available in a digital format. You can import data manually or automate the process.
+This manual page describes how to import data using the import tool. Importing data is recommended in may situations. For example, it is useful if you want to add new items, customer data or stock etc. to your plentymarkets system and this data is available in a digital format. You can import data manually or automate the process.
 
-You don’t know the Import tool yet? Then xref::data:import-introduction.adoc#[get to know the tool first].
+You don’t know the Import tool yet? Then xref:data:import-introduction.adoc#[get to know the tool first].
 
 [#1210]
 == Creating an import
@@ -28,7 +28,7 @@ Creating an import:
 
 [[table-create-sync]]
 .Creating an import
-[cols="1,3a"]
+[cols="1,4a"]
 |===
 |Setting |Explanation
 
@@ -106,7 +106,7 @@ Alternatively, you can set the field separator manually. Possible separators are
 2+^| *Source*
 
 | *Source*
-| Select *Manual upload* or *HTTPS*. +
+| Select *Manual upload*, *FTP*, *HTTPS* or *SFTP*. +
 Depending on the selected option, the following settings are shown:
 
 [cols="1,3a"]
@@ -121,7 +121,16 @@ Depending on the selected option, the following settings are shown:
 *_Note:_* The option *Delete file after running the import* is activated as default. As such, the file is automatically deleted from the webspace after the data was imported.  Deactivate the option to keep the file in the webspace. *_You will be billed for storing the file on the webspace._*
 
 ! *FTP*
-! *_From 21.07.2022, plentymarkets will no longer support FTP servers. As such, do not select this option._*
+!  *_Important:_* plentymarkets no longer provides an FTP server. As such, only use this option if the import file is saved on an external FTP server.
+
+* *Host (mandatory field)* = Enter the host of the FTP server.
+* *Port* = Enter the port of the FTP server. If no port is entered, the default port 22 is used.
+* *User name (mandatory field)* = Enter the user name for the FTP access.
+* *Password (mandatory field)* = Enter the password for the FTP access.
+* *File name* = Enter the path and the name of the file from which the data is to be imported. The file name has to end with .csv or .txt. +
+  *_Note:_* You can use wildcards in the field *File name*. For example, replace a part of the file name with an asterisk (*).
+However, only use wildcard characters in combination with the option *Move file to archive when import was successful*.
+* *Move file to archive when import was successful* = If this option is activated, the import file is automatically moved to a new *Archive* folder in the FTP directory after the import.
 
 ! *HTTPS*
 !
@@ -134,7 +143,17 @@ Depending on the selected option, the following settings are shown:
 . If you selected *HTTP authentication*, enter the *User name* and *Password* for the server.
 
 ! *SFTP*
-! *_From 21.07.2022, plentymarkets will no longer support FTP servers. As such, do not select this option._*
+!  *_Important:_* plentymarkets no longer provides an FTP server. As such, only use this option if the import file is saved on an external FTP server.
+
+* *Host* (mandatory field) = Enter the host of the FTP server.
+* *Port* (mandatory field) = Enter the port of the FTP server. If no port is entered, the default port 22 is used.
+* *User name* (mandatory field) = Enter the user name for the FTP access.
+* *Password* (mandatory field) = Enter the password for the FTP access.
+* *File name* = Enter the path and the name of the file from which the data is to be imported. The file name has to end with .csv or .txt. +
+  *_Note:_* You can use wildcards in the field *File name*. For example, replace a part of the file name with an asterisk (*).
+However, only use wildcard characters in combination with the option *Move file to archive when import was successful*.
+* *Move file to archive when import was successful* = If this option is activated, the import file is automatically moved to a new *Archive* folder in the FTP directory after the import.
+
 !===
 
 |===
@@ -201,7 +220,7 @@ Specifying matching fields:
 → The view *Settings* opens.
 . Open the view *Matching*.
 . Carry out the settings. +
-*_Tip:_* Every xref::page$import-types.adoc#[import type has different matching fields].
+*_Tip:_* Every xref:page$import-types.adoc#[import type has different matching fields].
 . Save (material:save[]) the settings.
 
 // TODO: Add example
@@ -242,7 +261,7 @@ image::daten:import-mapping-colour.png[]
 [#1710]
 === Processing jobs in the queue
 
-The queue enables the import of large amounts of data. Before being imported, the import file is broken down into packages and processed in so-called jobs. A job consists of 750 lines of a CSV or TXT file. However, import files with less than 750 lines also make a job. Whenever an import is started, the file is split up into the respective jobs and is put into the queue. In the queue, new jobs are permanently retrieved and the imports are processed. There are two different statuses. The status *Open jobs* means that there are jobs in the queue waiting to be processed. *Completed* jobs on the contrary have already been processed and the data have been imported.
+The queue enables the import of large amounts of data. Before being imported, the import file is broken down into packages. Each of these packages is a job. A job consists of 750 lines of a CSV or TXT file. However, import files with less than 750 lines also make a job. Whenever an import is started, the file is split up into the respective jobs and is put into the queue. In the queue, new jobs are permanently retrieved and the imports are processed. There are two different statuses. The status *Open jobs* means that there are jobs in the queue waiting to be processed. *Completed jobs* on the contrary have already been processed and the data have been imported.
 
 [#create-mappings]
 === Creating a mapping
@@ -253,7 +272,7 @@ Creating a mapping:
 . Go to *Data » Import » [Open import]*. +
 → The view *Settings* opens.
 . Switch to the view *Mapping*.
-. Click on *Add mapping* (material:add[role=green]). +
+. Click on *Add mapping* (material:add[]). +
 → The window *New mapping* opens.
 . Enter a name for the mapping.
 . Save the setting. +
@@ -376,11 +395,11 @@ Replacing values with the RegEx function:
 
 --
 
-*Value*: "Doe, Jane" +
+*Value*: “Musterberg, Maxi” +
 *Search*: /^(\\w+), (\\w+)$/ +
 *Replace*: $2 $1 +
 
-*_Result:_* "Jane Doe"
+*_Result:_* "Maxi Musterberg"
 --
 
 [#formula]
@@ -534,7 +553,7 @@ Activating a source for import::
 . To the left of the source, click on the toggle button *Activate row*. +
 * material:toggle_off[role="darkGrey"] = The source is inactive. The source is ignored during the export. +
 * material:toggle_on[role="blue"] = The source is active. During the import, the data of this source is imported.
-. Save (material:save[role="green"]) the settings.
+. Save (terra:save[role="green"]) the settings.
 --
 
 Activating one or several sources for import::
@@ -547,7 +566,7 @@ Activating one or several sources for import::
 . In the toolbar at the top, click on *Activate all* (icon:power-off[role="darkPurple"]). +
 → All selected sources are activated. +
 *_Tip:_* Correspondingly, you can use *Deactivate all* (icon:power-off[role="darkPurple"]) to deactivate several or all sources at the same time.
-. Save (material:save[role="green"]) the settings.
+. Save (terra:save[role="green"]) the settings.
 --
 ====
 
@@ -562,7 +581,7 @@ Activating/deactivating mappings:
 . Go to *Data » Import » [Open import]*.
 . Switch to the view *Mapping*. +
 → The mappings of the import are shown.
-. In the column Inactive/Active, click on the toggle button. +
+. In the column *Inactive/Active*, click on the toggle button. +
 * material:toggle_off[role="darkGrey"] = The mapping is inactive. During the import, the settings of this mapping are not applied. +
 * material:toggle_on[role="blue"] = The mapping is active. During the import, the settings of this mapping are applied. +
 *_Important:_* If more than one mapping is active, the mapping with the lowest ID is imported first. All other active mappings are also imported in ascending order based on the position.
@@ -679,7 +698,7 @@ Replacing import files of manual imports:
 . Go to *Data » Import*. +
 → The import overview opens.
 . Navigate to the import.
-. In the *File name* column, click on *Upload file* (material:upload[]). +
+. In the *File name* column, click on the button *Upload file* (material:upload[]). +
 → The file directory is shown.
 . Click on the file. +
 → The file is uploaded. +
@@ -741,7 +760,7 @@ Restoring backups of imports:
 
 . Go to *Setup » Settings » Hosting » Backup*. +
 → The backup overview opens.
-. In the row of the backup that you want to import, click on *Restore backup* (material:open_in_browser[]) on the right. +
+. In the line of the backup that you want to import, click on *Restore backup* (material:open_in_browser[]) on the right. +
 → The window *Import backup* is shown.
 . For the setting *Import backup*, select the option *Partially import data base*.
 . Activate the option *ElasticSync*. +
@@ -963,7 +982,7 @@ Viewing an import log:
 . Go to *Data » Data import » Status*. +
 → The status overview opens. +
 *_Tip:_* Or open the status menu from the menu *Data » Import*. +
-At the top left of the toolbar, click on *Status* (material:playlist_play[]).
+In the toolbar, click on *Status* (material:playlist_play[]).
 . Click on the import. +
 → The detail view opens.
 . At the top left of the toolbar, click on *Log* (material:playlist_play[]). +
