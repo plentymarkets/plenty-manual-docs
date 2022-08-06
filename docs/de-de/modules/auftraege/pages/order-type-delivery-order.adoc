@@ -1,0 +1,233 @@
+= Auftragstyp Lieferauftrag
+
+:keywords: Lieferauftrag, Lieferschein
+:author: team-order-core
+
+Mithilfe des Auftragstyps *Lieferauftrag* werden aus einem Hauptauftrag Lieferaufträge für die enthaltenen Auftragspositionen generiert, sodass du diese einzeln oder in Teilen verschicken kannst. So kannst du beispielsweise Artikel, die du auf Lager hast, sofort losschicken und Artikel, die du erst noch geliefert bekommst, später nachsenden. Führe dies mit unterschiedlichen oder auch nur mit einem einzelnen Versanddienstleister durch. +
+Lieferaufträge können <<manually-create-delivery-orders#, manuell>>, <<automatically-create-delivery-orders#, automatisch>> oder per <<create-delivery-orders-via-event-procedure#, Ereignisaktion>> erstellt werden.
+
+[WARNING]
+.Alle Auftragspositionen in Lieferaufträge übernehmen
+====
+Erstellst du Lieferaufträge aus einem Auftrag, müssen _alle_ Auftragspositionen des Hauptauftrags in Lieferaufträge überführt werden. Übernimmst du nicht alle Auftragspositionen in Lieferaufträge, kommt es zu Fehlern im Bestand und in den Lagern.
+====
+
+[#310]
+== Merkmale von Lieferaufträgen
+
+Im Allgemeinen besitzen Lieferaufträge die folgenden Eigenschaften:
+
+* Die Auftragspositionen eines Lieferauftrages lassen sich nach dem Erzeugen des Lieferauftrages _nicht_ mehr anpassen.
+* Der *Preis* und das *Gewicht* eines Artikels werden aus dem Hauptauftrag übernommen.
+* Die *Auftragssprache* wird aus dem Hauptauftrag übernommen.
+* Das *Adressetikett*, der *Lieferschein*, die *Proformarechung* und die *Gelangensbestätigung* können im Tab *Belege* eines Lieferauftrags generiert werden.
+* Die *Rechnung* und alle weiteren Dokumente werden zentral im Hauptauftrag generiert.
+* Die *Bestandsreservierung* für die in einem Lieferauftrag enthaltene Menge wird beim Anlegen eines Lieferauftrags vom Hauptauftrag auf den Lieferauftrag übertragen.
+
+[IMPORTANT]
+.Gemeinsamer Status
+====
+Der Hauptauftrag folgt immer dem Status des Lieferauftrags mit dem niedrigsten Status.
+Wenn z.B. ein Auftrag in Status *5.0* zwei Lieferaufträge hat und einer dieser Lieferaufträge wechselt in den Status *6.5*, ändert sich am Status des Hauptauftrages zunächst nichts. Erst wenn der zweite Lieferauftrag ebenfalls in den Status *6.5* wechselt, wird automatisch auch der Status des Hauptauftrages zu *6.5* geändert.
+====
+
+[#320]
+== Grundeinstellungen für Lieferaufträge vornehmen
+
+[WARNING]
+.Lager pro Auftragsposition zuordnen
+====
+Im Menü *Einrichtung » Aufträge » Einstellungen* muss für die xref:auftraege:grundeinstellungen.adoc#intable-warehouse-assignment[Zuordnung des Lagers] die Option *b) pro Artikelposition kann ein Lager zugeordnet werden* ausgewählt werden.
+====
+
+Im Menü *Einrichtung » Aufträge » Auftragstypen » Lieferauftrag* legst du vorab fest, nach welchem Kriterium Aufträge in Lieferaufträge gesplittet werden.
+
+[.instruction]
+Optionen für das Splitten von Aufträgen in Lieferaufträge wählen:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragstypen » Lieferauftrag*.
+. Nimm die Einstellungen anhand <<table-order-types-delivery-order-options>> vor.
+. *Speichere* (icon:save[role="green"]) die Einstellungen.
+
+[[table-order-types-delivery-order-options]]
+.Optionen für das *Splitten von Aufträgen in Lieferaufträge*
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+2+^| *Aufträge in Lieferaufträge splitten nach*
+
+| *Aus*
+|Es erfolgt *keine Aufsplittung*. +
+*_Achtung_*: Wenn du diese Option aktivierst, können Lieferaufträge nur noch manuell angelegt werden. Das automatische Generieren sowie das Erstellen von Lieferaufträgen per Ereignisaktion sind bei dieser Auswahl nicht möglich.
+
+| *Lager*
+|Die Lieferaufträge werden anhand der verschiedenen *Lager* der Auftragspositionen erstellt.
+
+| *Versandprofil*
+|Die Lieferaufträge werden anhand der verschiedenen *Versandprofile* der Auftragspositionen erstellt.
+
+| *Lager und Versandprofil*
+|Die Lieferaufträge werden anhand der verschiedenen *Lager und der Versandprofile* der Auftragspositionen erstellt.
+
+| *Lager und Netto-Warenbestand*
+|Die Lieferaufträge werden anhand der verschiedenen *Lager und des Netto-Warenbestands* der Auftragspositionen erstellt.
+|====
+
+[#manually-create-delivery-orders]
+== Lieferaufträge manuell anlegen
+//Hier anpassen: Auftrag öffnen, für den ein Lieferauftrag angelegt werden soll. Dann die Option "Für bestimmte Artikel" wählen?
+
+Bei Bedarf kannst du Lieferaufträge manuell über den Hauptauftrag anlegen. Bei dieser Methode wählst du für jeden Lieferauftrag einzeln die Auftragspositionen und -mengen aus, die der Lieferauftrag enthalten soll.
+
+Wir empfehlen, grundsätzlich für *alle* Auftragspositionen Lieferaufträge anzulegen. Verbleiben eine oder mehrere Auftragspositionen ohne Zuordnung zu einem Lieferauftrag im Hauptauftrag, kann es zu Fehlfunktionen kommen. Zudem darf die Menge, die du unter *LiefAufMenge* einträgst, nicht größer sein, als die unter *NZMenge* (nicht zugeordnete Menge) angezeigte Menge.
+
+[.instruction]
+Lieferaufträge manuell anlegen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Öffne den Auftrag, für den Lieferaufträge angelegt werden sollen.
+. Wechsle in das Tab *Lief*.
+. Trage in das Feld *LiefAufMenge* (Menge für den Lieferauftrag), die *Menge* ein, die in den Lieferauftrag überführt werden soll.
+. Klicke anschließend auf das *Lieferauftrag anlegen* (terra:execute[]). +
+→ Der Lieferauftrag wird angelegt.
+. Wiederhole den Prozess, um weitere Lieferaufträge anzulegen.
+
+[#automatically-create-delivery-orders]
+== Lieferaufträge automatisch anlegen
+//Hier anpassen: Auftrag öffnen, für den ein Lieferauftrag angelegt werden soll. Dann die Option "Für alle Artikel" wählen?
+
+[IMPORTANT]
+.Bedingung für das automatische Anlegen von Lieferaufträgen
+====
+Lieferaufträge können nur automatisch erzeugt werden, wenn noch kein Lieferauftrag zu dem Auftrag besteht.
+====
+
+Wenn du Lieferaufträge automatisch anlegen lässt, greifen die zuvor in <<table-order-types-delivery-order-options>> beschriebenen Kriterien zum Aufsplitten in Lieferaufträge. Somit müssen die Auftragspostionen und -mengen nicht einzeln ausgewählt werden. Stattdessen überführt das System je nach gewähltem Kriterium alle Auftragspositionen automatisch in Lieferaufträge.
+
+[.instruction]
+Lieferaufträge automatisch anlegen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Öffne den Auftrag, für den Lieferaufträge angelegt werden sollen.
+. Wechsle in das Tab *Lief*.
+. Klicke auf *Lieferauftrag automatisch anlegen* (icon:gear[role="darkGrey"]). +
+→ Die Lieferaufträge werden angelegt.
+
+[#create-delivery-orders-via-event-procedure]
+== Lieferaufträge per Ereignisaktion anlegen
+
+Lieferaufträge werden idealerweise über eine Ereignisaktion generiert. Als Händler:in kannst du somit bestimmen, wann und wie die Lieferaufträge zu einem Auftrag generiert werden. Im Folgenden werden drei Beispiele zum Generieren von Lieferaufträgen per Ereignisaktion beschrieben.
+
+=== Beispiel A: Ereignisaktion "Lieferauftrag generieren bei Auftragseingang"
+
+Wenn du möchtest, dass schon beim Eingang eines Auftrags die zugehörigen Lieferaufträge generiert werden, nutze die in <<table-event-procedure-delivery-order-when-new-order>> beschriebene Ereignisaktion.
+
+Da diese Ereignisaktion direkt beim Auftragseingang greift, wird der Status des Hauptauftrags nicht beachtet. Somit werden auch Lieferaufträge von Aufträgen in Status *3.0* (oder *1.0* wenn du mit Auktionsplattformen wie eBay arbeitest) generiert. Diese nehmen beim Generieren den Status des Hauptauftrages an.
+
+:table-event-procedure: <<table-event-procedure-delivery-order-when-new-order>>
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-delivery-order-when-new-order]]
+.Ereignisaktion "Lieferauftrag generieren bei Auftragseingang" einrichten
+[cols="1,3,3"]
+|====
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Neuer Auftrag*
+|
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Auftragslager*
+| *Mehrere Lager pro Auftrag*
+
+| *Aktion*
+| *Auftrag > Lieferaufträge generieren*
+|
+
+|====
+
+=== Beispiel B: Ereignisaktion "Lieferauftrag generieren bei Wechsel zu Status 5" einrichten
+
+Wenn du möchtest, dass zu einem Auftrag, der in den Status 5.0 (Freigabe Versand) wechselt, Lieferaufträge generiert werden, nutze die in <<table-event-procedure-delivery-order-status-5>> beschriebene Ereignisaktion.
+
+Nach dem Generieren der Lieferaufträge darfst du den Hauptauftrag nicht mehr ändern, damit die Summe der Artikel der Lieferaufträge der des Hauptauftrags entspricht.
+
+:table-event-procedure: <<table-event-procedure-delivery-order-status-5>>
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-delivery-order-status-5]]
+.Ereignisaktion "Lieferauftrag generieren bei Wechsel zu Status 5" einrichten
+[cols="1,3,3"]
+|====
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Auftragsänderung > Statuswechsel*
+| *Freigabe Versand*
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Auftragslager*
+| *Mehrere Lager pro Auftrag*
+
+| *Aktion*
+| *Auftrag > Lieferaufträge generieren*
+|
+
+|====
+
+=== Beispiel C: Ereignisaktion "Lieferauftrag generieren bei Rechnungserzeugung"
+
+Wenn du möchtest, dass zu einem Auftrag beim Erzeugen der Rechnung die Lieferaufträge angelegt werden, nutze die in <<table-event-procedure-invoice-generated>> beschriebene Ereignisaktion. +
+Somit kannst du am Hauptauftrag solange Änderungen vornehmen, bis du ihn durch den Rechnungsdruck zum Versand freigibst. Folgende Einstellungen sind nötig:
+
+:table-event-procedure: <<table-event-procedure-invoice-generated>>
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-invoice-generated]]
+.Ereignisaktion "Lieferauftrag generieren bei Rechnungserzeugung" einrichten
+[cols="1,3,3"]
+|====
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Dokumente > Rechnung generiert*
+|
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Auftragslager*
+| *Mehrere Lager pro Auftrag*
+
+| *Aktion*
+| *Auftrag > Lieferaufträge generieren*
+|
+
+|====
+
+[#360]
+== Haupt- und Lieferaufträge bearbeiten
+
+Um den Hauptauftrag öffnen zu dürfen, müssen variable Benutzer:innen über die xref:business-entscheidungen:benutzerkonten-zugaenge.adoc#100[Berechtigung] für alle Lager der Lieferaufträge eines Hauptauftrags verfügen. Prüfe dazu die Einstellungen im Menü *Einrichtung » Einstellungen » Benutzer » Konten » Tab: Berechtigungen*.
+
+Wenn du einen Hauptauftrag löschen möchtest, müssen zuerst die Lieferaufträge gelöscht werden. Lieferaufträge können einzeln oder über die Gruppenfunktion in der Auftragssuche gelöscht werden. Erst danach kann der Hauptauftrag gelöscht werden. Beachte aber, dass Aufträge nicht gelöscht werden können, sobald steuerrelevante Dokumente für diesen Auftrag existieren.
+
+Es können weitere Auftragspositionen zum Hauptauftrag hinzugefügt oder daraus gelöscht werden. Allerdings können nur Auftragspositionen, die nicht in Lieferaufträgen enthalten sind, aus dem Hauptauftrag gelöscht werden. Die Menge der Artikel im Hauptauftrag lässt sich erhöhen oder verringern. Löschen solltest du jedoch nur *nicht zu Lieferaufträgen zugeordnete Mengen*.
+
+[WARNING]
+.Löschen von Positionen in einem Lieferauftrag
+====
+Das Löschen von Positionen, die bereits in einem Lieferauftrag enthalten sind, ist technisch ebenfalls möglich. Um Fehlfunktionen zu verhindern, solltest du dies allerdings vermeiden.
+====
