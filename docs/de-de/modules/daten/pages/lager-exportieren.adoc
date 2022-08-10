@@ -6,10 +6,12 @@
 :author: team-stock
 
 ////
-zuletzt bearbeitet 08.08.2022
+zuletzt bearbeitet 10.08.2022
 ////
 
-Diese Seite beschreibt die Datenfelder und Filter, die dir beim Export von Lagerdaten über das Katalog-Tool zur Verfügung stehen.
+//ToDo - Beispiel ergänzen für die grüne Info-Box in die Einleitung - siehe andere Katalog-Formate wie Warenbestand als Beispiel
+
+Diese Seite beschreibt die Datenfelder und Filter, die dir beim Export von Lager- und Lagerort-Daten über das Katalog-Tool zur Verfügung stehen.
 Diese Seite dient lediglich als Referenz und setzt voraus, dass du bereits Grundkenntnisse über das xref:daten:dateiexport.adoc#[Katalog-Tool] hast.
 
 [discrete]
@@ -29,10 +31,6 @@ image::daten:katalog-lager.png[]
 Ein Standardformat wird verwendet, um spezifische Daten aus deinem plentymarkets System zu exportieren.
 Falls nötig, kannst du die Daten anschließend überarbeiten und wieder importieren.
 
-* *_Beispiel_*:
-#Stell dir vor, du möchtest im Rahmen einer Wirtschaftsprüfung herausfinden, wie viel Bestand sich zum Jahresende in deinem Lager befand.
-Du könntest eine CSV-Datei mit den Bestandsdaten exportieren.#
-
 * *_Abgrenzung_*:
 Beachte, dass Standardformate lediglich Daten aus deinem System exportieren.
 Sie übertragen diese Daten nicht an Marktplätze.
@@ -44,6 +42,14 @@ Sie übertragen diese Daten nicht an Marktplätze.
 Dieses Kapitel enthält eine Liste aller Lager-Datenfelder, die mit dem Katalog-Tool exportiert werden können.
 
 === Lager
+
+[TIP]
+.Welche Daten sollen exportiert werden?
+====
+Möchtest du ausschließlich Lagerdaten exportieren?
+Das heißt, soll die Exportdatei eine Zeile pro Lager anstatt eine Zeile pro Lagerort enthalten?
+Falls ja, dann nutze den xref:daten:lager-exportieren.adoc#20[Filter: Nur Lagerdaten].
+====
 
 [cols="1,3a"]
 |===
@@ -184,6 +190,14 @@ Der Zeitstempel, der angibt, wann das Lager erstellt wurde.
 
 === Dimension
 
+[TIP]
+.Welche Daten sollen exportiert werden?
+====
+Möchtest du ausschließlich Lagerdaten exportieren?
+Das heißt, soll die Exportdatei eine Zeile pro Lager anstatt eine Zeile pro Lagerort enthalten?
+Falls ja, dann nutze den xref:daten:lager-exportieren.adoc#20[Filter: Nur Lagerdaten].
+====
+
 [cols="1,3a"]
 |===
 |Feld |Erläuterung
@@ -194,9 +208,10 @@ Das Level der Dimension.
 
 Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#400[Einrichtung » Waren » Lager » [Lager öffnen\] » Dimensionen » Level].
 
-| #*Name der Elterndimension*#
+//weitere Infos ergänzen
+| *Name der Elterndimension*
 |
-Name der übergeordneten Dimension
+Der Name der übergeordneten Dimension.
 
 | *Präfix der Dimension*
 |
@@ -258,9 +273,17 @@ Die ID des Lagerorts.
 
 Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: ID].
 
-| #*Lagerortname*#
+| *Lagerortname*
 |
-Name des Lagerorts (ohne Pfad)
+Der Name des Lagerorts (ohne den vollständigen Pfad).
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » [Lagerort öffnen\] Eingabefeld: Lagerort].
+
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist der Name des Lagerorts SL4.
+
+*_Hinweis_*:
+Wenn du den vollständigen Pfad des Lagerorts exportieren möchtest, dann verwende stattdessen das Feld *Vollständiger Lagerortname*.
 
 | *Zweck*
 |
@@ -280,22 +303,46 @@ Die Position des Lagerorts.
 
 Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Position].
 
-| #*Vollständiger Lagerortname*#
+| *Vollständiger Lagerortname*
 |
-Vollständiger Name des Lagerorts (inklusive Pfad)
+Der vollständige Name des Lagerorts (inklusive Pfadangabe).
 
-| #*Lagerort-Typ*#
-|
-Typ des Lagerorts
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Lagerort].
 
-| #*Notizen*#
-|
-Notizen zum Lagerort
+*_Hinweis_*:
+Wenn du nur den Namen des Lagerorts (ohne Pfad) exportieren möchtest, dann verwende stattdessen das Feld *Lagerortname*.
 
-| #*Verfügbarkeit*#
+| *Lagerort-Typ*
 |
-Verfügbarkeit des Lagerorts: Ist ein Lagerort leer, wird er beim Wareneingang als verfügbar angezeigt und Ware kann eingebucht werden. Befindet sich bereits 1 Artikel in einem Lagerort, wird dieser nicht mehr als verfügbar angezeigt. Du kannst dort allerdings trotzdem Ware einbuchen. +
-Beim Export gibt es die beiden folgenden Werte: `0` = nicht verfügbar; `1` = verfügbar.
+Der Typ des Lagerorts.
+
+*_Hinweis_*:
+Der Typ wird bei der Generierung von Lagerorten ausgewählt.
+
+| *Notizen*
+|
+Die Notiz des Lagerorts.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » [Lagerort öffnen\] Eingabefeld: Notizen].
+
+| *Verfügbarkeit*
+|
+Gibt an, ob der Lagerort verfügbar ist.
+
+[cols="1,2"]
+!===
+
+!`0`
+!Nein, der Lagerort ist nicht verfügbar.
+Es wird ein roter Punkt in der Übersicht angezeigt.
+
+!`1`
+!Ja, der Lagerort ist verfügbar.
+Es wird ein grüner Punkt in der Übersicht angezeigt.
+
+!===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Verfügbarkeit].
 
 |===
 
@@ -307,23 +354,44 @@ Beim Export gibt es die beiden folgenden Werte: `0` = nicht verfügbar; `1` = ve
 
 | *Ebenen-ID*
 |
-ID der Ebene bzw. der niedrigsten Dimension des Lagerorts. Nutzt du einen Filter, ist es die ID der gefilterten Dimension.
+Die ID der Ebene.
+Das heißt, die ID der Dimension, die direkt vor dem Lagerort steht.
 
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die Ebene R1.
+Nutze dieses Feld, um die ID von R1 zu exportieren, z.B. "4762".
+
+//weitere Infos ergänzen
 | *ID der Elternebene*
 |
-ID der übergeordneten Ebene
+Die ID der übergeordneten Ebene.
 
 | *Position der Ebene*
 |
-Position der Ebene
+Die Position der Ebene.
+Das heißt, die Position der Dimension, die direkt vor dem Lagerort steht.
+
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die Ebene R1.
+Nutze dieses Feld, um die Position von R1 zu exportieren, z.B. "3".
 
 | *Name der Ebene*
 |
-Name der Ebene
+Der Name der Ebene.
+Das heißt, der Name der Dimension, die direkt vor dem Lagerort steht.
+
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die Ebene R1.
+Nutze dieses Feld, um den Namen "R1" zu exportieren.
 
 | *Pfadname der Ebene*
 |
-Pfadname
+Der vollständige Name der Ebene (inklusive Pfadangabe).
+Das heißt, der vollständige Name der Dimension, die direkt vor dem Lagerort steht.
+
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die Ebene R1.
+Nutze dieses Feld, um den Pfadnamen "H2:R1:" zu exportieren.
 
 |===
 
@@ -335,7 +403,7 @@ Dieses Kapitel enthält eine Liste der Filter, mit denen du einschränken kannst
 [TIP]
 .Filter können kombiniert werden
 ====
-Du kannst mehrere Filter wählen und somit #beispielsweise nach Warenbeständen aus einem bestimmten Lager mit einer bestimmten Markierung filtern.#
+Du kannst mehrere Filter wählen und somit beispielsweise nach Daten aus einem bestimmten Lager und auf einer bestimmten Dimensions-Ebene filtern.
 ====
 
 [cols="1,3a"]
@@ -344,21 +412,47 @@ Du kannst mehrere Filter wählen und somit #beispielsweise nach Warenbeständen 
 
 | *Lager*
 |
-Beschränkt den Export auf die gewählten Lager. Wähle ein oder mehrere Lager aus der Dropdown-Liste.
+Beschränkt den Export auf ein bestimmtes Lager.
+Wähle ein oder mehrere Lager aus der Dropdown-Liste aus.
+
+*_Filter-Kombination_*:
+Möchtest du ausschließlich Lagerdaten exportieren?
+Das heißt, soll die Exportdatei eine Zeile pro Lager anstatt eine Zeile pro Lagerort enthalten?
+Falls ja, dann nutze diesen Filter zusammen mit dem Filter *Nur Lagerdaten*.
+
+*_Tipp_*:
+Nutze die Vorschaufunktion, um zu prüfen, welche Daten exportiert werden.
 
 | *Dimensions-Ebene*
 |
-Beschränkt den Export auf eine bestimmte Ebene eines Lagers.
-Hast du eine Ebene gewählt, z.B. Ebene 3, werden nur die Dimensionen dieser Ebene exportiert. +
-Bei einer Lagerstruktur mit dem Aufbau *Halle > Regal > Fach > Boden > Lagerort* würden also alle Fächer exportiert werden, da diese die 3. Ebene bilden. +
-*_Tipp:_* Klicke auf *Vorschau*, um zu prüfen, welche Daten für den Export gewählt wurden.
+Beschränkt den Export auf Dimensionen eines bestimmten Levels.
+Wähle das Level aus der Dropdown-Liste aus.
+
+*_Beispiel_*:
+Dein Lager ist im Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Dimensionen* wie folgt strukturiert:
+
+* Halle = Level 1
+* Regal = Level 2
+* Fach = Level 3
+* Boden = Level 4
+
+Wählst du Level 3, dann werden alle Fächer exportiert.
+
+*_Tipp_*:
+Nutze die Vorschaufunktion, um zu prüfen, welche Daten exportiert werden.
 
 | *Pfadname der Ebene beginnend mit*
 |
-Beschränkt den Export auf die Daten unterhalb einer bestimmten Dimension. Lautet der Pfadname der Ebene beispielsweise *Halle 1 - Regal 4 - Fach 3 - Boden 8* und du möchtest alles unterhalb von Boden 8 der spezifischen Dimension exportieren, gib `H1-R4-F3-B8` in das Eingabefeld des Filters ein.
+Beschränkt den Export auf Daten unterhalb einer bestimmten Dimension.
+Gib den Pfadnamen in das Eingabefeld ein.
+
+*_Beispiel_*:
+Die Ebene lautet *Halle 1 - Regal 4 - Fach 3 - Boden 8*.
+Du möchtest alles unterhalb von Boden 8 exportieren.
+Dazu gibst du den Pfadnamen in das Eingabefeld ein: in diesem Fall `H1-R4-F3-B8`.
 
 | *Nur Lagerdaten*
 |
-Beschränkt den Export auf die Lagerdaten, wie die Lager-ID und den Lagernamen.
-Standardmäßig werden mit diesem Filter die Daten aller Lager exportiert. Möchtest du allerdings nur die Daten bestimmter Lager exportieren, wähle zusätzlich den Filter *Lager*.
+Beschränkt den Export, damit er ausschließlich Lagerdaten enthält.
+Das heißt, die Exportdatei enthält eine Zeile pro Lager anstatt eine Zeile pro Lagerort.
 |===
