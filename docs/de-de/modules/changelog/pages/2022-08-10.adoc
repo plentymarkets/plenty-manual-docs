@@ -6,7 +6,8 @@
 :startWeekDate: 4. August 2022
 :endWeekDate: 10. August 2022
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/fix-handelsvertreterstatistik-abrufen-fix-retrieve-sales-representative-statistics/690602
+// Auch diesen Eintrag beachten: https://forum.plentymarkets.com/t/plentybi-automatische-aktivierung-von-rohdatenformaten-automatic-activation-of-raw-data-formats/690486
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -28,6 +29,12 @@ stable::
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
 [discrete]
+=== Artikel
+
+* Artikel- und Variantengruppenfunktion sind nun in der neuen Artikel-UI verfügbar. Weitere Informationen zu Gruppenfunktionen findest du auf der Handbuchseite xref:artikel:group-functions.adoc#100[Massenbearbeitung].
+* Im Textbereich eines Artikels kann die Ansicht nun über die MyView-Funktion angepasst werden. Weitere Informationen findest du auf der Handbuchseite xref:artikel:detailansicht.adoc#960[Detailansicht: Gestaltung].
+
+[discrete]
 === CRM
 
 * Der Fehler bei der E-Mail-Vorschau in den Nachbestellungen mit alten Vorlagen wurde korrigiert.
@@ -40,12 +47,42 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 +
 *_Hintergrund_*: Mit der Ereignisaktion *eBay-Rückerstattung veranlassen* führst du eine Rückerstattung für einen Auftrag durch. Mit der Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener Rückerstattung* legst du fest, in welchen Status Aufträge geschoben werden sollen, wenn diese Ereignisaktion nicht ausgeführt werden konnte.
 
+[discrete]
+=== Hood
+
+* Seit 1. August 2022 bietet Hood die Möglichkeit, das Payment vollständig über die Hood Plattform abzuwickeln. Käufer:innen bezahlen also an Hood. Du erhältst später eine Auszahlung auf dein Bank- oder PayPal-Konto. Um den Payment-Service abzubilden, ist in plentymarkets nun die neue Zahlungsmethode *Hood Pay* verfügbar.
+** Nachdem du auf den neuen Zahlungsdienst wechselst, werden deine Aufträge mit dieser Zahlungsart „Hood Pay“ importiert.
+** Als Zahlungsart ist im Auftrag die Zahlungsart *Hood Pay* gespeichert.
+** Bei abgeschlossenen Aufträgen wird durch den Prozess auch die Zahlung angelegt, sodass die Aufträge direkt den Status 5 erhalten.
+
++
+[IMPORTANT]
+.To-Do: Ereignisaktionen prüfen und anpassen
+======
+Prüfe vor einem Wechsel zu Hood Pay deine Ereignisaktionen für Hood. Bei Ereignisaktionen mit einem Filter für die Zahlungsart musst du den Filter zu der neuen Zahlungsart *Hood Pay* ändern, damit die Ereignisaktionen weiterhin ausgelöst werden.
+======
+
+[discrete]
+=== Kaufland
+
+* Bisher wurde beim stündlichen Bestandsabgleich nur das Feld *Bestand* übertragen. Ab sofort werden zusätzlich die folgenden Felder aktualisiert:
+** *Bearbeitungszeit in Tagen*
+** *Zustand*
+** *Zustandsbeschreibung*
+** *Kaufland Versandgruppen-ID*
+** *Kaufland Lager-ID*
+
 '''
 
 [discrete]
 == Geändert
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Payment
+
+* Bei Plugin-Zahlungsarten, die die veraltete Klasse `PaymentMethodService` anstatt `PaymentMethodBaseService` benutzen, wurden die Zahlungsarten im Backend nur gelistet, wenn die Einstellung *Inaktive Plugin-Zahlungsarten anzeigen* auf Ja gesetzt war. Da noch immer einige externe Plugin-Zahlungsarten die veraltete Klasse benutzen, haben wir die Unterstützung für diese wieder aufgenommen.
 
 [discrete]
 === plentyBI
@@ -65,6 +102,14 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * Der dynamische Anhang *Voucher* im EmailBuilder wurde nicht an die E-Mail-Vorlage angehangen, wenn ein Gutschein gekauft wurde. Dieses Verhalten wurde behoben.
 * n einigen Systemen konnten E-Mail-Vorlagen aus dem Mail-Tab des Auftrags heraus nicht gesendet werden. Auch das Öffnen der Vorlagenvorschau in diesem Bereich hat nicht immer funktioniert. Dieses Verhalten wurde behoben.
 * Wenn man im Kontaktdatensatz im Menü *CRM » Kontakte* eine Adresse eingegeben hat, ohne diese zu speichern, und dann ein anderes Menü, beispielsweise den Auftrag geöffnet hat, waren die bereits eingegebenen Daten der Adresse beim Klick zurück in den Kontaktdatensatz nicht mehr vorhanden. Dieses Verhalten wurde behoben.
+* Beim E-Mail- und Nachrichtenversand über Ereignisaktionen kam es zu einem Fehler. Dieses Verhalten wurde behoben.
+* Wenn man im Auftrag auf das Tab Kundennotizen geklickt hat, wurde eine Fehlermeldung angezeigt, dass die Route nicht existiert. Dieses Verhalten wurde behoben. Ab sofort wird mit dem Klick auf Kundennotizen wie gewohnt der Messenger im Kontaktdatensatz geöffnet.
+* Beim Versuch, die Statistiken des Handelsvertreters abzurufen, ist ein Fehler aufgetreten. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Bei Nachbestellungsdokumenten konnte es dazu kommen, dass der Inhalt in dem Feld *Kundenname (Kommission)* aus der Gruppe *Spalten Artikelpositionen* nicht korrekt angezeigt wurde, wenn dem Kunden keine Firma zugeordnet war. Dies wurde behoben.
 
 [discrete]
 === Spezialexport
@@ -102,16 +147,10 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
-
-
-'''
-
 [discrete]
-== Geändert
+=== Aufträge
 
-Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
-
-
+* Der Filter *Datumstyp* wurde um das Lieferdatum erweitert.
 
 '''
 
@@ -120,7 +159,15 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== CRM
 
+* Wenn man im EmailBuilder in den Feldern *Antwort an*, *CC* und *BCC* E-Mail-Adressen eingegeben hat und die Vorlage speichern wollte, war dies nicht möglich. Es wurde in den 3 Feldern die Fehlermeldung angezeigt, dass die E-Mail-Adressen ungültig sind, obwohl sie korrekt waren. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dynamischer Export
+
+* Beim Versuch, einen Export über den Dynamischen Export durchzuführen, trat ein Fehler auf. Dieses Verhalten wurde behoben.
 
 --
 
@@ -134,9 +181,55 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/clearvat_6925[eClear - Grenzüberschreitender E-Commerce - so einfach wie Inlandsverkäufe^]
+|3.0.0
+|-
+
+|link:https://marketplace.plentymarkets.com/etsy_4689[Etsy^]
+|2.1.24
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportidealode_4723[idealo.de^]
+|3.3.38
+|-
+
+|link:https://marketplace.plentymarkets.com/io_4696[IO^]
+|5.0.54
+a|Die neue Route `/contact-mail-api` wurde hinzugefügt. Wenn du das plentyShop Kontaktformular verwendest (egal ob Standard oder per ShopBuilder-Inhalt), stelle sicher, dass diese Route im IO-Plugin aktiviert ist. Öffne dazu die Einstellungen des IO-Plugins in deinem Plugin-Set. Öffne den Reiter *Konfiguration*. Aktiviere in der Einstellung *Routen aktivieren* die Route `/contact-mail-api` und speichere deine Einstellungen. Wenn du das Kontaktformular nicht verwendest, stelle sicher, dass diese Route deaktiviert ist.
+
+|link:https://marketplace.plentymarkets.com/wesiocatalog_6759[Kataloggenerator - Kataloge schnell und einfach erstellen^]
+|1.1.6
+|-
+
+|link:https://marketplace.plentymarkets.com/metro_6600[Metro^]
+|2.2.5
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.2.1
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.15
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.18
+|-
+
+|link:https://marketplace.plentymarkets.com/ceres_4697[plentyShop LTS^]
+|5.0.54
+a|Im Plugin IO wurde die neue Route `/contact-mail-api` hinzugefügt. Wenn du das plentyShop Kontaktformular verwendest (egal ob Standard oder per ShopBuilder-Inhalt), stelle sicher, dass diese Route im IO-Plugin aktiviert ist. Öffne dazu die Einstellungen des IO-Plugins in deinem Plugin-Set. Öffne den Reiter *Konfiguration*. Aktiviere in der Einstellung *Routen aktivieren* die Route `/contact-mail-api` und speichere deine Einstellungen. Wenn du das Kontaktformular nicht verwendest, stelle sicher, dass diese Route deaktiviert ist.
+
+Im Zuge des Releases von Ceres 5.0.54 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+
+* link:https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-19f0c0c56118a0d17212318a2cf8c6e113276dc4c61779c2317b2e7a0976db31[resources/views/PageDesign/Partials/Header/DefaultHeader.twig^]
+* link:https://github.com/plentymarkets/plugin-ceres/pull/3319/files#diff-2696f6a2e31a39130c691133b3d6fdf30b218a6bdbbd0717433c835d060c3f66[resources/views/Widgets/Header/TopBarWidget.twig^]
+* link:https://github.com/plentymarkets/plugin-ceres/pull/3318/files#diff-2cee15b4b8add92d304d2f4cbbb5a5891a5752c533b564f1e1d152982c1e62d0[resources/views/Widgets/OrderConfirmation/PurchasedItemsWidget.twig^]
+
+|link:https://marketplace.plentymarkets.com/plentyshopltsmodern_55193[plentyShop LTS Modern^]
+|1.0.2
+|-
 
 |===
 
