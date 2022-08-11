@@ -5,7 +5,7 @@
 :author: team-item
 
 ////
-zuletzt bearbeitet 25.05.22
+zuletzt bearbeitet 11.08.22
 ////
 
 //ToDo - includes machen für alle Fragen ab den Kapitel Attribute
@@ -14,7 +14,10 @@ zuletzt bearbeitet 25.05.22
 //ToDo - alle Anker prüfen
 //ToDo - wenn die neue Artikel-UI als standard eingebunden wird, dann die Antworten der letzte beide Fragen unter Allgemein anpassen
 
-Text
+Auf dieser Seite findest du eine Liste der häufig gestellten Fragen zur Artikelverwaltung.
+Die Liste der Fragen wird laufend aktualisiert.
+Vermisst du eine Information oder ist etwas unklar?
+Dann sende uns gern eine Nachricht über die Feedback-Funktion unten auf dieser Seite.
 
 [#100]
 == Allgemeine Fragen
@@ -83,11 +86,12 @@ Links führen zu weiteren Informationen und Schritt-für-Schritt-Anleitungen, di
 --
 
 [.collapseBox]
-.*Wie kann ich sicherstellen, dass meine Content-Mitarbeiter nur Artikelbilder und -Texte ändern können, nicht aber andere sensible Daten?*
+.*Kann ich einschränken, welche Artikeldaten meine Mitarbeiter bearbeiten können? Sie sollen keine sensiblen Daten ändern können.*
 --
 
 //ToDo - sobald die neue Artikel-UI als standard eingebunden wird, dann stattdessen die Frage aus der Seite artikel:verzeichnis (FAQ Kapitel) nehmen und als include an beide Stellen einbinden
 
+Ja.
 Personen mit Backend-Zugriffsrechten können nur mit der Artikelverwaltung arbeiten, wenn ein Admin ihnen Zugriff gewährt hat:
 
 . Wende dich an eine Person mit Administratorrechten für das plentymarkets-System.
@@ -125,7 +129,7 @@ Ein Beispiel für nützliche Rechte eines Content-Mitarbeiters, findest du unten
 == Preise
 
 [.collapseBox]
-.*Kann ich unterschiedliche Preise für die einzelnen Varianten eines Artikels speichern?*
+.*Kann ich unterschiedliche Preise für jede Variante speichern?*
 --
 
 Ja.
@@ -148,7 +152,7 @@ xref:artikel:preise.adoc#[Weitere Informationen].
 --
 
 [.collapseBox]
-.*Mein Lieferant hat mir eine Datei mit neuen EKs geschickt. Wie kann ich die neuen EK-Preise importieren?*
+.*Mein Lieferant hat mir eine Datei mit neuen EKs geschickt. Wie importiere ich die neuen EK-Preise?*
 --
 
 //Frage ist auch im Bereich Massenbearbeitung zu finden.
@@ -238,10 +242,19 @@ include::page$attribute.adoc[tag=faq-add-attribute-existing-item]
 --
 
 [.collapseBox]
-.*#Ich will Varianten# erzeugen. Mir werden aber nicht alle Attribute zur Auswahl angeboten. Wo liegt der Fehler?*
+.*Ich will Varianten erzeugen. Mir werden aber nicht alle Attribute zur Auswahl angeboten. Wo liegt der Fehler?*
 --
 
-Text
+Wahrscheinlich hast du beim Erstellen des Artikels Attribute für die Hauptvariante gewählt.
+Obwohl dies technisch möglich ist, raten wir davon ab.
+
+* *_Warum?_*:
+Verknüpfst du Attribute bereits bei der Artikelanlage, müssen alle folgenden Varianten zwangsläufig aus den gleichen Attributen erzeugt werden.
+Dies ist nicht der Fall, wenn du beim Erstellen des Artikels keine Attribute verknüpfst.
+Im Nachhinein bist du also viel flexibler.
+* *_Was kannst du jetzt tun?_*:
+** Falls du den Artikel erst vor kurzem erstellt hast und noch nicht mit dem Verkauf begonnen hast, ist es wahrscheinlich am einfachsten, den Artikel zu löschen und ihn neu zu erstellen.
+** Falls du den Artikel bereits verkaufst, d.h. er hat Bestand und wurde auch schon mal bestellt, dann ist es wahrscheinlich am sinnvollsten, einen neuen Artikel anzulegen, damit es keine Probleme mit offenen Bestellungen und vorhandenen Lagerbeständen gibt.
 
 --
 
@@ -298,7 +311,7 @@ include::page$eigenschaften.adoc[tag=faq-properties-filters]
 --
 
 [#500]
-== Beschreibungstexte und Bilder
+== Artikeltexte und Bilder
 
 [.collapseBox]
 .*Wie viele Bilder kann ich pro Artikel hochladen?*
@@ -318,12 +331,35 @@ In diesem Menü gibt es keine Obergrenze.
 --
 
 [.collapseBox]
-.*#Ich muss ziemlich viele Bilder# hochladen. Wie mache ich das am effizientesten?*
+.*Ich muss ziemlich viele Bilder hochladen. Wie mache ich das am effizientesten?*
 --
 
 //denk auch an die fast gleiche Frage under Massenbearbeitung
 
-Text
+. Hinterlege die Artikel-Bilder auf einem Webspace deiner Wahl, z.B. Dropbox, Google Drive oder ähnlichem.
+Die dort hinterlegten Bilder müssen über eine öffentliche URL abrufbar sein.
+. Importiere die Artikel-Bilder mit Hilfe einer CSV-Datei.
+In der CSV-Datei ordnest du einem Artikel anhand seiner ID die Bilder mitsamt gewünschter Position zu.
+
+*_Eingabeformat_*:
+`Bild1url;positionBild1,Bild2url;positionBild2`
+
+*_Beispiel CSV-Datei_*:
+[cols="1,4a"]
+|===
+|Artikel-ID	|Bild-URLs
+
+|1
+|`https://www.beispielwebspace.de/bild1.png;1`
+
+|2
+|`https://www.beispielwebspace.de/bild2.png;1,https://www.beispielwebspace.de/bild3.png;2`
+|===
+
+*_Weitere Informationen_*:
+
+* xref:daten:elasticSync-artikel.adoc#1350[Nötiges Zuordnungsfeld: Multi-URL (kommasepariert)]
+* xref:artikel:import.adoc#600[Praktisches Beispiel]
 
 --
 
@@ -509,18 +545,32 @@ include::page$massenbearbeitung.adoc[tag=search-replace-config]
 --
 
 [.collapseBox]
-.*#Ich verkaufe bereits# auf Amazon, bin aber neu bei plentymarkets. Kann ich meine Artikeldaten von Amazon übernehmen?*
+.*Ich verkaufe bereits auf Amazon, bin aber neu bei plentymarkets. Kann ich meine Artikeldaten von Amazon übernehmen?*
 --
 
-Text
+TIP: Es gibt keine direkte Möglichkeit, Artikeldaten von Amazon ins plentymarkets System zu übertragen.
+Das Verfahren ist eher ein Workaround.
+Falls du bereits auf eBay verkaufst, wird es für dich viel einfacher sein, deine Artikeldaten von eBay zu übernehmen anstatt von Amazon.
+
+. Exportiere deine Artikeldaten aus Amazon.
+Wie genau du die Daten exportierst, bleibt dir überlassen.
+Zum Beispiel, ob du eine sogenannte "reverse feed" Datei anforderst oder eine andere Methode verwendest.
+. Nutze das Import-Tool, um die Daten in plentymarkets zu übertragen.
+.. Stelle dabei sicher, dass die Importdatei alle Pflichtfelder für neue Artikel und Varianten enthält.
+.. Ordne dabei die Informationen in deiner Datei zu den entsprechenden Datenfeldern in plentymarkets.
+
+Falls du noch nicht mit dem Import-Tool vertraut bist, solltest du zunächst einen Blick in die verschiedenen xref:artikel:faq-pim.adoc#400[Hilfsmaterialien] werfen.
+Dort findest du detaillierte Anleitungen und praktische Beispiele.
 
 --
 
 [.collapseBox]
-.*#Ich verkaufe bereits# auf eBay, bin aber neu bei plentymarkets. Kann ich meine Artikeldaten von eBay übernehmen?*
+.*Ich verkaufe bereits auf eBay, bin aber neu bei plentymarkets. Kann ich meine Artikeldaten von eBay übernehmen?*
 --
 
-Text
+Ja.
+Es gibt ein Tool, mit dem du deine eBay-Listings in das System importieren und gleichzeitig Artikel anlegen kannst.
+xref:ebay:ebay-einrichten.adoc#11000[Weitere Informationen zur Nutzung des eBay-Import-Tools].
 
 --
 
@@ -690,10 +740,10 @@ include::page$attribute.adoc[tag=steps-attribute-value-name-translations]
 --
 ////
 
-== Fragen zum Sortiment
+== Spezielle Anwendungsfälle
 
 [.collapseBox]
-.*#Wie kann ich# herausfinden, welche meiner Artikel am häufigsten verkauft werden?*
+.*#Wie finde ich# heraus, welche meiner Artikel am häufigsten verkauft werden?*
 --
 
 Text
