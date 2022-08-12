@@ -12,7 +12,7 @@ Creating an export format:
 → The *New export* tab opens.
 . Carry out the desired settings. Pay attention to the explanations given in {table-price-search-engine}. +
 *_Note:_* There are no item filters set by default. If you do not add any item filters, all items are exported.
-. Save (icon:save[set=plenty]) the settings. +
+. Save (terra:save[]) the settings. +
 → The export format *{export-format}* is given an ID. +
 → The export format is shown in the *Exports* overview.
 . Save the URL displayed in the *URL* field at {price-search-engine}.
@@ -22,7 +22,7 @@ Creating an export format:
 [#export-format]
 .Format settings and recommended item filters for the format *{export-format}*
 [cols="1,3a"]
-|====
+|===
 | Setting | Explanation
 
 2+^| *Settings*
@@ -100,7 +100,10 @@ a| Select the items you wish to export. To do so, select one or more item filter
 
 | *Order referrer*
 | Select the order referrer that should be assigned during the order import from the drop-down list. +
-→ The selected referrer is added to the product URL so that sales can be analysed later.
+→ The selected referrer is added to the product URL so that sales can be analysed later. +
+ifdef::awin,basic-price-search-engine,beezup,belboon,econda,KUPONA,mybestbrands,shopzilla[]
+*_Note:_* For {price-search-engine}, no order referrer is preconfigured in your plentymarkets system. Therefore, you have to <<#create-order-referrer, create the order referrer for {price-search-engine} manually>> in the *Setup » Orders » Order referrer* menu.
+endif::awin,basic-price-search-engine,beezup,belboon,econda,KUPONA,mybestbrands,shopzilla[]
 
 | *Marketplace account*
 | Select the marketplace account from the drop-down list.
@@ -119,27 +122,21 @@ Enter a number into the *Maximum number of characters (def. text)* field if desi
 Activate the *Remove HTML tags* option if you want HTML tags to be removed during the export. +
 If you only want to allow specific HTML tags to be exported, then enter these tags into the * Permitted HTML tags, separated by comma (def. text)* field. Use commas to separate multiple tags.
 endif::[]
-ifndef::preview[]
-This option does not affect this format.
-endif::[]
+ifndef::preview[This option does not affect this format.]
 
 | *Description*
 |
 ifdef::description[]
 Select the text that you want to transfer as description. Enter a number into the *Maximum number of characters (def. text)* field if desired. This specifies how many characters are exported for the description. Activate the option *Remove HTML tags* if you want HTML tags to be removed during the export. If you only want to allow specific HTML tags to be exported, then enter these tags into the field * Permitted HTML tags, separated by comma (def. text)* field. Use commas to separate multiple tags.
 endif::[]
-ifndef::description[]
-This option does not affect this format.
-endif::[]
+ifndef::description[This option does not affect this format.]
 
 | *Target country*
 | Select the target country from the drop-down list.
 
 | *Barcode*
 |
-ifdef::barcode[]
-This option does not affect this format.
-endif::[]
+ifdef::barcode[This option does not affect this format.]
 ifndef::barcode[]
 Select the ASIN, ISBN or a GTIN from the drop-down list. +
 *_Note:_* The barcode has to be linked to the order referrer selected above. Otherwise, the barcode will not be exported.
@@ -147,54 +144,36 @@ endif::[]
 
 | *Image*
 a|
-ifdef::first-image[]
-Select *First image*.
-endif::[]
+ifdef::first-image[Select *First image*.]
 ifdef::select-image[]
 Select *Position 0* or *First image*. +
 
 * *Position 0* = An image with position 0 is transferred.
 * *First image* = The first image is transferred.
 endif::[]
-ifndef::first-image,select-image[]
-This option does not affect this format.
-endif::[]
+ifndef::first-image,select-image[This option does not affect this format.]
 
 | *Image position of the energy label*
 |
 ifdef::energy[]
 Enter the position of the energy label. Every image that should be transferred as an energy label has to have this position.
 endif::[]
-ifndef::energy[]
-This option does not affect this format.
-endif::[]
+ifndef::energy[This option does not affect this format.]
 
 | *Stock buffer*
 |
-ifdef::buffer[]
-The stock buffer for variations with limitation to the net stock.
-endif::[]
-ifndef::buffer[]
-This option does not affect this format.
-endif::[]
+ifdef::buffer[The stock buffer for variations with limitation to the net stock.]
+ifndef::buffer[This option does not affect this format.]
 
 | *Stock for variations without stock limitation*
 |
-ifdef::stock-limit[]
-The stock for variations without stock limitation.
-endif::[]
-ifndef::stock-limit[]
-This option does not affect this format.
-endif::[]
+ifdef::stock-limit[The stock for variations without stock limitation.]
+ifndef::stock-limit[This option does not affect this format.]
 
 | *Stock for variations with no stock administration*
 |
-ifdef::nostock[]
-The stock for variations without stock administration.
-endif::[]
-ifndef::nostock[]
-This option does not affect this format.
-endif::[]
+ifdef::nostock[The stock for variations without stock administration.]
+ifndef::nostock[This option does not affect this format.]
 
 | *Live currency conversion*
 | Activate this option to convert the price into the currency of the selected country of delivery. The price has to be released for the corresponding currency.
@@ -204,39 +183,25 @@ endif::[]
 
 | *Offer price*
 |
-ifdef::offerprice[]
-Activate to transfer the offer price.
-endif::[]
-ifndef::offerprice[]
-This option does not affect this format.
-endif::[]
+ifdef::offerprice[Activate to transfer the offer price.]
+ifndef::offerpriceThis option does not affect this format.]
 
 | *RRP*
 |
-ifdef::rrp[]
-Activate to transfer the RRP.
-endif::[]
-ifndef::rrp[]
-This option does not affect this format.
-endif::[]
+ifdef::rrp[Activate to transfer the RRP.]
+ifndef::rrp[This option does not affect this format.]
 
 | *Shipping costs*
 |
 ifdef::shipping[]
 Activate this option if you want to use the shipping costs that are saved in a configuration. If this option is activated, then you are able to select the configuration and the payment method from the drop-down lists. Activate the option *Transfer flat rate shipping charge* if you want to use a flat rate shipping charge. If this option is activated, a value has to be entered in the line underneath.
 endif::[]
-ifndef::shipping[]
-This option does not affect this format.
-endif::[]
+ifndef::shipping[This option does not affect this format.]
 
 | *VAT note*
 |
-ifdef::vat[]
-Enter text. This amount includes the VAT but does not include shipping.
-endif::[]
-ifndef::vat[]
-This option does not affect this format.
-endif::[]
+ifdef::vat[Enter a text. This amount includes the VAT but does not include shipping.]
+ifndef::vat[This option does not affect this format.]
 
 | *Item availability*
 |
@@ -247,10 +212,8 @@ endif::[]
 ifdef::overwrite[]
 Activate the *overwrite* option and enter item availabilities into the fields *1* to *10*. The fields represent the IDs of the availabilities. This overwrites the item availabilities that are saved in the *Setup » Item » Availability* menu.
 endif::[]
-ifndef::overwrite-activate,overwrite[]
-This option does not affect this format.
-endif::[]
-|====
+ifndef::overwrite-activate,overwrite[This option does not affect this format.]
+|===
 
 ////
 :export-format: xxx-Plugin

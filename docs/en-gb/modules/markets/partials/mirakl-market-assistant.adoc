@@ -9,19 +9,21 @@ include::partial$assistant-basic-instructions.adoc[]
 --
 [[table-{market}-basic-settings-assistant]]
 [width="100%"]
-[cols="1,2a"]
+[cols="1,3a"]
 |======
 |Setting |Explanation
 
 2+^| Step *Authentication*
 
 | API Environment
-a| Select an API environment from the drop-down list. Get in touch with your contact person at {market} to confirm which API environment you should select. +
-*_Note:_* If you switch to another API environment, e.g. from Test to Productive mode, you need to generate a new <<#api-key, API key>>.
+| Select an API environment from the drop-down list. Get in touch with your contact person at {market} to confirm which API environment you should select.
+
+*_Note:_* If you switch to another API environment, for example from Test to Productive mode, you need to generate a new <<#api-key, API key>>.
 
 | API key
-| Enter the <<#api-key, API key>> that you generated. +
-*_Note:_* If you switch to another API environment, e.g. from Test to Productive mode, you need to generate a new <<#api-key, API key>>.
+| Enter the <<#api-key, API key>> that you generated.
+
+*_Note:_* If you switch to another API environment, for example from Test to Productive mode, you need to generate a new <<#api-key, API key>>.
 
 | Client selection
 | Select the client (shop) that your orders should be assigned to.
@@ -31,6 +33,9 @@ a| Select an API environment from the drop-down list. Get in touch with your con
 | Data exchange
 | Select processes for data exchange. This selection determines which data is exchanged between plentymarkets and Mirakl. +
 
+*Synchronize stock* = Activate to export offer data. +
+*Export products* = Activate to export product data.
+
 ifdef::mediamarkt[]
 *_Important:_* Do _not_ activate the import and export for order invoices.
 endif::mediamarkt[]
@@ -38,7 +43,7 @@ endif::mediamarkt[]
 2+^| Step *Refund mapping*
 
 |Refund mapping
-a|
+|
 ifdef::conrad,voelkner[]
 Map the refund reasons of {market} to plentymarkets order statuses.
 
@@ -62,7 +67,7 @@ endif::mediamarkt[]
 2+^| Step *Cancellation mapping*
 
 | Cancellation mapping
-a|
+|
 Map the cancellation reasons of {market} to plentymarkets order statuses.
 
 . Click on *Add new entry*. +
@@ -94,36 +99,78 @@ endif::voelkner[]
 2+^| Step *Shipping profile mapping*
 
 | Shipping profile mapping
-| For each shipping profile in plentymarkets, enter the corresponding ID of the shipping service provider. You can find the ID in the Mirakl menu *{mirakl-menu-shipping}*.
+| For each shipping profile in plentymarkets, enter the corresponding abbreviation of the shipping service provider. You can find the ID in the Mirakl menu *{mirakl-menu-shipping}*.
 
 2+^| Step *Offer properties mapping*
 
-| Offer properties mapping
-a| From the drop-down list *Logistic class*, select the property *{market} Logistic class*. +
-The *Leadtime to ship* and *Reverse charge* properties are selected by default.
+| *Reverse charge*
+| The _reverse charge procedure_. The property is created and mapped automatically. Valid values are `true` or `false`.
 
-* *Reverse charge*: This is the so-called _Reverse-charge procedure_. You can either transfer `true` or `false`.
+| *Leadtime to ship*
+| The _lead time to ship_. This is the time in days that a seller needs from accepting the order to registering the shipping. The property is created and mapped automatically. A whole number between 1 and 45 has to be transferred.
 
-* *Leadtime to ship*: The so-called _leadtime-to-ship_ is the time that a seller needs from the order acceptance to the shipping registration. A whole number between 1 and 45 has to be transferred.
+| *Logistics class*
+| From the drop-down list *Logistic class*, select the property *{market} Logistic class*.
 
-* *Logistics class*: This is the connection of a variation with a certain market shipping profile. The shipping profiles of the market are listed in the back end in the *{mirakl-menu-shipping}* menu. The value in brackets is the value that has to be transferred.
+This is the connection of a variation with a certain market shipping profile. The shipping profiles of the market are listed in the back end in the *{mirakl-menu-shipping}* menu. The value in brackets is the value that has to be exported.
 
-* *update-delete*: This is the option to delete an offer. If this field is not filled, *update* will be used automatically.
+| *update-delete*
+| The option to delete an offer. If the field is not filled, *update* will be used automatically.
 
 ifdef::conrad,voelkner[]
-* *product-id-type*: This field does not have to be defined. *SHOP_SKU* is transferred by default.
+| *product-id-type*
+| This field does not have to be defined. *SHOP_SKU* is transferred by default.
 endif::conrad,voelkner[]
 
 ifdef::voelkner[]
-* *Base price gross content quantity*: Here you can define the gross content quantity for the base price at the variation.
+| *Base price gross content quantity:*
+| Define the gross content quantity for the base price at the variation.
+endif::voelkner[]
 
-* *Product base price unit of measurement*: Here you can define the unit of measurement of the base price unit at the variation. Valid values are `KG`, `L`, `M`, `M2` or `M3`.
+ifdef::voelkner[]
+| *Product base price unit of measurement*
+| Define the unit of measurement of the base price unit at the variation. Valid values are `KG`, `L`, `M`, `M2` or `M3`.
+endif::voelkner[]
+
+ifdef::voelkner[]
+| *Voelkner discount start time*
+| A property *Voelkner discount start time* is created and mapped automatically. This property is used to specify when the <<discount-prices, discount period>> of a variation starts.
+endif::voelkner[]
+
+ifdef::voelkner[]
+| *Voelkner discount end time*
+| A property *Voelkner discount end time* is created and mapped automatically. This property is used to specify when the <<discount-prices, discount period>> of a variation ends.
 endif::voelkner[]
 
 2+^| Step *Offer export settings*
 
-| Offer export settings
-| Here you can define the amount of stock that is exported for variations that are not limited to net stock or for variations where no stock is managed. Offers of those variations are exported once at night.
+| *Replace stock amount for items not limited to stock* +
+
+*Quantity for items that are not limited to the stock*
+| What stock quantity do you want to export for variations without stock limitation?
+
+[cols="1a,8a"]
+!===
+! material:toggle_off[]
+! The net stock is exported for all variations.
+
+! material:toggle_on[]
+! For variations that are not limited to stock, the quantity is exported that you enter in the field *Quantity for items that are not limited to the stock*.
+
+. Activate the option.
+. In the field *Quantity for items not limited to stock*, enter a number. +
+→ This number is exported as the stock for all variations without stock limitation. +
+  *_Important:_* If you do not enter a number or enter "0", the net stock is exported for all variations.
+!===
+
+*_What are variations without stock limitation?_*
+
+Variations without stock limitation are variations with the setting *Limitation* set to one of the following options:
+
+* *None*
+* *Do not administer stock for this variation*
+
+You can find this setting in the menu *Item » Edit item » [Open variation] » Tab: Settings » Area: Availability » Drop-down list: Limitation]*. This setting is valid for all sales channels, not just for {market}.
 
 |======
 --

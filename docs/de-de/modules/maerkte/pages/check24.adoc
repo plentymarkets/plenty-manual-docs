@@ -33,11 +33,14 @@ Schnittstelle zu Check24 einrichten:
 . Aktiviere den automatischen Datenaustausch.
 . Gib als Benutzernamen deinen Partnerlogin für den FTP-Zugang ein.
 . Gib dein Passwort für den FTP-Zugang ein.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
-Die Anbindung des Marktplatzes stellt folgende automatisierte Prozesse bereit:
-
-* stündlicher Auftragsabgleich
+[TIP]
+.Häufigkeit des Datenaustauschs
+====
+Nachdem du Check24 in plentymarkets eingerichtet hast, findet der Datenaustausch in den folgenden Intervallen statt: +
+- Auftragsimport alle 15 Minuten
+====
 
 [#250]
 === Auftragsherkunft aktivieren
@@ -104,7 +107,7 @@ Die URL für den Produktexport (Katalog-Format *Check24*) kannst du nicht selbst
 
 In diesem Kapitel wird beschrieben, wie du deine Artikel zu Check24 überträgst. Im alten Plugin werden Artikel über den elastischen Export mit dem Datenformaten Check24DE zu Check24 exportiert.
 
-NOTE: Der Elastische Export und das Exportformat für Check24 werden für den Marktplatz-Export nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, <<#900, Kataloge für Check24 zu erstellen>>.
+NOTE: Der Elastische Export und das Exportformat für Check24 werden für den Marktplatz-Export nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, <<#catalogue-export, Kataloge für Check24 zu erstellen>>.
 
 ==== Plugins für Elastischen Export installieren
 
@@ -258,7 +261,7 @@ Erstelle wie unten beschrieben das Exportformat *Check24DE-Plugin* für Check24.
 | Diese Option ist für dieses Format nicht relevant.
 
 | *Artikelverfügbarkeit*
-| Option *überschreiben* aktivieren und in die Felder *1* bis *10*, die die ID der Verfügbarkeit darstellen, Artikelverfügbarkeiten eintragen. Somit werden die Artikelverfügbarkeiten, die im Menü *System » Artikel » Verfügbarkeit* eingestellt wurden, überschrieben.
+| Option *überschreiben* aktivieren und in die Felder *1* bis *10*, die die ID der Verfügbarkeit darstellen, Artikelverfügbarkeiten eintragen. Somit werden die Artikelverfügbarkeiten, die im Menü *Einrichtung » Artikel » Verfügbarkeit* eingestellt wurden, überschrieben.
 |===
 
 [#500-2]
@@ -355,6 +358,18 @@ Du kannst Artikeldaten jetzt auch über Katalog-Formate zu Check24 übertragen. 
 
 include::partial$catalogue-new-to-text.adoc[]
 
+[#catalogue-formats-check24]
+==== Katalog-Formate für Check24
+
+Für Check24 gibt es verschiedene Katalog-Formate:
+
+* *Check24*: Dieses Katalog-Format enthält Produktdaten.
+* *Check24 Offer*: Dieses Katalog-Format enthält Angebotsdaten.
+* *Check24 Furniture*: Dieses Katalog-Format enthält Artikeldaten für die Check24-Kategorie *Möbel*.
+* *Check24 Fashion*: Dieses Katalog-Format ist veraltet, da es die Fashion-Kategorie auf Check24 nicht mehr gibt. Es sollte nur in Ausnahmefällen und in Absprache mit Check24 genutzt werden.
+
+Weitere Informationen zu den verschiedenen Formaten findest du im Kapitel <<#check24-offer-product-exports, Angebotsexport und Produktexport bei Check24>>.
+
 [#catalogue-creation]
 ==== Katalog erstellen
 
@@ -362,23 +377,13 @@ Artikeldaten werden über das Marktplatz-Format *Check24* zu Check24 übertragen
 
 Check24 ruft die Artikeldaten über eine URL ab. Diese URL findest du in deinem Katalog für Check24 im Menü *Daten » Kataloge*. Damit deine Artikeldaten zu Check24 exportiert werden können, musst du diese <<#url-check24-katalog, URL kopieren und in deinem Konto bei Check24 speichern>>, nachdem du den Katalog erstellt hast.
 
-[TIP]
-.Katalog-Formate für Check24
-====
-Für Check24 gibt es die Katalog-Formate *Check24*, *Check24 Offer* und *Check24 Fashion*. +
-Das Format *Check24 Offer* enthält Angebotsdaten. +
-Das Katalog-Format *Check24* enthält Produktdaten. +
-Das Katalog-Format *Check24 Fashion* ist veraltet, da es die Fashion-Kategorie auf Check24 nicht mehr gibt. Es sollte nur in Ausnahmefällen und in Absprache mit Check24 genutzt werden. +
-Weitere Informationen zu den verschiedenen Formaten findest du im Kapitel <<#check24-offer-product-exports, Angebotsexport und Produktexport bei Check24>>.
-====
-
 :catalogue-template-name: Check24
 :catalogue-plugin:
 :one-per-category:
 
 include::partial$catalogue-creation.adoc[]
 
-[#catalogue-mapping]
+[#data-field-mappings]
 ==== Datenfelder im Katalog zuordnen
 
 Ordne nun die Datenfelder von Check24 den in plentymarkets gespeicherten Artikeldaten zu.
@@ -391,15 +396,21 @@ include::partial$catalogue-mapping.adoc[]
 include::partial$recommendation-text.adoc[]
 
 [.collapseBox]
-.Liste mit empfohlenen Datenfeld-Zuordnungen für Check24
+.Liste mit empfohlenen Datenfeld-Zuordnungen für *Check24*
 --
 include::partial$check24-recommended-mappings.adoc[]
 --
 
 [.collapseBox]
-.Liste mit empfohlenen Datenfeld-Zuordnungen für Check24 Offer
+.Liste mit empfohlenen Datenfeld-Zuordnungen für *Check24 Offer*
 --
 include::partial$check24offer-recommended-mappings.adoc[]
+--
+
+[.collapseBox]
+.Liste mit empfohlenen Datenfeld-Zuordnungen für *Check24 Furniture*
+--
+include::partial$check24-furniture-recommended-mappings.adoc[]
 --
 
 [#filter-export]
@@ -432,8 +443,8 @@ URL kopieren:
 → Die Katalog-Übersicht wird geöffnet.
 . Klicke auf den Katalog für das Format *Check24 Offer*. +
 → Der Katalog wird geöffnet.
-. Öffne in der Navigation links das Tab *Einstellungen* (icon:settings[set=material]).
-. Klicke unter *Download-Einstellungen* im Bereich *Optionen für öffentlichen Link* auf *URL kopieren* (icon:content_copy[set=material]).
+. Öffne in der Navigation links das Tab *Einstellungen* (material:settings[]).
+. Klicke unter *Download-Einstellungen* im Bereich *Optionen für öffentlichen Link* auf *URL kopieren* (material:content_copy[]).
 → Die URL wird in die Zwischenablage kopiert.
 . Speichere die URL im Backend von Check24.
 
@@ -510,7 +521,7 @@ Das Format Check24 Offer ist neu. Daher gibt es dafür kein vergleichbares Forma
 [#950]
 == Auftragsimport
 
-Beim stündlichen Auftragsimport wird der Auftrag automatisch in *Status [5] Freigabe Versand* gesetzt. Als Rechnungsadresse wird immer Check24 übermittelt. Die Adresse von Kund:innen dient lediglich als Lieferadresse.
+Beim viertelstündlichen Auftragsimport wird der Auftrag automatisch in *Status [5] Freigabe Versand* gesetzt. Als Rechnungsadresse wird immer Check24 übermittelt. Die Adresse von Kund:innen dient lediglich als Lieferadresse.
 
 [#975]
 == Versandbestätigungen senden
