@@ -4,7 +4,7 @@
 :keywords: Bank, Bankdaten, EBICS, SEPA, SEPA-Lastschriftmandat, Lastschrift, Bankinformationen, Konto, Bankkonto, Kontoinhaber, Kontonummer, Konto-Nr., Konto-Nummer, BLZ, Bankleitzahl, Account, IBAN, Bankverbindung, BIC, Mandat, Einzugsermächtigung, Abbuchungsauftrag, Bankdaten, Zahlungsverkehrsdaten, EBICS-Konto, Vormerkposten, Geschäftskonto, Geschäftskonten, Auszugsbereitstellung, buchungstagsorientiert, Buchungstag, auszugsorientiert, Auszugsnummer, Auszusgserstellung, technischer Teilnehmer, Buchung, Buchungen, STA, VMK, EU Typ, EU TYP T, Typ T, Kontoeinstellungen, Tagesumsatz, Tagesumsätze, Geschäftsvorfall, Geschäftsvorfälle, Zahlungsabruf, manueller Zahlungsabruf, INI, INI-Brief, Initialisierung, HIA, CAMT, Abrufintervall, Transaktion, Kreditinstitut, Überweisung, Lastschrift, Firmenlastschrift, Zahlungsempfänger, Gläubiger-Identifikationssnummer, Mandatsreferenz
 :author: team-fulfillment-payment
 
-Auf dieser Handbuchseite erfährst du, wie du deine <<#eigene-bankdaten, Bankdaten>> und die <<#bankdaten-kunden, Bankdaten deiner Kund:innen>> in plentymarkets speicherst und wie du <<#69, EBICS>> und <<#220, SEPA>> einrichtest.
+Auf dieser Handbuchseite erfährst du, wie du deine <<#eigene-bankdaten, Bankdaten>> und die <<#bankdaten-kunden, Bankdaten deiner Kund:innen>> in plentymarkets speicherst und wie du <<#ebics, EBICS>> und <<#220, SEPA>> einrichtest.
 
 [#eigene-bankdaten]
 == Eigene Bankdaten speichern
@@ -117,30 +117,32 @@ EBICS (Electronic Banking Internet Communication Standard) bezeichnet einen in D
 
 Für die Kommunikation per EBICS werden deine Umsätze in einer Datei ähnlich einem Kontoauszug bei deiner Bank gespeichert. Die Datei wird von plentymarkets importiert und die Umsätze werden in deinem plentymarkets System gebucht. Das verknüpfte EBICS-Konto stellt eine Art Verbundkonto dar, das mehrere Bankkonten umfassen kann. Täglich wird eine Datei mit allen Umsätzen des EBICS-Kontos erzeugt (Format CAMT053 oder MT940), sofern diese bei der Bank aktiviert sind. Diese Datei kann dann nachts abgerufen werden und am nächsten Morgen stehen alle Eingänge des Tages zur Verfügung. Außerdem werden täglich mehrere Dateien mit Vormerkposten erzeugt (Format CAMT052 oder MT942), die ebenfalls abgerufen werden können, um die Vormerkposten in dein plentymarkets System einzubuchen.
 
-EBICS wird mit dem EBICS-Plugin in dein System eingebunden. Lade dafür das EBICS-Plugin im link:https://marketplace.plentymarkets.com/ebics_5098[plentyMarketplace^] herunter. Für die Einrichtung von EBICS musst du einige grundlegende Einstellungen in deinem plentymarkets System ausführen.
+EBICS wird mit dem EBICS-Plugin in dein System eingebunden. Lade dafür das EBICS-Plugin im link:https://marketplace.plentymarkets.com/ebics_5098[plentyMarketplace^] herunter. Um EBICS einzurichten, musst du einige grundlegende Einstellungen in deinem plentymarkets System ausführen. Diese Einstellungen werden in den folgenden Unterkapiteln erläutert.
 
+//// 
 [IMPORTANT]
 .EBICS-Modul buchen
 ====
 Um ein Konto anzulegen, muss zuerst das EBICS-Modul über den xref:business-entscheidungen:dein-vertrag.adoc#30[Konfigurator] gebucht werden.
 ====
+////
 
 [#70]
 === EBICS bei deiner Bank beantragen
 
-Der erste Schritt zur Nutzung von EBICS in plentymarkets ist die Anmeldung für das Verfahren bei deiner Bank. Von dieser erhältst du Dokumente, die du ausfüllst und zurückschickst. Daraufhin erhältst du die für die Nutzung benötigte Daten wie z.B. die Bank-Kunden-ID von deiner Bank. +
+Der erste Schritt zur Nutzung von EBICS in plentymarkets ist die Anmeldung für das Verfahren bei deiner Bank. Von deiner Bank erhältst du Dokumente, die du ausfüllst und zurückschickst. Daraufhin erhältst du von der Bank die für die Nutzung benötigte Daten wie z.B. die Bank-Kunden-ID. +
 Die folgenden Angaben in den Unterlagen sind für EBICS Pflicht.
 
 [IMPORTANT]
 .Bestehende EBICS-Konten
 ====
-Bereits bestehende und verwendete EBICS-Konten dürfen nicht in plentymarkets eingerichtet werden. Ein EBICS-Konto kann mehrere Benutzer, Teilnehmer genannt, haben. Beantrage also ggf. einen neuen Teilnehmer (auch technische Teilnehmer möglich), den du ausschließlich für plentymarkets verwendest.
+Bereits bestehende und verwendete EBICS-Konten dürfen _nicht_ in plentymarkets eingerichtet werden. Ein EBICS-Konto kann mehrere Benutzer haben. Benutzer werden unter EBICS als Teilnehmer bezeichnet. Beantrage also ggf. einen neuen Teilnehmer (auch technische Teilnehmer möglich), den du ausschließlich für plentymarkets verwendest.
 ====
 
 [#80]
 ==== Kontonummern
 
-Gib die Kontonummern der Konten ein, für die der Abruf der Umsätze in plentymarkets eingebucht werden soll. Die Angabe von Kontonummern ist optional, da der Abruf technisch über die Benutzerdaten erfolgt.
+Gib die Kontonummern der Konten ein, für die der Abruf der Umsätze in plentymarkets eingebucht werden soll. Die Angabe von Kontonummern ist optional, weil der Abruf technisch über die Benutzerdaten erfolgt.
 
 [IMPORTANT]
 .Nur Geschäftskonten speichern
@@ -258,7 +260,7 @@ Diese Option ist nur beim Erstellen eines Kontos verfügbar.
 |Wähle aus der Dropdown-Liste, mit welchem Verfahren die Vormerkposten abgerufen werden sollen. Details dazu erhältst du von deiner Bank.
 
 | *Tagesumsätze*
-|Wähle aus der Dropdown-Liste wählen, mit welchem Verfahren die Tagesumsätze abgerufen werden sollen. Details dazu erhältst du von deiner Bank.
+|Wähle aus der Dropdown-Liste, mit welchem Verfahren die Tagesumsätze abgerufen werden sollen. Details dazu erhältst du von deiner Bank.
 
 | *IBAN/Kontonummer*
 |Gib die IBANs bzw. Kontonummern der verknüpften Konten kommasepariert ein. Das CAMT-Format benötigt die Eingabe der IBAN, das MT-Format benötigt die Eingabe der Kontonummer.
@@ -313,7 +315,7 @@ Speichere nach einem xref:business-entscheidungen:domains.adoc#[Domainwechsel] d
 
 | *INI-Brief*
 |Erstellt aus den generierten Schlüsseln einen INI-Brief als PDF und lädt das Dokument herunter. Dieser Brief muss ausgedruckt und an die Bank geschickt werden. Die Schaltfläche ist inaktiv, bis die Schlüssel erfolgreich erstellt wurden. +
-*_Hinweis:_* Für den fehlerfreien Download des INI-Briefs muss der Pop-up-Blocker deines Browsers deaktiviert sein.
+*_Hinweis:_* Für den fehlerfreien Download des INI-Briefs musst du den den Pop-up-Blocker deines Browsers deaktivieren.
 
 | *Initialisierung abschließen (HPB)*
 |Schließt den Initialisierungsvorgang mit der Bank ab.
@@ -341,37 +343,39 @@ Speichere nach einem xref:business-entscheidungen:domains.adoc#[Domainwechsel] d
 ====
 Nimm Änderungen nur nach Rücksprache mit deiner Bank vor. Wenn du z.B. die neuen CAMT-Formate nutzen möchtest, kläre mit deiner Bank, ob das Format unterstützt wird und lasse das Format aktivieren. Passe dann die Kontoeinstellungen und ggf. die Vormerkposten wie hier beschrieben an.
 
-Wenn ein Konto zurückgesetzt wurde und deine Bank neue Schlüssel benötigt, empfehlen wir, den betreffenden EBICS-Account in plentymarkets neu einzurichten, da nur dann neue Schlüssel erzeugt werden.
+Wenn ein Konto zurückgesetzt wurde und deine Bank neue Schlüssel benötigt, empfehlen wir, den betreffenden EBICS-Account in plentymarkets neu einzurichten, weil nur dann neue Schlüssel erzeugt werden.
 ====
 
 [#140]
 ==== Konto initialisieren
 
-Nachdem du die Zugangsdaten in plentymarkets eingegeben hast, meldet sich plentymarkets auf elektronischem Weg bei deiner Bank an. Für einen EBICS-Abruf sind geheime Schlüsselwerte erforderlich, die programmintern generiert werden. Nachdem die Schlüssel erzeugt wurden und die elektronische Erstanmeldung abgeschlossen ist, müssen die Schlüssel unterschrieben und in ausgedruckter Form an die Bank geliefert werden. Nur der in plentymarkets gespeicherte Teilnehmer ist zu dieser Unterschrift berechtigt. Die Bank wird keine Freigabe der EBICS-Schnittstelle erteilen, wenn die Unterschrift nicht von genau diesem gespeicherten Teilnehmer stammt.
+Nachdem du die Zugangsdaten in plentymarkets eingegeben hast, meldet sich plentymarkets auf elektronischem Weg bei deiner Bank an. Für einen EBICS-Abruf sind geheime Schlüsselwerte erforderlich, die programmintern generiert werden. +
+Nachdem die Schlüssel erzeugt wurden und die elektronische Erstanmeldung abgeschlossen ist, müssen die Schlüssel unterschrieben und in ausgedruckter Form an die Bank geliefert werden. +
+*_Beachte:_* Nur der in plentymarkets gespeicherte Teilnehmer ist zu dieser Unterschrift berechtigt. Die Bank wird _keine_ Freigabe der EBICS-Schnittstelle erteilen, wenn die Unterschrift nicht von genau diesem gespeicherten Teilnehmer stammt.
 
 [TIP]
 .Pop-up-Blocker im Browser
 ====
-Für den fehlerfreien Download des INI-Briefs muss der Pop-up-Blocker deines Browsers deaktiviert sein.
+Für den fehlerfreien Download des INI-Briefs musst du den Pop-up-Blocker deines Browsers deaktivieren.
 ====
 
 [.instruction]
 Konto initialisieren:
 
 . Öffne das Menü *Einrichtung » Aufträge » Zahlung » Plugins » EBICS*.
-. Klicke auf der Karte des Kontos, das du initialisieren willst, auf *Bearbeiten*. +
-→ Das Tab Kontoeinstellungen wird geöffnet.
+. Klicke auf der Karte des Kontos, das du initialisieren möchtest, auf *Bearbeiten*. +
+→ Das Tab *Kontoeinstellungen* wird geöffnet.
 . Klicke auf *Konto initialisieren*. +
-→ Die Schlüssel werden generiert, INI und HIA werden ausgeführt. +
-→ Sind alle Vorgänge erfolgreich abgeschlossen, wird die Schaltfläche INI-Brief erstellen aktiviert.
+→ Die Schlüssel werden generiert. INI und HIA werden ausgeführt. +
+→ Wenn alle Vorgänge erfolgreich abgeschlossen sind, wird die Schaltfläche *INI-Brief erstellen* aktiviert.
 . Klicke auf *INI-Brief erstellen*. +
-→ Der INI-Brief wird als pdf-Dokument heruntergeladen.
+→ Der INI-Brief wird als PDF-Dokument heruntergeladen.
 . Unterschreibe den INI-Brief und übermittele ihn an deine Bank. +
 → Die Bank prüft die Daten und gibt das Konto frei. Du erfährst von deiner Bank, wann dieser Vorgang abgeschlossen ist.
 . Klicke auf *Initialisierung abschließen (HPB)*. +
 → Das Konto ist erfolgreich initialisiert.
 
-Sind alle Werte bei der Bank eingegangen, werden die ausgedruckten Werte mit den elektronisch gesendeten Werten verglichen und die EBICS-Schnittstelle wird freigegeben. Ab diesem Moment werden die Transaktionen in den unten beschriebenen Intervallen abgerufen.
+Wenn alle Werte bei der Bank eingegangen sind, werden die ausgedruckten Werte mit den elektronisch gesendeten Werten verglichen und die EBICS-Schnittstelle wird freigegeben. Ab diesem Moment werden die Transaktionen in den <<#150, unten beschriebenen Intervallen>> abgerufen.
 
 [#150]
 === Abrufintervalle für Transaktionen
@@ -381,12 +385,12 @@ Deine Bank stellt maximal zweimal täglich die Transaktionen des jeweiligen Tage
 [#160]
 === Abrufintervalle Vormerkposten
 
-Da die Zeiten, in denen die Vormerkposten bereitgestellt werden, von Kreditinstitut zu Kreditinstitut unterschiedlich sind, ruft plentymarkets die Daten, falls verfügbar, zwischen 8:00 und 18:00 stündlich von den Kreditinstituten ab. Bei EBICS-Buchungen mit unbestätigtem Vormerkposten wird die Angabe *Vormerkposten* in roter Schrift dargestellt. Wird der Vormerkposten bestätigt, wechselt der Schriftzug von rot auf grün. Zusätzlich wird die bestätigte Buchung dem entsprechenden Auftrag zugeordnet, ohne die Zahlung nochmals zu buchen. Damit Vormerkposten bestätigt werden, ist die Aktivierung der Tagesumsätze erforderlich. Beachte dazu die Erläuterungen in <<#table-ebics-settings>>.
+Weil die Zeiten, in denen die Vormerkposten bereitgestellt werden, von Kreditinstitut zu Kreditinstitut unterschiedlich sind, ruft plentymarkets die Daten, falls verfügbar, zwischen 8:00 und 18:00 stündlich von den Kreditinstituten ab. Bei EBICS-Buchungen mit unbestätigtem Vormerkposten wird die Angabe *Vormerkposten* in roter Schrift dargestellt. Wird der Vormerkposten bestätigt, wechselt der Schriftzug von rot auf grün. Zusätzlich wird die bestätigte Buchung dem entsprechenden Auftrag zugeordnet, ohne die Zahlung nochmals zu buchen. Damit Vormerkposten bestätigt werden, ist die Aktivierung der Tagesumsätze erforderlich. Beachte dazu die Erläuterungen in <<#table-ebics-settings>>.
 
 [#170]
 === Geschäftsvorfälle verwalten
 
-Geschäftsvorfälle sind die bankfachlichen Auftragsarten, die du mit deinem Kreditinstitut abwickelst. Nach dem Anlegen sind noch keine Geschäftsvorfälle aktiviert. Für den automatischen Import und die Zuordnung der üblichen Geschäftsvorfälle aktiviere die folgenden Standardgeschäftsvorfälle:
+Geschäftsvorfälle sind die bankfachlichen Auftragsarten, die du mit deinem Kreditinstitut abwickelst. Nach dem Anlegen sind noch keine Geschäftsvorfälle aktiviert. Aktiviere für den automatischen Import und die Zuordnung der üblichen Geschäftsvorfälle die folgenden Standardgeschäftsvorfälle:
 
 * 005 – Lastschrift (Einzugsermächtigungsverfahren)
 * 006 – Sonstige Einzugspapiere
@@ -416,8 +420,8 @@ Geschäftsvorfälle sind die bankfachlichen Auftragsarten, die du mit deinem Kre
 Geschäftsvorfälle verwalten:
 
 . Öffne das Menü *Einrichtung » Aufträge » Zahlung » Plugins » EBICS*.
-. Klicke auf der Karte des Kontos, das du verwalten willst, auf *Bearbeiten*. +
-→ Das Fenster Kontoeinstellungen wird geöffnet.
+. Klicke auf der Karte des Kontos, das du verwalten möchtest, auf *Bearbeiten*. +
+→ Das Fenster *Kontoeinstellungen* wird geöffnet.
 . Klicke auf *Geschäftsvorfälle*.
 . Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<#table-ebics-settings-transactions>>.
 . *Speichere* (icon:save[role=green]) die Einstellungen.
@@ -456,24 +460,24 @@ Wenn auf deinem Konto Zahlungen eingehen, deren Geschäftsvorfall du nicht aktiv
 Inaktive Geschäftsvorfälle laden:
 
 . Öffne das Menü *Einrichtung » Aufträge » Zahlung » Plugins » EBICS*.
-. Klicke auf der Karte des Kontos, das du bearbeiten willst, auf *Bearbeiten*. +
+. Klicke auf der Karte des Kontos, das du bearbeiten möchtest, auf *Bearbeiten*. +
 → Das Fenster *Kontoeinstellungen* wird geöffnet.
 . Klicke auf *Geschäftsvorfälle*.
 . Klicke auf *Inaktive Geschäftsvorfälle laden*. +
 → Das Fenster zur Suche wird geöffnet.
-. Gib das Datum ein, für das du die Geschäftsvorfälle laden willst.
+. Gib das Datum ein, für das du die Geschäftsvorfälle laden möchtest.
 . Klicke auf *Suchen*. +
 → Alle Zahlungen des eingegebenen Tages, für die keine Geschäftsvorfälle aktiv sind, werden angezeigt.
-. Wähle die Geschäftsvorfälle, die du aktivieren willst.
+. Wähle die Geschäftsvorfälle, die du aktivieren möchtest.
 . *Speichere* (icon:save[role=green]) die Einstellungen. +
 → Die Geschäftsvorfälle sind aktiviert.
 
-Um die Zahlungen zuzuordnen, muss für dieses Datum ein Manueller Zahlungsabruf durchgeführt werden wie oben beschrieben. Alle zukünftigen Zahlungen werden automatisch zugeordnet.
+Um die Zahlungen zuzuordnen, muss für dieses Datum ein manueller Zahlungsabruf wie in <<#table-ebics-settings>> beschrieben durchgeführt werden. Alle zukünftigen Zahlungen werden automatisch zugeordnet.
 
 [#190]
 ==== Noch nicht verwendete Geschäftsfälle hinzufügen
 
-Wenn Zahlungen unter einem Geschäftsvorfallcode eingehen, der nicht aktiv ist, wird dieser automatisch zur globalen Liste der Geschäftsvorfälle hinzugefügt und können von dort aus wie oben beschrieben aktiviert werden.
+Wenn Zahlungen unter einem Geschäftsvorfallcode eingehen, der nicht aktiv ist, wird dieser automatisch zur globalen Liste der Geschäftsvorfälle hinzugefügt und kann von dort aus <<#170, wie oben>> beschrieben aktiviert werden.
 
 [#200]
 === Alte Integration migrieren
@@ -490,7 +494,7 @@ Migration durchführen:
 → Der Button wird ausgeblendet. +
 → Die Konten werden im Plugin aktiviert. +
 . Deaktiviere die Konten in der alten Integration.
-. Aktiviere die Geschäftsvorfälle in den Konten im Plugin wie oben beschrieben.
+. Aktiviere die Geschäftsvorfälle in den Konten im Plugin <<#170, wie oben>> beschrieben.
 
 [#220]
 == SEPA-Lastschriftmandat einrichten
@@ -541,7 +545,7 @@ Land*
 |Gib die Ausführungsmodalität ein. Gib entweder *Einmalige Zahlung* oder *Wiederkehrende Zahlung* ein.
 
 | *Name des Zahlungspflichtigen*
-|Der Name wird automatisch aus den gespeicherten Bankdaten gezogen. Wurden dort keine Daten gespeichert, wird der am Kontaktdatensatz gespeicherte Name genommen.
+|Der Name wird automatisch aus den gespeicherten Bankdaten gezogen. Wenn dort keine Daten gespeichert, wird der am xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Kontaktdatensatz] gespeicherte Name genommen.
 
 2+^|Formatierung
 
