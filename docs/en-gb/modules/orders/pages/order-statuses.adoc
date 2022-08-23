@@ -1,0 +1,184 @@
+= Using the order status
+
+:keywords: order status, default status, standard status, select status, add status, edit status
+:author: team-order-core
+
+The order statuses visualise the progress of orders during order processing. 19 statuses with 4 decimal places each, so a total of 199999, are available in your plentymarkets system. 28 statuses are set by default. These statuses represent a basis for usual steps of order processing. Some of these 28 statuses are linked to automatic processes in the system. You should only use them for these designated purposes within the system. The status of an order changes because of these automatic processes in the system, through automatic processes set up by you or can be changed manually. Order statuses also improve the order search.
+
+Roughly go through your order processes and determine when you want to assign a different status to orders to depict the progress of your processing. Set up your statuses after this by entering names for them. But take into account the default statuses which are already set up for a specific purpose, mentioned in <<table-default-statuses>>.
+
+[TIP]
+.Pay attention to the user rights
+======
+Note that elements such as drop-down lists only display those *shops* and *order statuses* for which the current user was given rights to. If you do not see a status, it is most likely that you do not have the rights needed for this. Rights can be assigned by admin users.
+======
+
+[#preselected-statuses]
+== Comprehending default order statuses
+
+The following 28 status entries are available by default in your plentymarkets system and some of them are linked to automatic processes in the system. It is not possible to delete statuses that are linked to an automatic process.
+
+[[table-default-statuses]]
+.Default statuses and automatic processes within the system
+[cols="1,3"]
+|===
+|Status |Explanation
+
+| *[1]* Incomplete data
+|This status is automatically assigned when the data of an order is incomplete, e.g. missing address details. Incomplete data can sometimes occur when they are imported from markets. Orders with this status are not to be processed further. The data will be completed by subsequent imports. The incomplete data are useful for a timely booking of stock.
+
+| *[1.1]* Waiting for payment & activation
+.3+^|Are not assigned automatically. A use case is the shopping cart which was filled in advance. An order is generated and a link to the shopping cart of the order is sent to the customer for confirmation.
+
+| *[1.2]* Activated, waiting for payment
+
+| *[2]* Waiting for activation
+
+| *[3]* Waiting for payment
+|This status is automatically assigned to every unpaid order of the type Order.
+
+| *[3.2]* In waiting position
+a|This status is automatically assigned in the following cases: +
+
+* If a partial payment for an order is booked and items are not in stock. +
+* If a down payment for an order is booked and items are not in stock. +
+* If an order is overpaid, not matter whether items are in stock or not.
+
+| *[3.3]* Ready for shipping; waiting for payment
+|This status is automatically assigned to an order of the type Order if a partial payment or a down payment for the order is booked and the items are in stock.
+
+| *[3.4]* Dunning letter sent
+|We recommend this status to indicate that a dunning letter was sent. Set up an automatic process for this by using an event procedure or a process. However, the status is not set by an automatic process within the system.
+
+| *[4]* In preparation for shipping
+|Is connected to the stock limitation. If you are not keeping stock and do not use the stock limitation, the status is available to be reassigned. +
+When the stock limitation is used, the status is automatically assigned as soon as an order of the type Order is fully paid but the item is not in stock in sufficient number. The item limitation as to be set to net stock. +
+If you use stock limitation and this status for insufficient stock, it is possible to have only those delivery notes and invoices generated which can be processed further.
+
+| *[5]* Cleared for shipping
+|This status is automatically assigned when an order of the type Order is paid or the payment method is invoice or cash in advance and the item is either in stock or stock is unlimited.
+
+| *[5.1]* External processing
+|We recommend to use this status to indicate that the items are compiled and sent by a fulfilment provider. However, the status is not set by an automatic process within the system.
+
+| *[6]* Currently being shipped
+|We recommend to use this status to indicate that orders are transferred to the warehouse to be picked and packed. Set up an automatic process for this by using an event procedure or a process.
+
+| *[7]* Outgoing items booked
+|This status is automatically assigned when outgoing items of an order were booked. Manually setting this status for an order does not cause the actual booking of outgoing items or the reduction of stock. This is why this status should not be set manually, but via an event procedure or an automated process.
+
+| *[7.1]* Order exported
+|This status can be used as required. A possible use case is to assign this status after items are exported for analysing purposes.
+
+| *[8]* Cancelled
+|We recommend to use this status to indicate that a regular order was cancelled. Status 8 is the default status for cancelled orders. However, if required, you can adjust the default statuses in the *Setup » Orders » Settings* menu. This setting is called xref:orders:preparatory-settings.adoc#[intable-default-status-cancelled-orders[default status for cancelled orders]. If you assigned a different status to cancelled orders, you can reassign status 8 as required.
+
+| *[8.1]* Cancelled by customer
+|We recommend to use this status to indicate that an order was cancelled by a customer.
+
+| *[9]* Return
+|This status is automatically preselected when an order of the type Return is created. You can change the xref:orders:preparatory-settings.adoc#intable-default-status-return[default status for returns], if required. You can find this setting under *Setup » Orders » Settings*.
+
+| *[9.1]* Items are checked
+|We recommend to use this status to indicate that returned items are checked.
+
+| *[9.2]* Waiting for return from wholesale dealer
+|This status can be used as required.
+
+| *[9.3]* Warranty initiated
+|We recommend to use this status to indicate that a warranty of a return has been initiated.
+
+| *[9.4]* Exchange initiated
+|We recommend to use this status to indicate that an exchange of returned items has been initiated.
+
+| *[9.5]* Credit note created
+|We recommend to use this status to indicate that a credit note for a return was created.
+
+| *[10]* Warranty
+|This status can be used as required. This status can be used to identify a completed warranty. When creating a warranty, the corresponding order is switched either to status 4 or 5, depending on your workflow.
+
+| *[11]* Credit note
+|This status is automatically assigned to an order of the type Credit note order when a credit note is generated. You can change the xref:orders:preparatory-settings.adoc#intable-default-status-credit-note[default status for credit notes], if required. You can find this setting under *Setup » Orders » Settings*.
+
+| *[11.1]* Credit note disbursed
+|We recommend to use this status to indicate that a credit note was disbursed and is completed.
+
+| *[12]* Repair
+|This status is automatically preselected when an order of the type Repair is created. You can change the xref:orders:preparatory-settings.adoc#intable-default-status-repairs[default status for repairs], if required. You can find this setting under *Setup » Orders » Settings*.
+
+| *[13]* Multi-order
+|This status is automatically assigned to an order of the type Multi-order when a multi-order is created. You can change the xref:orders:preparatory-settings.adoc#intable-default-status-multi-order[default status for multi-orders], if required. You can find this setting under *Setup » Orders » Settings*.
+
+| *[14]* Multi credit note
+|This status is automatically assigned to an order of the type Multi credit note when a multi credit note is created. You can change the xref:orders:preparatory-settings.adoc#intable-default-status-multi-credit-note[default status for multi credit notes], if required. You can find this setting under *Setup » Orders » Settings*.
+|===
+
+[#add-and-edit-statuses]
+== Adding and editing a status
+
+In the *Setup » Orders » Status* menu, you can add your own statuses in addition to those listed in <<table-default-statuses>>. You can edit and e.g. rename the available status. Maintain statuses in different languages in order to inform your customers about the progress via email or in the customer account of the online shop. Apart from status related to system automatisms you are able to delete all status. Status related to system automatisms can be renamed. However you should make sure to not misuse the status related to system automatisms. +
+Additionally, you can decide how the order statuses are displayed in your plentymarkets system. Use the toggle *Show status ID in status name* to decide whether only the given status name or whether the status ID is displayed additionally.
+
+[TIP]
+.Name is not a mandatory field
+======
+The name is not a mandatory field. If you don’t create a name you will only see a list of apparently empty status in the filters and an empty status field in the order overview. Therefore you have to enter e.g. at least the status number also as name in the language you use the most often, German or English. Translations in other languages do only serve as the user interface in the customer account of your shop and as customer information via email.====
+======
+
+[#adding-statuses]
+=== Adding a status
+
+[.instruction]
+Proceed as described below to add a status:
+
+. Go to Setup » Orders » Events.
+. Click on *Create new contact* (icon:plus-square[role="green"]).
+. Enter a status number. → The highest possible number is 19.9999.
+. Enter a name, if required. +
+The language in which you are logged in is shown as input field.
+. *Save* (icon:save[role="green"]) the settings. +
+→ Fields for additional settings are shown.
+. If necessary, add additional languages for the order status.
+. Select an individual colour for the order status in the *Colour* field.
+. *Save* (icon:save[role="green"]) the settings.
+
+[TIP]
+.Decimal places
+======
+When assigning numbers to new statuses, make sure that they do not end with 0. If the last decimal place is a 0, the system automatically deletes it. Thus, plentymarkets makes no distinction between a status with the number 1.1 and a status with the number 1.10.
+======
+
+[#edit-statuses]
+=== Edit the status:
+
+Proceed as follows in order to edit an available status. You can either edit a single status or you can use the group function and edit several statuses at the same time.
+
+[.instruction]
+Editing a single order status:
+
+. Go to Setup » Orders » Events.
+. Click on *Search* (icon:search[role="blue"]). +
+A list of all existing order statuses opens.
+. Select the status you want to edit. +
+→ The detail view of the contact opens.
+. Change the status name.
+. Change the *colour* of the status.
+. *Save* (icon:save[role="green"]) the settings.
+
+Use the group function in the menu *Setup » Orders » Status* to edit multiple orders statuses at the same time.
+
+[.instruction]
+Editing multiple statuses:
+
+. Go to Setup » Orders » Events.
+. Click on *Search* (icon:search[role="blue"]). +
+A list of all existing order statuses opens.
+. Place a check mark (icon:check-square-o[role="blue"]) in the status list for all statuses that should be edited.
+. Click on *Group function* (icon:gear[role="darkGrey", stack="gear,lr,darkGrey"]). +
+→ The editing area is displayed.
+. In the editing area, activate (icon:check-square-o[role="blue"]) the option *New colour* to select a new status colour.
+. Activate (icon:check-square-o[role="blue"]) the option *Shop visibility* and select the desired setting from the drop-down list.
+. Click on *Create delivery order* (terra:execute[]) to transfer the settings to the selected statuses. +
+→ You are asked to confirm your decision.
+. Confirm your decision by clicking on *Change status*. +
+→ The changes are saved.
