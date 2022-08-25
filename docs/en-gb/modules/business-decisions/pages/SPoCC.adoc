@@ -9,6 +9,7 @@ erstellt am 28.06.2022
 Project Manager: Tina Gerber
 
 Similar to Prohandel, SPoCC is a content database with stock management. Stock management is primarily used by shoe sellers. Item data (i.e. master data, properties, images, stock, prices) are imported to plentymarkets and order details is exported to SPoCC (previously called Apollon).
+https://docs.google.com/presentation/d/12mym8JIQqPc1BhJEeYFlxQfGqoQC9IiBvyt1mDx3fJo/edit#slide=id.g1321ed4c3cb_0_86
 ////
 
 //ToDo when the page can be made visible in the left navigation - remove the attribute :page-index: false from the header and add the page to the navigation file in the ROOT folder
@@ -174,16 +175,28 @@ In other words, you’ll enter your access data so that plentymarkets and SPoCC 
 |===
 |Setting |Explanation
 
-| *API key*
-| Enter the API key that you received from SPoCC.
+| *Global Stock API Key* +
+(mandatory)
+| Enter the key for the Global Stock API that you received from SPoCC.
 
-| *Retailer ID*
+| *Transaction Service API Key* +
+(mandatory)
+| Enter the key for the Transaction Service API that you received from SPoCC.
+
+| *Content Article API Key* +
+(mandatory)
+| Enter the key for the Content Article API that you received from SPoCC.
+
+| *Retailer ID* +
+(mandatory)
 | Enter the seller ID that you received from SPoCC.
 
-| *Customer number*
+| *Customer number* +
+(mandatory)
 | Enter your SPoCC customer number.
 
-| *Channel ID*
+| *Channel ID* +
+(mandatory)
 | Enter the Channel ID that you received from SPoCC.
 |===
 
@@ -199,20 +212,19 @@ In other words, where the data should be saved in plentymarkets.
 |===
 |Setting |Explanation
 
-2+^| Default category
+| *Complete item import*
+| Activate this option to activate the complete item import.
 
-| *Default item category*
-|Imagine you created a new category in SPoCC.
+| *Default category*
+| Imagine you created a new category in SPoCC.
 But you forgot to map it with a corresponding plentymarkets category.
-If you import items from the non-mapped Prohandel category, they will land in the default plentymarkets category.
+If you import items from the non-mapped category, they will land in the default plentymarkets category that you select here.
 
 *_Requirement_*: Have you already xref:item:categories.adoc#[created categories in plentymarkets]?
 This drop-down list only includes the categories that already exist in plentymarkets.
 
-2+^| Barcode
-
 | *Barcode*
-|Which plentymarkets barcode type matches your SPoCC barcode?
+| Which plentymarkets barcode type matches your SPoCC barcode?
 Select the barcode type from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:barcodes.adoc#100[configured barcode types in plentymarkets]?
@@ -221,14 +233,14 @@ This drop-down list only includes the barcode types that already exist in plenty
 2+^| Attributes
 
 | *Colour attribute*
-|Which plentymarkets attribute matches your SPoCC colour attribute?
+| Which plentymarkets attribute matches your SPoCC colour attribute?
 Select the attribute from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:attributes.adoc#[configured attributes in plentymarkets]?
 This drop-down list only includes the attributes that already exist in plentymarkets.
 
 | *Size*
-|Which plentymarkets attribute matches your SPoCC size?
+| Which plentymarkets attribute matches your SPoCC size?
 Select the attribute from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:attributes.adoc#[configured attributes in plentymarkets]?
@@ -251,21 +263,21 @@ There are three prices in SPoCC:
 |Setting |Explanation
 
 | *Sales price*
-|Which plentymarkets sales price do you want to use for the sale price in SPoCC?
+| Which plentymarkets sales price do you want to use for the sale price in SPoCC?
 Select the appropriate plentymarkets sales price from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:prices.adoc#[configured sales prices in plentymarkets]?
 This drop-down list only includes the sales prices that already exist in plentymarkets.
 
 | *Target price*
-|Which plentymarkets sales price do you want to use for the target price in SPoCC?
+| Which plentymarkets sales price do you want to use for the target price in SPoCC?
 Select the appropriate plentymarkets sales price from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:prices.adoc#[configured sales prices in plentymarkets]?
 This drop-down list only includes the sales prices that already exist in plentymarkets.
 
 | *Recommended retail price*
-|Which plentymarkets sales price do you want to use for the recommended retail price in SPoCC?
+| Which plentymarkets sales price do you want to use for the recommended retail price in SPoCC?
 Select the appropriate plentymarkets sales price from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:prices.adoc#[configured sales prices in plentymarkets]?
@@ -280,11 +292,13 @@ As such, you map plentymarkets properties to your SPoCC attributes in this step.
 
 
 
+. On the very right, click on icon:plus[].
 . From the drop-down list *plentymarkets property* on the left side, select a property. +
 *_Requirement_*: Have you already xref:item:properties.adoc#[configured properties in plentymarkets]?
 This drop-down list only includes the properties that already exist in plentymarkets.
 . From the drop-down list *SPoCC attribute* on the right, select an attribute. +
 → The two records are mapped to each other.
+. Map additional properties in the same way.
 
 [[table-property-mapping]]
 .Properties mapping
@@ -320,7 +334,7 @@ This allows you to remove mappings that are no longer needed.
 In this step, you map the product groups used in SPoCC to the categories in plentymarkets.
 This way, your items are directly sorted into the correct plentymarkets categories when they are imported from SPoCC.
 
-*_Important:_* Any items in SPoCC categories that you did not map in this step are sorted into the category
+*_Important:_* Items in SPoCC categories that you did not map in this step will be sorted into a default category. This default category is the one you select in the step *Options for the item import*.
 
 [[table-category-mapping]]
 .Mapping of categories
@@ -353,7 +367,7 @@ This allows you to remove mappings that are no longer needed.
 ====
 Technically speaking, you could just select a default category and then skip the rest of the category assignment.
 As a result, your items would always land in the default category when they are imported.
-If needed, you would then manually have to move the items into different plentymarkets categories.
+If needed, you would then have to move the items into different plentymarkets categories manually.
 ====
 
 [#warehouse-mapping]
@@ -368,20 +382,23 @@ In this step, you map your Channel Store Number from SPoCC to your plentymarkets
 |Setting |Explanation
 
 | *SPoCC Channel Store Number*
-|These are the warehouses in SPoCC.
+| These are your warehouses in SPoCC.
 Select the appropriate Channel Store Number from the drop-down list.
 
 | *plentymarkets warehouse*
-| These are the warehouses in the plentymarkets menu *Setup » Stock » Warehouse*.
+| These are your warehouses in the plentymarkets menu *Setup » Stock » Warehouse*.
 
+| icon:plus[role="green"]
+| Adds another line.
+This allows you to map multiple warehouses.
+
+| icon:minus-circle[role="red"]
+| Deletes a line.
+This allows you to remove mappings that are no longer needed.
 |===
 
-////
-
-    "
-
 [#cron-settings]
-=== [TODO] Step "Cron settings"
+=== Step "Cron settings"
 
 Data is transmitted between SPoCC and plentymarkets with the help of Crons.
 
@@ -405,9 +422,9 @@ This initial, full import can take a few days to finish, depending on the number
 Existing items are not updated with this cron.
 * The item import starts at the end of the day, or rather during the night.
 
-| *Item update*
+| *Attribute import*
 |Hourly
-|Existing items and variations are updated.
+| Existing items and variations are updated.
 This cron updates the following data:
 
 * Linked variation properties
@@ -415,15 +432,19 @@ This cron updates the following data:
 * Manufacturers (assuming that the manufacturer is imported)
 * EAN
 
-| *Price update*
-|Hourly
+| *Image import*
+| Every 60 minutes
 |
 
-| *Stock update*
-|Every 15 minutes
+| *Complete stock/price update*
+| Once every 24 hours
+|
+
+| *Delta stock/price update*
+| Every 15 minutes
 |
 |===
-////
+
 
 [#120]
 == Opening and modifying newly imported item data
@@ -452,7 +473,7 @@ For example:
 [TIP]
 .Main variation vs. Sub-variation
 ====
-Check the data that was transmitted for the main variation and for the sub-variations.
+Check the data that was transmitted for the main variation and for the sub-variations:
 
 * *_Main variation_*: An item’s first variation is called its main variation.
 It is not for sale, but rather is purely virtual and helps you manage the sub-variations via xref:item:inheritance.adoc#[inheritance].
