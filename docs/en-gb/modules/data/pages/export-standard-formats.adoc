@@ -194,9 +194,9 @@ The following placeholders are available:
 *_Possible values:_*
 
 * Comma = ,
-* Semicolon = &#x3B;
-* Pipe = &#x007C;
-* Tabulator = &#9225;
+* Semicolon = ;
+* Pipe = |
+* Tabulator = ␉
 
 | *Text delimiter*
 | Which text delimiter should separate the individual records from each other?
@@ -249,7 +249,7 @@ Carrying out the export settings:
 
 [[table-export-settings-standard]]
 .Carrying out the export settings
-[cols="1,3a"]
+[cols="1,4a"]
 |===
 |Setting |Explanation
 
@@ -269,11 +269,86 @@ Carrying out the export settings:
 ! *FTP*
 ! The export is saved on an FTP server.
 
-! *SFTP*
-! The export is saved on an SFTP server.
+[.collapseBox]
+.Setting up provisioning
+--
+. Select the option *FTP*. +
+→ Additional settings are shown.
+. Enter the *server* where you want to save the export. +
+*_Recommendation:_* Do not enter al protocol prefix.
+Some examples for protocol prefixes are `ftp://` and `ftps://`.
+. Enter a *port* or use the default setting. +
+*_Recommendation:_* Enter the port `21`.
+. Enter the *user name* for the server.
+. Enter the *password* for the server.
+. Enter the *path* to a storage location for the export.
+. Click on *Test connection*. +
+→ The server settings are checked:
+  * Can plentymarkets connect to the server?
+  * Can an export file be saved at the storage location? +
+  *_Tip:_* A test file is saved at the location specified. This test file is called `plentymarkets_ConnectionTestFile.txt`.
+--
 
 ! *FTPS*
 ! The export is saved on an FTPS server.
+
+[.collapseBox]
+.Setting up provisioning
+--
+. Select the option *FTPS*. +
+→ Additional settings are shown.
+. Enter the *server* where you want to save the export. +
+*_Recommendation:_* Do not enter al protocol prefix.
+Some examples for protocol prefixes are `ftp://` and `ftps://`.
+. Enter a *port* or use the default setting. +
+*_Recommendation:_* Enter the port `21`.
+. Enter the *user name* for the server.
+. Enter the *password* for the server.
+. Enter the *path* to a storage location for the export.
+. Click on *Test connection*. +
+→ The server settings are checked:
+  * Can plentymarkets connect to the server?
+  * Can an export file be saved at the storage location? +
+  *_Tip:_* A test file is saved at the location specified. This test file is called `plentymarkets_ConnectionTestFile.txt`.
+--
+
+! *SFTP*
+! The export is saved on an SFTP server.
+
+[.collapseBox]
+.Setting up provisioning
+--
+
+. Select the option *FTPS*. +
+→ Additional settings are shown.
+. Enter the *server* where you want to save the export. +
+*_Recommendation:_* Do not enter al protocol prefix.
+Some examples for protocol prefixes are `ftp://` and `ftps://`.
+. Enter a *port* or use the default setting. +
+*_Recommendation:_* Enter the port `22`.
+. Enter the *user name* for the server.
+. Enter the *password* for the server.
+. Enter the *path* to a storage location for the export. +
+*_Note:_* Enter the complete path.
+. Click on *Test connection*. +
+→ The server settings are checked:
+  * Can plentymarkets connect to the server?
+  * Can an export file be saved at the storage location? +
+  *_Tip:_* A test file is saved at the location specified. This test file is called `plentymarkets_ConnectionTestFile.txt`.
+--
+
+! *Google Sheets*
+! The export is saved in Google Sheets.
+
+[.collapseBox]
+.Setting up provisioning
+--
+. Select the option *Google Sheets*. +
+→ The setting *Spreadsheet URL* is shown.
+. Enter the URL of the Google Sheets file.
+. Click on *Connect with Google*. +
+→ The connection is established.
+--
 
 ! *Admin area* +
 (coming soon)
@@ -316,7 +391,15 @@ Some examples for protocol prefixes are `ftp://` and `ftps://`.
 * Can an export file be saved at the storage location? +
 *_Tip:_* A test file is saved at the location specified. This test file is called `plentymarkets_ConnectionTestFile.txt`.
 
-ifdef::marketplace-export[*_Note:_* This only tests if a file export is possible with the current export settings. The option does _not_ check if a connection can be established to a market.]
+ifdef::marketplace-export[*_Note:_* This only tests if a file export is possible with the current export settings. The option does _not_ check if a connection to a market can be established.]
+
+| Spreadsheet URL +
+(for Google Sheets)
+|
+
+. Enter the URL of the Google Sheets file in which the export is to be saved.
+. Click on *Connect with Google*. +
+→ The connection is established.
 
 | *Transfer*
 | When do you want to start the export?
@@ -763,6 +846,7 @@ Creating a preview from the catalogue list:
 . Check the data. Does the export work as expected?
 . *_Optional_*: Click on *Download data* (material:file_download[]). +
 → You can save a file with the first 5 data rows on your computer.
+
 --
 ====
 
@@ -803,8 +887,8 @@ Starting manual catalogue export::
 . Open the catalogue.
 . In the toolbar at the top, click on *Download data* (material:file_download[]). +
 → The export starts. +
-*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes.
-. Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
+*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes. +
+Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
 . In the notification centre, click on material:link[] *Download*. +
 *_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
 . Save the file on your computer.
@@ -820,8 +904,8 @@ Start manual export from catalogue list::
 . In the row of the catalogue, click on the further actions (material:more_vert[]).
 . Click on *Download data* (material:file_download[]). +
 → The export starts. +
-*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes.
-. Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
+*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes. +
+Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
 . In the notification centre, click on material:link[] *Download*. +
 *_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
 . Save the file on your computer.
