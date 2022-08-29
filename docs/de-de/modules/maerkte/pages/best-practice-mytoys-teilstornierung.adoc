@@ -1,11 +1,13 @@
 = Praxisbeispiel: Teilstornierungen an MyToys senden
 :author: team-plenty-channel
-:keywords: MyToys, Teilstornierung, Stornierung, MyToys Stornierung, Stonierung
+:keywords: MyToys, Teilstornierung, Stornierung, MyToys Stornierung, Stonierung, Teil Stornierung, stornieren
 :description:
 
 Eine oder mehrere Positionen eines Auftrags sollen storniert werden? In diesem Praxisbeispiel erfährst du, wie du MyToys darüber informieren kannst, dass eine oder mehrere Positionen eines Auftrags stoniert werden.
 
-Um eine oder mehrere Positionen eines Auftrags zu stornieren, erstellst du einen Lieferauftrag für die Positionen, die storniert werden sollen. Danach erstellst du die Ereignisaktion *Auftragsstornierung an MyToys melden*. Achte darauf, in der Ereignisaktion Lieferaufträge zu berücksichtigen.
+Um eine oder mehrere Positionen eines Auftrags zu stornieren, erstellst du einen Lieferauftrag für die Positionen, die storniert werden sollen. Danach erstellst du die Ereignisaktion *Auftragsstornierung an MyToys melden*. 
+
+Achte darauf, in der Ereignisaktion Lieferaufträge zu berücksichtigen.
 
 *_Hinweis:_* Eine Teilstornierung eines oder mehrerer Artikel kann nur erfolgen, wenn die Artikel aus dem Auftrag, die storniert werden sollen, noch nicht versendet wurden.
 
@@ -19,21 +21,14 @@ Lieferauftrag erstellen:
 
 . Öffne das Menü *Aufträge » Aufträge bearbeiten*.
 . Öffne den Auftrag, für den ein Lieferauftrag erstellt werden soll. +
-→ Es handelt sich um den Auftrag, bei dem ein oder mehrere Auftragspositionen stoniert werden sollen.
+→ Es handelt sich um den Auftrag, bei dem ein oder mehrere Auftragspositionen storniert werden sollen.
 . Wechsele in das Tab *Lief*.
 . Trage in das Feld *LiefAufMenge* (Menge für den Lieferauftrag) die *Menge* ein, die in den Lieferauftrag überführt werden soll.
 . Klicke anschließend auf *Lieferauftrag anlegen* (terra:execute[]). +
 → Der Lieferauftrag wird angelegt.
 
-Lieferauftrag muss man bei Teilstornierungen immer erstellen (alle Pos, die storbiert werden sollen)
--> Lieferauftrag macht nur Sinn, wenn nicht alle Positionen storniert werden sollen
-
-Filter und Ereignisse sind nur Beispiele zum Eirnichten, richtet sich nach dem Workflow des Kunden
-
-hinweis: mit den vorgeschlagegnen filtern werden auch im Hauptauftrag alle Pos als storniert gekennezichent, wenn der Staus storniert gewählt wird
-
-
-
+*_Hinweis:_* Wenn alle Positionen eines Auftrags - also der gesamte Auftrag - storniert werden soll, musst du keinen Lieferauftrag anlegen, sondern kannst einfach den Auftrag stornieren.
+Lieferaufträge dienen nur dazu, einzelne Positionen eines Auftrags herauszulösen, zum Beispiel wenn einzelne Artikel bereits verschickt werden sollen oder storniert werden sollen.
 
 [#ereignisaktion-teilstornierung]
 == Ereignisaktion einrichten
@@ -43,6 +38,9 @@ Erstelle nun eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion], u
 :table-event-procedure: <<#ereignisaktion-teilstornierung-myToys>>
 
 include::_includes:partial$event-procedure.adoc[]
+
+*_Hinweis:_* Der Status für die Ereignisaktion wurder beispielhaft gewählt. Wähle einen Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen bereits vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+Beachte, dass mit den hier vorgeschlagenen Ereignissen und Filtern auch alle Positionen in Hauptaufträgen als storniert gekennzeichnet werden.
 
 [[ereignisaktion-retouren-myToys]]
 .Ereignisaktion zum automatischen Melden von Teilstornierungen an MyToys
@@ -62,24 +60,3 @@ include::_includes:partial$event-procedure.adoc[]
 | *Plugins*
 | *Auftragsstornierung an MyToys melden*
 |===
-
-
-
-auftrag mit 2 positionen
-
-eine davon soll versendet werden, eine davon nicht
-
-ea wird auf kompletten auftrag versendet, deswegen muss man einen lieferauftrag erstellen
-
-lieferauftrag manuell erstellen -> zu dem hauptauftrag wird ein lieferauftrag erstellt
-
-EA: Lieferauftrag als versendet markieren
-
-entweder EA für Lieferaufträge, Typ Lieferauftrag
-
-
-
-_oder_
-
-Hauptauftrag nicht in Status verschieben, welcher Ereignisaktion triggert
-
