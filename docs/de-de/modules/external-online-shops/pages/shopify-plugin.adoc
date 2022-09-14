@@ -1,0 +1,723 @@
+= Shopify-Plugin Benutzer-Handbuch
+
+Shopify ist eine vollständige E-Commerce-Plattform, mit der Du ein
+Unternehmen starten, erweitern und verwalten kannst. Shopify ist
+vollständig Cloud-basiert und wird gehostet, sodass Du dir keine
+Gedanken über das Upgrade oder die Wartung von Software oder Webservern
+machen musst.
+
+== Bei Shopify registrieren
+
+[arabic]
+. Öffne https://www.shopify.com/signup[Shopify].
+. Führe die Schritte zur Registrierung durch.
+
+== Benutzerdefinierte App erstellen und API-Zugangsdaten generieren
+
+Erstelle nun eine benutzerdefinierte App und generiere die
+API-Zugangsdaten. Details zum Thema *Benutzerdefinierte Apps* findest Du
+im *Shopify Help Center* -
+https://help.shopify.com/de/manual/apps/custom-apps[Benutzerdefinierte
+Apps].
+
+*WICHTIG:* Die API-Zugangsdaten für die benutzerdefinierte App werden
+NUR EINMAL ANGEZEIGT. Speichere die API-Zugangsdaten deshalb sofort an
+einem sicheren Ort. Du benötigst diese API-Zugangsdaten, um im Plugin
+eine Verbindung zur Shopify-API herzustellen.
+
+[arabic]
+. Öffne das
+https://accounts.shopify.com/lookup?rid=74e44916-65fc-4db2-a7e5-792b379b3f34[Shopify-Backend].
+. Klicke auf *Apps*.
+. Klicke ganz unten auf *Apps für deinen Shop entwickeln*. → Die Seite
+*App-Entwicklung* wird geöffnet.
+. Klicke auf *App erstellen*.
+. Gib einen *Namen* für die App ein. Der Name ist frei wählbar.
+. Wähle einen *App-Entwickler*. Als App-Entwickler kannst du das Konto
+der Shop-Inhaber:in oder ein beliebiges Mitarbeiter- oder Gastkonto mit
+der Berechtigung *Apps entwickeln* angeben.
+. Klicke auf *App erstellen*. → Die Übersichtsseite der neuen App wird
+geöffnet.
+. Öffne das Tab *Konfiguration*.
+. Klicke im Abschnitt *Admin-API-Integration* auf *Konfigurieren*. → Die
+Seite *Admin-API-Integration* wird geöffnet.
+. Aktiviere alle Admin-API-Zugriffsbereiche. Nur so ist gewährleistet,
+dass das Plugin wie erwartet funktioniert.
+. Klicke oben auf der Seite auf *Speichern*.
+. Klicke auf *App installieren*. → Der Admin-API-Zugriffstoken wird
+angezeigt.
+. Speichere den Admin-API-Zugriffstoken an einem sicheren Ort. Du
+benötigst den Admin-API-Zugriffstoken, um das Plugin mit der Shopify-API
+zu verbinden. *WICHTIG:* Die API-Zugangsdaten für die benutzerdefinierte
+App werden NUR EINMAL ANGEZEIGT. Speichere den Admin-API-Zugriffstoken
+deshalb sofort an einem sicheren Ort.
+
+== Auftragsherkunft Shopify in plentymarkets aktivieren
+
+Aktiviere die Auftragsherkunft *Shopify*, damit die
+Plugin-Benutzeroberfläche sichtbar wird.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsherkunft*.
+. Aktiviere die Herkunft *Shopify*.
+. *Speichere* die Einstellungen. → Die Plugin-Benutzeroberfläche ist im
+Menü *Einrichtung » Märkte » Shopify* sichtbar.
+
+*WICHTIG:* Das Plugin kann keine manuell erstellte Auftragsherkunft
+verwenden. Das Plugin muss in dem Plugin-Set installiert sein, das mit
+dem Standard-Mandanten verbunden ist.
+
+== Plugin konfigurieren
+
+Die folgenden Unterkapitel führen Dich durch die Plugin-Optionen und
+deren Konfiguration.
+
+=== Verbindung zur Shopify-API herstellen
+
+Stelle mit den von der *Benutzerdefinierten App* bereitgestellten
+Anmeldeinformationen eine Verbindung zur Shopify-API her:
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Reiter:
+Verbindungsdetails*.
+. Gib den *Host-Namen* ein (Beispiel: *deinshopname.myshopify.com*).
+. Gib den *API-Schlüssel* von Shopify ein.
+. Gib den *Admin-API-Zugriffstoken* von Shopify ein.
+. Gib das *API-Geheimnis* von Shopify ein.
+. Weise den plentymarkets *Mandanten* zu, über den diese Verbindung
+ausgeführt wird.
+. Klicke auf *Verbindung testen*.
+. *Speichere* die Einstellungen.
+. Lese das Bestätigungs-Popup sorgfältig durch.
+. Klicke auf *Ok*. → Das Plugin ist mit der Shopify-API verbunden.
+
+=== Zusätzliche Shopify-Webshops verbinden
+
+Für jede neue Verbindung benötigst Du einen separaten plentymarkets
+*Mandant* und ein anderes *Shopify-Konto*.
+
+Um eine zusätzliche Verbindung einzurichten:
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Reiter
+Verbindungsdetails*.
+. Klicke auf *[+] Hinzufügen*.
+. Konfiguriere alles genau wie bei der vorherigen Verbindung. → Wähle
+den entsprechenden Shopify-Webshop im Abschnitt *Webshops*, um zwischen
+Plugin-Konfigurationen zu wechseln.
+
+=== Plugin-Einstellungen vornehmen
+
+Bitte beachte, dass artikelbezogene *Import-/Exportprozesse* nicht
+gleichzeitig aktiviert sein können.
+
+*Tabelle 1* _Reiter Plugin-Einstellungen_
+
+[width="100%",cols="<50%,<50%",options="header",]
+|===
+|*Option* |*Erläuterung*
+|*Reiter Einstellungen* |
+
+| |*Prozesse*
+
+|*Auftragsimport* |Läuft alle 15 Minuten.Nach dem ersten
+*Auftragsimport* importiert das Plugin nur Shopify-Bestellungen, die in
+den letzten 24 Stunden gelistet wurden. Schon *Ausgeführte*
+Shopify-Bestellungen werden vom Plugin nicht importiert. Folgende Daten
+werden importiert: - *Externe Auftrags-Id* - *Rechnungsadresse* -
+*Lieferadresse* - *Kontakt-Daten* → als Auftragsempfänger verknüpft. -
+*Auftragsnotizen*. - *Bestellte Artikel und Varianten IDs* →
+plentymarkets Artikel werden dem importierten Auftrag nur zugeordnet,
+wenn die SKU in plentymarkets und Shopify identisch sind. → In
+Shopify-Bestellungen enthaltene Discounts werden als separate Artikel im
+Auftrag importiert. - *Artikeltext* - *Bestellte Mengen* -
+*Artikelpreise ohne Zuschläge und Rabatte* - *Rabatte* - *Zahlungsart* →
+Das Plugin erkennt Zahlungsarten *Paypal* und *Vorkasse*, (wenn auf
+Shopify Zahlungsmethoden mit genau diesem Namen vorhanden sind). Alle
+anderen Zahlungsarten werden als *Shopify Direct Checkout* importiert. -
+*Versandprofil* → Basiert auf *Versandprofil Zuordnungen* -
+*Eigenschaften*. *HINWEIS:* Der Mehrwertsteuersatz wird vom System
+gesetzt, wenn ein Profil mit dem selben Namen auf beiden Systemen
+existiert. Wird keine Matching gefunden, so wird der
+Standard-Mehrwertsteuersatz vom plentymarkets-Backend verwendet. Um
+Aufträge mit Shopify Geschenkgutscheinen importieren zu können, erstelle
+in plentymarkets einen Artikel mit 0% Mehrwertsteuer und mit derselben
+SKU wie der Shopify Gutschein. Beim Auftragsimport wird die SKU
+automatisch abgeglichen und der Shopify Gutschein dem plentymarkets
+Artikel zugeordnet.
+
+|*Kunden Import* |Läuft ein Mal am Tag. Importiert den
+Shopify-Kundenstamm in plentymarkets. **HINWEIS:** Das Plugin importiert
+Kontakt-Daten auch mit dem *Auftragsimport*. Weitere Informationen
+hierzu findest Du unter *Überlegungen zur DSGVO* am Ende dieses
+Handbuchs.
+
+|*Warenbestand und Preis Import* |- Läuft *Stündlich* für bis zu 1000
+Einträge. - Ein Mal am Tag für über 1000 Einträge. Wird basierend auf
+Artikelzuordnungen ausgeführt, die durch den *Artikelimport* erstellt
+wurden. Dieser Vorgang kann nur verwendet werden, nachdem ein erster
+*Artikelimport* ausgeführt wurde. Die *UVP (Shopify: Compare at Price)*
+wird während dieses Vorgangs nicht synchronisiert.
+
+|*Warenbestand und Preis Export* |Läuft alle 15 Minuten. Exportiert
+Warenbestand und Preisdaten, ohne den *Artikelexport* zu verwenden.
+Exportiert werden Warenbestand und Preisdaten für alle Varianten, bei
+denen sich der Bestand in den letzten 15 Minuten geändert hat. DER *UVP
+(Shopify: Compare at Price)* wird bei diesem Vorgang nicht
+synchronisiert. *_Wichtig:_* Varianten, bei denen nur eine Preisänderung
+stattgefunden hat, werden nicht exportiert. Diese Varianten werden erst
+exportiert, wenn sich auch ihr Bestand geändert hat. - *_Bei Nutzung des
+Warenbestand und Preis Export in Kombination mit dem Artikelexport:_*
+Wenn du in plentymarkets eine neue Variante erstellst oder eine SKU
+hinzufügst oder änderst, wird die Variante innerhalb von einer Stunde
+exportiert. Danach prüft plentymarkets Bestands- und Preisänderungen
+alle 15 Minuten. - *_Bei Nutzung des Warenbestand und Preis Export ohne
+den Artikelexport:_* Wenn du in plentymarkets eine neue Variante
+erstellst oder eine SKU hinzufügst oder änderst, werden
+Bestandsänderungen für diese Variante innerhalb von 24 Stunden nachts
+exportiert. Grund: Vor dem Export müssen alle SKU und Varianten-IDs
+zwischen plentymarkets und Shopify abgeglichen werden. Dieser aufwändige
+Vorgang kann aufgrund der großen Datenmenge nur einmal täglich
+durchgeführt werden.
+
+|*Kategorie Import* |Läuft ein Mal am Tag. Importiert manuelle
+*Collections* als Kategorien. *HINWEIS:* Artikel verlinkte *Collections*
+werden auch mit dem *Artikel Import*-Prozess importiert. *WICHTIG:* Das
+Plugin unterstützt *automatische Shopify Collections* nicht. Kategorie
+zugewiesene Bilder werden nicht importiert.
+
+|*Kategorie Export* |Läuft ein Mal am Tag. Exportiert Kategorien als
+manuelle *Shopify Collections*. Artikel verknüpfte Kategorien können
+auch mit dem *Artikel Export* exportiert werden. *HINWEIS:* Weil Shopify
+Kategroriebäume nicht unterstützt, wird sa Plugin immer nur die
+tiefstehende Unterkategorie exportieren. Kategorie zugewiesene Bilder
+werden nicht exportiert.
+
+|*Artikel Import* |Läuft ein Mal am Tag. Importiert deine
+Shopify-Artikel nach plentymarkets. Folgende Daten werden importiert: -
+*Artikelname* - *Artikeltext* - *Verknüpfte Kategorien* - *Attribute* -
+*Varianten* - *Warenbestand* → *Verkauf fortsetzen, auch wenn Produkte
+nicht auf Lager sind* aus dem *Inventar*, wird auch importiert. -
+*Hersteller* - *Gewicht und Gewichtseinheit* - *Verkaufspreis* → Ein
+Verkaufspreis für die Auftragsherkunft Shopify wird erstellt, falls
+keiner existiert. - *SKU* - *Artikel - und Varianten-Bilder* - *Tags*. -
+*Zolltarifnummer* - *Einkaufspreis* - *Herstellungsland*
+
+|*Artikel Export* |- Läuft ein Mal am Tag für den ersten Import. -
+Stündlich für nachfolgende Synchronisierungen Exportiert deine Artikel
+zu Shopify.*HINWEIS:* Wenn Du Shopify-Artikel löschst, um sie erneut zu
+exportieren, benötigt der Artikelexport einen zusätzlichen Tag, um die
+Plugin-Datenbank zu bereinigen, bevor Artikel die aus Shopify entfernt
+wurden, nochmals exportiert werden können. Folgende Daten werden
+exportiert: - *Hersteller* - *Zolltarifnummer* *WICHTIG:* Das Plugin
+exportiert nur die ersten 6 Zeichen der Zolltarifnummer und entfernt
+auch enthaltene Leerzeichen. - *Verknüpfte Kategorien* *WICHTIG:*
+Artikel werden Standardmäßig ohne Kategorieverknüpfungen exportiert. -
+*Kategorie Meta-Title* - *Kategorie Meta-Beschreibung* -
+*Meta-Schlüsselwörter* - *Tags* - *Artikelname* - *Artikeltext* -
+*Attribute* - *Varianten* - *Varianten-Position* - *Verkaufspreis* →
+Verkaufspreis mit der kleinsten Postion im Artikel. - *Unverbindlicher
+Verkaufpsreis* → plentymarkets exportiert die *UVP* aus Artikeln auf das
+Feld *compare at price* in Shopify.Gemäß den Shopify-Regeln *muss* der
+*compare at price* größer als der normale Verkaufspreis sein. Wenn Du
+den exportierten *compare at price* von einem Artikel in Shopify
+entfernen möchtest, muss der exportierte *UVP* in plentymarkets auf *0*
+gesetzt werden. Dies löst die Entfernung aus. Wenn der *UVP* direkt aus
+dem Artikel in plentymarkets entfernt wird, wird die Änderung nicht an
+Shopify gesendet - *SKU* - *Barcode* - *Warenbestand* → *Beschränkung*
+als *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* -
+*Gewicht und Gewichtseinheit* -*Artikel-Bilder* und *verknüpfte
+Varianten-Bilder* - Bilder **Alt-Text** - *Tags* - *Artikel » Variante »
+Verfügbarkeit » Name* - *Einkaufspreis* - *Herstellungsland* -
+*Eigenschaften*
+
+|*Auftragszahlung Aktualisierung* |Läuft stündlich. Überprüft, ob bei
+Shopify Zahlungen für bereits importierte Bestellungen eingegangen sind,
+und importiert diese.
+
+| |*Datenaustausch*
+
+|*Automatische SKU-Erstellung basiert auf:* |Generiert SKUs für
+exportierte Varianten basierend auf der Benutzerauswahl - *Variantennr.*
+- *Varianten ID* - *Modell* - *Barcode* *WICHTIG:* Wir empfehlen, dass
+Du für alle Shopify-Webshops, die über das Plugin verwaltet werden,
+dasselbe Eingabefeld zur SKU-Generierung verwendest.
+
+|*Artikel-Sprache für Export / Import* |Wähle eine Sprache für den
+Artikel Import / Export aus. **WICHTIG:** Bitte beachte, dass alle
+übersetzbaren Eingabefelder eingerichtet sein müssen, damit diese
+Funktion korrekt laufen kann.
+
+|*Warenbestand Puffer* |Beim Senden von Beständen an Shopify subtrahiert
+das Plugin immer die Menge, die hier eingetragen wird.
+
+|*Kategorien beim Artikelexport mit exportieren* |Exportiere Artikel
+verknüpfte Kategorien mit dem *Artikel Export*.
+
+|*SKU als Variantennr. importieren* |Importiert SKUs aus den
+Shopify-Artikeln auf das Eingabefeld *Variantennr.* *HINWEIS:* Beachte,
+dass das Plugin nur mit einer eindeutigen Shopify-SKU funktioniert. Wenn
+zwei Varianten mit der selben SKU gefunden werden, wird nur die
+erst-gelesene SKU importiert.
+
+|*Exportierte Varianten nach Variantennr. sortieren* |Sortiert
+exportierte Varianten nach *Variantenposition* *WICHTIG:* Beachte, dass
+die Verwendung dieser Funktion die Ausführungszeit und die Anzahl der
+API-Aufrufe erhöht. *Wir empfehlen, diese Option nur zu verwenden, wenn
+die Varianten Positionierung wichtig ist.*
+
+|*Den Lagerbestand für ``Produktionsware'' auf Shopify nicht verfolgen*
+|Aktiviere diese Option um das Häkchen *Inventar verfolgen* von deinen
+Shopify Varianten zu entfernen. *Hinweis:* Der Warenbestand für
+exportierte Artikel vom Typ *Produktionsware* wird nach dem aktivieren
+dieser Option nicht mehr aktualisiert.
+
+|*Einkaufspreis importieren/exportieren* |Diese Option ist standardmaßig
+aktiviert. Deaktiviere die Option, um keine Einkaufspreise zu
+übertragen.
+
+| |*Auftragsimport Optionen*
+
+|*Auftragsimport startet mit Datum:* |Verwende diese Option um ältere
+Shopify-Bestellungen zu importieren. *WICHTIG:* Das Datum des
+Auftragsimports wird nach jedem *Ausführen* aktualisiert, um den letzten
+Import-Lauf zu markieren.
+
+|*Importiere Adressdetails wie folgt:* |Auswahlmöglichkeiten: - Shopify
+Adresse 1 auf plentymarkets Adresse 1, Shopify Adresse 2 auf
+plentymarkets Adresse 2.- Hausnummer aus Shopify Adresse 1 auf
+plentymarkets Adresse 2, wenn Shopify Adresse 2 leer.- Hausnummer aus
+Shopify Adresse 1 auf plentymarkets Adresse 2 und Shopify Adresse 2 auf
+plentymarkets Adresse 3.- Shopify Adresse 2 auf plentymarkets Adresse 3.
+
+|*Importiere Rückerstattungszahlungen nach erfolgreicher Rückerstattung*
+|Importiert Rückerstattungszahlungen.
+
+| |*Auftragsimport Status*
+
+|*Auftrag Status für eingehende Storno Anfragen* |Wähle einen
+Auftragsstatus für eingehende Storno Anfragen.
+
+|*Ab folgendem Status automatisch ablehnen:* |Eingehende Storno Anfragen
+werden mit diesem Status und höher automatisch abgelehnt.
+
+|*Status für erfolgreich erstattete Aufträge* |Erfolgreich erstattete
+Aufträge werden automatisch in diesen Auftrag Status verschoben.
+|===
+
+=== Varianten-Beschränkung einrichten
+
+Das Plugin exportiert die Varianten Option *Beschränkung* auf das
+Shopify-Eingabefeld *Verkauf fortsetzen, auch wenn Produkte nicht auf
+Lager sind*
+
+*Tabelle 3* _Varianten-Beschränkung-Optionen_
+
+[cols="<,<",options="header",]
+|===
+|*Beschränkung* |*Verkauf fortsetzen, auch wenn Produkte nicht auf Lager
+sind*
+|*Keine* |Häkchen *An*
+
+|*Auf Netto-WB* |Häkchen *Aus*
+
+|*Kein WB für diese Variante führen* |Häkchen *An*
+|===
+
+=== Benutzerdefinierte Auftragseigenschaften importieren
+
+Mit dem Plugin können auch die benutzerdefinierten Auftragseigenschaften
+aus der Shopify-Bestellung importiert werden. Wie zum Beispiel mit dem
+https://apps.shopify.com/product-personalizer[Product
+Personalizer-Plugin], mit dem Kunden-Notizen für Nutzer personalisierte
+Produkte aufnehmen kannst.
+
+Um solche Eigenschaften zu importieren: - Stelle sicher, dass der
+plentymarkets Artikel ein *Merkmal* mit der Option *Bestellmerkmal* auf
+*An* enthält. Das Plugin wird dieses Merkmal verwenden um zu erkennen,
+dass die Personzlizer-Plugin-Notiz auch importiert werden muss.
+
+=== Versandprofil-Zuordnungen einrichten
+
+Ermöglicht es dem *Auftragsimport*, die Versandprofile der beiden
+Systeme zu verknüpfen.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Versandprofil
+Zuordnungen*.
+. Wähle einen Webshop, für den Du diese Funktion konfigurieren möchtest.
+. Wähle ein Shopify *Versandprofil*.
+. Wähle ein plentymarkets *Versandprofil*.
+. *Speichere* die Einstellungen. → Die neue Verknüpfung wird auf der
+Mapping-Liste angezeigt.
+
+=== Eingabefeld-Zuordnungen festlegen
+
+Wähle, welche plentymarkets Daten auf bestimmte Shopify-Eingabefelder
+exportiert werden sollen.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Eingabefeld
+Zuordnungen*.
+. Klicke auf *[+] Hinzufügen*.
+. Wähle ein Shopify *Eingabefeld*.
+. Wähle ein plentymarkets *Eingabefeld*.
+. *Speichere* die Einstellungen. → Die neue Verknüpfung wird auf der
+Mapping-Liste angezeigt. *WICHTIG:* Eingabefeld-Zuordnungen sind nur für
+den Prozess *Artikel-Export* verfügbar.
+
+*Tabelle 2* _Die Eingabefeld-Zuordnungsoptionen_
+
+[width="100%",cols="<50%,<50%",options="header",]
+|===
+|*SHOPIFY OPTION* |*PLENTYMARKETS OPTIONS*
+|*Product Title* |- Name 1-3 - Eigenschaft
+
+|*Product Description* |- Artikeltext - Vorschautext - Eigenschaft
+
+|*Product Type* |- Eigenschaft
+
+|*Product SEO Page Title* |Eigenschaft
+
+|*Product SEO Meta Description* |- Meta Beschreibung - Artikeltext -
+Eigenschaft
+
+|*Collection SEO Meta Description* |- Kategoriebeschreibung - Collection
+SEO META Description
+
+|*Weight* |- Gewicht Netto - Gewicht Brutto
+
+|*Metafield on Product Variant* |Ermöglicht den Export von
+Varianten-*Verfügbarkeit*-Name / einer *Eigenschaft*, zu einem
+benutzerdefinierten *Metafeld*. 1. Wähle *Metafield on Product Variant*
+2. Lege einen *Namespace* fest » Der *Namespace* ist ein Container für
+ein Metafeld-Set. Du kannst einem Namespace-Container mehrere Metafelder
+zuweisen. Maximal-Länge ist 20 Zeichen. 3. Weise ein *Metafeld-Namen*
+zu. 4. Wähle zwischen *Verfügbarkeit* und *Eigenschaft*. *HINWEIS:*
+Shopify-Metafelder sind im Shopify-Backend ohne spezielle Apps nicht
+sichtbar. Weitere Informationen zum Thema Shopify-Metafelder findest Du
+im *Shopify Help Center* mit dem Schlüsselwort *Metaflield.*
+|===
+
+=== Lagerzuordnungen erstellen
+
+Die Einrichtung dieser Funktion ist für einen funktionalen
+Warenbestandabgleich erforderlich. Diese Funktion hat einen Einfluss nur
+auf die Warenbestandabgleichsfunktionen und auf Instanzen, in denen die
+Ereignisaktion *Versandbestätigung an Shopify Senden* ausgeführt wird.
+Die Lagerzuordnung beim *Auftragsimport* ist von dieser Funktion nicht
+betroffen, sie wird vom System außerhalb der Plugin-Funktionen
+durchgeführt.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Lager Zuordnungen*.
+. Wähle einen Webshop, für den Du diese Funktion konfigurieren möchtest.
+. Klicke auf *[ + ]Hinzufügen*.
+. Wähle *Ein / Mehrere* plentymarkets *Lager*.
+. Wähle einen Shopify *Standort* aus.
+. *Speichere* die Einstellungen. → Die neue Verknüpfung wird auf der
+Mapping-Liste angezeigt.
+
+=== Shopify-Kunden-Tags mit plentymarkets Kundenklassen verknüpfen
+
+Ermöglicht die Zuordnung von Shopify-Kunden-Tags zu plentymarkets
+Kundenklasse. *WICHTIG:* Jedes Zuordnungselement kann nur einen
+Kunden-Tag enthalten. Mehrere Kunden-Tags können derselben plentymarkets
+Kundenklasse zugeordnet werden, indem separate Zuordnungselemente
+erstellt werden.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Kundenklassen
+Zuordnung.*
+. Wähle einen Webshop, für den Du diese Funktion konfigurieren möchtest.
+. Trage einen Shopify *Kunden-Tag* ein.
+. Wähle eine plentymarkets *Kundenklasse*.
+. *Speichere* die Einstellungen. → Die neue Verknüpfung wird auf der
+Mapping-Liste angezeigt.
+
+== Plugin-Hilfe konsultieren
+
+Mit den in dieser Registerkarte enthaltenen Funktionen kannst Du:
+
+* Die Plugin-Bereitschaft überprüfen.
+* Varianten Exportbedingungen überprüfen.
+* Jede 10 Minuten einen Artikel manuell exportieren.
+* Alle 5 Minuten den Warenbestand einer Variante oder eines ganzen
+Artikels exportieren.
+* Die plentymarkets Auftrag-ID anhand der Shopify Auftragsnummer finden.
+* Artikelexport cleanup programmieren.
+
+=== Plugin-Bereitschaft prüfen
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe »
+Plugin-Bereitschaft*.
+. Klicke auf *Prüfen*.
+
+Überprüfte Bedingungen sind:
+
+* Die Herkunft *Shopify* muss unter *Einrichtung » Aufträge »
+Auftragsherkunft* aktiviert sein.
+* Es gibt mehr als eine *Shopify* Herkunft unter *Einrichtung » Aufträge
+» Auftragsherkunft*. Stelle sicher, dass die ID mit der höchsten Nummer
+aktiviert ist.
+* Eine Verbindung zu *Shopify.com* kann hergestellt werden.
+* *SDK-Datei* wird korrekt bereitgestellt.
+
+Erfüllten Bedingungen folgt ein grünes *OK*. Fehlgeschlagenen
+Bedingungen folgt ein rotes *X*.
+
+=== Exportbedingungen einer Variante prüfen
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe »
+Exportbedingungen*
+. Wähle einen Webshop, für den Du diese Variante überprüfen möchtest.
+. Trage eine gültige Varianten-ID ein.
+. Klicke auf *Überprüfen*. Folgende Bedingungen werden überprüft:
+
+* Variante muss *aktiv* sein. → *Artikel » Variante » Einstellungen »*
+Bereich *Verfügbarkeit » Häkchen Aktiv* muss gesetzt sein.
+* Variante muss für den Marktplatz Shopify verfügbar sein. → *Artikel »
+Variante » Verfügbarkeit » Bereich Märkte, Shopify* muss erteilt sein.
+*Variante » Mandant Zuordnung* stimmt mit der *Webshop* Auswahl überein.
+→ *Artikel » Variante » Verfügbarkeit » Bereich Mandant » Mandant
+Auswahl*.
+* Artikel muss einen *Artikeltext* enthalten. → *Artikel » Texte »
+Artikeltext* muss verfügbar sein.
+* Artikel muss *Name 1* enthalten. → *Artikel » Texte » Name 1* muss
+verfügbar sein.
+* Die Variante muss eine SKU für Marktplatz Shopify enthalten. →
+*Artikel » Variante » Verfügbarkeit » Bereich SKU* muss eine *SKU* für
+Herkunft Shopify enthalten.
+* Exportierte Artikel dürfen nicht mehr als 100 Varianten enthalten.
+Dies ist ein von Shopify auferlegtes Limit.
+
+Erfüllten Bedingungen folgt ein grünes *OK*. Fehlgeschlagenen
+Bedingungen folgt ein rotes *X*.
+
+*HINWEIS:* Der Export des Artikelverkaufspreises ist nicht
+verpflichtend.
+
+=== Einen Artikel manuell exportieren
+
+Zu Testzwecken kannst Du mit dem Plugin alle 10 Minuten einen Artikel
+manuell exportieren lassen.
+
+*HINWEIS:* Verwende diese Funktion, um zu testen, wie Exporte aussehen,
+bevor Bulk-Exporte von Artikeldaten durchgeführt werden.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe »
+Artikelexport*
+. Wähle einen Webshop, auf dem du den Artikel exportieren möchtest.
+. Trage eine gülitge Artikel-ID ein.
+. Klicke auf *Ausführen*. → Wenn alle Exportbedingungen erfüllt sind,
+wird der Artikel und seine Varianten exportiert.
+
+*HINWEIS:* Solltest Du einen / mehrere Artikel auf Shopify gelöscht
+haben um diese nochmals zu exportieren, beachte, dass ein erster Export
+die Plugin-Datenbank bereinigt - erst ein zweiter Export schreibt den
+Artikel nochmals auf Shopify.
+
+== Reiter Warenbestand Export
+
+Zu Testzwecken kannst Du mit dem Plugin alle 5 Minuten Warenbestände für
+einen Artikel manuell exportieren. Für eine Variante kann der Export all
+3 Minuten erfolgen.
+
+=== Benutzerdefiniertes Startdatum für Warenbestand und Preisexport festlegen
+
+Wenn Du Warenbestände für Artikel mit einem älteren *Letzte Änderung:*
+Datum exportieren musst:
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe » Warenbestand
+Export*
+. Wähle einen Webshop, wo das *Warenbestand und Preis Export* Startdatum
+zurückgesetzt werden soll.
+. Wähle ein Startdatum aus dem *Kalender*.
+. Trage *Stunde* und *Minuten* ein.
+. *Speichere* die Einstellungen. Der nächste *Warenbestand und Preis
+Export*-Lauf wird gemäß deiner Einrichtung ausgeführt. Beachte, dass das
+Startdatum immer aktualisiert wird, um den Start des letzten Laufs
+widerzuspiegeln.
+
+=== Warenbestand und Verkaufspreis für eine Variante manuell exportieren
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe » Warenbestand
+Export*
+. Wähle einen Webshop, auf dem du Warenbestände und Preise aktualisieren
+möchtest.
+. Trage eine gültige *Varianten-ID* ein.
+. Klicke auf *Ausführen*. → Wenn alle Exportbedingungen erfüllt sind,
+wird der Warenbestand für die eingetragene Variante exportiert.
+
+=== Warenbestand und Verkaufspreis für einen Artikel manuell exportieren
+
+1.Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe » Warenbestand
+Export* 2. Wähle einen Webshop, auf dem du Warenbestände und Preise
+aktualisieren möchtest. 3. Trage eine gültige *Artikel-ID* ein. 4.
+Klicke auf *Ausführen*. → Wenn alle Exportbedingungen erfüllt sind, wird
+der Warenbestand für den eingetragenen Artikel exportiert.
+
+== plentymarkets Auftrags-ID anhand der Shopify-Bestell-ID finden
+
+Wenn ein Kunde dich mit der Shopify-Bestell-ID kontaktiert, kannst Du
+diese ID verwenden, um die entsprechende plentymarkets Auftrags-ID zu
+identifizieren.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe »
+Auftragsnummer Suche*.
+. Wähle den Webshop, für den du die Shopify-Bestell-ID erhalten hast.
+. Trage eine gültige Shopify-Bestellnummer ein.
+. Klicke auf *Suchen*. → Wenn die übermittelte Shopify-Bestellnummer
+gültig ist, wird die plentymarkets Auftrags-ID angezeigt.
+
+== Artikelexport-Cleanup planen
+
+*WICHTIG:* Verwende den Cleanup nicht, wenn deine Artikel nach der
+Installation des Plugins aus Shopify importiert wurden. Ein solcher
+Versuch, kann zum Artikelverlust auf Shopify führen. Der Cleanup wird
+nur einmal ausgeführt, nachdem es geplant wurde. Plane nach Bedarf neue
+Cleanups.
+
+Plane einen Cleanup, wenn: Artikel / Varianten aus plentymarkets
+gelöscht wurden und diese auch aus Shopify entfernt werden sollen.
+Artikel / Varianten manuell aus Shopify gelöscht wurden und das Plugin
+keinen neuen Export durchführt. Alle Shopify Artikel gelöscht werden und
+ein frischer Export aus plentymarkets veranlasst werden soll. In diesem
+Fall: deaktiviere den Artikelexport > lösche alle Artikel aus Shopify
+und plane einen Cleanup > am nächsten Morgen kannst Du den Artikelexport
+reaktivieren.
+
+[arabic]
+. Öffne das Menü *Einrichtung » Märkte » Shopify » Hilfe » Artikelexport
+Cleanup*.
+. Wähle den *Webshop* aus, für dem Du ein Cleanup planen möchtest.
+. Clicke auf *Plane einen nächtlichen Cleanup für exportierte Artikel*.
+
+*Hinweis*: Bereits exportierte Artikel/Artikelvarianten werden in den
+folgenden Fällen bei der Bereinigung aus Shopify gelöscht: -
+*Mandant(Client)* und *Shopify Marktplatz* wurden aus deiner
+plentymarkets-Variante entfernt. - Variante wurde aus plentymarkets
+gelöscht. - Sobald der Artikel keine aktiven Varianten hat, wird der
+gesamte Artikel auch aus Shopify gelöscht.
+
+== Die Plugin-Ereignisaktionen
+
+Mit den plentymarkets Ereignisaktionen kannst Du mit deinen
+Shopify-Bestellungen kommunizieren, indem benutzerdefinierte Ereignisse
+ausgelöst werden. Weitere Informationen zum Thema plentymarkets
+Ereignisaktionen findest du
+https://knowledge.plentymarkets.com/automatisierung/ereignisaktionen[hier].
+
+==== Eine Beispiel-Ereignisaktion einrichten
+
+[arabic]
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisaktionen*.
+. Klicke auf *[+]Hinzufügen*. → Das Fenster *Erstelle eine neue
+Ereignisaktion* ist offen.
+. Trage einen *Namen* ein.
+. Wähle zum Beispiel, dass Ereignis *Auftragsänderung* » *Warenausgang
+gebucht*.
+. *Speichere* die Einstellungen.
+. Setze ein Filter *Typ Auftrag » Auftragstyp » Auftrag*.
+. Setze einen zweiten Filter *Typ Auftrag » Herkunft » Shopify*.
+. Erteile eine *Aktion* vom *Typ Plugin » Versandbestätigung an Shopify
+senden*
+. *Speichere* die Einstellungen.
+
+*Tabelle 3* _Die Plugin-Ereignisaktionen_
+
+[width="100%",cols="<50%,<50%",options="header",]
+|===
+|*Ereignisaktion* |*Beschreibung*
+|*Versandbestätigung an Shopify senden* |Sendet eine Versandbestätigung
+für die Shopify-Bestellung. Diese Ereignisaktion funktioniert auch mit
+der Auftragsart *Lieferauftrag*.
+
+|*Archiviere Shopify Auftrag* |Archiviert den Shopify-Auftrag.
+
+|*plentymarkets Auftrag Id in Shopify speichern* |Speichert die
+plentymarkets-Auftrags-ID an den Shopify-Auftragsnotizen.
+
+|*Storno Benachrichtigung an Shopify senden* |Eine
+Stornierungsbenachrichtigung wird für die Shopify-Bestellung gesendet.
+Kann nur ausgelöst werden, bevor die Shopify-Bestellung geliefert wurde.
+Sendet einen Stornobefehl für alle Artikel aus der Shopify-Bestellung.
+Auch die Versandkosten werden vollständig erstattet. Erstattete Beträge
+werden von Shopify berechnet.
+
+|*Sende Retoure an Shopify* |Sendet eine vollständige Rücksendung für
+die Shopify-Bestellung. Funktioniert nur, wenn die Shopify-Bestellung
+bereits erfüllt wurde. Das Ereignis überprüft alle Auftragspositionen
+und Mengen aus der Rücksendung und sendet dann eine Liste dieser Artikel
+an Shopify. Die Rückerstattung kann alle oder einen Teil der in der
+Bestellung enthaltenen Artikel enthalten. Wenn alle Artikel enthalten
+sind, werden auch die Versandkosten erstattet. Erstattete Beträge werden
+von Shopify berechnet.
+
+|*Erstattung / Stornierung an Shopify senden* |Eine Rückerstattung wird
+für die Shopify-Bestellung gemeldet. Der Bestand der Varianten wird
+freigegeben und zum Shopify-Bestand addiert. Funktioniert nur, wenn die
+Bestellung bezahlt und noch nicht erstattet wurde. Dieses Ereignis
+überprüft alle im Gutschrift-Auftrag enthaltenen Auftragspositionen und
+Mengen und sendet dann eine Liste dieser Artikel zusammen mit den in der
+Bestellung gefundenen Artikelpreisen an Shopify. Die Rückerstattung kann
+alle oder nur einen Teil der bestellten Artikel enthalten. Dieses
+Ereignis erstattet auch die Versandkosten aus dem initialen Auftrag.
+Hier kannst Du auch wählen, welche Beträge erstattet werden sollen.
+
+|*Erstattung / Stornierung ohne Bestandserhöhung an Shopify senden*
+|Eine Rückerstattung wird für die Shopify-Bestellung gemeldet. Anders
+als bei der Ereignisaktion *Erstattung / Stornierung an Shopify senden*
+wird der durch die Erstattung oder Stornierung freigegebene Bestand aber
+nicht zum Bestand bei Shopify addiert. Funktioniert nur, wenn die
+Bestellung bezahlt und noch nicht erstattet wurde. Dieses Ereignis
+überprüft alle im Gutschrift-Auftrag enthaltenen Auftragspositionen und
+Mengen und sendet dann eine Liste dieser Artikel zusammen mit den in der
+Bestellung gefundenen Artikelpreise an Shopify. Die Rückerstattung kann
+alle oder nur einen Teil der bestellten Artikel enthalten. Dieses
+Ereignis erstattet auch die Versandkosten aus dem initialen Auftrag .
+Hier kannst Du auch wählen, welche Beträge erstattet werden sollen.
+
+|*Sende manuell hinzugefügte Zahlung an Shopify* |Sendet manuell
+erstellte Zahlungen aus dem plentymarkets Auftrag für die entsprechende
+Shopify-Bestellung
+
+|*Gutschrift an Shopify senden* |Erstelle eine Gutschrift und sendet
+eine Rückerstattung an Shopify, ohne die Artikel des ursprünglichen
+Auftrag aufzuheben. Dieses Ereignis funktioniert für bezahlte Aufträge,
+unabhängig vom Erfüllungsstatus.
+|===
+
+== Überlegungen zur DSGVO
+
+Aufgrund der DSGVO-Spezifikationen wurden folgende Richtlinien in Bezug
+auf Kunden beim Auftragsimport implementiert:
+
+*Tabelle 4* _DSGVO beim Auftragsimport_
+
+[width="100%",cols="<50%,<50%",options="header",]
+|===
+|*Szenario* |*Erläuterung*
+|*Kontakt wird als Gast importiert* |Wenn: - Der Käufer keine
+plentymarkets Kontaktdetails hat - Die Echtheit des Kontakts von keiner
+Partei garantiert wird, selbst wenn die Kontaktdaten bei jedem
+Auftragsimport identisch sind. *HINWEIS:* Bei Bedarf kannst Du Kontakte
+vom Typ *Gast* in reguläre Kontakte umwandeln. Weitere Informationen
+hierzu findest Du im plentymarkets Handbuch.
+
+|*Käufer wird als plentymarkets Kontakt importiert* |Das Plugin erstellt
+einen plentymarkets Kontakt, wenn die Authentizität des Shopify-Kontakts
+durch eine eindeutige externe Kontakt-ID garantiert wird.
+
+|*Ein existierender plentymarkets Kontakt wird mit dem importierten
+Auftrag verknüpft* |Das Plugin prüft, ob ein Kontakt von Shopify mit
+dieser externen Kontakt-ID in der Vergangenheit importiert wurde. Wird
+ein Kontakt gefunden, wird die neue Bestellung an diesen Kontakt
+angehängt.
+|===
