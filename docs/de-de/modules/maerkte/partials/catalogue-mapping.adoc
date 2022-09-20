@@ -13,7 +13,7 @@ image::maerkte:catalogue-menu-colours.png[]
 * *plentymarkets Datenfelder* Im linken Bereich des Katalogs ordnest du den Marktplatz-Datenfeldern passende plentymarkets Datenfelder zu. Im Screenshot wurden schon einige Felder zugeordnet.
 --
 
-* Freitextfelder und Merkmale können über Kataloge nicht mehr exportiert werden. Verwende stattdessen xref:artikel:eigenschaften.adoc#500[Eigenschaften].
+* Freitextfelder und Merkmale können über Kataloge nicht exportiert werden. Verwende stattdessen xref:artikel:eigenschaften.adoc#500[Eigenschaften].
 
 [.instruction]
 Katalogzuordnungen erstellen:
@@ -33,11 +33,15 @@ endif::bol.com[]
 . Nun ordnest du den Marktplatz-Datenfeldern passende plentymarkets Datenfelder zu. +
 *_Tipp:_* Du brauchst mehr Informationen zu den plentymarkets Datenfeldern? Dann besuche die Handbuchseite für das Standardformat xref:daten:katalog-artikel.adoc#[Artikel (neu)]. +
 Für jedes Marktplatz-Datenfeld hast du die folgenden Zuordnungsmöglichkeiten. Diese Zuordnungsmöglichkeiten werden in den Info-Boxen unten näher beschrieben:
-  * *Einfache 1:1-Zuordnung*
-  * *Komplexe 1:1-Zuordnung*
-  * *1:1-Zuordnung mit Ausweich-Datenfeld*
-  * *1:n-Zuordnung*
-  * *Eigener-Wert-Zuordnung*
+** *Einfache 1:1-Zuordnung*
+** *Komplexe 1:1-Zuordnung*
+** *1:1-Zuordnung mit Ausweich-Datenfeld*
+** *1:n-Zuordnung*
+** *Eigener-Wert-Zuordnung*
+** *Zuordnung mit mathematischer Berechnung*
+ifdef::own-data-fields[]
+** *Zuordnung von eigenen Datenfeldern*
+endif::own-data-fields[]
 . Speichere (terra:save[role="darkGrey"]) den Katalog. +
 → Die Zuordnungen werden gespeichert.
 
@@ -78,19 +82,21 @@ image::maerkte:gif-catalogue-mapping-simple-de.gif[]
 --
 
 //tag::complex-mappings[]
-Wie bei den einfachen 1:1-Zuordnungen ordnest du auch hier einem Markplatz-Datenfeld eine Einstellung in plentymarkets oder eine Eigenschaft zu. Komplexe Zuordnungen sind aber immer dann nötig, wenn es für ein Marktplatz-Datenfeld verschiedene mögliche Werte gibt. Statt Datenfelder zuzuordnen, ordnest du bei komplexen Zuordnungen also die Werte dieser Datenfelder zu. Zum Beispiel kannst du dem Marktplatz-Datenfeld *Versandart* nicht einfach das plentymarkets Datenfeld *Versandprofil* zuordnen. Warum? Der Marktplatz kann nicht wissen, welches deiner Versandprofile in plentymarkets welchem Versandprofil des Marktplatzes entspricht.
+Wie bei den einfachen 1:1-Zuordnungen ordnest du auch hier einem Markplatz-Datenfeld eine Einstellung in plentymarkets oder eine Eigenschaft zu. Komplexe Zuordnungen sind aber immer dann nötig, wenn es für ein Marktplatz-Datenfeld verschiedene mögliche Werte gibt. Statt Datenfelder zuzuordnen, ordnest du bei komplexen Zuordnungen also einzelne Werte dieser Datenfelder zu. Zum Beispiel kannst du dem Marktplatz-Datenfeld *Versandart* nicht einfach das plentymarkets Datenfeld *Versandprofil* zuordnen. Warum? Der Marktplatz kann nicht wissen, welches deiner Versandprofile in plentymarkets welchem Versandprofil des Marktplatzes entspricht.
 
 IMPORTANT: Gib bei komplexen Zuordnungen keine eigenen Werte ein. Alle Werte, die du eingibst, müssen an den Varianten gespeichert sein, entweder in einer Einstellung oder als Eigenschaftswert. Das gilt auch, wenn das Feld *Comparative value* angezeigt wird. Auch hier musst du genau den Wert aus der zugeordneten Einstellung oder Eigenschaft eingeben.
 
-Beispiele für komplexe 1:1-Zuordnungen:
-
-* Kategorien
-* Marken
-* Versandart
+Bei komplexen Zuordnungen wird immer der Wert des Marktplatzes exportiert. Nur wenn du doch einen eigenen Wert zuordnest, wird der eingegebene eigene Wert exportiert.
 
 Komplexe Zuordnungen erkennst du daran, dass sich unterhalb des Namens des Marktplatz-Datenfelds ein Eingabefeld befindet. Wenn du in das Eingabefeld klickst, werden die Werte angezeigt, die es für das Marktplatz-Datenfeld gibt.
 
 image::maerkte:catalogue-complex-mappings.png[]
+
+Beispiele für komplexe 1:1-Zuordnungen sind:
+
+* Kategorien
+* Marken
+* Versandart
 
 *_Wichtig:_* Ordne bei komplexen Zuordnungen keine eigenen Werte und keine Eigenschaften des Typs *Kein* zu.
 
@@ -110,7 +116,7 @@ Komplexe 1:1-Zuordnung erstellen:
 → Die plentymarkets Datenfelder der Gruppe werden angezeigt.
 . Klicke auf das plentymarkets Datenfeld, für das du Werte zuordnen möchtest. +
 *_Wichtig:_* Ordne keinen eigenen Wert und keine Eigenschaft des Typs *Kein* zu. +
-→ Je nachdem, welches plentymarkets Datenfeld du gewählt hast, gehst du ab jetzt unterschiedlich vor:
+. Je nachdem, welches plentymarkets Datenfeld du gewählt hast, gehst du ab jetzt unterschiedlich vor:
 
 * *_Möglichkeit 1:_* Die verfügbaren Werte des plentymarkets Datenfelds werden links angezeigt. +
   ** Klicke neben dem gewünschten Wert auf das Plus. +
@@ -121,7 +127,9 @@ Komplexe 1:1-Zuordnung erstellen:
   ** Klicke auf *Bestätigen*.
 * *_Möglichkeit 3:_* Das plentymarkets Datenfeld wird eingefügt und eine Dropdown-Liste wird angezeigt.
   ** Wähle einen Wert aus der Dropdown-Liste.
-  ** Klicke auf *Bestätigen*.
+  ** Klicke auf *Bestätigen*. +
+→ Beim Export wird der Wert des Marktplatz-Datenfelds übertragen, nicht der Wert des plentymarkets Datenfelds. +
+*_Ausnahme:_* Wenn du doch einen eigenen Wert zuordnest, wird dieser eigene Wert exportiert.
 
 *_Beispiel:_* Lieferzeit in Tagen bei Otto Market
 
@@ -133,16 +141,46 @@ image::maerkte:gif-catalogue-mapping-complex-de.gif[]
 --
 
 [.collapseBox]
-.*1:1-Zuordnung mit Ausweich-Datenfeld:* 1 Marktplatz-Datenfeld, 1 plentymarkets Datenfeld mit Alternative
+.*1:1-Zuordnung mit Ausweich-Datenfeld:* 1 Marktplatz-Datenfeld, 1 plentymarkets Datenfeld mit Alternative(n)
 --
 
-Bei einer 1:1-Zuordnung mit Ausweich-Datenfeld ordnest du dem Markplatz-Datenfeld eine Einstellung in plentymarkets zu. Zusätzlich gibst du ein oder mehrere Ausweich-Datenfelder an, damit das System weitersucht, wenn das erste plentymarkets-Datenfeld leer ist oder einen ungültigen Wert enthält.
+Bei einer 1:1-Zuordnung mit Ausweich-Datenfeld ordnest du dem Markplatz-Datenfeld eine Einstellung in plentymarkets zu. Zusätzlich gibst du ein oder mehrere Ausweich-Datenfelder an, damit das System weitersucht, wenn das erste plentymarkets-Datenfeld für eine Variante fehlt oder leer ist.
 
 Du legst also fest:
 
-* Ich möchte, dass dieses Marktplatz-Datenfeld mit den Daten aus dieser plentymarkets Einstellung befüllt wird.
-* Wenn dieses Datenfeld für eine Variante leer oder ungültig ist, wird das erste Ausweich-Datenfeld geprüft und stattdessen dieser Wert für die Variante exportiert.
-* Wenn auch das erste Ausweich-Datenfeld für eine Variante leer oder ungültig ist, wird das zweite Ausweich-Datenfeld geprüft und stattdessen dieser Wert für die Variante exportiert usw.
+* Ich möchte, dass das Marktplatz-Datenfeld mit den Daten aus der gewählten plentymarkets Einstellung befüllt wird.
+* Wenn dieses Datenfeld für eine Variante fehlt oder leer ist, wird das erste Ausweich-Datenfeld geprüft. Stattdessen wird dieser Wert für die Variante exportiert.
+* Wenn auch das erste Ausweich-Datenfeld für eine Variante fehlt oder leer ist, wird das zweite Ausweich-Datenfeld geprüft. Wenn ein Wert gefunden wird, wird  der Wert des zweiten Ausweich-Datenfelds für die Variante exportiert usw.
+
+Zwei verschiedene Ausweichbedingungen sind verfügbar:
+
+[cols="1,4a"]
+|===
+
+| *Null (Standard)*
+| Das Ausweich-Datenfeld wird verwendet, wenn das Datenfeld darüber zwar im Katalog zugeordnet ist, aber nicht mit der Variante verknüpft ist.
+
+Die Bedingung "Null" eignet sich, wenn du Ausweich-Datenfelder für die folgenden Arten von plentymarkets Datenfeldern zuordnest:
+
+* SKU
+* Barcodes
+* Verkaufspreise
+* Eigenschaften
+
+*_Wichtig:_* Wenn du ein Ausweich-Datenfeld hinzufügst, wird automatisch die Ausweichbedingung "null" gewählt. Damit die Ausweichbedingung "leer" gilt, musst du die Standardeinstellung ändern.
+
+| *Leer*
+| Das Ausweich-Datenfeld wird verwendet, wenn das Datenfeld darüber zwar im Katalog zugeordnet und mit der Variante verknüpft, aber leer ist.
+
+Die Bedingung "Leer" eignet sich, wenn du Ausweich-Datenfelder für die folgenden Arten von plentymarkets Datenfeldern zuordnest:
+
+* plentymarkets Datenfelder, die automatisch an der Variante verfügbar sind
+
+*_Wichtig:_* Wenn du ein Ausweich-Datenfeld hinzufügst, wird automatisch die Ausweichbedingung "null" gewählt. Damit die Ausweichbedingung "leer" gilt, musst du die Standardeinstellung ändern.
+
+|===
+
+*_Hinweis:_* Auch wenn du ein oder mehrere Ausweich-Datenfelder zuordnest, wird für jede Variante nur ein Wert übertragen. Für jede Variante werden die zugeordneten plentymarkets Datenfelder in der Reihenfolge geprüft, in der sie zugeordnet wurden. Wenn also das erste Datenfeld keinen Wert für die Variante liefert, wird das erste Ausweich-Datenfeld übertragen usw.
 
 [.instruction]
 1:1-Zuordnung mit Ausweich-Datenfeld erstellen:
@@ -155,13 +193,25 @@ Du legst also fest:
 . Klicke neben dem gewünschten plentymarkets Datenfeld auf das Plus. +
 → Das plentymarkets Datenfeld wird in das Feld rechts eingefügt.
 . Klicke in der Liste der plentymarkets Datenfelder neben dem gewünschten plentymarkets Datenfeld auf das Plus. +
-→ Das Ausweich-Datenfeld wird exportiert, wenn das erste Datenfeld nicht vorhanden oder leer ist. +
-*_Hinweis:_* Auch wenn du ein oder mehrere Ausweich-Datenfelder zuordnest, wird für jede Variante nur ein Wert übertragen. Für jede Variante werden die zugeordneten plentymarkets Datenfelder in der Reihenfolge geprüft, in der sie zugeordnet wurden. Wenn also das erste Datenfeld keinen Wert für die Variante liefert, wird das erste Ausweich-Datenfeld übertragen usw.
-. Klicke auf *Bestätigen*.
+→ Das Ausweich-Datenfeld wird mit der Ausweichbedingung "null" hinzugefügt.
+. *_Möglichkeit 1:_* Das Ausweich-Datenfeld mit der Ausweichbedingung "null" hinzufügen:
+.. Klicke auf *Bestätigen*. +
+→ Das Ausweich-Datenfeld wird exportiert, wenn das Datenfeld darüber nicht mit der Variante verknüpft ist.
+. *_Möglichkeit 2:_* Das Ausweich-Datenfeld mit der Ausweichbedingung "leer" hinzufügen:
+.. Klicke links neben dem Ausweich-Datenfeld auf das Zahnrad (icon:cog[role="darkGrey"]). +
+→ Das Fenster *Einstellungen Datenspalten* wird angezeigt.
+.. Wähle für die Einstellung *Ausweichbedingung* die Option *leer*.
+.. Klicke auf *Speichern*. +
+→ Das Ausweich-Datenfeld wird mit der Ausweichbedingung "leer" hinzugefügt.
+.. Klicke auf *Bestätigen*. +
+→ Das Ausweich-Datenfeld wird exportiert, wenn das Datenfeld darüber leer ist.
 
-*_Beispiel:_* Ausweich-Datenfeld für SKU bei Otto Market
+[.instruction]
+_Beispiel:_ Ausweich-Datenfeld für SKU bei Otto Market
 
-Hier siehst du, wie du dem Marktplatz-Datenfeld *SKU* von Otto Market das plentymarkets Datenfeld *SKU* und das plentymarkets Datenfeld *Varianten-ID* als Ausweich-Datenfeld zuordnest:
+In diesem Beispiel siehst du eine Zuordnung für das Marktplatz-Datenfeld *SKU* von Otto Market. Diesem Marktplatz-Datenfeld wird das plentymarkets Datenfeld *SKU* zugeordnet. Als Ausweich-Datenfeld wird das plentymarkets Datenfeld *Varianten-ID*  zuordnest. Als Ausweichbedingung wird automatisch die Bedingung "null" angewendet.
+
+*_Ergebnis:_* Das Ausweich-Datenfeld *Varianten-ID* wird exportiert, wenn an der Variante kein Datenfeld *SKU* verknüpft ist.
 
 image::maerkte:gif-catalogue-mapping-fallback-de.gif[]
 //end::fallback-mappings-config[]
@@ -211,7 +261,7 @@ Du bist dir sicher, dass du für ein Marktplatz-Datenfeld für alle Varianten de
 
 Du legst also fest:
 
-* Ich möchte, dass für dieses Marktplatz-Datenfeld für _alle_ Varianten dieses Katalogs der Wert exportiert wird, den ich in das Feld *Eigener Wert* eingegeben habe.
+* Ich möchte, dass für dieses Marktplatz-Datenfeld für _alle_ Varianten dieses Katalogs der Wert exportiert wird, den ich in das Feld *Eigener Wert* eingegeben habe. Dabei wird immer dieser eingegebene Wert exportiert, auch bei komplexen Zuordnungen, bei denen normalerweise der Wert des Marktplatzes exportiert wird. Achte deshalb darauf, dass der Wert, den du als eigenen Wert eingibst, vom Marktplatz akzeptiert wird.
 
 [.instruction]
 Eigener-Wert-Zuordnung erstellen:
@@ -272,6 +322,7 @@ Zahlenwerte neu berechnen:
 --
 
 ifdef::own-data-fields[]
+[#eigene-datenfelder-zuordnen]
 [.collapseBox]
 .Zuordnung von eigenen Datenfeldern: 1 selbst erstelltes Datenfeld, 1 plentymarkets Datenfeld
 --

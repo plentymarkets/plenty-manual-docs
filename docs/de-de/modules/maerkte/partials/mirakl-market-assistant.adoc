@@ -9,19 +9,21 @@ include::partial$assistant-basic-instructions.adoc[]
 --
 [[table-{market}-basic-settings-assistant]]
 [width="100%"]
-[cols="1,2a"]
+[cols="1,3a"]
 |======
 |Einstellung |Erläuterung
 
 2+^| Schritt *Authentifizierung*
 
 | API Environment
-a| Wähle eine API-Umgebung aus der Dropdown-Liste. Welche API-Umgebung du wählen solltest, erfährst du von deinen Ansprechpartner:innen bei {market}. +
-*_Hinweis:_* Wenn du die API-Umgebung wechselst, also z.B. vom Test-Modus in den Produktiv-Modus wechselst, musst du einen neuen <<#api-schluessel, API-Schlüssel>> erzeugen.
+| Wähle eine API-Umgebung aus der Dropdown-Liste. Welche API-Umgebung du wählen solltest, erfährst du von deinen Ansprechpartner:innen bei {market}.
+
+*_Hinweis:_* Wenn du die API-Umgebung wechselst, also zum Beispiel vom Test-Modus in den Produktiv-Modus wechselst, musst du einen neuen <<#api-schluessel, API-Schlüssel>> erzeugen.
 
 | API Key
-| Trage den <<#api-schluessel, API-Schlüssel>> ein, den du erzeugt hast. +
-*_Hinweis:_* Wenn du die API-Umgebung wechselst, also z.B. vom Test-Modus in den Produktiv-Modus wechselst, musst du einen neuen <<#api-schluessel, API-Schlüssel>> erzeugen.
+| Trage den <<#api-schluessel, API-Schlüssel>> ein, den du erzeugt hast.
+
+*_Hinweis:_* Wenn du die API-Umgebung wechselst, also zum Beispiel vom Test-Modus in den Produktiv-Modus wechselst, musst du einen neuen <<#api-schluessel, API-Schlüssel>> erzeugen.
 
 | Mandantenauswahl
 | Wähle den Mandanten (Shop), dem die Aufträge zugeordnet werden sollen.
@@ -29,7 +31,10 @@ a| Wähle eine API-Umgebung aus der Dropdown-Liste. Welche API-Umgebung du wähl
 2+^| Schritt *Datenaustausch*
 
 | Datenaustausch
-| Wähle die Prozesse, für die du den Datenaustausch zwischen plentymarkets und Mirakl einrichten möchtest. +
+| Wähle die Prozesse, für die du den Datenaustausch zwischen plentymarkets und Mirakl aktivieren möchtest. +
+
+*Bestand synchronisieren* = Aktivieren, um Angebotsdaten zu übertragen. +
+*Produkte exportieren* = Aktivieren, um Produktdaten zu übertragen.
 
 ifdef::mediamarkt[]
 *_Wichtig:_* Der Import und der Export für Auftragsrechnungen darf _nicht_ aktiviert werden.
@@ -38,7 +43,7 @@ endif::mediamarkt[]
 2+^| Schritt *Zuordnung der Rückerstattung*
 
 |Zuordnung der Rückerstattung
-a|
+|
 ifdef::conrad,voelkner[]
 Hier ordnest du Auftragsstatus aus plentymarkets die Rückerstattungsgründe von {market} zu.
 
@@ -62,7 +67,7 @@ endif::mediamarkt[]
 2+^| Schritt *Zuordnung der Stornierung*
 
 | Zuordnung der Stornierung
-a|
+|
 Hier ordnest du Auftragsstatus aus plentymarkets die Stornierungsgründe von {market} zu.
 
 . Klicke auf *Neuen Eintrag hinzufügen*. +
@@ -87,8 +92,8 @@ endif::conrad,voelkner[]
 | Lagerauswahl
 | Wähle das Lager, das für den Bestandsexport verwendet werden soll. Bestände aus dem gewählten plentymarkets Lager werden an {market} übertragen.
 ifdef::voelkner[]
-Gib für jedes Versandlager, aus dem versendet wird, die Adresse im folgenden Format an: +
-`Name des Versandlagers, Teststraße 1, 12345 Musterstadt`.
+Gib für jedes Versandlager, aus dem Ware versendet wird, die Adresse im folgenden Format ein: +
+`Name des Versandlagers, Teststraße 1, 12345 Musterstadt`
 endif::voelkner[]
 
 2+^| Schritt *Zuordnung des Versandprofils*
@@ -98,33 +103,48 @@ endif::voelkner[]
 
 2+^| Schritt *Zuordnung der Angebots-Eigenschaften*
 
-| Zuordnung der Angebots-Eigenschaften
-a| Wähle aus der Dropdown-Liste *Logistikklasse* die Eigenschaft *{market} Logistikklasse*. +
-Die Eigenschaften für *Abzugsverfahren* und *Versandvorlaufzeit* sind bereits vorausgewählt.
+| *Abzugsverfahren*
+| Das sogenannte _Reverse-Charge-Verfahren_. Die Eigenschaft wird automatisch erstellt und zugeordnet. Gültige Werte sind `true` oder `false`.
 
-* *Abzugsverfahren*: Es handelt sich hier um das so genannte _Reverse-Charge-Verfahren_. Es kann entweder `true` oder `false` übertragen werden.
+| *Versandvorlaufzeit*
+| Die sogenannte _leadtime-to-ship_. Also die Zeit in Tagen, die Händler:innen von der Auftragsannahme bis zur Versandmeldung benötigt. Die Eigenschaft wird automatisch erstellt und zugeordnet. Hier muss eine ganze Zahl zwischen 1 und 45 übermittelt werden.
 
-* *Versandvorlaufzeit*: Es handelt sich hier um das sogenannte _leadtime-to-ship_, also die Zeit in Tagen, die ein:e Händler:in von der Auftragsannahme bis zur Versandmeldung benötigt. Hier muss eine ganze Zahl zwischen 1 und 45 übermittelt werden.
+| *Logistikklasse*
+| Wähle aus der Dropdown-Liste *Logistikklasse* die Eigenschaft *{market} Logistikklasse*.
 
-* *Logistikklasse*: Hier handelt es sich um das Verbinden einer Variante mit einem bestimmten Marktplatz-Versandprofil. Die Versandprofile des Marktplatzes sind im Backend unter *{mirakl-menu-shipping}* aufgeführt. Der Wert in Klammern ist der Wert, der übertragen werden muss.
+Das Verbinden einer Variante mit einem bestimmten Marktplatz-Versandprofil. Die Versandprofile des Marktplatzes sind im Backend unter *{mirakl-menu-shipping}* aufgeführt. Übertragen werden muss der Wert in Klammern.
 
-* *update-delete*: Hier handelt es sich um die Option, ein Angebot löschen zu können. Ist dieses Feld nicht befüllt, wird automatisch *update* verwendet.
+| *update-delete*
+| Die Option, ein Angebot löschen zu können. Ist das Feld nicht befüllt, wird automatisch *update* verwendet.
 
 ifdef::conrad,voelkner[]
-* *product-id-type*: Dieses Feld muss nicht definiert werden. Standardmäßig wird hier *SHOP_SKU* übertragen.
+| *product-id-type*
+| Dieses Feld muss nicht definiert werden. Standardmäßig wird hier *SHOP_SKU* übertragen.
 endif::conrad,voelkner[]
 
 ifdef::voelkner[]
-* *Brutto-Inhaltsmenge für Grundpreisangabe*: Hier kannst du die Brutto-Inhaltsmenge für die Grundpreisangabe an der Variante definieren.
+| *Brutto-Inhaltsmenge für Grundpreisangabe*:
+| Hier definierst du die Brutto-Inhaltsmenge für die Grundpreisangabe an der Variante.
+endif::voelkner[]
 
-* *Einheit der Grundpreisangabe*: Hier kannst du die Einheit der Grundpreisangabe an der Variante definieren. Gültige Werte sind `KG`, `L`, `M`, `M2` oder `M3`.
+ifdef::voelkner[]
+| *Einheit der Grundpreisangabe*
+| Hier definierst du die Einheit der Grundpreisangabe an der Variante. Gültige Werte sind `KG`, `L`, `M`, `M2` oder `M3`.
+endif::voelkner[]
+
+ifdef::voelkner[]
+| *Voelkner Rabatt Startzeit*
+| Eine Eigenschaft *Voelkner Rabatt Startzeit* wird automatisch erstellt und zugeordnet. Über diese Eigenschaft legst du fest, wann <<discount-prices, Rabattzeiträume>> starten.
+endif::voelkner[]
+
+ifdef::voelkner[]
+| *Voelkner Rabatt Endzeit*
+| Eine Eigenschaft *Voelkner Rabatt Endzeit* wird automatisch erstellt und zugeordnet. Über diese Eigenschaft legst du fest, wann <<discount-prices, Rabattzeiträume>> enden.
 endif::voelkner[]
 
 2+^| Schritt *Optionen für Angebots-Export*
 
-| *Bestandsmenge für Varianten ohne Bestandsbindung ersetzen*
-
-
+| *Bestandsmenge für Varianten ohne Bestandsbindung ersetzen* +
 
 *Menge für Artikel (Varianten) ohne Bestandsbindung*
 | Welche Bestandsmenge soll für Varianten ohne Bestandsbindung exportiert werden?
@@ -135,7 +155,7 @@ endif::voelkner[]
 ! Für alle Varianten wird der Nettobestand exportiert.
 
 ! material:toggle_on[]
-! Für Varianten ohne Bestandsbindung wird die Menge exportierst, die du im Feld *Menge für Artikel (Varianten) ohne Bestandsbindung* eingibst.
+! Für Varianten ohne Bestandsbindung wird die Menge exportiert, die du im Feld *Menge für Artikel (Varianten) ohne Bestandsbindung* eingibst.
 
 . Aktiviere die Option.
 . Gib in das Feld *Menge für Artikel (Varianten) ohne Bestandsbindung* eine Zahl ein. +
@@ -150,7 +170,7 @@ Varianten ohne Bestandsbindung sind Varianten, bei denen für die Einstellung *B
 * *Keine*
 * *Keinen WB für diese Variante führen*
 
-Diese Einstellung findest du im Menü xref:artikel:artikel-verwalten.adoc#200[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Verfügbarkeit » Dropdown-Liste: Beschränkung]. Die Einstellung gilt für alle Verkaufskanäle, also nicht nur für {market}.
+Diese Einstellung findest du im Menü xref:artikel:import-export-anlage-verzeichnis.adoc#intable-beschraenkung[Artikel » Artikel bearbeiten » [Variante öffnen\] » Tab: Einstellungen » Bereich: Verfügbarkeit » Dropdown-Liste: Beschränkung]. Die Einstellung gilt für alle Verkaufskanäle, also nicht nur für {market}.
 
 |======
 --
