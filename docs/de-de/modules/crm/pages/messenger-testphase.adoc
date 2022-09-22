@@ -39,6 +39,8 @@ Wenn Benutzer:innen vom Typ *Backend* mit dem Messenger arbeiten sollen, muss ei
 [#benutzerrechte-backend-benutzer]
 === Rechte für Backend-Benutzer:innen vergeben
 
+// TODO: Berechtigungen anpassen (siehe Sprint-Karte)
+
 :rights-purpose: Nachrichten im Messenger sehen und erstellen
 :right-one: pass:quotes[*CRM > Nachricht > Anzeigen*]
 :right-two: pass:quotes[*CRM > Nachricht > Erstellen*]
@@ -69,7 +71,7 @@ include::_includes:page$tags-creation.adoc[]
 [TIP]
 .Tags für den Bereich *Nachrichten (kostenpflichtig)* erstellen
 ====
-Wenn du Nachrichten erstellen möchtest, die über den Messenger _kostenpflichtig_ <<#nachricht-abrechnen, abgerechnet>> werden sollen, erstelle nach dem selben Schema Tags für den Bereich *Nachrichten (kostenpflichtig)*. Diese Tags musst du dann der <<#nachricht-erstellen, Nachricht>> hinzufügen.
+Wenn du Nachrichten erstellen möchtest, für die über den Messenger _kostenpflichtig_ <<#minuten-erfassen, Minuten erfasst>> werden sollen, erstelle nach dem selben Schema Tags für den Bereich *Nachrichten (kostenpflichtig)*. Diese Tags musst du dann der <<#nachricht-erstellen, Nachricht>> hinzufügen.
 ====
 
 [#tag-suchen]
@@ -98,25 +100,25 @@ Wenn du spätere mehrere Posteingänge aktiviert hast, also den Assistenten mehr
 
 In diesem Schritt wird automatisch eine kryptische E-Mail-Adresse, die die weiterleitende E-Mail-Adresse darstellt, erstellt. Verwende diese E-Mail-Adresse, um deinen E-Mail-Client einzurichten, damit deine E-Mails automatisch weitergeleitet werden. Beachte, dass du diese kryptische E-Mail-Adresse _nicht_ ändern kannst.
 
-Gib im unteren Bereich alle E-Mail-Adressen ein, die Nachrichten an die kryptische, weiterleitende E-Mail-Adresse oben senden dürfen. Du kannst beliebig viele E-Mail-Adressen mit einem Klick auf *Hinzufügen* (icon:plus-square[role="green"]) hinzufügen.
+Gib im unteren Bereich alle E-Mail-Adressen ein, die Nachrichten an die kryptische, weiterleitende E-Mail-Adresse oben senden dürfen. Du kannst beliebig viele E-Mail-Adressen mit einem Klick auf *Neuen Eintrag hinzufügen* (material:add[]) hinzufügen. Bestehende E-Mail-Adressen können mit einem Klick auf *Eintrag entfernen* (material:delete[]) gelöscht werden. *_Hinweis:_* Mindestens eine E-Mail-Adresse muss hier eingetragen werden.
 
+//// 
 [#verifizierung-e-mail-adressen]
 ==== Verifizierung der E-Mail-Adressen
 
 In diesem Schritt siehst du den Fortschritt des Verifizierungsvorgangs. plentymarkets sendet eine E-Mail an alle E-Mail-Adressen, die du im vorherigen Schritt <<#e-mail-weiterleitung, E-Mail-Weiterleitung>> eingegeben hast. Das System prüft dann, ob die E-Mail-Adressen valide sind und die Weiterleitungen funktionieren.
+////
 
 [#einstellungen-e-mail-versand]
 ==== Einstellungen für den E-Mail-Versand
-
-////
-ehemals: SMTP-Konfiguration
-////
 
 In diesem Schritt speicherst du die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest. Dies ist erforderlich, damit dein plentymarkets System E-Mails über den Messenger versenden und empfangen kann. 
 
 Wähle nach Eingabe der Zugangsdaten die Verschlüsselung und gib die Absender-E-Mail-Adresse sowie den Absendernamen ein. Diese E-Mail-Adresse und dieser Name wird den Empfänger:innen deiner E-Mails aus diesem Postfach angezeigt.
 
 *_Hinweis für Postfächer bei mailbox.org:_* Gib den Port *465* ein und wähle als Verschlüsselung die Einstellung *SSL*.
+
+// TODO: (hier noch mehr erklären) Aktiviere (material:check_box[role=skyBlue]) die Checkbox, um das Standardpostfach zu wählen.
 
 ////
 ggf. neue Tabelle einfügen mit aktuellen Zahlen analog zu dieser Tabelle hier: https://knowledge.plentymarkets.com/crm/e-mails-versenden#200
@@ -125,6 +127,14 @@ ggf. Tabelle mit weiteren Beispielen außer mailbox.org: Googlemail, Office365, 
 ////
 
 Außerdem wählst du in diesem Schritt eine E-Mail-Vorlage für den E-Mail-Versand, die du vorher bereits im xref:crm:emailbuilder.adoc#[EmailBuilder] erstellt hast. Beachte, dass die hier gewählte Vorlage Messenger-Variablen enthalten sollte. 
+
+[TIP]
+.Nutze die Standardvorlage 
+====
+Wir empfehlen, die Standardvorlage für den Messenger zu verwenden. Diese Vorlage ist bereits in deinem System vorhanden. 
+====
+
+// TODO: wie heißt die default Vorlage im Deutschen?
 
 Im EmailBuilder stehen dir die folgenden Messenger-bezogenen Variablen zur Verfügung:
 
@@ -135,6 +145,9 @@ Im EmailBuilder stehen dir die folgenden Messenger-bezogenen Variablen zur Verf�
 * Vorschau der Nachricht
 * Minuten der Nachricht
 * Hat abgerechnete Minuten
+
+// TODO: Diese Liste auch auf der EmailBuilder-Seite hinzufügen.
+// TODO: stimmt die Info in der folgenden Box?
 
 [TIP]
 .Standardvorlage verwenden
@@ -153,10 +166,6 @@ Im Menü *CRM » EmailBuilder (Testphase)* gibt es bereits eine Standardvorlage 
 [#einstellungen-e-mail-empfang]
 ==== Einstellungen für den E-Mail-Empfang
 
-////
-ehemals: Inbox configuration
-////
-
 In diesem Schritt wählst du den oder die Tags, die die Nachrichten erhalten sollen, wenn diese von weitergeleiteten Adressen empfangen oder versendet werden.
 
 Im letzten Abschnitt wählst du die Abonnent:innen, die bei neuen Nachrichten informiert werden. Wähle entweder einzelne Benutzer:innen aus der Dropdown-Liste oder wähle Rollen, damit alle dieser Rolle zugewiesenen Benutzer:innen neue Nachrichten in diesem Postfach abonnieren.
@@ -164,7 +173,7 @@ Im letzten Abschnitt wählst du die Abonnent:innen, die bei neuen Nachrichten in
 [#testmodus-inaktiv]
 ==== Testmodus auf inaktiv setzen
 
-Damit du Nachrichten mit dem Messenger versenden kannst, ist es erforderlich, dass der Testmodus im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Zugangsdaten* auf *inaktiv* steht.
+Damit du Nachrichten mit dem Messenger versenden kannst, ist es erforderlich, dass der Live-Modus im Assistenten *E-Mail-Konten* im Schritt *Zugangsdaten* aktiviert (material:check_box[role=skyBlue]) wird. 
 
 Das Setzen des Testmodus auf *inaktiv* kannst du in diesem Schritt erledigen, ohne den Assistenten verlassen zu müssen. Aktiviere (material:check_box[role=skyBlue]) dazu die Einstellung *Live-Modus aktivieren*.
 
@@ -218,19 +227,21 @@ Die folgenden Dateitypen sind als Anhang in der Nachricht zulässig: bmp, csv, g
 |Du kannst Nachrichten flüstern, damit diese nur intern und _nicht_ für deine Kontakte sichtbar sind. Klicke dazu auf *Flüster-Modus* (material:visibility[]). +
 Du erkennst eine geflüsterte Nachricht in dieser Ansicht daran, dass die Schaltfläche material:visibility_off[role=skyBlue] angezeigt wird. Außerdem ändert sich die Schaltfläche von material:forward_to_inbox[role=skyBlue] *SENDEN* in material:visibility_off[role=skyBlue] *FLÜSTERN*. +
 In der Übersicht werden geflüsterte Nachrichten in _kursiver Schrift_ dargestellt. +
-*_Hinweis:_* Sobald der Flüstermodus für diese Nachricht aktiviert ist, kannst du die <<#intable-bill-message, Nachricht abrechnen>>.
+*_Hinweis:_* Sobald der Flüstermodus für diese Nachricht aktiviert ist, kannst du <<#intable-capture-minutes, Minuten für die Nachricht erfassen>>.
 
 |[#intable-assign-tags-message]*Der Nachricht Tags zuweisen* (material:local_offer[])
 |Mit einem Klick auf material:local_offer[] kannst du nach Tags suchen und bereits bestehende Tags für die Nachricht wählen (material:check_box[role=skyBlue]), neue Tags hinzufügen (material:add[]) und bestehende Tags bearbeiten (material:edit[]). +
 *_Hinweis:_* Sobald du einen Tag für die Nachricht gewählt hast, wird die Schaltfläche in blau angezeigt: material:local_offer[role=skyBlue]. So erkennst du auf einen Blick, ob der Nachricht Tags zugewiesen sind. +
-*_Wichtig:_* Damit du die Nachricht <<#intable-bill-message, abrechnen>> kannst, musst du mindestens ein Tag vom Typ *Nachrichten (kostenpflichtig)* erstellen und dieses Tag der Nachricht zuweisen.
+*_Wichtig:_* Damit du die <<#intable-capture-minutes, Minuten für die Nachricht erfassen>> kannst, musst du mindestens ein Tag vom Typ *Nachrichten (kostenpflichtig)* erstellen und dieses Tag der Nachricht zuweisen.
 
-|[#intable-bill-message]*Nachricht abrechnen* (material:more_vert[])
-|Du kannst eine Nachricht immer dann abrechnen, wenn es sich um eine <<#intable-whisper-mode, geflüsterte Nachricht>> handelt. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Nachricht abrechnen* aktivierst (material:toggle_on[role=skyBlue]), wird diese Nachricht abgerechnet. Die Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN* wird geändert in material:visibility_off[role=skyBlue] *ABRECHNEN UND SENDEN*. +
-*_Hinweis:_* Du kannst die Schaltfläche *Nachricht abrechnen* nur aktivieren, wenn der <<#intable-whisper-mode, Flüstermodus>> für diese Nachricht aktiviert werden.
+|[#intable-capture-minutes]*Minuten erfassen* (material:more_vert[])
+|Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine <<#intable-whisper-mode, geflüsterte Nachricht>> handelt. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Minuten erfassen* aktivierst (material:toggle_on[role=skyBlue]), werden für diese Nachricht Minuten erfasst. Die Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN* wird geändert in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. +
+*_Hinweis:_* Du kannst die Schaltfläche *Minuten erfassen* nur aktivieren, wenn der <<#intable-whisper-mode, Flüstermodus>> für diese Nachricht aktiviert werden.
 
-|[#intable-timer]*Timer* (material:more_vert[])
-|Du kannst für jede Nachricht einen Timer starten. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Timer* aktivierst (material:toggle_on[role=skyBlue]), startet automatisch der Timer neben der Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN*. +
+// TODO: für minuten erfassen noch erklären, wie sich die schaltflächen ändern, wenn man freiminuten und bezahlte minuten gewählt hat.
+
+|[#intable-timer]*Timer anzeigen* (material:more_vert[])
+|Du kannst für jede Nachricht einen Timer starten. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Timer anzeigen* aktivierst (material:toggle_on[role=skyBlue]), startet automatisch der Timer neben der Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN*. +
 Klicke auf material:pause_circle[], um den Timer anzuhalten bzw. auf material:play_circle[], damit die Zeit weiterläuft.
 
 |[#intable-manage-inboxes]*Posteingänge verwalten* (material:more_vert[])
@@ -241,7 +252,9 @@ Klicke auf material:pause_circle[], um den Timer anzuhalten bzw. auf material:pl
 
 |[#intable-send]*SENDEN*
 |Mit einem Klick auf material:forward_to_inbox[role=skyBlue] *SENDEN* wird die Nachricht gesendet. +
-*_Hinweis:_* Wenn du die Nachricht abrechnest, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *ABRECHNEN UND SENDEN*. Wenn du die Nachricht flüsterst, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *FLÜSTERN*.
+*_Hinweis:_* Wenn du für die Nachricht Minuten erfasst, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. Wenn du die Nachricht flüsterst, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *FLÜSTERN*.
+
+// TODO: hier noch die weiteren Szenarien auflisten. (ERFASSEN und SENDEN etc.
 
 |====
 
@@ -298,7 +311,7 @@ Verfügbare Werte: *Erledigt* und *Nicht erledigt*.
 |[#intable-filter-contact-id]*Kontakt-ID*
 |Gib eine ID ein, um nur nach Konversationen zu suchen, die mit dieser Kontakt-ID verknüpft sind.
 
-// Es ist nicht möglich, nach mehreren IDs kommasepariert zu suchen. Soll das so bleiben?
+// TODO: Es ist nicht möglich, nach mehreren IDs kommasepariert zu suchen. Soll das so bleiben?
 
 |[#intable-filter-order-id]*Auftrags-ID*
 |Gib eine ID ein, um nur nach Konversationen zu suchen, die mit dieser Auftrags-ID verknüpft sind. +
@@ -438,7 +451,8 @@ Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Ve
 
 |[#intable-overview-subscribed]*Abonniert*
 |In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob die Konversation <<#konversation-abonnieren, abonniert>> wurde.
-// kann man hier auch sehen, wer die Konv. abonniert hat oder nur, dass sie abonniert wurde. Oder geht es nur darum, ob man sie selbst abonniert hat?
+
+// TODO: kann man hier auch sehen, wer die Konv. abonniert hat oder nur, dass sie abonniert wurde. Oder geht es nur darum, ob man sie selbst abonniert hat?
 
 |[#intable-overview-context-menu]*Kontextmenü*
 |Ermöglicht das Bearbeiten von Konversationen in der Übersicht mit Hilfe des <<#kontextmenue, Kontextmenüs>>.
@@ -475,8 +489,7 @@ Tabellenansicht: im oberen Bereich werden alle gefundenen Konversationen als Tab
 Listenansicht: im linken Bereich werden alle gefundenen Konversationen als Liste angezeigt (keine (Tabellen-)Überschriften). Die ausgewählte Konversation mit allen darin enthaltenen Nachrichten wird im oberen rechten Bereich angezeigt und der Editor zum Beantworten der Nachricht unten rechts.
 ////
 
-//// 
-
+////
 [#zuordnungsparameter]
 == Nachrichten im Messenger zuordnen
 
@@ -484,43 +497,43 @@ Nachrichten im Messenger werden nach Stichworten bzw. textlichen Parametern, die
 
 Beachte die Stichworte, die zu einer Zuordnung führen, in <<#table-assignment-messenger>>. Groß- und Kleinbuchstaben spielen _keine_ Rolle.
 
+// TODO: Ist die emailadresse kein zuordnungsparameter?
+
 [[table-assignment-messenger]]
 .Zuordnungsparameter und mögliche Schreibweisen
 [cols="1,3"]
 |====
 |Parameter |Mögliche Schreibweisen
 
-//| *E-Mail-Adresse*
-//|beispiel@mail.de
+| *E-Mail-Adresse*
+|beispiel@mail.de
 
-// TODO: Ist die emailadresse kein zuordnungsparameter?
-
-//| *Ticket-ID*
-//|Ticket / ID / Nr / No / Nummer / number + Zahl +
-//Beispiele: +
-//Ticket-ID: 123 +
-//Ticket id 123 +
-//TicketID &#35;123 +
-//ID: &#35;123 +
-//ID: 123 +
-//Erlaubte Zeichen: +
-//Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute, runde Klammern, eckige Klammern
+| *Ticket-ID*
+|Ticket / ID / Nr / No / Nummer / number + Zahl +
+Beispiele: +
+Ticket-ID: 123 +
+Ticket id 123 +
+TicketID &#35;123 +
+ID: &#35;123 +
+ID: 123 +
+Erlaubte Zeichen: +
+Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute, runde Klammern, eckige Klammern
 
 |Conversation:
 |conversation|conversations|konversation|konversationen +
 uuid|id|nr|nummer|number|no|:
 
-//| *Kundendaten*
-//|Kunden-ID bzw. Kunden-Nr.: Kunde / Customer + ID / Nr / No / Nummer / number + Zahl +
-//Kunden-Name: Kunden / Customer + Name + Zahl +
-//Beispiele: +
-//Kunden-ID: 123 +
-//Kunden ID 123 +
-//Kunden id 123 +
-//KundenID123 +
-//Kundennummer 123 +
-//Erlaubte Zeichen: +
-//Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+| *Kundendaten*
+|Kunden-ID bzw. Kunden-Nr.: Kunde / Customer + ID / Nr / No / Nummer / number + Zahl +
+Kunden-Name: Kunden / Customer + Name + Zahl +
+Beispiele: +
+Kunden-ID: 123 +
+Kunden ID 123 +
+Kunden id 123 +
+KundenID123 +
+Kundennummer 123 +
+Erlaubte Zeichen: +
+Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
 
 |Kunden:
 |(kunde|kunden|customer)(id|no|:|.|=|-|#) +
@@ -528,15 +541,15 @@ uuid|id|nr|nummer|number|no|:
 
 // TODO: soll der name hier auch mit aufgenommen werden?
 
-//| *Auftrags-ID*
-//|Auftrag(s) / Order + ID / Nr / No + Zahl +
-//Beispiele: +
-//Auftrags-ID: 123 +
-//Auftrag ID 123 +
-//AuftragsID123 +
-//Order id 123 +
-//Erlaubte Zeichen: +
-//Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+| *Auftrags-ID*
+|Auftrag(s) / Order + ID / Nr / No + Zahl +
+Beispiele: +
+Auftrags-ID: 123 +
+Auftrag ID 123 +
+AuftragsID123 +
+Order id 123 +
+Erlaubte Zeichen: +
+Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
 
 |Order:
 |(auftrag|auftrags|order)(id|nr|no|:|.|=|-|#)
@@ -544,20 +557,19 @@ uuid|id|nr|nummer|number|no|:
 |AmazonOrder:
 |(Bestellnummer|Bestellung|Commande|Order|Pedido|Ordine)(|:|#|ID)
 
-//| *Rechnungs-Nr.*
-//|Rechnung(s) / invoice + ID / Nr / No / Nummer / number + Zahl +
-//Beispiele: +
-//Rechnung-ID: 123 +
-//Rechnung ID 123 +
-//Invoice No 123 +
-//Erlaubte Zeichen: +
-//Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+| *Rechnungs-Nr.*
+|Rechnung(s) / invoice + ID / Nr / No / Nummer / number + Zahl +
+Beispiele: +
+Rechnung-ID: 123 +
+Rechnung ID 123 +
+Invoice No 123 +
+Erlaubte Zeichen: +
+Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
 
 |Rechnung:
 |(kunden|customer)(nr|nummer|number|:|.|=|-|#)
 
 |====
-
 ////
 
 [#kontextmenue]
@@ -731,13 +743,13 @@ Konversation löschen:
 . Klicke auf *Ja*. +
 → Die Konversation wird gelöscht und in den <<#papierkorb, Papierkorb>> verschoben.
 
-[#nachricht-abrechnen]
-== Nachricht abrechnen
+[#minuten-erfassen]
+== Minuten erfassen
 
-Du kannst eine Nachricht immer dann abrechnen, wenn es sich um eine geflüsterte Nachricht handelt.
+Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine geflüsterte Nachricht handelt und wenn du der Nachricht mindestens einen Tag vom Typ *Nachrichten (kostenpflichtig)* zugewiesen hast.
 
 [.instruction]
-Nachricht abrechnen:
+Minuten erfassen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
 . Klicke oben links auf material:add[] *Neue Nachricht*.
@@ -746,31 +758,70 @@ Nachricht abrechnen:
 . Gib den Betreff deiner Nachricht im Feld *Betreff* ein.
 . Gib im Textfeld die Nachricht ein.
 . Klicke auf material:visibility[], um die Nachricht zu flüstern. +
-*_Hinweis:_* Nur geflüsterte Nachrichten können abgerechnet werden. Du erkennst eine geflüsterte Nachricht an dem Symbol material:visibility_off[role=skyBlue].
+*_Hinweis:_* Nur für geflüsterte Nachrichten können Minuten erfasst werden. Du erkennst eine geflüsterte Nachricht an dem Symbol material:visibility_off[role=skyBlue].
 . Klicke auf material:local_offer[], um der Nachricht Tags zuzuweisen. +
-*_Wichtig:_* Um Nachrichten abrechnen zu können, musst du im Menü *Einrichtung » Einstellungen » Tags* ein Tag vom Typ *Nachrichten (kostenpflichtig)* erstellt haben.
+*_Wichtig:_* Um Minuten für eine Nachricht erfassen zu können, musst du im Menü *Einrichtung » Einstellungen » Tags* ein Tag vom Typ *Nachrichten (kostenpflichtig)* erstellt haben und diesen Tag der Nachricht zugewiesen haben.
 . Klicke auf material:more_vert[].
-. Aktiviere die Schaltfläche *Nachricht abrechnen* (material:toggle_on[role=skyBlue]).
-. Klicke auf material:visibility_off[role=skyBlue] *ABRECHNEN UND SENDEN*. +
-→ Das Fenster *Abrechnen und senden* öffnet sich.
-. Du siehst hier im Feld *Timer* die Zeit, die der Timer bisher aufgezeichnet hat. 
+. Aktiviere die Schaltfläche *Minuten erfassen* (material:toggle_on[role=skyBlue]).
+. Klicke auf material:visibility_off[role=skyBlue] *MINUTEN ERFASSEN*. +
+→ Das Fenster *Minuten erfassen* öffnet sich (siehe <<#image-messenger-capture-minutes-window>>).
+. Du siehst hier im Feld *Timer anzeigen* die Zeit, die der Timer bisher aufgezeichnet hat. 
 . Im Feld *Minuten* kannst du den Wert ggf. anpassen.
-. Aktiviere das Feld *Minuten abrechnen* (material:check_box[role=skyBlue]).
-. Klicke auf *Bestätigen*.
+. Wähle (material:radio_button_checked[role=skyBlue]), ob es sich um *Freiminuten* oder um *Bezahlte Minuten* handelt.
+. Wähle ggf. Tags aus der Liste.
+. Klicke auf *ERFASSEN UND SPEICHERN*. +
+*_Hinweis:_* Wenn du statt der Option *Freiminuten* die Option *Bezahlte Minuten* gewählt hast, ändert sich die Schaltfläche in *ABRECHNEN UND SPEICHERN*.
 
-////
-TODO: Screenshot von abgerechneter bzw. geflüsterter Nachricht einfügen.
-////
+[[image-messenger-capture-minutes-window]]
+.Minuten erfassen
+image::crm:messenger-minuten-erfassen.png[width=640, height=360]
+
+[#beispiel-erfasste-minuten-frei]
+=== Beispiel einer Nachricht mit erfassten und freien Minuten
+
+In diesem Beispiel siehst du eine Nachricht mit erfassten Minuten, bei der die Option *Freiminuten* gewählt wurde.
+
+[[image-messenger-example-free-minutes]]
+.Nachricht mit erfassten und freien Minuten in der Übersicht
+image::crm:messenger-beispiel-freiminuten.png[width=640, height=360]
+
+In dieser Nachricht sind von links nach rechts die folgenden Informationen sichtbar:
+
+* Absender:in der Nachricht
+* Datum und Uhrzeit der gesendeten Nachricht
+* Zugewiesene Tags (in diesem Beispiel heißt das Tag "Messenger")
+* Das Symbol material:av_timer[] zeigt an, dass Minuten erfasst wurden. +
+→ Wenn es sich um eine <<#beispiel-erfasste-minuten-bezahlt, Nachricht mit bezahlten Minuten>> handelt, wird hier noch das Kreditkarten-Symbol (material:credit_card[]) angezeigt.
+* Am Ende der Zeile steht die Anzahl der erfassten Minuten.
+* In der zweiten Zeile ist der Inhalt der Nachricht sichtbar.
+
+[#beispiel-erfasste-minuten-bezahlt]
+=== Beispiel einer Nachricht mit erfassten und bezahlten Minuten
+
+In diesem Beispiel siehst du eine Nachricht mit erfassten Minuten, bei der die Option *Bezahlte Minuten* gewählt wurde.
+
+[[image-messenger-example-paid-minutes]]
+.Nachricht mit erfassten und bezahlten Minuten in der Übersicht
+image::crm:messenger-beispiel-bezahlte-minuten.png[width=640, height=360]
+
+In dieser Nachricht sieht sind von links nach rechts die folgenden Informationen sichtbar:
+
+* Absender:in der Nachricht
+* Datum und Uhrzeit der gesendeten Nachricht
+* Zugewiesene Tags (in diesem Beispiel heißen die Tags "tag14" und "test123") +
+→ Wenn der Nachricht mehrere Tags zugewiesen sind, werden die Tags durch das Zeichen `|` getrennt.
+* Das Symbol material:attach_file[] zeigt an, dass die Nachricht einen Anhang hat. +
+→ Wenn du mit dem Mauszeiger über das Symbol fährst, siehst du wie viele Anhänge die Nachricht hat.
+* Das Symbol material:av_timer[] zeigt an, dass Minuten erfasst wurden.
+* Das Symbol material:credit_card[] zeigt an, dass die Option *Bezahlte Minuten* aktiviert wurde. +
+→ Im Gegensatz zu einer <<#beispiel-erfasste-minuten-frei, Nachrichten mit Freiminuten>> wird hier das Kreditkarten-Symbol angezeigt.
+* Am Ende der Zeile steht die Anzahl der erfassten Minuten.
+* In der zweiten Zeile ist der Inhalt der Nachricht sichtbar.
 
 [#einzelne-nachricht-bearbeiten]
 == Einzelne Nachricht bearbeiten
 
 Das <<#kontextmenue, Kontextmenü für die Konversationen>> hast du weiter oben auf dieser Seite bereits kennengelernt. Du kannst auch einzelne Nachrichten über ein Kontextmenü bearbeiten. Gehe dazu wie in den folgenden Unterkapiteln beschrieben vor.
-
-////
-TODO: Screenshot von einer einzelnen Nachricht mit den Mini-Icons hier einfügen und erklären.
---> Absender / Datum / Uhrzeit ohne Sekunden / Tag-Namen (getrennt durch |-Zeichen) / Anhang-Symbol (Anzahl sichtbar beim drüber hovern) / Uhr-Symbol, Kreditkarten-Symbol und Anzahl der Minuten im Fall einer abgerechneten Nachricht.
-////
 
 [[image-messenger-edit-single-message]]
 .Einzelne Nachricht über das Kontextmenü bearbeiten
@@ -799,7 +850,7 @@ Der Nachricht Tags zuweisen:
 . Wähle (material:check_box[role=skyBlue]) die Tags, die du der Nachricht zuweisen möchtest. 
 
 ////
-FRAGE: Kann man hier wirklich nur einer einzelnen Nachricht einen Tag zuweisen oder bekommt dann die gesamte Konversation auch den Tag zugewiesen? Wenn nur die Nachricht den Tag erhält, wie verhält es sich dann mit den Filtern in der Suche? Wird der Tag an einzelnen Nachrichten in der Suche berücksichtigt? 
+TODO: FRAGE: Wenn nur die Nachricht den Tag erhält, wie verhält es sich dann mit den Filtern in der Suche? Wird der Tag an einzelnen Nachrichten in der Suche berücksichtigt? 
 ////
 
 [#einzelne-nachricht-anhaenge]
@@ -836,7 +887,7 @@ Nachricht löschen:
 → Die Nachricht wird gelöscht und in den <<#papierkorb, Papierkorb>> verschoben.
 
 ////
-FRAGE: Wird die einzelne gelöschte Nachricht auch in den Papierkorb verschoben? Konnte ich im System nicht nachstellen.
+TODO: FRAGE: Wird die einzelne gelöschte Nachricht auch in den Papierkorb verschoben? Konnte ich im System nicht nachstellen.
 ////
 
 [#paypal-dispute]
@@ -972,8 +1023,10 @@ Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Ve
 |[#intable-new-messages-billed-minutes]*Abgerechnete Minuten*
 |In der Spalte *Abgerechnete Minuten* (material:av_timer[]) zeigt das Symbol material:av_timer[] an, ob die Konversation abgerechnete Minuten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Minuten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Minuten zu sortieren.
 
+// TODO: heißt es noch so? oder heißt es jetzt "Bezahlte Minuten"?
+
 |[#intable-new-messages-subscribed]*Abonniert*
-|In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob man die Konversation <<#konversation-abonnieren, abonniert>> hat.
+|In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob die Konversation <<#konversation-abonnieren, abonniert>> wurde.
 
 |[#intable-new-messages-context-menu]*Kontextmenü*
 |Ermöglicht das Bearbeiten von Konversationen in der Übersicht mit Hilfe des <<#kontextmenue, Kontextmenüs>>.
@@ -1084,7 +1137,7 @@ Auch im Bereich *Meine Nachrichten* kannst du die Gruppenfunktion nutzen. Die Gr
 In der Navigation auf der linken Seite des Messengers findest du den Ordner material:delete[] *Papierkorb*. Hier werden alle <<#kontextmenue-konversation-loeschen, gelöschten Konversationen>> und alle <<#einzelne-nachricht-loeschen, gelöschten Nachrichten>> abgelegt.
 
 //// 
-Wird es in Zukunft möglich sein, alle Nachrichten aus dem Papierkorb mit einem Klick zu entfernen (so wie bei "Papierkorb leeren" in E-Mail-Programmen? Oder werden die Nachrichten automatisch nach einem bestimmten Zeitraum gelöscht? Wird es möglich sein, Nachrichten aus dem Papierkorb "zurückzuholen", wenn ich die Konversation bzw. Nachricht auf "nicht abgeschlossen" setze?
+TODO: Wird es in Zukunft möglich sein, alle Nachrichten aus dem Papierkorb mit einem Klick zu entfernen (so wie bei "Papierkorb leeren" in E-Mail-Programmen? Oder werden die Nachrichten automatisch nach einem bestimmten Zeitraum gelöscht? Wird es möglich sein, Nachrichten aus dem Papierkorb "zurückzuholen", wenn ich die Konversation bzw. Nachricht auf "nicht abgeschlossen" setze?
 ////
 
 Im Papierkorb des Messengers kannst du dir die folgenden Spalten anzeigen lassen:
