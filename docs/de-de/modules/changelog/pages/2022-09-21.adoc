@@ -6,7 +6,7 @@
 :startWeekDate: 15. September 2022
 :endWeekDate: 21. September 2022
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/fix-mailversand-versand-vom-falschen-client-fix-mail-dispatch-sending-from-wrong-client/695383
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -54,9 +54,35 @@ Weitere Informationen findest du im link:https://forum.plentymarkets.com/t/neue-
 ======
 
 [discrete]
+=== eBay
+
+* Für eBay-Listings wurden die folgenden Aktualisierungsstatus hinzugefügt:
+** Vorgang wird wiederholt: OAuth2-Token nicht abrufbar
+** Vorgang wird wiederholt: Ungültige OAuth2-Konto-ID
+** Vorgang wird wiederholt: S3-Fehler
+** Vorgang wird wiederholt: Fehler beim Erstellen eines eBay-Jobs
+** Vorgang wird wiederholt: Fehler beim Upload des eBay-Feeds
+** OAuth2-Token ungültig
+** In Bearbeitung
+
++
+Es handelt sich hierbei um die Aktualisierungsstatus für aktive Listings im Menü *Listings » Aktive Listings*. Den Aktualisierungsstatus deiner Listings kannst du in der *Gruppenfunktion* unter *Aktualisierungsstatus abfragen* ansehen. Die neuen Status zeigen dir, was beim Aktualisieren deiner Listings schief gelaufen ist und ob der Prozess noch einmal wiederholt wird. Bei `Vorgang wird wiederholt` musst du nichts weiter tun, der Prozess wird automatisch wiederholt.
+
+[discrete]
 === Fulfillment
 
 * Ab sofort ist die neue Paketinhaltsliste im Menü Aufträge » Paketinhaltsliste (Testphase) verfügbar. Weitere Informationen findest du in im link:https://forum.plentymarkets.com/t/ankuendigung-neue-paketinhaltsliste-announcement-new-package-content-list/693629[Forum^] und auf der Handbuchseite xref:fulfillment:paketinhaltsliste-testphase.adoc[Paketinhaltsliste (Testphase)]. Die alte Paketinhaltsliste wurde in diesem Zuge als *veraltet* gekennzeichnet.
+
+[discrete]
+=== Kaufland
+
+* Das Datenfeld *Bestandspuffer* wurde zu den Kaufland-Katalogen hinzugefügt. Mit diesem Datenfeld kannst du einen Bestandspuffer für Kaufland verwenden, also eine Artikelmenge, die nicht verkauft und als Puffer einbehalten werden soll.
++
+Du kannst das Datenfeld im Katalog zum Beispiel mit einem eigenen Wert verknüpfen. Trägst du als Wert beispielsweise die Menge 5 ein, werden 5 Artikel als Puffer vom Bestand, der an Kaufland übertragen wird, abgezogen. Weitere Informationen zu empfohlenen Datenfeld-Zuordnungen findest du auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#bestandspuffer[Kaufland.de einrichten].
++
+Der Bestandspuffer wird beim Bestandsabgleich und beim Erstellen eines neuen Angebots berücksichtigt.
++
+Wie du Kataloge für Kaufland erstellst und Datenfelder in den Katalogen verknüpfst, ist auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#catalogue-export[Kaufland.de einrichten] beschrieben.
 
 '''
 
@@ -92,6 +118,18 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 === CRM
 
 * Wenn man im Kontaktdatensatz im Bereich Kontaktdetails die Zahlungsart Lastschrift aktiviert hat, wurde diese Aktion nicht gespeichert. Dieses Verhalten wurde behoben.
+* Wenn beim automatischen Versand einer neuen Bestellung eine EmailBuilder-Vorlage ausgewählt wurde, wurde die E-Mail nicht versendet. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Ereignisaktionen
+
+* Seit es die Aktion *Tags hinzufügen/entfernen* bei den Ereignisaktionen für alle Auftragstypen gibt, kommt es bei der Auftragsanlage durch den Shop zu einem Validierungsfehler der Benutzerrechte und die Tags werden nicht hinzugefügt. Dies wurde behoben.
+
+[discrete]
+=== Zalando
+
+* Für den Bestandsabgleich zu Zalando können nur Vertriebslager in den Einstellungen gewählt werden.
+Änderte man aber den Typ des Lagers, nachdem man dieses eingestellt hatte, wurde der Bestand aus dem Lager weiterhin für den Bestandsabgleich berücksichtigt. Dies wurde nun korrigiert, indem beim Export der Lagertyp nochmal explizit geprüft wird.
 
 '''
 
@@ -134,7 +172,11 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* In der neuen Auftrags-UI wurde eine Gruppenfunktion zum Erstellen von Dokumenten hinzugefügt.
+* Gutscheindokumente von verkauften Gutscheinen werden jetzt in der neuen Auftrags-UI zusammen mit den anderen Auftragsdokumenten angezeigt.
 
 '''
 
@@ -143,7 +185,27 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* Die Struktur im Menü *Aufträge* wurde angepasst. Unter Aufträge gibt es nun vier Bereiche. Den Menüpunkt *Dokumentenarchiv (Veraltet)* findest du ab sofort unter *Daten*.
++
+image:order-menu-september-2022.png[width=640, alt=The new order menu]
+
+[discrete]
+=== CRM
+
+* Im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail* wurde der Menüpunkt *Automatischer Versand* entfernt. Du kannst deine Vorlagen mit bestimmten Ereignissen ab sofort nur noch im Assistenten E-Mail-Konten verknüpfen. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*.
+
+[discrete]
+=== Dokumente
+
+* Bei einigen Systemen (größtenteils neueren) konnten die Namen der Zahlungsarten nicht auf den Auftragsdokumenten angezeigt werden. Das lag daran, dass die Namen der Legacy-Zahlungsarten fehlen. Wir haben den Code entsprechend angepasst, sodass nun die Namen nach neuer Logik ermittelt werden.
+
+[discrete]
+=== plentyPOS
+
+* Ab sofort findest du die POS-Einstellungen nicht mehr im Menü *Einrichtung » Mandant » [Mandant wählen] » POS*, sondern unter *Einrichtung » POS » [Mandant wählen]*. Somit öffnest du erst das POS-Menü und wählst dann den Mandanten.
 
 '''
 
@@ -152,7 +214,10 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* In einigen Fällen konnte es erneut vorkommen, dass beim Öffnen der Vorschau oder beim Senden der Vorlage im Menü *Aufträge » Aufträge bearbeiten* ein Fehler angezeigt wurde. Dieses Verhalten wurde behoben.
 
 --
 
@@ -166,9 +231,41 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:Cdiscount.com[Cdiscount.com^]
+|1.1.1
+|-
+
+|link:https://marketplace.plentymarkets.com/easycredit_5109[easyCredit-Ratenkauf^]
+|2.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/extendedimagecarouselwidget_55287[Erweiterter Bilder-Karussell Widget^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/findologic_6390[Findologic - OnSite-Suche & Product Discovery Platform^]
+|4.0.6
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.13.2
+|-
+
+|link:https://marketplace.plentymarkets.com/lexoffice_54996[Lexoffice^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.16
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.0.18
+|Wenn bei den Aufträgen entsprechende Einträge in die Notizen geschrieben werden sollen prüfe bitte die entsprechende Einstellung im Assistenten.
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.12.3
+|-
 
 |===
 
