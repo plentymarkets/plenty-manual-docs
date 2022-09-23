@@ -26,8 +26,6 @@ The header, the footer and the settings in the template such as the name, the su
 
 In case of certain events, e.g. if a new order is placed in your plentyShop or when a contact subscribes to a newsletter, your plentymarkets system automatically <<#automate-email-despatch, creates emails from these templates>> and sends them to your contacts.
 
-// Watch this link:https://www.youtube.com/watch?v=LnQ2MpTZEQw[video^] to learn more about the EmailBuilder.
-
 [#preparatory-settings]
 == Carrying out the preparatory settings
 
@@ -48,26 +46,32 @@ include::_includes:partial$rights.adoc[]
 [#email-server-login-details]
 === Saving the email server’s login details
 
-In the *Setup » Client » [Select client] » Email » Login details* menu, you save the login details of a mailbox so that plentymarkets emails such as order or shipping confirmations can be sent from this email address.
+In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, you save the login details of a mailbox so that plentymarkets emails such as order or shipping confirmations can be sent from this email address.
 
-[.instruction]
-Saving the email server’s login details:
-
-. Go to *Setup » Client » [Select client] » Email » Login details*.
-. Carry out the desired settings. Note <<#table-email-server-login-details>>.
-. *Save* (icon:save[role="green"]) the settings.
-
+[.collapseBox]
+.Settings in the *Email accounts* assistant in the *Login details* step
+--
 [[table-email-server-login-details]]
-.Saving the email server’s login details
+.Saving email server login details in the *Email accounts* assistant
 [cols="1,3"]
 |====
 |Setting |Explanation
 
-| *Test mode*
-| Select *Active* or *Inactive*. +
-*Active* = The test mode is activated. All emails are only sent to the saved email address. This allows you to test the settings before switching to the live mode. +
-*Inactive* = The live mode is activated. +
-*_Important:_* The test mode is only applied to this online shop. The settings for additional clients (shops) are carried out in the client’s menu.
+2+| Enter the server details of your email provider.
+
+| *Outgoing mail server/SMTP server*
+|Enter the outgoing mail server as specified by the provider (usually smtp.domain.co.uk or mail.domain.co.uk). +
+*_mailbox.org:_* For mailbox.org mailboxes, enter the outgoing mail server *smtp.mailbox.org* and select the encryption method *SSL*.
+
+| *Port (standard port: 25)*
+|Enter the value *25*. This value is correct for nearly all providers. Otherwise, ask your provider about the correct port. +
+*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+
+| *Encryption method*
+| Select *SSL*, *TLS* or *No encryption*.  +
+*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+
+2+| Enter the login details of your email account 
 
 | *Name of sender*
 |Enter your own name or the name of your plentyShop. The name is displayed to the recipient. +
@@ -76,10 +80,6 @@ Saving the email server’s login details:
 | *Email address*
 |Enter the email address as it is listed in the email programme.
 
-| *Outgoing mail server/SMTP server*
-|Enter the outgoing mail server as specified by the provider (usually smtp.domain.co.uk or mail.domain.co.uk). +
-*_mailbox.org:_* For mailbox.org mailboxes, enter the outgoing mail server *smtp.mailbox.org* and select the encryption method *SSL*.
-
 | *User name*
 |Enter the user name that matches the email address. +
 *_mailbox.org:_* The mailbox.org user name is the complete email address of the mailbox.org mailbox.
@@ -87,33 +87,70 @@ Saving the email server’s login details:
 | *Password*
 |Enter the password that matches the user name and email address.
 
-| *Port (standard port: 25)*
-|Enter the value *25*. This value is correct for nearly all providers. Otherwise, ask your provider about the correct port. +
-*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+2+|Would you like to test the email despatch now?
 
-| *Encryption*
-| Select *SSL*, *TLS* or *No encryption*.  +
-*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+|material:outgoing_mail[]
+|Click on material:outgoing_mail[] to send a test email to the email address entered above.
+
+2+|Would you like to activate the live mode?
+
+|material:check_box_outline_blank[]
+|If you do not place a check mark for *Activate live mode* (material:check_box_outline_blank[]), the test mode is activated. + All emails are only sent to the saved email address. This allows you to test the settings before switching to the live mode. +
+*_Important:_* The test mode is only applied to this online shop. The settings for additional clients (shops) are carried out in the client’s menu.
+
+|material:check_box[role=skyBlue]
+|If you place a check mark for *Activate live mode* (material:check_box[role=skyBlue]), the live mode is activated.
 
 |====
-
-[TIP]
-.Entering newsletter login details
-====
-Go to *Setup » Client » [Select client] » Email » Newsletter*. Enter the login details to use the newsletter service that is integrated in plentymarkets. For further information, refer to the xref:crm:sending-newsletters.adoc#200[Entering newsletter login details] chapter of the xref:crm:sending-newsletters.adoc#[Newsletters] page of the manual.
-====
+--
 
 [#email-signature]
 === Saving the email signature
 
-Go to *Setup» Client » [Select client] » Email » Signature* to save the signature. The signature is then automatically added to your email templates when you inserted the corresponding variable in the template.
+Go to the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu to save the signature. The signature is then automatically added to your email templates when you inserted the corresponding variable in the template.
 
 [IMPORTANT]
 .Note the priority of the signature
 ====
-The signature that was saved for a user in his or her user account in the *Setup » Settings » User » Accounts* menu takes priority over the signature that is saved in the *Setup » Client » Select client » Email » Signature* menu. +
-*_This means:_* If you insert, for example, the variable `Signature in HTML format` in the template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Setup » Client » [Select client] » Email » Signature* menu is used.
+The signature that was saved for a user in his or her user account in the *Setup » Settings » User » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
+*This means:*_ If you insert, for example, the variable `Signature in HTML format` in the email template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Email accounts* assistant in the *Signature* step is used.
 ====
+
+[#e-mail-info-service]
+=== Setting up the email information service
+
+In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, you set to send a blind copy of all emails sent by your plentymarkets system to an email address of your choice. This can be particularly helpful in the early stages of your online shop, as it allows you to maintain an overview of all sent emails and recognise where processes can still be improved. You can also set here that you automatically receive an info email when a new order has been placed.
+
+[.collapseBox]
+.Settings in the *Email accounts* assistant in the *Info service* step
+--
+[[table-info-service]]
+.Saving email server login details in the *Email accounts* assistant
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+2+| Would you like to receive a blind copy of all emails sent by your plentymarkets system?
+
+|*Receive emails as blind copy* (material:toggle_off[role=darkGrey])
+|If you do not want to receive a blind copy, do _not_ activate the button (material:toggle_off[role=darkGrey]).
+
+|*Receive emails as blind copy* (material:toggle_on[role=skyBlue])
+|If you want to receive a blind copy, activate the button (material:toggle_on[role=skyBlue]). Enter in the field that appears below the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+
+|*Receive newsletter as blind copy*
+|If you are using the xref:crm:sending-newsletters.adoc#[newsletter] integrated in plentymarkets, you can set here whether you want to receive a blind copy when a newsletter is sent.
+
+2+| Would you like to receive an email when a new order is placed?
+
+|*Receive email in case of a new order* (material:toggle_off[role=darkGrey])
+|If you do not want to receive a blind copy when a new order is placed, do _not_ activate the button (material:toggle_off[role=darkGrey]).
+
+|*Receive email in case of a new order* (material:toggle_on[role=skyBlue])
+|If you want to receive a blind copy when a new order is placed, activate the button (material:toggle_on[role=skyBlue]). Enter in the field that appears below the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+
+|====
+--
 
 [#manage-folders]
 == Managing folders
@@ -196,7 +233,7 @@ Creating a sub-folder:
 . Go to *CRM » EmailBuilder (Test phase)*.
 . In the line of the folder that you want to create a sub-folder for, click on material:more_vert[]. +
 → A new window opens.
-. Click on material:add[] *Add* material:play_arrow[]. 
+. Click on material:add[] *Add*.
 . Click on material:folder[] *Folder*. +
 → The *Create new folder* window opens.
 . Enter the name for the sub-folder.
@@ -254,7 +291,7 @@ Creating a header template:
 . Go to *CRM » EmailBuilder (Test phase)*.
 . In the line of the folder or sub-folder in which you want to create a header, click on material:more_vert[]. +
 → A new window opens.
-. Click on material:add[] *Add* material:play_arrow[].
+. Click on material:add[] *Add*.
 . Click on material:web_asset[] *Header*. +
 → The *Create new header* window opens.
 . Enter a name for the header.
@@ -299,8 +336,8 @@ Creating a footer template:
 . Go to *CRM » EmailBuilder (Test phase)*.
 In the line of the folder or sub-folder in which you want to create a footer, click on material:more_vert[]. +
 → A new window opens.
-. Click on material:add[] *Add* material:play_arrow[].
-. Click on material:video_label[] *Footer*. +
+. Click on material:add[] *Add*.
+. Click on material:video_label[] *Filter*. +
 → The *Create new footer* window opens. +
 . Enter a name for the footer.
 . Click on *Save*. +
@@ -311,7 +348,7 @@ In the line of the folder or sub-folder in which you want to create a footer, cl
 → The window *New name* opens.
 . Enter the footer template’s subject.
 . Click on *Save*.
-. In the *Settings* area, select (material:check_box[role=skyBlue]) the owner and the client.
+. In the Settings area, select (material:check_box[role=skyBlue]) the owner and the client.
 . Click on *Edit* (material:edit[]).
 . Edit the footer according to your wishes and insert <<#insert-widget, widgets>> and <<#variables-emailbuilder, variables>>.
 . *Save* (material:save[]) the settings.
@@ -362,13 +399,13 @@ Creating a template:
 . Go to *CRM » EmailBuilder (Test phase)*.
 . In the line of the folder or sub-folder in which you want to create a template, click on material:more_vert[]. +
 → A new window opens.
-. Click on material:add[] *Add* material:play_arrow[].
+. Click on material:add[] *Add*.
 . Click on material:description[] *Template*. +
 → The *Create new template* window opens.
 . Carry out the settings. Note <<#table-emailbuilder-create-template>> and <<#image-emailbuilder-template>>.
 . *Save* (material:save[]) the settings.
 
-*_Note:_* If you do not want to create the template within a folder, click on the start page of the *CRM » EmailBuilder (Test phase)* menu in the bottom left on material:add[] *Add* material:play_arrow[] and click on material:description[] *Template* afterwards. The template will then be created on the first level and does not belong to a folder.
+*_Note:_* If you do not want to create the template within a folder, click on the start page of the *CRM » EmailBuilder (Test phase)* menu in the bottom left on material:add[] *Add* material:play_arrow[]and select material:description[] *Template* afterwards. The template will then be created on the first level and does not belong to a folder.
 
 [TIP]
 .Email templates are sent in multipart format
@@ -568,6 +605,8 @@ For example, you will find in the *Order items* widget a pre-defined list with t
 
 //// 
 
+ 
+
 <<#image-emailbuilder-widget-order-items>> shows the editing mode of the predefined *Order items* widget.
 
 [[image-emailbuilder-widget-order-items]]
@@ -648,6 +687,9 @@ Click on *Close settings* (material:close[]) to close the settings. Click on *De
 
 |[#intable-widget-order-items]*Order items*
 |This widget contains an already pre-defined layout for the order items with sample data. The sample data will then be replaced with the correct values in the email. 
+
+ 
+ 
 
 Click on material:settings[] to open the settings. Use the drop-down lists to decide which content is to be shown in the columns and as individual positions. Click on material:unfold_more[]to change the order. Click on material:add[] (*Add new entry*) in the settings to add further columns. Click on *Remove entry* (material:delete[]) to delete the columns from the overview.
 
@@ -744,7 +786,7 @@ Creating a default template:
 . Go to *CRM » EmailBuilder (Test phase)*.
 . In the line of the folder in which you want to create a default template, click on material:more_vert[]. +
 → A new window opens.
-. Click on material:add[] *Add* material:play_arrow[].
+. Click on material:add[] *Add*.
 . Click on material:description[] *Template*. +
 → The *Create new template* window opens.
 . Enter a name for the template.
@@ -757,7 +799,7 @@ As soon as the default template is created, you can see the prefilled content in
 The toolbar shows the prefilled subject. Adjust the subject by clicking on material:translate[] in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. +
 In the *Settings* area, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 3 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
 
-*_Note:_* If you do not want to create the default template within a folder, click on the start page of the *CRM » EmailBuilder (Test phase)* menu in the bottom left on material:add[] *Add* material:play_arrow[] and click on material:description[] *Template* afterwards. The template will then be created on the first level and does not belong to a folder.
+*_Note:_* If you do not want to create the default template within a folder, click on the start page of the *CRM » EmailBuilder (Test phase)* menu in the bottom left on material:add[] *Add* material:play_arrow[] and select material:description[] *Template* afterwards. The template will then be created on the first level and does not belong to a folder.
 
 [#default-templates-name-and-subject]
 ==== Available default templates
@@ -860,6 +902,8 @@ Would you like to know which default templates are already available in the Emai
 
 |====
 
+
+
 --
 
 [#template-show-preview]
@@ -917,7 +961,8 @@ Searching for a template:
 |Select (material:check_box[role=skyBlue]) a language from the drop-down list to only search for templates that were created in this language. You can select one or multiple languages.
 
 | *Name*
-|Enter a name to search for templates with this name.
+|Enter a name to search for templates with this name. +
+*_Note:_* If you have already created "old" templates in the *Setup » Client » [Select client] » Email » Templates* menu, you can use this field to search for the template’s old ID. During the migration, the old ID was written in brackets behind the name.
 
 | *Client*
 |Select (material:check_box[role=skyBlue]) a client from the drop-down list to only search for templates that were created for this client.
@@ -1086,19 +1131,20 @@ You have multiple options in plentymarkets to automate the email despatch to you
 [#automatic-email-despatch]
 === Setting up automatic emails
 
-The *Setup» Client » [Select client] » Email » Automatic* menu contains various events that you can link with a template. Select from the drop-down list the template that you <<#create-template, created>> before in the *CRM » EmailBuilder (Test phase)* menu. This ensures that the email template is sent to your contacts once the event occurs.
+The *Email accounts* assistant contains various events that you can link with a template. In the *Automatic despatch* step, select from the drop-down list the template that you <<#create-template, created>> before in the *CRM » EmailBuilder (Test phase)* menu. This ensures that the email template is sent to your contacts once the event occurs.
 
 [IMPORTANT]
 .Removing the link before deleting the email template
 ====
-Deleting an email template that is linked with an event in the *Automatic email* area may lead to undesired effects. Therefore, first go to *Setup » Client » [Select client] » Email » Automatic* and remove the link by selecting the option *Do not send* from the drop-down list in the line of the event. Afterwards, delete the template in the *CRM » EmailBuilder (Test phase)* menu.
+Deleting an email template that is linked with an event in the *Automatic despatch* step of the *Email accounts* assistant may lead to undesired effects. Therefore, first go to *Setup » Assistants » Basic setup* and open the *Email accounts* assistant. Remove the link by selecting the option *Do not send* from the drop-down list in the line of the event in the *Automatic despatch* step. Afterwards, delete the template in the *CRM » EmailBuilder (Test phase)* menu.
 ====
 
 [.instruction]
 Setting up the automatic email despatch:
 
-. Go to *Setup » Client » [Select client] » Email » Automatic*.
-. Select a template from the drop-down list in the line of the event. Note <<#table-events-automatic-email-despatch>>.
+. Go to *Setup » Assistants » Basic setup*.
+. Open the *Email accounts* assistant.
+. In the *Automatic despatch* step, select a template from the drop-down list in the line of the event. Note <<#table-events-automatic-email-despatch>>.
 . *Save* (icon:save[role="green"]) the settings.
 
 [[table-events-automatic-email-despatch]]
@@ -2274,11 +2320,11 @@ As an alternative, you can find the saved IBAN in the *Setup » Settings » Bank
 | `globals.legalInformation.privacyPolicy.plain`
 
 | `Signature in HTML format`
-|The signature is saved in the *Setup » Client » [Select client] » Email » Signature* menu in the *HTML signature* area.
+|The signature is saved in the *Email accounts* assistant in the *Signature* step. You can find the assistant in the Setup » Assistants » Basic setup menu.
 | `globals.account.signatureHTML`
 
 | `Signature in plain text`
-|The signature is saved in the *Setup » Client » [Select client] » Email » Signature* menu in the *Plain text signature* area.
+|The signature is saved in the *Email accounts* assistant in the *Signature* step. You can find the assistant in the Setup » Assistants » Basic setup menu.
 | `globals.account.signatureText`
 
 | `Today’s date`
