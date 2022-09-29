@@ -3,7 +3,7 @@
 :description: Learn how to use the Messenger in plentymarkets to send and receive emails.
 :author: team-crm
 
-The *CRM » Messenger (Test phase)* menu allows you to manage the external communication with your customers via emails as well as the internal communication via messages. If you use the whisper mode in messages, these messages are only visible in your plentymarkets system and _cannot_ be seen by your contacts. 
+The *CRM » Messenger (Test phase)* menu allows you to manage the external communication with your customers via emails as well as the internal communication via messages. If you use the whisper mode in messages, these messages are only visible in your plentymarkets system and _cannot_ be seen by your contacts.
 
 The *CRM » Messenger (Test phase)* menu is structured as follows:
 
@@ -38,8 +38,6 @@ If users of the type *Back end* should be able to work with the messenger, a per
 
 [#user-rights-back-end-user]
 === Assigning rights for back end users
-
- 
 
 :rights-purpose: see and create messages in the messenger
 :right-one: pass:quotes[*CRM > Message > Show*]
@@ -102,22 +100,52 @@ In this step, a cryptic email address is automatically created that builds the f
 
 In the lower part, enter all email addresses that are allowed to send messages to the cryptic, forwarding email address stated above. You can add as many email addresses as you like by clicking on *Add new entry* (material:add[]). Existing email addresses can be deleted by clicking on *Remove entry* (material:delete[]). *_Note:_* At least one email address has to be entered here.
 
+////
+[#verifizierung-e-mail-adressen]
+==== Verifizierung der E-Mail-Adressen
+
+In this step, you can see the progress of the verification process. plentymarkets sends an email to all email addresses that you entered in the previous step <<#email-forwarding, Email forwarding>>. The system then checks whether the email addresses are valid and the forwarding works correctly.
+////
+
 [#settings-email-despatch]
 ==== Settings for sending emails
 
-In this step, save the login details of the email inbox that you want to use to send emails from. This is necessary to make sure that your plentymarkets system is able to send and receive emails via the messenger. 
+In this step, save the login details of the email inbox that you want to use to send emails from. This is necessary to make sure that your plentymarkets system is able to send and receive emails via the messenger.
 
 After having entered the login details, select the encryption method and enter the sender email address and the sender name. This email address and this name will be shown to the recipients of your emails from this inbox.
 
 *_Note for mailbox.org mailboxes:_* Enter the port *465* and select *SSL* as encryption method.
 
-Select also in this step an email template for the email despatch. Be sure to have the email template created in the xref:crm:emailbuilder.adoc#[EmailBuilder] in advance. Note that the template you select here should contain Messenger variables. 
+////
+TODO: ggf. neue Tabelle einfügen mit aktuellen Zahlen analog zu dieser Tabelle hier: https://knowledge.plentymarkets.com/crm/e-mails-versenden#200
+////
+
+Select also in this step an email template for the email despatch.
 
 [TIP]
-.Use the default template 
+.Use the default template *Messenger default*
 ====
-We recommend to use the default template for the Messenger. This template is already available in your system. 
+We recommend to use the default template *Messenger default* for the Messenger. This template is already available in your system in the *CRM » EmailBuilder (Test phase)* menu in the *Default templates* folder. You can, of course, adjust this template according to your needs.
+
+The template contains the following variables:
+
+* Subject of the message in the subject line, shown as `{{ messenger.title }}`
+** So called _twig expressions_ in double curly brackets need to be inserted in the template’s subject because it is not possible to use “normal” variables in the subject line. For further information, refer to the xref:crm:emailbuilder.adoc#variables-emailbuilder[Available variables and twig expressions] chapter on the xref:crm:emailbuilder.adoc#[EmailBuilder] page.
+* Full name
+* Message content
+* Signature in HTML format
+* Conversation ID
+** The variable *Conversation ID* serves as unique identifier to make sure that the message is always correctly assigned. This is why this variable should _not_ be removed from the template.
 ====
+
+If you do _not_ want to use the default template for the messenger in this step, but a custom email template, make sure that the email template that you create in the *CRM » EmailBuilder (Test phase)* menu, contains at least the following variables:
+
+* Message subject
+** Enter `{{ messenger.title }}` in the template’s subject line.
+* Message content
+** Insert the variable `Message content` into the template’s text field.
+* Conversation ID
+** Insert the variable `Message conversation ID` into the template’s text field.
 
 The following Messenger-related variables are available in the EmailBuilder:
 
@@ -129,20 +157,6 @@ The following Messenger-related variables are available in the EmailBuilder:
 * Message minutes
 * Has billed minutes
 
-[TIP]
-.Use the default template
-====
-In the *CRM » EmailBuilder (Test phase)* menu, you can find a default template for the messenger. You can, of course, adjust this template according to your needs. The template contains the following variables:
-
-* Subject of the message in the subject line, shown as `{{ messenger.title }}`
-** So called _twig expressions_ in double curly brackets need to be inserted in the template’s subject because it is not possible to use “normal” variables in the subject line. For further information, refer to the xref:crm:emailbuilder.adoc#variables-emailbuilder[Available variables and twig expressions] chapter on the xref:crm:emailbuilder.adoc#[EmailBuilder] page.
-* Full name
-* Message content
-* Signature in HTML format
-* Conversation ID
-** The variable *Conversation ID* serves as unique identifier to make sure that the message is always correctly assigned. This is why this variable should _not_ be removed from the template.
-====
-
 [#settings-email-receipt]
 ==== Settings for receiving emails
 
@@ -153,7 +167,7 @@ In the last section, select the subscribers who should be informed in case of ne
 [#test-mode-inactive]
 ==== Setting test mode to inactive
 
-To be able to send messages with the messenger, it is required that the live mode in the *Email accounts* assistant in the *Login details* step is activated (material:check_box[role=skyBlue]). 
+To be able to send messages with the messenger, it is required that the live mode in the *Email accounts* assistant in the *Login details* step is activated (material:check_box[role=skyBlue]).
 
 Setting the test mode to *inactive* can be done in this step without having to leave the assistant. To do so, select (material:check_box[role=skyBlue]) the option *Activate live mode*.
 
@@ -169,6 +183,8 @@ Creating a message:
 . In the top left corner, click on material:add[] *New message*.
 . Enter a value in the *Add receiver...* field and select the appropriate value from the suggestion list. +
 *_Example:_* If you enter a number, possible receivers with this order ID or contact ID will be suggested (see <<#image-messenger-new-message-suggestion-list>>).
+. Select a template from the list.
+. Select the template language.
 . Enter the subject of the message in the *Subject* field.
 . Select the inbox from the drop-down list.
 . Enter the message in the text field.
@@ -190,8 +206,16 @@ image::crm:messenger-new-message-suggestion-list.png[width=640, height=360]
 |[#intable-recipients]*Recipients*
 |Enter a name or ID here and select the appropriate value from the suggestion list (see <<#image-messenger-new-message-suggestion-list>>).
 
-|[#intable-subject]*Subject*
-|Enter a subject for the message.
+|[#intable-template]*Template*
+|Select a template from the list. The list shows all templates that you created in the xref:crm:emailbuilder.adoc#[EmailBuilder]. +
+*_Tip:_* Enter at least 3 characters to see a suggestion list with already available email templates. +
+*_Note:_* If you click on <<#intable-refresh-template, Refresh template>>, the content of the template and the subject saved in this template are shown.
+
+|[#intable-template-language]*Template language*
+|Select the template language.
+
+|[#intable-refresh-template]*Refresh template*
+|Click on material:refresh[] to refresh the content of the template. For example, the content of the selected template and its subject will be shown.
 
 |[#intable-inbox]*Inbox*
 |Select an inbox from the drop-down list. The list shows the names of the inboxes that you set up by <<#complete-assistant, completing the assistant>>.
@@ -218,6 +242,8 @@ In the overview, whispered messages are shown in _italics_. +
 |You can always capture minutes for a message as long as it is a <<#intable-whisper-mode, whispered message>>. To do so, click on material:more_vert[] first. If you then activate the button *Capture minutes* (material:toggle_on[role=skyBlue]), minutes will be captures for this message. The button changes from material:forward_to_inbox[role=skyBlue] *SEND* to material:visibility_off[role=skyBlue] *CAPTURE AND SEND*. +
 *_Note:_* You can only activate the button *Capture minutes* if the <<#intable-whisper-mode, whisper mode>> has been activated for this message.
 
+
+
 |[#intable-timer]*Show timer* (material:more_vert[])
 |You can start a timer for every message. To do so, click on material:more_vert[] first. If you then activate the *Show timer* button (material:toggle_on[role=skyBlue]), the timer next to the button material:forward_to_inbox[role=skyBlue] *SEND* will start running automatically. +
 Click on material:pause_circle[] to stop the timer or on material:play_circle[] to start the timer again.
@@ -225,9 +251,14 @@ Click on material:pause_circle[] to stop the timer or on material:play_circle[] 
 |[#intable-manage-inboxes]*Manage inboxes* (material:more_vert[])
 |First, click on material:more_vert[] and then on material:edit[] *Manage inboxes*. You will be redirected to the *Setup » Assistants » Basic setup* menu. Here, you can edit the inboxes via the available *Messenger configuration* <<#complete-assistant, assistants>>.
 
+//|[#intable-name-inbox]_Name of the currently selected inbox_
+//| Click on material:arrow_drop_down[] to select another inbox from the drop-down list. The list shows the names of the inboxes that you set up by <<#complete-assistant, completing the assistant>>.
+
 |[#intable-send]*SEND*
 |By clicking on material:forward_to_inbox[role=skyBlue] *SEND*, the message will be sent. +
 *_Note:_* If you capture minutes for the message, the button changes to material:visibility_off[role=skyBlue] *CAPTURE AND SEND*. If you whisper the message, this button is changed to material:visibility_off[role=skyBlue] *WHISPER*.
+
+
 
 |====
 
@@ -276,13 +307,15 @@ Possible values:
 Available values: *Done* and *Not done*.
 
 |[#intable-filter-has-attachments]*Has attachments*
-|Select *Yes* to search for conversations with attached files. Select *No* to search for conversations that have no files attached. 
+|Select *Yes* to search for conversations with attached files. Select *No* to search for conversations that have no files attached.
 
 |[#intable-filter-has-billed-messages]*Has billed messages*
 |Select *Yes* to search for conversations that contain billed messages. Select *No* to search for conversations that does not contain any billed messages.
 
 |[#intable-filter-contact-id]*Contact ID*
 |Enter an ID to only search for conversations that are linked with this contact ID.
+
+
 
 |[#intable-filter-order-id]*Order ID*
 |Enter an ID to only search for conversations that are linked with this order ID. +
@@ -312,7 +345,7 @@ Available values: *Done* and *Not done*.
 When you start a search, your selected filters are displayed up top as so-called “chips”. You can save these filters to apply them again more quickly and easily in the future.
 
 [.instruction]
-Saving the current filter: 
+Saving the current filter:
 
 . Start a search.
 . Click on *Saved filters* (material:bookmarks[]).
@@ -333,7 +366,7 @@ Use drag-and-drop to arrange the filters in a specific order by clicking on *Mov
 Proceed as follows to apply an already saved filter for the search.
 
 [.instruction]
-Applying saved filters: 
+Applying saved filters:
 
 . Click on *Saved filters* (material:bookmarks[]).
 . Click on a filter that you have already created. +
@@ -383,7 +416,7 @@ Possible values:
 |[#intable-overview-relations]*Relations*
 a|The conversation relations are shown here, for example:
 
-* material:person[] _Name of the contact (contact ID)_ 
+* material:person[] _Name of the contact (contact ID)_
 * material:shopping_cart[] _Order ID_
 ** Depending on whether it is a normal xref:orders:managing-orders.adoc#[order], a xref:orders:subscription.adoc#[subscription] or a xref:stock-management:managing-reorders.adoc#[reorder], you will be redirected to the corresponding menu when clicking on the ID within the conversation.
 * material:mail[] _Email address_
@@ -423,6 +456,8 @@ The xref:payment:beta-managing-payments-new.adoc#[payment] has a direct link to 
 |[#intable-overview-subscribed]*Subscribed*
 |The symbol material:done[] in the column material:notifications[] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
 
+
+
 |[#intable-overview-context-menu]*Context menu*
 |Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
 
@@ -435,7 +470,7 @@ Click on *Configure columns* (material:settings[]) on the top right to deactivat
 
 Search the <<#search-conversation, conversation>> that contains the message you want to reply to. Click on the message to reply to it.
 
-The only difference to <<#create-message, creating a message>> is that you can show and hide the subject line when replying to an existing message by clicking on the symbol material:more_vert[] (see <<#image-messenger-reply-to-message>>). 
+The only difference to <<#create-message, creating a message>> is that you can show and hide the subject line when replying to an existing message by clicking on the symbol material:more_vert[] (see <<#image-messenger-reply-to-message>>).
 
 [[image-messenger-reply-to-message]]
 .Replying to a message
@@ -443,7 +478,7 @@ image::crm:messenger-reply-to-message.png[width=640, height=360]
 
 You can adjust the subject line when the option *Subject* is activated (material:toggle_on[role=skyBlue]). If you have _not_ activated the *Subject* option (material:toggle_off[]), the *Subject* field is not visible when replying to the message. The currently selected subject is then automatically transferred when replying to the message.
 
-//// 
+////
 TODO: wieder einfügen, wenn diese Funktion wieder eingebaut wurde.
 
 [#switch-view]
@@ -453,96 +488,9 @@ It is possible to change the view in the Messenger from a table to a list. To do
 The table view is selected by default.
 
 
- 
+
   The selected conversation with all the messages contained therein is shown in the lower left section and the editor to reply to the messages is shown in the lower right section.
   The selected conversation with all the messages contained therein is shown in the upper right section and the editor to reply to the messages is shown in the lower right section.
-////
-
-//// 
-TODO: einfügen?! 
-
-
-[#assignment-parameters]
-== Assigning messages in the messenger
-
-Messages in the messenger are assigned with the help of keywords or text parameters that are automatically recognised by your plentymarkets system.
-
-Note the keywords that are used for the assignment as listed in <<#table-assignment-messenger>>. Both upper and lower case letters can be used.
-
-[[table-assignment-messenger]]
-.Assignment parameters and permitted spellings
-[cols="1,3"]
-|====
-|Parameter |Alternative spellings
-
-//| *Email address*
-//|example@mail.de
-
- 
-
-//| *ID of the ticket*
-//|Ticket / ID / Nr / No / nummer / number + digits +
-Examples: +
-  +
-  +
-  +
-//ID: #123 +
-//ID: 123 +
-  +
- 
-
-|Conversation:
-|conversation|conversations| |  +
-uuid|id| | |number| |:
-
-//| *Customer data*
-//|Customer ID or Customer No.: Kunde / Customer + ID / Nr / No / Nummer / number + digits +
-  + Name + digits +
-Examples: +
-  +
-  +
-  +
-  +
-  +
-  +
- 
-
-| 
- | |customer)(id| |:|.|=|-|\#) +
- |customer)(nr| |number|:|.|=|-|\#)
-
- 
-
-//| *Order ID*
-//|Auftrag(s) / Order + ID / Nr / No + digits +
-Examples: +
-  +
-  +
-  +
-  +
-  +
- 
-
-| 
- | | | | |:|.|=|-|\#)
-
-| 
-| |Order| |Order| |Ordine)(|:|#|ID)
-
-//| *Invoice No.*
-//|Rechnung(s) / invoice + ID / Nr / No / Nummer / number + digits +
-Examples: +
-  +
-  +
-  +
-  +
- 
-
-| 
- |customer)(nr| |number|:|.|=|-|\#)
-
-|====
-
 ////
 
 [#context-menu]
@@ -766,7 +714,7 @@ In this message, you can see from the left to the right the following informatio
 * Date and time of sent message
 * Assigned tags (in this example, our tag is called “Messenger”)
 * The symbol material:av_timer[] shows that minutes have been captured. +
-→ If it’s a <<#example-captured-minutes-paid, message with paid minutes>>, a credit card symbol is shown here.
+→ If it’s a <<#example-captured-minutes-paid, message with paid minutes>>, a credit card symbol (material:credit_card[]) is shown here.
 * At the end of the line, you can see the number of captured minutes.
 * The second line shows the content of the message.
 
@@ -818,26 +766,26 @@ Proceed as described below to assign a tag to a single message.
 Assigning tags to the message:
 
 . Go to *CRM » Messenger (Test phase)*.
-. Open the conversation that contains the message you want to assign a tag for.  
+. Open the conversation that contains the message you want to assign a tag for.
 . Open the message by clicking in the line of the message.
 . Click on material:local_offer[] *Assign tags to conversation* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
 *_Tip:_* If you have created a lot of tags for the *Messages* or *Messages (billable)* areas, enter the name of the tag in the search field *Search for tag*.
-. Select (material:check_box[role=skyBlue]) the tags that you want to assign to the message. 
+. Select (material:check_box[role=skyBlue]) the tags that you want to assign to the message.
 
 ////
-TODO: FRAGE: Wenn nur die Nachricht den Tag erhält, wie verhält es sich dann mit den Filtern in der Suche? Wird der Tag an einzelnen Nachrichten in der Suche berücksichtigt? 
+TODO: FRAGE: Wenn nur die Nachricht den Tag erhält, wie verhält es sich dann mit den Filtern in der Suche? Wird der Tag an einzelnen Nachrichten in der Suche berücksichtigt?
 ////
 
 [#attachments-single-message]
 === Downloading attachments
 
-You can either download the attachments of the message one by one or download all attachments of the message as a ZIP file to your computer. 
+You can either download the attachments of the message one by one or download all attachments of the message as a ZIP file to your computer.
 
 [.instruction]
 Downloading attachments:
 
 . Go to *CRM » Messenger (Test phase)*.
-. Open the conversation that contains the message whose attachment(s) you want to download.  
+. Open the conversation that contains the message whose attachment(s) you want to download.
 . Open the message by clicking in the line of the message.
 . Click on material:more_vert[].
 . Click on material:attach_file[] *Attachments*.
@@ -853,7 +801,7 @@ Proceed as described below to delete a single message.
 Deleting a message:
 
 . Go to *CRM » Messenger (Test phase)*.
-. Open the conversation that contains the message you want to delete.  
+. Open the conversation that contains the message you want to delete.
 . Open the message by clicking in the line of the message.
 . Click on material:more_vert[].
 . Click on material:delete[] *Delete*. +
@@ -998,10 +946,10 @@ The xref:payment:beta-managing-payments-new.adoc#[payment] has a direct link to 
 |[#intable-new-messages-billed-minutes]*Billed minutes*
 |The symbol material:av_timer[] in the *Billed minutes* (material:av_timer[]) column shows whether the conversation has billed minutes. When you hover with your cursor over the symbol, you can see the number of billed minutes. Right next to the title bar, click on material:arrow_upward[] to sort the table by the number of billed minutes.
 
- 
+
 
 |[#intable-new-messages-subscribed]*Subscribed*
-|The symbol material:notifications[] in the column material:done[] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
+|The symbol material:done[] in the column material:notifications[] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
 
 |[#intable-new-messages-context-menu]*Context menu*
 |Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
@@ -1019,7 +967,7 @@ You can also use the group function in the *New messages* area. The group functi
 [#my-messages]
 == My messages
 
-In the navigation on the left-hand side of the messenger, you can find the folder material:3p[] *My messages* below the folder material:inbox[] *Inbox*. You can see all conversations here that you <<#subscribe-conversations, subscribed for>>. 
+In the navigation on the left-hand side of the messenger, you can find the folder material:3p[] *My messages* below the folder material:inbox[] *Inbox*. You can see all conversations here that you <<#subscribe-conversations, subscribed for>>.
 
 You can have the following columns displayed in the *My messages* folder of the Messenger:
 
@@ -1107,11 +1055,11 @@ You can also use the group function in the *My messages* area. The group functio
 ====
 
 [#trash]
-== Trash 
+== Trash
 
 In the navigation on the left-hand side of the Messenger, you can find the folder material:delete[] *Trash*. Here you can find all <<#context-menu-delete-conversation, deleted conversations>> and all<<#delete-single-message, deleted messages>>.
 
-//// 
+////
 TODO: Wird es in Zukunft möglich sein, alle Nachrichten aus dem Papierkorb mit einem Klick zu entfernen (so wie bei "Papierkorb leeren" in E-Mail-Programmen? Oder werden die Nachrichten automatisch nach einem bestimmten Zeitraum gelöscht? Wird es möglich sein, Nachrichten aus dem Papierkorb "zurückzuholen", wenn ich die Konversation bzw. Nachricht auf "nicht abgeschlossen" setze?
 ////
 
