@@ -6,6 +6,7 @@
 
 :voelkner:
 :market: Voelkner
+:mirakl:
 :plugin-name: Voelkner
 :plugin-link: https://marketplace.plentymarkets.com/voelknerextension_6949
 :type-of-market: marketplace
@@ -60,7 +61,7 @@ You have installed the plugins *Mirakl Connector* and *Voelkner* and generated a
 include::partial$mirakl-market-assistant.adoc[]
 
 [#order-referrer]
-=== Activating the order referrer
+=== Activating an order referrer
 
 :market: {market}
 :referrer: {market}
@@ -136,8 +137,6 @@ include::partial$recommendation-text.adoc[]
 
 include::partial$catalogue-mirakl-mapping.adoc[]
 
-
-
 ////
 Wird noch überarbeitet
 [TIP]
@@ -181,6 +180,56 @@ include::partial$mirakl-data-link-categories.adoc[]
 
 include::partial$properties-link.adoc[]
 
+[#discount-prices]
+=== _Optional:_ Defining discount prices
+
+You can export promotion prices that are valid for a specific period. Graduated prices can also be discounted.
+
+Two properties of the type *Date* are automatically created and mapped in step *Offer properties mapping* of the assistant. These properties are used to specify the start date and the end date of the discount period. Link this property with the variations that you want to discount for a limited period.
+
+[tabs]
+====
+Discounting sales price::
++
+--
+[.instruction]
+Discounting sales price:
+
+. Create a sales price of the type *Special offer*. +
+  *_Tip:_* Remember to activate the referrers *Mirakl* and *Voelkner* for this special offer price.
+. Link the sales price of the type *Special offer* to the variation.
+. Enter a price for the special sales price.
+. Link the variation with the property *Voelkner discount start date*.
+. Select a date for the property. +
+→ The discount price starts at 00:00 o'clock on this date.
+. Link the variation with the property *Voelkner discount end date*.
+. Select a date for the property. +
+→ The discount price ends at 23:59 o'clock on this date.
+
+--
+ 
+Discounting graduated prices::
++
+--
+
+[.instruction]
+Discounting graduated prices:
+
+. Create the same number of sales prices of the type *Special price* as you created sales prices for graduated prices for {market}. +
+  *_Tip:_* Remember to activate the referrers *Mirakl* and *Voelkner* for these special offer prices.
+. For these special prices, enter the same values for the setting *Minimum quantity* as for the normal sales prices used for the graduation.
+. Link the sales price and the graduated prices of the type *Special offer* to the variation.
+. Enter a price for each special price.
+. Link the variation with the property *Voelkner discount start date*.
+. Select a date for the property. +
+→ The discount prices start at 00:00 o'clock on this date.
+. Link the variation with the property *Voelkner discount end date*.
+. Select a date for the property. +
+→ The discount prices end at 23:59 o'clock on this date.
+
+--
+====
+
 [#product-and-offer-data]
 == Transferring product and offer data
 
@@ -211,17 +260,17 @@ You can automate the following order processing steps using event procedures:
 include::partial$mirakl-further-EPs.adoc[]
 
 [#shipping-confirmation-voelkner]
-=== Reporting shipping confirmations to Voelkner
+=== Report shipping confirmation to Voelkner
 
 include::partial$mirakl-EP-shipping-confirmation.adoc[]
 
 [#refund-voelkner]
-=== Reporting refunds to Voelkner
+=== Report refund to Voelkner
 
 include::partial$mirakl-EP-refund.adoc[]
 
 [#invoice-voelkner]
-=== Sending invoices to Voelkner
+=== Send invoice to Voelkner
 
 include::partial$mirakl-EP-send-invoice.adoc[]
 
