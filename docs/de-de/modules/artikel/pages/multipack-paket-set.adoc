@@ -5,21 +5,22 @@
 :author: team-item
 
 ////
-zuletzt bearbeitet 22.11.2021
+zuletzt bearbeitet 04.10.2022
 ////
 
 //ToDo - sobald Sets mit der neue UI kompatibel sind, dann folgende Keywords ergänzen:
 //Set, Sets, Artikelset, Artikelsets, Artikel-Set, Artikel-Sets, Artikel Set, Artikel Sets, Ab-Preis, Ab-Preise, Ab Preis, Ab Preise, Setpreis, Setbestandteil, Setbestandteile, Setbestandteilen
-
-
-//tag::combining-products-preamble[]
+//ToDo - sobald Sets mit der neue UI kompatibel sind, dann die Preamble + Tipp-Box unten mit dem Include-Tag einbinden und dafür die Tabelle raus löschen
+//ToDo - Anker und Links anpassen
 
 plentymarkets bietet verschiedene Möglichkeiten, Produkte zu kombinieren und als eine Verkaufseinheit anzubieten.
+
+////
 Die Tabelle vergleicht die Möglichkeiten und erläutert sie beispielhaft.
 
-[cols="1,5,1"]
+[cols="1,5"]
 |===
-|Art |Erläuterung |Artikeltyp
+|Art |Erläuterung
 
 |
 xref:artikel:multipacks-pakete-sets-verwalten.adoc#1000[Multipack]
@@ -31,7 +32,9 @@ a| *_Beispiel_*: 1 Flasche Wasser, eine Packung mit 6 Flaschen und eine Packung 
 * Die Hauptvariante entspricht der kleinsten Verkaufseinheit des Produkts, z.B. 1 Flasche.
 * Alle weiteren Varianten sind Kombinationen dieser kleinsten Verkaufseinheit, z.B. 6 oder 12 Flaschen.
 * Bestand wird nur an der Hauptvariante verwaltet.
-|Multipack
+* Alle Varianten eines Multipacks haben dieselben Attribute.
+Endkunden können also nicht z.B. zwischen Wasser mit und ohne Kohlensäure wählen.
+Sie können nur zwischen den verschiedenen Stückzahlen wählen.
 
 |
 xref:artikel:multipacks-pakete-sets-verwalten.adoc#2000[Paket]
@@ -50,123 +53,285 @@ Zum Beispiel können sie das Bartpflege-Kit nicht ohne das Bartwachs kaufen.
 * Alle Bestandteile müssen auf dem selben Lager liegen.
 * Der Warenbestand des Pakets richtet sich nach dem Bestandteil mit dem geringsten Bestand.
 Am Paketartikel selbst pflegst du keinen Bestand.
-|Standard
 
-|
-xref:artikel:multipacks-pakete-sets-verwalten.adoc#3000[Set]
-a| *_Beispiel_*: Eine Fußballuniform bestehend aus einem Trikot, Shorts und Socken. Endkunden stellen ihre eigenen Uniformen zusammen, indem sie die gewünschte Größe und Farbe für jede der drei Komponenten auswählen.
+//|
+//xref:artikel:multipacks-pakete-sets-verwalten.adoc#3000[Set]
+//a| *_Beispiel_*: Eine Fußballuniform bestehend aus einem Trikot, Shorts und Socken. Endkunden stellen ihre eigenen Uniformen zusammen, indem sie die gewünschte Größe und Farbe für jede der drei Komponenten auswählen.
 
-*_Technische Angaben_*:
+//*_Technische Angaben_*:
 
-* Sets bestehen aus mehreren Artikeln (Trikot, Shorts, Socken).
-* Bei der Bestellung können Endkunden für jeden Artikel die gewünschte Variante wählen (Größe, Farbe).
-* Die Hauptvariante selbst ist virtuell, kann also nicht verkauft werden.
+//* Sets bestehen aus mehreren Artikeln (Trikot, Shorts, Socken).
+//* Bei der Bestellung können Endkunden für jeden Artikel die gewünschte Variante wählen (Größe, Farbe).
+//* Die Hauptvariante selbst ist virtuell, kann also nicht verkauft werden.
 
-*_Hinweis_*: Es ist möglich, Artikel-Sets im link:https://marketplace.plentymarkets.com/plugins/sales/online-shops/ceres_4697[plentyShop LTS] Version 5.0 und höher zu verkaufen.
-Niedrigere Versionen von plentyShop LTS unterstützen die Set-Funktion nicht.
-Die Set-Funktion ist nur für den plentyShop vorgesehen.
-Es ist nicht möglich, Artikel-Sets auf Märkten wie Amazon und eBay zu verkaufen.
-|Set
+//*_Hinweis_*: Es ist möglich, Artikel-Sets im link:https://marketplace.plentymarkets.com/plugins/sales/online-shops/ceres_4697[plentyShop LTS] Version 5.0 und höher zu verkaufen.
+//Niedrigere Versionen von plentyShop LTS unterstützen die Set-Funktion nicht.
+//Die Set-Funktion ist nur für den plentyShop vorgesehen.
+//Es ist nicht möglich, Artikel-Sets auf Märkten wie Amazon und eBay zu verkaufen.
 |===
+////
 
-//end::combining-products-preamble[]
+[discrete]
+=== [.underline]##Voraussetzungen##
+
+Diese Seite setzt voraus, dass du bereits Grundkenntnisse über die Artikelstruktur in plentymarkets hast.
+Du sollst den xref:artikel:struktur.adoc#[Unterschied zwischen Artikeln und Varianten] kennen und du sollst wissen, wie Varianten ihre xref:artikel:vererbung.adoc#[Daten vererben].
+
+Zudem müssen folgende Daten im System vorhanden sein, um wie hier beschrieben Multipacks oder Artikelpakete manuell zu erstellen:
+
+* xref:artikel:attribute.adoc#[Attribute und Attributwerte]
+* xref:artikel:kategorien.adoc#[Kategorien]
+* xref:artikel:preise.adoc#[Verkaufspreise]
 
 [TIP]
-.Schon mit der Artikelverwaltung vertraut?
+.Artikel können auch importiert werden
 ====
-Diese Seite setzt voraus, dass du bereits xref:artikel:einleitung.adoc#[Grundkenntnisse über die Artikelverwaltung] in plentymarkets hast.
-Beispielsweise wird angenommen, dass du:
+plentymarkets enthält ein xref:daten:ElasticSync.adoc#[Import-Tool], mit dem du neue Artikel importieren kannst.
+Die Idee ist ganz einfach.
+Anstatt Artikeldaten manuell in plentymarkets zu speichern, trägst du die gleiche Informationen in eine CSV-Datei ein und importierst diese Datei dann in dein System.
 
-* den xref:artikel:struktur.adoc#[Unterschied zwischen Artikeln und Varianten] kennst.
-* einige xref:artikel:einstellungen.adoc#[vorbereitende Einstellungen] in deinem System konfiguriert hast.
-Zum Beispiel, dass du bereits eine xref:artikel:kategorien.adoc#[Kategoriestruktur] erstellt hast, xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofile] für deine Artikel eingerichtet hast, usw.
+* Verwende dazu den Import-Typ *Artikel*.
+* Gib mit Hilfe des Zuordnungsfeldes xref:daten:elasticSync-artikel.adoc#250[Artikel / Typ] an, welche Art von Artikel du importieren willst.
 ====
+
 
 [#1000]
 == Multipacks
 
-Bei einem Artikel des Typs *Multipack* entspricht die Hauptvariante der kleinsten Verkaufseinheit des Produkts. Alle weiteren Varianten des Artikels sind Kombinationen dieser kleinsten Verkaufseinheit. Der Bestand wird nur an der Hauptvariante gepflegt. Alle Varianten des Artikels haben dieselben Attribute. Das heißt, dass bei der Bestellung nicht zum Beispiel zwischen verschiedenen Farben oder Größen des Produkts gewählt werden kann. Im Onlineshop kann nur zwischen den verschiedenen Varianten gewählt werden, die der Anzahl des Produktes entspricht.
+*_Beispiel_*: 1 Flasche Wasser, eine Packung mit 6 Flaschen und eine Packung mit 12 Flaschen.
+
+*_Technische Angaben_*:
+
+* Multipacks sind verschiedene Stückzahlen derselben Variante.
+* Die Hauptvariante entspricht der kleinsten Verkaufseinheit des Produkts, z.B. 1 Flasche.
+* Alle weiteren Varianten sind Kombinationen dieser kleinsten Verkaufseinheit, z.B. 6 oder 12 Flaschen.
+* Bestand wird nur an der Hauptvariante verwaltet.
+* Alle Varianten eines Multipacks haben dieselben Attribute.
+Endkunden können also nicht z.B. zwischen Wasser mit und ohne Kohlensäure wählen.
+Sie können nur zwischen den verschiedenen Stückzahlen wählen.
 
 [#1100]
-=== Artikel des Typs Multipack erstellen
+=== Ein neues Multipack erstellen
 
-Beim Erstellen eines neuen Multipacks wird wie bei Artikeln des Typs *Standard* automatisch eine Hauptvariante erstellt. Diese Hauptvariante ist fest mit dem Artikel des Typs *Multipack* verbunden und kann nur zusammen mit dem Artikel erstellt oder gelöscht werden. Die Hauptvariante selbst entspricht der kleinsten Verkaufseinheit des Produkts.
+Erstelle den Multipack-Datensatz, indem du einige grundlegende Produktinformationen eingibst.
+Nach der Erstellung fügst du weitere Produktinformationen hinzu und aktivierst das Multipack, wenn es verkaufsfertig ist.
+
+//#gif#
 
 [.instruction]
-Artikel des Typs Multipack erstellen:
+Ein neues Multipack erstellen:
 
-. Öffne das Menü *Artikel » Artikel bearbeiten*.
-. Klicke auf *Neu*. +
-→ Das Tab *Neuer Artikel* wird geöffnet.
-. Wähle den Typ *Multipack*.
-. Nimm die weiteren Einstellungen vor. Beachte <<table-create-multipack>>.
-. *Speichere* die Einstellungen. +
-→ Der Artikel des Typs *Multipack* wird erstellt. +
-→ Die Hauptvariante wird in einem neuen Tab geöffnet.
+. Öffne das Menü *Artikel » Artikel-UI*.
+. Klicke auf icon:plus[role="darkGrey"] und wähle *Multipack-Artikel*.
+. Ein Pop-Up Fenster wird geöffnet. Dieses Fenster ist in mehrere Schritte unterteilt. Nimm die Einstellungen in jedem Schritt vor.
 
-[TIP]
-.Neuen Artikel des Typs *Multipack* in Übersicht anzeigen
-====
-Der neue Artikel des Typs *Multipack* ist nicht aktiv. Um neu erstellte Artikel in der Übersicht im Menü *Artikel » Artikel bearbeiten* anzuzeigen, wähle auf der linken Seite für den Filter *Aktiv* die Option *ALLE*. Klicke dann auf *Suchen*. +
-xref:artikel:artikel-verwalten.adoc#200[Aktiviere die Variante], sobald sie in deinem plentyShop veröffentlicht werden soll.
-====
+'''
+[discrete]
+==== Schritt: Name
 
-[[table-create-multipack]]
-.Artikel des Typs Multipack erstellen
-[cols="1,3"]
+//ToDo - füge die Tabelle stattdessen mit ein Include-Tag ein
+
+:manual:
+
+[cols="1,4a"]
 |===
 |Einstellung |Erläuterung
 
-2+^| *Artikeldaten*
+| *Artikelname* +
+[red]#(Pflichtfeld)#
+|Gib einen Namen für den Artikel ein.
 
-| *Typ*
-|Artikeltyp *Multipack* wählen. +
-*Standard* = Erstellt einen Artikel des Typs *Standard* mit Hauptvariante. +
-*Set* = Erstellt einen Artikel des Typs *Set*. +
-*Multipack* = Erstellt einen Artikel des Typs *Multipack*.
+*_Hinweis_*:
+Nachdem du den Artikel erstellt hast, kannst du den Namen in weitere Sprachen übersetzen oder auch weitere Namen hinzufügen, z.B. wenn der Artikel auf Marktplätzen anders genannt werden soll.
 
-| *ID*
-|Die Artikel-ID ist eine eindeutige, fortlaufende Zahl, die plentymarkets zur exklusiven Zuordnung jedes Artikels benötigt. Wird dieses Feld freigelassen, vergibt plentymarkets automatisch die nächste freie ID.
+|===
 
-| *Name*
-|Namen für das Multipack eingeben. Der Name ist eine Pflichtangabe.
-Der Name kann nachträglich xref:artikel:artikel-verwalten.adoc#50[noch geändert werden].
+'''
+[discrete]
+==== Schritt: Kategorien
 
-2+^| *Variante » Kategorieverknüpfung*
+//ToDo - füge die Tabelle stattdessen mit ein Include-Tag ein
 
-|Kategoriewahl
-|Die Kategorie wählen, in der das Multipack veröffentlicht werden soll. Alternativ auf *Neue Kategorie* klicken, um eine neue Kategorie zu erstellen.
+
+[cols="1,4"]
+|===
+|Einstellung |Erläuterung
+
+| *Kategorien wählen* +
+[red]#(Pflichtfeld)#
+a|In welche Kategorie soll der Artikel einsortiert werden?
+
+. Klicke auf *Kategorien wählen*. +
+→ Ein Pop-Up Fenster wird geöffnet.
+. Erweitere die Einträge (icon:chevron-right[role="darkGrey"]) und wähle alle Kategorien (icon:check-square[role="blue"]), in denen dieser Artikel erscheinen soll.
+. Klicke auf *Übernehmen*. +
+→ Die gewählten Kategorien werden als Tabelle dargestellt.
+Klicke auf material:delete[role="darkGrey"], um eine Kategorie aus dieser Liste zu entfernen, oder klicke auf icon:pencil[role="darkGrey"] *Kategorien wählen*, um weitere Kategorien hinzuzufügen.
+
+*_Hinweis_*: Diese Liste enthält nur die xref:artikel:kategorien.adoc#[Kategorien], die du bereits in plentymarkets angelegt hast.
+
+|===
+
+'''
+[discrete]
+==== Schritt: Hauptvariante
+
+Die erste Variante eines Artikels wird als Hauptvariante bezeichnet.
+
+* Bei einem Multipack entspricht die Hauptvariante der kleinsten Verkaufseinheit des Produkts, z.B. 1 Flasche.
+* Alle weiteren Varianten sind Kombinationen dieser kleinsten Verkaufseinheit, z.B. 6 oder 12 Flaschen.
+* Bestand wird nur an der Hauptvariante verwaltet.
+
+[cols="1s,4"]
+|===
+|Einstellung |Erläuterung
+
+| Variantennr.
+|Gib eine Nummer für die Hauptvariante ein.
+
+| Inhalt +
+Einheit
+|Gib einen numerischen Wert für die Hauptvariante ein und wähle eine Einheit aus der Dropdown-Liste, z.B. 500ml oder 150g.
+
+| Attribute wählen
+a|Die Hauptvariante kann Attribute besitzen, muss es aber nicht.
+
+. Klicke auf *Attribute wählen*. +
+→ Ein Pop-Up Fenster wird geöffnet.
+. Erweitere die Attribute (icon:chevron-right[role="darkGrey"]) und wähle die Attributwerte (icon:check-square[role="blue"]), die du für die Hauptvariante verwenden willst, z.B. "mit Kohlensäure".
+. Klicke auf *Übernehmen*. +
+→ Die gewählten Attributwerte werden als Tabelle dargestellt.
+Klicke auf material:delete[role="darkGrey"], um einen Attributwert aus dieser Liste zu entfernen, oder klicke auf icon:pencil[role="darkGrey"] *Attribute wählen*, um weitere Attributwerte hinzuzufügen.
+
+*_Hinweis_*: Alle Varianten eines Multipacks haben dieselben Attribute.
+Endkunden können also nicht z.B. zwischen Wasser mit und ohne Kohlensäure wählen.
+Sie können nur zwischen den verschiedenen Stückzahlen wählen.
+
+*_Hinweis_*: Diese Liste enthält nur die xref:artikel:attribute.adoc#[Attribute und Werte], die du bereits in plentymarkets angelegt hast.
+
+|===
+
+'''
+[discrete]
+==== Schritt: Fertig
+
+//ToDo - füge die Tabelle stattdessen mit ein Include-Tag ein
+
+[cols="1s,4"]
+|===
+|Einstellung |Erläuterung
+
+| Zusammenfassung
+a|Hier siehst du eine Zusammenfassung deiner gewählten Einstellungen.
+Klicke auf *Artikel erstellen*, wenn du mit den Angaben einverstanden bist.
+
+Nach der Erstellung hast du folgende Möglichkeiten:
+
+[cols="1s,4a"]
+!===
+
+! Zum Artikel
+!Das Pop-up-Fenster wird geschlossen und der neu erstellte Artikeldatensatz wird zur weiteren Bearbeitung geöffnet.
+
+! Weiteren Artikel erstellen
+!Das Pop-up-Fenster wird für den nächsten Artikel neu gestartet.
+
+! Schliessen
+!Das Pop-up-Fenster wird geschlossen.
+
+!===
+
+|===
+
+[#1400]
+=== Benötigte Stückzahlen erstellen
+
+Multipacks sind verschiedene Stückzahlen derselben Variante.
+Kunden kaufen z.B. entweder 1 Flasche Wasser, eine Packung mit 6 Flaschen oder eine Packung mit 12 Flaschen.
+
+//#gif#
+
+[.instruction]
+Benötigte Stückzahlen erstellen:
+
+. Öffne das Menü *Artikel » Artikel-UI » [Multipack öffnen] » Variantenübersicht*.
+. Klicke auf *Varianten erstellen* (icon:plus[role="darkGrey"]).
+. Ein Pop-Up Fenster wird geöffnet. Dieses Fenster ist in mehrere Schritte unterteilt. Nimm die Einstellungen in jedem Schritt vor.
+
+'''
+[discrete]
+==== Schritt: Einstellungen
+
+[cols="1,4a"]
+|===
+|Einstellung |Erläuterung
+
+| *Größe der Packung*
+|Die Hauptvariante entspricht der kleinsten Verkaufseinheit des Produkts, z.B. 1 Flasche.
+Hier erstellst du alle weiteren Kombinationen dieser kleinsten Verkaufseinheit, z.B. 6 oder 12 Flaschen.
+
+*_Vorgehensweise_*:
+
+. Gib eine Stückzahl für die Variante ein. Zum Beispiel, die Hauptvariante mal 6.
+. Klicke auf *Weiter* und dann auf *Multipack-Variante erstellen*.
+. Wiederhole den Vorgang für die nächste Stückzahl. Zum Beispiel, die Hauptvariante mal 12.
+
+|===
+
+'''
+[discrete]
+==== Schritt: Zusammenfassung
+
+[cols="1s,4"]
+|===
+|Einstellung |Erläuterung
+
+| Zusammenfassung
+a|Hier siehst du eine Zusammenfassung deiner gewählten Einstellungen.
+Klicke auf *Multipack-Variante erstellen*, wenn du mit den Angaben einverstanden bist.
+
+Nach der Erstellung hast du folgende Möglichkeiten:
+
+[cols="1s,4a"]
+!===
+
+! Zur Multipack-Variante
+!Das Pop-up-Fenster wird geschlossen und die neu erstellte Variante wird zur weiteren Bearbeitung geöffnet.
+
+! Weitere Multipack-Variante erstellen
+!Das Pop-up-Fenster wird für die nächste Variante neu gestartet.
+
+! Schliessen
+!Das Pop-up-Fenster wird geschlossen.
+
+!===
+
 |===
 
 [#1300]
-=== Artikel des Typs Multipack bearbeiten
+=== Weitere Produktdaten hinzufügen
 
 Nachdem du den Artikel des Typs *Multipack* erstellt hast, nimm die weiteren Einstellungen vor.
 Diese Einstellungen sind in einem xref:artikel:artikel-verwalten.adoc#[Verzeichnis] aufgeführt.
-
-[#1400]
-=== Multipack-Variante erstellen
-
-Beim Erstellen eines Artikels des Typs *Multipack* wird immer eine Hauptvariante erstellt. Die Hauptvariante ist fest mit dem Artikel verbunden. Die Hauptvariante kann nicht gelöscht werden. Diese Hauptvariante entspricht der kleinsten Verkaufseinheit des Produkts. Alle weiteren Varianten des Artikels entsprechen dieser kleinsten Verkaufseinheit mal x. Der Bestand aller Varianten wird nur an der Hauptvariante gepflegt. Im Tab *Bestand* der weiteren Varianten des Artikels wird nur der theoretische Bestand angezeigt. Wenn sich der Bestand der Hauptvariante ändert, wird der Bestand für die anderen Varianten des Artikels neu berechnet.
-
-[.instruction]
-Multipack-Variante erstellen:
-
-. Öffne das Menü *Artikel » Artikel bearbeiten*.
-. Öffne den Artikel des Typs *Multipack*.
-. Wechsele in das Tab *Varianten*.
-. Klicke auf *Neu*. +
-→ Das Fenster *Neue Variante erstellen* wird geöffnet.
-. Gib als Inhalt eine Stückzahl der Hauptvariante ein. +
-*_Tipp_*: Einheit und Attribute sind nicht änderbar.
-. Klicke auf *Variante erstellen*. +
-→ Die Variante wird erstellt. +
-→ Die Variante wird in der Variantenübersicht angezeigt.
 
 Die Einstellungen der Variante bearbeitest du genauso wie xref:artikel:import-export-anlage-verzeichnis.adoc#170[Varianten von Artikeln des Typs Standard]. Beachte jedoch die folgenden Besonderheiten von Multipack-Varianten:
 
 * Deaktiviere die Vererbung des Verkaufspreises und speichere einen eigenen Preis.
 * Der Tab *Bestand* ist rein informativ. Der Bestand wird nur an der Hauptvariante gepflegt.
+
+//Der Bestand aller Varianten wird nur an der Hauptvariante gepflegt. Im Tab *Bestand* der weiteren Varianten des Artikels wird nur der theoretische Bestand angezeigt. Wenn sich der Bestand der Hauptvariante ändert, wird der Bestand für die anderen Varianten des Artikels neu berechnet.
+
+
+[#1300]
+=== Multipack im Frontend anschauen
+
+//mit ein Include-Tag einbinden
+
+[#1300]
+=== Multipack für den Verkauf freigeben
+
+//mit ein Include-Tag einbinden
+
 
 [#2000]
 == Artikelpakete
@@ -180,7 +345,7 @@ Für den korrekten Bestand von Artikelpaketen müssen alle Bestandteile auf dem 
 ====
 
 [#2100]
-=== Artikelpaket erstellen
+=== Ein neues Artikelpaket erstellen
 
 Im Tab *Paket* eines Artikels des Typs *Standard* erstellst du ein Artikelpaket, das sich aus mehreren Bestandteilen, den Basisartikeln, zusammensetzt. Wenn du dem geöffneten Artikel weitere Varianten hinzufügst, wird daraus ein Paket. Die Bestandteile des Pakets werden im Tab *Paket-Bestandteile* angezeigt und werden dort auch bearbeitet und gelöscht.
 
@@ -214,7 +379,7 @@ Anstatt einen neuen Paketartikel zu erstellen, kannst du auch einen vorhandenen 
 ====
 
 [#2200]
-=== Paketbestandteile bearbeiten oder löschen
+=== Bestandteile hinzufügen oder löschen
 
 Im Tab *Paket-Bestandteile* änderst du die Menge der im Artikelpaket enthaltenen Varianten, siehst den Nettowarenbestand der Varianten und löschst nicht mehr benötigte Paket-Bestandteile.
 
@@ -232,6 +397,8 @@ Paketbestandteil löschen:
 . Klicke auf *Paket-Bestandteile löschen*. +
 → Die Paketbestandteile werden aus dem Artikelpaket gelöscht.
 
+//ToDo - this should be something like a Praxisbeispiel within the sub-chapter about adding components
+[discrete]
 [#2300]
 === Mehrere Pakete in einem Artikel abbilden
 
@@ -248,13 +415,16 @@ Artikelvarianten können zu Paketen mit verschiedenen Bestandteilen werden. Auf 
 
 Auf diese Weise bietest du in deinem plentyShop den Artikel *Handtuchpaket* als Paket in den Farben *Rot* und *Blau* an.
 
+[#1300]
+=== Weitere Produktdaten hinzufügen
+
 [#2400]
-=== Warenbestand von Artikelpaketen einstellen
+==== Warenbestand eines Artikelpakets
 
 Der Warenbestand des Pakets richtet sich nach dem Paketbestandteil mit dem geringsten Bestand. Der Warenbestand dieses Paketbestandteils wird in der Artikelübersicht im Menü *Artikel » Artikel bearbeiten* in der Spalte *WB netto* angezeigt. Am Paketartikel selbst pflegst du keinen Bestand. Im Paketbestandteil im Tab *Bestand* verwaltest du den Warenbestand, buchst neue Wareneingänge, korrigierst Bestände und überblickst Zuläufe und Warenbewegungen.
 
 [#2500]
-=== Gewicht und Einkaufspreis berechnen
+==== Gewicht und Einkaufspreis berechnen
 
 Ein Artikelpaket ist eine Zusammenstellung mehrerer Bestandteile. Jeder Bestandteil verfügt wiederum über wichtige Kennzahlen, wie xref:artikel:artikel-verwalten.adoc#270[Gewicht] und xref:artikel:artikel-verwalten.adoc#280[Einkaufspreis] (EK). Aber wie setzen sich diese Kennzahlen für das Artikelpaket insgesamt zusammen?
 
@@ -316,7 +486,13 @@ Willst du Gewicht und Einkaufspreis in der Regel automatisch berechnen lassen? V
 Möchtest du das Gewicht und den EK für deine Artikelpakete selbst eingeben? Wähle im Bereich *Paket* keine Einstellungen aus, um die Daten händisch zu pflegen. Sind keine Einstellungen ausgewählt, haben Kennzahlen der einzelnen Bestandteile keinen Einfluss auf die Kennzahlen des Artikelpakets.
 ====
 
+[#1300]
+=== Paket im Frontend anschauen
 
+[#1300]
+=== Paket für den Verkauf freigeben
+
+////
 [#3000]
 == Sets
 
@@ -592,6 +768,8 @@ Zulässige Menge eines Setbestandteils festlegen:
 . *Speichere* (terra:save[role="green"]) die Einstellungen.
 
 ////
+
+////
 info-box: was macht man (was trägt man ein) wenn man nur bei 1 der Bestandteile eine Mindestbestellmenge hinterlegen will? Was macht man wenn man nur eine Mindestbestellmenge aber keine Maximalbestellmenge haben will?
 
 === Artikelsets mit dem Import-Tool anlegen und verwalten
@@ -603,6 +781,7 @@ info-box: was macht man (was trägt man ein) wenn man nur bei 1 der Bestandteile
 ==== Weitere Einstellungen mit dem Import-Tool bearbeiten
 ////
 
+////
 [#4200]
 ==== Einstellungen in den übrigen Tabs
 
@@ -731,3 +910,4 @@ Wir planen aber, in Zukunft ein Positionsfeld zu implementieren.
 *_Workaround_*:
 Füge die Bestandteile schon in der Reihenfolge hinzu, die dann auch im plentyShop dargestellt werden soll.
 --
+////
