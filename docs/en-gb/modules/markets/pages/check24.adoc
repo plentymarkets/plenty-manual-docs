@@ -35,12 +35,25 @@ Setting up the interface to Check24:
 . Enter the FTP access password.
 . Save (terra:save[]) the settings.
 
-[TIP]
+[#data-exchange-check24]
+== Frequency of data exchange
+
+After you have set up Check24 in plentymarkets, data is exchanged with the market in the intervals described in <<#data-exchange>>.
+
+[[data-exchange]]
 .Frequency of data exchange
-====
-After you have set up Check24 in plentymarkets, data is exchanged with the market in the intervals described below: +
-- Order import every 15 minutes
-====
+[cols="1,1a"]
+|===
+|Data |Interval
+
+| Order import
+| every 15 minutes
+
+| Item export
+| Check24 retrieves item data via an <<#url-check24-catalogue, URL>>. +
+
+*_Note:_* The interval for the data exchange is defined in the <<#catalogue-settings, catalogue settings>>.
+|===
 
 [#250]
 === Activating an order referrer
@@ -261,7 +274,7 @@ Create the export format *Check24DE-Plugin* as described below. Note the followi
 | This option does not affect this format.
 
 | *Item availability*
-| Activate the *overwrite* option and enter item availabilities into the fields *1* to *10*. The fields represent the IDs of the availabilities. This overwrites the item availabilities that are saved in the menu *System » Item » Item availability*.
+| Activate the *overwrite* option and enter item availabilities into the fields *1* to *10*. The fields represent the IDs of the availabilities. This overwrites the item availabilities that are saved in the *Setup » Item » Availability* menu.
 |===
 
 [#500-2]
@@ -383,7 +396,7 @@ Check24 retrieves item data via an URL. You will find this URL in your Check24 c
 
 include::partial$catalogue-creation.adoc[]
 
-[#catalogue-mapping]
+[#data-field-mappings]
 ==== Mapping data fields in the catalogue
 
 Now, map the Check24 data fields to the item data saved in plentymarkets.
@@ -429,6 +442,8 @@ include::partial$catalogue-settings.adoc[]
 
 :interval: once a day during the night
 
+include::partial$catalogue-activation.adoc[]
+
 [#url-check24-catalogue]
 ==== Saving the URL at Check24
 
@@ -447,8 +462,6 @@ Copying the URL:
 . Under *Download settings* in the *Options for public link* section, click on *Copy URL* (material:content_copy[]).
 → The URL is copied to the clipboard.
 . Save the URL in the Check24 back end.
-
-include::partial$catalogue-activation.adoc[]
 
 [#change-elastic-export-catalogue]
 === _Alternative 3:_ Changing from elastic export to catalogue
@@ -517,6 +530,24 @@ The format Check24 Offer is new. As such, there is no equivalent format availabl
 | Weight
 
 |===
+
+[#check24-delete-items]
+== Removing items from Check24
+
+Offers will only be visible on Check24 if a variation has at least one active offer. If a variation is not contained in the offer export or is exported to Check24 with a stock of *0*, then there will be no offer for this variation on Check24.
+
+Thus, variations cannot be sold on Check24 if they do not have stock in plentymarkets. The offer for the variation on Check24 will be removed from Check24 if a stock of *0* is exported. The interval for the data exchange is defined in the <<#catalogue-settings, catalogue settings>>.
+If the variation has stock again, then it will also be offered on Check24 after the next item data export.
+
+However, if you do not want to sell a variation which has stock in plentymarkets on Check24, then you have to delete the availability for the market. 
+
+[.instruction]
+Deleting the availability:
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability*.
+. *Delete* (icon:minus-circle[role="red"]) the availability *Check24*.
+. *Save* (terra:save[]) the settings. +
+→ The variation will not be offered on Check24 any longer.
 
 [#950]
 == Order import

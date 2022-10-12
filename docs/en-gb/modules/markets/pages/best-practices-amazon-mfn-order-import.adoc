@@ -6,9 +6,9 @@
 This best practice deals with MFN orders (MFN = Merchant Fulfillment Network, i.e. shipment by the seller) that are not imported. We assume that the order import is activated in the basic settings for Amazon.
 
 [#100]
-== MWS registration
+== Authorisation has expired or is missing
 
-MWS registration allows our developers to access your Amazon account. When the registration is finished, the access rights are displayed in your seller central within *Settings » User permissions* in the *Amazon MWS Developer Permissions* area. If we are not granted access rights, we can neither retrieve data from nor send data to Amazon (as requests are blocked by Amazon).
+For plentymarkets and Amazon to exchange data, you need to allow plentymarkets access to your Amazon account. You grant this access in the menu *Setup » Markets » Amazon » Settings* when you create a new account. When the registration is finished, the access rights are displayed in your seller central within *Settings » User permissions* in the *Amazon MWS Developer Permissions* area. If we are not granted access rights, Amazon blocks all requests. As such, we can neither retrieve data from nor send data to Amazon.
 
 [IMPORTANT]
 ====
@@ -16,20 +16,12 @@ Check whether developer permissions are set up. To do so, go to *Settings » Use
 Another indicator that there are no developer permissions is this error message: _Error:Access to Reports. (GetReportScheduleList) is denied_. You will receive this error message for almost all requests if you did not set up any developer permissions. If you set up _scheduled reports_, then error messages are displayed in the logs or within *Setup » Markets » Amazon » Data exchange » Reports*. How to set up scheduled reports is described below.
 ====
 
-How to carry out the MWS registration is described in our xref:markets:amazon-setup.adoc#100[manual].
+How to allow access is described in our xref:markets:amazon-setup.adoc#300[manual].
 
 [#200]
-== Auth token expired
+== Access rights expired
 
-The Auth token is generated during the MWS registration. The token is used for the synchronisation between plentymarkets and Amazon and it is directly linked to the authorisation. The token has an expiry date. This is to ensure that deactivated interfaces no longer have access after the token is expired.
-Vice versa, this means that the token must be updated from time to time. When the token has expired, developer permissions granted with the MWS registration are no longer valid and no synchronisation can be carried out.
-
-[IMPORTANT]
-====
-Check whether the token has expired by viewing the developer permissions in your seller central. Another indicator that the token has expired is the error message _Access denied_.
-====
-
-You can update the Auth token via this link:https://sellercentral.amazon.de/apps/manage[link^]. (The expiry date is set in the future. This ensures that the permissions are valid again.)
+You can update the access rights in the *Amazon - Base settings* assistant in the *Setup » Assistants » Omni-Channel* menu. To do so, click on *Allow access* in the step *Allow access to Amazon* of the assistant. You are then forwarded to Amazon and have to login with your Amazon access data. On the Amazon page, click on *Confirm* to renew the access rights.
 
 [#300]
 == Wrong access data
@@ -40,8 +32,6 @@ In order to enable contact between our system and your Amazon account, the acces
 ====
 If the seller token is not saved correctly within the basic settings, the error message _ERROR: AuthToken is not valid for SellerId and AWSAccountId_ is issued.
 ====
-
-The correct token and your seller ID (merchant ID) can be found via the xref:markets:amazon-setup.adoc#100[MWS registration] (at the end of the registration). As an alternative, you can enter the merchant ID into the field for the seller token.
 
 [TIP]
 ====
@@ -80,5 +70,5 @@ As a result, the schedulers that you activated for your Amazon account are displ
 [#500]
 == Further error messages
 
-If you receive the error message _The seller does not have an eligible Amazon account to call Amazon MWS._, it may be that our system is not authorised to access Amazon. Check the developer permissions as described above. If they are not available, add the permissions via the MWS registration.
-If this does not help, contact Amazon. (Either your seller account is no power seller account and therefore the Amazon MWS API cannot be used, or your account is not properly activated).
+If you receive the error message _The seller does not have an eligible Amazon account to call Amazon MWS._, it may be that our system is not authorised to access Amazon. Check the access rights as described above. If they are not available, add the permissions via the assistant.
+If this does not help, contact Amazon. Either your seller account is not a power seller account or your account is not properly activated.

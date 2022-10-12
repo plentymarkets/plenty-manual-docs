@@ -35,12 +35,25 @@ Schnittstelle zu Check24 einrichten:
 . Gib dein Passwort für den FTP-Zugang ein.
 . Speichere (terra:save[]) die Einstellungen.
 
-[TIP]
+[#datenaustausch-check24]
+== Häufigkeit des Datenaustauschs
+
+Nachdem du die Schnittstelle zu Check24 in plentymarkets eingerichtet hast, findet der Datenaustausch in den in <<#data-exchange>> aufgeführten Intervallen statt.
+
+[[data-exchange]]
 .Häufigkeit des Datenaustauschs
-====
-Nachdem du Check24 in plentymarkets eingerichtet hast, findet der Datenaustausch in den folgenden Intervallen statt: +
-- Auftragsimport alle 15 Minuten
-====
+[cols="1,1a"]
+|===
+|Daten |Intervall
+
+| Auftragsimport
+| alle 15 Minuten
+
+| Artikelexport
+| Check24 ruft Artikeldaten über eine <<#url-check24-katalog, URL>> ab. +
+
+*_Hinweis:_* Das Intervall für die Übertragung legst du in den <<#catalogue-settings, Katalogeinstellungen>> fest.
+|===
 
 [#250]
 === Auftragsherkunft aktivieren
@@ -263,7 +276,7 @@ Erstelle wie unten beschrieben das Exportformat *Check24DE-Plugin* für Check24.
 | Diese Option ist für dieses Format nicht relevant.
 
 | *Artikelverfügbarkeit*
-| Option *überschreiben* aktivieren und in die Felder *1* bis *10*, die die ID der Verfügbarkeit darstellen, Artikelverfügbarkeiten eintragen. Somit werden die Artikelverfügbarkeiten, die im Menü *System » Artikel » Verfügbarkeit* eingestellt wurden, überschrieben.
+| Option *überschreiben* aktivieren und in die Felder *1* bis *10*, die die ID der Verfügbarkeit darstellen, Artikelverfügbarkeiten eintragen. Somit werden die Artikelverfügbarkeiten, die im Menü *Einrichtung » Artikel » Verfügbarkeit* eingestellt wurden, überschrieben.
 |===
 
 [#500-2]
@@ -654,6 +667,8 @@ include::partial$catalogue-settings.adoc[]
 
 :interval: einmal täglich nachts
 
+include::partial$catalogue-activation.adoc[]
+
 [#url-check24-katalog]
 ==== URL bei Check24 speichern
 
@@ -672,8 +687,6 @@ URL kopieren:
 . Klicke unter *Download-Einstellungen* im Bereich *Optionen für öffentlichen Link* auf *URL kopieren* (material:content_copy[]).
 → Die URL wird in die Zwischenablage kopiert.
 . Speichere die URL im Backend von Check24.
-
-include::partial$catalogue-activation.adoc[]
 
 [#change-elastic-export-catalogue]
 === _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog
@@ -742,6 +755,24 @@ Das Format Check24 Offer ist neu. Daher gibt es dafür kein vergleichbares Forma
 | Gewicht
 
 |===
+
+[#check24-delete-items]
+== Artikel auf Check24 entfernen
+
+Angebote sind auf Check24 nur sichtbar, wenn es für eine Variante mindestens ein aktives Angebot gibt. Wenn also eine Variante nicht mehr im Angebotsexport enthalten ist oder mit dem Bestand *0* an Check24 übertragen wird, wird zu dieser Variante auch kein Angebot mehr auf Check24 angezeigt.
+
+Varianten können also nicht auf Check24 verkauft werden, wenn sie in plentymarkets keinen Bestand mehr haben. Das Angebot zu der Variante auf Check24 wird entfernt, wenn bei der Übertragung von Artikeldaten der Bestand *0* an Check24 exportiert wird. Das Intervall für die Artikeldatenübertragung legst du in den <<#catalogue-settings, Katalogeinstellungen>> fest.
+Wenn die Variante in deinem plentymarkets System wieder Bestand hat, wird sie mit der nächsten Artikeldatenübertragung auch wieder auf Check24 zum Verkauf angeboten.
+
+Wenn du eine Variante, die in plentymarkets Bestand hat, nicht mehr auf Check24 verkaufen möchtest, musst du an der Variante die Verfügbarkeit für den Marktplatz entfernen.
+
+[.instruction]
+Verfügbarkeit entfernen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Verfügbarkeit*.
+. *Lösche* (icon:minus-circle[role="red"]) die Verfügbarkeit *Check24*.
+. *Speichere* (terra:save[]) die Einstellungen. +
+→ Die Variante wird nun nicht mehr auf Check24 zum Verkauf angeboten.
 
 [#950]
 == Auftragsimport

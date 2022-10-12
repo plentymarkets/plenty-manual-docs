@@ -5,32 +5,23 @@
 :author: team-item
 
 ////
-zuletzt bearbeitet 01.03.2022
+zuletzt bearbeitet 04.08.2022
 ////
 
-//ToDo - info about adding notes h1, h2, colour
-
-////
--Inheritance logic +
--How/where to do specific actions (copy item, create new item, 3-dots dropdown thing) +
--Multilingual texts logic +
--Link to directory of all data fields +
-////
-
-Diese Seite beschäftigt sich mit der Artikel-Detailansicht und erläutert das grundsätzliche Bedienkonzept.
+Diese Seite beschäftigt sich mit der Detailansicht eines Produkts und erläutert das grundsätzliche Bedienkonzept.
 Du lernst:
 
-* xref:artikel:detailansicht.adoc#200[die Benutzeroberfläche anzupassen]
+* xref:artikel:detailansicht.adoc#200[die Produktansicht anzupassen]
 * xref:artikel:detailansicht.adoc#1000[wie die Speicherlogik funktioniert]
 
 video::682773880#t=1m57s[vimeo]
 
 [#200]
-== Benutzeroberfläche anpassen
+== Produktansicht anpassen
 
-Wenn du einen xref:artikel:suchen.adoc#100[Artikeldatensatz im plentymarkets Backend öffnest], werden die Artikeldetails im Hauptfenster rechts angezeigt.
-Was aber, wenn du mit der Anordnung der Artikeldetails nicht zufrieden bist?
-Du kannst eine neue Detailansicht erstellen und sie an deine Bedürfnisse anpassen.
+Wenn du einen xref:artikel:suchen.adoc#560[Artikel- oder Variantendatensatz im plentymarkets Backend öffnest], werden die Details im Hauptfenster rechts angezeigt.
+Was aber, wenn du mit der Anordnung der Details nicht zufrieden bist?
+Du kannst eine neue Ansicht erstellen und sie an deine Bedürfnisse anpassen.
 
 [TIP]
 .Hast du Admin-Rechte?
@@ -129,6 +120,81 @@ Ein solches Szenario kann mit eigenen Portlets realisiert werden.
 image::artikel:detailansicht-eigene-portlets.png[]
 //end::own-portlet[]
 
+=== Eigene Texte, Farben und Pflichtfelder
+
+Es ist möglich, das Design eines ganzen Elements anzupassen oder das Design eines einzelnen Datenfelds.
+
+[.collapseBox]
+.*Element-Ebene*
+--
+
+Du hast folgende Anpassungsmöglichkeiten auf der Element-Ebene:
+
+image::artikel:gestaltung-ebene-element.gif[]
+
+[cols="1,4a"]
+|===
+|Einstellung |Erläuterung
+
+| *Name*
+|Gibt dem Element einen eigenen Namen.
+Dies ist nützlich, wenn du z.B. mit xref:artikel:detailansicht.adoc#600[eigenen Portlets] arbeitest oder wenn du den vordefinierten Namen nicht spezifisch genug findest.
+
+| *Eigener Text*
+|Fügt dem Element Fließtext oder eine Überschrift hinzu.
+
+* p = Steht für Paragraph (Absatz).
+Wähle diese Option, wenn du Fließtext hinzufügen möchtest.
+* h1 - h6 = Steht für Heading (Überschrift).
+Überschrift 1 ist dabei am größten und Überschrift 6 ist am kleinsten.
+
+| *Eigene Anmerkung*
+|Fügt dem Element einen farbigen Hinweistext hinzu.
+
+|===
+
+--
+
+[.collapseBox]
+.*Datenfeld-Ebene*
+--
+
+Du hast folgende Anpassungsmöglichkeiten auf der Datenfeld-Ebene:
+
+image::artikel:gestaltung-ebene-datenfeld.gif[]
+
+[cols="1,4a"]
+|===
+|Einstellung |Erläuterung
+
+| *Name des Elements*
+|Gibt dem Datenfeld einen eigenen Namen.
+Dies ist nützlich, wenn du z.B. den vordefinierten Namen nicht spezifisch genug findest.
+
+
+| *Hinweise anzeigen*
+|Fügt dem Datenfeld einen Hinweistext hinzu.
+Der Text wird unterhalb des Datenfeldes und in kleinerer Schrift angezeigt.
+
+| *Pflichtfeld*
+|Verwandelt das Datenfeld in ein Pflichtfeld.
+Das heißt, dass:
+
+* das Datenfeld mit einem Sternchen versehen wird.
+* das Datenfeld rot unterstrichen wird, falls es leer ist.
+* es nicht möglich sein wird, das Datenfeld ohne Inhalt zu speichern.
+
+Dies ist z.B. nützlich, wenn du deine Mitarbeiter verpflichten willst, bestimmte Informationen einzugeben.
+
+| *Disabled*
+|Ändert das Datenfeld so, dass es nicht mehr bearbeitet werden kann.
+Dies ist z.B. nützlich, wenn deine Mitarbeiter bestimmte Informationen zwar sehen, aber nicht ändern können sollen.
+
+|===
+
+
+--
+
 [#700]
 === Bearbeitung abschließen
 
@@ -209,98 +275,33 @@ xref:business-entscheidungen:benutzerkonten-zugaenge.adoc#116[Weitere Informatio
 
 --
 
-[#1000]
-== Speicherlogik
+[#920]
+== Spezielle Ansichten
 
-[#1100]
-=== Sternchen
+[#940]
+=== Eigenschaften
 
-Wenn du Änderungen an einem Artikel oder einer Variante vornimmst, erscheint ein Sternchen in der linken Navigationsleiste.
+//fast den gleichen Einleitungstext findet sich auch in die Datei verzeichnis - da bei den Eigenschaften Element
 
-* Das Sternchen weist auf ungespeicherte Änderungen hin.
-* Wo das Sternchen erscheint, gibt Auskunft darüber, auf welcher Ebene die Änderung vorgenommen wurde.
-Zum Beispiel, ob die Änderung auf Artikel- oder Variantenebene stattgefunden hat.
-* Wenn du mehrere Artikel gleichzeitig geöffnet hast, zeigt dir das Sternchen auch an, welche Artikel geändert wurden.
-* Das Sternchen verschwindet, wenn du deine Änderungen speicherst oder wenn du die Einstellungen auf ihre ursprünglichen Werte zurücksetzt.
+Das Eigenschaften-Element kann beliebig oft hinzugefügt werden.
+Eine mögliche Anwendung ist, jeden Eigenschaftstyp als ein eigenes Portlet darzustellen.
 
-image::artikel:detailansicht-sternchen.png[]
+include::page$verzeichnis.adoc[tag=properties-type-portlet]
 
-[#1200]
-=== Pop-Up-Fenster
+[#960]
+=== Texte
 
-Versuchst du, einen Artikel mit ungespeicherten Änderungen zu schließen, erscheint ein Pop-up-Fenster, das dich auf die ungespeicherten Änderungen hinweist.
-Im Pop-up-Fenster wird aufgelistet, welche Einstellungen genau geändert wurden.
-Hast du mehrere Einstellungen geändert, werden sie alle aufgelistet.
+//fast den gleichen Einleitungstext findet sich auch in die Datei verzeichnis - da bei den Text Element
 
-image::artikel:detailansicht-pop-up.png[]
+Standardmäßig ist der Textbereich eine zweisprachige Ansicht mit Deutsch und Englisch.
+Du kannst den Bereich jedoch anpassen, wenn du andere Sprachen benötigst oder sie in einer anderen Reihenfolge anzeigen möchtest.
+Beispielsweise könntest du eine einsprachige Ansicht erstellen.
+Oder du könntest andere Sprachen wählen und somit eine individuelle Übersetzungsansicht einrichten.
 
-[cols="1,4"]
-|===
-|Option |Erläuterung
-
-| *Speichern*
-|Die Änderungen werden gespeichert und der Artikel wird geschlossen.
-Wenn du den Artikel wieder öffnest, siehst du, dass die Einstellungen geändert wurden.
-Diese Aktion ist die gleiche wie der Speichern-Button weiter oben im Toolbar.
-Solange der Speichervorgang läuft, ist der Speichern-Button deaktiviert.
-
-| *Nicht speichern*
-|Die Änderungen werden verworfen und der Artikel wird geschlossen.
-Wenn du den Artikel wieder öffnest, siehst du, dass die Einstellungen wieder auf den Ausgangszustand zurückgesetzt worden sind.
-
-| *Abbrechen*
-|Nur das Pop-up-Fenster wird geschlossen.
-Der Artikeldatensatz bleibt offen.
-Deine Änderungen sind noch offen, d.h. sie wurden noch nicht gespeichert.
-Du kannst mit der Bearbeitung des Artikels fortfahren.
-|===
+include::page$verzeichnis.adoc[tag=texts-multilingual-panel]
 
 [#1300]
 == Fragen und Antworten
-
-[#1400]
-=== Allgemeine Fragen
-
-[.collapseBox]
-.*Wie kann ich Feedback geben?*
---
-
-Feedback zur neuen Artikel-UI ist in link:https://forum.plentymarkets.com/c/item/18[dieser Forenkategorie] herzlich willkommen.
-
---
-
-[.collapseBox]
-.*Wird die alte Artikel-UI bald abgeschafft?*
---
-
-Nein.
-Die alte Artikel-UI wird nicht in nächster Zeit abgeschaltet werden.
-Derzeit können die neue und alte Artikel-UIs parallel verwendet werden.
-
---
-
-[.collapseBox]
-.*Welche Funktionen fehlen?*
---
-
-Folgende Funktionalitäten fehlen und sind geplant:
-
-* Artikel-Sets
-* Multipacks
-* Etikett generieren
-* Seriennummern
-
-Folgende Funktionalitäten fehlen und sind nicht geplant:
-
-* Merkmale
-* Freitextfelder
-* Artikel-Tab Media
-* Artikel-Tab Statistik
-
---
-
-[#1500]
-=== Benutzeroberfläche
 
 [.collapseBox]
 .*Ich sehe keine Dropdown-Liste mit Ansichten oben rechts. Warum nicht?*
@@ -358,31 +359,5 @@ Weitere Informationen findest du im xref:artikel:detailansicht.adoc#600[Anwendun
 Noch nicht.
 Eine Import-/Exportfunktion ist für die Zukunft geplant.
 Allerdings können wir noch nicht abschätzen, wann sie fertig sein wird.
-
---
-
-[#1600]
-=== Speicherlogik
-
-[.collapseBox]
-.*Kann ich mehrere Artikel gleichzeitig speichern?*
---
-
-Noch nicht.
-Ein globaler Speicherbutton ist für die Zukunft geplant.
-Allerdings können wir noch nicht abschätzen, wann diese Funktion fertig sein wird.
-
---
-
-[.collapseBox]
-.*Was ist der Unterschied zwischen "Speichern", "Nicht speichern" und "Abbrechen"?*
---
-
-* *Speichern* = Die Änderungen werden gespeichert und der Artikel wird geschlossen.
-* *Nicht speichern* = Die Änderungen werden verworfen und der Artikel wird geschlossen.
-* *Abbrechen* = Nur das Pop-up-Fenster wird geschlossen.
-Der Artikeldatensatz bleibt offen.
-
-xref:artikel:detailansicht.adoc#1200[Weitere Informationen].
 
 --
