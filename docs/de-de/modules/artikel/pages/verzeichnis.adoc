@@ -1,4 +1,4 @@
-= Detailansicht: Verzeichnis der Datenfelder
+= Verzeichnis der Datenfelder (neue Artikel-UI)
 :keywords: Neue Artikel-UI, Artikel » Artikel-UI, Artikeldaten, Artikeldatensatz, Artikeldatensätze, Artikeldatenfeld, Artikeldatenfelder, Artikel-Datenfeld, Artikel-Datenfelder, Artikelverwaltung, Artikelbearbeitung, Artikel verwalten, Artikel bearbeiten, Artikel manuell verwalten, Artikel manuell bearbeiten, Element, Elemente, Portlet, Portlets, Datenfeld, Datenfelder
 :description: Erläuterungen zu den Elementen, Portlets und Datenfeldern eines Artikeldatensatzes.
 :id: BP4F3X1
@@ -55,7 +55,7 @@ image::artikel:artikel-toolbar.png[]
 
 | terra:save[role="darkGrey"]
 |Speichert deine Änderungen am Datensatz.
-xref:artikel:detailansicht.adoc#1000[Mehr zum Thema Speicherlogik].
+xref:artikel:verzeichnis.adoc#1000[Mehr zum Thema Speicherlogik].
 
 | icon:bell[role="darkGrey"]{nbsp}{nbsp}{nbsp}icon:user[role="darkGrey"]
 |Markierung 1 und 2 des Artikels.
@@ -751,10 +751,6 @@ image::artikel:varianten-ebene-elemente.png[]
 [#150]
 === Toolbar
 
-////
-Interner Kommentar - nachdem die Vererbungsverhalten der neue UI beschreiben wurde (in die Detailansicht Seite), dann den Link auf diese Seite anpassen
-////
-
 image::artikel:variante-toolbar.png[]
 
 [cols="1,4a"]
@@ -763,15 +759,25 @@ image::artikel:variante-toolbar.png[]
 
 | terra:save[role="darkGrey"]
 |Speichert deine Änderungen am Datensatz.
-xref:artikel:detailansicht.adoc#1000[Mehr zum Thema Speicherlogik].
+xref:artikel:verzeichnis.adoc#1000[Mehr zum Thema Speicherlogik].
 
 | terra:item_variation_inheritance[role="darkGrey"]
 |Öffnet die Vererbungseinstellungen.
-xref:artikel:vererbung.adoc#[Mehr zum Thema Vererbung].
+
+//interner Kommentar - der Konfig hier ist fast genau das selbe wie in die Vererbung Seite - falls hier etwas geändert wird, bitte in der Vererbung Seite auch anpassen
+
+. Entscheide, welche Einstellungen vererbt werden sollen:
+.. Wähle die Einstellungen, die vererbt werden sollen (icon:check-square[role="blue"]).
+.. Wähle die Einstellungen ab, die nicht vererbt werden sollen (icon:square-o[role="darkGrey"]).
+. Klicke auf *Ausführen*.
+. Ändere die nicht vererbten Einstellungen wie benötigt.
+. *Speichere* (terra:save[role="darkGrey"]) die Einstellungen.
 
 *_Hinweis_*:
 Diese Schaltfläche ist in der Hauptvariante ausgegraut.
 Du kannst die Schaltfläche nur in einer Untervariante anklicken.
+
+xref:artikel:vererbung.adoc#[Mehr zum Thema Vererbung].
 
 | material:open_in_new[role="darkGrey"]
 |Öffnet das Produkt im plentyShop oder auf Amazon.
@@ -2163,6 +2169,52 @@ Mit anderen Worten:
 
 include::page$detailansicht.adoc[tag=own-portlet]
 
+[#1000]
+== Speicherlogik
+
+[#1100]
+=== Sternchen
+
+Wenn du Änderungen an einem Artikel oder einer Variante vornimmst, erscheint ein Sternchen in der linken Navigationsleiste.
+
+* Das Sternchen weist auf ungespeicherte Änderungen hin.
+* Wo das Sternchen erscheint, gibt Auskunft darüber, auf welcher Ebene die Änderung vorgenommen wurde.
+Zum Beispiel, ob die Änderung auf Artikel- oder Variantenebene stattgefunden hat.
+* Wenn du mehrere Artikel gleichzeitig geöffnet hast, zeigt dir das Sternchen auch an, welche Artikel geändert wurden.
+* Das Sternchen verschwindet, wenn du deine Änderungen speicherst oder wenn du die Einstellungen auf ihre ursprünglichen Werte zurücksetzt.
+
+image::artikel:detailansicht-sternchen.png[]
+
+[#1200]
+=== Pop-Up-Fenster
+
+Versuchst du, einen Artikel mit ungespeicherten Änderungen zu schließen, erscheint ein Pop-up-Fenster, das dich auf die ungespeicherten Änderungen hinweist.
+Im Pop-up-Fenster wird aufgelistet, welche Einstellungen genau geändert wurden.
+Hast du mehrere Einstellungen geändert, werden sie alle aufgelistet.
+
+image::artikel:detailansicht-pop-up.png[]
+
+[cols="1,4"]
+|===
+|Option |Erläuterung
+
+| *Speichern*
+|Die Änderungen werden gespeichert und der Artikel wird geschlossen.
+Wenn du den Artikel wieder öffnest, siehst du, dass die Einstellungen geändert wurden.
+Diese Aktion ist die gleiche wie der Speichern-Button weiter oben im Toolbar.
+Solange der Speichervorgang läuft, ist der Speichern-Button deaktiviert.
+
+| *Nicht speichern*
+|Die Änderungen werden verworfen und der Artikel wird geschlossen.
+Wenn du den Artikel wieder öffnest, siehst du, dass die Einstellungen wieder auf den Ausgangszustand zurückgesetzt worden sind.
+
+| *Abbrechen*
+|Nur das Pop-up-Fenster wird geschlossen.
+Der Artikeldatensatz bleibt offen.
+Deine Änderungen sind noch offen, d.h. sie wurden noch nicht gespeichert.
+Du kannst mit der Bearbeitung des Artikels fortfahren.
+|===
+
 [#380]
 == Fragen und Antworten
 
@@ -2255,5 +2307,28 @@ Falls du kein Admin bist:
 . Wende dich an eine Person mit Admin-Rechten.
 . Bitte sie, die erforderlichen xref:artikel:detailansicht.adoc#300[Ansichten zu erstellen] und sie deinem xref:artikel:detailansicht.adoc#900[Benutzerkonto zuzuweisen].
 
+
+--
+
+[.collapseBox]
+.*Kann ich mehrere Artikel gleichzeitig speichern?*
+--
+
+Noch nicht.
+Ein globaler Speicherbutton ist für die Zukunft geplant.
+Allerdings können wir noch nicht abschätzen, wann diese Funktion fertig sein wird.
+
+--
+
+[.collapseBox]
+.*Was ist der Unterschied zwischen "Speichern", "Nicht speichern" und "Abbrechen"?*
+--
+
+* *Speichern* = Die Änderungen werden gespeichert und der Artikel wird geschlossen.
+* *Nicht speichern* = Die Änderungen werden verworfen und der Artikel wird geschlossen.
+* *Abbrechen* = Nur das Pop-up-Fenster wird geschlossen.
+Der Artikeldatensatz bleibt offen.
+
+xref:artikel:verzeichnis.adoc#1200[Weitere Informationen].
 
 --

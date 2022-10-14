@@ -118,7 +118,7 @@ Wenn du Newsletter an deine Kund:innen versenden möchtest, gibst du die Zugangs
 [#e-mail-signatur]
 === E-Mail-Signatur speichern
 
-Im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten » Grundeinrichtung* speicherst du im Schritt *Signatur* deine Signatur, die dann in deinen E-Mail-Vorlagen automatisch eingefügt wird, wenn du die entsprechende Variable in der Vorlage eingefügt hast.
+Im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten » Grundeinrichtung* speicherst du im Schritt *Signatur* deine Signatur im HTML-Format oder im reinen Textformat. Die Signatur wird dann in deinen E-Mail-Vorlagen automatisch eingefügt wird, wenn du die entsprechende Variable in der Vorlage eingefügt hast.
 
 [IMPORTANT]
 .Priorität der Signatur beachten
@@ -216,7 +216,7 @@ Im Menü *Einrichtung » Assistenten » Grundeinrichtung* im Assistenten *E-Mail
 [.collapseBox]
 .Einstellungen im Assistenten *E-Mail-Konten* im Schritt *Messenger-Integration*
 --
-[[table-info-service]]
+[[table-collect-emails]]
 .Alle gesendeten E-Mails im Messenger-Modul sammeln
 [cols="1,3"]
 |====
@@ -1339,186 +1339,230 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 
 [[table-variables-order-order]]
 .Variablen in der Kategorie *Auftrag*
-[cols="2,4,3"]
+[cols="2,4,3,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[Die Informationen in dieser Spalte sind für dich nur relevant, wenn du bereits E-Mail-Vorlagen im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* erstellt hast und wissen möchtest, wie die alte Variable hieß. Hinweis: Diese Spalte ist noch nicht vollständig befüllt. Inhalte werden weiterhin ergänzt.]
 
 | `Auftrag im Webshop aufrufen`
 |Öffnet die URL des Auftrags in deinem Webshop.
 | `order.access_key`
+|$OrderAccessKey
 
 | `Barcode-ID`
 |
 | `order.formattedGeneral.barcodeOrderID`
+| $BarcodeOrderID
 
 | `Plenty ID`
 |Die ID wird vom System vergeben und kann nicht geändert werden. Du findest die ID im Menü *Einrichtung » Mandant » [Mandant wählen] » Einstellungen*.
 | `order.plentyId`
+|
 
 | `Gutscheinwert`
 |Wert des xref:auftraege:gutscheine.adoc#[Gutscheins].
 | `order.formattedGeneral.couponValue`
+| $CouponValue
 
 | `Währungscode`
 |Währungscode, z.B. *EUR* oder *USD*.
 | `order.formattedSubtotals.currencyCode`
+| $Currency
+
 
 | `Währungszeichen`
 |Währungssymbol, z.B. *€* oder *$*.
 | `order.formattedSubtotals.currencySymbol`
+| $Currency
 
 | `Kundenzeichen`
 |
 | `order.formattedProperties.customerSign`
+| $CustomerSign
 
 | `Kundenwunsch`
 |Kund:innen können bei der Bestellung über den Webshop einen Wunsch angeben. Dieser Wunsch wird als Auftragsnotiz in den Auftragsdaten gespeichert.
 | `order.formattedComments.customerSpecialWishes`
+| $CustomerSpecialWishes
 
 | `DHL Retoure Online QR-Code`
 |Sendet deinen Kund:innen einen QR-Code für xref:fulfillment:plugin-dhl-retoure-online.adoc#[DHL Retoure Online]. Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Personal in der Postfiliale den QR-Code auf ihrem Smartphone vorzeigen. Das Personal druckt dann das Retourenlabel und bringt es auf dem Paket an. Deine Kund:innen benötigen also keinen Drucker mehr und du musst das Retourenlabel nicht als PDF-Anhang in der E-Mail versenden. +
 Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach einem Klick auf die URL erscheint dann in einem separaten Fenster der QR-Code.
 | `order.formattedGeneral.DHLRetoureOnlineQRCodeURL`
+| $DHLRetoureOnlineQRCodeURL
 
 | `Datum und Uhrzeit des Auftragseingangs`
 |Datum und Uhrzeit des Auftragseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.createdOn ? (order.formattedDates.createdOn \| date('m-d-Y H:i:s')) : ''`
+|
 
 | `Datum des Auftragseingangs`
 |Datum des Auftragseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.createdOn ? (order.formattedDates.createdOn \| date('m-d-Y')) : ''`
+| $OrderDate
 
 | `Datum des Zahlungseingangs`
 |Datum und Uhrzeit des Zahlungseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.paidOn`
+| $PaymentDate
 
 | `Lieferadresse USt-IdNr.`
 |Umsatzsteuer-Identifikationsnummer aus der Lieferadresse, wie im Auftrag gespeichert.
 | `order.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
+| $OrderDeliveryAddressTaxId
 
 | `Externe Auftrags-ID`
 |
 | `order.formattedProperties.externalOrderId`
+| $ExternalOrderID
 
 | `Markierung`
 |Markierung, die im Auftrag gewählt wurde.
 | `order.formattedProperties.flag`
+| $OrderFlag
 
 | `Rechnungsadresse USt-IdNr.`
 |Umsatzsteuer-Identifikationsnummer aus der Rechnungsadresse, wie im Auftrag gespeichert.
 | `order.formattedAddresses.invoiceAddress.formattedOptions.VATNumber`
+| $OrderBillingAddressTaxId
 
 | `Rechnungsdatum`
 |
 | `order.formattedDocuments.invoiceDate`
+| -
 
 | `Rechnungsnummer-ID`
 |
 | `order.formattedDocuments.invoice`
+| -
 
 | `Anzahl der Pakete`
 |Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
 | `order.package`
+| 
 
 | `Gesamtrechnungsbetrag netto`
 |
 | `order.formattedGeneral.invoiceTotalNet`
+| $InvoiceTotalNet
 
 | `Gesamtbetrag des Auftrags netto`
 |
 | `order.formattedGeneral.totalNet`
+| $OrderTotalNet
 
 | `Offener Betrag`
 |
 | `order.formattedGeneral.openAmount`
+| $OpenAmount
 
 | `Auftrags-ID`
 |
 | `order.id`
+| $OrderID
 
 | `Auftragstyp-ID`
 |ID des Auftragstyps, z.B. `1` für Auftrag, `4` für Gutschrift und `6` für Reparaturauftrag. +
 *_Hinweis:_* Die komplette Liste der Auftragstypen und deren IDs findest du auf dieser xref:daten:interne-IDs.adoc#80[Handbuchseite].
 | `order.typeId`
+| -
 
 | `Name des Auftragstyps`
 |Name des Auftragstyps, z.B. `Auftrag`, `Gutschrift` und `Reparaturauftrag`. +
 *_Hinweis:_* Die komplette Liste der Auftragstypen und deren IDs findest du auf dieser xref:daten:interne-IDs.adoc#80[Handbuchseite].
 | `order.formattedGeneral.orderTypeName`
+| $OrderType
 
 | `Auftrag Lager-ID`
 |
 | `order.formattedProperties.warehouse`
+| $WarehouseID
 
 | `ID des Hauptauftrags`
 |ID des obersten Vorgängerauftrags. Dies ist in der Regel ein normaler Auftrag. +
 *_Beispiel:_* Bei einer Gutschrift G1 aus einer Retoure R1 aus einem Auftrag A1 gibt die Variable `ID des Elternauftrags` die ID von R1 und `ID des Hauptauftrags` die ID von A1 aus.
 | `order.formattedOriginOrder.originOrderId`
+| $OriginOrderID
 
 | `Überbezahlter Betrag`
 |
 | `order.formattedGeneral.overpaidAmount`
+| $OverpaidAmount
 
 | `Bezahlter Betrag`
 |
 | `order.formattedGeneral.paidAmount`
+| $PaidAmount
 
 | `ID des Elternauftrags`
 |ID des direkten Vorgängerauftrags +
 *_Beispiel:_* Bei einer Gutschrift kann es die ID der Retoure oder des Auftrags sein, aus dem die Gutschrift erzeugt wurde.
 | `order.parent_order_id`
+| $ParentOrderID
 
 | `Zahlungsart`
 |Name der xref:payment:zahlungsarten-verwalten.adoc#65[Zahlungsart] wie im Menü *Einrichtung » Aufträge » Zahlung » Zahlungsarten* gespeichert.
 | `order.formattedGeneral.methodOfPaymentName`
+| $MethodOfPaymentName
 
 | `Zahlungsart-ID`
 |Die ID wird vom System vergeben. Die IDs der xref:payment:zahlungsarten-verwalten.adoc#65[Zahlungsarten] sind im Menü *Einrichtung » Aufträge » Zahlung » Zahlungsarten* aufgeführt.
 | `order.formattedProperties.paymentMethod`
+| $MethodOfPaymentID
 
 | `Herkunft`
 |Name der xref:auftraege:auftragsherkunft.adoc#[Auftragsherkunft] wie im Menü *Einrichtung » Aufträge » Auftragsherkunft* gespeichert.
 | `order.formattedReferrer.name`
+| $ReferrerName
 
 | `Herkunfts-ID`
 |ID der xref:auftraege:auftragsherkunft.adoc#[Auftragsherkunft] wie im Menü *Einrichtung » Aufträge » Auftragsherkunft* gespeichert.
 | `order.formattedReferrer.id`
+| $ReferrerID
 
 | `Nachbestellungs-ID`
 |ID der xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung].
 | `order.formattedReorder.id`
+| $ReorderID
 
 | `Verkäuferkonto`
 |
 | `order.formattedProperties.sellerAccount`
+|
 
 | `Status-ID`
 |ID des xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] wie im Menü *Einrichtung » Aufträge » Status* gespeichert.
 | `order.statusId`
+| $OrderStatusID
 
 | `Status`
 |Name des Auftragsstatus wie im Menü *Einrichtung » Aufträge » Status* gespeichert.
 | `order.statusName`
+| $OrderStatusLabel
 
 | `Gesamtrechnungsbetrag`
 |*_Beispiel:_* 1.234,00
 | `order.formattedGeneral.invoiceTotal \| number_format(2, ',', '.')`
+| $InvoiceTotal
 
 | `Gesamtrechnungsbetrag, durch Punkt getrennt`
 |*_Beispiel:_* 1234.00
 | `order.formattedGeneral.invoiceTotal \| number_format(2, '.', '')`
+| $InvoiceTotalDecimalSeparatorDot
 
 | `Gesamtbetrag der Mehrwertsteuer`
 |
 | `order.formattedGeneral.totalVat`
+| $TotalVAT
 
 | `Wert der Artikel`
 |
 | `order.formattedGeneral.valueOfItems`
+| $ValueOfItems
 
 | `eBay-Zahlungs-ID`
 |
 | `order.formattedProperties.ebayUniquePaymentID`
+| $EbayUniquePaymentID
 
 |====
 
@@ -1527,60 +1571,77 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 [[table-variables-order-delivery-address]]
 .Variablen in der Unterkategorie *Auftrag / Lieferadresse*
-[cols="1,3"]
+[cols="1,3,2"]
 |====
-|Name der Variable |Twig expression
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Lieferadresse Adresszusatz`
 | `order.formattedAddresses.deliveryAddress.address3`
+| $DeliveryAddressAdditionalAddress
 
 | `Lieferadresse Firmenname`
 | `order.formattedAddresses.deliveryAddress.name1`
+| $DeliveryAddressCompany
 
 | `Lieferadresse Kontaktperson`
 | `order.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
+| $DeliveryAddressContactPerson
 
 | `Lieferadresse Land`
 | `order.formattedAddresses.deliveryAddress.country.name`
+| $CustomerCountry
 
 | `Lieferadresse Länder-ID`
 | `order.formattedAddresses.deliveryAddress.country.id`
+| $CustomerCountryID
 
 | `Lieferadresse Länder-ISO-Code 2`
 | `order.formattedAddresses.deliveryAddress.country.isoCode2`
+| $CustomerCountryIsoCode
 
 | `Lieferadresse Länder-ISO-Code 3`
 | `order.formattedAddresses.deliveryAddress.country.isoCode3`
+| $CustomerCountryIsoCode
 
 | `Lieferadresse Vorname`
 | `order.formattedAddresses.deliveryAddress.name2`
+| $DeliveryAddressFirstName
 
 | `Lieferadresse Vorname und Nachname`
 | `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressFullName
 
 | `Lieferadresse Nachname`
 | `order.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressLastName
 
 | `Lieferadresse Telefon`
 | `order.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+|
 
 | `Lieferadresse Postleitzahl`
 | `order.formattedAddresses.deliveryAddress.postalCode`
+| $DeliveryAddressZip
 
 | `Lieferadresse Postleitzahl und Ort`
 | `order.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ order.formattedAddresses.deliveryAddress.town`
+|
 
 | `Lieferadresse Bundesland`
 | `order.formattedAddresses.deliveryAddress.state.name`
+| $DeliveryAddressState
 
 | `Lieferadresse Straße`
 | `order.formattedAddresses.deliveryAddress.address1`
+| $DeliveryAddressStreet
 
 | `Lieferadresse Hausnummer`
 | `order.formattedAddresses.deliveryAddress.address2`
+|
 
 | `Lieferadresse Ort`
 | `order.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCity
 
 |====
 
@@ -1589,60 +1650,77 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 [[table-variables-order-invoice-address]]
 .Variablen in der Unterkategorie *Auftrag / Rechnungsadresse*
-[cols="1,3"]
+[cols="1,3,2"]
 |====
-|Name der Variable |Twig expression
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Rechnungsadresse Adresszusatz`
 | `order.formattedAddresses.invoiceAddress.address3`
+| $BillingAddressAdditionalAddress
 
 | `Rechnungsadresse Firmenname`
 | `order.formattedAddresses.invoiceAddress.name1`
+| $BillingAddressCompany
 
 | `Rechnungsadresse Kontaktperson`
 | `order.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
+| $BillingAddressContactPerson
 
 | `Rechnungsadresse Land`
 | `order.formattedAddresses.invoiceAddress.country.name`
+|
 
 | `Rechnungsadresse Länder-ID`
 | `order.formattedAddresses.invoiceAddress.country.id`
+|
 
 | `Rechnungsadresse Länder-ISO-Code 2`
 | `order.formattedAddresses.invoiceAddress.country.isoCode2`
+| $CustomerCountryIsoCode
 
 | `Rechnungsadresse Länder-ISO-Code 3`
 | `order.formattedAddresses.invoiceAddress.country.isoCode3`
+| $CustomerCountryIsoCode
 
 | `Rechnungsadresse Vorname`
 | `order.formattedAddresses.invoiceAddress.name2`
+| $BillingAddressFirstName
 
 | `Rechnungsadresse Vorname und Nachname`
 | `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
+| $BillingAddressFullName
 
 | `Rechnungsadresse Nachname`
 | `order.formattedAddresses.invoiceAddress.name3`
+| $BillingAddressLastName
 
 | `Rechnungsadresse Telefon`
 | `order.formattedAddresses.invoiceAddress.formattedOptions.telephone`
+|
 
 | `Rechnungsadresse Postleitzahl`
 | `order.formattedAddresses.invoiceAddress.postalCode`
+|
 
 | `Rechnungsadresse Postleitzahl und Ort`
 | `order.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ order.formattedAddresses.invoiceAddress.town`
+|
 
 | `Rechnungsadresse Bundesland`
 | `order.formattedAddresses.invoiceAddress.state.name`
+| $CustomerState
 
 | `Rechnungsadresse Straße`
 | `order.formattedAddresses.invoiceAddress.address1`
+|
 
 | `Rechnungsadresse Hausnummer`
 | `order.formattedAddresses.invoiceAddress.address2`
+|
 
 | `Rechnungsadresse Ort`
 | `order.formattedAddresses.invoiceAddress.town`
+|
 
 |====
 
@@ -1652,266 +1730,330 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 [[table-variables-order-order-items]]
 .Variablen in der Unterkategorie *Auftrag / Auftragspositionen (nur für Artikellisten-Widget)*
-[cols="2,4,3"]
+[cols="2,4,3,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `ASIN`
 |Amazon Standard Ident Number (ASIN) des Artikels
 | `orderItem.formattedBarcodes.ASIN`
+| $ItemASIN
 
 | `Attributwerte`
 | xref:artikel:attribute.adoc#[Attributwerte] wie im Menü *Einrichtung » Artikel » Attribute* gespeichert.
 | `orderItem.attributeValues`
+| $VariantName
 
 | `Verfügbarkeits-ID`
 |ID der xref:artikel:verfuegbarkeit.adoc#[Artikelverfügbarkeit] des Netttowarenbestands wie im Menü *Einrichtung » Artikel » Verfügbarkeit* gespeichert. Die ID wird automatisch vergeben und kann nicht geändert werden.
 | `orderItem.formattedAvailability.availabilityId`
+| $ItemAvailabilityID
 
 | `Verfügbarkeits-ID physischer Warenbestand`
 |ID der Artikelverfügbarkeit des physischen Warenbestands
 | `orderItem.formattedAvailability.availabilityPhysicalStockId`
+| $ItemAvailabilityPhysicalStockID
 
 | `Verfügbarkeitstext`
 |Name der Artikelverfügbarkeit des Nettowarenbestands
 | `orderItem.formattedAvailability.availabilityName`
+| $ItemAvailabilityLabel
 
 | `Verfügbarkeitstext physischer Warenbestand`
 |Name der Artikelverfügbarkeit des physischen Warenbestands
 | `orderItem.formattedAvailability.availabilityPhysicalStockName`
+| $ItemAvailabilityPhysicalStockLabel
 
 | `Codes eines Gutscheins`
 |
 | `orderItem.formattedVoucherCodes`
+| $VoucherCodes
 
 | `Inhalt`
 |
 | `orderItem.formattedUnit.unitContent`
+| $UnitString
 
 | `Rabatt pro Auftragsposition`
 |
 | `orderItem.formattedAmounts.discount`
+| $RebateAmount
 
 | `Externe Artikel-ID`
 |
 | `orderItem.variation.item.external_article_id`
+| $ExternalItemID
 
 | `Externe Token-ID`
 |
 | `orderItem.formattedExternalTokenId`
+| $TransactionID
 
 | `Externe Varianten-ID`
 |
 | `orderItem.variation.externalId`
+| $ExternalVariationID
 
 | `Freitextfeld 1`
 | xref:artikel:felder.adoc#[Freitextfelder] für die Artikel wie im Menü *Einrichtung » Artikel » Freitextfelder* gespeichert. +
 *_Beispiel:_* `Freitextfeld 3` gibt den Text aus, der in *Feld 3* gespeichert ist.
 | `orderItem.variation.item.free1`
+| $Free
 
 | `Freitextfeld 2`
 |
 | `orderItem.variation.item.free2`
+| $Free
 
 | `Freitextfeld 3`
 |
 | `orderItem.variation.item.free3`
+| $Free
 
 | `Freitextfeld 4`
 |
 | `orderItem.variation.item.free4`
+| $Free
 
 | `Freitextfeld 5`
 |
 | `orderItem.variation.item.free5`
+| $Free
 
 | `Freitextfeld 6`
 |
 | `orderItem.variation.item.free6`
+| $Free
 
 | `Freitextfeld 7`
 |
 | `orderItem.variation.item.free7`
+| $Free
 
 | `Freitextfeld 8`
 |
 | `orderItem.variation.item.free8`
+| $Free
 
 | `Freitextfeld 9`
 |
 | `orderItem.variation.item.free9`
+| $Free
 
 | `Freitextfeld 10`
 |
 | `orderItem.variation.item.free10`
+| $Free
 
 | `Freitextfeld 11`
 |
 | `orderItem.variation.item.free11`
+| $Free
 
 | `Freitextfeld 12`
 |
 | `orderItem.variation.item.free12`
+| $Free
 
 | `Freitextfeld 13`
 |
 | `orderItem.variation.item.free13`
+| $Free
 
 | `Freitextfeld 14`
 |
 | `orderItem.variation.item.free14`
+| $Free
 
 | `Freitextfeld 15`
 |
 | `orderItem.variation.item.free15`
+| $Free
 
 | `Freitextfeld 16`
 |
 | `orderItem.variation.item.free16`
+| $Free
 
 | `Freitextfeld 17`
 |
 | `orderItem.variation.item.free17`
+| $Free
 
 | `Freitextfeld 18`
 |
 | `orderItem.variation.item.free18`
+| $Free
 
 | `Freitextfeld 19`
 |
 | `orderItem.variation.item.free19`
+| $Free
 
 | `Freitextfeld 20`
 |
 | `orderItem.variation.item.free20`
+| $Free
 
 | `GTIN`
 |Global Trade Item Number (GTIN) des Artikels
 | `orderItem.formattedBarcodes.GTIN`
+| $ItemEAN
 
 | `ISBN`
 |ISBN-Code des Artikels
 | `orderItem.formattedBarcodes.ISBN`
+| $ItemISBN
 
 | `Artikel-ID`
 |ID des xref:artikel:artikelsuche.adoc#580[Artikels]. Die ID wird automatisch vergeben und kann nicht geändert werden.
 | `orderItem.variation.itemId`
+| $ItemID
 
 | `URL zum Artikel`
 |Gibt die URL zum Artikel im Webshop aus.
 | `orderItem.formattedLink`
+| $ItemImageURL
 
 | `Artikelname`
 |Name des des xref:artikel:artikelsuche.adoc#580[Artikels].
 | `orderItem.orderItemName`
+| $ItemName
 
 | `Artikeltyp`
 |Gibt den Artikeltypen aus, der im Artikel im Tab *Global* gespeichert ist. Mögliche Werte: Standard, Set, Multipack.
 | `orderItem.formattedStockType`
+|
 
 | `Artikelnummer`
 |
 | `orderItem.variation.item.ArtNo`
+| $ItemNumber
 
 | `Wert der Bestelleigenschaft`
 |
 | `orderItem.formattedOrderProperty.value`
+| $OrderItemOrderPropertyValue
 
 | `Bruttopreis`
-|
+|Bruttopreis des Artikels.
 | `orderItem.formattedAmounts.grossPrice`
+| $ItemPrice
 
 | `Artikeleigenschaften`
 |
 | `orderItem.formattedProperties.all`
+| $OrderProperties
 
 | `Artikelmenge`
 |
 | `orderItem.quantity`
+| $ItemQuantity
 
 | `Herstellername`
 |Name des xref:artikel:hersteller.adoc#[Herstellers.]
 | `orderItem.variation.item.producer`
+| $ItemProducerName
 
 | `Modell`
 |Modellbezeichnung des Artikels
 | `orderItem.variation.model`
+| $ItemModel
 
 | `Nettopreis`
-|
+|Nettopreis des Artikels.
 | `orderItem.formattedAmounts.netPrice`
+| $ItemPriceNet
 
 | `Herkunft`
 |
 | `orderItem.formattedReferrer.referrerName`
+| $ItemReferrer
 
 | `Erscheinungsdatum`
 |
 | `orderItem.variation.releasedAt`
+| -
 
 | `Retourenkommentar`
 |
 | `orderItem.formattedReturn.comment`
+| $ReturnItemComment
 
 | `Status-ID des retournierten Artikels`
 |
 | `orderItem.formattedReturn.statusId`
+| $ReturnItemStatusID
 
 | `Name des retournierten Artikels`
 |
 | `orderItem.formattedReturn.statusLabel`
+| $ReturnItemStatusLabel
 
 | `ID des Retourengrunds`
 |ID des xref:auftraege:auftraege-verwalten.adoc#410[Retourengrunds] wie im Menü *Einrichtung » Aufträge » Auftragstypen » Retoure* gespeichert.
 | `orderItem.formattedReturn.reasonId`
+| $ReturnReasonID
 
 | `Retourengrund`
 |Name des xref:auftraege:auftraege-verwalten.adoc#410[Retourengrunds] wie im Menü *Einrichtung » Aufträge » Auftragstypen » Retoure* gespeichert.
 | `orderItem.formattedReturn.reasonLabel`
+| $ReturnReasonLabel
 
 | `Wert der Retoure in Prozent`
 |
 | `orderItem.formattedReturn.percentage`
+| $ReturnItemValuePercentage
 
 | `Zolltarifnummer`
 |
 | `orderItem.variation.customsTariffNumber`
+|
 
 | `Gesamtpreis (Einzelpreis x Menge)`
 |
 | `orderItem.formattedAmounts.totalPrice`
+| -
 
 | `Grundpreis`
 |
 | `orderItem.formattedUnit.unitPrice`
+|-
 
 | `URL zum Variantenbild`
 |Gibt die URL zum Variantenbild aus.
 | `orderItem.formattedImageUrl`
+| -
 
 | `Einheit`
 |
 | `orderItem.formattedUnit.unitName`
+| -
 
 | `Mehrwertsteuersatz`
 |
 | `orderItem.vatRate`
+| $ItemVatRate
 
 | `Varianten-ID`
 |
 | `orderItem.variation.id`
+| $VariationId
 
 | `Variantenname`
 |
 | `orderItem.variation.name`
+| $VariationName
 
 | `Variantennummer`
 |
 | `orderItem.variation.number`
+| $VariationNumber
 
 | `Lager-ID`
 |ID des xref:warenwirtschaft:lager-einrichten.adoc#[Lagers] wie im Menü *Einrichtung » Waren » Lager* gespeichert.
 | `orderItem.warehouseId`
+| $ItemWarehouseID
 
 |====
 
@@ -1921,70 +2063,85 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 [[table-variables-order-shipping]]
 .Variablen in der Unterkategorie *Auftrag / Versand*
-[cols="2,4,3"]
+[cols="2,4,3,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Lieferschein-ID`
 |ID des xref:auftraege:lieferscheine-erzeugen.adoc#[Lieferscheins].
 | `order.formattedDocuments.deliveryNote`
+| -
 
 | `Voraussichtliches Lieferdatum`
 |
 | `order.formattedDates.estimatedDeliveryDate`
+| $OrderEstimatedDeliveryDate
 
 | `Voraussichtliches Versanddatum`
 |
 | `order.formattedDates.estimatedShippingDate`
+| $OrderEstimatedShipmentDate
 
 | `Paketnummernliste`
 |Paketnummern bzw. Tracking-Nummern werden nach erfolgreicher Auftragsanmeldung beim Versanddienstleister im Auftrag im Tab *Einstellungen* gespeichert.
 | `order.formattedShipping.packageNumberList`
+|$PackageCount
 
 | `Paketgewicht`
 |Paketgewicht und Einheit wie im Menü *Aufträge » Versand-Center* im Bereich *Versandpakete* gespeichert.
 | `order.formattedShipping.packageWeight`
+| -
 
 | `Mögliches Lieferdatum`
 |
 | `order.formattedDates.earliestDeliveryDate`
+| $OrderEarliestDeliveryDate
 
 | `Nachbestellung Lieferdatum`
 |
 | `order.formattedReorder.estimatedDeliveryDate`
+| $ReorderDeliveryDate
 
 | `Datum des Retoureneingangs`
 |
 | `order.formattedDates.returnDate`
+| $OrderReturnDate
 
 | `Retourenpaketnummer`
 |
 | `order.returns_code`
+| $ReturnsCode
 
 | `Versandkosten gesamt`
 |
 | `order.formattedGeneral.shippingCosts`
+| $ShippingCosts
 
 | `Versandprofil`
 | Name des xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofils] wie im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versandprofile* gespeichert.
 | `order.formattedShipping.profileName`
+| $ShippingProfileName
 
 | `Versandprofil-ID`
 |Wird automatisch vom System vergeben. Die ID des xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofils] findest du im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versandprofile*.
 | `order.formattedShipping.profileId`
+| $ShippingProfileID
 
 | `Versanddienstleister`
 |Name des xref:fulfillment:versand-vorbereiten.adoc#800[Versanddienstleisters] wie im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert.
 | `order.formattedShipping.providerName`
+| $ShippingServiceProviderName
 
 | `Versanddienstleister-ID`
 |Wird automatisch vom System vergeben. Die ID des xref:fulfillment:versand-vorbereiten.adoc#800[Versanddienstleisters] findest du im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister*.
 | `order.formattedShipping.providerId`
+| $ShippingServiceProviderID
 
 | `Tracking-URL`
 |Dient zur Sendungsverfolgung. Die xref:fulfillment:versand-vorbereiten.adoc#840[Tracking-URL] des Versanddienstleisters wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert. +
 *_Hinweis:_* Schau auch in unser xref:crm:praxisbeispiel-tracking-url-senden.adoc#[Praxisbeispiel zu diesem Thema]. Dort wird beschrieben, welche Einstellungen du vornehmen musst, um die Tracking-URL an deine Kund:innen zu senden.
 | `order.formattedShipping.trackingURL`
+| $TrackingURL
 
 |====
 
@@ -1993,35 +2150,41 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 [[table-variables-order-subscription]]
 .Variablen in der Unterkategorie *Auftrag / Abonnement*
-[cols="2,4,3"]
+[cols="2,4,3,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Abonnement-ID`
 |ID des Abonnements. Wird automatisch vom System vergeben und kann _nicht_ geändert werden.
 | `order.formattedSubscription.id`
+| $SchedulerID
 
 | `Startdatum des Abonnements`
 |Beginn des Abonnements.
 | `order.formattedSubscription.startDate`
+| $SchedulerStartDate
 
 | `Enddatum des Abonnements`
 |Ende des Abonnements.
 | `order.formattedSubscription.endDate`
+| $SchedulerEndDate
 
 | `Abonnement: Anzahl der Ausführungen`
 |Anzahl der Aufträge, die basierend auf einem Abonnement, angelegt wurde. +
 *_Beispiel:_* Wenn das Abonnement im Mai 2021 mit einem Intervall von 3 Monaten gestartet hat, wurden bis Mai 2022 4 Aufträge angelegt. In diesem Fall würde für diese Variable der Wert `4` in der E-Mail-Vorlage ausgegeben werden.
 | `order.formattedSubscription.numberOfExecutions`
+| $SchedulerExecutionCount
 
 | `Abonnementintervall`
 |Intervall des Abonnements wie im Menü *Einrichtung » Aufträge » Abonnement* festgelegt. Das Intervall legt fest, in welchen Zeitabständen Artikel an Kund:innen versendet werden. + 
 Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 | `order.formattedSubscription.interval`
+| $SchedulerInterval
 
 | `Gesamtbetrag des Abonnements`
 |
 | `order.formattedSubscription.totalAmount \| number_format(2, '.', ',')`
+| $SchedulerTotalAmount
 
 |====
 
@@ -2030,101 +2193,123 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 
 [[table-variables-order-contact]]
 .Variablen in der Kategorie *Kontakt*
-[cols="2,4,3"]
+[cols="2,4,3,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Kontoinhaber (Kontakt)`
 | xref:crm:kontakt-bearbeiten.adoc#bankdaten[Kontoinhaber:in] wie im Kontaktdatensatz gespeichert.
 | `contact.formattedBanks.accountOwner`
+|
 
 | `BIC des Kontakts`
 | xref:crm:kontakt-bearbeiten.adoc#bankdaten[BIC] wie im Kontaktdatensatz gespeichert.
 | `contact.formattedBanks.bic`
+| $CustomerBIC
 
 | `Bankname des Kontakts`
 | xref:crm:kontakt-bearbeiten.adoc#bankdaten[Bankname] wie im Kontaktdatensatz gespeichert.
 | `contact.formattedBanks.bankName`
+| $CustomerBankName
 
 | `Klasse`
 | Kundenklasse, der der Kontakt zugeordnet ist. xref:crm:vorbereitende-einstellungen.adoc#kundenklasse-erstellen[Klassen] erstellst du im Menü *Einrichtung » CRM » Kundenklassen*.
 | `contact.formattedClass.name`
+| $CustomerClass
 
 | `Firmenname`
 |Name der xref:crm:kontakt-bearbeiten.adoc#firma[Firma].
 | `contact.formattedAccounts.companyName`
+| $CustomerCompany
 
 | `Kontakt-ID`
 |ID des xref:crm:kontakt-bearbeiten.adoc#[Kontakts]. Die ID wird automatisch vergeben und kann nicht geändert werden.
 | `contact.id`
+| $CustomerID
 
 | `Vorname`
 |
 | `contact.firstName`
+| $CustomerFirstName
 
 | `Vorname und Nachname des Systembenutzers`
 |Vorname und Nachname des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] am Kontaktdatensatz gespeichert ist.
 | `contact.formattedUser.realName`
+|
 
 | `Vollständiger Name`
 |
 | `contact.fullName`
+| $CustomerFullName
 
 | `Geschlecht`
 |Anzeige, wenn männlich: *male* +
 Anzeige, wenn weiblich: *female* +
 Anzeige, wenn divers: leere Option
 | `contact.gender is same as ('diverse') ? '' : contact.gender`
+|
 
 | `IBAN des Kontakts`
 |IBAN wie im Kontaktdatensatz gespeichert.
 | `contact.formattedBanks.iban`
+| $CustomerIBAN
 
 | `Sprache`
 |Sprache wie im Kontaktdatensatz gespeichert. Wenn du eine E-Mail-Vorlage in der gewählten Sprache erstellt hast, werden E-Mail-Vorlagen in dieser Sprache an den Kontakt versendet.
 | `contact.lang`
+| $CustomerLang
 
 | `Nachname`
 |
 | `contact.lastName`
+| $CustomerLastName
 
 | `Newsletter-Empfang: Zustimmung durch Kontakt`
 |Datum, wann der Kontakt dem Newsletter-Empfang zugestimmt hat. +
 Datumsformat in der E-Mail: `mm-tt-jjjj`. +
 Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitstempel im Format `00:00:00` gespeichert.
 | `contact.newsletterAllowanceAt`
+| $IsNewsletterActive
 
 | `Nummer`
 |Zusätzliche Nummer für den Kontakt
 | `contact.number`
+| $CustomerNumber
 
 | `Anzahl der Aufträge`
 |
 | `contact.formattedOrdersCount`
+| $OrderCount
 
 | `Anrede geschäftlich`
 |
 | `contact.formattedOptions.salutationWork`
+| $CustomerSalutationLabel
 
 | `Anrede`
 |
 | `contact.formattedSalutation.label`
+| $CustomerSalutationKey
 
 | `Anrede privat`
 |
 | `contact.formattedOptions.salutationPrivate`
+| $CustomerSalutationLabel
 
 | `Signatur des Systembenutzers`
 |Signatur des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] am Kontaktdatensatz gespeichert ist, im Textformat.
 | `contact.formattedUser.signatureNoHtml`
+| $ContactOwnerSignature
 
 | `Signatur des Systembenutzers im HTML-Format`
 |Signatur des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] im Kontaktdatensatz gespeichert ist, im HTML-Format.
 | `contact.formattedUser.signatureHtml`
+| $ContactOwnerSignatureHtml
 
 | `Titel`
 |
 | `contact.title`
+| $CustomerTitle
 
 |====
 
@@ -2136,57 +2321,73 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 
 [[table-variables-order-contact-delivery-address]]
 .Variablen in der Unterkategorie *Kontakt / Lieferadresse*
-[cols="1,3"]
+[cols="1,3,2"]
 |====
-|Name der Variable |Twig expression
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Lieferadresse Adresszusatz`
 | `contact.formattedAddresses.deliveryAddress.address3 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address4`
+| $DeliveryAddressAdditionalAddress
 
 | `Lieferadresse Firmenname`
 | `contact.formattedAddresses.deliveryAddress.name1`
+| $DeliveryAddressCompany
 
 | `Lieferadresse Land`
 | `contact.formattedAddresses.deliveryAddress.country.name`
+| $DeliveryAddressCountry
 
 | `Lieferadresse Länder-ID`
 | `contact.formattedAddresses.deliveryAddress.country.id`
+| $DeliveryAddressCountryID
 
 | `Lieferadresse Länder-ISO-Code 2`
 | `contact.formattedAddresses.deliveryAddress.country.isoCode2`
+| $DeliveryAddressCountryIsoCode
 
 | `Lieferadresse Länder-ISO-Code 3`
 | `contact.formattedAddresses.deliveryAddress.country.isoCode3`
+| $DeliveryAddressCountryIsoCode
 
 | `Lieferadresse Vorname`
 | `contact.formattedAddresses.deliveryAddress.name2`
+| $DeliveryAddressFirstName
 
 | `Lieferadresse Vorname und Nachname`
 | `contact.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressFullName
 
 | `Lieferadresse Nachname`
 | `contact.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressLastName
 
 | `Lieferadresse Telefon`
 | `contact.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+| $DeliveryAddressPhone
 
 | `Lieferadresse Postleitzahl`
 | `contact.formattedAddresses.deliveryAddress.postalCode`
+| $DeliveryAddressZip
 
 | `Lieferadresse Postleitzahl und Ort`
 | `contact.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ contact.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCityWithZip
 
 | `Lieferadresse Bundesland`
 | `contact.formattedAddresses.deliveryAddress.state.name`
+| $DeliveryAddressState
 
 | `Lieferadresse Straße`
 | `contact.formattedAddresses.deliveryAddress.address1 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address2`
+| $DeliveryAddressStreet
 
 | `Lieferadresse Hausnummer`
 | `contact.formattedAddresses.deliveryAddress.address2`
+|
 
 | `Lieferadresse Ort`
 | `contact.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCity
 
 |====
 
@@ -2198,57 +2399,73 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 
 [[table-variables-order-contact-invoice-address]]
 .Variablen in der Unterkategorie *Kontakt / Rechnungsadresse*
-[cols="1,3"]
+[cols="1,3,2"]
 |====
-|Name der Variable |Twig expression
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Rechnungsadresse Adresszusatz`
 | `contact.formattedAddresses.invoiceAddress.address3 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address4`
+|
 
 | `Rechnungsadresse Firmenname`
 | `contact.formattedAddresses.invoiceAddress.name1`
+|
 
 | `Rechnungsadresse Land`
 | `contact.formattedAddresses.invoiceAddress.country.name`
+|
 
 | `Rechnungsadresse Länder-ID`
 | `contact.formattedAddresses.invoiceAddress.country.id`
+|
 
 | `Rechnungsadresse Länder-ISO-Code 2`
 | `contact.formattedAddresses.invoiceAddress.country.isoCode2`
+|
 
 | `Rechnungsadresse Länder-ISO-Code 3`
 | `contact.formattedAddresses.invoiceAddress.country.isoCode3`
+|
 
 | `Rechnungsadresse Vorname`
 | `contact.formattedAddresses.invoiceAddress.name2`
+|
 
 | `Rechnungsadresse Vorname und Nachname`
 | `contact.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.name3`
+|
 
 | `Rechnungsadresse Nachname`
 | `contact.formattedAddresses.invoiceAddress.name3`
+|
 
 | `Rechnungsadresse Telefon`
 | `contact.formattedAddresses.invoiceAddress.formattedOptions.telephone`
+|
 
 | `Rechnungsadresse Postleitzahl`
 | `contact.formattedAddresses.invoiceAddress.postalCode`
+|
 
 | `Rechnungsadresse Postleitzahl und Ort`
 | `contact.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ contact.formattedAddresses.invoiceAddress.town`
+|
 
 | `Rechnungsadresse Bundesland`
 | `contact.formattedAddresses.invoiceAddress.state.name`
+|
 
 | `Rechnungsadresse Straße`
 | `contact.formattedAddresses.invoiceAddress.address1 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address2`
+|
 
 | `Rechnungsadresse Hausnummer`
 | `contact.formattedAddresses.invoiceAddress.address2`
+|
 
 | `Rechnungsadresse Ort`
 | `contact.formattedAddresses.invoiceAddress.town`
+|
 
 |====
 
@@ -2257,42 +2474,53 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 
 [[table-variables-order-contact-options]]
 .Variablen in der Unterkategorie *Kontakt / Optionen*
-[cols="1,3"]
+[cols="1,3,2"]
 |====
-|Name der Variable |Twig expression
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Zusätzlicher Ansprechpartner`
 | `contact.formattedOptions.additionalContactPerson`
+|
 
 | `E-Mail geschäftlich`
 | `contact.formattedOptions.emailWork`
+| $CustomerEmail
 
 | `E-Mail PayPal`
 | `contact.formattedOptions.emailPayPal`
+| $CustomerEmail
 
 | `E-Mail privat`
 | `contact.formattedOptions.emailPrivate`
+| $CustomerEmail
 
 | `Fax geschäftlich`
 | `contact.formattedOptions.telefaxWork`
+| $CustomerFax
 
 | `Fax privat`
 | `contact.formattedOptions.telefaxPrivate`
+| $CustomerFax
 
 | `Mobiltelefon geschäftlich`
 | `contact.formattedOptions.telephoneMobileWork`
+| $CustomerMobilePhone
 
 | `Mobiltelefon privat`
 | `contact.formattedOptions.telephoneMobilePrivate`
+| $CustomerMobilePhone
 
 | `Telefon geschäftlich`
 | `contact.formattedOptions.telephoneWork`
+| $CustomerPhone
 
 | `Telefon privat`
 | `contact.formattedOptions.telephonePrivate`
+| $CustomerPhone
 
 | `eBay-Name`
 | `contact.formattedOptions.marketplaceEbay`
+| $CustomerEbayName
 
 |====
 
@@ -2301,146 +2529,178 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 
 [[table-variables-global]]
 .Variablen in der Kategorie *Global*
-[cols="2,4,3"]
+[cols="2,4,3,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Kontoinhaber (Stammdaten)`
 |Kontoinhaber:in aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines plentymarkets Systems. Wird im *Basics*-Assistenten im Schritt *Bankdaten* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinstellungen*. +
 Alternativ findest du den:die Kontoinhaber:in im Menü *Einrichtung » Einstellungen » Bank*.
 | `globals.bank.owner`
+|
 
 | `BIC (Stammdaten)`
 |BIC aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines plentymarkets Systems. Wird im *Basics*-Assistenten im Schritt *Bankdaten* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinstellungen*. +
 Alternativ findest du die gespeicherte BIC im Menü *Einrichtung » Einstellungen » Bank*.
 | `globals.bank.bic`
+|
 
 | `Bankname (Stammdaten)`
 |Bankname aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines plentymarkets Systems. Wird im *Basics*-Assistenten im Schritt *Bankdaten* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinstellungen*. +
 Alternativ findest du den gespeicherten Banknamen im Menü *Einrichtung » Einstellungen » Bank*.
 | `globals.bank.name`
+| $BankName
 
 | `Widerrufsrecht im HTML-Format`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *HTML* gespeichert.
 | `globals.legalInformation.cancellationRights.html`
+| $CancellationRightsHTML
 
 | `Widerrufsrecht im reinen Textformat`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *Text* gespeichert.
 | `globals.legalInformation.cancellationRights.plain`
-
+| $CancellationRightsText
 
 | `Gutschein-Code (1)`
 | xref:auftraege:gutscheine.adoc#[Gutschein-Codes] werden in der Kampagne im Menü *Aufträge » Gutscheine* generiert. Ein Gutschein-Code kann immer nur jeweils einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
 | `globals.coupons.couponCode1`
+| $CouponCode1
 
 | `Gutschein-Code (2)`
 |
 | `globals.coupons.couponCode2`
+| $CouponCode2
 
 | `Gutschein-Code (3)`
 |
 | `globals.coupons.couponCode3`
+| $CouponCode3
 
 | `Gutschein-Code (4)`
 |
 | `globals.coupons.couponCode4`
+| $CouponCode4
 
 | `Gutschein-Code (5)`
 |
 | `globals.coupons.couponCode5`
+| $CouponCode5
 
 | `Gutschein-Code (6)`
 |
 | `globals.coupons.couponCode6`
+| $CouponCode6
 
 | `Gutschein-Code (7)`
 |
 | `globals.coupons.couponCode7`
+| $CouponCode7
 
 | `Gutschein-Code (8)`
 |
 | `globals.coupons.couponCode8`
+| $CouponCode8
 
 | `Gutschein-Code (9)`
 |
 | `globals.coupons.couponCode9`
+| $CouponCode9
 
 | `Gutschein-Code (10)`
 |
 | `globals.coupons.couponCode10`
+| $CouponCode10
 
 | `EORI-Nummer`
 |Eindeutige Identifizierungsnummer, die für Zollzwecke benötigt wird.
 | `globals.account.EORINumber`
+|
 
 | `IBAN (Stammdaten)`
 |IBAN aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines plentymarkets Systems. Wird im *Basics*-Assistenten im Schritt *Bankdaten* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinstellungen*. +
 Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellungen » Bank*.
 | `globals.bank.iban`
+| $BankIBAN
 
 | `Impressum im HTML-Format`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *HTML* gespeichert.
 | `globals.legalInformation.withdrawalForm.html`
+| $LegalDisclosureHTML
 
 | `Impressum im reinen Textformat`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *Text* gespeichert.
 | `globals.legalInformation.legalDisclosure.plain`
+| $LegalDisclosureText
 
 | `Datenschutzerklärung im HTML-Format`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Datenschutzerklärung* und dort im Tab *HTML* gespeichert.
 | `globals.legalInformation.privacyPolicy.html`
+| $PrivacyPolicyHTML
 
 | `Datenschutzerklärung im reinen Textformat`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Datenschutzerklärung* und dort im Tab *Text* gespeichert.
 | `globals.legalInformation.privacyPolicy.plain`
+| $PrivacyPolicyText
 
 | `Signatur im HTML-Format`
 |Die Signatur wird im Assistenten *E-Mail-Konten* im Schritt *Signatur* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*.
 | `globals.account.signatureHTML`
+| $SignatureHTML
 
 | `Signatur im reinen Textformat`
 |Die Signatur wird im Assistenten *E-Mail-Konten* im Schritt *Signatur* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*.
 | `globals.account.signatureText`
+| $SignatureText
 
 | `Heutiges Datum`
 |Gibt das heutige Datum im Format `tt-mm-jjjj` aus.
 | `"now"\|date("d-m-Y")`
+| $TodaysDate
 
 | `URL zum Warenkorb`
 |Gibt die URL zum Warenkorb im Webshop aus.
 | `globals.links.linkBasket`
+|
 
 | `URL zum Ändern des Passworts`
 |Gibt die URL zum Bereich *Passwort ändern* im Webshop aus. Dort können Kund:innen ein neues Passwort eingeben.
 | `globals.links.linkChangePassword`
+| $CustomerPassword
 
 | `URL zum Checkout`
 |Gibt die URL zum Checkout-Bereich des Auftrags im Webshop aus.
 | `globals.links.linkCheckout`
+|
 
 | `URL zum Bestätigen der E-Mail-Adresse`
 |Gibt die URL zum Bestätigen der E-Mail-Adressänderung des Kontakts aus.
 | `globals.account.newCustomerEmail`
+|$NewCustomerEmail
 
 | `URL zum neuen Passwort`
 |Gibt die URL zu einem Formular zum Erstellen eines neuen Passworts aus. Dort geben Kund:innen ihre E-Mail-Adresse ein.
 | `globals.links.linkNewPassword`
+|
 
 | `URL zum Webshop`
 |Gibt die URL zum Webshop aus.
 | `globals.links.linkWebstore`
+|
 
 | `URL zu den Geschäftsbedingungen`
 |Gibt die URL zu den AGB aus.
 | `globals.links.linkTermsConditions`
+|
 
 | `Widerrufsformular im HTML-Format`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsformular* und dort im Tab *HTML* gespeichert.
 | `globals.legalInformation.withdrawalForm.html`
+| $WithdrawalFormHTML
 
 | `Widerrufsformular im reinen Textformat`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsformular* und dort im Tab *Text* gespeichert.
 | `globals.legalInformation.withdrawalForm.plain`
+| $WithdrawalFormText
 
 |====
 
@@ -2449,21 +2709,24 @@ Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellung
 
 [[table-variables-newsletter]]
 .Variablen in der Kategorie *Newsletter*
-[cols="2,5,2"]
+[cols="2,5,2,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Newsletter Vorname`
 |Vorname der Person, die den xref:crm:newsletter-versenden.adoc#[Newsletter] abonnieren möchte.
 | `newsletter.firstName`
+| -
 
 | `Newsletter Nachname`
 |Nachname der Person, die den xref:crm:newsletter-versenden.adoc#[Newsletter] abonnieren möchte.
 | `newsletter.lastName`
+| -
 
 | `URL zur Bestätigung des Newsletter-Abonnements`
 |Gibt die URL zum Bestätigen des xref:crm:newsletter-versenden.adoc#[Newsletter-Abonnements] aus.
 | `newsletter.formattedConfirmUrl`
+| $NewsletterConfirmURL
 
 |====
 
@@ -2472,51 +2735,61 @@ Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellung
 
 [[table-variables-ticket]]
 .Variablen in der Kategorie *Ticket*
-[cols="2,5,2"]
+[cols="2,5,2,2"]
 |====
-|Name der Variable |Erläuterung |Twig expression
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Ticket Backend-URL`
 |Verlinkt zum Ticket im Menü xref:crm:ticketsystem-nutzen.adoc#[CRM » Ticketsystem].
 | `ticket.formattedUrl.backendUrl`
+| $TicketBackendURL
 
 | `Ticket: Nachrichtenhistorie`
 |Gibt den zuletzt gespeicherten Text im Ticket aus. Das ist entweder der Text eines Kommentars oder einer Nachricht.
 | `ticket.formattedMessage.history`
+| $TicketHistory
 
 | `Ticket-ID`
 |Gibt die ID des Tickets aus, aus dem die E-Mail versendet wurde.
 | `ticket.id`
+| $TicketID
 
 | `Ticket: Letzter Kommentar`
 |Gibt den Text des letzten xref:crm:ticketsystem-nutzen.adoc#2500[Kommentars] aus. +
 *_Hinweis:_* Kommentare dienen der internen Kommunikation und sind für deine Kund:innen _nicht_ sichtbar.
 | `ticket.formattedMessage.lastComment`
+| $TicketLastComment
 
 | `Ticket: Letzte Nachricht`
 |Gibt den Text der letzten xref:crm:ticketsystem-nutzen.adoc#2400[Nachricht] aus.
 | `ticket.formattedMessage.lastMessage`
+| $TicketLastMessage
 
 | `Ticket-Priorität`
 |Gibt die Priorität des Tickets als ID aus. Die Werte der Sterne werden aufsteigend mit Zahlen von `0` (grauer Stern, niedrigste Priorität) bis `5` (2 gelbe Sterne, höchste Priorität) angezeigt.
 | `ticket.priorityId`
+| $TicketPriority
 
 | `Ticket-Status`
 |Gibt den Status des Tickets aus.
 | `ticket.formattedStatus`
+| $TicketStatus
 
 | `Ticket-Tags`
 |Gibt die Tags des Tickets aus.
 | `ticket.formattedTags`
+| $TicketTags
 
 | `Ticket-Titel`
 |Gibt den Titel des Tickets aus.
 | `ticket.title`
+| $TicketTitle
 
 | `Ticket-URL`
 |Verlinkt zum Ticket im Bereich *Mein Konto* des Kunden. Kund:innen können dann dort die Nachricht lesen und direkt eine Antwortnachricht eingeben und versenden. +
 Beachte dazu das Kapitel xref:crm:ticketsystem-nutzen.adoc#5500[Tickets im Mein Konto-Bereich erstellen] auf der Handbuchseite xref:crm:ticketsystem-nutzen.adoc#[Ticketsystem].
 | `ticket.formattedUrl.url`
+| $TicketURL
 
 |====
 
