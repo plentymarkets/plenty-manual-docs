@@ -46,7 +46,7 @@ include::_includes:partial$rights.adoc[]
 [#email-server-login-details]
 === Saving the email server’s login details
 
-In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, you save the login details of a mailbox so that plentymarkets emails such as order or shipping confirmations can be sent from this email address.
+In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, save the login details of a mailbox in the *Login details* step so that plentymarkets emails such as order or shipping confirmations can be sent from this email address.
 
 [.collapseBox]
 .Settings in the *Email accounts* assistant in the *Login details* step
@@ -71,7 +71,7 @@ In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* me
 | Select *SSL*, *TLS* or *No encryption*.  +
 *_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
 
-2+| Enter the login details of your email account 
+2+| Enter the login details of your email account. 
 
 | *Name of sender*
 |Enter your own name or the name of your plentyShop. The name is displayed to the recipient. +
@@ -95,7 +95,8 @@ In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* me
 2+|Would you like to activate the live mode?
 
 |material:check_box_outline_blank[]
-|If you do not place a check mark for *Activate live mode* (material:check_box_outline_blank[]), the test mode is activated. + All emails are only sent to the saved email address. This allows you to test the settings before switching to the live mode. +
+|If you do not place a check mark for *Activate live mode* (material:check_box_outline_blank[]), the test mode is activated. +
+All emails are only sent to the saved email address. This allows you to test the settings before switching to the live mode. +
 *_Important:_* The test mode is only applied to this online shop. The settings for additional clients (shops) are carried out in the client’s menu.
 
 |material:check_box[role=skyBlue]
@@ -104,22 +105,30 @@ In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* me
 |====
 --
 
+//// 
+[TIP]
+.Newsletter-Zugangsdaten eingeben
+====
+Go to *Setup » Client » [Select client] » Email » Newsletter*. Enter the login details to use the newsletter service that is integrated in plentymarkets. For further information, refer to the xref:crm:sending-newsletters.adoc#200[Entering newsletter login details] chapter of the xref:crm:sending-newsletters.adoc#[Newsletters] page of the manual.
+====
+////
+
 [#email-signature]
 === Saving the email signature
 
-Go to the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu to save the signature. The signature is then automatically added to your email templates when you inserted the corresponding variable in the template.
+Go to the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu to save the signature in HTML format or plain text in the *Signature* step. The signature is then automatically added to your email templates when you inserted the corresponding variable in the template.
 
 [IMPORTANT]
 .Note the priority of the signature
 ====
 The signature that was saved for a user in his or her user account in the *Setup » Settings » User » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
-*This means:*_ If you insert, for example, the variable `Signature in HTML format` in the email template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Email accounts* assistant in the *Signature* step is used.
+*_This means:_* If you insert, for example, the variable `Signature in HTML format` or `Signature in plain text` in the email template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Email accounts* assistant in the *Signature* step is used.
 ====
 
 [#e-mail-info-service]
 === Setting up the email information service
 
-In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, you set to send a blind copy of all emails sent by your plentymarkets system to an email address of your choice. This can be particularly helpful in the early stages of your online shop, as it allows you to maintain an overview of all sent emails and recognise where processes can still be improved. You can also set here that you automatically receive an info email when a new order has been placed.
+In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, you can set in the *Info service* step that a blind copy of all emails is sent by your plentymarkets system to an email address of your choice. This can be particularly helpful in the early stages of your online shop, as it allows you to maintain an overview of all sent emails and recognise where processes can still be improved. You can also set here that you automatically receive an info email when a new order has been placed.
 
 [.collapseBox]
 .Settings in the *Email accounts* assistant in the *Info service* step
@@ -148,6 +157,88 @@ In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* me
 
 |*Receive email in case of a new order* (material:toggle_on[role=skyBlue])
 |If you want to receive a blind copy when a new order is placed, activate the button (material:toggle_on[role=skyBlue]). Enter in the field that appears below the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+
+|====
+--
+
+[#email-automatic-despatch]
+=== Setting up the automatic despatch:
+
+The *Automatic despatch* step of the *Email accounts* assistant contains various events that you can link with a template. You can find the assistant in the *Setup » Assistants » Basic setup* menu. Select from the drop-down list the template that you <<#create-template, created>> before in the *CRM » EmailBuilder (Test phase)* menu. This ensures that the email template is sent to your contacts once the event occurs.
+
+[IMPORTANT]
+.Removing the link before deleting the email template
+====
+Deleting an email template that is linked with an event in the *Automatic despatch* step of the *Email accounts* assistant may lead to undesired effects. Therefore, first go to *Setup » Assistants » Basic setup* » *Email accounts* assistant and remove the link in the *Automatic despatch* step by selecting the option *Do not send* from the drop-down list in the line of the event. Afterwards, <<#delete-template, delete>> the template in the *CRM » EmailBuilder (Test phase)* menu.
+====
+
+[.collapseBox]
+.Explanations about some events for the automatic despatch in the *Automatic despatch* step of the *Email accounts* assistant 
+--
+
+[[table-events-automatic-email-despatch]]
+.Explanations about some events for the automatic despatch
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *New order from online store*
+|The contacts receive an email including the order confirmation after the purchase has been completed in the online shop. +
+*_Note:_* If your customers should be able to access the order processing in your online shop with this email to see the order status, you have to insert the variable `URL to checkout` in the template that you select for this automatic event. +
+*_Note:_* You can find the variable in the <<#variables-global, Global>> category.
+
+| *Send customer email to change password*
+|The contacts receive an email with a link to the new password. The link has to be actively confirmed. The variable `URL to change password` has to be contained in the template. +
+*_Note:_* You can find the variable in the <<#variables-global, Global>> category.
+
+| *Newsletter opt-in*
+|The contacts receive an email when they have registered for the newsletter. The template should include the confirmation link that the contacts have to click in order to complete the newsletter registration process: `URL to confirm newsletter subscription`. +
+*_Note:_* You can find the variable in the <<#variables-newsletter, Newsletter>> category.
+
+| *Newsletter opt-in confirmation*
+|The contacts receive a confirmation email once they have activated the confirmation link that was sent with the email template for the *Newsletter opt-in* event.
+
+| *Email when item becomes available*
+|The contacts receive an email containing the information that a certain item is available again. Requirement: The contacts have entered their email address in the online shop directly next to the item that could not be delivered at that time.
+
+|====
+--
+
+Further options how to automate the email despatch to your customers are described in the chapters <<#set-up-event-procedures, Setting up event procedures>> and <<#email-despatch-to-multiple-email-addresses, Email despatch to multiple email addresses>>.
+
+[#e-mail-messenger-integration]
+=== Messenger integration
+
+Go to *Setup » Assistants » Basic setup* and open the *Email accounts* assistant. In the *Messenger integration* step, determine whether all sent emails and attachments should be collected in the xref:crm:messenger-testphase.adoc#[Messenger]. Furthermore, you can decide in which inbox the emails should be collected and which tags should be assigned to the conversations.
+
+[.collapseBox]
+.Settings in the *Email accounts* assistant in the *Messenger integration* step
+--
+[[table-collect-emails]]
+.Collect all sent emails in the messenger module
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Activate service*
+a| If you want to start collecting the emails in the messenger, activate the button *Activate Messenger integration* (material:toggle_on[role=skyBlue]). +
+The emails from the following plentymarkets areas will be saved and shown in the messenger: 
+
+* Automatic despatch
+* Order events
+* Order procedures
+* Group function in the contact data record
+* Orders » Orders (Test phase)
+* Group function in the order
+
+| *Attachments*
+| If you want to collect the email attachments in the messenger, activate the button *Collect attachments* (material:toggle_on[role=skyBlue]).
+
+| *Inbox*
+| Select the messenger inbox from the drop-down list in which the emails should be collected.
+
+| *Tags*
+| Select (material:check_box[role=skyBlue]) the tags from the list that should be added to the conversation.
 
 |====
 --
@@ -348,7 +439,7 @@ In the line of the folder or sub-folder in which you want to create a footer, cl
 → The window *New name* opens.
 . Enter the footer template’s subject.
 . Click on *Save*.
-. In the Settings area, select (material:check_box[role=skyBlue]) the owner and the client.
+. In the *Settings* area, select (material:check_box[role=skyBlue]) the owner and the client.
 . Click on *Edit* (material:edit[]).
 . Edit the footer according to your wishes and insert <<#insert-widget, widgets>> and <<#variables-emailbuilder, variables>>.
 . *Save* (material:save[]) the settings.
@@ -521,7 +612,7 @@ In this area, carry out the language-specific settings. Thus, you can carry out 
 You can see an individual area for each language you created. Click on material:expand_more[] to collapse individual language areas. Clicking on material:chevron_right[] opens the language area again.
 
 |[#intable-template-settings-subject]*Subject*
-|You can see the template’s subject here. If needed, you can adjust the subject. +
+|You can see the template’s subject here. You can <<#adjust-subject, adjust the subject>>, if needed. +
 *_Note:_* This field is _not_ available for templates of the type *Header* and *Footer*.
 
 |[#intable-template-settings-static-attachments]*Static attachments*
@@ -604,9 +695,6 @@ In the editor, you can find a selection of widgets whose contents are already pr
 For example, you will find in the *Order items* widget a pre-defined list with the most important variables around the ordered item such as item name, the number of ordered items, the prices, the shipping costs and the total invoice amount. However, you can adjust the content at any time according to your needs and add further column names and individual items.
 
 //// 
-
- 
-
 <<#image-emailbuilder-widget-order-items>> shows the editing mode of the predefined *Order items* widget.
 
 [[image-emailbuilder-widget-order-items]]
@@ -687,9 +775,6 @@ Click on *Close settings* (material:close[]) to close the settings. Click on *De
 
 |[#intable-widget-order-items]*Order items*
 |This widget contains an already pre-defined layout for the order items with sample data. The sample data will then be replaced with the correct values in the email. 
-
- 
- 
 
 Click on material:settings[] to open the settings. Use the drop-down lists to decide which content is to be shown in the columns and as individual positions. Click on material:unfold_more[]to change the order. Click on material:add[] (*Add new entry*) in the settings to add further columns. Click on *Remove entry* (material:delete[]) to delete the columns from the overview.
 
@@ -795,11 +880,20 @@ Creating a default template:
 . *Save* (material:save[]) the settings. +
 → The template is created and opened. 
 
-As soon as the default template is created, you can see the prefilled content in the editor. Adjust the content by clicking on material:edit[]. +
-The toolbar shows the prefilled subject. Adjust the subject by clicking on material:translate[] in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. +
-In the *Settings* area, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 3 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
+[TIP]
+If you do not want to create the default template within a folder, click on the start page of the *CRM » EmailBuilder (Test phase)* menu in the bottom left on material:add[] *Add* material:play_arrow[] and select material:description[] *Template* afterwards. The template will then be created on the first level and does not belong to a folder.
 
-*_Note:_* If you do not want to create the default template within a folder, click on the start page of the *CRM » EmailBuilder (Test phase)* menu in the bottom left on material:add[] *Add* material:play_arrow[] and select material:description[] *Template* afterwards. The template will then be created on the first level and does not belong to a folder.
+[#default-template-adjust-subject]
+==== Adjusting the subject
+
+As soon as the default template is created, you can see the prefilled content in the toolbar. Adjust the subject by clicking on *Language-dependent settings* (material:translate[]) in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. Also in this area, you can adjust the xref:crm:emailbuilder.adoc#exapmles-custom-styles[custom styles] of the template such as the template width and font size.
+
+[#edit-default-template]
+==== Editing the default template
+
+Besides the language-dependent settings where you can <<#default-template-adjust-subject, adjust the subject>> and select static attachments for your default template, for example, you can also adjust the default template’s content by clicking on material:edit[]. 
+
+In the *Settings* area of the template, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 3 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
 
 [#default-templates-name-and-subject]
 ==== Available default templates
@@ -902,8 +996,6 @@ Would you like to know which default templates are already available in the Emai
 
 |====
 
-
-
 --
 
 [#template-show-preview]
@@ -962,7 +1054,7 @@ Searching for a template:
 
 | *Name*
 |Enter a name to search for templates with this name. +
-*_Note:_* If you have already created "old" templates in the *Setup » Client » [Select client] » Email » Templates* menu, you can use this field to search for the template’s old ID. During the migration, the old ID was written in brackets behind the name.
+*_Note:_* If you have already created “old” templates in the past in the *Setup » Client » [Select client] » Email » Templates* menu, you can use this field to search for the ID of the old template. During the migration, the old ID of the template has been written in brackets behind the name.
 
 | *Client*
 |Select (material:check_box[role=skyBlue]) a client from the drop-down list to only search for templates that were created for this client.
@@ -1028,6 +1120,15 @@ Editing a template:
 . Click on the template.
 . Carry out the changes. Note <<#table-emailbuilder-create-template>>.
 . *Save* (material:save[]) the settings.
+
+Besides the language-dependent settings where you can <<#default-template-adjust-subject, adjust the subject>> and select static attachments for your default template, for example, you can also adjust the default template’s content by clicking on material:edit[]. 
+
+In the *Settings* area of the template, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 3 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
+
+[#adjust-subject]
+=== Adjusting the subject
+
+As soon as the template is created, you can see the prefilled content in the toolbar. Adjust the subject by clicking on *Language-dependent settings* (material:translate[]) in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. Also in this area, you can adjust the xref:crm:emailbuilder.adoc#exapmles-custom-styles[custom styles] of the template such as the template width and font size.
 
 [#add-language]
 === Adding a language to the template
@@ -1128,51 +1229,17 @@ Removing a language from the template:
 
 You have multiple options in plentymarkets to automate the email despatch to your customers.
 
+* <<#automatic-email-despatch, Setting up the automatic email despatch>>
+* <<#set-up-event-procedures, Setting up event procedures>>
+* <<#email-despatch-to-multiple-email-addresses, Email despatch to multiple email addresses>>
+
 [#automatic-email-despatch]
 === Setting up automatic emails
 
-The *Email accounts* assistant contains various events that you can link with a template. In the *Automatic despatch* step, select from the drop-down list the template that you <<#create-template, created>> before in the *CRM » EmailBuilder (Test phase)* menu. This ensures that the email template is sent to your contacts once the event occurs.
+Set up the automatic despatch in the *Email accounts* assistant. You can find the assistant in the *Setup » Assistants » Basic setup* menu. +
+You can link different events with already <<#create-template, created>> templates in this area. 
 
-[IMPORTANT]
-.Removing the link before deleting the email template
-====
-Deleting an email template that is linked with an event in the *Automatic despatch* step of the *Email accounts* assistant may lead to undesired effects. Therefore, first go to *Setup » Assistants » Basic setup* and open the *Email accounts* assistant. Remove the link by selecting the option *Do not send* from the drop-down list in the line of the event in the *Automatic despatch* step. Afterwards, delete the template in the *CRM » EmailBuilder (Test phase)* menu.
-====
-
-[.instruction]
-Setting up the automatic email despatch:
-
-. Go to *Setup » Assistants » Basic setup*.
-. Open the *Email accounts* assistant.
-. In the *Automatic despatch* step, select a template from the drop-down list in the line of the event. Note <<#table-events-automatic-email-despatch>>.
-. *Save* (icon:save[role="green"]) the settings.
-
-[[table-events-automatic-email-despatch]]
-.Explanations about some events for the automatic despatch
-[cols="1,3"]
-|====
-|Setting |Explanation
-
-| *New order from online store*
-|The contacts receive an email including the order confirmation after the purchase has been completed in the online shop. +
-*_Note:_* If your customers should be able to access the order processing in your online shop with this email to see the order status, you have to insert the variable `URL to checkout` in the template that you select for this automatic event. +
-*_Note:_* You can find the variable in the <<#variables-global, Global>> category.
-
-| *Send customer email to change password*
-|The contacts receive an email with a link to the new password. The link has to be actively confirmed. The variable `URL to change password` has to be contained in the template. +
-*_Note:_* You can find the variable in the <<#variables-global, Global>> category.
-
-| *Newsletter opt-in*
-|The contacts receive an email when they have registered for the newsletter. The template should include the confirmation link that the contacts have to click in order to complete the newsletter registration process: `URL to confirm newsletter subscription`. +
-*_Note:_* You can find the variable in the <<#variables-newsletter, Newsletter>> category.
-
-| *Newsletter opt-in confirmation*
-|The contacts receive a confirmation email once they have activated the confirmation link that was sent with the email template for the *Newsletter opt-in* event.
-
-| *Email when item becomes available*
-|The contacts receive an email containing the information that a certain item is available again. Requirement: The contacts have entered their email address in the online shop directly next to the item that could not be delivered at that time.
-
-|====
+To see the available events, refer to the <<#email-automatic-despatch, Setting up the automatic despatch>> chapter.
 
 [#set-up-event-procedures]
 === Setting up event procedures
@@ -1218,10 +1285,9 @@ Besides the variables, you can find also the twig expressions in the <<#availabl
 
 If you want to use a twig expression in the template’s subject line, this expression has to be surrounded by double curly brackets.
 
-*_Example:_* If you want to display the shipping service provider in your template’s subject line, open the expandable area *Order / Shipping*, search for the variable *Shipping service provider* and insert the corresponding twig expression in the subject line of your template as follows: `&#123;&#8288;&#123;order.formattedShipping.providerName&#125;&#8288;&#125;`.
+*_Example:_* If you want to display the shipping service provider in your template’s subject line, open the expandable area *Order / Shipping*, search for the variable *Shipping service provider* and insert the corresponding twig expression in the <<#adjust-subject, subject line>> of your template as follows: `&#123;&#8288;&#123;order.formattedShipping.providerName&#125;&#8288;&#125;`.
 
 You can find code examples for the subject line in the <<#code-examples-subject, Code examples for the subject line>> chapter.
-
 
 [#twig-code-widget]
 ==== Twig expression in the code widget
@@ -1256,6 +1322,8 @@ The available variables for the EmailBuilder are grouped into the following cate
 * <<#variables-newsletter, Newsletter>>
 
 * <<#variables-ticket, Ticket>>
+
+* <<#variables-messenger, Messenger>>
 
 [#variables-order]
 ==== Variables: Order general
@@ -1444,8 +1512,6 @@ The QR code is shown as an URL in the email of your customers. After clicking on
 | `order.formattedProperties.ebayUniquePaymentID`
 
 |====
-
-
 
 [#variables-order-delivery-address]
 ==== Variables: Order / Delivery address
@@ -2231,17 +2297,17 @@ In the contact data record, the timestamp in the format `00:00:00` is also saved
 |Name of the variable |Explanation |Twig expression
 
 | `Account holder (master data)`
-|Account holder from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic settings* menu. +
+|Account holder from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic setup* menu. +
 As an alternative, you can find the account holder in the *Setup » Settings » Bank* menu.
 | `globals.bank.owner`
 
 | `BIC (master data)`
-|BIC from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic settings* menu. +
+|BIC from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic setup* menu. +
 As an alternative, you can find the saved BIC in the *Setup » Settings » Bank* menu.
 | `globals.bank.bic`
 
 | `Bank name (master data)`
-|Bank name from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic settings* menu. +
+|Bank name from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic setup* menu. +
 As an alternative, you can find the saved bank name in the *Setup » Settings » Bank* menu.
 | `globals.bank.name`
 
@@ -2299,7 +2365,7 @@ As an alternative, you can find the saved bank name in the *Setup » Settings »
 | `globals.account.EORINumber`
 
 | `IBAN (master data)`
-|IBAN from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic settings* menu. +
+|IBAN from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your plentymarkets system. Is saved in the *Basics* assistant in the *Bank details* step. You can find the assistant in the *Setup » Assistants » Basic setup* menu. +
 As an alternative, you can find the saved IBAN in the *Setup » Settings » Bank* menu.
 | `globals.bank.iban`
 
@@ -2442,6 +2508,45 @@ As an alternative, you can find the saved IBAN in the *Setup » Settings » Bank
 |Links to the ticket in the *My account* area. The customer can read the message in the My account area, write an answer and send it. +
 Note also the xref:crm:using-the-ticket-system.adoc#5500[Creating tickets in the My account area] chapter on the xref:crm:using-the-ticket-system.adoc#[Ticket system] page.
 | `ticket.formattedUrl.url`
+
+|====
+
+[#variables-messenger]
+==== Variables: Messenger
+
+[[table-variables-messenger]]
+.Variables in the *Messenger* category
+[cols="2,5,2"]
+|====
+|Name of the variable |Explanation |Twig expression
+
+| `Message content`
+|
+| `messenger.message \| raw`
+
+| `Message conversation ID`
+|Serves as unique identifier to make sure that the message is always correctly assigned. This is why this variable should not be removed from the template.
+| `messenger.conversationId`
+
+| `Has billed messages`
+|
+| `messenger.metaData.timeCapture.chargeable ? trans('module_mail_templates::Widget.confirm', [], params.lang) : trans('module_mail_templates::Widget.notConfirm', [], params.lang)`
+
+| `Message minutes`
+|
+| `messenger.metaData.timeCapture.minutes`
+
+| `Message preview`
+|
+| `messenger.preview`
+
+| `Message subject`
+|
+| `messenger.title`
+
+| `Message ID`
+|
+| `messenger.uuid`
 
 |====
 
