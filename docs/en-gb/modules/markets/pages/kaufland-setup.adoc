@@ -52,7 +52,7 @@ The following fields are exported during stock synchronisation:
 *_Note:_* Only items which have been changed within the last 26 hours are exported.
 
 | Order import
-| * as soon as a new order was generated on Kaufland
+| * as soon as a new order is generated on Kaufland
 
 | Additional data
 | * export of surcharges for attribute values (item variations)
@@ -67,7 +67,12 @@ The following fields are exported during stock synchronisation:
 * Your items are listed on Kaufland. The name of your company is shown with your items.
 * Customers place an order on Kaufland.
 * Customers make their payments to Kaufland.
-* The order is imported into plentymarkets with status *[5] Cleared for shipping*.
+* The order is imported into plentymarkets right after it was placed on Kaufland.
+
+*_Notes on the Kaufland order import:_*
+
+* Orders with the Kaufland status *OPEN* are imported into plentymarkets without address details and with the status *[1] Incomplete data*. These are orders that can still be cancelled by the customer. The orders remain in this status for 15 minutes so that customers still have the possibility to cancel the order.
+* When the order status on Kaufland changes after 15 minutes, the order automatically moves to status *[5] Cleared for shipping* in plentymarkets. All missing order data is added to the order.
 
 [#market-setup]
 == Setting up the market in plentymarkets
@@ -327,7 +332,7 @@ include::partial$variation-availability.adoc[]
 
 // Web API required!
 
-[##link-variations-to-product-category]
+[#link-variations-to-product-category]
 === Linking variations to a Kaufland product category
 
 *_Note:_* You only have to link your variations to Kaufland product categories if you use the <<#catalogue-export, catalogue export>> to transfer items to Kaufland.
