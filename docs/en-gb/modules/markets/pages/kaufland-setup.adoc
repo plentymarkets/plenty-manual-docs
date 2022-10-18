@@ -21,6 +21,54 @@ video::331004662[vimeo]
 
 In order to use the Kaufland.de interface, you have to register your Kaufland.de user account as a seller account. To do so, go to the link:https://www.Kaufland.de/seller/new/[Kaufland.de website^] and save your VAT number in the *Mein Konto* (My account) area.
 
+[#data-exchange]
+== Frequency of data exchange
+
+After setting up {market} in plentymarkets, the automatic processes described in <<#data-exchange-market>> are available:
+
+[[data-exchange-market]]
+.Frequency of data exchange
+[cols="1,3a"]
+|===
+|Data |Interval
+
+| Price synchronisation
+| Hourly
+
+| Stock synchronisation
+| Hourly
+
+The following fields are exported during stock synchronisation:
+
+*Stock* +
+*Processing time* +
+*Condition* +
+*Description of the condition* +
+*Kaufland shipping group ID* +
+*Kaufland warehouse ID*
+
+| Item export
+| once a day +
+*_Note:_* Only items which have been changed within the last 26 hours are exported.
+
+| Order import
+| every 15 minutes
+
+| Additional data
+| * export of surcharges for attribute values (item variations)
+* transfer of the description text saved in the *Texts* tab
+* transfer of the technical data selected in table 1
+* image export selected in the item's *Images* tab
+|===
+
+[#workflow-order]
+== Workflow of a Kaufland order
+
+* Your items are listed on Kaufland. The name of your company is shown with your items.
+* Customers place an order on Kaufland.
+* Customers make their payments to Kaufland.
+* The order is imported into plentymarkets with status *[5] Cleared for shipping*.
+
 [#market-setup]
 == Setting up the market in plentymarkets
 
@@ -96,7 +144,7 @@ This setting is not relevant for new Kaufland accounts which can be added in the
 |Select whether the item export to Kaufland.de should be activated. +
 
 *_Note:_* You can *deactivate* this setting if you export your items to Kaufland using <<#catalogue-export, catalogues>>. +
-However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variation-to-catalogue-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
+However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variations-to-product-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
 
 | *Export only items with flags*
 a| * *All items* = All items are exported.
@@ -130,7 +178,7 @@ a| * *Yes* (default setting) = Offers are updated once per hour and once per day
 * *No* = The offer update is deactivated. +
 
 *_Note:_* You can *deactivate* this setting if you export your items to Kaufland using <<#catalogue-export, catalogues>>. +
-However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variation-to-catalogue-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
+However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variations-to-product-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
 
 | *Generate cache file (Inventory)*
 a| Select *Yes* or *No*. +
@@ -182,46 +230,6 @@ The plentymarkets availability IDs 1-10 correspond to the item availabilities de
 
 | *Send offer file to Kaufland.de*
 |Send the offer file to Kaufland.de.
-|===
-
-[#data-exchange]
-=== Frequency of data exchange
-
-After setting up {market} in plentymarkets, the automatic processes described in <<#data-exchange-market>> are available:
-
-[[data-exchange-market]]
-.Frequency of data exchange
-[cols="1,3a"]
-|===
-|Data |Interval
-
-| Price synchronisation
-| Hourly
-
-| Stock synchronisation
-| Hourly
-
-The following fields are exported during stock synchronisation:
-
-*Stock* +
-*Processing time* +
-*Condition* +
-*Additional description of condition* +
-*Kaufland shipping group ID* +
-*Kaufland warehouse ID*
-
-| Item export
-| once a day +
-*_Note:_* Only items which have been changed within the last 26 hours are exported.
-
-| Order import
-| every 15 minutes
-
-| Additional data
-| * export of surcharges for attribute values (item variations)
-* transfer of the description text saved in the *Texts* tab
-* transfer of the technical data selected in table 1
-* image export selected in the item's *Images* tab
 |===
 
 [#225]
@@ -319,7 +327,7 @@ include::partial$variation-availability.adoc[]
 
 // Web API required!
 
-[#link-variation-to-catalogue-category]
+[##link-variations-to-product-category]
 === Linking variations to a Kaufland product category
 
 *_Note:_* You only have to link your variations to Kaufland product categories if you use the <<#catalogue-export, catalogue export>> to transfer items to Kaufland.
