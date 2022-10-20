@@ -1,5 +1,5 @@
 = Emails
-:keywords: emails, send emails, info service, email template, template variable, template function, automatic email
+:keywords: info service, email template, template variables template functions, automatic email
 :description: Learn how to set up email templates and automatically send emails to your contacts.
 :id: NIUDPCH
 :author: team-crm
@@ -23,51 +23,53 @@ video::212556599[vimeo, width=640, height=360]
 [#50]
 == Assigning rights for back end users
 
-:rights-purpose: work with certain settings in the email area
+:rights-purpose: to work with certain settings in the email area
 :right-one: pass:quotes[*CRM > Email > Edit automatic email*]
 :right-two: pass:quotes[*CRM > Email > Edit HTML design*]
-:right-three: pass:quotes[*CRM > E-Mail > Edit info service*]
-:right-four: pass:quotes[*CRM > E-Mail > Edit newsletter*]
-:right-five: pass:quotes[*CRM > E-Mail > Edit signature*]
-:right-six: pass:quotes[*CRM > E-Mail > Edit template*]
-:right-seven: pass:quotes[*CRM > E-Mail > Edit access data*]
+:right-three: pass:quotes[*CRM > Email > Edit info service*]
+:right-four: pass:quotes[*CRM > Email > Edit newsletter*]
+:right-five: pass:quotes[*CRM > Email > Edit signature*]
+:right-six: pass:quotes[*CRM > Email > Edit template*]
+:right-seven: pass:quotes[*CRM > Email > Edit access data*]
 
 include::_includes:partial$rights.adoc[]
-
 
 [#100]
 == Saving the email server's login details
 
-In the *Setup »Client » [Select client] » Email » Login details* menu, you save the login details of a mailbox so that plentymarkets emails such as order or shipping confirmations can be sent from this email address.
+In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, you save the login details of a mailbox so that plentymarkets emails such as order or shipping confirmations can be sent from this email address.
 
-[.instruction]
-Saving the email server's login details:
-
-. Go to *Setup » Client » [Select client] » Email » Login details*.
-. Carry out the desired settings. Note <<#table-email-server-login-details>>.
-. *Save* (icon:save[role="green"]) the settings.
-
+[.collapseBox]
+.Settings in the *Email accounts* assistant in the *Login details* step
+--
 [[table-email-server-login-details]]
-.Saving the email server's login details
+.Saving email server login details in the *Email accounts* assistant
 [cols="1,3"]
 |====
 |Setting |Explanation
 
-| *Test mode*
-| Select *Active* or *Inactive*. +
-*Active* = The test mode is activated. All emails are only sent to the saved email address. This allows you to test the settings before switching to the live mode. +
-*Inactive* = The live mode is activated. +
-*_Important:_* The test mode is only applied to this online shop. The settings for additional clients (stores) are carried out in the client's menu.
-
-| *Name of sender*
-|Enter your name or the name of the online shop. The name is displayed to the recipient. Avoid using special characters in order to allow for correct display.
-
-| *Email address*
-|Enter the email address as it is listed in the email programme.
+2+| Enter the server details of your email provider.
 
 | *Outgoing mail server/SMTP server*
 |Enter the outgoing mail server as specified by the provider (usually smtp.domain.co.uk or mail.domain.co.uk). +
 *_mailbox.org:_* For mailbox.org mailboxes, enter the outgoing mail server *smtp.mailbox.org* and select the encryption method *SSL*.
+
+| *Port (standard port: 25)*
+|Enter the value *25*. This value is correct for nearly all providers. Otherwise, ask your provider about the correct port. +
+*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+
+| *Encryption method*
+| Select *SSL*, *TLS* or *No encryption*.  +
+*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+
+2+| Enter the login details of your email account 
+
+| *Name of sender*
+|Enter your own name or the name of your plentyShop. The name is displayed to the recipient. +
+*_Note:_* Avoid using special characters in order to allow for correct display.
+
+| *Email address*
+|Enter the email address as it is listed in the email programme.
 
 | *User name*
 |Enter the user name that matches the email address. +
@@ -76,14 +78,22 @@ Saving the email server's login details:
 | *Password*
 |Enter the password that matches the user name and email address.
 
-| *Port (standard port: 25)*
-|Enter the value *25*. This value is correct for nearly all providers. Otherwise, ask your provider about the correct port. +
-*_mailbox.org:_* For mailbox.org mailboxes, enter the port *465* and select the setting *SSL* as *encryption method*.
+2+|Would you like to test the email despatch now?
 
-| *Encryption*
-| Select *SSL*, *TLS* or *No encryption*. For further information, refer to the xref:crm:sending-emails.adoc#200[Selecting the encryption for email communication] chapter. +
-*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+|material:outgoing_mail[]
+|Click on material:outgoing_mail[] to send a test email to the email address entered above.
+
+2+|Would you like to activate the live mode?
+
+|material:check_box_outline_blank[]
+|If you do not place a check mark for *Activate live mode* (material:check_box_outline_blank[]), the test mode is activated. + All emails are only sent to the saved email address. This allows you to test the settings before switching to the live mode. +
+*_Important:_* The test mode is only applied to this online shop. The settings for additional clients (shops) are carried out in the client’s menu.
+
+|material:check_box[role=skyBlue]
+|If you place a check mark for *Activate live mode* (material:check_box[role=skyBlue]), the live mode is activated.
+
 |====
+--
 
 [TIP]
 .Entering newsletter login details
@@ -99,7 +109,7 @@ The encryption methods *SSL*, *TLS* and the setting *no encryption* are availabl
 [#300]
 === Security via SSL encryption
 
-Set up SSL encryption for protected data transfer between your email programs and your mailbox. <<#table-ssl-encryption>> explains the settings for SSL encryption in the *Setup » Client » [Select client] » Email » Login details* menu.
+Set up SSL encryption for protected data transfer between your email programs and your mailbox. <<#table-ssl-encryption>> explains the settings for SSL encryption in the *Email accounts* assistant in the *Login details* step.
 
 [[table-ssl-encryption]]
 .Settings for SSL encryption
@@ -126,7 +136,7 @@ Set up SSL encryption for protected data transfer between your email programs an
 [#400]
 === Security via STARTTLS
 
-plentymarkets also provides STARTTLS in order to ensure compatibility with older email programs. <<#table-starttls-encryption>> explains the settings for STARTTLS encryption in the *Setup » Client » [Select client] » Email » Login details* menu.
+plentymarkets also provides STARTTLS in order to ensure compatibility with older email programs. <<#table-starttls-encryption>> explains the settings for STARTTLS encryption in the *Email accounts* assistant in the *Login details* step.
 
 [[table-starttls-encryption]]
 .Settings for STARTTLS encryption
@@ -159,7 +169,7 @@ plentymarkets also provides STARTTLS in order to ensure compatibility with older
 Unencrypted communication can be read by third parties. Unencrypted transmission does not meet current security standards.
 ====
 
-<<#table-unencrypted-connection>> explains the settings for unencrypted communication in the *Setup » Client » [Select client] » Email » Login details* menu.
+<<#table-unencrypted-connection>> explains the settings for unencrypted communication in the *Email accounts* assistant in the *Login details* step.
 
 [[table-unencrypted-connection]]
 .Settings for unencrypted connections
@@ -187,7 +197,14 @@ Unencrypted communication can be read by third parties. Unencrypted transmission
 [#600]
 == Saving the email signature
 
-Go to *Setup» Client » [Select client] » Email » Signature* to save the signature. The signature is then automatically inserted into an email template.
+Go to the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu to save the signature in HTML format or plain text in the *Signature* step. The signature is then automatically added to your email templates when you inserted the corresponding variable in the template.
+
+[IMPORTANT]
+.Note the priority of the signature
+====
+The signature that was saved for a user in his or her user account in the *Setup » Settings » User » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
+*_This means:_* If you insert, for example, the variable `Signature in HTML format` in the template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Email accounts* assistant in the *Signature* step is used.
+====
 
 [IMPORTANT]
 .Pay attention to the legal requirements
@@ -195,61 +212,41 @@ Go to *Setup» Client » [Select client] » Email » Signature* to save the sign
 Note the legal requirements that are in effect for your online shop as to the content of an email signature, e.g. specifying the VAT number. Email signatures are required to include the same information as company business letters. Non-compliance can result in a fine or in a costly warning being issued by a competitor. If in doubt, ask a specialised solicitor.
 ====
 
-[.instruction]
-Saving the email signature:
-
-. Go to *Setup » Client » [Select client] » Email » Signature*.
-. Enter the text for your signature. Pay attention to the explanations given in the green box.
-. *Save* (icon:save[role="green"]) the settings.
-
-[TIP]
-.Formatting the signature by means of the HTML editor
-====
-Select whether you save the text of your signature as *plain text signature* or *HTML signature*. If you want to format the text, it is recommended to enter the text in the *HTML signature* area. An integrated HTML editor is provided to assist you with editing and formatting.
-
-Go to *Setup » Settings » Editors* and determine which editors should be available for certain areas in your plentymarkets system. Choose between *Editor*, *Syntax editor* and *Text field*.
-====
-
 [#700]
 == Setting up the email information service
 
-In the *Setup » Client » [Select client] » Email » Info service* menu, you have the possibility of sending a "blind copy" (BCC) of all emails sent by your plentymarkets system to an email address of your choice. This can be particularly helpful in the early stages of your online shop, as it allows you to maintain an overview of all sent emails and recognise where processes can still be improved. You can, for example, also set that you automatically receive an informational email for each order.
+In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, you set to send a blind copy of all emails sent by your plentymarkets system to an email address of your choice. This can be particularly helpful in the early stages of your online shop, as it allows you to maintain an overview of all sent emails and recognise where processes can still be improved. You can also set here that you automatically receive an info email when a new order has been placed.
 
-[.instruction]
-Setting up the email information service:
-
-. Go to *Setup » Client » [Select client] » Email » Info service*.
-. Carry out the desired settings. Note <<#table-email-info-service>>.
-. *Save* (icon:save[role="green"]) the settings.
-
-[[table-email-info-service]]
-.Setting up the email information service
+[.collapseBox]
+.Settings in the *Email accounts* assistant in the *Info service* step
+--
+[[table-info-service]]
+.Saving email server login details in the *Email accounts* assistant
 [cols="1,3"]
 |====
 |Setting |Explanation
 
-| *All outgoing emails are sent as blind copies (BCC) to the email address entered in the next line*
-|Select whether all outgoing emails are sent as BCC to one or multiple email addresses. The email addresses are entered in the next line. +
-*YES* = The option is activated. +
-*NO* = The option is deactivated (default setting).
+2+| Would you like to receive a blind copy of all emails sent by your plentymarkets system?
 
-| *Email address for blind copy*
-|Enter the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+|*Receive emails as blind copy* (material:toggle_off[role=darkGrey])
+|If you do not want to receive a blind copy, do _not_ activate the button (material:toggle_off[role=darkGrey]).
 
-| *Deactivate blind copies (BCC) for the newsletter*
-|Select whether blind copies (BCC) should be sent for newsletters. +
-Activate option = No blind copies are sent for newsletters. +
-Deactivate option = Blind copies are sent for newsletters (default setting).
+|*Receive emails as blind copy* (material:toggle_on[role=skyBlue])
+|If you want to receive a blind copy, activate the button (material:toggle_on[role=skyBlue]). Enter in the field that appears below the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
 
-| *Send notification to email address when a new order was received (next line)*
-|Select whether an email should be sent when an order is received. The email addresses are entered in the next line. +
-*YES* = An email is sent when an order is received. +
-*NO* = No email is sent (default setting). +
- *_Important:_* This function is not available for new orders on eBay. It is recommended instead to set up an xref:automation:event-procedures.adoc#[event procedure].
+|*Receive newsletter as blind copy*
+|If you are using the xref:crm:sending-newsletters.adoc#[newsletter] integrated in plentymarkets, you can set here whether you want to receive a blind copy when a newsletter is sent.
 
-| *Email address*
-|Enter the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+2+| Would you like to receive an email when a new order is placed?
+
+|*Receive email in case of a new order* (material:toggle_off[role=darkGrey])
+|If you do not want to receive a blind copy when a new order is placed, do _not_ activate the button (material:toggle_off[role=darkGrey]).
+
+|*Receive email in case of a new order* (material:toggle_on[role=skyBlue])
+|If you want to receive a blind copy when a new order is placed, activate the button (material:toggle_on[role=skyBlue]). Enter in the field that appears below the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+
 |====
+--
 
 [#800]
 == Using the HTML design
@@ -263,7 +260,7 @@ If you wish to create your email templates without a centrally saved HTML design
 [#900]
 === Uploading the company logo to the webspace
 
-You can adapt your email templates to the design of your online shop, e.g. by inserting your company logo in the HTML design. First, you have to upload the logo to the webspace. After you created the email template, you insert the <<#1750, logo in the HTML design>> and xref:crm:sending-emails.adoc#1100[link] the design with this email template.
+You can adapt your email templates to the design of your online shop, e.g. by inserting your company logo in the HTML design. First, you have to upload the logo to the webspace. After you created the email template, you insert the <<#1750, logo in the HTML design>> and <<#1100, link>> the design with this email template.
 
 [.instruction]
 Uploading the company logo to the webspace:
@@ -330,7 +327,7 @@ Creating an email template:
 → The *New email template* window opens.
 . Enter the name for the template.
 . Select the owner or the option *ALL* from the drop-down list *Owner*.
-. *Save* the settings. +
+. Click on *Save*. +
 → The email template is created and saved in one of the 3 folders, depending on the selected setting in the *Owner* drop-down list.
 . Carry out the remaining settings. Note <<#table-email-template>>.
 . *Save* (icon:save[role="green"]) the settings.
@@ -383,7 +380,7 @@ Currently available attachments: Adjustment form, credit note, delivery note, du
 All email templates can be sent with up to 2 attachments in a standardised way: Use email templates to send PDF documents relating to fulfilment (e.g. invoices) or other files (e.g. brochures or instructions). For example, it would be useful to attach PDF documents of your cancellation rights and terms and conditions to the email template *Confirmation of online store order*.
 
 | *Reply to*
-|Enter an email address. If someone replies to the email template, their message is sent to this address. If no email address was entered, replies to the template are sent to the xref:crm:sending-emails.adoc#100[email address that is saved] under *Setup » Client » [Select client] » Email » Login details*. For example, it is useful to enter the accounting department's email address for the *PDF invoice* email template. Questions about the invoice would then directly be sent to your accounting department and wouldn't have to be forwarded to them in an extra step.
+|Enter an email address. If someone replies to the email template, their message is sent to this address. If no email address was entered, replies to the template are sent to the xref:crm:sending-emails.adoc#100[email address that is saved] in the *Email accounts* assistant in the *Login details* step. For example, it is useful to enter the accounting department's email address for the *PDF invoice* email template. Questions about the invoice would then directly be sent to your accounting department and wouldn't have to be forwarded to them in an extra step.
 
 | *Use design*
 |Activate if the content of the email should be sent with the design that was saved under *Setup » Client » [Select client] » Email » HTML design*. If the option is not activated, only the content of the email template is used.
@@ -471,7 +468,7 @@ Configuring the display of variations:
 . Open the template.
 . Click on the *Email message* tab. +
 → The *Content* tab appears.
-. Insert the template variable `$ItemListHTML `in the tab Text in *HTML format* or the template variable `$ItemListPlain` in the tab *Plain text* in the email's *Content* tab. Position the template variable where you would like the variations to be displayed.
+. Insert the template variable `$ItemListHTML` in the tab *Text in HTML format* or the template variable `$ItemListPlain` in the tab *Plain text* in the email's *Content* tab. Position the template variable where you would like the variations to be displayed.
 . Copy the template variable from the overview that you need for the variations and add the template variable to the tab *Item list*. +
 → To help with the formatting, for example, you can insert tabs that you copied from a text program between the template variables (see <<#image-crm-available-template-variables-item-list-part1>> and <<#image-crm-available-template-variables-item-list-part2>>).
 . *Save* (icon:save[role="green"]) the settings.
@@ -502,7 +499,7 @@ include::example$Email-Templates-MethodOfPayment.html[]
 
 ----
 
-// For further information, refer to the xref:online-store:cms-syntax.adoc#basics-if[CMS syntax] page of the manual.
+ 
 
 [#1600]
 === Checking the email template using the preview function
@@ -587,8 +584,7 @@ In order to send emails, xref:business-decisions:user-accounts-access.adoc#10[us
 [.collapseBox]
 .Email log entries in case of an error
 --
-
-The *Email* process in the *Data » API log (deprecated)* menu contains error messages that relate to emails, e.g. when emails cannot be sent or when email accounts or addresses are not configured correctly. The process is added to the drop-down list when such an error occurs for the first time. The following information is displayed in an error message, e.g. if an email could not be sent: customer ID, order ID and the provider's error message. This information is also displayed in the log entry.
+The *Email* process in the *Data » API log (deprecated)* menu contains error messages that relate to emails, e.g. when emails cannot be sent or when email accounts or addresses are not configured correctly. The process is added to the drop-down list when such an error occurs for the first time. he following information is displayed in an error message, e.g. if an email could not be sent: customer ID, order ID and the provider’s error message. This information is also displayed in the log entry.
 
 *How to filter API log entries*
 
@@ -630,22 +626,22 @@ Filtering log entries by date:
 [#1900]
 === Sending ticket messages and comments as emails
 
-An xref:crm:using-the-ticket-system.adoc#2100[email account] has to be saved in the *Setup » CRM » Ticket system » Email accounts* menu in order for messages and comments to be sent as emails. You also have to set up an email template that displays the last ticket message or comment. This email template has to be linked to an xref:crm:using-the-ticket-system.adoc#2900[event procedure] in order for messages and comments to be sent via email. For further information, refer to the xref:crm:using-the-ticket-system.adoc#2100[Ticket system] page of the manual.
+An xref:crm:using-the-ticket-system.adoc#2100[email account] has to be saved in the *Setup » CRM » Ticket system » Email accounts* menu in order for messages and comments to be sent as emails. You also have to set up an email template that displays the last ticket message or comment. This email template has to be linked to an xref:crm:using-the-ticket-system.adoc#2900[event procedure] in order for messages and comments to be sent via email. For further information, refer to the xref:crm:using-the-ticket-system.adoc#2100[Ticket system] page.
 
 [#2000]
 === Sending coupons via email
 
-You can send coupons and coupon codes via email. Simply attach them to emails as PDF files. For further information, refer to the chapters xref:orders:coupons.adoc#send-email-coupon-codes[Inserting coupon codes directly into emails] and xref:orders:coupons.adoc#set-up-coupon-template[Configuring coupon templates] on the xref:orders:coupons.adoc#[Coupons] page of the manual.
+You can send coupons and coupon codes via email. Simply attach them to emails as PDF files. For further information, refer to the chapters xref:orders:coupons.adoc#coupon-codes-email[Inserting coupon codes directly into emails] and xref:orders:coupons.adoc#configure-coupon-template[Configuring coupon templates] on the xref:orders:coupons.adoc#[Coupons] page of the manual.
 
 [#2300]
 == Setting up the automatic email despatch
 
-The *Setup» Client » [Select client] » Email » Automatic* menu contains various events that can be linked with an email template. Select the email template that you have previously xref:crm:sending-emails.adoc#1200[created] in the *Setup » Client » [Select client] » Email » Templates* menu from the drop-down list. This ensures that the email template is sent to your contact once the event occurs.
+The *Automatic despatch* step of the *Email accounts* assistant contains various events that can be linked with an email template. You can find the assistant in the *Setup » Assistants » Basic setup* menu. Select the email template that you have previously xref:crm:sending-emails.adoc#1200[created] in the from the drop-down list. This ensures that the email template is sent to your contact once the event occurs.
 
 [IMPORTANT]
 .Removing the link before deleting the email template
 ====
-Deleting an email template that is linked with an event in the *Automatic email* area may lead to undesired effects. Therefore, first go to *Setup » Client » [Select client] » Email » Automatic* and remove the link by selecting the option *Do not send* from the drop-down list in the line of the event. Afterwards, you delete the email template in the *Setup » Client » [Select client] » Email » Templates* menu.
+Deleting an email template that is linked with an event in the *Automatic despatch* step of the *Email accounts* assistant may lead to undesired effects. Therefore, first go to *Setup » Assistants » Basic setup* and remove the link by selecting the option *Do not send* from the drop-down list in the line of the event. Afterwards, delete the email template in the *Setup » Client » [Select client] » Email » Templates* or *CRM » EmailBuilder* menu.
 ====
 
 Learn in the following video tutorial how you link your email templates with fixed events and set up event procedures for the automatic email despatch:
@@ -657,8 +653,9 @@ video::214835758[vimeo, width=640, height=360]
 [.instruction]
 Setting up the automatic email despatch:
 
-. Go to *Setup » Client » [Select client] » Email » Automatic*.
-. Select an email template from the drop-down list in the line of the event. Note <<#table-events-automatic-email-despatch>>.
+. Go to *Setup » Assistants » Basic setup*.
+. Open the *Email accounts* assistant.
+. In the *Automatic despatch* step, select an email template from the drop-down list in the line of the event. Note <<#table-events-automatic-email-despatch>>.
 . *Save* (icon:save[role="green"]) the settings.
 
 <<#table-events-automatic-email-despatch>> lists explanations of some of the events.
@@ -671,7 +668,7 @@ Setting up the automatic email despatch:
 
 | *New order from online store*
 |The contacts receive an email including the order confirmation after the purchase has been completed in the online shop. +
-*_Note_:* If you want that your customer can access the order processing in your online shop with this email to see the order status, you have to insert the template function `{%Link_Checkout()%}` in the email template that you select for this automatic event.
+*_Note:_* If you want that your customer can access the order processing in your online shop with this email to see the order status, you have to insert the template function `{%Link_Checkout()%}` in the email template that you select for this automatic event.
 
 | *Send customer email to change password*
 |The contacts receive an email with a link to the new password. The link has to be actively confirmed. The template function `{% Link_ChangePassword() %}` has to be included in the email template.
@@ -698,7 +695,7 @@ The only requirement is that potential customers were registered and logged into
 [discrete]
 === Automatic email despatch taking a new order on eBay as an example
 
-An order is automatically created in plentymarkets after a contact has purchased an item on eBay. If you have xref:crm:sending-emails.adoc#1200[created] the email template "Order confirmation eBay" for example and selected this template from the drop-down list for the event *New order from eBay* in the *Setup » Client » [Select client] » Email » Automatic* menu, an email is automatically sent to the contact.
+An order is automatically created in plentymarkets after a contact has purchased an item on eBay. If you have xref:crm:sending-emails.adoc#1200[created] the email template "Order confirmation eBay" for example and selected this template from the drop-down list for the event *New order from eBay* in the *Automatic despatch* step of the *Email accounts* assistant, an email is automatically sent to the contact. You can find the assistant in the *Setup » Assistants » Basic setup* menu.
 
 Along with the automatic email despatch, a message can also be sent to the contact via the eBay messaging system. Go to *Setup » Markets » eBay » Settings*. Click on the *Account settings* tab and save the text in the sub-menu *Message after purchase*. For further information, refer to the xref:markets:ebay-setup.adoc#1500[Sending messages after purchase] chapter on the xref:markets:ebay-setup.adoc#[Setting up eBay] page of the manual.
 
@@ -707,7 +704,7 @@ Along with the automatic email despatch, a message can also be sent to the conta
 
 It is also possible to set up event procedures in the *Setup » Orders » Events* menu. Define an event, activate one or more filters and decide which procedures your plentymarkets system should carry out automatically when the event occurs.
 
-For example, you can use filters to trigger a procedure once a contact has placed a certain number of orders. The procedure could send an email that includes a coupon. For further information, refer to the xref:automation:event-procedures.adoc#[event procedures] page of the manual.
+For example, you can use filters to trigger a procedure once a contact has placed a certain number of orders. The procedure could send an email that includes a coupon. For further information, refer to the xref:automation:event-procedures.adoc#[Event procedures] page.
 
 [#2500]
 == Displaying sent email templates for each contact
@@ -1227,11 +1224,11 @@ The ID is automatically assigned by the system and cannot be changed. The ID is 
 
 | `$SignatureText`
 |Signature in plain text. +
-The text is saved in the *Setup » Client » [Select client] » Email » Signature* menu.
+The signature is saved in the *Email accounts* assistant in the *Signature* step. You can find the assistant in the *Setup » Assistants » Basic setup* menu.
 
 | `$SignatureHTML`
 |Signature in HTML format. +
-The text is saved in the *Setup » Client » [Select client] » Email » Signature* menu.
+The signature is saved in the *Email accounts* assistant in the *Signature* step. You can find the assistant in the *Setup » Assistants » Basic setup* menu.
 
 | `$RebateAmount`
 |Discount amount
@@ -1555,7 +1552,7 @@ This is not a global template variable, but a variable that is set per order ite
 
 |====
 
-[#overview-cms-syntax-old-chapter]
+[#overview-cms-syntax-old]
 === Overview: CMS syntax (old)
 
 Open the following box to see a CMS syntax overview that you can still use in the "old" email templates in the *Setup » Client » [Select client] » Email » Templates* menu.

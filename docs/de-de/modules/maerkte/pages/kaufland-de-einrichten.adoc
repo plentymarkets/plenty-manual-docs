@@ -21,6 +21,61 @@ video::331004096[vimeo]
 
 Um die Schnittstelle zu Kaufland.de nutzen zu können, musst du dein Kaufland.de-Benutzerkonto als Händlerkonto registrieren. Rufe dazu auf der link:https://www.Kaufland.de/seller/new/[Kaufland.de-Website^] den Bereich *Mein Konto* auf und gib dort deine Umsatzsteuer-Identifikationsnummer ein.
 
+[#data-exchange]
+== Häufigkeit des Datenaustauschs
+
+Nachdem du {market} in plentymarkets eingerichtet hast, stehen die in <<#data-exchange-market>> beschriebenen automatisierten Abläufe bereit:
+
+[[data-exchange-market]]
+.Häufigkeit des Datenaustauschs
+[cols="1,3a"]
+|===
+|Daten |Intervall
+
+| Preisabgleich
+| stündlich
+
+| Bestandsabgleich
+| stündlich
+
+Die folgenden Felder werden beim Bestandsabgleich exportiert:
+
+*Bestand* +
+*Bearbeitungszeit in Tagen* +
+*Zustand* +
+*Zustandsbeschreibung* +
+*Kaufland Versandgruppen-ID* +
+*Kaufland Lager-ID*
+
+| Artikelexport
+| einmal täglich +
+*_Hinweis:_* Nur Artikel werden exportiert, bei denen die letzte Änderung innerhalb der letzten 26 Stunden vorgenommen wurde.
+
+| Auftragsimport
+| * immer, wenn ein neuer Auftrag auf Kaufland generiert wurde
+
+| Weitere Daten
+| * Export von Aufpreisen für Attributwerte (Variantenartikel)
+* Übertragung des Beschreibungstexts, wie im Tab *Texte* eingegeben
+* Übertragung der technischen Daten, wie in Tabelle 1 gewählt
+* Bilderexport, wie im Tab *Bilder* des Artikels eingestellt
+|===
+
+[#ablauf-bestellung]
+== Ablauf einer Bestellung bei Kaufland
+
+* Deine Artikel werden bei Kaufland gelistet. Der Name deines Unternehmens wird an deinen Artikeln angezeigt.
+* Kund:innen geben eine Bestellung auf Kaufland auf.
+* Kund:innen zahlen an Kaufland.
+* Der Auftrag wird sofort, nachdem er auf Kaufland aufgegeben wurden, in plentymarkets importiert.
+
+*_Hinweise zum Auftragsimport bei Kaufland:_*
+
+* Aufträge mit dem Kaufland-Status *OPEN* werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Hierbei handelt es sich um Aufträge, die nach der Bestellung noch von der Käufer:in storniert werden können. Die Aufträge verbleiben 15 Minuten in diesem Status, damit Kund:innen die Möglichkeit haben, den Auftrag zu stornieren.
+* Wenn der Auftrag bei Kaufland nach 15 Minuten einen anderen Status bekommt, wechselt der Auftragsstatus in plentymarkets automatisch zu Status *[5] Freigabe Versand*. Alle fehlenden Auftragsdaten werden am Auftrag ergänzt.
+
+* <<#kaufland-fbk, Aufträge, die von Kaufland abgewickelt werden (FbK = Fulfillment by Kaufland)>> werden mit der Auftragsherkunft *170.01 Kaufland FBK DE* in plentymarkets importiert.
+
 [#market-setup]
 == Marktplatz in plentymarkets einrichten
 
@@ -79,7 +134,7 @@ Für neue Kaufland-Konten, die du im *Tab: Neues Konto* hinzufügst, ist diese E
 *_Wichtig:_* Du musst jeden deiner Dienstleister mit einem Dienstleister aus der Dropdown-Liste verknüpfen.
 
 | *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung*
-| In welchen Status sollen Aufträge verschoben werden, für die keine Versandbestätigung an Kaufland.de gesendet werden konnte? Erstelle bei Bedarf einen xref:auftraege:auftraege-verwalten.adoc#1230[neuen Status].
+| In welchen Status sollen Aufträge verschoben werden, für die keine Versandbestätigung an Kaufland.de gesendet werden konnte? Erstelle bei Bedarf einen xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[neuen Status].
 
 *_Hintergrund:_* Mit der Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> informierst du {market} automatisch darüber, dass die Artikel eines Auftrags versendet wurden. Wenn die Ereignisaktion nicht ausgeführt werden kann, wird der Auftrag in den Status geschoben, den du für die Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast.
 
@@ -88,10 +143,15 @@ Für neue Kaufland-Konten, die du im *Tab: Neues Konto* hinzufügst, ist diese E
 
 //*_Hintergrund:_* Mit der Ereignisaktion <<#in-fulfillment, In-Fulfillment-Bestätigung an Kaufland.de senden>> informierst du {market} automatisch darüber, dass ein Auftrag an das Lager übergeben wurde. Wenn die Ereignisaktion nicht ausgeführt werden kann, wird der Auftrag in den Status geschoben, den du für die Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener In-Fulfillment-Bestätigung* gewählt hast.
 
-2+^| Artikeleinstellungen
+2+^| Artikeleinstellungen +
+
+*_Hinweis:_* Wenn du deine Artikel mit <<#catalogue-export, Katalogen>> an Kaufland überträgst, musst du hier keine Einstellungen vornehmen.
 
 | *Artikelexport aktivieren*
-|Wählen, ob der Artikelexport zu Kaufland.de aktiviert werden soll.
+|Wählen, ob der Artikelexport zu Kaufland.de aktiviert werden soll. +
+
+*_Hinweis:_* Du kannst diese Einstellung *deaktivieren*, wenn du deine Artikel mit <<#catalogue-export, Katalogen>> an Kaufland überträgst. +
+Stelle jedoch sicher, dass du alle Varianten, die du auf Kaufland verkaufen möchtest, <<#varianten-mit-katalog-kategorie-verknüpfen, mit einem Kaufland-Katalog verknüpft hast>>, bevor du diese Einstellung deaktivierst. Wenn die Variante nicht mit einem Kaufland-Katalog verknüpft ist, wird sie nicht zu Kaufland exportiert.
 
 | *Nur Artikel mit Markierung übertragen*
 a| * *Alle Artikel* = Alle Artikel werden übertragen.
@@ -116,11 +176,16 @@ Diese Einstellung greift für Artikeldaten und Angebotsdaten.
 | *Produktdatei zu Kaufland.de senden*
 |Produktdatei zu Kaufland.de übertragen.
 
-2+^| Angebotseinstellungen
+2+^| Angebotseinstellungen +
+
+*_Hinweis:_* Wenn du deine Artikel mit <<#catalogue-export, Katalogen>> an Kaufland überträgst, musst du hier keine Einstellungen vornehmen.
 
 | *Angebotsabgleich aktivieren*
 a| * *Ja* (Standardeinstellung) = Angebote werden stündlich und täglich bei Kaufland.de aktualisiert. Nur wenn diese Option und die Option *Schnittstelle zu Kaufland.de aktivieren* aktiviert sind, findet der tägliche vollständige Angebotsabgleich und der stündliche Abgleich für geänderte Angebote statt. +
-* *Nein* = Der Angebotsabgleich ist deaktiviert.
+* *Nein* = Der Angebotsabgleich ist deaktiviert. +
+
+*_Hinweis:_* Du kannst diese Einstellung *deaktivieren*, wenn du deine Artikel mit <<#catalogue-export, Katalogen>> an Kaufland überträgst. +
+Stelle jedoch sicher, dass du alle Varianten, die du auf Kaufland verkaufen möchtest, <<#varianten-mit-katalog-kategorie-verknüpfen, mit einem Kaufland-Katalog verknüpft hast>>, bevor du diese Einstellung deaktivierst. Wenn die Variante nicht mit einem Kaufland-Katalog verknüpft ist, wird sie nicht zu Kaufland exportiert.
 
 | *Cache-Datei generieren (Inventory)*
 a| *Ja* oder *Nein* wählen. +
@@ -174,37 +239,6 @@ Die plentymarkets Verfügbarkeits-IDs 1-10 entsprechen der im Menü *Einrichtung
 |Angebotsdatei zu Kaufland.de übertragen.
 |===
 
-[#data-exchange]
-=== Häufigkeit des Datenaustauschs
-
-Nachdem du {market} in plentymarkets eingerichtet hast, stehen die in <<#data-exchange-market>> beschriebenen automatisierten Abläufe bereit:
-
-[[data-exchange-market]]
-.Häufigkeit des Datenaustauschs
-[cols="1,3a"]
-|===
-|Daten |Intervall
-
-| Preisabgleich
-| stündlich
-
-| Bestandsabgleich
-| stündlich
-
-| Artikelexport
-| einmal täglich +
-*_Hinweis:_* Nur Artikel werden exportiert, bei denen die letzte Änderung innerhalb der letzten 26 Stunden vorgenommen wurde.
-
-| Auftragsimport
-| alle 15 Minuten
-
-| Weitere Daten
-| * Export von Aufpreisen für Attributwerte (Variantenartikel)
-* Übertragung des Beschreibungstexts, wie im Tab *Texte* eingegeben
-* Übertragung der technischen Daten, wie in Tabelle 1 gewählt
-* Bilderexport, wie im Tab *Bilder* des Artikels eingestellt
-|===
-
 [#225]
 === Modell Fiktiver Lieferer
 
@@ -235,7 +269,7 @@ Lager verknüpfst du über die Einstellung *Lager verknüpfen* im Menü *Einrich
 
 :market: Kaufland.de
 :referrer: Kaufland.de
-:referrer-option: pass:quotes[Option *Kaufland.de* mit der ID *170*]
+:referrer-option: pass:quotes[Option *Kaufland.de* mit der ID *102*]
 
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
@@ -282,6 +316,21 @@ Barcode für Kaufland.de festlegen:
 . Speichere (terra:save[]) die Einstellungen. +
 *_Tipp:_* Ist dieser Barcode schon mit deinen Varianten verknüpft? Wenn nicht, dann vergiss nicht, <<#save-barcode, den Barcode mit deinen Varianten zu verknüpfen und einen Code zu speichern>>.
 
+[#kaufland-fbk]
+=== Fulfillment by Kaufland (FbK): Kaufland lagert und versendet
+
+Kaufland bietet den Service FbK (= Fulfillment by Kaufland) an. Mit FbK übernimmt Kaufland die Lagerung und den Versand deiner Artikel. Wenn du FbK nutzen willst, kontaktiere deine Ansprechpartner:innen bei Kaufland. +
+
+Du kannst in deinem plentymarkets System zurzeit keine weiteren Einstellungen für FbK vornehmen. Kaufland-FbK-Aufträge werden lediglich in plentymarkets importiert. Artikel, die du über FbK verkaufen willst, müssen im Kaufland Seller Portal angelegt werden. FbK-Aufträge können in plentymarkets nur abgerufen, aber nicht bearbeitet werden.
+
+Ablauf einer FbK-Bestellung:
+
+* Deine Artikel werden auf Kaufland gelistet. Der Name deines Unternehmens wird an deinen Artikeln angezeigt.
+* Kund:innen geben eine Bestellung auf Kaufland auf.
+* Kund:innen zahlen an Kaufland.
+* Kaufland verschickt die Bestellung.
+* FbK-Aufträge werden mit der Auftragsherkunft *170.01 Kaufland FBK DE* in plentymarkets importiert.
+
 [#prepare-variations]
 == Varianten vorbereiten
 
@@ -299,6 +348,32 @@ Bereite nun deine Varianten vor.
 include::partial$variantenverfuegbarkeit.adoc[]
 
 // Web-API erforderlich!
+
+[#varianten-mit-katalog-kategorie-verknüpfen]
+=== Varianten mit Kaufland-Produktkategorie verknüpfen
+
+*_Hinweis:_* Du musst deine Varianten nur mit Kaufland-Produktkategorien verknüpfen, wenn du Artikel per <<#catalogue-export, Katalogexport>> an Kaufland überträgst.
+
+Wenn du mit dem Assistenten *Kaufland - Kataloge erstellen* ein Katalog-Format für Kaufland erstellt hast, wird in deinem plentymarkets System die Eigenschaft *Kaufland.de-Kategorie* erstellt. Mit dieser Eigenschaft legst du fest, in welcher Kategorie deine Varianten auf Kaufland angeboten werden.
+
+Im Assistenten *Kaufland - Kataloge erstellen* wählst du für jeden Katalog eine Kaufland-Produktkategorie. Jede dieser Produktkategorien wird als Auswahlwert zu der Eigenschaft *Kaufland.de-Kategorie* hinzugefügt.
+
+Damit deine Varianten in der gewünschten Kategorie auf Kaufland angeboten werden, müssen sie im Tab *Eigenschaften* der Variante mit der Eigenschaft *Kaufland.de-Kategorie* verknüpft werden. Für diese Eigenschaft wählst du dann die Produktkategorie, in der deine Varianten angeboten werden sollen.
+
+[.instruction]
+Variante mit Produktkategorie verknüpfen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen]*.
+. Wechsele in das *Tab: Varianten*.
+. Öffne die Variante, die du verknüpfen möchtest.
+. Wechsele in das *Tab: Eigenschaften*.
+. Wähle im Bereich *Varianteneigenschaften* aus der Dropdown-Liste *Eigenschaften* die Eigenschaft *Kaufland.de-Kategorie* und klicke auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Die Eigenschaft wird hinzugefügt.
+. Wähle für die Eigenschaft *Kaufland.de-Kategorie* aus der Dropdown-Liste *Wert* die gewünschte Kategorie. +
+→ Die Variante wird im zugehörigen Katalog exportiert. +
+*_Beispiel:_* Wählst du den Wert *T-Shirts*, wird die Variante auf Kaufland in der Kategorie *T-Shirts* angeboten.
+. Wiederhole die Schritte 5 und 6 für alle Kategorien, in denen du die Variante verkaufen möchtest.
+. Speichere (terra:save[]) die Einstellungen.
 
 [#350]
 === _Optional:_ SKU speichern
@@ -432,7 +507,11 @@ Wenn du den Katalog aktiviert hast, werden die Artikeldaten einmal täglich auto
 Für jede Produktkategorie auf Kaufland gibt es ein eigenes Katalog-Format. In jedem Format werden unterschiedliche Artikeldaten exportiert, je nachdem, welche Informationen Kaufland für eine Produktkategorie benötigt. In dem Format für *Fernseher* müssen beispielsweise andere Artikeldaten verknüpft werden als in dem Format für *Kameras*. +
 Du musst also für jede Produktkategorie von Kaufland, in der du Artikel verkaufen möchtest, einen eigenen Katalog erstellen.
 
-*_Hinweis:_* Für Kaufland können Kataloge momentan nur mit dem Assistenten *Kaufland - Kataloge erstellen* und _nicht_ über das Menü *Daten » Kataloge* erstellt werden.
+[IMPORTANT]
+.Kataloge im Assistenten erstellen
+====
+Für Kaufland können Kataloge momentan nur mit dem Assistenten *Kaufland - Kataloge erstellen* und _nicht_ über das Menü *Daten » Kataloge* erstellt werden.
+====
 
 :number-of-boxes: Info-Box
 
@@ -476,6 +555,12 @@ Wähle einen Namen, der aussagekräftig ist und dir bei der Übersicht über dei
 
 Nachdem du einen Katalog erstellt hast, ordnest du die Datenfelder des Marktplatzes den in plentymarkets gespeicherten Artikeldaten zu. In diesem Kapitel erfährst du, wie du Datenfelder zuordnest und welche Besonderheiten es bei {market} gibt.
 
+[TIP]
+.Eigene Datenfelder zuordnen
+====
+Du möchtest Artikeldaten an Kaufland übertragen, für die es im Katalog des Marktplatzes kein Datenfeld gibt? In den Kaufland-Katalogen hast du die Möglichkeit, eigene Datenfelder zu erstellen und mit den in plentymarkets gespeicherten Artikeldaten zu verknüpfen. Wie das geht, ist <<#eigene-datenfelder-zuordnen, hier>> beschrieben.
+====
+
 :own-data-fields:
 
 include::partial$catalogue-mapping.adoc[]
@@ -491,6 +576,54 @@ include::partial$recommendation-text.adoc[]
 --
 include::partial$kaufland-recommended-mappings.adoc[]
 --
+
+[#besonderheiten-kaufland-kataloge]
+==== Besonderheiten bei der Zuordnung von Datenfeldern
+
+Jeder Marktplatz strukturiert Artikeldaten anders. Deshalb treten beim Zuordnen von Datenfeldern bestimmte Sonderfälle auf. In diesem Kapitel findest du Hinweise dazu, was du beim Zuordnen von Datenfeldern für Kaufland beachten solltest.
+
+[#bestandspuffer]
+===== Bestandspuffer
+
+In den Katalogen für Kaufland kannst du einen *Bestandspuffer* verwenden. Mit einem Bestandspuffer gibst du die Menge eines Artikels an, die nicht verkauft, sondern als Puffer einbehalten werden soll. +
+Um einen Bestandspuffer für Kaufland zu verwenden, verknüpfe das Datenfeld *Bestandspuffer* in deinen Kaufland-Katalogen. Der Bestandspuffer wird dann beim Bestandsabgleich und beim Erstellen eines neuen Angebots berücksichtigt.
+
+Empfohlene Zuordnung für das Datenfeld *Bestandspuffer*:
+
+ * *Eigener Wert*: Wert eintragen, der als Bestandspuffer verwendet werden soll. Trägst du hier beispielsweise *5* ein, werden 5 Artikel vom Bestand für Kaufland abgezogen und als Puffer einbehalten.
+
+_oder_
+
+ * Eigenschaft an Variante, Typ *Text* oder *ganze Zahl*
+
+[#groesseneinheit-kaufland]
+===== Größeneinheit als eigenen Wert für Länge, Breite und Höhe angeben
+
+In vielen Kaufland-Katalogen sind die Datenfelder *Länge*, *Breite* und *Höhe* Pflichtfelder und müssen zugeordnet werden. Dafür empfehlen wir folgende Zuordnungen:
+
+* *Länge*: *Variante » Länge*, _Größeneinheit angeben_
+* *Breite*: *Variante » Breite*, _Größeneinheit angeben_
+* *Höhe*: *Variante » Höhe*, _Größeneinheit angeben_
+
+Bei diesen Datenfeldern wird nur der Wert und nicht die Größeneinheit zu Kaufland übertragen. Damit deine Varianten fehlerfrei zu Kaufland exportiert werden können, muss jedoch die Größeneinheit angegeben werden. Deshalb solltest du die Größeneinheit zusätzlich als *eigenen Wert* angeben. +
+Im Folgenden wird beispielhaft beschrieben, wie du die Größeneinheit als eigenen Wert für das Datenfeld *Länge* angibst.
+
+[.instruction]
+Größeneinheit als eigenen Wert angeben:
+
+. Öffne das Menü *Daten » Kataloge*.
+. Öffne den Kaufland-Katalog.
+. Ordne dem Kaufland-Datenfeld *Länge* den Wert *Variante » Länge* zu.
+. Klicke auf *Datenfeld hinzufügen* (material:insert_link[]). +
+→ Ein weiteres Datenfeld wird hinzugefügt.
+. Gib die Größeneinheit im Datenfeld *Eigener Wert* ein. +
+→ Die Größeneinheit kannst du zum Beispiel als *mm*, *cm*, oder *m* angeben, je nachdem, welche Größeneinheit du übertragen willst.
+. Klicke in dem Datenfeld auf *Einstellungen* (material:settings[]). +
+→ Das Fenster *Einstellungen Datenspalten* wird geöffnet. In diesem Fenster konfigurierst du das Trennzeichen.
+. Wähle *Null* als *Ausweichbedingung*.
+. Wähle *Leerzeichen* als *Trennzeichen*.
+. *Speichere* die Einstellungen.
+. Wiederhole diese Schritte für die Datenfelder *Breite* und *Höhe*.
 
 [#activate-catalogue]
 ==== Katalogexport aktivieren

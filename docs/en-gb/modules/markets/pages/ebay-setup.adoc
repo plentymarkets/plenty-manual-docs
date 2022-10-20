@@ -4,6 +4,11 @@
 :id: DWYPTTK
 :author: team-plenty-channel
 
+:ebay:
+:market: ebay
+:listings-sales-planner: 2700
+:listings-edit: 3800
+
 With more than 120 million buyers worldwide, eBay provides an opportunity to sell on a global and growing market. The eBay API interface can be fully integrated with plentymarkets. For example, you can start <<#5100, listings>> and upload <<#6000, variation offers>>, process your <<#7400, returns>> and send <<#7100, dunning letters>>. You will also learn how to <<#10100, exchange data>> between eBay and plentymarkets.
 
 [#100]
@@ -83,13 +88,7 @@ Deleting an account:
 You need a valid xref:business-decisions:ssl-certificate.adoc#1200[SSL certificate] for the eBay OAuth2 authentication.
 ====
 
-Many calls already use the new eBay APIs. Those new APIs are based on the authentication method OAuth2 instead of the Auth-n-Auth method which was used before. The new authentication method OAuth2 is needed for more and more essential processes. Therefore, you should already authenticate your eBay accounts for OAuth2 when setting up eBay in plentymarkets.
-
-[IMPORTANT]
-.OAuth2 will become mandatory
-====
-Due to an adjustment on the part of eBay, processes relating to eBay business policies will soon not work any longer without OAuth2. Therefore you have to authenticate your eBay accounts for OAuth2 if you have not already done so.
-====
+OAuth2 is a new authentication method that is needed for more and more essential eBay processes. Therefore, you should already authenticate your eBay accounts for OAuth2 when setting up eBay in plentymarkets.
 
 ==== Activating and changing accounts
 
@@ -255,7 +254,7 @@ a| Select whether <<Processing returns, eBay returns>> should be retrieved or no
 * *No* = The eBay return process is deactivated in plentymarkets. New eBay returns are not imported into plentymarkets. eBay returns must be edited in the seller’s My eBay area instead.
 
 | *Retrieve eBay purchase cancellations*
-| Select whether <<Processing purchase cancellations, eBay purchase cancellations>> are retrieved and imported into plentymarkets. Purchase cancellations are updated every 15 minutes.
+| Select whether <<#8900-1, eBay purchase cancellations>> are retrieved and imported into plentymarkets. Purchase cancellations are updated every 15 minutes.
 
 | *Update eBay return status*
 | Select whether the return status should be updated *In return order*, *In credit note* or *In return order and credit note* when the status is changed by eBay. Return statuses are updated once per hour.
@@ -264,7 +263,7 @@ a| Select whether <<Processing returns, eBay returns>> should be retrieved or no
 | Select whether an incoming payment is booked for orders of the type *credit note* when an eBay Payments order is successfully refunded.
 
 | *Order status for orders with failed refunds*
-| Select a status. If no refund could be issued, then the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#1230[new status]. +
+| Select a status. If no refund could be issued, then the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#create-status[new status]. +
 
 *_Background:_* The event procedure <<#8300, Issue eBay refund to customer>> initiates a refund for an order. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed refunds*.
 
@@ -274,7 +273,7 @@ a| Select whether <<Processing returns, eBay returns>> should be retrieved or no
 | *Use "out of stock" option*
 a| Select whether the out of stock option should be used. +
 
-* *Yes* = Listings are not ended if the items are unavailable. The offer is displayed but cannot be purchased. The number of items sold is not set to zero when the item is available again. Rather, the sales history remains as it is. In addition to this option, the <<Activating the automatic stock update, automatic stock update>> in the *Initial settings* tab must be activated. Furthermore, this option takes priority over the <<Setting up stock, End offers automatically>> option, i.e. offers are not ended but displayed and cannot be purchased. +
+* *Yes* = Listings are not ended if the items are unavailable. The offer is displayed but cannot be purchased. The number of items sold is not set to zero when the item is available again. Rather, the sales history remains as it is. In addition to this option, the <<Activating the automatic stock update, automatic stock update>> in the *Initial settings* tab must be activated. Furthermore, this option takes priority over the <<#2500, End offers automatically>> option, i.e. offers are not ended but displayed and cannot be purchased. +
 * *No* = Listings are ended automatically if an item is not in stock.
 
 | *Price synchronisation*
@@ -371,7 +370,7 @@ Linking return statuses:
 . Go to *Setup » Markets » eBay » Settings » Tab: Return settings*.
 . Click on the *Return status links* tab.
 . Select a plentymarkets return status for each *eBay return status* from the drop-down lists. +
-→ You can select an already existing status or you can xref:orders:managing-orders.adoc#1220[create] a new status that best suits your workflow.
+→ You can select an already existing status or you can xref:orders:managing-orders.adoc#create-status[create] a new status that best suits your workflow.
 . Save (terra:save[]) the settings.
 
 For further information about editing eBay returns and using event procedures for partial automation, refer to the <<Processing returns, Processing returns>> chapter.
@@ -582,8 +581,10 @@ Automatic email to email address::
 [discrete]
 ===== Setting up the automatic email despatch:
 
-. Go to *Setup » Client » [Select client] » Email » Automatic*.
-. From the drop-down list *New order from eBay*, select the email template. Note <<#table-events-automatic-email-despatch>>.
+. Go to *Setup » Assistants » Basic setup*.
+. Open the *Email accounts* assistant.
+. Go to the *Automatic despatch* step.
+. From the drop-down list *New order from eBay*, select the email template.
 . Save (terra:save[]) the setting.
 --
 
@@ -635,7 +636,7 @@ include::_includes:partial$event-procedure.adoc[]
 
 With link:https://www.ebay.co.uk/help/selling/selling/selling-vehicles-parts-accessories?id=4647[parts compatibility listings^], you link the items that you want to sell to the correct vehicles. That way you increase your sales prospects since items of parts compatibility listings have a higher ranking in the search results. Create, edit and delete parts compatibility listings in the *Setup » Markets » eBay » Parts compatibility listing* menu.
 
-TIP: You can also import and update parts compatibility listings with the import tool in the *Data » Import* menu. Use the xref:data/importing-data:elasticsync-parts-compatibility-listing.adoc#[parts compatibility listing] import type. For further information, refer to the xref:data:best-practices-elasticsync-parts-compatibility-listing.adoc#[Creating parts compatibility listings] best practice.
+TIP: You can also import and update parts compatibility listings with the import tool in the *Data » Import* menu. Use the xref:data:elasticsync-parts-compatibility-listing.adoc#[parts compatibility listing] import type. For further information, refer to the xref:data:best-practices-elasticsync-parts-compatibility-listing.adoc#[Creating parts compatibility listings] best practice.
 
 [.instruction]
 Creating a new parts compatibility listing:
@@ -1580,7 +1581,7 @@ include::partial$manage-listings.adoc[tag=listing-processes]
 [#6000]
 == Uploading offers with variations
 
-You can upload items with multiple variations as a single eBay offer. In order to create variations, you have to create attributes and link them with your items. Variations are xref:item:structure.adoc#400[combinations of different attributes]. Surcharges are applied to every combination, for example size, colour and material. Variations linked with a listing are also transferred to eBay when starting, restarting or updating the listing. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/creating-listings-variations?id=4150[Creating listings with variations^] page.
+You can upload items with multiple variations as a single eBay offer. In order to create variations, you have to create attributes and link them with your items. Variations are xref:item:attributes.adoc#[combinations of different attributes]. Surcharges are applied to every combination, for example size, colour and material. Variations linked with a listing are also transferred to eBay when starting, restarting or updating the listing. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/creating-listings-variations?id=4150[Creating listings with variations^] page.
 
 [IMPORTANT]
 .Variations for eBay listings have to match
@@ -1716,7 +1717,7 @@ If the *Wildcard character in layout template (eBay)* function is activated, the
 
 Use cross-selling to offer further products related to an item. These products are displayed at your listing on eBay. +
 
-Use the template function *GetCrossSellingData* to add xref:item:managing-items.adoc#970[cross-selling items] that are linked to an item to a <<Managing layout templates, layout template>> and <<Linking a layout template, link>> this layout template to the desired listings. Add cross-selling items to layout templates in the *Setup » Listings » Layout* menu.
+Use the template function *GetCrossSellingData* to add xref:item:cross-selling.adoc#[cross-selling items] that are linked to an item to a <<Managing layout templates, layout template>> and <<Linking a layout template, link>> this layout template to the desired listings. Add cross-selling items to layout templates in the *Setup » Listings » Layout* menu.
 The template function *GetCrossSellingData* displays the following data which can be displayed at a cross-selling item:
 
  * *Item ID* of the item in plentymarkets
@@ -2111,7 +2112,7 @@ Set up xref:automation:event-procedures.adoc#[event procedures] to automatically
 [IMPORTANT]
 .Editing returns in the order type "return" or "credit note"
 ====
-Before you set up event procedures for refunds, decide whether refunds should be edited in the order type *Return* or whether credit notes should be created. If you create credit notes, then select the filter *Order type > Credit notes* for event procedures with refunds. Because edited eBay statuses are imported along with both the credit note and the return, the event procedure would otherwise be triggered twice, i.e. for the return and for the credit note. 
+Before you set up event procedures for refunds, decide whether refunds should be edited in the order type *Return* or whether credit notes should be created. If you create credit notes, then select the filter *Order type > Credit notes* for event procedures with refunds. Because edited eBay statuses are imported along with both the credit note and the return, the event procedure would otherwise be triggered twice, i.e. for the return and for the credit note.
 ====
 
 [#7800]
@@ -2123,7 +2124,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-accepting-returns]]
 .Event procedure for automatically accepting returns with eBay label
@@ -2163,7 +2164,7 @@ Returns with your own label are only available for your customers on ebay.de, eb
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-return-own-label]]
 .Event procedure for automatically accepting returns with your own label
@@ -2203,7 +2204,7 @@ Only reject those returns that violate the terms specified in the *Setup » Mark
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-rejecting-returns]]
 .Event procedure for automatically rejecting returns
@@ -2237,7 +2238,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to offer your 
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-partial-refund]]
 .Event procedure for automatically offering partial refunds
@@ -2277,7 +2278,7 @@ You can upload a return label with an event procedure at eBay as described below
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-own-label]]
 .Event procedure for uploading your own label
@@ -2311,7 +2312,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to inform eBay
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-mark-return]]
 .Event procedure for automatically marking returns as received
@@ -2364,7 +2365,7 @@ The event procedure can be triggered in three different cases if you use eBay Ma
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-automatic-refund]]
 .Event procedure for automatically initiating refunds via PayPal
@@ -2403,7 +2404,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to inform eBay
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
 
 [[event-procedure-sent-refunds]]
 .Event procedure for automatically marking refunds as sent (non-PayPal)
@@ -2738,7 +2739,7 @@ Changing the order status to accept purchase cancellation:
 . Select an order.
 . Change the order’s status to the status for *eBay purchase cancellation accepted*.
 . Save (terra:save[]) the settings. +
-→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9800, Communicating a purchase cancellation acceptance>>.
+→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9300, Communicating a purchase cancellation acceptance>>.
 
 Use the group function to change multiple orders at once. If you want to accept the request for unpaid orders, then search for all unpaid orders with the appropriate status and change the orders’ status with the xref:orders:managing-orders.adoc#1700[group function].
 
@@ -2780,7 +2781,7 @@ Changing the order status to reject requests:
 . Select an order.
 . Change the order’s status to the status for *eBay purchase cancellation rejected*.
 . Save (terra:save[]) the settings. +
-→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9900, Communicating a purchase cancellation rejection>>.
+→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9400, Communicating a purchase cancellation rejection>>.
 --
 
 [.collapseBox]
@@ -3161,7 +3162,7 @@ Importing eBay listings:
 | Select a specific platform or select *ALL*. If you select a platform, only those market listings are imported that were listed on this platform. All listings from other platforms are not imported in this case. For example, this is useful if you have your German eBay listings translated by a service provider such as Webinterpret.
 
 | *Import into directory*
-| Select which <<Creating directories, directory>> the listings should be imported into. +
+| Select which <<#3200, directory>> the listings should be imported into. +
 If you did not create a special directory for this, then the standard directory is used.
 
 | *Warehouse for stock*
@@ -3170,7 +3171,7 @@ If you did not create a special directory for this, then the standard directory 
 | *Stock dependence*
 | Choose between *unlimited (with synchronisation)*, *unlimited (without synchronisation)*, *limited (with reservation)* and *limited (without reservation)*. +
 *_Important:_* If you select *Limited* (both) or *Unlimited (with synchronisation)*, then you should deactivate the following options until the listings are checked: +
-<<Activating the automatic stock update, Activate automatic stock update>> and <<Setting up stock, End offers automatically>>.
+<<Activating the automatic stock update, Activate automatic stock update>> and <<#2500, End offers automatically>>.
 
 2+^| Import settings
 
