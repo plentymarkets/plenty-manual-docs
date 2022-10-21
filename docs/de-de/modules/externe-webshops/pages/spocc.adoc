@@ -244,16 +244,14 @@ Wähle den Barcode-Typ aus der Dropdown-Liste.
 *_Voraussetzung_*: Hast du schon xref:artikel:barcodes.adoc#100[Barcode-Typen in plentymarkets konfiguriert]?
 Diese Dropdown-Liste enthält nur die Barcode-Typen, die schon in plentymarkets vorhanden sind.
 
-2+^| Attribute
-
-| *Farbattribut*
+| Attribute: *Farbattribut*
 | Welches plentymarkets Attribut passt zu deinem SPoCC-Farbattribut?
 Wähle das Attribut aus der Dropdown-Liste.
 
 *_Voraussetzung_*: Hast du schon xref:artikel:attribute.adoc#[Attribute in plentymarkets konfiguriert]?
 Diese Dropdown-Liste enthält nur die Attribute, die schon in plentymarkets vorhanden sind.
 
-| *Größe*
+| Attribute: *Größe*
 | Welches plentymarkets Attribut passt zu deiner SPoCC-Größe?
 Wähle das Attribut aus der Dropdown-Liste.
 
@@ -320,20 +318,20 @@ Diese Dropdown-Liste enthält nur die Eigenschaften, die schon in plentymarkets 
 |===
 |Einstellung |Erläuterung
 
-| *SPoCC-Attribut*
-|Dies sind deine Attribute bei SPoCC.
-Wähle das passende Attribut aus der Dropdown-Liste.
-
 | *plentymarkets Eigenschaft*
-|Dies sind die Kategorien, die du in plentymarkets eingerichtet hast.
+| Diese Dropdown-Liste enthält die Kategorien, die du in plentymarkets eingerichtet hast.
 Wähle die passende Eigenschaft aus der Dropdown-Liste.
 
 *_Voraussetzung_*: Hast du schon xref:artikel:eigenschaften.adoc#[Eigenschaften in plentymarkets konfiguriert]?
 Diese Dropdown-Liste enthält nur die Eigenschaften, die schon in plentymarkets vorhanden sind.
 
+| *SPoCC-Attribut*
+| Diese Dropdown-Liste enthält deine Attribute bei SPoCC.
+Wähle das passende Attribut aus der Dropdown-Liste.
+
 | icon:plus[role="green"]
 | Fügt eine weitere Zeile hinzu.
-Auf diese Weise kannst du mehrere Eigenschaften zuordnen.
+Auf diese Weise kannst du weitere Eigenschaften zuordnen.
 
 | icon:minus-circle[role="red"]
 |Löscht eine Zeile.
@@ -343,7 +341,7 @@ Auf diese Weise kannst du eine nicht mehr benötigte Zuordnung löschen.
 // TODO: Beispiel einfügen mit Screenshot
 
 [#category-mapping]
-=== Schritt "Kategorien zuordnen"
+=== Schritt "Kategorien"
 
 In diesem Schritt ordnest du deine in SPoCC verwendeten Produktgruppen den Kategorien in plentymarkets zu.
 So werden deine Artikel schon in die richtigen plentymarkets Kategorien einsortiert, wenn sie von SPoCC importiert werden.
@@ -379,13 +377,13 @@ Auf diese Weise kannst du eine nicht mehr benötigte Zuordnung löschen.
 [TIP]
 .Alternativer Ablauf ohne Kategoriezuordnung
 ====
-Technisch gesehen kannst du auch nur eine Standard-Artikelkategorie wählen und den Rest der Kategoriezuordnung überspringen.
+Technisch gesehen kannst du auch nur im Schritt "Auftragsimport" eine Standard-Artikelkategorie wählen und den Rest der Kategoriezuordnung überspringen.
 Als Folge landen deine Artikel beim Import immer nur in der Standardkategorie.
 Bei Bedarf musst du dann Artikel manuell in andere plentymarkets Kategorien verschieben.
 ====
 
 [#warehouse-mapping]
-=== Schritt "Lager zuordnen"
+=== Schritt "Lager"
 
 In diesem Schritt ordnest du deine Channel Store Number von SPoCC deinen plentymarkets Lagern zu.
 
@@ -427,11 +425,11 @@ In diesem Schritt aktivierst du die Cron-Jobs, die automatisch ausgeführt werde
 |Cron |Intervall |Erläuterung
 
 | *Artikelimport*
-|Täglich
+| Täglich
 |
 * Nachdem du den Assistenten abgeschlossen hast, werden alle Artikel erstmalig von SPoCC nach plentymarkets übertragen.
 Dieser erstmalige vollständige Import kann, je nach Anzahl der Produkte, einige Tage dauern.
-* Nach dem ersten Import werden nur noch Teilimporte durchgeführt, die auf den zuvor gewählten xref:business-entscheidungen:SPoCC.adoc#70[Importeinstellungen] basieren.
+* Nach dem ersten Import werden nur noch Teilimporte durchgeführt, die auf den zuvor gewählten <<#80, Importeinstellungen>> basieren.
 * Importiert werden nur neue Artikel, neue Varianten zu bestehenden Artikeln und Änderungen an Artikeln.
 * Der Artikelimport erfolgt am Ende des Tages bzw. in der Nacht.
 
@@ -445,11 +443,11 @@ Dieser erstmalige vollständige Import kann, je nach Anzahl der Produkte, einige
 
 | *Vollständiges Bestands-/Preisupdate*
 | Alle 24 Stunden
-| // TODO: Die Unterteilung ergibt irgendwie keinen Sinn, oder?
+| Alle Bestände und Preise werden aktualisiert.
 
 | *Delta Bestands-/Preisupdate*
 | Alle 15 Minuten
-| // TODO: Die Unterteilung ergibt irgendwie keinen Sinn, oder?
+| Nur geänderte Bestände und Preise werden aktualisiert.
 |===
 
 
@@ -472,7 +470,6 @@ Dies setzt voraus, dass du:
 . Lege mit den xref:artikel:suche.adoc#[Suchfiltern] in der linken Spalte fest, welche Artikel du abrufen willst.
 Zum Beispiel:
 .. Setze den Filter *Aktiv* auf *ALLE* oder *Nein*, da Artikel beim Import inaktiv sind.
-.. Setze den Filter *Tag* auf den im Assistant gewählten xref:business-entscheidungen:SPoCC.adoc#70[Tag für neu importierte Artikel].
 . Klicke auf *Suchen* (icon:search[role="blue"]). +
 → Die Suchergebnisse werden in der Übersicht rechts angezeigt.
 . Klicke auf einen Artikel in der Übersicht, um den Artikeldatensatz zu öffnen.
@@ -515,25 +512,13 @@ Weitere Informationen zur Auftragsbearbeitung in plentymarkets findest du auf de
 == Ereignisaktionen einrichten
 
 Natürlich sollen die Auftragsdaten nicht nur in plentymarkets bleiben, sondern auch zu SPoCC übertragen werden.
-Dazu musst du vier sogenannte Ereignisaktionen einrichten.
-Diese müssen nur einmalig im Voraus eingerichtet werden, damit der Auftragsexport korrekt funktioniert.
+Dazu musst du sogenannte Ereignisaktionen einrichten.
+Diese Ereignisaktionen müssen nur einmal im Voraus eingerichtet werden, damit der Auftragsexport korrekt funktioniert.
 
-[.instruction]
-Ereignisaktion einrichten:
+Für SPoCC sind die folgenden Ereignisaktionen verfügbar:
 
-. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
-. Klicke auf *Ereignisaktion hinzufügen* (icon:plus[role="green"]). +
-→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
-. Gib einen eindeutigen Namen für die Ereignisaktion ein.
-. Wähle das Ereignis gemäß den folgenden Tabellen.
-. Klicke auf icon:save[set=plenty, role="green"] *Speichern*. +
-→ Die Ereignisaktion wird erstellt und kann weiter bearbeitet werden.
-. Klicke auf *Aktion hinzufügen* (icon:plus[role="green"]) und wähle die Aktion gemäß den folgenden Tabellen.
-. Optional: Klicke auf *Filter hinzufügen* (icon:plus[role="green"]) und wähle Filter, wenn die Ereignisaktion nur in bestimmten Szenarien gelten soll.
-Beispielsweise wenn die Ereignisaktion nur für bestimmte Verkaufskanäle oder Mandanten gelten soll.
-. Aktiviere die Ereignisaktion (icon:check-square[role="blue"]), sobald sie in Kraft treten soll.
-Ab dem Zeitpunkt der Aktivierung greift die Ereignisaktion mit den von dir gewählten Einstellungen.
-. Speichere (icon:save[set=plenty, role="green"]) die Einstellungen.
+* <<#170, SPoCC: Bestand reservieren>>
+* <<#180, SPoCC: Versand an SPoCC melden>>
 
 Weitere Informationen zur allgemeinen Verwendung von Ereignisaktionen findest du auf der Handbuchseite xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen].
 
@@ -543,19 +528,25 @@ Weitere Informationen zur allgemeinen Verwendung von Ereignisaktionen findest du
 Sobald ein neuer Auftrag in plentymarkets landet, soll SPoCC über den Auftrag informiert werden.
 So wird der nötige Bestand in SPoCC reserviert, damit es nicht zu Überverkäufen kommt.
 
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-one>>
+
+include::_includes:partial$event-procedure.adoc[]
+
 [[table-event-procedure-one]]
 [cols="1,2"]
 |===
 
-|Ereignis
-|Neuer Auftrag
+| Ereignis
+| Neuer Auftrag
 
-|Filter (optional)
-|Auftrag > Herkunft +
-Auftrag > Mandant (Shop)
+| Filter
+| Auftrag > Herkunft > SPoCC +
+*_Optional:_* Auftrag > Mandant (Shop) > [Mandant wählen]
 
-|Aktion
-|Plugins > SPoCC: Bestand reservieren
+| Aktion
+| Plugins > SPoCC: Bestand reservieren
 |===
 
 [#180]
@@ -563,17 +554,24 @@ Auftrag > Mandant (Shop)
 
 Informiere SPoCC automatisch darüber, dass der Auftrag versandbereit ist.
 
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-two>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+
 [[table-event-procedure-two]]
 [cols="1,2"]
 |===
 
-|Ereignis
-|Warenausgang gebucht
+| Ereignis
+| Warenausgang gebucht
 
-|Filter (optional)
-|Auftrag > Herkunft +
-Auftrag > Mandant (Shop)
+| Filter
+| Auftrag > Herkunft > SPoCC +
+*_Optional:_* Auftrag > Mandant (Shop) > [Mandant wählen]
 
-|Aktion
-|Plugins > SPoCC: Versand an SPoCC melden
+| Aktion
+| Plugins > SPoCC: Versand an SPoCC melden
 |===
