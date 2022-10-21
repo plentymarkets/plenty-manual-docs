@@ -1,4 +1,4 @@
-= SPoCC interface
+= SPoCC Connector
 :keywords: SPoCC, SPoCC interface, SPoCC connector, SPoCC extension, Apollon, Single Point of Content and Communication
 :description: Learn how to connect your SPoCC system with plentymarkets.
 :page-index: false
@@ -17,12 +17,16 @@ https://docs.google.com/presentation/d/12mym8JIQqPc1BhJEeYFlxQfGqoQC9IiBvyt1mDx3
 SPoCC and plentymarkets – a great combination.
 Do you already use SPoCC as an inventory management tool for shoe retail?
 And are you ready to get started in e-commerce with plentymarkets?
+Then you’re in the right place.
 The SPoCC plugin connects your SPoCC system to plentymarkets.
 
 * Continue using SPoCC for your sales.
 * Import the item data imported in the SPoCC database to plentymarkets.
 * Modify the item data in plentymarkets as needed and then sell your items on various marketplaces, sales channels and online shops.
 * Export order data to SPoCC.
+
+NOTE: This manual page is right for you if you are a SPoCC customer but do not yet use plentymarkets productively.
+Do you already use plentymarkets and want to get started on SPoCC? Then contact our setup team.
 
 [#data-exchange]
 == Data exchange
@@ -54,12 +58,14 @@ SPoCC attributes in properties
 | * Complete import every 24 hours
 * Changed data every 15 minutes
 
-| Export of orders to SPoCC: +
+| Export of orders to SPoCC:
+
 * Create order, notifications, reserve stock
 * Update order when ready four shipping
 | When event procedure is triggered
 
 | Request order status:
+
 * Cancellation
 | Every 20 minutes
 
@@ -171,9 +177,16 @@ In other words, you’ll enter your access data so that plentymarkets and SPoCC 
 
 [[table-connection-settings]]
 .Step "Connection"
-[cols="1,3"]
+[cols="1,2"]
 |===
 |Setting |Explanation
+
+2+^| *Test mode*
+
+| *Test mode*
+| Activate this option to use the test mode for exchanging data between SPoCC and plentymarkets.
+
+2+^| *Login details*
 
 | *Global Stock API Key* +
 (mandatory)
@@ -197,11 +210,11 @@ In other words, you’ll enter your access data so that plentymarkets and SPoCC 
 
 | *Channel ID* +
 (mandatory)
-| Enter the Channel ID that you received from SPoCC.
+| Enter the number *4*. At SPoCC, plentymarkets always has this channel ID.
 |===
 
 [#80]
-=== Step "Options for the item import"
+=== Step “Item import”
 
 In this step, you’ll decide what the data that comes from SPoCC should look like in plentymarkets.
 In other words, where the data should be saved in plentymarkets.
@@ -213,7 +226,8 @@ In other words, where the data should be saved in plentymarkets.
 |Setting |Explanation
 
 | *Complete item import*
-| Activate this option to activate the complete item import.
+| Activate this option to activate the complete item import. +
+*_Important:_* This option is deactivated automatically after the first complete item import. As such, only new and changed item data is imported. If you need another complete item import at a later date, activate this option again and complete the assistant.
 
 | *Default category*
 | Imagine you created a new category in SPoCC.
@@ -230,16 +244,14 @@ Select the barcode type from the drop-down list.
 *_Requirement_*: Have you already xref:item:barcodes.adoc#100[configured barcode types in plentymarkets]?
 This drop-down list only includes the barcode types that already exist in plentymarkets.
 
-2+^| Attributes
-
-| *Colour attribute*
+| Attribute: *Colour attribute*
 | Which plentymarkets attribute matches your SPoCC colour attribute?
 Select the attribute from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:attributes.adoc#[configured attributes in plentymarkets]?
 This drop-down list only includes the attributes that already exist in plentymarkets.
 
-| *Size*
+| Attribute: *Size attribute*
 | Which plentymarkets attribute matches your SPoCC size?
 Select the attribute from the drop-down list.
 
@@ -248,7 +260,7 @@ This drop-down list only includes the attributes that already exist in plentymar
 |===
 
 [#sales-price-mapping]
-=== Step "Map sales prices"
+=== Step "Sales prices"
 
 There are three prices in SPoCC:
 
@@ -306,20 +318,20 @@ This drop-down list only includes the properties that already exist in plentymar
 |===
 |Setting |Explanation
 
-| *SPoCC attribute*
-|These are your attributes in SPoCC.
-Select the appropriate attribute from the drop-down list.
-
 | *plentymarkets property*
-|These are the categories that you’ve set up in plentymarkets.
+| This drop-down list contains the categories that you have set up in plentymarkets.
 Select the appropriate property from the drop-down list.
 
 *_Requirement_*: Have you already xref:item:properties.adoc#[configured properties in plentymarkets]?
 This drop-down list only includes the properties that already exist in plentymarkets.
 
+| *SPoCC attribute*
+| This drop-down list contains your SPoCC attributes.
+Select the appropriate attribute from the drop-down list.
+
 | icon:plus[role="green"]
 | Adds another line.
-This allows you to map multiple properties.
+This allows you to map additional properties.
 
 | icon:minus-circle[role="red"]
 |Deletes a line.
@@ -329,7 +341,7 @@ This allows you to remove mappings that are no longer needed.
 
 
 [#category-mapping]
-=== Step: "Map categories"
+=== Step "Categories"
 
 In this step, you map the product groups used in SPoCC to the categories in plentymarkets.
 This way, your items are directly sorted into the correct plentymarkets categories when they are imported from SPoCC.
@@ -365,13 +377,13 @@ This allows you to remove mappings that are no longer needed.
 [TIP]
 .Alternative procedure without assigning categories
 ====
-Technically speaking, you could just select a default category and then skip the rest of the category assignment.
+Technically speaking, you could just select a default category in the step "Item import" and then skip the rest of the category assignment.
 As a result, your items would always land in the default category when they are imported.
 If needed, you would then have to move the items into different plentymarkets categories manually.
 ====
 
 [#warehouse-mapping]
-=== Step "Map warehouses"
+=== Step "Warehouse"
 
 In this step, you map your Channel Store Number from SPoCC to your plentymarkets warehouses.
 
@@ -413,36 +425,29 @@ In this step, you’ll activate the cron jobs that should run automatically (ico
 |Cron |Interval |Explanation
 
 | *Item import*
-|Daily
+| Daily
 |
 * Once you have completed the assistant, all of your items will initially be transmitted from SPoCC to plentymarkets.
 This initial, full import can take a few days to finish, depending on the number of products.
-* Afterwards, only a sub-set of items will be imported, based on the previously selected xref:business-decisions:SPoCC.adoc#70[import settings
-* Only new items are imported and new variations on existing items.
-Existing items are not updated with this cron.
+* Afterwards, only a sub-set of items will be imported, based on the previously selected <<#80, import settings>>.
+* Only new items, new variations of existing items and changed items and variations are imported.
 * The item import starts at the end of the day, or rather during the night.
 
 | *Attribute import*
 |Hourly
-| Existing items and variations are updated.
-This cron updates the following data:
-
-* Linked variation properties
-* Tags (assuming that the SPoCC pattern is imported as a tag)
-* Manufacturers (assuming that the manufacturer is imported)
-* EAN
+| Imports the SPoCC attributes to plentymarkets.
 
 | *Image import*
 | Every 60 minutes
-|
+| Imports SPoCC images to plentymarkets.
 
 | *Complete stock/price update*
 | Once every 24 hours
-|
+| All stock and price data is updated.
 
 | *Delta stock/price update*
 | Every 15 minutes
-|
+| Only changed stock and price data is updated.
 |===
 
 
@@ -465,7 +470,6 @@ Open a few item data records and make sure that your item data was correctly imp
 . Use the xref:item:search.adoc#[search filters] on the left to specify which items you want to access.
 For example:
 .. Set the *Active* filter to *ALL* or *No*, since items are inactive when they are imported.
-.. Set the *Tag* filter to whichever xref:business-decisions:SPoCC.adoc#70[tag for newly imported items] you chose in the assistant.
 . Click on *Search* (icon:search[role="blue"]). +
 → The search results are displayed in an overview on the right.
 . Click on an item in the overview to open the item data record.
@@ -508,25 +512,13 @@ Further information about processing orders in plentymarkets can be found on the
 == Setting up event procedures
 
 Of course, the order data shouldn’t just stay in plentymarkets. Rather, it should also be transmitted to SPoCC.
-You’ll set up four so-called event procedures to do this.
-They only need to be set up once, in order for the export to work correctly.
+You will set up event procedures to do this.
+These event procedures only need to be set up once, in order for the export to work correctly.
 
-[.instruction]
-Setting up an event procedure:
+The following event procedures are available for SPOCC:
 
-. Go to *Setup » Orders » Events*.
-. Click on *Add event procedure* (icon:plus[role="green"]). +
-→ The *Create new event procedure* window opens.
-. Enter a distinct name for the event procedure.
-. Select the event as listed in the following tables.
-. Click on icon:save[set=plenty, role="green"] *Save*. +
-→ The event procedure is created and can be edited further.
-. Click on *Add procedure* (icon:plus[role="green"]) and select the procedure as listed in the following tables.
-. Optional: Click on *Add filter* (icon:plus[role="green"]) and select filters if you only want the event procedure to apply in certain situations.
-For example, the event procedure could only apply to specific sales channels or clients.
-. Activate the event procedure (icon:check-square[role="blue"]) once it should go into effect.
-From the point of activation onwards, the event procedure applies your settings to the selected orders.
-. Save (icon:save[set=plenty, role="green"]) the settings.
+* <<#170, SPoCC: Reserve stock>>
+* <<#180, SPoCC: Notify SPoCC of shipping>>
 
 For further information, refer to the xref:automation:event-procedures.adoc#[Event procedures] page of the manual.
 
@@ -536,19 +528,25 @@ For further information, refer to the xref:automation:event-procedures.adoc#[Eve
 When a new order lands in plentymarkets, SPoCC should be informed of the order.
 This allows SPoCC to reserve the necessary stock and avoid overselling.
 
+Set up an xref:automation/event-procedures.adoc#[event procedure] for that purpose.
+
+:table-event-procedure: <<#table-event-procedure-one>>
+
+include::_includes:partial$event-procedure.adoc[]
+
 [[table-event-procedure-one]]
 [cols="1,2"]
 |===
 
-|Event
-|New order
+| Event
+| New order
 
-|Filter (optional)
-|Order > Referrer +
-Order > Client (store)
+| Filter
+| Order > Referrer > SPoCC +
+*_Optional:_* Oder > Client (store) > [Select client]
 
-|Procedure
-|Plugins > SPoCC: Reserve stock
+| Action
+| Plugins > SPoCC: Reserve stock
 |===
 
 [#180]
@@ -556,17 +554,24 @@ Order > Client (store)
 
 Automatically inform SPoCC that the order is ready for shipping.
 
+Set up an xref:automation/event-procedures.adoc#[event procedure] for that purpose.
+
+:table-event-procedure: <<#table-event-procedure-two>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+
 [[table-event-procedure-two]]
 [cols="1,2"]
 |===
 
-|Event
-|Outgoing items booked
+| Event
+| Outgoing items booked
 
-|Filter (optional)
-|Order > Referrer +
-Order > Client (store)
+| Filter
+| Order > Referrer > SPoCC +
+*_Optional:_* Oder > Client (store) > [Select client]
 
-|Procedure
-|Plugins > SPoCC: Notify SPoCC of shipping
+| Action
+| Plugins > SPoCC: Notify SPoCC of shipping
 |===
