@@ -21,6 +21,61 @@ video::331004096[vimeo]
 
 Um die Schnittstelle zu Kaufland.de nutzen zu können, musst du dein Kaufland.de-Benutzerkonto als Händlerkonto registrieren. Rufe dazu auf der link:https://www.Kaufland.de/seller/new/[Kaufland.de-Website^] den Bereich *Mein Konto* auf und gib dort deine Umsatzsteuer-Identifikationsnummer ein.
 
+[#data-exchange]
+== Häufigkeit des Datenaustauschs
+
+Nachdem du {market} in plentymarkets eingerichtet hast, stehen die in <<#data-exchange-market>> beschriebenen automatisierten Abläufe bereit:
+
+[[data-exchange-market]]
+.Häufigkeit des Datenaustauschs
+[cols="1,3a"]
+|===
+|Daten |Intervall
+
+| Preisabgleich
+| stündlich
+
+| Bestandsabgleich
+| stündlich
+
+Die folgenden Felder werden beim Bestandsabgleich exportiert:
+
+*Bestand* +
+*Bearbeitungszeit in Tagen* +
+*Zustand* +
+*Zustandsbeschreibung* +
+*Kaufland Versandgruppen-ID* +
+*Kaufland Lager-ID*
+
+| Artikelexport
+| einmal täglich +
+*_Hinweis:_* Nur Artikel werden exportiert, bei denen die letzte Änderung innerhalb der letzten 26 Stunden vorgenommen wurde.
+
+| Auftragsimport
+| * immer, wenn ein neuer Auftrag auf Kaufland generiert wurde
+
+| Weitere Daten
+| * Export von Aufpreisen für Attributwerte (Variantenartikel)
+* Übertragung des Beschreibungstexts, wie im Tab *Texte* eingegeben
+* Übertragung der technischen Daten, wie in Tabelle 1 gewählt
+* Bilderexport, wie im Tab *Bilder* des Artikels eingestellt
+|===
+
+[#ablauf-bestellung]
+== Ablauf einer Bestellung bei Kaufland
+
+* Deine Artikel werden bei Kaufland gelistet. Der Name deines Unternehmens wird an deinen Artikeln angezeigt.
+* Kund:innen geben eine Bestellung auf Kaufland auf.
+* Kund:innen zahlen an Kaufland.
+* Der Auftrag wird sofort, nachdem er auf Kaufland aufgegeben wurden, in plentymarkets importiert.
+
+*_Hinweise zum Auftragsimport bei Kaufland:_*
+
+* Aufträge mit dem Kaufland-Status *OPEN* werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Hierbei handelt es sich um Aufträge, die nach der Bestellung noch von der Käufer:in storniert werden können. Die Aufträge verbleiben 15 Minuten in diesem Status, damit Kund:innen die Möglichkeit haben, den Auftrag zu stornieren.
+* Wenn der Auftrag bei Kaufland nach 15 Minuten einen anderen Status bekommt, wechselt der Auftragsstatus in plentymarkets automatisch zu Status *[5] Freigabe Versand*. Alle fehlenden Auftragsdaten werden am Auftrag ergänzt.
+
+* <<#kaufland-fbk, Aufträge, die von Kaufland abgewickelt werden (FbK = Fulfillment by Kaufland)>> werden mit der Auftragsherkunft *170.01 Kaufland FBK DE* in plentymarkets importiert.
+
 [#market-setup]
 == Marktplatz in plentymarkets einrichten
 
@@ -191,46 +246,6 @@ Die plentymarkets Verfügbarkeits-IDs 1-10 entsprechen der im Menü *Einrichtung
 |Angebotsdatei zu Kaufland.de übertragen.
 |===
 
-[#data-exchange]
-=== Häufigkeit des Datenaustauschs
-
-Nachdem du {market} in plentymarkets eingerichtet hast, stehen die in <<#data-exchange-market>> beschriebenen automatisierten Abläufe bereit:
-
-[[data-exchange-market]]
-.Häufigkeit des Datenaustauschs
-[cols="1,3a"]
-|===
-|Daten |Intervall
-
-| Preisabgleich
-| stündlich
-
-| Bestandsabgleich
-| stündlich
-
-Die folgenden Felder werden beim Bestandsabgleich exportiert:
-
-*Bestand* +
-*Bearbeitungszeit in Tagen* +
-*Zustand* +
-*Zustandsbeschreibung* +
-*Kaufland Versandgruppen-ID* +
-*Kaufland Lager-ID*
-
-| Artikelexport
-| einmal täglich +
-*_Hinweis:_* Nur Artikel werden exportiert, bei denen die letzte Änderung innerhalb der letzten 26 Stunden vorgenommen wurde.
-
-| Auftragsimport
-| alle 15 Minuten
-
-| Weitere Daten
-| * Export von Aufpreisen für Attributwerte (Variantenartikel)
-* Übertragung des Beschreibungstexts, wie im Tab *Texte* eingegeben
-* Übertragung der technischen Daten, wie in Tabelle 1 gewählt
-* Bilderexport, wie im Tab *Bilder* des Artikels eingestellt
-|===
-
 [#225]
 === Modell Fiktiver Lieferer
 
@@ -301,6 +316,21 @@ Barcode für Kaufland.de festlegen:
 . Aktiviere die Herkunft *Kaufland.de*.
 . Speichere (terra:save[]) die Einstellungen. +
 *_Tipp:_* Ist dieser Barcode schon mit deinen Varianten verknüpft? Wenn nicht, dann vergiss nicht, <<#save-barcode, den Barcode mit deinen Varianten zu verknüpfen und einen Code zu speichern>>.
+
+[#kaufland-fbk]
+=== Fulfillment by Kaufland (FbK): Kaufland lagert und versendet
+
+Kaufland bietet den Service FbK (= Fulfillment by Kaufland) an. Mit FbK übernimmt Kaufland die Lagerung und den Versand deiner Artikel. Wenn du FbK nutzen willst, kontaktiere deine Ansprechpartner:innen bei Kaufland. +
+
+Du kannst in deinem plentymarkets System zurzeit keine weiteren Einstellungen für FbK vornehmen. Kaufland-FbK-Aufträge werden lediglich in plentymarkets importiert. Artikel, die du über FbK verkaufen willst, müssen im Kaufland Seller Portal angelegt werden. FbK-Aufträge können in plentymarkets nur abgerufen, aber nicht bearbeitet werden.
+
+Ablauf einer FbK-Bestellung:
+
+* Deine Artikel werden auf Kaufland gelistet. Der Name deines Unternehmens wird an deinen Artikeln angezeigt.
+* Kund:innen geben eine Bestellung auf Kaufland auf.
+* Kund:innen zahlen an Kaufland.
+* Kaufland verschickt die Bestellung.
+* FbK-Aufträge werden mit der Auftragsherkunft *170.01 Kaufland FBK DE* in plentymarkets importiert.
 
 [#prepare-variations]
 == Varianten vorbereiten
