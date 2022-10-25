@@ -30,7 +30,7 @@ Inform idealo about how item data should be transferred before setting up idealo
 [[item-export-idealo-1]]
 .idealo data transfer
 [cols="1,1"]
-|====
+|===
 | Item data export via API (PWS 2.0) | Item data export via elastic export
 
 //tag::table-comparison[]
@@ -54,7 +54,25 @@ Inform idealo about how item data should be transferred before setting up idealo
 |Orders are always imported to the default client
 
 //end::table-comparison[]
-|====
+|===
+
+[#export-item-data-api]
+=== Changing item data when using the item export via API
+
+If you use the item export via API to transfer item data to idealo, new offers will be created on idealo if there is no offer for this item on idealo yet - for example, if you transfer an item to idealo for the first time or if an item is in stock again after its stock was *0*. +
+
+Afterwards, items will only be updated on idealo if the price or stock of an item changes. In this case, the following data will be updated on idealo: +
+
+* *SKU*
+* *Price*
+* *Stock*
+* *Delivery time*
+* *idealo Checkout (yes/no)*
+
+
+*_Note:_* All other changes to item data will _not_ be automatically transferred to idealo. Thus, if item texts, characteristics, shipping costs etc. are changed, it is currently not possible to automatically transfer those changes to idealo.
+
+→ In this case, contact our support team in the link:https://forum.plentymarkets.com/[plentymarkets forum^]. Our support will help you export the item data to idealo.
 
 [#2400]
 == Installing the necessary plugins
@@ -178,7 +196,7 @@ Item URL
 Variation URL
 
 | *Which price would you like to transfer to idealo as minimum price?*
-a| If you use the price range feature for idealo checkout sellers, you can specify a minimum price in addition to the regular sales price. Select the sales price form the drop-down list that you want to export as the minimum price. Visit the link:https://partner.idealo.com/de/magazin/repricing-bei-idealo-umsatzanstieg-durch-preisanpassung[idealo^] website to find out more about the price range feature. +
+a| If you use the price range feature for idealo checkout sellers, you can specify a minimum price in addition to the regular sales price. Select the sales price form the drop-down list that you want to export as the minimum price. Visit the link:https://partner.idealo.com/de/magazin/repricing-bei-idealo-umsatzanstieg-durch-preisanpassung[idealo^]{nbsp}icon:external-link[] website to find out more about the price range feature. Note that this page is currently only available in German. +
 *_Tip:_* You can only select sales prices from the drop-down list for which <<#600, the referrer idealo has been activated>>.
 
 * *Do not use minimum price* = The price range feature is deactivated.
@@ -382,7 +400,7 @@ Depending on whether you only want to use the idealo price comparison or whether
 
 :referrer: the idealo price comparison
 :referrer: idealo price comparison
-:referrer-option: pass:quotes[option *idealo*]
+:referrer-option: pass:quotes[option *idealo* with the ID *121*]
 :idealo-direkt:
 
 include::partial$activate-referrer.adoc[]
@@ -445,12 +463,12 @@ Information about the different types of data transfer is available in <<#item-e
 [[item-export-idealo]]
 .idealo data transfer
 [cols="1,1"]
-|====
+|===
 | Item data export via API (PWS 2.0) | Item data export via elastic export
 
 include::page$idealo-setup.adoc[tag=table-comparison]
 
-|====
+|===
 
 [#850]
 === Item data export via API (PWS 2.0)
@@ -463,7 +481,7 @@ If you transfer your items via API, items will be created at idealo once per day
 [#900]
 === Item data export via elastic export
 
-If you export items via the elastic export, you have to carry out a few settings in the *Data » Elastic export* menu to set up the export format. In order to use the elastic export, the link:https://marketplace.plentymarkets.com/en/plugins/sales/marktplaetze/elasticexport_4763[Elastic Export^] plugin must be installed in your plentymarkets system. First create the data format IdealoDE and afterwards transfer the URL to idealo so that idealo will be able to retrieve your item data.
+If you export items via the elastic export, you have to carry out a few settings in the *Data » Elastic export* menu to set up the export format. In order to use the elastic export, the link:https://marketplace.plentymarkets.com/en/elasticexport_4763[Elastic Export^]{nbsp}icon:external-link[] plugin must be installed in your plentymarkets system. First create the data format IdealoDE and afterwards transfer the URL to idealo so that idealo will be able to retrieve your item data.
 
 How to set up the elastic export to export your items to idealo is described in the following chapters <<#950, Setting up the data format IdealoDE plugin in plentymarkets>> and <<#1000, Available columns for the export file>>.
 
@@ -499,7 +517,7 @@ The following table lists details for settings, format settings and recommended 
 [[format-settings-idealo]]
 .Format settings for IdealoDE
 [cols="1,3a"]
-|====
+|===
 | Setting | Explanation
 
 2+^| *Settings*
@@ -555,7 +573,7 @@ a|Select an item filter from the drop-down list and click on *Add*. There are no
 2+^| *Format settings*
 
 | *Product URL*
-|Select the URL that you wish to transfer to the price search engine. You can either send the item’s URL or the variation’s URL. URLs of variations can only be transferred in combination with plentyShop LTS.
+|Select the URL that you wish to transfer to the price search engine. You can either send the item’s URL and the variation’s URL. URLs of variations can only be transferred in combination with plentyShop LTS.
 
 | *Client*
 |Select a client. This setting is used for the URL structure.
@@ -633,7 +651,7 @@ If *Transfer flat rate shipping charge* has been selected, only prepayment will 
 
 | *Item availability*
 |Activate the *overwrite* option and enter item availabilities into the fields *1* to *10*. The fields represent the IDs of the availabilities. This overwrites the item availabilities that are saved in the *Setup » Item » Availability* menu.
-|====
+|===
 
 [#1000]
 ==== Available columns for the export file
@@ -641,7 +659,7 @@ If *Transfer flat rate shipping charge* has been selected, only prepayment will 
 [[columns-export-file]]
 .Columns for the export file
 [cols="1,3a"]
-|====
+|===
 | Column header | Explanation
 
 | *article_id*
@@ -740,13 +758,13 @@ Characteristic of type *Text*, *Selection* or *decimal number* and the link to t
 
 | *Payment methods*
 | *Requirement*: at least one payment method +
-All payment methods will be exported, according to the format setting *Shipping costs* in their own column.
-|====
+All payment methods will be exported according to the format setting *Shipping costs* in their own column.
+|===
 
 [#idealo-delete-items]
 == Deleting items on idealo
 
-If a varation is out of stock in plentymarkets, it is deleted on idealo and cannot be bought on the market any longer. As stock data is transferred to idealo every 15 minutes, varations without stock are deleted automatically. If a variation has stock again in plentymarkets, it is offered again on idealo with the next stock export.
+If a varation is out of stock in plentymarkets, it is deleted on idealo and cannot be bought on the market any longer. As stock data is transferred to idealo every 15 minutes, variations without stock are deleted automatically. If a variation has stock again in plentymarkets, it is offered again on idealo with the next stock export.
 
 However, if you do not want to sell a variation on idealo any longer which still has stock in plentymarkets, you have to delete the availability for idealo.
 
@@ -766,7 +784,7 @@ To do so, go to *Item » Edit item » Tab: Item group function*. Place a check m
 ====
 
 [#1100]
-== Permitting payment method idealo Checkout in customer classes
+== Permitting the payment method idealo Checkout in a customer class
 
 :market: idealo
 :payment-method: idealo Checkout
@@ -992,7 +1010,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[shipping-confirmation-idealo]]
 .Event procedure for automatically sending shipping confirmations to idealo
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -1010,7 +1028,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Plugins > Send shipping confirmation to idealo*
 |
-|====
+|===
 
 [#1750]
 === Automatically sending returns
@@ -1024,7 +1042,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[returns-idealo]]
 .Event procedure for automatically notifying idealo of returns
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -1042,7 +1060,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Plugins > Send return notification to idealo*
 |
-|====
+|===
 
 [#1800]
 === Automatically sending cancellations
@@ -1062,11 +1080,11 @@ include::_includes:partial$event-procedure.adoc[]
 [[cancellations-seller-idealo]]
 .Event procedure for automatically notifying idealo of cancellations by seller
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| Select an event, for example *Order change: Status change*
+| Select an event, for example *Order change: Status change*.
 | *[8] Cancelled*
 
 | *Filter 1*
@@ -1080,7 +1098,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Plugins > Send seller cancellation to idealo*
 |
-|====
+|===
 
 [#1802]
 ==== Automatically sending buyer cancellations
@@ -1092,11 +1110,11 @@ include::_includes:partial$event-procedure.adoc[]
 [[cancellations-buyer-idealo]]
 .Event procedure for automatically notifying idealo of cancellations by buyer
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
-| Select an event, for example *Order change: Status change*
+| Select an event, for example *Order change: Status change*.
 | *[8.1] Cancelled by customer*
 
 | *Filter 1*
@@ -1110,7 +1128,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Plugins > Send buyer cancellation to idealo*
 |
-|====
+|===
 
 [#1803]
 ==== Automatically accepting cancellation by buyer
@@ -1122,7 +1140,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[accept-cancellations-buyer-idealo]]
 .Event procedure for automatically accepting cancellations by buyer
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -1140,7 +1158,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Plugins > Accept cancellation by buyer*
 |
-|====
+|===
 
 [#1755]
 === Automatically sending refund notifications
@@ -1160,7 +1178,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[refund-idealo]]
 .Event procedure for automatically notifying idealo of credit notes
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -1178,7 +1196,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Plugins > Send refund notification to idealo*
 |
-|====
+|===
 
 [#1900]
 == Viewing the log
