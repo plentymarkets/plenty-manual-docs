@@ -21,6 +21,61 @@ video::331004662[vimeo]
 
 In order to use the Kaufland.de interface, you have to register your Kaufland.de user account as a seller account. To do so, go to the link:https://www.Kaufland.de/seller/new/[Kaufland.de website^] and save your VAT number in the *Mein Konto* (My account) area.
 
+[#data-exchange]
+== Frequency of data exchange
+
+After setting up {market} in plentymarkets, the automatic processes described in <<#data-exchange-market>> are available:
+
+[[data-exchange-market]]
+.Frequency of data exchange
+[cols="1,3a"]
+|===
+|Data |Interval
+
+| Price synchronisation
+| Hourly
+
+| Stock synchronisation
+| Hourly
+
+The following fields are exported during stock synchronisation:
+
+*Stock* +
+*Processing time* +
+*Condition* +
+*Description of the condition* +
+*Kaufland shipping group ID* +
+*Kaufland warehouse ID*
+
+| Item export
+| once a day +
+*_Note:_* Only items which have been changed within the last 26 hours are exported.
+
+| Order import
+| * as soon as a new order is generated on Kaufland
+
+| Additional data
+| * export of surcharges for attribute values (item variations)
+* transfer of the description text saved in the *Texts* tab
+* transfer of the technical data selected in table 1
+* image export selected in the item's *Images* tab
+|===
+
+[#workflow-order]
+== Workflow of a Kaufland order
+
+* Your items are listed on Kaufland. The name of your company is shown with your items.
+* Customers place an order on Kaufland.
+* Customers make their payments to Kaufland.
+* The order is imported into plentymarkets right after it was placed on Kaufland.
+
+*_Notes on the Kaufland order import:_*
+
+* Orders with the Kaufland status *OPEN* are imported into plentymarkets without address details and with the status *[1] Incomplete data*. These are orders that can still be cancelled by the customer. The orders remain in this status for 15 minutes so that customers still have the possibility to cancel the order.
+* When the order status on Kaufland changes after 15 minutes, the order automatically moves to status *[5] Cleared for shipping* in plentymarkets. All missing order data is added to the order.
+
+* <<#kaufland-fbk, Orders that are processed by Kaufland (FbK = Fulfillment by Kaufland)>> are imported into plentymarkets with the order referrer *170.01 Kaufland FBK DE*.
+
 [#market-setup]
 == Setting up the market in plentymarkets
 
@@ -79,7 +134,7 @@ This setting is not relevant for new Kaufland accounts which can be added in the
 *_Important:_* You have to assign each of your service providers to one of the service providers from the drop-down list.
 
 | *Order status for orders with failed shipping confirmations*
-| Select a status. If no shipping confirmation could be sent to Kaufland.de, the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#1230[new status].
+| Select a status. If no shipping confirmation could be sent to Kaufland.de, the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#create-status[new status].
 
 *_Background:_* The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
 
@@ -96,7 +151,7 @@ This setting is not relevant for new Kaufland accounts which can be added in the
 |Select whether the item export to Kaufland.de should be activated. +
 
 *_Note:_* You can *deactivate* this setting if you export your items to Kaufland using <<#catalogue-export, catalogues>>. +
-However, make sure that all of the variations which you want to offer on Kaufland are <<##link-variation-to-catalogue-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
+However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variations-to-product-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
 
 | *Export only items with flags*
 a| * *All items* = All items are exported.
@@ -130,7 +185,7 @@ a| * *Yes* (default setting) = Offers are updated once per hour and once per day
 * *No* = The offer update is deactivated. +
 
 *_Note:_* You can *deactivate* this setting if you export your items to Kaufland using <<#catalogue-export, catalogues>>. +
-However, make sure that all of the variations which you want to offer on Kaufland are <<##link-variation-to-catalogue-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
+However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variations-to-product-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
 
 | *Generate cache file (Inventory)*
 a| Select *Yes* or *No*. +
@@ -182,46 +237,6 @@ The plentymarkets availability IDs 1-10 correspond to the item availabilities de
 
 | *Send offer file to Kaufland.de*
 |Send the offer file to Kaufland.de.
-|===
-
-[#data-exchange]
-=== Frequency of data exchange
-
-After setting up {market} in plentymarkets, the automatic processes described in <<#data-exchange-market>> are available:
-
-[[data-exchange-market]]
-.Frequency of data exchange
-[cols="1,3a"]
-|===
-|Data |Interval
-
-| Price synchronisation
-| Hourly
-
-| Stock synchronisation
-| Hourly
-
-The following fields are exported during stock synchronisation:
-
-*Stock* +
-*Processing time* +
-*Condition* +
-*Additional description of condition* +
-*Kaufland shipping group ID* +
-*Kaufland warehouse ID*
-
-| Item export
-| once a day +
-*_Note:_* Only items which have been changed within the last 26 hours are exported.
-
-| Order import
-| every 15 minutes
-
-| Additional data
-| * export of surcharges for attribute values (item variations)
-* transfer of the description text saved in the *Texts* tab
-* transfer of the technical data selected in table 1
-* image export selected in the item's *Images* tab
 |===
 
 [#225]
@@ -301,6 +316,21 @@ Defining a barcode for Kaufland.de:
 . Save (terra:save[]) the settings. +
 *_Tip:_* Is this barcode already linked to your variations? If not, don’t forget <<#save-barcode, to link the barcode to your variations and to save a code>>.
 
+[#kaufland-fbk]
+=== Fulfillment by Kaufland (FbK): Using the FbK service
+
+Kaufland offers the service FbK (= Fulfillment by Kaufland). With this service, Kaufland takes care of the storage and ships your items. If you want to use FbK, get in touch with your contact person at Kaufland. +
+
+Currently, you cannot carry out any settings for FbK in your plentymarkets system. Kaufland FbK orders are only imported into plentymarkets. Items that you want to sell via FbK have to be created in the Kaufland Seller Portal. FbK orders can be retrieved, but not processed in plentymarkets.
+
+Workflow of an FbK order:
+
+* Your items are listed on Kaufland. The name of your company is shown with your items.
+* Customers place an order on Kaufland.
+* Customers make their payments to Kaufland.
+* Kaufland ships the order.
+* FbK orders are imported into plentymarkets with the order referrer *170.01 Kaufland FBK DE*.
+
 [#prepare-variations]
 == Preparing variations
 
@@ -319,7 +349,7 @@ include::partial$variation-availability.adoc[]
 
 // Web API required!
 
-[#link-variation-to-catalogue-category]
+[#link-variations-to-product-category]
 === Linking variations to a Kaufland product category
 
 *_Note:_* You only have to link your variations to Kaufland product categories if you use the <<#catalogue-export, catalogue export>> to transfer items to Kaufland.
@@ -546,6 +576,54 @@ include::partial$recommendation-text.adoc[]
 --
 include::partial$kaufland-recommended-mappings.adoc[]
 --
+
+[#particularities-kaufland-catalogues]
+==== Particularities for mapping data fields
+
+Every market structures item data differently. As such, there are some particularities for each market when mapping data fields. This chapter contains mapping information for important data fields for Kaufland.
+
+[#stock-buffer]
+===== Stock buffer
+
+In the catalogues for Kaufland, you can use a *stock buffer*. A stock buffer is the amount of an item that should not be sold, but kept as a buffer. +
+In order to use a stock buffer for Kaufland, map the data field *Stock buffer* in your Kaufland catalogues. The stock buffer is applied when the stock is updated and when a new offer is created.
+
+Recommended mappings for the data field *Stock buffer*:
+
+ * *Own value*: Enter a value that should be used as stock buffer. For example, if you enter the value *5* here, then the stock for Kaufland is reduced by 5 items which are kept as a buffer.
+
+_or_
+
+ * Property linked to variation, type *Text* or *whole number*
+
+[#size-unit-kaufland]
+===== Specifying the size unit as own value for Length, Width, and Height
+
+In many Kaufland catalogues, the data fields *Length*, *Width*, and *Height* are mandatory and have to be mapped. We recommend the following mappings for these data fields:
+
+* *Length*: *Variation » Length*, _specify size unit_
+* *Width*: *Variation » Width*, _specify size unit_
+* *Height*: *Variation » Height*, _specify size unit_
+
+For these data fields, only the value is transferred to Kaufland. The size unit is not transferred to Kaufland. However, in order for your variations to be correctly exported to Kaufland, you have to specify the size unit. You should therefore additionally specify the size unit as an *own value*. +
+An example of how to specify the size unit as own value for the data field *Length* is provided below.
+
+[.instruction]
+Specifying the size unit as own value:
+
+. Go to *Data » Catalogues*.
+. Open the Kaufland catalogue.
+. Map the Kaufland data field *Length* with the value *Variation » Length*.
+. Click on *Add data field* (material:insert_link[]). +
+→ Another data field is added.
+. Enter the size unit in the data field *Own value*. +
+→ For example, you can enter *mm*, *cm*, or *m*, depending on which size unit you want to transfer.
+. Click on the *Settings* (material:settings[]) for this data field. +
+→ The window *Data column settings* opens. Here you can configure the separator.
+. Select *Null* as *Fallback condition*.
+. Select *Space* as *Separator*.
+. *Save* the settings.
+. Repeat the steps above for the data fields *Width* and *Height*.
 
 [#activate-catalogue]
 ==== Activating the catalogue export
