@@ -340,7 +340,7 @@ Check the necessary settings that are listed here and activate (material:toggle_
 
 Here, the contact’s primary addresses are shown if you selected *Yes, primary* for the invoice address and/or the delivery address in the <<#addresses, Addresses>> area. When you open the contact data record, this area is opened by default and the available data is loaded. 
 
-Click on *New address* (material:add[]) to create a <<#addresses, new address>>. Click on material:more_vert[] to edit or delete the address. Next to the email address or next to the phone number, click on material:content_copy[] to copy these values to the clipboard.
+Click on *New address* (material:add[]) to create a <<#addresses, new address>>. Click on material:more_vert[] to edit or delete the address. Next to the email address or next to the telephone number, click on material:content_copy[] to copy these values to the clipboard.
 
 [[image-primary-delivery-address-example]]
 .Example: Primary delivery address
@@ -485,7 +485,7 @@ Generating new passwords for all contacts:
 [#email-reset-password]
 ==== Sending an email to reset the password
 
-Send an email template to your contact containing a link to change the password in your plentyShop. It is required that you have linked an email template from the EmailBuilder containing the variable *URL to change password* with the event *Send customer email to change password*. Carry out this setting in the *Setup » Assistants » Basic setup* menu in the *Email accounts* assistant in the *Automatic despatch* step.
+Send an email template to your contact containing a link to change the password in your plentyShop. It is required that you have linked an email template from the EmailBuilder containing the variable *URL to change password* with the event *Send customer email to change password*. Carry out this setting in the *Setup » Assistants » Basic setup* menu in the *Automatic dispatch* step of the *Email accounts* assistant.
 
 For further information, refer to the xref:crm:emailbuilder-testphase.adoc#automate-email-despatch[EmailBuilder] page.
 
@@ -504,13 +504,13 @@ Sending an email to reset the password:
 [IMPORTANT]
 .Save appropriate variable in template for automatic despatch
 ====
-To ensure that the email to reset the password will be correctly sent to your customers, you have to save the appropriate variable in the template that you selected for the option *Send customer email to change password*  in the *Email accounts* assistant in the *Automatic despatch* menu. You can find the assistant in the *Setup » Assistants » Basic setup* menu.
+To ensure that the email to reset the password will be correctly sent to your customers, you have to save the appropriate variable in the template that you selected for the option *Send customer email to change password* in the *Setup » Assistants » Basic setup* menu in the *Automatic despatch* step of the *Email accounts* assistant.
 ====
 
 [#unlock-login]
 ==== Unlocking the contact’s login
 
-If the contact enters the wrong password in your plentyShop 4 times in a row, the contact will be blocked for the login and receives the message in the plentyShop to contact the administrator. With one click, you unlock the contact’s login and your contact is able to log into the your plentyShop again as usual.
+If the contact enters the wrong password in your plentyShop 4 times in a row, the contact will be blocked for the login for 24 hours and receives the message in the plentyShop to contact the administrator. With one click, you unlock the contact’s login and your contact is able to log into the your plentyShop again as usual.
 
 [.instruction]
 Unlocking the contact’s login:
@@ -544,6 +544,13 @@ Click on *Configure columns* (material:settings[]) on the top right and decide w
 * Invoice number
 * Payment method
 * Gross order value
+* Order date
+* Referrer ID
+* Referrer name
+* Client
+* Incoming payment
+* Outgoing items
+* Shipping date
 
 Click on *Refresh data* (material:refresh[]) in the top right to refresh the *Orders* area.
 
@@ -552,7 +559,7 @@ Click on *Refresh data* (material:refresh[]) in the top right to refresh the *Or
 
 Here, you can see the addresses that are saved for the contact. Note that only 25 address data records can be shown.
 
-Click on *Configure columns* (material:settings[]) on the top right and decide which columns to show in the overview of the *Addresses* area. Click on material:drag_indicator[] to change the order of the columns with drag-and-drop. The following columns are available:
+Click on *Configure columns* (material:settings[]) on the top right and decide which columns to show in the *Addresses* area. Click on material:drag_indicator[] to change the order of the columns with drag-and-drop. The following columns are available:
 
 * ID
 * Company
@@ -650,7 +657,7 @@ This a mandatory field when there is no entry for *Company* and *Last name*.
 This is a mandatory field when there is no entry for *Company* and *First name*.
 
 | *Additional information (Name 4)*
-|Do you want to enter any additional information for the contact? Enter the information, for example _c/o   Mr. John Doe_.
+|Do you want to enter any additional information for the contact? Enter the information, for example _c/o Mr. John Doe_.
 
 | *Address 1 (Street)* +
 *Address 2 (House number)*
@@ -984,7 +991,7 @@ Red = The order is not paid yet and payment is overdue. +
 |Document number, e.g. invoice number, of the current main document of the order.
 
 |[#intable-account-payment-due-date]*Payment due date*
-|Date on which payment is due for the order. To have a payment due date displayed here, the xref:orders:managing-orders.adoc#intable-payment-terms-order[payment terms] of the corresponding order have to be filled in and an invoice has to be created. 
+|Date on which payment is due for the order. To have a payment due date displayed here, the xref:orders:managing-orders.adoc#intable-payment-terms-order[payment terms] of the corresponding order have to be filled in and an invoice has to be created.
 
 |[#intable-account-gross-order-value]*Gross order value*
 |Gross value of the order.
@@ -1042,11 +1049,92 @@ You can use various filters to retrieve specific information about your contact'
 [#messenger]
 === Messenger
 
-Here, you can see all messages that are saved for the contact. Click on *New message* (material:add[]) to open the messenger and to create a message.
+In the *Messenger* area, you can see all messages that belong to the contact. You can <<#whisper-message, whisper>> messages so that they are only internally visible and _not_ for your customers. You can <<#send-message, send>> messages and you can <<#message-capture-minutes, capture minutes for the message>> and save these minutes as free minutes or paid minutes. 
 
-Click on material:more_vert[] in the line of the message to edit or delete the conversation. The colour of the circle shows the editing status of the message. material:circle[role=skyBlue] means that the message is still unread, material:circle[role=darkGrey] means that the message has already been read. Click on material:refresh[] to reload the *Messenger* area.
+Click on the already created message to open the conversation in the messenger. You can carry out further settings there. For further information, refer to the xref:crm:messenger-testphase.adoc#[Messenger (Test phase)] page.
 
-For further information, refer to the xref:crm:messenger.adoc#[Messenger] page.
+[#whisper-message]
+==== Whispering a message
+
+Proceed as described below to whisper a message.
+
+[.instruction]
+Whispering a message:
+
+. Go to *CRM » Contacts*.
+. Search for the contact that you want to edit by means of the filter settings. Note the explanations about the filters on the xref:crm:search-contact.adoc#[Searching for a contact] page. +
+→ The contacts that correspond to the search criteria entered are displayed.
+. Click in the line of the contact to open the data record.
+. On the left side, click on *Messenger*.
+. Click on *New message* (material:add[]). +
+→ The messenger opens.
+. Select one ore multiple recipients. +
+*_Note:_* The ID of the contact is already prefilled as recipient. This way, the email will be sent to the email address that is saved in the invoice address.
+. Enter more recipients, if needed.
+. Enter a subject.
+. Enter the text. +
+→ Double-click on the word to use formatting options for your message.
+. Click on material:attach_file[] *Add attachments* to add a file, if needed.
+. Click on material:visibility_off[] *WHISPER* to whisper the message. 
+
+[#send-message]
+==== Sending a message
+
+Proceed as described below to send a message.
+
+[.instruction]
+Sending a message:
+
+. Go to *CRM » Contacts*.
+. Search for the contact that you want to edit by means of the filter settings. Note the explanations about the filters on the xref:crm:search-contact.adoc#[Searching for a contact] page. +
+→ The contacts that correspond to the search criteria entered are displayed.
+. Click in the line of the contact to open the data record.
+. On the left side, click on *Messenger*.
+. Click on *New message* (material:add[]). +
+→ The messenger opens.
+. Select one ore multiple recipients. +
+*_Note:_* The ID of the contact is already prefilled as recipient. This way, the email will be sent to the email address that is saved in the invoice address.
+. Enter more recipients, if needed.
+. Enter a subject.
+. Enter the text. +
+→ Double-click on the word to use formatting options for your message.
+. Click on material:attach_file[] *Add attachments* to add a file, if needed.
+. Click on material:visibility_off[] *Whisper mode* to switch off the whisper mode. +
+*_Note:_* The button changes from material:visibility_off[] *WHISPER* to material:forward_to_inbox[role=skyBlue] *SEND*.
+. Click on material:forward_to_inbox[role=skyBlue] *SEND* to send the message. 
+
+[#message-capture-minutes]
+==== Capturing minutes for the message
+
+Proceed as described below to capture minutes for the message. You can then decide whether the minutes are free minutes or paid minutes.
+
+Capturing minutes is only possible for whispered messages.
+
+[.instruction]
+Capturing minutes for the message:
+
+. Go to *CRM » Contacts*.
+. Search for the contact that you want to edit by means of the filter settings. Note the explanations about the filters on the xref:crm:search-contact.adoc#[Searching for a contact] page. +
+→ The contacts that correspond to the search criteria entered are displayed.
+. Click in the line of the contact to open the data record.
+. On the left side, click on *Messenger*.
+. Click on *New message* (material:add[]). +
+→ The messenger opens.
+. Select one ore multiple recipients. +
+*_Note:_* The ID of the contact is already prefilled as recipient. This way, the email will be sent to the email address that is saved in the invoice address.
+. Enter more recipients, if needed.
+. Enter a subject.
+. Enter the text. +
+→ Double-click on the word to use formatting options for your message.
+. Click on material:attach_file[] *Add attachments* to add a file, if needed.
+. Click on material:more_vert[] and then activate (material:toggle_on[role=skyBlue]) the option *Capture minutes*. +
+*_Note:_* The button changes to material:visibility_off[role=skyBlue] *CAPTURE MINUTES*.
+. Click on material:visbility_off[role=skyBlue] *CAPTURE MINUTES* to capture the minutes for the message. +
+→ The *Capture minutes* window opens.
+. Adjust the minutes, if necessary.
+. Select (material:radio_button_checked[role=skyBlue]) whether the minutes are *Free minutes* or *Paid minutes*.
+. Assign tags to the message, if needed.
+. Click on *CAPTURE AND SAVE*.
 
 [#options]
 === Options
@@ -1464,8 +1552,7 @@ a| Sends the template selected from the drop-down list to all activated contacts
 
 //| *Save payment due date*
 //|Saves the entered payment due date in the contact data record of all activated contacts. +
-//*_Note_*: If you select contacts here and do _not enter a value_, the values that have been saved so far are _deleted_ for the selected contacts. +
-// You can find a detailed <<#step-by-step, step-by-step guide>> on how to save the payment due date using the group function below this table.
+//*_Note_*: If you select contacts here and do _not enter a value_, the values that have been saved so far are _deleted_ for the selected contacts. + You can find a detailed <<#step-by-step, step-by-step guide>> on how to save the payment due date using the group function below this table.
 
 |====
 
@@ -1533,7 +1620,7 @@ Adding multiple email addresses to a newsletter folder:
 → The contacts that correspond to the search criteria entered are displayed.
 . Select (material:check_box[role=skyBlue]) the contacts whose email addresses you want to add to a certain newsletter folder.
 . In the toolbar, click on *Add to newsletter folder* (material:post_add[]). +
-→ The window *Add to newsletter folder* opens.
+→ The *Add to newsletter folder* window opens.
 . Select the newsletter folder from the drop-down list.
 . Click on *Execute*. +
 → The email addresses of the selected contacts are added to the newsletter folder.
@@ -1544,6 +1631,8 @@ Adding multiple email addresses to a newsletter folder:
 ====
 
 ////
+
+ 
 
 Saving the payment due date for multiple contacts::
 +
