@@ -25,13 +25,12 @@ Gruppenfunktionen nutzen:
 
 . Öffne das Menü *Aufträge » Aufträge (Testphase)*.
 . Führe die Suche (material:search[]) aus, um Aufträge anzuzeigen.
-. Wähle (material:done[]) alle Aufträge, für die du gesammelt eine Aktion ausführen möchtest.
+. Wähle (material:check_box[role=skyBlue]) alle Aufträge, für die du gesammelt eine Aktion ausführen möchtest.
 . Wähle eine der verfügbaren Gruppenfunktionen. Beachte dazu die Erläuterungen in <<table-order-group-functions>>.
 
 [TIP]
 .Standard-Gruppenfunktionen wählen
-Im Bearbeitungsmodus (terra:design_inline_edit[role="darkGrey"]) der Auftragsübersicht kannst du
-*Standard-Gruppenfunktionen* festlegen, die beim Wählen von Aufträgen direkt sichtbar werden. Alle übrigen Gruppenfunktionen werden automatisch in das Kontextmenü (material:more_vert[]) verlagert.
+Im Bearbeitungsmodus (terra:design_inline_edit[role="darkGrey"]) der Auftragsübersicht kannst du *Standard-Gruppenfunktionen* festlegen, die beim Wählen von Aufträgen direkt sichtbar werden. Alle übrigen Gruppenfunktionen werden automatisch in das Kontextmenü (material:more_vert[]) verlagert.
 
 [[table-order-group-functions]]
 .Gruppenfunktionen für Aufträge
@@ -59,7 +58,7 @@ Im Bearbeitungsmodus (terra:design_inline_edit[role="darkGrey"]) der Auftragsüb
 |material:delete[]
 |Löscht alle gewählten Aufträge.
 
-2+^| *Kontextmenü* (material:more_vert[])
+3+^| *Kontextmenü* (material:more_vert[])
 | *Warenausgang zurückbuchen*
 |material:book[]
 |Bucht den Warenausgang von allen gewählten Aufträgen zurück.
@@ -92,24 +91,45 @@ Rechts in der Auftragsübersicht sind je nach Auftragstyp weitere Funktionen üb
 
 [[table-context-menu-functions]]
 .Weitere Funktionen für Aufträge
-[cols="1,3"]
+[cols="2,1,6a"]
 |===
 
-|Einstellung |Erläuterung
+|Einstellung |Symbol |Erläuterung
 
 | *Dokument erstellen*
+|material:add[]
 |Ermöglicht das Erstellen von Dokumenten. Je nach Auftragstyp sind verschiedene Dokumente verfügbar.
 
+| *Status ändern*
+|material:repeat_one[]
+|Ermöglicht das Ändern des Status für einen Auftrag. Wähle einen anderen Status aus der Dropdown-Liste.
+
 | *Warenausgang buchen*
-|Bucht den Warenausgang.
+|material:output[]
+|Bucht den Warenausgang. Das aktuelle Datum sowie die Uhrzeit der Buchung wird angezeigt. Wähle bei Bedarf ein anderes Buchungsdatum oder eine andere Uhrzeit über den Kalender (material:today[]).
 
 | *Referenzierte Bestellungen anzeigen*
-|Zeigt die verknüpften Bestellungen an.
+|material:account_tree[]
+|Zeigt die Auftragsreferenzen an. Konfiguriere (material:settings[]) die Spalten der Tabelle bei Bedarf.
 
 | *Zahlung buchen*
-|Ermöglicht das Buchen einer Zahlung.
+|material:payment[]
+|Ermöglicht das Buchen einer Zahlung. Gib die Daten der Zahlung ein, die du buchen möchtest.
+
+| *Warenbestand ermitteln*
+|material:warehouse[]
+|Zeigt den Warenbestand sowie eventuelle Nachbestellungen für das Lager der Auftragsposition an. Klappe die Zeilen aus (material:chevron_right[]), um weitere Informationen zum Warenbestand zu sehen.
+
+| *Tracking-Link öffnen*
+|terra:shipment_tracking[]
+|Öffnet den Tracking-Link der Paketnummern.
+
+| *Auftrag im Versand-Center öffnen*
+|terra:outgoing_items[]
+|Öffnet den Auftrag im Versand-Center 2.0.
 
 | *Auftrag löschen*
+|material:delete[]
 |Ermöglicht das Löschen eines Auftrags. Beachte, dass Aufträge unter Umständen nicht gelöscht werden können.
 
 |===
@@ -127,6 +147,7 @@ Mit einem Klick auf einen Eintrag in der folgenden Liste gelangst du direkt in d
 * <<#area-status-tags, Status und Tags>>
 * <<#area-general, Allgemein>>
 * <<#area-addresses, Adressen>>
+* <<#area-messenger, Messenger>>
 * <<#area-order-items, Auftragspositionen>>
 * <<#area-payment-terms, Zahlungsbedingungen>>
 * <<#area-bank-data, Bankdaten>>
@@ -287,8 +308,8 @@ Die Standardeinstellung für für die Herkunft ist *0.00 Manuelle Eingabe*.
 | *Zahlungsart*
 |Zeigt die Zahlungsart an. Wähle die gewünschte Zahlungsart aus der Dropdown-Liste. Standardmäßig ist die Option *Vorkasse* vorausgewählt.
 
-| *Externe Auftragsnummer*
-|Zeigt die externe Auftragsnummer an.
+| *Externe Auftrags-ID*
+|Zeigt die externe ID des Auftrags an.
 
 | *Währung*
 |Zeigt die Währung an. +
@@ -307,8 +328,9 @@ Die Standardeinstellung für die Währung ist *Euro (EUR)*.
 |Gib ein Rückgabedatum ein oder wähle ein Datum über den Kalender (material:today[]).
 
 | *Paketnummern*
-|Gib eine Paketnummer ein. +
-Über *Versand-Center öffnen* (terra:outgoing_items[]) gelangst du direkt ins xref:fulfillment:versand-center-2-0.adoc#[Versand-Center 2.0].
+|Zeigt die Paketnummern kommasepariert an.
+Über *Tracking-Link öffnen* (terra:shipment_tracking[]) wird der Tracking-Link der Paketnummern geöffnet. +
+Über *Versand-Center öffnen* (terra:outgoing_items[]) wird der Auftrag im xref:fulfillment:versand-center-2-0.adoc#[Versand-Center 2.0] geöffnet.
 
 | *Mahnstufe*
 |Zeigt die Mahnstufe an. +
@@ -330,6 +352,30 @@ In der Dropdown-Liste kannst du zwischen *Keine* und *Stufe 1* bis *Stufe 4* wä
 |Zeigt die Paketnummern einer Retoure kommasepariert an. Dieses Feld ist nur für den Auftragstyp *Retoure* verfügbar. Mit Klick auf terra:order_return[] wirst du zum Versand-Center 2.0 weitergeleitet.
 
 |===
+
+==== Pakete via Tracking-Link verfolgen
+
+Über den an der Paketnummer hinterlegten Tracking-Link kannst du die Pakete deiner Aufträge verfolgen und somit sehen, wo sich deine Ware gerade befindet. Um Pakete zu verfolgen, gehe vor wie folgt.
+
+[.instruction]
+Pakete via Tracking-Link verfolgen:
+
+. Öffne das Menü *Aufträge » Aufträge (Testphase)*.
+. Führe die Suche (material:search[]) aus, um Aufträge anzuzeigen.
+. Klicke oben rechts auf *Spalten konfigurieren* (material:settings[]).
+. Wähle die Option *Tabelle Auftragsübersicht*.
+. Wähle (icon:check[]) die Spalte *Paketnummern*.
+. Klicke auf *Bestätigen*. +
+→ Die Spalte *Paketnummern* wird mit den kommaseparierten Paketnummern des Auftrags in der Auftragsübersicht angezeigt.
+. Klicke in der Zeile des Auftrags auf eine Paketnummer. +
+icon:map-signs[] *_Oder:_* Klicke in der Zeile des Auftrags auf das Kontextmenü (material:more_vert[]) und wähle die Option *Tracking-Link öffnen* (terra:shipment_tracking[]).
+→ Der Tracking-Link wird geöffnet.
+
+[TIP]
+.Tracking-Link bei mehreren Paketnummern splitten
+======
+Aktiviere im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* die Option *URLs splitten*, wenn ein Tracking-Link bei mehreren Paketnummern gesplittet werden soll. In diesem Fall wird für jede Paketnummer ein separater Link verwendet. Ist die Option nicht aktiviert, gibt es einen gemeinsamen Tracking-Link für alle Paketnummern.
+======
 
 [#area-addresses]
 === Bereich: Adressen
@@ -429,6 +475,93 @@ Andere Adresse zuweisen:
 
 * Rechnungsadresse: *E-Mail-Adresse* und *Telefonnummer*
 * Lieferadresse: alle Felder außer *Umsatzsteuernummer* und *Land*
+
+[#area-messenger]
+=== Bereich: Messenger
+
+Im Bereich *Messenger* siehst du alle zum Auftrag gehörigen Nachrichten. Du kannst Nachrichten <<#nachricht-fluestern, flüstern>>, sodass sie nur intern sichtbar sind und _nicht_ für deine Kund:innen. Du kannst Nachrichten <<#nachricht-senden, senden>> und du kannst <<#nachricht-minuten-erfassen, Minuten für die Nachricht erfassen>> und diese Minuten als Freiminuten oder bezahlte Minuten speichern.
+
+Mit einem Klick auf die bereits erstellte Nachricht wird die Konversation im Messenger geöffnet. Dort kannst du weitere Einstellungen vornehmen. Weitere Informationen findest du auf der Handbuchseite xref:crm:messenger-testphase.adoc#[Messenger (Testphase)].
+
+[#nachricht-fluestern]
+==== Nachricht flüstern
+
+Gehe wie im Folgenden beschrieben vor, um eine Nachricht zu flüstern.
+
+[.instruction]
+Nachricht flüstern:
+
+. Öffne das Menü *Aufträge » Aufträge (Testphase)*.
+. Führe die Suche (material:search[]) aus, um Aufträge anzuzeigen.
+. Öffne den Auftrag, für den du eine Nachricht flüstern möchtest.
+. Klicke auf der linken Seite auf *Messenger*.
+. Klicke auf *Neue Nachricht* (material:add[]). +
+→ Der Messenger wird geöffnet.
+. Wähle einen oder mehrere Empfänger:innen. +
+*_Hinweis:_* Die ID des Auftrags ist bereits als Empfänger vorausgefüllt. Somit wird die E-Mail an die in der Rechnungsadresse gespeicherte E-Mail-Adresse gesendet.
+. Gib bei Bedarf weitere Empfänger:innen ein.
+. Gib einen Betreff ein.
+. Gib den Text ins Textfeld ein. +
+→ Mit einem Doppelklick auf das Wort stehen dir Formatierungsmöglichkeiten für deine Nachricht zur Verfügung.
+. Füge optional mit einem Klick auf material:attach_file[] *Anhänge hinzufügen* eine Datei an.
+. Klicke auf material:visibility_off[] *FLÜSTERN*, um die Nachricht zu flüstern.
+
+[#nachricht-senden]
+==== Nachricht senden
+
+Gehe wie im Folgenden beschrieben vor, um eine Nachricht zu senden.
+
+[.instruction]
+Nachricht senden:
+
+. Öffne das Menü *Aufträge » Aufträge (Testphase)*.
+. Führe die Suche (material:search[]) aus, um Aufträge anzuzeigen.
+. Öffne den Auftrag, für den du eine Nachricht senden möchtest.
+. Klicke auf der linken Seite auf *Messenger*.
+. Klicke auf *Neue Nachricht* (material:add[]). +
+→ Der Messenger wird geöffnet.
+. Wähle einen oder mehrere Empfänger:innen. +
+*_Hinweis:_* Die ID des Auftrags ist bereits als Empfänger vorausgefüllt. Somit wird die E-Mail an die in der Rechnungsadresse gespeicherte E-Mail-Adresse gesendet.
+. Gib bei Bedarf weitere Empfänger:innen ein.
+. Gib einen Betreff ein.
+. Gib den Text ins Textfeld ein. +
+→ Mit einem Doppelklick auf das Wort stehen dir Formatierungsmöglichkeiten für deine Nachricht zur Verfügung.
+. Füge optional mit einem Klick auf material:attach_file[] *Anhänge hinzufügen* eine Datei an.
+. Klicke auf material:visibility_off[] *Flüster-Modus*, um den Flüster-Modus auszuschalten. +
+*_Hinweis:_* Die Schaltfläche ändert sich von material:visibility_off[] *FLÜSTERN* in material:forward_to_inbox[role=skyBlue] *SENDEN*.
+. Klicke auf material:forward_to_inbox[role=skyBlue] *SENDEN*, um die Nachricht zu senden.
+
+[#nachricht-minuten-erfassen]
+==== Minuten für die Nachricht erfassen
+
+Gehe wie im Folgenden beschrieben vor, um Minuten für die Nachricht zu erfassen. Du kannst dann entscheiden, ob es sich bei diesen Minuten um Freiminuten oder bezahlte Minuten handelt.
+
+Das Erfassen von Minuten ist nur bei geflüsterten Nachrichten möglich.
+
+[.instruction]
+Minuten für die Nachricht erfassen:
+
+. Öffne das Menü *Aufträge » Aufträge (Testphase)*.
+. Führe die Suche (material:search[]) aus, um Aufträge anzuzeigen.
+. Öffne den Auftrag, für den du eine Nachricht mit erfassten Minuten erstellen möchtest.
+. Klicke auf der linken Seite auf *Messenger*.
+. Klicke auf *Neue Nachricht* (material:add[]). +
+→ Der Messenger wird geöffnet.
+. Wähle einen oder mehrere Empfänger:innen. +
+*_Hinweis:_* Die ID des Auftrags ist bereits als Empfänger vorausgefüllt. Somit wird die E-Mail an die in der Rechnungsadresse gespeicherte E-Mail-Adresse gesendet.
+. Gib bei Bedarf weitere Empfänger:innen ein.
+. Gib einen Betreff ein.
+. Gib den Text ins Textfeld ein. +
+→ Mit einem Doppelklick auf das Wort stehen dir Formatierungsmöglichkeiten für deine Nachricht zur Verfügung.
+. Füge optional mit einem Klick auf material:attach_file[] *Anhänge hinzufügen* eine Datei an.
+. Klicke auf material:more_vert[] und aktiviere (material:toggle_on[role=skyBlue]) dann die Option *Minuten erfassen*. +
+*_Hinweis:_* Die Schaltfläche ändert sich in material:visibility_off[role=skyBlue] *MINUTEN ERFASSEN*.
+. Klicke auf material:visibility_off[role=skyBlue] *MINUTEN ERFASSEN*, um die Minuten für die Nachricht zu erfassen. +
+→ Das Fenster *Minuten erfassen* wird geöffnet.
+. Passe ggf. die Minuten an.
+. Wähle (material:radio_button_checked[role=skyBlue]), ob es sich um *Freiminuten* oder *Bezahlte Minuten* handelt.
+. Weise der Nachricht ggf. Tags zu.
+. Klicke auf *ERFASSEN UND SPEICHERN*.
 
 [#area-order-items]
 === Bereich: Auftragspositionen
@@ -603,7 +736,8 @@ Mit Klick auf die ID wird die Variante geöffnet.
 |Zeigt die Nummer der Variante an.
 
 | *Artikelname*
-|Zeigt den Namen des Artikels an.
+|Zeigt den Namen des Artikels an. +
+Passe den Namen bei Bedarf im Eingabefeld an.
 
 | *Attribute*
 |Zeigt die Attribute an.
@@ -649,9 +783,24 @@ Mit Klick auf die ID wird die Variante geöffnet.
 | *Lager*
 |Zeigt das Lager an. Wähle bei Bedarf ein anderes Lager aus der Dropdown-Liste.
 
-|*USt. (%)*
+| *USt. [%]*
 |Die Umsatzsteuer wird in % angezeigt. +
 Voreingestellt sind 19.00 %. Über die Dropdown-Liste kannst du den Steuersatz ändern.
+
+| *Gewicht [g]*
+|Zeigt das Gewicht des Artikels in Gramm an. +
+Passe das Gewicht bei Bedarf im Eingabefeld an.
+
+| *Länge [mm]*
+|Zeigt die Länge des Artikels in mm an. +
+Passe die Länge bei Bedarf im Eingabefeld an.
+
+| *Breite [mm]*
+|Zeigt die Breite des Artikels in mm an. +
+Passe die Breite bei Bedarf im Eingabefeld an.
+
+| *Aktionen*
+|Stellt rechts im Kontextmenü (material:more_vert[]) weitere Aktionen für die Artikel zur Verfügung.
 
 2+^| *Auftragspositionen löschen*
 
@@ -948,8 +1097,8 @@ Im Bereich *Dokumente* siehst du alle vorhandenen sowie archivierten Dokumente d
 | *Anzeigedatum*
 |Zeigt das Datum an, das auf dem Dokument ausgewiesen wird.
 
-| *Kontextmenü* (material:more_vert[])
-|Über das Kontextmenü kannst du ein Dokument herunterladen (material:file_download[]).
+| *Aktionen*
+|Ermöglicht das *Archivieren* und *Herunterladen* des Dokuments über das Kontextmenü (material:more_vert[]).
 |===
 
 [NOTE]
