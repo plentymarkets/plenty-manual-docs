@@ -1435,11 +1435,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedDocuments.invoice`
 | -
 
-| `Anzahl der Pakete`
-|Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
-| `order.package`
-| 
-
 | `Gesamtrechnungsbetrag netto`
 |
 | `order.formattedGeneral.invoiceTotalNet`
@@ -1449,6 +1444,11 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 |
 | `order.formattedGeneral.totalNet`
 | $OrderTotalNet
+
+| `Anzahl der Pakete`
+|Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
+| `order.package`
+| 
 
 | `Offener Betrag`
 |
@@ -1554,7 +1554,7 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedGeneral.totalVat`
 | $TotalVAT
 
-| `Wert der Artikel`
+| `Wert des Artikels`
 |
 | `order.formattedGeneral.valueOfItems`
 | $ValueOfItems
@@ -1611,6 +1611,10 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressFullName
 
+| `Lieferadresse Hausnummer`
+| `order.formattedAddresses.deliveryAddress.address2`
+|
+
 | `Lieferadresse Nachname`
 | `order.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressLastName
@@ -1634,10 +1638,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `Lieferadresse Straße`
 | `order.formattedAddresses.deliveryAddress.address1`
 | $DeliveryAddressStreet
-
-| `Lieferadresse Hausnummer`
-| `order.formattedAddresses.deliveryAddress.address2`
-|
 
 | `Lieferadresse Ort`
 | `order.formattedAddresses.deliveryAddress.town`
@@ -1690,6 +1690,10 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
 | $BillingAddressFullName
 
+| `Rechnungsadresse Hausnummer`
+| `order.formattedAddresses.invoiceAddress.address2`
+|
+
 | `Rechnungsadresse Nachname`
 | `order.formattedAddresses.invoiceAddress.name3`
 | $BillingAddressLastName
@@ -1712,10 +1716,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 | `Rechnungsadresse Straße`
 | `order.formattedAddresses.invoiceAddress.address1`
-|
-
-| `Rechnungsadresse Hausnummer`
-| `order.formattedAddresses.invoiceAddress.address2`
 |
 
 | `Rechnungsadresse Ort`
@@ -1920,11 +1920,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `orderItem.orderItemName`
 | $ItemName
 
-| `Artikeltyp`
-|Gibt den Artikeltypen aus, der im Artikel im Tab *Global* gespeichert ist. Mögliche Werte: Standard, Set, Multipack.
-| `orderItem.formattedStockType`
-|
-
 | `Artikelnummer`
 |
 | `orderItem.variation.item.ArtNo`
@@ -1949,6 +1944,11 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 |
 | `orderItem.quantity`
 | $ItemQuantity
+
+| `Artikeltyp`
+|Gibt den Artikeltypen aus, der im Artikel im Tab *Global* gespeichert ist. Mögliche Werte: Standard, Set, Multipack.
+| `orderItem.formattedStockType`
+|
 
 | `Herstellername`
 |Name des xref:artikel:hersteller.adoc#[Herstellers.]
@@ -2015,11 +2015,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `orderItem.formattedAmounts.totalPrice`
 | -
 
-| `Grundpreis`
-|
-| `orderItem.formattedUnit.unitPrice`
-|-
-
 | `URL zum Variantenbild`
 |Gibt die URL zum Variantenbild aus.
 | `orderItem.formattedImageUrl`
@@ -2029,6 +2024,11 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 |
 | `orderItem.formattedUnit.unitName`
 | -
+
+| `Grundpreis`
+|
+| `orderItem.formattedUnit.unitPrice`
+|-
 
 | `Mehrwertsteuersatz`
 |
@@ -2154,20 +2154,21 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
+| `Enddatum des Abonnements`
+|Ende des Abonnements.
+| `order.formattedSubscription.endDate`
+| $SchedulerEndDate
+
 | `Abonnement-ID`
 |ID des Abonnements. Wird automatisch vom System vergeben und kann _nicht_ geändert werden.
 | `order.formattedSubscription.id`
 | $SchedulerID
 
-| `Startdatum des Abonnements`
-|Beginn des Abonnements.
-| `order.formattedSubscription.startDate`
-| $SchedulerStartDate
-
-| `Enddatum des Abonnements`
-|Ende des Abonnements.
-| `order.formattedSubscription.endDate`
-| $SchedulerEndDate
+| `Abonnementintervall`
+|Intervall des Abonnements wie im Menü *Einrichtung » Aufträge » Abonnement* festgelegt. Das Intervall legt fest, in welchen Zeitabständen Artikel an Kund:innen versendet werden. + 
+Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
+| `order.formattedSubscription.interval`
+| $SchedulerInterval
 
 | `Abonnement: Anzahl der Ausführungen`
 |Anzahl der Aufträge, die basierend auf einem Abonnement, angelegt wurde. +
@@ -2175,11 +2176,10 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedSubscription.numberOfExecutions`
 | $SchedulerExecutionCount
 
-| `Abonnementintervall`
-|Intervall des Abonnements wie im Menü *Einrichtung » Aufträge » Abonnement* festgelegt. Das Intervall legt fest, in welchen Zeitabständen Artikel an Kund:innen versendet werden. + 
-Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
-| `order.formattedSubscription.interval`
-| $SchedulerInterval
+| `Startdatum des Abonnements`
+|Beginn des Abonnements.
+| `order.formattedSubscription.startDate`
+| $SchedulerStartDate
 
 | `Gesamtbetrag des Abonnements`
 |
@@ -2357,6 +2357,10 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 | `contact.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressFullName
 
+| `Lieferadresse Hausnummer`
+| `contact.formattedAddresses.deliveryAddress.address2`
+|
+
 | `Lieferadresse Nachname`
 | `contact.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressLastName
@@ -2380,10 +2384,6 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 | `Lieferadresse Straße`
 | `contact.formattedAddresses.deliveryAddress.address1 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address2`
 | $DeliveryAddressStreet
-
-| `Lieferadresse Hausnummer`
-| `contact.formattedAddresses.deliveryAddress.address2`
-|
 
 | `Lieferadresse Ort`
 | `contact.formattedAddresses.deliveryAddress.town`
@@ -2435,6 +2435,10 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 | `contact.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.name3`
 |
 
+| `Rechnungsadresse Hausnummer`
+| `contact.formattedAddresses.invoiceAddress.address2`
+|
+
 | `Rechnungsadresse Nachname`
 | `contact.formattedAddresses.invoiceAddress.name3`
 |
@@ -2457,10 +2461,6 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 
 | `Rechnungsadresse Straße`
 | `contact.formattedAddresses.invoiceAddress.address1 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address2`
-|
-
-| `Rechnungsadresse Hausnummer`
-| `contact.formattedAddresses.invoiceAddress.address2`
 |
 
 | `Rechnungsadresse Ort`
