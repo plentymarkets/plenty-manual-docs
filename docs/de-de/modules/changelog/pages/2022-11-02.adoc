@@ -6,7 +6,7 @@
 :startWeekDate: 27. Oktober 2022
 :endWeekDate: 2. November 2022
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/prozesse-fehler-code-1010-beim-laden-von-auftraegen-behoben-processes-fixed-error-code-1010-when-loading-orders/700060
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -37,6 +37,21 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 ** die Schaltfläche *Auftrag neu laden* innerhalb der Detailansicht eines Auftrags geklickt wird,
 ** der Auftrag aus der Seitennavigation entfernt wird
 ** oder das *Aufträge*-Tab geschlossen wird.
+
+[discrete]
+=== bol.com
+
+* Die Schnittstelle zu bol.com wurde auf Version v8 aktualisiert. Dieses Update betrifft nur die Erstellung und Aktualisierung von Produkten (keine Angebote oder Auftragsprozesse). Aus dem Update ergeben sich folgende Änderungen:
+** Artikel werden jetzt einzeln an bol.com übertragen und nicht mehr in 100er-Paketen.
+** Mit dem Assistenten können jetzt auch neue Katalog-Formate von bol.com erstellt werden.
+** Einige Katalog-Formate wurden geändert und einige Datenfelder wurden umbenannt.
+
++
+[NOTE]
+.Kein To-Do
+======
+Hieraus ergeben sich für dich keine To-Dos. Alle Datenfelder, die geändert oder umbenannt wurden, wurden migriert.
+======
 
 [discrete]
 === Check24
@@ -71,6 +86,37 @@ Wie du Datenfelder im Katalog verknüpfst, findest du auf der Handbuchseite xref
 '''
 
 [discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Cloud
+
+* Der Menüpunkt *Hosting* welcher im Backend im Menü des plenty-Logos zu finden war, wird nun im Dashboard unter dem Menüpunkt *Cloud-Verbrauch* angezeigt.
++
+image:cloud-hosting-dashboard.png[width=640]
+
+[discrete]
+=== CRM
+
+* Im Assistenten *Messenger-Konfiguration* wurde der Schritt *Testmodus* auf inaktiv setzen entfernt. In diesem Schritt hast du genau dieselbe Einstellung vorgenommen wie im Assistenten *E-Mail-Konten* im Schritt *Zugangsdaten* und dort im Bereich *Möchtest du den Live-Modus aktivieren?*.
++
+Daher haben wir entschieden, die Einstellung zum Aktivieren des Live-Modus aus dem Assistenten *Messenger-Konfiguration* zu entfernen.
++
+Hintergrund: Die erste Anlaufstelle zum Einrichten des E-Mail-Versands ist der Assistent *E-Mail-Konten*. Wenn dort alle Einstellungen korrekt vorgenommen wurden, du den E-Mail-Versand gestestet hast und dann den Live-Modus aktiviert hast, ist es nicht mehr notwendig diesen Schritt im Assistenten *Messenger-Konfiguration* zu wiederholen. Das Aktivieren des Live-Modus gilt global für den gesamten E-Mail-Versand in plentymarkets.
+
+[discrete]
+==== OTTO
+
+:otto-master-date: 28.10.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/3UPikEK8PU6mfdbGM60keXjtOFy.xlsx
+
+include::partial$otto-master-file.adoc[]
+
+'''
+
+[discrete]
 == Behoben
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
@@ -82,9 +128,16 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * Alte Zahlungsarten wurden in der neuen Auftragsübersicht und in den Auftragsdetails nicht angezeigt. Dieses Verhalten wurde behoben.
 
 [discrete]
+=== CRM
+
+* Im Assistenten *E-Mail-Konten* kam es zu einem Fehler im Schritt *Infodienst*. Wenn man dort eine E-Mail-Adresse gespeichert hatte und den Assistenten erneut geöffnet hat, wurde nicht die E-Mail-Adresse angezeigt, sondern nur das Zeichen '-'. Dieses Verhalten wurde behoben.
+* Bei einigen Systemen wurden beim Versand von E-Mail-Vorlagen die dynamischen Anhänge während des Versands umbenannt. Dieses Verhalten wurde behoben.
+
+[discrete]
 === Prozesse
 
 * In der Aktion *Wareneingang (einfach)* gab es beim Einbuchen von Artikeln sowie beim Drucken von Artikeletiketten ein Problem, wenn am Artikel kein Preis hinterlegt war. Dieses Verhalten wurde behoben.
+* Beim Laden von Aufträgen konnte es zum Fehler-Code `1010` kommen, wenn ein Auftrag keine Lieferadresse hatte. Dieser Fehler wurde behoben. Außerdem wird nun die Rechnungsadresse angezeigt, sollte es keine Lieferadresse geben. Der Tooltip an der Adresse zeigt an, welche Adresse dargestellt wird.
 
 --
 
@@ -99,7 +152,21 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* In der neuen Auftrags-UI ist jetzt möglich, den Artikelnamen, das Gewicht, die Länge und die Breite in der Artikeltabelle zu bearbeiten. Diese Möglichkeit steht dir im zweiten Schritt der Auftragsanlage oder in der Ansicht Artikel bearbeiten eines Auftrags zur Verfügung.
+* Im Bearbeitungsmodus für die Auftragsübersicht wurde eine Einstellung hinzugefügt, um die Tabelle der Auftragspositionen für alle Aufträge immer ausgeklappt anzuzeigen.
+* In der Auftragsübersicht der neuen Auftrags-UI ist es jetzt möglich, einen neuen Auftrag anzulegen.
+* Die Benutzeroberfläche zum Erstellen von Aufträgen wurde überarbeitet. In diesem Schritt wurde die Möglichkeit hinzugefügt, Gastbestellungen anzulegen und nach Kontakten zu suchen.
+* Beim Erstellen von Gutschriften und Gewährleistungen in der neuen Auftrags-UI ist jetzt möglich, die Versandkosten anzupassen.
+* In der Übersicht der neuen Auftrags-UI kannst du jetzt definieren, welche Menüfunktionen für Aufträge direkt als Icon angezeigt werden sollen und welche Funktionen im Kontextmenü verfügbar sein sollen.
+* In der Übersicht der neuen Auftrags-UI ist es jetzt möglich, die Paketnummern anzuzeigen, den Tracking-Link zu öffnen und das Versand-Center zu öffnen.
+
+[discrete]
+=== Payment
+
+* Es ist nun möglich, Zahlungen nicht nur unter Verwendung der Auftrags-ID, sondern auch anhand der Rechnungsnummer zuzuordnen. Wähle dazu im 3-Punkte-Menü die entsprechende Option aus.
 
 '''
 
@@ -108,7 +175,10 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Payment
 
+* Wenn du dir im Menü Zahlungsverkehr die Filter anzeigen lässt, werden diese nun in zwei Spalten statt wie bisher in einer angezeigt. Dadurch wird verhindert, dass der Suchen-Button unerreichbar wird. Zusätzlich wurden die Filter überarbeitet, sodass nun der Abfrageoperator bei den Filtern selbst gewählt werden kann. So ist es bspw. Möglich nach mehreren Zahlungsarten gleichzeitig zu filtern.
 
 '''
 
@@ -117,7 +187,15 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* Es war möglich, eine Auftragseigenschaft mit einem leerem String zu aktualisieren. Dies wurde behoben. Auftragseigenschaften mit leeren Strings werden nun beim Aktualisieren und Anlegen ignoriert.
+
+[discrete]
+=== CRM
+
+* Im Kontaktdatensatz gab es ein Problem beim Speichern der Schaltflächen zum Erlauben bzw. Nicht-erlauben der Zahlungsarten *Lastschrift* und *Rechnung* im Portlet *Kontaktdetails*. Dieses Verhalten wurde behoben.
 
 --
 
@@ -131,13 +209,50 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/elasticexportfashionde_4742[Fashion.de^]
+|1.0.15
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.4.21
+|-
+
+|link:https://marketplace.plentymarkets.com/mytoys_54776[myToys^]
+|1.0.54
+|-
+
+|link:https://marketplace.plentymarkets.com/payone_5434[PAYONE^]
+|2.5.3
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.0.22
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.12.6
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.2.7
+|-
 
 |===
 
 Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+App::
++
+--
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in Version 1.11.32 der *plentymarkets App* behoben.
+
+* Es war nicht möglich, die Zahlungsart POS Kauf auf Rechnung zu verwenden. Dieses Verhalten wurde behoben.
 
 --
 
