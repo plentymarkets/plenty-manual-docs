@@ -1317,8 +1317,6 @@ The available variables for the EmailBuilder are grouped into the following cate
 
 * <<#variables-ticket, Ticket>>
 
-* <<#variables-messenger, Messenger>>
-
 [#variables-order]
 ==== Variables: Order general
 
@@ -2313,6 +2311,13 @@ As an alternative, you can find the saved bank name in the *Setup » Settings »
 |Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Cancellation rights* tab and save the text in the *Text* tab.
 | `globals.legalInformation.cancellationRights.plain`
 
+| `Client ID`
+|Returns the ID of the client (shop).
+| `globals.clientId`
+
+| `Client name`
+|Returns the name of the client (shop).
+| `globals.clientName`
 
 | `Coupon code (1)`
 | xref:orders:coupons.adoc#[Coupon codes] are generated in the campaign in the *Orders » Coupons* menu. A coupon code can always be assigned to only one campaign to send this coupon code from the campaign in an email template.
@@ -2510,45 +2515,6 @@ As an alternative, you can find the saved IBAN in the *Setup » Settings » Bank
 |Links to the ticket in the *My account* area. The customer can read the message in the My account area, write an answer and send it. +
 Note also the xref:crm:using-the-ticket-system.adoc#5500[Creating tickets in the My account area] chapter on the xref:crm:using-the-ticket-system.adoc#[Ticket system] page.
 | `ticket.formattedUrl.url`
-
-|====
-
-[#variables-messenger]
-==== Variables: Messenger
-
-[[table-variables-messenger]]
-.Variables in the *Messenger* category
-[cols="2,5,2"]
-|====
-|Name of the variable |Explanation |Twig expression
-
-| `Message content`
-|
-| `messenger.message \| raw`
-
-| `Message conversation ID`
-|Serves as unique identifier to make sure that the message is always correctly assigned. This is why this variable should not be removed from the template.
-| `messenger.conversationId`
-
-| `Has billed messages`
-|
-| `messenger.metaData.timeCapture.chargeable ? trans('module_mail_templates::Widget.confirm', [], params.lang) : trans('module_mail_templates::Widget.notConfirm', [], params.lang)`
-
-| `Message minutes`
-|
-| `messenger.metaData.timeCapture.minutes`
-
-| `Message preview`
-|
-| `messenger.preview`
-
-| `Message subject`
-|
-| `messenger.title`
-
-| `Message ID`
-|
-| `messenger.uuid`
 
 |====
 
