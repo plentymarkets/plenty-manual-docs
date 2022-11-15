@@ -166,28 +166,54 @@ Deleting an email template that is linked with an event in the *Automatic despat
 ====
 
 [.collapseBox]
-.Explanations about some events for the automatic despatch in the *Automatic despatch* step of the *Email accounts* assistant 
+.Explanations about the available events for the automatic despatch in the *Automatic despatch* step of the *Email accounts* assistant 
 --
 
 [[table-events-automatic-email-despatch]]
-.Explanations about some events for the automatic despatch
+.Explanations about the events for the automatic despatch
 [cols="1,3"]
 |====
 |Setting |Explanation
 
 | *Send customer email to change password*
-|The contacts receive an email with a link to the new password. The link has to be actively confirmed. The variable `URL to change password` has to be contained in the template. +
+|If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, an email with an URL to the new password will be sent to your customers once this event is triggered. This link has to be confirmed. +
+The variable `URL to change password` has to be contained in the template. +
+*_Note:_* You can find the variable in the <<#variables-global, Global>> category.
+
+| *Confirmation of password change*
+|If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they change their password. +
+Inserting a variable here is not mandatory. It would be useful, however, to add the URL to your online shop (`URL to online shop`). +
+*_Note:_* You can find the variable in the <<#variables-global, Global>> category.
+
+| *Customer wants to change email address*
+|If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they change their email address in your online shop and enter the new email address. +
+Therefore, the template should contain the variable `URL to confirm email address`. +
 *_Note:_* You can find the variable in the <<#variables-global, Global>> category.
 
 | *Newsletter opt-in*
-|The contacts receive an email when they have registered for the newsletter. The template should include the confirmation link that the contacts have to click in order to complete the newsletter registration process: `URL to confirm newsletter subscription`. +
+|If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, an email will be sent to your customers once they registered for the newsletter. The template should contain the variable `URL for confirming the newsletter receipt`; thus, the confirmation link that the contacts have to click in order to complete the newsletter registration process. +
 *_Note:_* You can find the variable in the <<#variables-newsletter, Newsletter>> category.
 
 | *Newsletter opt-in confirmation*
-|The contacts receive a confirmation email once they have activated the confirmation link that was sent with the email template for the *Newsletter opt-in* event.
+|If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they activated the confirmation link that was sent with the email template for the event *Newsletter opt-in*. +
+Inserting a variable here is not mandatory. It would be possible, however, to insert a variable of a coupon code for your online shop to say thank you.
+
+| *Customer registration*
+|If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they created a customer account in your online shop when placing an order, for example. +
+Inserting a variable here is not mandatory. It would be useful, however, to add the URL to your online shop (URL to online shop) as well as a short welcome message. +
+*_Note:_* You can find the variable in the <<#variables-global, Global>> category.
 
 | *Email when item becomes available*
-|The contacts receive an email containing the information that a certain item is available again. Requirement: The contacts have entered their email address in the online shop directly next to the item that could not be delivered at that time.
+|If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, an email will be sent to your customers once a certain item is available again. +
+*_Requirement:_* The contacts have entered their email address in the online shop directly next to the item that could not be delivered at that time. +
+Ideally, the template that you link here contains the variables `URL to item` and `Item name`. +
+*_Note:_* You can find the variable in the <<#variables-order-order-items, Order items (only for item list widget)>> category.
+
+| *New order confirmation link*
+| If you want to provide customers who order as guests with the possibility to request a new order confirmation link, you have to xref:crm:emailbuilder.adoc#create-template[create] an email template and link it here. +
+The variable `URL to order confirmation` has to be contained in the template. +
+*_Note:_* You can find the variable in the <<#variables-global, Global>> category. +
+For further information about the softlogin, refer to the xref:online-store:shop-builder.adoc#softlogin[Setting up the ShopBuilder] page.
 
 |====
 --
@@ -1310,8 +1336,8 @@ The available variables for the EmailBuilder are grouped into the following cate
 |====
 |Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[The information in this column is only relevant for you if you have already created in the *Setup » Client » Select client » Email » Templates* menu and want to know the name of the old variable. Note: This column has not yet been filled completely. Content is continuously being added.]
 
-| `Access order in the online shop`
-|Opens the URL to the order in your online shop.
+| `Order access key`
+|Opens the URL to the order in your online shop. Additionally, a hash is also added to uniquely identify the order.
 | `order.access_key`
 |$OrderAccessKey
 
@@ -2654,8 +2680,8 @@ As an alternative, you can find the saved IBAN in the *Setup » Settings » Bank
 | `globals.links.linkChangePassword`
 | $CustomerPassword
 
-| `URL to checkout`
-|Returns the URL to the checkout area of the order in the online shop.
+| `URL to order confirmation`
+|Returns the URL of the order confirmation in the online shop.
 | `globals.links.linkCheckout`
 |
 
