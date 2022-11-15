@@ -1,8 +1,7 @@
 = bol.com
 :author: team-plenty-channel
 :keywords: bol.com, bol.com, bol, bol, blo, blo.com, BolItemExport, setting up bol.com, bol.com, bol, Netherlands, Holland, bol.nl, bol.com setup, set up bol.com
-:description: Multi-Channel in plentymarkets: Set up the interface to the market bol.com in your plentymarkets system.
-:id: 0WQSMLF
+:description: Learn how to set up the market bol.com in plentymarkets to start selling your items on bol.com.
 :bol.com:
 :market: bol.com
 
@@ -16,7 +15,7 @@ After you have set up the interface to bol.com, the automatic processes describe
 [[data-exchange]]
 .Frequency of data exchange
 [cols="1,1a"]
-|====
+|===
 |Data |Interval
 
 | Item export
@@ -40,7 +39,7 @@ After you have set up the interface to bol.com, the automatic processes describe
 | Import of returns registered on bol.com
 | Hourly +
 *_Note:_* Returns are imported with the status [9.00] by default.
-|====
+|===
 
 [#100]
 == Registering with bol.com
@@ -85,6 +84,23 @@ a| The API access data can be generated in the seller section at bol.com.
 * *Client ID* (mandatory) = Enter the user ID for the API interface you received from bol.com.
 * *Client Secret* (mandatory) = Enter the password for the API interface that you received from bol.com.
 
+2+^|Step *Validating access data*
+
+| *Is the access data correct?*
+a| It is checked whether your API access data for bol.com is correct. The field *Status of validation* shows whether the access data is correct. If the access data is invalid, then enter it once again in the step *Access data*.
+
+2+^|Step *Event procedure status changes*
+
+| _Select an order status after an event procedure was executed_
+a| Select an order status that orders should move to after an event procedure was executed. Select two order statuses for each event procedure: one status that orders should move to after a successful event procedure and one status that orders should move to after an event procedure has failed. If orders should not change their statuses after an event procedure, then select *No status change*. +
+
+Select statuses for the following event procedures: +
+
+* *Send order cancellation to bol.com*
+* *Send order shipping confirmation to bol.com*
+* *Send return status to bol.com*
+* *Create a return at bol.com*
+
 2+^|Step *Warehouse*
 
 | *Select how stock for bol.com should be calculated.*
@@ -109,7 +125,7 @@ a| Select the stock quantity for the offer export. Select one of the following o
 
 :market: bol.com
 :referrer: bol.com
-:referrer-option: pass:quotes[option *bol.com*]
+:referrer-option: pass:quotes[option *bol.com* with ID *152*]
 
 include::partial$activate-referrer.adoc[]
 
@@ -121,7 +137,7 @@ include::partial$activate-referrer.adoc[]
 include::partial$define-sales-price.adoc[]
 
 [#650]
-=== Permitting payment method in a customer class
+=== Permitting the payment method in a customer class
 
 :market: bol.com
 :payment-method: Bol.com
@@ -136,7 +152,7 @@ Next, carry out settings for shipping. For bol.com, you have to save the shippin
 [#shipping-service-providers-bol-com]
 ==== Saving names for shipping service providers in Dutch
 
-For bol.com, you have to enter an link:https://api.bol.com/retailer/public/Retailer-API/v6/functional/orders-shipments.html#_transporters[API transporter code^] as name for the xref:preparing-the-shipment.adoc#800[shipping service provider]. In addition, the name of the shipping service provider has to be saved in Dutch. These settings are carried out in the *Setup » Orders » Shipping » Settings* menu.
+For bol.com, you have to enter an link:https://api.bol.com/retailer/public/Retailer-API/v6/functional/orders-shipments.html#_transporters[API transporter code^] as name for the xref:fulfilment:preparing-the-shipment.adoc#800[shipping service provider]. In addition, the name of the shipping service provider has to be saved in Dutch. These settings are carried out in the *Setup » Orders » Shipping » Settings* menu.
 
 [.instruction]
 Saving names for shipping service providers:
@@ -148,7 +164,7 @@ Saving names for shipping service providers:
 → The shipping service providers are displayed.
 . In the input field *Name (nl)*, enter the *API transporter code* for every shipping service provider that you want to use for bol.com. +
 *_Tip:_* The *API transporter codes* for the shipping service providers can be found in the link:https://api.bol.com/retailer/public/Retailer-API/v6/functional/orders-shipments.html#_transporters[developer documentation for bol.com^].
-. Save (icon:save[set=plenty]) the settings. +
+. Save (terra:save[]) the settings. +
 → The Dutch names for bol.com shipping service providers were saved.
 
 [#550]
@@ -190,7 +206,7 @@ include::partial$catalogue-assistant-config.adoc[]
 [[table-catalogue-assistant]]
 [width="100%"]
 [cols="1,2a"]
-|====
+|===
 | Setting | Explanation
 
 | *Select a category for your catalogue.*
@@ -199,7 +215,7 @@ include::partial$catalogue-assistant-config.adoc[]
 → A property with the name of the bol.com category is created. Link this property with the variations that you want to sell on bol.com. +
 *_Tip:_* Enter a few names of the category name to get suggestions. +
 *_Note:_* You need to create a separate catalogue for each combination of a bol.com category and a language.
-|====
+|===
 --
 
 [#data-field-mappings]
@@ -218,7 +234,7 @@ Every market structures item data differently. As such, there are some particula
 [[special-mappings]]
 .Notes on mapping data fields
 [cols="1,3a"]
-|====
+|===
 | Marketplace data field | plentymarkets data field
 
 | *bol_used*
@@ -232,7 +248,7 @@ Every market structures item data differently. As such, there are some particula
 * Own value `0` or `false` or `n` = All variations are new.
 * Own value `1` or `true` or `y` = All variations are used.
 
-|====
+|===
 ////
 
 [#prepare-variations]
@@ -248,7 +264,7 @@ In order to list a variation as an offer on bol.com, you need to save at least t
 [[table-bol-variation-checklist]]
 .Mandatory fields for the variation
 [cols="1,3a"]
-|====
+|===
 | Mandatory data | Explanation
 
 | EAN or ISBN
@@ -299,7 +315,18 @@ a| The variation must be available for the market.
   ** Referrer *bol.com* = You ship orders yourself. +
   ** Referrer *bol.com FBB* = bol.com ships the order.
 
-|====
+| Condition
+| * In the tab *Global* of the item, a *Condition for API* must be saved. This condition for API is automatically exported during the offer export.
+
+The plentymarkets conditions are mapped to the bol.com API conditions like this:
+
+* *0 New* = NEW
+* *1 Used but as new* = AS_NEW
+* *2 Used but very good* = GOOD
+* *3 Used but good* = MODERATE
+* *4 Used but acceptable* = REASONABLE
+
+|===
 
 [#link-category-property]
 === Linking variations to the property value of the bol.com category
@@ -319,7 +346,7 @@ Linking variation to bol.com category:
 → The property is added.
 . Select a category from the drop-down list *Value* for the property *bol.com category*. +
 → The variation will be exported in this catalogue.
-. Save (icon:save[set=plenty]) the settings.
+. Save (terra:save[]) the settings.
 
 [#300]
 === Activating variations for the market
@@ -352,13 +379,13 @@ To sell a variation with Fulfilment by bol.com (FBB or LVB), you need to activat
 . In the *Markets* area, click in the selection field. +
 → A list of all available markets is displayed.
 . Activate the option *bol.com FBB*.
-. Save (icon:save[set=plenty]) the settings.
+. Save (terra:save[]) the settings.
 --
 
 [#automate-orders]
 == Automating order processing
 
-Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform bol.com about order status changes. The following event procedures can be set up for bol.com:
+Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform bol.com about changes to the order status. The following event procedures are available for bol.com:
 
 * Send shipping confirmation to bol.com (<<#700, How?>>)
 * Send order cancellation to bol.com (<<#900, How?>>)
@@ -372,12 +399,12 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 
 :table-event-procedure: <<#event-procedure-shipping-confirmation-bol>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[event-procedure-shipping-confirmation-bol]]
 .Event procedure for automatically sending shipping confirmations to bol.com
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -395,7 +422,7 @@ include::_includes:page$EA.adoc[]
 | *Procedure*
 | *Shipping > Send shipping confirmation to bol.com*
 |
-|====
+|===
 
 [#900]
 === Automatically sending cancellations
@@ -417,12 +444,12 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 
 :table-event-procedure: <<#event-procedure-cancellations-bol>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[event-procedure-cancellations-bol]]
 .Event procedure for automatically sending cancellations to bol.com
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -440,7 +467,7 @@ include::_includes:page$EA.adoc[]
 | *Procedure*
 | *Order > Send cancellation to bol.com*
 | *Customer cancellation*
-|====
+|===
 
 [#800]
 === Automatically sending the return status
@@ -457,13 +484,13 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 :table-event-procedure: <<#event-procedure-return-status-bol>>
 :ea-queue:
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 :!ea-queue:
 
 [[event-procedure-return-status-bol]]
 .Event procedure for automatically sending return statuses to bol.com
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -481,7 +508,7 @@ include::_includes:page$EA.adoc[]
 | *Procedure*
 | *Order > Send return status to bol.com*
 |Select a status.
-|====
+|===
 
 [#810]
 === Sending information on direct returns to bol.com
@@ -497,12 +524,12 @@ In addition, set up an xref:automation:event-procedures.adoc#[event procedure] t
 
 :table-event-procedure: <<#event-procedure-return-bol>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[event-procedure-return-bol]]
 .Event procedure to inform bol.com about returns
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -519,8 +546,8 @@ include::_includes:page$EA.adoc[]
 
 | *Procedure*
 | *Order > Create a return at bol.com*
-|Select a status.
-|====
+| Select a status.
+|===
 
 [#activate-catalogue]
 == Starting the item export: Activating catalogue export
@@ -575,7 +602,7 @@ Use the reference types and reference values listed in <<#table-reference-types>
 [[table-reference-types]]
 .Reference types and reference values for bol.com
 [cols="1,1,3"]
-|====
+|===
 |Reference type |Explanation |Reference value
 
 | *action*
@@ -605,4 +632,4 @@ a| Select a reference type to filter for specific events. +
 | *externalOrderItemId*
 | Filters by the ID of the bol.com order item.
 |
-|====
+|===

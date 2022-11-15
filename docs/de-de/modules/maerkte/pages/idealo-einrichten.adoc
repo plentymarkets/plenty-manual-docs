@@ -1,7 +1,6 @@
 = idealo einrichten
 :keywords: idealo, idealo.de, idealo Direktkauf, idealo Preisvergleich, checkoutApproved
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz idealo Direktkauf in deinem plentymarkets System ein.
-:id: JFWN4QY
+:description: Hier erfährst du, wie du das Preisvergleichsportal idealo in plentymarkets einrichtest. Mit idealo Direktkauf kannst du deine Produkte auf idealo listen, sodass Kund:innen deine Produkte direkt auf idealo kaufen können, ohne in deinen Shop wechseln zu müssen.
 :author: team-plenty-channel
 
 Auf dieser Handbuchseite findest du Informationen zum Einrichten des Preisvergleichportals und Marktplatzes idealo in plentymarkets. Du erfährst, wie du die Schnittstelle einrichtest, deine Artikel zu idealo exportierst und Verkaufspreise festlegst.
@@ -53,6 +52,24 @@ Kläre vor dem Einrichten in plentymarkets mit idealo, wie Artikeldaten übertra
 
 //end::table-comparison[]
 |===
+
+[#artikeldaten-exportieren-api]
+=== Änderung von Artikeldaten beim Artikelexport per API
+
+Wenn du den Artikelexport per API nutzt, um Artikeldaten an idealo zu übertragen, werden immer dann Angebote auf idealo erstellt, wenn es zu diesem Artikel noch kein Angebot auf idealo gibt - zum Beispiel, wenn du einen Artikel zum ersten Mal an idealo überträgst oder wenn ein Artikel wieder auf Lager ist, nachdem der Bestand *0* war. +
+
+Danach werden Artikel auf idealo nur noch aktualisiert, wenn sich der Preis oder der Bestand des Artikels ändert. In diesem Fall werden die folgenden Daten bei idealo aktualisiert: +
+
+* *SKU*
+* *Preis*
+* *Bestand*
+* *Lieferzeit*
+* *idealo Direktkauf (ja/nein)*
+
+
+*_Hinweis:_* Alle anderen Änderungen an Artikeldaten werden _nicht_ automatisch zu idealo übertragen. Wenn sich also Artikeltexte, Merkmale, Versandkosten etc. ändern, gibt es derzeit keine Möglichkeit, diese Änderungen automatisch an idealo zu übertragen.
+
+→ Wende dich in diesem Fall an unser Support-Team im link:https://forum.plentymarkets.com/[plentymarkets Forum^]. Unser Support wird dir dabei helfen, diese Artikeldaten an idealo zu übertragen.
 
 [#2400]
 == Benötigte Plugins installieren
@@ -489,7 +506,7 @@ Neues Exportformat erstellen:
 . Öffne das Menü *Daten » Elastischer Export*.
 . Klicke auf *Neuer Export*.
 . Nimm die gewünschten Einstellungen vor. Beachte dazu die Erläuterungen in <<#formateinstellungen-idealo>>.
-. Speichere (icon:save[set=plenty]) die Einstellungen. +
+. Speichere (terra:save[]) die Einstellungen. +
 → Eine ID für das Exportformat *IdealoDE-Plugin* wird vergeben und das Exportformat wird in der Übersicht *Exporte* angezeigt.
 
 In der folgenden Tabelle findest du Hinweise zu den einzelnen Formateinstellungen und empfohlenen Artikelfiltern für das Format *IdealoDE-Plugin*.
@@ -746,22 +763,25 @@ Die Zahlungsarten werden gemäß der Formateinstellung *Versandkosten* in einer 
 
 Varianten werden bei idealo gelöscht und können nicht mehr auf dem Marktplatz gekauft werden, wenn sie in plentymarkets keinen Bestand mehr haben. Dies passiert automatisch, denn Bestandsdaten werden alle 15 Minuten zu idealo übertragen. Wenn die Variante in deinem plentymarkets System wieder Bestand hat, wird sie mit der nächsten Bestandsübertragung also auch wieder auf idealo zum Verkauf angeboten.
 
-Wenn du eine Variante, die in plentymarkets Bestand hat, aber nicht mehr auf idealo verkaufen möchtest, musst du an der Variante die Verfügbarkeit für den Marktplatz entfernen.
+Wenn du eine Variante, die in plentymarkets Bestand hat, nicht mehr auf idealo verkaufen möchtest, musst du an der Variante die Verfügbarkeit für den Marktplatz entfernen und den Zeitstempel für Marktplatzexporte aktualisieren.
 
 [.instruction]
 Verfügbarkeit entfernen:
 
 . Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Verfügbarkeit*.
 . *Lösche* (icon:minus-circle[role="red"]) die Verfügbarkeiten *idealo* und *idealo Direktkauf*.
-. *Speichere* (icon:save[set=plenty]) die Einstellungen. +
-→ Die Variante wird in den nächsten 15 Minuten bei idealo gelöscht und kann dort nicht mehr gekauft werden.
+. *Speichere* (terra:save[]) die Einstellungen.
 
-[TIP]
-.Zeitstempel für Marktplatzexporte aktualisieren
-====
-Wenn du sicherstellen möchtest, dass die Variante sofort bei idealo gelöscht wird, kannst du zusätzlich mit der *Artikel-Gruppenfunktion* den *Zeitstempel für Marktplatzexporte aktualisieren*. +
-Öffne dazu das Menü *Artikel » Artikel bearbeiten » Tab: Artikel-Gruppenfunktion*. Setze ein Häkchen bei *Zeitstempel für Marktplatzexporte aktualisieren* und klicke auf icon:execute[set=plenty] *Ausführen*. Die Variante wurde gelöscht und kann nun nicht mehr auf idealo gekauft werden.
-====
+Nachdem du die Verfügbarkeit entfernt hast, musst du über die *Artikel-Gruppenfunktion* den *Zeitstempel für Marktplatzexporte aktualisieren*, damit der Bestand *0* an idealo übertragen wird.
+
+[.instruction]
+Zeitstempel für Marktplatzexporte aktualisieren:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » Tab: Artikel-Gruppenfunktion*.
+. Setze ein Häkchen bei *Zeitstempel für Marktplatzexporte aktualisieren*.
+. Klicke auf terra:execute[] *Ausführen*. +
+→ Der Bestand *0* wird an idealo übertragen. +
+→ Die Variante wird auf idealo gelöscht und kann nicht mehr gekauft werden.
 
 [#1100]
 == Zahlungsart idealo Direktkauf in Kundenklasse erlauben
@@ -804,14 +824,14 @@ Merkmal für Material einrichten:
 . Gib den *Namen (intern)* ein.
 . Wähle als Merkmaltyp *kein* aus der Dropdown-Liste.
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *Material*.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
 [#1300]
 === Merkmal für Versandarten erstellen
 
-Wenn du idealo Direktkauf nutzt, findet der Verkauf direkt bei idealo statt und du musst Informationen zur Versandart an idealo Direktkauf übergeben. Versendest du deine Artikel mit einem Paketdienst, einer Spedition, per Brief oder Download, wird diese Pflichtinformation mit einem Merkmal angegeben und an idealo Direktkauf übergeben. Bei der Versandart *Spedition* wird beim Verkauf des Artikels die Telefonnummer des Käufers zur Abstimmung eines Liefertermins mit dem beauftragten Speditionsunternehmen erfragt.
+Wenn du idealo Direktkauf nutzt, findet der Verkauf direkt bei idealo statt und du musst Informationen zur Versandart an idealo Direktkauf übergeben. Versendest du deine Artikel mit einem Paketdienst, einer Spedition, per Brief oder Download, wird diese Pflichtinformation mit einem Merkmal angegeben und an idealo Direktkauf übergeben. Bei der Versandart *Spedition* wird beim Verkauf des Artikels die Telefonnummer der Käufer:in zur Abstimmung eines Liefertermins mit dem beauftragten Speditionsunternehmen erfragt.
 
 Gehe wie im Folgenden beschrieben vor, um das Merkmal *FulfillmentType* zu erstellen, mit dem du angibst, ob du die Versandart *Spedition*, *Paketdienst*, *Brief* oder *Download* verwendest.
 
@@ -824,7 +844,7 @@ Merkmal für Versandart erstellen:
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *FulfillmentType*. +
 → Eine Dropdown-Liste wird angezeigt.
 . Wähle je nach Versandart einen Wert aus der Dropdown-Liste. Die Werte *Spedition*, *Paketdienst*, *Brief* und *Download* sind verfügbar.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
@@ -850,7 +870,7 @@ Merkmal für Altgeräteabholung erstellen:
 . Gib den *Namen (intern)* ein.
 . Wähle als Merkmaltyp *Kommazahl* aus der Dropdown-Liste.
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *DisposalFee*.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
@@ -861,10 +881,10 @@ Merkmal für Altgeräteabholung mit Artikel verknüpfen:
 . Öffne den Artikel.
 . Wechsele in das Tab *Merkmale*.
 . Aktiviere das eben erstellte Merkmal *DisposalFee*.
-. Speichere (icon:save[set=plenty]) die Einstellungen. +
+. Speichere (terra:save[]) die Einstellungen. +
 → Das Merkmal wird mit dem Artikel verknüpft und ist im Bereich *Merkmale* sichtbar.
 . Gib als Wert für die kostenlose Altgeräteabholung *0.00* ein.
-. *Speichere* (icon:save[set=plenty]) die Einstellungen.
+. *Speichere* (terra:save[]) die Einstellungen.
 
 [discrete]
 ==== Informationen zur Altgeräteabholung im Auftrag
@@ -886,7 +906,7 @@ Merkmal für Kommentar zur Lieferung erstellen:
 . Gib den *Namen (intern)* ein.
 . Wähle als Merkmaltyp *Text* aus der Dropdown-Liste.
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *DeliveryComment*.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
@@ -908,7 +928,7 @@ Merkmal für Energieeffizienzklasse erstellen:
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *EnergyClass*. +
 → Eine Dropdown-Liste wird angezeigt.
 . Wähle je nach Energieeffizienzklasse einen Wert aus der Dropdown-Liste.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
@@ -926,7 +946,7 @@ Merkmal für kostenlose Rückgabefrist erstellen:
 . Gib den *Namen (intern)* ein.
 . Wähle als Merkmaltyp *ganze Zahl* aus der Dropdown-Liste.
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *FreeReturnDays*.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
@@ -944,7 +964,7 @@ Merkmal für Pfand erstellen:
 . Gib den *Namen (intern)* ein.
 . Wähle als Merkmaltyp *Kommazahl* aus der Dropdown-Liste.
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *DepositFee*.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
@@ -962,7 +982,7 @@ Merkmal für Replika erstellen:
 . Gib den *Namen (intern)* ein.
 . Wähle als Merkmaltyp *kein* aus der Dropdown-Liste.
 . Wähle bei *idealo Direktkauf-Merkmal* das Merkmal *Replica*.
-. Speichere (icon:save[set=plenty]) die Einstellungen.
+. Speichere (terra:save[]) die Einstellungen.
 
 Im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Merkmale* verknüpfst du anschließend das Merkmal mit dem Artikel.
 
@@ -985,7 +1005,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 :table-event-procedure: <<#versandbestaetigung-idealo>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[versandbestaetigung-idealo]]
 .Ereignisaktion zum automatischen Melden von Versandbestätigungen an idealo
@@ -1017,7 +1037,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 :table-event-procedure: <<#retouren-idealo>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[retouren-idealo]]
 .Ereignisaktion zum automatischen Melden von Retouren an idealo
@@ -1051,11 +1071,11 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 * Stornierung durch Käufer an idealo melden
 
 [#1801]
-==== Stornierungen durch Händler automatisch melden
+==== Stornierungen durch Händler:in automatisch melden
 
 :table-event-procedure: <<#stornierungen-haendler-idealo>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[stornierungen-haendler-idealo]]
 .Ereignisaktion zum automatischen Melden von Stornierungen durch Händler an idealo
@@ -1085,7 +1105,7 @@ include::_includes:page$EA.adoc[]
 
 :table-event-procedure: <<#stornierungen-kaeufer-idealo>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[stornierungen-kaeufer-idealo]]
 .Ereignisaktion zum automatischen Melden von Stornierungen durch Käufer:innen an idealo
@@ -1115,7 +1135,7 @@ include::_includes:page$EA.adoc[]
 
 :table-event-procedure: <<#stornierungen-kaeufer-akzeptieren-idealo>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[stornierungen-kaeufer-akzeptieren-idealo]]
 .Ereignisaktion, um Stornierungen durch Kund:innen zu akzeptieren
@@ -1153,7 +1173,7 @@ Die Ereignisaktion *Rückerstattung an idealo melden* wird nur für Aufträge au
 
 :table-event-procedure: <<#erstattung-idealo>>
 
-include::_includes:page$EA.adoc[]
+include::_includes:partial$event-procedure.adoc[]
 
 [[erstattung-idealo]]
 .Ereignisaktion zum automatischen Melden von Rückerstattungen an idealo
@@ -1204,6 +1224,6 @@ Zeitstempel für Marktplatzexporte aktualisieren:
 
 . Öffne das Menü *Artikel » Stapelverarbeitung*.
 . Aktiviere im Bereich *Aktionen* die Option *Zeitstempel für Marktplatzexporte aktualisieren*.
-. Klicke auf *Anwenden* (icon:execute[set=plenty]). +
+. Klicke auf *Anwenden* (terra:execute[]). +
 → Alle Artikel, die für idealo verfügbar sind, werden mit dem nächsten Artikelexport zu idealo übertragen.
 --

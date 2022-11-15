@@ -1,7 +1,47 @@
-[[recommended-mappings]]
+[[table-recommended-mappings]]
 [cols="2a,6a,2a"]
-|====
+|===
 |limango field |Recommended mapping / notes | limango product level
+
+3+^| Product name (for categories with "[Product name] in [colour]")
+
+| Product name +
+(_can be used to automatically create product name_)
+| * *Item text » Name 1*, language *German*
+
+_or_
+
+* *Item text » Name 2*, language *German*
+
+_or_
+
+* *Item text » Name 3*, language *German*
+
+_or_
+
+* Property of the type *Text*, language *German* +
+
+*_Tip:_* During the export, the data fields *Product name* and *Colour value* of this group are combined. The word `in` is automatically inserted between these two data fields. +
+On the limango market, the product name is then shown like so: +
+`[Product name] in [Colour]`
+
+*_Note:_* Does your property for *Product name* contain both product type and colour? Then do not map a plentymarkets data field to the data field *Colour value*. Otherwise, the colour will be duplicated in the product name. In addition, map the same property to the data field *Product name* that you mapped to the data field *Product name* in the area *Product*. At some point, the second data field *Product name* will be removed.
+| Product
+
+| Colour value +
+(_can be used to automatically create product name_)
+| * Values of an attribute *Colour*
+
+_or_
+
+* Values of a property *Colour* for variations
+
+*_Tip:_* During the export, the data fields *Product name* and *Colour value* of this group are combined. The word `in` is automatically inserted between these two data fields. +
+On the limango market, the product name is then shown like so: +
+`[Product name] in [Colour]`
+
+*_Note:_* Does your property for *Product name* contain both product type and colour? Then do not map a plentymarkets data field to the data field *Colour value*. Otherwise, the colour will be duplicated in the product name. In addition, map the same property to the data field *Product name* that you mapped to the data field *Product name* in the area *Product*. At some point, the second data field *Product name* will be removed.
+| Product
 
 3+^| Products
 
@@ -26,15 +66,19 @@
 
 | Product name +
 (_mandatory field_)
-| * *Item text » Name 1* + Own value `in` + Values of the attribute *Colour*; separator *Space*
+| * *Item text » Name 1*, language *German*
 
 _or_
 
-* *Item text » Name 1* + Own value `in` + Values of a property *Colour* for variations; separator *Space*
+* *Item text » Name 2*, language *German*
 
-image::markets:limango-product-name.png[]
+_or_
 
-*_Tip:_* To select the separator, click on *Settings* (icon:gear[])) at the right end of the row.
+* *Item text » Name 3*, language *German*
+
+_or_
+
+* Property of the type *Text*, language *German*
 | Product
 
 | Short description
@@ -44,12 +88,6 @@ image::markets:limango-product-name.png[]
 | Description +
 (_mandatory field_)
 | * *Item text » Item text* + a property of the type *Text* for additional product information for some categories
-
-Exception for selling shoes:
-
-* *Item text* + Material description
-
-image::markets:limango-description.png[]
 | Product
 
 | Manufacturer item number
@@ -84,6 +122,36 @@ _or_
 * Values of a variation property *Colour* +
 
 *_Tip:_* This field tells limango which attribute or which property you use for colours. To create the item number, the colour is added to the SKU. As such, the colour must be a unique value, for example the manufacturer colour. +
+| Product
+
+3+^| Material composition
+
+| Material composition +
+(*Sleeve lining*; +
+*Upper 3*; +
+*Upper 2*; +
+*Upper 1*; +
+*Membrane*; +
+*Material 3* +
+etc.)
+| * Properties of the type *Text*, language *German*
+| Product
+
+3+^| Shoes
+
+| Material composition for shoes +
+*Shoes: Upper shoe materials*; +
+*Shoes: Lining shoe materials*; +
+*Shoes: Insole shoe materials*; +
+*Shoes: Outsole shoe materials*)
+| * Properties of the type *Multi selection* linked to variation
+
+*_Valid values:_*
+
+  ** `sonstiges-material` (other material)
+  ** `leder` (leather)
+  ** `beschichtetes-leder` (coated leather)
+  ** `textil` (textiles)
 | Product
 
 3+^| Product variations
@@ -186,13 +254,11 @@ _or_
 
 | RRP
 | * *Sales price » [Select sales price of the type RRP for the referrer limango]*
-
 | Variation
 
 | Gross sales price +
 (_mandatory field_)
-| * *Sales price » [Select sales price for the referrer limango]*
-
+| * *Sales price » [Select sales price for the referrer limango]* +
 Add a fallback data field if necessary.
 | Variation
 
@@ -253,6 +319,14 @@ image::markets:limango-age-group.png[]
 
 | Product
 
+3+^| Taking back old appliances according to ElektroG3
+
+| Taking back old appliances according to ElektroG3
+| * Property of the type *Text* +
+Allowed value: *DE* = Device is covered by ElektroG3.
+
+| Product
+
 3+^| Season
 
 | Season
@@ -275,11 +349,12 @@ _or_
 
 * Values of a variation property *Colour*
 
-_If necessary, add different shades of the same colour as fallback data fields:_
+*_If necessary, add different shades of the same colour as fallback data fields:_*
 
-The colour value is equivalent to the colour filter of the limango shop. However, limango only distinguishes by colour, not by colour shades. For example, if you offer a dress in both light and dark green, both are presented if customers search for green dresses on the market.
+The colour value is equivalent to the colour filter of the limango shop. However, limango only distinguishes by colour, not by colour shades. +
+*_Example:_* You offer a dress in both light green and dark green. When customers search for green dresses on the market, both these dresses are presented.
 
-To ensure that different products are created for variations in different shades of the same colour, the colour value saved in plentymarkets is exported as part of the merchant product ID and the product name instead of the limango colour value.
+To ensure that separate products are created for variations in different shades of the same colour, the colour value saved in plentymarkets is exported as part of the merchant product ID and the product name. In other words, the limango colour value is not exported.
 
 [.collapseBox]
 .*_Example:_* Mapping different shades of green to the colour value *green*
@@ -374,6 +449,30 @@ image::markets:limango-vat-2.png[]
 Add a fallback data field if necessary.
 | Variation
 
+3+^| Intrastat measurements
+
+| Length in cm
+| * Property of the type *Whole number* or *Decimal number*
+
+[.collapseBox]
+.What is this?
+--
+If your warehouse is outside of Germany, you need to specify information for Intrastat notifications. +
+Specify the length of the variation without packaging in centimetres (cm).
+--
+| Variation
+
+| Weight in kg
+| * *Variation » Net weight kg*
+
+[.collapseBox]
+.What is this?
+--
+If your warehouse is outside of Germany, you need to specify information for Intrastat notifications. +
+Specify the net mass of the variation in full kilograms (kg). The net mass is the weight of the variation without any packaging. In other words, this is the net weight. Round up or down to the next full kilogram. If you need to round down to 0 kg, enter the value `0`.
+--
+| Variation
+
 3+^| Fields that are exported without a mapping
 
 | Merchant product ID +
@@ -399,4 +498,4 @@ Add a fallback data field if necessary.
 | The unit price is calculated based on the content
 | Variation
 
-|====
+|===
