@@ -86,6 +86,66 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 * Wenn man in der Kontakt-UI und in der Schnellsuche nach Datensätzen suchen wollte, die Umlaute (ä, ö, ü) enthalten, wurden diese Datensätze nicht gefunden. Dieses Verhalten wurde behoben.
 
 [discrete]
+=== plentyShop
+
+Die plentyShop Sitemap wurde umstrukturiert, um den link:https://developers.google.com/search/docs/specialty/international/localized-versions#sitemap[Google-Richtlinien für Sitemaps^] besser zu entsprechen.
+
+Wenn ein plentyShop Seiten verschiedene Sprachen anbietet, war es bisher so, dass ein `<url>`-Element in der Sitemap die URL der Standartsprache enthielt und alternative Sprachversionen dieser URL Teil des `<url>`-Elements waren. Ein Eintrag einer URL in der Sitemap sah demnach wie folgt aus:
+
+[source, xml]
+------
+<url>
+<loc>https://www.beispiel.de/deutsch/page.html</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.beispiel.com/english/page.html"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.beispiel.de/deutsch/page.html"/>
+</url>
+------
+
+Die Vorgabe der Google-Richtlinien besagt allerdings, dass jeweils ein neuer Haupteintrag für jede alternative Sprache angelegt werden muss. Nach der Änderung sieht der Sitemap-Eintrag der gleichen URL also wie folgt aus:
+
+[source,xml]
+------
+<url>
+<loc>https://www.beispiel.de/deutsch/page.html</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.beispiel.com/english/page.html"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.beispiel.de/deutsch/page.html"/>
+</url>
+<url>
+<loc>https://www.beispiel.com/englisch/page.html</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.beispiel.de/deutsch/page.html"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.beispiel.com/english/page.html"/>
+</url>
+------
+
+Das bedeutet, dass die Sitemap nach erneutem Crawlen, abhängig von der Anzahl der verfügbaren Shop-Sprachen, deutlich mehr Einträge enthalten kann als vor der Änderung an der Sitemap.
+
+[NOTE]
+.Kein To-Do
+======
+Händler:innen müssen nicht aktiv werden, damit die Änderung in ihrem plentyShop greift.
+======
+
+link:https://developers.google.com/search/docs/specialty/international/localized-versions#sitemap[Link zur Dokumentation von Google^]
+
+[discrete]
 === Plugins
 
 * Die Logs für Plugin Build 1, welche bei jeder Bereitstellung einen Fehler geworfen haben, der keine Auswirkung auf den Bereitstellungsprozess hatten, wurden entfernt. Dafür wurden Logs für Plugin Build 2 integriert. Diese sind findest du unter *Integration* mit dem Wert `Plenty\Modules\Plugin\Services\PluginBuildMicroservicesGateway`.
