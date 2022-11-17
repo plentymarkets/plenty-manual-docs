@@ -1,8 +1,7 @@
 = EmailBuilder
-:keywords: EmailBuilder, E-Mail Builder, E-Mail-Vorlagen, Widgets, Emailvorlagen, Dokumentenanhang E-Mail, Email-Vorlagen Baukasten, E-Mail-Variablen, twig expressions, E-Mail-Versand, Code-Widget
-:description: Erfahre, wie du den EmailBuilder in plentymarkets verwendest.
+:keywords: EmailBuilder, E-Mail Builder, E-Mail-Vorlagen, Widgets, Emailvorlagen, Dokumentenanhang E-Mail, Email-Vorlagen Baukasten, E-Mail-Variablen, twig expressions, E-Mail-Versand, Code-Widget, Widgets E-Mail-Vorlagen
+:description: Erfahre, wie du den EmailBuilder in plentymarkets verwendest und E-Mail-Vorlagen im Baukastenprinzip mithilfe von Widgets und Variablen erstellst.
 :page-aliases: emailbuilder-testphase.adoc
-:id: MYFLVYO
 :author: team-crm
 
 Alle E-Mails, die du über plentymarkets an deine xref:crm:kontakte.adoc#[Kontakte] versendest, basieren auf Vorlagen. Vorlagen erstellst und verwaltest du mit dem EmailBuilder im Menü *CRM » EmailBuilder*. 
@@ -107,6 +106,8 @@ Alle E-Mails werden nur an die eingegebene E-Mail-Adresse gesendet. So kannst du
 |====
 --
 
+// TODO: Kapitel "Verschlüsselung der E-Mail-Kommunikation wählen" plus alle Unterkapitel hier noch ergänzen: https://knowledge.plentymarkets.com/de-de/manual/main/crm/e-mails-versenden.html#200 
+
 //// 
 [TIP]
 .Newsletter-Zugangsdaten eingeben
@@ -175,33 +176,54 @@ Das Löschen einer Vorlage, die mit einem Ereignis im Schritt *Automatischer Ver
 ====
 
 [.collapseBox]
-.Erläuterungen zu einigen Ereignissen für den automatischen Versand im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* 
+.Erläuterungen zu den verfügbaren Ereignissen für den automatischen Versand im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* 
 --
 
 [[table-events-automatic-email-dispatch]]
-.Erläuterungen zu einigen Ereignissen für den automatischen Versand
+.Erläuterungen zu den Ereignissen für den automatischen Versand
 [cols="1,3"]
 |====
 |Einstellung |Erläuterung
 
-| *Neue Bestellung über den Webshop*
-|Sendet Kund:innen eine E-Mail mit der Auftragsbestätigung, nachdem der Kaufvorgang im Webshop abgeschlossen wurde. +
-*_Hinweis:_* Wenn du möchtest, dass dein:e Kund:in über diese E-Mail in die Auftragsabwicklung in deinem Webshop gelangen kann, um den Status der Bestellung einzusehen, musst du die Variable `URL zum Checkout` in die Vorlage, die du für dieses automatische Ereignis wählst, einfügen. +
+| *Sende Kunde E-Mail zur Passwortänderung*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen bei Eintritt dieses Ereignisses eine E-Mail mit einem Link zum neuen Passwort gesendet. Dieser Link muss aktiv bestätigt werden. +
+Die Variable `URL zum Ändern des Passworts` muss in der Vorlage enthalten sein. +
 *_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
 
-| *Sende Kunde E-Mail zur Passwortänderung*
-|Sendet Kund:innen eine E-Mail mit einem Link zum neuen Passwort, der aktiv bestätigt werden muss. Die Variable `URL zum Ändern des Passworts` muss in der Vorlage enthalten sein. +
+| *Bestätigung der Passwortänderung*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine Bestätigungs-E-Mail gesendet, wenn sie ihr Passwort ändern. +
+Eine Variable ist hier nicht zwingend notwendig. Sinnvoll wäre allerdings der Link zu deinem Webshop (`URL zum Webshop`). +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
+
+| *Kunde möchte E-Mail-Adresse ändern*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine Bestätigungs-E-Mail gesendet, wenn sie in deinem Webshop ihre E-Mail-Adresse ändern und die neue E-Mail-Adresse eingeben. +
+Die Vorlage sollte daher die Variable `URL zum Bestätigen der E-Mail-Adresse` enthalten. +
 *_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
 
 | *Newsletter Opt-In*
-|Sendet Kund:innen eine E-Mail, wenn die Kund:innen sich für den Newsletter angemeldet haben. Die Vorlage sollte den Bestätigungslink, den die Kund:innen anklicken müssen, um die Newsletter-Anmeldung abzuschließen, enthalten: `URL zur Bestätigung des Newsletter-Abonnements`. +
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine E-Mail gesendet, wenn sie sich für den Newsletter angemeldet haben. Die Vorlage sollte die Variable `URL zur Bestätigung des Newsletter-Abonnements` enthalten; also den Bestätigungslink, den die Kund:innen anklicken müssen, um die Newsletter-Anmeldung abzuschließen. +
 *_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-newsletter, Newsletter>>.
 
 | *Bestätigung Newsletter Opt-In*
-|Sendet Kund:innen eine E-Mail als Bestätigung, sobald die Kund:innen den Bestätigungslink, der mit der E-Mail-Vorlage für das Ereignis *Newsletter Opt-In* versendet wurde, aktiviert haben.
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine E-Mail als Bestätigung gesendet, sobald sie den Bestätigungslink, der mit der E-Mail-Vorlage für das Ereignis *Newsletter Opt-In* versendet wurde, aktiviert haben. +
+Eine Variable ist hier nicht zwingend notwendig. Denkbar wäre hier allerdings eine Variable, die als Dankeschön einen Gutschein-Code für deinen Webshop enthält.
+
+| *Kundenregistrierung*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine E-Mail als Bestätigung gesendet, sobald sie z.B. bei Abschluss der Bestellung in deinem Webshop ein Kund:innenkonto in deinem Webshop erstellt haben. +
+Eine Variable ist hier nicht zwingend notwendig. Sinnvoll wäre allerdings der Link zu deinem Webshop (`URL zum Webshop`) sowie eine kurze Willkommensnachricht. +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
 
 | *Benachrichtigung bei verfügbarem Artikel*
-|Sendet Kund:innen eine E-Mail mit dem Hinweis, dass ein bestimmter Artikel wieder verfügbar ist. Voraussetzung: Die Kund:innen haben zuvor ihre E-Mail-Adresse im Webshop bei dem nicht lieferbaren Artikel eingetragen.
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deine Kund:innen eine E-Mail mit dem Hinweis, dass ein bestimmter Artikel wieder verfügbar ist, gesendet. +
+*_Voraussetzung:_* Die Kund:innen haben zuvor ihre E-Mail-Adresse im Webshop bei dem nicht lieferbaren Artikel eingetragen. +
+Idealerweise enthält die hier verknüpfte Vorlage die Variablen `URL zum Artikel` und `Artikelname`. +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-auftrag-auftragspositionen, Auftrag / Auftragspositionen (nur für Artikellisten-Widget)>>.
+
+| *Neuer Link zur Bestellbestätigung*
+| Wenn du Gastkund:innen die Möglichkeit geben möchtest, einen neuen Auftragsbestätigungslink anzufordern, musst du dafür eine E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellen] und diese hier verknüpfen. +
+Die Variable `URL zur Auftragsübersicht` muss in der Vorlage enthalten sein. +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>. +
+Weitere Informationen zum Softlogin findest du auf der Handbuchseite xref:webshop:shop-builder.adoc#softlogin[ShopBuilder einrichten].
 
 |====
 --
@@ -1332,8 +1354,6 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 
 * <<#variablen-ticket, Ticket>>
 
-* <<#variablen-messenger, Messenger>>
-
 [#variablen-auftrag]
 ==== Variablen: Auftrag allgemein
 
@@ -1343,8 +1363,8 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[Die Informationen in dieser Spalte sind für dich nur relevant, wenn du bereits E-Mail-Vorlagen im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* erstellt hast und wissen möchtest, wie die alte Variable hieß. Hinweis: Diese Spalte ist noch nicht vollständig befüllt. Inhalte werden weiterhin ergänzt.]
 
-| `Auftrag im Webshop aufrufen`
-|Öffnet die URL des Auftrags in deinem Webshop.
+| `Zugriffsschlüssel des Auftrags`
+|Hierbei handelt es sich um den Hash, um den Auftrag eindeutig zu identifizieren.
 | `order.access_key`
 |$OrderAccessKey
 
@@ -2561,6 +2581,16 @@ Alternativ findest du den gespeicherten Banknamen im Menü *Einrichtung » Einst
 | `globals.legalInformation.cancellationRights.plain`
 | $CancellationRightsText
 
+| `Mandanten-ID`
+|Gibt die ID des Mandanten (Shops) aus.
+| `globals.clientId`
+| -
+
+| `Mandantenname`
+|Gibt den Namen des Mandanten (Shops) aus.
+| `globals.clientName`
+| -
+
 | `Gutschein-Code (1)`
 | xref:auftraege:gutscheine.adoc#[Gutschein-Codes] werden in der Kampagne im Menü *Aufträge » Gutscheine* generiert. Ein Gutschein-Code kann immer nur jeweils einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
 | `globals.coupons.couponCode1`
@@ -2677,8 +2707,8 @@ Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellung
 | `globals.links.linkChangePassword`
 | $CustomerPassword
 
-| `URL zum Checkout`
-|Gibt die URL zum Checkout-Bereich des Auftrags im Webshop aus.
+| `URL zur Auftragsübersicht`
+|Gibt die URL zur Auftragsübersicht im Webshop aus.
 | `globals.links.linkCheckout`
 |
 
@@ -2800,45 +2830,6 @@ Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellung
 Beachte dazu das Kapitel xref:crm:ticketsystem-nutzen.adoc#5500[Tickets im Mein Konto-Bereich erstellen] auf der Handbuchseite xref:crm:ticketsystem-nutzen.adoc#[Ticketsystem].
 | `ticket.formattedUrl.url`
 | $TicketURL
-
-|====
-
-[#variablen-messenger]
-==== Variablen: Messenger
-
-[[table-variables-messenger]]
-.Variablen in der Kategorie *Messenger*
-[cols="2,5,2"]
-|====
-|Name der Variable |Erläuterung |Twig expression
-
-| `Inhalt der Nachricht`
-|
-| `messenger.message \| raw`
-
-| `ID der Konversation`
-|Dient als eindeutiges Kennzeichen, damit die Nachricht immer korrekt zugeordnet werden kann. Daher sollte diese Variable nicht aus der Vorlage entfernt werden.
-| `messenger.conversationId`
-
-| `Hat abgerechnete Nachrichten`
-|
-| `messenger.metaData.timeCapture.chargeable ? trans('module_mail_templates::Widget.confirm', [], params.lang) : trans('module_mail_templates::Widget.notConfirm', [], params.lang)`
-
-| `Minuten der Nachricht`
-|
-| `messenger.metaData.timeCapture.minutes`
-
-| `Vorschau der Nachricht`
-|
-| `messenger.preview`
-
-| `Betreff der Nachricht`
-|
-| `messenger.title`
-
-| `ID der Nachricht`
-|
-| `messenger.uuid`
 
 |====
 
