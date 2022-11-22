@@ -1,7 +1,6 @@
 = OTTO Market
 :keywords: OTTO Market, OTTO Market, OTTO, OTTO, ottomarket, otto.market
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zu OTTO Market in deinem plentymarkets System ein.
-:id: SMKVRT7
+:description: Auf dieser Seite erfährst du, wie du OTTO Market in plentymarkets einrichtest, damit du deine Artikel auf OTTO Market verkaufen kannst.
 :author: team-plenty-channel
 :page-aliases: otto.adoc
 :ea-queue:
@@ -285,9 +284,6 @@ bezogene Attribute
 | Gib als Lieferzeit die Gesamtlieferzeit in Tagen an, also vom Zeitpunkt der Bestellung bis zur Zustellung durch einen Transportdienstleister. +
 Beim Export übersetzt OTTO die Werte in die Kund:innen bekannten Lieferaussagen von OTTO.
 
-| *Kategorie*
-| Aktuelle Informationen zu den OTTO Market-Attributen findest du in der Kategorieliste von OTTO Market link:https://og2gether-my.sharepoint.com/:x:/g/personal/micha_saake_otto_de/EXg5Id8bTxNKuV8mRkQ1wrsBNFuBrjP8iQJINZjcezvjdg?rtime=ueiZ-kgf2Ug[in der Registerkarte "Übersicht Kategorien"^]
-
 [.collapseBox]
 .Lieferzeiten: Liste und Beispiele
 --
@@ -378,6 +374,9 @@ Beim Export übersetzt OTTO die Werte in die Kund:innen bekannten Lieferaussagen
 * Wenn du als Lieferzeit größer 11 aber kleiner oder gleich 14 angibst, wird wird Endkund:innen auf otto.de "lieferbar in 2 Wochen" angezeigt.
 --
 
+| *Kategorie*
+| Aktuelle Informationen zu den OTTO Market-Attributen findest du in der Kategorieliste von OTTO Market link:https://og2gether-my.sharepoint.com/:x:/g/personal/micha_saake_otto_de/EXg5Id8bTxNKuV8mRkQ1wrsBNFuBrjP8iQJINZjcezvjdg?rtime=ueiZ-kgf2Ug[in der Registerkarte "Übersicht Kategorien"^]
+
 | *"My Otto"-Identifikationsnummer* +
 (Pflichtfeld)
 | Die "My Otto"-Identifikationsnummer (MOIN) ist eine eindeutige Produktkennzeichnung von OTTO Market. Ab 11.08.2021 weist OTTO Market jeder Variante eine eindeutige MOIN zu.
@@ -394,7 +393,7 @@ Unabhängig davon, ob die MOIN bereits existiert oder OTTO Market eine neue MOIN
 
 . Die Variante wird zu OTTO Market exportiert.
 . 15 Minuten später vergibt OTTO Market eine MOIN für die Variante.
-. Die MOIN wird in dein plentymarkets System importiert und an der Variate gespeichert. Du findest sie im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Tab: Einstellungen » Bereich: ASIN/ePID*.
+. Die MOIN wird in dein plentymarkets System importiert und an der Variate gespeichert. Du findest sie im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Tab: Einstellungen » Bereich: ASIN/ePID/MOIN*.
 . Beim nächsten Export wird die MOIN mit den anderen Artikeldaten exportiert. +
 *_Hinweis:_* Wenn du eine Variante zum ersten Mal exportierst, für die es auf OTTO Market schon Angebote anderer Händer:innen gibt, kann es bis zu zwei Nächte dauern, bis dein Angebot bei OTTO Market online ist.
 
@@ -622,6 +621,31 @@ include::partial$checklist-variations.adoc[tag=checklist-check-log]
 
 include::partial$catalogue-activation.adoc[]
 
+[#artikel-deaktivieren]
+== Artikel auf OTTO Market deaktivieren
+
+Varianten können nicht mehr auf OTTO Market gekauft werden, wenn sie in plentymarkets keinen Bestand mehr haben. Dies passiert automatisch, denn Bestandsdaten werden alle 15 Minuten zu OTTO Market übertragen. Wenn die Variante in deinem plentymarkets System wieder Bestand hat, wird sie mit der nächsten Bestandsübertragung also auch wieder auf OTTO Market zum Verkauf angeboten.
+
+Wenn du eine Variante, die in plentymarkets Bestand hat, nicht mehr auf OTTO Market verkaufen möchtest, musst du an der Variante die Verfügbarkeit für den Marktplatz entfernen und den Zeitstempel für Marktplatzexporte aktualisieren.
+
+[.instruction]
+Verfügbarkeit entfernen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Verfügbarkeit*.
+. *Lösche* (icon:minus-circle[role="red"]) die Verfügbarkeit *OTTO market*.
+. *Speichere* (terra:save[]) die Einstellungen.
+
+Nachdem du die Verfügbarkeit entfernt hast, musst du über die *Artikel-Gruppenfunktion* den *Zeitstempel für Marktplatzexporte aktualisieren*, damit der Bestand *0* an OTTO Market übertragen wird.
+
+[.instruction]
+Zeitstempel für Marktplatzexporte aktualisieren:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » Tab: Artikel-Gruppenfunktion*.
+. Setze ein Häkchen bei *Zeitstempel für Marktplatzexporte aktualisieren*.
+. Klicke auf terra:execute[] *Ausführen*. +
+→ Der Bestand *0* wird an OTTO Market übertragen. +
+→ Die Variante wird auf OTTO Market deaktiviert und kann nicht mehr gekauft werden.
+
 [#1050]
 == Auftragsbearbeitung bei OTTO Market
 
@@ -632,7 +656,13 @@ Im Folgenden erfährst du, wie Aufträge bei OTTO Market verarbeitet werden.
 
 * OTTO Market-Aufträge werden als unbezahlt in Status *[3] Warten auf Zahlung* in plentymarkets importiert.
 * Aufträge mit dem OTTO Market-Status ANNOUNCED werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Hierbei handelt es sich um Aufträge, die nach der Bestellung noch von der Käufer:in storniert werden können, oder Aufträge mit der Zahlungsmethode Vorkasse, die noch nicht bezahlt wurden. Sobald der Auftrag bei OTTO in den Status PROCESSABLE wechselt, werden die Adressen am Auftrag ergänzt und der Auftrag wird in Status *[4] In Versandvorbereitung* verschoben. Aufträge mit der Zahlungsmethode Vorkasse werden in Status *[3] Warten auf Zahlung* verschoben. +
+
+[TIP]
+.Warenbestand für Aufträge mit Vorkasse reservieren
+====
 *_Wichtig:_* Standardmäßig wird für Aufträge im Status *[1] Unvollständige Daten* kein Warenbestand reserviert. Damit für diese Aufträge Warenbestand reserviert wird, öffne das Menü *Einrichtung » Aufträge » Einstellungen*. Wähle bei der Einstellung *Status Auftragsreservierung (Reservierung von Beständen)* für die Option *von* den Status *[1] Unvollständige Daten*. Wähle in der letzten Dropdown-Liste die Option *Alle Aufträge*.
+====
+
 * Nachdem ein Auftrag von OTTO Market bestätigt wurde, wechselt der Auftrag in den Status *[5] Freigabe Versand*.
 * In plentymarkets wird eine Zahlung für den Auftrag erstellt und der Auftrag als *bezahlt* gekennzeichnet. +
 Falls der Auftrag bei OTTO Market per Überweisung bezahlt wurde, kann die Auftragsbestätigung länger dauern als bei anderen Zahlungsarten. In plentymarkets wird die Zahlungsart immer als *OTTO Payment* angezeigt. +
