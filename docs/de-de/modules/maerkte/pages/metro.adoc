@@ -25,6 +25,32 @@ Um METRO in plentymarkets nutzen zu können, installiere zuerst das link:https:/
 :main-client:
 include::maerkte:partial$plugin-installation.adoc[]
 
+[#100]
+== Häufigkeit des Datenaustauschs
+
+Nachdem du {market} in plentymarkets eingerichtet hast, stehen die in <<#data-exchange-market>> beschriebenen automatisierten Abläufe bereit:
+
+[[data-exchange-market]]
+.Häufigkeit des Datenaustauschs
+[cols="2,3a"]
+|===
+|Daten |Intervall
+
+| Artikelexport
+| einmal pro Nacht
+
+| Preis- und Bestandsabgleich
+| Warenbestand und Verkaufspreise werden dynamisch aktualisiert. Die Häufigkeit hängt davon ab, wie viele Varianten aktualisiert werden müssen:
+
+* Alle 15 Minuten für bis zu *500* Varianten
+* Stündlich von *500* bis zu *1500* Varianten
+* Einmal pro Tag für mehr als *1500* Varianten
+
+| Auftragsimport
+| alle 15 Minuten
+|===
+
+
 [#1194782543]
 == Marktplatz in plentymarkets einrichten
 
@@ -196,6 +222,28 @@ Dieser Assistent unterstützt dich dabei, METRO-Retourengründe den plentymarket
  . Erstelle die nötigten Zuordnungen.
  . Speichere die Einstellungen.
 
+[#5226544237]
+=== Artikellieferzeiten einrichten
+
+Damit METRO Angebote funktionieren muss eine *minimale* und *maximale Lieferzeit* definiert und verknüpft sein.
+
+[#4607614564]
+==== Mindestlieferzeit konfigurieren
+
+. Öffne das Menü *Einrichtung » Artikel » Variante » Verfügbarkeit*.
+. Definiere die relevanten *durchschnittlichen Lieferzeiten*.
+. Erteile den Varianten eine *Durchschnittliche Lieferzeit* im Menü *Artikel » Variante » Einstellungen » Bereich: Verfügbarkeit » 1* bis *10*. +
+→ Die Mindestlieferzeit ist eingerichtet und verknüpft.
+
+[#6925994604]
+==== Maximale Lieferzeit konfigurieren
+
+. Öffne das Menü *Einrichtung » Assistenten » Omni-Channel » Plugins »  Plugin Konfigurationsassistent*.
+. Öffne den Schritt *Warenbestand und Verkaufspreis Export*.
+. Füge einen Wert für *Der maximale Lieferzeitpuffer beträgt?* ein. +
+→ Die maximale Lieferzeit ist eingerichtet und verknüpft.
+
+
 [#8435957916]
 == Artikelexport einrichten
 
@@ -237,7 +285,6 @@ include::partial$catalogue-assistant-config.adoc[]
 |===
 --
 
-
 [#1118666925]
 === Datenfelder im Katalog zuordnen
 
@@ -252,74 +299,73 @@ include::partial$catalogue-mapping.adoc[]
 
 Bereite nun deine Varianten vor.
 
-[#1118666904]
-=== Varianten mit {market}-Produktkategorie verknüpfen
+[#300]
+=== Varianten für Marktplatz freigeben
 
-:property-for-market-name: METRO Kategorie
-:property-name: xxx
+:market-availability: METRO
+:option-availability: METRO
+
+include::partial$variantenverfuegbarkeit.adoc[]
+
+[#1118666904]
+=== Varianten mit {market}-Produktkategorien verknüpfen
+
+:property-name: METRO market category group / METRO market Kategoriegruppe
 
 include::partial$catalogue-link-property-for-market-category.adoc[]
 
 [#7251018515]
-=== Der Warenbestand und Verkaufspreis Export
+== Warenbestands- und Preisabgleich einrichten
 
-Der Warenbestand und Verkaufspreis Export wird durch *
-* oder *SKU* Spiegelung ermöglicht.
-*_Wichtig:_* Bitte überprüfe Einrichtung der *Artikel » Verfügbarkeit* unter *Einrichtung » Artikel » Verfügbarkeit* und dessen Zuweisung auf deinen Artikel * ein erfolgreicher Warenbestand und Verkaufspreis Export kann ohne diese Option nicht durchgeführt werden.
+Beachte die folgenden Voraussetzungen für das Aktualisieren von Warenbestand und Verkaufspreisen bei METRO:
 
-[#2113838211]
-==== Warenbestand und Verkaufspreis Export via GTIN
+* Die Artikelverfügbarkeit muss im Menü *Einrichtung » Artikel » Verfügbarkeit* und am Artikel gepflegt sein.
 
-Der schnellste Weg um Warenbestand und Verkaufspsreis Daten nach METRO zu exportieren basiert auf GTIN.
-Der Warenbestand und Verkaufpsreis Export erfolgt automatisch und ein Angebot wird zum METRO-Artikel gesendet.
+* Damit Warenbestand und Verkaufspreise bei METRO aktualisiert werden, muss entweder die GTIN oder die SKU der Variante bei METRO und in plentymarkets identisch sein.
 
-[#4138743662]
-==== Warenbestand und Verkaufspreis Export via SKU
+* Standardmäßig werden Warenbestand und Verkaufspreise über einen GTIN-Abgleich aktualisiert. Wenn du die Daten über einen SKU-Abgleich aktualisieren möchtest, sind zusätzliche Einstellungen nötig.
 
+[.collapseBox]
+.Warenbestand und Verkaufspreise per SKU-Abgleich einrichten
+--
 1. Öffne das Menü *Einrichtung » Assistenten » Omni-Channel » METRO » Plugin Konfigurationsassistent » Schritt: Warenbestand und Verkaufspreis Export*.
 2. Wähle eine Datenquelle unter *Die automatische SKU-Erstellung basiert auf:* .
 3. Assistenten *Fertigstellen*.
 4. Überprüfe, ob in deinem METRO-Dashboard ein Angebot für den betreffenden Artikel vorhanden ist *_Hinweis:_* Du kannst ein Angebot auch manuell über das METRO-Dashboard erstellen.
 6. Stelle Sicher, dass die gleiche SKU im Artikel auf beiden Systemen die gleiche ist. +
-*_Hinweis:_* Du Kannst SKU-Bulk-Zuordnungen auf METRO erstellen, indem Du *Angebote verwalten* öffnest. Für weitere Informationen wende dich bitte an deinem METRO-Support.
+*_Hinweis:_* Du Kannst SKU-Bulk-Zuordnungen auf METRO erstellen, indem Du *Angebote verwalten* öffnest. Für weitere Informationen wende dich bitte an deinen METRO-Support.
+--
 
 [#4807852476]
-=== Voraussetzungen für den Artikelexport
+=== _Checkliste:_ Voraussetzungen für den Artikelexport
 
 * Variante muss *aktiv* sein.
-* Variante muss für den Marktplatz: METRO freigeschaltet sein.
-* Die Metro Eigenschaft *METRO Kategorie* und ein korrekter Wert muss mit der Variante verknüpft sein.
-* Die Variante muss mindestens ein Bild enthalten welches auch für den Marktplatz: METRO freigeschaltet ist.
-* Die Variante muss den Barcode-Typ: GTIN oder die MPN + Hersteller als Exportkennung nutzen.
-* Die enthaltene *Artikel Beschreibung / Description* darf nur folgende HTML tags enthalten: +
-*&lt;p&gt; &lt;ul&gt; &lt;ol&gt; &lt;li&gt; &lt;span&gt; &lt;br&gt;*
+* Variante muss für den Marktplatz METRO freigeschaltet sein.
+* Die Metro-Eigenschaft *METRO Kategorie* und ein korrekter Wert muss mit der Variante verknüpft sein.
+* Die Variante muss mindestens ein Bild enthalten, das für den Marktplatz METRO freigeschaltet ist.
+* Die Variante muss den Barcode-Typ GTIN oder die MPN + Hersteller als Exportkennung nutzen.
+* Die enthaltene Artikelbeschreibung darf nur die folgenden HTML-Tags enthalten:
+  ** *&lt;p&gt; &lt;ul&gt; &lt;ol&gt; &lt;li&gt; &lt;span&gt; &lt;br&gt;*
 
 [#8758031625]
-=== Vorraussetzungen für den Warenbestandsexport
+=== _Checkliste:_ Vorraussetzungen für den Warenbestandsexport
 
-* Warenbestand NETTO muss Positiv sein.
-
-→ Varianten mit einem negativen Warenbestand werden mit den Warenbestand 0 exportiert.
-* Varianten müssen einen Verkaufspreis für Marktplatz: METRO enthalten. Die Währung dieses Verkaufspreises mus EUR sein.
-* Der Verkaufspreis muss die Summe von  *Verkaufspreis BRUTTO + Versandkosten Brutto* sein.
+* Netto-Warenbestand muss positiv sein.
+→ Varianten mit einem negativen Warenbestand werden mit dem Warenbestand 0 exportiert.
+* Varianten müssen einen Verkaufspreis für den Marktplatz METRO enthalten. Die Währung dieses Verkaufspreises muss EURO sein.
+* Der Verkaufspreis muss die Summe von *Verkaufspreis BRUTTO + Versandkosten Brutto* sein.
 
 *_Wichtig:_*
 
-* Verkaufspreise für *Mengenpreis* (mit de Option *Ab Menge*) muss auch die Summe von *Verkaufspreis BRUTTO + Versandkosten Brutto* sein.
-* Bitte beachte, dass der Verkaufspreis für eine Mindestmenge von 10 Stück nicht höher sein kann als ein Verkaufspreis für eine Mindestmenge von 5 Stk.
+* Verkaufspreise für *Mengenpreis* (mit der Option *Ab Menge*) muss auch die Summe von *Verkaufspreis BRUTTO + Versandkosten Brutto* sein.
+* Der Verkaufspreis für eine Mindestmenge von 10 Stück darf nicht höher sein als ein Verkaufspreis für eine Mindestmenge von 5 Stück.
 * Da die METRO-Verkaufspreise Versandkosten enthalten müssen, werden importierte Bestellungen als bezahlt importiert und enthalten 0 Versandkosten.
-* Verkaufspreise werden nicht mit der Artikelexport .csv nach METRO exportiert, sondern über den Prozess *Warenbestand und Verkaufspreis Export durchgeführt.
+* Verkaufspreise werden nicht mit dem Artikelexport zu METRO exportiert, sondern über den Prozess *Warenbestand und Verkaufspreis Export* durchgeführt.
 
-Der Warenbestand und Verkaufspreis Export wird Dynamisch ausgeführt, abhängig von der Anzahl der Varianten, die aktualisiert werden müssen:
-
-* Alle *15* Minuten, für bis zu *500* Varianten.
-* Stündlich, von *500* bis zu *1500* Varianten.
-* Ein  Mal am Tag für alles über *1500* Varianten.
-
-*_Hinweis:_* Der Warenbestand und Verkaufspreis Export findet nicht statt, wenn keine GTIN / SKU Spiegelung besteht.
+*_Wichtig:_* Die GTIN oder die SKU müssen in plentymarkets und auf METRO gleich sein, damit Warenbestand und Verkaufspreise aktualisiert werden.
 
 [#2395556941]
-==== Sende ein Angebot zu einem schon vorhandenen METRO-Artikel
+==== Angebot zu vorhandenem METRO-Artikel senden
 
 Diese Funktion erfordert keinen Artikelexport und verwendet eine der folgenden Kennungen, um ein Angebot zu erstellen:
 
@@ -328,50 +374,31 @@ Diese Funktion erfordert keinen Artikelexport und verwendet eine der folgenden K
 
 Um ein Angebot zu erstellen, müssen die folgenden Einstellungen beachtet werden:
 
-* Die Variante muss den entsprechenden Wert für *METRO Plugin Konfigurationsassistent » Die automatische SKU-Erstellung basiert auf:* enthalten.
-* *GTIN / SKU* Spiegelung zwischen plentymarkets und METRO artikel muss existieren.
-* Variante muss *aktiv* unter: *Artikel » Variante » Einstellungen » Bereich Verfügbarkeit*.
-* Die Variante muss die Herkunft: *METRO* unter: *Artikel » Variante » Reiter Verfügbarkeit » Bereich Marktplatz* enthalten.
-* Variante muss für den *Standard Mandanten* unter *Artikel » Variante » Reiter Verfugbarkeit » Mandant* freigeschaltet sein.
-* *WB Netto* muss Positiv sein.
-* Variante muss einen Verkaufspreis für Marktplatz: *METRO* enthalten.
-* Währung der des Verkaufspreises muss *EUR* sein.
+* Die Variante muss den Wert für *METRO Plugin Konfigurationsassistent » Die automatische SKU-Erstellung basiert auf:* enthalten.
+* *GTIN / SKU* Spiegelung zwischen plentymarkets und METRO muss existieren.
+* Variante muss *aktiv* sein unter *Artikel » Variante » Einstellungen » Bereich Verfügbarkeit*.
+* Variante muss die Herkunft *METRO* unter *Artikel » Variante » Tab: Verfügbarkeit » Bereich: Marktplatz* enthalten.
+* Variante muss für den *Standard-Mandanten* unter *Artikel » Variante » Tab: Verfügbarkeit » Mandant* freigeschaltet sein.
+* *WB Netto* muss positiv sein.
+* Variante muss einen Verkaufspreis für den Marktplatz *METRO* enthalten.
+* Die Währung des Verkaufspreises muss *EUR* sein.
 * Der exportierte Wert des Verkaufspreises muss die Summe von *Verkaufspreis BRUTTO + Versandkosten BRUTTO* sein.
 
 Sobald diese Einstellungen vorgenommen wurden, gibt die Funktion *Warenbestand und Verkaufspreis Export* ein Angebot für den Artikel ab.
 
-[#5226544237]
-=== Artikel Lieferzeiten einrichten
+[#9331181558]
+== Auftragsabwicklung automatisieren
 
-Damit METRO Angebote funktionieren muss eine *minimale* und *maximale Lieferzeit* definiert und  verknüpft sein.
-
-[#4607614564]
-==== Die Mindestlieferzeit konfigurieren
-
-1. Öffne das Menü *Einrichtung » Artikel » Variante » Verfugbarkeit*.
-2. Definiere die relevanten *durchschnittlichen Lieferzeiten*.
-3. Erteile den Varianten eine *Durschnittliche liferzeit* unter:*Artikel » Variante » Einstellungen » Bereich Availability » *1* to *10*. +
-→ Die Mindestlieferzeit ist eingerichtet und verknüpft.
-
-[#6925994604]
-==== Die maximale Lieferzeit konfigurieren
-
-1. Öffne das Menü *Einrichtung » Assistenten » Omni-Channel » METRO »  Plugin Konfigurationsassistent*
-2. Öffne den Schritt *Warenbestand und Verkaufspreis Export*.
-3. Füge einen Wert für *Der maximale Lieferzeitpuffer beträgt?* ein.
-
-→ Die maximale Lieferzeit ist eingerichtet und verknüpft.
 
 [#9331181541]
-== Der Auftragsimport
+=== Informationen zum Auftragsimport
 
-Informationen und Besonderheiten des Auftragsimports / der Auftragsabwicklung beim den METRO-Marktplatz.
+Informationen und Besonderheiten des Auftragsimports und der Auftragsabwicklung bei METRO.
 
-* Der Auftragsimport läuft alle 15 Minuten.
 * Das Plugin erstellt aus jeder METRO-Bestellposition Einzelbestellungen. +
-*_Beispiel:_* Wenn Sie 2 Artikel *X* und 3 Artikel *Y* haben, erhältst Du einen Auftrag mit 2 Artikeln *X* und einen weiteren Auftrag mit 3 Artikeln *Y*. Verwandte Aufträge können mit Hilfe des Suchfilters *Ext. Auftragsnummer* gefunden werden.
-* Jede METRO-Bestellposition wird separat bearbeitet (Erfüllung, Rechnung, Ereignisaktionen, Retouren, etc.)
-* Alle importierten Aufträge werden als *Bezahlt* importiert.
+*_Beispiel:_* Eine Kundin bestellt 2 Exemplare des Artikels X und 3 Exemplare des Artikels Y. In plentymarkets wird ein Auftrag für 2 x Artikel X und ein weiterer Auftrag für 3 x Artikel Y erstellt. Verwandte Aufträge können über den Suchfilter *Ext. Auftragsnummer* gefunden werden.
+* Jede METRO-Bestellposition wird separat bearbeitet (Erfüllung, Rechnung, Ereignisaktionen, Retouren, etc.).
+* Alle Aufträge werden als *Bezahlt* importiert.
 
 [#8798043284]
 === Unterstützte Zahlungsarten
@@ -380,15 +407,15 @@ Die folgenden Zahlungsmethoden werden unterstützt und beim Auftragsimport autom
 
 * *Lastschrift Zahlungen* werden als "Metro Direct Debit" importiert.
 * *RatePAY Rechnungen* werden als "Metro Open Invoice" importiert.
-* *Kreditkarten Zahlungen* werden als "Metro Direct Checkout" importiert.
-* *Paypal Zahlungen* werden als "Metro Paypal" importiert.
+* *PayPal Zahlungen* werden als "Metro Paypal" importiert.
 * *Klarna Sofortüberweisung Zahlungen* werden als "Metro SOFORT" importiert.
+* *Kreditkarten Zahlungen* werden als "Metro Direct Checkout" importiert.
 * *Alle anderen Zahlungsarten* werden auch als "Metro Direct Checkout" importiert.
 
-* *_Hinweis:_* Das Plugin importiert anonyme Proxy-E-Mail-Adressen für METRO-Käufer.
+* *_Hinweis:_* Das Plugin importiert anonyme Proxy-E-Mail-Adressen für METRO-Käufer:innen.
 
 [#1045309002]
-== Ereignisaktionen einrichten
+=== Ereignisaktionen einrichten
 
 Mit den xref:automatisierung:ereignisaktionen.adoc[Ereignisaktionen] des Plugins sendest Du METRO Informationen über deine Aufträge.
 
@@ -401,51 +428,51 @@ Mit den xref:automatisierung:ereignisaktionen.adoc[Ereignisaktionen] des Plugins
 |===
 |Ereignisaktion |Erläuterung
 
-|*Sende Storno Benachrichtigung an METRO,* +
+| *Sende Storno Benachrichtigung an METRO,* +
 *Begründung: "Kein Warenbestand*
-|Diese Ereignisaktion sendet eine Stornierungsbenachrichtigung zum METRO-Auftrag.
+| Diese Ereignisaktion sendet eine Stornierungsbenachrichtigung zum METRO-Auftrag.
 
-|*Sende Storno Benachrichtigung an METRO,* +
+| *Sende Storno Benachrichtigung an METRO,* +
 *Begründung: "Falscher Preis"*
-|Diese Ereignisaktion sendet eine Stornierungsbenachrichtigung zum METRO-Auftrag.
+| Diese Ereignisaktion sendet eine Stornierungsbenachrichtigung zum METRO-Auftrag.
 
-|*Sende Storno Benachrichtigung an METRO,* +
+| *Sende Storno Benachrichtigung an METRO,* +
 *Begründung: "Falsche Artikeldaten"*
-|Diese Ereignisaktion sendet eine Stornierungsbenachrichtigung zum METRO-Auftrag.
+| Diese Ereignisaktion sendet eine Stornierungsbenachrichtigung zum METRO-Auftrag.
 
-|*Versandbestätigung an METRO senden*
-|Diese Ereignisaktion löst die Erfüllungsbenachrichtigung aus. Eine Tracking-Nummer ist nicht erforderlich.
+| *Versandbestätigung an METRO senden*
+| Diese Ereignisaktion löst die Erfüllungsbenachrichtigung aus. Eine Tracking-Nummer ist nicht erforderlich.
 
-|*Sende  Auftrag  "In Bearbeitung" an METRO*
-|Bei erfolgreichem Auftragsimport löst dieses Ereignis eine Auftragsbestätigung für die METRO-Bestellung aus und verschiebt die Bestellung vom Status: *platziert* in *Verarbeitung*. Dies ist ein wichtiger Schritt, da nur Bestellungen mit dem Status: *Verarbeitung* in den Status: *Versand* verschoben werden können.
+| *Sende  Auftrag "In Bearbeitung" an METRO*
+| Bei erfolgreichem Auftragsimport löst dieses Ereignis eine Auftragsbestätigung für die METRO-Bestellung aus und verschiebt die Bestellung vom Status *platziert* in den Status *Verarbeitung*. Dies ist ein wichtiger Schritt, da nur Bestellungen mit dem Status *Verarbeitung* in den Status *Versand* verschoben werden können.
 
 Hier empfehlen wir folgende Einrichtung der Ereignisaktion
 
 . Öffne das Menü *Einrichtung » Aufträge » Ereignisse » Neu*.
 . Gib einen *Namen* ein.
-. Wähle *Statuswechsel* aus der Dropdown-Liste aus.
-. Wähle Status: *4.In Versandvorbereitung* oder Status: *5. Versandbereit*.
+. Wähle *Statuswechsel* aus der Dropdown-Liste.
+. Wähle Status *[4] In Versandvorbereitung* oder Status *[5] Versandbereit*.
 . Füge die Aktion *Sende Auftrag "In Bearbeitung" an METRO* hinzu.
 
-*_Wichtig:_* METRO Ereignisaktionen sind mit dem Ereignis *Neuer Auftrag* nicht kompatibel.
+*_Wichtig:_* METRO-Ereignisaktionen sind mit dem Ereignis *Neuer Auftrag* nicht kompatibel.
 
-|*Rechnung an METRO sende*
-|Mit dieser Ereignisaktion sendest Du eine Rechnung an METRO.
+| *Rechnung an METRO sende*
+| Mit dieser Ereignisaktion sendest Du eine Rechnung an METRO.
 
-|*Sende Retourenetikett an METRO*
-|Öffne das Menü *Aufträge » Versand-Center* um *Return Label* für den Retoure Auftrag zu erstellen und löse diese Ereignisaktion um das erstellte Retourenetikett an METRO zu senden.
+| *Sende Retourenetikett an METRO*
+| Öffne das Menü *Aufträge » Versand-Center* um *Return Label* für den Retoure-Auftrag zu erstellen und löse diese Ereignisaktion aus, um das erstellte Retourenetikett an METRO zu senden.
 
-|*Sende 'Retouren Anfrage akzeptiert' an METRO*
-|Diese Ereignisaktion benachrichtigt METRO, die Retouren Anfrage zu akzeptieren.
+| *Sende 'Retouren Anfrage akzeptiert' an METRO*
+| Diese Ereignisaktion benachrichtigt METRO darüber, dass du die Retourenanfrage akzeptiert hast.
 
-|*Rücksendung erhalten' an METRO melden*
-|Wenn der Käufer die versendeten Artikel nicht akzeptiert / erhält, wird die Bestellung automatisch zurück gesendet. Erstelle hierfür einen Retoure Auftrag und löse dieses Ereignis aus.
+| *Rücksendung erhalten' an METRO melden*
+| Wenn Käufer:innen die versendeten Artikel nicht akzeptieren oder nicht erhalten, wird die Bestellung automatisch zurückgesendet. Erstelle hierfür einen Retourenauftrag und löse dieses Ereignis aus.
 
-|*Sende 'Retouren Anfrage abgelehnt' an METRO*
-|Diese Ereignisaktion sendet eine Benachrichtigung an METRO, um die vom Kunden übermittelte Retoure Anfrage abzulehnen.
+| *Sende 'Retouren Anfrage abgelehnt' an METRO*
+|Diese Ereignisaktion sendet eine Benachrichtigung an METRO, um Retourenanfragen von Kund:innen abzulehnen.
 
-|*Sende Gutschrift an METRO*
-|Erstelle einen *Gutschrift Auftrag* von einem *Retoure Auftrag* das akzeptiert wurde und schreibe eine *Gutschrift* auf dem *Gutschrift Auftrag*. Löse diese Ereignisaktion aus, um die Gutschrift an METRO zu senden.
+| *Sende Gutschrift an METRO*
+|Erstelle einen *Gutschriftauftrag* für einen akzeptierten *Retourenauftrag* und schreibe eine *Gutschrift* auf dem *Gutschrift Auftrag*. Löse diese Ereignisaktion aus, um die Gutschrift an METRO zu senden.
 |===
 
 [#0746212710]
@@ -454,12 +481,12 @@ Hier empfehlen wir folgende Einrichtung der Ereignisaktion
 . Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
 . Klick auf *Ereignisaktion hinzufügen*. +
 → Das Fenster *Neue Ereignisaktion erstellen* ist offen.
-. Trage einen Namen ein.
+. Gib einen Namen ein.
 . Wähle ein *Ereignis*, zum Beispiel *Auftragsänderung » Warenausgang gebucht*
 . *Speichere* die Einstellungen.
 . Füge den Filter *Auftrag » Auftragstyp » Auftrag* hinzu.
 . Füge den Filter *Auftrag » Herkunft » METRO* hinzu.
-. Wähle eine Aktion vom Bereich Plugin aus.
+. Wähle eine Aktion aus dem Bereich *Plugin*.
 . *Speichere* die Einstellungen.
 
 [#0922092229]
@@ -467,9 +494,9 @@ Hier empfehlen wir folgende Einrichtung der Ereignisaktion
 
 Im plentymarkets Backend findest du das Menü *Einrichtung » Märkte » METRO » Hilfe*. Mit dieser Plugin-Hilfe kannst Du folgende Plugin-Prozesse prüfen:
 
-* Download-Test der Artikelexport .csv für eine METRO-Kategorie deiner Wahl.
-* Überprüfe die Exportbedingungen für eine Artikelvariante und vergleiche diese mit den Eigenschaften eines Katalogs deiner Wahl.
-* Überprüfe die Pluginbereitschaft.
+* <<5721453049, Download-Test der CSV-Artikelexportdatei für eine METRO-Kategorie deiner Wahl.>>
+* <<5603650009, Überprüfe die Exportbedingungen für eine Artikelvariante und vergleiche diese Exportbedingungen mit den Eigenschaften eines Katalogs deiner Wahl.>>
+* <<5659888624, Überprüfe die Plugin-Bereitschaft.>>
 
 [#5721453049]
 === CSV-Datei des Artikelexports herunterladen
@@ -480,23 +507,23 @@ Im plentymarkets Backend findest du das Menü *Einrichtung » Märkte » METRO �
 . Überprüfe den exportierten Inhalt für den ausgewählten Katalog.
 
 [#5603650009]
-=== Varianten Export Bedingungen überprüfen
+=== Exportbedingungen für Varianten prüfen
 
 . Öffne das Menü *Einrichtung » Märkte » METRO » Hilfe*.
-. Eine Varianten-ID eintragen.
-. Wähle den Varianten relevanten METRO-Katalog aus.
+. Gib eine Varianten-ID ein.
+. Wähle den für die Variante relevanten METRO-Katalog.
 . Klick auf *überprüfen*. +
 → Eine Liste der Exportbedingungen wird angezeigt. +
   * *OK* = Die Bedingung ist erfüllt. +
   * *X* = Die Bedingung ist nicht erfüllt.
 
 [#5659888624]
-=== Plugin Bereitschaft überprüfen
+=== Plugin-Bereitschaft überprüfen
 
 1. Öffne das Menü *Einrichtung » Märkte » METRO » Hilfe*.
 2. Klick auf *überprüfen*. +
 → Das Plugin überprüft folgendes:
-* Ist die Herkunft *METRO* aktiv?
-* Kann eine Verbindung zur METRO-API hergestellt werden?
-* Ist mehr als eine Herkunft METRO im Menü *Einrichtung » Aufträge » Oder Auftragsherkunft* existiert und aktiv?
-* Ist die höchste verfügbare Herkunfts-ID aktiv?
+  * Ist die Herkunft *METRO* aktiv?
+  * Kann eine Verbindung zur METRO-API hergestellt werden?
+  * Ist mehr als eine Herkunft METRO im Menü *Einrichtung » Aufträge » Oder Auftragsherkunft* vorhanden und aktiv?
+  * Ist die höchste verfügbare Herkunfts-ID aktiv?
