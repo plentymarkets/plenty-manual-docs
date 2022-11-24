@@ -66,6 +66,13 @@ Du hast das {market}-Plugin installiert? Super. Nun richtest du den Marktplatz i
 
 include::maerkte:partial$auftragsherkunft-aktivieren.adoc[]
 
+[#3863568785]
+=== Verkaufspreis festlegen
+
+:referrer-price: {market}
+
+include::partial$verkaufspreis-festlegen.adoc[]
+
 [#5675802010]
 === Konfigurationsassistenten durchlaufen
 
@@ -243,16 +250,16 @@ Maximale Lieferzeit konfigurieren:
 [#7251018515]
 === Bestands- und Preisabgleich per SKU statt per GTIN einrichten
 
-Beachte die folgenden Voraussetzungen für das Aktualisieren von Warenbestand und Verkaufspreisen bei METRO:
+Beachte die folgenden Voraussetzungen für das Aktualisieren von Warenbestand und Preisen bei METRO:
 
 * Die Artikelverfügbarkeit muss im Menü *Einrichtung » Artikel » Verfügbarkeit* und am Artikel gepflegt sein.
 
-* Damit Warenbestand und Verkaufspreise bei METRO aktualisiert werden, muss entweder die GTIN oder die SKU der Variante bei METRO und in plentymarkets identisch sein.
+* Der Bestands- und Preisabgleich von Varianten erfolgt anhand der GTIN. Damit der Abgleich funktioniert, muss die Variante bei plentymarkets dieselbe GTIN haben wie bei METRO.
 
-* Standardmäßig werden Warenbestand und Verkaufspreise über einen GTIN-Abgleich aktualisiert. Wenn du die Daten über einen SKU-Abgleich aktualisieren möchtest, sind zusätzliche Einstellungen nötig:
+* Standardmäßig werden Warenbestand und Preise über einen GTIN-Abgleich aktualisiert. Wenn du für den Abgleich die SKU von Varianten nutzen möchtest, sind zusätzliche Einstellungen nötig:
 
 [.collapseBox]
-.Warenbestand und Verkaufspreise per SKU-Abgleich einrichten
+.Bestands- und Preisabgleich per SKU-Abgleich einrichten
 --
 
 . Öffne das Menü *Einrichtung » Assistenten » Omni-Channel » METRO » Plugin Konfigurationsassistent*.
@@ -262,7 +269,7 @@ Beachte die folgenden Voraussetzungen für das Aktualisieren von Warenbestand un
 . Überprüfe, ob in deinem METRO-Dashboard ein Angebot für den betreffenden Artikel vorhanden ist. +
 *_Hinweis:_* Du kannst ein Angebot auch manuell über das METRO-Dashboard erstellen.
 . Stelle sicher, dass die SKU im Artikel auf beiden Systemen gleich ist. +
-*_Hinweis:_* Du kannst SKU-Bulk-Zuordnungen auf METRO erstellen, indem Du *Angebote verwalten* öffnest. Für weitere Informationen wende dich an deinen METRO-Support.
+*_Tipp:_* Du kannst SKU-Bulk-Zuordnungen auf METRO erstellen, indem Du *Angebote verwalten* öffnest. Wende dich für weitere Informationen an deinen METRO-Support.
 --
 
 [#8435957916]
@@ -343,17 +350,19 @@ include::partial$catalogue-link-property-for-market-category.adoc[]
 
 * Variante muss *aktiv* sein.
 * Variante muss für den Marktplatz METRO freigeschaltet sein.
-* Die Metro-Eigenschaft *METRO Kategorie* und ein korrekter Wert muss mit der Variante verknüpft sein.
+* Die Metro-Eigenschaft *METRO Kategorie* und ein korrekter Eigenschaftswert muss mit der Variante verknüpft sein.
 * Die Variante muss mindestens ein Bild enthalten, das für den Marktplatz METRO freigeschaltet ist.
 * Die Variante muss den Barcode-Typ GTIN oder die MPN + Hersteller als Exportkennung nutzen.
 * Die enthaltene Artikelbeschreibung darf nur die folgenden HTML-Tags enthalten:
-
   ** &lt;p&gt;
   ** &lt;ul&gt;
   ** &lt;ol&gt;
   ** &lt;li&gt;
   ** &lt;span&gt;
   ** &lt;br&gt;
+
+  *_Wichtig:_* Verkaufspreise werden über den Prozess *Warenbestand und Verkaufspreis Export* zu METRO exportiert, nicht über den Artikelexport.
+
 
 [#8758031625]
 === _Checkliste:_ Vorraussetzungen für den Warenbestandsexport
@@ -362,15 +371,9 @@ include::partial$catalogue-link-property-for-market-category.adoc[]
 → Varianten mit einem negativen Warenbestand werden mit dem Warenbestand 0 exportiert.
 * Varianten müssen einen Verkaufspreis für den Marktplatz METRO enthalten. Die Währung dieses Verkaufspreises muss EURO sein.
 * Der Verkaufspreis muss die Summe von *Verkaufspreis BRUTTO + Versandkosten Brutto* sein.
+* Damit Warenbestand und Preise aktualisiert werden, müssen die GTIN in plentymarkets und auf METRO gleich sein. Wenn du statt des standardmäßigen GTIN-Abgleich den SKU-Abgleich eingestellt hast, müssen stattdessen die SKU in plentymarkets und auf METRO gleich sein.
 
-*_Wichtig:_*
-
-* Verkaufspreise für *Mengenpreis* (mit der Option *Ab Menge*) muss auch die Summe von *Verkaufspreis BRUTTO + Versandkosten Brutto* sein.
-* Der Verkaufspreis für eine Mindestmenge von 10 Stück darf nicht höher sein als ein Verkaufspreis für eine Mindestmenge von 5 Stück.
-* Da die METRO-Verkaufspreise Versandkosten enthalten müssen, werden importierte Bestellungen als bezahlt importiert und enthalten 0 Versandkosten.
-* Verkaufspreise werden nicht mit dem Artikelexport zu METRO exportiert, sondern über den Prozess *Warenbestand und Verkaufspreis Export* durchgeführt.
-
-*_Wichtig:_* Die GTIN oder die SKU müssen in plentymarkets und auf METRO gleich sein, damit Warenbestand und Verkaufspreise aktualisiert werden.
+*_Wichtig:_* Verkaufspreise werden über den Prozess *Warenbestand und Verkaufspreis Export* zu METRO exportiert, nicht über den Artikelexport.
 
 [#2395556941]
 === Angebot zu vorhandenem METRO-Artikel senden
@@ -406,6 +409,7 @@ Informationen und Besonderheiten des Auftragsimports und der Auftragsabwicklung 
 *_Beispiel:_* Eine Kundin bestellt 2 Exemplare des Artikels X und 3 Exemplare des Artikels Y. In plentymarkets wird ein Auftrag für 2 x Artikel X und ein weiterer Auftrag für 3 x Artikel Y erstellt. Verwandte Aufträge können über den Suchfilter *Ext. Auftragsnummer* gefunden werden.
 * Jede METRO-Bestellposition wird separat bearbeitet (Erfüllung, Rechnung, Ereignisaktionen, Retouren, etc.).
 * Alle Aufträge werden als *Bezahlt* importiert.
+* Da die METRO-Verkaufspreise die Versandkosten bereits enthalten, sind die Versandkosten in den importierten Aufträgen mit 0 Euro angegeben.
 
 [#8798043284]
 === Unterstützte Zahlungsarten
