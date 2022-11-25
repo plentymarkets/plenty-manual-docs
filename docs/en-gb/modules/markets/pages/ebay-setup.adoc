@@ -1,5 +1,5 @@
 = Setting up eBay
-:keywords: eBay, eBay listing, eBay Plus, ePID, eBay token, eBay shop categories, Second Chance Offer, SCO, eBay platform
+:keywords: eBay, eBay listing, eBay Plus, eBay token, eBay shop categories, Second Chance Offer, SCO, eBay platform
 :description: Learn how to set up the market eBay in plentymarkets to start selling your items on eBay.
 :author: team-plenty-channel
 
@@ -253,7 +253,7 @@ a| Select whether <<Processing returns, eBay returns>> should be retrieved or no
 * *No* = The eBay return process is deactivated in plentymarkets. New eBay returns are not imported into plentymarkets. eBay returns must be edited in the seller’s My eBay area instead.
 
 | *Retrieve eBay purchase cancellations*
-| Select whether <<#8900-1, eBay purchase cancellations>> are retrieved and imported into plentymarkets. Purchase cancellations are updated every 15 minutes.
+| Select whether eBay purchase cancellations are retrieved and imported into plentymarkets. Purchase cancellations are updated every 15 minutes.
 
 | *Update eBay return status*
 | Select whether the return status should be updated *In return order*, *In credit note* or *In return order and credit note* when the status is changed by eBay. Return statuses are updated once per hour.
@@ -369,7 +369,7 @@ Linking return statuses:
 . Go to *Setup » Markets » eBay » Settings » Tab: Return settings*.
 . Click on the *Return status links* tab.
 . Select a plentymarkets return status for each *eBay return status* from the drop-down lists. +
-→ You can select an already existing status or you can xref:orders:managing-orders.adoc#create-status[create] a new status that best suits your workflow.
+→ You can select an already existing status or you can create a xref:orders:managing-orders.adoc#create-status[new status] that best suits your workflow.
 . Save (terra:save[]) the settings.
 
 For further information about editing eBay returns and using event procedures for partial automation, refer to the <<Processing returns, Processing returns>> chapter.
@@ -530,6 +530,7 @@ Proceed as described below to define a sales price for the eBay country platform
 Defining the sales price for country platforms:
 
 . Go to *Setup » Item » Sales prices » [Open sales price] » Tab: Settings*.
+. In the *Client* area, activate the default client.
 . In the *Referrer* area, activate the desired eBay country platform.
 . In the *eBay accounts* area, activate the desired eBay account.
 . Save (terra:save[]) the settings.
@@ -565,7 +566,6 @@ _or_
 Automatic email to email address::
 +
 --
-
 [discrete]
 ===== Customising the email template:
 
@@ -580,17 +580,33 @@ Automatic email to email address::
 [discrete]
 ===== Setting up the automatic email despatch:
 
-. Go to *Setup » Assistants » Basic setup*.
-. Open the *Email accounts* assistant.
-. Go to the *Automatic despatch* step.
-. From the drop-down list *New order from eBay*, select the email template.
-. Save (terra:save[]) the setting.
+:table-event-procedure: <<#automatic-email-despatch>>
+
+include::_includes:partial$event-procedure-tabbed.adoc[]
+
+[[automatic-email-despatch]]
+.Creating an event procedure for automatic emails
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *New order*
+| 
+
+| *Filter 1*
+| *Order > Referrer*
+| *eBay*
+
+| *Procedure*
+| *Customer > Send email*
+| *[add the email template that you created for eBay]*
+|===
 --
 
 Automatic message to eBay user account::
 +
 --
-
 [discrete]
 ===== Entering texts for messages after purchase:
 
@@ -769,8 +785,8 @@ Select *No* to deactivate the holiday settings.
 [#extended-producer-responsibility]
 === Providing information about the Extended Producer Responsibility
 
-The European policy for Extended Producer Responsibility (EPR) makes manufacturers and sellers responsible for waste collection and recycling of specific products, such as electrical devices or furniture.  In some countries, it is already mandatory to provide details about waste collection and recycling when selling such products. +
-Further information about the extended producer responsibility can be found link:https://epr-info.com/[here^].  +
+The European policy for Extended Producer Responsibility (EPR) makes manufacturers and sellers responsible for waste collection and recycling of specific products, such as electrical devices or furniture. In some countries, it is already mandatory to provide details about waste collection and recycling when selling such products. +
+Further information about the extended producer responsibility can be found link:https://epr-info.com/[here^]. +
 In this chapter, you will learn how to define WEEE take back policies and how to provide information about product compliance. In addition, you will learn how to set up recycling fees in plentymarkets.
 
 [#weee-take-back]
@@ -1156,7 +1172,7 @@ a| Select additional options, for example *Free shipping* or *Express shipping*.
 | Select whether the rule governing shipping at a special rate should be applied. link:https://www.ebay.com/help/selling/shipping-items/shipping-rates/shipping-discounts?id=4168[Rules governing shipping at a special rate^] must be set up on eBay.
 
 | *Rate tables (additional regions)*
-| Select whether the rate tables should be applied. Rate tables must be set up on eBay. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options?id=4089[Setting up your postage options^] page.
+| Select whether the rate tables should be applied. Rate tables must be set up on eBay. For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/posting-items/setting-postage-options?id=4089#tables[Setting up your postage options^] page.
 
 | *Exclude shipping locations*
 | Exclude shipping locations, PO boxes and DHL pack stations. The options shown here depend on the *eBay platform* that was chosen. The countries listed here are related to the *Purchasers who are registered in a country that I do not ship items to* option in the *Buyer requirements* area. This option is found in an eBay shipping profile in the *Setup » Markets » eBay » Business policies » [Open shipping profile]* menu.
@@ -1210,7 +1226,7 @@ Creating a new profile:
 . Save (terra:save[]) the settings.
 
 [[ebay-return-policy]]
-.Settings for eBay return policies
+.eBay return policies
 [cols="1,3a"]
 |===
 | Setting | Explanation
@@ -1716,7 +1732,7 @@ If the *Wildcard character in layout template (eBay)* function is activated, the
 
 Use cross-selling to offer further products related to an item. These products are displayed at your listing on eBay. +
 
-Use the template function *GetCrossSellingData* to add xref:item:cross-selling.adoc#[cross-selling items] that are linked to an item to a <<Managing layout templates, layout template>> and <<Linking a layout template, link>> this layout template to the desired listings. Add cross-selling items to layout templates in the *Setup » Listings » Layout* menu.
+Use the template function *GetCrossSellingData* in the *Setup » Listings » Layout* menu to add xref:item:managing-items.adoc#970[cross-selling items] that are linked to an item to a <<Managing layout templates, layout template>> and <<Linking a layout template, link>> this layout template to the desired listings.
 The template function *GetCrossSellingData* displays the following data which can be displayed at a cross-selling item:
 
  * *Item ID* of the item in plentymarkets
@@ -1786,83 +1802,6 @@ Example code tab: CSS
 include::example$css_cross-selling.html[]
 
 ----
-
-[#6550]
-== Matching ePIDs
-
-Since 15 August 2018, it is mandatory to match products from specific categories which you want to offer on eBay with ePIDs. An ePID (eBay Product ID) is an eBay-specific product identification that is provided by eBay. ePIDs are used to display identical products in a cluster on eBay. When buyers click on the product, they can choose an offer. +
-
-A product which is sold on eBay as a single product and in a set can have multiple ePIDs.
-
-[TIP]
-.Automatic ePID matching
-====
-New listings are automatically matched with an ePID when they are started. If there is more than one ePID available for a listing, then the first ePID is automatically matched. Further ePIDs are saved in a log message. +
-For existing listings, you have to match ePIDs manually.
-====
-
-Link variations with ePIDs in the *Setup » Markets » eBay » ePID matching* menu.
-
-Requirements for matching variations with ePIDs:
-
-- The variation that you want to match with an ePID has to have an active or hidden listing.
-- The selection *Transmit ePID* must be selected for the *Transfer as item number* option within the *Listings » Edit listings » [Open listing ID] » Edit listing* menu.
-- An EAN must be saved for the variation within *Item » Edit item » [Open item] » Tab: Variation ID* in the *Barcode* area.
-- - In the *Setup » Markets » eBay » Settings » Tab: Initial settings* menu, the *Add item details from the eBay catalogue* option has to be set to *Yes*.
-- At the moment, ePID matching is only possible for the platforms eBay Germany, eBay UK, eBay United States, eBay Canada, and eBay Australia.
-- At the moment, only products from specific eBay categories can be matched with ePIDs. Further information about the affected categories is available link:https://developer.ebay.com/api-docs/sell/static/inventory/pbse-phase1-categories.html[here^].
-
-[IMPORTANT]
-.OAuth2 authentication required
-====
-In order to link ePIDs, you have to authenticate your eBay account for OAuth2 in the *Setup » Markets » eBay » Accounts » OAuth2* menu.
-====
-
-[.instruction]
-Matching ePIDs:
-
-. Go to *Setup » Markets » eBay » ePID matching*.
-. Click on *Search* (icon:search[role="blue"]). +
-→ All variations without an ePID from the last day are displayed in the overview.
-. Click on the variation that you want to match with an ePID. +
-→ All available ePIDs for this variation are displayed.
-. Cick on *Match ePID* in the field of the ePID that you want to match.
-
-[discrete]
-===== Filtering variations without ePIDs
-
-Go to *Setup » Markets » eBay » ePID matching* to filter variations without ePID matches. For example, you can search for MLIDs or item IDs, or you can display only variations which are sorted into a specific directory. For further information about filter options for variations without ePID matching, refer to <<#filter-epid>>.
-
-[[filter-epid]]
-.Filter options for variations without ePID match
-[cols="1,3a"]
-|===
-| Filter | Explanation
-
-| *MLID*
-| Enter a market listing ID to search for market listings without ePID.
-
-| *External listing ID*
-| Enter an external listing ID to search for listings without ePID that have this external listing ID.
-
-| *Item ID*
-| Enter an item ID to search for variations without ePID that have this item ID.
-
-| *Variation ID*
-| Enter a variation ID to search for variations without ePID that have this variation ID.
-
-| *Account*
-| Select an account or *ALL* to search for variations with this account.
-
-| *Platform*
-| Select a platform or *ALL* to search for variations that are listed for the saved platform.
-
-| *Category ID*
-| Enter an eBay category to search for variations in this category.
-
-| *Directory*
-| Enter a directory to search for variations that are sorted into this directory.
-|===
 
 [#6600]
 == Setting up eBay Plus
@@ -2066,7 +2005,7 @@ Automatically sending a dunning letter:
 | *Payment due date was exceeded*
 | The dispute process is intended for orders for which payment has been pending for more than 4 days.
 
-2+^| Procedure
+2+^| *Procedure*
 
 | *Send email template*
 | Automatically send the selected email template, forexample *[6] eBay dispute process*.
@@ -2738,7 +2677,7 @@ Changing the order status to accept purchase cancellation:
 . Select an order.
 . Change the order’s status to the status for *eBay purchase cancellation accepted*.
 . Save (terra:save[]) the settings. +
-→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9300, Communicating a purchase cancellation acceptance>>.
+→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9700, Accept eBay cancellation request>>.
 
 Use the group function to change multiple orders at once. If you want to accept the request for unpaid orders, then search for all unpaid orders with the appropriate status and change the orders’ status with the xref:orders:managing-orders.adoc#1700[group function].
 
@@ -2780,7 +2719,7 @@ Changing the order status to reject requests:
 . Select an order.
 . Change the order’s status to the status for *eBay purchase cancellation rejected*.
 . Save (terra:save[]) the settings. +
-→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9400, Communicating a purchase cancellation rejection>>.
+→ eBay will be automatically informed about your decision if you have set up the event procedure <<#9700, Reject eBay cancellation request>>.
 --
 
 [.collapseBox]
@@ -2891,19 +2830,19 @@ include::_includes:partial$event-procedure.adoc[]
 |===
 |Setting |Option |Selection
 
-|Event
+| *Event*
 | *Order change: Status change*
 | Select the status that you set for the reason *Buyer gave incorrect delivery address*.
 
-|Filter 1
+| *Filter 1*
 | *Order > Order type*
 | *Order*
 
-|Filter 2
+| *Filter 2*
 | *Order > Referrer*
 | Select an *eBay referrer*.
 
-|Procedure
+| *Procedure*
 | *Market-Listings > Create an order cancellation on eBay*
 | *Buyer gave incorrect delivery address*
 |===
@@ -3207,7 +3146,7 @@ If you select this option, the following settings must be saved for the item: Th
 | Activate to compare the SKU on eBay with the variation number in plentymarkets during the import.
 
 | *Compare SKU to external variation ID*
-| Activate to compare the SKU on eBay with the external variation ID in plentymarkets during the import.
+| Activate to compare the SKU on eBay with the external variation ID during the import.
 
 | *Create main variation without attributes (variation listings)*
 | Activate to create a main variation with no attributes when variation listings are imported.
