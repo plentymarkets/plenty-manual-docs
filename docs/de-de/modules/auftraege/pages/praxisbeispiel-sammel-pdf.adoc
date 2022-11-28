@@ -1,0 +1,78 @@
+= Praxisbeispiel: Sammel-PDF erstellen
+:keywords: Sammelrechnung, Prozess
+:page-aliases: best-practice-sammel-pdf.adoc
+:author: team-docs-automation
+:description: Erfahre, wie du mithilfe eines Prozesses eine Sammelrechnung als PDF erzeugst.
+
+In diesem Praxisbeispiel zeigen wir dir eine Alternative zum Sammel-PDF im Dokumentenarchiv. Sammel-PDFs lassen sich über den Client per Prozess im Handumdrehen erzeugen. Sobald du dir den Prozess eingerichtet hast, kannst du ihn jederzeit mit einem Klick starten. In diesem Beispiel haben wir 2 alternative Prozesse eingerichtet.
+Der Unterschied zwischen beiden Prozessen liegt lediglich in einem Filter. In Prozess 1 *“SammelPDF”* werden alle Aufträge eines gewählten Status berücksichtigt, während in Prozess 2 *“SammelPDF_Zeitraum”* nur die Aufträge eines gewählten Status in einem gewählten Zeitraum berücksichtigt werden. Der Zeitraum muss immer wieder angepasst werden, weshalb wir die Version ohne Datumsfilter empfehlen.
+
+Unten auf dieser Seite stehen dir die Prozesse zum Download zur Verfügung. Lerne in den folgenden Kapiteln jedoch zuerst, welche Schritte du in deinem System vornehmen musst.
+
+== Was du brauchst?
+
+Das Tool xref:automatisierung:plentybase-installieren.adoc#[PlentyBase] muss installiert und eingerichtet sein.
+
+== Anpassungen
+
+1) Nachdem du den Prozess heruntergeladen und in deinen Client importiert hast, kannst du den Prozess öffnen.
+
+image::auftraege:prozessimport.png[Prozessimport]
+
+2) Öffne den Arbeitsschritt *Aufträge suchen* und passe die folgenden Einstellungen an:
+
+[.subhead]
+Einstellungen
+
+*Anzahl* (optional für einen ersten Testlauf verringern)
+Zum Testen kannst du die Anzahl der Aufträge z.B auf 3 verringern. Das Maximum beträgt 250.
+
+[.subhead]
+Filter
+
+* *Statusfilter* +
+7 Warenausgang gebucht
+* *Datumsfilter* (nur in Prozess 2) +
+Warenausgang und von bis
+
+[.subhead]
+Aufträge markieren
+
+* Neuer Eigner → Aktiver Benutzer
+
+image::auftraege:arbeitsschritt.png[Arbeitsschritt]
+
+3) Speichere (icon:save[role="green"]) den Arbeitsschritt. +
+4) Öffne die Subaktion *Speichern* oberhalb des Stifts. Das folgende Fenster wird geöffnet:
+
+image::auftraege:subaktion-speichern.png[Subaktion speichern]
+
+5) Gib deinen Zielordner an und aktiviere die Option *Als Sammeldokument*. +
+6) Öffne die Subaktion *Status ändern* und wähle den Status, in den die Aufträge verschoben werden sollen, z.B. Status 7.5 „Rechnung gedruckt“. +
+→ Den Status musst du im Menü *Einstellungen » Aufträge » Auftragsstatus* selbst anlegen.
+
+image::auftraege:subaktion-status.png[Subaktion Status]
+
+7) Starte den Prozess.
+
+image::auftraege:prozess-starten.png[Subaktion speichern]
+
+8) Prüfe die Aufträge und Rechnungen.
+
+[NOTE]
+.Zeitraum für Datumsfilter neu wählen
+====
+Für den Prozess mit Datumsfilter: Wähle einen neuen Zeitraum, wenn du das nächste mal Rechnungen generieren möchtest.
+====
+
+== Download
+
+Unsere Empfehlung: link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/plentyprocess/sammelpdf.plentyprocess[SammelPDF]
+
+Alternative mit Datumsfilter: link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/plentyprocess/sammelpdf-zeitraum.plentyprocess[SammelPDF_Zeitraum]
+
+[NOTE]
+.Rechnungen gesammelt generieren
+====
+Wenn die Option *Als Sammeldokument* nicht ausgewählt ist, wird für jede Rechnung ein eigenes PDF-Dokument generiert.
+====
