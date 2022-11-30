@@ -1,7 +1,6 @@
 = eBay einrichten
-:keywords: eBay, eBay, eBay einrichten, eBay-Listing, eBay Listing, eBay Plus, ePID, eBay-Token, eBay-Shop-Kategorien, Second Chance Offer, SCO, eBay-Plattform, wiedereinstellen
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz eBay in deinem plentymarkets System ein.
-:id: DWYPTTK
+:keywords: eBay, eBay, eBay einrichten, eBay-Listing, eBay Listing, eBay Plus, eBay-Token, eBay-Shop-Kategorien, Second Chance Offer, SCO, eBay-Plattform, wiedereinstellen
+:description: Auf dieser Seite erfährst du, wie du eBay in plentymarkets einrichtest, damit du deine Artikel auf eBay verkaufen kannst.
 :author: team-plenty-channel
 
 :ebay:
@@ -531,6 +530,7 @@ Gehe wie im Folgenden beschrieben vor, um für die Länderplattformen einen Verk
 Verkaufspreis für Länderplattformen festlegen:
 
 . Öffne das Menü *Einrichtung » Artikel » Verkaufspreise » [Verkaufspreis öffnen] » Tab: Einstellungen*.
+. Aktiviere im Bereich *Mandant* den Standard-Mandanten.
 . Aktiviere im Bereich *Herkunft* die gewünschte eBay-Länderplattform.
 . Aktiviere im Bereich *eBay-Konten* das gewünschte eBay-Konto.
 . Speichere (terra:save[]) die Einstellungen.
@@ -566,7 +566,6 @@ _oder_
 Automatische E-Mail an E-Mail-Adresse::
 +
 --
-
 [discrete]
 ===== E-Mail-Vorlage anpassen:
 
@@ -581,16 +580,33 @@ Automatische E-Mail an E-Mail-Adresse::
 [discrete]
 ===== Automatischen E-Mail-Versand einrichten:
 
-. Öffne das Menü *Einrichtung » Assistenten » Grundeinrichtung*.
-. Öffne den Assistenten *E-Mail-Konten*..
-. Wähle im Schritt *Automatischer Versand* aus der Dropdown-Liste *Neue Bestellung über eBay* die E-Mail-Vorlage. Beachte dazu die Erläuterungen in xref:crm:emailbuilder.adoc#table-events-automatic-email-dispatch[dieser Tabelle].
-. Speichere (terra:save[]) die Einstellungen.
+:table-event-procedure: <<#automatischer-email-versand>>
+
+include::_includes:partial$event-procedure-tabbed.adoc[]
+
+[[automatischer-email-versand]]
+.Ereignisaktion zum automatischen E-Mail-Versand
+[cols="1,3,3"]
+|===
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Neuer Auftrag*
+| 
+
+| *Filter 1*
+| *Auftrag &gt; Herkunft*
+| *eBay*
+
+| *Aktion*
+| *Kunde &gt; E-Mail versenden*
+| *[zuvor erstellte E-Mail-Vorlage für eBay hinzufügen]*
+|===
 --
 
 Automatische Nachricht an eBay-Benutzerkonto::
 +
 --
-
 [discrete]
 ===== Texte für Nachrichten nach dem Kauf eingeben:
 
@@ -1786,83 +1802,6 @@ Beispiel-Code Tab: CSS
 include::example$css_cross-selling.html[]
 
 ----
-
-[#6550]
-== Varianten mit ePIDs verknüpfen
-
-Seit dem 15. August 2018 verpflichtet eBay Händler:innen dazu, Produkte aus bestimmten Kategorien, die sie auf eBay zum Verkauf anbieten möchten, mit ePIDs zu verknüpfen. Eine ePID (eBay Product ID) ist eine von eBay vorgegebene, eBay-spezifische Produktkennzeichnung. Durch die Verwendung von ePIDs soll sichergestellt werden, dass identische Produkte gebündelt auf eBay angezeigt werden. Nachdem Käufer:innen das Produkt angeklickt haben, können sie sich für ein Angebot entscheiden. +
-
-Für ein Produkt, das auf eBay einzeln und in einem Set verkauft wird, kann es mehrere ePIDs geben.
-
-[TIP]
-.Automatische ePID-Verknüpfung
-====
-Wenn du neue Listings startest, werden diese Listings automatisch mit einer ePID verknüpft. Wenn es mehrere verfügbare ePIDs zu einem Listing gibt, wird automatisch die erste vorgeschlagene ePID verknüpft. Weitere ePIDs werden in einer Logmeldung gespeichert. +
-Für bestehende Listings findet keine automatische Verknüpfung statt und du musst ePIDs manuell verknüpfen.
-====
-
-Im Menü *Einrichtung » Märkte » eBay » ePID-Verknüpfung* verknüpfst du Varianten mit ePIDs.
-
-Voraussetzungen, um Varianten mit ePIDs zu verknüpfen:
-
-- Die Variante, die du verknüpfen möchtest, muss ein aktives oder ausgeblendetes Listing haben.
-- Im Listing muss unter *Listings » Listings bearbeiten » [Listing-ID öffnen] » Listing bearbeiten* für die Option *Als Artikelnummer übertragen* die Auswahl *ePID übertragen* eingestellt sein.
-- Für die Variante muss unter *Artikel » Artikel bearbeiten » [Artikel öffnen] »  Tab: Varianten-ID* im Bereich *Barcode* eine EAN gespeichert sein.
-- Im Menü *Einrichtung » Märkte » eBay » Einstellungen » Tab: Basiseinstellungen* muss für die Option *Produktdetails aus dem eBay-Katalog hinzufügen* *Ja* eingestellt sein.
-- Momentan ist die ePID-Verknüpfung nur für die eBay-Plattformen eBay Germany, eBay UK, eBay United States, eBay Canada und eBay Australia verfügbar.
-- Momentan können nur Produkte aus bestimmten eBay-Kategorien mit ePIDs verknüpft werden. Weitere Informationen zu diesen Kategorien findest du link:https://developer.ebay.com/api-docs/sell/static/inventory/pbse-phase1-categories.html[hier^].
-
-[IMPORTANT]
-.OAuth2-Authentifizierung erforderlich
-====
-Damit ePIDs verknüpft werden können, musst du dein eBay-Konto im Menü *Einrichtung » Märkte » eBay » Konten » OAuth2* für OAuth2 freischalten.
-====
-
-[.instruction]
-Varianten mit ePIDs verknüpfen:
-
-. Öffne das Menü *Einrichtung » Märkte » eBay » ePID-Verknüpfung*.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ In der Übersicht werden alle Varianten ohne ePID-Verknüpfung des vorherigen Tages angezeigt.
-. Klicke die Variante an, die du mit einer ePID verknüpfen möchtest. +
-→ Verfügbare ePIDs für diese Variante werden angezeigt.
-. Klicke im Feld der ePID, die du mit der Variante verknüpfen möchtest, auf *ePID verknüpfen*.
-
-[discrete]
-===== Varianten ohne ePID-Verknüpfung filtern
-
-Im Menü *Einrichtung » Märkte » eBay » ePID-Verknüpfung* hast du die Möglichkeit, Varianten ohne ePID-Verknüpfung zu filtern. Du kannst beispielsweise nach MLID oder Artikel-ID suchen oder nur Varianten anzeigen lassen, die einem bestimmten Verzeichnis angehören. Weitere Informationen zu Filteroptionen für Varianten ohne ePID-Verknüpfung findest du in <<#filter-epid>>.
-
-[[filter-epid]]
-.Filteroptionen für Varianten ohne ePID-Verknüpfung
-[cols="1,3a"]
-|===
-| Filter | Erläuterung
-
-| *MLID*
-| Eine Market-Listing-ID eingeben, um Market-Listings ohne ePID-Verknüpfung zu suchen.
-
-| *Externe Listing-ID*
-| Eine externe Listing-ID eingeben, um Listings ohne ePID-Verknüpfung mit dieser externen Listing-ID zu suchen.
-
-| *Artikel-ID*
-| Eine Artikel-ID eingeben, um Listings ohne ePID-Verknüpfung mit dieser Artikel-ID zu suchen.
-
-| *Varianten-ID*
-| Eine Varianten-IDs eingeben, um Varianten mit dieser Varianten-ID ohne ePID-Verknüpfung zu suchen.
-
-| *Konto*
-| Ein Konto oder *ALLE* wählen, um Varianten zu suchen, bei denen das gewählte Konto eingestellt ist.
-
-| *Plattform*
-| Eine Plattform oder *ALLE* wählen, um Varianten zu suchen, die auf der gewählten Plattform eingestellt sind.
-
-| *Kategorie-ID*
-| eBay-Kategorie eingeben, um Varianten in dieser Kategorie zu suchen.
-
-| *Verzeichnis*
-| Verzeichnis eingeben, um Varianten zu suchen, die in dieses Verzeichnis eingeordnet sind.
-|===
 
 [#6600]
 == eBay Plus einrichten
