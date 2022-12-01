@@ -1,0 +1,74 @@
+= Praxisbeispiel: Auftragsbestätigung automatisch an Kund:innen senden
+:keywords: 
+:description: Dieses Praxisbeispiel beschreibt, wie du 
+:author: team-crm
+
+Was muss ich einstellen, damit meine Kund:innen automatisch eine Auftragsbestätigung per E-Mail erhalten, wenn sie in meinem Shop einen Artikel bestellt haben?
+
+[discrete]
+== Erforderliche Schritte (Kurzform)
+
+* <<#xx, xx>>
+* <<##ereignisaktion-einrichten, Ereignisaktion einrichten>>
+
+// TODO: Links ersetzen
+
+[#e-mail-vorlage-einrichten]
+== E-Mail-Vorlage einrichten
+
+// TODO: Einleitung plus Konfig ergänzen
+
+////
+E-Mail-Vorlage, Name “Shop: Eingangsbestätigung Bestellung”
+Standardvorlage im EmailBuilder im Ordner Standardvorlagen vorhanden
+
+E-Mail-Vorlage nach eigenen Wünschen anpassen
+ggf. Anhänge anpassen
+Beispiel: Widerrufsrecht (entweder als Textvariable in der E-Mail oder als PDF-Anhang)
+////
+
+[#ereignisaktion-einrichten]
+== Ereignisaktion einrichten
+
+Richte nun eine Ereignisaktion ein, die den Versand der E-Mail-Vorlage auslöst, sobald ein Auftrag in deinem plentyShop platziert wurde.
+
+[.instruction]
+Ereignisaktion einrichten:
+
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klicke unten links auf *Ereignisaktion hinzufügen* (material:add[role=green]). +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Gib einen eindeutigen Namen für die Ereignisaktion ein, z.B. `Auftragsbestätigung plentyShop`.
+. Wähle das Ereignis gemäß <<#table-event-procedure-order-confirmation>>.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+. Nimm die Einstellungen gemäß <<#table-event-procedure-order-confirmation>> vor.
+. Aktiviere die Option *Aktiv*.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+
+[[table-event-procedure-order-confirmation]]
+.Ereignisaktion "Auftragsbestätigung plentyShop" einrichten
+[cols="2,4,3"]
+|====
+|Einstellung |Option |Auswahl
+
+|Ereignis
+|Auftragsanlage > Neuer Auftrag
+|
+
+|Filter 1
+|Auftrag > Auftragstyp
+|Auftrag
+
+|Filter 2
+|Herkunft
+|Mandant (Shop)
+
+|Aktion
+|Kunde > E-Mail versenden
+|Wähle als Vorlage die soeben erstellte Vorlage für die Auftragsbestätigung. Wähle als *Empfänger* die Option *Rechnungsadresse aus Auftrag*.
+
+// TODO: Verlinkung auf vorheriges Kapitel einfügen in der Aktion (soeben erstellte Vorlage für die Auftragsbestätigung)
+
+|====
+
+// TODO: Seite auf Übersichtsseite und in nav.adoc ergänzen.
