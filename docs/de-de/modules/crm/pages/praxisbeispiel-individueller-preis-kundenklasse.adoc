@@ -11,13 +11,12 @@ Ich möchte, dass ein bestimmter Kunde in meinem plentyShop – im Gegensatz zu 
 * <<#kundenklasse-erstellen, Kundenklasse erstellen>>
 * <<#verkaufspreis-erstellen, Verkaufspreis erstellen>>
 ** *_Wichtig:_* Kundenklasse und Herkunft *Webshop* müssen aktiviert werden.
-* <<#verkaufspreis-artikel, Verkaufspreis in Artikel hinzufügen>>
-
+* <<#verkaufspreis-artikel, Verkaufspreis im Artikel hinzufügen>>
 
 [#kundenklasse-erstellen]
 == Kundenklasse erstellen
 
-Erstelle zunächst eine neue Kundenklasse. Gehe dazu wie im Folgenden beschrieben vor.
+Erstelle zunächst eine neue Kundenklasse, die du dann später <<#verkaufspreis-erstellen, im Verkaufspreis aktivierst>>.
 
 [.instruction]
 Kundenklasse erstellen:
@@ -25,21 +24,23 @@ Kundenklasse erstellen:
 . Öffne das Menü *Einrichtung » CRM » Kundenklassen*.
 . Wechsele in das Tab *Neue Kundenklasse*.
 . Gib im Feld *Bezeichnung* den Namen der Kundenklasse ein, z.B. `Stammkunden`.
-//. TODO: Mengenrabatt ergänzen und auf Kapitel Verkaufspreis weiter unten verlinken. Andersherum genauso von Verkaufpreis auf dieses Kapitel verlinken.
+. Stelle die Einstellung *Mengenrabatt* auf *berücksichtigen*, wenn du später im <<#verkaufspreis-erstellen, Verkaufspreis>> einen Mengenrabatt einstellen möchtest.
 . Wähle (material:radio_button_checked[role=skyBlue]), ob die Preise im Webshop in *brutto* oder *netto* angezeigt werden sollen.
-. *Speichere* (material:save[]) die Einstellungen
+. *Speichere* (material:save[]) die Einstellungen.
 
 [TIP]
 Die oben beschriebenen Schritte listen die Einstellungen auf, die _mindestens_ für das Erstellen einer Kundenklasse für die Zwecke dieses Praxisbeispiels vorgenommen werden müssen. Natürlich kannst du noch weitere Einstellungen in der Kundenklasse vornehmen. Alle weiteren Einstellungen sind auf der Handbuchseite xref:crm:vorbereitende-einstellungen.adoc#[Vorbereitende Einstellungen vornehmen] im Kapitel xref:crm:vorbereitende-einstellungen.adoc#kundenklasse-erstellen[Kundenklasse erstellen] detailliert beschrieben.
 
+In plentymarkets kannst du Automatismen einrichten, wodurch bestimmte Kund:innen einer bestimmten Kundenklasse zugeordnet werden. +
+Ein gängiges Beispiel wäre zum Beispiel, wenn ein bestimmter Kunde nach einer von dir definierten Anzahl an Aufträgen in deinem plentyShop einer bestimmten Kundenklasse zugeordnet wird. Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein und wähle als Filter *Kunde > Anzahl der Aufträge* und als Aktion *Kunde > Kundenklasse ändern*. 
+
+Natürlich kannst du die Kundenklasse auch xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[manuell im Kontaktdatensatz] anpassen.
 
 [#verkaufspreis-erstellen]
 == Verkaufspreis erstellen
 
-Erstelle nun einen Verkaufspreis. Verkaufspreise definieren die Bedingungen, unter denen eine Variante zu einem bestimmten Preis verkauft wird. Zum Beispiel kannst du deine Produkte im plentyShop günstiger anbieten als auf einem Marktplatz. Oder du kannst deine Produkte günstiger an B2B-Kunden verkaufen als an B2C-Kunden. +
+Erstelle nun einen Verkaufspreis. Verkaufspreise definieren die Bedingungen, unter denen eine Variante zu einem bestimmten Preis verkauft wird. Zum Beispiel kannst du deine Produkte im plentyShop günstiger anbieten als auf einem Marktplatz. Oder du kannst deine Produkte günstiger an B2B-Kund:innen verkaufen als an B2C-Kund:innen. +
 In dem Verkaufspreis musst du dann die <<#kundenklasse-erstellen, gerade erstellte Kundenklasse>> sowie die Herkunft *Webshop* aktivieren.
-
-// TODO: BOX --> Wichtig: Kundenklasse und Herkunft “Webshop” aktivieren.
 
 [.instruction]
 Verkaufspreis erstellen:
@@ -47,14 +48,17 @@ Verkaufspreis erstellen:
 . Öffne das Menü *Einrichtung » Artikel » Verkaufspreise*.
 . Klicke auf icon:add[role=green] *Neu*.
 . Gib im Feld *Position* eine Zahl ein. +
-→ Wenn du später mehrere Verkaufspreise mit einer Variante verknüpfst, dann werden die Verkaufspreise anhand ihrer Positionsnummer im Artikeldatensatz sortiert angezeigt.
-. Gib im Feld *Interner Name* einen Namen für den Verkaufspreis ein, z.B. `Stammkundenpreis`.
-. Im Feld *Externer Name* kannst du denselben oder einen anderen Namen für den Verkaufspreis eingeben.
+→ *_Hinweis:_* Wenn du später mehrere Verkaufspreise mit einer Variante verknüpfst, dann werden die Verkaufspreise anhand ihrer Positionsnummer im Artikeldatensatz sortiert angezeigt.
+. Gib im Feld *Interner Name* einen Namen für den Verkaufspreis ein, z.B. `Stammkundenpreis`. +
+→ Das Feld *Externer Name* ist wie der interne Name ein Pflichtfeld. Hier kannst du denselben wie für den internen Namen oder einen ganz anderen Namen für den Verkaufspreis eingeben.
 . Gib im Feld *Ab Menge* eine Zahl ein, z.B. `3`. +
 → *_Beispiel:_* Wenn ein Kunde mehrere Exemplare deines Artikel kauft (z.B. 3), kannst du bestimmen, dass der Preis ab Kauf von 3 Exemplaren reduziert wird. +
-*_Wichtig:_* Mengenrabatte müssen auch in der Kundenklasse erlaubt sein. Stelle sicher, dass die Einstellung *Mengenrabatt* auf *berücksichtigen* gesetzt ist. 
-
-
+*_Wichtig:_* Mengenrabatte müssen auch in der <<#kundenklasse-erstellen, Kundenklasse erlaubt>> sein. Stelle sicher, dass in der Kundenklasse die Einstellung *Mengenrabatt* auf *berücksichtigen* gesetzt ist. 
+. Wähle (material:check_box[role=skyBlue]) die Währung aus der Liste, z.B. `EUR`.
+. Wähle (material:check_box[role=skyBlue]) den passenden Mandanten aus der Liste.
+Wähle (material:check_box[role=skyBlue]) die soeben erstellte Kundenklasse `Stammkunden` aus der Liste.
+Wähle (material:check_box[role=skyBlue]) das Land aus der Liste.
+. Wähle (material:check_box[role=skyBlue]) die Herkunft aus der Liste, in unserem Fall `Mandant (Shop)`.
 
 [TIP]
 Die oben beschriebenen Schritte listen die Einstellungen auf, die _mindestens_ für das Erstellen eines Verkaufspreises für die Zwecke dieses Praxisbeispiels vorgenommen werden müssen. Natürlich kannst du noch weitere Einstellungen im Verkaufspreis vornehmen. Alle weiteren Einstellungen sind auf der Handbuchseite xref:artikel:preise.adoc#[Verkaufspreise und Preiskalkulation] im Kapitel xref:artikel:preise.adoc#100[Verkaufspreise] detailliert beschrieben.
@@ -66,14 +70,23 @@ Du hast die Möglichkeit, deinen Verkaufspreis mit dem xref:artikel:preise.adoc#
 ====
 
 [#verkaufspreis-artikel]
-== Verkaufspreis in Artikel hinzufügen
+== Verkaufspreis im Artikel hinzufügen
 
-//// 
-TODO: 
+Im Menü *Artikel » Artikel-UI* musst du nun im gewünschten Artikel den soeben erstellten Verkaufspreis hinzufügen und dort auch den eigentlichen Geldbetrag des Verkaufspreises speichern.
 
-Es gibt Automatismen, mit denen bestimmte Kunden nun in diese Kundenklasse “rutschen”
-EA
-manuell geht auch
+[.instruction]
+Verkaufspreis im Artikel hinzufügen:
 
-Wenn der Kunde nun in deinem Webshop bestellt, sieht er automatisch den von dir definierten Preis (für die Kundenklasse, der er angehört).
-////
+. Öffne das Menü *Artikel » Artikel-UI*. 
+. Suche den Artikel, in dem du den Verkaufspreis aktivieren möchtest. +
+→ Der Bereich der Hauptvariante ist automatisch geöffnet.
+. Navigiere in den Bereich *Verkaufspreise*.
+. Klicke im Bereich *Verkaufspreise* auf *Verkaufspreise hinzufügen* (material:add[]). +
+→ Das Fenster *Verkaufspreise hinzufügen* öffnet sich.
+. Wähle (material:check_box[role=skyBlue]) den soeben erstellten Verkaufspreis aus der Dropdown-Liste.
+. Klicke auf *Übernehmen*. +
+→ Der Verkaufspreis wird hinzugefügt.
+. Gib in der Spalte *Preis (Brutto)* den von dir gewünschten Geldbetrag ein.
+. *Speichere* (material:save[]) die Einstellungen.
+
+Wenn du alle auf dieser Seite beschriebenen Einstellungen vorgenommen hast, sehen Kund:innen mit der zugeordneten Kundenklasse automatisch den von dir definierten Preis für einen bestimmten Artikel in deinem plentyShop.
