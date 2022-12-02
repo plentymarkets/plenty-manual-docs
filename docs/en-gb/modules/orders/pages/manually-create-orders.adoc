@@ -113,6 +113,9 @@ Carrying out default settings:
 |[#intable-default-referrer]*Default referrer*
 |The default referrer selected here is preselected in the order details when creating a new order or a new offer if no referrer is set in the contact. If a referrer is set in the contact data, this referrer takes priority.
 
+|[#intable-default-warehouse]*Default warehouse*
+|The default warehouse selected here is preselected in the order details when creating an order or an offer if no warehouse is set in the contact. If a warehouse is set in the contact data, it has priority.
+
 |[#intable-default-template]*Default order template*
 |If you select an <<#create-and-apply-order-templates, order template>> as the default order template, this template is preselected for the new order or offer by default. The values of the selected order template are automatically applied to the order or offer. You can only select order templates that have already been created. +
 The option *No order template preselected* is set by default. If you select an order template as the default and this template is deleted at some point, the default setting returns to *None*.
@@ -195,7 +198,7 @@ Use the preview (material:visibility[]) to access the contact data record direct
 If you create a *guest order*, add a new invoice address.
 
 | *Delivery address*
-|If you select the option *As invoice*, the invoice address is automatically entered as the delivery address as well. Otherwise, the delivery address is taken from the contact data. If there is more than one delivery address, the one saved as the primary delivery address is taken. If no delivery address is saved as the primary address, you can select the right address from the drop-down list. +
+|If you select the option *As invoice*, the invoice address is automatically entered as the *delivery address* as well. Otherwise, the delivery address is taken from the contact data. If there is more than one delivery address, the one saved as the primary delivery address is taken. If no delivery address is saved as the primary address, you can select the right address from the drop-down list. +
 The dropdown-list also offers the possibility to create a new delivery address which is then saved in the contact data. For further information, see the expandable box at the end of this section. +
 Use the preview (material:visibility[]) to access the contact data record directly. The already carried out settings in the order details will remain. +
 If you create a *guest order*, add a new delivery address.
@@ -214,7 +217,9 @@ A discount is already filled in if the contact is assigned to a customer class i
 | *Warehouse*
 |Which options are available depends on the settings you set for xref:orders:preparatory-settings.adoc#intable-warehouse-assignment[assignment of warehouses]: +
 - Is *a) a warehouse can be assigned for each order* set, you can select a warehouse for the order in the order details. +
-- Is *b) a warehouse can be assigned for each stock unit* set, *Depending on the stock units* is displayed. In the next step, items are added to the order. This means that you can select a warehouse for each variation from the drop-down list.
+If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected.
+- Is *b) a warehouse can be assigned for each order item* set, *Depending on the order items* is displayed. In the next step, items are added to the order. This means that you can select a warehouse for each variation from the drop-down list. +
+If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected in the item table of the next step.
 
 | *Client*
 |Select the client for this order from the drop-down list. Preselected is either the client set in the contact data or as a next option the <<#intable-default-client, default client>> if it is set.
@@ -230,7 +235,7 @@ A discount is already filled in if the contact is assigned to a customer class i
 This setting is only available for the payment methods *Invoice* and *Cash in advance*.
 
 | *Early payment (days)*
-|Enter the early payment days, i.e. the number of days starting when the invoice is created. The pending amount can be paid at a discounted price during this time period. +
+|Enter the number of days (starting when the invoice is created) in which the pending amounts can be paid at a discounted price. +
 This setting is only available for the payment methods *Invoice* and *Cash in advance*.
 
 | *Value date (days)*
@@ -313,7 +318,7 @@ The order of the options *Postcode* and *Town* is reversed for certain countries
 |Optionally enter a telephone number.
 
 |*Type* and *Value*
-|Select a type from the drop-down list. The following types are available: VAT number, External address ID, Entry certificate, Post number, Personal ID, age rating, Birthday, Title, Contact person, External contact ID. Enter the corresponding *Value* for the selected type. +
+|Select a type from the drop-down list. The following types are available: VAT number, External address ID, Entry certificate, Post number, Personal ID, age rating, Birthday, Title, Contact person, External contact ID. Enter the corresponding *value* for the selected type. +
 Click on *Add address option* to add further *Types* and the corresponding *Values*.
 
 |====
@@ -396,7 +401,7 @@ This is a default column.
 
 |[#intable-item-search-price-selection]*Price selection*
 |All valid sales prices that are determined for this order are displayed in a drop-down list. You can select one of the displayed sales prices, which is then taken as the basis for the order calculation. If the price includes a discount, this is shown behind the price name and amount. The columns *Customer class discount* and *Category discount* show the percentage of the applied discount. +
-In the <<#shopping-cart, shopping cart>>, you can manually adjust the price. If you select a different sales price than the one that was determined first, the sales price needs to be updated. To do so, click on *Refresh sales price* (material:refresh[]). After the update, the shopping cart button (material:add_shopping_cart[]) is available again and the items can be added to the shopping cart. This also applies to quantity changes. +
+You can manually set a sales price in the <<#shopping-cart, shopping cart>>. If you select a different sales price than the one that was determined first, the sales price needs to be updated. To do so, click on *Refresh sales price* (material:refresh[]). After the update, the shopping cart button (material:add_shopping_cart[]) is available again and the items can be added to the shopping cart. This also applies to quantity changes. +
 If no valid sales price could be detected, *No valid sales price* is displayed in the drop-down list. The order cannot be completed without a valid sales price. Therefore, add the item to the shopping cart and adapt the price manually in there. +
 This is a default column.
 
@@ -417,11 +422,12 @@ This is a default column.
 This is a default column.
 
 | *Warehouse*
-|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each stock unit* for the *assignment of warehouses*. +
+|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each order item* for the *assignment of warehouses*. +
+If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected. +
 This is a default column.
 
 |*Quantity*
-|Enter the quantity to be added to the shopping cart. You can only enter whole numbers. Negative quantities or quantities which exceed the net stock are not allowed. If you enter such quantities, an error message is displayed.  If the quantity added sets the stock in the warehouse to 0 or lower, the row is displayed in red. +
+|Enter the quantity to be added to the shopping cart. You can only enter whole numbers. Negative quantities or quantities which exceed the net stock are not allowed. If you enter such quantities, an error message is displayed. If the added quantity sets the stock in the warehouse to 0 or lower, the row is displayed in red. +
 If you change the quantity, the sales price changes as well and needs to be updated. To do so, click on *Refresh sales price* (material:refresh[]). After the update, the shopping cart button (material:add_shopping_cart[]) is available again and the items can be added to the shopping cart. +
 This is a default column.
 
@@ -487,7 +493,7 @@ Carry out the <<#search-items, search>> (material:search[]) to find and add the 
 
 | *Only display sales warehouses*
 |Activate this option (material:done[role=skyBlue]) to filter only for items that are stored in sales warehouses. +
-*_Note:_* If you set *a) a warehouse can be assigned for each order* in the basic settings you can only select the option *Only display sales warehouses* for the search because the warehouse is already determined by the setting.
+*_Note:_* If you set *a) a warehouse can be assigned for each order* in the basic settings you cannot select the option *Only display sales warehouses* for the search because the warehouse is already determined by the setting.
 
 | *Only display items with valid price*
 |Activate this option (material:done[role=skyBlue]) to filter only for items with a valid sales price.
@@ -522,7 +528,8 @@ Adding items:
 
 . Search (material:search[]) for the desired item.
 . Select the appropriate sales price from the *Price selection* drop-down list.
-. Enter the quantity of the item you want to add to the order. If you adjust any prices or quantities, open the context menu (material:more_vert[]) on the right of the respective line and update the sales price by clicking on *Refresh sales prices* (material:refresh[]). +
+. Enter the quantity of the item you want to add to the order.
+. If you adjust any prices or quantities, open the context menu (material:more_vert[]) on the right of the respective line and update the sales price by clicking on *Refresh sales prices* (material:refresh[]). +
 *_Tip:_* On the top left of the table, you can update all changes for prices or quantities at once by clicking on *Refresh sales prices* (material:refresh[]).
 . At the end of the respective line, click on *Add items to shopping cart* in order to add the item to the shopping cart.
 . Repeat these steps to add further items.
@@ -646,7 +653,7 @@ This is a default column.
 This is a default column.
 
 | *Warehouse*
-|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each stock unit* for the *assignment of warehouses*. +
+|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each order item* for the *assignment of warehouses*. +
 This is a default column.
 
 | *VAT (%)*
@@ -761,7 +768,6 @@ Redeeming coupon codes of an external campaign:
 
 |===
 
-
 Below the order details, a table with the added order items is displayed. In addition to the information given in the previous view, further prices and the VAT rate are shown. The VAT rates are editable if you allowed this in the <<#carrying-out-standard-settings, default settings>>.
 
 [.collapseBox]
@@ -779,7 +785,7 @@ Customising the table:
 . Move (material:drag_indicator[]) the columns so they are displayed in the order you need them in.
 . Click on *Confirm* to save your settings.
 
-The following columns are available: .
+The following columns are available: +
 
 * Expand
 * Quantity
