@@ -4,182 +4,375 @@
 :page-aliases: lager.adoc
 :author: team-stock
 
-Mit Formaten des Typs *warehouse* exportierst du Lagerdaten.
+Diese Seite erläutert die Datenfelder, die dir beim Export von Lager-, Dimensions- und Lagerortdaten zur Verfügung stehen.
+Diese Seite dient lediglich als Referenz und setzt voraus, dass du bereits Grundkenntnisse über xref:daten:FormatDesigner.adoc#[FormatDesigner] und den xref:daten:elastischer-export.adoc#[elastischer Export] hast.
 
-include::_includes:page$export-hinweis-katalog.adoc[]
+[#50]
+== Verfügbarkeit
+
+Gibt an, ob ein Lagerort verfügbar ist.
+
+[cols="1,3a"]
+|===
+|Exportwert in CSV-Datei |Option im plentymarkets Backend
+
+| `no`
+| Nein, der Lagerort ist nicht verfügbar.
+Es wird ein roter Punkt in der Übersicht angezeigt.
+
+| `yes`
+| Ja, der Lagerort ist verfügbar.
+Es wird ein grüner Punkt in der Übersicht angezeigt.
+
+|===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Verfügbarkeit].
+
+
+[#400]
+== Warehouse
+
+Für den Export von Lager-Daten stehen folgende Felder zur Verfügung.
+
+[cols="1,3a"]
+|===
+|Feld |Erläuterung
+
+|createdAt
+|Datum und Uhrzeit der Erstellung des Lagers.
+
+|id
+|Die ID des Lagers.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Feld: ID].
+
+|isInventoryModeActive
+|Gibt an, ob der Inventurmodus aktiviert ist.
+
+[cols="1,1"]
+!===
+
+!Zeile ist leer
+!Nein. Häkchen ist nicht gesetzt.
+
+!`1`
+!Ja. Häkchen ist gesetzt.
+
+!===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Checkbox: Inventur-Modus aktiv].
+
+|logisticsType
+|Der Logistiktyp des Lagers.
+
+[cols="1,1"]
+!===
+
+!`own`
+!Eigenes Lager
+
+!`amazon`
+!Amazon
+
+!`dhlFulfillment`
+!DHL Fulfillment
+
+!===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Dropdown-Liste: Logistiktyp].
+
+|name
+|Der Name des Lagers.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Eingabefeld: Lagername].
+
+|note
+|Die Notiz des Lagers.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Eingabefeld: Notiz].
+
+|onStockAvailability
+|Die Verfügbarkeit mit Bestand (1-10).
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Verfügbarkeit mit Bestand].
+
+|outOfStockAvailability
+|Die Verfügbarkeit ohne Bestand (1-10).
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Verfügbarkeit ohne Bestand].
+
+|repairWarehouseId
+|Die ID des zugeordneten Reparaturlagers.
+
+*_Hinweis_*:
+In der Export-Datei bedeutet `0`, dass kein Reparaturlager zugeordnet wurde.
+Das heißt, die Einstellung --- ist gesetzt.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Dropdown-Liste: Zugeordnetes Reparaturlager].
+
+|splitByShippingProfile
+|Gibt an, ob nach Versandprofil gesplittet wird.
+
+[cols="1,1"]
+!===
+
+!Zeile ist leer
+!Nein
+
+!`1`
+!Ja
+
+!===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Dropdown-Liste: Nach Versandprofil splitten].
+
+|typeId
+|Der Typ des Lagers.
+Wird durch die Lagertyp-ID angegeben.
+
+[cols="1,1"]
+!===
+
+!`0`
+!Vertrieb
+
+!`1`
+!Reparatur
+
+!`4`
+!Vorrat
+
+!`5`
+!Umschlag
+
+!`6`
+!Verteiler
+
+!`7`
+!Sonstiges
+!===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Dropdown-Liste: Lagertyp].
+
+|updatedAt
+|Datum und Uhrzeit der letzten Aktualisierung der Lagerdaten.
+
+|===
 
 [#100]
 == WarehouseLocation
 
-Für den Export von Lagerorten stehen die in <<tabelle-felder-lagerorte>> aufgelisteten Felder zur Verfügung.
+Für den Export von Lagerort-Daten stehen folgende Felder zur Verfügung.
 
-[[tabelle-felder-lagerorte]]
-.Felder für den Export von Lagerorten
-[cols="1,3"]
+[cols="1,3a"]
 |===
 |Feld |Erläuterung
 
-|id
-|Lagerort-ID
+|fullLabel
+|Der vollständige Name des Lagerorts (inklusive Pfadangabe).
 
-|levelId
-|Ebenen-ID
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Lagerort].
+
+*_Hinweis_*:
+Wenn du nur den Namen des Lagerorts (ohne Pfad) exportieren möchtest, dann verwende stattdessen das Feld *label*.
+
+|id
+|Die ID des Lagerorts.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: ID].
 
 |label
-|Lagerortname (ohne Pfad)
+|Der Name des Lagerorts (ohne den vollständigen Pfad).
 
-|purposekey
-|Verwendungszweck
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » [Lagerort öffnen\] Eingabefeld: Lagerort].
 
-|statuskey
-|Status
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist der Name des Lagerorts SL4.
 
-|position
-|Position
+*_Hinweis_*:
+Wenn du den vollständigen Pfad des Lagerorts exportieren möchtest, dann verwende stattdessen das Feld *fullLabel*.
 
-|fulllabel
-|Vollständiger Lagerortname (inklusive Pfad)
+|levelId
+|Die ID der Ebene.
+Das heißt, die ID der Dimension, die direkt vor dem Lagerort steht.
 
-//|properties
-//|Eigenschaften
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die Ebene R1.
+Nutze dieses Feld, um die ID von R1 zu exportieren, z.B. "4762".
 
-|type
-|Typ
+Entspricht der Option im Menü: *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte » Struktur » [Ebene öffnen] » Feld: ID*.
 
 |notes
-|Notizen
+|Die Notiz des Lagerorts.
 
-|allIds
-|Alle Lagerort-IDs (kommasepariert)
-
-|allNames
-|Alle Lagerortnamen (kommasepariert)
-|===
-
-[#200]
-== WarehouseLocationLevel
-
-Für den Export von Lagerortebenen stehen die in <<tabelle-felder-lagerortebenen>> aufgelisteten Felder zur Verfügung.
-
-[[tabelle-felder-lagerortebenen]]
-.Felder für den Export von Lagerortebenen
-[cols="1,3"]
-|===
-|Feld |Erläuterung
-
-|id
-|Lagerortebenen-ID
-
-|parentId
-|Eltern-ID der Ebene
-
-|dimensionID
-|ID der Dimension
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » [Lagerort öffnen\] Eingabefeld: Notizen].
 
 |position
-|Position der Ebene
+|Die Position des Lagerorts.
 
-|name
-|Name der Ebene
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Position].
 
-|type
-|Typ der Ebene
+|purposeKey
+|Der Zweck des Lagerorts.
 
-|pathName
-|Lagerortpfad (ohne Lagerortname)
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Zweck].
+
+|statusKey
+|Der Status des Lagerorts.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#500[Einrichtung » Waren » Lager » [Lager öffnen\] » Lagerorte » Spalte: Status].
+
 |===
 
 [#300]
 == WarehouseLocationDimension
 
-Für den Export von Lagerortdimensionen stehen die in <<tabelle-felder-lagerortdimensionen>> aufgelisteten Felder zur Verfügung.
+Für den Export von Dimensions-Daten stehen folgende Felder zur Verfügung.
 
-[[tabelle-felder-lagerortdimensionen]]
-.Felder für den Export von Lagerortdimensionen
-[cols="1,3"]
+[TIP]
+.Welche Dimension soll exportiert werden?
+====
+Klicke auf icon:sign-in[role="darkGrey"] und entscheide, welche Dimension exportiert werden soll.
+Wenn du die Option *storage_location_parent* wählst, dann wird die Dimension exportiert, die direkt vor dem Lagerort steht.
+Beispiel: Wenn der Lagerort unter dem Pfad "Regal:Boden:Lagerort" liegt, dann wird die Dimension "Boden" exportiert.
+====
+
+[cols="1,3a"]
 |===
 |Feld |Erläuterung
-
-|id
-|ID der Dimension
-
-|parentID
-|Eltern-ID
-
-|warehouseID
-|Lager-ID
-
-|level
-|Ebene
-
-|name
-|Name der Dimension
-
-|shortcut
-|Kürzel
-
-|separator
-|Trenner
 
 |displayInName
-|Im Lagerortnamen anzeigen
+|Gibt an, ob die Dimension im Lagerortnamen angezeigt wird.
+
+[cols="1,1"]
+!===
+
+!Zeile ist leer
+!Nein. Häkchen ist nicht gesetzt.
+
+!`1`
+!Ja. Häkchen ist gesetzt.
+
+!===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#400[Einrichtung » Waren » Lager » [Lager öffnen\] » Dimensionen » Checkbox: Im Namen anzeigen].
+
+|id
+|Die interne ID der Dimension.
 
 |isActiveForPickupPath
-|In Laufweg einfließen lassen
+|Gibt an, ob die Dimension für den Laufweg berücksichtigt wird.
+
+[cols="1,1"]
+!===
+
+!Zeile ist leer
+!Nein. Häkchen ist nicht gesetzt.
+
+!`1`
+!Ja. Häkchen ist gesetzt.
+
+!===
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#400[Einrichtung » Waren » Lager » [Lager öffnen\] » Dimensionen » Checkbox: Position für Laufweg berücksichtigen].
+
+|level
+|Das Level der Dimension.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#400[Einrichtung » Waren » Lager » [Lager öffnen\] » Dimensionen » Level].
+
+|name
+|Der Name der Dimension.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#400[Einrichtung » Waren » Lager » [Lager öffnen\] » Dimensionen » Name].
+
+|parentId
+|Die ID der übergeordneten Dimension.
+
+*_Hinweis_*: Wenn dies die höchste Dimension ist, bleibt die Zeile leer.
+
+|separator
+|Das Trennzeichen der Dimension.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#400[Einrichtung » Waren » Lager » [Lager öffnen\] » Dimensionen » Dropdown-Liste: Trenner].
+
+|shortcut
+|Das Präfix der Dimension.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#400[Einrichtung » Waren » Lager » [Lager öffnen\] » Dimensionen » Eingabefeld: Präfix].
+
+|warehouseId
+|Die ID des Lagers.
+
+Entspricht der Option im Menü: xref:warenwirtschaft:lager-einrichten.adoc#300[Einrichtung » Waren » Lager » [Lager öffnen\] » Einstellungen » Feld: ID].
+
 |===
 
-[#400]
-== Warehouse
+[#200]
+== WarehouseLocationLevel
 
-Für den Export von Lagern stehen die in <<tabelle-felder-lager>> aufgelisteten Felder zur Verfügung.
+Für den Export von Lagerortebenen stehen folgende Felder zur Verfügung.
 
-[[tabelle-felder-lager]]
-.Felder für Export von Lagern
-[cols="1,3"]
+[TIP]
+.Welche Ebene soll exportiert werden?
+====
+Klicke auf icon:sign-in[role="darkGrey"] und entscheide, welche Ebene exportiert werden soll.
+Wenn du die Option *storage_location_parent* wählst, dann wird die Ebene exportiert, die direkt vor dem Lagerort steht.
+Beispiel: Wenn der Lagerort unter dem Pfad "Regal:Boden:Lagerort" liegt, dann wird die Ebene "Boden" exportiert.
+====
+
+[cols="1,3a"]
 |===
 |Feld |Erläuterung
 
-//|allIds
-//|Alle Lager-IDs (kommasepariert)
-
-//|allNames
-//|Alle Lagernamen (kommasepariert)
+|dimensionId
+|Die interne ID der Dimension.
 
 |id
-|Lager-ID
+|Die ID der Ebene.
+Dies ist die Ebene direkt vor dem Lagerort.
+
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die Ebene R1.
+Nutze dieses Feld, um die ID von R1 zu exportieren, z.B. "4762".
+
+Entspricht der Option im Menü: *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte » Struktur » [Ebene öffnen] » Feld: ID*.
 
 |name
-|Name des Lagers
+|Der Name der Ebene.
+Dies ist die Ebene direkt vor dem Lagerort.
 
-|note
-|Notiz
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die Ebene R1.
+Nutze dieses Feld, um der Name "R1" zu exportieren.
 
-|typeId
-|Lagertyp
+Entspricht der Option im Menü: *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte » Struktur » [Ebene öffnen] » Feld: Name*.
 
-|onStockAvailability
-|Verfügbarkeit mit Bestand
+|parentId
+|Die ID der übergeordneten Ebene.
+Dies ist die Ebene zwei Stellen vor dem Lagerort.
 
-|outOfStockAvailability
-|Verfügbarkeit ohne Bestand
+*_Beispiel_*:
+Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist die übergeordnete Ebene H2.
+Nutze dieses Feld, um die ID von H2 zu exportieren, z.B. "178".
 
-|splitByShippingProfile
-|Nach Versandprofil splitten
+Entspricht der Option im Menü: *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte » Struktur » [Ebene öffnen] » Feld: ID*.
 
-|repairWarehouseID
-|Zugeordnetes Reparaturlager
+|pathName
+|Der Pfad des Lagerorts (ohne Lagerortname).
 
-|isInventoryModeActive
-|Inventur-Modus aktiv
+*_Beispiel_*: Wenn der vollständige Pfad des Lagerorts H2:R1:SL4 lautet, dann ist der Pfad H2:R1:
 
-|logisticType
-|Zugeordnetes Reparaturlager (eigene Lager, DHL Fulfillment, Amazon)
+Entspricht der Option im Menü: *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte » [Lagerort öffnen] » Feld: Name*.
 
-|updatedAt
-|Zeitstempel der letzten Aktualisierung
+|position
+|Die Position der Ebene.
 
-|createdAt
-|Zeitstempel der Erstellung
+Entspricht der Option im Menü: *Einrichtung » Waren » Lager » [Lager öffnen] » Lagerorte » Spalte: Position*.
+
+|type
+|Der Typ der Ebene.
+
 |===
 
 [#500]
