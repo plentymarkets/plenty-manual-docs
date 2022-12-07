@@ -264,3 +264,168 @@ Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die im Folge
 
 *Tipp:* Du kannst Kontakte des Typs *Gast* in xref:crm:schnellsuche.adoc#gastzugang-umwandeln[reguläre Kontakte umwandeln].
 |===
+
+////
+[#plugin-hilfe]
+== Plugin-Hilfe nutzen
+
+Im Tab *Hilfe* des Shopify-Plugins kannst du die folgenden Funktionen nutzen:
+
+* <<#3873695972, Die Plugin-Bereitschaft prüfen.>>
+* <<#6535986175, Varianten-Exportbedingungen prüfen.>>
+* <<#8878636701, Alle 10 Minuten einen Artikel manuell exportieren.>>
+* <<#4973807959, Alle 5 Minuten den Warenbestand einer Variante oder eines ganzen Artikels exportieren.>>
+* <<#0389029301, Die plentymarkets Auftrags-ID anhand der Shopify-Auftragsnummer finden.>>
+* <<#7088931107, Ein Artikelexport-Cleanup programmieren.>>
+
+[#3873695972]
+=== Plugin-Bereitschaft prüfen
+
+[.instruction]
+Plugin-Bereitschaft prüfen:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Plugin-Bereitschaft*.
+. Klicke auf *Prüfen*.
+
+Die folgenden Bedingungen werden geprüft:
+
+* Die Herkunft *Shopify* muss unter *Einrichtung » Aufträge » Auftragsherkunft* aktiviert sein.
+* Es gibt mehr als eine *Shopify*-Herkunft unter *Einrichtung » Aufträge » Auftragsherkunft*. Stelle sicher, dass die ID mit der höchsten Nummer aktiviert ist.
+* Eine Verbindung zu Shopify.com kann hergestellt werden.
+* Die *SDK-Datei* wird korrekt bereitgestellt.
+
+Erfüllte Bedingungen sind mit einem grünen *OK* markiert.
+Fehlgeschlagene Bedingungen sind mit einem roten *X* markiert.
+
+[#6535986175]
+=== Exportbedingungen einer Variante prüfen
+
+[.instruction]
+Exportbedingungen prüfen:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Exportbedingungen*.
+. Wähle einen Webshop, für den du diese Variante überprüfen möchtest.
+. Gib eine gültige Varianten-ID ein.
+. Klicke auf *Überprüfen*.
+
+Die folgenden Bedingungen werden geprüft:
+
+* Die Variante muss *aktiv* sein. +
+→ Im Menü *Artikel » Variante » Einstellungen »*, Bereich *Verfügbarkeit » Aktiv* muss ein Häkchen gesetzt sein.
+* Die Variante muss für den Marktplatz Shopify verfügbar sein. +
+→ *Artikel »Variante » Verfügbarkeit »*, Bereich *Märkte, Shopify* muss erteilt sein.
+* *Variante » Mandant Zuordnung* stimmt mit der *Webshop*-Auswahl überein. +
+→ *Artikel » Variante » Verfügbarkeit »*, Bereich *Mandant » Mandant Auswahl*.
+* Am Artikel muss ein *Artikeltext* gespeichert sein. +
+→ *Artikel » Texte » Artikeltext* muss verfügbar sein.
+* Am Artikel muss *Name 1* gespeichert sein. +
+→ *Artikel » Texte » Name 1* muss verfügbar sein.
+* Die Variante muss eine SKU für Shopify enthalten. +
+→ *Artikel » Variante » Verfügbarkeit »*, Bereich *SKU* muss eine *SKU* für die Herkunft *Shopify* enthalten.
+* Exportierte Artikel dürfen nicht mehr als 100 Varianten enthalten. Dies ist ein von Shopify auferlegtes Limit.
+
+Erfüllte Bedingungen sind mit einem grünen *OK* markiert.
+Fehlgeschlagene Bedingungen sind mit einem roten *X* markiert.
+
+*_Hinweis:_* Der Export des Artikelverkaufspreises ist nicht verpflichtend.
+
+[#8878636701]
+=== Einen Artikel manuell exportieren
+
+Zu Testzwecken kannst du mit dem Plugin alle 10 Minuten einen Artikel manuell exportieren.
+
+*_Hinweis:_* Verwende diese Funktion, um zu testen, wie Exporte aussehen, bevor Bulk-Exporte von Artikeldaten durchgeführt werden.
+
+[.instruction]
+Artikel manuell exportieren:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe »Artikelexport*.
+. Wähle einen Webshop.
+. Gib eine gülitge Artikel-ID ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, werden der Artikel und die dazugehörigen Varianten exportiert.
+
+*_Hinweis:_* Solltest du einen oder mehrere Artikel auf Shopify gelöscht haben, um diese nochmals zu exportieren, dann beachte, dass ein erster Export die Plugin-Datenbank bereinigt. Erst ein zweiter Export schreibt den Artikel nochmals auf Shopify.
+
+[#4973807959]
+== Tab: *Warenbestand Export*
+
+Zu Testzwecken kannst du alle 5 Minuten Warenbestände für einen Artikel manuell exportieren. Für eine Variante kann der Export alle 3 Minuten erfolgen.
+
+[#8869548744]
+=== Benutzerdefiniertes Startdatum für Warenbestand und Preisexport festlegen
+
+Wenn du Warenbestände für Artikel mit einem älteren *Letzte Änderung*-Datum exportieren möchtest:
+
+[.instruction]
+Startdatum festlegen:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Warenbestand Export*
+. Wähle einen Webshop, in dem das *Warenbestand und Preis Export*-Startdatum zurückgesetzt werden soll.
+. Wähle ein Startdatum aus dem *Kalender*.
+. Trage *Stunde* und *Minuten* ein.
+. *Speichere* die Einstellungen. +
+→ Der nächste *Warenbestand und Preis Export* wird gemäß deiner Einrichtung ausgeführt. Beachte, dass das Startdatum immer aktualisiert wird, um den Start des letzten Exports widerzuspiegeln.
+
+[#2729787975]
+=== Warenbestand und Verkaufspreis für eine Variante manuell exportieren
+
+[.instruction]
+Warenbestand und Verkaufspreis für eine Variante exportieren:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Warenbestand Export*
+. Wähle einen Webshop, in dem du Warenbestände und Preise aktualisieren möchtest.
+. Gib eine gültige *Varianten-ID* ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand für die eingetragene Variante exportiert.
+
+[#8910138297]
+=== Warenbestand und Verkaufspreis für einen Artikel manuell exportieren
+
+[.instruction]
+Warenbestand und Verkaufspreis für einen Artikel exportieren:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Warenbestand Export*.
+. Wähle einen Webshop, in dem du Warenbestände und Preise aktualisieren möchtest.
+. Gib eine gültige *Artikel-ID* ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand für den eingetragenen Artikel exportiert.
+
+[#0389029301]
+== plentymarkets Auftrags-ID anhand der Shopify-Bestell-ID finden
+
+Wenn ein:e Kund:in dich mit der Shopify-Bestell-ID kontaktiert, kannst du diese ID verwenden, um die plentymarkets Auftrags-ID des Auftrags zu finden.
+
+[.instruction]
+plentymarkets Auftrags-ID finden:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Auftragsnummer Suche*.
+. Wähle den Webshop, für den du die Shopify-Bestell-ID erhalten hast.
+. Gib eine gültige Shopify-Bestellnummer ein.
+. Klicke auf *Suchen*. +
+→ Wenn die übermittelte Shopify-Bestellnummer gültig ist, wird die plentymarkets Auftrags-ID angezeigt.
+
+[#7088931107]
+== Artikelexport-Cleanup planen
+
+Plane ein Cleanup, wenn: 
+
+* Artikel oder Varianten aus plentymarkets gelöscht wurden und diese auch aus Shopify entfernt werden sollen.
+* Artikel oder Varianten manuell aus Shopify gelöscht wurden und das Plugin keinen neuen Export durchführt.
+* Alle Shopify-Artikel gelöscht werden und ein neuer Export aus plentymarkets veranlasst werden soll. In diesem Fall deaktiviere den Artikelexport und lösche alle Artikel aus Shopify. Plane ein Cleanup. Am nächsten Morgen kannst du den Artikelexport reaktivieren.
+
+*_Hinweis:_* Verwende das Cleanup nicht, wenn deine Artikel nach der Installation des Plugins aus Shopify importiert wurden. Ein solcher Versuch kann zum Artikelverlust auf Shopify führen! Das Cleanup wird nur einmal ausgeführt, nachdem es geplant wurde. Plane nach Bedarf neue Cleanups.
+
+[.instruction]
+Cleanup planen:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Artikelexport Cleanup*.
+. Wähle den *Webshop*, für den du ein Cleanup planen möchtest.
+. Clicke auf *Plane einen nächtlichen Cleanup für exportierte Artikel*.
+
+*_Hinweis:_* Bereits exportierte Artikel und Varianten werden in den folgenden Fällen bei der Bereinigung aus Shopify gelöscht:
+
+* *Mandant (Client)* und *Shopify-Marktplatz* wurden aus deiner plentymarkets-Variante entfernt.
+* Die Variante wurde aus plentymarkets gelöscht.
+* Sobald der Artikel keine aktiven Varianten hat, wird der gesamte Artikel auch auf Shopify gelöscht.
+////
