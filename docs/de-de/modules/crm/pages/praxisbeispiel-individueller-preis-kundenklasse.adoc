@@ -13,6 +13,8 @@ Ich möchte, dass ein bestimmter Kunde in meinem plentyShop – im Gegensatz zu 
 ** *_Wichtig:_* Kundenklasse und Herkunft *Webshop* müssen aktiviert werden.
 * <<#verkaufspreis-artikel, Verkaufspreis im Artikel hinzufügen>>
 
+* Tipp: <<#ereignisaktion-einrichten, Ereignisaktion einrichten>>
+
 [#kundenklasse-erstellen]
 == Kundenklasse erstellen
 
@@ -32,7 +34,7 @@ Kundenklasse erstellen:
 Die oben beschriebenen Schritte listen die Einstellungen auf, die _mindestens_ für das Erstellen einer Kundenklasse für die Zwecke dieses Praxisbeispiels vorgenommen werden müssen. Natürlich kannst du noch weitere Einstellungen in der Kundenklasse vornehmen. Alle weiteren Einstellungen sind auf der Handbuchseite xref:crm:vorbereitende-einstellungen.adoc#[Vorbereitende Einstellungen vornehmen] im Kapitel xref:crm:vorbereitende-einstellungen.adoc#kundenklasse-erstellen[Kundenklasse erstellen] detailliert beschrieben.
 
 In plentymarkets kannst du Automatismen einrichten, wodurch bestimmte Kund:innen einer bestimmten Kundenklasse zugeordnet werden. +
-Ein gängiges Beispiel wäre zum Beispiel, wenn ein bestimmter Kunde nach einer von dir definierten Anzahl an Aufträgen in deinem plentyShop einer bestimmten Kundenklasse zugeordnet wird. Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein und wähle als Filter *Kunde > Anzahl der Aufträge* und als Aktion *Kunde > Kundenklasse ändern*. 
+Ein gängiges Beispiel für eine Ereignisaktion findest du weitere unten im Kapitel <<#ereignisaktion-einrichten, Ereignisaktion einrichten>>. 
 
 Natürlich kannst du die Kundenklasse auch xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[manuell im Kontaktdatensatz] anpassen.
 
@@ -90,3 +92,45 @@ Verkaufspreis im Artikel hinzufügen:
 . *Speichere* (material:save[]) die Einstellungen.
 
 Wenn du alle auf dieser Seite beschriebenen Einstellungen vorgenommen hast, sehen Kund:innen mit der zugeordneten Kundenklasse automatisch den von dir definierten Preis für einen bestimmten Artikel in deinem plentyShop.
+
+[#ereignisaktion-einrichten]
+== Tipp: Ereignisaktion einrichten
+
+Richte eine Ereignisaktion ein, die den Wechsel der Kundenklasse auslöst, wenn ein Kunde eine von dir definierte Anzahl an Aufträgen in deinem plentyShop platziert hat. 
+
+[.instruction]
+Ereignisaktion einrichten:
+
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klicke unten links auf *Ereignisaktion hinzufügen* (material:add[role=green]). +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Gib einen eindeutigen Namen für die Ereignisaktion ein, z.B. `Kundenklasse ändern nach x Anzahl von Aufträgen`.
+. Wähle das Ereignis gemäß <<#table-event-procedure-customer-class-number-of-orders>>.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+. Nimm die Einstellungen gemäß <<#table-event-procedure-customer-class-number-of-ordersr>> vor.
+. Aktiviere die Option *Aktiv*.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+
+[[table-event-procedure-customer-class-number-of-orders]]
+.Ereignisaktion "Paketnummer generiert" einrichten
+[cols="2,4,3"]
+|====
+|Einstellung |Option |Auswahl
+
+|Ereignis
+|Auftragsanlage > Neuer Auftrag
+|
+
+|Filter 1
+|Auftrag > Herkunft
+|Mandant (Shop)
+
+|Filter 3
+|Kunde > Anzahl der Aufträge
+|Wähle einen Operator aus der Liste und gib eine Zahl in das Feld ein.
+
+|Aktion
+|Kunde > Kundenklasse ändern
+|Wähle die von dir erstellte <<##kundenklasse-erstellen, Kundenklasse>> aus der Dropdown-Liste.
+
+|====
