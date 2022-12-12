@@ -1,9 +1,29 @@
+Fill the HTML layout with the desired and necessary template variables and functions and this way, have the corresponding content of the listing placed in the layout. Pay attention to upper and lower case letters in the template variables and functions.
+
+Fill in the item description *{% GetItemDescription() %}* instead of the description that is saved with the listing. This way, you only need to maintain one description text for your plentyShop and listings.
+
+ifdef::ebay[]
+[IMPORTANT]
+.Activate the option Wildcard character in layout template (eBay)
+====
+If you use template variables which contain properties, such as {% GetItemPropertyById() %}*, *{% GetItemPropertyByName() %}*, and *{% PropertyList() %}*, then you have to activate the *Wildcard character in layout template (eBay)* option for the selected property, so that the property is displayed in the layout template. This is done in the *Setup » Item » Characteristics* menu.
+====
+endif::ebay[]
+
+ifdef::ricardo[]
+[IMPORTANT]
+.Activate the Wildcard character in layout template (ricardo) option
+====
+If you use template variables which contain properties, such as {% GetItemPropertyById() %}*, *{% GetItemPropertyByName() %}*, and *{% PropertyList() %}*, then you have to activate the *Wildcard character in layout template (eBay)* option for the selected property, so that the property is displayed in the layout template. This is done in the *Setup » Item » Characteristics* menu.
+====
+endif::ricardo[]
+
 The following table explains the template variable and functions in the *Layout templates* area in alphabetical order:
 
 [[table-template-variables]]
 .Template variables and template functions for layout templates
 [cols="1,3a"]
-|====
+|===
 |Variable/function |Explanation
 
 2+^|Function
@@ -59,12 +79,30 @@ type = *unit* or *value* +
 | *{% GetItemPropertyByName() %}*
 |Item characteristics +
 The following parameters are required: +
-characterName = The characteristic's back end name +
+characterName = The characteristic’s back end name +
 type = *unit* or *value* +
 *_Examples:_*
 
 * *GetItemPropertyByName('abstract_motives', 'value')* = The unit type of the characteristic with the back end name "abstract_motives" +
 * *GetItemPropertyByName('abstract_motives', 'value')* = The value of the characteristic with the back end name "abstract_motives"
+
+ifdef::ebay[]
+| *{% GetItemPropertyV2ById() %}*
+| Properties +
+The following parameters are required: +
+Enter the ID of the property in brackets. +
+
+*_Example:_* *GetItemPropertyV2ById(2)* = In this example, the property’s ID is *2*. You can find the ID of the property in the *Setup » Settings » Properties » Configuration* menu under *ID*.
+endif::ebay[]
+
+ifdef::ebay[]
+| *{% GetItemPropertyV2ByName() %}*
+| Properties +
+The following parameters are required: +
+Enter the name of the property in brackets. +
+
+*_Example:_* *GetItemPropertyV2ByName(water-repellent)* = In this example, the property’s name is *water-repellent*. You can find the name of the property in the *Setup » Settings » Properties » Configuration* menu under *Name*.
+endif::ebay[]
 
 | *{% GetItemShortDescription() %}*
 |Item preview text +
@@ -100,6 +138,13 @@ endif::[]
 
 | *{% PropertyList() %}*
 |Characteristic list
+
+ifdef::ebay[]
+| *{% PropertyListV2() %}*
+| List of properties +
+
+*_Note:_* You do not have to enter anything in brackets here.
+endif::ebay[]
 
 2+^|Variable
 
@@ -287,7 +332,7 @@ endif::[]
 
 | *$VAT*
 |VAT
-|====
+|===
 
 [TIP]
 .Use if-logic
