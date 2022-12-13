@@ -2,11 +2,21 @@ Fülle deine HTML-Vorlage mit den benötigten Template-Variablen und -Funktionen
 
 Lasse die Artikelbeschreibung *{% GetItemDescription() %}* und nicht die bei dem Listing gespeicherte Beschreibung einfügen. Auf diese Weise musst du für deinen plentyShop und für deine Listings nur einen Beschreibungstext pflegen.
 
+ifdef::ebay[]
+[IMPORTANT]
+.Option Platzhalter in Layout-Vorlage (eBay) für Merkmale aktivieren
+====
+Wenn du Template-Variablen verwendest, die Merkmale enthalten, wie zum Beispiel *{% GetItemPropertyById() %}*, *{% GetItemPropertyByName() %}* und *{% PropertyList() %}*, muss an dem gewählten Merkmal die Option *Platzhalter in Layout-Vorlage (eBay)* im Menü *Einrichtung » Artikel » Merkmale* aktiviert sein, damit das Merkmal in der Layout-Vorlage angezeigt wird.
+====
+endif::ebay[]
+
+ifdef::ricardo[]
 [IMPORTANT]
 .Option Platzhalter in Layout-Vorlage (ricardo) für Merkmale aktivieren
 ====
-Wenn du Template-Variablen verwendest, die Merkmale enthalten, wie zum Beispiel *{% GetItemPropertyById() %}* und *{% GetItemPropertyByName() %}*, muss an dem gewählten Merkmal die Option *Platzhalter in Layout-Vorlage (ricardo)* im Menü *Einrichtung » Artikel » Merkmale* aktiviert sein, damit das Merkmal in der Layout-Vorlage angezeigt wird.
+Wenn du Template-Variablen verwendest, die Merkmale enthalten, wie zum Beispiel *{% GetItemPropertyById() %}*, *{% GetItemPropertyByName() %}* und *{% PropertyList() %}*, muss an dem gewählten Merkmal die Option *Platzhalter in Layout-Vorlage (ricardo)* im Menü *Einrichtung » Artikel » Merkmale* aktiviert sein, damit das Merkmal in der Layout-Vorlage angezeigt wird.
 ====
+endif::ricardo[]
 
 Die folgende Tabelle erläutert die Template-Variablen und -Funktionen für den Bereich *Layout-Vorlagen* in alphabetischer Reihenfolge:
 
@@ -76,6 +86,24 @@ type = *unit* oder *value* +
 * *GetItemPropertyByName('abstrakte_motive', 'unit')* = Einheitstyp des Merkmals mit Backend-Name "abstrakte_motive" +
 * *GetItemPropertyByName('abstrakte_motive', 'value')* = Wert des Merkmals mit Backend-Name "abstrakte_motive"
 
+ifdef::ebay[]
+| *{% GetItemPropertyV2ById() %}*
+| Eigenschaften +
+Folgende Parameter sind erforderlich: +
+ID der Eigenschaft in Klammern eingeben +
+
+*_Beispiel:_* *GetItemPropertyV2ById(2)* = Die ID der Eigenschaft ist in diesem Beispiel *2*. Du findest die ID der Eigenschaft im Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration* in der Übersicht deiner Eigenschaften unter *ID*.
+endif::ebay[]
+
+ifdef::ebay[]
+| *{% GetItemPropertyV2ByName() %}*
+| Eigenschaften +
+Folgende Parameter sind erforderlich: +
+Name der Eigenschaft in Klammern eingeben +
+
+*_Beispiel:_* *GetItemPropertyV2ByName(Wasserabweisend)* = Der Name der Eigenschaft ist in diesem Beispiel *Wasserabweisend*. Du findest den Namen der Eigenschaft im Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration* in der Übersicht deiner Eigenschaften unter *Name*.
+endif::ebay[]
+
 | *{% GetItemShortDescription() %}*
 |Artikel-Vorschautext +
 Optionaler Parameter: +
@@ -110,6 +138,13 @@ endif::[]
 
 | *{% PropertyList() %}*
 |Merkmalliste
+
+ifdef::ebay[]
+| *{% PropertyListV2() %}*
+| Liste der Eigenschaften +
+
+*_Hinweis:_* Hier muss nichts in Klammern angegeben werden.
+endif::ebay[]
 
 2+^|Variable
 
