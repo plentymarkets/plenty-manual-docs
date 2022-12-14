@@ -588,8 +588,13 @@ Diese Ereignisaktionen müssen nur einmal im Voraus eingerichtet werden, damit d
 
 Für SPoCC sind die folgenden Ereignisaktionen verfügbar:
 
-* <<#5454333207, SPoCC: Bestand reservieren>>
-* <<#0414974358, SPoCC: Versand an SPoCC melden>>
+* <<#5454333207, SPoCC über neue Aufträge informieren>>
+* <<#8993901978, SPoCC über Bezahlung informieren>>
+* <<#0414974358, SPoCC über erstellte Auftragsdokumente informieren>>
+* <<#1052999368, SPoCC über Retouren informieren>>
+* <<#UI7TSJAK, Aufträge nach Versandmeldung weiterverarbeiten>>
+* <<#VOQ82RU7, Nicht an SPoCC gemeldete Aufträge weiterverarbeiten>>
+* <<#KZ1UJ2CB, Aufträge nach Stornierungsanfrage weiterverarbeiten>> 
 
 Weitere Informationen zur allgemeinen Verwendung von Ereignisaktionen findest du auf der Handbuchseite xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen].
 
@@ -606,7 +611,7 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-one]]
-[cols="1,2"]
+[cols="1,3"]
 |===
 
 | Ereignis
@@ -625,16 +630,17 @@ Auftrag > Mandant (Shop)
 [#8993901978]
 === SPoCC über Bezahlung informieren
 
-Sobald der Auftrag bezahlt ist, soll SPoCC darüber informiert werden.
+Sobald der Auftrag bezahlt ist, soll SPoCC darüber informiert werden. 
+Erst dann wird der Auftrag für die SPoCC-Filiale sichtbar und der Auftrag kann dort von Lagermitarbeiter:innen kommissioniert werden.
 
 Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
 
-:table-event-procedure: <<#table-event-procedure-one-two>>
+:table-event-procedure: <<#table-event-procedure-8993901978>>
 
 include::_includes:partial$event-procedure.adoc[]
 
-[[table-event-procedure-one-two]]
-[cols="1,2"]
+[[table-event-procedure-8993901978]]
+[cols="1,3"]
 |===
 
 | Ereignis
@@ -651,22 +657,23 @@ Auftrag > Mandant (Shop)
 |===
 
 [#0414974358]
-=== SPoCC über xxxx informieren
+=== SPoCC über erstellte Auftragsdokumente informieren
 
-Informiere SPoCC automatisch darüber, dass der Auftrag versandbereit ist. Diese Ereignisaktion sollte ausgelöst werden, wenn die Versanddokumente am Auftrag vorhanden sind.
+Informiere SPoCC automatisch darüber, dass die Versanddokumente erstellt wurden. Damit gibst du der Filiale grünes Licht für den Versand.
 
 Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
 
-:table-event-procedure: <<#table-event-procedure-two>>
+:table-event-procedure: <<#table-event-procedure-0414974358>>
 
 include::_includes:partial$event-procedure.adoc[]
 
-[[table-event-procedure-two]]
-[cols="1,2"]
+[[table-event-procedure-0414974358]]
+[cols="1,3"]
 |===
 
 | Ereignis
 | *Statuswechsel > [Status wählen, bei dem das Ereignis ausgelöst werden soll]* +
+*_Beispiel:_* *Statuswechsel > [5] Freigabe Versand*
 
 
 |Filter (optional)
@@ -681,16 +688,16 @@ Auftrag > Mandant (Shop)
 [#1052999368]
 === SPoCC über Retouren informieren
 
-Informiere SPoCC automatisch darüber, dass eine Variante retourniert wird. Diese Ereignisaktion sollte ausgelöst werden, wenn .
+Informiere SPoCC automatisch darüber, dass eine Variante retourniert wird. So weiß die Filiale, dass sie mit der Retoure rechnen kann.
 
 Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
 
-:table-event-procedure: <<#table-event-procedure-two>>
+:table-event-procedure: <<#table-event-procedure-1052999368>>
 
 include::_includes:partial$event-procedure.adoc[]
 
-[[table-event-procedure-two]]
-[cols="1,2"]
+[[table-event-procedure-1052999368]]
+[cols="1,3"]
 |===
 
 | Ereignis
@@ -703,6 +710,90 @@ Auftrag > Mandant (Shop)
 | Aktion
 | Plugins > SPoCCConnector return order export??? +
 → In SPoCC wird der Auftrag in die SPoCC-Status-ID 18 verschoben. +
-→ Der Retourengrund wird übertragen. Wenn du für einen plentymarkets Retourengrund keinen SPoCC-Retourengrund zugeordnet hast, wird standardmäßig der Retourengrund *[1] No reason* an SPoCC übertragen.
+→ Der Retourengrund wird übertragen. Wenn du für einen plentymarkets Retourengrund keinen SPoCC-Retourengrund zugeordnet hast, wird der Retourengrund *[1] No reason* an SPoCC übertragen.
+
+|===
+
+[#UI7TSJAK]
+=== Aufträge nach Versandmeldung weiterverarbeiten
+
+Lege fest, was mit Aufträgen passiert, nachdem SPoCC den Versand bestätigt hat.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-UI7TSJAK>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-UI7TSJAK]]
+[cols="1,3"]
+|===
+
+| Ereignis
+| SpoccConnector \| Versandmeldung erfolgreich
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| [Aktion wählen.] +
+*_Beispiel:_* *Status ändern* > *[7] Warenausgang gebucht*]
+
+|===
+
+[#VOQ82RU7]
+=== Nicht an SPoCC gemeldete Aufträge weiterverarbeiten
+
+Lege fest, was mit Aufträgen passiert, die nicht an SPoCC gemeldet werden konnten. Das sind neue Aufträge, bei denen die Aktion *SPoCCConnector order export???* nicht ausgelöst wurde.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-VOQ82RU7>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-VOQ82RU7]]
+[cols="1,3"]
+|===
+
+| Ereignis
+| SpoccConnector \| Anmeldung fehlgeschlagen
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| [Aktion wählen.] +
+*_Beispiel:_* *Status ändern > *[Status für manuelle Prüfung wählen]*
+
+|===
+
+[#KZ1UJ2CB]
+=== Aufträge nach Stornierungsanfrage weiterverarbeiten
+
+Lege fest, was mit Aufträgen passiert, wenn eine Stornierungsanfrage eingeht. 
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-KZ1UJ2CB>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-KZ1UJ2CB]]
+[cols="1,3"]
+|===
+
+| Ereignis
+| SpoccConnector \| Stornierung beantragt
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| [Aktion wählen.] +
+*_Beispiel:_* *Status ändern* > *[8.1] Storniert durch Kunden*]
 
 |===
