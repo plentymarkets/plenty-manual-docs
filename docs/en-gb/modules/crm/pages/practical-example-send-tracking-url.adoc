@@ -1,5 +1,5 @@
 = Practical example: Sending tracking URLs to customers
-:keywords: practical example, send tracking url, track parcel, track shipment email
+:keywords: parcel tracking, tracking URL, tracking link, track parcel email, shipment tracking, track shipment, track delivery
 :description: This practical example describes how to automatically send the tracking URL to your customers as soon as the package number from the shipping service provider is available at the order.
 :author: team-crm
 
@@ -8,13 +8,13 @@ I would like to send the tracking URL to my customers once the package number is
 [discrete]
 == Required steps (short version)
 
-* Save the tracking URL at the shipping service provider
-* Set up an email template in the EmailBuilder
+* <<#save-tracking-url, Save the tracking URL at the shipping service provider>>
+* <<#create-template-with-variable, Set up an email template in the EmailBuilder>>
 ** Insert the variable `Tracking URL` in the template
-* Link event procedure that sends the template when the package has been registered at the service provider and a package number is available at the order.
+* <<#set-up-event-procedure, Set up an event procedure>> that sends the template when the package has been registered at the service provider and a package number is available at the order.
 
 [#save-tracking-url]
-== Save the tracking URL at the shipping service provider
+== Saving the tracking URL at the shipping service provider
 
 Many shipping service providers allow customers to track their packages with tracking URLs. A functional tracking URL should include the package number and the recipient's postcode.
 You can send your customers an email that contains the tracking URL. This way, your customers can see the current status of their shipments at the shipping service provider as well as the estimated time of delivery.
@@ -37,40 +37,49 @@ If you don’t know the tracking URL of the shipping service provider, proceed a
 [#create-template-with-variable]
 == Creating an email template with the variable for the tracking URL
 
-//// 
-TODO: Dieses Praxisbeispiel auch auf der EmailBuilder-Seite verlinken
-////
-
-Now create an email template that contains the variable for the tracking URL. You can also use one of the xref:crm:emailbuilder.adoc#use-default-templates[availale default templates] and xref:crm:emailbuilder.adoc#edit-template[adjust] it afterwards. +
+Now create an email template that contains the variable for the tracking URL. You can also use one of the xref:crm:emailbuilder.adoc#use-default-templates[available default templates] and xref:crm:emailbuilder.adoc#edit-template[adjust] it afterwards. +
 *_Note:_* We will explain how you create a new template and not how you edit an existing template.
 
 [.instruction]
 Creating an email template with the EmailBuilder:
 
-. Go to *CRM » EmailBuilder (Test phase)*.
+. Go to *CRM » EmailBuilder*.
 . In the line of the folder or sub-folder in which you want to create a template, click on material:more_vert[]. +
-→ A window opens.
-. Click on material:add[] *New template*.
+→ A new window opens.
+. Click on material:add[] *Add*.
+. Click on material:description[] *Template*. +
+→ The *Create new template* window opens.
 . Enter a name for the template, e.g. `Package tracking`.
+. Select a xref:crm:emailbuilder.adoc#template-header-footer[header and footer] each from the drop-down lists.
+. Click on *SAVE*. +
+→ The template is created and opened.
+. In the top left, click on *Add* (material:add[]) to add the language for the template. +
+→ The *Enter subject* window opens.
 . Enter a subject for the template, e.g. `Your parcel will arrive soon`.
-. Select a xref:crm:emailbuilder.adoc#template-header-footer[header and footer] each from the drop-down lists (see <<#image-example-practical-example-template-settings>>).
-. *Save* the settings. +
-Saving is required to be able to edit the template’s content (see <<#image-example-practical-example-template-editor>>).
-. In the line material:expand_more[] *Content*, click on *Edit* (material:edit[]). +
-→ The editor with the widgets opens.
+. Click on *SAVE*.
+. In the line of the subject, click on *Edit* (material:edit[]). +
+→ The editor of the template opens.
 . Drag the *Text* widget to the shaded area.
-. Click on material:edit[].
+. Click on *Edit* (material:edit[]).
 . In the text field, enter the desired text and search the appropriate variables that you need by using the *Search* text field in the *Variables* column.
+. Don’t forget to insert the variable `Tracking URL` to ensure that the shipment tracking link is sent in the email to your customers.
+. *Save* (material:save[]) the settings.
+
+[discrete]
+=== Example: Template with dummy data in the preview 
 
 [[image-example-practical-example-template-settings]]
-.Example: Template settings with dummy data in the preview
-image::practical-example-template-settings.png[width=640, height=360]
+.Example: Template with dummy data in the preview
+image::practical-example-template-dummy-data.png[width=640, height=360]
+
+[discrete]
+=== Example: Template with variables in the editor
 
 This is how the template content looks in the editor after you clicked on material:edit[]:
 
 [[image-example-practical-example-template-editor]]
 .Template’s editor view
-image::practical-example-template-editor.png[width=640, height=360]
+image::practical-example-template-editor-variables.png[width=640, height=360]
 
 [.collapseBox]
 .Creating an email template via the client (“old” method)
@@ -90,14 +99,14 @@ Now set up an event procedure that triggers the email template despatch for the 
 Setting up an event procedure:
 
 . Go to *Setup » Orders » Events*.
-. Click on *Add event procedure* at the bottom left (material:add[role=green]). +
+. At the bottom left, click on *Add event procedure* (material:add[role=green]). +
 → The *Create new event procedure* window opens.
 . Enter a distinct name for the event procedure, e.g. `Package number generated`.
 . Select the event as listed in <<#table-event-procedure-package-number>>.
-. *Save* (icon:save[role="green"]) the settings.
+. *Save* (icon:save[role=green]) the settings.
 . Carry out the settings as listed in <<#table-event-procedure-package-number>>.
 . Activate the option *Active*.
-. *Save* (icon:save[role="green"]) the settings.
+. *Save* (icon:save[role=green]) the settings.
 
 [[table-event-procedure-package-number]]
 .Setting up the “Package number generated” event procedure
