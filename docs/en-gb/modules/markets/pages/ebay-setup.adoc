@@ -127,7 +127,7 @@ Import the eBay shop categories to plentymarkets or synchronise them in this are
 Loading eBay shop categories:
 
 . Go to *Setup » Markets » eBay » Settings » Tab: Account settings*.
-. Expand (icon:plus-square-o[]) the *eBay shop categories* area to display an overview of your account’s shop categories. +
+. Expand the *eBay shop categories* section (icon:plus-square-o[]) to display an overview of your account’s shop categories. +
 → The account data is synchronised.
 . Select *by position (as saved on eBay)* or *alphabetically by category name* from the *Import shop categories* drop-down list.
 . Click on *Add* (icon:plus-square[role="green"]) to import the eBay shop categories into plentymarkets.
@@ -135,7 +135,7 @@ Loading eBay shop categories:
 [TIP]
 .Updating shop categories and return policy
 ====
-After changing the eBay account data, update your shop categories and return policy. Load the *shop categories* directly in this menu. The *return policy* is defined in the *Setup » Markets »  eBay » Business policies » Tab: Return policy* menu.
+After changing the eBay account data, update your shop categories and return policy. Load the *shop categories* directly in this menu. The *return policy* is defined in the *Setup » Markets » eBay » Business policies » Tab: Return policy* menu.
 ====
 
 [#600]
@@ -899,7 +899,7 @@ Afterwards, link the property *EcoParticipationFee* with the item.
 Creating the *EcoParticipatonFee* property:
 
 . Go to *Setup » Settings » Properties » Configuration*.
-. Click on icon:plus[role="darkGrey"] *Create property*.
+. Click on (icon:add[]) *Create property*.
 . Carry out the settings. Pay attention to the explanations given in <<#settings-eco-participation-fee>>.
 . Carry out further settings in the *Groups*, *Visibilities*, and *Options* sections as desired.
 . Save (terra:save[]) the settings. +
@@ -987,7 +987,7 @@ Create the following properties to specify UPINs:
 Creating properties for UPINs:
 
 . Go to *Setup » Settings » Properties » Configuration*.
-. Click on icon:plus[role="darkGrey"] *Create property*.
+. Click on (icon:add[]) *Create property*.
 . Carry out the settings. Pay attention to the explanations given in <<#settings-upin>>.
 . Carry out further settings in the *Groups*, *Visibilities*, and *Options* sections as desired.
 . Save (terra:save[]) the settings. +
@@ -1226,7 +1226,7 @@ Creating a new profile:
 . Save (terra:save[]) the settings.
 
 [[ebay-return-policy]]
-.eBay return policies
+.eBay return policy
 [cols="1,3a"]
 |===
 | Setting | Explanation
@@ -1425,16 +1425,6 @@ include::partial$manage-listings.adoc[tag=link-layout]
 
 [#3050]
 ==== Template variables and template functions
-
-Fill the HTML layout with the desired and necessary template variables and functions and this way, have the corresponding content of the listing placed in the layout. Pay attention to upper and lower case letters in the template variables and functions.
-
-Fill in the item description *{% GetItemDescription() %}* instead of the description that is saved with the listing. This way, you only need to maintain one description text for your plentyShop and listings.
-
-[IMPORTANT]
-.Activate the option Wildcard character in layout template (eBay)
-====
-If you use template variables which contain properties, such as *{% GetItemPropertyById() %}* and *{% GetItemPropertyByName() %}*, you have to activate the *Wildcard character in layout template (eBay)* option for the selected property, so that the property is displayed in the layout template. This is done in the *Setup » Item » Characteristics* menu.
-====
 
 :ebay:
 
@@ -1707,24 +1697,68 @@ In particular, be sure to check the settings for eBay properties. It is very imp
 Click on the *eBay properties* link in the listing's basic settings. Check to make sure that the attribute names, which were used for the item variations, for example size or colour, do not have values entered for them. If there are values entered in these text fields, delete them.
 ====
 
-[#6500]
-=== Linking your own properties
+[#using-properties]
+=== Activating properties for eBay
 
-In order to be able to use your own properties for the eBay market, the properties have to be linked with eBay in the *Setup » Item » Characteristics* menu.
+You want to enhance your eBay listings with further information which cannot be added via eBay properties? Then use plentymarkets properties to describe your listings in more detail. To do so, xref:item:properties.adoc#600[create a new property] or activate an existing property for the market eBay.
 
 [.instruction]
-Linking your own properties:
+Activating a property:
+
+. Go to *Setup » Settings » Properties » Configuration*.
+. Click on the property that you want to activate for eBay.
+. In the *Visibilities* area, select the *referrer* of the desired eBay platform, e.g. *eBay Germany*.
+. Save (terra:save[]) the settings.
+
+[TIP]
+.Using plentymarkets properties in a layout template
+====
+If you want to use properties in a layout template, then you have to add the following template functions to the layout template: *GetItemPropertyV2ById()*, *GetItemPropertyV2ByName()*, and *PropertyListV2()*. +
+Further information about creating layout templates is available in the chapter <<#2800, Managing layout templates>>.
+====
+
+[.collapseBox]
+.eBay properties, plentymarkets properties, and characteristics?
+--
+For eBay, you have three different possibilities to add information to your listings: via eBay properties, plentymarkets properties, or characteristics. All three possibilities fulfil the same function: They allow to enhance your listings with further, more detailed information. +
+
+For example, if you have an eBay property, a plentymarkets property, and a characteristic and all three of them contain the same information, then not all three are exported to eBay. plentymarkets will always check first whether you have an eBay property. If so, then the eBay property is exported. If you also have a property and a characteristic with the same information linked to a listing, then the property and the characteristic will not be transferred. +
+
+Hence, information is prioritised in this order:
+
+1. eBay property
+2. property
+3. characteristic
+
+If you have an eBay property, a plentymarkets property, and a characteristic with the same information, then only the highest priority will be transferred to eBay.
+
+*What to use - eBay properties, plentymarkets properties, or characteristics?*
+
+If you want to enhance your listing with further information, then you should either use eBay properties or plentymarkets properties. You should not create any more characteristics, as characteristics will not be developed any further and will be replaced by properties in the future.
+
+For example, you can only create plentymarkets properties and use them for your listings. If you want customers to be able to find your listings on eBay via the eBay search filters, then the properties and their values have to have the exact same names as the eBay properties. +
+
+Of course, you can also use properties with other names than the eBay properties. However, note that those properties cannot be found via the eBay search filters.
+--
+
+[#6500]
+=== Linking your own characteristics
+
+In order to be able to use your own characteristics for the eBay market, the characteristics have to be linked with eBay in the *Setup » Item » Characteristics* menu.
+
+[.instruction]
+Linking your own characteristics:
 
 . Go to *Setup » Item » Characteristics*.
-. Expand the property (icon:plus-square-o[]).
+. Expand the characteristic (icon:plus-square-o[]).
 . Activate the *Display as eBay property* setting.
 . Save (terra:save[]) the setting. +
-→ The property is included in the item's list of properties on eBay.
+→ The characteristic is included in the item's list of properties on eBay.
 
 [TIP]
 .Wildcard character in layout template (eBay)
 ====
-If the *Wildcard character in layout template (eBay)* function is activated, the property is also displayed in the layout template of a listing, provided that the wildcard character is used.
+If the *Wildcard character in layout template (eBay)* function is activated, the characteristic is also displayed in the layout template of a listing, provided that the wildcard character is used.
 ====
 
 [#6525]
@@ -2005,7 +2039,7 @@ Automatically sending a dunning letter:
 | *Payment due date was exceeded*
 | The dispute process is intended for orders for which payment has been pending for more than 4 days.
 
-2+^| *Procedure*
+2+^| Action
 
 | *Send email template*
 | Automatically send the selected email template, forexample *[6] eBay dispute process*.
@@ -2830,19 +2864,19 @@ include::_includes:partial$event-procedure.adoc[]
 |===
 |Setting |Option |Selection
 
-| *Event*
+| Event
 | *Order change: Status change*
 | Select the status that you set for the reason *Buyer gave incorrect delivery address*.
 
-| *Filter 1*
+| Filter 1
 | *Order > Order type*
 | *Order*
 
-| *Filter 2*
+| Filter 2
 | *Order > Referrer*
 | Select an *eBay referrer*.
 
-| *Procedure*
+| Procedure
 | *Market-Listings > Create an order cancellation on eBay*
 | *Buyer gave incorrect delivery address*
 |===

@@ -1,8 +1,541 @@
+
 = Metro
 :author: team-plenty-channel
 :keywords: Metro, Metro.de, set up Metro, setting up Metro.de, metro setup, metro.de setup
 :description: Learn how to set up the plugin for the market Metro in plentymarkets.
 
+:market: Metro
+:metro:
+
+// Moved, updated and published page from Marketplace: 23/11/2022 :-)
+
 METRO is a B2B focused e-commerce platform where sellers and suppliers meet in a growing and hospitable community.
 
-TIP: Find out how to set up the Metro plugin in the link:https://marketplace.plentymarkets.com/en/metro_6600[plugin’s user guide].
+[#7756484118]
+== Registering with METRO
+
+Join the seller community of the European non food marketplace and connect with millions of HoReCa customers and professionals from different branches.
+
+Visit the link:https://www.metro-selleroffice.com/[Selleroffice] and register as a seller.
+
+[#8289095872]
+== Installing the plugin in plentymarkets
+
+To connect to METRO in plentymarkets, first install the link:https://marketplace.plentymarkets.com/metro_6600[METRO plugin^] in your plentymarkets system. You can download this and other plugins in the link:https://marketplace.plentymarkets.com/en[plentyMarketplace^].
+
+:plugin: METRO
+:main-client:
+include::markets:partial$plugin-installation.adoc[]
+
+[#100]
+== Frequency of data exchange
+
+After setting up {market} in plentymarkets, the automatic processes described in <<#data-exchange-market>> are available:
+
+[[data-exchange-market]]
+.Frequency of data exchange
+[cols="2,3a"]
+|===
+|Data |Interval
+
+| Item export
+| once per night
+
+| Price and stock synchronisation
+| Stock and prices are updated dynamically. The update interval depends on the number of variations to be updated:
+
+* Every 15 minutes for up to *500* variations
+* Hourly for *500* to *1500* variations
+* Once per day for more than *1500* variations
+
+| Order import
+| every 15 minutes
+|===
+
+
+[#1194782543]
+== Setting up the market in plentymarkets
+
+Installed the {market} plugin? Great. Now, set up the market in plentymarkets.
+
+[#3863568703]
+=== Activating an order referrer
+
+:referrer: METRO
+:referrer-option: pass:quotes[option *METRO*]
+
+include::markets:partial$activate-referrer.adoc[]
+
+[#3863568785]
+=== Defining a sales price
+
+:referrer-price: {market}
+
+include::partial$define-sales-price.adoc[]
+
+[#5675802010]
+=== Completing the configuration assistant
+
+Use the *Plugin configuration assistant* in the *Setup » Assistants » Plugins » [Select plugin set]* menu to set up {market} in plentymarkets. Keep the API access data at hand that you received from {market}.
+
+*_Important:_* The assistant is only visible after you have installed the plugin and activated the order referrer *METRO*. You can change the assistant settings at any time.
+
+:menu-path: pass:quotes[*Setup » Assistants » Plugins*]
+:assistant-name: Plugin configuration assistant
+:number-of-boxes: info boxes
+
+include::partial$assistant-basic-instructions.adoc[]
+
+
+[.collapseBox]
+.Step *API connection*
+--
+
+[cols="2,3a"]
+|===
+|Setting |Explanation
+
+| *Customer key*
+| Enter the METRO customer key.
+
+| *Customer secret*
+| METRO customer secret
+|===
+--
+
+[.collapseBox]
+.Step *Item export*
+--
+
+[cols="2,3a"]
+|===
+|Setting |Explanation
+
+|*Should we export item data to METRO?*
+| Possible options: +
+ Item export *On* or *Off*
+
+*_Note:_* The item export runs once a day.
+ Item data is not directly uploaded to your METRO back end. The CSV file exported by the plugin undergoes manual screening by METRO staff. You can check the status of uploaded files in your Metro dashboard. If issues are identified, you can download a report from the tab *Produkte aus METRO-Inventar verwalten* of your METRO seller account.
+
+*_Important:_* METRO items are unique. The system does not allow duplicate entries. If you are the first uploader of an item, you become the sole manager of that item's details and specifications. If another seller uploads the same item, this only results in an *offer* for the item.
+
+*_Note:_* Items for which you are not the owner only become visible in your METRO backend once you have submitted an offer for this item.
+
+|*Which barcode type should we use as an identifier for exported items?*
+| Select a barcode type.
+
+|===
+--
+
+[.collapseBox]
+.Step *Stock and Price Export*
+--
+
+[cols="2,3a"]
+|===
+|Setting |Explanation
+
+|*Should we export stock and price data to METRO?*
+|Possible options: +
+Stock and price export *On* or *Off*
+
+|*METRO offers are available for B2B and B2C customers by default. Should we enable B2B customers only?*
+|Flip the switch to *green* if your offers should be available for B2B customers only.
+
+|*Automatically generated SKU is based on:*
+|Possible options:
+* *Variation no.*
+* *Variation ID*
+* *Model*
+* *Barcode*
+
+|*Which property should we use to tag items for METRO freight forwarding?*
+| Assign a property to be used as METRO freight forwarding tag.
+
+*_Tip:_* This property must exist on variants which require METRO freight forwarding.
+
+|*The maximum delivery time buffer is?*
+|Assign a numerical value.
+This input defines the maximum time for an item to be delivered.
+
+*_Note:_* The input is added on top of the *Variation availability 1-10* you assigned.
+*maxProcessingTime* must be less than 100.
+
+|*Should we send a fixed stock quantity each time?*
+| Assign a numerical value. This value is exported as stock quantity for all items.
+|===
+--
+
+[.collapseBox]
+.Step *Order Processing*
+--
+
+[cols="2,3a"]
+|===
+|Setting |Explanation
+
+|*Should we import orders from METRO?*
+|Possible options:
+ Order Import *On* or *Off*
+
+|*Orders cancelled by METRO will be set to status:*
+| Select an order status.
+
+|*Auto reject cancel requests starting with order-status:*
+|Select an order status.
+
+|===
+--
+
+[.collapseBox]
+.Step *Return request processing*
+--
+
+[cols="2,3a"]
+|===
+|Setting |Explanation
+
+|*Should the plugin create return orders for pending METRO return requests?*
+|Possible options:
+ Create Return orders *On* or *Off*
+
+|*Status for accepted return requests*
+| Select an order status.
+
+|*Status for customer cancelled return requests*
+|Select an order status.
+
+*_Important:_* The plugin automatically imports customer cancelled return requests.The return order is moved to the order-status you selected only if the return request has not already been accepted.
+This plugin behaviour requires that you have order-status defined for:
+* Accepted return requests.
+* Cancelled return requests.
+
+|===
+--
+
+[#8435936916]
+==== Completing the Return Reasons Mapping Assistant
+
+The METRO plugin automatically imports all return requests as return orders.
+This assistant helps you to map METRO return reasons to your *reasons for return* in plentymarkets:
+
+. Go to *Setup » Assistants » Plugins » [Open plugin set]*.
+. Open the *Return Reasons Mapping Assistant*. +
+*_Important:_* The assistant is only visible after you have installed the plugin and activated the order referrer *METRO*.
+. Link your return reasons.
+. Save the settings.
+
+[#5226544237]
+=== Setting up item delivery times
+
+METRO requires you to define a *minimum* and a *maximum delivery time* for submitted offers.
+
+[.instruction]
+Configuring a minimum delivery time:
+
+. Go to *Setup » Item » Variation » Availability*.
+. Define *Average delivery periods* you consider relevant.
+. Assign an *Average delivery period* to your item. To do so, go to *Item » Variant » Settings » section Availability » 1* to *10*. +
+→ The minimum delivery time is defined and assigned.
+
+[.instruction]
+Configuring a maximum delivery time:
+
+. Go to *Setup » Assistants » Plugins » [Open plugin set]*.
+. Open the *Plugin configuration assistant*.
+. Open the step *Stock and Price Export*.
+. Add a value for the option *The maximum delivery time buffer is?*. +
+→ The maximum delivery time is defined and assigned.
+
+[#7251018515]
+=== Setting up stock and price updates by SKU instead of GTIN
+
+Note the following requirements for updating stock and prices on METRO:
+
+* The item availability must be active in the menu *Item » Variation » Settings » Area: Availability*.
+
+* Stock and prices of variations are updated based on the GTIN. Variations can only be updated if they have the same GTIN in both plentymarkets and on METRO.
+
+* By default, stock and prices are updated by matching the plentymarkets GTIN to the identical GTIN on METRO. If you want to compare the SKU instead of the GTIN for updates, additional settings are required:
+
+[.collapseBox]
+.Setting up stock and price updates based on SKU matching
+--
+
+. Go to *Setup » Assistants » Plugins » [Open plugin set]*.
+. Open the *Plugin configuration assistant*.
+. Open the step *Stock and Price Export*.
+. Select a data source for the option *Automatically generated SKU is based on:*.
+. Complete the assistant.
+. Check if an offer exists in Your METRO dashboard for the item in question. +
+*_Note:_* You can also manually create an offer from your METRO dashboard.
+. Ensure that the SKU is identical in both systems. +
+*_Tip:_* You can create SKU bulk assignments on METRO by going to *Angebote verwalten*. For additional details, contact your METRO support.
+--
+
+[#8435957916]
+== Setting up the item export
+
+Item data is exported to {market} using catalogues. Use the assistant *Item Export Preparation* to create a marketplace format for each {market} category.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+[#5386707307]
+=== Creating a catalogue in the assistant
+
+The item export uses the plentymarkets catalogue to decide which item data is exported to METRO.
+This assistant supports you in creating catalogue templates for the METRO item export.
+
+:catalogue-assistant-name: The Item Export Preparation Assistant
+:number-of-boxes: info boxes
+:catalogue-path: pass:quotes[*Setup » Assistants » Plugins » Open plugin set*]
+:catalogue-note: You need a separate catalogue for each category on METRO.
+:mapping-fields: the
+
+include::partial$catalogue-assistant-config.adoc[]
+
+[.collapseBox]
+.Settings in the assistant
+--
+[[table-catalogue-assistant]]
+[width="100%"]
+[cols="1,2a"]
+|===
+| Setting | Explanation
+
+| *Select a METRO category.*
+| Select a product category from the drop-down list. +
+→ The catalogue is created with the name of the category and shown in the *Data » Catalogues* menu. +
+→ A property with the name of the METRO category is created. Link this property with the variations that you want to sell on METRO. +
+*_Note:_* You need a separate catalogue for each METRO category.
+
+| *Enter a name for the new catalogue.*
+| Enter a name for the catalogue.
+|===
+--
+
+[#1118666925]
+=== Mapping data fields in the catalogue
+
+After you have created a catalogue, map the market's data fields to item data saved in plentymarkets. Check the documentation of the sales channel to find out what data the market expects for the individual data fields.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#1118677925]
+=== Creating properties for units of measurement
+
+Create a property for each unit of measurement that you want to map.
+
+[#1115666904]
+== Preparing variations
+
+Continue with preparing your variations.
+
+[#300]
+=== Activating variations for the market
+
+:market-availability: METRO
+:option-availability: METRO
+
+include::partial$variation-availability.adoc[]
+
+[#1118666904]
+=== Linking variations to a {market} product category
+
+:category-property-name: METRO market category group / METRO market Kategoriegruppe
+
+include::partial$catalogue-link-property-for-market-category.adoc[]
+
+[#4807852476]
+=== _Check list:_ Requirements for the item export
+
+* The variation must be *active*.
+* Variation must be activated for the market METRO.
+* The Metro property *METRO category* and a specific property value must be linked to the variation.
+* The variation must have at least one image that is activated for the market METRO.
+* The variation must have a barcode type GTIN or the MPN + manufacturer as the export identifier.
+* The item description must only contain the following HTML tags:
+  ** <p>
+  ** <ul>
+  ** <ol>
+  ** <li>
+  ** <span>
+  ** <br>
+
+*_Important:_* Sales prices are not exported to METRO with the item export. Instead, they are exported in the *Stock and price export*.
+
+[#8758031625]
+=== _Check list:_ Requirements for the stock export
+
+* Net stock must be positive. +
+→ Variations with negative stock are exported with a stock of 0.
+* Variations must have a sales price for the market METRO. The currency of this sales price must be EURO.
+* The sales price must be the sum of *Sales price GROSS + Gross shipping costs*.
+* For stock and prices to be updated, the GTIN or the SKU must be identical in plentymarkets and on METRO. If you selected the SKU to be matched instead of the GTIN, then the SKU must be identical in plentymarkets and on METRO instead.
+
+*_Important:_* Sales prices are not exported to METRO with the item export. Instead, they are exported in the *Stock and price export*.
+
+[#2395556941]
+=== Submitting offers to existing METRO items
+
+This functionality does not require an item export. Instead, offers for a variation are exported with the *Stock and price Export*.
+
+During the export, one of the following identifiers to create an offer:
+
+* *GTIN*
+* *SKU*
+
+To create an offer, the following settings must be in place:
+
+* The variation must have a value for the stock export identifier you selected in the *METRO Plugin Configuration Assistant » Option: Automatically generated SKU is based on:*.
+* For an offer to be exported, the GTIN must be identical in plentymarkets and on METRO. If you selected the SKU to be matched instead of the GTIN, then the SKU must be identical in plentymarkets and on METRO instead.
+* The variation must be *active* in the menu *Item » Variation » Settings » Area: Availability*.
+* The item must have referrer *METRO* set in the menu *Item » Variation » Tab: Availability » Area: Marketplace*.
+* Item must have the *Standard Client* set in the menu *Item » Variation » Tab Availability » Client*.
+* *Net stock* must be positive.
+* Variation must have a sales price for the market *METRO*.
+* The currency of the sales price must be *EURO*.
+* The exported value for the sales price must be the sum of *Sales price GROSS + GROSS shipping costs*.
+
+[#9331181558]
+== Understanding order processing
+
+[#9331181541]
+=== Information about the order import
+
+Information about order import and order processing for METRO.
+
+* The plugin creates individual orders from each METRO order item. +
+*_Example:_* A customer orders 2 pieces of the item X and 3 pieces of the item Y. In plentymarkets, two orders are created: one order for 2 x item X and another order for 3 x item Y. You can find related orders by using the order search filter *Ext. order number*.
+* Each METRO order line-item is processed separately (fulfilment, invoice, event procedures, returns, etc.).
+* All orders are imported as *paid*.
+* Because METRO sales prices already include shipping costs, orders are imported with a shipping cost of 0 Euros.
+
+[#8798043284]
+=== Supported payment methods
+
+The following payment methods are supported and automatically recognised during the order import:
+
+* *Direct debit payments* are imported as "Metro Direct Debit".
+* *RatePAY invoices* are imported as "Metro Open Invoice".
+* *PayPal payments *are imported as "Metro PayPal".
+* *Klarna Sofortüberweisung payments* are imported as "Metro SOFORT".
+* *Credit card payments* are imported as "Metro Direct Checkout".
+* *All other payment methods* are also imported as "Metro Direct Checkout".
+
+*_Note:_* The plugin imports anonymous proxy-email-addresses for METRO buyers.
+
+[#1045309002]
+=== Automating order processing
+
+The xref:automation:event-procedures.adoc[event procedures] provided by the plugin allow you to send information about your orders to METRO.
+
+[#5583680407]
+==== Available event procedures
+
+[[table-metro-event-procedures]]
+.Available event procedures
+[cols="2,3a"]
+|===
+|Event procedure |Explanation
+
+| *Send cancel notification to METRO,* +
+*reason "No inventory"*
+| This event procedure sends a cancellation notification for the METRO order.
+
+| *Send cancel notification to METRO,* +
+*reason "Wrong price"*
+| This event procedure sends a cancellation notification for the METRO order.
+
+| *Send cancel notification to METRO,* +
+*reason "Wrong product data"*
+| This event procedure sends a cancellation notification for the METRO order.
+
+| *Send fulfilment notification to METRO*
+| This event procedure triggers the fulfilment notification. A tracking number is not required.
+
+| *Send order "Processing" to METRO*
+| On successful order import, this event triggers an order confirmation on the METRO order, it also moves the order from status *Placed* to status *Processing*. This is an important step, since only orders on status *Processing* can be moved to the status *Shipped*.
+
+Here, we recommend the following event procedure setup:
+
+. Go to *Setup » Orders » Events » New*.
+. Enter a *name*.
+. Select *Status change* from the drop-down list.
+. Pick status *[4] In preparation for shipping* or status *[5] Cleared for shipping*.
+. Add the action *Send order "Processing" to Metro*.
+
+*_Important:_* METRO event procedures do not support the event *New Order*.
+
+| *Send invoice to METRO*
+| This event procedure allows you to send an invoice to METRO.
+
+| *Send return label to METRO*
+| Go to *Orders » Shipping centre* to generate a *Return Label* for the Return Order and trigger this event procedure to send the document to Metro.
+
+| *Send 'accept return request' to METRO*
+| This event procedure notifies METRO that you accepted the return request.
+
+| *Report 'returned order' to METRO*
+| If the buyer does not accept or receive the shipped items, the order is automatically returned. Create a Return Order and trigger this event.
+
+| *Send 'return request declined' to METRO*
+|This event procedure sends a notification to METRO to decline the return request submitted by the customer.
+
+| *Send credit note to METRO*
+|Create a *Credit Note Order* from a *Return Order* that has been accepted and generate a *credit note document* on the *Credit Note Order*. Trigger this event to send the credit note to METRO.
+|===
+
+[#0746212710]
+==== Example: Setting up an event procedure
+
+. Go to *Setup » Orders » Events*.
+. Click on *Add event procedure*. +
+→ The *Create new event procedure* window opens.
+. Enter a name.
+. Select an *event*, for example *Order change: Outgoing items booked*.
+. *Save* the settings.
+. Select the filter *Order > Order type > Order*.
+. Select the filter *Order > Referrer > METRO*.
+. Select a procedure from the area *Plugin*.
+. *Save* the settings.
+
+[#0922092229]
+== Using the plugin help
+
+The plentymarkets back end provides the menu *Setup » Markets » METRO » Help*. The plugin help enables you to check the following:
+
+* <<5721453049, Test download an item export CSV for a METRO category of your choice.>>
+* <<5603650009, Check the export conditions for an item variation and compare it with the properties of a catalogue of your choice.>>
+* <<#5659888624, Check the plugin health>>
+
+[#5721453049]
+=== Downloading a CSV file of the Item export
+
+. Go to *Setup » Markets » METRO » Help*.
+. Select a catalogue from the *catalogue list*.
+. Click on *Download CSV*.
+. Check the exported content for the selected catalogue.
+
+[#5603650009]
+=== Checking variation export conditions
+
+. Go to *Setup » Markets » METRO » Help*.
+. Enter a variation ID.
+. Select the METRO catalogue that is relevant for the variation.
+. Click on *Check*. +
+→ A list of the export conditions is shown. +
+  * *OK* = The requirement is met. +
+  * *X* = The requirement is missing.
+
+[#5659888624]
+=== Checking the plugin health
+
+. Go to *Setup » Markets » METRO » Help*.
+. Click on *Check*. +
+The plugin checks the following:
+  * Is the order referrer *METRO* active in the menu *Setup » Orders » Order referrer*?
+  * Can plentymarkets connect to the METRO API?
+  * Is more than one referrer METRO present and active in the menu *Setup » Orders » Order referrer*?
+  * Is the highest available referrer ID active?
