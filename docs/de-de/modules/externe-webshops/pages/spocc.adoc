@@ -70,10 +70,7 @@ SPoCC-Attribute in Eigenschaften
 | Alle 20 Minuten
 
 | Versanddokumente bereitstellen
-|
-
-| Pakettyp exportieren
-|
+| Bei Auslösen der Ereignisaktion
 |===
 
 [#5733676376]
@@ -204,15 +201,13 @@ Du gibst also deine Zugangsdaten ein, damit plentymarkets und SPoCC miteinander 
 (Pflichtfeld)
 | Gib die Händler:innen-ID ein, die du von SPoCC erhalten hast.
 
-////
-| *Kundennummer* +
-(Pflichtfeld)
-| Gib deine SPoCC-Kundennummer ein.
+//| *Kundennummer* +
+//(Pflichtfeld)
+//| Gib deine SPoCC-Kundennummer ein.
 
-| *Channel ID* +
-(Pflichtfeld)
-| Gib die Zahl *4* ein. Bei SPoCC hat plentymarkets immer diese Channel-ID.
-////
+//| *Channel ID* +
+//(Pflichtfeld)
+//| Gib die Zahl *4* ein. Bei SPoCC hat plentymarkets immer diese Channel-ID.
 |===
 
 [#9643799177]
@@ -231,7 +226,7 @@ Das heißt, wo die Daten in plentymarkets gespeichert werden sollen.
 | Aktiviere diese Option, um einen vollständigen Artikelimport zu aktivieren. +
 *_Wichtig:_* Nach dem ersten vollständigen Artikelimport wird diese Option automatisch deaktiviert. Es werden also nur noch neue und geänderte Artikeldaten importiert. Falls du später irgendwann wieder einen vollständigen Artikelimport benötigst, aktiviere diese Funktion noch einmal und schließe den Assistenten wie gewohnt ab.
 
-| *Tag to mark extended data*
+| *Tag für Import erweiterter Artikeldaten*
 | Mit welchem Tag willst du Varianten versehen, für die zusätzliche Daten aus SPoCC importiert werden sollen? Für Varianten, die du mit diesem Tag versiehst, werden aus SPoCC Daten wie EAN, Bilder und Eigenschaften ergänzt. 
 
 *_Voraussetzung_*:
@@ -283,29 +278,42 @@ Bei SPoCC gibt es drei Preise:
 * Zielpreis
 * Unverbindlicher Verkaufspreis
 
+Im besten Fall sind Verkaufspreis und Zielpreis gleich, sodass der Händler den Artikel regulär verkauft. Der "retailPrice" wird in den meisten Shops nur dann in rot angezeigt, wenn er unterhalb des "targetPrice" liegt.
+ Der "recommendedRetailPrice" wird meist nur dann angezeigt, wenn der "targetPrice" untwerhalb des "recommendedRetailPrice" liegt und somit einen Hauspreis des Händlers darstellen soll.
+
 [[table-sales-prices]]
 .Zuordnung der Verkaufspreise
-[cols="1,3"]
+[cols="1,3a"]
 |===
 |Einstellung |Erläuterung
 
-| *Verkaufspreis*
+| *Verkaufspreis* +
+(retailPrice)
 | Welchen plentymarkets Verkaufspreis möchtest du für den Verkaufspreis in SPoCC verwenden?
 Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste.
 
+* Der Preis inkl. MwSt., den Kund:innen zu zahlen haben.
+
 *_Voraussetzung_*: Hast du schon xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
 Diese Dropdown-Liste enthält nur die Verkaufspreise, die schon in plentymarkets vorhanden sind.
 
-| *Zielpreis*
+| *Zielpreis* +
+(targetPrice)
 | Welchen plentymarkets Verkaufspreis möchtest du für den Zielpreis in SPoCC verwenden?
 Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste.
 
+* Der Zielpreis ist der Preis inkl. MwSt., den du als deinen reguären Preis nutzt.
+
 *_Voraussetzung_*: Hast du schon xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
 Diese Dropdown-Liste enthält nur die Verkaufspreise, die schon in plentymarkets vorhanden sind.
 
-| *Unverbindlicher Verkaufspreis*
+| *Unverbindlicher Verkaufspreis* +
+(recommendedRetailPrice)
 | Welchen plentymarkets Verkaufspreis möchtest du für den unverbindlichen Verkaufspreis in SPoCC verwenden?
 Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste.
+
+* Der unverbindliche Verkaufspreis ist der empfohlene Preis inkl. MwSt., den Lieferant:in oder Hersteller:in als reguären Preis vorschlägt.
+* Der unverbindliche Verkaufspreis wird normalerweise nur angezeigt, wenn der Zielpreis unterhalb des unverbindlichen Verkaufspreises liegt und somit einen Hauspreis darstellen soll.
 
 *_Voraussetzung_*: Hast du schon xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
 Diese Dropdown-Liste enthält nur die Verkaufspreise, die schon in plentymarkets vorhanden sind.
@@ -329,7 +337,7 @@ Diese Dropdown-Liste enthält nur die Eigenschaften, die schon in plentymarkets 
 
 [[table-property-mapping]]
 .Zuordnung der Eigenschaften
-[cols="1,3"]
+[cols="1,3a"]
 |===
 |Einstellung |Erläuterung
 
@@ -365,7 +373,7 @@ So werden deine Artikel schon in die richtigen plentymarkets Kategorien einsorti
 
 [[table-category-mapping]]
 .Zuordnung der Kategorien
-[cols="1,3"]
+[cols="1,3a"]
 |===
 |Einstellung |Erläuterung
 
@@ -440,11 +448,11 @@ Wähle einen Marktplatz aus der Dropdown-Liste.
 | *SPoCC-Herkünfte*
 | Die Dropdown-Liste enthält deine Marktplätze in SPoCC. Wähle denselben Marktplatz aus der Dropdown-Liste.
 
-| material:plus[]
+| icon:plus[role="green"]
 | Fügt eine weitere Zeile hinzu.
 Auf diese Weise kannst du mehrere Marktplätze zuordnen.
 
-| material:delete[]
+| icon:minus-circle[role="red"]
 | Löscht eine Zeile.
 Auf diese Weise kannst du einen nicht mehr benötigte Marktplatz löschen.
 |===
@@ -467,11 +475,11 @@ Wähle einen Retourengrund aus der Dropdown-Liste.
 | *SPoCC-Retourengründe*
 | Die Dropdown-Liste enthält deine Retourengründe in SPoCC. Wähle einen Retourengrund aus der Dropdown-Liste, der zu dem Grund passt, den du in der Spalte *plentymarkets Retourengründe* gewählt hast.
 
-| material:plus[]
+| icon:plus[role="green"]
 | Fügt eine weitere Zeile hinzu.
 Auf diese Weise kannst du mehrere Retourengründe zuordnen.
 
-| material:delete[]
+| icon:minus-circle[role="red"]
 | Löscht eine Zeile.
 Auf diese Weise kannst du einen nicht mehr benötigte Retourengrund löschen.
 |===
@@ -491,7 +499,7 @@ In diesem Schritt aktivierst du die Prozesse, die automatisch ausgeführt werden
 |===
 |Prozess |Intervall |Erläuterung
 
-| Import von SPoCC-Attributen
+| *Import von SPoCC-Attributen*
 | Stündlich
 | Importiert die SPoCC-Attribute in plentymarkets.
 
@@ -506,7 +514,7 @@ Dieser erstmalige vollständige Import kann, je nach Anzahl der Produkte, einige
 
 | *Import erweiterter Artikeldaten*
 | ???
-| Importiert EAN, Bilder und Eigenschaften von Varianten, die mit dem Tag gekennzeichnet sind, das du in der Einstellung *???* gewählt hast.
+| Importiert EAN, Bilder und Eigenschaften von Varianten, die mit dem Tag gekennzeichnet sind, das du in der Einstellung *Tag für Import erweiterter Artikeldaten* gewählt hast.
 
 | *Import von Bildern*
 | Alle 60 Minuten
@@ -611,7 +619,7 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-one]]
-[cols="1,3"]
+[cols="1,3a"]
 |===
 
 | Ereignis
@@ -622,7 +630,7 @@ include::_includes:partial$event-procedure.adoc[]
 Auftrag > Mandant (Shop)
 
 | Aktion
-| Plugins > SPoCCConnector order export??? +
+| Plugins > SPoCCConnector: Auftrag anmelden +
 → In SPoCC wird ein Auftrag mit der SPoCC-Status-ID 1 erstellt. +
 → Der Bestand wird bei SPoCC reserviert.
 |===
@@ -640,7 +648,7 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-8993901978]]
-[cols="1,3"]
+[cols="1,3a"]
 |===
 
 | Ereignis
@@ -651,7 +659,7 @@ include::_includes:partial$event-procedure.adoc[]
 Auftrag > Mandant (Shop)
 
 | Aktion
-| Plugins > SPoCCConnector order is paid??? +
+| Plugins > SPoCCConnector: Auftrag bezahlt +
 → In SPoCC wird der Auftrag in den SPoCC-Status ??? verschoben. +
 → Der Auftrag wird für die SPoCC-Filiale sichtbar und kann von Lagermitarbeiter:innen kommissioniert werden.
 |===
@@ -668,7 +676,7 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-0414974358]]
-[cols="1,3"]
+[cols="1,3a"]
 |===
 
 | Ereignis
@@ -681,7 +689,7 @@ include::_includes:partial$event-procedure.adoc[]
 Auftrag > Mandant (Shop)
 
 | Aktion
-| Plugins > SPoCCConnector order shipping document export??? +
+| Plugins > SPoCCConnector: Versanddokumente erstellt +
 → Auftragsdokumente werden an SPoCC übertragen. +
 |===
 
@@ -697,7 +705,7 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-1052999368]]
-[cols="1,3"]
+[cols="1,3a"]
 |===
 
 | Ereignis
@@ -708,7 +716,7 @@ include::_includes:partial$event-procedure.adoc[]
 Auftrag > Mandant (Shop)
 
 | Aktion
-| Plugins > SPoCCConnector return order export??? +
+| Plugins > SPoCCConnector: Retoure melden +
 → In SPoCC wird der Auftrag in die SPoCC-Status-ID 18 verschoben. +
 → Der Retourengrund wird übertragen. Wenn du für einen plentymarkets Retourengrund keinen SPoCC-Retourengrund zugeordnet hast, wird der Retourengrund *[1] No reason* an SPoCC übertragen.
 
@@ -726,11 +734,11 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-UI7TSJAK]]
-[cols="1,3"]
+[cols="1,3a"]
 |===
 
 | Ereignis
-| SpoccConnector \| Versandmeldung erfolgreich
+| SpoccConnector \| Auftrag versendet
 
 |Filter (optional)
 |Auftrag > Herkunft +
@@ -745,7 +753,7 @@ Auftrag > Mandant (Shop)
 [#VOQ82RU7]
 === Nicht an SPoCC gemeldete Aufträge weiterverarbeiten
 
-Lege fest, was mit Aufträgen passiert, die nicht an SPoCC gemeldet werden konnten. Das sind neue Aufträge, bei denen die Aktion *SPoCCConnector order export???* nicht ausgelöst wurde.
+Lege fest, was mit Aufträgen passiert, die nicht an SPoCC gemeldet werden konnten. Das sind neue Aufträge, bei denen die Aktion *SPoCCConnector: Auftrag anmelden* nicht ausgelöst wurde.
 
 Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
 
@@ -754,7 +762,7 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-VOQ82RU7]]
-[cols="1,3"]
+[cols="1,3a"]
 |===
 
 | Ereignis
@@ -773,7 +781,7 @@ Auftrag > Mandant (Shop)
 [#KZ1UJ2CB]
 === Aufträge nach Stornierungsanfrage weiterverarbeiten
 
-Lege fest, was mit Aufträgen passiert, wenn eine Stornierungsanfrage eingeht. 
+Lege fest, was mit Aufträgen passiert, die in SPoCC storniert wurden.
 
 Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
 
@@ -782,7 +790,7 @@ Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein
 include::_includes:partial$event-procedure.adoc[]
 
 [[table-event-procedure-KZ1UJ2CB]]
-[cols="1,3"]
+[cols="1,3a"]
 |===
 
 | Ereignis
