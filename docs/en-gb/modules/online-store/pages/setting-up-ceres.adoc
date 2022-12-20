@@ -1221,57 +1221,96 @@ image::omni-channel:DE-Ceres-einrichten-eTrusted-Partner-Certified-Software.png[
 You want to certify your plentyShop with Trusted Shops? plentyShop LTS has been pre-certified by Trusted Shops, so your Trusted Shops certification will be handled as fast and easy as possible. Find all necessary information link:https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS[here^].
 
 [#960]
-== Activating the ShopBooster 
+== Using the ShopBooster
 
-link:https://www.plentymarkets.eu/blog/Volle-Kraft-voraus-ShopBooster-bringt-deinen-Ceres-Shop-auf-Hochtouren/b-2125/[ShopBooster^] is an additional module, via which online shop content of plentyShops are written into the cache in order to achieve better loading times. The ShopBooster is available for Ceres versions 2.14 and higher.
+The link:https://www.plentymarkets.eu/blog/Volle-Kraft-voraus-ShopBooster-bringt-deinen-Ceres-Shop-auf-Hochtouren/b-2125/[ShopBooster^] is an additional module, via which online shop content of plentyShops is written into the cache in order to achieve better loading times.
 
-[IMPORTANT]
-.Additional costs
+[TIP]
+.No additional costs
 ====
-Activating the ShopBooster entails additional costs in the amount of 0,004€ per 100 page accesses and changes (per client). A page access is the process in which a visitor or web crawler accesses a URL of your online shop; a page change is effected by one of the following processes:
+The ShopBooster and all its functions can be used at no additional cost.
+====
 
-- Updating category of item data
-- Updating ShopBuilder pages
-- Saving and deploying plugin sets
-- Saving settings in the plentyShop LTS configuration
-- Invalidating the cache by deactivating the ShopBooster
+[#activate-cache-blocks]
+=== Activating cache blocks
 
-The additional costs of the ShopBooster module amount to a *maximum* of 100 € per month per client.
+Using cache blocks ensures that contents that have already been cached are not invalidated unnecessarily. Cache blocks divide the page contents into blocks which can be invalidated separately. Contents that are identical on several pages (e.g. the footer) can thus be updated once and replaced on all cached contents without the need to completely invalidate all pages.
+
+This leads to a better cache coverage and on average also to a better Time-to-first-Byte (TTFB) which can have a strong impact on PSI.
+
+[NOTE]
+.Adaptations for additional theme
+====
+Cache blocks are directly compatible with plentyShop LTS and plentyShop LTS Modern. If you are using an additional theme, you need to adjust it so that cache blocks have an effect. Further information on that can be found in our link:https://developers.plentymarkets.com/en-gb/developers/main/plentyshop-plugins/shopbooster-cache-blocks.html#_using_the_plentyshop_lts_cache_blocks_in_your_own_theme[developer documentation^].
 ====
 
 [.instruction]
-Activating the ShopBooster:
+Activating ShopBooster cache blocks:
 
-. Go to the *Setup » Client » Select client» Webshop » ShopBooster* menu.
-- Click on *Activate ShopBooster* +
-→ A window is opened, informing you about additional costs.
-. Click on *Confirm* to activate the ShopBooster. +
-→ The message *ShopBooster has been activated* is displayed.
+. Go to the *Setup » Client » [Select client] » Online store » ShopBooster* menu.
+. Click on *Activate cache blocks*. +
+→ The cache blocks are activated.
 
 You can deactivate the ShopBooster in the same way.
 
 [.instruction]
-Deactivating the ShopBooster:
+Deactivating ShopBooster cache blocks:
 
-. Go to the *Setup » Client » Select client» Webshop » ShopBooster* menu.
-- Click on *Deactivate ShopBooster* +
-→ A window is opened, informing you about additional costs.
-. Click on *Confirm* to deactivate the ShopBooster. +
-→ The message *ShopBooster has been deactivated* is displayed.
+. Go to the *Setup » Client » [Select client] » Online store » ShopBooster* menu.
+. Click on *Deactivate cache blocks*. +
+→ The cache blocks are deactivated.
 
+[#deactivate-invalidation]
 === Deactivating the invalidation
 
-In the *Deactivate invalidation*, you can suspend the invalidation of the ShopBooster until the chosen date and time. As a result, your item data will be exclusively loaded from the cache until the chosen time, without the cache being deleted or updated. Therefore, your plentyShop will be able to achieve better loading times. +
+In the *Deactivate invalidation* section, you can suspend the invalidation of the ShopBooster until the chosen date and time. As a result, your item data will be exclusively loaded from the cache until the chosen time, without the cache being deleted or updated. Therefore, your plentyShop will be able to achieve better loading times. +
 
-Note that deactivating the invalidation will also affect the visibility of items in your online shop: The visibility of your items will no longer be automatically updated as long as the invalidation is inactive; it is therefore possible, that items appear as available even though they are already sold out. However, it is not possible for your customers to purchase items that are not available. + 
+Note that deactivating the invalidation will also affect the visibility of items in your online shop: The visibility of your items will no longer be automatically updated as long as the invalidation is inactive; it is therefore possible, that items appear as available even though they are already sold out. However, it is not possible for your customers to purchase items that are not available.
 
 [.instruction]
-Deactivate the invalidation:
+Deactivating the invalidation:
 
-. Go to the *Setup » Client » Select client» Webshop » ShopBooster* menu.
+. Go to *Setup » Client » [Select client] » Online store » ShopBooster*.
 . Enter the date until which you want to deactivate the invalidation.
 . Enter the time until which you want to deactivate the invalidation.
 . *Save* your inputs.
+
+[#invalidate-immediately]
+=== Immediately invalidating the cache
+
+You can manually remove cached contents from the cache. There are 5 invalidations available per day which will be reset each night exactly at midnight. Note that after an invalidation, the loading times of your shop will take longer until your shop pages are accessed for the first time and thus written to the cache once again.
+
+[.instruction]
+Manually invalidating the cache:
+
+. Go to *Setup » Client » [select client] » Online store » ShopBooster*.
+. In the section *Immediately invalidate cache*, click on the *Invalidate* button. +
+→ The cache is deleted and the message *Cache was invalidated* is displayed. +
+→ The number of *Remaining invalidations for today* is reduced by 1.
+
+[#check-cache-status]
+=== Checking the cache status of a page
+
+To ensure that the ShopBooster is effective and that a page is loaded from the cache, you can use the developer tools of your browser. The following instruction is based on the Google Chrome browser.
+
+[.instruction]
+checking the cache status of a page:
+
+. Open an item page or a category page in your shop.
+. Open the developer tools by right-clicking and selecting *Inspect*. +
+→ The developer tools open.
+. At the top bar, click on the *Network* tab.
+. In the *Filter* bar, click on *Doc*.
+. Under *Name*, click on the name of the page.
+. In the detail view of the page, open the *Headers* tab.
+. Check whether the entry *x-plenty-cache: hit* appears in the *Response Headers* section.
+
+If the Response Header contains the entry *x-plenty-cache: hit*, the page is in the ShopBooster cache. If you cannot find the entry, the checked page is not in the cache.
+
+[NOTE]
+====
+Note that shop pages need to be opened once so they are written to the cache. If the inspected page does not contain an *x-plenty-cache: hit* entry, reload the page. If the page is still not loaded from the cache, contact us in the link:https://forum.plentymarkets.com/c/plentyshop/125[forum^].
+====
 
 [#1000]
 == Customising plentyShop LTS
