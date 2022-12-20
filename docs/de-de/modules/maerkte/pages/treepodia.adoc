@@ -4,18 +4,92 @@
 :description: Richte die Artikeldatenübertragung zu treepodia in deinem plentymarkets System ein. Treepodia bietet die Möglichkeit, aus Artikelbildern automatisch erzeugte Produktvideos bei Webshop-Artikeln einzubinden.
 
 :price-search-engine: treepodia
+:market: treepodia
 :plugin-name: treepodia.com
 :plugin-link: https://marketplace.plentymarkets.com/plugins/channels/preisportale/elasticexporttreepodiacom_4776
-
-include::partial$plugin-download.adoc[]
 
 [#100]
 == Bei Treepodia.com registrieren
 
 Treepodia bietet die Möglichkeit, aus Artikelbildern automatisch erzeugte Produktvideos in die SingleArticle-Ansicht von Webshop-Artikeln einzubinden.
 
+[#item-export]
+== Artikeldaten exportieren
+
+* <<#catalogue-export, _Möglichkeit 1:_ Artikelexport über Katalog-Formate _(empfohlene Methode)_>>
+* <<#old-export, _Möglichkeit 2:_ Artikelexport über Elastischen Export _(alte Methode)_>>
+* <<#change-elastic-export-catalogue, _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog>>
+
+[#catalogue-export]
+===  _Möglichkeit 1:_ Artikelexport über Katalog-Formate _(empfohlene Methode)_
+
+Mit dem Export über Kataloge machst du deinen Export zu {market} zukunftssicher und flexibel.
+
+[#catalogue-creation]
+==== Katalog erstellen
+
+Artikeldaten werden über ein Marktplatz-Format exportiert. Um deine Artikel zu einem Preisportal zu exportieren, erstellst du im Menü *Daten » Kataloge* einen Katalog. Ordne dann im Marktplatz-Format die vom Katalog vorgegebenen Marktplatz-Datenfelder den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+:catalogue-template-name: treepodia
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Datenfelder im Katalog zuordnen
+
+Ordne nun die Marktplatz-Datenfelder im Katalog den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Empfehlungen für Datenfeld-Zuordnungen
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.Liste mit empfohlenen Datenfeld-Zuordnungen
+--
+include::partial$treepodia-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Nur bestimmte Artikel exportieren
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Katalogeinstellungen für Export vornehmen
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Katalog aktivieren
+
+:interval:
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Katalogdaten an {market} übergeben
+
+include::partial$catalogue-url.adoc[]
+
+[#old-export]
+=== _Möglichkeit 2:_ Artikelexport über Elastischen Export _(alte Methode)_
+
+NOTE: Der Elastische Export und die Exportformate werden für den Marktplatz-Export nicht mehr weiterentwickelt. Wir empfehlen dir deshalb, schon jetzt <<#catalogue-export, Kataloge zu erstellen>>.
+
+[#plugin-download]
+==== Plugins herunterladen und installieren
+
+include::partial$plugin-download.adoc[]
+
 [#200]
-== Das Format TreepodiaCOM-Plugin in plentymarkets einrichten
+==== Das Format TreepodiaCOM-Plugin in plentymarkets einrichten
 
 :export-format: TreepodiaCOM-Plugin
 :price-search-engine: treepodia
@@ -34,14 +108,17 @@ Treepodia bietet die Möglichkeit, aus Artikelbildern automatisch erzeugte Produ
 include::partial$exportformate.adoc[]
 
 [#300]
-== Verfügbare Spalten der Exportdatei
+==== Verfügbare Spalten der Exportdatei
 
 :export-format: TreepodiaCOM-Plugin
 
 include::maerkte:partial$exportdatei-herunterladen.adoc[]
 
+[.collapseBox]
+.Verfügbare Spalten der Exportdatei für das Exportformat *TracdelightCOM-Plugin*
+--
 [[spalten-exportdatei-treepodia]]
-.Verfügbare Spalten der Exportdatei für das Exportformat *TreepodiaCOM-Plugin*
+.Verfügbare Spalten der Exportdatei
 [cols="1,3a"]
 |===
 | Tag-Bezeichnung
@@ -97,10 +174,65 @@ include::maerkte:partial$exportdatei-herunterladen.adoc[]
 | tags
 | Die am Artikel hinterlegten Keywords
 |===
+--
 
-[#400]
-== Lizenz
+[#change-elastic-export-catalogue]
+=== _Möglichkeit 3:_ Wechsel von elastischem Export zu Katalog
 
-:license-link: https://github.com/plentymarkets/plugin-elastic-export-treepodia-com/blob/master/LICENSE.md
+:elastic-export-catalogue-mappings:
+include::partial$catalogue-change-from-elastic-export.adoc[]
 
-include::partial$plugin-lizenz.adoc[]
+[[elastic-export-catalogue-mappings]]
+.Spalten und Datenfelder
+[cols="1,1"]
+|===
+|Spalte im elastischen Export |Datenfeld im Katalog
+
+| sku
+| SKU
+
+| _Das Datenfeld gibt es im Elastischen Export nicht._
+| SKU-Basis
+
+| price.value
+| Verkaufspreis
+
+| price.sale
+| Angebotspreis
+
+| name
+| Artikelname
+
+| category
+| Kategoriepfad
+
+| description
+| Artikelbeschreibung
+
+| brand.name
+| Herstellername
+
+| brand.logo
+| Logo des Herstellers
+
+| page-url
+| Produkt-URL
+
+| image-url
+| Bild-URL
+
+| attribute.name
+| Attributname der Variante
+
+| attribute-value
+| Attributwert der Variante
+
+| catch-phrase
+| Freitextfelder
+
+| shipping
+| Versandkosten
+
+| tags
+| Keywords
+|===
