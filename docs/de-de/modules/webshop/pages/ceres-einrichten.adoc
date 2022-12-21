@@ -213,7 +213,7 @@ Paginierung und Sortierung anpassen:
 [NOTE]
 .Sortierwert: Meistverkaufte Artikel und Variantenposition
 ====
-Wenn die Einstellung *Automatische Sortierung nach monatlichen Verkäufen* im Menü *Einrichtung » Mandant » Mandant wählen » Artikelansichten » Einstellungen* aktiv ist, kannst du deine Artikelvarianten über die Sortieroptionen *Meistverkaufte Artikel ⬆/Meistverkaufte Artikel ⬇* in Abhängigkeit zu seinen monatlichen Verläufen sortieren. Ist diese Option nicht aktiv, ändert sich die Bezeichnung dieser Sortieroptionen im Backend in *Variantenposition ⬆/Variantenposition ⬇*. In diesem Fall steuerst du die Sortierung über die an der Variante hinterlegte Positionsnummer. 
+Wenn die Einstellung *Automatische Sortierung nach monatlichen Verkäufen* im Menü *Einrichtung » Mandant » Mandant wählen » Artikelansichten » Einstellungen* aktiv ist, kannst du deine Artikelvarianten über die Sortieroptionen *Meistverkaufte Artikel ⬆/Meistverkaufte Artikel ⬇* in Abhängigkeit zu seinen monatlichen Verläufen sortieren. Ist diese Option nicht aktiv, ändert sich die Bezeichnung dieser Sortieroptionen im Backend in *Variantenposition ⬆/Variantenposition ⬇*. In diesem Fall steuerst du die Sortierung über die an der Variante hinterlegte Positionsnummer.
 ====
 
 [#220]
@@ -494,9 +494,9 @@ Einstellungen für die Plugin-Entwicklung vornehmen:
 Im Tab *Logging und Performance* kannst du ab plentyShop LTS v5.0.29 Vue Server-Side Rendering (SSR) aktivieren. Durch SSR werden viele Shop-Komponenten bereits auf dem Server verarbeitet, sodass bereits generierte Seiten direkt an den Browser ausgeliefert werden können. Der Browser muss den übermittelten Code nicht erneut ausführen. Dies hat insbesondere auf die Bewertung der mobilen Seiten positiven Einfluss. +
 
 [IMPORTANT]
-==== 
-Aktiviere diese Einstellung erst in einem separaten Plugin-Set und teste deinen Shop, bevor du SSR auch für dein Produktivsystem aktivierst. 
-==== 
+====
+Aktiviere diese Einstellung erst in einem separaten Plugin-Set und teste deinen Shop, bevor du SSR auch für dein Produktivsystem aktivierst.
+====
 
 [.instruction]
 Server-Side Rendering aktivieren:
@@ -701,80 +701,81 @@ image::webshop:DE-Ceres-einrichten-eTrusted-Partner-Certified-Software.png[]
 Du möchtest deinen plentyShop bei Trusted Shops zertifizieren? plentyShop LTS ist bereits durch Trusted Shops vorzertifiziert. Dadurch geht die vollständige Zertifizierung durch Trusted Shops schnellstmöglich vonstatten. Alle dafür nötigen Informationen findest du link:https://www.trustedshops.de/shopbetreiber/bestellen.html?shopsoftware=PLENTYMARKETS[hier^].
 
 [#shopbooster]
-== ShopBooster aktivieren
+== ShopBooster verwenden
 
 Der link:https://www.plentymarkets.eu/blog/Volle-Kraft-voraus-ShopBooster-bringt-deinen-Ceres-Shop-auf-Hochtouren/b-2125/[ShopBooster^] ist ein Zusatzmodul, über welches Seiteninhalte von plentyShop LTS in den Cache geschrieben werden. Dadurch erzielst du deutlich bessere Ladezeiten im Shop.
 
-[IMPORTANT]
-.Zusätzliche Kosten
+[TIP]
+.Keine zusätzlichen Kosten
 ====
-Durch das Aktivieren des ShopBoosters fallen *pro Mandant* zusätzliche Kosten in Höhe von 0,004 € pro 100 Seitenaufrufe und -änderungen an. Ein Seitenaufruf ist der Vorgang, bei dem Shop-Besucher:innen oder Webcrawler eine URL des Online-Shops aufrufen; eine Seitenänderung wird durch folgende Vorgänge ausgelöst:
+Der ShopBooster und all seine Funktionen sind ohne zusätzliche Kosten nutzbar.
+====
 
-- Aktualisieren von Kategorien- und Artikeldaten
-- Aktualisieren von ShopBuilder-Seiten
-- Bereitstellen von Plugins
-- Speichern von Einstellungen in der plentyShop LTS-Konfiguration
-- Invalidieren des Caches bei Deaktivierung des ShopBoosters
+[#cache-bloecke-aktivieren]
+=== Cache-Blöcke aktivierern
 
-Die Zusatzkosten des ShopBoosters betragen monatlich *maximal* 100€ pro Mandant.
+Durch die Verwendung von Cache-Blöcken kannst du gewährleisten, dass bereits gecachte Seiteninhalte nicht unnötig invalidiert werden. Cache-Blöcke teilen die Seiteninhalte in Blöcke auf, die separat invalidiert werden können. Inhalte, die auf mehreren Seiten identisch sind (z.B. der Footer) können somit einmalig erneuert werden und dann auf allen gecachten Inhalten ersetzt werden, ohne dass alle betroffenen Seiten vollständig invalidiert werden müssen.
+
+Dies führt zu einer verbesserten Cache-Abdeckung und im Durchschnitt auch zu einer verbesserten Time-to-first-Byte (TTFB), die einen starken Einfluss auf PSI haben kann.
+
+[NOTE]
+.Anpassungen für zusätzliches Theme
+====
+Cache-Blöcke sind direkt mit plentyShop LTS und plentyShop LTS Modern kompatibel. Falls du ein zusätzliches Theme nutzt, müssen Anpassungen daran gemacht werden, damit Cache-Blöcke einen Effekt haben.
+Weitere Informationen dazu findest du in unserer link:https://developers.plentymarkets.com/en-gb/developers/main/plentyshop-plugins/shopbooster-cache-blocks.html#_using_the_plentyshop_lts_cache_blocks_in_your_own_theme[Entwicklerdokumentation^].
 ====
 
 [.instruction]
-ShopBooster aktivieren:
+ShopBooster Cache-Blöcke aktivieren:
 
-. Öffne das Menü *Einrichtung » Mandant » Mandant wählen » Webshop » ShopBooster*.
-. Klicke auf *ShopBooster aktivieren*. +
-→ Ein Fenster öffnet sich, welches dich auf entsprechende zusätzliche Kosten hinweist.
-. Klicke auf *Bestätigen* um den ShopBooster zu aktivieren. +
-→ Die Meldung *ShopBooster wurde aktiviert* wird eingeblendet.
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » ShopBooster*.
+. Klicke auf *Cache-Blöcke aktivieren*. +
+→ Die Cache-Blöcke werden aktiviert.
 
-Auf die gleiche Weise kannst du den ShopBooster wieder deaktivieren.
+Auf die gleiche Weise kannst du ShopBooster Cache-Blöcke wieder deaktivieren.
 
 [.instruction]
-ShopBooster deaktivieren:
+ShopBooster Cache-Blöcke deaktivieren:
 
-. Öffne das Menü *Einrichtung » Mandant » Mandant wählen » Webshop » ShopBooster*.
-. Klicke auf *ShopBooster deaktivieren*. +
-→ Ein Fenster öffnet sich, welches dich auf zusätzliche Kosten hinweist.
-. Klicke auf *Bestätigen* um den ShopBooster zu deaktivieren. +
-→ Die Meldung *ShopBooster wurde deaktiviert* wird eingeblendet.
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » ShopBooster*.
+. Klicke auf *Cache-Blöcke deaktivieren*. +
+→ Die Cache-Blöcke werden deaktiviert.
 
 [#invalidierung-deaktivieren]
 === Invalidierung deaktivieren
 
 Du kannst im Bereich *Invalidierung deaktivieren* die Invalidierung des ShopBoosters bis zu dem eingetragenen Termin deaktivieren. Dadurch werden deine Artikeldaten bis zum gewählten Zeitpunkt immer aus dem Cache geladen, ohne dass dieser gelöscht bzw. aktualisiert wird. Das führt dazu, dass dein plentyShop schnellere Ladezeiten erzielen kann. +
 
-Beachte, dass bei inaktiver Invalidierung Änderungen an der Sichtbarkeit des Artikels nicht mehr aktualisiert werden, sodass bspw. Artikel in deinem plentyShop sichtbar sein können, die durch Ausverkauf nicht mehr sichtbar sein sollten. Es ist für deine Kund:innen dadurch aber nicht möglich, nicht verfügbare Artikel zu kaufen. +
+Beachte, dass bei inaktiver Invalidierung Änderungen an der Sichtbarkeit des Artikels nicht mehr aktualisiert werden, sodass bspw. Artikel in deinem plentyShop sichtbar sein können, die durch Ausverkauf nicht mehr sichtbar sein sollten. Es ist für deine Kund:innen dadurch aber nicht möglich, nicht verfügbare Artikel zu kaufen.
 
 [.instruction]
 Invalidierung deaktivieren:
 
-. Öffne das Menü *Einrichtung » Mandant » Mandant wählen » Webshop » ShopBooster*.
-. Gib das Datum ein, bis zu welchem die Invalidierung deaktiviert werden soll. 
-. Gib die Uhrzeit ein, bis zu welcher die Invalidierung deaktiviert werden soll. 
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » ShopBooster*.
+. Gib das Datum ein, bis zu welchem die Invalidierung deaktiviert werden soll.
+. Gib die Uhrzeit ein, bis zu welcher die Invalidierung deaktiviert werden soll.
 . *Speichere* deine Eingabe.
 
 [#sofort-invalidieren]
 === Cache sofort invalidieren
 
-Du kannst gecachte Inhalte manuell aus dem Cache entfernen. Dir stehen 5 Invalidierungen pro Tag zur Verfügung. Die Invalidierungen werden jede Nacht um 00:00 Uhr zurückgesetzt. Beachte, dass die Ladezeiten deines Shops nach einer Invalidierung höher sind, bis deine Shopseiten durch den ersten Aufruf wieder in den Cache geschrieben werden. 
+Du kannst gecachte Inhalte manuell aus dem Cache entfernen. Dir stehen 5 Invalidierungen pro Tag zur Verfügung. Die Invalidierungen werden jede Nacht um 00:00 Uhr zurückgesetzt. Beachte, dass die Ladezeiten deines Shops nach einer Invalidierung höher sind, bis deine Shopseiten durch den ersten Aufruf wieder in den Cache geschrieben werden.
 
 [.instruction]
 Cache manuell invalidieren:
 
-. Öffne das Menü *Einrichtung » Mandant » Mandant wählen » Webshop » ShopBooster*.
+. Öffne das Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » ShopBooster*.
 . Klicke im Bereich *Cache sofort invalidieren* auf die Schaltfläche *Invalidieren*. +
 → Der Cache wird gelöscht und die Mitteilung *Cache wurde invalidiert* wird angezeigt. +
 → Die Zahl der *Für heute verbleibende Invalidierungen* wird um 1 reduziert.
 
-[#cache-abdeckung]
-=== Cache-Abdeckung prüfen
+[#cache-status-pruefen]
+=== Cache-Status einer Seite prüfen
 
-Um sicherzustellen, dass der ShopBooster wirksam ist und eine Seite aus dem Cache geladen wird, kannst du die Entwicklertools deines Browsers verwenden. 
-Die folgende Anleitung basiert auf dem Google Chrome Browser.
+Um sicherzustellen, dass der ShopBooster wirksam ist und eine Seite aus dem Cache geladen wird, kannst du die Entwicklertools deines Browsers verwenden. Die folgende Anleitung basiert auf dem Google Chrome Browser.
 
 [.instruction]
-Cache-Abdeckung prüfen:
+Cache-Status einer Seite prüfen:
 
 . Öffne eine Artikel- oder Kategorieseite in deinem Shop.
 . Öffne die Entwicklertools, indem du rechtsklickst und *Untersuchen* wählst. +
@@ -782,10 +783,10 @@ Cache-Abdeckung prüfen:
 . Klicke in der oberen Leiste auf das Tab *Netzwerk*.
 . Klicke in der *Filtern-Leiste* auf *Doc*.
 . Klicke unter *Name* auf den Namen der Seite.
-. Öffne in der Detailansicht der Seite den Tab *Header*.
+. Öffne in der Detailansicht der Seite das Tab *Header*.
 . Prüfe, ob im Abschnitt *Antwortheader* der Eintrag *x-plenty-cache: hit* erscheint.
 
-Falls der Antwortheader den Eintrag *x-plenty-cache: hit* enthält, liegt die Seite im ShopBooster-Cache. Falls du den Eintrag nicht findest, liegt die untersuchte Seite nicht im Cache. 
+Falls der Antwortheader den Eintrag *x-plenty-cache: hit* enthält, liegt die Seite im ShopBooster-Cache. Falls du den Eintrag nicht findest, liegt die untersuchte Seite nicht im Cache.
 
 [NOTE]
 ====
@@ -990,7 +991,7 @@ In unserem link:https://www.youtube.com/watch?v=s_9DCTlF_qg[Livestream^] am 17. 
 .*Wie tausche ich das Firmenlogo aus?*
 --
 
-Du kannst das Firmenlogo im Header deines plentyShops austauschen. 
+Du kannst das Firmenlogo im Header deines plentyShops austauschen.
 Öffne das Menü _CMS » ShopBuilder_.
 Wähle eine Kategorie im Kategoriebaum auf der linken Seite.
 Öffne einen Inhalt im Bereich **Header-Inhalte**, indem du darauf klickst.
