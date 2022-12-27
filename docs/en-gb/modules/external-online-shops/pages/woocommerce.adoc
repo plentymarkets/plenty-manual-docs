@@ -344,7 +344,7 @@ The WooCommerce plugin "Germanized" extends WooCommerce to technically match spe
 
 | *Send lowest price in the last 30 days using Germanized*
 | material:check_box_outline_blank[] = The price is not sent. +
-material:check_box[] = When you have set up the *Slug of 'Lowest price of the last 30 days' label* correctly, the lowest price of the last 30 days is exported to WooCommerce.
+material:check_box[] = If you have set up the *Slug of 'Lowest price in the last 30 days' label* correctly, the lowest price of the last 30 days is exported to WooCommerce.
 
 *_Tip:_* To find out how to manage the lowest price of the last 30 days, go to the xref:item:directory.adoc#340[Directory of data fields of the new item UI].
 
@@ -354,8 +354,8 @@ material:check_box[] = When you have set up the *Slug of 'Lowest price of the la
 . Open your WooCommerce back end.
 . Navigate to *Settings > Germanized*.
 . Click on *Price labels*.
-. Create a new price label. For example, name this price label `Lowest price in the last 30 days`.
-. Enter a value in the slug field, for example `lowest30days`.
+. Create a new price label. For example, name this price label `Lowest price of the last 30 days`.
+. Enter a slug value, for example `lowest30days`.
 
 Now, save the value of the slug label in your plentymarkets system:
 
@@ -367,6 +367,65 @@ Now, save the value of the slug label in your plentymarkets system:
 . Save the settings.
 
 *_Tip:_* To find out how to manage the lowest price of the last 30 days, go to the xref:item:directory.adoc#340[Directory of data fields of the new item UI].
+
+[.collapseBox]
+.How are the prices exported?
+--
+
+There are only two prices in WooCommerce: the regular price and the discount price. However, in plentymarkets a third price is available: The lowest price of the last 30 days. How the prices are shown in WooCommerce depends on the type of price reduction. 
+
+[cols="1,3a"]
+!===
+
+! Discount in plentymarkets
+! You create an offer price in plentymarkets. +
+The lowest 30 day price is exported as the regular price and tagged with the price label "Lowest price in the last 30 days".
+
+*_Example:_* 
+
+* Sales price: 2.99 Euro
+* Offer price: 1.99 Euro
+* Lowest 30 day price: 2.79 Euro
+
+Price exported to WooCommerce:
+
+* Regular price: 2.79 Euro (lowest 30 day price in plentymarkets) with price label "Lowest price in the last 30 days" +
+* Discount price: 1.99 Euro (offer price in plentymarkets)
+
+! Price reduction in plentymarkets
+! You lower the sales price in plentymarkets. +
+The previous price is exported as the lowest 30 day price and tagged with the price label "Lowest price in the last 30 days". +
+The new, lower price is exported as the discount price.
+
+*_Example:_* 
+
+* Sales price: 1.99 Euro
+* Offer price: -/-
+* Lowest 30 day price: 2.99 Euro
+
+Price exported to WooCommerce:
+
+* Regular price: 2.99 Euro (lowest 30 day price in plentymarkets) with price label "Lowest price in the last 30 days" +
+* Discount price: 1.99 Euro (sales price in plentymarkets)
+
+! Price increase in plentymarkets
+! You increase the sales price in plentymarkets. +
+The lowest 30 day price is lower than the new sales price. +
+Only the new sales price is exported to WooCommerce as the regular price. +
+No lowest 30 day price is exported.
+
+*_Example:_* 
+
+* Sales price: 3.99 Euro
+* Offer price: -/-
+* Lowest 30 day price: 2.99 Euro
+
+Price exported to WooCommerce:
+
+* Regular price: 3.99 Euro (sales price in plentymarkets)
+
+!===
+--
 
 2+^| *Import and export item stocks from:*
 
