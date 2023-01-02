@@ -201,11 +201,23 @@ Beachte die folgenden Hinweise, wenn du mehr als einen Shopify-Shop mit plentyma
 include::maerkte:partial$auftragsherkunft-aktivieren.adoc[]
 
 [#UNO4F1PH]
-=== Verkaufspreis wählen
+== Verkaufspreis wählen
 
 :referrer-price: Shopify
 
-include::partial$verkaufspreis-festlegen.adoc[]
+include::maerkte:partial$verkaufspreis-festlegen.adoc[]
+
+[#LFL990IP]
+== Benutzerdefinierte Auftragseigenschaften importieren
+
+Mit der Shopify-Integration kannst du beim Auftragsimport in plentymarkets benutzerdefinierte Auftragseigenschaften importieren. 
+
+Benutzerdefinierte Auftragseigenschaften erstellt zum Beispiel das Shopify-Plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. Mit diesem Plugin bietest du Kund:innen die Möglichkeit, bei der Bestellung eigenen Text einzugeben. So kannst du personalisierte Produkte anbieten, zum Beispiel mit einer Gravur.
+
+Voraussetzungen für das Importieren von benutzerdefinierten Auftragseigenschaften sind:
+
+* Im Menü *Einrichtung » Artikel » Merkmale* erstellst du ein Merkmal, für das du rechts die Option *Bestellmerkmal* aktivierst.
+* Der plentymarkets Artikel hat das Merkmal, bei dem die Option *Bestellmerkmal* aktiviert ist.
 
 [#XV8ANTMR]
 == Varianten vorbereiten
@@ -214,13 +226,34 @@ Bereite nun deine Varianten vor.
 
 *_Bevor du loslegst:_* Jeder Artikel darf höchstens 100 Varianten haben. Dieses Limit gibt Shopify vor. Artikel mit mehr als 100 Varianten werden also nicht zu Shopify exportiert.
 
+[#beschraenkung-warenbestand]
+=== Informationen zur Beschränkung von Warenbestand
+
+Im Shopify-Backend entscheidet die Option *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* darüber, ob Produkte auch verkauft werden, wenn kein oder zu wenig Bestand im Lager ist. Ob beim Export von Warenbestand diese Option für eine Variante in Shopify aktiviert wird ist abhängig von der plentymarkets Einstellung xref:artikel:verzeichnis.adoc#220[Bestandsbeschränkung].
+
+Je nachdem, welche *Beschränkung* du für eine Variante in plentymarkets festgelegt hast, ist die Checkbox *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* aktiv oder inaktiv:
+
+[cols="2,3"]
+|====
+| Option *"Beschränkung"* in plentymarkets | Option *"Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind"* in Shopify
+
+| *Keine*
+| Aktiviert
+
+| *Auf Netto-WB*
+| Nicht aktiviert
+
+| *Keinen WB für diese Variante führen*
+| Aktiviert
+|====
+
 [#300]
 === Variantenverfügbarkeit einstellen
 
 :market-availability: Shopify
 :option-availability: Shopify
 
-include::partial$variantenverfuegbarkeit.adoc[]
+include::maerkte:partial$variantenverfuegbarkeit.adoc[]
 
 [#MK10HTRN]
 === SKU speichern
@@ -296,47 +329,14 @@ Name und Wert eines Attributs prüfen:
 . Prüfe den Inhalt des Eingabefelds der Sprache.
 . Gib wenn nötig einen Namen für das Attribut ein.
 . Wechsele in das Tab *Werte*.
-. Wähle in der Symbolleiste die *Sprache*, in der du Artikeldaten zu Shopify exportierst.
+. Wähle in der Symbolleiste die *Sprache*, in der du Artikeldaten zu Shopify exportierst. +
 → Die Werte des Attributs werden angezeigt.
 . Gib wenn nötig einen Namen für den Attributwert ein.
 . Klicke auf *Speichern*, wenn du Änderungen vorgenommen hast.
 --
 
-[#beschraenkung-warenbestand]
-== Logik der Beschränkung von Warenbestand
-
-Im Shopify-Backend entscheidet die Option *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* darüber, ob Produkte auch verkauft werden, wenn kein oder zu wenig Bestand im Lager ist. Ob beim Export von Warenbestand diese Option für eine Variante in Shopify aktiviert wird ist abhängig von der plentymarkets Einstellung xref:artikel:verzeichnis.adoc#220[Bestandsbeschränkung].
-
-Je nachdem, welche *Beschränkung* du für eine Variante in plentymarkets festgelegt hast, ist die Checkbox *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* aktiv oder inaktiv:
-
-[cols="2,3"]
-|====
-| Option *"Beschränkung"* in plentymarkets | Option *"Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind"* in Shopify
-
-| *Keine*
-| Aktiviert
-
-| *Auf Netto-WB*
-| Nicht aktiviert
-
-| *Keinen WB für diese Variante führen*
-| Aktiviert
-|====
-
-[#benutzerdefinierte-autragseigenschaften]
-== Benutzerdefinierte Auftragseigenschaften importieren
-
-Mit der Shopify-Integration kannst du beim Auftragsimport in plentymarkets benutzerdefinierte Auftragseigenschaften importieren. 
-
-Benutzerdefinierte Auftragseigenschaften erstellt zum Beispiel das Shopify-Plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. Mit diesem Plugin bietest du Kund:innen die Möglichkeit, bei der Bestellung eigenen Text einzugeben. So kannst du personalisierte Produkte zum Beispiel mit einer Gravur anbieten.
-
-Voraussetzungen für das Importieren von benutzerdefinierten Auftragseigenschaften:
-
-* Im Menü *Einrichtung » Artikel » Merkmale* erstellst du ein Merkmal, für das du rechts die Option *Bestellmerkmal* aktivierst.
-* Wenn du solche Eigenschaften importieren möchtest, stelle sicher, dass der plentymarkets Artikel ein Merkmal hat, bei dem die Option *Bestellmerkmal* aktiviert ist.
-
 [#OPOU57M9]
-== _Checkliste:_ Voraussetzungen für Variantenexport
+=== _Checkliste:_ Voraussetzungen für Variantenexport
 
 include::maerkte:partial$checklist-variations.adoc[tag=checklist-intro]
 
@@ -361,13 +361,15 @@ include::maerkte:partial$checklist-variations.adoc[tag=checklist-market-sku]
 
 include::maerkte:partial$checklist-variations.adoc[tag=checklist-market-client]
 
+[+E4EO9VDN]
+== Auftragsabwicklung
+
+Hier findest du Informationen zur Auftragsabwicklung.
+
 [#ereignisaktionen]
-== Ereignisaktionen erstellen
+=== Ereignisaktionen erstellen
 
 Mit den xref:automatisierung:ereignisaktionen.adoc#[plentymarkets Ereignisaktionen] automatisierst du die Auftragskommunikation mit Shopify.
-
-[#ereignisaktionen]
-=== Verfügbare Ereignisaktionen
 
 Für die Shopify-App sind die folgenden Ereignisaktionen verfügbar:
 
@@ -384,12 +386,12 @@ Für die Shopify-App sind die folgenden Ereignisaktionen verfügbar:
 * Shopify App: Erstattung/Stornierung ohne Bestandserhöhung an Shopify senden
 
 [#dsgvo]
-== Berücksichtigung der DSGVO
+=== Berücksichtigung der DSGVO beim Auftragsimport 
 
-Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die im Folgenden aufgeführten Richtlinien für Konten und Aufträge von Kund:innen implementiert:
+Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die folgenden Richtlinien für Konten und Aufträge von Kund:innen implementiert:
 
 [[tabelle-dsgvo]]
-.Berücksichtigung der DSGVO für Kontaktimport
+.Berücksichtigung der DSGVO beim Auftragsimport
 [cols="1,2"]
 |===
 |*Szenario* |*Erläuterung*
