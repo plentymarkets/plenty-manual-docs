@@ -201,11 +201,30 @@ Beachte die folgenden Hinweise, wenn du mehr als einen Shopify-Shop mit plentyma
 include::maerkte:partial$auftragsherkunft-aktivieren.adoc[]
 
 [#UNO4F1PH]
-=== Verkaufspreis wählen
+== Verkaufspreis wählen
 
 :referrer-price: Shopify
 
-include::partial$verkaufspreis-festlegen.adoc[]
+include::maerkte:partial$verkaufspreis-festlegen.adoc[]
+
+[#LFL990IP]
+== Benutzerdefinierte Auftragseigenschaften importieren
+
+Mit der Shopify-Integration kannst du beim Auftragsimport in plentymarkets benutzerdefinierte Auftragseigenschaften importieren. 
+
+Benutzerdefinierte Auftragseigenschaften erstellt zum Beispiel das Shopify-Plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. Mit diesem Plugin bietest du Kund:innen die Möglichkeit, bei der Bestellung eigenen Text einzugeben. So kannst du personalisierte Produkte anbieten, zum Beispiel mit einer Gravur.
+
+Voraussetzungen für das Importieren von benutzerdefinierten Auftragseigenschaften sind:
+
+* Im Menü *Einrichtung » Artikel » Merkmale* erstellst du ein Merkmal, für das du rechts die Option *Bestellmerkmal* aktivierst.
+* Der plentymarkets Artikel hat das Merkmal, bei dem die Option *Bestellmerkmal* aktiviert ist.
+
+[#XV8ANTMR]
+== Varianten vorbereiten
+
+Bereite nun deine Varianten vor.
+
+*_Bevor du loslegst:_* Jeder Artikel darf höchstens 100 Varianten haben. Dieses Limit gibt Shopify vor. Artikel mit mehr als 100 Varianten werden also nicht zu Shopify exportiert.
 
 [#XV8ANTMR]
 == Varianten vorbereiten
@@ -303,7 +322,7 @@ Name und Wert eines Attributs prüfen:
 --
 
 [#beschraenkung-warenbestand]
-== Logik der Beschränkung von Warenbestand
+=== Informationen zur Beschränkung von Warenbestand
 
 Im Shopify-Backend entscheidet die Option *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* darüber, ob Produkte auch verkauft werden, wenn kein oder zu wenig Bestand im Lager ist. Ob beim Export von Warenbestand diese Option für eine Variante in Shopify aktiviert wird ist abhängig von der plentymarkets Einstellung xref:artikel:verzeichnis.adoc#220[Bestandsbeschränkung].
 
@@ -323,20 +342,96 @@ Je nachdem, welche *Beschränkung* du für eine Variante in plentymarkets festge
 | Aktiviert
 |====
 
-[#benutzerdefinierte-autragseigenschaften]
-== Benutzerdefinierte Auftragseigenschaften importieren
+[#300]
+=== Variantenverfügbarkeit einstellen
 
-Mit der Shopify-Integration kannst du beim Auftragsimport in plentymarkets benutzerdefinierte Auftragseigenschaften importieren. 
+:market-availability: Shopify
+:option-availability: Shopify
 
-Benutzerdefinierte Auftragseigenschaften erstellt zum Beispiel das Shopify-Plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. Mit diesem Plugin bietest du Kund:innen die Möglichkeit, bei der Bestellung eigenen Text einzugeben. So kannst du personalisierte Produkte zum Beispiel mit einer Gravur anbieten.
+include::maerkte:partial$variantenverfuegbarkeit.adoc[]
 
-Voraussetzungen für das Importieren von benutzerdefinierten Auftragseigenschaften:
+[#MK10HTRN]
+=== SKU speichern
 
-* Im Menü *Einrichtung » Artikel » Merkmale* erstellst du ein Merkmal, für das du rechts die Option *Bestellmerkmal* aktivierst.
-* Wenn du solche Eigenschaften importieren möchtest, stelle sicher, dass der plentymarkets Artikel ein Merkmal hat, bei dem die Option *Bestellmerkmal* aktiviert ist.
+Nur Varianten werden exportiert, für die eine SKU für die Herkunft *Shopify* gespeichert ist.
+
+[.instruction]
+SKU für Shopify speichern:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Einstellungen*.
+. Wechsele in das Tab *Verfügbarkeit*.
+. Klicke im Bereich *SKU* auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Das Bearbeitungsfenster *Neue SKU* wird angezeigt.
+. Wähle die Herkunft *Shopify*.
+. Wähle das dazugehörige Marktplatzkonto.
+. Gib die SKU ein.
+. Klicke auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Die SKU wird gespeichert und angezeigt.
+
+[#0U31GAX6]
+=== Mandant an der Variante aktivieren
+
+Nur Varianten werden exportiert, für die der Mandant (Shop) aktiviert ist, über den du auf {market} verkaufst.
+
+[.instruction]
+Mandant an der Variante aktivieren:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen]*.
+. Wechsele in das Varianten-Tab *Verfügbarkeit*.
+. Aktiviere im Bereich *Mandant (Shop)* den Mandanten (Shop), über den du auf {market} verkaufst.
+. Speichere die Einstellung.
+
+[#TUVEBVS1]
+=== Weitere Pflichtangaben ergänzen
+
+Die folgenden Angaben sind Pflicht für den Variantenexport zu Shopify. Ergänze diese Angaben, damit deine Varianten an Shopify exportiert werden.
+
+[.collapseBox]
+.Speichere für den Artikel einen "Name 1" und einen "Artikeltext".
+--
+
+[.instruction]
+Name 1 und Artikeltext speichern:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen]*.
+. Wechsle in das Tab *Texte*.
+. Wähle in der Symbolleiste die *Sprache*, in der du Artikeldaten zu Shopify exportierst.
+. Gib einen Namen in das Feld *Name 1* ein.
+. Gib einen Artikeltext in das Feld *Artikeltext* ein.
+. Klicke auf *Speichern*.
+--
+
+[.collapseBox]
+.Stelle sicher, dass für die Variante ein Attributname und eine Attributwert in der Exportsprache gespeichert sind.
+--
+
+Für die Variante müssen ein Attributname und ein Attributwert in der Sprache gespeichert sein, in der du Artikeldaten an Shopify exportierst.
+
+[.instruction]
+Attributnamen und Attributwert an Variante speichern:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen]*.
+. Navigiere im Tab *Einstellungen* zum Bereich *Grundeinstellungen*. +
+→ Die mit der Variante verknüpften Attribute werden unterhalb der Einstellung *Position* angezeigt.
+
+Nun kannst du in den Einstellungen der Attribute prüfen, ob Attributname und Attributwert in der korrekten Sprache gespeichert sind.
+
+[.instruction]
+Name und Wert eines Attributs prüfen:
+
+. Öffne das Menü *Einrichtung » Artikel » Attribute » [Attribut öffnen] » Tab: Werte*.
+. Wechsele in das Tab *Name*.
+. Prüfe den Inhalt des Eingabefelds der Sprache.
+. Gib wenn nötig einen Namen für das Attribut ein.
+. Wechsele in das Tab *Werte*.
+. Wähle in der Symbolleiste die *Sprache*, in der du Artikeldaten zu Shopify exportierst. +
+→ Die Werte des Attributs werden angezeigt.
+. Gib wenn nötig einen Namen für den Attributwert ein.
+. Klicke auf *Speichern*, wenn du Änderungen vorgenommen hast.
+--
 
 [#OPOU57M9]
-== _Checkliste:_ Voraussetzungen für Variantenexport
+=== _Checkliste:_ Voraussetzungen für Variantenexport
 
 include::maerkte:partial$checklist-variations.adoc[tag=checklist-intro]
 
@@ -361,13 +456,15 @@ include::maerkte:partial$checklist-variations.adoc[tag=checklist-market-sku]
 
 include::maerkte:partial$checklist-variations.adoc[tag=checklist-market-client]
 
+[+E4EO9VDN]
+== Auftragsabwicklung
+
+Hier findest du Informationen zur Auftragsabwicklung.
+
 [#ereignisaktionen]
-== Ereignisaktionen erstellen
+=== Ereignisaktionen erstellen
 
 Mit den xref:automatisierung:ereignisaktionen.adoc#[plentymarkets Ereignisaktionen] automatisierst du die Auftragskommunikation mit Shopify.
-
-[#ereignisaktionen]
-=== Verfügbare Ereignisaktionen
 
 Für die Shopify-App sind die folgenden Ereignisaktionen verfügbar:
 
@@ -384,12 +481,12 @@ Für die Shopify-App sind die folgenden Ereignisaktionen verfügbar:
 * Shopify App: Erstattung/Stornierung ohne Bestandserhöhung an Shopify senden
 
 [#dsgvo]
-== Berücksichtigung der DSGVO
+=== Berücksichtigung der DSGVO beim Auftragsimport 
 
-Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die im Folgenden aufgeführten Richtlinien für Konten und Aufträge von Kund:innen implementiert:
+Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die folgenden Richtlinien für Konten und Aufträge von Kund:innen implementiert:
 
 [[tabelle-dsgvo]]
-.Berücksichtigung der DSGVO für Kontaktimport
+.Berücksichtigung der DSGVO beim Auftragsimport
 [cols="1,2"]
 |===
 |*Szenario* |*Erläuterung*
