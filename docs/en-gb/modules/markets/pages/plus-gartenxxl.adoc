@@ -133,12 +133,26 @@ Items with the *Limited to net stock* setting are not taken into consideration.
 |Enter the user name that you received from Netto eStores.
 |===
 
+[#marktkauf]
+=== Setting up Marktkauf
+
+When you have set up the market Netto in plentymarkets, it is also possible to sell your items on the market Marktkauf. Beside the basic settings for the market Netto, you additionally have to carry out the following settings in plentymarkets:
+
+* <<#250, Activate the order referrer for Marktkauf>>
+* <<#shipping-referrer, Activate the referrer Marktkauf in shipping profiles>>
+* <<#300, Make your variations available for Marktkauf>>
+* <<#500, Set up category links for Marktkauf>>
+* <<#700, Create characteristics for Marktkauf>>
+* <<#1350, Set up the order documents for Marktkauf>>
+
 [#250]
 === Activating an order referrer
 
 :market: Netto Marken-Discount
 :referrer: Netto Marken-Discount
-:referrer-option: pass:quotes[options *Netto* with the ID *154* and *plus.de* with the ID *131*]
+:referrer-option: pass:quotes[options *Netto* with the ID *154.00* and *plus.de* with the ID *131.00*]
+
+:marktkauf:
 
 include::partial$activate-referrer.adoc[]
 
@@ -146,6 +160,8 @@ include::partial$activate-referrer.adoc[]
 === Defining a sales price
 
 Proceed as described below to select a sales price for the order referrer Netto.
+
+*_Note:_* It is currently not possible to use different sales prices for Netto and Marktkauf. The sales price for Netto will be transferred to Marktkauf even if you activate the referrer *Marktkauf* for a sales price.
 
 [.instruction]
 Defining a sales price for Netto Marken-Discount:
@@ -160,6 +176,8 @@ Defining a sales price for Netto Marken-Discount:
 
 :referrer: Netto
 
+:marktkauf:
+
 include::partial$shipping-profile-activate.adoc[]
 
 [#400]
@@ -167,6 +185,8 @@ include::partial$shipping-profile-activate.adoc[]
 
 :market: Netto Marken-Discount
 :payment-method: Netto
+
+:marktkauf:
 
 include::partial$activate-payment-method.adoc[]
 
@@ -186,6 +206,8 @@ You can download the checklist as PDF file here: link:https://cdn02.plentymarket
 :market-availability: Netto
 :option-availability: Netto
 :web-api:
+
+:marktkauf:
 
 include::partial$variation-availability.adoc[]
 
@@ -231,7 +253,9 @@ This chapter describes how to export your item data to {market} using the old ex
 [#500]
 ==== Linking categories
 
-You need to create category links in order for your items to be displayed on the market Netto Marken-Discount. Netto eStores will send you the necessary Netto Marken-Discount category IDs. Proceed as follows to create category links for your items to be displayed in the xref:item:categories.adoc#[categories] on Netto.
+You need to create category links in order for your items to be displayed on the market Netto Marken-Discount. Netto eStores will send you the necessary Netto Marken-Discount category IDs. Proceed as follows to create category links for your items to be displayed in the xref:item:categories.adoc#[categories] on Netto. +
+
+*_Tip:_*If you also want to offer your items on the market Marktkauf, then also create category links for Marktkauf.
 
 [.instruction]
 Linking categories:
@@ -239,7 +263,8 @@ Linking categories:
 . Go to *Setup » Markets » Netto eStores*.
 . Click on the *Activate categories* tab.
 . Enter the category ID that best matches your plentymarkets categories in the *Netto category link* column. +
-*_Tip:_* The category IDs of the markets can be found in the category files that you have received from Netto eStores.
+*_Tip:_* The category IDs of the markets can be found in the category files that you have received from Netto eStores. +
+*_Tip:_* If you also want to offer your items on the market Marktkauf, then additionally enter the category ID that best matches your plentymarkets categories in the *Marktkauf category link* column.
 . Activate the categories.
 . Save (terra:save[]) the settings.
 
@@ -248,7 +273,8 @@ Linking categories:
 
 Use xref:item:properties.adoc#100[characteristics] to link specific item details to your items which are required to set up Netto Marken-Discount. If needed, you can save commissions and category links that differ from the default settings saved for the items. Moreover, you transfer item information to the markets with the help of characteristic filters and determine criteria for the item search on the markets.
 
-As described in the <<#500, Linking categories>> chapter, go to *Setup » Markets » Netto eStores* and save the standard category links in the *Activate categories* tab. If you want to link specific items to a different category, use the xref:item:properties.adoc#100[characteristic] *Item category link for Netto*.
+As described in the <<#500, Linking categories>> chapter, go to *Setup » Markets » Netto eStores* and save the standard category links in the *Activate categories* tab. If you want to link specific items to a different category, use the xref:item:properties.adoc#100[characteristic] *Item category link for Netto*. +
+Use the characteristic *Item category link for Marktkauf* for the items that you want to offer on Marktkauf.
 
 [.instruction]
 Creating a characteristic:
@@ -257,7 +283,7 @@ Creating a characteristic:
 . Click on the *New characteristic* tab.
 . Enter the name into the *Name (internal)* field.
 . Select the *Text* characteristic type.
-. From the drop-down list *Netto eStores property*, select the property *Item category link for Netto Marken-Discount*.
+. Select the characteristic *Item category link for Netto Marken-Discount* or *Item category link for Marktkauf* from the *Netto eStores characteristic* drop-down list, depending on which market you want to use the characteristic for.
 . Save (terra:save[]) the settings.
 
 [#800]
@@ -501,12 +527,6 @@ include::partial$catalogue-creation.adoc[]
 
 After you have created a catalogue, map the market's data fields to item data saved in plentymarkets. This chapter describes how you map data fields and what particularities apply for item exports to {market}.
 
-[TIP]
-.Using properties
-====
-Use xref:item:properties.adoc#500[properties] to export values for marketplace data fields that have no corresponding field in plentymarkets.
-====
-
 :own-data-fields:
 
 include::partial$catalogue-mapping.adoc[]
@@ -543,7 +563,7 @@ You can also use the Procedure Manager to cancel unpaid orders after 30 days. (<
 [#1000]
 === Automatically sending shipping confirmations
 
-Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send shipping confirmations to Netto eStores when the outgoing items have been booked. The shipping confirmation is automatically sent to Netto eStores when the order changes its status to *[7] Outgoing items booked*. After that, Netto eStores informs the buyer about the shipment of the item.
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send shipping confirmations to Netto eStores when the outgoing items are booked. The shipping confirmation is automatically sent to Netto eStores when the order changes its status to *[7] Outgoing items booked*. After that, Netto eStores informs the buyer about the shipment of the item.
 
 [IMPORTANT]
 .Event procedures for GartenXXL
@@ -571,7 +591,7 @@ include::_includes:partial$event-procedure.adoc[]
 
 | *Filter 2*
 | *Order > Referrer*
-| *Netto*, *GartenXXL.de* and *GartenXXL.at*
+| *Netto*, *GartenXXL.de*, *GartenXXL.at* and *Marktkauf*
 
 | *Procedure*
 | *Shipping > Send shipping confirmation to Netto eStores*
@@ -692,13 +712,13 @@ Setting up a procedure:
 | *30 days ago*
 
 | *Order referrer*
-| *Net*
+| *Netto*
 |===
 
 [#1350]
 == Setting up order documents
 
-The following information only applies to delivery notes and return labels for Netto Marken-Discount. It does not apply to other markets.
+The following information only applies to delivery notes and return labels for Netto Marken-Discount and Marktkauf. It does not apply to other markets.
 
 * *_Invoices are sent by Netto:_*
   ** Netto Marken-Discount sends the invoice to the customer. You will receive the customer's delivery address from Netto but not the customer's invoice address. The delivery address supplied by Netto Marken-Discount is saved as the delivery and invoice address in plentymarkets. You send the items to this address.
@@ -708,7 +728,7 @@ The following information only applies to delivery notes and return labels for N
 * *_Note will be hidden:_*
   ** The text that you can save in the *Note* field in the *Template* tab's *Optional elements in the stock unit table* area of the *Setup » Client » [Select client] » Locations » Germany (standard) » Documents » Delivery note* and/or *Return label* menu is hidden on documents that belong to the referrer *Netto*. This is required by Netto eStores.
 
-You need specific delivery notes and return slips for Netto Marken-Discount. This chapter describes how you set up xref:orders:order-documents.adoc#1700[PDF templates] for delivery notes and return slips. This information is structured as follows:
+You need specific delivery notes and return slips for Netto Marken-Discount and Marktkauf. This chapter describes how you set up xref:orders:order-documents.adoc#1700[PDF templates] for delivery notes and return slips. This information is structured as follows:
 
 * <<#1500, How to prepare the delivery notes>>
 * <<#1600, How to prepare the return slips>>
@@ -753,6 +773,11 @@ Uploading a PDF template for delivery notes:
 . Click on *Upload template* (icon:save[role="green"]). +
 → The template is uploaded.
 . Adjust the layout of the delivery notes based on Netto Marken-Discount’s requirements. You can find information on how to do this in the xref:orders:order-documents.adoc#1700[Orders] area of the manual.
+
+*_Note:_* You have to use the Marktkauf PDF template for delivery notes for Marktkauf orders. To do so, proceed as described for the Netto delivery notes, but use the template for Marktkauf instead:
+
+* *_Alternative 1:_* link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/netto-order-documents/pdf-template_marktkauf_simple-december2022-ohne-adresszeile.pdf[Download PDF template without sender address line]
+* *_Alternative 2:_* link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/netto-order-documents/pdf-template_marktkauf_simple-december2022-mit-adresszeile.pdf[Download PDF template with sender address line]
 
 [#1600]
 === Preparing return slips
@@ -801,6 +826,11 @@ Uploading a PDF template for return slips:
 . Click on *Upload template* (icon:save[role="green"]). +
 → The template is uploaded.
 . Adjust the layout of the return slips based on Netto Marken-Discount’s requirements. You can find information on how to do this in the xref:orders:order-documents.adoc#1700[Orders] area of the manual.
+
+*_Note:_* You have to use the Marktkauf PDF template for return slips for Marktkauf orders. To do so, proceed as described for the Netto return slips, but use the template for Marktkauf instead:
+
+* link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/netto-order-documents/pdf-template_marktkauf_simple-december2022-ohne-adresszeile.pdf[PDF template without sender address line]
+
 
 [#16002]
 === Inserting return instructions for return slips
