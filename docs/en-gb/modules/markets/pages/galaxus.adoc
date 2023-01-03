@@ -173,7 +173,7 @@ These merchants must designate a person resident in Switzerland as their VAT fis
 --
 //TODO !!!
 
-2+| FTP configuration
+2+^| FTP configuration
 
 | *Host*
 | Enter the host name based on the pattern *ftp.dg.ch*.
@@ -194,7 +194,7 @@ These merchants must designate a person resident in Switzerland as their VAT fis
 → From this FTP path, the plugin will read new orders and requests from Galaxus. +
 *_Important:_* The specified folder paths begin with *(/... /...)*, only if the hostname submitted on *Step 4* does not end with *( / )*.
 
-2+| Order status configuration
+2+^| Order status configuration
 
 | *Order status for cancellation requests*
 | Which order status do you want to assign to new cancellation requests during import?
@@ -209,6 +209,7 @@ These merchants must designate a person resident in Switzerland as their VAT fis
 
 |===
 
+[#VTBU7EUA]
 == Setting up the item export
 
 The following Elastic Export formats are used for the item export. When you provision the plugin, these formats are installed automatically.
@@ -321,6 +322,7 @@ Creating a whitelist element:
 
 |===
 
+[#27QWIBEH]
 === Default export matrix for active variations
 
 The basic logic of Galaxus is like this:
@@ -369,6 +371,7 @@ The following table shows a default export matrix for active variations.
 
 |===
 
+[#4JCZZBS0]
 == Setting up a sales price
 
 Sales prices define the conditions under which a variation is sold at a specific price and on a specific sales channel.
@@ -388,6 +391,7 @@ Sales prices define the conditions under which a variation is sold at a specific
 
 *_Note:_* Alternatively, you can activate the referrer *Galaxus* in an existing sales price.
 
+[#W1ZE4G9E]
 == Preparing variations for the export
 
 * The variations must be *Active*: +
@@ -416,10 +420,12 @@ Sales prices define the conditions under which a variation is sold at a specific
   . Ensure that variations activated for Galaxus are linked to the relevant *Availability 1-10*. +
   *_Important:_* The setting *Positive stock quantities are always exported, independent of the average delivery period* does not work if no *Availability 1-10* is set.
 
+[#ONK1TUKE]
 == Exporting items to Galaxus
 
 The Galaxus plugin exports the item data using the *Elastic Export plugin*. For more information on the *Elastic Export Plugin*, visit the xref:data:elastic-export.adoc#[Elastic Export] page.
 
+[#6BDAE4XD]
 === Setting up Elastic Export formats
 
 The following Elastic Export formats are used for the item export. When you provision the plugin, these formats are installed automatically.
@@ -703,6 +709,7 @@ For example, the property *Property1* is to exist in the 3 groups *GroupA, Group
 |===
 --
 
+[#LQPQ0MM4]
 === Configuring formats in the elastic export
 
 //TODO: Go through options.
@@ -787,7 +794,6 @@ Select an item filter from the drop-down list and click on *Add*. There are no f
 
 |===
 
-
 [#order-documents]
 == Preparing order documents
 
@@ -843,7 +849,7 @@ To show this information on the invoices, proceed as described below.
 [.instruction]
 Saving VAT rates for Switzerland:
 
-.
+. Go to *System » Client » [Select client] » Locations » Location: Germany » Accounting » Tab: VAT*.
 . Click on *New configuration*.
 . Select the country *Switzerland*.
 . Enter the VAT rates for Switzerland. +
@@ -876,7 +882,7 @@ Uploading PDF template for invoices:
 Adjusting invoice template:
 
 . Go to *Setup » Client » [Open standard client] » Locations » Location: Germany » Documents » Invoice » Tab: Template*.
-.
+. For the setting *Currency of the document*, select the option *Order currency*.
 *_Important:_* This setting is applied to all invoices of the location, not just to Galaxus.
 . Scroll down to the area *Optional elements below stock unit table*.
 . Carry out the settings described in <table-delivery-notes>. +
@@ -973,7 +979,7 @@ To show this information on the invoices, proceed as described below.
 [.instruction]
 Saving VAT rates for Switzerland:
 
-.
+. Go to *System » Client » [Select client] » Locations » Location: Germany » Accounting » Tab: VAT*.
 . Click on *New configuration*.
 . Select the country *Switzerland*.
 . Enter the VAT rates for Switzerland.
@@ -1007,7 +1013,7 @@ Uploading PDF template for invoices:
 Adjusting invoice template:
 
 . Go to *Setup » Client » [Open standard client] » Locations » Location: Germany » Documents » Invoice » Tab: Template*.
-.  +
+. For the setting *Currency of the document*, select the option *Order currency*. +
 *_Important:_* This setting is applied to all invoices of the location, not just to Galaxus.
 . Scroll down to the area *Optional elements below stock unit table*.
 . Carry out the settings described in <<#table-invoices-fiscal-rep>>. +
@@ -1131,7 +1137,7 @@ For Galaxus, the event procedures listed in <<#galaxus-event-procedures>> are av
 //TODO: Check table
 [[galaxus-event-procedures]]
 .Galaxus event procedures
-[cols="1,1,3a"]
+[cols="2,1,3a"]
 |===
 |Event procedure name |Recommended event |Explanation
 
@@ -1200,6 +1206,7 @@ For example, set up an event procedure to send automatic order confirmations to 
 . Add an *Action* with the selection *Plugins » Send order confirmation to Galaxus*.
 . *Save* the settings.
 
+[#PEHWFNZB]
 == Particularities of the Galaxus order processing
 
 * Galaxus return requests generate new plentymarkets orders of the type *Return*. These orders are linked to the initial order. The resulting orders must be processed separately.
@@ -1209,9 +1216,8 @@ For example, set up an event procedure to send automatic order confirmations to 
 
 * A shipping date is also not set if the item quantity needed to fulfil the order is not available as net stock. The planned delivery date can change based on the plugin option *Positive stock quantities are always exported, independent of the average delivery period* in the menu *Setup » Markets » Galaxus » Tab: Product Stock Price*.
 
-* In all scenarios where only a part of the order is to be processed (return/shipping), the imported order must be split. The resulting orders must be processed separately.
-
-* How to split an order:
+* In all scenarios where only a part of the order is to be processed (return/shipping), the imported order must be split. The resulting orders must be processed separately. +
+  How to split an order:
   . Go to *Order » [Open order]*.
   . Split the order from *Order » Overview » Gear (split)*. +
   → The window *Split order* opens.
@@ -1219,13 +1225,16 @@ For example, set up an event procedure to send automatic order confirmations to 
   *_Important:_* The shipping costs of the original order will not be changed. +
   → After splitting an order, the plugin can inform Galaxus without any additional user input.
 
+  * Orders with an invoice address in Liechtenstein and a delivery address in the EU are imported as net orders.
 
+[#5JRKNOXB]
 == Order data exchange: scenarios
 
 The Galaxus plugin supports the following scenarios.
 
 *_Important:_* All scenarios except cancellation requests can be applied to both complete orders and partial orders. As such and to avoid duplicate content, scenarios for complete orders are not described separately.
 
+[#9KO6USYT]
 === The imported order is ready for shipping
 
 The imported order contains all required information and is ready to be shipped:
@@ -1233,6 +1242,7 @@ The imported order contains all required information and is ready to be shipped:
 . The order import was automatically reported back to Galaxus by the event procedure *Send Order confirmation to Galaxus*.
 . When your order is ready to be shipped, trigger event procedure *Send shipping confirmation to Galaxus*.
 
+[#2NNFPG4P]
 === Only part of the imported order can be fulfilled
 
 Only part of the imported order can be fulfilled at this time. The customer agrees to receive half of the oder now. The other half will be sent at a later date:
@@ -1245,7 +1255,8 @@ Only part of the imported order can be fulfilled at this time. The customer agre
 . Trigger the event procedure *Send Order Confirmation to Galaxus* to inform Galaxus about the new delivery date.
 . When finished, trigger event procedure *Send Shipping Confirmation to Galaxus*.
 
-=== Part of the items contained in the order can't be fulfilled anymore
+[#6T87DOXB]
+=== Parts of an order cannot be fulfilled
 
 You realised that part of the order cannot be fulfilled, for example because the item is out of stock.
 
@@ -1256,6 +1267,7 @@ You realised that part of the order cannot be fulfilled, for example because the
 . Galaxus automatically replies with a *Cancellation request*.
 . The cancellation request can be *rejected* or *accepted* by triggering either the event procedure *Accept Galaxus cancellation request* or *Reject Galaxus cancellation request with justification*.
 
+[#2CI84ZDL]
 === The customer has requested a partial return
 
 The customer wants to return parts of the order.
@@ -1265,6 +1277,7 @@ plentymarkets creates a new order of the type *Return* that is linked to the ini
 . Trigger the event procedure *Send Order Confirmation to Galaxus*.
 . Trigger the event procedure *Accept Galaxus Return Request* or *Reject Galaxus Return Request with Explanation*.
 
+[#Q7LT0ZU3]
 === The customer has rejected the package
 
 The customer did not accept your delivery for an unjustified reason. The package has now been returned to you.
