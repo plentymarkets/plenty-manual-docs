@@ -3,6 +3,11 @@
 :description: Learn how to connect your plentymarkets account with Shopify in order to synchronise your data.
 :author: team-plenty-channel
 
+:shopify:
+:market: Shopify
+:referrer-option: Shopify
+:referrer: Shopify
+
 On this page, you will learn how to connect your plentymarkets account with Shopify so you can synchronise your data between both systems. The two Shopify assistants will guide you through all required steps so you can start right away.
 
 [IMPORTANT]
@@ -180,15 +185,49 @@ Using the input field mapping assistant:
 --
 
 [#further-shops]
-== _Optional:_ Connecting additional Shopify shops
+=== _Optional:_ Connecting additional Shopify shops
 
 Note the following if you want to link more than one Shopify shop with plentymarkets:
 
 * Each new connection requires a separate plentymarkets client and a separate Shopify account.
 * To create an additional connection you need to install the plentymarkets app in each Shopify shop you wish to connect.
 
+[#RM4RZXPC]
+== Activating the order referrer
+
+:referrer: Shopify
+:referrer-option: pass:quotes[option *Shopify*]
+
+include::markets:partial$activate-referrer.adoc[]
+
+[#UNO4F1PH]
+== Selecting the sales price
+
+:referrer-price: Shopify
+
+include::markets:partial$define-sales-price.adoc[]
+
+[#LFL990IP]
+== Importing custom order properties
+
+The Shopify integration also enables you to import custom order properties using the order import process. 
+
+For example, you can create custom order properties with the Shopify plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. This plugin gives your customers the option to enter custom text during the order process. This allows you to offer personalized products, for example with engravings.
+
+Requirements for importing custom order properties are:
+
+* In the menu *Setup » Item » Characteristics*, create a characteristic for which you activate the option *Order characteristic* on the right.
+* The plentymarkets item is linked to the characteristic for which the option *Order characteristic* is activated.
+
+[#XV8ANTMR]
+== Preparing variations
+
+Now, prepare your variations.
+
+*_Before you start:_* Each item can only have up to 100 variations. This limit is set by Shopify. As such, items with more than 100 variations are not exported to Shopify.
+
 [#stock-limitation]
-== Logic for limiting stock
+=== Information about stock limitation
 
 In the Shopify back end, the option *Continue selling when out of stock* determines if products are sold if no or not enough stock is in the warehouse. When stock is exported, this option is either activated or not. This depends on the plentymarkets setting xref:item:directory.adoc#220[Stock limitation].
 
@@ -208,25 +247,129 @@ Depending on which *Limitation* you selected for a variation in plentymarkets, t
 | Activated
 |====
 
-[#custom-order-properties]
-== Importing custom order properties
+[#300]
+=== Setting the variation availability
 
-The Shopify integration also enables you to import custom order properties using the order import process. 
+:market-availability: Shopify
+:option-availability: Shopify
 
-For example, you can create custom order properties with the Shopify plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. This plugin gives your customers the option to enter custom text during the order process. This allows you to offer personalized products, for example with engravings.
+include::markets:partial$variation-availability.adoc[]
 
-Requirements for importing custom order properties:
+[#0U31GAX6]
+=== Activating the client for a variation
 
-* In the menu *Setup » Item » Characteristics*, create a characteristic for which you activate the option *Order characteristic* on the right.
-* If you want to import such properties, make sure that the plentymarkets item has a characteristic where the option *Order characteristic* is activated.
+Only variations that are activated for the client (store) that you use to sell on {market} are exported.
+
+[.instruction]
+Activating the client for a variation:
+
+. Go to *Item » Edit item » [Open item] » [Open variation]*.
+. Click on the variation tab *Availability*.
+. In the area *Client (store)*, activate the client (store) that you use to sell on {market}.
+. Save the setting.
+
+[#MK10HTRN]
+=== Saving SKU
+
+Only variations with an SKU for the referrer *Shopify* are exported.
+
+[.instruction]
+Saving an SKU for Shopify:
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Settings*.
+. Click on the *Availability* tab.
+. In the *SKU* area, click on *Add* (icon:plus-square[role="green"]). +
+→ The *New SKU* window opens.
+. Select the referrer *Shopify*.
+. Select the corresponding marketplace account.
+. Enter the SKU.
+. Click on *Add* (icon:plus-square[role="green"]). +
+→ The SKU is saved and displayed.
+
+[#TUVEBVS1]
+=== Saving other mandatory information
+
+The following information is mandatory for exporting variations to Shopify. Save this information to export your variations.
+
+[.collapseBox]
+.Save a "Name 1" and an "Item text" saved for the item.
+--
+
+[.instruction]
+Saving Name 1 and item text:
+
+. Go to *Item » Edit item » [Open item]*.
+. Switch to the tab *Texts*.
+. In the toolbar, select the *Language* in which you export item data to Shopify.
+. Enter a name in the field *Name 1*.
+. Enter an item text in the field *Item text*.
+. Click on *Save*.
+--
+
+[.collapseBox]
+.Ensure that an attribute name and an attribute value are saved for the variation in the export language.
+--
+
+An attribute name and an attribute value must be saved for the variation in the language you use for the item export.
+
+[.instruction]
+Checking attribute name and attribute value for a variation:
+
+. Go to *Item » Edit item » [Open item] » [Open variation]*.
+. In the tab *Settings*, navigate to the area *Basic settings*. +
+→ The attributes that are linked to the variation are listed underneath the setting *Position*.
+
+Now, you can check the settings of the attributes. Are the attribute name and the attribute value saved in the language you need?
+
+[.instruction]
+Checking name and value of an attribute:
+
+. Go to *Setup » Item » Attributes » [Open attribute] » Tab: Values*.
+. Click on the *Name* tab.
+. Check the content of the field for the language.
+. If necessary, enter a name for the attribute.
+. Click on the *Values* tab.
+. In the toolbar, select the *Language* in which you export item data to Shopify.
+→ The values of the attribute are shown.
+. If necessary, enter a name for the attribute value.
+. Click on *Sav* if you have made changes.
+--
+
+[#OPOU57M9]
+=== _Check list:_ Requirements for exporting variations
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-intro]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-variation-active]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-variation-referrer]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-availability-active]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-net-stock]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-sales-price]
+
+:number-of-variations: 100
+include::markets:partial$checklist-variations.adoc[tag=checklist-number-of-variations]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-name-text-shopify]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-attributes-shopify]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-market-sku]
+
+include::markets:partial$checklist-variations.adoc[tag=checklist-market-client]
+
+[#E4EO9VDN]
+== Order group processing
+
+Find out how orders are processed.
 
 [#event-procedures]
 == Setting up event procedures
 
 Use xref:automation:event-procedures.adoc#[plentymarkets event procedures] to automate order communication with Shopify.
-
-[#event-procedures]
-=== Available event procedures
 
 The following event procedures are available for the Shopify app:
 
@@ -248,7 +391,7 @@ The following event procedures are available for the Shopify app:
 Due to GDPR specifications, the following policies for customer accounts and orders have been implemented:
 
 [[table-gdpr]]
-.GDPR considerations during the contact import
+.GDPR considerations during order import
 [cols="1,2"]
 |===
 |*Scenario* |*Explanation*
