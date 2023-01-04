@@ -47,7 +47,8 @@ include::_includes:partial$rights.adoc[]
 [#email-server-login-details]
 === Saving the email server’s login details
 
-In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, save the login details of a mailbox in the *Login details* step so that plentymarkets emails such as order or shipping confirmations can be sent from this email address.
+In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* menu, save the login details of a mailbox in the *Login details* step so that plentymarkets emails such as order or shipping confirmations can be sent from this email address. +
+Moreover, you can activate the live mode here to ensure that all emails are not only sent to the email address you entered but also to your customers.
 
 [.collapseBox]
 .Settings in the *Email accounts* assistant in the *Login details* step
@@ -69,7 +70,7 @@ In the *Email accounts* assistant in the *Setup » Assistants » Basic setup* me
 *_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
 
 | *Encryption method*
-| Select *SSL*, *TLS* or *No encryption*.  +
+| Select *SSL*, *TLS* or *No encryption*. +
 *_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
 
 2+| Enter the login details of your email account. 
@@ -200,7 +201,7 @@ Inserting a variable here is not mandatory. It would be possible, however, to in
 
 | *Customer registration*
 |If you xref:crm:emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they created a customer account in your online shop when placing an order, for example. +
-Inserting a variable here is not mandatory. It would be useful, however, to add the URL to your online shop (URL to online shop) as well as a short welcome message. +
+Inserting a variable here is not mandatory. It would be useful, however, to add the URL to your online shop (`URL to online shop`) as well as a short welcome message. +
 *_Note:_* You can find the variable in the <<#variables-global, Global>> category.
 
 | *Email when item becomes available*
@@ -618,7 +619,7 @@ In the *Settings* area on the right side of your screen, you can carry out the g
 *_Note:_* When you enter several email addresses, separate them with a comma each.
 
 2+^|[#intable-language-specific-settings]*Language-specific settings* (material:translate[]) +
-In this area, carry out the language-specific settings. Thus, you can carry out different settings for each template. For example, you can link product data sheets or user manuals in the corresponding language with the template. +
+In this area, carry out the language-specific settings. Thus, you can carry out different settings for each template. For example, you can link product data sheets or user manuals in the corresponding language with the template and determine the time, date and number formats for each language. +
 *_Note:_* If the template is of the type *Header* or *Footer*, only the field <<#intable-template-settings-custom-styles, custom styles>> is available in this area. A subject and static attachments are not available for headers and footers.
 
 | material:translate[]
@@ -636,6 +637,45 @@ You can see an individual area for each language you created. Click on material:
 |[#intable-template-settings-custom-styles]*Custom styles*
 |You can adjust the CSS styling of your template, your header and your footer here. <<#examples-custom-styles, The collapsible box below this table>> contains some common examples for adjusting your template. +
 *_Tip:_* Save the settings and open the *Preview* (material:preview[]) to check your entries and to make further adjustments, if needed.
+
+|[#intable-template-settings-number-format]*Number format*
+|Select the German or English notation for the number format from the list.
+
+*_Example:_* The German notation shows the number formats as follows: 1,25 or 1.000,25. The English notation shows the number formats as follows: 1.25 or 1,000.25. 
+
+|[#intable-template-settings-decimals]*Number of decimals*
+|Enter a number that defines the number of decimals.
+
+|[#intable-template-settings-date-format]*Date format*
+a|Select the date format from the drop-down list. 
+
+`dd` represents the day, `mm` the month and `yyyy` the year. By default, the date format `dd.mm.yyyy` is preselected for German systems and the format `dd-mm-yyyy` for all other languages. +
+Available formats:
+
+* yyyy-mm-dd
+* dd.mm.yyyy
+* dd-mm-yy
+* dd/mm/yyyy
+* mm-dd-yyyy
+
+|[#intable-template-settings-time-format]*Time format*
+a|Select the time format from the drop-down list.
+
+`hh` represents the hour in 12h format, `HH` represents the hour in 24h format, `ii` the minutes and `ss` the seconds. `a` returns the addition AM or PM depending on the time of day. By default, the time format `HH:ii` is preselected. +
+Available formats:
+
+* hh:ii:ss a
+* hh.ii.ss a
+* hh-ii-ss a
+* hh:ii a
+* hh.ii a
+* hh-ii a
+* HH:ii:ss
+* HH.ii.ss
+* HH-ii-ss
+* HH:ii
+* HH.ii
+* HH-ii
 
 |[#intable-template-settings-back-to-template-configuration]*Back to template configuration*
 |Click on material:arrow_back[] at the top right to go back to the template configuration.
@@ -707,6 +747,14 @@ In the editor, you can find a selection of widgets whose contents are already pr
 * <<#intable-widget-image, Image>>
 
 For example, you will find in the *Order items* widget a pre-defined list with the most important variables around the ordered item such as item name, the number of ordered items, the prices, the shipping costs and the total invoice amount. However, you can adjust the content at any time according to your needs and add further column names and individual items.
+
+//// 
+<<#image-emailbuilder-widget-order-items>> shows the editing mode of the predefined *Order items* widget.
+
+[[image-emailbuilder-widget-order-items]]
+.Editing mode of the pre-defined widget *Order items*
+image::crm:emailbuilder-editing-mode-order-items.png[width=640, height=360]
+////
 
 Proceed as described below to insert one or multiple widgets into your template.
 
@@ -908,6 +956,7 @@ Would you like to know which default templates are already available in the Emai
 [.collapseBox]
 .Default templates in the EmailBuilder and their subjects
 --
+
 *English default templates in the EmailBuilder and their subjects*
 
 [[table-default-templates-english]]
@@ -929,10 +978,10 @@ Would you like to know which default templates are already available in the Emai
 |Payment for order ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; fully received
 
 |Order: Payment reminder
-|Payment status for the order placed on &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125; with order ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125;
+|Payment status for the order placed on &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125; with order ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125;
 
 |Order: Invoice
-|Invoice for order ID: &#123;&#8288;&#123;order.id&#125;&#8288;&#125; from &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125;
+|Invoice for order ID: &#123;&#8288;&#123;order.id&#125;&#8288;&#125; from &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125;
 
 |eBay: dispute / cancellation, no payment
 |Your order with the ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; was cancelled
@@ -975,10 +1024,10 @@ Would you like to know which default templates are already available in the Emai
 |Zahlung für Auftrag &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vollständig erhalten
 
 |Auftrag: Zahlungserinnerung
-|Zahlungsstatus für den Auftrag mit der ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125;
+|Zahlungsstatus für den Auftrag mit der ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125;
 
 |Auftrag: Rechnung PDF-Anhang
-|Rechnung zu Order-ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125;
+|Rechnung zu Order-ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125;
 
 |eBay: Disput / Storno, keine Zahlung
 |Ihre Bestellung mit der ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; wurde storniert
@@ -1293,6 +1342,7 @@ If you want to use a twig expression in the template’s subject line, this expr
 
 You can find code examples for the subject line in the <<#code-examples-subject, Code examples for the subject line>> chapter.
 
+
 [#twig-code-widget]
 ==== Twig expression in the code widget
 
@@ -1385,12 +1435,12 @@ The QR code is shown as an URL in the email of your customers. After clicking on
 
 | `Date and time of incoming order`
 |Date and time of the incoming order as saved in the order.
-| `order.formattedDates.createdOn ? (order.formattedDates.createdOn \| date('m-d-Y H:i:s')) : ''`
+| `order.formattedDates.createdOnDateAndTime`
 |
 
 | `Date of the incoming order`
 |Date of the incoming order as saved in the order.
-| `order.formattedDates.createdOn ? (order.formattedDates.createdOn \| date('m-d-Y')) : ''`
+| `order.formattedDates.createdOn`
 | $OrderDate
 
 | `Date of incoming payment`
@@ -1533,14 +1583,9 @@ The QR code is shown as an URL in the email of your customers. After clicking on
 | $OrderStatusLabel
 
 | `Total invoice amount`
-|*_Example:_* 1.234,00
-| `order.formattedGeneral.invoiceTotal \| number_format(2, ',', '.')`
+|
+| `order.formattedGeneral.invoiceTotal`
 | $InvoiceTotal
-
-| `Total invoice amount, separated by a full stop`
-|*_Example:_* 1234.00
-| `order.formattedGeneral.invoiceTotal \| number_format(2, '.', '')`
-| $InvoiceTotalDecimalSeparatorDot
 
 | `VAT total`
 |
@@ -1978,7 +2023,7 @@ The QR code is shown as an URL in the email of your customers. After clicking on
 | `orderItem.formattedReturn.statusId`
 | $ReturnItemStatusID
 
-| `Name of the returned item`
+| `Status name of the returned item`
 |
 | `orderItem.formattedReturn.statusLabel`
 | $ReturnItemStatusLabel
@@ -2176,7 +2221,7 @@ Possible values: *1 month*, *3 months*, *6 months*, *12 months*.
 
 | `Subscription total amount`
 |
-| `order.formattedSubscription.totalAmount \| number_format(2, '.', ',')`
+| `order.formattedSubscription.totalAmount`
 | $SchedulerTotalAmount
 
 |====
