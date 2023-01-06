@@ -32,8 +32,8 @@ We will provide the file for you in the plentymarkets forum via PM. Write us a m
 [.collapseBox]
 .My Zalando account has not been activated yet.
 --
-To activate Zalando's zDirect API interface, your Zalando account must be linked to the plentymarkets developer account. This link is established automatically during the integration. However, plentymarkets also needs to generate additional credentials for the API and then save these credentials in your plentymarkets system. As such, plentymarkets is not allowed to give you access to these credentials. +
-Ask our support staff to activate your account in link:https://forum.plentymarkets.com/t/sammelthema-aktivierung-neuer-zalando-konten/600409[this thread^] in the plentymarkets forum.
+To activate Zalando’s zDirect API interface, your Zalando account must be linked to the plentymarkets developer account. This link is established automatically during the integration. However, plentymarkets also needs to generate additional credentials for the API and then save these credentials in your plentymarkets system. We cannot give you access to these credentials. As such, plentymarkets is not allowed to give you access to these credentials. +
+Ask our support staff to activate your account in link:https://forum.plentymarkets.com/t/sammelthema-aktivierung-neuer-zalando-konten/600409[this thread^] of the plentymarkets forum.
 --
 
 [#faq-item-data-export]
@@ -47,13 +47,15 @@ You have to carry out the following settings so that an item can be exported to 
     * The availabilities *Zalando* and *WEB API* must be activated in the *Availability* tab of a variation. (<<#300, How?>>)
     * The variation must be *activated*.
     * The variation has a sales price for Zalando. (<<#350, How?>>)
-    * The items are linked to all mandatory characteristics. (<<#600, Which?>>)
+ifndef::catalogue[* The items are linked to all mandatory characteristics. (<<#600, Which ones?>>)]
+ifdef::catalogue[* The items are linked to all mandatory properties. (<<#600, Which ones?>>)]
+
 --
 
 [.collapseBox]
-.Why aren't my items being exported to Zalando?
+.Why are my items not exported to Zalando?
 --
-Either you have not yet carried out the basic settings for the market or the mandatory fields are not filled. +
+Either you did not carry out the basic settings for the market or the mandatory fields are not filled. +
 The mandatory fields for Zalando are listed below:
 
     * 1 Farbcode (colour code)
@@ -65,11 +67,11 @@ The mandatory fields for Zalando are listed below:
     * Jahreszeiten-Code (seasonal code)
     * Silhouetten-Typ (silhouette type)
 
-To check whether there are errors for your variations, you can take a look at the reports listed below. Depending on the report, you can check your variations for errors.
+To check whether there are errors for your variations, you can take a look at the reports. Depending on the report, you can check your variations for errors.
 --
 
 [.collapseBox]
-.Why are my items not being updated?
+.Why are my items not updated?
 --
 For Zalando, changes to item data, such as text changes, are not automatically imported afterwards. In this case it is necessary to contact Zalando directly.
 --
@@ -107,66 +109,97 @@ Zalando generates the product status reports once during the night. These report
 [.collapseBox]
 .errors (1234567) (ValueId:12345): silhouetteId
 --
-The characteristic *Zalando » Silhouettenname* (silhouette name) for the variation ID (=ValueID) is missing.
+ifndef::catalogue[The characteristic *Zalando » Silhouettenname* (silhouette name) for the variation ID (=ValueID) is missing.]
+ifdef::catalogue[A property for the Silhouettenname (silhouette name) is missing for the variation ID (ValueID).]
+
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): brand
 --
-The characteristic *Zalando » Hersteller-Code* (manufacturer code) for the variation ID (=ValueID) is missing.
+ifndef::catalogue[The characteristic *Zalando » Hersteller-Code* (manufacturer code) for the variation ID (=ValueID) is missing.]
+ifdef::catalogue[A property for the Hersteller-Code (manufacturer code) is missing for the variation ID (ValueID).]
+
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): ageGroups
 --
-The characteristic *Zalando » Altersgruppe* (age group) for the variation ID (=ValueID) is missing.
+ifndef::catalogue[The characteristic *Zalando » Altersgruppe* (age group) for the variation ID (=ValueID) is missing.]
+ifdef::catalogue[A property for the Altersgruppe (age group) is missing for the variation ID (ValueID).]
+
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): sizeRegister
 --
-The characteristic *Zalando » Größen-Register* (size register) is missing or was not created correctly. +
+ifndef::catalogue[]
+The characteristic *Zalando » Größen-Register* (size register) is missing or was not created correctly.
 *_Note:_* This only applies if you do _not_ use attributes to indicate sizes.
 
-    * *_Scenario 1:_ The characteristic is missing. +
-    The characteristic has to be added and linked to the appropriate size register.
-    * *_Scenario 2:_ The characteristic was created. +
-    Keep in mind to comply with the format provided by Zalando. Check if the size register is correct.
+* _Scenario 1:_ The characteristic is missing. +
+The characteristic has to be added and linked to the appropriate size register.
+* _Scenario 2:_ The characteristic was created. +
+Keep in mind to comply with the format provided by Zalando. Check if the size register is correct.
 
 *_Note:_* Size registers that were created manually cannot be used for Zalando.
+endif::catalogue[]
+
+ifdef::catalogue[]
+The property for the Größen-Register (size register) is missing or was not created correctly.
+*_Note:_* This only applies if you do _not_ use attributes to indicate sizes.
+
+* _Scenario 1:_ The property is missing. +
+The property has to be added and linked to the appropriate size register.
+* _Scenario 2:_ The property exists and is linked. +
+Keep in mind to comply with the format provided by Zalando. Check if the size register is correct.
+
+*_Note:_* Size registers that were created manually cannot be used for Zalando.
+endif::catalogue[]
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): mainColorCode
 --
-The characteristic *Zalando » 1. Farbcode* (colour code) for the variation ID (=ValueID) is missing. +
+ifndef::catalogue[The characteristic *Zalando » 1. Farbcode* (colour code) for the variation ID (=ValueID) is missing. +]
+ifdef::catalogue[A property for the 1. Farbcode (colour code) for the variation ID (=ValueID) is missing. +]
 _Exception:_ The variation has a colour attribute. In that case, attribute links are used to manage colours.
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): supplierColor
 --
-The characteristic *Zalando » Hersteller-Farbe* (manufacturer colour) or the second attribute link is missing or was not properly saved for the variation ID (=ValueID).
+ifndef::catalogue[The characteristic *Zalando » Hersteller-Farbe* (Zalando » Manufacturer colour) or the second attribute link is missing or not properly saved for the variation ID (=ValueID).]
+ifdef::catalogue[A property for the Hersteller-Farbe (manufacturer colour) or the 2. attribute link is missing or not properly saved for the variation ID (=ValueID).]
+
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): genders
 --
-The characteristic *Zalando » Geschlecht* (gender) for the variation ID (=ValueID) is missing.
+ifndef::catalogue[The characteristic *Zalando » Geschlecht* (gender) for the variation ID (=ValueID) is missing.]
+ifdef::catalogue[A property for Geschlecht (gender) is missing for the variation ID (ValueID).]
+
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): season
 --
-The characteristic *Zalando » Jahreszeiten-Code* (seasonal code) for the variation ID (=ValueID) is missing.
+ifndef::catalogue[The characteristic *Zalando » Jahreszeiten-Code* (seasonal code) for the variation ID (=ValueID) is missing.]
+ifdef::catalogue[A property for the Jahreszeiten-Code (seasonal code) is missing for the variation ID (ValueID).]
+
 --
 
 [.collapseBox]
 .errors (1234567) (ValueId:12345): size
 --
-The characteristic *Zalando » Größe* (size) for the variation ID (=ValueID) is missing _or_ the attribute was not linked with the characteristic. +
+ifndef::catalogue[]
+The characteristic *Zalando » Größe* (size) for the variation ID (ValueID) is missing _or_ the attribute was not linked with the characteristic. +]
 *_Note:_* You can use item attributes to indicate sizes. It is mandatory to link the attributes in the size register. +
 Here's how to xref:markets:zalando.adoc#700[link attributes to characteristics].
+endif::catalogue[]
+ifdef::catalogue[A property for the size is missing for the variation ID (ValueID).]
+
 --
 
 [.collapseBox]
@@ -194,22 +227,27 @@ See <<#stock-update-few-variations, How can I update the stock again for a few v
 [.collapseBox]
 .ZABLO_15 - Article blocked due to old season. Please delete the article from the feed or reach out to the Operations team to adjust the season.
 --
+ifdef::catalogue[If you can still offer this item in the new season, change the value of the property for the Jahreszeiten-Code (seasonal code) of the variation to the new season.]
+ifndef::catalogue[]
 If you can offer this item also in the new season, then you can map the characteristic *Jahreszeiten-Code* (seasonal code) with the new season. If the new season is not displayed, then contact Zalando. The new silhouettes have to be updated at Zalando afterwards. +
 Also take a look at <<#updating-silhouettes, The silhouettes were not updated/imported in plentymarkets.>>
+endif::catalogue[]
 --
 
 [.collapseBox]
 .PSERR_133 - Submitted size isn’t an allowed value for the size chart being submitted by the partner. Or the submitted size isn’t an allowed value for the partner article’s already existing size chart.
 --
 You want to transfer a size from a size register which is not enabled for you. For example, Zalando assigned the sizes _S-L_ to you, but you tried to list an item in _XL_. Contact Zalando and have the sizes in your size registers adjusted. +
-Also take a look at <<#updating-silhouettes, The silhouettes were not updated/imported in plentymarkets.>>
+ifndef::catalogue[Also take a look at <<#updating-silhouettes, The silhouettes were not updated/imported in plentymarkets.>>]
 --
 
 [.collapseBox]
 .PSERR_118 - EAN rejected because the sum of the material composition is not 100%. Please review the sum of material composition within the attribute.
 --
-Characteristics are used to save information about the item’s material. Use a characteristic of the type *Text* to specify the item’s material composition in %. +
-*_Note:_* The sum always has to be 100%. However, the material information has to be indicated in 100,00% for the export to work. Thus, if the item consists of 80% polyester and 20% cotton, you have to enter the following values:
+ifndef::catalogue[Characteristics are used to save information about the item’s material. Use a characteristic of the type *Text* to specify the item’s material composition in %. +]
+ifdef::catalogue[Use properties to save information about the variation's material. Use a property of the type *Text* to specify the item’s material composition in %. +]
+
+*_Note:_* The sum must always add up to 100%. However, the material information has to be indicated in 100,00% for the export to work. Thus, if the item consists of 80% polyester and 20% cotton, you have to enter the following values:
 
     * polyester: “8000”
     * cotton: “2000”
@@ -243,7 +281,7 @@ image::markets:zalando-faq-job-id-filter.png[jobid-filter]
 
 There will be messages like these:
 
-image::markets:zalando-faq-job-id-search-results.png[search-results]
+image::markets:zalando-faq-job-id-search-results.png[search results]
 
 Open the log entry shown in the screenshot above:
 
@@ -263,13 +301,13 @@ The sales price which is used as standard sales price for Zalando was defined in
 [.collapseBox]
 .How can I update the prices again for all variations?
 --
-To export all prices to Zalando again, the price synchronisation must be triggered. For example, this can be done in the assistant *Account settings - Zalando* in the *Setup » Assistants » Omni-Channel* menu. You only have to make a change in the *Prices for Germany* and/or *Prices for Austria* section. It doesn’t matter which change you make. You can revert the change afterwards. All prices will be exported to Zalando within 15 minutes afterwards. +
+To export all prices to Zalando again, the price synchronisation must be triggered. For example, this can be done in the assistant *Account settings - Zalando* in the *Setup » Assistants » Omni-Channel* menu. You only have to make a change  in the *Prices for Germany* and/or *Prices for Austria* section. It does not matter which change you make. You can revert the change afterwards. All prices will be exported to Zalando within 15 minutes afterwards. +
 You can check the export of prices in the log. +
 Note that the export may be delayed if you transfer a lot of variations to different sales channels. This is due to the limitation of API calls set by Zalando. It can happen that data is exported in several packages, and therefore the export takes longer. Variations of one and the same item might also be exported in different packages. Each package contains up to 1000 variations, which make up one request. 20 requests can be sent per minute. Different packages can be distinguished by the *jobId* in the *Data » Log* menu. +
 --
 
 [#faq-stock-update]
-=== Stock update
+=== Stock correction import
 
 [#stock-update]
 [.collapseBox]
@@ -279,7 +317,7 @@ Go to *Data » Log*. +
 Use the following filters:
 
     * *Integration*: Plenty\Modules\Zalando\Stock\Services\StockUpdateService
-    *Identifier*: Zalando
+    * *Identifier*: Zalando
 
 Enter the *variation ID* or the *EAN* as reference type. To do so, enter *variationID* or *ean* as reference type and use the corresponding value as reference value. +
 Afterwards, open the log entry and click on *Expand all* to look at the request. +
@@ -299,14 +337,14 @@ The error message _„Request contains duplicate combinations of stock quantitie
 .How can I update the stock again for one or a few variations?
 --
 To update the stock again, you have to adjust the stock of the desired variation. For example, you can change the stock from _- 1 piece_ to _+ 1 piece_. Afterwards, the stock will be exported to Zalando within 15 minutes. +
-You can check the export of prices in the log. Also see <<#price-synchronisation, How can I check stock updates?>>. +
+You can check the export of prices in the log. Also see <<#price-synchronisation, How can I check stock updates?>>.
 Settings for stock export are carried out when first setting up Zalando with the assistant *Account settings - Zalando*.
 --
 
 [.collapseBox]
 .How can I update the stock again for all variations?
 --
-To export stock again to Zalando, the stock synchronisation must be triggered. You can use the assistant *Account settings - Zalando* to do so. You only have to make a change  in the *Stock for Germany* and/or *Stock for Austria* section. It doesn’t matter which change you make. You can revert the change afterwards. The stock will be exported to Zalando within 15 minutes afterwards. +
+To export stock again to Zalando, the stock synchronisation must be triggered. You can use the assistant *Account settings - Zalando* to do so. You only have to make a change  in the *Stock for Germany* and/or *Stock for Austria* section. It does not matter which change you make. You can revert the change afterwards. The stock will be exported to Zalando within 15 minutes afterwards. +
 You can check the export of prices in the log. +
 Note that the export may be delayed if you transfer a lot of variations to different sales channels. This is due to the limitation of API calls set by Zalando. It can happen that data is exported in several packages, and therefore the export takes longer. Variations of one and the same item might also be exported in different packages. Each package contains up to 1000 variations, which make up one request. 20 requests can be sent per minute. Different packages can be distinguished by the *jobId*.
 --
@@ -370,6 +408,7 @@ There may be different reasons for this:
 [#faq-general]
 === General questions
 
+ifndef::catalogue[]
 [#updating-silhouettes]
 [.collapseBox]
 .The silhouettes were not updated or imported into plentymarkets.
@@ -381,7 +420,7 @@ image::markets:zalando-faq-silhouettes.png[]
 
 Then the reason might be that
 
-    * either Zalando has not yet sent any silhouettes for you _or_
+    * Either Zalando has not yet sent any silhouettes for you _or_
     * plentymarkets has not yet imported your silhouettes.
 
 If you already have silhouettes in your plentymarkets system and you want to convert them into characteristics, the backend looks like this:
@@ -392,6 +431,7 @@ Select the desired groups and click on *convert to characteristics*. +
 *_Tip:_* Only select the groups which you want to sell items in to keep the number of characteristics at a minimum. +
 Also see <<#500, Converting silhouettes to characteristics>>.
 --
+endif::catalogue[]
 
 [.collapseBox]
 .Where can I find the order documents requested by Zalando?
@@ -402,9 +442,11 @@ You can book an additional client in the *START (plentymarkets logo) » My accou
 How to set up you documents is described on the xref:orders:order-documents.adoc#[Setting up documents] page.
 --
 
+ifndef::catalogue[]
 [.collapseBox]
 .When is the master data exported?
 --
 *_Note:_* The master data contains your size registers and the silhouettes that you want to use. +
 As in the case of silhouettes, size registers are imported every Wednesday.
 --
+endif::catalogue[]
