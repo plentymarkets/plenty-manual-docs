@@ -233,7 +233,7 @@ A discount is already filled in if the contact is assigned to a customer class i
 
 | *Warehouse*
 |Which options are available depends on the settings you set for xref:orders:preparatory-settings.adoc#intable-warehouse-assignment[assignment of warehouses]: +
-- Is *a) a warehouse can be assigned for each order* set, you can select a warehouse for the order in the order details. +
+- Is *a) a warehouse can be assigned for each order* set, you can select a warehouse for the order in the order details or enter the name of a warehouse to search for it. +
 If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected.
 - Is *b) a warehouse can be assigned for each order item* set, *Depending on the order items* is displayed. In the next step, items are added to the order. This means that you can select a warehouse for each variation from the drop-down list. +
 If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected in the item table of the next step.
@@ -394,7 +394,7 @@ This is a default column.
 
 |*Variation number*
 |Shows the variation number. You are redirected to the variation data when clicking on the variation number. +
-This is a default column.
+This is an optional column.
 
 |*Item name*
 |Shows the name that is saved on the item. +
@@ -439,7 +439,7 @@ This is a default column.
 This is a default column.
 
 | *Warehouse*
-|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each order item* for the *assignment of warehouses*. +
+|Shows the warehouse of the item. Select another warehouse from the drop-down list if required or enter the name of a warehouse to search for it. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each order item* for the *assignment of warehouses*. +
 If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected. +
 This is a default column.
 
@@ -610,7 +610,7 @@ This is not a default column.
 
 | *Variation no.*
 |Shows the number of the variation. You are redirected to the variation data when clicking on the variation number. +
-This is a default column.
+This is an optional column.
 
 | *Item name*
 |Shows the name that is saved on the item. You can edit (material:edit[]) the item name if needed. +
@@ -645,26 +645,37 @@ This is not a default column.
 This is not a default column.
 
 | *Net price*
-|Shows the net price of the item. You can edit the data field net price via material:edit[]. The gross price will be adjusted automatically. +
+|Shows the net price of the item. If you applied a discount, this has already been deducted. The gross price will also be adjusted automatically. +
 This is a default column.
 
-| *Regular net price*
-|Shows the regular net price of the item. +
-This is not a default column.
+| *Original net price*
+|Shows the original net price of the item before a discount was applied. You can adjust (material:edit[]) the original net price if required. +
+This is a default column.
 
 | *Gross price*
-|Shows the gross price of the item. You can edit the data field gross price via material:edit[]. The net price will be adjusted automatically. +
+|Shows the gross price of the item. If you applied a discount, this has already been deducted. The net price will also be adjusted automatically. +
 This is a default column.
+
+| *Original gross price*
+|Shows the original gross price of the item before a discount was applied. You can adjust (material:edit[])
+ the original gross price if required. +
+ This is a default column.
 
 | *Surcharge total*
 |Shows the sum of the order item properties’ surcharges. +
 This is not a default column.
 
-| *Discount*
-|Shows the discount that was entered in the order details in the first step of the order creation. +
+| *Discount [%]*
+|Shows the discount in percent that was entered in the order details in the first step of the order creation.
+If you want to display the discount as amount, select the option *Amount* from the drop-down list. +
+*_Note:_* The amount is displayed in the currency of the order. +
 This is a default column.
 
-| *Total amount of the order (gross)*
+|*Total amount (net)*
+|Shows the total net amount of the item. +
+This is a default column.
+
+| *Total amount (gross)*
 |Shows the total gross amount of the item. +
 This is a default column.
 
@@ -740,6 +751,11 @@ In the order details, you can adjust the *Payment method*, the *Shipping costs*,
 
 Moreover, you can enter one or more coupon codes in the *Coupon codes* field to redeem these with this order. The values of the coupons are set off against the order value. Coupons are not added as an order position in the shopping cart. Coupons cannot be redeemed for offers.  This means that the input field *Coupon codes* is only available for the order creation, but not for creating offers. For coupons, it is differentiated between the types *plentymarkets campaign* and *External campaign*. In order to redeem coupon codes proceed as follows.
 
+[tabs]
+====
+Redeeming coupon codes of a plentymarkets campaign::
++
+--
 [.instruction]
 Redeeming coupon codes of a plentymarkets campaign:
 
@@ -754,6 +770,11 @@ icon:map-signs[] *_Or:_* On the right in the field *Coupon codes* click on *Add 
 . Enter the coupon code of the plentymarkets campaign.
 . Click on *Redeem*. +
 → The coupon code is added and will be redeemed with this order.
+--
+
+Redeeming coupon codes of an external campaign::
++
+--
 
 [.instruction]
 Redeeming coupon codes of an external campaign:
@@ -783,6 +804,8 @@ Redeeming coupon codes of an external campaign:
 |Enter the coupon’s value in the respective currency.
 
 |===
+--
+====
 
 Below the order details, a table with the added order items is displayed. In addition to the information given in the previous view, further prices and the VAT rate are shown. The VAT rates are editable if you allowed this in the <<#carrying-out-standard-settings, default settings>>.
 
@@ -812,12 +835,12 @@ The following columns are available: .
 * Item name
 * Attributes
 * Net price
-* Regular net price
+* Original net price
 * Gross price
 * Discount
 * Surcharge total
-* Total amount of the order (net)
-* Total amount of the order (gross)
+* Total amount (net)
+* Total amount (gross)
 * Warehouse
 * VAT
 * External item ID
