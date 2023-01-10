@@ -2,6 +2,7 @@
 :author: team-webshop
 :keywords: online shop, Ceres, Drag and drop, construction module, ShopBuilder, Widget, Checkout,
 :icons: font
+:description: Learn how to use the ShopBuilder to create, manage, and edit pages for your plentyShop without any programming skills.
 :docinfodir: /workspace/manual-adoc
 :docinfo1:
 :id: UC8C8W9
@@ -1404,7 +1405,7 @@ This widget provides item lists. Click *Edit* icon:cog[role="darkGrey"] to open 
 
 *Category items* = Select this option to generate a list consisting of items of a single category. If this option is active, the additional field *category* is displayed in the widget settings. Clicking this field opens the *category picker*. Select the desired category and *confirm* the selection at the lower end of the +
 *Last seen* = Create a list of the items that a user visited recently. +
-*Items with tags* = Select this option to generate a list of items with specific tags. The input field *tags* is displayed below the current input field. If you want to enter multiple tag IDs, make sure that they are separated by commas. +
+*Items with tags* = Select this option to generate a list of items with a specific tag. The input field *tags* is displayed below the current input field. Enter the tag ID. +
 *Manufacturers* = Select this option to generate a list of items that share a manufacturer. If you select this option, you can pick the manufacturer in the *manufacturer* field. +
 
 | *Item sorting*
@@ -1978,7 +1979,7 @@ This widget provides the button with which customers can log out of the online s
 
 |====
 
-[#97]
+[#order-confirmation]
 === Order confirmation
 
 This widget category lists all widgets that serve to design the order confirmation.
@@ -2051,7 +2052,7 @@ This widget provides a list of ordered items, including item image, item name, s
 |Add additional CSS classes to customise the widget’s style. You can add any number of CSS classes.
 
 | *Appearance*
-|Select a colour from the drop-down list. This determines the colour if the item names in the list. You define the available colour options in the <<#design, Design>> menu.
+|Select a colour from the drop-down list. This determines the colour of the item names in the list. You define the available colour options in the <<#design, Design>> menu.
 
 | *Edit paddings*
 |Activate to display additional formatting options. You can edit all <<#paddings-margins, paddings and margins>> separately.
@@ -2083,6 +2084,67 @@ This widget provides a list of order totals. Click *Edit* icon:cog[role="darkGre
 
 |====
 
+[#softlogin]
+=== Softlogin
+
+The softlogin page is used to provide customers who order as guests with secure access to their order confirmation.
+When guest customers open the order confirmation link they receive by email after placing an order, they are first directed to the softlogin page.
+
+On the soft login page, customers must again enter the postcode of the delivery or billing address in order to access the order confirmation page. If the customer does not have a postcode, the last name of the billing or delivery address is requested as a substitute. +
+
+In the *online store* step of the plentyShop LTS assistent you can set how long the order confirmation link should be valid for guest customers. You can set the validity to *30* days, *60* days or *Always*. +
+If you set the validity of the order confirmation link to *Always*, guest clients will be redirected to a page after 90 days where they can request a new order confirmation link. +
+
+Create a new *email template* containing the new order confirmation link.
+
+==== Create email template
+
+Create a new email template for sending the order confirmation link with the xref:crm:emailbuilder.adoc#create-template[EmailBuilder]. +
+This template must contain the variable `URL to order confirmation` which contains the link to the order confirmation. +
+After you have created the template, you have to link the template to the corresponding event.
+
+[.instruction]
+Linking the email template:
+
+. Open the Email assistant in the *Setup » Assistents » Basic setup » Email accounts* menu.
+. Select a client
+. Open the step *Automatic despatch*.
+. Select the newly created email template from the drop-down list for the *New order confirmation link* event.
+. Finish the assistant.
+. Click on *Finalise* to save your changes.
+
+==== Create softlogin content
+
+To make the soft login page available to your guest customers, create a new ShopBuilder content of type *Softlogin* in the category of your order confirmation page. The softlogin page will be displayed automatically when your guest customers access the order confirmation page via the link in the email sent to them.
+
+==== Edit softlogin page texts
+
+You can edit the texts that are displayed on the softlogin page via the *CMS " Multilingualism* menu.
+The two translation keys `softLoginDescriptionName` and `softLoginDescriptionPostcode` contain the texts that are displayed on the softlogin page. `softLoginDescriptionPostcode` contains the text that will be displayed if guest clients can enter a postcode. If no postcode is available, the text contained in `softLoginDescriptionName` will be displayed.
+
+==== Softlogin widget
+
+Click *Edit* icon:cog[role="darkGrey"] to open the widget settings. +
+
+[[table-softlogin]]
+.Settings softlogin for the order confirmation page
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| **CSS class**
+|Add additional CSS classes to customise the widget’s style. You can add any number of CSS classes.
+
+| *Appearance*
+|Select a colour from the drop-down list. This determines the colour of the button on the softlogin page. You define the available colour options in the <<#design, Design>> menu.
+
+| *Edit paddings*
+|Activate to display additional formatting options. You can edit all <<#paddings-margins, paddings and margins>> separately.
+
+| *Edit margins*
+|Activate to display additional formatting options. You can edit all <<#paddings-margins, paddings and margins>> separately.
+
+|====
 
 // ===== Return
 

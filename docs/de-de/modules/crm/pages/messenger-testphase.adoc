@@ -1,6 +1,6 @@
 = Messenger (Testphase)
 :keywords:
-:description: Erfahre, wie du den Messenger in plentymarkets für den E-Mail-Versand und E-Mail-Empfang nutzt.
+:description: Erfahre, wie du den Messenger in plentymarkets sowohl für den E-Mail-Versand und E-Mail-Empfang als auch für die interne Kommunikation nutzt.
 :author: team-crm
 
 Im Menü *CRM » Messenger (Testphase)* verwaltest du sowohl die externe Kommunikation mit deinen Kund:innen in Form von E-Mails als auch die interne Kommunikation in Form von Nachrichten. Wenn du Nachrichten flüsterst, sind diese Nachrichten nur in deinem plentymarkets System sichtbar und können von deinen Kontakten _nicht_ eingesehen werden. 
@@ -46,8 +46,6 @@ Wenn Benutzer:innen vom Typ *Backend* mit dem Messenger arbeiten sollen, muss ei
 
 [#benutzerrechte-backend-benutzer]
 === Rechte für Backend-Benutzer:innen vergeben
-
-// TODO: Berechtigungen prüfen
 
 :rights-purpose: Nachrichten im Messenger sehen und erstellen
 :right-one: pass:quotes[*CRM > Nachricht > Anzeigen*]
@@ -118,13 +116,6 @@ Im Schritt *E-Mail-Weiterleitung* wird automatisch eine kryptische E-Mail-Adress
 
 Gib im unteren Bereich alle E-Mail-Adressen ein, die Nachrichten an die kryptische, weiterleitende E-Mail-Adresse oben senden dürfen. Du kannst beliebig viele E-Mail-Adressen mit einem Klick auf *Neuen Eintrag hinzufügen* (material:add[]) hinzufügen. Bestehende E-Mail-Adressen können mit einem Klick auf *Eintrag entfernen* (material:delete[]) gelöscht werden. *_Hinweis:_* Mindestens eine E-Mail-Adresse muss hier eingetragen werden.
 
-//// 
-[#verifizierung-e-mail-adressen]
-==== Verifizierung der E-Mail-Adressen
-
-In diesem Schritt siehst du den Fortschritt des Verifizierungsvorgangs. plentymarkets sendet eine E-Mail an alle E-Mail-Adressen, die du im vorherigen Schritt <<#e-mail-weiterleitung, E-Mail-Weiterleitung>> eingegeben hast. Das System prüft dann, ob die E-Mail-Adressen valide sind und die Weiterleitungen funktionieren.
-////
-
 [#einstellungen-e-mail-versand]
 ==== Einstellungen für den E-Mail-Versand
 
@@ -134,7 +125,8 @@ Wähle nach Eingabe der Zugangsdaten die Verschlüsselung und gib die Absender-E
 
 *_Hinweis für Postfächer bei mailbox.org:_* Gib den Port *465* ein und wähle als Verschlüsselung die Einstellung *SSL*.
 
-// TODO: Aktiviere (material:check_box[role=skyBlue]) die Checkbox, um das Standardpostfach für alle Nachrichten zu wählen.
+Im Bereich *Standard-Posteingang* kannst du die Option *Als Standard-Posteingang festlegen* aktivieren (material:check_box[role=skyBlue]), damit dieser Posteingang beim Schreiben neuer Nachrichten aus dem Messenger vorausgewählt ist. 
+
 
 ////
 TODO: ggf. neue Tabelle einfügen mit aktuellen Zahlen analog zu dieser Tabelle hier: https://knowledge.plentymarkets.com/crm/e-mails-versenden#200
@@ -144,40 +136,28 @@ ggf. Tabelle mit weiteren Beispielen außer mailbox.org: Googlemail, Office365, 
 
 Außerdem wählst du in diesem Schritt eine E-Mail-Vorlage für den E-Mail-Versand.
 
-[TIP]
-.Nutze die Standardvorlage *Messenger default*
+[IMPORTANT]
+.Live-Modus im Assistenten *E-Mail-Konten* muss aktiviert sein
 ====
-Wir empfehlen, die Standardvorlage *Messenger default* für den Messenger zu verwenden. Diese Vorlage ist bereits in deinem System im Menü *CRM » EmailBuilder (Testphase)* im Ordner *Standardvorlagen* vorhanden. Du kannst diese Vorlage nach deinen Wünschen anpassen.
+Im Assistenten *E-Mail-Konten* im Schritt xref:crm:emailbuilder.adoc#e-mail-server-zugangsdaten[Zugangsdaten] muss im Bereich *Möchtest du den Live-Modus aktivieren?* die Option *Live-Modus aktivieren* aktiviert (material:check_box[role=skyBlue]) sein. Dadurch wird der Testmodus deaktiviert und alle E-Mails werden an die jeweiligen Empfänger:innen versendet. 
+
+Das Aktivieren des Live-Modus gilt global für den gesamten E-Mail-Versand in plentymarkets. Somit auch für den E-Mail-Versand über den Messenger.
+====
+
+[TIP]
+.Standardvorlage *Messenger default NEW* verwenden
+====
+Wir empfehlen, die Standardvorlage *Messenger default NEW* für den Messenger zu verwenden. Diese Vorlage ist bereits in deinem System im Menü *CRM » EmailBuilder* im Ordner *Standardvorlagen* vorhanden. Du kannst diese Vorlage nach deinen Wünschen anpassen. Diese Vorlage wird automatisch vorausgewählt, wenn du eine neue Nachricht schreibst. 
 
 Die Vorlage enthält die folgenden Variablen:
 
-* Betreff der Nachricht in der Betreffzeile, dargestellt als `{{ messenger.title }}`
+* Name des Mandanten in der Betreffzeile, dargestellt als `{{ globals.clientName }}`
 ** Im Betreff der Vorlage muss eine sogenannte _twig expression_ in doppelt geschweiften Klammern enthalten sein, weil in der Betreffzeile keine "normalen" Variablen verwendet werden können. Weitere Informationen dazu findest du auf der Handbuchseite xref:crm:emailbuilder.adoc#[EmailBuilder] im Kapitel xref:crm:emailbuilder.adoc#variablen-emailbuilder[Verfügbare Variablen und twig expressions].
 * Vollständiger Name
-* Inhalt der Nachricht
 * Signatur im HTML-Format
-* ID der Konversation
-** Die Variable *ID der Konversation* dient als eindeutiges Kennzeichen, damit die Nachricht immer korrekt zugeordnet werden kann. Daher sollte diese Variable _nicht_ aus der Vorlage entfernt werden.
 ====
 
-Wenn du in diesem Schritt _nicht_ die Standardvorlage für den Messenger, sondern eine eigene E-Mail-Vorlage verwenden möchtest, stelle sicher, dass die E-Mail-Vorlage, die du im Menü *CRM » EmailBuilder (Testphase)* erstellst, mindestens die folgenden Variablen enthält:
-
-* Betreff der Nachricht 
-** Gib im Betreff der Vorlage `{{ messenger.title }}` ein.
-* Inhalt der Nachricht 
-** Füge im Textfeld der Vorlage die Variable `Inhalt der Nachricht` ein.
-* ID der Konversation
-** Füge im Textfeld der Vorlage die Variable `ID der Konversation` ein.
-
-Im EmailBuilder stehen dir die folgenden Messenger-bezogenen Variablen zur Verfügung:
-
-* ID der Nachricht
-* ID der Konversation
-* Inhalt der Nachricht
-* Betreff der Nachricht
-* Vorschau der Nachricht
-* Minuten der Nachricht
-* Hat abgerechnete Minuten
+Du kannst in diesem Schritt selbstverständlich auch eine Vorlage wählen, die du selbst im Menü *CRM » EmailBuilder* erstellt hast.
 
 [#einstellungen-e-mail-empfang]
 ==== Einstellungen für den E-Mail-Empfang
@@ -186,12 +166,10 @@ Im Schritt *Einstellungen für den E-Mail-Empfang* wählst du den oder die Tags,
 
 Im letzten Abschnitt wählst du die Abonnent:innen, die bei neuen Nachrichten informiert werden. Wähle entweder einzelne Benutzer:innen aus der Dropdown-Liste oder wähle Rollen, damit alle dieser Rolle zugewiesenen Benutzer:innen neue Nachrichten in diesem Postfach abonnieren.
 
-[#testmodus-inaktiv]
-==== Testmodus auf inaktiv setzen
+[#zusammenfassung]
+==== Zusammenfassung
 
-Damit du Nachrichten mit dem Messenger versenden kannst, ist es erforderlich, dass der Live-Modus im Assistenten *E-Mail-Konten* im Schritt *Zugangsdaten* aktiviert (material:check_box[role=skyBlue]) wird. 
-
-Das Setzen des Testmodus auf *inaktiv* kannst du in diesem Schritt erledigen, ohne den Assistenten verlassen zu müssen. Aktiviere (material:check_box[role=skyBlue]) dazu die Einstellung *Live-Modus aktivieren*.
+In diesem Schritt wird eine Zusammenfassung aller getätigten Eingaben in den einzelnen Schritten aufgelistet. Du kannst deine Angaben prüfen, in den einzelnen Schritten ggf. Anpassungen vornehmen und den Assistenten danach über die Zusammenfassung abschließen.
 
 [#nachrichten-sammeln]
 === Nachrichten im Messenger sammeln
@@ -207,7 +185,7 @@ Wenn du den Dienst zum Sammeln der E-Mails aktivierst, werden die E-Mails aus de
 * Aufträge » Aufträge (Testphase)
 * Gruppenfunktion im Auftrag
 
-Den Assistenten *E-Mail-Konten* findest du ebenfalls im Menü *Einrichtung » Assistenten » Grundeinrichtung*. Weitere Informationen zum Sammeln der E-Mails findest du auf der Seite xref:crm:emailbuilder.adoc#[EmailBuilder (Testphase)] im Kapitel xref:crm:emailbuilder.adoc#e-mail-messenger-integration[Messenger-Integration].
+Den Assistenten *E-Mail-Konten* findest du ebenfalls im Menü *Einrichtung » Assistenten » Grundeinrichtung*. Weitere Informationen zum Sammeln der E-Mails findest du auf der Seite xref:crm:emailbuilder.adoc#[EmailBuilder] im Kapitel xref:crm:emailbuilder.adoc#e-mail-messenger-integration[Messenger-Integration].
 
 [#nachricht-erstellen]
 == Neue Nachricht erstellen
@@ -221,8 +199,8 @@ Nachricht erstellen:
 . Klicke oben links auf material:add[] *Neue Nachricht*.
 . Gib im Feld *Empfänger hinzufügen...* einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste. +
 *_Beispiel:_* Wenn du eine Zahl eingibst, werden dir mögliche Empfänger:innen mit dieser Auftrags-ID oder Kontakt-ID vorgeschlagen (siehe <<#image-messenger-new-message-suggestion-list>>).
-// . Wähle eine Vorlage aus der Liste.
-// . Wähle die Vorlagensprache.
+. Wähle eine Vorlage aus der Liste.
+. Wähle die Vorlagensprache.
 . Gib den Betreff deiner Nachricht im Feld *Betreff* ein.
 . Wähle den Posteingang aus der Dropdown-Liste.
 . Gib im Textfeld die Nachricht ein.
@@ -241,22 +219,22 @@ image::crm:messenger-new-message-suggestion-list.png[width=640, height=360]
 |====
 |Einstellung |Erläuterung
 
-|[#intable-recipients]*Empfänger:innen*
-|Gib hier einen Namen oder eine ID ein und wähle dann den passenden Wert aus der Vorschlagsliste (siehe <<#image-messenger-new-message-suggestion-list>>).
+|[#intable-recipients]*Empfänger:in*
+|Gib hier einen Namen oder eine ID ein und wähle dann den passenden Wert aus der Vorschlagsliste (siehe <<#image-messenger-new-message-suggestion-list>>). Du kannst mehrere Empfänger:innen hinzufügen.
 
-// |[#intable-template]*Vorlage*
-// |Wähle eine Vorlage aus der Liste. Du siehst in der Liste alle Vorlagen, die du im xref:crm:emailbuilder.adoc#[EmailBuilder] erstellt hast. +
-// *_Tipp:_* Gib mindestens 3 Buchstaben ein, damit dir eine Vorschlagsliste der bereits vorhandenen E-Mail-Vorlagen angezeigt wird. +
-// *_Hinweis:_* Wenn du auf <<#intable-refresh-template, Vorlage laden>> klickst, wird der Inhalt der Vorlage und der in der Vorlage gespeicherte Betreff angezeigt.
+|[#intable-template]*Vorlage*
+|Wähle eine Vorlage aus der Liste. Du siehst in der Liste alle Vorlagen, die du im xref:crm:emailbuilder.adoc#[EmailBuilder] erstellt hast. +
+*_Tipp:_* Gib mindestens 3 Buchstaben ein, damit dir eine Vorschlagsliste der bereits vorhandenen E-Mail-Vorlagen angezeigt wird. +
 
-// |[#intable-template-language]*Vorlagensprache*
-// |Wähle die Vorlagensprache.
+|[#intable-template-language]*Vorlagensprache*
+|Wähle die Vorlagensprache. +
+Wenn die gewählte Sprache nicht der empfohlenen Sprache (basierend auf den Empfänger:innen) entspricht, wird ein Hinweis angezeigt.
 
-// |[#intable-refresh-template]*Vorlage laden*
-// |Mit einem Klick auf material:refresh[] lädst du den Inhalt der Vorlage neu. Zum Beispiel wird der Inhalt der gewählten Vorlage sowie der Betreff angezeigt.
+|[#intable-template-subject]*Betreff*
+|Gib den Betreff ein. Dies ist ein Pflichtfeld.
 
 |[#intable-inbox]*Posteingang*
-|Wähle einen Posteingang aus der Dropdown-Liste. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten durchlaufen>> hast.
+|Wähle einen Posteingang aus der Dropdown-Liste. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten *Messenger-Konfiguration* durchlaufen>> hast.
 
 |[#intable-text-field]*Textfeld*
 |Gib hier den Inhalt der Nachricht ein.
@@ -277,10 +255,8 @@ In der Übersicht werden geflüsterte Nachrichten in _kursiver Schrift_ dargeste
 *_Wichtig:_* Damit du die <<#intable-capture-minutes, Minuten für die Nachricht erfassen>> kannst, musst du mindestens ein Tag vom Typ *Nachrichten (kostenpflichtig)* erstellen und dieses Tag der Nachricht zuweisen.
 
 |[#intable-capture-minutes]*Minuten erfassen* (material:more_vert[])
-|Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine <<#intable-whisper-mode, geflüsterte Nachricht>> handelt. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Minuten erfassen* aktivierst (material:toggle_on[role=skyBlue]), werden für diese Nachricht Minuten erfasst. Die Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN* wird geändert in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. +
-*_Hinweis:_* Du kannst die Schaltfläche *Minuten erfassen* nur aktivieren, wenn der <<#intable-whisper-mode, Flüstermodus>> für diese Nachricht aktiviert werden.
-
-// TODO: für minuten erfassen noch erklären, wie sich die schaltflächen ändern, wenn man freiminuten und bezahlte minuten gewählt hat.
+|Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine <<#intable-whisper-mode, geflüsterte Nachricht>> handelt. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Minuten erfassen* aktivierst (material:toggle_on[role=skyBlue]), werden für diese Nachricht Minuten erfasst. Die Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN* wird geändert in material:visibility_off[role=skyBlue] *MINUTEN ERFASSEN*. +
+*_Hinweis:_* Du kannst die Schaltfläche *Minuten erfassen* nur aktivieren, wenn der <<#intable-whisper-mode, Flüstermodus>> für diese Nachricht aktiviert ist.  
 
 |[#intable-timer]*Timer anzeigen* (material:more_vert[])
 |Du kannst für jede Nachricht einen Timer starten. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Timer anzeigen* aktivierst (material:toggle_on[role=skyBlue]), startet automatisch der Timer neben der Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN*. +
@@ -289,14 +265,10 @@ Klicke auf material:pause_circle[], um den Timer anzuhalten bzw. auf material:pl
 |[#intable-manage-inboxes]*Posteingänge verwalten* (material:more_vert[])
 |Klicke zunächst auf material:more_vert[] und dann auf material:edit[] *Posteingänge verwalten*. Dadurch wirst du in das Menü *Einrichtung » Assistenten » Grundeinrichtung* weitergeleitet. Hier kannst du die Posteingänge über die dort sichtbaren <<#assistent-durchlaufen, Assistenten>> *Messenger-Konfiguration* bearbeiten.
 
-//|[#intable-name-inbox]_Name des aktuell gewählten Posteingangs_
-//| Mit einem Klick auf material:arrow_drop_down[] kannst du einen anderen Posteingang aus der Dropdown-Liste wählen. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten durchlaufen>> hast.
-
 |[#intable-send]*SENDEN*
 |Mit einem Klick auf material:forward_to_inbox[role=skyBlue] *SENDEN* wird die Nachricht gesendet. +
-*_Hinweis:_* Wenn du für die Nachricht Minuten erfasst, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. Wenn du die Nachricht flüsterst, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *FLÜSTERN*.
-
-// TODO: hier noch die weiteren Szenarien auflisten. (ERFASSEN und SENDEN etc.
+*_Hinweis:_* Wenn du für die Nachricht <<#intable-capture-minutes, Minuten erfasst>>, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. +
+Wenn du die Nachricht <<#intable-whisper-mode, flüsterst>>, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *FLÜSTERN*.
 
 |====
 
@@ -509,25 +481,27 @@ Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Ve
 [#benachrichtigung-neue-nachricht]
 == Benachrichtigungen über neue Nachrichten 
 
-Wenn du das Menü *CRM » Messenger (Testphase*) öffnest, siehst du bei Eingang neuer Nachrichten die Anzahl der neuen Nachrichten am Symbol material:notifications[]. Mit einem Klick auf material:notifications[] öffnet sich das Benachrichtigungsfenster.
+Aktiviere im Assistenten *Messenger-Konfiguration* im Schritt *Einstellungen für den E-Mail-Empfang* die Option *Benachrichtigungen aktivieren* (material:check_box[role=skyBlue]) im Bereich *Möchtest du Benachrichtigungen aktivieren?*, damit du in deinem plentymarkets Backend bei Eingang neuer Nachrichten die Anzahl der neuen Nachrichten neben dem Symbol material:notifications[] sehen kannst. Mit einem Klick auf material:notifications[] öffnet sich das Benachrichtigungsfenster.
+
+[[image-notifications-new-messages]]
+.Benachrichtigung über neue Nachricht im Messenger im plentymarkets Backend
+image::crm:benachrichtigung-neue-nachricht-messenger.png[width=640, height=360]
 
 Im Bereich material:info[] *Neue Messenger-Nachricht* siehst du den Betreff der Nachricht und wann die Nachricht gesendet wurde. Klicke auf material:link[] *Nachricht öffnen*, um die Nachricht im Messenger zu öffnen. +
-Wenn du die Benachrichtigung für diese Nachricht entfernen möchtest, klicke auf material:more_vert[] und dann auf material:delete[] *Schließen*. Die Zahl bei dem Symbol material:notifications[] reduziert sich dann um 1.
+Wenn du die Benachrichtigung für diese Nachricht entfernen möchtest, klicke auf material:more_vert[] und dann auf material:delete[] *Schließen*. Die Zahl neben dem Symbol material:notifications[] reduziert sich dann um 1.
 
 [#auf-nachricht-antworten]
 == Auf eine bestehende Nachricht antworten
 
-Suche die <<#konversation-suchen, Konversation>>, die die Nachricht enthält, auf die du antworten möchtest. Klicke dann auf die Nachricht, um darauf zu antworten. Beim Antworten auf eine bestehende Nachricht siehst du alle Empfänger:innen, die diese Nachricht erhalten. Du kannst weitere Empfänger:innen hinzufügen.
+Suche die <<#konversation-suchen, Konversation>>, die die Nachricht enthält, auf die du antworten möchtest. Klicke dann auf die Nachricht, um darauf zu antworten. +
+Klicke oben rechts auf material:fullscreen[], um den Vollbildmodus der Nachricht anzuzeigen und die Übersicht auszublenden. Klicke anschließend auf material:fullscreen_exit[], um den Vollbildmodus zu verlassen und zur Übersicht zurückzukehren. +
+Beim Antworten auf eine bestehende Nachricht siehst du alle Empfänger:innen, die diese Nachricht erhalten. Du kannst weitere Empfänger:innen hinzufügen. Falls gewünscht, wähle aus der Dropdown-Liste *Vorlage* eine Vorlage und eine Vorlagensprache.
 
-// Falls gewünscht, wähle aus der Dropdown-Liste *Vorlage* eine Vorlage und eine Vorlagensprache.
-
-Der einzige Unterschied zum <<#nachricht-erstellen, Erstellen einer Nachricht>> ist, dass du beim Antworten auf eine bestehende Nachricht über das Symbol material:more_vert[] den Betreff ein- und ausblenden kannst (siehe <<#image-messenger-reply-to-message>>). 
+Der einzige Unterschied zum <<#nachricht-erstellen, Erstellen einer Nachricht>> ist, dass du beim Antworten auf eine bestehende Nachricht über das Symbol material:more_vert[] den Betreff und die Vorlagenliste ein- und ausblenden und den Vollbildmodus der Nachricht öffnen kannst (siehe <<#image-messenger-reply-to-message>>). 
 
 [[image-messenger-reply-to-message]]
 .Auf eine bestehende Nachricht antworten
-image::crm:messenger-auf-nachricht-antworten.png[width=640, height=360]
-
-// TODO: Screenshot erneuern
+image::crm:messenger-auf-nachricht-antworten-kontextmenue.png[width=640, height=360]
 
 Du kannst den Betreff anpassen, wenn die Option *Betreff* aktiviert ist (material:toggle_on[role=skyBlue]). Wenn du die Option *Betreff* _nicht_ aktiviert hast (material:toggle_off[]), ist das Feld *Betreff* beim Antworten auf die Nachricht nicht sichtbar. Der aktuell gewählte Betreff wird dann beim Antworten auf die Nachricht automatisch übernommen.
 
@@ -553,8 +527,6 @@ Listenansicht: im linken Bereich werden alle gefundenen Konversationen als Liste
 Nachrichten im Messenger werden nach Stichworten bzw. textlichen Parametern, die von deinem plentymarkets System automatisch erkannt werden, zugeordnet.
 
 Beachte die Stichworte, die zu einer Zuordnung führen, in <<#table-assignment-messenger>>. Groß- und Kleinbuchstaben spielen _keine_ Rolle.
-
-
 
 [[table-assignment-messenger]]
 .Zuordnungsparameter und mögliche Schreibweisen
@@ -690,7 +662,7 @@ Tags einer Konversation zuweisen:
 [#tag-hinzufuegen]
 ==== Tag hinzufügen
 
-Wenn du den gesuchten Tag nicht gefunden hast, wie im Kapitel <<#kontextmenue-tags-konversation, Tags zuweisen>> beschrieben, kannst du aus der Übersicht des Messengers heraus einen neuen Tag erstellen. Gehe dazu wie im Folgenden beschrieben vor.
+Wenn du den gesuchten Tag nicht gefunden hast, wie im Kapitel <<#kontextmenue-tags-konversation, Der Konversation Tags zuweisen>> beschrieben, kannst du aus der Übersicht des Messengers heraus einen neuen Tag erstellen. Gehe dazu wie im Folgenden beschrieben vor.
 
 [.instruction]
 Neuen Tag erstellen:
@@ -818,7 +790,7 @@ Minuten erfassen:
 . Du siehst hier im Feld *Timer anzeigen* die Zeit, die der Timer bisher aufgezeichnet hat. 
 . Im Feld *Minuten* kannst du den Wert ggf. anpassen.
 . Wähle (material:radio_button_checked[role=skyBlue]), ob es sich um *Freiminuten* oder um *Bezahlte Minuten* handelt.
-. Wähle ggf. Tags aus der Liste.
+. Wähle ein passendes Tag oder mehrere Tags aus der Liste.
 . Klicke auf *ERFASSEN UND SPEICHERN*.
 
 [[image-messenger-capture-minutes-window]]
@@ -936,11 +908,7 @@ Nachricht löschen:
 . Klicke auf material:delete[] *Löschen*. +
 → Ein Fenster mit einer Sicherheitsabfrage erscheint.
 . Klicke auf *Ja*. +
-→ Die Nachricht wird gelöscht und in den <<#papierkorb, Papierkorb>> verschoben.
-
-////
-TODO: FRAGE: Wird die einzelne gelöschte Nachricht auch in den Papierkorb verschoben? Konnte ich im System nicht nachstellen.
-////
+→ Die Nachricht wird gelöscht.
 
 [#paypal-dispute]
 == Verknüpfung zum PayPal Dispute-Plugin
@@ -1187,10 +1155,6 @@ Auch im Bereich *Meine Nachrichten* kannst du die Gruppenfunktion nutzen. Die Gr
 == Papierkorb 
 
 In der Navigation auf der linken Seite des Messengers findest du den Ordner material:delete[] *Papierkorb*. Hier werden alle <<#kontextmenue-konversation-loeschen, gelöschten Konversationen>> und alle <<#einzelne-nachricht-loeschen, gelöschten Nachrichten>> abgelegt.
-
-//// 
-TODO: Wird es in Zukunft möglich sein, alle Nachrichten aus dem Papierkorb mit einem Klick zu entfernen (so wie bei "Papierkorb leeren" in E-Mail-Programmen? Oder werden die Nachrichten automatisch nach einem bestimmten Zeitraum gelöscht? Wird es möglich sein, Nachrichten aus dem Papierkorb "zurückzuholen", wenn ich die Konversation bzw. Nachricht auf "nicht abgeschlossen" setze?
-////
 
 Im Papierkorb des Messengers kannst du dir die folgenden Spalten anzeigen lassen:
 

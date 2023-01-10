@@ -1,7 +1,6 @@
 = Kaufland.de einrichten
 :keywords: real.de, real, kaufland.de, kaufland.de, kaufland, kaufland
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Martkplatz Kaufland.de in deinem plentymarkets System ein.
-:id: LZKL2OG
+:description: Auf dieser Seite erfährst du, wie du Kaufland in plentymarkets einrichtest, damit du deine Artikel auf Kaufland verkaufen kannst.
 :author: team-plenty-channel
 :market: Kaufland.de
 
@@ -71,7 +70,14 @@ Die folgenden Felder werden beim Bestandsabgleich exportiert:
 
 *_Hinweise zum Auftragsimport bei Kaufland:_*
 
-* Aufträge mit dem Kaufland-Status *OPEN* werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Hierbei handelt es sich um Aufträge, die nach der Bestellung noch von der Käufer:in storniert werden können. Die Aufträge verbleiben 15 Minuten in diesem Status, damit Kund:innen die Möglichkeit haben, den Auftrag zu stornieren.
+* Aufträge mit dem Kaufland-Status *OPEN* werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Hierbei handelt es sich um Aufträge, die nach der Bestellung noch von der Käufer:in storniert werden können. Die Aufträge verbleiben 15 Minuten in diesem Status, damit Kund:innen die Möglichkeit haben, den Auftrag zu stornieren. +
+
+[TIP]
+.Warenbestand für Aufträge mit Vorkasse reservieren
+====
+*_Wichtig:_* Standardmäßig wird für Aufträge im Status *[1] Unvollständige Daten* kein Warenbestand reserviert. Damit für diese Aufträge Warenbestand reserviert wird, öffne das Menü *Einrichtung » Aufträge » Einstellungen*. Wähle bei der Einstellung *Status Auftragsreservierung (Reservierung von Beständen)* für die Option *von* den Status *[1] Unvollständige Daten*. Wähle in der letzten Dropdown-Liste die Option *Alle Aufträge*.
+====
+
 * Wenn der Auftrag bei Kaufland nach 15 Minuten einen anderen Status bekommt, wechselt der Auftragsstatus in plentymarkets automatisch zu Status *[5] Freigabe Versand*. Alle fehlenden Auftragsdaten werden am Auftrag ergänzt.
 
 * <<#kaufland-fbk, Aufträge, die von Kaufland abgewickelt werden (FbK = Fulfillment by Kaufland)>> werden mit der Auftragsherkunft *170.01 Kaufland FBK DE* in plentymarkets importiert.
@@ -88,8 +94,239 @@ Mit plentymarkets kannst du auf den Kaufland-Länderplattformen Kaufland.de, Kau
 Beachte jedoch, dass Kaufland die Marktplätze in Tschechien und der Slowakei noch nicht eröffnet hat. Du kannst deine Artikel dort bereits listen, jedoch noch nicht verkaufen.
 ====
 
+[#einstellungen-kaufland]
+=== _Neues Einrichtungsmenü:_ Konto-Einstellungen vornehmen
+
+Um Artikel bei Kaufland anzubieten, richte den Marktplatz in plentymarkets ein. Dazu benötigst du deine Kaufland-Zugangsdaten. Pro plentyShop kannst du mehrere Konten für Kaufland einrichten.
+
+[.instruction]
+Konto-Einstellungen vornehmen:
+
+. Öffne das Menü *Einrichtung » Märkte » Kaufland » Neue Einstellungen (Testphase)*.
+. Klicke auf *Neues Konto* (icon:add[]).
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<#einstellungen-kaufland>>.
+. Speichere (terra:save[]) die Einstellungen.
+
+[[einstellungen-kaufland]]
+.Einstellungen des Marktplatzes Kaufland
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+2+^| *Allgemein*
+
+| *Shop-Name* +
+(Pflichtfeld)
+| Gib den Namen deines Kaufland-Shops ein. +
+*_Hinweis:_* Dieser Name wird nur in deinem plentymarkets System angezeigt und nicht zu Kaufland exportiert. Der Shop-Name dient also nur dazu, die Liste der Konfigurationen im Menü *Einrichtung » Märkte » Kaufland » Neue Einstellungen (Testphase)* übersichtlicher zu machen.
+
+| *Datenaustausch*
+| Aktivieren, um Daten mit Kaufland auszutauschen.
+
+| *Client API Key* +
+(Pflichtfeld)
+| Client API Key eingeben. Du erhältst den Key von Kaufland.
+
+| *Secret API Key* +
+(Pflichtfeld)
+| Secret API Key eingeben. Du erhältst den Key von Kaufland.
+
+2+^| *Auftragseinstellungen*
+
+| *Mandant (Shop)*
+| plentyShop aus der Dropdown-Liste wählen, den du für diese Konfiguration nutzen möchtest.
+
+| *Zahlungseingang buchen*
+| *Ja* = Aufträge werden als *bezahlt* importiert. +
+*Nein* = Aufträge werden als *nicht bezahlt* importiert. +
+
+Unabhängig von dieser Einstellung werden Artikel bei ausreichend Bestand sofort für den Versand freigegeben.
+
+| *Versanddienstleister zuordnen*
+| Ordne deinen Versanddienstleistern in plentymarkets die Versanddienstleister von Kaufland aus der Dropdown-Liste zu. +
+
+Diese Einstellung ist erforderlich, damit Kaufland.de nach Bestätigung des Versands mit Hilfe der richtigen Paketnummer den korrekten Tracking-Link an Kund:innen per E-Mail versenden kann. +
+
+*_Wichtig:_* Du musst jeden deiner Dienstleister mit einem Dienstleister aus der Dropdown-Liste verknüpfen.
+
+*_Hinweis:_* Klicke auf (icon:open_in_new[]), um neue Versanddienstleister in plentymarkets einzurichten. Du wirst zum Menü *Einrichtung » Aufträge » Versand » Optionen » Tab: Versanddienstleister* weitergeleitet.
+
+| *Status für Aufträge mit fehlgeschlagener Versandbestätigung*
+| In welchen Status sollen Aufträge verschoben werden, für die keine Versandbestätigung an Kaufland.de gesendet werden konnte? Erstelle bei Bedarf einen xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[neuen Status]. +
+
+*_Hintergrund:_* Mit der Ereignisaktion <<#shipping-confirmation, Versandbestätigung an Kaufland.de senden>> informierst du {market} automatisch darüber, dass die Artikel eines Auftrags versendet wurden. Wenn die Ereignisaktion nicht ausgeführt werden kann, wird der Auftrag in den Status geschoben, den du für die Einstellung *Status für Aufträge mit fehlgeschlagener Versandbestätigung* gewählt hast.
+
+2+^| *Artikeleinstellungen*
+
+| *Artikelexport*
+| Aktivieren, um Artikel zu Kaufland zu exportieren. +
+
+*_Hinweis:_* Du kannst diese Einstellung *deaktivieren*, wenn du deine Artikel mit <<#catalogue-export, Katalogen>> an Kaufland überträgst. +
+Stelle jedoch sicher, dass du alle Varianten, die du auf Kaufland verkaufen möchtest, <<#varianten-mit-katalog-kategorie-verknüpfen, mit einem Kaufland-Katalog verknüpft hast>>, bevor du diese Einstellung deaktivierst. Wenn die Variante nicht mit einem Kaufland-Katalog verknüpft ist, wird sie nicht zu Kaufland exportiert.
+
+| *Nur Artikel mit Markierung übertragen*
+a| * *alle Artikel* = Alle Artikel werden übertragen.
+* *alle Artikel mit Markierung 1* oder *2* = Alle Artikel mit dieser Markierung werden übertragen. +
+* *alle Artikel ohne Markierung 1* oder *2* = Alle Artikel ohne diese Markierung werden übertragen. +
+* Auswahl einer bestimmten Markierung = Nur Artikel mit der gewählten Markierung werden übertragen. +
+Diese Einstellung greift für Artikeldaten und Angebotsdaten.
+
+| *Bildposition (ID) des Energieeffizienzlabels*
+| ID des Bildes für das Energieeffizienzlabel eingeben. Du findest die ID des Bildes im Tab *Bilder* eines Artikels. +
+
+Alle Bilder, die als Energieeffizienzlabel übertragen werden sollen, müssen diese Position (ID) haben. +
+
+*_Hinweis:_* Die ID muss eine ganze Zahl sein.
+
+| *Technische Daten zur Artikelbeschreibung hinzufügen*
+| Aktiviere diese Einstellung, wenn die technischen Daten, die im Tab *Texte* eines Artikels im Bereich *Technische Daten* eingegeben sind, zur Artikelbeschreibung auf Kaufland hinzugefügt werden sollen. +
+Diese Einstellung ist standardmäßig *aktiviert*.
+
+2+^| *Angebotseinstellungen*
+
+| *Angebotsabgleich*
+a| Aktivieren, wenn Angebote zu Kaufland übertragen und auf Kaufland aktualisiert werden sollen. Angebote werden stündlich und täglich bei Kaufland aktualisiert. +
+Nur wenn diese Einstellung und die Einstellung *Datenaustausch* aktiviert sind, findet der tägliche vollständige Angebotsabgleich und der stündliche Abgleich für geänderte Angebote statt. +
+
+*_Hinweis:_* Du kannst diese Einstellung *deaktivieren*, wenn du deine Artikel mit <<#catalogue-export, Katalogen>> an Kaufland überträgst. +
+Stelle jedoch sicher, dass du alle Varianten, die du auf Kaufland verkaufen möchtest, <<#varianten-mit-katalog-kategorie-verknüpfen, mit einem Kaufland-Katalog verknüpft hast>>, bevor du diese Einstellung deaktivierst. Wenn die Variante nicht mit einem Kaufland-Katalog verknüpft ist, wird sie nicht zu Kaufland exportiert.
+
+| *Inventory-Cache*
+| Aktivieren, wenn Bestandsdaten täglich im Cache gespeichert werden sollen. +
+
+*_Hinweis:_* Wir empfehlen, diese Einstellung zu aktivieren, da große Bestandsänderungen zu Fehlern führen können.
+
+| *Max. Menge für Artikel ohne Bestandsbeschränkung*
+| Ganze Zahl eingeben. Artikel mit der Einstellung *Keine Beschränkung* im Tab *Einstellungen* im Bereich *Verfügbarkeit* eines Artikels werden in der hier eingegebenen Anzahl auf Kaufland angeboten. Das heißt, dass maximal so viele Artikel, wie hier eingegeben, auf einmal auf Kaufland gekauft werden können. +
+Sobald ein Artikel verkauft wurde, wird zur nächsten Stunde die hier gespeicherte Anzahl wieder neu zum Verkauf eingestellt.
+
+| *Mindestpreis*
+| Einen Verkaufspreis für den Mindestpreis wählen, um die Tiefpreisautomatik von Kaufland zu nutzen. +
+
+Wenn noch andere Händler:innen das gleiche Produkt anbieten, passt die Tiefpreisautomatik deine Preise automatisch an. Dein Preis inklusive Versandkosten ist dann immer einen Cent günstiger als das Angebot deiner Mitbewerber:innen. Der Mindestpreis ist also der niedrigste Preis, zu dem die Variante angeboten werden soll. +
+
+*_Hinweis:_* Wähle für den Mindestpreis einen anderen Verkaufspreis als für den normalen Verkaufspreis, den du für Kaufland festgelegt hast. Der Mindestpreis-Verkaufspreis muss für die Herkunft Kaufland.de freigegeben sein. +
+
+Gib außerdem für den als Mindestpreis gewählten Verkaufspreis an der Variante einen Mindestpreis ein, um die Tiefpreisautomatik für diese Variante zu aktivieren. +
+
+*_Wichtig:_* Der Mindestpreis greift nicht bei Variantenartikeln mit Aufpreisen für Attribute. In diesem Fall die Option *deaktiviert* wählen oder jede Variante als separaten Artikel mit definiertem Mindestpreis erstellen, wenn der Mindestpreis genutzt werden soll.
+
+| *Text für Artikelkommentar*
+| Wählen, welcher Text als Kommentar an deinen Artikeln auf Kaufland angezeigt werden soll. Der gewählte Text wird bei jedem Angebot auf Kaufland angezeigt. +
+
+Du kannst Freitextfelder wählen oder das Feld *Artikelkommentar für jedes Angebot* für diese Funktion einstellen.
+
+| *Artikelkommentar für jedes Angebot*
+| Beliebigen Text eingeben. Der eingegebene Text wird bei jedem Angebot auf Kaufland angezeigt, wenn du bei der Einstellung *Text für Artikelkommentar* die Option *Artikelkommentar für jedes Angebot* wählst. +
+
+Wenn deine Artikel beispielsweise alle von Hand hergestellt werden, könntest du den Text "handgemacht" als Kommentar einfügen. Dieser Text wird dann an jedem Angebot auf Kaufland angezeigt.
+
+| *Versandprofile zuordnen*
+| Ordne deinen Versandprofilen in plentymarkets Kaufland-Versandgruppen zu. +
+
+Klicke zuerst auf *Kaufland-Versandgruppen aktualisieren* (icon:refresh[]), damit alle aktuellen Kaufland-Versandgruppen in der Dropdown-Liste zur Verfügung stehen. +
+*_Wichtig:_* Wenn du die Versandgruppen auf Kaufland änderst, kannst du sie über *Versandgruppen aktualisieren* in plentymarkets aktualisieren. +
+*_Hinweis:_* Wenn du die Kaufland-Versandgruppen aktualisierst, wird die Seite neu geladen. Nicht gespeicherte Änderungen gehen dadurch verloren. Deshalb werden zuerst alle Änderungen automatisch gespeichert, bevor die Kaufland-Versandgruppen aktualisiert werden. +
+
+Wenn an einem Artikel mehrere Versandprofile gespeichert sind, dann wird das Versandprofil mit der niedrigsten Kategorie und der höchsten Priorität exportiert. Die Kategorie und Priorität des Versandprofils werden unter *Einrichtung » Aufträge » Versand » Optionen » Tab: Versandprofile* im jeweiligen Versandprofil im Tab *Base* eingestellt.
+
+| *Lager zuordnen*
+a| Lager außerhalb der EU müssen einem Lager von Kaufland zugeordnet werden. Nutze dafür die Einstellung *Lager zuordnen*. Hier werden alle deine plentymarkets Lager vom Typ *Vertrieb* (Sales) aufgelistet. Wähle deine Lager und verknüpfe sie mit den passenden Lagern von Kaufland. So werden Bestände deiner plentymarkets Lager mit den Lagern von Kaufland verknüpft. +
+*_Hinweis:_* Diese Einstellung ist nicht relevant, wenn deine Lager innerhalb der EU sind. +
+
+* *–* = Das Lager wird mit dem Standard-Lager von Kaufland.de verknüpft.
+* *Nicht exportieren* = Der Bestand dieses plentymarkets Lagers wird nicht an Kaufland übertragen.
+
+| *Artikelverfügbarkeiten übertragen*
+| Wählen, ob die Artikelverfügbarkeiten zu Kaufland übertragen werden sollen.
+
+| *Artikelverfügbarkeiten zuordnen*
+a| Klicke auf *Zuordnunstabelle öffnen* (icon:swap_horiz[]), um die Artikelverfügbarkeiten in plentymarkets Lieferzeiten in Werktagen zuzuordnen. +
+
+In den Feldern *Min. Lieferzeit (in Werktagen)* und *Max. Lieferzeit (in Werktagen)* die minimale und maximale Lieferzeit in Werktagen eingeben, die der plentymarkets Artikelverfügbarkeit entspricht. +
+
+*_Hinweis:_* Bei Kaufland gelten Montag bis Freitag als Werktage. +
+
+Die plentymarkets Verfügbarkeits-IDs 1-10 entsprechen der im Menü *Einrichtung » Artikel » Verfügbarkeit* festgelegten Artikelverfügbarkeit.
+|===
+
+[#uebersicht]
+=== Konto-Übersicht
+
+Im Menü *Einrichtung » Märkte » Kaufland » Neue Einstellungen (Testphase)* erhältst du eine Übersicht über deine Kaufland-Konten. In <<tabelle-konto-uebersicht>> sind die einzelnen Spalten und verfügbaren Aktionen der Konto-Übersicht beschrieben.
+
+[TIP]
+.Spalten konfigurieren
+====
+Über *Spalten konfigurieren* (icon:settings[]) kannst du festlegen, welche Einstellungen in der Konto-Übersicht angezeigt werden sollen. +
+Standardmäßig werden die Spalten *Konto-ID*, *Shop-Name*, *Aktiv*, *Artikelexport aktiv* und *Angebotsabgleich aktiv* in der Übersicht angezeigt.
+====
+
+*_Hinweis:_* Die Konto-Übersicht sieht unterschiedlich aus, je nachdem, welche Spalten du über *Spalten konfigurieren* (icon:settings[]) in der Übersicht hinzufügst oder ausblendest. In der folgenden Tabelle sind nur die Spalten beschrieben, die standardmäßig in der Übersicht angezeigt werden.
+
+[[tabelle-konto-uebersicht]]
+.Kaufland Konto-Übersicht
+[cols="1a,3a"]
+|===
+|Spalte |Erläuterung
+
+| (icon:chevron_right[])
+| Einstellungen des Kontos ausklappen. Hier werden der *Client Key* und der *Secret Key* angezeigt.
+
+| *Konto-ID*
+| Die ID deines Kaufland-Kontos.
+
+| *Shop-Name*
+| Der Name, den du für die Konfiguration deines Kaufland-Kontos eingegeben hast. +
+Wir empfehlen, hier den Namen des Kaufland-Shops zu verwenden.
+
+| *Aktiv*
+| (icon:circle[role="blue"]) = Das Konto ist aktiv und Daten werden mit Kaufland ausgetauscht. +
+(icon:circle[]) = Das Konto ist nicht aktiv. Daten werden nicht mit Kaufland ausgetauscht.
+
+| *Artikelexport aktiv*
+| *Ja* = Artikeldaten werden mit Kaufland ausgetauscht. +
+*Nein* = Es werden keine Artikeldaten an Kaufland übertragen.
+
+| *Angebotsabgleich aktiv*
+| *Ja* = Angebotsdaten werden mit Kaufland ausgetauscht. +
+*Nein* = Es werden keine Angebotsdaten an Kaufland übertragen.
+
+| *Mehr* (icon:more_vert[])
+| Hier klicken, um weitere Aktionen anzuzeigen. +
+
+[cols="1,3a"]
+!===
+2+! *Artikeleinstellungen* (icon:settings[])
+
+! *Artikel aktualisieren* (icon:refresh[])
+! Erstellt eine Produktdatei mit allen Artikeln, die zu Kaufland exportiert werden sollen. Diese kann über *Artikelvorschau* (icon:preview[]) angesehen werden.
+
+! *Artikelvorschau* (icon:preview[])
+! Vorschau der Produktdatei anzeigen. +
+*_Hinweis:_* Wenn du die Schnittstelle zu Kaufland.de noch nicht eingerichtet hast und dir testweise eine Vorschau der Produktdatei ansehen möchtest, musst du die Schnittstelle kurzzeitig aktivieren, da die Vorschau der Produktdatei ansonsten leer ist. Um dir eine Vorschau der Produktdatei anzusehen, aktiviere die Schnittstelle und klicke dann auf *Artikelvorschau* (icon:preview[]). Deaktiviere die Schnittstelle danach sofort wieder, indem du die Einstellung *Datenaustausch* (unter *Allgemein*) deaktivierst und speicherst. Dadurch vermeidest du, dass vorzeitig Artikel übertragen werden.
+
+! *Artikel zu Kaufland.de übertragen* (icon:playlist_play[])
+! Produktdatei zu Kaufland.de übertragen.
+
+2+! *Angebotseinstellungen* (icon:settings[])
+
+! *Angebote aktualisieren* (icon:refresh[])
+! Erstellt eine Angebotsdatei. Diese kann über *Vorschau der Angebote* (icon:preview[]) angesehen werden.
+
+! *Vorschau der Angebote* (icon:preview[])
+! Vorschau der Angebotsdatei anzeigen.
+
+! *Angebote zu Kaufland.de übertragen* (icon:playlist_play[])
+! Angebotsdatei zu Kaufland.de übertragen.
+
+! *Löschen* (icon:delete[])
+! Konto löschen.
+!===
+|===
+
 [#200]
-=== Zugang zu Kaufland.de einrichten
+=== _Altes Einrichtungsmenü:_ Konto einrichten
 
 Um Artikel bei Kaufland.de anzubieten, richte Kaufland.de in plentymarkets ein. Dazu benötigst du deine Zugangsdaten für die Kaufland.de-Schnittstelle. Pro plentyShop/Mandant (Shop) kannst du mehrere Konten für Kaufland.de einrichten.
 
@@ -274,7 +511,7 @@ Lager verknüpfst du über die Einstellung *Lager verknüpfen* im Menü *Einrich
 [#250]
 === Auftragsherkunft aktivieren
 
-:market: Kaufland.de
+:market: Kaufland
 :referrer: Kaufland.de
 :referrer-option: pass:quotes[Option *Kaufland.de* mit der ID *102*]
 
@@ -318,9 +555,9 @@ Barcode für Kaufland.de festlegen:
 *_Tipp:_* Ist dieser Barcode schon mit deinen Varianten verknüpft? Wenn nicht, dann vergiss nicht, <<#save-barcode, den Barcode mit deinen Varianten zu verknüpfen und einen Code zu speichern>>.
 
 [#kaufland-fbk]
-=== Fulfillment by Kaufland (FbK): Kaufland lagert und versendet
+=== _Beta:_ Fulfillment by Kaufland (FbK): Kaufland lagert und versendet
 
-Kaufland bietet den Service FbK (= Fulfillment by Kaufland) an. Mit FbK übernimmt Kaufland die Lagerung und den Versand deiner Artikel. Wenn du FbK nutzen willst, kontaktiere deine Ansprechpartner:innen bei Kaufland. +
+Kaufland bietet den Service FbK (= Fulfillment by Kaufland) an. Mit FbK übernimmt Kaufland die Lagerung und den Versand deiner Artikel. Wenn du FbK nutzen willst, kontaktiere deine Ansprechpartner:innen bei Kaufland. Beachte jedoch, dass sich Kaufland FbK noch in der Beta-Phase befindet. Kaufland baut dieses Feature kontinuierlich weiter aus. +
 
 Du kannst in deinem plentymarkets System zurzeit keine weiteren Einstellungen für FbK vornehmen. Kaufland-FbK-Aufträge werden lediglich in plentymarkets importiert. Artikel, die du über FbK verkaufen willst, müssen im Kaufland Seller Portal angelegt werden. FbK-Aufträge können in plentymarkets nur abgerufen, aber nicht bearbeitet werden.
 

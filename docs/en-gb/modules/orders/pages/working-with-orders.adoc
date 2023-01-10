@@ -2,6 +2,7 @@
 
 :keywords: order creation, creating orders, create orders, group function for orders, dividing orders, redeeming coupons, redeeming vouchers, sales prices, order areas
 :author: team-order-core
+:description: Learn how to work with orders, use group functions and carry out the settings in the different areas of an order. Moreover, find out how to redeem coupons.
 
 //menü artikel bearbeiten (im bereich auftragspositionen) hinzufügen
 
@@ -30,7 +31,9 @@ Using group functions:
 
 [TIP]
 .Select default group functions
-In the editing mode (terra:design_inline_edit[role="darkGrey"]) of the order overview you can determine *default group functions* that become directly visible when selecting orders. All remaining group functions will automatically be added to the context menu (material:more_vert[]).
+======
+In the editing mode (terra:design_inline_edit[role="darkGrey"]) of the order overview, you can determine *default group functions* that become directly visible when selecting orders. All remaining group functions will automatically be added to the context menu (material:more_vert[]).
+======
 
 [[table-order-group-functions]]
 .Group functions for orders
@@ -44,7 +47,7 @@ In the editing mode (terra:design_inline_edit[role="darkGrey"]) of the order ove
 
 | *Change status*
 |material:repeat_one[]
-|Changes the status of the selected orders. Select a status from the drop-down list.
+|Changes the status of the selected orders. The current status is already preselected. Select another status from the drop-down list.
 
 | *Change tag*
 |material:label[]
@@ -81,7 +84,7 @@ In the editing mode (terra:design_inline_edit[role="darkGrey"]) of the order ove
 
 | *Create document*
 |material:note_add[]
-|Creates a document for all selected orders. Select a document type from the drop-down list and enter a creation date for the document or select a date from the calendar (material:today[]).
+|Creates a document for all selected orders. Select a document type from the drop-down list. Enter a creation date for the document or select a date from the calendar (material:today[]).
 
 |===
 
@@ -118,7 +121,15 @@ On the right-hand side of the order overview, further functions are available. T
 
 | *Show stock*
 |material:warehouse[]
-|Shows the stock and possible reorders of an order. Expand (material:chevron_right) the columns to see further information on the stock of the warehouse.
+|Shows the stock and possible reorders for the order item's warehouse. Expand (material:chevron_right[]) the columns to see further information on the stock.
+
+| *Open tracking link*
+|terra:shipment_tracking[]
+|Opens the tracking link of the package numbers.
+
+| *Open order in shipping centre*
+|terra:outgoing_items[]
+|Opens the order in the shipping centre 2.0.
 
 | *Delete order*
 |material:delete[]
@@ -149,12 +160,13 @@ By clicking on an entry in the following list, you will be directly forwarded to
 * <<#area-documents, Documents>>
 * <<#area-history, History>>
 * <<#area-notes, Notizen>>
+* <<#area-messenger, Messenger>>
 
 [TIP]
 .How is data being loaded in the individual areas?
 ======
 If you click on the area that you want to edit on the left-hand side of the navigation, this area will shortly be highlighted in blue, the available data for this area will be loaded and you can directly start editing it. +
-*_Note:_* The following areas will be loaded and opened when you first open the order: *Overview*, *Status and tags*, *Addresses*, *General*, *Order items*, *Payment terms*, *Assigned payments*, *Documents*, *History*. +
+*_Note:_* The following areas will be loaded and opened when you first open the order: *Overview*, *Status and tags*, *Addresses*, *General*, *Order items*, *Payment terms*, *Assigned payments*, *Documents*, *History*, *Notes*, *Messenger*. +
 The following areas will only be loaded and opened after you click on them in the left-hand side of the navigation: *Bank details*, *Order references*, *Properties*.
 ======
 
@@ -206,9 +218,6 @@ For this field, you can use the *Amount display format* setting in the editing m
 | *Net profit margin*
 |Shows the net profit margin.
 
-| *Dunning level*
-|Shows the dunning level.
-
 | *Coupon payment*
 |Shows the coupon payment.
 
@@ -220,6 +229,12 @@ For this field, you can use the *Amount display format* setting in the editing m
 
 | *Net coupon discount*
 |Shows the net coupon discount.
+
+| *Dunning level*
+|Shows the dunning level.
+
+| *VAT rates*
+|Shows the VAT rates that have been used for this order.
 
 |===
 
@@ -272,9 +287,6 @@ Note that you need to have created templates in order to generate documents and 
 |Select a customized date. +
 *_Note:_* You can add a maximum of 5 dates.
 
-| *Order status*
-|Select a status from the drop-down list.
-
 | *Client*
 |The client that was saved is displayed here.
 
@@ -320,8 +332,9 @@ The default setting for the currency is *Euro (EUR)*.
 |Enter a return date or select a date via the calendar (material:today[]).
 
 | *Package numbers*
-|Enter a package number. +
-You can access the xref:fulfilment:shipping-centre-2-0.adoc#[shipping centre 2.0] by clicking on *Open Shipping Centre* (terra:outgoing_items[]).
+|Shows the package numbers separated by comma.
+By clicking on *Open tracking link* (terra:shipment_tracking[]), the tracking link of the package numbers opens. +
+By clicking on *Open shipping centre* (terra:outgoing_items[]), the order is opened in the xref:fulfilment:shipping-centre-2-0.adoc#[shipping centre 2.0].
 
 | *Dunning level*
 |Shows the dunning level. +
@@ -342,7 +355,37 @@ You can select from *None* and *Level 1* to *Level 4* from the drop-down list.
 | *Return package numbers*
 |Shows the package numbers of a return separated by comma. This field is only available for the order type *Return*. By clicking on terra:order_return[] you are redirected to the Shipping Centre 2.0.
 
+| *Sales representative*
+|Enter the name of the sales representative that you want to select for the order. Alternatively, you can also enter the ID or the email address of the sales representative.
+
+| *Status*
+|Select a status from the drop-down list.
+
 |===
+
+==== Tracking packages via tracking link
+
+Via the tracking link on the package number, you can track the packages of your orders and thus see where your items are at the moment. To track packages, proceed as follows.
+
+[.instruction]
+Tracking packages via tracking link:
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. At the top right, click on *Configure columns* (material:settings[]).
+. Select the option *Order overview table*.
+. Select (icon:check[]) the *Package numbers* column.
+. Click on *Confirm*. +
+→ The *Package numbers* column is shown in the order overview and displays the package numbers separated by comma.
+. In the line of the order, click on a package number. +
+icon:map-signs[] *_Or:_* In the line of the order, click on the context menu (material:more_vert[]) and select the option *Open tracking link* (terra:shipment_tracking[]).
+→ The tracking link opens.
+
+[TIP]
+.Split tracking link for several package numbers
+======
+Open the *Shipping service provider* tab in the *Setup » Orders » Shipping » Settings* menu and activate the option *Split URLs* to split a tracking link for several package numbers. In this case, a separate link is used for each package number. If the option is not activated, there is only one tracking link for all package numbers.
+======
 
 [#area-addresses]
 === Area: Addresses
@@ -448,7 +491,7 @@ Assigning another address:
 
 In the *Messenger* area, you can see all messages that belong to the order. You can <<#whisper-message, whisper>> messages so that they are only internally visible and _not_ for your customers. You can <<#send-message, send>> messages and you can <<#message-capture-minutes, capture minutes for the message>> and save these minutes as free minutes or paid minutes.
 
-Click on the already created message to open the conversation in the messenger. You can carry out further settings there. For further information, refer to the xref:crm:messenger-testphase.adoc#[Messenger (Test phase)] page.
+Click on the already created message to open the conversation in the messenger. You can carry out further settings there. In case you want to add a new message, click on *New message* (material:add[]) at the top right. Afterwards, you will be directed to the Messenger in order to create the new message. For further information, refer to the xref:crm:messenger-testphase.adoc#[Messenger (Test phase)] page.
 
 [#whisper-message]
 ==== Whispering a message
@@ -530,6 +573,8 @@ Capturing minutes for the message:
 . Assign tags to the message, if needed.
 . Click on *CAPTURE AND SAVE*.
 
+Information on the different table columns in the *Messenger* area can be found on xref:crm:messenger-testphase.adoc#configure-columns[this chapter].
+
 [#area-order-items]
 === Area: Order items
 
@@ -573,11 +618,16 @@ This is a default column.
 |Shows the net price of this order item. +
 This is a default column.
 
-| *Regular net price*
-|Shows the regular net price.
+| *Original net price*
+|Shows the original net price of this order item. +
+This is a default column.
 
 | *Gross price*
 |Shows the gross price of this order item. +
+This is a default column.
+
+| *Original gross price*
+|Shows the original gross price of this order item. +
 This is a default column.
 
 | *Discount [%]*
@@ -588,11 +638,11 @@ This is a default column.
 |Shows the sum of the surcharges of the order item. +
 This is a default column.
 
-| *Total amount of the order (net)*
+| *Total amount (net)*
 |Shows the total net amount of the order item. +
 This is a default column.
 
-| *Total amount of the order (gross)*
+| *Total amount (gross)*
 |Shows the total gross amount of the order item. +
 This is a default column.
 
@@ -703,7 +753,8 @@ You can open the variation by clicking on the ID.
 |Shows the number of the variation.
 
 | *Item name*
-|Shows the name of the item.
+|Shows the name of the item. +
+Edit the name in the input field if needed.
 
 | *Attributes*
 |Shows the attributes.
@@ -727,31 +778,52 @@ You can open the variation by clicking on the ID.
 |Shows the discount of this customer class.
 
 | *Net price*
-|Shows the net price. +
-You can edit the data field net price via material:edit[]. The gross price will be adjusted automatically.
+|Shows the net price of the item. If you applied a discount, this has already been deducted. The gross price will also be adjusted automatically.
 
-| *Regular net price*
-|Shows the regular net price.
+| *Original net price*
+|Shows the original net price of the item before a discount was applied. You can adjust (material:edit[]) the original net price if required.
 
 | *Gross price*
-|Shows the gross price. +
-You can edit the data field gross price via material:edit[]. The net price will be adjusted automatically.
+|Shows the gross price of the item. If you applied a discount, this has already been deducted. The net price will also be adjusted automatically.
+
+| *Original gross price*
+|Shows the original gross price of the item before a discount was applied. You can adjust (material:edit[])
+ the original gross price if required. +
 
 | *Surcharge total*
 |Shows the total sum of the surcharge.
 
-| *Discount*
-|Shows the discount.
+| *Discount [%]*
+|Shows the discount in percent. If you want to display the discount as amount, select the option *Amount* from the drop-down list. +
+*_Note:_* The amount is displayed in the currency of the order.
 
-| *Total amount of the order (gross)*
+| *Total amount (net)*
+|Shows the total net amount of the order.
+
+| *Total amount (gross)*
 |Shows the total gross amount of the order.
 
 | *Warehouse*
-|Shows the warehouse. Select another warehouse from the drop-down list, if required.
+|Shows the warehouse. Select another warehouse from the drop-down list if required or enter the name of a warehouse to search for it.
 
-|*VAT [%]*
+| *VAT [%]*
 |The VAT is shown in %. +
 19.00 % are preset for the VAT. You can change the VAT rate in the drop-down list.
+
+| *Weight [g]*
+|Shows the item weight in grams. +
+Edit the weight in the input field if needed.
+
+| *Length [mm]*
+|Shows the length of the item in mm. +
+Edit the length in the input field if needed.
+
+| *Width [mm]*
+|Shows the width of the item in mm. +
+Edit the width in the input field if needed.
+
+| *Actions*
+|Provides further actions for the items in the context menu (material:more_vert[]) on the right.
 
 2+^| *Delete order items*
 
@@ -950,7 +1022,7 @@ Define in the editing mode whether the currency is the *System currency* or the 
 |Setting |Explanation
 
 | *Relationship*
-|Shows the relation to the order type.
+|Shows the relationship to this order. This column does not only show the direct parent and child orders, but all related orders. The latter are defined as _Other_.
 
 | *ID*
 |Shows the ID of the order.

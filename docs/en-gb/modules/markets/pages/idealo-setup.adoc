@@ -1,7 +1,6 @@
 = Setting up idealo
 :keywords: idealo, idealo, idealo.de, idealo.de, idealo Direktkauf, idealo Checkout, checkoutApproved
-:description: Multi-Channel in plentymarkets: Set up the interface to the market idealo Checkout in your plentymarkets system.
-:id: JFWN4QY
+:description: Learn how to set up the price search engine idealo in your plentymarkets system. If you use idealo Checkout, you can list your items on idealo and your customers can buy your products directly on idealo without having to enter your shop.
 :author: team-plenty-channel
 
 :market: idealo
@@ -185,7 +184,7 @@ a| You need the API client access data so that plentymarkets can connect to your
 
 | *Select the item name that should be transferred to idealo.*
 | Select *Name 1*, *Name 2* or *Name 3* from the drop-down list. This item name is transferred. +
-*_Tip:_* Item names are entered in the xref:item:managing-items.adoc#50[texts] tab of the item.
+*_Tip:_* Item names are entered in the tab xref:item:managing-items.adoc#50[Texts] of the item.
 
 | *Select the item description that should be transferred to idealo.*
 | Select *Item description*, *Preview text*, *Technical data* or *Item description and technical data* from the drop-down list. This item description is transferred to idealo.
@@ -275,7 +274,7 @@ a| If you use the price range feature for idealo checkout sellers, you can speci
 | *What plentymarkets property do you use for the idealo energy efficiency attribute "Link to label"?* +
 (plugin versions 3.3.5 and higher)
 | This property is used to export links to image files that contain the energy efficiency labels of products that need to be labelled. +
-*_Example:_* `http://www.link.to/label.jpg` +
+*_Example:_* `\http://www.link.to/label.jpg` +
 *_Important:_* Make sure that the image’s resolution is high enough to allow customers to scan the label’s QR code.
 
 [cols="1,3"]
@@ -293,7 +292,7 @@ a| If you use the price range feature for idealo checkout sellers, you can speci
 | *What plentymarkets property do you use for the idealo energy efficiency attribute "Link to data sheet"?* +
 (plugin versions 3.3.5 and higher)
 | This property is used to export links to PDF files that contain the EEK data sheets of products that need to be labelled. +
-*_Example:_* `http://www.example.com/datasheet.pdf`
+*_Example:_* `\http://www.example.com/datasheet.pdf`
 
 [cols="1,3"]
 !===
@@ -369,8 +368,8 @@ a| If you use the price range feature for idealo checkout sellers, you can speci
 |Setting |Explanation
 
 | *Would you like to activate your idealo user account now?*
-a| _Not activated_ = The settings are saved but the data exchange with idealo is not started. +
-_Activated_ = Data exchange with idealo is started once the assistant is completed. +
+a| material:check_box_outline_blank[] = The settings are saved but the data exchange with idealo is not started. +
+material:check_box[] = Data exchange with idealo is started once the assistant is completed. +
 *_Recommendation:_* Only activate the user account after you have checked all settings and are ready to start the data exchange with idealo.
 
 | *Would you like to copy existing SKUs from the old idealo interface to your new user account?*
@@ -764,24 +763,27 @@ All payment methods will be exported according to the format setting *Shipping c
 [#idealo-delete-items]
 == Deleting items on idealo
 
-If a varation is out of stock in plentymarkets, it is deleted on idealo and cannot be bought on the market any longer. As stock data is transferred to idealo every 15 minutes, variations without stock are deleted automatically. If a variation has stock again in plentymarkets, it is offered again on idealo with the next stock export.
+If a variation is out of stock in plentymarkets, it is deleted on idealo and cannot be bought on the market any longer. As stock data is transferred to idealo every 15 minutes, variations without stock are deleted automatically. If a variation has stock again in plentymarkets, it is offered again on idealo with the next stock export.
 
-However, if you do not want to sell a variation on idealo any longer which still has stock in plentymarkets, you have to delete the availability for idealo.
+If you do not want to sell a variation which is in stock in plentymarkets on idealo, then you have to delete the availability for the market and update the timestamp for market exports.
 
 [.instruction]
 Deleting the availability:
 
 . Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability*.
 . *Delete* (icon:minus-circle[role="red"]) the availabilities *idealo* and *idealo Direktkauf*.
-. *Save* (terra:save[]) the settings. +
-→ The variation will be deleted on idealo within the next 15 minutes and cannot be bought any longer.
+. *Save* (terra:save[]) the settings.
 
-[TIP]
-.Update timestamp for market exports
-====
-If you want to make sure that a variation is deleted on idealo immediately, you can additionally *Update the timestamp for market exports* using the *Item group function*. +
-To do so, go to *Item » Edit item » Tab: Item group function*. Place a check mark next to *Update timestamp for market exports* and click on terra:execute[] *Execute*. The variation is deleted and cannot be bought on idealo any longer.
-====
+After you removed the availability, you have to *Update the timestamp for market exports* using the *Item group function*. This ensures that a stock of *0* is transferred to idealo.
+
+[.instruction]
+Updating the timestamp for market exports:
+
+. Go to *Item » Edit item » Tab: Item group function*.
+. Place a check mark next to *Update timestamp for market exports*.
+. Click on terra:execute[] *Execute*. +
+→ A stock of *0* is transferred to idealo. +
+→ The variation is deleted on idealo and cannot be bought any longer.
 
 [#1100]
 == Permitting the payment method idealo Checkout in a customer class

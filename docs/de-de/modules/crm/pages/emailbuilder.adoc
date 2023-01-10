@@ -1,11 +1,12 @@
-= EmailBuilder (Testphase)
-:keywords: EmailBuilder, E-Mail Builder, E-Mail-Vorlagen, Widgets, Emailvorlagen, Dokumentenanhang E-Mail, Email-Vorlagen Baukasten, E-Mail-Variablen, twig expressions, E-Mail-Versand, Code-Widget
-:description: Erfahre, wie du den EmailBuilder in plentymarkets verwendest.
+= EmailBuilder
+:keywords: EmailBuilder, E-Mail Builder, E-Mail-Vorlagen, Widgets, Emailvorlagen, Dokumentenanhang E-Mail, Email-Vorlagen Baukasten, E-Mail-Variablen, twig expressions, E-Mail-Versand, Code-Widget, Widgets E-Mail-Vorlagen
+:description: Erfahre, wie du den EmailBuilder in plentymarkets verwendest und E-Mail-Vorlagen im Baukastenprinzip mithilfe von Widgets und Variablen erstellst.
 :page-aliases: emailbuilder-testphase.adoc
-:id: MYFLVYO
 :author: team-crm
 
-Alle E-Mails, die du über plentymarkets an deine xref:crm:kontakte.adoc#[Kontakte] versendest, basieren auf Vorlagen. Vorlagen erstellst und verwaltest du mit dem EmailBuilder im Menü *CRM » EmailBuilder (Testphase)*. 
+Alle E-Mails, die du über plentymarkets an deine xref:crm:kontakte.adoc#[Kontakte] versendest, basieren auf Vorlagen. Vorlagen erstellst und verwaltest du mit dem EmailBuilder im Menü *CRM » EmailBuilder*. 
+
+Schau dir das folgende link:https://www.youtube.com/watch?v=denxnArUsJ0[Video^] an, um mehr über den EmailBuilder zu erfahren.
 
 [TIP]
 .E-Mail-Vorlagen werden im Multipart-Format versendet
@@ -25,8 +26,6 @@ Die Header- und Footer-Vorlagen kannst du dann beliebig in deinen E-Mail-Vorlage
 Mit dem Header, dem Footer und den Einstellungen in der Vorlage wie Name, Betreff etc. erstellst du sozusagen das Gerüst deiner E-Mail. Den Inhalt der Vorlage bildest du mit den <<#widget-einfuegen, Widgets>> und <<#variablen-emailbuilder, Variablen>>. Die Variablen werden dann in der E-Mail an deine Kund:innen durch den korrekten Inhalt ersetzt. Zum Beispiel wird die Variable `Lieferadresse Vorname und Nachname` in der E-Mail dann durch den Vornachnamen und Nachnamen des Kontakts aus der Lieferadresse ausgegeben.
 
 Außerdem kannst du einstellen, dass dein plentymarkets System bei bestimmten Ereignissen, z.B. beim Eingehen neuer Bestellungen in deinem plentyShop oder nachdem Kund:innen deinen Newsletter abonniert haben, <<#e-mail-versand-automatisieren, automatisch E-Mails aus diesen Vorlagen>> erstellt und an deine Kund:innen versendet.
-
-// Schau dir dieses link:https://www.youtube.com/watch?v=denxnArUsJ0[Video^] an, um mehr über den EmailBuilder zu erfahren.
 
 [#vorbereitende-einstellungen]
 == Vorbereitende Einstellungen vornehmen
@@ -48,7 +47,8 @@ include::_includes:partial$rights.adoc[]
 [#e-mail-server-zugangsdaten]
 === E-Mail-Server-Zugangsdaten speichern
 
-Im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten » Grundeinrichtung* speicherst du im Schritt *Zugangsdaten* die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest, damit dein plentymarkets System E-Mails wie Auftragsbestätigungen und Versandbestätigungen von dieser E-Mail-Adresse versenden kann.
+Im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten » Grundeinrichtung* speicherst du im Schritt *Zugangsdaten* die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest, damit dein plentymarkets System E-Mails wie Auftragsbestätigungen und Versandbestätigungen von dieser E-Mail-Adresse versenden kann. +
+Außerdem kannst du hier auch den Live-Modus aktivieren, damit alle E-Mails nicht nur an die eingegebene E-Mail-Adresse gesendet werden, sondern an deine Kund:innen.
 
 [.collapseBox]
 .Einstellungen im Assistenten *E-Mail-Konten* im Schritt *Zugangsdaten*
@@ -70,7 +70,7 @@ Im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten » Grundeinr
 *_mailbox.org:_* Gib für Postfächer bei mailbox.org den Port *465* ein und wähle die Verschlüsselung *SSL*.
 
 | *Verschlüsselungsmethode*
-| Wähle *SSL*, *TLS* oder *keine Verschlüsselung*.  +
+| Wähle *SSL*, *TLS* oder *keine Verschlüsselung*. +
 *_mailbox.org:_* Gib für Postfächer bei mailbox.org den Port *465* ein und wähle die Verschlüsselung *SSL*.
 
 2+| Wie lauten die Zugangsdaten deines E-Mail-Kontos? 
@@ -106,6 +106,8 @@ Alle E-Mails werden nur an die eingegebene E-Mail-Adresse gesendet. So kannst du
 
 |====
 --
+
+// TODO: Kapitel "Verschlüsselung der E-Mail-Kommunikation wählen" plus alle Unterkapitel hier noch ergänzen: https://knowledge.plentymarkets.com/de-de/manual/main/crm/e-mails-versenden.html#200 
 
 //// 
 [TIP]
@@ -166,42 +168,63 @@ Du kannst im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten »
 [#e-mail-automatischer-versand]
 === Automatischen Versand einrichten
 
-Im Menü *Einrichtung » Assistenten » Grundeinrichtung* im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* stehen dir verschiedene Ereignisse zur Verfügung, die du mit einer Vorlage verknüpfen kannst. Wähle aus der Dropdown-Liste die Vorlage, die du zuvor im Menü *CRM » EmailBuilder (Testphase)* <<#vorlage-erstellen, erstellt>> hast. Dadurch wird bei Eintritt des Ereignisses diese Vorlage automatisch an deine Kund:innen versendet.
+Im Menü *Einrichtung » Assistenten » Grundeinrichtung* im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* stehen dir verschiedene Ereignisse zur Verfügung, die du mit einer Vorlage verknüpfen kannst. Wähle aus der Dropdown-Liste die Vorlage, die du zuvor im Menü *CRM » EmailBuilder* <<#vorlage-erstellen, erstellt>> hast. Dadurch wird bei Eintritt des Ereignisses diese Vorlage automatisch an deine Kund:innen versendet.
 
 [IMPORTANT]
 .Verknüpfung vor Löschen der E-Mail-Vorlage entfernen
 ====
-Das Löschen einer Vorlage, die mit einem Ereignis im Schritt *Automatischer Versand* im Assistenten *E-Mail-Konten* verknüpft ist, kann zu unerwünschten Effekten führen. Entferne daher zunächst die Verknüpfung im Menü *Einrichtung » Assistenten » Grundeinrichtung* » Assistent *E-Mail-Konten* » Schritt: *Automatischer Versand*, indem du in der Zeile des Ereignisses in der Dropdown-Liste die Option *Nicht senden* wählen. Anschließend <<#vorlage-loeschen, löschst>> du die Vorlage im Menü *CRM » EmailBuilder (Testphase)*.
+Das Löschen einer Vorlage, die mit einem Ereignis im Schritt *Automatischer Versand* im Assistenten *E-Mail-Konten* verknüpft ist, kann zu unerwünschten Effekten führen. Entferne daher zunächst die Verknüpfung im Menü *Einrichtung » Assistenten » Grundeinrichtung* » Assistent *E-Mail-Konten* » Schritt: *Automatischer Versand*, indem du in der Zeile des Ereignisses in der Dropdown-Liste die Option *Nicht senden* wählen. Anschließend <<#vorlage-loeschen, löschst>> du die Vorlage im Menü *CRM » EmailBuilder*.
 ====
 
 [.collapseBox]
-.Erläuterungen zu einigen Ereignissen für den automatischen Versand im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* 
+.Erläuterungen zu den verfügbaren Ereignissen für den automatischen Versand im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* 
 --
 
 [[table-events-automatic-email-dispatch]]
-.Erläuterungen zu einigen Ereignissen für den automatischen Versand
+.Erläuterungen zu den Ereignissen für den automatischen Versand
 [cols="1,3"]
 |====
 |Einstellung |Erläuterung
 
-| *Neue Bestellung über den Webshop*
-|Sendet Kund:innen eine E-Mail mit der Auftragsbestätigung, nachdem der Kaufvorgang im Webshop abgeschlossen wurde. +
-*_Hinweis:_* Wenn du möchtest, dass dein:e Kund:in über diese E-Mail in die Auftragsabwicklung in deinem Webshop gelangen kann, um den Status der Bestellung einzusehen, musst du die Variable `URL zum Checkout` in die Vorlage, die du für dieses automatische Ereignis wählst, einfügen. +
+| *Sende Kunde E-Mail zur Passwortänderung*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen bei Eintritt dieses Ereignisses eine E-Mail mit einem Link zum neuen Passwort gesendet. Dieser Link muss aktiv bestätigt werden. +
+Die Variable `URL zum Ändern des Passworts` muss in der Vorlage enthalten sein. +
 *_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
 
-| *Sende Kunde E-Mail zur Passwortänderung*
-|Sendet Kund:innen eine E-Mail mit einem Link zum neuen Passwort, der aktiv bestätigt werden muss. Die Variable `URL zum Ändern des Passworts` muss in der Vorlage enthalten sein. +
+| *Bestätigung der Passwortänderung*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine Bestätigungs-E-Mail gesendet, wenn sie ihr Passwort ändern. +
+Eine Variable ist hier nicht zwingend notwendig. Sinnvoll wäre allerdings der Link zu deinem Webshop (`URL zum Webshop`). +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
+
+| *Kunde möchte E-Mail-Adresse ändern*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine Bestätigungs-E-Mail gesendet, wenn sie in deinem Webshop ihre E-Mail-Adresse ändern und die neue E-Mail-Adresse eingeben. +
+Die Vorlage sollte daher die Variable `URL zum Bestätigen der E-Mail-Adresse` enthalten. +
 *_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
 
 | *Newsletter Opt-In*
-|Sendet Kund:innen eine E-Mail, wenn die Kund:innen sich für den Newsletter angemeldet haben. Die Vorlage sollte den Bestätigungslink, den die Kund:innen anklicken müssen, um die Newsletter-Anmeldung abzuschließen, enthalten: `URL zur Bestätigung des Newsletter-Abonnements`. +
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine E-Mail gesendet, wenn sie sich für den Newsletter angemeldet haben. Die Vorlage sollte die Variable `URL zur Bestätigung des Newsletter-Abonnements` enthalten; also den Bestätigungslink, den die Kund:innen anklicken müssen, um die Newsletter-Anmeldung abzuschließen. +
 *_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-newsletter, Newsletter>>.
 
 | *Bestätigung Newsletter Opt-In*
-|Sendet Kund:innen eine E-Mail als Bestätigung, sobald die Kund:innen den Bestätigungslink, der mit der E-Mail-Vorlage für das Ereignis *Newsletter Opt-In* versendet wurde, aktiviert haben.
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine E-Mail als Bestätigung gesendet, sobald sie den Bestätigungslink, der mit der E-Mail-Vorlage für das Ereignis *Newsletter Opt-In* versendet wurde, aktiviert haben. +
+Eine Variable ist hier nicht zwingend notwendig. Denkbar wäre hier allerdings eine Variable, die als Dankeschön einen Gutschein-Code für deinen Webshop enthält.
+
+| *Kundenregistrierung*
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deinen Kund:innen eine E-Mail als Bestätigung gesendet, sobald sie z.B. bei Abschluss der Bestellung in deinem Webshop ein Kund:innenkonto in deinem Webshop erstellt haben. +
+Eine Variable ist hier nicht zwingend notwendig. Sinnvoll wäre allerdings der Link zu deinem Webshop (`URL zum Webshop`) sowie eine kurze Willkommensnachricht. +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>.
 
 | *Benachrichtigung bei verfügbarem Artikel*
-|Sendet Kund:innen eine E-Mail mit dem Hinweis, dass ein bestimmter Artikel wieder verfügbar ist. Voraussetzung: Die Kund:innen haben zuvor ihre E-Mail-Adresse im Webshop bei dem nicht lieferbaren Artikel eingetragen.
+|Wenn du die E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellt] hast und die Vorlage mit diesem Ereignis verknüpfst, wird deine Kund:innen eine E-Mail mit dem Hinweis, dass ein bestimmter Artikel wieder verfügbar ist, gesendet. +
+*_Voraussetzung:_* Die Kund:innen haben zuvor ihre E-Mail-Adresse im Webshop bei dem nicht lieferbaren Artikel eingetragen. +
+Idealerweise enthält die hier verknüpfte Vorlage die Variablen `URL zum Artikel` und `Artikelname`. +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-auftrag-auftragspositionen, Auftrag / Auftragspositionen (nur für Artikellisten-Widget)>>.
+
+| *Neuer Link zur Bestellbestätigung*
+| Wenn du Gastkund:innen die Möglichkeit geben möchtest, einen neuen Auftragsbestätigungslink anzufordern, musst du dafür eine E-Mail-Vorlage xref:crm:emailbuilder.adoc#vorlage-erstellen[erstellen] und diese hier verknüpfen. +
+Die Variable `URL zur Auftragsübersicht` muss in der Vorlage enthalten sein. +
+*_Hinweis:_* Du findest die Variable in der Kategorie <<#variablen-global, Global>>. +
+Weitere Informationen zum Softlogin findest du auf der Handbuchseite xref:webshop:shop-builder.adoc#softlogin[ShopBuilder einrichten].
 
 |====
 --
@@ -264,7 +287,7 @@ Erstelle Ordner, um später eine bessere Übersicht über deine E-Mail-Vorlagen 
 [.instruction]
 Ordner erstellen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke unten links auf material:add[] *Hinzufügen* material:play_arrow[].
 . Klicke auf material:folder[] *Ordner*. +
 → Das Fenster *Neuen Ordner erstellen* öffnet sich.
@@ -283,7 +306,7 @@ Du kannst den Namen des Ordners jederzeit anpassen. Gehe dazu wie im Folgenden b
 [.instruction]
 Ordner umbenennen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners, den du umbenennen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:edit[] *Umbenennen*. +
@@ -300,7 +323,7 @@ Du kannst den Ordner jederzeit an eine andere Stelle verschieben. Gehe dazu wie 
 [.instruction]
 Ordner verschieben:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners, den du verschieben möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:move_down[] *Verschieben*. +
@@ -323,7 +346,7 @@ Wir empfehlen dir, im Vorfeld einen Entwurf zu erstellen, um unübersichtliche V
 [.instruction]
 Unterordner erstellen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners, für den du einen Unterordner erstellen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:add[] *Hinzufügen* material:play_arrow[].
@@ -343,7 +366,7 @@ Du kannst Ordner und Unterordner jederzeit löschen. Beachte, dass dabei alle In
 [.instruction]
 Ordner löschen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners bzw. Unterordners, den du löschen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:delete[] *Löschen*. +
@@ -381,7 +404,7 @@ Gehe wie im Folgenden beschrieben vor, um eine Vorlage für den Header deiner E-
 [.instruction]
 Vorlage für den Header erstellen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners bzw. Unterordners, in dem du einen Header erstellen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:add[] *Hinzufügen* material:play_arrow[].
@@ -407,7 +430,7 @@ Vorlage für den Header erstellen:
 
 Prüfe den Header, indem du die Vorschau öffnest.
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der den Header enthält, von dem du eine Vorschau anzeigen möchtest.
 . Klicke auf den Header.
 . Klicke auf *Vorschau* (material:preview[]).
@@ -426,7 +449,7 @@ Gehe wie im Folgenden beschrieben vor, um eine Vorlage für den Footer deiner E-
 [.instruction]
 Vorlage für den Footer erstellen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 Klicke in der Zeile des Ordners bzw. Unterordners, in dem du einen Footer erstellen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:add[] *Hinzufügen* material:play_arrow[].
@@ -452,7 +475,7 @@ Klicke in der Zeile des Ordners bzw. Unterordners, in dem du einen Footer erstel
 
 Prüfe den Footer, indem du die Vorschau öffnest.
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der den Footer enthält, von dem du eine Vorschau anzeigen möchtest.
 . Klicke auf den Footer.
 . Klicke auf *Vorschau* (material:preview[]).
@@ -489,7 +512,7 @@ image::crm:emailbuilder-neue-vorlage.png[width=640, height=360]
 [.instruction]
 Vorlage erstellen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners, in dem du eine Vorlage erstellen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:add[] *Hinzufügen* material:play_arrow[].
@@ -498,7 +521,7 @@ Vorlage erstellen:
 . Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<#table-emailbuilder-create-template>> und <<#image-emailbuilder-template>>.
 . *Speichere* (material:save[]) die Einstellungen.
 
-*_Hinweis:_* Wenn du die Vorlage nicht innerhalb eines Ordners erstellen möchtest, klicke auf der Startseite des Menüs *CRM » EmailBuilder (Testphase)* direkt unten links auf material:add[] *Hinzufügen* material:play_arrow[] und klicke dann auf material:description[] *Vorlage*. Die Vorlage wird dann auf der ersten Ebene erstellt, ohne dass sie zu einem Ordner gehört.
+*_Hinweis:_* Wenn du die Vorlage nicht innerhalb eines Ordners erstellen möchtest, klicke auf der Startseite des Menüs *CRM » EmailBuilder* direkt unten links auf material:add[] *Hinzufügen* material:play_arrow[] und klicke dann auf material:description[] *Vorlage*. Die Vorlage wird dann auf der ersten Ebene erstellt, ohne dass sie zu einem Ordner gehört.
 
 [TIP]
 .E-Mail-Vorlagen werden im Multipart-Format versendet
@@ -606,7 +629,7 @@ Im Bereich *Einstellungen* auf der rechten Seite deines Bildschirms nimmst du di
 *_Hinweis:_* Wenn du mehrere E-Mail-Adressen eingibst, trenne diese jeweils durch ein Komma.
 
 2+^|[#intable-language-specific-settings]*Sprachabhängige Einstellungen* (material:translate[]) +
-In diesem Bereich nimmst du die sprachabhängigen Einstellungen vor. Für jede Vorlage kannst du also unterschiedliche Einstellungen vornehmen. Zum Beispiel kannst du Produktdatenblätter oder Bedienungsanleitungen in der jeweiligen Sprache mit der Vorlage verknüpfen. +
+In diesem Bereich nimmst du die sprachabhängigen Einstellungen vor. Für jede Vorlage kannst du also unterschiedliche Einstellungen vornehmen. Zum Beispiel kannst du Produktdatenblätter oder Bedienungsanleitungen in der jeweiligen Sprache mit der Vorlage verknüpfen und die Zeit-, Datums- und Zahlenformate für jede Sprache individuell bestimmen. +
 *_Hinweis:_* Wenn die Vorlage vom Typ *Header* oder *Footer* ist, steht dir in diesem Bereich nur das Feld <<#intable-template-settings-custom-styles, Benutzerdefiniertes Styling>> zur Verfügung. Ein Betreff und statische Anhänge sind für Header und Footer nicht verfügbar.
 
 | material:translate[]
@@ -614,7 +637,7 @@ In diesem Bereich nimmst du die sprachabhängigen Einstellungen vor. Für jede V
 Für jede erstellte Sprache siehst du einen eigenen Bereich. Mit einem Klick auf material:expand_more[] kannst du einzelne Sprachbereiche zuklappen. Ein Klick auf material:chevron_right[] öffnet den Sprachbereich wieder.
 
 |[#intable-template-settings-subject]*Betreff*
-|Hier siehst du den Betreff der Vorlage. Du kannst den <<#betreff-aendern, Betreff anpassen>>, wenn gewünscht. +
+|Hier siehst du den Betreff der Vorlage. Du kannst den <<#betreff-aendern, Betreff ändern>>, wenn gewünscht. +
 *_Hinweis:_* Bei Vorlagen vom Typ *Header* und *Footer* ist dieses Feld _nicht_ verfügbar.
 
 |[#intable-template-settings-static-attachments]*Statische Anhänge*
@@ -624,6 +647,45 @@ Für jede erstellte Sprache siehst du einen eigenen Bereich. Mit einem Klick auf
 |[#intable-template-settings-custom-styles]*Benutzerdefiniertes Styling*
 |Hier kannst du das CSS-Styling deiner Vorlage, deines Headers und deines Footers anpassen. <<#beispiele-benutzerdefiniertes-styling, In der aufklappbaren Box unterhalb dieser Tabelle>> findest du einige gängige Beispiele, wie du das Styling deiner Vorlage anpassen kannst. +
 *_Tipp:_* Speichere die Einstellungen und öffne anschließend die *Vorschau* (material:preview[]), um deine Eingaben zu prüfen und ggf. weitere Anpassungen vorzunehmen.
+
+|[#intable-template-settings-number-format]*Zahlenformat*
+|Wähle für das Zahlenformat die deutsche oder die englische Schreibweise aus der Liste.
+
+*_Beispiel:_* Die deutsche Schreibweise zeigt Zahlenformate folgendermaßen an: 1,25 oder 1.000,25. Die englische Schreibweise zeigt Zahlenformate folgendermaßen an: 1.25 oder 1,000.25. 
+
+|[#intable-template-settings-decimals]*Anzahl der Nachkommastellen*
+|Gib eine Zahl ein, die die Anzahl der Nachkommastellen definiert.
+
+|[#intable-template-settings-date-format]*Datumsformat*
+a|Wähle das Datumsformat aus Dropdown-Liste. 
+
+`dd` steht für den Tag, `mm` für den Monat und `yyyy` für das Jahr. Standardmäßig ist für deutsche Systeme das Datumsformat `dd.mm.yyyy` vorausgewählt und für alle anderen Sprachen das Format `dd-mm-yyyy`. +
+Verfügbare Formate:
+
+* yyyy-mm-dd
+* dd.mm.yyyy
+* dd-mm-yy
+* dd/mm/yyyy
+* mm-dd-yyyy
+
+|[#intable-template-settings-time-format]*Zeitformat*
+a|Wähle das Zeitformat aus Dropdown-Liste.
+
+`hh` steht für die Stunde im 12h-Format, `HH` steht für die Stunde im 24h-Format, `ii` für die Minuten und `ss` für die Sekunden. `a` gibt je nach Uhrzeit den Zusatz AM oder PM aus. Standardmäßig ist das Zeitformat `HH:ii` vorausgewählt. +
+Verfügbare Formate:
+
+* hh:ii:ss a
+* hh.ii.ss a
+* hh-ii-ss a
+* hh:ii a
+* hh.ii a
+* hh-ii a
+* HH:ii:ss
+* HH.ii.ss
+* HH-ii-ss
+* HH:ii
+* HH.ii
+* HH-ii
 
 |[#intable-template-settings-back-to-template-configuration]*Zurück zur Vorlagenkonfiguration*
 |Mit einem Klick auf material:arrow_back[] ganz oben rechts gelangst du wieder zurück zu Vorlagenkonfiguration.
@@ -713,7 +775,7 @@ Gehe nun wie im Folgenden beschrieben vor, um ein Widget oder mehrere Widgets in
 [.instruction]
 Widget in Vorlage einfügen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, die du bearbeiten möchtest.
 . Klicke auf die Vorlage.
 . Klicke auf *Bearbeiten* (material:edit[]). +
@@ -810,7 +872,7 @@ Klicke auf *Einstellungen schließen* (material:close[]), um die Einstellungen z
 
 Prüfe das Widget, indem du die Vorschau öffnest.
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, von der du eine Vorschau anzeigen möchtest.
 . Klicke auf die Vorlage.
 . Klicke auf *Vorschau* (material:preview[]).
@@ -829,7 +891,7 @@ Du kannst die Inhalte der Widgets jederzeit bearbeiten. Gehe dazu wie im Folgend
 [.instruction]
 Widget bearbeiten:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, die du bearbeiten möchtest.
 . Klicke auf die Vorlage.
 . Klicke auf *Bearbeiten* (material:edit[]). +
@@ -876,7 +938,7 @@ image::crm:emailbuilder-beispiel-standardvorlage.png[width=640, height=360]
 [.instruction]
 Standardvorlage erstellen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners, in dem du eine Standardvorlage erstellen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
 . Klicke auf material:add[] *Hinzufügen* material:play_arrow[].
@@ -889,17 +951,17 @@ Standardvorlage erstellen:
 → Die Vorlage wird erstellt und geöffnet. 
 
 [TIP]
-Wenn du die Standardvorlage nicht innerhalb eines Ordners erstellen möchtest, klicke auf der Startseite des Menüs *CRM » EmailBuilder (Testphase)* direkt unten links auf material:add[] *Hinzufügen* material:play_arrow[] und klicke dann auf material:description[] *Vorlage*. Die Vorlage wird dann auf der ersten Ebene erstellt, ohne dass sie zu einem Ordner gehört.
+Wenn du die Standardvorlage nicht innerhalb eines Ordners erstellen möchtest, klicke auf der Startseite des Menüs *CRM » EmailBuilder* direkt unten links auf material:add[] *Hinzufügen* material:play_arrow[] und klicke dann auf material:description[] *Vorlage*. Die Vorlage wird dann auf der ersten Ebene erstellt, ohne dass sie zu einem Ordner gehört.
 
 [#standardvorlage-betreff-aendern]
-==== Betreff ändern
+==== Betreff der Standardvorlage ändern
 
-Sobald die Standardvorlage erstellt ist, siehst du in der Symbolleiste den vorausgefüllten Betreff. Den Betreff kannst du mit einem Klick auf *Sprachabhängige Einstellungen* (material:translate[]) ganz oben rechts anpassen. Dort wählst du auch bis zu 3 statische Anhänge, die du an deine E-Mail-Vorlage anhängst. Ebenfalls in diesem Bereich kannst du das xref:crm:emailbuilder.adoc#beispiele-benutzerdefiniertes-styling[benutzerdefinierte Styling] der Vorlage wie zum Beispiel die Breite der Vorlage oder die Schriftgröße ändern.
+Sobald die Standardvorlage erstellt ist, siehst du in der Symbolleiste den vorausgefüllten Betreff. Den Betreff kannst du mit einem Klick auf *Sprachabhängige Einstellungen* (material:translate[]) ganz oben rechts anpassen. Dort wählst du auch bis zu 3 statische Anhänge, die du an deine E-Mail-Vorlage anhängst. Ebenfalls in diesem Bereich kannst du das xref:crm:emailbuilder.adoc#beispiele-benutzerdefiniertes-styling[benutzerdefinierte Styling] der Vorlage wie zum Beispiel die Breite der Vorlage oder die Schriftgröße ändern und das <<#intable-template-settings-number-format, Zahlenformat>>, <<#intable-template-settings-date-format, Datumsformat>> und <<#intable-template-settings-time-format, Zeitformat>> in deinen Vorlagen definieren.
 
 [#standardvorlage-bearbeiten]
 ==== Standardvorlage bearbeiten
 
-Neben den sprachabhängigen Einstellungen, in denen du beispielsweise den <<#standardvorlage-betreff-aendern, Betreff ändern>> und statische Anhänge für deine Standardvorlage wählen kannst, kannst du den Inhalt der Standardvorlage selbst mit einem Klick auf material:edit[] anpassen. 
+Neben den sprachabhängigen Einstellungen, in denen du beispielsweise den <<#standardvorlage-betreff-aendern, Betreff der Standardvorlage ändern>> und statische Anhänge für deine Standardvorlage wählen kannst, kannst du den Inhalt der Standardvorlage selbst mit einem Klick auf material:edit[] anpassen. 
 
 Im Bereich *Einstellungen* der Vorlage wählst du einen Eigner, den Mandanten und den Header und Footer, falls noch nicht geschehen. Dort kannst du auch bis zu 3 dynamische Anhänge wählen und die Felder *Antwort an*, *CC* und *BCC* befüllen.
 
@@ -933,10 +995,10 @@ Möchtest du wissen, welche Standardvorlagen bereits im EmailBuilder vorhanden s
 |Zahlung für Auftrag &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vollständig erhalten
 
 |Auftrag: Zahlungserinnerung
-|Zahlungsstatus für den Auftrag mit der ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125;
+|Zahlungsstatus für den Auftrag mit der ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125;
 
 |Auftrag: Rechnung PDF-Anhang
-|Rechnung zu Order-ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125;
+|Rechnung zu Order-ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; vom &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125;
 
 |eBay: Disput / Storno, keine Zahlung
 |Ihre Bestellung mit der ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; wurde storniert
@@ -979,10 +1041,10 @@ Möchtest du wissen, welche Standardvorlagen bereits im EmailBuilder vorhanden s
 |Payment for order ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; fully received
 
 |Order: Payment reminder
-|Payment status for the order placed on &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125; with order ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125;
+|Payment status for the order placed on &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125; with order ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125;
 
 |Order: Invoice
-|Invoice for order ID: &#123;&#8288;&#123;order.id&#125;&#8288;&#125; from &#123;&#8288;&#123;order.formattedDates.createdOn \| date('m-d-Y H:i:s')&#125;&#8288;&#125;
+|Invoice for order ID: &#123;&#8288;&#123;order.id&#125;&#8288;&#125; from &#123;&#8288;&#123;order.formattedDates.createdOn&#125;&#8288;&#125;
 
 |eBay: dispute / cancellation, no payment
 |Your order with the ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125; was cancelled
@@ -1021,7 +1083,7 @@ So sind deine E-Mails für alle Empfänger:innen lesbar, auch wenn deren E-Mail-
 [.instruction]
 Vorschau anzeigen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, von der du eine Vorschau anzeigen möchtest.
 . Klicke auf die Vorlage.
 . Klicke auf *Vorschau* (material:preview[]).
@@ -1040,7 +1102,7 @@ Um eine bestimmte Vorlage zu suchen, gibst du die dir bekannten Suchbegriffe in 
 [.instruction]
 Vorlage suchen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 * *_Möglichkeit 1:_* Gib einen Wert im Suchfeld ein und wähle dann den für dich passenden Filter aus der Vorschlagsliste. *_Beispiel:_* Wenn du eine Zahl eingibst, werden dir mögliche Filter mit dieser ID vorgeschlagen wie z.B. die Vorlagen-ID.
 * *_Möglichkeit 2:_* Klicke auf material:tune[], um die Suchergebnisse mit Hilfe von Filtern einzugrenzen.
 . Beachte die Erläuterungen zu den Filtern in <<#table-search-template>>. +
@@ -1091,7 +1153,7 @@ Du kannst deine Vorlagen jederzeit in einen anderen Ordner verschieben. Gehe daz
 [.instruction]
 Vorlage verschieben:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, die du verschieben möchtest.
 . Klicke in der Zeile der Vorlage auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
@@ -1123,20 +1185,20 @@ Wenn du im Editor oder in den Spracheinstellungen einer Vorlage bist und in eine
 [.instruction]
 Vorlage bearbeiten:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, die du bearbeiten möchtest.
 . Klicke auf die Vorlage.
 . Nimm die Änderungen vor. Beachte dazu auch die Erläuterungen in <<#table-emailbuilder-create-template>>.
 . *Speichere* (material:save[]) die Einstellungen.
 
-Neben den sprachabhängigen Einstellungen, in denen du beispielsweise den <<#betreff-aendern, Betreff ändern>> und statische Anhänge für deine Standardvorlage wählen kannst, kannst du den Inhalt der Standardvorlage selbst mit einem Klick auf material:edit[] anpassen. 
+Neben den sprachabhängigen Einstellungen, in denen du beispielsweise den <<#betreff-aendern, Betreff der Vorlage ändern>> und statische Anhänge für deine Vorlage wählen kannst, kannst du den Inhalt der Vorlage selbst mit einem Klick auf material:edit[] jederzeit anpassen. 
 
 Im Bereich *Einstellungen* der Vorlage wählst du einen Eigner, den Mandanten und den Header und Footer, falls noch nicht geschehen. Dort kannst du auch bis zu 3 dynamische Anhänge wählen und die Felder *Antwort an*, *CC* und *BCC* befüllen.
 
 [#betreff-aendern]
-=== Betreff ändern
+=== Betreff der Vorlage ändern
 
-Sobald die Vorlage erstellt ist, siehst du in der Symbolleiste den vorausgefüllten Betreff. Den Betreff kannst du mit einem Klick auf *Sprachabhängige Einstellungen* (material:translate[]) ganz oben rechts anpassen. Dort wählst du auch bis zu 3 statische Anhänge, die du an deine E-Mail-Vorlage anhängst. Ebenfalls in diesem Bereich kannst du das xref:crm:emailbuilder.adoc#beispiele-benutzerdefiniertes-styling[benutzerdefinierte Styling] der Vorlage wie zum Beispiel die Breite der Vorlage oder die Schriftgröße ändern.
+Sobald die Vorlage erstellt ist, siehst du in der Symbolleiste den vorausgefüllten Betreff. Den Betreff kannst du mit einem Klick auf *Sprachabhängige Einstellungen* (material:translate[]) ganz oben rechts anpassen. Dort wählst du auch bis zu 3 statische Anhänge, die du an deine E-Mail-Vorlage anhängst. Ebenfalls in diesem Bereich kannst du das xref:crm:emailbuilder.adoc#beispiele-benutzerdefiniertes-styling[benutzerdefinierte Styling] der Vorlage wie zum Beispiel die Breite der Vorlage oder die Schriftgröße ändern und das <<#intable-template-settings-number-format, Zahlenformat>>, <<#intable-template-settings-date-format, Datumsformat>> und <<#intable-template-settings-time-format, Zeitformat>> in deinen Vorlagen definieren.
 
 [#sprache-hinzufuegen]
 === Sprache zur Vorlage hinzufügen
@@ -1182,7 +1244,7 @@ Nimm _vor dem Kopieren_ der Vorlage auch die Einstellungen im Bereich <<#intable
 [.instruction]
 Vorlage kopieren:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, die du kopieren möchtest.
 . Klicke in der Zeile der Vorlage, die du kopieren möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
@@ -1204,7 +1266,7 @@ Gehe wie im Folgenden beschrieben vor, um Vorlagen zu löschen. Nur die zusammen
 [.instruction]
 Vorlage löschen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, die du löschen möchtest.
 . Klicke in der Zeile der Vorlage, die du löschen möchtest, auf material:more_vert[]. +
 → Ein Fenster öffnet sich.
@@ -1221,7 +1283,7 @@ Gehe wie im Folgenden beschrieben vor, um eine bestimmte Sprache aus der Vorlage
 [.instruction]
 Sprache aus der Vorlage entfernen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klappe den Ordner auf (material:chevron_right[]), der die Vorlage enthält, aus der du eine Sprache entfernen möchtest.
 . Klicke auf die Vorlage.
 . Wähle oben in den Tabs der Vorlage die Sprache, die du entfernen möchtest.
@@ -1293,7 +1355,7 @@ Im Kapitel <<#verfuegbare-variablen, Verfügbare Variablen>> findest du neben de
 
 Wenn du eine twig expression im Betreff der Vorlage verwenden möchtest, muss diese von doppelt geschweiften Klammern umgeben sein.
 
-*_Beispiel:_* Wenn du im Betreff deiner Vorlage den Versanddienstleister anzeigen möchtest, öffnest du den aufklappbaren Bereich *Auftrag / Versand*, suchst nach der Variable *Versanddienstleister* und setzt dann die entsprechende twig expression wie folgt in den <<#betreff-aendern, Betreff>> deiner Vorlage ein:  `&#123;&#8288;&#123;order.formattedShipping.providerName&#125;&#8288;&#125;`.
+*_Beispiel:_* Wenn du im Betreff deiner Vorlage den Versanddienstleister anzeigen möchtest, öffnest du den aufklappbaren Bereich *Auftrag / Versand*, suchst nach der Variable *Versanddienstleister* und setzt dann die entsprechende twig expression wie folgt in den <<#betreff-aendern, Betreff>> deiner Vorlage ein: `&#123;&#8288;&#123;order.formattedShipping.providerName&#125;&#8288;&#125;`.
 
 Code-Beispiele für den Betreff findest du im Kapitel <<#code-beispiele-betreff, Code-Beispiele für den Betreff>>.
 
@@ -1332,8 +1394,6 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 
 * <<#variablen-ticket, Ticket>>
 
-* <<#variablen-messenger, Messenger>>
-
 [#variablen-auftrag]
 ==== Variablen: Auftrag allgemein
 
@@ -1343,8 +1403,8 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[Die Informationen in dieser Spalte sind für dich nur relevant, wenn du bereits E-Mail-Vorlagen im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* erstellt hast und wissen möchtest, wie die alte Variable hieß. Hinweis: Diese Spalte ist noch nicht vollständig befüllt. Inhalte werden weiterhin ergänzt.]
 
-| `Auftrag im Webshop aufrufen`
-|Öffnet die URL des Auftrags in deinem Webshop.
+| `Zugriffsschlüssel des Auftrags`
+|Hierbei handelt es sich um den Hash, um den Auftrag eindeutig zu identifizieren.
 | `order.access_key`
 |$OrderAccessKey
 
@@ -1392,12 +1452,12 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 | `Datum und Uhrzeit des Auftragseingangs`
 |Datum und Uhrzeit des Auftragseingangs wie im Auftrag gespeichert.
-| `order.formattedDates.createdOn ? (order.formattedDates.createdOn \| date('m-d-Y H:i:s')) : ''`
+| `order.formattedDates.createdOnDateAndTime`
 |
 
 | `Datum des Auftragseingangs`
 |Datum des Auftragseingangs wie im Auftrag gespeichert.
-| `order.formattedDates.createdOn ? (order.formattedDates.createdOn \| date('m-d-Y')) : ''`
+| `order.formattedDates.createdOn`
 | $OrderDate
 
 | `Datum des Zahlungseingangs`
@@ -1435,11 +1495,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedDocuments.invoice`
 | -
 
-| `Anzahl der Pakete`
-|Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
-| `order.package`
-| 
-
 | `Gesamtrechnungsbetrag netto`
 |
 | `order.formattedGeneral.invoiceTotalNet`
@@ -1449,6 +1504,11 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 |
 | `order.formattedGeneral.totalNet`
 | $OrderTotalNet
+
+| `Anzahl der Pakete`
+|Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
+| `order.package`
+| 
 
 | `Offener Betrag`
 |
@@ -1540,21 +1600,16 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | $OrderStatusLabel
 
 | `Gesamtrechnungsbetrag`
-|*_Beispiel:_* 1.234,00
-| `order.formattedGeneral.invoiceTotal \| number_format(2, ',', '.')`
+|
+| `order.formattedGeneral.invoiceTotal`
 | $InvoiceTotal
-
-| `Gesamtrechnungsbetrag, durch Punkt getrennt`
-|*_Beispiel:_* 1234.00
-| `order.formattedGeneral.invoiceTotal \| number_format(2, '.', '')`
-| $InvoiceTotalDecimalSeparatorDot
 
 | `Gesamtbetrag der Mehrwertsteuer`
 |
 | `order.formattedGeneral.totalVat`
 | $TotalVAT
 
-| `Wert der Artikel`
+| `Wert des Artikels`
 |
 | `order.formattedGeneral.valueOfItems`
 | $ValueOfItems
@@ -1611,6 +1666,10 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressFullName
 
+| `Lieferadresse Hausnummer`
+| `order.formattedAddresses.deliveryAddress.address2`
+|
+
 | `Lieferadresse Nachname`
 | `order.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressLastName
@@ -1634,10 +1693,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `Lieferadresse Straße`
 | `order.formattedAddresses.deliveryAddress.address1`
 | $DeliveryAddressStreet
-
-| `Lieferadresse Hausnummer`
-| `order.formattedAddresses.deliveryAddress.address2`
-|
 
 | `Lieferadresse Ort`
 | `order.formattedAddresses.deliveryAddress.town`
@@ -1690,6 +1745,10 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
 | $BillingAddressFullName
 
+| `Rechnungsadresse Hausnummer`
+| `order.formattedAddresses.invoiceAddress.address2`
+|
+
 | `Rechnungsadresse Nachname`
 | `order.formattedAddresses.invoiceAddress.name3`
 | $BillingAddressLastName
@@ -1712,10 +1771,6 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 
 | `Rechnungsadresse Straße`
 | `order.formattedAddresses.invoiceAddress.address1`
-|
-
-| `Rechnungsadresse Hausnummer`
-| `order.formattedAddresses.invoiceAddress.address2`
 |
 
 | `Rechnungsadresse Ort`
@@ -1913,17 +1968,12 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `URL zum Artikel`
 |Gibt die URL zum Artikel im Webshop aus.
 | `orderItem.formattedLink`
-| $ItemImageURL
+| 
 
 | `Artikelname`
 |Name des des xref:artikel:artikelsuche.adoc#580[Artikels].
 | `orderItem.orderItemName`
 | $ItemName
-
-| `Artikeltyp`
-|Gibt den Artikeltypen aus, der im Artikel im Tab *Global* gespeichert ist. Mögliche Werte: Standard, Set, Multipack.
-| `orderItem.formattedStockType`
-|
 
 | `Artikelnummer`
 |
@@ -1949,6 +1999,11 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 |
 | `orderItem.quantity`
 | $ItemQuantity
+
+| `Artikeltyp`
+|Gibt den Artikeltypen aus, der im Artikel im Tab *Global* gespeichert ist. Mögliche Werte: Standard, Set, Multipack.
+| `orderItem.formattedStockType`
+|
 
 | `Herstellername`
 |Name des xref:artikel:hersteller.adoc#[Herstellers.]
@@ -1985,7 +2040,7 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `orderItem.formattedReturn.statusId`
 | $ReturnItemStatusID
 
-| `Name des retournierten Artikels`
+| `Statusname des retournierten Artikels`
 |
 | `orderItem.formattedReturn.statusLabel`
 | $ReturnItemStatusLabel
@@ -2015,20 +2070,20 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | `orderItem.formattedAmounts.totalPrice`
 | -
 
-| `Grundpreis`
-|
-| `orderItem.formattedUnit.unitPrice`
-|-
-
 | `URL zum Variantenbild`
 |Gibt die URL zum Variantenbild aus.
 | `orderItem.formattedImageUrl`
-| -
+| $ItemImageURL
 
 | `Einheit`
 |
 | `orderItem.formattedUnit.unitName`
 | -
+
+| `Grundpreis`
+|
+| `orderItem.formattedUnit.unitPrice`
+|-
 
 | `Mehrwertsteuersatz`
 |
@@ -2138,9 +2193,9 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 | $ShippingServiceProviderID
 
 | `Tracking-URL`
-|Dient zur Sendungsverfolgung. Die xref:fulfillment:versand-vorbereiten.adoc#840[Tracking-URL] des Versanddienstleisters wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert. +
+|Gibt den Link zur Sendungsverfolgungsseite des Versanddienstleisters aus. Die xref:fulfillment:versand-vorbereiten.adoc#840[Tracking-URL] des Versanddienstleisters wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert. +
 *_Hinweis:_* Schau auch in unser xref:crm:praxisbeispiel-tracking-url-senden.adoc#[Praxisbeispiel zu diesem Thema]. Dort wird beschrieben, welche Einstellungen du vornehmen musst, um die Tracking-URL an deine Kund:innen zu senden.
-| `order.formattedShipping.trackingURL`
+| `order.formattedShipping.trackingURL \| raw`
 | $TrackingURL
 
 |====
@@ -2154,26 +2209,15 @@ Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach eine
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `Abonnement-ID`
-|ID des Abonnements. Wird automatisch vom System vergeben und kann _nicht_ geändert werden.
-| `order.formattedSubscription.id`
-| $SchedulerID
-
-| `Startdatum des Abonnements`
-|Beginn des Abonnements.
-| `order.formattedSubscription.startDate`
-| $SchedulerStartDate
-
 | `Enddatum des Abonnements`
 |Ende des Abonnements.
 | `order.formattedSubscription.endDate`
 | $SchedulerEndDate
 
-| `Abonnement: Anzahl der Ausführungen`
-|Anzahl der Aufträge, die basierend auf einem Abonnement, angelegt wurde. +
-*_Beispiel:_* Wenn das Abonnement im Mai 2021 mit einem Intervall von 3 Monaten gestartet hat, wurden bis Mai 2022 4 Aufträge angelegt. In diesem Fall würde für diese Variable der Wert `4` in der E-Mail-Vorlage ausgegeben werden.
-| `order.formattedSubscription.numberOfExecutions`
-| $SchedulerExecutionCount
+| `Abonnement-ID`
+|ID des Abonnements. Wird automatisch vom System vergeben und kann _nicht_ geändert werden.
+| `order.formattedSubscription.id`
+| $SchedulerID
 
 | `Abonnementintervall`
 |Intervall des Abonnements wie im Menü *Einrichtung » Aufträge » Abonnement* festgelegt. Das Intervall legt fest, in welchen Zeitabständen Artikel an Kund:innen versendet werden. + 
@@ -2181,9 +2225,20 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 | `order.formattedSubscription.interval`
 | $SchedulerInterval
 
+| `Abonnement: Anzahl der Ausführungen`
+|Anzahl der Aufträge, die basierend auf einem Abonnement, angelegt wurde. +
+*_Beispiel:_* Wenn das Abonnement im Mai 2021 mit einem Intervall von 3 Monaten gestartet hat, wurden bis Mai 2022 4 Aufträge angelegt. In diesem Fall würde für diese Variable der Wert `4` in der E-Mail-Vorlage ausgegeben werden.
+| `order.formattedSubscription.numberOfExecutions`
+| $SchedulerExecutionCount
+
+| `Startdatum des Abonnements`
+|Beginn des Abonnements.
+| `order.formattedSubscription.startDate`
+| $SchedulerStartDate
+
 | `Gesamtbetrag des Abonnements`
 |
-| `order.formattedSubscription.totalAmount \| number_format(2, '.', ',')`
+| `order.formattedSubscription.totalAmount`
 | $SchedulerTotalAmount
 
 |====
@@ -2357,6 +2412,10 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 | `contact.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressFullName
 
+| `Lieferadresse Hausnummer`
+| `contact.formattedAddresses.deliveryAddress.address2`
+|
+
 | `Lieferadresse Nachname`
 | `contact.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressLastName
@@ -2380,10 +2439,6 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 | `Lieferadresse Straße`
 | `contact.formattedAddresses.deliveryAddress.address1 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address2`
 | $DeliveryAddressStreet
-
-| `Lieferadresse Hausnummer`
-| `contact.formattedAddresses.deliveryAddress.address2`
-|
 
 | `Lieferadresse Ort`
 | `contact.formattedAddresses.deliveryAddress.town`
@@ -2435,6 +2490,10 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 | `contact.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.name3`
 |
 
+| `Rechnungsadresse Hausnummer`
+| `contact.formattedAddresses.invoiceAddress.address2`
+|
+
 | `Rechnungsadresse Nachname`
 | `contact.formattedAddresses.invoiceAddress.name3`
 |
@@ -2457,10 +2516,6 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 
 | `Rechnungsadresse Straße`
 | `contact.formattedAddresses.invoiceAddress.address1 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address2`
-|
-
-| `Rechnungsadresse Hausnummer`
-| `contact.formattedAddresses.invoiceAddress.address2`
 |
 
 | `Rechnungsadresse Ort`
@@ -2561,6 +2616,16 @@ Alternativ findest du den gespeicherten Banknamen im Menü *Einrichtung » Einst
 | `globals.legalInformation.cancellationRights.plain`
 | $CancellationRightsText
 
+| `Mandanten-ID`
+|Gibt die ID des Mandanten (Shops) aus.
+| `globals.clientId`
+| -
+
+| `Mandantenname`
+|Gibt den Namen des Mandanten (Shops) aus.
+| `globals.clientName`
+| -
+
 | `Gutschein-Code (1)`
 | xref:auftraege:gutscheine.adoc#[Gutschein-Codes] werden in der Kampagne im Menü *Aufträge » Gutscheine* generiert. Ein Gutschein-Code kann immer nur jeweils einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
 | `globals.coupons.couponCode1`
@@ -2616,6 +2681,16 @@ Alternativ findest du den gespeicherten Banknamen im Menü *Einrichtung » Einst
 | `globals.account.EORINumber`
 |
 
+| `Allgemeine Geschäftsbedingungen im HTML-Format`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *HTML* gespeichert.
+| `globals.legalInformation.termsConditions.html`
+|
+
+| `Allgemeine Geschäftsbedingungen im reinen Textformat`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *Text* gespeichert.
+| `globals.legalInformation.termsConditions.plain`
+|
+
 | `IBAN (Stammdaten)`
 |IBAN aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines plentymarkets Systems. Wird im *Basics*-Assistenten im Schritt *Bankdaten* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinstellungen*. +
 Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellungen » Bank*.
@@ -2667,8 +2742,8 @@ Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellung
 | `globals.links.linkChangePassword`
 | $CustomerPassword
 
-| `URL zum Checkout`
-|Gibt die URL zum Checkout-Bereich des Auftrags im Webshop aus.
+| `URL zur Auftragsübersicht`
+|Gibt die URL zur Auftragsübersicht im Webshop aus.
 | `globals.links.linkCheckout`
 |
 
@@ -2790,45 +2865,6 @@ Alternativ findest du die gespeicherte IBAN im Menü *Einrichtung » Einstellung
 Beachte dazu das Kapitel xref:crm:ticketsystem-nutzen.adoc#5500[Tickets im Mein Konto-Bereich erstellen] auf der Handbuchseite xref:crm:ticketsystem-nutzen.adoc#[Ticketsystem].
 | `ticket.formattedUrl.url`
 | $TicketURL
-
-|====
-
-[#variablen-messenger]
-==== Variablen: Messenger
-
-[[table-variables-messenger]]
-.Variablen in der Kategorie *Messenger*
-[cols="2,5,2"]
-|====
-|Name der Variable |Erläuterung |Twig expression
-
-| `Inhalt der Nachricht`
-|
-| `messenger.message \| raw`
-
-| `ID der Konversation`
-|Dient als eindeutiges Kennzeichen, damit die Nachricht immer korrekt zugeordnet werden kann. Daher sollte diese Variable nicht aus der Vorlage entfernt werden.
-| `messenger.conversationId`
-
-| `Hat abgerechnete Nachrichten`
-|
-| `messenger.metaData.timeCapture.chargeable ? trans('module_mail_templates::Widget.confirm', [], params.lang) : trans('module_mail_templates::Widget.notConfirm', [], params.lang)`
-
-| `Minuten der Nachricht`
-|
-| `messenger.metaData.timeCapture.minutes`
-
-| `Vorschau der Nachricht`
-|
-| `messenger.preview`
-
-| `Betreff der Nachricht`
-|
-| `messenger.title`
-
-| `ID der Nachricht`
-|
-| `messenger.uuid`
 
 |====
 
