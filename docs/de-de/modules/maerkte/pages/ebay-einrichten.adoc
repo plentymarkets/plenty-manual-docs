@@ -1128,6 +1128,12 @@ Mit dieser Option müssen Käufer:innen die Kaufabwicklung bereits vor dem Kauf 
 
 In diesem Menü legst du Bedingungen für den nationalen und internationalen Versand fest. Du wählst neben der Versandregion auch landesspezifische xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofile] oder Dienstleister für den internationalen Versand. Prüfe im Menü *Einrichtung » Aufträge » Versand » Optionen » Tab: Lieferländer* die Spracheinstellungen für die Lieferländer, in die du deine eBay-Artikel versenden möchtest. Weitere Informationen findest du bei eBay unter link:https://verkaeuferportal.ebay.de/internationalen-versand-anbieten[Internationalen Versand anbieten^].
 
+[TIP]
+.Sperrgutversand
+====
+Du kannst auf eBay jetzt auch Sperrgutversand anbieten. Um den Service für Sperrgutversand (eBay Seller Managed Services) nutzen zu können, musst du von eBay dafür freigeschaltet werden. Weitere Informationen zu dem Service und wie du Sperrgutversand für eBay in plentymarkets einrichtest, findest du in unserem xref:maerkte:best-practice-ebay-sms.adoc#[Praxisbeispiel].
+====
+
 [.instruction]
 Einstellungen für nationalen Versand vornehmen:
 
@@ -1426,16 +1432,6 @@ include::partial$manage-listings.adoc[tag=link-layout]
 [#3050]
 ==== Template-Variablen und -Funktionen
 
-Fülle deine HTML-Vorlage mit den benötigten Template-Variablen und -Funktionen und lasse so die Inhalte des Listings in das Layout laden. Achte bei der Schreibweise der Template-Variablen und -Funktionen auf Groß- und Kleinschreibung.
-
-Lasse die Artikelbeschreibung *{% GetItemDescription() %}* und nicht die bei dem Listing gespeicherte Beschreibung einfügen. Auf diese Weise musst du für deinen plentyShop und für deine Listings nur einen Beschreibungstext pflegen.
-
-[IMPORTANT]
-.Option Platzhalter in Layout-Vorlage (eBay) für Merkmale aktivieren
-====
-Wenn du Template-Variablen verwendest, die Merkmale enthalten, wie zum Beispiel *{% GetItemPropertyById() %}* und *{% GetItemPropertyByName() %}*, muss an dem gewählten Merkmal die Option *Platzhalter in Layout-Vorlage (eBay)* im Menü *Einrichtung » Artikel » Merkmale* aktiviert sein, damit das Merkmal in der Layout-Vorlage angezeigt wird.
-====
-
 :ebay:
 
 include::partial$template-variables.adoc[]
@@ -1706,6 +1702,50 @@ Prüfe besonders die Einstellungen der eBay-Merkmale. Diese Prüfung ist sehr wi
 
 Klicke auf den Link *eBay-Merkmale* in den Grundeinstellungen des Listings und prüfe, ob für die Attributnamen, die für die Artikelvarianten benutzt werden, zum Beispiel: Größe oder Farbe, hier keine Werte eingetragen sind. Falls die Werte eingetragen sein sollten, lösche den Inhalt der entsprechenden Textfelder.
 ====
+
+[#eigenschaften-verwenden]
+=== Eigenschaften für eBay aktivieren
+
+Du möchtest weitere Informationen zu deinen eBay-Listings hinzufügen, die du nicht über eBay-Merkmale angeben kannst? Dann verwende Eigenschaften, um deine Listings detaillierter zu beschreiben. Dazu xref:artikel:eigenschaften.adoc#600[erstellst du eine neue Eigenschaft] oder aktivierst eine bestehende Eigenschaft für den Marktplatz eBay.
+
+[.instruction]
+Eigenschaft aktivieren:
+
+. Öffne das Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration*.
+. Klicke auf die Eigenschaft, die du für eBay aktivieren willst.
+. Wähle im Bereich *Sichtbarkeiten* die *Herkunft* der gewünschten eBay-Plattform, zum Beispiel *eBay Germany*.
+. Speichere (terra:save[]) die Einstellungen.
+
+[TIP]
+.Eigenschaften in Layout-Vorlage verwenden
+====
+Wenn du Eigenschaften in einer Layout-Vorlage verwenden willst, musst du folgende Template-Funktionen in die Layout-Vorlage einfügen: *GetItemPropertyV2ById()*, *GetItemPropertyV2ByName()* und *PropertyListV2()*. +
+Weitere Informationen zum Erstellen von Layout-Vorlagen findest du im Kapitel <<#2800, Layout-Vorlagen verwalten>>.
+====
+
+[.collapseBox]
+.eBay-Merkmale, Eigenschaften und Merkmale?
+--
+Bei eBay hast du die Möglichkeit, Informationen zu deinen Listings auf verschiedenen Wegen anzugeben: über eBay-Merkmale, Eigenschaften oder plentymarkets Merkmale. Alle drei Möglichkeiten erfüllen dieselbe Funktion - sie dienen dazu, deinen Listings weitere Informationen hinzuzufügen und sie detaillierter zu beschreiben. +
+
+Wenn du beispielsweise ein eBay-Merkmal, eine Eigenschaft und ein plentymarkets Merkmal hast und alle drei dieselben Informationen enthalten, werden nicht alle drei zu eBay übertragen. plentymarkets prüft immer zuerst, ob ein eBay-Merkmal vorhanden ist und wenn ja, wird das eBay-Merkmal übertragen. Wenn du zusätzlich noch eine Eigenschaft und ein Merkmal mit denselben Informationen mit einem Listing verknüpft hast, werden die Eigenschaft und das Merkmal nicht übertragen. +
+
+Die Priorisierung sieht also folgendermaßen aus:
+
+1. eBay-Merkmal
+2. Eigenschaft
+3. plentymarkets Merkmal
+
+Wenn du eBay-Merkmal, Eigenschaft und plentymarkets Merkmal mit denselben Informationen hast, wird also immer nur die höchste Priorität zu eBay übertragen.
+
+*Soll ich eBay-Merkmale, Eigenschaften oder plentymarkets Merkmale verwenden?*
+
+Wenn du deinen Listings weitere Informationen hinzufügen willst, solltest du entweder eBay-Merkmale oder Eigenschaften verwenden. Neue plentymarkets Merkmale solltest du nicht mehr erstellen, da die Merkmale nicht mehr weiterentwickelt und in Zukunft komplett durch Eigenschaften ersetzt werden.
+
+Du kannst beispielsweise auch nur Eigenschaften an deinen Artikeln pflegen und diese Eigenschaften dann auch für deine Listings verwenden. Wenn du willst, dass Kund:innen deine Listings auf eBay über die eBay-Filter in der Suche finden können, müssen die Eigenschaften und deren Werte exakt so heißen wie die eBay-Merkmale. +
+
+Du kannst natürlich auch Eigenschaften verwenden, die anders heißen als die eBay-Merkmale. Beachte aber, dass diese dann nicht über die eBay-Suchfilter gefunden werden.
+--
 
 [#6500]
 === Eigene Merkmale aktivieren
