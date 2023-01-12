@@ -1,9 +1,11 @@
-= Shopify einrichten
+= Shopify-Plugin einrichten
 :keywords: Shopify, Shopify plugin, Shopify Shops, Shopify verbinden, Shopify einrichten
 :description: Erfahre, wie du das Shopify-Plugin in plentymarkets einrichtest.
 :author: team-plenty-channel
 
 Shopify ist eine E-Commerce-Plattform, mit der du ein Unternehmen starten, erweitern und verwalten kannst. Shopify ist vollständig cloud-basiert und wird gehostet, sodass du dir keine Gedanken über die Aktualisierung oder Wartung von Software oder Webservern machen musst.
+
+include::partial$shopify-differences.adoc[]
 
 [#registrierung-shopify]
 == Bei Shopify registrieren
@@ -456,7 +458,7 @@ Kundenklassen zuordnen:
 [#plugin-hilfe]
 == Plugin-Hilfe konsultieren
 
-Im Tab *Hilfe* des Shopify-Plugins hast kannst du die folgenden Funktionen nutzen:
+Im Tab *Hilfe* des Shopify-Plugins kannst du die folgenden Funktionen nutzen:
 
 * Die Plugin-Bereitschaft prüfen.
 * Varianten-Exportbedingungen prüfen.
@@ -535,12 +537,12 @@ Artikel manuell exportieren:
 *_Hinweis:_* Solltest du einen oder mehrere Artikel auf Shopify gelöscht haben, um diese nochmals zu exportieren, dann beachte, dass ein erster Export die Plugin-Datenbank bereinigt. Erst ein zweiter Export schreibt den Artikel nochmals auf Shopify.
 
 [#warenbestand-export]
-== Tab: *Warenbestand Export*
+=== Tab: *Warenbestand Export*
 
 Zu Testzwecken kannst du alle 5 Minuten Warenbestände für einen Artikel manuell exportieren. Für eine Variante kann der Export alle 3 Minuten erfolgen.
 
 [#benutzerdefiniertes-startdatum]
-=== Benutzerdefiniertes Startdatum für Warenbestand und Preisexport festlegen
+==== Benutzerdefiniertes Startdatum für Warenbestand und Preisexport festlegen
 
 Wenn du Warenbestände für Artikel mit einem älteren *Letzte Änderung*-Datum exportieren möchtest:
 
@@ -555,7 +557,7 @@ Startdatum festlegen:
 → Der nächste *Warenbestand und Preis Export* wird gemäß deiner Einrichtung ausgeführt. Beachte, dass das Startdatum immer aktualisiert wird, um den Start des letzten Exports widerzuspiegeln.
 
 [#warenbestand-verkaufspreis-variante-exportieren]
-=== Warenbestand und Verkaufspreis für eine Variante manuell exportieren
+==== Warenbestand und Verkaufspreis für eine Variante manuell exportieren
 
 [.instruction]
 Warenbestand und Verkaufspreis für eine Variante exportieren:
@@ -567,7 +569,7 @@ Warenbestand und Verkaufspreis für eine Variante exportieren:
 → Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand für die eingetragene Variante exportiert.
 
 [#warenbestand-verkaufspreis-artikel-exportieren]
-=== Warenbestand und Verkaufspreis für einen Artikel manuell exportieren
+==== Warenbestand und Verkaufspreis für einen Artikel manuell exportieren
 
 [.instruction]
 Warenbestand und Verkaufspreis für einen Artikel exportieren:
@@ -579,7 +581,7 @@ Warenbestand und Verkaufspreis für einen Artikel exportieren:
 → Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand für den eingetragenen Artikel exportiert.
 
 [#plentymarkets-id-finden]
-== plentymarkets Auftrags-ID anhand der Shopify-Bestell-ID finden
+=== plentymarkets Auftrags-ID anhand der Shopify-Bestell-ID finden
 
 Wenn ein:e Kund:in dich mit der Shopify-Bestell-ID kontaktiert, kannst du diese ID verwenden, um die entsprechende plentymarkets Auftrags-ID zu finden.
 
@@ -591,7 +593,7 @@ Wenn ein:e Kund:in dich mit der Shopify-Bestell-ID kontaktiert, kannst du diese 
 → Wenn die übermittelte Shopify-Bestellnummer gültig ist, wird die plentymarkets Auftrags-ID angezeigt.
 
 [#artikelexport-cleanup]
-== Artikelexport-Cleanup planen
+=== Artikelexport-Cleanup planen
 
 Plane ein Cleanup, wenn: 
 
@@ -617,10 +619,50 @@ Cleanup planen:
 [#ereignisaktionen]
 == Ereignisaktionen einrichten
 
-Mit den plentymarkets Ereignisaktionen kannst du mit deinen Shopify-Bestellungen kommunizieren, indem benutzerdefinierte Ereignisse ausgelöst werden. Weitere Informationen zu Ereignisaktionen findest du xref:automatisierung:ereignisaktionen.adoc#[hier].
+Mit den xref:automatisierung:ereignisaktionen.adoc#[plentymarkets Ereignisaktionen] automatisierst du die Auftragskommunikation mit Shopify.
+
+[#6862295724]
+=== Verfügbare Ereignisaktionen
+
+Für das Shopify-Plugin sind die folgenden Ereignisaktionen verfügbar:
+
+[[tabelle-shopify-ereignisaktionen]]
+.Ereignisaktionen für Shopify
+[cols="1,3a"]
+|===
+| Ereignisaktion | Beschreibung
+
+| *Shopify-Plugin: Versandbestätigung an Shopify senden*
+| Sendet eine Versandbestätigung für die Shopify-Bestellung. Diese Ereignisaktion funktioniert auch mit der Auftragsart *Lieferauftrag*.
+
+| *Shopify-Plugin: Archiviere Shopify Auftrag*
+| Archiviert den Shopify-Auftrag.
+
+| *Shopify-Plugin: plentymarkets Auftrags-ID in Shopify speichern*
+| Speichert die plentymarkets-Auftrags-ID an den Shopify-Auftragsnotizen.
+
+| *Shopify-Plugin: Storno Benachrichtigung an Shopify senden*
+| Eine Stornierungsbenachrichtigung wird für die Shopify-Bestellung gesendet. Diese Ereignisaktion kann nur ausgelöst werden, bevor die Shopify-Bestellung geliefert wurde. +
+Sendet einen Stornobefehl für alle Artikel aus der Shopify-Bestellung. Auch die Versandkosten werden vollständig erstattet. Erstattete Beträge werden von Shopify berechnet.
+
+| *Shopify-Plugin: Sende Retoure an Shopify*
+| Sendet eine vollständige Rücksendung für die Shopify-Bestellung. Diese Ereignisaktion funktioniert nur, wenn die Shopify-Bestellung bereits erfüllt wurde. Das Ereignis überprüft alle Auftragspositionen und Mengen aus der Rücksendung und sendet dann eine Liste dieser Artikel an Shopify. Die Rückerstattung kann alle oder einen Teil der in der Bestellung enthaltenen Artikel enthalten. Wenn alle Artikel enthalten sind, werden auch die Versandkosten erstattet. Erstattete Beträge werden von Shopify berechnet.
+
+| *Shopify-Plugin: Erstattung / Stornierung an Shopify senden*
+| Eine Rückerstattung wird für die Shopify-Bestellung gemeldet. Der Bestand der Varianten wird freigegeben und zum Shopify-Bestand addiert. Funktioniert nur, wenn die Bestellung bezahlt und noch nicht erstattet wurde. Dieses Ereignis überprüft alle im Gutschrift-Auftrag enthaltenen Auftragspositionen und Mengen und sendet dann eine Liste dieser Artikel zusammen mit den in der Bestellung gefundenen Artikelpreisen an Shopify. Die Rückerstattung kann alle oder nur einen Teil der bestellten Artikel enthalten. Dieses Ereignis erstattet auch die Versandkosten aus dem initialen Auftrag. Hier kannst Du auch wählen, welche Beträge erstattet werden sollen.
+
+| *Shopify-Plugin: Erstattung / Stornierung ohne Bestandserhöhung an Shopify senden*
+| Eine Rückerstattung wird für die Shopify-Bestellung gemeldet. Anders als bei der Ereignisaktion *Erstattung / Stornierung an Shopify senden* wird der durch die Erstattung oder Stornierung freigegebene Bestand aber nicht zum Bestand bei Shopify addiert. Diese Ereignisaktion funktioniert nur, wenn die Bestellung bezahlt und noch nicht erstattet wurde. Dieses Ereignis überprüft alle im Gutschrift-Auftrag enthaltenen Auftragspositionen und Mengen und sendet dann eine Liste dieser Artikel zusammen mit den in der Bestellung gefundenen Artikelpreisen an Shopify. Die Rückerstattung kann alle oder nur einen Teil der bestellten Artikel enthalten. Dieses Ereignis erstattet auch die Versandkosten aus dem initialen Auftrag. Hier kannst du auch wählen, welche Beträge erstattet werden sollen.
+
+| *Shopify-Plugin: Sende manuell hinzugefügte Zahlung an Shopify*
+| Sendet manuell erstellte Zahlungen aus dem plentymarkets Auftrag für die entsprechende Shopify-Bestellung.
+
+| *Shopify-Plugin: Gutschrift an Shopify senden*
+| Erstellt eine Gutschrift und sendet eine Rückerstattung an Shopify, ohne die Artikel des ursprünglichen Auftrags aufzuheben. Dieses Ereignis funktioniert für bezahlte Aufträge, unabhängig vom Erfüllungsstatus.
+|===
 
 [#beispiel-ereignisaktion-einrichten]
-=== Eine Beispiel-Ereignisaktion einrichten
+=== _Beispiel:_ Ereignisaktion einrichten
 
 [.instruction]
 Beispiel-Ereignisaktion einrichten:
@@ -636,47 +678,10 @@ Beispiel-Ereignisaktion einrichten:
 . Wähle eine *Aktion* vom Typ *Plugin » Versandbestätigung an Shopify senden*.
 . *Speichere* die Einstellungen.
 
-[[tabelle-shopify-ereignisaktionen]]
-.Ereignisaktionen für Shopify
-[cols="1,3a"]
-|===
-| Ereignisaktion | Beschreibung
-
-| *Versandbestätigung an Shopify senden*
-| Sendet eine Versandbestätigung für die Shopify-Bestellung. Diese Ereignisaktion funktioniert auch mit der Auftragsart *Lieferauftrag*.
-
-| *Archiviere Shopify Auftrag*
-| Archiviert den Shopify-Auftrag.
-
-| *plentymarkets Auftrags-ID in Shopify speichern*
-| Speichert die plentymarkets-Auftrags-ID an den Shopify-Auftragsnotizen.
-
-| *Storno Benachrichtigung an Shopify senden*
-| Eine Stornierungsbenachrichtigung wird für die Shopify-Bestellung gesendet. Diese Ereignisaktion kann nur ausgelöst werden, bevor die Shopify-Bestellung geliefert wurde. +
-Sendet einen Stornobefehl für alle Artikel aus der Shopify-Bestellung. Auch die Versandkosten werden vollständig erstattet. Erstattete Beträge werden von Shopify berechnet.
-
-| *Sende Retoure an Shopify*
-| Sendet eine vollständige Rücksendung für die Shopify-Bestellung. Diese Ereignisaktion funktioniert nur, wenn die Shopify-Bestellung bereits erfüllt wurde. Das Ereignis überprüft alle Auftragspositionen und Mengen aus der Rücksendung und sendet dann eine Liste dieser Artikel an Shopify. Die Rückerstattung kann alle oder einen Teil der in der Bestellung enthaltenen Artikel enthalten. Wenn alle Artikel enthalten sind, werden auch die Versandkosten erstattet. Erstattete Beträge werden von Shopify berechnet.
-
-| *Erstattung / Stornierung an Shopify senden*
-| Eine Rückerstattung wird für die Shopify-Bestellung gemeldet. Der Bestand der Varianten wird freigegeben und zum Shopify-Bestand addiert. Funktioniert nur, wenn die Bestellung bezahlt und noch nicht erstattet wurde. Dieses Ereignis überprüft alle im Gutschrift-Auftrag enthaltenen Auftragspositionen und Mengen und sendet dann eine Liste dieser Artikel zusammen mit den in der Bestellung gefundenen Artikelpreisen an Shopify. Die Rückerstattung kann alle oder nur einen Teil der bestellten Artikel enthalten. Dieses Ereignis erstattet auch die Versandkosten aus dem initialen Auftrag. Hier kannst Du auch wählen, welche Beträge erstattet werden sollen.
-
-| *Erstattung / Stornierung ohne Bestandserhöhung an Shopify senden*
-| Eine Rückerstattung wird für die Shopify-Bestellung gemeldet. Anders als bei der Ereignisaktion *Erstattung / Stornierung an Shopify senden* wird der durch die Erstattung oder Stornierung freigegebene Bestand aber nicht zum Bestand bei Shopify addiert. Diese Ereignisaktion funktioniert nur, wenn die Bestellung bezahlt und noch nicht erstattet wurde. Dieses Ereignis überprüft alle im Gutschrift-Auftrag enthaltenen Auftragspositionen und Mengen und sendet dann eine Liste dieser Artikel zusammen mit den in der Bestellung gefundenen Artikelpreisen an Shopify. Die Rückerstattung kann alle oder nur einen Teil der bestellten Artikel enthalten. Dieses Ereignis erstattet auch die Versandkosten aus dem initialen Auftrag. Hier kannst du auch wählen, welche Beträge erstattet werden sollen.
-
-| *Sende manuell hinzugefügte Zahlung an Shopify*
-| Sendet manuell erstellte Zahlungen aus dem plentymarkets Auftrag für die entsprechende Shopify-Bestellung.
-
-| *Gutschrift an Shopify senden*
-| Erstellt eine Gutschrift und sendet eine Rückerstattung an Shopify, ohne die Artikel des ursprünglichen Auftrags aufzuheben. Dieses Ereignis funktioniert für bezahlte Aufträge, unabhängig vom Erfüllungsstatus.
-|===
-
 [#dsgvo]
 == Überlegungen zur DSGVO
 
 Aufgrund der DSGVO-Spezifikationen wurden folgende Richtlinien in Bezug auf Kund:innen beim Auftragsimport implementiert:
-
-*Tabelle 4* _DSGVO beim Auftragsimport_
 
 [[tabelle-shopify-dsgvo]]
 .DSGVO beim Auftragsimport
@@ -684,17 +689,18 @@ Aufgrund der DSGVO-Spezifikationen wurden folgende Richtlinien in Bezug auf Kund
 |===
 | Szenario | Erläuterung
 
+| *Käufer:in wird als plentymarkets Kontakt importiert*
+| Das Plugin erstellt einen plentymarkets Kontakt, wenn die Authentizität des Shopify-Kontakts durch eine eindeutige externe Kontakt-ID garantiert wird.
+
+| *Ein existierender plentymarkets Kontakt wird mit dem importierten Auftrag verknüpft*
+| Das Plugin prüft, ob ein Kontakt von Shopify mit dieser externen Kontakt-ID in der Vergangenheit importiert wurde. Wird ein Kontakt gefunden, wird die neue Bestellung an diesen Kontakt angehängt.
+
 | *Kontakt wird als Gast importiert*
 | Wenn:
 
 * Die Käufer:in keine plentymarkets Kontaktdetails hat.
 * Die Echtheit des Kontakts von keiner Partei garantiert wird, selbst wenn die Kontaktdaten bei jedem Auftragsimport identisch sind.
 
-*_Hinweis:_* Bei Bedarf kannst du Kontakte vom Typ *Gast* in reguläre Kontakte umwandeln.
+*Tipp:* Du kannst Kontakte des Typs *Gast* in reguläre Kontakte umwandeln. Weitere Informationen dazu findest du auf der Handbuchseite xref:crm:schnellsuche.adoc#gastzugang-umwandeln[Schnellsuche].
 
-| *Käufer wird als plentymarkets Kontakt importiert*
-| Das Plugin erstellt einen plentymarkets Kontakt, wenn die Authentizität des Shopify-Kontakts durch eine eindeutige externe Kontakt-ID garantiert wird.
-
-| *Ein existierender plentymarkets Kontakt wird mit dem importierten Auftrag verknüpft*
-| Das Plugin prüft, ob ein Kontakt von Shopify mit dieser externen Kontakt-ID in der Vergangenheit importiert wurde. Wird ein Kontakt gefunden, wird die neue Bestellung an diesen Kontakt angehängt.
 |===

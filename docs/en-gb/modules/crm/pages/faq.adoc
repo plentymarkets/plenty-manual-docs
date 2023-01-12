@@ -27,6 +27,24 @@ To avoid that “old” addresses of your contacts are used by mistake when manu
 You want to manually create a new contact but the desired country is not available in the *Country* drop-down list?
 
 In order to be able to select the country from the drop-down list in the contact data record, you have to activate the country first. Go to *Setup » Orders » Shipping » Settings* » Tab: *Shipping profiles*. Search for the desired country and set it to material:check_circle[] *Active*.
+
+*_Note:_* If you set the country of delivery to *Active*, it is automatically available to be selected in your plentyShop by customers.
+--
+
+[#faq-delivery-county-backoffice-active]
+[.collapseBox]
+.I want to have a country of delivery visible in my plentymarkets back end only, but not in my online shop. Is this possible?
+--
+Yes, this is possible. To be able to select this country for example in the contact data record’s drop-down list, you have to set this country to *Back office active*. Go to *Setup » Orders » Shipping » Settings* » Tab: *Shipping profiles*. Search for the desired country and set it to material:flag[] *Back office active*.
+--
+
+[#faq-supplier-delivery-country-active]
+[.collapseBox]
+.How can I activate a country for suppliers only?
+--
+You want to select in a supplier’s contact data record a country that is not available in the list, but you don’t want this country to be selectable in other menus of your back end nor your plentyShop? 
+
+To be able to select this country for example in the drop-down list of a supplier’s contact data record, you have to set this country to *Supplier is active*. Go to *Setup » Orders » Shipping » Settings* » Tab: *Shipping profiles*. Search for the desired country and set it to material:person[] *Supplier is active*.
 --
 
 [#faq-guest-orders-section]
@@ -94,6 +112,21 @@ It is most likely that you are looking for the button in the wrong menu. Anonymi
 For further information about anonymising contact data, refer to the box <<#faq-delete-customer-data, How can I delete contact data in compliance with GDPR?>> and to the xref:crm:quick-search.adoc#anonymise-data-record[Quick search] page.
 --
 
+[#faq-area-contacts-plentyshop]
+== Contact / plentyShop
+
+[#faq-log-into-shop]
+[.collapseBox]
+.Why is my contact not able to log into the shop anymore?
+--
+If your contact cannot log into your plentyShop anymore, this may have the following reasons:
+
+* The sub-type of the email address was changed from *private* to *business*.
+* The contact has entered a wrong password several times in a row.
+
+If the contact enters the wrong password in your plentyShop 4 times in a row, the contact will be blocked for the login for 24 hours and receives the message in the plentyShop to contact the administrator. With one click, you unlock the contact’s login and your contact is able to log into the your plentyShop again as usual. For further information, refer to the xref:crm:edit-contact.adoc#unlock-login[Editing a contact] page.
+--
+
 [#email-templates]
 == Email templates
  
@@ -104,6 +137,13 @@ For further information about anonymising contact data, refer to the box <<#faq-
 You would like to send an email template that contains the tracking URL to your customers as soon as the order has been successfully registered with the shipping service provider and the package number is available at the order? 
 
 Just have a look at this xref:crm:practical-example-send-tracking-url.adoc#[practical example] where we explain step by step which settings you need to carry out in your plentymarkets system.
+--
+
+[#faq-email-templates-new]
+[.collapseBox]
+.Why is there a "[NEW]" in front of some email templates?
+--
+If `[NEW]` is written in front of your email templates, this means that these templates are <<#emailbuilder-migration-old-templates, migrated email templates>>. You can edit these templates at any time in the *CRM » EmailBuilder* menu.
 --
 
 [#emailbuilder-migration-old-templates]
@@ -137,11 +177,10 @@ If you have already created a template in multiple languages, you have to manual
 
 You can find a practical example with instructions which settings to check after the migration of the old email templates on the user manual page xref:crm:practical-example-migration-templates.adoc#[EmailBuilder: Todo after the migration of the old email templates]. +
 Further details about the new EmailBuilder can be found in our xref:crm:emailbuilder.adoc#[user manual].
-
 --
 
 [#email-despatch]
-== Email despatch
+== Sending emails 
 
 [#activate-live-mode]
 [.collapseBox]
@@ -159,5 +198,32 @@ Activating the live mode applies globally for the entire email despatch in plent
 [.collapseBox]
 .How are the email addresses saved in plentymarkets prioritised?
 --
-The email address from the invoice address has priority over the email address from the contact options. If no email address is saved in the invoice address, the email address from the contact options is taken as fallback. This fallback applies when you select in the event procedure the option *Contact* for the procedure *Customer > Send email*. The following prioritisation applies: The private email address has priority over the business email address.
+The email address from the invoice address has priority over the email address from the contact options. If no email address is saved in the invoice address, the email address from the contact options is taken as fallback. This fallback applies if you select in the event procedure the option *Contact* for the procedure *Customer > Send email*. The following prioritisation applies: The private email address has priority over the business email address.
+--
+
+[#email-despatch-to-multiple-different-email-addresses]
+[.collapseBox]
+.How can I send an email to multiple different email addresses?
+--
+Set up an event procedure in the *Setup » Orders » Events* menu. After you selected the desired event, select the procedure *Customer > Send email* afterwards. There, you can select the following recipients:
+
+* Invoice address from order
+* Invoice address from order
+* Contact email business
+* Contact email private
+* Contact email PayPal
+
+You can either select the same or a separate email template for each of these recipients. This way, an email will be sent to the above mentioned recipients at the same time once the selected event occurs.
+--
+
+[#coupons]
+== Coupons
+
+[#cancelled-coupons]
+[.collapseBox]
+.I would like to activate a cancelled coupon code. Can I do that?
+--
+No. Coupon codes that have already been cancelled cannot be activated again. +
+This is because a relation to an order already exists. This means that a coupon that has already been redeemed is not valid any longer, even if the order itself has been cancelled. +
+In this case, you have to generate new coupon codes in the *Orders » Coupons* menu. How this works, is described on the xref:orders:coupons.adoc#generate-coupon-codes[Coupons] page.
 --

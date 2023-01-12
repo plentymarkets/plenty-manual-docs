@@ -1,0 +1,85 @@
+= Practical example: Sending a plentyShop order confirmation to customers
+:keywords: order confirmation, automatically confirm incoming order
+:description: This practical example describes which settings you need to carry out to automatically send an order confirmation to your customers when they placed an order in your plentyShop.
+:author: team-crm
+
+What do I need to do to automatically send an order confirmation email to my customers when they ordered an item in my shop?
+
+[discrete]
+== Required steps (short version)
+
+* <<#set-up-email-template, Setting up an email template>>
+* <<#set-up-event-procedure, Setting up an event procedure>>
+
+[#set-up-email-template]
+== Setting up an email template
+
+In your plentymarkets system, you can find some xref:crm:emailbuilder.adoc#use-default-templates[default templates] that you can adjust according to your needs. You can also create your xref:crm:emailbuilder.adoc#[own template]. +
+*_Note:_* We will explain how you edit a default template and not how create a new template.
+
+[.instruction]
+Adjusting an existing default template in the EmailBuilder:
+
+. Go to *CRM » EmailBuilder*.
+. Open (material:chevron_right[]) the folder *Default templates*.
+. Click on the template _(ID) Shop: Order confirmation_. +
+You will see the already pre-filled template.
+. Check the preview of the template.
+. Click on *Edit* (material:edit[]) to edit the content of the template, if needed.
+. In the *Settings* area, select a xref:crm:emailbuilder.adoc#template-header-footer[header and footer] each from the drop-down lists.
+. The subject of this template is `Order confirmation for your order with ID {⁠{order.id}⁠}`. +
+→ If you want to change the subject, click in the top right on *Language-dependent settings* (material:translate[]).
+*_Note:_* Also note the <<#info-box-static-attachment-cancellation-right, information about the static attachment and cancellation right>> in the box.
+. *Save* (material:save[]) the settings.
+
+[#info-box-static-attachment-cancellation-right]
+[TIP]
+.Adjusting the template’s attachment
+====
+Adjust also the attachment of the default template, if needed. In the default template *Shop: Order confirmation* from our example, the cancellation right variable (`Cancellation right in HTML format` or `Cancellation right in plain text`) is contained in the template. +
+If you prefer to send the cancellation right as an attachment and not as text within the email template, you can upload a PDF file with your text for the cancellation right in the *CMS » Documents* menu and then select this PDF file as static attachment. To do so, click in the template’s *Settings* area in the top right on *Language-dependent settings* (material:translate[]) and select the PDF file from the drop-down list *Static attachments*.
+
+*_Important:_* If you send the cancellation right as an attachment of the email, don’t forget to remove the variable `Cancellation right in HTML format` or `Cancellation right in plain text` from the template.
+====
+
+[#set-up-event-procedure]
+== Setting up an event procedure
+
+Now set up an event procedure that triggers the sending of the <<#set-up-email-template, email template>> as soon as an order has been placed in your plentyShop.
+
+[.instruction]
+Setting up an event procedure:
+
+. Go to *Setup » Orders » Events*.
+. At the bottom left, click on *Add event procedure* (material:add[role=green]). +
+→ The *Create new event procedure* window opens.
+. Enter a distinct name for the event procedure, e.g. `Order confirmation plentyShop`.
+. Select the event as listed in <<#table-event-procedure-order-confirmation>>.
+. *Save* (icon:save[role=green]) the settings.
+. Carry out the settings as listed in <<#table-event-procedure-order-confirmation>>.
+. Activate the option *Active*.
+. *Save* (icon:save[role=green]) the settings.
+
+[[table-event-procedure-order-confirmation]]
+.Setting up the event procedure "Order confirmation plentyShop"
+[cols="2,4,3"]
+|====
+|Setting |Option |Selection
+
+|Event
+|Order generation > New order
+|
+
+|Filter 1
+|Order > Order type
+|Order
+
+|Filter 2
+|Referrer
+|Client (store)
+
+|Procedure
+|Customer > Send email
+|Select as template the <<#set-up-email-template, template for the order confirmation that you have just created>>. Select as *recipient* the option *Invoice address from order*.
+
+|====
