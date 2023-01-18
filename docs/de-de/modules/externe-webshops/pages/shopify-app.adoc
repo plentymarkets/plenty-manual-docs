@@ -1,20 +1,16 @@
-= Shopify verknüpfen
+= Shopify-App einrichten
 :keywords: Shopify, plentymarkets App, Shopify Assistent, Shopify Shops, Shopify verbinden
 :description: Erfahre, wie du dein plentymarkets Konto mit Shopify verknüpfst, um deine Daten zu synchronisieren.
 :author: team-plenty-channel
 
-Auf dieser Seite erfährst du, wie du dein plentymarkets Konto mit Shopify verknüpfst, um deine Daten zwischen beiden Systemen zu synchronisieren. Die beiden Assistenten zum Einrichten von Shopify leiten dich durch alle notwendigen Schritte, damit du direkt durchstarten kannst.
-
-[IMPORTANT]
-.Die Shopify-App ist nur für neue plentymarkets Systeme verfügbar
-====
-Die neue Shopify-App ist aus technischen Gründen zum Start nur für neue plentymarkets Systeme verfügbar. Bestehende Integrationen nutzen weiterhin das Shopify-Plugin. Eine Migrationsmöglichkeit vom Plugin auf die neue App befindet sich in der Entwicklung.
-====
-
-[#about]
-== Über Shopify
+:shopify:
+:market: Shopify
+:referrer-option: Shopify
+:referrer: Shopify
 
 Genau wie plentymarkets ist auch Shopify eine vollumfängliche E-Commerce-Plattform, mit der du dein Online-Business starten, stetig ausbauen und verwalten kannst. Da Shopify vollständig cloud-basiert und -gehostet ist, brauchst du dich nicht um das Aktualisieren oder Warten von Software oder Webservern zu kümmern.
+
+include::partial$shopify-differences.adoc[]
 
 [#registrierung]
 == Bei Shopify registrieren
@@ -54,7 +50,7 @@ video::4D_3vFrVBIQ[youtube]
 [#shopify-konfigurations-assistent]
 === Assistent für Shopify-Konfiguration durchlaufen
 
-Der Assistent *Shopify-Konfiguration* leitet dich durch alle notwendigen Schritte, um deine Shopify-Verbindung einzurichten. <<tabelle-shopify-konfigurations-assistent>> enthält Informationen zu den Einstellungen der einzelnen Schritte des Assistenten. Du findest den Shopify-Konfigurations-Assistenten im Menü *Einrichtung » Assistenten* im Bereich *Omni-Channel*.
+Der Assistent *Shopify-Konfiguration* leitet dich durch alle notwendigen Schritte, um deine Shopify-Verbindung einzurichten. <<table-shopify-configuration-assistant>> enthält Informationen zu den Einstellungen der einzelnen Schritte des Assistenten. Du findest den Shopify-Konfigurations-Assistenten im Menü *Einrichtung » Assistenten* im Bereich *Omni-Channel*.
 
 [.instruction]
 Assistent *Shopify-Konfiguration* durchlaufen:
@@ -180,23 +176,57 @@ Assistent zur Eingabefeldzuordnung durchlaufen:
 --
 
 [#weitere-shops]
-== _Optional:_ Weitere Shopify-Shops verknüpfen
+=== _Optional:_ Weitere Shopify-Shops verknüpfen
 
 Beachte die folgenden Hinweise, wenn du mehr als einen Shopify-Shop mit plentymarkets verknüpfen möchtest:
 
 * Für jede neue Verknüpfung wird ein separater plentymarkets Mandant und ein separates Shopify-Konto benötigt.
 * Um eine zusätzliche Verknüpfung zu erstellen, musst du die plentymarkets App in jedem Shopify-Shop installieren, den du verbinden möchtest.
 
+[#RM4RZXPC]
+== Auftragsherkunft aktivieren
+
+:referrer: Shopify
+:referrer-option: pass:quotes[Option *Shopify*]
+
+include::maerkte:partial$auftragsherkunft-aktivieren.adoc[]
+
+[#UNO4F1PH]
+== Verkaufspreis wählen
+
+:referrer-price: Shopify
+
+include::maerkte:partial$verkaufspreis-festlegen.adoc[]
+
+[#LFL990IP]
+== Benutzerdefinierte Auftragseigenschaften importieren
+
+Mit der Shopify-Integration kannst du beim Auftragsimport in plentymarkets benutzerdefinierte Auftragseigenschaften importieren. 
+
+Benutzerdefinierte Auftragseigenschaften erstellt zum Beispiel das Shopify-Plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. Mit diesem Plugin bietest du Kund:innen die Möglichkeit, bei der Bestellung eigenen Text einzugeben. So kannst du personalisierte Produkte anbieten, zum Beispiel mit einer Gravur.
+
+Voraussetzungen für das Importieren von benutzerdefinierten Auftragseigenschaften sind:
+
+* Im Menü *Einrichtung » Artikel » Merkmale* erstellst du ein Merkmal, für das du rechts die Option *Bestellmerkmal* aktivierst.
+* Der plentymarkets Artikel hat das Merkmal, bei dem die Option *Bestellmerkmal* aktiviert ist.
+
+[#XV8ANTMR]
+== Varianten vorbereiten
+
+Bereite nun deine Varianten vor.
+
+*_Bevor du loslegst:_* Jeder Artikel darf höchstens 100 Varianten haben. Dieses Limit gibt Shopify vor. Artikel mit mehr als 100 Varianten werden also nicht zu Shopify exportiert.
+
 [#beschraenkung-warenbestand]
-== Logik der Beschränkung von Warenbestand
+=== Informationen zur Bestandsbeschränkung
 
 Im Shopify-Backend entscheidet die Option *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* darüber, ob Produkte auch verkauft werden, wenn kein oder zu wenig Bestand im Lager ist. Ob beim Export von Warenbestand diese Option für eine Variante in Shopify aktiviert wird ist abhängig von der plentymarkets Einstellung xref:artikel:verzeichnis.adoc#220[Bestandsbeschränkung].
 
 Je nachdem, welche *Beschränkung* du für eine Variante in plentymarkets festgelegt hast, ist die Checkbox *Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind* aktiv oder inaktiv:
 
-[cols="2,3"]
+[cols="2,2"]
 |====
-| Option *"Beschränkung"* in plentymarkets | Option *"Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind"* in Shopify
+| plentymarkets Option *"Beschränkung"* | Shopify-Option *"Verkauf fortsetzen, auch wenn Produkte nicht auf Lager sind"*
 
 | *Keine*
 | Aktiviert
@@ -208,25 +238,129 @@ Je nachdem, welche *Beschränkung* du für eine Variante in plentymarkets festge
 | Aktiviert
 |====
 
-[#benutzerdefinierte-autragseigenschaften]
-== Benutzerdefinierte Auftragseigenschaften importieren
+[#300]
+=== Variantenverfügbarkeit einstellen
 
-Mit der Shopify-Integration kannst du beim Auftragsimport in plentymarkets benutzerdefinierte Auftragseigenschaften importieren. 
+:market-availability: Shopify
+:option-availability: Shopify
 
-Benutzerdefinierte Auftragseigenschaften erstellt zum Beispiel das Shopify-Plugin link:https://apps.shopify.com/product-personalizer[Product Personalizer^]. Mit diesem Plugin bietest du Kund:innen die Möglichkeit, bei der Bestellung eigenen Text einzugeben. So kannst du personalisierte Produkte zum Beispiel mit einer Gravur anbieten.
+include::maerkte:partial$variantenverfuegbarkeit.adoc[]
 
-Voraussetzungen für das Importieren von benutzerdefinierten Auftragseigenschaften:
+[#0U31GAX6]
+=== Mandant an der Variante aktivieren
 
-* Im Menü *Einrichtung » Artikel » Merkmale* erstellst du ein Merkmal, für das du rechts die Option *Bestellmerkmal* aktivierst.
-* Wenn du solche Eigenschaften importieren möchtest, stelle sicher, dass der plentymarkets Artikel ein Merkmal hat, bei dem die Option *Bestellmerkmal* aktiviert ist.
+Nur Varianten werden exportiert, für die der Mandant (Shop) aktiviert ist, über den du auf {market} verkaufst.
+
+[.instruction]
+Mandant an der Variante aktivieren:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen]*.
+. Wechsele in das Varianten-Tab *Verfügbarkeit*.
+. Aktiviere im Bereich *Mandant (Shop)* den Mandanten (Shop), über den du auf {market} verkaufst.
+. Speichere die Einstellung.
+
+[#MK10HTRN]
+=== SKU speichern
+
+Nur Varianten werden exportiert, für die eine SKU für die Herkunft *Shopify* gespeichert ist.
+
+[.instruction]
+SKU für Shopify speichern:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Einstellungen*.
+. Wechsele in das Tab *Verfügbarkeit*.
+. Klicke im Bereich *SKU* auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Das Bearbeitungsfenster *Neue SKU* wird angezeigt.
+. Wähle die Herkunft *Shopify*.
+. Wähle das dazugehörige Marktplatzkonto.
+. Gib die SKU ein.
+. Klicke auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Die SKU wird gespeichert und angezeigt.
+
+[#TUVEBVS1]
+=== Weitere Pflichtangaben ergänzen
+
+Die folgenden Angaben sind Pflicht für den Variantenexport zu Shopify. Ergänze diese Angaben, damit deine Varianten an Shopify exportiert werden.
+
+[.collapseBox]
+.Speichere für den Artikel einen "Name 1" und einen "Artikeltext".
+--
+
+[.instruction]
+Name 1 und Artikeltext speichern:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen]*.
+. Wechsle in das Tab *Texte*.
+. Wähle in der Symbolleiste die *Sprache*, in der du Artikeldaten zu Shopify exportierst.
+. Gib einen Namen in das Feld *Name 1* ein.
+. Gib einen Artikeltext in das Feld *Artikeltext* ein.
+. Klicke auf *Speichern*.
+--
+
+[.collapseBox]
+.Stelle sicher, dass für die Variante ein Attributname und eine Attributwert in der Exportsprache gespeichert sind.
+--
+
+Für die Variante müssen ein Attributname und ein Attributwert in der Sprache gespeichert sein, in der du Artikeldaten an Shopify exportierst.
+
+[.instruction]
+Attributnamen und Attributwert an Variante prüfen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen]*.
+. Navigiere im Tab *Einstellungen* zum Bereich *Grundeinstellungen*. +
+→ Die mit der Variante verknüpften Attribute werden unterhalb der Einstellung *Position* angezeigt.
+
+Nun kannst du in den Einstellungen der Attribute prüfen, ob Attributname und Attributwert in der korrekten Sprache gespeichert sind.
+
+[.instruction]
+Name und Wert eines Attributs prüfen:
+
+. Öffne das Menü *Einrichtung » Artikel » Attribute » [Attribut öffnen] » Tab: Werte*.
+. Wechsele in das Tab *Name*.
+. Prüfe den Inhalt des Eingabefelds der Sprache.
+. Gib wenn nötig einen Namen für das Attribut ein.
+. Wechsele in das Tab *Werte*.
+. Wähle in der Symbolleiste die *Sprache*, in der du Artikeldaten zu Shopify exportierst.
+→ Die Werte des Attributs werden angezeigt.
+. Gib wenn nötig einen Namen für den Attributwert ein.
+. Klicke auf *Speichern*, wenn du Änderungen vorgenommen hast.
+--
+
+[#OPOU57M9]
+=== _Checkliste:_ Voraussetzungen für Variantenexport
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-intro]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-variation-active]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-variation-referrer]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-availability-active]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-net-stock]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-sales-price]
+
+:number-of-variations: 100
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-number-of-variations]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-name-text-shopify]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-attributes-shopify]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-market-sku]
+
+include::maerkte:partial$checklist-variations.adoc[tag=checklist-market-client]
+
+[#E4EO9VDN]
+== Auftragsabwicklung
+
+Hier findest du Informationen zur Auftragsabwicklung.
 
 [#ereignisaktionen]
-== Ereignisaktionen erstellen
+=== Ereignisaktionen erstellen
 
 Mit den xref:automatisierung:ereignisaktionen.adoc#[plentymarkets Ereignisaktionen] automatisierst du die Auftragskommunikation mit Shopify.
-
-[#ereignisaktionen]
-=== Verfügbare Ereignisaktionen
 
 Für die Shopify-App sind die folgenden Ereignisaktionen verfügbar:
 
@@ -243,12 +377,12 @@ Für die Shopify-App sind die folgenden Ereignisaktionen verfügbar:
 * Shopify App: Erstattung/Stornierung ohne Bestandserhöhung an Shopify senden
 
 [#dsgvo]
-== Berücksichtigung der DSGVO
+== Kontaktimport und DSGVO
 
-Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die im Folgenden aufgeführten Richtlinien für Konten und Aufträge von Kund:innen implementiert:
+Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die folgenden Richtlinien für Konten und Aufträge von Kund:innen implementiert:
 
 [[tabelle-dsgvo]]
-.Berücksichtigung der DSGVO für Kontaktimport
+.Berücksichtigung der DSGVO beim Auftragsimport
 [cols="1,2"]
 |===
 |*Szenario* |*Erläuterung*
@@ -264,3 +398,182 @@ Aufgrund von Vorgaben der Datenschutzgrundverordnung (DSGVO) wurden die im Folge
 
 *Tipp:* Du kannst Kontakte des Typs *Gast* in xref:crm:schnellsuche.adoc#gastzugang-umwandeln[reguläre Kontakte umwandeln].
 |===
+
+[#plugin-help]
+== Hilfefunktionen nutzen
+
+Im Menü *Einrichtung » Märkte » Shopify-App* kannst du die folgenden Funktionen nutzen:
+
+* <<#3873695972, Die Verbindungsbereitschaft prüfen.>>
+* <<#6535986175, Exportbedingungen einer Variante prüfen.>>
+* <<#8878636701, Alle 10 Minuten einen Artikel manuell exportieren.>>
+* <<#4973807959, Alle 5 Minuten den Warenbestand einer Variante oder eines ganzen Artikels exportieren.>>
+* <<#0389029301, Die plentymarkets Auftrags-ID anhand der Shopify-Auftragsnummer finden.>>
+* <<#7088931107, Eine Artikelbereinigung planen.>>
+
+[#3873695972]
+=== Verbindung zu Shopify prüfen
+
+[.instruction]
+Verbindungsbereitschaft prüfen:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Bereitschaft prüfen*.
+. Klicke auf *Prüfen*. +
+→ Es wird geprüft, ob eine Verbindung zu Shopify.com hergestellt werden kann. +
+→ Es wird geprüft, ob Shopify Direct Checkout installiert ist. +
+*_Tipp:_* Erfüllte Bedingungen sind grün und mit einem *OK* markiert. Fehlgeschlagene Bedingungen sind rot und mit einem *X* markiert.
+
+*_Keine Verbindung zu Shopify? Dann prüfe die folgenden Bedingungen:_*
+
+* Ist im Menü *Einrichtung » Aufträge » Auftragsherkunft* die Herkunft *Shopify* aktiviert?
+* Gibt es mehr als eine *Shopify*-Herkunft im Menü *Einrichtung » Aufträge » Auftragsherkunft*? Stelle sicher, dass die ID mit der höchsten Zahl aktiviert ist.
+
+[#6535986175]
+=== Exportbedingungen einer Variante prüfen
+
+Prüfe, ob eine Variante alle Bedingungen für den Export zu Shopify erfüllt.
+
+[.instruction]
+Exportbedingungen einer Variante prüfen:
+
+. Wähle den Webshop, für den du die Variante überprüfen möchtest.
+. Öffne das Menü *Einrichtung » Märkte » Shopify App » Hilfe » Exportbedingungen*.
+. Gib eine gültige Varianten-ID ein.
+. Klicke auf *Prüfen*. +
+→ Es wird geprüft, ob die Variante die Exportbedingungen erfüllt. +
+*_Tipp:_* Erfüllte Bedingungen sind grün und mit einem *OK* markiert. Fehlgeschlagene Bedingungen sind rot und mit einem *X* markiert. +
+*_Wichtig:_* Varianten müssen alle Bedingugnen erfüllen, um exportiert zu werden.
+
+*_Die folgenden Bedingungen werden geprüft:_*
+
+* Ist die Variante aktiv? +
+→ Im Menü *Artikel » Variante » Einstellungen » Bereich: Verfügbarkeit » Aktiv* muss ein Häkchen gesetzt sein.
+* Ist die Variante für den Marktplatz Shopify verfügbar? +
+→ *Artikel »Variante » Verfügbarkeit » Bereich: Märkte » Option: Shopify* muss aktiv sein.
+* Stimmt die *Variante » Mandant Zuordnung* mit der *Webshop*-Auswahl überein? +
+→ *Artikel » Variante » Verfügbarkeit » Bereich: Mandant » [Gewählter Mandant]*.
+* Ist ein *Artikeltext* am Artikel gespeichert? +
+→ *Artikel » Texte » Artikeltext* muss verfügbar sein.
+* Ist ein *Name 1* am Artikel gespeichert? +
+→ *Artikel » Texte » Name 1* muss ausgefüllt sein.
+* Hat die Variante eine SKU für Shopify? +
+→ *Artikel » Variante » Verfügbarkeit » Bereich: SKU* muss eine *SKU* für die Herkunft *Shopify* enthalten.
+* Hat die Variante einen für Shopify freigegebenen Verkaufspreis mit Standardwährung?
+* Ist für die ausgewählte Artikelexportsprache ein Varianten-Attributname gespeichert?
+* Ist für die ausgewählte Artikelexportsprache ein Varianten-Attribuwert gespeichert?
+* Ist für die ausgewählte Artikelexportsprache ein Titel und eine Beschreibung des Artikels gespeichert?
+* Hat der Artikel maximal 100 Varianten? +
+→ Exportierte Artikel dürfen nicht mehr als 100 Varianten enthalten. Dieses Limit wird von Shopify vorgegeben.
+
+// TODO: Liste besser gestalten.
+
+[#8878636701]
+=== Einen Artikel manuell exportieren
+
+Zu Testzwecken kannst du alle 10 Minuten einen Artikel manuell exportieren.
+
+[.instruction]
+Artikel manuell exportieren:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify-App » Artikelexport*.
+. Wähle einen Webshop.
+. Gib eine gülitge Artikel-ID ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, werden der Artikel und die dazugehörigen Varianten exportiert.
+
+*_Hinweis:_* Wenn du einen oder mehrere Artikel auf Shopify gelöscht hast, um sie noch einmal zu exportieren, bereinigt der erste Export nur die Datenbank. Erst der zweite Export speichert den Artikel wieder auf Shopify.
+
+[#2729787975]
+=== Bestände manuell exportieren
+
+Zu Testzwecken kannst du alle 5 Minuten manuell Warenbestände für einen Artikel exportieren. Für eine Variante ist der Export alle 3 Minuten möglich.
+
+[tabs]
+====
+Bestand für einen Artikel manuell exportieren::
++
+--
+
+[.instruction]
+Bestand für einen Artikel exportieren:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify-App » Bestandsexport*.
+. Wähle einen Webshop.
+. Wähle aus der Dropdown-Liste *xxx* die Option *Exportiere Warenbestand für Artikel*.
+. Gib eine gültige *Artikel-ID* ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand für den Artikel exportiert. +
+*_Hinweis:_* Den nächsten manuellen Export eines Artikels kannst du erst nach 5 Minuten starten.
+--
+ 
+Bestand für eine Variante manuell exportieren::
++
+--
+[.instruction]
+Bestand für eine Variante exportieren:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify-App » Bestandsexport*.
+. Wähle einen Webshop.
+. Wähle aus der Dropdown-Liste *xxx* die Option *Exportiere Warenbestand für Variante*.
+. Gib eine gültige *Varianten-ID* ein.
+. Klicke auf *Ausführen*. +
+→ Wenn alle Exportbedingungen erfüllt sind, wird der Warenbestand für die Variante exportiert. +
+*_Hinweis:_* Den nächsten manuellen Export einer Variante kannst du erst nach 3 Minuten starten.
+--
+====
+
+[#8869548744]
+=== Benutzerdefiniertes Startdatum für Bestandsexport festlegen
+
+Wenn du Warenbestände für Artikel mit einem älteren *Letzte Änderung*-Datum exportieren möchtest.
+
+[.instruction]
+Startdatum festlegen:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify-App » Bestandsexport*.
+. Wähle einen Webshop.
+. Wähle aus der Dropdown-Liste die Option *Aktualisierungsdatum*.
+. Wähle ein Startdatum aus dem *Kalender*.
+. Gib eine *Uhrzeit* ein.
+. Klicke auf *Speichern*. +
+→ Der nächste Bestandsexport wird zum gewählten Zeitpunkt ausgeführt. +
+*_Wichtig:_* Das angezeigte Startdatum wird nach jedem Export aktualisiert.
+
+[#0389029301]
+== plentymarkets Auftrags-ID anhand Shopify-Bestell-ID finden
+
+Wenn Kund:innen dich mit der Shopify-Bestell-ID kontaktieren kannst du diese ID verwenden, um die plentymarkets Auftrags-ID des Auftrags zu finden.
+
+[.instruction]
+plentymarkets Auftrags-ID finden:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify-App » Auftrags-ID finden*.
+. Wähle den Webshop, für den du die Shopify-Bestell-ID erhalten hast.
+. Gib eine gültige Shopify-Bestellnummer ein.
+. Klicke auf *Suchen*. +
+→ Wenn die Shopify-Bestellnummer gültig ist, wird die plentymarkets Auftrags-ID angezeigt.
+
+[#7088931107]
+== Artikelbereinigung planen
+
+Plane eine Artikelbereinigung, wenn: 
+
+* Artikel oder Varianten aus plentymarkets gelöscht wurden und auch aus Shopify entfernt werden sollen.
+* Artikel oder Varianten manuell aus Shopify gelöscht wurden und das Plugin keinen neuen Export durchführt.
+* Alle Shopify-Artikel gelöscht werden und ein neuer Export aus plentymarkets gestartet werden soll. In diesem Fall deaktiviere den Artikelexport und lösche alle Artikel aus Shopify. Plane eine Artikelbereinigung. Am nächsten Morgen kannst du den Artikelexport reaktivieren.
+
+*_Hinweis:_* Verwende die Artikelbereinigung nicht, wenn deine Artikel nach der Einrichtung der Verbindung aus Shopify importiert wurden. Das kann zu Artikelverlust auf Shopify führen. Die Artikelbereinigung wird nur einmal ausgeführt, nachdem sie geplant wurde. Plane nach Bedarf neue Artikelbereinigungen.
+ 
+[.instruction]
+Artikelbereinigung planen:
+
+. Öffne das Menü *Einrichtung » Märkte » Shopify-App » Artikelbereinigung*.
+. Wähle den *Webshop*, für den du ein Cleanup planen möchtest.
+. Clicke auf *Bereinigung planen*. +
+→ Betroffene Artikel werden beim nächsten nächtlichen Export auf Shopify gelöscht.
+
+*_Hinweis:_* Bereits exportierte Artikel und Varianten werden in den folgenden Fällen bei der Bereinigung aus Shopify gelöscht:
+
+* Aus der plentymarkets Variante wurden *Mandant (Client)* und *Shopify-Marktplatz* entfernt.
+* Die Variante wurde aus plentymarkets gelöscht.
+* Bei Artikeln ohne aktive Varianten wird der gesamte Artikel auf Shopify gelöscht.
