@@ -126,6 +126,13 @@ The following fields are exported during stock synchronisation:
 
 Set up the market in plentymarkets.
 
+[TIP]
+.Kaufland country platforms
+====
+With plentymarkets, you can sell your items on the Kaufland platforms Kaufland.de, Kaufland.cz, and Kaufland.sk. +
+However, note that Kaufland has not launched the markets in the Czech Republic and Slovakia yet. You can already list your items there, but not yet sell them.
+====
+
 [#settings-kaufland]
 === _New setup menu:_ Carrying out account settings
 
@@ -482,7 +489,7 @@ a| Select *Yes* or *No*. +
 | *Minimum price*
 | Select a sales price for the minimum price to set up repricing (Tiefpreisautomatik) for Kaufland.de. +
 If other sellers offer the same product, your price is automatically reduced. Your price plus shipping is then always once cent cheaper than the prices of your competitors. As such, the minimum price is the lowest price that can be used to undercut the competition. +
-*_Note:_* For the minimum price, select a different price from the normal sales price that you <<#400, set for Kaufland.de>>. The referrer Kaufland.de must be activated for the sales price that you select as the minimum price. +
+*_Note:_* For the minimum price, select a different price than the normal sales price that you <<#400, set for Kaufland.de>>. The Kaufland order referrer must be activated for the sales price that you select as the minimum price. +
 Activate the repricing by linking the sales price that you selected as the minimum price with the variation and entering the lowest possible price. +
 *_Important:_* The minimum price does not apply to item variations which have surcharges for attributes. In this case, *deactivate* this option. If you would like to use the minimum price, then create each variation as a separate item with a defined minimum price.
 
@@ -555,12 +562,6 @@ Link warehouses with the option *Link warehouses* in the menu *Setup » Markets 
 include::partial$activate-referrer.adoc[]
 
 [IMPORTANT]
-.Do not activate subordinate Kaufland referrers
-====
-The referrers *102.01 Kaufland DE*, *102.02 Kaufland CZ*, and *102.03 Kaufland SK* are currently without function and therefore, they must be deactivated. If these referrers are activated, this can result in errors during the stock and price updates.
-====
-
-[IMPORTANT]
 .Do not group Kaufland.de orders
 ====
 During the order import, Kaufland.de orders are synchronised by the external order number. However, in grouped orders, the external order number no longer exists. As such, grouping orders might result in orders being created anew when they are retrieved again.
@@ -586,7 +587,7 @@ include::partial$define-sales-price.adoc[]
 
 Variations must have a barcode that is activated for {market}.
 
-Proceed as described below to define a barcode for the order referrer Kaufland.de that is already saved in your system. This barcode is transferred to Kaufland.de for your variations.
+Proceed as described below to define a barcode for the Kaufland order referrer that is already saved in your system. This barcode is transferred to Kaufland for your variations.
 
 [.instruction]
 Defining a barcode for Kaufland.de:
@@ -821,9 +822,7 @@ Creating a catalogue in the assistant:
 | Select a Kaufland country platform on which you want to offer your items. Select a Kaufland product category afterwards. You have to create a separate catalogue for every Kaufland product category in which you want to offer your items.
 | Here you select the Kaufland country platform and the Kaufland product category that you want to create a catalogue for. You define which items you want to sell in this country in the selected product category. You can export different item data to different country platforms. +
 The different country platforms are displayed as country codes, for example *DE* for *Germany*. At Kaufland, country platforms are called storefronts. +
-*_Note:_* At present, only the country platform *Deutschland (DE)* is available. +
-You have to create a separate catalogue for each Kaufland product category that you want to offer your items in. +
-For example, you create different catalogues for the product categories *TVs* and *Cameras*.
+You have to create a separate catalogue for each Kaufland product category and for each country platform that you want to offer your items on. For example, you create different catalogues for the product categories *TVs* and *Cameras*. You can select the product category after you selected the country platform.
 
 | Enter a name for this catalogue. The name is shown in the *Data » Catalogues* menu and is not exported to Kaufland.
 | Here you enter an internal name for the Kaufland catalogue. This name is only visible in the *Data » Catalogues* menu in your plentymarkets system and serves a better overview of your catalogues. The name of the catalogue is not exported to Kaufland. +
@@ -906,6 +905,22 @@ Specifying the size unit as own value:
 . Select *Space* as *Separator*.
 . *Save* the settings.
 . Repeat the steps above for the data fields *Width* and *Height*.
+
+[#language-product-data]
+===== Language for product data
+
+The field *Language of plentymarkets product data* was added to the Kaufland catalogues. +
+This field is not mandatory. However, it is relevant for the Kaufland country platforms CZ (Czech Republic) and SK (Slovakia) if the product data in plentymarkets are saved in German.
+
+* If the field *Language of plentymarkets product data* is not mapped and remains empty, then the system assumes that the product data in plentymarkets are saved in the language of each market.
+
+* Thus, if the product data in plentymarkets are saved in German, this field must be mapped so that the product data will be translated into the market’s language when they are exported.
+
+* *_allowed values:_* +
+
+ `de` = product data are saved in German and are translated into the language of the catalogue
+ `sk` = product data are translated into Slovak
+ `cz` = product data are translated into Czech
 
 [#activate-catalogue]
 ==== Activating the catalogue export
@@ -1022,7 +1037,7 @@ _or_
 
 | *Filter 2*
 | *Order > Referrer*
-| *Kaufland.de*
+| Select the order referrers for the Kaufland country platforms that you want to use this event procedure for. If you want to use the event procedure for all Kaufland country platforms, then select the order referrer *102 Kaufland*.
 
 | *Procedure*
 | *Plugin*
@@ -1066,7 +1081,7 @@ The status and filters listed in <<#event-procedure-invoices-kaufland>> only ser
 
 | *Filter 2*
 | *Order > Referrer*
-| *Kaufland.de*
+| Select the order referrers for the Kaufland country platforms that you want to use this event procedure for. If you want to use the event procedure for all Kaufland country platforms, then select the order referrer *102 Kaufland*.
 
 | *Procedure*
 | *Documents > Generate invoice*
@@ -1104,7 +1119,7 @@ The statuses and filters in <<#event-procedure-invoice-upload-kaufland>> only se
 
 | *Filter*
 | *Order > Referrer*
-| *Kaufland.de*
+| Select the order referrers for the Kaufland country platforms that you want to use this event procedure for. If you want to use the event procedure for all Kaufland country platforms, then select the order referrer *102 Kaufland*.
 
 | *Procedure*
 | *Order > Upload invoice to Kaufland.de*
@@ -1150,7 +1165,7 @@ include::_includes:partial$event-procedure.adoc[]
 
 | *Filter 2*
 | *Order > Referrer*
-| *Kaufland.de*
+| Select the order referrers for the Kaufland country platforms that you want to use this event procedure for. If you want to use the event procedure for all Kaufland country platforms, then select the order referrer *102 Kaufland*.
 
 | *Procedure*
 | *Order > Send cancellation to Kaufland.de*
@@ -1190,7 +1205,7 @@ _or_
 
 | *Filter 2*
 | *Order > Referrer*
-| *Kaufland.de*
+| Select the order referrers for the Kaufland country platforms that you want to use this event procedure for. If you want to use the event procedure for all Kaufland country platforms, then select the order referrer *102 Kaufland*.
 
 | *Procedure*
 | *Order*
@@ -1200,24 +1215,24 @@ _or_
 ////
 
 [#returns]
-=== Returns for Kaufland.de
+=== Returns for Kaufland
 
-Unlike other marketplaces, you cannot send returns to Kaufland.de with an event procedure via plentymarkets yet. Process returns for Kaufland.de directly in your Kaufland.de seller account.
+Unlike other marketplaces, you cannot send returns to Kaufland with an event procedure via plentymarkets yet. Process returns for Kaufland directly in your Kaufland seller account.
 
 [#1000]
 == Viewing the log
 
-:market: Kaufland.de
+:market: Kaufland
 include::partial$viewing_logs.adoc[tag=data-log-intro]
 
-* *Identifier* » *Kaufland.de*
+* *Identifier* » *Kaufland*
 
 include::partial$viewing_logs.adoc[tag=data-log-config]
 
 Use the reference types and reference values listed in <<#table-reference-types>> to limit the search results:
 
 [[table-reference-types]]
-.Reference types and reference values for Kaufland.de
+.Reference types and reference values for Kaufland
 [cols="1,3,3"]
 |===
 |Reference type |Explanation |Reference value
@@ -1233,11 +1248,11 @@ a| Select a reference type to filter for specific events.
 |
 
 | *externalOrderId*
-|Filters by the Kaufland.de order number of the order.
+|Filters by the Kaufland order number of the order.
 |
 
 | *externalOrderItemId*
-|Filters by the ID of the Kaufland.de order item.
+|Filters by the ID of the Kaufland order item.
 |
 
 |===
