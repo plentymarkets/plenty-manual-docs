@@ -23,10 +23,49 @@ In order to use the Kaufland.de interface, you have to register your Kaufland.de
 [#data-exchange]
 == Frequency of data exchange
 
-After setting up {market} in plentymarkets, the automatic processes described in <<#data-exchange-market>> are available:
+After setting up {market} in plentymarkets, the automatic processes described below are available. +
+Depending on whether you export data using catalogues or the old export, data are transferred to Kaufland in different intervals.
+
+[#data-exchange-catalogue]
+=== Data exchange when exporting data via catalogues
+
+If you export data to Kaufland using catalogues, then data are exchanged with Kaufland in the intervals described in <<#data-exchange-catalogue>>:
+
+[[data-exchange-catalogue]]
+.Frequency of data exchange when using catalogues
+[cols="1,3a"]
+|===
+|Data |Interval
+
+| Price synchronisation
+| every 15 minutes
+
+| Stock synchronisation
+| every 15 minutes
+
+| Item export
+| once a day
+
+| Updating offers
+| Hourly
+
+| Deleting offers
+| Hourly
+
+| Updating products
+| once a day
+
+| Status of product creation
+| Hourly
+|===
+
+[#data-exchange-old-export]
+=== Data exchange when exporting data with the old export
+
+If you export data to Kaufland using the old export, then data are exchanged with Kaufland in the intervals described in <<#data-exchange-market>>:
 
 [[data-exchange-market]]
-.Frequency of data exchange
+.Frequency of data exchange when using the old export
 [cols="1,3a"]
 |===
 |Data |Interval
@@ -103,11 +142,11 @@ Set up Kaufland in plentymarkets to offer items on Kaufland. You need your Kaufl
 Carrying out account settings:
 
 . Go to *Setup » Markets » Kaufland » New settings (test phase)*.
-. Click on *New account* (icon:add[]).
-. Carry out the settings. Pay attention to the explanations given in <<#settings-kaufland>>.
+. Click on *New account* (material:add[]).
+. Carry out the settings. Pay attention to the explanations given in <<#account-settings-kaufland>>.
 . Save (terra:save[]) the settings.
 
-[#settings-kaufland]
+[[account-settings-kaufland]]
 .Settings for the market Kaufland
 [cols="1,3a"]
 |===
@@ -147,9 +186,9 @@ Regardless of this setting, items will immediately be cleared for shipping when 
 
 After the shipment has been confirmed, this option allows Kaufland.de to use the package number in order to send the customer an email with the correct tracking link. +
 
-*_Important:_* You have to assign each of your shipping service providers to one of the shipping service providers from the drop-down list.
+*_Important:_* You have to assign each of your service providers to one of the service providers from the drop-down list.
 
-*_Note:_* Click on (icon:open_in_new[]) to set up new shipping service providers in plentymarkets. Go to *Setup » Orders » Shipping » Settings » Tab: Shipping service providers*.
+*_Note:_* Click on material:open_in_new[] to set up new shipping service providers in plentymarkets. Go to *Setup » Orders » Shipping » Settings » Tab: Shipping service providers*.
 
 | *Status for orders with failed shipping confirmations*
 | Select a status. If no shipping confirmation could be sent to Kaufland.de, the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#create-status[new status]. +
@@ -189,6 +228,7 @@ a| Activate if offers should be transferred to and updated on Kaufland. Offers a
 Only if both this setting and the setting *Data exchange* are activated, the daily complete offer update and the hourly update for offers that were changed is carried out. +
 
 *_Note:_* You can *deactivate* this setting if you export your items to Kaufland using <<#catalogue-export, catalogues>>. +
+
 However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variations-to-product-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
 
 | *Inventory cache*
@@ -198,6 +238,7 @@ However, make sure that all of the variations which you want to offer on Kauflan
 
 | *Max. quantity for items with no stock limit*
 | Enter an integer. Items for which *No limitation* has been selected in the *Settings* tab in the *Availability* area of an item are offered on Kaufland with the quantity entered here. This means that a maximum of the number entered here can be bought of this item on Kaufland at once. +
+
 As soon as an item has been sold, the quantity saved here is newly transferred for sale at the next full hour.
 
 | *Minimum price*
@@ -224,10 +265,8 @@ For example, if all of your items are handmade, you could enter the text “hand
 | *Match shipping profiles*
 | Match your shipping profiles in plentymarkets with shipping groups from Kaufland. +
 
-First, click on *Update shipping groups* (icon:refresh[]) so that the latest Kaufland shipping groups are available in the drop-down list. +
-
+First, click on *Update shipping groups* (material:refresh[]) so that the latest Kaufland shipping groups are available in the drop-down list. +
 *_Important:_* If you change the shipping groups on Kaufland, then you can update them in plentymarkets by clicking on *Update shipping groups*. +
-
 *_Note:_* The page will be refreshed if you update the Kaufland shipping groups. All unsaved changes will be lost. Therefore, the settings are automatically saved before the Kaufland shipping groups are updated. +
 
 If an item has more than one shipping profile, the shipping profile with the lowest category and the highest priority is exported. The category and the priority of a shipping profile are configured within *Setup » Orders » Shipping » Settings » Tab: Shipping profiles* in the *Base* tab of each shipping profile.
@@ -240,16 +279,19 @@ a| Warehouses located outside the EU have to be linked with a Kaufland warehouse
 * *Do not export* = The stock of this warehouse is not transmitted to Kaufland.
 
 | *Export item availabilities*
-| Select whether item availabilities should be transferred to Kaufland.
+| Activate if item availabilities should be transferred to Kaufland.
 
-| *Export item availabilities*
-a| Click on *Open matching table* (icon:swap_horiz[]) to match the item availabilities in plentymarkets with delivery times in working days. +
+| *Match item availabilities*
+a| Click on *Open matching table* (material:swap_horiz[]) to match the item availabilities in plentymarkets with delivery times in working days. +
 
-Enter the minimum and maximum delivery time in working days into the *Minimum delivery time (in working days)* and *Maximum delivery time (in working days)* fields that match the plentymarkets item availability. +
+Enter the handling time in working days into the *Handling time (in working days)* field that matches the plentymarkets item availability. +
+If you do not enter a value for *Handling time*, then the value which is entered into *Minimum delivery time (in working days)* will be transferred as handling time.
 
 *_Note:_* Kaufland specifies Monday to Friday as working days. +
 
 The plentymarkets availability IDs 1-10 correspond to the item availabilities defined in the *Setup » Item » Availability* menu.
+
+*_Note:_* The fields *Minimum delivery time (in working days)* and *Maximum delivery time (in working days)* are deprecated and will be removed from the menu. This means that you do not have to enter anything into these fields. However, make sure to enter values into the *Handling time (in working days)* fields.
 |===
 
 [#overview]
@@ -260,11 +302,11 @@ The *Setup » Markets » Kaufland » New settings (test phase)* menu provides an
 [TIP]
 .Configuring columns
 ====
-Click on *Configure columns* (icon:settings[]) to define which settings should be displayed in the account overview. +
+Click on *Configure columns* (material:settings[]) to define which settings should be displayed in the account overview. +
 The columns *Account ID*, *Shop name*, *Active*, *Item export active*, and *Offer update active* are displayed by default in the overview.
 ====
 
-*_Note:_* The account overview looks different depending on which columns you add or hide via *Configure columns* (icon:settings[]). The following table only lists the columns which are displayed in the overview by default.
+*_Note:_* The account overview looks different depending on which columns you add or hide via *Configure columns* (material:settings[]). The following table only lists the columns which are displayed in the overview by default.
 
 [[table-account-overview]]
 .Kaufland account overview
@@ -272,7 +314,7 @@ The columns *Account ID*, *Shop name*, *Active*, *Item export active*, and *Offe
 |===
 |Column |Explanation
 
-| (icon:chevron_right[])
+| material:expand_more[]
 | Expand the account settings. The *Client key* and the *Secret key* are shown here.
 
 | *Account ID*
@@ -283,8 +325,8 @@ The columns *Account ID*, *Shop name*, *Active*, *Item export active*, and *Offe
 We recommend to use the name of your Kaufland shop.
 
 | *Active*
-| (icon:circle[role="blue"]) = The account is active and data is exchanged with Kaufland. +
-(icon:circle[]) = The account is not active. Data is not exchanged with Kaufland.
+| material:circle[role="blue"] = The account is active and data is exchanged with Kaufland. +
+material:circle[] = The account is not active. Data is not exchanged with Kaufland.
 
 | *Item export active*
 | *Yes* = Item data is exchanged with Kaufland. +
@@ -294,35 +336,35 @@ We recommend to use the name of your Kaufland shop.
 | *Yes* = Offer data is exchanged with Kaufland. +
 *No* = Offer data is not transferred to Kaufland.
 
-| *More* (icon:more_vert[])
+| material:more_vert[] *More*
 | Click here to display more actions. +
 
 [cols="1,3a"]
 !===
-2+! *Item settings* (icon:settings[])
+2+! material:settings[] *Item settings*
 
-! *Update items* (icon:refresh[])
+! material:refresh[] *Update items*
 ! Creates a product file with all items that should be transferred to Kaufland. This file can be viewed via *Item preview* (icon:preview[]).
 
-! *Item preview* (icon:preview[])
+! material:preview[] *Item preview*
 ! Display the item file preview. +
-*_Note:_* If you have not fully set up the interface to Kaufland.de but want to take a look at the item file preview, then you have to activate the interface temporarily. Otherwise, the item file preview will be empty. In order to view the product file preview when the interface is not active, activate the interface and click on *Item preview* (icon:preview[]). Deactivate the interface immediately afterwards by deactivating the setting *Data exchange* (in the *General* settings) and saving the changes. This way, you can prevent items from being transferred too soon.
+*_Note:_* If you have not fully set up the interface to Kaufland.de but want to take a look at the item file preview, then you have to activate the interface temporarily. Otherwise, the item file preview will be empty. In order to view the product file preview when the interface is not active, activate the interface and click on *Item preview* (material:preview[]). Deactivate the interface immediately afterwards by deactivating the setting *Data exchange* (in the *General* settings) and saving the changes. This way, you can prevent items from being transferred too soon.
 
-! *Send items to Kaufland.de* (icon:playlist_play[])
+! material:playlist_play[] *Send items to Kaufland.de*
 ! Send the item file to Kaufland.de.
 
-2+! *Offer settings* (icon:settings[])
+2+! material:settings[] *Offer settings*
 
-! *Update offers* (icon:refresh[])
-! This option creates an offer file. This file can be viewed via *Offer preview* (icon:preview[]).
+! material:refresh[] *Update offers*
+! This option creates an offer file. This file can be viewed via *Offer preview* (material:preview[]).
 
-! *Offer preview* (icon:preview[])
+! material:preview[] *Offer preview*
 ! Display the offer file preview.
 
-! *Send offers to Kaufland.de* (icon:playlist_play[])
+! material:playlist_play[] *Send offers to Kaufland.de*
 ! Send the offer file to Kaufland.de.
 
-! *Delete* (icon:delete[])
+! material:delete[] *Delete*
 ! Delete the account.
 !===
 |===
