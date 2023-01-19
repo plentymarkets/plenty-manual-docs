@@ -130,6 +130,9 @@ Carrying out default settings:
 |[#intable-default-referrer]*Default referrer*
 |The default referrer selected here is preselected in the order details when creating a new order or a new offer if no referrer is set in the contact. If a referrer is set in the contact data, this referrer takes priority.
 
+|[#intable-default-warehouse]*Default warehouse*
+|The default warehouse selected here is preselected in the order details when creating an order or an offer if no warehouse is set in the contact. If a warehouse is set in the contact data, it has priority.
+
 |[#intable-default-template]*Default order template*
 |If you select an <<#create-and-apply-order-templates, order template>> as the default order template, this template is preselected for the new order or offer by default. The values of the selected order template are automatically applied to the order or offer. You can only select order templates that have already been created. +
 The option *No order template preselected* is set by default. If you select an order template as the default and this template is deleted at some point, the default setting returns to *None*.
@@ -230,8 +233,10 @@ A discount is already filled in if the contact is assigned to a customer class i
 
 | *Warehouse*
 |Which options are available depends on the settings you set for xref:orders:preparatory-settings.adoc#intable-warehouse-assignment[assignment of warehouses]: +
-- Is *a) a warehouse can be assigned for each order* set, you can select a warehouse for the order in the order details. +
-- Is *b) a warehouse can be assigned for each stock unit* set, *Depending on the stock units* is displayed. In the next step, items are added to the order. This means that you can select a warehouse for each variation from the drop-down list.
+- Is *a) a warehouse can be assigned for each order* set, you can select a warehouse for the order in the order details or enter the name of a warehouse to search for it. +
+If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected.
+- Is *b) a warehouse can be assigned for each order item* set, *Depending on the order items* is displayed. In the next step, items are added to the order. This means that you can select a warehouse for each variation from the drop-down list. +
+If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected in the item table of the next step.
 
 | *Client*
 |Select the client for this order from the drop-down list. Preselected is either the client set in the contact data or as a next option the <<#intable-default-client, default client>> if it is set.
@@ -389,7 +394,7 @@ This is a default column.
 
 |*Variation number*
 |Shows the variation number. You are redirected to the variation data when clicking on the variation number. +
-This is a default column.
+This is an optional column.
 
 |*Item name*
 |Shows the name that is saved on the item. +
@@ -434,7 +439,8 @@ This is a default column.
 This is a default column.
 
 | *Warehouse*
-|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each stock unit* for the *assignment of warehouses*. +
+|Shows the warehouse of the item. Select another warehouse from the drop-down list if required or enter the name of a warehouse to search for it. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each order item* for the *assignment of warehouses*. +
+If you selected a default warehouse in the *Setup » Orders » Order types » Sales order [Beta]* menu, this warehouse will be preselected. +
 This is a default column.
 
 |*Quantity*
@@ -481,7 +487,8 @@ Carry out the <<#search-items, search>> (material:search[]) to find and add the 
 |Enter a name to filter for items with this name.
 
 | *Variation no.*
-|Enter a variation number to filter for items with this variation number.
+|Enter a variation number to filter for items with this variation number. +
+*_Tip:_* For this filter, a partial search is also possible. This means that you only need to enter the first characters of the variation number in order to search for it.
 
 | *Variation ID*
 |Enter a variation ID in order to filter for items with this variation ID.
@@ -603,7 +610,7 @@ This is not a default column.
 
 | *Variation no.*
 |Shows the number of the variation. You are redirected to the variation data when clicking on the variation number. +
-This is a default column.
+This is an optional column.
 
 | *Item name*
 |Shows the name that is saved on the item. You can edit (material:edit[]) the item name if needed. +
@@ -638,31 +645,42 @@ This is not a default column.
 This is not a default column.
 
 | *Net price*
-|Shows the net price of the item. You can edit the data field net price via material:edit[]. The gross price will be adjusted automatically. +
+|Shows the net price of the item. If you applied a discount, this has already been deducted. The gross price will also be adjusted automatically. +
 This is a default column.
 
-| *Regular net price*
-|Shows the regular net price of the item. +
-This is not a default column.
+| *Original net price*
+|Shows the original net price of the item before a discount was applied. You can adjust (material:edit[]) the original net price if required. +
+This is a default column.
 
 | *Gross price*
-|Shows the gross price of the item. You can edit the data field gross price via material:edit[]. The net price will be adjusted automatically. +
+|Shows the gross price of the item. If you applied a discount, this has already been deducted. The net price will also be adjusted automatically. +
 This is a default column.
+
+| *Original gross price*
+|Shows the original gross price of the item before a discount was applied. You can adjust (material:edit[])
+ the original gross price if required. +
+ This is a default column.
 
 | *Surcharge total*
 |Shows the sum of the order item properties’ surcharges. +
 This is not a default column.
 
-| *Discount*
-|Shows the discount that was entered in the order details in the first step of the order creation. +
+| *Discount [%]*
+|Shows the discount in percent that was entered in the order details in the first step of the order creation.
+If you want to display the discount as amount, select the option *Amount* from the drop-down list. +
+*_Note:_* The amount is displayed in the currency of the order. +
 This is a default column.
 
-| *Total amount of the order (gross)*
+|*Total amount (net)*
+|Shows the total net amount of the item. +
+This is a default column.
+
+| *Total amount (gross)*
 |Shows the total gross amount of the item. +
 This is a default column.
 
 | *Warehouse*
-|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each stock unit* for the *assignment of warehouses*. +
+|Shows the warehouse of the item. Select another warehouse from the drop-down list, if required. Note that this is only possible if you selected the setting *b) A warehouse can be assigned for each order item* for the *assignment of warehouses*. +
 This is a default column.
 
 | *VAT (%)*
@@ -730,8 +748,64 @@ In the last step, the order or the offer is completed. Different amounts of the 
 * Open amount: Shows the open invoice amount the customer has to pay. The status bar is green when the amount is zero, i.e. if the customer has already paid the full invoice amount. Red means that the full invoice amount is still open. Orange means that the invoice amount is still partially open.
 
 In the order details, you can adjust the *Payment method*, the *Shipping costs*, the *Shipping method* as well as the *Owner* if required. +
-Moreover, you can enter one or more coupon codes in the *Coupon codes* field to redeem these with this order. Enter a coupon code and press _enter_ or click outside the field. It is checked whether the coupon can be redeemed. Redeemable coupons are displayed in green with the coupon’s value. A tooltip shows which kind of coupon it is. Coupons that cannot be redeemed are displayed in red with the info *Not redeemable*. You can also enter several coupon codes. +
-The values of the coupons are set off against the order value. Coupons are not added as an order position in the shopping cart. Coupons cannot be redeemed for offers.  This means that the input field *Coupon codes* is only available for the order creation, but not for creating offers.
+
+Moreover, you can enter one or more coupon codes in the *Coupon codes* field to redeem these with this order. The values of the coupons are set off against the order value. Coupons are not added as an order position in the shopping cart. Coupons cannot be redeemed for offers.  This means that the input field *Coupon codes* is only available for the order creation, but not for creating offers. For coupons, it is differentiated between the types *plentymarkets campaign* and *External campaign*. In order to redeem coupon codes proceed as follows.
+
+[tabs]
+====
+Redeeming coupon codes of a plentymarkets campaign::
++
+--
+[.instruction]
+Redeeming coupon codes of a plentymarkets campaign:
+
+. In the field *coupon codes*, enter the code of a plentymarkets campaign.
+. Then click on _Enter_ or outside the field. +
+→ It is checked whether the coupon code is valid. If the coupon is redeemable, it is displayed in green with the coupon’s value. If a coupon code is however invalid, it is displayed in red with the info *Not redeemable*. +
+*_Tip:_* A tooltip shows which kind of coupon it is.
+. Enter additional coupon codes if required. +
+icon:map-signs[] *_Or:_* On the right in the field *Coupon codes* click on *Add coupon code* (material:add[]). +
+→ The window *Redeem coupon* opens.
+. Select the campaign type *plentymarkets campaign* from the drop-down list.
+. Enter the coupon code of the plentymarkets campaign.
+. Click on *Redeem*. +
+→ The coupon code is added and will be redeemed with this order.
+--
+
+Redeeming coupon codes of an external campaign::
++
+--
+
+[.instruction]
+Redeeming coupon codes of an external campaign:
+
+. On the right in the field *Coupon codes* click on *Add coupon code* (material:add[]). +
+→ The window *Redeem coupon* opens.
+. Carry out the settings. Pay attention to the information given in <<table-redeem-coupon-codes>>.
+. Click on *Redeem*. +
+→ The coupon code is added in blue together with the coupon’s value and will be redeemed with this order.
+
+[[table-redeem-coupon-codes]]
+.Redeeming coupon codes
+[cols="1,3"]
+|===
+|*Setting* |*Explanation*
+
+| *Campaign type*
+|Select the type *External campaign* from the drop-down list.
+
+| *Code*
+|Enter a coupon code.
+
+| *Type*
+|Select whether it is a *Promotional coupon* or a *Multipurpose coupon*.
+
+| *Value in €*
+|Enter the coupon’s value in the respective currency.
+
+|===
+--
+====
 
 Below the order details, a table with the added order items is displayed. In addition to the information given in the previous view, further prices and the VAT rate are shown. The VAT rates are editable if you allowed this in the <<#carrying-out-standard-settings, default settings>>.
 
@@ -761,12 +835,12 @@ The following columns are available: .
 * Item name
 * Attributes
 * Net price
-* Regular net price
+* Original net price
 * Gross price
 * Discount
 * Surcharge total
-* Total amount of the order (net)
-* Total amount of the order (gross)
+* Total amount (net)
+* Total amount (gross)
 * Warehouse
 * VAT
 * External item ID
@@ -866,7 +940,7 @@ The status of the main order is always identical to the status of the delivery o
 [WARNING]
 .Assigning a warehouse for each order item
 ====
-To use delivery orders, you have to select the option *b) a warehouse can be assigned for each stock unit* for the xref:orders:basic-settings.adoc#intable-warehouse-assignment[Assignment of warehouses] in the menu *Setup » Orders » Settings*.
+To use delivery orders, you have to select the option *b) a warehouse can be assigned for each order item* for the xref:orders:basic-settings.adoc#intable-warehouse-assignment[Assignment of warehouses] in the menu *Setup » Orders » Settings*.
 ====
 
 Before working with delivery orders, go to *Setup »Orders »Order types » Delivery order* to select an option for splitting up main orders into delivery orders.
@@ -2696,7 +2770,7 @@ Note that for the generation of order documents and emails in different language
 
 | *Warehouse*
 |The warehouse or main warehouse of the order item. If required, click on *Stock correction* to change the warehouse. +
-*_Important_*: The option *Stock correction* synchronises the data displayed in the *Settings* tab of the order with the warehouse saved for the order items included in the order. The option is only available when you selected *b) a warehouse can be assigned for each stock unit* as a xref:orders:basic-settings.adoc#intable-warehouse-assignment[basic order setting] in the *Setup » Orders » Settings* menu. If you manually change the warehouse assigned to an order item and the changed warehouse is not automatically visible in the *Settings* tab of the order, click on *Stock correction* to update the display of the warehouse.
+*_Important_*: The option *Stock correction* synchronises the data displayed in the *Settings* tab of the order with the warehouse saved for the order items included in the order. The option is only available when you selected *b) a warehouse can be assigned for each order item* as a xref:orders:basic-settings.adoc#intable-warehouse-assignment[basic order setting] in the *Setup » Orders » Settings* menu. If you manually change the warehouse assigned to an order item and the changed warehouse is not automatically visible in the *Settings* tab of the order, click on *Stock correction* to update the display of the warehouse.
 
 | *Outgoing items*
 |Indicates whether outgoing items were booked and displays the corresponding date. +

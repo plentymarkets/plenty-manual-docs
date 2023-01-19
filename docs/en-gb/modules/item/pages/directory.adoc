@@ -1,11 +1,11 @@
-= Detail view: Directory of data fields
+= Directory of data fields (new item UI)
 :keywords: New item UI, Item » Item UI, Item data, Item data record, Item data records, Item data field, Item data fields, Item management, Manage items, Managing items, Item editing, Edit items, Editing items, Item processing, Process items, Processing items, Manually edit items, Manually process items, Element, Elements, Portlet, Portlets, Data field, Data fields
 :description: Explanations of the elements, portlets and data fields within an item data record.
 :author: team-item
 :manual:
 
 ////
-zuletzt bearbeitet 22.08.2022
+zuletzt bearbeitet 13.01.2023
 ////
 
 //ToDo - search for and fix comments
@@ -54,7 +54,7 @@ image::item:item-toolbar.png[]
 
 | terra:save[role="darkGrey"]
 |Saves your changes to the data record.
-xref:item:detail-view.adoc#1000[Further information about saving changes].
+xref:item:directory.adoc#1000[Further information about saving changes].
 
 | icon:bell[role="darkGrey"]{nbsp}{nbsp}{nbsp}icon:user[role="darkGrey"]
 |Flag 1 and 2 of the item.
@@ -67,8 +67,13 @@ xref:item:flags.adoc#100[Further information about flags].
 xref:item:manually-create-item.adoc#500[Further information about the preview].
 
 | icon:ellipsis-v[role="darkGrey"]
-|Click on the three dots to access additional functions.
-For example to xref:item:group-functions.adoc#600[copy the item].
+|Click on the three dots to access additional functions:
+
+* Reload
+* xref:item:group-functions.adoc#600[Copy item]
+* Delete item
+* Item serial numbers
+* Labels
 
 | icon:chevron-down[role="darkGrey"]
 |Expands and collapses the elements in this view.
@@ -471,6 +476,14 @@ It’s also possible to save variation-specific texts.
 . Then you’ll xref:item:properties.adoc#1400[link these properties] with the appropriate variations.
 ====
 
+[TIP]
+.Character counter
+====
+There is a character counter in the lower right corner of the data fields.
+Here you can see the maximum number of characters permitted.
+Example: the item name is limited to 240 characters.
+====
+
 //bild
 
 [cols="1,4a"]
@@ -768,7 +781,7 @@ image::item:variation-toolbar.png[]
 
 | terra:save[role="darkGrey"]
 |Saves your changes to the data record.
-xref:item:detail-view.adoc#1000[Further information about saving changes].
+xref:item:directory.adoc#1000[Further information about saving changes].
 
 | terra:item_variation_inheritance[role="darkGrey"]
 |Opens the inheritance settings.
@@ -783,7 +796,14 @@ You can only click on the button in a sub-variation.
 xref:item:manually-create-item.adoc#500[Further information about the preview].
 
 | icon:ellipsis-v[role="darkGrey"]
-|Click on the three dots to access additional functions.
+|Click on the three dots to access additional functions:
+
+* Reload
+* Delete variation
+* Labels
+* Make main variation
+
+//ToDo - add links to the instructions for printing labels in the new ui and for changing the main variation
 
 | icon:chevron-down[role="darkGrey"]
 |Expands and collapses the elements in this view.
@@ -800,6 +820,14 @@ If needed, you can manually link further properties with the variation.
 .Requirement
 ====
 This assumes that you’ve already configured the necessary xref:item:properties.adoc#500[properties] in plentymarkets.
+====
+
+[TIP]
+.Character counter
+====
+There is a character counter in the lower right corner of the data fields.
+Here you can see the maximum number of characters permitted.
+Example: properties of the type text and HTML are limited to 65535 characters.
 ====
 
 [.collapseBox]
@@ -850,12 +878,8 @@ You can find further information in the following table.
 | *Whole number*
 |Enter the numerical value as a whole number, e.g. 350 centimetres.
 
-*_Note_*: Whole numbers between -2,147,483,648 and 2,147,483,647 are permitted.
-
 | *Decimal number*
 |Enter the numerical value as a decimal number, e.g. 3.5 metres.
-
-*_Note_*: 8 places before and 4 places after the decimal point are permitted.
 
 | *Selection*
 |Select the appropriate option from the drop-down list.
@@ -878,14 +902,13 @@ You can find further information in the following table.
 |Enter an alphanumeric character string.
 
 | *HTML*
-|Enter up to 65,535 characters of text.
-Format the text as needed.
+|Enter text with HTML formatting.
 
 *_Note_*: In the portlet’s settings, you can specify which language should be displayed on the left and right side.
 You can also select a different language from the drop-down list.
 
 | *Text*
-|Enter up to 65,535 characters of plain text.
+|Enter plain text.
 
 *_Note_*: In the portlet’s settings, you can specify which language should be displayed on the left and right side.
 You can also select a different language from the drop-down list.
@@ -1358,6 +1381,7 @@ If needed, you can manually link additional categories to the variation or you c
 
 IMPORTANT: This assumes that you’ve already created the necessary xref:item:categories.adoc#200[categories] in plentymarkets.
 
+//tag::link-category[]
 . Go to *Item » Item UI » [Open variation] » Element: Categories*.
 . Within the element, click on icon:ellipsis-v[role="darkGrey"] and then on icon:pencil[role="darkGrey"] *Pick categories*. +
 → A pop-up window will open.
@@ -1365,6 +1389,7 @@ IMPORTANT: This assumes that you’ve already created the necessary xref:item:ca
 . Click on *Apply*. +
 → The data will be displayed as a table.
 . *Save* (terra:save[role="darkGrey"]) the settings.
+//end::link-category[]
 
 --
 
@@ -1464,23 +1489,33 @@ You can learn more about these settings in our xref:item:checklist-items-visibil
 [#290]
 === Client (store)
 
-With plentymarkets, you can manage several online stores, i.e. xref:online-store:setting-up-clients.adoc#[several clients], with only one software. Consequently, it is possible to manage several different areas of business with one plentymarkets system. That’s a great advantage. But it also means that you’ll always need to tell plentymarkets which online store a variation should appear in.
+plentymarkets is a multitenant application.
+In other words, you can manage several different areas of business with just one system.
+
+*_Example_*: Imagine you sell medications.
+To better reach your target groups, you've split your product line among two webshops.
+One shop specialises in natural products and alternative medicine.
+The other shop sells traditional medicine.
+Your webshops have different names and designs, and your end customers don't know that they are actually the same company.
+Nonetheless, you can use just one plentymarkets system to fulfil all of your orders and manage both business divisions.
 
 [.instruction]
 Linking a client to the variation:
 
+//tag::link-client[]
 . Go to *Item » Item UI » [Open variation] » Element: Client (store)*.
 . Choose whichever store (icon:toggle-on[role="blue"]) the variation should appear in.
 . *Save* (terra:save[role="darkGrey"]) the settings.
+//end::link-client[]
 
 [TIP]
-.Setting is greyed out? Check the stock level!
+.Setting has a blue info-box? Check the stock level!
 ====
 plentymarkets can automatically remove items from the plentyShop if they are no longer in stock.
 This automatic function is controlled by the settings in the menu xref:item:directory.adoc#220[Item » Item UI » [Open variation] » Element: Availability and visibility].
 More specifically, it’s controlled by the settings *Client automatic availability: Not deliverable if net stock is negative* and *Client automatic visibility: Not visible if net stock is negative*.
 
-If one of these options is activated and the variation is no longer in stock, then the client setting here will be greyed out.
+If one of these options is activated and the variation is no longer in stock, then a blue info-box will appear here.
 Reorder the variation to get it back in stock.
 Alternatively, click on *Temporarily make available* if you want to manually make the variation visible in the plentyShop despite the fact that it’s not in stock.
 
@@ -2170,6 +2205,52 @@ In other words:
 
 include::page$detail-view.adoc[tag=own-portlet]
 
+[#1000]
+== Saving changes
+
+[#1100]
+=== Asterisk
+
+When you make changes to an item or variation, an asterisk appears in the left navigation bar.
+
+* The asterisk indicates unsaved changes.
+* Where the asterisk appears tells you which level the changes were made on.
+For example, whether a change was made on the item level or variation level.
+* If you have several items open at once, then the asterisk also tells you which items were changed.
+* The asterisk disappears when you save your changes or when you reset the settings to their original values.
+
+image::item:details-asterisk.png[]
+
+[#1200]
+=== Pop-up window
+
+If you try to close an item with unsaved changes, then a pop-up window will appear. It informs you of the unsaved changes.
+The pop-up window lists which exact settings were changed.
+If you changed multiple settings, then they will all be listed.
+
+image::item:details-pop-up.png[]
+
+[cols="1,4"]
+|===
+|Option |Explanation
+
+| *Save*
+|The changes will be saved and the item will close.
+If you open the item again, you will see that the settings were changed.
+This action is the same as the save button further up in the toolbar.
+The save button is disabled as long as the changes are being saved.
+
+| *Do not save*
+|The changes will be discarded and the item will close.
+If you open the item again, you will see that the settings were reset to their original state.
+
+| *Cancel*
+|Only the pop-up window will close.
+The item data record remains open.
+Your changes are still pending, i.e. they have not been saved yet.
+You can continue editing the item.
+|===
+
 [#380]
 == FAQ
 
@@ -2262,5 +2343,28 @@ If you are not an admin:
 . Turn to someone with admin rights.
 . Ask them to xref:item:detail-view.adoc#300[create the necessary views] and xref:item:detail-view.adoc#900[assign them to your user account].
 
+
+--
+
+[.collapseBox]
+.*Can I save multiple items at once?*
+--
+
+Not yet.
+A global save button is planned for the future.
+However, we cannot yet estimate when this function will be available.
+
+--
+
+[.collapseBox]
+.*What’s the difference between "Save", "Do not save" and "Cancel"?*
+--
+
+* *Save* = The changes will be saved and the item will close.
+* *Do not save* = The changes will be discarded and the item will close.
+* *Cancel* = Only the pop-up window will close.
+The item data record remains open.
+
+xref:item:directory.adoc#1200[Further information].
 
 --

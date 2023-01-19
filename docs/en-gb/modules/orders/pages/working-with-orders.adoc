@@ -47,7 +47,7 @@ In the editing mode (terra:design_inline_edit[role="darkGrey"]) of the order ove
 
 | *Change status*
 |material:repeat_one[]
-|Changes the status of the selected orders. Select a status from the drop-down list.
+|Changes the status of the selected orders. The current status is already preselected. Select another status from the drop-down list.
 
 | *Change tag*
 |material:label[]
@@ -121,7 +121,7 @@ On the right-hand side of the order overview, further functions are available. T
 
 | *Show stock*
 |material:warehouse[]
-|Shows the stock and possible reorders for the order item's warehouse. Expand (material:chevron_right) the columns to see further information on the stock.
+|Shows the stock and possible reorders for the order item's warehouse. Expand (material:chevron_right[]) the columns to see further information on the stock.
 
 | *Open tracking link*
 |terra:shipment_tracking[]
@@ -150,7 +150,6 @@ By clicking on an entry in the following list, you will be directly forwarded to
 * <<#area-status-tags, Status and tags>>
 * <<#area-general, General>>
 * <<#area-addresses, Addresses>>
-* <<#area-messenger, Messenger>>
 * <<#area-order-items, Order items>>
 * <<#area-payment-terms, Payment terms>>
 * <<#area-bank-data, Bank details>>
@@ -159,13 +158,15 @@ By clicking on an entry in the following list, you will be directly forwarded to
 * <<#area-properties, Properties>>
 * <<#area-documents, Documents>>
 * <<#area-history, History>>
-* <<#area-notes, Notizen>>
+* <<#area-notes, Notes>>
+* <<#area-messenger, Messenger>>
+* <<#area-tickets, Tickets>>
 
 [TIP]
 .How is data being loaded in the individual areas?
 ======
 If you click on the area that you want to edit on the left-hand side of the navigation, this area will shortly be highlighted in blue, the available data for this area will be loaded and you can directly start editing it. +
-*_Note:_* The following areas will be loaded and opened when you first open the order: *Overview*, *Status and tags*, *Addresses*, *General*, *Order items*, *Payment terms*, *Assigned payments*, *Documents*, *History*. +
+*_Note:_* The following areas will be loaded and opened when you first open the order: *Overview*, *Status and tags*, *Addresses*, *General*, *Order items*, *Payment terms*, *Assigned payments*, *Documents*, *History*, *Notes*, *Messenger*, *Tickets*. +
 The following areas will only be loaded and opened after you click on them in the left-hand side of the navigation: *Bank details*, *Order references*, *Properties*.
 ======
 
@@ -490,7 +491,7 @@ Assigning another address:
 
 In the *Messenger* area, you can see all messages that belong to the order. You can <<#whisper-message, whisper>> messages so that they are only internally visible and _not_ for your customers. You can <<#send-message, send>> messages and you can <<#message-capture-minutes, capture minutes for the message>> and save these minutes as free minutes or paid minutes.
 
-Click on the already created message to open the conversation in the messenger. You can carry out further settings there. For further information, refer to the xref:crm:messenger-testphase.adoc#[Messenger (Test phase)] page.
+Click on the already created message to open the conversation in the messenger. You can carry out further settings there. In case you want to add a new message, click on *New message* (material:add[]) at the top right. Afterwards, you will be directed to the Messenger in order to create the new message. For further information, refer to the xref:crm:messenger-testphase.adoc#[Messenger (Test phase)] page.
 
 [#whisper-message]
 ==== Whispering a message
@@ -572,6 +573,8 @@ Capturing minutes for the message:
 . Assign tags to the message, if needed.
 . Click on *CAPTURE AND SAVE*.
 
+Information on the different table columns in the *Messenger* area can be found on xref:crm:messenger-testphase.adoc#configure-columns[this chapter].
+
 [#area-order-items]
 === Area: Order items
 
@@ -615,11 +618,16 @@ This is a default column.
 |Shows the net price of this order item. +
 This is a default column.
 
-| *Regular net price*
-|Shows the regular net price.
+| *Original net price*
+|Shows the original net price of this order item. +
+This is a default column.
 
 | *Gross price*
 |Shows the gross price of this order item. +
+This is a default column.
+
+| *Original gross price*
+|Shows the original gross price of this order item. +
 This is a default column.
 
 | *Discount [%]*
@@ -630,11 +638,11 @@ This is a default column.
 |Shows the sum of the surcharges of the order item. +
 This is a default column.
 
-| *Total amount of the order (net)*
+| *Total amount (net)*
 |Shows the total net amount of the order item. +
 This is a default column.
 
-| *Total amount of the order (gross)*
+| *Total amount (gross)*
 |Shows the total gross amount of the order item. +
 This is a default column.
 
@@ -770,27 +778,33 @@ Edit the name in the input field if needed.
 |Shows the discount of this customer class.
 
 | *Net price*
-|Shows the net price. +
-You can edit the data field net price via material:edit[]. The gross price will be adjusted automatically.
+|Shows the net price of the item. If you applied a discount, this has already been deducted. The gross price will also be adjusted automatically.
 
-| *Regular net price*
-|Shows the regular net price.
+| *Original net price*
+|Shows the original net price of the item before a discount was applied. You can adjust (material:edit[]) the original net price if required.
 
 | *Gross price*
-|Shows the gross price. +
-You can edit the data field gross price via material:edit[]. The net price will be adjusted automatically.
+|Shows the gross price of the item. If you applied a discount, this has already been deducted. The net price will also be adjusted automatically.
+
+| *Original gross price*
+|Shows the original gross price of the item before a discount was applied. You can adjust (material:edit[])
+ the original gross price if required. +
 
 | *Surcharge total*
 |Shows the total sum of the surcharge.
 
-| *Discount*
-|Shows the discount.
+| *Discount [%]*
+|Shows the discount in percent. If you want to display the discount as amount, select the option *Amount* from the drop-down list. +
+*_Note:_* The amount is displayed in the currency of the order.
 
-| *Total amount of the order (gross)*
+| *Total amount (net)*
+|Shows the total net amount of the order.
+
+| *Total amount (gross)*
 |Shows the total gross amount of the order.
 
 | *Warehouse*
-|Shows the warehouse. Select another warehouse from the drop-down list, if required.
+|Shows the warehouse. Select another warehouse from the drop-down list if required or enter the name of a warehouse to search for it.
 
 | *VAT [%]*
 |The VAT is shown in %. +
@@ -1008,7 +1022,7 @@ Define in the editing mode whether the currency is the *System currency* or the 
 |Setting |Explanation
 
 | *Relationship*
-|Shows the relation to the order type.
+|Shows the relationship to this order. This column does not only show the direct parent and child orders, but all related orders. The latter are defined as _Other_.
 
 | *ID*
 |Shows the ID of the order.
@@ -1083,19 +1097,19 @@ In the *Documents* area you can see all available and archived documents of your
 |Displays all archived documents. Depending on the order type, different documents can be created.
 
 | *Name*
-|Shows the name of the document.
+|Displays the name of the document.
 
 | *Number*
 |Displays the number of the document.
 
 | *Type*
-|Shows the type of the document.
+|Displays the type of the document.
 
 | *Reference*
 |Displays the reference.
 
 | *Warehouse*
-|Shows the warehouse.
+|Displays the warehouse.
 
 | *Owner*
 |Displays the owner.
@@ -1145,6 +1159,53 @@ In the *History* area you get an overview of all previous actions as well as the
 === Area: Notes
 
 In the *Notes* area you can see internal order notes as well as notes from customers with the respective date and time of the creation. The most recent note is always displayed at the top. You can also add further notes (material:add[]) and edit or delete internal notes via the context menu (material:more_vert[]). Customer notes can only be deleted, but not be edited. If there is a customer wish, a corresponding tag is automatically shown on the note.
+
+[#area-tickets]
+=== Area: Tickets
+
+In the *Tickets* area, you can see all existing tickets of the customer. The following table lists the fields that are available in the *Tickets* area of the order. Via *Configure columns* (material:settings[]), you can configure the columns as desired.
+
+[[table-tab-tickets]]
+.Settings in the *Tickets* area
+[cols="1,3"]
+|===
+
+| *ID*
+|Displays the ticket ID. The ID is automatically assigned by the system and cannot be changed.
+
+| *Type*
+|Displays the type of the ticket. Ticket types are created in the *Setup » CRM » Ticket system » Settings* menu in the *Types &amp; Status* tab.
+
+| *Title*
+|Displays the title of the ticket.
+
+| *Status*
+|Displays the current status of the ticket. Ticket statuses are created in the *Setup » CRM » Ticket system » Settings* menu in the *Types &amp; Status* tab.
+
+| *Created at*
+|Displays the creation date of the ticket.
+
+| *Last changes*
+|Displays the date of the ticket's last changes.
+
+| *Progress*
+|Displays the progress in percent by means of a bar. The percentage is displayed in the bar.
+
+| *Prio*
+|Displays the priority of the ticket. There are 6 priority levels. +
+Grey star = lowest priority (default priority) +
+2 yellow stars = highest priority
+
+| *Age*
+|The age of the tickets in days is displayed here. Depending on the age, the ticket is displayed in a different colour: +
+Green = The ticket is 0 to 3 days old. +
+Yellow = The ticket is 4 to 5 days old. +
+Orange = The ticket is 6 to 7 days old. +
+Red = The ticket is at least 8 days old.
+
+|===
+
+In order to add a new ticket, click on *Add new ticket* (material:add[]) at the top right. You will automatically be redirected to the *CRM » Ticket system* menu where you can carry out the settings for the new ticket. For more information refer to the xref:crm:using-the-ticket-system.adoc#1600[Ticket system] manual page.
 
 [#splitting-orders]
 == Splitting orders
