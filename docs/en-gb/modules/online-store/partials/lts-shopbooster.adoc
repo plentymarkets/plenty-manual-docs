@@ -1,0 +1,127 @@
+ShopBooster is an additional module which serves to write plentyShop LTS page contents into a cache. This yields significantly faster loading times in the online shop. +
+
+With ShopBooster, pages are stored in the cache after they have been accessed the first time, thereby making each successive access to the page a lot faster.
+Certain events trigger the invalidation of the cached contents.
+This means that they are deleted from the cache, for example if plugin settings are changed.
+Otherwise, plentyShop would load content that is not up to date. +
+
+ShopBooster writes all online shop contents into the cache, with the exception of the *My Account*, *Checkout*, *Shopping cart*, and *Order confirmation* pages, as well as those pages, that contain customer data.
+
+[TIP]
+.No additional costs
+====
+You can use ShopBooster and all its features at no extra costs.
+====
+
+[#activate-cache-blocks]
+=== Activating cache blocks
+
+By using cache blocks, you can make sure that page contents in the cache are not unnecessarily invalidated. Cache blocks divide the page contents into blocks, which can be invalidated separately. Content that is identical on multiple pages (e.g. the footer) can then be updated once and can be replaced on all cached pages at the same time, without the need to fully invalidate all affected pages.
+
+This improves the cache coverage and, on average, also leads to an improved Time-to-first-Byte (TTFB), which can positively impact your PSI rating.
+
+[NOTE]
+.Adaptations for additional themes
+====
+Cache blocks are directly compatible with plentyShop LTS and plentyShop LTS Modern. If you are using an additional theme, you need to adjust it so that cache blocks have an effect.
+Further information on that can be found in our link:https://developers.plentymarkets.com/en-gb/developers/main/plentyshop-plugins/shopbooster-cache-blocks.html#_using_the_plentyshop_lts_cache_blocks_in_your_own_theme[developer’s documentation^].
+====
+
+[.instruction]
+Activating ShopBooster cache blocks:
+
+. Go to *Setup » Client » [Select client] » Online store » ShopBooster*.
+. Click on *Activate cache blocks*. +
+→ The cache blocks are activated.
+
+You can deactivate the ShopBooster in the same way.
+
+[.instruction]
+Deactivating ShopBooster cache blocks:
+
+. Go to *Setup » Client » [Select client] » Online store » ShopBooster*.
+. Click on *Deactivate cache blocks*. +
+→ The cache blocks are deactivated.
+
+[#softpurging]
+=== Soft purging
+
+ShopBooster uses so-called soft purging to improve online shop performance.
+Whenever contents are invalidated, the old cached content is delivered one more time when the page is accessed, while the updated content is written into the cache in the background. Thereby, online shop content can always be quickly loaded from the cache. 
+
+[#invalidation]
+=== Invalidation of ShopBooster cache
+
+The invalidation of contents that are stored in the ShopBooster cache is necessary to delete content from the cache in order to prevent obsolete content being displayed in your plentyShop. 
+
+==== Triggering the invalidation
+
+The following events and actions trigger a partial or full invalidation of the ShopBooster cache: +
+
+* Editing or deleting a category +
+* Deleting the link between a variation and a category +
+* Saving changes to the plugin configuration +
+* Linking a client to a plugin set +
+* Manually invalidating the cache in the *Setup » Client » ShopBooster* menu +
+* Creating, editing, or deleting a live shopping offer +
+* Placing an order that includes an item which is part of a live shopping offer. Here, the invalidation is only triggered if the item in question is the last available item of the live shopping offer. +
+* Saving changes to the legal texts in the *Setup » Client » [Select client] » Online store » Legal* menu +
+* Saving settings in the plentyShop LTS assistant +
+* Editing sales prices in the *Setup » Item » Sales prices* menu +
+
+==== How long does the invalidation take?
+
+In most cases, it takes about 5 minutes until the contents in the ShopBooster cache have been invalidated. In rare cases this can take up to 10 minutes.
+
+[#deactivate-invalidation]
+=== Deactivate invalidation
+
+In the *Deactivate invalidation* section, you can deactivate the ShopBooster invalidation until the date you enter. Thereby the item data will always be loaded from the cache until the specified date, without the cache being deleted or updated. This can lead to faster loading times in your plentyShop. +
+
+Note that deactivating the invalidation means that changes to the visibility of items will no longer be updated, so that items in your plentyShop can be visible, even though they should not be, e.g. due to a lack of stock. However, your customers will not be able to order items that are not available.
+
+[.instruction]
+Deactivate invalidation:
+
+. Go to *Setup » Client » [Select client] » Online store » ShopBooster*.
+. Enter the date until which you want to deactivate the invalidation.
+. Enter a time until which you want to deactivate the invalidation.
+. *Save* your input.
+
+[#instant-invalidation]
+=== Instantly invalidating the cache
+
+You can remove cached contents from the cache manually. You have 5 invalidations per day at your disposal. The invalidations are reset at 00:00 AM each night. Note that loading times of your shop are slower after invalidating the cache until the pages have been written into the cache again by accessing them.
+
+[.instruction]
+Manually invalidating the cache:
+
+. Go to *Setup » Client » [Select client] » Online store » ShopBooster*.
+. Click the button *Invalidate* in the *Instantly invalidate cache* section. +
+→ The cache is deleted and the notification *Cache has been invalidated* is displayed. +
+→ The number of *Remaining invalidations* for the day is reduced by 1.
+
+[#cache-state]
+=== Checking the cache status of a page
+
+To make sure that the ShopBooster is effective and a page is loaded from the cache, you can use the developer’s tools of your browser.
+The following instruction is based on the Google Chrome browser.
+
+[.instruction]
+Checking the cache status of a page:
+
+. Open an item or category page in your online shop.
+. Open the developer’s tools by right-clicking and selecting *Inspect*. +
+→ The developer’s tools are opened.
+. Click on the tab *Network* in the upper bar.
+. Click on *Doc* in the *filter bar*.
+. Click the name of the page under *Name*.
+. In the detail view of the page, open the tab*Header*.
+. Check whether the entry *x-plenty-cache: hit* appears in the section *Response header*.
+
+If the response header contains the entry *x-plenty-cache: hit*, the page is loaded from the ShopBooster cache. If you cannot find the entry, the inspected page is not stored in the cache.
+
+[NOTE]
+====
+Please note that shop pages have to have been accessed once in order to store them in the cache. If the inspected page does not contain the *x-plenty-cache: hit* entry, reload the page. If the page still does not come from the cache, please contact us in the link:https://forum.plentymarkets.com/c/plentyshop/125[forum^].
+====
