@@ -399,6 +399,11 @@ You can set the filter as default filter directly when creating it as described 
 
 In the line of the saved filter, click on material:star[] *Set as default*. If you want to set another filter as default filter, deactivate the currently selected default filter by clicking on material:star_outline[] *Do not use as default*.
 
+[#create-folder]
+== Creating a folder
+
+You can create as many folders as you like to better organise your conversations. For example, you can create a `Payments` folder in which you save all conversations that are related to invoices. How to create folders is described in the <<#create-custom-folders, Creating custom folders>>.
+
 [#configure-columns]
 == Configuring columns
 
@@ -472,11 +477,17 @@ The xref:payment:beta-managing-payments-new.adoc#[payment] has a direct link to 
 |The symbol material:av_timer[] in the *Billed minutes* (material:av_timer[]) column shows whether the conversation has billed minutes. When you hover with your cursor over the symbol, you can see the number of billed minutes. Right next to the title bar, click on material:arrow_upward[] to sort the table by the number of billed minutes.
 
 |[#intable-overview-priority]*Priority*
-|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downwar[] to sort the table in ascending or descending order by the priority. +
+|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downward[] to sort the table in ascending or descending order by the selected priority. +
 For further information about the available priorities, refer to the <<#context-menu-conversation-set-priority, Setting a priority>> chapter.
+
+|[#intable-overview-folder]*Folder*
+|Shows in which <<#context-menu-move-conversation-to-folder, folder>> the conversation is saved. +
+If the conversation was moved to multiple folders, all folders are listed in the *Folder* column.
 
 |[#intable-overview-subscribed]*Subscribed*
 |The symbol material:done[] in the column material:notifications[] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
+
+   
 
 |[#intable-overview-context-menu]*Context menu*
 |Allows to edit conversations in the overview using the <<#context-menu, context menu>>.
@@ -512,6 +523,99 @@ image::crm:messenger-reply-to-message-context-menu.png[width=640, height=360]
 
 You can adjust the subject line when the option *Subject* is activated (material:toggle_on[role=skyBlue]). If you have _not_ activated the *Subject* option (material:toggle_off[]), the *Subject* field is not visible when replying to the message. The currently selected subject is then automatically transferred when replying to the message.
 
+//// 
+TODO: wieder einfügen, wenn diese Funktion wieder eingebaut wurde.
+
+[#switch-view]
+=== Switching the view
+
+It is possible to change the view in the Messenger from a table to a list. To do so, click on *Change view* (material:list[]) in the top right of the overview. +
+The table view is selected by default.
+
+
+ 
+  The selected conversation with all the messages contained therein is shown in the lower left section and the editor to reply to the messages is shown in the lower right section.
+  The selected conversation with all the messages contained therein is shown in the upper right section and the editor to reply to the messages is shown in the lower right section.
+////
+
+////
+[#zuordnungsparameter]
+== Nachrichten im Messenger zuordnen
+
+Messages in the messenger are assigned with the help of keywords or text parameters that are automatically recognised by your plentymarkets system.
+
+Note the keywords that are used for the assignment as listed in <<#table-assignment-messenger>>. Both upper and lower case letters can be used.
+
+[[table-assignment-messenger]]
+.Assignment parameters and permitted spellings
+[cols="1,3"]
+|====
+|Parameter |Alternative spellings
+
+
+| *Ticket ID*
+|Ticket / ID / Nr / No / nummer / number + digits +
+Examples: +
+Ticket ID: 123 +
+Ticket id 123 +
+TicketID #123 +
+ID: #123 +
+ID: 123 +
+Permitted symbols: +
+Space, period, colon, minus, equals sign, hash key, round brackets, square brackets
+
+|*Conversation*
+|conversation / conversations / konversation / konversationen +
+uuid / id / nr / nummer / number / no +
+Permitted symbols: +
+Space, period, colon, minus, equals sign, hash key
+
+| *Customer data*
+|Customer ID or Customer No.: Kunde / Customer + ID / Nr / No / Nummer / number + digits +
+Customer name: Kunden / Customer + Name + digits +
+Examples: +
+Customer ID: 123 +
+Customer ID 123 +
+Customer id 123 +
+CustomerID123 +
+Customer number 123 +
+Permitted symbols: +
+Space, period, colon, minus, equals sign, hash key
+
+ 
+
+| *Customers*
+|kunde / kunden / customer / id / no / number / nummer +
+Permitted symbols: +
+Space, period, colon, minus, equals sign, hash key
+
+| *Order*
+|Auftrag(s) / Order + ID / Nr / No + digits +
+Examples: +
+Order ID: 123 +
+Order ID 123 +
+OrderID123 +
+Order id 123 +
+Permitted symbols: +
+Space, period, colon, minus, equals sign, hash key
+
+|*Amazon order*
+|Bestellnummer / Bestellung / Commande / Order / Pedido / Ordine / ID +
+Permitted symbols: +
+Space, colon, hash key
+
+| *Invoice No.*
+|Rechnung(s) / invoice + ID / Nr / No / Nummer / number + digits +
+Examples: +
+Invoice ID: 123 +
+invoice ID 123 +
+Invoice No 123 +
+Permitted symbols: +
+Space, period, colon, minus, equals sign, hash key
+
+|====
+////
+
 [#context-menu]
 == Editing conversations in the overview
 
@@ -522,7 +626,8 @@ In the Messenger overview the following functions are available when clicking in
 image::crm:messenger-context-menu-overview.png[width=640, height=360]
 
 * <<#context-menu-mark-conversation-as-read-unread, Marking a conversation as read / unread>>
-* <<#context-menu-tags-conversation, Assigning tags to a conversation>>
+* <<#context-menu-tags-conversation, Assigning tags to conversation>>
+* <<#context-menu-move-conversation-to-folder, Moving a conversation to a folder>>
 * <<#context-menu-mark-conversation-as-done-not-done, Marking a conversation as done / not done>>
 * <<#context-menu-subscribe-unsubscribe-conversation, Subscribing for a conversation / Unsubscribing from a conversation>>
 * <<#context-menu-conversation-set-priority, Setting a priority>>
@@ -542,6 +647,7 @@ Proceed as described below to mark a conversation in the overview as read.
 Marking a conversation as read:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to mark as read, click on material:more_vert[].
 . Click on material:mark_email_read[] *Mark conversation as read*. +
 → The line of the conversation is no longer shown in bold and the blue circle material:circle[role=skyBlue] at the beginning of the line disappears.
@@ -555,6 +661,7 @@ Proceed as described below to mark a conversation in the overview as unread.
 Marking a conversation as unread:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to mark as unread, click on material:more_vert[].
 . Click on material:mark_email_unread[] *Mark conversation as unread*. +
 → The line of the conversation is shown in bold and a blue circle material:circle[role=skyBlue] appears at the beginning of the line.
@@ -568,6 +675,7 @@ Proceed as described below to assign a tag to a conversation. You can also searc
 Assigning tags to a conversation:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation, click on material:more_vert[].
 . Click on material:local_offer[] *Assign tags to conversation* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
 *_Tip:_* If you have created a lot of tags for the *Messages* or *Messages (billable)* areas, enter the name of the tag in the search field *Search for tag*.
@@ -602,6 +710,42 @@ Editing a tag:
 . Click on material:edit[] *Edit tag* to edit an existing tag. +
 → You will automatically be redirected to the *Setup » Settings » Tags* menu. There, you can edit the tags.
 
+[#context-menu-move-conversation-to-folder]
+=== Moving a conversation to a folder
+
+Proceed as described below in order to move the conversation to a folder. Note that you have to <<#create-custom-folders, create a folder>> first. 
+
+[.instruction]
+Moving a conversation to a folder:
+
+. Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
+. In the line of the conversation that you want to move to a folder, click on material:more_vert[].
+. Click on material:folder[] *Move to folder*.
+. Select (material:check_box[role=skyBlue]) one or multiple folders from the list. +
+*_Note:_* If you activated the *Folder option* via the *Configure columns* function, you can see in the overview in which folder the conversation is saved.
+
+[#context-menu-remove-conversation-from-folder]
+[discrete]
+=== Removing a conversation from a folder
+
+You can remove a conversation from a folder at any time. 
+
+[.instruction]
+Removing a conversation from a folder:
+
+. Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
+. In the line of the conversation that you want to remove from a folder, click on material:more_vert[].
+. Click on material:folder[] *Move to folder*.
+. Click on the activated (material:check_box[role=skyBlue]) folder to remove the selection (material:check_box_outline_blank[]).
+
+[TIP]
+.Removing a conversation from all folders
+====
+If you want to remove the conversation from all folders, click on material:remove[] *Remove from all folders*.
+====
+
 [#context-menu-mark-conversation-as-done-not-done]
 === Marking a conversation as done / not done
 
@@ -616,6 +760,7 @@ Proceed as described below to mark a conversation in the overview as done.
 Marking a conversation as done:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to mark as done, click on material:more_vert[].
 . Click on material:circle[] *Mark conversation as done*. +
 → At the beginning of the conversation’s line, the icon material:circle[role=green] is shown.
@@ -629,6 +774,7 @@ Proceed as described below to mark a conversation in the overview as not done.
 Marking a conversation as not done:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to mark as not done, click on material:more_vert[].
 . Click on material:radio_button_unchecked[] *Mark conversation as not done*. +
 → At the beginning of the conversation’s line, the icon material:circle[role=green] is removed.
@@ -647,6 +793,7 @@ Proceed as follows to subscribe for a conversation.
 Subscribing for a conversation:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to subscribe for, click on material:more_vert[].
 . Click on material:notifications_active[] *Subscribe for conversation*. +
 → In the column material:notifications[] *Subscribed*, the symbol material:done[] is shown.
@@ -660,6 +807,7 @@ Proceed as described below to unsubscribe from a conversation.
 Unsubscribing from a conversation:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to unsubscribe from, click on material:more_vert[].
 . Click on material:notifications_off[] *Unsubscribe from conversation*. +
 → In the column material:notifications[] *Subscribed*, the symbol material:done[] is no longer shown. +
@@ -674,6 +822,7 @@ Proceed as described below to set a priority for the conversation by using stars
 Setting a priority:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to set a priority for, click on material:more_vert[].
 . Click on material:star[] *Set priority*.
 . Select a priority from the list.
@@ -703,6 +852,7 @@ Proceed as described below to delete a conversation in the overview.
 Deleting a conversation:
 
 . Go to *CRM » Messenger (Test phase)*.
+. Search for the conversation by means of the filter settings. Note the explanations about the filters in the <<#search-conversation, Searching for a conversation in the Messenger>> chapter.
 . In the line of the conversation that you want to delete, click on material:more_vert[].
 . Click on material:delete[] *Delete*. +
 → A window opens and you need to confirm your decision.
@@ -811,7 +961,7 @@ Proceed as described below to assign a tag to a single message.
 Assigning tags to the message:
 
 . Go to *CRM » Messenger (Test phase)*.
-. Open the conversation that contains the message you want to assign a tag for.
+. Open the conversation that contains the message you want to assign a tag for.  
 . Open the message by clicking in the line of the message.
 . Click on material:local_offer[] *Assign tags to conversation* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
 *_Tip:_* If you have created a lot of tags for the *Messages* or *Messages (billable)* areas, enter the name of the tag in the search field *Search for tag*.
@@ -826,7 +976,7 @@ You can either download the attachments of the message one by one or download al
 Downloading attachments:
 
 . Go to *CRM » Messenger (Test phase)*.
-. Open the conversation that contains the message whose attachment(s) you want to download.
+. Open the conversation that contains the message whose attachment(s) you want to download.  
 . Open the message by clicking in the line of the message.
 . Click on material:more_vert[].
 . Click on material:attach_file[] *Attachments*.
@@ -953,7 +1103,7 @@ a|The conversation relations are shown here, for example:
 * material:credit_card[] _Payment ID_
 * subscribers of the conversation.
 
-In the line of the conversation, click on material:chevron_right[] to see all available relations at a glance. Click on material:expand_more[] to close the relation area again. +
+In the line of the conversation, click on material:chevron_right[] to see all available relations at a glance. Click on material:expand_more[] to close the relation area again.  +
 
 *_Notes:_* +
 The xref:crm:contacts.adoc#[contact] has a direct link to the corresponding data record in the *CRM » Contacts* menu. +
@@ -983,9 +1133,13 @@ The xref:payment:beta-managing-payments-new.adoc#[payment] has a direct link to 
 |[#intable-new-messages-billed-minutes]*Billed minutes*
 |The symbol material:av_timer[] in the *Billed minutes* (material:av_timer[]) column shows whether the conversation has billed minutes. When you hover with your cursor over the symbol, you can see the number of billed minutes. Right next to the title bar, click on material:arrow_upward[] to sort the table by the number of billed minutes.
 
-|[#intable-overview-priority]*Priority*
-|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downwar[] to sort the table in ascending or descending order by the priority. +
+|[#intable-new-messages-priority]*Priority*
+|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downward[] to sort the table in ascending or descending order by the selected priority. +
 For further information about the available priorities, refer to the <<#context-menu-conversation-set-priority, Setting a priority>> chapter.
+
+|[#intable-new-messages-folder]*Folder*
+|Shows in which <<#context-menu-move-conversation-to-folder, folder>> the conversation is saved. +
+If the conversation was moved to multiple folders, all folders are listed in the *Folder* column.
 
 |[#intable-new-messages-subscribed]*Subscribed*
 |The symbol material:done[] in the column material:notifications[] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
@@ -1006,7 +1160,9 @@ You can also use the group function in the *New messages* area. The group functi
 [#my-messages]
 == My messages
 
-In the navigation on the left-hand side of the messenger, you can find the folder material:3p[] *My messages* below the folder material:inbox[] *Inbox*. You can see all conversations here that you <<#subscribe-conversation, subscribed for>>.
+In the navigation on the left-hand side of the messenger, you can find the folder material:3p[] *My messages* below the folder material:inbox[] *Inbox*. You can see all conversations here that you <<#subscribe-conversation, subscribed for>>. 
+
+Below this table, you learn how to <<#create-custom-folders, create custom folders>>.
 
 You can have the following columns displayed in the *My messages* folder of the Messenger:
 
@@ -1047,7 +1203,7 @@ a|The conversation relations are shown here, for example:
 * material:credit_card[] _Payment ID_
 * subscribers of the conversation.
 
-In the line of the conversation, click on material:chevron_right[] to see all available relations at a glance. Click on material:expand_more[] to close the relation area again. +
+In the line of the conversation, click on material:chevron_right[] to see all available relations at a glance. Click on material:expand_more[] to close the relation area again.  +
 
 *_Notes:_* +
 The xref:crm:contacts.adoc#[contact] has a direct link to the corresponding data record in the *CRM » Contacts* menu. +
@@ -1077,9 +1233,13 @@ The xref:payment:beta-managing-payments-new.adoc#[payment] has a direct link to 
 |[#intable-my-messages-billed-minutes]*Billed minutes*
 |The symbol material:av_timer[] in the *Billed minutes* (material:av_timer[]) column shows whether the conversation has billed minutes. When you hover with your cursor over the symbol, you can see the number of billed minutes. Right next to the title bar, click on material:arrow_upward[] to sort the table by the number of billed minutes.
 
-|[#intable-overview-priority]*Priority*
-|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downwar[] to sort the table in ascending or descending order by the priority. +
+|[#intable-my-messages-priority]*Priority*
+|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downward[] to sort the table in ascending or descending order by the selected priority. +
 For further information about the available priorities, refer to the <<#context-menu-conversation-set-priority, Setting a priority>> chapter.
+
+|[#intable-my-messages-folder]*Folder*
+|Shows in which <<#context-menu-move-conversation-to-folder, folder>> the conversation is saved. +
+If the conversation was moved to multiple folders, all folders are listed in the *Folder* column.
 
 |[#intable-my-messages-subscribed]*Subscribed*
 |The symbol material:done[] in the column material:notifications[] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
@@ -1096,6 +1256,56 @@ Click on *Configure columns* (material:settings[]) on the top right to deactivat
 ====
 You can also use the group function in the *My messages* area. The group function in the *My messages* area works the same way as the group function in the *Inbox* area. For further information, refer to the <<#group-function, Using the group function in the inbox>> chapter.
 ====
+
+[#create-custom-folders]
+=== Creating custom folders
+
+To have a better overview and structure in your conversations, you can create as many folders as you like. To do so, proceed as described below.
+
+[.instruction]
+Creating a folder:
+
+. Go to *CRM » Messenger (Test phase)*.
+. In the bottom left corner, click on material:add[] *ADD NEW FOLDER*. +
+→ The *Create folder* window opens.
+. Enter a name for the folder.
+. Click on *Save*. +
+→ The folder is created. You can find the folder in the material:3p[] *My messages* > material:3p[] *My folders* area.
+
+The sub-folder material:3p[] *My folders* is only visible when you have created at least one custom folder. If you do not create custom folder, the sub-folder material:3p[] *My folders* is _not_ visible.
+
+By clicking on the folder, only the conversations contained in this folder are shown in the overview.
+
+[#rename-folder]
+=== Renaming the folder
+
+Do you want to save another name for the folder? To do so, proceed as follows.
+
+[.instruction]
+Renaming the folder:
+
+. Go to *CRM » Messenger (Test phase)*.
+. On the left side in the material:3p[] *My messages* > material:3p[] *My folders* area, click in the line of the folder that you want to delete, on material:more_vert[].
+. Click on material:edit[] *Edit*. +
+→ The *Rename folder* window opens.
+. Enter an other name for the folder.
+. Click on *Save*.
+
+[#delete-folder]
+=== Deleting a folder
+
+Proceed as described below to delete a new folder. +
+*_Important:_* When deleting the folder, only the relation is deleted, but _not_ the conversations within the folder. If you delete a folder, the conversation are moved to the *Inbox* folder.
+
+[.instruction]
+Deleting a folder:
+
+. Go to *CRM » Messenger (Test phase)*.
+. On the left side in the material:3p[] *My messages* > material:3p[] *My folders* area, click in the line of the folder that you want to delete, on material:more_vert[].
+. Click on material:delete[] *Delete*. +
+→ A window opens and you need to confirm your decision.
+. Click on material:delete[role=red] *DELETE*. +
+→ The folder is deleted and the conversations contained in it are moved to the *Inbox* folder.
 
 [#trash]
 == Trash
@@ -1171,9 +1381,13 @@ The xref:payment:beta-managing-payments-new.adoc#[payment] has a direct link to 
 |[#intable-trash-billed-minutes]*Billed minutes*
 |The symbol material:av_timer[] in the *Billed minutes* (material:av_timer[]) column shows whether the conversation has billed minutes. When you hover with your cursor over the symbol, you can see the number of billed minutes. Right next to the title bar, click on material:arrow_upward[] to sort the table by the number of billed minutes.
 
-|[#intable-overview-priority]*Priority*
-|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downwar[] to sort the table in ascending or descending order by the priority. +
+|[#intable-trash-priority]*Priority*
+|In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downward[] to sort the table in ascending or descending order by the selected priority. +
 For further information about the available priorities, refer to the <<#context-menu-conversation-set-priority, Setting a priority>> chapter.
+
+|[#intable-trash-folder]*Folder*
+|Shows in which <<#context-menu-move-conversation-to-folder, folder>> the conversation is saved. +
+If the conversation was moved to multiple folders, all folders are listed in the *Folder* column.
 
 |[#intable-trash-subscribed]*Subscribed*
 |The symbol material:done[] in the column material:notifications[] shows whether you have <<#subscribe-conversation, subscribed for>> the conversation.
