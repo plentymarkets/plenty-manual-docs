@@ -215,7 +215,7 @@ Vorhandenen Channel kopieren und anpassen::
 
 // TODO: Hier ist aus den Mockups nicht ersichtlich, ob das Fenster "Add new channel" angezeigt wird oder die Channel-Einstellungen unten im Hauptmenü ausgeklappt werden. 
 
-[#501]
+[#5T93GW10]
 ====  Channel-Einstellungen vornehmen
 
 In der Ansicht *Channel-Einstellungen* nimmst du Einstellungen zu deinen Channels vor.
@@ -271,43 +271,39 @@ Zusätzliche SKUs werden beim Amazon-Auftragsimport automatisch berücksichtigt.
 * *Bestandsabgleich* = Der Bestand für zusätzliche SKUs wird zusammen mit dem Bestand abgeglichen.
 * *Preisabgleich* = Der Preis für zusätzliche SKUs wird in dem Intervall abgeglichen, den du für die Einstellung *Preisänderungen* eingestellt hast.
 
-Beim Bestandsabgleich für zusätzliche SKUs werden auch FBA-Bestände importiert und in plentymarkets aktualisiert.
-// TODO: WTF!?!?!?
+Beim Bestandsabgleich für zusätzliche SKUs werden auch FBA-Bestände in plentymarkets importiert.
 
+[.collapseBox]
+.Was ist die zusätzliche SKU?
+--
+Zusätzliche SKUs können zusätzlich zu der SKU der Variante für den Bestandsexport und den Preisexport genutzt werden.
 
+*_Beispiel:_* Du hast mehrere Angebote zu einer Variante in deiner Seller Central aktiv. Wenn du den Bestandsabgleich und/oder den Preisabgleich für zusätzliche SKU aktivierst, kannst über plentymarkets auch Bestand und Preis für die zusätzlichen Angebote aktualisieren.
 
-    Eben nicht für den Ex-, sondern den Import (und hierbei Zuordnungsfehler zu verhindern).
+*_Wichtig:_* Zusätzliche SKU können _nicht_ für den Artikelexport genutzt werden. Grund: Amazon erlaubt es nicht, mehrere Angebote für ein Produkt mit eindeutiger Identifizierung (EAN, ASIN etc.) zu erstellen.
 
-Zusätzliche SKUS können für den Bestandsexport, sowie für den Preisexport zusätzlich zu der „echten“ SKU des Artikels/der Variante genutzt werden.
-Hast du beispielsweise mehrere Angebote zu einem Artikel/einer Variante in deiner Seller Central aktiv, kann aus einem Artikel/einer Variante in plentymarkets heraus für die zusätzlichen SKUS auch der Bestand und Preis übermittelt werden.
-Die zusätzlichen SKUS können außerdem für die Zuordnung des Artikels (Auftrag → Variante/Artikel im plentymarkets-System) genutzt werden.
-
-:exclamation: Die Einschränkung hier ist, dass die zusätzlichen SKUS NICHT für den Artikelexport genutzt werden können (und von Amazon aus nicht „dürfen“), da es von Amazon aus generell nicht erwünscht ist, zu einem Artikel/einer Variante (eindeutige Identifizierung über die EAN/ASIN/etc.) mehrere Angebote zu erstellen.
-
-Hier nochmal der Handbuchlink zur Konfiguration.
-
-
-
-
+Zusätzliche SKU können außerdem für die Zuordnung der Variante beim Auftragsimport genutzt werden.
+--
 
 | *Artikelverfügbarkeit* 
-| Exportfilter: Wenn ein Artikel eine nicht freigegebene Verfügbarkeit hat, werden die Varianten des Artikels nicht exportiert.
+| Optionaler Exportfilter: Wenn ein Artikel eine nicht freigegebene Verfügbarkeit hat, werden die Varianten des Artikels nicht exportiert.
 
 | *Markierung 1*; +
 *Markierung 2*
-| Exportfilter: Diese Filter greifen nur für den täglichen Export.
+| Optionaler Exportfilter: Diese Filter greifen nur für den täglichen Export.
 
 | *Tags*
-| Exportfilter: Nur Varianten mit den gewählten Tags werden exportiert. Es können ein oder mehrere Tags gewählt werden.
+| Optionaler Exportfilter: Nur Varianten mit den gewählten Tags werden exportiert. Es können ein oder mehrere Tags gewählt werden.
 
 | *Export-Kategorien*
-| Exportfilter: Kategorien aktivieren, um nur Varianten dieser Kategorien zu exportieren.
+| Optionaler Exportfilter: Kategorien aktivieren, um nur Varianten dieser Kategorien zu exportieren.
 
 | *BMVD-Export-Kategorien*
-| Exportfilter: BMVD steht für Bücher, Musik, Video und DVD. Kategorien aktivieren, um nur Varianten dieser Kategorien zu exportieren.
+| Optionaler Exportfilter: BMVD steht für Bücher, Musik, Video und DVD. Kategorien aktivieren, um nur Varianten dieser Kategorien zu exportieren.
 
-| *Nur im Webshop verfügbare Artikel exportieren*
-| Exportfilter: Option aktivieren, um nur Varianten zu exportieren, die für diesen Mandanten freigegeben sind.
+| *Nur im Webshop verfügbare* +
+*Artikel exportieren*
+| Optionaler Exportfilter: Option aktivieren, um nur Varianten zu exportieren, die für diesen Mandanten freigegeben sind.
 
 material:toggle_off[role="darkGrey"] (Standardeinstellung) = Alle Varianten werden exportiert, unabhängig vom gewählten Mandanten.
 material:toggle_on[role="blue"] = Nur Varianten werden exportiert, die auch für den Mandanten aktiviert sind, der für den Amazon-Account gewählt wurde.
@@ -321,7 +317,8 @@ material:toggle_on[role="blue"] = Nur Varianten werden exportiert, die auch für
 
 | *HTML-Tags erlauben*
 | material:toggle_off[role="darkGrey"] (Standardeinstellung) = HTML-Tags werden nicht erlaubt. +
-material:toggle_on[role="blue"] = Die folgenden Tags sind zugelassen: +
+material:toggle_on[role="blue"] = HTLM-Tags können verwendet werden. +
+Die folgenden HTLM-Tags sind erlaubt: +
 &lt; br &gt;, &lt; b &gt;, &lt; i &gt;, &lt; p &gt; ,&lt; ul &gt;, &lt; li &gt;, &lt; table &gt;, &lt; tr &gt;, &lt; td &gt;, &lt; th &gt;, &lt; tbody &gt; und &lt; strong &gt;
 
 2+^| Listing
@@ -351,7 +348,8 @@ Die Bestände der gewählten Lager werden summiert und zu Amazon übermittelt. D
 | *Maximaler Warenbestand*
 | Bestimmt die obere Grenze des exportierten Bestands für alle Artikel. Diese Einstellung hat Priorität gegenüber der Einstellung *Menge für Artikel ohne Bestandsbindung*.
 
-| *Menge für Artikel ohne Bestandsbindung*
+| *Menge für Artikel* +
+*ohne Bestandsbindung*
 | Bei Artikeln mit der Einstellung *keine Beschränkung* wird der Maximalwert aus realem Bestand und der hier definierten Menge übermittelt. +
 *_Beispiel:_* Einstellung 0, Nettowarenbestand 8. plentymarkets übermittelt 8. +
 Artikel mit der Einstellung *Beschränkung auf Netto-Warenbestand* werden hier nicht berücksichtigt.
