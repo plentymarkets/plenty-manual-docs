@@ -167,6 +167,12 @@ In diesem Schritt speicherst du allgemeine Informationen zum Lager, wie zum Beis
 |===
 |Einstellung |Erläuterung
 
+| terra:execute[role="darkGrey"]
+
+icon:minus-circle[role="red"]
+|Die Entscheidung, Bestände oder ein Lager zu löschen, darf nicht leichtfertig getroffen werden, da es sonst zu ungewollten Fehlern kommen kann.
+xref:warenwirtschaft:lager-einrichten.adoc#600[Weitere Informationen zu den Schaltflächen].
+
 | *Lager-ID*
 |Sobald du das Lager angelegt hast, erhält es automatisch eine fortlaufende und einzigartige ID.
 Die ID kann nicht geändert werden.
@@ -469,7 +475,25 @@ xref:warenwirtschaft:lager-einrichten.adoc#528[Weitere Informationen zum nachtr�
 [#500]
 === Lagerorte
 
-Generiere Lagerorte, um die tatsächlichen Plätze zum Lagern deiner Ware angeben zu können. Varianten können nur auf konkrete Lagerorte gebucht werden und nicht auf Dimensionen. Auch das Generieren vieler Lagerorte auf einmal ist ganz einfach. Sobald Lagerorte generiert sind, werden sie nach dem Laufweg sortiert.
+Ein Lagerort ist der konkrete Ort, an dem sich ein Produkt im Lager befindet.
+Normalerweise hat ein Lager sehr viele Lagerorte.
+Aber keine Sorge, du wirst sie nicht alle einzeln in plentymarkets hinzufügen müssen.
+Stattdessen werden die Lagerorte generiert.
+Beispiel:
+
+* Du hast 3 Regale im Lager. Jedes der 3 Regale hat 4 Böden.
+** 3 Regale x 4 Böden = 12 Böden
+* Jeder der 12 Böden hat 2 Lagerorte.
+** 12 Böden x 2 Lagerorte = 24 Lagerorte
+
+//Produkte können nur auf konkrete Lagerorte gebucht werden und nicht auf Dimensionen.
+
+//Sobald Lagerorte generiert sind, werden sie nach dem Laufweg sortiert.
+
+#gif#
+
+[.instruction]
+Lagerorte generieren:
 
 . Öffne das Menü *Einrichtung » Waren » Lager » [Lager wählen] » Lagerorte*.
 . Klicke auf icon:plus[role="darkGrey"] *Neue Lagerorte anlegen*.
@@ -576,7 +600,6 @@ Nur Zahlen sind zulässig.
 Es können keine Buchstaben für die Startposition verwendet werden.
 Hast du also Buchstaben in die Felder *Lagerorte anlegen von* und *Lagerorte anlegen bis* eingegeben, dann musst du diese Buchstaben als Zahlen für die Startposition betrachten, z.B. A = 1, B = 2 und C = 3.
 
-
 | *Im Namen anzeigen*
 |Lagerorte werden immer im Namen angezeigt.
 |===
@@ -605,8 +628,21 @@ Zusätzlich kann bei der Lagerortsuche mit der xref:warenwirtschaft:artikel-und-
 *_Hinweis:_* Der Zweck hat noch keine Auswirkungen auf andere Menüs im plentymarkets Backend.
 
 |[#intable-status]*Status*
-|Wähle den Status. Die Option *Aktiv* ist voreingestellt. +
-Beachte, dass der Status *Gesperrt in Status 4* der einzige Status mit einer besonderen Funktion ist; alle anderen Status sind lediglich aktiviert.
+|Wähle den Status. Die Option *Aktiv* ist voreingestellt.
+
+*_Hinweis_*:
+Der Status *Gesperrt in Status 4* ist der einzige Status mit einer besonderen Funktion.
+Alle anderen Status sind rein informativ.
+
+---
+
+*_Praxisbeispiel_*:
+Nutze den Status *Gesperrt in Status 4*, um Ware in einem Lagerort zu blockieren und für die Entnahme zu sperren.
+Aufträge, die Ware in einem gesperrten Lagerort reservieren, springen dann nicht mehr automatisch von Status 4 (In Versandvorbereitung) in Status 5 (Freigabe Versand).
+
+Aktiviere dazu im Menü *Einrichtung » Aufträge » Einstellungen* die Option *Statuswechsel auf 4 statt 5, wenn Warenbestand fehlt*.
+Damit Aufträge dennoch in Status 5 laufen können, ist es ratsam, die Ware in aktive Lagerorte umzubuchen.
+Beachte, dass gesperrte Ware für Marktplätze weiterhin verfügbar ist.
 
 |[#intable-notizen]*Notizen*
 |Hier kannst du Notizen zum Lagerort vermerken.
@@ -632,17 +668,15 @@ Beachte, dass der Status *Gesperrt in Status 4* der einzige Status mit einer bes
 |===
 
 [TIP]
-.Ware mit dem Status *Gesperrt in Status 4* blockieren
+.Was bedeuten die grünen Punkte?
 ====
-Nutze den Status *Gesperrt in Status 4*, um Ware in einem Lagerort zu blockieren und für die Entnahme zu sperren. Aufträge, die Ware in einem gesperrten Lagerort reservieren, springen dann nicht mehr automatisch von Status 4 (In Versandvorbereitung) in Status 5 (Freigabe Versand). Aktiviere dazu im Menü *Einrichtung » Aufträge » Einstellungen* die Option *Statuswechsel auf 4 statt 5, wenn Warenbestand fehlt*. Damit Aufträge dennoch in Status 5 laufen können, ist es ratsam, die Ware in aktive Lagerorte umzubuchen. +
-Beachte, dass gesperrte Ware für Marktplätze weiterhin verfügbar ist.
-====
+In der Übersicht sind Lagerorte mit einem grünen oder mit einem roten Punkt gekennzeichnet.
 
-[TIP]
-.Verfügbarkeit des Lagerorts
-====
-Ist ein Lagerort leer, wird er beim Wareneingang als verfügbar angezeigt und Ware kann eingebucht werden. Befindet sich bereits 1 Artikel in einem Lagerort, wird dieser nicht mehr als verfügbar angezeigt. Du kannst dort allerdings trotzdem Ware einbuchen. +
-In der Übersicht der Lagerorte werden verfügbare Lagerorte mit einem grünen Punkt gekennzeichnet. Nicht verfügbare Lagerorte sind mit einem roten Punkt gekennzeichnet.
+* Grün = Der Lagerort ist leer.
+Er wird beim Wareneingang als verfügbar angezeigt und Ware kann dort eingebucht werden.
+* Rot = Es befindet sich mindestens ein Exemplar des Artikels an diesem Lagerort.
+Der Lagerort wird als nicht verfügbar angezeigt.
+Du kannst dort allerdings trotzdem Ware einbuchen.
 ====
 
 [#800]
@@ -900,74 +934,70 @@ Beachte, dass der Status *Gesperrt in Status 4* der einzige Status mit einer bes
 [#600]
 == Bestände und Lager löschen
 
-Du kannst entweder nur die Bestände eines Lagers oder ein Lager samt Beständen löschen. In beiden Fällen werden auch die Warenbewegungen gelöscht.
+Die Entscheidung, Bestände oder ein Lager zu löschen, darf nicht leichtfertig getroffen werden, da es sonst zu ungewollten Fehlern kommen kann. Beispiele:
 
-[IMPORTANT]
-.Bestände können nicht wiederhergestellt werden
-====
-Es spielt keine Rolle, ob du nur Bestände mit Warenbewegungen oder das Lager samt Beständen und Warenbewegungen löschst. Bestände und Warenbewegungen können nicht wiederhergestellt werden. Verwende die Löschfunktionen in jedem Fall vorsichtig, da hier besonders viele Querverbindungen zu anderen Menüs, z.B. Listings, bestehen. Das Löschen von Beständen kann Angebote auf Marktplätzen beenden.
-====
+* Es bestehen besonders viele Querverbindungen zu anderen Menüs, z.B. Listings. Das Löschen von Beständen kann Angebote auf Marktplätzen beenden.
+* Beim Löschen eines Lagers werden auch alle Bestände, Warenbewegungen, Lagerorte und Dimensionen des Lagers gelöscht. Sie können nicht wiederhergestellt werden.
+Es besteht also die Gefahr, nicht GoBD-konform zu sein.
 
 [#630]
 === Bestände löschen
 
-Es wird empfohlen, Warenbestände mit Hilfe des Katalog-Tools zu löschen.
+Es wird empfohlen, Warenbestände per Export/Import zu löschen.
 Somit gehen keine Warenbewegungen verloren und rechtskonformes Arbeiten ist gewährleistet.
+Denk aber trotzdem daran, dass besonders viele Querverbindungen zu anderen Menüs, z.B. Listings, bestehen.
+Das Löschen von Beständen kann Angebote auf Marktplätzen beenden.
 
 [.instruction]
-Bestände per Katalog löschen:
+Bestände exportieren:
 
-. Öffne das Menü *Daten » Kataloge* und erstelle einen Katalog mit dem Format-Typ *Warenbestände*.
-. Füge die gewünschten Datenfelder und Filter hinzu.
-. Exportiere die Datei im CSV- oder TXT-Format.
+. Öffne das Menü *Daten » Kataloge*.
+. xref:daten:standardformate-exportieren.adoc#create-catalogue[Erstelle einen Katalog] mit dem Format-Typ *Warenbestände*.
+. Füge die gewünschten xref:daten:warenbestand-exportieren.adoc#[Datenfelder und Filter] hinzu.
+. xref:daten:warenbestand-exportieren.adoc#120[Exportiere die Datei] im CSV- oder TXT-Format.
 . Öffne die Datei und ändere die Bestände auf 0.
 
-xref:daten:standardformate-exportieren.adoc#create-catalogue[Weitere Informationen zur Erstellung eines Katalogs].
-
-xref:daten:warenbestand-exportieren.adoc#[Beschreibungen der einzelnen Datenfelder und Filter].
-
-xref:daten:warenbestand-exportieren.adoc#120[Anleitung zum Exportieren der Datei].
-
-
-
-
-Es wird stattdessen empfohlen, die Bestände per Katalog mit dem Format xref:daten:katalog-warenbestaende.adoc#[Warenbestände] zu exportieren, die CSV-Datei anzupassen, indem die Bestände auf Null gesetzt werden, und die genullten Bestände anschließend wieder zu importieren.
-
----
-
-Es ist zwar technisch möglich, Warenbestände im Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Einstellungen* zu löschen.
-Wir empfehlen diese Vorgehensweise jedoch nicht, da sie nicht GoBD-konform ist.
-
----
-
-Das Löschen von Beständen leert ein Lager vollständig. Auch die Warenbewegungen werden gelöscht. Die Dimensionen und Lagerorte bleiben jedoch erhalten.
-
 [.instruction]
-Bestände eines Lagers löschen:
+Bestände importieren:
+
+. Öffne das Menü *Daten » Import*.
+. xref:daten:ElasticSync.adoc#1210[Erstelle einen Import] mit dem Typ *Warenbestand*.
+. Füge die gewünschten xref:daten:elasticSync-warenbestand.adoc#[Datenfelder] hinzu.
+. xref:daten:ElasticSync.adoc#3362886156[Führe den Import aus] und kontrolliere, dass die Daten korrekt in plentymarkets importiert wurden.
+
+[IMPORTANT]
+.Das Löschen in den Lager-Einstellungen ist nicht GoBD-konform
+====
+Es ist zwar technisch möglich, Warenbestände in den Lager-Einstellungen zu löschen.
+Wir empfehlen diese Vorgehensweise jedoch nicht, da die Warenbewegungen dabei verloren gehen.
+Dies ist nicht GoBD-konform.
 
 . Öffne das Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Einstellungen*.
 . Klicke auf *Warenbestände und Warenbewegungen komplett löschen* (terra:execute[role="darkGrey"]). +
 → Eine Sicherheitsabfrage wird geöffnet.
 . Klicke auf *OK*, um die Warenbestände und Warenbewegungen zu löschen.
 
-*_Hinweis:_* Es wird vom Löschen der Warenbestände in dieser Form abgeraten, da dies nicht GoBD-konform ist.
+*_Hinweis_*: Es wird vom Löschen der Warenbestände und Warenbewegungen in dieser Form abgeraten, da dies nicht GoBD-konform ist.
+====
 
 [#670]
 === Lager löschen
 
-Das Löschen eines Lagers löscht alle Bestände, Warenbewegungen, Lagerorte und Dimensionen des Lagers.
+Bevor du ein Lager löschst, solltest du den xref:daten:warenbestand-exportieren.adoc#[Bestand] und die xref:daten:warenbewegung-exportieren.adoc#[Warenbewegungen] exportieren, denn sie können später nicht mehr wiederhergestellt werden.
+Es besteht also die Gefahr, nicht GoBD-konform zu sein.
 
-[.instruction]
-Lager löschen:
-
+. Exportiere den Bestand und die Warenbewegungen, da sie später nicht mehr wiederhergestellt werden können.
 . Öffne das Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Einstellungen*.
 . Klicke auf *Löschen* (icon:minus-circle[role="red"]). +
 → Ein Fenster zum Löschen des Lagers wird geöffnet.
 . Wähle ein Lager aus der Dropdown-Liste *Lager abändern auf*, um offene Aufträge auf ein neues Lager zu übertragen.
 . Klicke erneut auf *Löschen* (icon:minus-circle[role="red"]). +
-→ Das Lager und alle Bestände des Lagers werden gelöscht.
+→ Das Lager und alle Bestände, Warenbewegungen, Lagerorte und Dimensionen des Lagers werden gelöscht.
+Sie können nicht wiederhergestellt werden.
 
-*_Hinweis:_* Das Löschen des Lagers löscht auch die Warenbewegungen. Sie können somit nicht wiederhergestellt werden, was nicht GoBD-konform ist.
+*_Hinweis_*: Das Löschen eines Lagers löscht auch die Warenbewegungen.
+Sie können nicht wiederhergestellt werden.
+Es besteht also die Gefahr, nicht GoBD-konform zu sein.
 
 [#1500]
 == Fragen und Antworten
