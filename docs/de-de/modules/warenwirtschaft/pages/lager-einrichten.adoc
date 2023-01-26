@@ -4,7 +4,7 @@
 :author: team-stock
 
 ////
-zuletzt bearbeitet 25.07.2022
+zuletzt bearbeitet 24.01.2023
 ////
 
 Diese Seite beschreibt, wie du dein Lager 1:1 in plentymarkets abbildest.
@@ -167,6 +167,12 @@ In diesem Schritt speicherst du allgemeine Informationen zum Lager, wie zum Beis
 |===
 |Einstellung |Erläuterung
 
+| terra:execute[role="darkGrey"]
+
+icon:minus-circle[role="red"]
+|Die Entscheidung, Bestände oder ein Lager zu löschen, darf nicht leichtfertig getroffen werden, da es sonst zu ungewollten Fehlern kommen kann.
+xref:warenwirtschaft:lager-einrichten.adoc#600[Weitere Informationen zu den Schaltflächen].
+
 | *Lager-ID*
 |Sobald du das Lager angelegt hast, erhält es automatisch eine fortlaufende und einzigartige ID.
 Die ID kann nicht geändert werden.
@@ -236,25 +242,6 @@ Gib die Kontaktdaten in diese Felder ein.
 Wähle diesen Typ aus der Dropdown-Liste, damit er in diversen Menüs vorausgewählt wird.
 Zum Beispiel im Menü *Artikel » Artikel bearbeiten » [Variante öffnen] » Tab: Lager*.
 
-//überarbeiten
-|[[Meldebestand_Variante_Lager]]*Dynamischer Meldebestand*
-|
-
-[cols="1,4a"]
-!===
-
-! *Aktiv*
-!Die Differenz zum Meldebestand wird für Varianten in diesem Lager basierend auf dem dynamischen Meldebestand berechnet.
-Der dynamische Meldebestand selbst wird dir im System noch nicht angezeigt.
-
-*_Hinweis:_* Damit für eine Variante die Differenz zum Meldebestand basierend auf dem dynamischen Meldebestand berechnet wird, muss der Meldebestand für das Lager 0 sein.
-
-! *Inaktiv*
-!Die Differenz zum Meldebestand wird für Varianten in diesem Lager nicht basierend auf dem dynamischen Meldebestand berechnet, sondern basierend auf dem eingetragenen Meldebestand.
-Du kannst also einen Meldebestand für die Variante eingeben, der größer als 0 ist.
-
-!===
-
 | *Durchschnittspreis*
 |Wie soll der Durchschnittspreis für das Lager bestimmt werden?
 Eine ausführliche Beschreibung der Berechnungsmethoden findest du auf der Seite xref:warenwirtschaft:wareneingaenge-verwalten.adoc#250[Ware einbuchen].
@@ -273,6 +260,25 @@ Diese Berechnungsmethode heißt Livedurchschnittsberechnung.
 ! *Gleitender Durchschnittspreis der Variante*
 !Der Durchschnittseinkaufspreis für Varianten in diesem Lager wird gleitend berechnet.
 In diesem Fall wird der Einkaufspreis bei jedem Wareneingang berechnet, jedoch nicht bei Warenausgang.
+
+!===
+
+//überarbeiten
+|[[Meldebestand_Variante_Lager]]*Dynamischer Meldebestand*
+|
+
+[cols="1,4a"]
+!===
+
+! *Aktiv*
+!Die Differenz zum Meldebestand wird für Varianten in diesem Lager basierend auf dem dynamischen Meldebestand berechnet.
+Der dynamische Meldebestand selbst wird dir im System noch nicht angezeigt.
+
+*_Hinweis:_* Damit für eine Variante die Differenz zum Meldebestand basierend auf dem dynamischen Meldebestand berechnet wird, muss der Meldebestand für das Lager 0 sein.
+
+! *Inaktiv*
+!Die Differenz zum Meldebestand wird für Varianten in diesem Lager nicht basierend auf dem dynamischen Meldebestand berechnet, sondern basierend auf dem eingetragenen Meldebestand.
+Du kannst also einen Meldebestand für die Variante eingeben, der größer als 0 ist.
 
 !===
 
@@ -425,20 +431,23 @@ Du kannst Zahlen, Buchstaben und Sonderzeichen nutzen.
 |Welches Trennzeichen soll nach der Dimension angezeigt werden?
 Wähle dieses Trennzeichen aus der Dropdown-Liste aus.
 
-//add more info
 | *Position für Laufweg berücksichtigen*
 |Soll die Position der Dimension für den Laufweg berücksichtigt werden?
 
-icon:check-square[role="blue"] = Ja. Die Position der Dimension wird für den Laufweg berücksichtigt.
+icon:check-square[role="blue"] = Ja.
 
-icon:square-o[role="darkGrey"] = Nein. Die Position der Dimension wird _nicht_ für den Laufweg berücksichtigt.
+icon:square-o[role="darkGrey"] = Nein.
+
+*_Hinweis_*:
+Wenn du diese Option aktivierst (icon:check-square[role="blue"]), wird das Feld *Startposition* beim Generieren von Lagerorten angezeigt.
+xref:warenwirtschaft:lager-einrichten.adoc#500[Weitere Informationen zum Generieren von Lagerorten].
 
 | *Im Namen anzeigen*
 |Soll diese Dimension im Namen des Lagerorts angezeigt werden?
 
-icon:check-square[role="blue"] = Ja. Die Dimension wird im Namen des Lagerorts angezeigt.
+icon:check-square[role="blue"] = Ja.
 
-icon:square-o[role="darkGrey"] = Nein. Die Dimension wird _nicht_ im Namen des Lagerorts angezeigt.
+icon:square-o[role="darkGrey"] = Nein.
 
 | icon:plus[role="darkGrey"]
 |Fügt die neue Dimension zur Liste der Lager-Dimensionen hinzu.
@@ -466,16 +475,35 @@ xref:warenwirtschaft:lager-einrichten.adoc#528[Weitere Informationen zum nachtr�
 [#500]
 === Lagerorte
 
-Generiere Lagerorte, um die tatsächlichen Plätze zum Lagern deiner Ware angeben zu können. Varianten können nur auf konkrete Lagerorte gebucht werden und nicht auf Dimensionen. Auch das Generieren vieler Lagerorte auf einmal ist ganz einfach. Sobald Lagerorte generiert sind, werden sie nach dem Laufweg sortiert.
+Ein Lagerort ist der konkrete Ort, an dem sich ein Produkt im Lager befindet.
+Normalerweise hat ein Lager sehr viele Lagerorte.
+Aber keine Sorge, du wirst sie nicht alle einzeln in plentymarkets hinzufügen müssen.
+Stattdessen werden die Lagerorte generiert.
+Beispiel:
+
+* Du hast 3 Regale im Lager. Jedes der 3 Regale hat 4 Böden.
+** 3 Regale x 4 Böden = 12 Böden
+* Jeder der 12 Böden hat 2 Lagerorte.
+** 12 Böden x 2 Lagerorte = 24 Lagerorte
+
+//Produkte können nur auf konkrete Lagerorte gebucht werden und nicht auf Dimensionen.
+
+//Sobald Lagerorte generiert sind, werden sie nach dem Laufweg sortiert.
+
+image::warenwirtschaft:lagerorte-generieren.gif[]
+
+[.instruction]
+Lagerorte generieren:
 
 . Öffne das Menü *Einrichtung » Waren » Lager » [Lager wählen] » Lagerorte*.
 . Klicke auf icon:plus[role="darkGrey"] *Neue Lagerorte anlegen*.
 . Nimm die Einstellungen vor.
 . *Speichere* (terra:save[role="darkGrey"]) die Einstellungen. +
 → Eine Vorschau mit Beispielen der Lagerortnamen wird angezeigt.
-. Klicke auf *Generieren*, um die Lagerorte zu generieren.
-
-Die Lagerorte werden im Hintergrund kontinuierlich generiert. Dir werden schon nach kurzer Zeit die ersten Lagerorte angezeigt, jedoch ist das Generieren noch nicht abgeschlossen. Dir wird eine Erfolgsmeldung angezeigt, wenn das Generieren vollständig abgeschlossen wurde.
+. Klicke auf *Generieren*.
+Die Lagerorte werden im Hintergrund kontinuierlich generiert.
+Schon nach kurzer Zeit siehst du die ersten Lagerorte.
+Eine Erfolgsmeldung wird angezeigt, wenn die Generierung vollständig abgeschlossen ist.
 
 ////
 where should I include this info?
@@ -487,11 +515,19 @@ Auch für den Fall, dass ein Artikel auf mehreren Lagerorten liegt, hilft die Po
 ====
 ////
 
+[TIP]
+.Wie viele Lagerorte kann ich generieren?
+====
+* Bis zu 200 Lagerorten können pro Dimension generiert werden.
+* Bis zu 100.000 Lagerorten können in einem Durchgang generiert werden.
+====
+
+[discrete]
+==== Dimensionen
+
 [cols="1,3a"]
 |===
 |Einstellung |Erläuterung
-
-2+^| *Dimensionen*
 
 | *Präfix*
 |Das Präfix wird aus den Einstellungen der Dimensionen übernommen und kann dort eingegeben werden. Hier wird es lediglich angezeigt.
@@ -512,15 +548,29 @@ Nicht zulässig sind folgende Kombinationen und Werte:
 * 1A bis 1Z: Zahlen am Anfang können nicht mit nachgestellten Buchstaben kombiniert werden.
 * AA bis ZZ
 * Sonderzeichen
+* Dezimalzahlen
 
 | *Startposition*
-|Die Startposition ist nur sichtbar, wenn die Dimension für die Positionen der Lagerorte berücksichtigt werden soll. +
-Gib die Startposition ein. Nur Zahlen sind zulässig.
+|Gib eine Zahl ein.
+
+*_Hinweis_*:
+Dieses Feld wird nur angezeigt, wenn du beim Erstellen der Dimension die Option *Position für Laufweg berücksichtigen* aktiviert hast (icon:check-square[role="blue"]).
+
+*_Hinweis_*:
+Nur Zahlen sind zulässig.
+Es können keine Buchstaben für die Startposition verwendet werden.
+Hast du also Buchstaben in die Felder *Von* und *Bis* eingegeben, dann musst du diese Buchstaben als Zahlen für die Startposition betrachten, z.B. A = 1, B = 2 und C = 3.
 
 | *Im Namen anzeigen*
 |Hier wird lediglich angezeigt, ob die Dimension in den Lagerortnamen übernommen wird oder nicht. Dies wird in den Einstellungen der Dimension festgelegt.
+|===
 
-2+^| *Lagerort*
+[discrete]
+==== Lagerort
+
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
 
 | *Präfix*
 |Gib ein Präfix für Lagerorte ein. Standardmäßig ist SL (für Storage Location) voreingetragen. Das Präfix ist kein Pflichtfeld.
@@ -540,14 +590,27 @@ Nicht zulässig sind folgende Kombinationen:
 * A1 bis Z1: Der Anfangsbuchstabe muss gleich bleiben.
 * 1A bis 1Z: Zahlen am Anfang können nicht mit nachgestellten Buchstaben kombiniert werden.
 * AA bis ZZ
+* Sonderzeichen
+* Dezimalzahlen
 
 | *Startposition*
-|Gib die Startposition ein. Nur Zahlen sind zulässig.
+|Gib eine Zahl ein.
+
+*_Hinweis_*:
+Nur Zahlen sind zulässig.
+Es können keine Buchstaben für die Startposition verwendet werden.
+Hast du also Buchstaben in die Felder *Lagerorte anlegen von* und *Lagerorte anlegen bis* eingegeben, dann musst du diese Buchstaben als Zahlen für die Startposition betrachten, z.B. A = 1, B = 2 und C = 3.
 
 | *Im Namen anzeigen*
 |Lagerorte werden immer im Namen angezeigt.
+|===
 
-2+^| *Details*
+[discrete]
+==== Details
+
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
 
 |[#intable-zweck]*Zweck*
 a|Wähle den Zweck der Lagerorte. Die folgenden Zwecke stehen zur Verfügung: +
@@ -566,16 +629,37 @@ Zusätzlich kann bei der Lagerortsuche mit der xref:warenwirtschaft:artikel-und-
 *_Hinweis:_* Der Zweck hat noch keine Auswirkungen auf andere Menüs im plentymarkets Backend.
 
 |[#intable-status]*Status*
-|Wähle den Status. Die Option *Aktiv* ist voreingestellt. +
-Beachte, dass der Status *Gesperrt in Status 4* der einzige Status mit einer besonderen Funktion ist; alle anderen Status sind lediglich aktiviert.
+|Wähle den Status. Die Option *Aktiv* ist voreingestellt.
+
+*_Hinweis_*:
+Der Status *Gesperrt in Status 4* ist der einzige Status mit einer besonderen Funktion.
+Alle anderen Status sind rein informativ.
+
+---
+
+*_Praxisbeispiel_*:
+Nutze den Status *Gesperrt in Status 4*, um Ware in einem Lagerort zu blockieren und für die Entnahme zu sperren.
+Aufträge, die Ware in einem gesperrten Lagerort reservieren, springen dann nicht mehr automatisch von Status 4 (In Versandvorbereitung) in Status 5 (Freigabe Versand).
+
+Aktiviere dazu im Menü *Einrichtung » Aufträge » Einstellungen* die Option *Statuswechsel auf 4 statt 5, wenn Warenbestand fehlt*.
+Damit Aufträge dennoch in Status 5 laufen können, ist es ratsam, die Ware in aktive Lagerorte umzubuchen.
+Beachte, dass gesperrte Ware für Marktplätze weiterhin verfügbar ist.
 
 |[#intable-notizen]*Notizen*
 |Hier kannst du Notizen zum Lagerort vermerken.
 
+*_Hinweis_*: Möglich sind bis zu 500 Zeichen.
+
 |*Lagerort-Typ*
 |Wähle den Typ des Lagerorts. Hier kannst du entscheiden, ob du einen anderen Lagerort-Typ wählen möchtest, als den, der bereits in den Einstellungen des Lagers als Standard-Lagerort-Typ festgelegt wurde.
+|===
 
-2+^| *Eigenschaften*
+[discrete]
+==== Eigenschaften
+
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
 
 | *Eigenschaft*
 |Wähle die Eigenschaft des Lagerorts. Eigenschaften müssen im Vorhinein xref:warenwirtschaft:properties.adoc#[erstellt] werden.
@@ -585,87 +669,22 @@ Beachte, dass der Status *Gesperrt in Status 4* der einzige Status mit einer bes
 |===
 
 [TIP]
-.Ware mit dem Status *Gesperrt in Status 4* blockieren
+.Was bedeuten die grünen Punkte?
 ====
-Nutze den Status *Gesperrt in Status 4*, um Ware in einem Lagerort zu blockieren und für die Entnahme zu sperren. Aufträge, die Ware in einem gesperrten Lagerort reservieren, springen dann nicht mehr automatisch von Status 4 (In Versandvorbereitung) in Status 5 (Freigabe Versand). Aktiviere dazu im Menü *Einrichtung » Aufträge » Einstellungen* die Option *Statuswechsel auf 4 statt 5, wenn Warenbestand fehlt*. Damit Aufträge dennoch in Status 5 laufen können, ist es ratsam, die Ware in aktive Lagerorte umzubuchen. +
-Beachte, dass gesperrte Ware für Marktplätze weiterhin verfügbar ist.
+In der Übersicht sind Lagerorte mit einem grünen oder mit einem roten Punkt gekennzeichnet.
+
+* Grün = Der Lagerort ist leer.
+Er wird beim Wareneingang als verfügbar angezeigt und Ware kann dort eingebucht werden.
+* Rot = Es befindet sich mindestens ein Exemplar des Artikels an diesem Lagerort.
+Der Lagerort wird als nicht verfügbar angezeigt.
+Du kannst dort allerdings trotzdem Ware einbuchen.
 ====
-
-[TIP]
-.Verfügbarkeit des Lagerorts
-====
-Ist ein Lagerort leer, wird er beim Wareneingang als verfügbar angezeigt und Ware kann eingebucht werden. Befindet sich bereits 1 Artikel in einem Lagerort, wird dieser nicht mehr als verfügbar angezeigt. Du kannst dort allerdings trotzdem Ware einbuchen. +
-In der Übersicht der Lagerorte werden verfügbare Lagerorte mit einem grünen Punkt gekennzeichnet. Nicht verfügbare Lagerorte sind mit einem roten Punkt gekennzeichnet.
-====
-
-[#530]
-==== Limitierungen
-
-Beim Erstellen von Dimensionen und beim Generieren von Lagerorten gibt es einige Limitierungen zu beachten. Außerdem gibt es Vorgaben, welche Buchstaben- und Zahlenkombinationen zum Generieren verwendet werden können.
-
-.Limitierungen Dimensionen
-[cols="3,1"]
-|===
-|Einstellung |Limitierung
-
-| *Maximale Anzahl an Dimensionen, die erstellt werden können*
-|10
-
-| *Mindestanzahl an benötigten Dimensionen*
-|1
-
-| *Anzahl an Zeichen für den Namen*
-|56
-
-| *Anzahl an Zeichen für das Präfix (keine Zahlen)*
-|3
-|===
-
-.Limitierungen Lagerorte generieren
-[cols="3,1"]
-|===
-|Einstellung |Limitierung
-
-| *Maximale Anzahl an Lagerorten pro Dimension*
-|200
-
-| *Maximale Anzahl an Lagerorten pro Generierung*
-|100.000
-
-|Nur Buchstaben oder Zahlen, keine Sonderzeichen wie *!%
-|
-
-|Keine Dezimalzahlen
-|
-
-|Keine Buchstaben für die Startposition
-|
-
-| *Maximale Anzahl an Zeichen in der Notizbox*
-|500
-|===
-
-.Buchstaben- und Zahlenkombinationen für Eingaben in den Generator
-[cols="3,1"]
-|===
-
-| *Kann verwendet werden*
-|A bis C +
-A1 bis A10 +
-A bis AC +
-
-| *Kann nicht verwendet werden*
-|A1 bis B1 +
-1A bis 1C
-AA bis CC
-|===
 
 [#800]
 === Label
 
 Um Waren beim Einlagern schnell auf einen Lagerort zu buchen, ist es hilfreich, die Waren und den Lagerort zu scannen. Versehe hierfür deine Lagerorte mit scanbaren Labels. Bild 1 zeigt z.B. die Einstellungen für ein seitenbreites Label:
 
-.Label erstellen
 image::warenwirtschaft:label-einstellungen.png[]
 
 [.instruction]
@@ -915,51 +934,70 @@ Beachte, dass der Status *Gesperrt in Status 4* der einzige Status mit einer bes
 [#600]
 == Bestände und Lager löschen
 
-Du kannst entweder nur die Bestände eines Lagers oder ein Lager samt Beständen löschen. In beiden Fällen werden auch die Warenbewegungen gelöscht.
+Die Entscheidung, Bestände oder ein Lager zu löschen, darf nicht leichtfertig getroffen werden, da es sonst zu ungewollten Fehlern kommen kann. Beispiele:
 
-[IMPORTANT]
-.Bestände können nicht wiederhergestellt werden
-====
-Es spielt keine Rolle, ob du nur Bestände mit Warenbewegungen oder das Lager samt Beständen und Warenbewegungen löschst. Bestände und Warenbewegungen können nicht wiederhergestellt werden. Verwende die Löschfunktionen in jedem Fall vorsichtig, da hier besonders viele Querverbindungen zu anderen Menüs, z.B. Listings, bestehen. Das Löschen von Beständen kann Angebote auf Marktplätzen beenden.
-====
+* Es bestehen besonders viele Querverbindungen zu anderen Menüs, z.B. Listings. Das Löschen von Beständen kann Angebote auf Marktplätzen beenden.
+* Beim Löschen eines Lagers werden auch alle Bestände, Warenbewegungen, Lagerorte und Dimensionen des Lagers gelöscht. Sie können nicht wiederhergestellt werden.
+Es besteht also die Gefahr, nicht GoBD-konform zu sein.
 
 [#630]
 === Bestände löschen
 
-Das Löschen von Beständen leert ein Lager vollständig. Auch die Warenbewegungen werden gelöscht. Die Dimensionen und Lagerorte bleiben jedoch erhalten.
+Es wird empfohlen, Warenbestände per Export/Import zu löschen.
+Somit gehen keine Warenbewegungen verloren und rechtskonformes Arbeiten ist gewährleistet.
+Denk aber trotzdem daran, dass besonders viele Querverbindungen zu anderen Menüs, z.B. Listings, bestehen.
+Das Löschen von Beständen kann Angebote auf Marktplätzen beenden.
 
 [.instruction]
-Bestände eines Lagers löschen:
+Bestände exportieren:
 
-. Öffne das Menü *Einrichtung » Waren » Lager*.
-. Wähle ein Lager.
-. Klicke auf *Einstellungen*. +
-→ Die Einstellungen des Lagers werden geöffnet.
-. Klicke auf *Löschen* (icon:minus-square[role="red"]). +
-→ Ein Fenster zum Löschen des Lagers wird geöffnet.
-. Wähle aus der Dropdown-Liste neben *Lager abändern auf* ein Lager, um offene Aufträge auf ein neues Lager zu übertragen.
-. Klicke erneut auf *Löschen* (icon:minus-square[role="red"]). +
-→ Das Lager und alle Bestände des Lagers werden gelöscht.
+. Öffne das Menü *Daten » Kataloge*.
+. xref:daten:standardformate-exportieren.adoc#create-catalogue[Erstelle einen Katalog] mit dem Format-Typ *Warenbestände*.
+. Füge die gewünschten xref:daten:warenbestand-exportieren.adoc#[Datenfelder und Filter] hinzu.
+. xref:daten:warenbestand-exportieren.adoc#120[Exportiere die Datei] im CSV- oder TXT-Format.
+. Öffne die Datei und ändere die Bestände auf 0.
 
-*_Hinweis:_* Es wird vom Löschen der Warenbestände in dieser Form abgeraten, da dies nicht GoBD-konform ist. Es wird stattdessen empfohlen, die Bestände per Katalog mit dem Format xref:daten:katalog-warenbestaende.adoc#[Warenbestände] zu exportieren, die CSV-Datei anzupassen, indem die Bestände auf Null gesetzt werden, und die genullten Bestände anschließend wieder zu importieren. Somit gehen die Warenbewegungen nicht verloren und rechtskonformes Arbeiten ist gewährleistet.
+[.instruction]
+Bestände importieren:
+
+. Öffne das Menü *Daten » Import*.
+. xref:daten:ElasticSync.adoc#1210[Erstelle einen Import] mit dem Typ *Warenbestand*.
+. Füge die gewünschten xref:daten:elasticSync-warenbestand.adoc#[Datenfelder] hinzu.
+. xref:daten:ElasticSync.adoc#3362886156[Führe den Import aus] und kontrolliere, dass die Daten korrekt in plentymarkets importiert wurden.
+
+[IMPORTANT]
+.Das Löschen in den Lager-Einstellungen ist nicht GoBD-konform
+====
+Es ist zwar technisch möglich, Warenbestände in den Lager-Einstellungen zu löschen.
+Wir empfehlen diese Vorgehensweise jedoch nicht, da die Warenbewegungen dabei verloren gehen.
+Dies ist nicht GoBD-konform.
+
+. Öffne das Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Einstellungen*.
+. Klicke auf *Warenbestände und Warenbewegungen komplett löschen* (terra:execute[role="darkGrey"]). +
+→ Eine Sicherheitsabfrage wird geöffnet.
+. Klicke auf *OK*, um die Warenbestände und Warenbewegungen zu löschen.
+
+*_Hinweis_*: Es wird vom Löschen der Warenbestände und Warenbewegungen in dieser Form abgeraten, da dies nicht GoBD-konform ist.
+====
 
 [#670]
 === Lager löschen
 
-Das Löschen eines Lagers löscht alle Bestände, Warenbewegungen, Lagerorte und Dimensionen des Lagers.
+Bevor du ein Lager löschst, solltest du den xref:daten:warenbestand-exportieren.adoc#[Bestand] und die xref:daten:warenbewegung-exportieren.adoc#[Warenbewegungen] exportieren, denn sie können später nicht mehr wiederhergestellt werden.
+Es besteht also die Gefahr, nicht GoBD-konform zu sein.
 
-[.instruction]
-Lager löschen:
+. Exportiere den Bestand und die Warenbewegungen, da sie später nicht mehr wiederhergestellt werden können.
+. Öffne das Menü *Einrichtung » Waren » Lager » [Lager öffnen] » Einstellungen*.
+. Klicke auf *Löschen* (icon:minus-circle[role="red"]). +
+→ Ein Fenster zum Löschen des Lagers wird geöffnet.
+. Wähle ein Lager aus der Dropdown-Liste *Lager abändern auf*, um offene Aufträge auf ein neues Lager zu übertragen.
+. Klicke erneut auf *Löschen* (icon:minus-circle[role="red"]). +
+→ Das Lager und alle Bestände, Warenbewegungen, Lagerorte und Dimensionen des Lagers werden gelöscht.
+Sie können nicht wiederhergestellt werden.
 
-. Öffne das Menü *Einrichtung » Waren » Lager*.
-. Wähle ein Lager.
-. Klicke auf *Einstellungen*. +
-→ Die Einstellungen des Lagers werden geöffnet.
-. Klicke oben auf *Warenbestände und Warenbewegungen komplett löschen*. +
-→ Eine Sicherheitsabfrage wird geöffnet.
-. Klicke auf *OK*, um die Warenbestände und Warenbewegungen zu löschen.
-
-*_Hinweis:_* Das Löschen des Lagers löscht auch die Warenbewegungen. Sie können somit nicht wiederhergestellt werden, was nicht GoBD-konform ist.
+*_Hinweis_*: Das Löschen eines Lagers löscht auch die Warenbewegungen.
+Sie können nicht wiederhergestellt werden.
+Es besteht also die Gefahr, nicht GoBD-konform zu sein.
 
 [#1500]
 == Fragen und Antworten
@@ -1042,4 +1080,18 @@ Welcher Lagerort im Auftrag zugeordnet wird, hängt zunächst vom Bestand ab. We
 Die Zuordnung des Lagerortes findet in Status 5 des Auftrags automatisch statt und wird außerdem vom xref:warenwirtschaft:praxisbeispiel-lager-einrichten.adoc#40[Laufweg im Lager] beeinflusst. +
 Um sicherzustellen, dass Lagerorte zugewiesen werden wenn Bestand verfügbar ist, setze die Einstellung *Statuswechsel auf 4 statt 5, wenn Warenbestand fehlt* auf `Ja`. Diese Einstellung findest du im Menü *Einrichtung » Aufträge » Einstellungen*. Verschiebe Aufträge nicht manuell von Status 4 auf 5, denn dies kann zu Überverkäufen führen.
 Weitere Informationen zur Zuordnung des Lagers findest du in xref:auftraege:grundeinstellungen.adoc#intable-warehouse-assignment[dieser Tabelle] zu den Einstellungen im Auftrag.
+--
+
+[.collapseBox]
+.*Wie viele Lager, Dimensionen und Lagerorte darf ich maximal anlegen?*
+--
+
+* *Lager*: Wie viele Lager du maximal angelegen kannst, hängt davon ab, welche plentymarkets Edition du gebucht hast.
+link:https://www.plentymarkets.com/de/produkt/preise/[Weitere Informationen zu den Editionen und Preisen].
+* *Dimensionen*: Mindestens eine Dimension wird pro Lager benötigt.
+Es können bis zu 10 Dimensionen pro Lager erstellt werden.
+Hinweis: Die Lagerorte selbst sind keine Dimensionen.
+* *Lagerorte*: Bis zu 200 Lagerorten können pro Dimension generiert werden.
+Bis zu 100.000 Lagerorten können in einem Durchgang generiert werden.
+
 --
