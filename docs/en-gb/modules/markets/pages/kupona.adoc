@@ -5,23 +5,97 @@
 
 :KUPONA:
 :price-search-engine: KUPONA
+:market: Kupona
 :plugin-name: KUPONA
 :plugin-link: https://marketplace.plentymarkets.com/en/plugins/channels/preisportale/elasticexportkuponade_4756
-
-include::partial$plugin-download.adoc[]
 
 [#100]
 == Registering with Kupona.de
 
-Kupona.de is an agency for online performance marketing. It is active in the fields of display performance advertising, retargeting, affiliate marketing, and product data marketing.
+Kupona is an agency for online performance marketing, including performance advertising, retargeting, affiliate marketing, and product data marketing.
 
 [#create-order-referrer]
 == Creating an order referrer
 
 include::partial$create-order-referrer.adoc[]
 
+[#5LIO3VPJ]
+== Exporting item data
+
+* <<#catalogue-export, _Alternative 1:_ Item export with catalogue formats _(recommended method)_>>
+* <<#old-export, _Alternative 2:_ Item export with the Elastic Export _(old method)_>>
+* <<#change-elastic-export-catalogue, _Alternative 3:_ Changing from elastic export to catalogue>>
+
+[#catalogue-export]
+===  _Alternative 1:_ Item export with catalogue formats _(recommended method)_
+
+Catalogue formats provide you with a long-term and flexible way to export your item data to {market}.
+
+[#catalogue-creation]
+==== Creating a catalogue
+
+Item data is exported using a marketplace format. To export your items to a price search engine, create a catalogue in the *Data » Catalogue* menu. Link the data fields in the catalogue with item data saved in plentymarkets in the marketplace format afterwards.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+:catalogue-template-name: treepodia
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Mapping data fields in the catalogue
+
+Now, map the data fields in the catalogue to the item data saved in plentymarkets.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.List of recommended data field mappings
+--
+include::partial$kupona-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Exporting specific items
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Setting up catalogue export
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Activating the catalogue
+
+:interval:
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Exporting catalogue data to {market}
+
+include::partial$catalogue-url.adoc[]
+
+[#old-export]
+=== _Alternative 2:_ Item export with the Elastic Export _(old method)_
+
+NOTE: No new features are planned for the Elastic Export and the export formats. As such, we recommend that you <<#catalogue-export, create catalogues instead>>.
+
+[#plugin-download]
+==== Downloading and installing the plugins
+
+include::partial$plugin-download.adoc[]
+
 [#200]
-== Setting up the data format KuponaDE-Plugin in plentymarkets
+==== Setting up the data format KuponaDE-Plugin in plentymarkets
 
 :export-format: KuponaDE-Plugin
 :price-search-engine: KUPONA
@@ -38,9 +112,9 @@ include::partial$create-order-referrer.adoc[]
 include::partial$export-formats.adoc[]
 
 [#300]
-== Available columns for the export file
+==== Available columns for the export file
 
-include::partial$download_export-file.adoc[]
+include::markets:partial$download_export-file.adoc[]
 
 [[columns-export-file-kupona]]
 .Available columns of the export file for the export format *KuponaDE-Plugin*
@@ -111,9 +185,77 @@ include::partial$download_export-file.adoc[]
 *_Example:_* 10.00 EUR / kilogram
 |===
 
-[#400]
-== License
+[#change-elastic-export-catalogue]
+=== _Alternative 3:_ Changing from elastic export to catalogue
 
-:license-link: https://github.com/plentymarkets/plugin-elastic-export-kupona-de/blob/master/LICENSE.md
+:elastic-export-catalogue-mappings:
+include::partial$catalogue-change-from-elastic-export.adoc[]
 
-include::partial$plugin-license.adoc[]
+
+[[elastic-export-catalogue-mappings]]
+.Columns and data fields
+[cols="1,1"]
+|===
+|Column in elastic export |Marketplace data field in catalogue
+
+| prod_number
+| The *variation ID* of the variation
+
+| prod_name
+| According to the format setting *Item name*.
+
+| prod_price
+| The *sales price* of the variation
+
+| prod_price_old
+| The *sales price* of the variation. If the *RRP* is activated in the format setting and is higher than the sales price, the RRP is exported.
+
+| currency_symbol
+| The ISO3 *Currency code* of the prices
+
+| prod_url
+| The *URL path* of the item depending on the chosen *client* in the format settings
+
+| category
+| The names of the categories that are linked to the variation, separated by *>*
+
+| category_url
+| Empty
+
+| valid_from_date
+| Empty
+
+| valid_to_date
+| Empty
+
+| prod_description
+| According to the format setting *Preview text*
+
+| prod_description_long
+| According to the format setting *Description*
+
+| img_small
+| The image preview URL. Variation images are prioritised over item images.
+
+| img_medium
+| The image middle URL. Variation images are prioritised over item images.
+
+| img_large
+| URL of the image. Variation images are prioritised over item images.
+
+| ean_code
+| According to the format setting *Barcode*
+
+| versandkosten
+| According to the format setting Shipping costs
+
+| lieferzeit
+| The *name of the item availability* saved in the *Setup » Item » Availability* menu or the translation according to the format setting *Overwrite item availability*
+
+| platform
+| Empty
+
+| grundpreis
+| The *unit price information* in the format `price / unit` +
+*_Example:_* 10.00 EUR / kilogram
+|===
