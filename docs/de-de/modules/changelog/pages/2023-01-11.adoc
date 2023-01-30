@@ -1,0 +1,348 @@
+= Changelog 11. Januar 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 5. Januar 2023
+:endWeekDate: 11. Januar 2023
+
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/aenderung-e-mail-reiter-von-konto-ui-zu-einstellungen-umgezogen-change-email-tab-moved-from-account-ui-to-settings/707342
+// Auch folgenden Eintrag berücksichtigen: https://forum.plentymarkets.com/t/katalog-auftragseigenschaft-fuer-handelsvertreter-catalogue-order-property-for-sales-representative/707068
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Wir haben im EmailBuilder 2 neue Schaltflächen hinzugefügt:
+** eine Schaltfläche zum Migrieren aller Vorlagen
+** eine Schaltfläche zum erneuten Erstellen der Standardvorlagen, falls ihr diese gelöscht habt.
+
++
+In den alten E-Mail-Vorlagen-Einstellungen haben wir eine Schaltfläche hinzugefügt, mit der die gewählte Vorlage in den EmailBuilder migriert werden kann.
++
+[IMPORTANT]
+.To-Do
+======
+Wir haben die Migration verbessert. Die Migration könnt ihr jederzeit manuell anstoßen, indem ihr die oben genannten Schaltflächen anklickt.
+Wenn ihr z.B. komplexe, verschachtelte if statements in euren Vorlagen verwendet habt, ist es nicht immer möglich, diese korrekt zu migrieren.
+
+Prüft daher nach der Migration jede einzelne Vorlage. Um es einfacher und übersichtlicher für euch zu gestalten, haben wir diese Fehler in roter Schrift hervorgehoben.
+======
+* Im Bereich *Sprachabhängige Einstellungen* einer E-Mail-Vorlage im EmailBuilder wurden die Felder *Zahlenformat*, *Anzahl der Dezimalstellen*, *Datumsformat* und *Zeitformat* hinzugefügt. So kannst du nun für jede Sprache einstellen, wie die Variablenwerte in der E-Mail-Vorlage ausgegeben werden sollen. Die Einstellungen, die du dort vornimmst, finden dann Anwendung bei allen Variablen, die Zahlen, Datums- und Zeitformate ausgeben.
+* Im Messenger ist das Wählen eines Tags in der Funktion *Minuten erfassen* nun auch Pflicht, wenn es sich um Freiminuten handelt.
+
+[discrete]
+=== Ereignisaktionen
+
+* In den Ereignisaktionen wurden die folgenden Optionen zum Tag-Filter hinzugefügt:
+** Aufträge ohne Tags
+** Aufträge ohne diese Tags
+** Aufträge mit mindestens einem dieser Tags
+
+[discrete]
+=== Prozesse
+
+* n den Prozessen wurden die folgenden Optionen zum Tag-Filter hinzugefügt:
+** Aufträge ohne Tags
+** Aufträge ohne diese Tags
+** Aufträge mit mindestens einem dieser Tags
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Weil die Zahlenformatierungen in den TWIG-Ausdrücken der Variablen nun nicht mehr benötigt werden, wurden diese auch entfernt. Beispiel:
+** Alt: `{⁠{order.formattedGeneral.invoiceTotal | number_format(2, ',', '.')}⁠}`
+** Neu: `{⁠{order.formattedGeneral.invoiceTotal}⁠}`
+* Die Variable `Name des retournierten Artikels` im EmailBuilder wurde umbenannt in `Statusname des retournierten Artikels`.
+* Der Bereich *E-Mail* wurde von dem Menü *Einrichtung » Einstellungen » Benutzer » Konto* in das Menü *Einrichtung » Einstellung » E-Mail* umgezogen.
+
+[discrete]
+=== Kaufland
+
+Kaufland schaltet die alte API-Version zum 01.02.2023 ab.
+
+[NOTE]
+.Hinweis
+======
+Diese Änderung betrifft nur den alten Export. Der Export über Kataloge läuft bereits über API-Version 2.
+======
+
+[IMPORTANT]
+.To-Do
+======
+Aus dem Wechsel der API-Version ergibt sich eine Änderung, die du beachten musst:
+
+Zuvor mussten in den Einstellungen deines Kaufland-Kontos unter *Artikelverfügbarkeiten zuordnen* die *Minimale Lieferzeit (in Werktagen)* und *Maximale Lieferzeit (in Werktagen)* den plentymarkets Artikelverfügbarkeiten zugeordnet werden.
+
+Das ist jetzt nicht mehr notwendig. Stattdessen wurde die Spalte *Bearbeitungszeit (in Werktagen)* zur Tabelle *Artikelverfügbarkeiten zuordnen* hinzugefügt. In diese Spalte trägst du die Bearbeitungszeit in Werktagen ein, die der jeweiligen plentymarkets Artikelverfügbarkeit entspricht.
+
+Wenn du keinen Wert für die Bearbeitungszeit einträgst, wird der Wert, der bei *Minimale Lieferzeit (in Werktagen)* eingetragen ist, als Bearbeitungszeit übertragen.
+======
+
+[NOTE]
+.Hinweis
+======
+Die Felder *Minimale Lieferzeit (in Werktagen)* und *Maximale Lieferzeit (in Werktagen)* sind veraltet und werden in Zukunft aus dem Menü entfernt werden. Du brauchst diese Felder also nicht mehr auszufüllen. Wichtig ist aber, dass du bei *Bearbeitungszeit (in Werktagen)* einen Wert eingibst.
+======
+
+[discrete]
+=== Shopify-App
+
+Die plentymarkets-App für Shopify benötigt 4 zusätzliche Berechtigungen:
+* `read_assigned_fulfillment_orders`
+* `write_assigned_fulfillment_orders`
+* `read_merchant_managed_fulfillment_orders`
+* `write_merchant_managed_fulfillment_orders`
+
+Diese Änderung der Berechtigungen ist erforderlich, weil Shopify seine Fulfillment-API aktualisiert (link:https://shopify.dev/api/release-notes/2022-07#breaking-changes[2022-07 release notes^]). Die Frist für diese Änderungen ist der 1. April 2023, aber plentymarkets hat bereits begonnen, die API zu aktualisieren. Wenn du dich das nächste Mal in dein Shopify-Dashboard einloggst wirst du aufgefordert, die App-Berechtigungen zu aktualisieren (Dein Shopname wird unterhalb des Shopify-Logos angezeigt.):
+
+image::shopify-rights-update-2022-07.png[width=640, alt="Shopify-Dashboard"]
+
+[IMPORTANT]
+.To-Do
+======
+. Melde dich in deinem Shopify-Dashboard an. Du wirst aufgefordert, die App zu aktualisieren (siehe Screenshot oben).
+. Aktualisiere die App. Klicke dazu auf *App aktualisieren*.
+
+Damit ist sichergestellt, dass dein Shopify-Shop für die neue Fulfillment-API bereit ist.
+======
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftragsanlage wurde folgendes Verhalten behoben:
+** Beim Erstellen einer Adresse im 1. Schritt wurden durch mehrfaches Klicken auf *Speichern* mehrere Adressen erstellt;
+** Beim Einlösen von Gutscheinen wurde der Gutschein durch mehrfaches Klicken auf *Einlösen* mehrmals zum Auftrag hinzugefügt.
+* In der Übersichtstabelle der neuen Aufträge-UI wurden die Anzahl der Ergebnisse pro Seite nicht gespeichert, wenn die Seite neu geladen wurde. Dieser Fehler wurde nun behoben.
+
+[discrete]
+=== CRM
+
+* In der Übersicht der Schnellsuche wurde die Anzahl der Aufträge bei Gastbestellungen nicht angezeigt. Auch wenn man den Datensatz der Gastbestellung geöffnet hat, wurde die Anzahl der Aufträge nicht korrekt angezeigt. Dieses Verhalten wurde behoben.
+* In einigen Systemen war es nicht möglich, die Standardvorlagen im EmailBuilder zu bearbeiten. Dieses Verhalten wurde behoben.
+* Wenn man in einem Kontaktdatensatz eine Datei im Bereich *Dokumente* hochgeladen und diese später heruntergeladen hat, war es nicht möglich, die Datei zu öffnen. Eine Fehlermeldung, dass die Datei beschädigt sei, ist erschienen. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Ereignisaktionen
+
+* Bei den beiden Aktionen *Zahlung per Lastschrift erlauben* und *Zahlung per Rechnung erlauben* kam es zu einem Fehler bei Gastbestellungen, da kein Kontakt existiert, dem die Erlaubnis erteilt werden kann. Dies wurde behoben.
+
+[discrete]
+=== Fulfillment
+
+* Bei der Anmeldung eines Auftrages im Versand-Center 2.0 konnte auch bei Erfolg fälschlicherweise zu einer Fehlermeldung kommen. Dies wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Beim Versuch, mehrere Dokumente über die Aktionen *Externe Rechnung* und *Externe Gutschrift* zu laden, konnte es dazu kommen, dass der Prozess hängen blieb. Dieses Verhalten wurde behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* gelöscht.
+
+[discrete]
+=== CRM
+
+* Die Variable *Gesamtrechnungsbetrag, durch Punkt getrennt* wurden aus dem EmailBuilder entfernt, weil diese nun nicht mehr benötigt wird.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel
+
+* Wir haben einen Zeichenzähler für die Artikel-Texte, sowie die HTML-, Text-, und Zeichenketten-Eigenschaften eingefügt.
+* In der neuen Artikel-UI ist es jetzt möglich, die Varianten-Gruppenfunktion in der Variantenübersicht eines Artikels zu verwenden.
+* Es gibt nun einen Schalter unter *Einrichtung > Artikel > Neue Artikel-UI (Testphase)*, um die neue Artikel-UI als Standard Artikel-UI festzulegen. Links aus anderen UIs (z. B. Aufträge) leiten ebenfalls auf die neue Artikel UI um. Diese Einstellung gilt nur für den jeweiligen Nutzer und lässt sich jederzeit aktivieren oder deaktivieren.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI und in der Auftragsanlage kann der Rabatt nun für jeden einzelnen Artikel bearbeitet werden.
+* In der neuen Auftrags-UI kannst du im Bereich *Allgemein* eines Auftrags ab sofort die Markierung wählen. Es handelt sich dabei um ein reines Anzeigefeld, d.h. die Markierung kann nicht geändert werden.
+* In den Auftragsdetails steht nun der Bereich *Tickets* zur Verfügung. Dieser ist standardmäßig nicht eingeblendet, kann aber über die MyView hinzugefügt werden.
+* In der neuen Auftrags-UI kann die Größe der Spalten von nun an in den folgenden Tabellen angepasst werden:
+** Tabelle in der Auftragsübersicht;
+** Tabelle der Auftragspositionen (in der Übersicht sowie in den Auftragsdetails);
+** Tabelle der Variantensuche in der Ansicht Artikel bearbeiten;
+** Tabelle des Warenkorbs in der Ansicht Artikel bearbeiten
+
+[discrete]
+=== CRM
+
+* Wenn eine Adresse mit einem Auftrag verknüpft ist, kann man diese Adresse nicht löschen. Wir haben im Hintergrund die Funktion eingebaut, dass die Relation „Kontakt/Adresse“ jetzt entfernt wird, wenn das Löschen der Adresse fehlschlägt. Die neue Meldung im Backend lautet: `Die Adresse konnte nicht gelöscht werden, weil sie mit einem Auftrag verknüpft ist. Die Relation zum Kontakt wurde gelöscht.`
+* Im Messenger wurde der Filter *Posteingang* hinzugefügt, mit dem du nach Konversationen aus einem bestimmten Posteingang suchen kannst.
+
+[discrete]
+=== Fulfillment
+
+* Unter der Paketnummer im Versand-Center 2.0 ist nun die Sendungsverfolgung für das jeweilige Paket hinterlegt und kann durch einen Klick auf die Nummer direkt aufgerufen werden.
+* Die zuletzt verwendeten Werte für den Versanddienstleister, die zwei Auftragsstatusfelder sowie für den Versanddientsleister im Fall einer Retoure bleiben ab sofort im Cache, so dass diese Einstellungen nicht wieder neu ausgewählt werden müssen.
+
+[discrete]
+=== Kataloge
+
+* Im Menü *Daten » Katalogexportstatus* kannst du ab sofort die Kataloge auch danach filtern, ob sie Fehler enthalten oder nicht. Weitere Informationen findest du auf der Handbuchseite xref:daten:catalogues-status.adoc#overview-filters[Exportstatus prüfen].
+
+[discrete]
+=== Shopify-App
+
+* In der neuen Shopify-App haben wir die folgenden Funktionen ergänzt:
+** Die Verbindungsbereitschaft prüfen.
+** Exportbedingungen einer Variante prüfen.
+** Alle 10 Minuten einen Artikel manuell exportieren.
+** Alle 5 Minuten den Warenbestand einer Variante oder eines ganzen Artikels exportieren.
+** Die plentymarkets Auftrags-ID anhand der Shopify-Auftragsnummer finden.
+** Eine Artikelbereinigung planen.
+
++
+Im Zuge der Neuerung wurde auch xref:externe-webshops:shopify-app.adoc#plugin-help[die Handbuchseite zur Shopify-App] erweitert. Eine Checkliste für den Variantenexport hilft dir dabei, deine Varianten für den Export flott zu machen.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Bisher konnte die PDF-Datei für Mehrzweckgutscheine nur erstellt werden, wenn der dazugehörige Auftrag vollständig bezahlt war. Bei überbezahlten Aufträgen hingegen wurde keine PDF-Datei erstellt. Nun werden PDFs auch für überbezahlte Aufträge erstellt.
+* In der neuen Auftragsanlage war in den Eingabefeldern *Preis (brutto)* und *Preis (netto)* im 2. Schritt der Warenkorb-Tabelle der Wert `0` nicht möglich. Dies wurde behoben.
+* In der Auftragsübersicht ist es im Dialog *Referenzierte Bestellungen anzeigen* zu einen Fehler gekommen, wenn man einen Auftrag öffnen wollte. Dieser Fehler wurde behoben.
+* Im letzten Schritt der neuen Auftragsanlage wurde bei der *Artikelmenge (gesamt)* die Menge der Auftragsposition angezeigt und nicht die Summierten mengen der einzelnen Positionen. Dieser Fehler wurde behoben.
+* In der neuen Auftrags-UI hat das Duplizieren des Auftrags-Tabs nicht funktioniert. Dies wurde behoben.
+
+[discrete]
+=== Elastischer Export
+
+* Im Elastischen Export hat der Filter für den Mandanten nicht funktioniert. Wenn dieser Filter gesetzt war, wurde keine CSV-Datei ausgegeben. Beim Export mit einem Limit höher als 9999 wurde eine leere Datei ausgegeben. Dieses Verhalten wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/returnsportal_55342[apoio - plentymarkets Retourenportal^]
+|1.0.1
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourfullcrossselling_6125[Crossselling Artikellisten für die Produkt Seite^]
+|1.0.16
+|-
+
+|link:https://marketplace.plentymarkets.com/goexpress_55126[GO! Express^]
+|1.0.11
+|-
+
+|link:https://marketplace.plentymarkets.com/io_4696[IO^]
+|5.0.57
+|-
+
+|link:https://marketplace.plentymarkets.com/feedback_5115[Kunden-Feedback^]
+|4.0.8
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.4.24
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.2.7
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.23
+|-
+
+|link:https://marketplace.plentymarkets.com/paypaldispute_6582[PayPalDispute^]
+|1.1.3
+|-
+
+|link:https://marketplace.plentymarkets.com/ceres_4697[plentyShop LTS^]
+|5.0.58
+a|
+* Falls du die Platzhalter-Zahlungsart "Bereits bezahlt" für Bestellungen aktivieren möchtest, die z.B. durch einen Mehrzweckgutschein bezahlt wurden, musst du sie im plentyShop LTS Assistenten für deine Lieferländer aktivieren und anschließend mit den Kundenklassen verbinden, für die du sie zur Verfügung stellen möchtest. Weitere Informationen findest du auf der Handbuchseite xref:webshop:ceres-einrichten.adoc#lts-assistent-zahlungsart[plentyShop LTS einrichten].
+* Aufgrund von Änderungen an bestehenden Widgets müssen die ShopBuilder-Inhalte im Menü *CMS » ShopBuilder* über die Schaltfläche *Inhalte neu generieren* aktualisiert werden.
+
+Im Zuge des Releases von Ceres 5.0.57 gab es Änderungen an Template-Dateien, die für Theme-Entwickler:innen relevant sind. Die Verlinkung führt direkt zu der umgesetzten Änderung in den entsprechenden Dateien.
+
+* link:https://github.com/plentymarkets/plugin-ceres/pull/3372/files#diff-6e3fe08ffe8086b5176c1c0451cb0c0034b99195843630994e5e79347f8d1158[resources/views/Category/Item/CategoryItem.twig^]
+
+|link:https://marketplace.plentymarkets.com/plentyshopltsmodern_55193[plentyShop LTS Modern^]
+|1.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.14.2
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
