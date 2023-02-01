@@ -5,6 +5,13 @@
 
 Hier findest du weitere Praxisbeispiele zum Thema 301-Weiterleitungen. Diese Seite setzt vorraus, dass du die Grundlagen der 301-Weiterleitungen verstehst. Bist du mit den Grundlagen noch nicht vertraut, findest du diese unter xref:business-entscheidungen:domains.adoc#265[Domains], wenn du die Box URL Weiterleitungen aufklappst.
 
+== Beispiel für eine explizite Weiterleitung
+
+Eine explizite Weiterleitung leitet die Quell-URL dann weiter, wenn sie direkt auf den Domain-Namen und gleichzeitig das Ende der URL darstellt: `deine-domain.de/mode/herren`.
+
+Dabei symbolisiert das Zirkumflex ^ den Stringanfang und das Dollarzeichen $ das Stringende. Durch diese Syntax vermeidest du, dass es zu unerwünschten Weiterleitungen oder Endlosweiterleitungen kommt, wenn du mehrere Zeilen an Weiterleitungen nutzt die z.B. /mode/hosen/ als Quell-URL enthalten. Die Weiterleitung sieht in diesem Fall wie folgt aus:
+`^/mode/hosen/$;/mode/herren/hosen/;301;L`
+
 == Trailing-Slash Beispiele
 
 Würde die folgende Weiterleitung auch `/emotion-persoenlichkeit/geniesser` erfassen?:
@@ -43,4 +50,32 @@ Wenn du zusätzlich zum Asterisk der Quell-URL ein Asterisk hinter der Ziel-URL 
 
 |/emotion-persoenlichkeit/geniesser abcdefg
 |/thema/essen-trinken-genuss abcdefg
+|====
+
+== Weiterleitung mit URL-Codierung
+
+Beinhaltet eine Weiterleitung URL-Codierungen kommt es zu Problemen, da ein Semikolon bei einer Weiterleitung als Trennzeichen gilt. Aber auch die URL-Codierung nutzt Semikolons. In der Praxis sieht das wie folgt aus:
+
+Die Weiterleitung mit URL-Codierung: `^/geschenkboxen-einzeln-kaufen?boxtyp=415&amp;groessen_klasse=359%2C420;geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen;301;L``
+
+wird von nginx folgendermaßen interpretiert: +
+Leite weiter von: `^/geschenkboxen-einzeln-kaufen?boxtyp=415&amp` +
+nach: `groessen_klasse=359%2C420` +
+Nutze den HTTP-Code: `geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen` +
+und die Option: `301` +
+
+Damit nginx die Weiterleitung richtig interpretiert muss eine der URL-Codierungen `&amp` mit `&` ausgetauscht werden. +
+Optional kann auch die zweite URL-Codierung ausgetauscht werden, `%2C mit `,`. Das ist optional, weil alle drei Zeichen zulässig für Weiterleitungen sind, ohne die Syntax zu verändern.
+
+Die korrekten Weiterleitungen sehen folgendermaßen aus: +
+`^/geschenkboxen-einzeln-kaufen?boxtyp=415&groessen_klasse=359,420;/geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen;301;L`
+
+`^/geschenkboxen-einzeln-kaufen?boxtyp=415&groessen_klasse=359%2C420;/geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen;301;L`
+
+== Zulässige Zeichen in einer Weiterleitung
+
+Diese Zeichen sind ohne weiteres in einer Weiterleitung nutzbar.
+
+`/^[\^]?\/[A-Za-z0-9äöüÄÖÜ\[\]\+&%\-_\.=\/:\'´„“ÂÃŸ©§ßé]*[\*\$]?$/`
+
 
