@@ -54,28 +54,8 @@ Wenn du zusätzlich zum Asterisk der Quell-URL ein Asterisk hinter der Ziel-URL 
 
 == Weiterleitung mit URL-Codierung
 
-Beinhaltet eine Weiterleitung URL-Codierungen kommt es zu Problemen, da ein Semikolon bei einer Weiterleitung als Trennzeichen gilt. Aber auch die URL-Codierung nutzt Semikolons. In der Praxis sieht das wie folgt aus:
+Beinhaltet eine Weiterleitung URL-Codierungen kommt es zu Problemen, da die Weiterleitung Semikolons als Trennzeichen nutzt, um z.B. Quell- und Ziel-URL von einander zu unterscheiden. Somit würde die Syntax der Weiterleitung durch Semikolons der URL-Codierung fehlerhaft sein. Zudem erkennen die Weiterleitungen keine Parameter in der URL.
 
-Die Weiterleitung mit URL-Codierung: `^/geschenkboxen-einzeln-kaufen?boxtyp=415&amp;groessen_klasse=359%2C420;geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen;301;L``
 
-wird von nginx folgendermaßen interpretiert: +
-Leite weiter von: `^/geschenkboxen-einzeln-kaufen?boxtyp=415&amp` +
-nach: `groessen_klasse=359%2C420` +
-Nutze den HTTP-Code: `geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen` +
-und die Option: `301` +
-
-Damit nginx die Weiterleitung richtig interpretiert muss eine der URL-Codierungen `&amp` mit `&` ausgetauscht werden. +
-Optional kann auch die zweite URL-Codierung ausgetauscht werden, `%2C mit `,`. Das ist optional, weil alle drei Zeichen zulässig für Weiterleitungen sind, ohne die Syntax zu verändern.
-
-Die korrekten Weiterleitungen sehen folgendermaßen aus: +
-`^/geschenkboxen-einzeln-kaufen?boxtyp=415&groessen_klasse=359,420;/geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen;301;L`
-
-`^/geschenkboxen-einzeln-kaufen?boxtyp=415&groessen_klasse=359%2C420;/geschenkboxen-einzeln-kaufen/boxtyp/magnetboxen;301;L`
-
-== Zulässige Zeichen in einer Weiterleitung
-
-Diese Zeichen sind ohne weiteres in einer Weiterleitung nutzbar.
-
-`/^[\^]?\/[A-Za-z0-9äöüÄÖÜ\[\]\+&%\-_\.=\/:\'´„“ÂÃŸ©§ßé]*[\*\$]?$/`
 
 
