@@ -1,0 +1,713 @@
+= Setting up Shopify
+:keywords: Shopify, Shopify plugin, Shopify shops, connecting Shopify, setting up Shopify
+:description: Learn how to set up the Shopify plugin in plentymarkets.
+:author: team-plenty-channel
+
+Shopify is a complete E-commerce platform that lets you start, grow, and
+manage your business. Shopify is entirely cloud-based and hosted, which means you don't have to worry about upgrading or maintaining software or web servers.
+
+include::partial$shopify-differences.adoc[]
+
+[#registration-shopify]
+== Registering with Shopify
+
+First, register with link:https://www.shopify.com[Shopify^].
+
+[.instruction]
+Registering with Shopify:
+
+. Öffne https://www.shopify.com/signup[Shopify.com].
+. Follow the steps for the Shopify registration.
+
+[#api-login-details]
+== Create custom app and generate API credentials
+
+Now, create a custom app and generate the credentials. +
+*Custom apps* are described in more detail in the Shopify Help Center under https://help.shopify.com/en/manual/apps/custom-apps[Custom apps^].
+
+
+[IMPORTANT]
+.API credentials are only shown once
+====
+The API credentials for the custom app are _only shown once_. Make sure that you save the API credentials _straight away_. You need these API credentials to connect the plugin to the Shopify API.
+====
+
+[.instruction]
+Creating a custom app and generating API credentials:
+
+. Open the https://accounts.shopify.com/lookup?rid=74e44916-65fc-4db2-a7e5-792b379b3f34[Shopify back end^].
+. Click on *Apps*.
+. In the area *Private Apps have moved*, click on *Develop apps for your store*. +
+→ The page *App development* opens.
+. Click on *Create app*.
+. Enter a *name* for the app. You can freely select the name.
+. Select an *app developer*. +
+→ You can select the account of the shop owner or any other employee or guest account with the right to *Develop apps*.
+. Click on *Create app*. +
+→ The overview page of the new app opens.
+. Open the tab *Configuration*.
+. In the *Admin API Integration*, click on *Configure*. +
+→ The page *Admin API Integration* opens.
+. Activate all Admin API Scopes. This ensures that the plugin will work as expected.
+. Click on *Save* at the top of the page.
+. Click on *Install app*. +
+→ The Admin API access token is shown.
+. Save the Admin API access token in a safe location.  You need the Admin API access token to connect the plugin to the Shopify API. +
+*_Note:_* The API credentials for the custom app are *only shown once*. Save the Admin API access token in a safe location.
+
+[#order-referrer]
+== Activating the order referrer
+
+The plugin interface becomes visible once you activate the order referrer *Shopify*.
+
+[.instruction]
+Activating an order referrer:
+
+. Go to *Setup » Orders » Order referrer*.
+. Activate the referrer *Shopify*.
+. *Save* the settings. +
+→ The plugin interface is now visible under *Setup » Markets » Shopify*.
+
+*_Note:_* Note that the plugin cannot use order referrers that were created manually. The plugin must be installed in the plugin set that is linked to the default client.
+
+[#plugin-configuration]
+== Setting up the Shopify plugin 
+
+Now set up the Shopify plugin in your plentymarkets system.
+
+[#connection-shopify-api]
+=== Connecting with the Shopify API
+
+Use the credentials of the *custom app* to connect to the Shopify API.
+
+[.instruction]
+Connecting with the Shopify API:
+
+. Go to *Setup » Markets » Shopify » Tab: Connection*.
+. Enter the *Host name*. +
+*_Example:_* yourshopname.myshopify.com
+. Enter the *API key* from Shopify.
+. Enter the *Admin API access token* from Shopify.
+. Enter the *API secret key* from Shopify.
+. Assign the plentymarkets *client* through which this connection runs.
+. Click on *Test connection*.
+. *Save* the settings.
+. Carefully read the acknowledgement popup text.
+. Click on *Ok*. +
+→ The plugin is connected to the Shopify API.
+
+[#shopify-webshops]
+=== Connecting additional Shopify shops
+
+Each new connection requires a separate plentymarkets *client* and *Shopify account*.
+
+[.instruction]
+Connecting additional shops:
+
+. Go to *Setup » Markets » Shopify » Tab: Connection*.
+. Click on *Add* (material:add[]).
+. Configure the connection as you did for the previous one. +
+→ Switch between plugin configurations by selecting the corresponding Shopify
+web shop from the *Webshops* area.
+
+[#plugin-settings]
+=== Carrying out the settings for the Shopify plugin
+
+*_Note:_* Note that item related import and export processes cannot be active at the same time.
+
+[[table-shopify-plugin-settings]]
+.Settings in the *Plugin settings* tab
+[cols="1,3a"]
+|===
+| Setting | Explanation
+
+2+| *Processes*
+
+| *Order import*
+| * every 15 minutes +
+After a first order import, only Shopify orders posted in the last 24 hours will be imported. Orders which have already been fulfilled on Shopify will not be imported. +
+
+The following data is imported: +
+
+* External order ID
+* Invoice address
+* Delivery address
+* Contact details (linked to the recipient)
+* *Order comments*
+* Ordered items and variation IDs +
+→ plentymarkets items are linked to the order only if the SKU in plentymarkets and Shopify are identical. +
+→ Discount payments contained in Shopify orders are imported as separate order items. +
+* Item text
+* Ordered quantities
+* Item prices excluding surcharges and discounts
+* Discounts
+* Payment method +
+→ *_Note:_* The plugin recognizes the payment methods *Paypal* and *Cash in advance* if a payment method with that name exists on Shopify. All other payment methods are imported as *Shopify Direct Checkout*. +
+* Shipping profile +
+→ Based on *shipping profile mappings*. +
+* Properties
+
+*_Note:_* The VAT rate is assigned by plentymarkets if a match is found. If no match is found, the standard VAT rate from pelntymarkets is assigned. To handle Shopify gift cards, create a plentymarkets item with 0% VAT and the same SKU as the Shopify gift card. During the order import, the SKU is matched and the Shopify gift card is assigned to the plentymarkets item automatically.
+
+| *Customer import*
+| * once a day +
+Imports the Shopify customer base into plentymarkets. +
+*_Note:_* Contact details are also imported during the order import. For more information, see <<#gdpr, GDPR considerations>>.
+
+| *Stock and price import*
+| * hourly for up to 1000 entries +
+* once a day for more than 1000 entries +
+This process is based on item mappings created during the item import. This process can only be carried out after an initial item import. The *RRP (Shopify: Compare at Price)* is not updated during this process.
+
+| *Stock and price export*
+| * every 15 minutes +
+Exports stock and prices without using the *item export*. +
+Exports stock and prices for variations with stock changes within the last 15 minutes. The *RRP (Shopify: Compare at Price)* is not updated during this process. +
+*_Note:_* Variations for which only the price was changed will not be exported. Those variations will only be exported after the stock has changed.
+ +
+
+* When using the stock and price export combined with the item export: +
+If you create a new variation in plentymarkets or if you change or add an SKU, then the variation will be exported within an hour. Afterwards, plentymarkets will check stock and price changes every 15 minutes. +
+
+* When using the stock and price export without the item export: +
+If you create a new variation in plentymarkets or if you change or add an SKU, then stock changes for this variation will be exported within 24 hours during the night. +
+_Why?_ All SKUs and variation IDs have to be synchronised between plentymarkets and Shopify prior to the export. Because of the huge amount of data, this process can only be executed once a day.
+
+| *Category import*
+| * once a day +
+Imports manual *collections* as categories. +
+*_Note:_* *Collections* linked to an item will also be imported during the item import. +
+*_Important:_* The plugin does not support *automatic Shopify collections*. Images mapped with a category will not be imported.
+
+| *Category export*
+| * once a day +
+Exports all categories as manual *Shopify collections*. Categories linked to an item can also be exported with the item export. +
+*_Note:_* Shopify does not support category trees. Therefore, only the sub-category will be exported. Images mapped with a category will not be imported.
+
+|*Item import*
+| * once a day +
+Imports your Shopify items into plentymarkets. +
+
+The following data is imported: +
+
+* Item name
+* Item text
+* Linked categories
+* Attributes
+* Item variations
+* Stock
+→ The stock limitation from the field *inventory_policy* is also imported. +
+* Manufacturer
+* Weight and weight unit
+* Sales price +
+→ A sales price for the order referrer Shopify will be created if it doesn’t already exist. +
+* SKU
+* Item and variation images
+* Tags
+* Customs tariff number
+* Purchase price
+* Manufacturing country
+
+| *Item export*
+| * once a day for the initial import and afterwards hourly for updates +
+Exports your items to Shopify. +
+*_Note:_* If you delete Shopify items to export them once again, then the item export will take one more day to clean up the plugin data base. This has to be done before items which were deleted can be exported again. +
+
+The following data is exported: +
+
+* Manufacturer
+* Customs tariff number +
+*_Note:_* The plugin only exports the first 6 characters of the customs tariff number. Spaces are also removed. +
+* Linked categories +
+*_Note:_* Items are exported without category mappings by default. +
+* Category meta-title
+* The meta description of the category.
+* Meta-keywords
+* Tags
+* Item name
+* Item text
+* Attributes
+* Item variations
+* Item variation position
+* Sales price +
+→ The sales price with the lowest position within the item. +
+* Recommended retail price +
+→ plentymarkets exports the *RRP* to the field *Compare at Price* in Shopify. According to the Shopify rules, the *Compare at Price* _must_ be higher than the regular sales price. If you want to remove the exported *Compare at Price* from an item in Shopify, then the exported *RRP* in plentymarkets has to be *0*. The price will then be removed. If you delete the *RRP* from the item in plentymarkets, then this change will not be transferred to Shopify. +
+* SKU
+* Barcode
+* Stock +
+→ *Limitation* as *inventory_policy* +
+* Weight and weight unit
+* Item images and linked variation images
+* Alt-Text
+* Tags
+* *Item » Variation » Availability » Name*
+* Purchase price
+* Manufacturing country
+* Properties
+
+| *Update order payments*
+| * hourly +
+Checks whether payments for already imported orders were made in Shopify and imports those payments.
+
+2+| *Data exchange*
+
+| *Automatically generate SKU based on*
+| Generates SKUs for exported items based on the user selection. +
+
+* Variation number
+* Variation ID
+* Model
+* Barcode +
+
+*_Note:_* We recommend to use the same input field for SKU generation for all Shopify online shops that are administered by the plugin.
+
+| *Export/import items to language*
+| Select a language for the item import and item export. +
+*_Note:_* Note that all translatable input fields have to be set up. Otherwise, this function will not work properly.
+
+| *Stock buffer*
+| Whenever stock is exported to Shopify, the amount entered as stock buffer will be subtracted.
+
+| *When exporting an item, also export its categories*
+| Export categories linked to an item with the item export.
+
+| *Import SKU into variation no.*
+| Imports SKUs from Shopify items to the input field *Variation no.*. +
+*_Note_:* Note that the plugin only functions properly with a unique Shopify SKU. If two variations with the same SKU are found, then only the first SKU is imported. 
+
+| *Arrange exported variations by position nr.*
+| Arranges exported variations according to their position. +
+*_Note:_* Note that using this function will increase the runtime and the number of API calls. We recommend to only use this function if the position of the variations is important.
+
+| *Do not track stock for Production items on Shopify*
+| Activate this setting to remove the checkmark *Track quantity* from your Shopify items. +
+*_Note:_* The stock for exported items of the type *production items* will not be updated once this setting has been activated.
+
+| *Import/export purchase price*
+| This setting is activated by default. Deactivate this setting if you don’t want to transfer purchase prices.
+
+2+| *Order import options*
+
+| *Import orders starting with date*
+| Use this setting to import old Shopify orders. +
+*_Note:_* The order import date is updated after each run to reflect the last time an order import has been carried out.
+
+| *Import address details as follows*
+| _Possibilities:_ +
+
+* Shopify address 1 to plentymarkets address 1
+* Shopify address 2 to plentymarkets address 2
+* House number from Shopify address 1 to plentymarkets address 2 if
+Shopify address 2 is empty
+* House number from Shopify address 1 to plentymarkets address 2, while Shopify address 2 moves to plentymarkets address 3
+* Shopify address 2 to plentymarkets address 3
+
+| *Import refund payments after successful refund*
+| Imports refund payments.
+
+2+| *Order import status*
+
+| *Order status for incoming cancelation requests*
+| Select an order status for incoming cancelation requests.
+
+| *Automatically deny incoming cancelation requests from status*
+| Incoming cancellation requests with this status and higher are automatically denied.
+
+| *Status for successfully refunded orders*
+| Successfully refunded orders are automatically moved to this order status.
+|===
+
+[#variation-limitation]
+=== Setting up the stock limitation for variations
+
+The stock *limitation* setting is exported to the Shopify field *Continue selling when out of stock*.
+
+[[table-shopify-variation-limitations]]
+.Settings for variation stock limitations
+[cols="1,3a"]
+|===
+| Limitation | Continue selling when out of stock
+
+| *None*
+| Check mark *on*
+
+| *To net stock*
+| Check mark *off*
+
+| *Do not administer stock for this variation*
+| Check mark *on*
+|===
+
+[#custom-order-properties]
+=== Importing custom order properties
+
+You can also import custom order properties from the Shopify order. To do so, for example, you can use the https://apps.shopify.com/product-personalizer[Product Personalizer plugin^], which allows you to record custom notes.
+
+If you want to import such properties, make sure that the plentymarkets item has a *characteristic* for which the option *Order characteristic* is *activated*. The characteristic is required so that the Shopify plugin will import custom notes from the Personalizer plugin.
+
+[#linking-shipping-profiles]
+=== Linking shipping profiles
+
+Now, link your plentymarkets shipping profiles with shipping profiles in Shopify.
+
+[.instruction]
+Linking shipping profiles:
+
+. Go to *Setup » Markets » Shopify » Shipping profile mapping*.
+. Select an online shop.
+. Select a Shopify *shipping profile*.
+. Select a plentymarkets *shipping profile*.
+. *Save* the settings. +
+→ The new mapping is shown in the mapping list.
+
+[#input-field-mappings]
+=== Mapping Shopify input fields
+
+Select which plentymarkets data should be exported to Shopify input fields.
+
+[.instruction]
+Mapping input fields:
+
+. Go to *Setup » Markets » Shopify » Input field mapping*.
+. Click on *Add* (material:add[]).
+. Select a Shopify *input field*.
+. Select a plentymarkets *input field*.
+. *Save* the settings. +
+→ The new mapping is shown in the mapping list. +
+*_Note:_* Input fields are only available in the item export.
+
+[[table-shopify-input-fields]]
+.Input field mappings
+[cols="1,3a"]
+|===
+| Shopify option | plentymarkets options
+
+| *Product Title*
+| * Name 1-3]
+* Property
+
+| *Product Description*
+| * Item text
+* Preview text
+* Property
+
+| *Product Type*
+| * Property
+
+| *Product SEO Page Title*
+|* Property
+
+| *Product SEO Meta Description*
+| * Meta description
+* Item text
+* Property
+
+| *Collection SEO Meta Description*
+| * Category description
+* Collection SEO META Description
+
+| *Weight*
+| * Net weight
+* Gross weight
+
+| *Metafield on Product Variant*
+| Enables the export of the variations *availability name* or a *property* to a custom Shopify *metafield*. +
+
+[.instruction]
+Mapping a metafield:
+
+. Select *Metafield on Product Variant*.
+. Define a *namespace*. +
+→ The *namespace* is a container for a set of metafields. You can assign several metafields to one namespace container. +
+_Maximum length:_ 20 characters.
+. Assign a *metafield name*.
+. Select *availability* or *property*. +
+*_Note:_* Shopify metafields will not be visible in the Shopify back end without specific apps. For more information about Shopify metafields,consult the *Shopify Help Center* and use the keyword *Metafield.*
+|===
+
+[#mapping-warehouses]
+=== Assign warehouses
+
+plentymarkets warehouses have to be mapped with Shopify warehouses so that stock can be synchronised. This function only affects the stock synchronisation and the event procedure *Send fulfilment notification to Shopify*. +
+The warehouse mapping during the order import is not affected by this function. This mapping is carried out independently of the Shopify plugin.
+
+[.instruction]
+Mapping warehouses:
+
+. Go to *Setup » Markets » Shopify » Warehouse to location mapping*.
+. Select an online shop.
+. Click on *Add* (material:add[]).
+. Select one or more plentymarkets *warehouses*.
+. Select a Shopify *location*.
+. *Save* the settings. +
+→ The new mapping is shown in the mapping list.
+
+[#tags-customer-class-mapping]
+=== Mapping Shopify customer tags with plentymarkets customer classes
+
+Map Shopify customer tags to a plentymarkets customer class.
+
+*_Note:_* Each mapping can only contain one customer tag. Multiple customer tags can be mapped to the same plentymarkets customer class by creating separate mappings.
+
+[.instruction]
+Mapping customer classes:
+
+. Go to *Setup » Markets » Shopify » Customer class mapping*.
+. Select an online shop.
+. Enter a Shopify *customer tag*.
+. Select a plentymarkets *customer class*.
+. *Save* the settings. +
+→ The new mapping is shown in the mapping list.
+
+[#plugin-help]
+== Plugin help
+
+In the *Help* tab of the Shopify plugin, you can use the following functions:
+
+* Check the plugin’s health.
+* Check variation export conditions.
+* Manually export an item every 10 minutes.
+* Export the stock of a variation or an item every 5 minutes.
+* Find the plentymarkets order ID by using the Shopify order number.
+* Clean up exported items.
+
+[#plugin-health]
+=== Checking the plugin’s health
+
+[.instruction]
+Checking the plugin’s health:
+
+. Go to *Setup » Markets » Shopify » Help » Plugin health*.
+. Click on *Check*.
+
+The following conditions are checked:
+
+* The *Shopify* referrer under *Setup » Orders » Order referrer* must be active.
+* There is more than one *Shopify* referrer entry under *Setup » Orders » Referrer*. Make sure that the ID with the highest number is active.
+* A connection to Shopify.com can be established.
+* The *SDK file* is deployed correctly.
+
+Conditions that are fulfilled are marked with a green *OK*.
+Conditions that have failed are marked with a red *X*.
+
+[#check-export-conditions]
+=== Checking export conditions for variations
+
+[.instruction]
+Checking export conditions:
+
+. Go to *Setup » Markets » Shopify » Help » Export conditions*.
+. Select an online shop that you want to use this function for.
+. Enter a valid variation ID.
+. Click on *Check*.
+
+The following conditions are checked:
+
+* The variation must be *activated*. +
+→ *Item » Variation » Settings*, *Availability*
+section, checkbox *Active* must be set.
+* The variation has to be available for Shopify. +
+→ *Item » Variation » Availability* » section *Markets, Shopify* must be assigned.
+* The *Variation » Client* assignment matches your *online shop* selection. +
+→ *Item » Variation » Availability*, *Client* section, client selection.
+* An *item text* must be saved for the item. +
+→ *Item » Texts » Item text* must be entered.
+* A *name* must be saved for the item. +
+→ *Item » Texts » Name 1* must be entered.
+* The variation must have an SKU for Shopify. +
+→ *Item » Variation » Avaialbility*, *SKU* section must contain an *SKU* for the referrer *Shopify*.
+* Exported items must not contain more than 100 variations. This limit is set by Shopify.
+
+Conditions that are fulfilled are marked with a green *OK*.
+Conditions that have failed are marked with a red *X*.
+
+*_Note:_* Exporting the item’s sales price is not mandatory.
+
+[#manually-exporting-items]
+=== Manually exporting items
+
+For testing purposes, you can manually export an item every 10 minutes.
+
+*_Note:_* Use this function to test how the export will look before you export large amounts of item data.
+
+[.instruction]
+Manually exporting an item:
+
+. Go to *Setup » Markets » Shopify » Help » Item export*.
+. Select an online shop.
+. Enter a valid item ID.
+. Click on *Execute*. +
+→ If all export requirements are met, the item and the corresponding variations will be exported.
+
+*_Note:_* If you deleted one or more items on Shopify to export them again, then note that an initial export cleans up the plugin’s data base. Only a second export will add the items again.
+
+[#exporting-stock]
+=== Exporting stock
+
+For testing purposes, you can manually export an item’s stock every 5 minutes. For variations, you can carry out the export every 3 minutes.
+
+[#custom-start-date]
+==== Setting a custom start date for stock and price exports
+
+If you want to export stock quantities for items with an older *last change* date:
+
+[.instruction]
+Setting a start date:
+
+. Go to *Setup » Markets » Shopify » Help » Stock export*.
+. Select an online shop for which you want to reset the start date of the *stock and price export*.
+. Select a start date from the *calendar*.
+. Enter *hours* and *minutes*.
+. *Save* the settings. +
+→ The next *stock and price export* is carried out according to your setup. Note that the start date is always updated in order to reflect the start of the last export.
+
+[#stock-price-export-variation]
+==== Manually exporting stock and sales prices of variations
+
+[.instruction]
+Manually exporting stock and sales price of a variation:
+
+. Go to *Setup » Markets » Shopify » Help » Stock export*.
+. Select an online shop that you want to update stock and prices for.
+. Enter a valid *variation ID*.
+. Click on *Execute*. +
+→ If all export requirements are met, the stock of the selected variation will be exported.
+
+[#stock-price-export-item]
+==== Manually exporting stock and sales prices of items
+
+[.instruction]
+Manually exporting stock and sales price of an item:
+
+. Go to *Setup » Markets » Shopify » Help » Stock export*.
+. Select an online shop that you want to update stock and prices for.
+. Enter a valid *item ID*.
+. Click on *Execute*. +
+→ If all export requirements are met, the stock of the selected item will be exported.
+
+[#plentymarkets-id]
+=== Finding the plentymarkets order ID by using the Shopify order number
+
+If a customer contacts you with the Shopify order ID, then you can use this ID to find out the corresponding plentymarkets order ID.
+
+[arabic]
+. Go to *Setup » Markets » Shopify » Help » Find Shopify order number*.
+. Select the webshop.
+. Enter a valid Shopify order number.
+. Click on *Search*. +
+→ If the Shopify order number is valid, the plentymarkets order ID will be shown.
+
+[#item-export-cleanup]
+=== Scheduling an item export cleanup
+
+Carry out a cleanup when: 
+
+* You have deleted or deactivated items or variations from plentymarkets and you also need them removed from Shopify.
+* You have manually deleted items or variations from Shopify and they are not re-exported by the plugin.
+* You want to delete all items from Shopify and start a new item export from plentymarkets. In this case, deactivate the item export and delete all items from Shopify. Plan a cleanup. You can reactivate the item export the next morning.
+
+*_Note:_* Do not use the cleanup process after your items were imported from Shopify after installing the plugin. This may lead to items being deleted on Shopify! The cleanup will only be carried out once. If required, plan a new cleanup.
+
+[.instruction]
+Scheduling a cleanup:
+
+. Go to *Setup » Markets » Shopify » Help » Clean up exported items*.
+. Select the *online shop* that you want to plan a cleanup for.
+. Click on *Schedule a cleanup for exported items tonight*.
+
+*_Note:_* Items and variations that were already exported will be deleted from Shopify if:
+
+* The *client* and the *Shopify market* were removed from the variation.
+* The variation was deleted from plentymarkets.
+* If the item has no active variations, then it will be deleted from Shopify.
+
+[#event-procedures]
+== Setting up event procedures
+
+plentymarkets event procedures enable you to communicate with your
+orders on Shopify by triggering user defined events. For further information, refer to the xref:automation:event-procedures.adoc#[Event procedures] page.
+
+[#set-up-event-procedure]
+=== Example: Setting up an event procedure procedure
+
+[.instruction]
+Setting up an exemplary event procedure:
+
+. Go to *Setup » Orders » Events*.
+. Click on *Add* (material:add[]). +
+→ The *Create new event procedure* window opens.
+. Enter a *name*.
+. Select an event, for example *Order change: Outgoing items booked*.
+. *Save* the settings.
+. Apply the filter *Order » Order type » Order*.
+. Apply another filter *Order » Referrer » Shopify*.
+. Select the *procedure* *Plugin » Send fulfilment notification to Shopify*.
+. *Save* the settings.
+
+[[table-shopify-event-procedures]]
+.Event procedures for Shopify
+[cols="1,3a"]
+|===
+| Event procedure | Description
+
+| *Shopify Plugin: Send fulfilment notification to Shopify*
+| Sends a shipping confirmation for the Shopify order. This event procedure also works with the order type *delivery order*.
+
+| *Shopify Plugin: Archive Shopify order*
+| Files the Shopify order.
+
+| *Shopify Plugin: Save plentymarkets order Id in Shopify*
+| Saves the plentymarkets order ID in the Shopify order notes.
+
+| *Shopify Plugin: Send cancel notification to Shopify*
+| A cancellation notification for the Shopify order is sent to Shopify. This event procedure can only be triggered before the Shopify order is shipped. +
+It sends a cancellation command for all items contained in the Shopify order. Shipping costs will be fully refunded. Refunded sums are calculated by Shopify.
+
+| *Shopify Plugin: Sende Retoure an Shopify*
+| Sends a return for the Shopify order. This event procedure only works if the Shopify order has already been fulfilled. Checks all order items and quantities from the return shipment and sends a list of the items to Shopify. The refund can contain all items or only part of the items contained in the order. If all items are contained, shipping costs will also be refunded. Refunded sums are calculated by Shopify.
+
+| *Shopify Plugin: Send cancellation/refund to Shopify*
+| Shopify is informed about a refund. The stock of the variations is released and added to the Shopify stock. This only works if the order was paid for and hasn’t been refunded yet. This event checks all order items and quantities contained in your credit
+note order and then sends a list of those items to Shopify, along with
+the item prices in the order. The refund can contain all items or only part of the items contained in the order. This event also refunds the shipping costs from the initial order. You can also select which sums should be refunded.
+
+| *Shopify Plugin: Send refund/cancellation to Shopify without stock adjustment*
+| Shopify is informed about a refund. However, in contrast to the event procedure *Send cancellation/refund to Shopify*, the stock that is released because of the refund or cancellation is not added to the Shopify stock. This only works if the order was paid for and hasn’t been refunded yet. This event checks all order items and quantities contained in your credit
+note order and then sends a list of those items to Shopify, along with
+the item prices in the order. The refund can contain all items or only part of the items contained in the order. This event also refunds the shipping costs from the initial order. You can also select which sums should be refunded.
+
+| *Shopify Plugin: Send manually added payment to Shopify*
+| Sends payments that were added manually to the plentymarkets order.
+
+| *Shopify Plugin: Send credit note to Shopify*
+| Creates a credit note and sends a refund to Shopify without restocking the items in the initial order. This event procedure only works for paid orders, independent of their fulfilment status.
+|===
+
+[#gdpr]
+== GDPR considerations
+
+Due to GDPR specifications, the following policy in regard to customer accounts and orders has been implemented:
+
+*Table 4* _GDPR considerations for the order import_
+
+[[table-shopify-gdpr]]
+.GDPR considerations for the order import
+[cols="1,3a"]
+|===
+| Scenario | Explanation
+
+| *Customer is imported as guest*
+| If:
+
+* The customer has no plentymarkets account.
+* The authenticity of the customer isn't guaranteed by either part, even if the contact details on several orders are the same.
+
+*_Note:_* You can convert contacts of type *Guest* to regular contacts if required.
+
+| *Customer is imported as regular contact*
+| The plugin creates a regular account if the authenticity of the Shopify contact is guaranteed by a unique external contact ID.
+
+| *An existing plentymarkets contact is linked to the imported order*
+| It is checked whether a Shopify contact with this external contact ID has already been imported in the past. If a contact is found, then the new order is attached to this customer.
+|===

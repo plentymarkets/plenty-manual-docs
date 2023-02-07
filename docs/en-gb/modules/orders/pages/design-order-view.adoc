@@ -2,6 +2,7 @@
 
 :keywords: MyView, design order view, customise order view, adjust order view, adjust columns for order view, configure columns
 :author: team-order-core
+:description: Learn how to customise the order overview as well as the detail view of your orders. In the editing mode, decide for yourself which columns and settings you need for managing your orders.
 
 On this manual page you will learn how to customise the order overview as well as the detail view of your orders according to your needs. By using the editing mode you can for example define which columns should be displayed for your orders and in which order you want them to be shown.
 The detail view differs depending on the order type. Thus, there is an individual overview for each type with the respectively relevant information.
@@ -55,8 +56,8 @@ You can create the following order types as child orders: +
 * Partial delivery
 * Advance order
 
-** For all items: The maximum amount of all items is automatically added to the shopping cart.
-** For specific items: The table of the shopping cart will be empty at first, which means that the desired items have to be added manually.
+** For all order items: The maximum amount of all items is automatically added to the shopping cart.
+** For specific order items: The table of the shopping cart will be empty at first, which means that the desired items have to be added manually.
 ** Split automatically (only for delivery orders): The items are automatically split according to the settings.
 
 | *Book outgoing items*
@@ -121,7 +122,11 @@ Note that orders cannot be deleted, if: +
 * a delivery order has been created.
 * child orders exist. +
 
-In general, orders should not be deleted. Errors can occur when orders are deleted because the orders are linked to items, shipping settings and other functions such as cancellations and returns. However, newly created orders can be deleted. In case you want to delete an order that has child orders, you need to delete the child orders first. +
+In general, orders should not be deleted. Errors can occur when orders are deleted because the orders are linked to items, shipping settings and other functions such as cancellations and returns. However, newly created orders can be deleted. In case you want to delete an order that has child orders, you need to delete the child orders first.
+
+| *Reload order*
+| material:refresh[]
+|Updates the order and thus shows possible changes from other users that have worked on the same order simultaneously. Save your changes before reloading the order.
 |===
 
 [TIP]
@@ -154,6 +159,16 @@ Configuring columns:
 → The settings are saved.
 --
 
+[TIP]
+.Resizable table columns
+====
+For some tables in the Order UI, you have the possibility to adjust the size of the columns according to your needs. When hovering over the respective table columns, blue lines appear which allow you to adjust the size as desired. You can resize the columns of the following tables: +
+* Order overview table
+* Order items table (in the overview as well as in the order details)
+* Order variation search in the *Edit items* view of an order
+* Shopping cart table in the *Edit items* view of an order.
+====
+
 [#table-columns-orders]
 === Configuring table columns in the order overview
 
@@ -172,10 +187,7 @@ The following columns are available for the *order overview*.
 |Allows you to select orders so you can carry out actions for several orders at once.
 
 | *Lock status*
-a|Shows whether an order is locked. An order is locked as soon as an invoice has been generated.  A credit note is locked as soon as a credit note document has been generated. You can unlock the order or the credit note by generating a reversal document for the respective document. +
-
-* (material:lock_open[]) = Not locked
-* (material:lock[]) =  Blocked +
+a|Shows whether an order is locked (material:lock[]). An order is locked as soon as an invoice has been generated. A credit note is locked as soon as a credit note document has been generated. You can unlock the order or the credit note by generating a reversal document for the respective document. +
 This is a default column.
 
 | *Order type*
@@ -194,6 +206,10 @@ This is an optional column.
 |Shows the ID of the contact. +
 In order to display an ID, a contact data record needs to exist for this customer. If it is a guest order, *Guest* is displayed. By clicking on the contact ID, the contact data record opens. +
 This is a default column.
+
+| *Contact rating*
+|Shows the customer rating of the contact. +
+This is an optional column.
 
 | *Client*
 |Shows the client that was used to create the order. +
@@ -244,7 +260,7 @@ This is a default column.
 This is a default column.
 
 | *Invoice number*
-|In case an invoice has already been created for the order, the invoice number is displayed. +
+|In case an invoice has already been created for the order, the invoice number is displayed. By clicking on the invoice number, the invoice opens. +
 This is a default column.
 
 | *Payment status*
@@ -332,6 +348,29 @@ This is a default column.
 |Shows the shipping service provider. +
 This is an optional column.
 
+| *Package numbers*
+|Shows the order’s package numbers separated by comma. +
+This is an optional column.
+
+| *External order ID*
+|Shows the external ID of the order. +
+This is a default column.
+
+| *Sales representative ID*
+|Shows the ID of the sales representative.
+
+| *Contact (invoice address)*
+|Shows the contact of the invoice address. +
+This is an optional column.
+
+| *Contact (delivery address)*
+|Shows the contact of the delivery address. +
+This is an optional column.
+
+| *Company*
+|Shows the company that is saved on the order's contact or on the invoice address (guest order). +
+This is an optional column.
+
 |*Actions*
 |Shows further actions (material:more_vert[]) that are available for this order.
 |===
@@ -342,8 +381,14 @@ This is an optional column.
 Expand the second level (material:chevron_right[]) to see information about the *order items*. For this, the columns listed in the table below are available. +
 *_Note:_* The order items are not the same for all order types.
 
+[TIP]
+.Show order items for all orders by default
+======
+By default, the order items of your orders are not shown in the overview. In the editing mode of the overview, you can however define via the *Order items table default* setting whether to expand or collapse the order items table in the order overview by default. If you select the option *Expanded*, up to 5 order items are shown. By clicking on *Show all order items*, you are forwarded to the detail view of the order where all order items are listed.
+======
+
 [[table-order-items]]
-.- Order items
+.Order items
 [cols="1,3"]
 |===
 |Setting |Explanation
@@ -416,7 +461,7 @@ This is a default column.
 This is a default column.
 
 | *External item ID*
-|Shows the external item ID. +
+|Shows the external item ID. If the order is an eBay or an Amazon order, you are directed to the marketplace when clicking on the ID. +
 This is an optional column.
 
 | *External order item ID*
@@ -457,9 +502,9 @@ This is a default column.
 |===
 
 [#show-order-items]
-=== Display or hide order items
+=== Display or hide order item properties
 
-In the order overview, the order items are not displayed by default. If you want to see properties of the order items, such as *Name* or *Value*, go to the line of the order and click on the arrow icon on the left (material:chevron_right[]). At first, you will see information on the order, such as the *Quantity*, *Item ID* or *Variation number*. On this level, click on the arrow symbol (material:chevron_right[]) once again too see the properties. +
+If you want to see the properties of order items, such as *Name* or *Value*, go to the line of the order and click on the arrow icon on the left (material:chevron_right[]). At first, you will see details about the order items, such as the *Quantity*, *Item ID* or *Variation number*. On this level, click on the arrow symbol (material:chevron_right[]) once again too see the properties. +
 *_Note:_* If you want to edit the properties of order items, open the desired order, go to the *Order items* area and click on *Edit items* (material:edit[]).
 
 [#editing-mode]
@@ -566,6 +611,24 @@ Finalising your work:
 . If necessary:
 .. Click on *Edit view* (terra:design_inline_edit[role="darkGrey"]) again and edit the view even further.
 .. Allow other users to see the view.
+
+[#order-menu-functions]
+== Placing functions in the order overview
+
+The order overview offers many different functions that are available in the context menu (material:more_vert[]) of each line by default. If you want to directly place specific functions for orders in the order overview table, you can carry out the corresponding settings in the editing mode.
+
+[.instruction]
+Placing functions in the order overview:
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. Click on *Edit view* (icon:design_inline_edit[set=plenty]) at the top right. +
+→ The editing mode opens.
+. In the main window, click on *Edit* (material:edit[role=skyBlue]). +
+→ The settings become visible on the right.
+. In the *order menu functions* setting, select (material:check[role=skyBlue]) all *default menu functions* from the drop-down list that should be visible by default in the order overview.
+. *Save* (material:save[]) the settings. +
+→ All selected functions are now directly available on the right in the order overview.
 
 [#asterisk-unsaved-changes]
 == Noticing unsaved changes

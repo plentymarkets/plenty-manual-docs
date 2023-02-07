@@ -1,8 +1,7 @@
 = Using standard formats
 :keywords:
-:description: Create standard formats for exporting plentymarkets data
+:description: Create standard formats to export plentymarkets data to a file.
 :page-aliases: file-export.adoc
-:id: Z14A1MY
 :author: team-plenty-channel
 :file-export:
 
@@ -168,15 +167,17 @@ The following placeholders are available:
 
 *_Examples for using placeholders:_*
 
-* Input 1: `item-export_$year_$month_$day`
-* Result 1: `item-export_2022_01_02.csv`
+[cols="1a,1a"]
+!===
+!Entry !Result
 
-'''
+! `item-export_$year_$month_$day`
+! * `item-export_2022_01_02.csv`
 
-* Input 2: `$type_$format_$year_$month_$day`
-* Result 2:
-  ** `order_order_2022_01_02.csv` +
+! `$type_$format_$year_$month_$day`
+! * `order_order_2022_01_02.csv` +
   ** `check24_offer_2020_10_25.csv`
+!===
 
 | *Format*
 | Select the file format for the export.
@@ -211,8 +212,10 @@ The following placeholders are available:
 
 *_Possible values:_*
 
-* Comma = Default in German speaking countries, for example `20,00 Euro`
-* Dot = Default in English speaking countries, for example `20.00 Euro`
+* Comma = Default in German speaking countries +
+*_Example:_* `20,00 Euro`
+* Dot = Default in English speaking countries +
+*_Example:_* `20.00 Euro`
 
 | *Line break*
 | How do you want to handle line brakes in the export file?
@@ -314,7 +317,7 @@ Some examples for protocol prefixes are `ftp://` and `ftps://`.
 
 * Can plentymarkets connect to the server?
 * Can an export file be saved at the storage location? +
-*_Tip:_* A test file is saved at the location specified. This test file is called `plentymarkets_ConnectionTestFile.txt`.
+*_Tip:_* A test file is saved at the storage location. This test file is called `plentymarkets_ConnectionTestFile.txt`.
 
 ifdef::marketplace-export[*_Note:_* This only tests if a file export is possible with the current export settings. The option does _not_ check if a connection can be established to a market.]
 
@@ -351,7 +354,7 @@ In the *Download settings* of the catalogue you can generate a URL. This URL giv
 
 * You can protect public links from inappropriate access by adding a hash and/or token.
 
-NOTE: The export file can only be accessed after the first export. In addition, the catalogue must be active to create an export file.
+NOTE: The catalogue must be active to create an export file. The export file can only be accessed after the first export.
 
 [.instruction]
 Setting up the download:
@@ -494,9 +497,12 @@ Adding data field to the export:
 *_Tip:_* Alternatively, enter the name of the data field into the search field. Select the data field from the search results. +
 → The data field is added to the export. +
 . Check if the export key suits your needs. +
-  ** *_What is an export key?_* +
-  The Export Key is the name of the column header that will be shown in your export file. Each export key can only be used once in this catalogue. Also, export keys cannot contain any spaces. +
+*_What is an export key and how should it be structured?_* +
+ The Export Key is the name of the column header that will be shown in your export file.
+  ** Each export key can only be used once in this catalogue. +
   *_Important:_* If several data fields have the same export key, only one data field is exported.
+  ** Export keys cannot contain any spaces.
+  ** If the export key contains a dot, the data is exported in a tree structure. In most cases, this means that the data is not exported as expected. As such, we recommend that you do not use dots in export key names.
 . Add all data fields that you want to export.
 . *Save* (material:save[]) the settings. +
 → The data fields are exported with this catalogue. +
@@ -617,7 +623,7 @@ image::data:result-export-street.png[]
 ._Optional:_ Recalculating numerical values (*Formula*)
 --
 
-Mathematical calculations allow you to change values automatically during the export.
+Mathematical calculations allow you to change numerical values automatically during the export.
 
 * The preview function is not available for all catalogue formats.
 * This function only works for data fields that contain numerical values.
@@ -689,8 +695,6 @@ Removing data fields from export:
 
 You can use filters to limit the data that should be exported.
 
-* Different filters are available for different standard formats. The available filters are explained on the manual pages of each standard format.
-
 [.instruction]
 Adding a filter:
 
@@ -701,6 +705,14 @@ Adding a filter:
 → The filter overview opens.
 . Select a filter from the drop-down list. +
 *_Tip:_* Different filters are available for different standard formats.
+You can find descriptions of the individual filters here:
+* xref:data:item.adoc#170[Item (New)]
+* xref:data:catalogue-format-order.adoc#400[Orders]
+* xref:data:manufacturers.adoc#200[Manufacturers]
+* xref:data:exporting-warehouse-data.adoc#20[Warehouses]
+* xref:data:exporting-stocks.adoc#20[Stocks]
+* xref:data:exporting-stock-movements.adoc#20[Stock movements]
+* xref:data:exporting-payments.adoc#20[Payments]
 . On the right, click on *Add filter* (material:add[]). +
 → The filter is added.
 . If an operator is available for this filter:
@@ -757,12 +769,13 @@ Creating a preview from the catalogue list:
 . Go to *Data » Catalogues*. +
 → The catalogue overview opens.
 . Navigate to the catalogue.
-. In the row of the catalogue, open the further actions (icon:ellipsis-v[]).
+. Open the further actions (icon:ellipsis-v[]) of the catalogue.
 . Click on *Preview* (material:preview[]). +
 → A preview of the first 5 data rows of the export is shown in the *Preview* window.
 . Check the data. Does the export work as expected?
 . *_Optional_*: Click on *Download data* (material:file_download[]). +
 → You can save a file with the first 5 data rows on your computer.
+
 --
 ====
 
@@ -779,56 +792,18 @@ Activating automatic catalogue export:
 . Go to *Data » Catalogues*. +
 → The catalogues are listed.
 . Scroll to the catalogue.
-. In the *Active/Inactive* column, move the toggle button (icon:toggle-on[role="green"]) to the right. +
+. In the column *Active*, move the toggle button (icon:toggle-on[]) to the right. +
 → The catalogue is active. +
 → The data is exported to the storage location and at the intervals you selected in the catalogue settings.
 
 [#manual-export]
-=== Starting a manual export in the catalogue
+=== Starting a manual export
 
-Have you added at least one data field to the export? You can then start a manual export of the export. Once the export is completed, you can download the export file from the Notifications.
+Have you added at least one data field to the export? Then start a manual export of the export.
+The format in which the data is exported depends on the format settings of the catalogue.
+You can export data in CSV, TXT, JSON and XML files.
 
-The format in which the data is exported depends on the format settings of the catalogue. You can export data in CSV, TXT, JSON and XML files.
-
-NOTE: The export process is started when you click on *Download data*. However, note that there will be _no_ window for downloading the file straight away. When the export is completed, you can download the export file from the Notifications.
-
-[tabs]
-====
-Starting manual catalogue export::
-+
---
-
-. Go to *Data » Catalogues*. +
-→ The catalogue overview opens.
-. Open the catalogue.
-. In the toolbar at the top, click on *Download data* (material:file_download[]). +
-→ The export starts. +
-*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes.
-. Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
-. In the notification centre, click on material:link[] *Download*. +
-*_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
-. Save the file on your computer.
-
---
- 
-Start manual export from catalogue list::
-+
---
-
-. Go to *Data » Catalogues*. +
-→ The catalogue overview opens.
-. In the row of the catalogue, click on the further actions (material:more_vert[]).
-. Click on *Download data* (material:file_download[]). +
-→ The export starts. +
-*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes.
-. Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
-. In the notification centre, click on material:link[] *Download*. +
-*_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
-. Save the file on your computer.
---
-====
-
-image::data:catalogue-export.gif[]
+include::partial$catalogue-manual-download.adoc[]
 
 [#faq]
 == FAQ: Questions and answers

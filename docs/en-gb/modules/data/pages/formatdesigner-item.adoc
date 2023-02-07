@@ -1,6 +1,7 @@
 = Item
 :keywords: Downloading item, Downloading items, Download item, Download items, Exporting item, Exporting items, Item exporting, Items exporting, Item export, Items export, Export item, Export items, Item-Export, Items-Export, Export-Item, Export-Items, Exporting variation, Exporting variations, Variation exporting, Variations exporting, Variation export, Variations export, Export variation, Export variations, Variation-Export, Variations-Export, Export-Variation, Export-Variations, Exporting item link, Exporting item links, Exporting product, Exporting products, Exporting goods
 :author: team-item
+:description: FormatDesigner: Item and variation data can be exported out of plentymarkets. This page serves as a reference and lists the available data fields.
 
 Use the *item* format to export item and variation data.
 
@@ -204,7 +205,7 @@ free20
 
 *_Format_*: `urlImage1;positionImage1,urlImage2;positionImage2`
 
-*_Example_*: `https://www.example.com/image1.png;1,https://www.example.com/image2.png;2`
+*_Example_*: `\https://www.example.com/image1.png;1,https://www.example.com/image2.png;2`
 
 |createdAt
 |The timestamp when the image was created.
@@ -883,30 +884,71 @@ a|Returns a 1 or 0.
 [#1800]
 == VariationMarketIdentNumber
 
-<<table-fields-asin-epid>> lists the fields available for exporting ASIN/ePID data.
+The following fields are used for exporting ASINs and ePIDs.
 
-[[table-fields-asin-epid]]
-.Fields for exporting ASIN and ePID
-[cols="1,3"]
-|====
-|Field |Explanation
+=== countryId
 
-|countryId
-|Country ID
+Specifies the country's ID.
+In other words, this field specifies the country platform, e.g. Amazon Germany, eBay France, eBay UK, etc.
 
-|id
-|ID for the ASIN. You need this ID if you want to xref:data:elasticSync-item.adoc#2430[delete ASINs with the help of the import tool]. The ID is not visible in your plentymarkets system.
+You can find the country IDs as a xref:data:internal-IDs.adoc#20[list in the manual] or in the menu *Setup » Orders » Shipping » Settings » Tab: Countries of delivery*.
 
-|position
-|The ASIN’s position. The position is not visible in your plentymarkets system.
+[TIP]
+Click on icon:sign-in[role="darkGrey"] and select the appropriate market.
 
-|type
-|Type (ASIN or ePID)
+'''
+=== id
 
-|value
-|Value
-|====
+Specifies the ASIN or ePID's internal ID.
 
+Corresponds to the option in the menu: *Item » Item UI » [Open variation] » Element: ASIN/ePID/MOIN » Column: ID*.
+
+*_Use-case_*:
+You need the ID if you want to xref:data:elasticSync-item.adoc#2430[delete ASINs or ePIDs with the help of the import tool].
+
+[TIP]
+Click on icon:sign-in[role="darkGrey"] and select the appropriate market.
+
+'''
+=== position
+
+Specifies the ASIN or ePID's position number.
+
+Corresponds to the option in the menu: *Item » Item UI » [Open variation] » Element: ASIN/ePID/MOIN » Column: Position*.
+
+[TIP]
+Click on icon:sign-in[role="darkGrey"] and select the appropriate market.
+
+'''
+=== type
+
+Specifies the type, i.e. whether you are dealing with an ASIN or an ePID.
+
+[cols="1,1"]
+|===
+|Value in the export file |Meaning
+
+|`ASIN`
+|You are dealing with an ASIN.
+
+|`EPID`
+|You are dealing with an EPID.
+|===
+
+Corresponds to the option in the menu: *Item » Item UI » [Open variation] » Element: ASIN/ePID/MOIN » Column: Type*.
+
+[TIP]
+Click on icon:sign-in[role="darkGrey"] and select the appropriate market.
+
+'''
+=== value
+
+Specifies the actual ASIN or ePID, i.e. the numeric or alpha-numeric product identifier.
+
+Corresponds to the option in the menu: *Item » Item UI » [Open variation] » Element: ASIN/ePID/MOIN » Column: Value*.
+
+[TIP]
+Click on icon:sign-in[role="darkGrey"] and select the appropriate market.
 
 [#1900]
 == VariationProperty
@@ -991,6 +1033,16 @@ _Example:_ 512;"SomeText":"en"
 |SKU
 |====
 
+[TIP]
+.What's the difference between the SKU and parent SKU?
+====
+The parent SKU is only necessary if you work with variation items.
+
+* The parent SKU is for the main variation.
+* The SKU is for the sub-variations.
+
+You only need the SKU for items without variations.
+====
 
 [#2200]
 == VariationStock

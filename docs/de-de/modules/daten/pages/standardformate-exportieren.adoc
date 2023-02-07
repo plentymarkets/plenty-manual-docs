@@ -1,8 +1,7 @@
 = Standardformate nutzen
 :keywords:
-:description: Standardformate für den Export von plentymarkets Daten erstellen
+:description: Erfahre, wie du Standardformate für den Export von plentymarkets Daten in eine Datei erstellst.
 :page-aliases: dateiexport.adoc
-:id: Z14A1MY
 :author: team-plenty-channel
 :file-export:
 
@@ -168,15 +167,17 @@ Die folgenden Platzhalter sind verfügbar:
 
 *_Beispiele für die Verwendung von Platzhaltern:_*
 
-* Eingabe 1: `artikel-export_$year_$month_$day`
-* Ergebnis 1: `artikel-export_2022_01_02.csv`
+[cols="1a,1a"]
+!===
+!Eingabe !Ergebnis
 
-'''
+! `artikel-export_$year_$month_$day`
+! * `artikel-export_2022_01_02.csv`
 
-* Eingabe 2: `$type_$format_$year_$month_$day`
-* Ergebnis 2:
-  ** `bestellung_bestellung_2022_01_02.csv` +
+! `$type_$format_$year_$month_$day`
+!  ** `bestellung_bestellung_2022_01_02.csv` +
   ** `check24_offer_2020_10_25.csv`
+!===
 
 | *Format*
 | In welchem Dateiformat sollen die Daten exportiert werden?
@@ -211,8 +212,10 @@ Die folgenden Platzhalter sind verfügbar:
 
 *_Mögliche Werte:_*
 
-* Komma = Standard im deutschsprachigen Raum, zum Beispiel `20,00 Euro`
-* Punkt = Standard im englischsprachigen Raum, zum Beispiel `20.00 Euro`
+* Komma = Standard im deutschsprachigen Raum +
+*_Beispiel:_* `20,00 Euro`
+* Punkt = Standard im englischsprachigen Raum +
+*_Beispiel:_* `20.00 Euro`
 
 | *Zeilenumbruch*
 | Wie sollen Zeilenumbrüche in den Dateien abgebildet werden?
@@ -314,7 +317,7 @@ Protokoll-Präfixe sind zum Beispiel `ftp://` und `ftps://`.
 
 * Kann eine Verbindung zu dem Server hergestellt werden?
 * Kann eine Exportdatei an dem Speicherort gespeichert werden? +
-*_Tipp:_* Unter dem angegebenen Pfad wird eine Testdatei gespeichert. Diese Testdatei heißt `plentymarkets_ConnectionTestFile.txt`.
+*_Tipp:_* Am Speicherort wird eine Testdatei gespeichert. Diese Testdatei heißt `plentymarkets_ConnectionTestFile.txt`.
 
 ifdef::marketplace-export[*_Hinweis:_* Getestet wird nur, ob mit den aktuellen Exporteinstellungen ein Dateiexport möglich ist. Die Option prüft _nicht_, ob eine Verbindung zu einem Marktplatz hergestellt werden kann.]
 
@@ -351,7 +354,7 @@ In den *Download-Einstellungen* des Katalogs kannst du eine URL generieren. Übe
 
 * Bei öffentlichen Links kannst du die Datei durch ein Hash und/oder einen Token vor unlauterem Zugriff schützen.
 
-NOTE: Die Exportdatei ist erst nach dem ersten Export unter der URL erreichbar. Außerdem muss der Katalog aktiv sein, damit eine Exportdatei erstellt wird.
+NOTE: Der Katalog muss aktiv sein, damit eine Exportdatei erstellt wird. Die Exportdatei ist erst nach dem ersten Export unter der URL erreichbar.
 
 [.instruction]
 Download-Einstellungen vornehmen:
@@ -364,7 +367,7 @@ Download-Einstellungen vornehmen:
 . Navigiere zum Bereich *Download-Einstellungen*.
 . Nimm die Einstellungen vor. Beachte die Erläuterungen in <<#tabelle-url-generieren>>.
 . Speichere die Einstellungen. +
-→ Die URL für den Download der Datei wird angezeigt. Über diese URL ist der Export verfügbar, nachdem der erste Export abgeschlossen ist. +
+→ Die URL für den Download der Datei wird angezeigt. Über diese URL ist die Exportdatei nach dem ersten Export verfügbar. +
 → Im Menü wird immer die URL der zuletzt exportierten Datei angezeigt.
 . Klicke auf die URL oder kopiere die URL (material:content_copy[]), um sie zu verwenden.
 
@@ -494,9 +497,12 @@ Datenfeld zum Export hinzufügen:
 *_Tipp:_* Gib alternativ den Namen des Datenfelds in das Suchfeld ein. Wähle das Datenfeld aus den Suchergebnissen. +
 → Das Datenfeld wird zum Export hinzugefügt. +
 . Prüfe, ob der Export Key deine Anforderungen erfüllt. +
-  ** *_Was ist ein Export Key?_* +
-  Der "Export Key" ist der Name der Spaltenüberschrift, der in deiner Exportdatei erscheinen wird. Jeder "Export Key" darf in diesem Katalog nur einmal vorkommen. Export Keys dürfen außerdem keine Leerzeichen enthalten. +
+*_Was ist ein Export Key und wie muss er aufgebaut sein?_* +
+Der Export Key ist der Name der Spaltenüberschrift, der in deiner Exportdatei erscheinen wird.
+  ** Jeder Export Key darf in diesem Katalog nur einmal vorkommen. +
   *_Wichtig:_* Wenn mehrere Datenfelder denselben Export Key haben, wird nur eines der Datenfelder exportiert.
+  ** Export Keys dürfen keine Leerzeichen enthalten.
+  ** Wenn der Export Key einen Punkt enthält, werden die Daten als Baumstruktur exportiert. In den meisten Anwendungsfällen werden die Daten dann nicht wie erwartet exportiert. Wir empfehlen dir deshalb, in Export Keys keine Punkte zu verwenden.
 . Füge alle Datenfelder hinzu, die du exportieren möchtest.
 . *Speichere* (material:save[]) die Einstellungen. +
 → Die Datenfelder werden mit diesem Katalog exportiert. +
@@ -617,7 +623,7 @@ image::daten:ergebnis-export-street.png[]
 ._Optional:_ Zahlenwerte neu berechnen (*Formel*)
 --
 
-Mit mathematischen Berechnungen passt du Werte während des Exports automatisch an.
+Mit mathematischen Berechnungen passt du Zahlenwerte während des Exports automatisch an.
 
 * Diese Funktion ist neu und noch nicht für alle Formate verfügbar.
 * Diese Funktion funktioniert nur bei Datenfeldern, die Zahlenwerte enthalten.
@@ -689,8 +695,6 @@ Datenfelder aus Export entfernen:
 
 Mit Filtern kannst du die Daten eingrenzen, die exportiert werden sollen.
 
-* Je nach Standardformat sind unterschiedliche Filter verfügbar. Die verfügbaren Filter sind auf den Handbuchseiten der einzelnen Standardformate erklärt.
-
 [.instruction]
 Filter hinzufügen:
 
@@ -701,6 +705,14 @@ Filter hinzufügen:
 → Die Filter-Übersicht wird geöffnet.
 . Wähle einen Filter aus der Dropdown-Liste. +
 *_Tipp:_* Je nach Standardformat sind unterschiedliche Filter verfügbar.
+Beschreibungen der einzelnen Filter findest du hier:
+* xref:daten:artikel.adoc#170[Artikel (Neu)]
+* xref:daten:auftraege.adoc#400[Aufträge]
+* xref:daten:hersteller.adoc#200[Hersteller]
+* xref:daten:lager-exportieren.adoc#20[Lager]
+* xref:daten:warenbestand-exportieren.adoc#20[Warenbestände]
+* xref:daten:warenbewegung-exportieren.adoc#20[Warenbewegungen]
+* xref:daten:zahlungen-exportieren.adoc#20[Zahlungen]
 . Klicke rechts auf *Filter hinzufügen* (material:add[]). +
 → Der Filter wird hinzugefügt.
 . Wenn für den Filter ein Operator verfügbar ist:
@@ -757,7 +769,7 @@ Vorschau in Katalogübersicht erstellen:
 . Öffne das Menü *Daten » Kataloge*. +
 → Die Katalog-Übersicht wird geöffnet.
 . Navigiere zur Zeile des Katalogs.
-. Öffne die weiteren Aktionen (icon:ellipsis-v[]) in der Zeile des Katalogs.
+. Öffne die weiteren Aktionen (icon:ellipsis-v[]).
 . Klicke auf *Vorschau* (material:preview[]). +
 → Im Fenster *Vorschau* wird eine Vorschau der ersten 5 Datenzeilen des Exports angezeigt.
 . Prüfe die Daten. Wurden die Daten so exportiert, wie du es erwartest?
@@ -785,51 +797,10 @@ Automatischen Katalogexport aktivieren:
 → Die Daten werden zu dem Speicherort und in dem Intervall exportiert, die du in den Katalogeinstellungen festgelegt hast.
 
 [#manual-export]
-=== Manuellen Export in Katalog starten
+=== Manuellen Export starten
 
-Du hast mindestens ein Datenfeld für den Export hinzugefügt? Dann kannst du einen manuellen Export des Katalogs starten. Sobald der Export abgeschlossen ist, kannst du die Exportdatei über die Notifications herunterladen.
+include::partial$catalogue-manual-download.adoc[]
 
-In welchem Format die Daten exportiert werden, legst du in den Formateinstellungen des Katalogs fest. Zurzeit kannst du Daten in den Formaten CSV, TXT, JSON und XML herunterladen.
-
-NOTE: Wenn du auf *Daten herunterladen* klickst, wird der Exportvorgang gestartet. Es wird aber _kein_ Fenster angezeigt, über das du die Datei sofort herunterladen kannst. Erst wenn der Exportvorgang abgeschlossen ist, kannst du die Exportdatei über die Notifications herunterladen.
-
-[tabs]
-====
-Manuellen Export im Katalog starten::
-+
---
-
-. Öffne das Menü *Daten » Kataloge*. +
-→ Die Katalog-Übersicht wird geöffnet.
-. Öffne den Katalog.
-. Klicke in der Symbolleiste oben auf *Daten herunterladen* (material:file_download[]). +
-→ Der Export wird gestartet. +
-*_Wichtig:_* Der Export läuft im Hintergrund. Es wird _kein_ Fenster angezeigt, über das du die Datei sofort herunterladen kannst. Auch der Export kleiner Datenmengen dauert ca. 30 Minuten. +
-→ Wenn der Export abgeschlossen ist, wirst in den Notifications (material:notifications_none[]) angezeigt, dass die Exportdatei heruntergeladen werden kann.
-. Klicke im Notification Center auf material:link[] *Herunterladen*. +
-*_Tipp:_* Die Notification wird nicht mehr angezeigt? Die Datei kann immer über die URL in den *Download-Einstellungen* abgerufen werden.
-. Speichere die Datei auf deinem Rechner.
-
---
- 
-Manuellen Export in Katalogübersicht starten::
-+
---
-
-. Öffne das Menü *Daten » Kataloge*. +
-→ Die Katalog-Übersicht wird geöffnet.
-. Klicke in der Zeile des Katalogs auf die weiteren Aktionen (material:more_vert[]).
-. Klicke auf *Daten herunterladen* (material:file_download[]). +
-→ Der Export wird gestartet. +
-*_Wichtig:_* Der Export läuft im Hintergrund. Es wird _kein_ Fenster angezeigt, über das du die Datei sofort herunterladen kannst. Auch der Export kleiner Datenmengen dauert ca. 30 Minuten. +
-→ Wenn der Export abgeschlossen ist, wirst in den Notifications (material:notifications_none[]) angezeigt, dass die Exportdatei heruntergeladen werden kann.
-. Klicke im Notification Center auf material:link[] *Herunterladen*. +
-*_Tipp:_* Die Notification wird nicht mehr angezeigt? Die Datei kann immer über die URL in den *Download-Einstellungen* abgerufen werden.
-. Speichere die Datei auf deinem Rechner.
---
-====
-
-image::daten:katalog-export.gif[]
 
 [#faq]
 == FAQ: Fragen und Antworten

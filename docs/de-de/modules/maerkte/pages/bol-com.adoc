@@ -1,8 +1,7 @@
 = bol.com
 :author: team-plenty-channel
 :keywords: bol.com, bol.com, bol, bol, blo, blo.com, BolItemExport, bol.com einrichten, bol.com, bol, Niederlande, Holland, bol.nl
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz bol.com in deinem plentymarkets System ein.
-:id: 0WQSMLF
+:description: Auf dieser Seite erfährst du, wie du den Marktplatz bol.com in plentymarkets einrichtest, damit du deine Artikel auf bol.com verkaufen kannst.
 :bol.com:
 :market: bol.com
 
@@ -73,8 +72,8 @@ include::partial$assistant-basic-instructions.adoc[]
 a| Wähle aus der Dropdown-Liste *Mandant* den Mandanten, der genutzt werden soll, um die Artikel-URL im Katalog zu erzeugen und dem bol.com-Aufträge zugeordnet werden sollen.
 
 | *Möchtest du dein bol.com-Benutzerkonto aktivieren?*
-a| _Konto nicht aktiviert_ = Die Einstellungen werden gespeichert, der Datenaustausch mit bol.com wird aber noch nicht gestartet. +
-_Konto aktiviert_ = Der Datenaustausch mit bol.com wird nach Abschluss des Assistenten gestartet. +
+a| material:check_box_outline_blank[] = Die Einstellungen werden gespeichert, der Datenaustausch mit bol.com wird aber noch nicht gestartet. +
+material:check_box[] = Der Datenaustausch mit bol.com wird nach Abschluss des Assistenten gestartet. +
 *_Empfehlung:_* Aktiviere das Benutzerkonto erst, nachdem du alle Einstellungen geprüft hast.
 
 2+^|Schritt *Zugangsdaten*
@@ -84,6 +83,23 @@ a| Die API-Zugangsdaten erzeugst du im Händlerbereich bei bol.com.
 
 * *Client-ID* (Pflichtangabe) = Gib die Benutzer-ID für die API-Schnittstelle ein, die du von bol.com erhalten hast.
 * *Client Secret* (Pflichtangabe) = Gib das Passwort für die API-Schnittstelle ein, das du von bol.com erhalten hast.
+
+2+^|Schritt *Prüfung der Zugangsdaten*
+
+| *Sind die Zugangsdaten korrekt?*
+a| Es wird geprüft, ob deine API-Zugangsdaten für bol.com korrekt sind. Im Feld *Status der Zugangsdaten* wird angezeigt, ob die Zugangsdaten korrekt sind. Wenn die Zugangsdaten ungültig sind, gib die Zugangsdaten erneut im Schritt *Zugangsdaten* ein.
+
+2+^|Schritt *Status nach Ereignisaktionen*
+
+| _Auftragsstatus nach Ausführung einer Ereignisaktion wählen_
+a| Auftragsstatus festlegen, in den Aufträge wechseln sollen, nachdem eine Ereignisaktion ausgeführt wurde. Wähle jeweils zwei Auftragsstatus: einen Status, in den Aufträge nach einer erfolgreichen Ereignisaktion wechseln sollen und einen Status, in den Aufträge wechseln sollen, wenn die Ereignisaktion fehlgeschlagen ist. Wenn Aufträge ihren Status nach einer Ereignisaktion nicht wechseln sollen, dann wähle *Kein Statuswechsel*. +
+
+Wähle Status für die folgenden Ereignisaktionen: +
+
+* *Stornierung an bol.com senden*
+* *Versandbestätigung an bol.com senden*
+* *Retourenstatus an bol.com senden*
+* *Retoure bei bol.com anlegen*
 
 2+^|Schritt *Lager*
 
@@ -174,13 +190,14 @@ include::partial$catalogue-new-to-text.adoc[]
 [#create-catalogue]
 === Katalog mit dem Assistenten erstellen
 
-Pro Kombination aus bol.com-Kategorie und Sprache benötigst du einen eigenen Katalog.
+Pro Kombination aus bol.com-Kategorie und Sprache benötigst du einen eigenen Katalog. +
+*_Tipp:_* Im Katalog wird die Sprache in Klammern hinter der Kategorie angezeigt.
 
 :catalogue-assistant-name: Kataloge erstellen - bol.com
 :number-of-boxes: Info-Box
 :catalogue-path: pass:quotes[*Einrichtung » Assistenten » Omni-Channel*]
 :catalogue-note: Pro Kombination aus bol.com-Kategorie und Sprache benötigst du einen eigenen Katalog.
-:mapping-fields: die Marktplatz-Datenfelder mit plentymarkets Datenfeldern
+:mapping-fields: die
 
 include::partial$catalogue-assistant-config.adoc[]
 
@@ -195,9 +212,8 @@ include::partial$catalogue-assistant-config.adoc[]
 
 | *Wähle eine Kategorie für deinen Katalog aus.*
 | Eine Produktkategorie aus der Dropdown-Liste wählen. +
-→ Im Menü *Daten » Kataloge* wird der Katalog unter dem Namen der Kategorie angezeigt. +
-→ Eine Eigenschaft mit dem Namen der bol.com-Kategorie wird erstellt. Verlinke diese Eigenschaft mit den Varianten, die du in dieser Kategorie auf bol.com verkaufen möchtest. +
 *_Tipp:_* Gib ein paar Buchstaben des Kategorienamens ein, um Vorschläge zu erhalten. +
+→ Im Menü *Daten » Kataloge* wird der Katalog unter dem Namen der Kategorie angezeigt. +
 *_Hinweis:_* Für jede Kombination aus bol.com-Kategorie und Sprache benötigst du einen eigenen Katalog.
 |===
 --
@@ -298,6 +314,17 @@ a| Die Variante muss für den Marktplatz freigegeben sein.
 * Im Tab *Verfügbarkeit* der Variante muss im Bereich *Märkte* die Marktplatzverfügbarkeiten *bol.com* oder *bol.com FBB* aktiviert werden. +
   ** Herkunft *bol.com* = Du versendest deine Artikel selbst. +
   ** Herkunft *bol.com FBB* = Der Versand erfolgt durch bol.com.
+
+| Zustand
+| * Im Tab *Global* des Artikels muss im Bereich *Grundeinstellungen* der *Zustand API* gespeichert sein. Dieser *Zustand API* wird beim Export der Angebotsdaten automatisch übertragen.
+
+Die plentymarkets Zustände werden wie folgt den bol.com-API-Zuständen zugeordnet:
+
+* *0 Neu* = NEW
+* *1 Gebraucht wie neu* = AS_NEW
+* *2 Gebraucht sehr gut* = GOOD
+* *3 Gebraucht gut* = MODERATE
+* *4 Gebraucht annehmbar* = REASONABLE
 
 |===
 

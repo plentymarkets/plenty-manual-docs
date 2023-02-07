@@ -1,0 +1,357 @@
+= Changelog 16. November 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 10. November 2022
+:endWeekDate: 16. November 2022
+
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/geaendert-logs-fuer-plugin-build-1-entfernt-und-neue-logs-fuer-plugin-build-2-hinzugefuegt-changed-removed-logs-for-plugin-build-1-and-added-new-logs-for-plugin-build-2/701906
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel-UI (Neu)
+
+* Du kannst ab jetzt in der neuen Artikel-UI Artikel kopieren.
+* Du kannst ab jetzt Seriennummern in der neuen Artikel-UI nutzen.
+* Du kannst ab jetzt Warenbewegungen in der neuen Artikel-UI nachvollziehen.
+* Du kannst ab jetzt die variantenspezifischen Lagereinstellungen in der neuen Artikel-UI hinterlegen.
+
+[discrete]
+=== CRM
+
+* Im EmailBuilder wurden im Bereich *Globals* die folgenden Variablen hinzugefügt:
+** Allgemeine Geschäftsbedingungen im HTML-Format
+** Allgemeine Geschäftsbedingungen im reinen Textformat
+
++
+Diese Variablen geben den gesamten Text der AGB aus wie im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches* gespeichert.
+
+[discrete]
+=== Payment
+
+* Im Menü *Zahlungsverkehr* wurden folgende Spalten neu hinzugefügt:
+** *Transaktionscode*
+** *Referenz-ID*
+** *Transaktionstyp*
+
++
+Diese Kategorien waren bereits als Filter vorhanden, können nun aber auch nach Wunsch als Spalten hinzugefügt werden.
+* Außerdem wurden folgende Spalten neu hinzugefügt:
+** *Zahlungsart-ID*
+** *Zahlungsart-Symbol*
+** *Name der Zahlungsart*
+
++
+Diese Informationen sind weiterhin in der Spalte Zahlungsart verfügbar, können nun aber auch als separate Spalten dargestellt werden. Standardmäßig sind die neuen Spalten deaktiviert. Über die Einstellungen (*Spalten konfigurieren*) kannst du sie aktivieren.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Es gab Anpassungen bei der Standardvorlage für den Messenger sowie bei den Messenger-bezogenen Variablen:
+** Der Name der Standardvorlage, die im EmailBuilder zur Verfügung steht und im Assistenten Messenger-Konfiguration gewählt werden kann, wurde geändert in *Messenger default NEW*.
+** Die neue Vorlage „Messenger default NEW“ enthält ab sofort nur noch die folgenden Variablen:
+*** den Namen des Mandanten in der Betreffzeile: `{{ globals.clientName }}`
+*** die Variable *Vollständiger Name*
+*** die Variable *Signatur im HTML-Format*
+** Alle Messenger-bezogenen Variablen wurden aus dem EmailBuilder entfernt.
+* Die folgenden Variablen im EmailBuilder wurden umbenannt:
+** *Auftrag im Webshop aufrufen* -> *Zugriffsschlüssel des Auftrags*
+** *URL zum Checkout* -> *URL zur Auftragsübersicht*
+* Wenn man in der Kontakt-UI und in der Schnellsuche nach Datensätzen suchen wollte, die Umlaute (ä, ö, ü) enthalten, wurden diese Datensätze nicht gefunden. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== plentyShop
+
+Die plentyShop Sitemap wurde umstrukturiert, um den link:https://developers.google.com/search/docs/specialty/international/localized-versions#sitemap[Google-Richtlinien für Sitemaps^] besser zu entsprechen.
+
+Wenn ein plentyShop Seiten verschiedene Sprachen anbietet, war es bisher so, dass ein `<url>`-Element in der Sitemap die URL der Standartsprache enthielt und alternative Sprachversionen dieser URL Teil des `<url>`-Elements waren. Ein Eintrag einer URL in der Sitemap sah demnach wie folgt aus:
+
+[source, xml]
+------
+<url>
+<loc>https://www.beispiel.de/deutsch/page.html</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.beispiel.com/english/page.html"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.beispiel.de/deutsch/page.html"/>
+</url>
+------
+
+Die Vorgabe der Google-Richtlinien besagt allerdings, dass jeweils ein neuer Haupteintrag für jede alternative Sprache angelegt werden muss. Nach der Änderung sieht der Sitemap-Eintrag der gleichen URL also wie folgt aus:
+
+[source,xml]
+------
+<url>
+<loc>https://www.beispiel.de/deutsch/page.html</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.beispiel.com/english/page.html"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.beispiel.de/deutsch/page.html"/>
+</url>
+<url>
+<loc>https://www.beispiel.com/englisch/page.html</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.beispiel.de/deutsch/page.html"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.beispiel.com/english/page.html"/>
+</url>
+------
+
+Das bedeutet, dass die Sitemap nach erneutem Crawlen, abhängig von der Anzahl der verfügbaren Shop-Sprachen, deutlich mehr Einträge enthalten kann als vor der Änderung an der Sitemap.
+
+[NOTE]
+.Kein To-Do
+======
+Händler:innen müssen nicht aktiv werden, damit die Änderung in ihrem plentyShop greift.
+======
+
+link:https://developers.google.com/search/docs/specialty/international/localized-versions#sitemap[Link zur Dokumentation von Google^]
+
+[discrete]
+=== Plugins
+
+* Die Logs für Plugin Build 1, welche bei jeder Bereitstellung einen Fehler geworfen haben, der keine Auswirkung auf den Bereitstellungsprozess hatten, wurden entfernt. Dafür wurden Logs für Plugin Build 2 integriert. Diese sind findest du unter *Integration* mit dem Wert `Plenty\Modules\Plugin\Services\PluginBuildMicroservicesGateway`.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Bei dem Exportformat für Zahlungen in den Katalogen (*Daten » Kataloge*) kam es bei der Verwendung von dem Datenformat CSV und Datenfeldern bei denen der Export Key einen Punkt beinhaltete zu einer fehlerhaften Darstellung. Dies wurde behoben.
+* In der neuen Auftragsanlage wurden teilweise Dimensionen zum Artikelnamen hinzugefügt, obwohl diese nicht gesetzt waren. Die Dimensionen wurden außerdem doppelt zum Artikelnamen hinzugefügt. Dies wurde behoben.
+* In der Detailansicht der neuen Auftrags-UI wurden die zugeordneten Zahlungen nicht korrekt ausgegeben. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Im Portlet *Aufträge* im Kontaktdatensatz wurde der falsche Mandant in der Spalte *Herkunftsname* angezeigt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Über die neue Auftrags-UI sowie über die REST-API wird das Dokumentdatum im W3C-Format erwartet und auch an die Dokumenterzeugung weitergegeben. In der Dokumenterzeugung wird das Datum allerdings in einem anderen Format für die Ausgabe erwartet, sodass die Berechnung des Zahlungsziels ab dem 01.01.1970 beginnt. Dies wurde behoben.
+
+[discrete]
+=== Plugins
+
+* Der Bereitstellungsstatus der Plugin-Set-UI hat noch den Status des Legacy-Builds angezeigt, so dass hier immer *Problem beim Bereitstellen* angezeigt wurde. Dieses Verhalten wurde gefixt.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Änderungshistorie
+
+* Der Änderungshistorie wurde die Komponente speicherbare Filter hinzugefügt. Damit kannst du ab sofort Filter speichern und wiederverwenden.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI wurde der Filter für das Kundenzeichen zu den Filtern in der Auftragssuche hinzugefügt. Dieser Filter ist optional und kann in den *MyView*-Einstellungen aktiviert werden.
+* In der neuen Auftrags-UI kannst du im Bereich Allgemein eines Auftrags ab sofort den Handelsvertreter wählen. Außerdem kannst du das Feld Handelsvertreter in der Tabelle der Auftragsübersicht hinzufügen und somit nach Aufträgen eines Handelsvertreters filtern.
+* In der neuen Auftragsanlage wurden die folgenden Felder zum ersten Schritt eines neuen Auftrags hinzugefügt:
+** Skontofrist (Tage)
+** Skonto (%)
+** Valuta (Tage)
+** Zahlungsziel (Tage)
+
+[discrete]
+=== CRM
+
+* Bei der Auswahl von E-Mail-Vorlagen in Nachbestellungen, Ereignisaktionen (Aufträge und Ticketsystem), Aktionsmanager (Aufträge und Ticketsystem), Gruppenfunktionen, Messenger, Ticketsystem, Aufträge-UI, Assistenten *E-Mail-Konten* und *Messenger-Konfiguration* und in den Prozessen wurde die Anzeige der E-Mail-Vorlagen nach folgendem Muster vereinheitlicht:
++
+----
+[ID] [NEW] Name der Vorlage
+----
++
+Die Sortierung der Vorlagen erfolgt anhand des Vorlagennamens. Die neuen Vorlagen ([NEW]) werden vor den alten Vorlagen ([OLD]) angezeigt.
+* Wenn im EmailBuilder der Betreff einer Vorlage zu lang ist, wird der Text ab sofort gekürzt, um zu vermeiden, dass die Schaltflächen am Ende der Zeile in eine neue Zeile rutschen. Die drei Punkte (...) am Ende der gekürzten Betreffzeile weisen darauf hin, dass der Betreff länger ist als dargestellt. Außerdem wurde ein Tooltip eingebaut, damit man den kompletten Betreff auf einen Blick sehen kann.
+* Im EmailBuilder wurden im Bereich *Globals* die Variablen *Mandantenname* und *Mandanten-ID* hinzugefügt.
+
+[discrete]
+=== Datenlog
+
+* In der Log-UI gibt es ab sofort eine Schnellsuche über der Tabelle, damit du diese schneller filtern kannst. Außerdem wurde der Log-UI die Komponente speicherbare Filter hinzugefügt. Damit kannst du ab sofort Filter bzw. Filter-Sets speichern und wiederverwenden.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel-UI (Neu)
+
+* Die Art und Weise, wie Eigenschaften zu Varianten hinzugefügt werden, wurde komplett überarbeitet. Es wird nun zur Auswahl der gewünschten Eigenschaften die reguläre Eigenschaften Übersicht verwendet. Dadurch ist ein deutlich schnelleres Arbeiten beim Hinzufügen von Eigenschaften möglich.
+
+[discrete]
+=== Plugins
+
+* Es ist nun möglich, dass Plugins über die Backend-URL auf den SDK-Server zugreifen können. Das bedeutet du musst nicht mehr Plugins, welche über eine Route auf den SDK-Server zugreifen im Plugin-Set deines Hauptmandanten installieren.
+
+[discrete]
+=== Prozesse
+
+* Es gab eine Anpassung in den Prozessen, sodass folgende Auftragsdokumente nun über eine neue Schnittstelle generiert und abgerufen werden:
+** Rechnung
+** Lieferschein
+** Gutschrift
+** Korrekturbeleg
+** Reparaturschein
+** Auftragsbestätigung
+** Angebot
+** Rücksendeschein
+** Gelangensbestätigung
+** Abhol-/Lieferschein
+** Stornobeleg Mahnung
+** Stornobeleg Rechnung
+** Stornobeleg Gutschrift
+** Proformarechnung
+
++
+[NOTE]
+.Kein To-Do
+======
+Eine Anpassung in den Prozessen ist nicht notwendig.
+======
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI wurden beim Ändern der Zahlungsbedingungen in den Auftragsdetails nur die geänderten Werte gespeichert. Dieser Fehler wurde behoben und die Daten werden nun korrekt gespeichert.
+* In der Auftrags-UI (Testphase) wurden Einträge in der Seitennavigation nicht korrekt sortiert, wenn ein neuer Auftrag erstellt wurde. Dieser Fehler wurde behoben.
+
+[discrete]
+=== Datenlog
+
+* Die Filter *Datum* und *Uhrzeit* in der Log-UI haben nicht korrekt funktioniert. Dieser Fehler wurde jetzt behoben.
+
+'''
+
+[discrete]
+== Entfernt
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* entfernt.
+
+[discrete]
+=== CRM
+
+* Wie in diesem link:https://forum.plentymarkets.com/t/ankuendigung-abschaltung-von-einigen-ereignissen-im-automatischen-versand-announcement-deactivation-of-some-automatic-despatch-events/699311[Forumsbeitrag^] angekündigt, wurden im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* die folgenden Ereignisse entfernt:
+** Neue Bestellung über den Webshop
+** Neue Bestellung über eBay
+** Neue Bestellung über Amazon
+** Neue Bestellung über Amazon FBA
+** Neue Bestellung über Yatego
+** Neue Bestellung über Kauflux
+** Neue Bestellung über Mercateo
+** Neue Bestellung über pixmania
+** Neue Bestellung über ricardo
+** Neue Bestellung über Rakuten
+** Neue Bestellung über Kaufland.de
+** Neue Bestellung über Interfaces
+** Tell-a-friend
+** Gewinnspielanmeldung
+** Forum-Benachrichtigung
+** Neuer Link zur Bestellbestätigung
+
++
+Diese Ereignisse kannst du ab sofort nur noch über Ereignisaktionen einbinden, um zum Beispiel bei Eingang einer neuen Bestellung über einen der oben genannten Marktplätze automatisch eine Auftragsbestätigung an deine Kund:innen zu senden.
+
++
+[IMPORTANT]
+.To-Do
+======
+Wenn du im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* E-Mail-Vorlagen mit einem der oben genannten Ereignisse verknüpft hast, erstelle für diese Fälle Ereignisaktionen im Menü *Einrichtung » Aufträge » Ereignisse*.
+======
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/elasticexportgoogleshopping_4722[Google Shopping^]
+|1.2.15
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.13.0
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.6
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
