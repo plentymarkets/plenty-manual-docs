@@ -5,10 +5,9 @@
 
 :shopzilla:
 :price-search-engine: shopzilla
+:market: Shopzilla
 :plugin-name: shopzilla
 :plugin-link: https://marketplace.plentymarkets.com/en/elasticexportshopzillade_4770
-
-include::partial$plugin-download.adoc[]
 
 [#100]
 == Registering with shopzilla.de
@@ -20,8 +19,84 @@ shopzilla is a price comparison platform. In order to set up shopzilla in plenty
 
 include::partial$create-order-referrer.adoc[]
 
+
+[#5LIO3VPJ]
+== Exporting item data
+
+* <<#catalogue-export, _Alternative 1:_ Item export with catalogue formats _(recommended method)_>>
+* <<#old-export, _Alternative 2:_ Item export with the Elastic Export _(old method)_>>
+* <<#change-elastic-export-catalogue, _Alternative 3:_ Changing from elastic export to catalogue>>
+
+[#catalogue-export]
+===  _Alternative 1:_ Item export with catalogue formats _(recommended method)_
+
+Catalogue formats provide you with a long-term and flexible way to export your item data to {market}.
+
+[#catalogue-creation]
+==== Creating a catalogue
+
+Item data is exported using a marketplace format. To export your items to a price search engine, create a catalogue in the *Data » Catalogue* menu. Link the data fields in the catalogue with item data saved in plentymarkets in the marketplace format afterwards.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+:catalogue-template-name: treepodia
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Mapping data fields in the catalogue
+
+Now, map the data fields in the catalogue to the item data saved in plentymarkets.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.List of recommended data field mappings
+--
+include::partial$shopzilla-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Exporting specific items
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Setting up catalogue export
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Activating the catalogue
+
+:interval:
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Exporting catalogue data to {market}
+
+include::partial$catalogue-url.adoc[]
+
+[#old-export]
+=== _Alternative 2:_ Item export with the Elastic Export _(old method)_
+
+NOTE: No new features are planned for the Elastic Export and the export formats. As such, we recommend that you <<#catalogue-export, create catalogues instead>>.
+
+[#plugin-download]
+==== Downloading and installing the plugins
+
+include::partial$plugin-download.adoc[]
+
 [#200]
-== Setting up the data format ShopzillaDE-Plugin in plentymarkets
+==== Setting up the data format ShopzillaDE-Plugin in plentymarkets
 
 :export-format: ShopzillaDE-Plugin
 :price-search-engine: shopzilla
@@ -39,11 +114,11 @@ include::partial$create-order-referrer.adoc[]
 include::partial$export-formats.adoc[]
 
 [#300]
-== Available columns for the export file
+==== Available columns for the export file
 
 :export-format: ShopzillaDE-Plugin
 
-include::partial$download_export-file.adoc[]
+include::markets:partial$download_export-file.adoc[]
 
 [[columns-export-file-shopzilla]]
 .Available columns of the export file for the export format *ShopzillaDE-Plugin*
@@ -55,17 +130,17 @@ include::partial$download_export-file.adoc[]
 | *Required* +
 The *SKU* of the variation based on the chosen order referrer in the format settings.
 
-|Titel
+|Title
 | *Required* +
 *Limitation:* No HTML code allowed +
 According to the format setting *Item name*.
 
-|Beschreibung
+|Description
 | *Required* +
 *Limitation:* No HTML code allowed +
 According to the format setting *Description*.
 
-|Kategorie
+|Category
 | *Required* +
 *Category path of the standard category* for the *Client* configured in the format settings.
 
@@ -84,29 +159,29 @@ URL of the image according to the format setting *Image*. Variation images are p
 *Allowed file types:* jpg, gif, bmp, png +
 A list of up to 10 URLs of the image according to the format setting *Image* separated by comma. Variation images are prioritised over item images.
 
-|Zustand
+|Condition
 | *Required* +
 The value from *Condition for API* of the variation will be translated. *[0]New* will be exported as new. All other options will be exported as *used*.
 
-|Bestand
+|Stock
 | *Required* +
 *Allowed values:* Auf Lager (in stock), Nicht vorrätig (not in stock), Verfügbar (available), Auf Vorbestellung (order in advance) +
 Translation according to the format setting *Overwrite item availability*.
 
-|Marke
+|Brand
 |The *name of the manufacturer* of the item. The *external name* saved in the *Setup » Item » Manufacturers* menu is preferred if existing.
 
 |EAN
 |According to the format setting *Barcode*.
 
-|Artikelnummer
+|Item number
 |The *model* as per *Item » Edit item » [Open item] » [Open variation] » Settings » Basic settings*.
 
-|Versandkosten
+|Shipping costs
 | *Required* +
 According to the format setting *Shipping costs*.
 
-|Geschlecht
+|Gender
 | *Allowed values:* männlich (male), weiblich (female), nicht geschlechtspezifisch (unisex) +
 The value of a characteristic of the type *Text* or *Selection* that is linked to *Shopzilla.de » Gender*.
 
@@ -114,36 +189,114 @@ The value of a characteristic of the type *Text* or *Selection* that is linked t
 | *Allowed values:* Erwachsene (adults), Kinder (children) +
 The value of a characteristic of the type *Text* or *Selection* that is linked to *Shopzilla.de » Age group*.
 
-|Größe
+|Size
 |The value of an attribute with an attribute link for *Google Shopping* to *Size*. The value of a property of the type *Text* or *Selection* that is linked to *shopzilla.de » Size* can also be used as an alternative.
 
-|Farbe
+|Colour
 |The value of an attribute with an attribute link for *Google Shopping* to *Colour*. As an alternative the value of a property of the type *Text* or *Selection* that is linked to *Shopzilla.de » Colour* can also be used.
 
 |Material
 |The value of an attribute with an attribute link for *Google Shopping* to *Material*. As an alternative the value of a property of the type *Text* or *Selection* that is linked to *Shopzilla.de » Material* can also be used.
 
-|Muster
+|Pattern
 |The value of an attribute with an attribute link for *Google Shopping* to *Pattern*. As an alternative the value of a property of the type *Text* or *Selection* that is linked to *Shopzilla.de » Pattern* can also be used.
 
-|Produktgruppe
+|Product group
 | *Mandatory field for items with variations* +
 The item ID of the main variation.
 
-|Grundpreis
+|Unit price
 |The *base price information* in the format "price / unit" (example: 10,00 EUR / kilogram)
 
 |Empfohlener Preis
 |The *sales price* of the price type *RRP* of the variation.
 
-|Preis
+|Price
 | *Required* +
 The *sales price* of the variation.
 |===
 
-[#400]
-== License
+[#change-elastic-export-catalogue]
+=== _Alternative 3:_ Changing from elastic export to catalogue
 
-:license-link: https://github.com/plentymarkets/plugin-elastic-export-shopzilla-de/blob/master/LICENSE.md
+:elastic-export-catalogue-mappings:
+include::partial$catalogue-change-from-elastic-export.adoc[]
 
-include::partial$plugin-license.adoc[]
+
+[[elastic-export-catalogue-mappings]]
+.Columns and data fields
+[cols="1,1"]
+|===
+|Column in elastic export |Marketplace data field in catalogue
+
+| Column header | Explanation
+
+|ID
+| ID
+
+|Title
+| Title
+
+|Description
+| Description
+
+|Category
+| Category
+
+|Artikel-URL
+| Artikel-URL
+
+|Bild-URL
+| Bild-URL
+
+|Zusätzliche Bild-URL
+| Zusätzliche Bild-URL
+
+|Condition
+| Condition
+
+|Stock
+| Stock
+
+|Brand
+| Brand
+
+|EAN
+| GTIN
+
+|Item number
+| Item number
+
+|Shipping costs
+| Shipping costs
+
+|Gender
+| Gender
+
+|Altersgruppe
+| Altersgruppe
+
+|Size
+| Size
+
+|Colour
+| Colour
+
+|Material
+| Material
+
+|Pattern
+| Pattern
+
+|Product group
+| Product group
+
+|Unit price
+| Unit price
+
+|Empfohlener Preis
+| Empfohlener Preis
+
+|Price
+| Price
+|===
