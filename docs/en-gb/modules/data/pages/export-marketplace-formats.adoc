@@ -2,7 +2,6 @@
 :keywords: catalogue, Marketplace formats, marketplace export, market export
 :description: Get to know catalogues for exporting variation data to markets.
 :page-aliases: marketplace-export.adoc
-:id: JD40PF4
 :author: team-plenty-channel
 
 :marketplace-export:
@@ -10,9 +9,7 @@
 Use the marketplace formats of the catalogue to export variation data and stock data to many markets and price portals.
 plentymarkets is working on moving all markets to catalogue formats.
 
-On this page, find out how to export variation data to markets using catalogues. Only the general workflow is explained.
-
-When you are ready to set up catalogues for individual markets, head over to the manual pages of the individual xref:markets:markets.adoc#[markets] to find out how you create and structure the catalogues.
+On this page, find out how to export variation data to markets using catalogues. Only the general workflow is explained. When you are ready to set up catalogues for individual markets, head over to the manual page of the xref:markets:markets.adoc#[market] to find out how you create and structure the catalogues.
 
 include::_includes:page$new-page-info-box.adoc[]
 
@@ -24,7 +21,7 @@ include::partial$catalogue-menu.adoc[]
 [#market-formats]
 == What are catalogues with marketplace formats?
 
-Every market structures product data differently. Often, different product information is even exported to the same market for different product categories: Your product data is different for shoes than for cat food. For shoes, you specify for example the shoe size and the material. For cat food, you will specify unit price information, the list of ingredients, the cats the food is most suited for, etc.
+Every market structures product data differently. Often, you even need different product information for different product categories of the same market. For example, your product data for shoes will be different from that for cat food. For shoes, you specify the shoe size and the material. For cat food, you need to specify the base price, a list of ingredients and so on. 
 
 Catalogues with marketplace formats allow you to tailor your item information exactly to the needs of the market. Because here, you assign a suitable plentymarkets data field to each of the data fields of the market. When your variation data is exported to the market, the market’s data fields are then filled with the correct plentymarkets data.
 
@@ -38,7 +35,7 @@ Catalogues with marketplace formats allow you to tailor your item information ex
 * You choose for each market and sometimes even for each market category which variation data is going to be published on the market. For example, you can use properties to export different variation names and descriptions to different markets.
 * You can easily copy and adjust well configured catalogues.
 
-*_Let’s talk straight: Aren#t there any disadvantages?_*
+*_Let’s be honest: Are there any disadvantages?_*
 
 It really depends. The catalogues give you maximum flexibility. You can map data fields any way you like. However, that also means that mappings are not checked on whether or not they make any sense. As an example, the system will not prevent you from mapping the variation ID as the price. You might only notice such a mistake when your variations are either not exported to the market or when your t-shirts suddenly cost a few thousand bucks. However, this is only a disadvantage if you don’t work carefully. The more familiar you are with the catalogues, the easier it will be for you to map the data fields. You can always copy and adjust well configured catalogues. That also makes your work easier.
 
@@ -86,6 +83,7 @@ image::data:plentymarkets-data-fields.png[]
 * Check out the manual page for the standard format xref:data:catalogues-item.adoc#[Item (new)] to find out which data is exported with which plentymarkets data fields.
 * You can map a fallback data field in addition to a plentymarkets data field. All plentymarkets data field are again available as fallback data fields. The difference is that the content of the fallback data field is only exported if the first mapped plentymarkets data field does not return a value.
 
+ 
 
 [#mappings]
 == Which mappings are available?
@@ -181,8 +179,9 @@ All plentymarkets data field are available as fallback data fields. However, the
 * If no data is found for a marketplace data field for a variation, what happens next depends on whether or not the data field is mandatory or not. If so, the variation is not exported. If not, the variation is exported. The variation is exported but the marketplace data field is not filled on the market.
 
 [[fallback-data-fields]]
-._Example “Colour” in the REWE fashion catalogue:_ An attribute for colour as the main data field, a property for colour as the fallback data field
+._Example "Colour":_ An attribute for colour as the main data field, a property for colour as the fallback data field
 image::data:fallback-data-fields.png[]
+
 
 [.collapseBox]
 .Creating a 1:1 mapping with fallback data fields
@@ -240,9 +239,9 @@ include::markets:partial$catalogue-mapping.adoc[tag=own-mappings-config]
 === Recalculating numerical values (Formula)
 
 [discrete]
-===== You save a formula that is applied to numerical values during the export
+===== You save a mathematical formula. This formula is applied to numerical values during the export.
 
-Mathematical calculations allow you to change values automatically during the export.
+Mathematical calculations allow you to change numerical values automatically during the export.
 
 * This function is new and has not been implemented for all marketplace formats yet.
 * This function only works for data fields that contain numerical values.
@@ -251,6 +250,7 @@ So this mapping specifies:
 
 * I want the numerical value of a plentymarkets data field to be recalculated during the export. Basic arithmetic operations are available for the formulas.
 
+////
 *_Example:_*
 
 You want to set up a stock buffer for the market. So a specific quantity is substracted from the stock of each variation during the export. In the catalogue, create the following formula:
@@ -258,6 +258,9 @@ You want to set up a stock buffer for the market. So a specific quantity is subs
 [[catalogue-formula]]
 .Formula for stock buffer
 image::data:catalogue-stock-buffer.png[]
+
+TODO: Insert screenshot
+////
 
 [.collapseBox]
 .Creating mappings with mathematical calculations
@@ -272,41 +275,16 @@ Catalogues with marketplace formats are automatically exported to markets if all
 
 However, you can also export a file that contains the data that is also exported to the market.
 
-[tabs]
-====
-One-time file export::
-+
---
+[#XjKI8jqJKa]
+=== One-time catalogue export to a file
 
 Use these instructions to create a one-time export of the catalogue data. The catalogue data is *_not_* exported to the market.
 
-NOTE: The export process is started when you click on *Download data*. However, note that there will be _no_ window for downloading the file straight away. When the export is completed, you can download the export file from the Notifications.
+include::partial$catalogue-manual-download.adoc[tag=single-export]
 
-[.instruction]
-Exporting catalogue data to a file once:
 
-. Go to *Data » Catalogues*. +
-→ The catalogue overview opens.
-. Click on the catalogue. +
-→ The catalogue opens.
-. Click on the *Settings* tab on the left. +
-→ The different settings options are shown.
-. Check the settings and change them as needed. +
-*_Tip:_* Make sure that the option *Receive notifications* is active in the *Download settings*.
-. Save (terra:save[]) the settings. +
-. Click on material:file_download[] in the toolbar up top. +
-→ The export will start and it runs in the background.
-You can continue working during the export process. +
-*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes.
-. Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
-. In the notification centre, click on material:link[] *Download*. +
-*_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
-. Save the file on your computer.
---
- 
-Regular file export::
-+
---
+[#X9NucM8q50]
+=== Regular catalogue export to a file
 
 Use these instructions to save the variation data of the catalogue regularly to a specified storage location. It is also up to you to decide what “regularly” means. The catalogue data is *_not_* exported to the market.
 
@@ -317,14 +295,13 @@ Setting up regular file exports:
 → The catalogue overview opens.
 . Click on the catalogue. +
 → The catalogue opens.
-. Click on the *Settings* tab on the left. +
+. Click on the *Settings* tab (icon:cog[]) on the left. +
 → The different settings options are shown.
 . Carry out the settings. Note <<#table-file-export>>.
 . Save (terra:save[]) the settings. +
 → The catalogue data is exported to a file in the specified intervals. +
 → The file is saved at the specified storage location.
---
-====
+
 
 [[table-file-export]]
 .Settings for optional file export

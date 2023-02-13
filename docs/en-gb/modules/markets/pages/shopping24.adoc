@@ -1,8 +1,7 @@
 = Shopping24
 :author: team-plenty-channel
 :keywords: Shopping24, Shopping24, Shopping 24
-:description: Multi-Channel in plentymarkets: Set up the item data export to the price search engine Shopping24 in your plentymarkets system.
-:id: X6KORDA
+:description: Set up the item data export to the price search engine Shopping24 in your plentymarkets system.
 :shopping24:
 :market: Shopping24
 
@@ -15,18 +14,84 @@
 
 shopping24.de is a subsidiary of the Otto Group and an online portal for price and product comparisons. In order to set up the billiger.de plugin in plentymarkets, you have to register with link:https://www.s24.com/[shopping24.de^] first. Please note that this website is currently only available in German.
 
+[#item-export]
+== Exporting item data
+
+* <<#catalogue-export, _Alternative 1:_ Item export with catalogue formats _(recommended method)_>>
+* <<#old-export, _Alternative 2:_ Item export with the Elastic Export _(old method)_>>
+* <<#change-elastic-export-catalogue, _Alternative 3:_ Changing from elastic export to catalogue>>
+
+[#catalogue-export]
+=== _Alternative 1:_ Item export with catalogue formats _(recommended method)_
+
+Catalogue formats provide you with a long-term and flexible way to export your item data to {market}.
+
+[#catalogue-creation]
+==== Creating a catalogue
+
+Item data is exported using a marketplace format. To export your items to a price search engine, create a catalogue in the *Data » Catalogue* menu. Link the data fields in the catalogue with item data saved in plentymarkets in the marketplace format afterwards.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+:catalogue-template-name: shopping24
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Mapping data fields in the catalogue
+
+Now, map the data fields in the catalogue to the item data saved in plentymarkets.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.List of recommended data field mappings
+--
+include::partial$shopping24-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Exporting specific items
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Setting up catalogue export
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Activating the catalogue
+
+:interval: once a day during the night
+:market: shopping24
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Exporting catalogue data to {market}
+
+include::partial$catalogue-url.adoc[]
+
 [#old-export]
-== _Alternative 1:_ Export format Shopping24DE-Plugin _(old method)_
+=== _Alternative 2:_ Item export with the Elastic Export _(old method)_
 
 NOTE: No new features are planned for the Elastic Export and the export formats. As such, we recommend that you <<#catalogue-export, create catalogues instead>>.
 
 [#plugin-download]
-=== Downloading and installing the plugins
+==== Downloading and installing the plugins
 
 include::partial$plugin-download.adoc[]
 
 [#200]
-=== Setting up the data format Shopping24DE-Plugin in plentymarkets
+==== Setting up the data format Shopping24DE-Plugin in plentymarkets
 
 :export-format: Shopping24DE-Plugin
 :table-price-search-engine: <<#format-shopping24>>
@@ -44,14 +109,17 @@ include::partial$plugin-download.adoc[]
 include::partial$export-formats.adoc[]
 
 [#300]
-=== Available columns for the export format
+==== Available columns for the export file
 
 :export-format: Shopping24DE-Plugin
 
 include::partial$download_export-file.adoc[]
 
-[[columns-export-file-shopping24]]
-.Columns of the export file for *Shopping24.de*
+[.collapseBox]
+.Available columns of the export file for the export format *Shopping24.de*
+--
+[columns-export-file-shopping24]]
+.Available columns for the export format
 [cols="1,3a"]
 |===
 | *Column* | *Explanation*
@@ -113,68 +181,10 @@ include::partial$download_export-file.adoc[]
 |unit_price
 |The *base price information* in the format "price / unit" (example: 10,00 EUR / kilogram)
 |===
-
-[#catalogue-export]
-== _Alternative 2:_ Catalogue export _(recommended)_
-
-Catalogue formats provide you with a long-term and flexible way to export your item data to {market}.
-
-[#catalogue-creation]
-=== Creating a catalogue
-
-Item data is exported using a marketplace format. To export your items to a price search engine, create a catalogue in the *Data » Catalogue* menu. Link the data fields in the catalogue with item data saved in plentymarkets in the marketplace format afterwards.
-
-include::partial$catalogue-new-to-text.adoc[]
-
-:catalogue-template-name: shopping24
-:format-item-new:
-
-include::partial$catalogue-creation.adoc[]
-
-[#data-field-mappings]
-=== Mapping data fields in the catalogue
-
-Now, map the data fields in the catalogue to the item data saved in plentymarkets.
-
-include::partial$catalogue-mapping.adoc[]
-
-[#recommended-mappings]
-=== Recommendations for data field mappings
-
-include::partial$recommendation-text.adoc[]
-
-[.collapseBox]
-.List of recommended data field mappings
 --
-include::partial$shopping24-recommended-mappings.adoc[]
---
-
-[#filter-export]
-=== _Optional:_ Exporting specific items
-
-include::partial$catalogue-filters.adoc[]
-
-[#catalogue-settings]
-=== Setting up catalogue export
-
-:csv-txt:
-include::partial$catalogue-settings.adoc[]
-
-[#catalogue-activation]
-=== Activating the catalogue
-
-:interval: once a day during the night
-:market: shopping24
-
-include::partial$catalogue-activation.adoc[]
-
-[#catalogue-url]
-=== Exporting catalogue data to {market}
-
-include::partial$catalogue-url.adoc[]
 
 [#change-elastic-export-catalogue]
-== _Alternative 3:_ Changing from elastic export to catalogue
+=== _Alternative 3:_ Changing from elastic export to catalogue
 
 :elastic-export-catalogue-mappings:
 
@@ -184,7 +194,7 @@ include::partial$catalogue-change-from-elastic-export.adoc[]
 .Columns and data fields
 [cols="1,1"]
 |===
-|Column in elastic export |Data field in catalogue
+|Column in elastic export |Marketplace data field in catalogue
 
 |art_name
 | Name
@@ -242,6 +252,5 @@ include::partial$catalogue-change-from-elastic-export.adoc[]
 
 |unit_price
 | Unit price: sales price; +
-Unit price: unit; +
-Unit price: quantity
+Unit price: unit
 |===

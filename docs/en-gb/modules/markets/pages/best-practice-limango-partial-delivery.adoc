@@ -1,11 +1,27 @@
 = Best practice: Reporting partial deliveries to limango
 :author: team-plenty-channel
 :keywords: limango, shipping items, partial delivery, part delivery, shipping limango orders, limango partial delivery
-:description:
+:description: In this best practice you will learn how to ship one or more order items of a limango order without marking the whole order as shipped.
 
 A customer ordered several items at limango, but you do not have all of the order items in stock. However, now you already want to send two items which you have in stock to your customer. This best practice teaches you how to do this and how to inform limango that one or more order items have already been shipped.
 
 In order to ship one or more order items, you first create a delivery order for the order item(s) that should be shipped. Afterwards, create the event procedure *Send shipping confirmation to limango*.
+
+[TIP]
+.Create multiple delivery orders
+====
+If you want to ship one or more order items, then you have to create at least two delivery orders: +
+
+* one delivery order for the items that should be shipped
+
+_and_
+
+* one delivery order for the items that should not be shipped yet
+
+Afterwards, create an event procedure for each delivery order, depending on which procedures should be triggered for the items contained in the delivery order.
+====
+
+How to create a delivery order and an event procedure for the items that should be shipped is described below. Afterwards, create a delivery order and an event procedure for the remaining order items.
 
 [#create-delivery-order]
 == Creating a delivery order
@@ -37,7 +53,7 @@ Now set up an xref:automation:event-procedures.adoc#[event procedure] to inform 
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#1220[create] a new status. +
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status. +
 Note that all order items contained in main orders will also be marked as shipped if you use the recommended events and filters.
 
 [[event-procedure-partial-delivery-limango]]
@@ -48,7 +64,7 @@ Note that all order items contained in main orders will also be marked as shippe
 
 | *Event*
 | *Order change: Outgoing items booked*
-| 
+|
 
 | *Filter 1*
 | *Order > Referrer*
@@ -57,4 +73,44 @@ Note that all order items contained in main orders will also be marked as shippe
 | *Action*
 | *Plugins*
 | *Send shipping confirmation to limango*
+|===
+
+[#multiple-delivery-orders]
+== _Example:_ Creating multiple delivery orders from one order
+
+A customer ordered 5 items on limango:
+
+* a jeans
+* a red t-shirt
+* a green t-shirt
+* a pair of sunglasses
+* a children’s jacket
+
+The jeans and the two t-shirts are in stock, so you already want to ship them to the customer. The delivery time of the children’s jacket is 3 weeks, so you want to ship it later on. The sunglasses are not in stock, so you have to cancel them.
+
+You need to create three delivery orders from this order because three different event procedures should be triggered.
+
+[[delivery-orders-limango]]
+.Create multiple delivery orders for limango
+[cols="1a,3a,3a"]
+|===
+|Delivery order |Order items |Event procedure
+
+| *Delivery order 1*
+| * one jeans +
+* one red t-shirt +
+* one green t-shirt +
+→ These items should already be shipped.
+| *Send shipping confirmation to limango*
+
+| *Delivery order 2*
+| * one children’s jacket +
+→ This item is currently out of stock and should be shipped later on.
+| *Send shipping confirmation to limango* +
+*_Note:_* The event procedure will only be triggered when the item is in stock again and after the order status changed.
+
+| *Delivery order 3*
+| * a pair of sunglasses +
+→ This item should be cancelled.
+| *Send order cancellation to limango*
 |===

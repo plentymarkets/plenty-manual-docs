@@ -1,7 +1,8 @@
-= Using the order status
+= Using order statuses
 
 :keywords: order status, default status, standard status, select status, add status, edit status
 :author: team-order-core
+:description: Learn how to use, create, edit and delete order statuses correctly. The purpose of order statuses is to visualise the progress of orders during oder processing.
 
 The order statuses visualise the progress of orders during order processing. 19 statuses with 4 decimal places each, so a total of 199999, are available in your plentymarkets system. 28 statuses are set by default. These statuses represent a basis for usual steps of order processing. Some of these 28 statuses are linked to automatic processes in the system. You should only use them for these designated purposes within the system. The status of an order changes because of these automatic processes in the system, through automatic processes set up by you or can be changed manually. Order statuses also improve the order search.
 
@@ -10,7 +11,7 @@ Roughly go through your order processes and determine when you want to assign a 
 [TIP]
 .Pay attention to the user rights
 ======
-Note that elements such as drop-down lists only display those *shops* and *order statuses* for which the current user was given rights to. If you do not see a status, it is most likely that you do not have the rights needed for this. Rights can be assigned by admin users.
+Note that elements such as drop-down lists only display those *online stores* and *order statuses* for which the current user was given rights to. If you do not see a status, it is most likely that you do not have the rights needed for this. Rights can be assigned by admin users.
 ======
 
 [#preselected-statuses]
@@ -22,7 +23,7 @@ The following 28 status entries are available by default in your plentymarkets s
 .Default statuses and automatic processes within the system
 [cols="1,3"]
 |===
-|Status |Explanation
+|Order status |Explanation
 
 | *[1]* Incomplete data
 |This status is automatically assigned when the data of an order is incomplete, e.g. missing address details. Incomplete data can sometimes occur when they are imported from markets. Orders with this status are not to be processed further. The data will be completed by subsequent imports. The incomplete data are useful for a timely booking of stock.
@@ -113,72 +114,221 @@ If you use stock limitation and this status for insufficient stock, it is possib
 |This status is automatically assigned to an order of the type *Multi credit note* when a multi credit note is created. You can change the xref:orders:preparatory-settings.adoc#intable-default-status-multi-credit-note[default status for multi credit notes], if required. You can find this setting under *Setup » Orders » Settings*.
 |===
 
-[#add-and-edit-statuses]
-== Adding and editing a status
-
-In the *Setup » Orders » Status* menu, you can add your own statuses in addition to those listed in <<table-default-statuses>>. You can edit and e.g. rename the available status. Maintain statuses in different languages in order to inform your customers about the progress via email or in the customer account of the online shop. Apart from status related to system automatisms you are able to delete all status. Status related to system automatisms can be renamed. However you should make sure to not misuse the status related to system automatisms. +
-Additionally, you can decide how the order statuses are displayed in your plentymarkets system. Use the toggle button *Show status ID in status name* to decide whether only the given status name or whether the status ID is displayed additionally.
-
 [TIP]
-.Name is not a mandatory field
+.Show status ID in status name
 ======
-The name is not a mandatory field. If you don’t create a name you will only see a list of apparently empty status in the filters and an empty status field in the order overview. Therefore you have to enter e.g. at least the status number also as name in the language you use the most often, German or English. Translations in other languages do only serve as the user interface in the customer account of your shop and as customer information via email.====
+Use the toggle button *Show status ID in status name* to decide whether only the given status name or also the status ID should be displayed.
 ======
 
-[#adding-statuses]
-=== Adding a status
+[#search-for-order-statuses]
+== Searching for order statuses
+
+Use one of the following methods to search for order statuses.
 
 [.instruction]
-Proceed as described below to add a status:
+Searching for order statuses:
 
-. Go to Setup » Orders » Events.
-. Click on *Create new contact* (icon:plus-square[role="green"]).
-. Enter a status number. → The highest possible number is 19.9999.
-. Enter a name, if required. +
-The language in which you are logged in is shown as input field.
-. *Save* (icon:save[role="green"]) the settings. +
-→ Fields for additional settings are shown.
-. If necessary, add additional languages for the order status.
-. Select an individual colour for the order status in the *Colour* field.
-. *Save* (icon:save[role="green"]) the settings.
+. Go to the *Setup » Orders » Order status* menu.
+.. *_Option 1_*: Click on material:search[] to see a list of all statuses.
+.. *_Option 2:_* Enter something into the search field and click on one of the automatic suggestions.
+.. *_Option 3:_* Click on material:tune[] to narrow down the search results with filters.
+
+[#use-filters]
+=== Using filters
+
+In order to search for specific order statuses, you can use the following filters.
+
+[[table-filters-order-status]]
+.Filters for order statuses
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Status from*
+|Filters by statuses from this status number onwards.
+
+| *Status to*
+|Filters by statuses up to this status number.
+
+| *Language*
+|Filters by statuses with this language.
+
+|===
+
+[#configure-columns]
+== Configuring columns in the overview
+
+In the overview, you can decide which columns should be displayed in the table and also define the order in which they are shown. In order to configure the columns, proceed as follows.
+
+[.instruction]
+Configuring columns:
+
+. Go to the *Setup » Orders » Order status* menu.
+. At the top right, click on *Configure columns* (material:settings[]). +
+→ The window *Configure columns* opens.
+. Select (material:done[]) the columns you want to be displayed. Pay attention to the explanations given in <<table-order-status-columns>>.
+. Move (material:drag_indicator[]) the columns via drag-and-drop to the desired position until they are displayed in the desired order.
+. Add or remove columns according to your needs.
+. Click on *Confirm*. +
+→ The settings are saved.
+
+[[table-order-status-columns]]
+.Columns in the status overview
+[cols="1,3"]
+|===
+|Column |Explanation
+
+| *Checkbox*
+|Shows a checkbox at the beginning of the line. Tick the checkbox in order to use one of the available <<#order-status-group-functions, group functions>> for this status.
+
+| *Status*
+|Shows the status of the order.
+
+| *Colour*
+|Shows the colour of the order status.
+
+| *Name*
+|Shows the name of the order status. In case you activated the toggle button *Show status ID in status name* (material:toggle_on[]), the ID is also shown.
+
+| *Name (language)*
+|Shows the status name for the language that is shown in brackets. Select all the languages that you need.
+
+| *Delete*
+|Shows the delete function for deleting the status (material:delete[]) at the end of the line. +
+*_Note:_* Statuses that originate from the system cannot be deleted.
+
+|===
+
+[#order-status-group-functions]
+== Using group functions
+
+There are some group functions that you can use in order to carry out actions for multiple statuses at once. You can use a group function to <<#change-visibility, change the visibility>>, <<#change-colour, change the colour>> or <<#delete-status, delete specific statuses>>.
+
+[#change-visibility]
+=== Changing the visibility
+
+The visibility of order statuses can be determined for different areas. In order to change the visibility for one or several statuses, proceed as follows.
+
+[.instruction]
+Changing the visibility:
+
+. Go to the *Setup » Orders » Order status* menu.
+. Carry out the search (material:search[]) to display order statuses.
+. Place a check mark for one or several statuses (material:check_box[]).
+. At the top, click on the *Change visibility* (material:remove_red_eye[]) function. +
+→ The *Change visibility* window opens.
+. Carry out the settings. Pay attention to the explanations given in <<table-change-visibility>>.
+. Click on *Change visibility* (material:remove_red_eye[role=skyBlue]). +
+→ The visibility is changed.
+
+[[table-change-visibility]]
+.Visibility for order statuses
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Visibility in online store*
+|Select from the drop-down list whether the order status should be visible in the online store.
+
+| *Visibility in reorders*
+|Select from the drop-down list whether the order status should be visible in reorders.
+
+| *Visibility in redistributions*
+|Select from the drop-down list whether the order status should be visible in redistributions.
+
+|===
+
+[#change-colour]
+=== Changing the colour
+
+You can adjust the colour of an order status at any time. In order to change the colour for one or several statuses, proceed as follows.
+
+[.instruction]
+Changing the colour:
+
+. Go to the *Setup » Orders » Order status* menu.
+. Carry out the search (material:search[]) to display order statuses.
+. Place a check mark for one or several statuses (material:check_box[]).
+. At the top, click on the *Change colour* (material:color_lens[]) function. +
+→ The *Change colour* window opens.
+. Select a new colour. To do so, either enter a HEX code or select values for RGB (Red, Green, Blue) or HSL (Hue, Saturation, Lightness).
+. Click on *Change colour* (material:color_lens[role=skyBlue]). +
+→ The colour is changed.
+
+[#delete-status]
+=== Deleting an order status
+
+Order statuses can also be deleted. However, note that this is not possible for statuses that originate from the system. In order to delete order statuses, proceed as follows.
+
+[.instruction]
+Deleting an order status:
+
+. Go to the *Setup » Orders » Order status* menu.
+. Carry out the search (material:search[]) to display order statuses.
+. Place a check mark for one or several statuses (material:check_box[]).
+. At the top, click on the *Delete status* (material:delete[]) function. +
+icon:map-signs[] *_Or:_* On the right in the line of a status, click on *Delete* (material:delete[]) in order to delete this status only. +
+→ The window *Delete status* opens.
+. If you are sure that you want to delete all selected statuses, confirm the confirmation message by clicking on *Delete status* (material:delete[role=red]). +
+→ The statuses are deleted.
+
+[#create-status]
+== Creating a new status
+
+In the *Setup » Orders » Order status* menu, you can add your own statuses in addition to those listed in <<table-default-statuses>>. You can edit the available statuses. Maintain statuses in different languages in order to inform your customers about the progress via email or in the customer account of the online shop. Status related to system automatisms can be renamed. However you should make sure to not misuse the status related to system automatisms. To create a new status, proceed as follows.
+
+[.instruction]
+Creating a new status:
+
+. Go to the *Setup » Orders » Order status* menu.
+. Click on *Create new status* (material:add[]). +
+→ The *Create new status* window opens.
+. Carry out the settings. Pay attention to the explanations given in <<table-create-new-status>>.
+. Click on *Create* (material:add[role=green]). +
+→ The new status is created.
+
+[[table-create-new-status]]
+.Creating a new status
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *New status*
+|Enter a status number (e.g. 2.5). Make sure that this status is unique. If the entered status already exists, en error message is displayed. +
+This is a mandatory field.
+
+| *Name in system language (language)*
+|Enter a name for the new status. The language in which you are logged in is shown in the input field. +
+This is a mandatory field.
+
+| *Colour*
+|Select a colour for the new status. To do so, either enter a HEX code or select values for RGB (Red, Green, Blue) or HSL (Hue, Saturation, Lightness).
+
+| *Visibility*
+|Select whether the new status should be visible in the online store, in reorders or in redistributions.
+
+|===
 
 [TIP]
-.Decimal places
+.Pay attention to decimal places
 ======
 When assigning numbers to new statuses, make sure that they do not end with 0. If the last decimal place is a 0, the system automatically deletes it. Thus, plentymarkets makes no distinction between a status with the number 1.1 and a status with the number 1.10.
 ======
 
-[#edit-statuses]
-=== Edit the status:
+[#edit-status]
+== Editing a status
 
-Proceed as follows in order to edit an available status. You can either edit a single status or you can use the group function and edit several statuses at the same time.
-
-[.instruction]
-Editing a single order status:
-
-. Go to Setup » Orders » Events.
-. Click on *Search* (icon:search[role="blue"]). +
-A list of all existing order statuses opens.
-. Select the status you want to edit. +
-→ The detail view of the contact opens.
-. Change the status name.
-. Change the *colour* of the status.
-. *Save* (icon:save[role="green"]) the settings.
-
-Use the group function in the menu *Setup » Orders » Status* to edit multiple orders statuses at the same time.
+Statuses can be edited at any time. Via the group function, you can also open several statuses at once and edit one after the other. In order to edit statuses, proceed as follows.
 
 [.instruction]
-Editing multiple statuses:
+Editing a status:
 
-. Go to Setup » Orders » Events.
-. Click on *Search* (icon:search[role="blue"]). +
-A list of all existing order statuses opens.
-. Place a check mark (icon:check-square-o[role="blue"]) in the status list for all statuses that should be edited.
-. Click on *Group function* (icon:gear[role="darkGrey", stack="gear,lr,darkGrey"]). +
-→ The editing area is displayed.
-. In the editing area, activate (icon:check-square-o[role="blue"]) the option *New colour* to select a new status colour.
-. Activate (icon:check-square-o[role="blue"]) the option *Shop visibility* and select the desired setting from the drop-down list.
-. Click on *Create delivery order* (terra:execute[]) to transfer the settings to the selected statuses. +
-→ You are asked to confirm your decision.
-. Confirm your decision by clicking on *Change status*. +
-→ The changes are saved.
+. Go to the *Setup » Orders » Order status* menu.
+. Carry out the search (material:search[]) to display orders.
+. Place a check mark (material:check_box[]) for all statuses that you want to edit.
+. Click in the line of a selected status. +
+*_Tip:_* If you select several statuses at once, they are all opened and you can edit them one after the other. +
+→ The detail view of the status opens. If you have selected several statuses, they are displayed underneath each other and you can switch between the detail views.
+. Carry out the desired changes for the *names*, the *colour* or the *visibility*.
+. *Save* (material:save[]) the settings. +
+→ The changes are applied.

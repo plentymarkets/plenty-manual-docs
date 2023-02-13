@@ -1,0 +1,275 @@
+= Changelog 21. September 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 15. September 2022
+:endWeekDate: 21. September 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/fix-mailversand-versand-vom-falschen-client-fix-mail-dispatch-sending-from-wrong-client/695383
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Die neue Version des EmailBuilder wurde veröffentlicht und bietet die folgenden Features:
+** Mehrsprachigkeit
+** Sprachabhängige Einstellungen von den globalen Einstellungen getrennt
+** Vorlagen für andere Sprachen kopieren
+** Eigner und Mandant einer Vorlage zuweisen
+** Filter, um nach Vorlagen suchen zu können
+** komplette Vorlagen mit allen Sprachen und Einstellungen kopieren
+** Vorlagen verschieben / Ordner verschieben
+
++
+Alle alten Vorlagen, die ihr bereits im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail » Vorlagen* erstellt habt, werden in diesem Zuge automatisch in den EmailBuilder migriert.
+
++
+[IMPORTANT]
+.To-Do
+======
+* Prüfe die Inhalte der migrierten Vorlagen.
+* Prüfe in deinem gesamten plentymarkets System alle Stellen, an denen du E-Mail-Vorlagen verknüpft hast, die automatisiert versendet werden.
+* Wenn du in der vorherigen Version des EmailBuilder bereits mehrsprachige Vorlagen angelegt hast, musst du diese manuell überführen.
+
+Weitere Informationen findest du im link:https://forum.plentymarkets.com/t/neue-funktionen-des-emailbuilders-inkl-migration-bestehender-vorlagen-new-features-of-emailbuilder-incl-migration-of-existing-templates/693489#new-features-of-the-emailbuilder-including-migration-of-existing-templates-9[Forum^] und auf der Handbuchseite xref:crm:emailbuilder.adoc[EmailBuilder (Testphase)].
+======
+
+[discrete]
+=== eBay
+
+* Für eBay-Listings wurden die folgenden Aktualisierungsstatus hinzugefügt:
+** Vorgang wird wiederholt: OAuth2-Token nicht abrufbar
+** Vorgang wird wiederholt: Ungültige OAuth2-Konto-ID
+** Vorgang wird wiederholt: S3-Fehler
+** Vorgang wird wiederholt: Fehler beim Erstellen eines eBay-Jobs
+** Vorgang wird wiederholt: Fehler beim Upload des eBay-Feeds
+** OAuth2-Token ungültig
+** In Bearbeitung
+
++
+Es handelt sich hierbei um die Aktualisierungsstatus für aktive Listings im Menü *Listings » Aktive Listings*. Den Aktualisierungsstatus deiner Listings kannst du in der *Gruppenfunktion* unter *Aktualisierungsstatus abfragen* ansehen. Die neuen Status zeigen dir, was beim Aktualisieren deiner Listings schief gelaufen ist und ob der Prozess noch einmal wiederholt wird. Bei `Vorgang wird wiederholt` musst du nichts weiter tun, der Prozess wird automatisch wiederholt.
+
+[discrete]
+=== Fulfillment
+
+* Ab sofort ist die neue Paketinhaltsliste im Menü Aufträge » Paketinhaltsliste (Testphase) verfügbar. Weitere Informationen findest du in im link:https://forum.plentymarkets.com/t/ankuendigung-neue-paketinhaltsliste-announcement-new-package-content-list/693629[Forum^] und auf der Handbuchseite xref:fulfillment:paketinhaltsliste-testphase.adoc[Paketinhaltsliste (Testphase)]. Die alte Paketinhaltsliste wurde in diesem Zuge als *veraltet* gekennzeichnet.
+
+[discrete]
+=== Kaufland
+
+* Das Datenfeld *Bestandspuffer* wurde zu den Kaufland-Katalogen hinzugefügt. Mit diesem Datenfeld kannst du einen Bestandspuffer für Kaufland verwenden, also eine Artikelmenge, die nicht verkauft und als Puffer einbehalten werden soll.
++
+Du kannst das Datenfeld im Katalog zum Beispiel mit einem eigenen Wert verknüpfen. Trägst du als Wert beispielsweise die Menge 5 ein, werden 5 Artikel als Puffer vom Bestand, der an Kaufland übertragen wird, abgezogen. Weitere Informationen zu empfohlenen Datenfeld-Zuordnungen findest du auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#bestandspuffer[Kaufland.de einrichten].
++
+Der Bestandspuffer wird beim Bestandsabgleich und beim Erstellen eines neuen Angebots berücksichtigt.
++
+Wie du Kataloge für Kaufland erstellst und Datenfelder in den Katalogen verknüpfst, ist auf der Handbuchseite xref:maerkte:kaufland-de-einrichten.adoc#catalogue-export[Kaufland.de einrichten] beschrieben.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Benutzeroberfläche
+
+* In allen Ansichten, in denen die Schnellsuche vorhanden ist, wird nun direkt eine Suche ausgeführt, sobald Du zu Deinem eingegebenen Stichwort einen vorgeschlagenen Filter auswählst. Solltest Du mehrere Filter für Deine Suche benötigen, kannst Du diese wie gehabt im Filter-Menü setzen.
+
+[discrete]
+=== CRM
+
+* Die folgenden Menüpunkte wurden im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail* entfernt:
+** *Zugangsdaten*
+** *Signatur*
+** *Infodienst*
+
++
+Du kannst diese Einstellungen ab sofort nur noch im Assistenten *E-Mail-Konten* vornehmen. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== CRM
+
+* Wenn man im Kontaktdatensatz im Bereich Kontaktdetails die Zahlungsart Lastschrift aktiviert hat, wurde diese Aktion nicht gespeichert. Dieses Verhalten wurde behoben.
+* Wenn beim automatischen Versand einer neuen Bestellung eine EmailBuilder-Vorlage ausgewählt wurde, wurde die E-Mail nicht versendet. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Ereignisaktionen
+
+* Seit es die Aktion *Tags hinzufügen/entfernen* bei den Ereignisaktionen für alle Auftragstypen gibt, kommt es bei der Auftragsanlage durch den Shop zu einem Validierungsfehler der Benutzerrechte und die Tags werden nicht hinzugefügt. Dies wurde behoben.
+
+[discrete]
+=== Zalando
+
+* Für den Bestandsabgleich zu Zalando können nur Vertriebslager in den Einstellungen gewählt werden.
+Änderte man aber den Typ des Lagers, nachdem man dieses eingestellt hatte, wurde der Bestand aus dem Lager weiterhin für den Bestandsabgleich berücksichtigt. Dies wurde nun korrigiert, indem beim Export der Lagertyp nochmal explizit geprüft wird.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen von *{version}* gelöscht.
+
+[discrete]
+=== plentyShop
+
+* Im Zuge der Vereinfachung des plentymarkets Backends haben wir einige weitere veraltete Menüpfade und Einstellungen entfernt. Dabei handelt es sich zunächst nur um Einstellungen, die für plentyShops relevant sind oder für dessen Vorgänger Callisto relevant waren. Es handelt sich dabei ausschließlich um kosmetische/organisatorische Änderungen; durch das Entfernen von Menüs werden keine Funktionalitäten entfernt! Die folgenden Einstellungen wurden aus dem plentymarkets Backend entfernt:
+** Einrichtung » Mandant » (Mandanten wählen) » Webshop » Multilingual » Bereich
+** Einrichtung » Mandant » (Mandanten wählen) » Webshop » Multilingual » Automatische Spracherkennung
+** Einrichtung » Mandant » (Mandanten wählen) » Artikelansichten » Einstellungen » Artikelanzeige
+** Einrichtung » Mandant » (Mandanten wählen) » Artikelansichten » Einstellungen » Attribut-Verfügbarkeit
+** Einrichtung » Mandant » (Mandanten wählen) » Artikelansichten » Einstellungen » Sortierung der Artikelkategorien (Ebene 1)
+** Einrichtung » Mandant » (Mandanten wählen) » Artikelansichten » Einstellungen » Sortierung der Artikelkategorien (Ebene 2)
+** Einrichtung » Mandant » (Mandanten wählen) » Artikelansichten » Einstellungen » Automatische Sortierung nach monatlichen Verkäufen
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Artikelpaket
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Standard-Lieferland
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Grundpreis
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Zahlungsinformation
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Versandart
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Newsletter-Anmeldung im Bestellvorgang
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » IP-Adresse des Käufers
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Angabe Lieferdatum
+** Einrichtung » Mandant » (Mandanten wählen) » Bestellvorgang » Einstellungen » Externe Umsatzsteuer-ID-Prüfung
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI wurde eine Gruppenfunktion zum Erstellen von Dokumenten hinzugefügt.
+* Gutscheindokumente von verkauften Gutscheinen werden jetzt in der neuen Auftrags-UI zusammen mit den anderen Auftragsdokumenten angezeigt.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Die Struktur im Menü *Aufträge* wurde angepasst. Unter Aufträge gibt es nun vier Bereiche. Den Menüpunkt *Dokumentenarchiv (Veraltet)* findest du ab sofort unter *Daten*.
++
+image:order-menu-september-2022.png[width=640, alt=The new order menu]
+
+[discrete]
+=== CRM
+
+* Im Menü *Einrichtung » Mandant » [Mandant wählen] » E-Mail* wurde der Menüpunkt *Automatischer Versand* entfernt. Du kannst deine Vorlagen mit bestimmten Ereignissen ab sofort nur noch im Assistenten E-Mail-Konten verknüpfen. Du findest den Assistenten im Menü *Einrichtung » Assistenten » Grundeinrichtung*.
+
+[discrete]
+=== Dokumente
+
+* Bei einigen Systemen (größtenteils neueren) konnten die Namen der Zahlungsarten nicht auf den Auftragsdokumenten angezeigt werden. Das lag daran, dass die Namen der Legacy-Zahlungsarten fehlen. Wir haben den Code entsprechend angepasst, sodass nun die Namen nach neuer Logik ermittelt werden.
+
+[discrete]
+=== plentyPOS
+
+* Ab sofort findest du die POS-Einstellungen nicht mehr im Menü *Einrichtung » Mandant » [Mandant wählen] » POS*, sondern unter *Einrichtung » POS » [Mandant wählen]*. Somit öffnest du erst das POS-Menü und wählst dann den Mandanten.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In einigen Fällen konnte es erneut vorkommen, dass beim Öffnen der Vorschau oder beim Senden der Vorlage im Menü *Aufträge » Aufträge bearbeiten* ein Fehler angezeigt wurde. Dieses Verhalten wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:Cdiscount.com[Cdiscount.com^]
+|1.1.1
+|-
+
+|link:https://marketplace.plentymarkets.com/easycredit_5109[easyCredit-Ratenkauf^]
+|2.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/extendedimagecarouselwidget_55287[Erweiterter Bilder-Karussell Widget^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/findologic_6390[Findologic - OnSite-Suche & Product Discovery Platform^]
+|4.0.6
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.13.2
+|-
+
+|link:https://marketplace.plentymarkets.com/lexoffice_54996[Lexoffice^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.16
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.0.18
+|Wenn bei den Aufträgen entsprechende Einträge in die Notizen geschrieben werden sollen prüfe bitte die entsprechende Einstellung im Assistenten.
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.12.3
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====

@@ -1,0 +1,301 @@
+= Changelog 4. Januar 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 29. Dezember 2022
+:endWeekDate: 4. Januar 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/katalogexportstatus-neuer-filter-fehler-verfuegbar-catalogue-export-status-new-filter-has-errors/706471
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Die Spalte Variantennummer ist nun in den folgenden UIs eine optionale Spalte:
+** In der neuen Auftragsanlage: in der Artikeltabelle des zweiten Schritts und in der Warenkorb-Tabelle des letzten Schritts.
+** In der neuen Auftrags-UI (Testphase): in der Warenkorb-Tabelle der Ansicht *Artikel bearbeiten* und in der Artikeltabelle der Detailansicht eines Auftrags.
+** In der Warenkorb-Tabelle eines neuen Kindauftrags in der neuen Auftrags-UI (Testphase).
+** In der Ansicht beim Teilen von Aufträgen in der neuen Auftrags-UI (Testphase).
+* Das Eingabefeld für das Lager in der Detailansicht der neuen Auftrags-UI und in der Auftragsanlage wurde überarbeitet. Die Lager können nun über ein Textfeld gefiltert werden.
+
+[discrete]
+=== CRM
+
+* Im Menü *CRM » Firmen* wurde ein Suchfeld hinzugefügt, in dem du nach dem Namen der Firma suchen kannst.
+* Wenn man in der Detailansicht des Messengers einer Nachricht geöffnet hat, werden ab sofort weniger Nachrichten in der Übersicht angezeigt, damit das Feld zum Beantworten der Nachricht größer dargestellt wird.
+* Eine Schaltfläche wurde an der Nachricht im Messenger hinzugefügt. Mit einem Klick auf diese Schaltfläche wird die Nachricht im Vollbildmodus angezeigt. Wenn man den Vollbildmodus wieder schließt, gelangt man zurück zur Übersicht.
+
+[discrete]
+=== eBay
+
+* Du kannst ab jetzt Eigenschaften für den Marktplatz eBay verwenden. Um eine Eigenschaft für eBay zu verwenden, musst du die Eigenschaft im Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration » [Eigenschaft öffnen]* unter *Herkunft* für die gewünschte eBay-Plattform aktivieren. Wie das geht, ist auf der Handbuchseite xref:maerkte:ebay-einrichten.adoc#eigenschaften-verwenden[eBay einrichten] beschrieben.
++
+[NOTE]
+.Hinweis
+======
+Wenn du Eigenschaften in einer Layout-Vorlage verwenden willst, musst du folgende Template-Funktionen in die Layout-Vorlage einfügen: `GetItemPropertyV2ById()`, `GetItemPropertyV2ByName()` und `PropertyListV2()`.
+
+Weitere Informationen zur Verwendung von Template-Funktionen findest du auf der Handbuchseite xref:maerkte:ebay-einrichten.adoc#3050[eBay einrichten].
+======
++
+[NOTE]
+.Zusatzinformationen
+======
+*Was ist der Unterschied zwischen eBay-Merkmalen, Eigenschaften und plentymarkets Merkmalen?*
+
+Bei eBay hast du die Möglichkeit, Informationen zu deinen Listings auf verschiedenen Wegen anzugeben: über eBay-Merkmale, Eigenschaften oder plentymarkets Merkmale. Alle drei Möglichkeiten erfüllen dieselbe Funktion - sie dienen dazu, deinen Listings weitere Informationen hinzuzufügen und sie detaillierter zu beschreiben.
+
+Wenn du deinen Listings weitere Informationen hinzufügen willst, empfehlen wir, entweder eBay-Merkmale oder Eigenschaften zu verwenden. Neue plentymarkets Merkmale solltest du nicht mehr erstellen, da die Merkmale nicht mehr weiterentwickelt und in Zukunft komplett durch Eigenschaften ersetzt werden.
+
+*Was wird zu eBay übertragen?*
+
+Wenn du beispielsweise ein eBay-Merkmal, eine Eigenschaft und ein plentymarkets Merkmal hast und alle drei dieselben Informationen enthalten, werden nicht alle drei zu eBay übertragen. plentymarkets prüft immer zuerst, ob ein eBay-Merkmal vorhanden ist und wenn ja, wird das eBay-Merkmal übertragen. Ist keines mit diesen Informationen vorhanden, wird die Eigenschaft übertragen.
+
+Die Priorisierung bei der Übertragung der eBay-Merkmale, Eigenschaften und plentymarkets Merkmale sieht also folgendermaßen aus:
+
+. eBay-Merkmal
+. Eigenschaft
+. plentymarkets Merkmal
+
+Wenn du eBay-Merkmal, Eigenschaft und plentymarkets Merkmal mit denselben Informationen hast, wird also immer nur die höchste Priorität zu eBay übertragen.
+======
+
+[discrete]
+=== Kaufland
+
+* Ab sofort gibt es einen neuen Prozess, der stündlich deine Angebote zu den Varianten aktualisiert, die einem Katalog zugeordnet sind. Der Prozess berücksichtigt alle Varianten, die sich seit dem letzten Lauf des Prozesses geändert haben und aktualisiert diese auf Kaufland. Solltest du Änderungen bei der Zuordnung in einem Kaufland-Katalog vornhemen, werden beim nächsten Angebotsaktualisierungs-Prozess alle Angebote, die zu diesem Katalog gehören aktualisiert. Folgende Felder werden durch den Prozess aktualisiert:
+** Bestand
+** Zustandsbeschreibung
+** Bearbeitungszeit in Tagen
+** Kaufland Lager-ID
+** Kaufland Versandgruppen-ID
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Kaufland
+
+* Wegen einer Vorbereitung, zur Internationalisierung von Kaufland, werden eine Zeit lang nun Kaufland SKUs doppelt vergeben. Einmal für die Herkunft `102.00` und einmal für die Herkunft `102.01`. Diese bitte NICHT löschen.
+
+[discrete]
+=== Payment
+
+* In der Zahlungs-UI wird der Betrag von Soll-Zahlungen nun in rot dargestellt. Zusätzlich wird bei Anlage einer Zahlung der Betrag geprüft, sodass es nicht mehr möglich ist negative Beträge an einer Zahlung anzulegen.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI (Testphase) enthielt der Filter *Versandart* die falschen Namen der Versandarten. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Wenn man den Messenger über die Nachbestellungs-UI aufgerufen hat, wurden die Nachrichten nicht korrekt geladen bzw. aktualisiert. Dieses Verhalten wurde behoben.
+* Die Variablen `URL zum Ändern des Passworts` und `URL zum neuen Passwort` haben immer auf den Hauptmandanten verlinkt, auch wenn der Kontakt einem anderen Mandanten zugeordnet war. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Netto
+
+* Die xref:maerkte:plus-gartenxxl.adoc#1000[Ereignisaktion für Versandmeldungen] wurde nicht für Marktkauf-Aufträge ausgeführt. Dies wurde behoben.
++
+[IMPORTANT]
+.To-Do
+======
+Die Ereignisaktion für die Versandmeldung muss für Marktkaufaufträge neu ausgelöst werden.
+======
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Wir haben im EmailBuilder 2 neue Schaltflächen hinzugefügt:
+** eine Schaltfläche zum Migrieren aller Vorlagen
+** eine Schaltfläche zum erneuten Erstellen der Standardvorlagen, falls ihr diese gelöscht habt.
+
++
+In den alten E-Mail-Vorlagen-Einstellungen haben wir eine Schaltfläche hinzugefügt, mit der die gewählte Vorlage in den EmailBuilder migriert werden kann.
++
+[IMPORTANT]
+.To-Do
+======
+Wir haben die Migration verbessert. Die Migration könnt ihr jederzeit manuell anstoßen, indem ihr die oben genannten Schaltflächen anklickt.
+Wenn ihr z.B. komplexe, verschachtelte if statements in euren Vorlagen verwendet habt, ist es nicht immer möglich, diese korrekt zu migrieren.
+
+Prüft daher nach der Migration jede einzelne Vorlage. Um es einfacher und übersichtlicher für euch zu gestalten, haben wir diese Fehler in roter Schrift hervorgehoben.
+======
+* Im Bereich *Sprachabhängige Einstellungen* einer E-Mail-Vorlage im EmailBuilder wurden die Felder *Zahlenformat*, *Anzahl der Dezimalstellen*, *Datumsformat* und *Zeitformat* hinzugefügt. So kannst du nun für jede Sprache einstellen, wie die Variablenwerte in der E-Mail-Vorlage ausgegeben werden sollen. Die Einstellungen, die du dort vornimmst, finden dann Anwendung bei allen Variablen, die Zahlen, Datums- und Zeitformate ausgeben.
+* Im Messenger ist das Wählen eines Tags in der Funktion *Minuten erfassen* nun auch Pflicht, wenn es sich um Freiminuten handelt.
+
+[discrete]
+=== Ereignisaktionen
+
+* In den Ereignisaktionen wurden die folgenden Optionen zum Tag-Filter hinzugefügt:
+** Aufträge ohne Tags
+** Aufträge ohne diese Tags
+** Aufträge mit mindestens einem dieser Tags
+
+[discrete]
+=== Prozesse
+
+* n den Prozessen wurden die folgenden Optionen zum Tag-Filter hinzugefügt:
+** Aufträge ohne Tags
+** Aufträge ohne diese Tags
+** Aufträge mit mindestens einem dieser Tags
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Weil die Zahlenformatierungen in den TWIG-Ausdrücken der Variablen nun nicht mehr benötigt werden, wurden diese auch entfernt. Beispiel:
+** Alt: `{⁠{order.formattedGeneral.invoiceTotal | number_format(2, ',', '.')}⁠}`
+** Neu: `{⁠{order.formattedGeneral.invoiceTotal}⁠}`
+* Die Variable `Name des retournierten Artikels` im EmailBuilder wurde umbenannt in `Statusname des retournierten Artikels`.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftragsanlage wurde folgendes Verhalten behoben:
+** Beim Erstellen einer Adresse im 1. Schritt wurden durch mehrfaches Klicken auf *Speichern* mehrere Adressen erstellt;
+** Beim Einlösen von Gutscheinen wurde der Gutschein durch mehrfaches Klicken auf *Einlösen* mehrmals zum Auftrag hinzugefügt.
+* In der Übersichtstabelle der neuen Aufträge-UI wurden die Anzahl der Ergebnisse pro Seite nicht gespeichert, wenn die Seite neu geladen wurde. Dieser Fehler wurde nun behoben.
+
+[discrete]
+=== CRM
+
+* In der Übersicht der Schnellsuche wurde die Anzahl der Aufträge bei Gastbestellungen nicht angezeigt. Auch wenn man den Datensatz der Gastbestellung geöffnet hat, wurde die Anzahl der Aufträge nicht korrekt angezeigt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Beim Versuch, mehrere Dokumente über die Aktionen *Externe Rechnung* und *Externe Gutschrift* zu laden, konnte es dazu kommen, dass der Prozess hängen blieb. Dieses Verhalten wurde behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* gelöscht.
+
+[discrete]
+=== CRM
+
+* Die Variable *Gesamtrechnungsbetrag, durch Punkt getrennt* wurden aus dem EmailBuilder entfernt, weil diese nun nicht mehr benötigt wird.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/avocado_55217[AvocadoStore Connector^]
+|1.1.7
+|-
+
+|link:https://marketplace.plentymarkets.com/persistentshoppingcart_55154[Bleibender Warenkorb^]
+|1.0.8
+|-
+
+|link:https://marketplace.plentymarkets.com/etsy_4689[Etsy^]
+|2.1.36
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.14.1
+|-
+
+|link:https://marketplace.plentymarkets.com/feedback_5115[Kunden-Feedback^]
+|4.0.8
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.19
+|-
+
+|link:https://marketplace.plentymarkets.com/mytoys_54776[myToys^]
+|1.0.61
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.1.5
+|-
+
+|link:https://marketplace.plentymarkets.com/schuhe24_54954[Schuhe24 Import-/Exportplugin^]
+|2.10.1
+|Assistenten erneut durchlaufen
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.14.2
+|-
+
+|link:https://marketplace.plentymarkets.com/woocommerce_5102[woocommerce.com^]
+|3.2.0
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====

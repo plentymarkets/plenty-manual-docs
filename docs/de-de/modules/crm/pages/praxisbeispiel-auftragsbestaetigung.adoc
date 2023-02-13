@@ -1,0 +1,85 @@
+= Praxisbeispiel: plentyShop-Auftragsbestätigung an Kund:innen senden
+:keywords: Auftragsbestätigung, Auftragseingang automatisch bestätigen
+:description: Dieses Praxisbeispiel beschreibt, welche Einstellungen du vornehmen musst, um deinen Kund:innen automatisch eine Auftragsbestätigung zu senden, wenn sie eine Bestellung in deinem plentyShop aufgegeben haben.
+:author: team-crm
+
+Was muss ich einstellen, damit meine Kund:innen automatisch eine Auftragsbestätigung per E-Mail erhalten, wenn sie in meinem Shop einen Artikel bestellt haben?
+
+[discrete]
+== Erforderliche Schritte (Kurzform)
+
+* <<#e-mail-vorlage-einrichten, E-Mail-Vorlage einrichten>>
+* <<#ereignisaktion-einrichten, Ereignisaktion einrichten>>
+
+[#e-mail-vorlage-einrichten]
+== E-Mail-Vorlage einrichten
+
+In deinem plentymarkets System sind bereits xref:crm:emailbuilder.adoc#standardvorlagen-verwenden[Standardvorlagen] vorhanden, die du nach deinen Wünschen anpassen kannst. Du kannst auch eine xref:crm:emailbuilder.adoc#vorlage-erstellen[eigene Vorlage] erstellen. +
+*_Hinweis:_* Wir erläutern im Folgenden, wie du eine Standardvorlage bearbeitest und nicht, wie du eine neue Vorlage erstellst.
+
+[.instruction]
+Vorhandene Standardvorlage im EmailBuilder anpassen:
+
+. Öffne das Menü *CRM » EmailBuilder*.
+. Öffne (material:chevron_right[]) den Ordner *Standardvorlagen*.
+. Klicke auf die Vorlage _(ID) Shop: Eingangsbestätigung Bestellung_. +
+→ Du siehst die bereits befüllte Vorlage. 
+. Prüfe die Vorschau der Vorlage.
+. Klicke auf *Bearbeiten* (material:edit[]), um den Inhalt der Vorlage ggf. anzupassen.
+. Wähle im Bereich *Einstellungen* je einen xref:crm:emailbuilder.adoc#vorlage-header-footer[Header und Footer] aus den Dropdown-Listen.
+. Der Betreff dieser Vorlage ist `Auftragsbestätigung für Auftrags-ID {{order.id}}`. +
+→ Wenn du den Betreff ändern möchtest, klicke oben rechts auf *Sprachabhängige Einstellungen* (material:translate[]).
+*_Hinweis:_* Beachte auch die <<#info-box-statischer-anhang-widerrufsrecht, Information zum statischen Anhang und dem Widerrufsrecht>> in der Box.
+. *Speichere* (material:save[]) die Einstellungen.
+
+[#info-box-statischer-anhang-widerrufsrecht]
+[TIP]
+.Anhang der Vorlage anpassen
+====
+Passe ggf. auch den Anhang der Standardvorlage an. In der Standardvorlage *Shop: Eingangsbestätigung Bestellung* aus unserem Beispiel ist die Variable des Widerrufsrechts (`Widerrufsrecht im HTML-Format` oder `Widerrufsrecht im reinen Textformat`) direkt in der Vorlage enthalten. +
+Wenn du das Widerrufsrecht lieber als Anhang und nicht als Text innerhalb der E-Mail-Vorlage versenden möchtest, kannst du eine PDF-Datei mit deinem Text für das Widerrufsrecht im Menü *CMS » Dokumente* hochladen und dann diese PDF-Datei als statischen Anhang wählen. Klicke dazu in der Vorlage im Bereich *Einstellungen* oben rechts auf *Sprachabhängige Einstellungen* (material:translate[]) und wähle die PDF-Datei aus der Dropdown-Liste *Statische Anhänge*.
+
+*_Wichtig:_* Wenn du das Widerrufsrecht als Anhang an die E-Mail versendest, vergiss nicht, die Variable `Widerrufsrecht im HTML-Format` bzw. `Widerrufsrecht im reinen Textformat` aus der Vorlage direkt zu entfernen.
+====
+
+[#ereignisaktion-einrichten]
+== Ereignisaktion einrichten
+
+Richte nun eine Ereignisaktion ein, die den Versand der <<#e-mail-vorlage-einrichten, E-Mail-Vorlage>> auslöst, sobald ein Auftrag in deinem plentyShop eingegangen ist.
+
+[.instruction]
+Ereignisaktion einrichten:
+
+. Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
+. Klicke unten links auf *Ereignisaktion hinzufügen* (material:add[role=green]). +
+→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
+. Gib einen eindeutigen Namen für die Ereignisaktion ein, z.B. `Auftragsbestätigung plentyShop`.
+. Wähle das Ereignis gemäß <<#table-event-procedure-order-confirmation>>.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+. Nimm die Einstellungen gemäß <<#table-event-procedure-order-confirmation>> vor.
+. Aktiviere die Option *Aktiv*.
+. *Speichere* (icon:save[role=green]) die Einstellungen.
+
+[[table-event-procedure-order-confirmation]]
+.Ereignisaktion "Auftragsbestätigung plentyShop" einrichten
+[cols="2,4,3"]
+|====
+|Einstellung |Option |Auswahl
+
+|Ereignis
+|Auftragsanlage > Neuer Auftrag
+|
+
+|Filter 1
+|Auftrag > Auftragstyp
+|Auftrag
+
+|Filter 2
+|Herkunft
+|Mandant (Shop)
+
+|Aktion
+|Kunde > E-Mail versenden
+|Wähle als Vorlage die <<#e-mail-vorlage-einrichten, soeben erstellte Vorlage für die Auftragsbestätigung>>. Wähle als *Empfänger* die Option *Rechnungsadresse aus Auftrag*.
+
+|====

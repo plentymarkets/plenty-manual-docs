@@ -1,7 +1,7 @@
 = Event procedures
-:id: WA2EIQR
 :keywords: event, event procedure, automation, event action, event group, filter group, procedure group, activate event procedure, deactivate event procedure
 :author: team-docs-automation
+:description: Learn how to automate your daily tasks by using event procedures. Moreover, find out how to create, activate and edit event procedures.
 
 Order processing mostly consists of routine tasks. To a large extent, you can let your plentymarkets system take care of these tasks. In particular, sending emails to your customer is a time-consuming tasks, but nonetheless a vital aspect of a service- and customer-oriented online shop.
 With the *Event procedures*, plentymarkets provides you with an efficient tool for setting up such automatic processes that are reliably managed by your plentymarkets system. +
@@ -108,6 +108,8 @@ The event *New return (by customer)* refers to returns that are initiated by cus
 | *New OpenTrans order*
 |The event procedure is triggered when a new OpenTrans order is created.
 
+| *Order address changed*
+|The event procedure is triggered when the invoice address or the delivery address of an order is changed or when a new address is assigned. Select from the drop-down list for which address type the event should be triggered.
 |====
 
 [#events-documents]
@@ -144,6 +146,7 @@ xref:orders:generating-an-entry-certificate-gelangensbestaetigung.adoc#[Entry ce
 xref:orders:managing-orders.adoc#840[Multi-invoice] +
 xref:orders:managing-orders.adoc#860[Multi-credit note] +
 xref:orders:generating-pick-up-delivery.adoc#200[Pick-up/Delivery note] +
+*Uploaded* +
 
 _Important:_ If you use the procedure *Generate invoice* simultaneously in another event procedure, this event may be triggered twice.
 
@@ -151,6 +154,8 @@ _Important:_ If you use the procedure *Generate invoice* simultaneously in anoth
 *External credit note uploaded*
 |The event procedure is triggered when an external invoice or an external credit note is uploaded to an order.
 
+|*Document uploaded*
+|This event procedure is triggered, if a document of the type *uploaded* is generated for an order.
 |====
 
 [#events-payment]
@@ -264,11 +269,18 @@ icon:map-signs[] *Or:* Alternatively, you can select one or more warehouses to f
 
 | *Number of positions*
 |Orders are filtered according to the number of different variations included per order. Select whether the system filters orders according to a fixed number ( ==) of variations or according to values greater than (>), greater than or equal to (>=), less than (<) or less than or equal to (< ==) the selected quantity. You can also limit results by using a second (optional) operator. +
-*_Example_:* Required setting for filtering all orders with more than 5, but less than or equal to 10 different variations >5 < = 10.
+*_Example_:* Required setting for filtering all orders with more than 5, but less than or equal to 10 different variations >5 < = 10. +
+*_Note:_* For this filter, all order item types are taken into account.
 
 | *Quantity of order items*
 |Orders are filtered according to the total quantity of order items included per order. Select whether the system filters orders according to a fixed number ( ==) of order items or according to values greater than (>), greater than or equal to (>=), less than (<) or less than or equal to (< ==) the selected quantity. You can also limit results by using a second (optional) operator. +
-*_Example_:* Required setting for filtering all orders with more than 5, but less than or equal to 10 order items: >5 < = 10.
+*_Example_:* Required setting for filtering all orders with more than 5, but less than or equal to 10 order items: >5 < = 10. +
+*_Note:_* For this filter, the following order item types are taken into account: +
+*Variation* +
+*Unassigned variation* +
+*Bundle component* +
+*Set component* +
+*Gift wrap*
 
 | *Active user*
 |Orders are filtered according to the active xref:business-decisions:user-accounts-access.adoc#[user], which means the person by whom the event procedure is triggered. You can also select several or *all* users at once.
@@ -344,7 +356,12 @@ _Example:_ If you enter the value “34”, all postcodes beginning with “34�
 |Orders are filtered based on whether they have a return package number or not. Select the filter *Yes* or *No* from the drop-down list.
 
 |*Tag*
-|With this filter, you can assign xref:item:flags.adoc#400[tags] to an order type. By using this filter, orders of these types are filtered based on the tags assigned to them. Use the option *Orders with exactly these tags* or *Orders with at least these tags* to determine exactly how tags will be filtered.
+|With this filter, you can assign xref:item:flags.adoc#400[tags] to an order type. By using this filter, orders of these types are filtered based on the tags assigned to them. Use the following options to determine exactly how tags should be filtered: +
+*Orders without tags* +
+*Orders without these tags* +
+*Orders with exactly these tags* +
+*Orders with at least these tags* +
+*Orders with at least one of these tags*
 
 | *Order item type*
 | Orders are filtered based on the order item type they contain. Select an order item type for this filter. Then select whether the event procedure should be applied to orders which contain the selected order item type or to orders, which do not contain this order item type. +
@@ -609,8 +626,8 @@ The procedure can be added more than once so that tags can be added and deleted 
 | *Change dunning level*
 |The procedure changes the dunning level of an order. Select the dunning level that should be applied from the drop-down list.
 
-| *Change status of main order*
-|The procedure changes the order type of a main order. Select the order status from the drop-down list which the main order should get after splitting an order (option *Split up* in the order menu) or after delivery orders are generated.
+| *Change status of parent order*
+|The procedure changes the order type of a parent order. Select the order status from the drop-down list which the parent order should get after splitting an order (option *Split up* in the order menu) or after delivered orders are generated.
 
 | *Calculate sales data for data export*
 |Revenue data is usually stored in a separate database to maintain a high level of system performance during the generation of invoices or credit notes. Because it is not allowed to generate internal invoices for certain payment methods, such as *Neckermann* or *Quelle*, this database does not contain any data for orders with these payment methods. However, you can use this procedure to generate export data for those orders (Collmex, DATEV etc.) with the help of an event procedure. +
@@ -658,9 +675,6 @@ For further information, refer to the xref:crm:edit-contact.adoc#contact-details
 
 |*Send “Order complete” to DaWanda*
 |The procedure sends the information *Order complete* to DaWanda.
-
-| *Send cancellation to Flubit*
-|The procedure informs the market xref:markets:fruugo.adoc#[Fruugo] about an order cancellation. Select a reason for the cancellation from the drop-down list (Item not in stock, Item discontinued, Invalid delivery address, Customer cancellation, Legislation restriction, Other).
 
 | *Send order confirmation to idealo*
 |The procedure sends an order confirmation to the market xref:markets:idealo-setup.adoc#[idealo].

@@ -1,8 +1,7 @@
 = Kauflux
 :author: team-plenty-channel
 :keywords: Kauflux, Kauflux, Kaufluchs
-:description: Multi-Channel in plentymarkets: Set up the interface to the market Kauflux in your plentymarkets system.
-:id: GKYZVIJ
+:description: Learn how to set up the market Kauflux in plentymarkets to start selling your items on Kauflux.
 
 :kauflux:
 :market: Kauflux
@@ -32,7 +31,7 @@ Setting up Kauflux in plentymarkets:
 [[basic-settings-kauflux]]
 .Basic settings for Kauflux
 [cols="1,3a"]
-|====
+|===
 |Setting |Explanation
 
 | *Exchange period*
@@ -47,14 +46,14 @@ Setting up Kauflux in plentymarkets:
 | *API URL for the order import*
 |Kauflux uses this link to transfer orders to plentymarkets. This link is needed for importing orders from Kauflux and not for creating the item catalogue. The item catalogue is created <<#catalogue-export, with a catalogue in the *Data » Catalogues* menu>> or <<old-export, with the elastic export in the *Data » Elastic export* menu>>. +
 Further information in German can be found on link:https://www.kauflux.de/shop-anmelden/automatischer-auftragsdatenexport[Kauflux^].
-|====
+|===
 
 [#250]
 == Activating the order referrer
 
 :market: Kauflux
 :referrer: Kauflux
-:referrer-option: pass:quotes[option *Kauflux*]
+:referrer-option: pass:quotes[option *Kauflux* with ID *12*]
 
 include::partial$activate-referrer.adoc[]
 
@@ -112,7 +111,7 @@ Entering category IDs:
 
 . Open the Kauflux CSV file.
 . For each plentymarkets category, search for the corresponding *category IDs* in the CSV file from Kauflux.
-. Enter the category IDs from the Kauflux CSV file into the *KaufluxCat* column in the exported CSV file.
+. Enter the category IDs from the Kauflux CSV file into the *KaufluxCat* column in the exported online store CSV file.
 . Save the exported CSV file on your computer's hard drive.
 
 [.instruction]
@@ -128,12 +127,70 @@ Importing links:
 [#item-export]
 == Exporting item data
 
-* <<#old-export, _Alternative 1:_ Item export with the Elastic Export _(old method)_>>
-* <<#catalogue-export, _Alternative 2:_ Catalogue export _(recommended method)_>>
+* <<#catalogue-export, _Alternative 1:_ Item export with catalogue formats _(recommended method)_>>
+* <<#old-export, _Alternative 2:_ Item export with the Elastic Export _(old method)_>>
 * <<#change-elastic-export-catalogue, _Alternative 3:_ Changing from elastic export to catalogue>>
 
+[#catalogue-export]
+=== _Alternative 1:_ Item export with catalogue formats _(recommended method)_
+
+Catalogue formats provide you with a long-term and flexible way to export your item data to {market}.
+
+[#catalogue-creation]
+==== Creating a catalogue
+
+Item data is exported using a marketplace format. To export your items to a market, create a catalogue in the *Data » Catalogue* menu. Link the data fields in the catalogue with item data saved in plentymarkets in the marketplace format afterwards.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+:catalogue-template-name: Kauflux
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Mapping data fields in the catalogue
+
+Now, map the data fields in the catalogue to the item data saved in plentymarkets.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.List of recommended data field mappings
+--
+include::partial$kauflux-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Exporting specific items
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Setting up catalogue export
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+===== Activating the catalogue
+
+:interval:
+
+include::partial$catalogue-activation.adoc[]
+
+[#catalogue-url]
+==== Exporting catalogue data to {market}
+
+include::partial$catalogue-url.adoc[]
+
 [#old-export]
-=== _Alternative 1:_ Export format KaufluxDE-Plugin _(old method)_
+=== _Alternative 2:_ Item export with the Elastic Export _(old method)_
 
 NOTE: No new features are planned for the Elastic Export and the export formats. As such, we recommend that you <<#catalogue-export, create catalogues instead>>.
 
@@ -166,10 +223,13 @@ include::partial$export-formats.adoc[]
 
 include::partial$download_export-file.adoc[]
 
+[.collapseBox]
+.Available columns of the export file for the export format *KaufluxDE-Plugin*
+--
 [[kauflux-columns]]
 .Available columns for the export format
 [cols="1,3a"]
-|====
+|===
 | Column header | Explanation
 
 |ProductID
@@ -271,65 +331,8 @@ a|Status of the item: +
 
 |HerstellerArtNr
 |The model of the variation.
-|====
-
-[#catalogue-export]
-=== _Alternative 2:_ Catalogue export _(recommended method)_
-
-Catalogue formats provide you with a long-term and flexible way to export your item data to {market}.
-
-[#catalogue-creation]
-==== Creating a catalogue
-
-Item data is exported using a marketplace format. To export your items to a market, create a catalogue in the *Data » Catalogue* menu. Link the data fields in the catalogue with item data saved in plentymarkets in the marketplace format afterwards.
-
-include::partial$catalogue-new-to-text.adoc[]
-
-:catalogue-template-name: Kauflux
-:format-item-new:
-
-include::partial$catalogue-creation.adoc[]
-
-[#data-field-mappings]
-==== Mapping data fields in the catalogue
-
-Now, map the data fields in the catalogue to the item data saved in plentymarkets.
-
-include::partial$catalogue-mapping.adoc[]
-
-[#recommended-mappings]
-==== Recommendations for data field mappings
-
-include::partial$recommendation-text.adoc[]
-
-[.collapseBox]
-.List of recommended data field mappings
+|===
 --
-include::partial$kauflux-recommended-mappings.adoc[]
---
-
-[#filter-export]
-==== _Optional:_ Exporting specific items
-
-include::partial$catalogue-filters.adoc[]
-
-[#catalogue-settings]
-==== Setting up catalogue export
-
-:csv-txt:
-include::partial$catalogue-settings.adoc[]
-
-[#catalogue-activation]
-===== Activating the catalogue
-
-:interval:
-
-include::partial$catalogue-activation.adoc[]
-
-[#catalogue-url]
-==== Exporting catalogue data to {market}
-
-include::partial$catalogue-url.adoc[]
 
 [#change-elastic-export-catalogue]
 === _Alternative 3:_ Changing from elastic export to catalogue
@@ -340,8 +343,8 @@ include::partial$catalogue-change-from-elastic-export.adoc[]
 [[elastic-export-catalogue-mappings]]
 .Columns and data fields
 [cols="1,1"]
-|====
-|Column in elastic export |Data field in catalogue
+|===
+|Column in elastic export |Marketplace data field in catalogue
 
 | ProductID
 | ID
@@ -442,7 +445,7 @@ include::partial$catalogue-change-from-elastic-export.adoc[]
 | HerstellerArtNr
 | Model
 
-|====
+|===
 
 === Exporting item data
 
@@ -469,13 +472,27 @@ Orders from Kauflux can be imported into your plentymarkets system automatically
 [#1000]
 == Sending an email when orders are imported
 
-It is possible to send automatic emails when orders are imported into plentymarkets. Go to *Setup » Client » [Select client] » Email » Templates* to create and activate an email template for Kauflux.
+It is possible to send automatic emails when orders are imported into plentymarkets. Go to the *Setup » Client » [Select client] » Email » Templates* menu to create an email template for Kauflux. Afterwards, create an event procedure to send an email to customers when orders are imported.
 
-[.instruction]
-Sending an email when orders are imported:
+:table-event-procedure: <<#automatic-email-despatch-kauflux>>
 
-. Go to *Setup » Client » [Select client] » Email » Automatic*.
-. Select the previously created email template for the *New order from Kauflux* option.
-. Save (terra:save[]) the settings.
+include::_includes:partial$event-procedure.adoc[]
 
-Click on *Edit email template* to access the *Setup » Client » [Select client] » Email » Templates* menu and edit the email template.
+[[automatic-email-despatch-kauflux]]
+.Creating an event procedure for automatic emails
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *New order*
+| 
+
+| *Filter 1*
+| *Order > Referrer*
+| *Kauflux*
+
+| *Procedure*
+| *Customer > Send email*
+| *[add the email template that you created for Kauflux]*
+|===

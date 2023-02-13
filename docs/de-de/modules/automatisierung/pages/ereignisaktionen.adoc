@@ -1,7 +1,7 @@
 = Ereignisaktionen
-:id: WA2EIQR
 :keywords: Ereignis, Aktion, Ereignis-Aktion, Ereignisaktion, Automatisierung, Ereignisse, Ereignisgruppe, Filtergruppe, Aktionsgruppe, Aktionstyp, Ereignisaktion aktivieren, Ereignisaktion deaktivieren, EA
 :author: team-docs-automation
+:description: Erfahre, wie du anhand von Ereignisaktionen deine Routineaufgaben automatisierst. Lerne außerdem, wie du Ereignisaktionen anlegst, aktivierst und bearbeitest,
 
 Ein großer Teil der Auftragsbearbeitung besteht aus Routineaufgaben, die du automatisiert durch dein plentymarkets System erledigen lassen kannst. Besonders der Versand von E-Mails an deine Kunden:innen ist eine sehr aufwendige Aufgabe, für die Kund:innen- und Serviceorientierung deines Webshops aber unverzichtbar.
 Mit den *Ereignisaktionen* stellt dir plentymarkets ein effektives Werkzeug zur Verfügung, mit dem du solche Automatismen einstellen und zuverlässig durch das System ausführen lassen kannst. +
@@ -109,6 +109,8 @@ Das Ereignis *Neue Retoure (durch Kunde)* bezieht sich auf Retouren, die durch K
 | *Neue OpenTrans-Bestellung*
 |Die Ereignisaktion wird ausgelöst, wenn eine neue OpenTrans-Bestellung durchgeführt wird.
 
+| *Auftragsadresse geändert*
+|Die Ereignisaktion wird ausgelöst, wenn in einem Auftrag die Rechnungsadresse oder die Lieferadresse geändert wird oder wenn eine neue Adresse zugewiesen wird. Wähle in der Dropdown-Liste, bei welchem Adresstyp das Ereignis ausgelöst werden soll.
 |====
 
 [#events-documents]
@@ -145,6 +147,7 @@ xref:auftraege:gelangensbestaetigung-erzeugen.adoc#[Gelangensbestätigung] +
 xref:auftraege:auftraege-verwalten.adoc#840[Sammelrechnung] +
 xref:auftraege:auftraege-verwalten.adoc#860[Sammelgutschrift] +
 xref:auftraege:abhol-lieferschein.adoc#200[Abhol-/Lieferschein] +
+*Hochgeladen* +
 
 *_Wichtig:_* Dieses Ereignis kann auch durch eine andere Ereignisaktion ausgelöst werden, wenn du die Aktion *Rechnung erzeugen* parallel in einer weiteren Ereignisaktion verwendest.
 
@@ -152,6 +155,8 @@ xref:auftraege:abhol-lieferschein.adoc#200[Abhol-/Lieferschein] +
 *Externe Gutschrift hochgeladen*
 |Die Ereignisaktion wird ausgelöst, wenn eine externe Rechnung oder eine externe Gutschrift für einen Auftrag hochgeladen wird.
 
+| *Dokument hochgeladen*
+|Die Ereignisaktion wird ausgelöst, wenn ein Dokument des Typs *Hochgeladen* am Auftrag generiert wird.
 |====
 
 [#events-payment]
@@ -265,11 +270,19 @@ icon:map-signs[] *_Oder:_* Alternativ kannst du ein oder mehrere deiner Lager w�
 
 | *Anzahl Positionen*
 |Aufträge werden anhand der Anzahl der verschiedenen Auftragspositionen gefiltert, die pro Auftrag enthalten sind. Wähle, ob das System nach Aufträgen mit der exakt angegebenen Anzahl (==) der Positionen oder nach Werten größer (>), größer gleich (>=), kleiner (<), kleiner gleich (<=) der gewählten Anzahl filtert. Optional kannst du die Filterergebnisse über einen zweiten Operator eingrenzen. +
-*_Beispiel:_* Filterung nach allen Aufträgen mit mehr als 5 aber weniger oder gleich 10 verschiedenen Positionen: > 5 < = 10.
+*_Beispiel:_* Filterung nach allen Aufträgen mit mehr als 5 aber weniger oder gleich 10 verschiedenen Positionen: > 5 < = 10. +
+*_Hinweis:_* Bei diesem Filter werden alle Auftragspositionstypen berücksichtigt.
+
 
 | *Menge der Auftragspositionen*
 |Aufträge werden Anhand der Gesamtmenge aller Auftragspositionen gefiltert, die pro Auftrag enthalten ist. Wähle, ob das System nach Aufträgen mit der exakt angegebenen Menge (==) der Positionen oder nach Werten größer (>), größer gleich (>=), kleiner (<), kleiner gleich (<=) der gewählten Menge filtert. Optional kannst du die Filterergebnisse über einen zweiten Operator eingrenzen. +
-*_Beispiel:_* Filterung nach allen Aufträgen mit mehr als 5 aber weniger oder gleich 10 Auftragspositionen: > 5 < = 10.
+*_Beispiel:_* Filterung nach allen Aufträgen mit mehr als 5 aber weniger oder gleich 10 Auftragspositionen: > 5 < = 10. +
+*_Hinweis:_* Bei diesem Filter werden die folgenden Auftragspositionstypen berücksichtigt: +
+*Variante* +
+*Unzugeordnete Variante* +
+*Paket-Bestandteil* +
+*Set-Bestandteil* +
+*Geschenkverpackung*
 
 | *Aktiver Benutzer*
 |Aufträge werden anhand der aktiven xref:business-entscheidungen:benutzerkonten-zugaenge.adoc#[Benutzer:in] gefiltert, d.h. der Person, die den durch die Ereignisaktion aktivierten Vorgang auslöst. Es sind mehrere oder auch *alle* Benutzer:innen auf einmal wählbar.
@@ -345,7 +358,12 @@ Beachte, dass alle gewählten Dokumente für den Auftrag existieren müssen.
 |Aufträge werden anhand dessen gefiltert, ob sie eine Retourenpaketnummer enthalten oder nicht. Wähle den Filter *Ja* oder *Nein* aus der Dropdown-Liste.
 
 | *Tag*
-|Mit diesem Filter kannst du einem Auftragstyp xref:artikel:markierungen.adoc#400[Tags] zuordnen. Wird dieser Filter genutzt, werden die Aufträge anhand der ihnen zugeordneten Tags gefiltert. Lege mithilfe der Optionen *Aufträge mit exakt diesen Tags* und *Aufträge mit mindestens diesen Tags* fest, wie nach Tags gefiltert werden soll.
+|Mit diesem Filter kannst du einem Auftragstyp xref:artikel:markierungen.adoc#400[Tags] zuordnen. Wird dieser Filter genutzt, werden die Aufträge anhand der ihnen zugeordneten Tags gefiltert. Lege anhand der folgenden Optionen fest, wie nach Tags gefiltert werden soll: +
+*Aufträge ohne Tags* +
+*Aufträge ohne diese Tags* +
+*Aufträge mit exakt diesen Tags* +
+*Aufträge mit mindestens diesen Tags* +
+*Aufträge mit mindestens einem dieser Tags*
 
 | *Typ der Auftragsposition*
 | Aufträge werden danach gefiltert, welche Auftragspositionstypen sie enthalten. Wähle im Filter einen Auftragspositionstyp. Wähle dann aus, ob die Ereignisaktion auf Aufträge angewendet werden soll, die diesen Typ enthalten oder auf Aufträge, die diesen Typ nicht enthalten. +
@@ -610,8 +628,8 @@ Die Aktion kann mehrmals hinzugefügt werden, so dass in einer Ereignisaktion Ta
 | *Mahnstufe ändern*
 |Die Aktion ändert die Mahnstufe eines Auftrags. Wähle aus der Dropdown-Liste aus, welche Mahnstufe der Auftrag durch die Ereignisaktion erhalten soll.
 
-| *Status des Hauptauftrags ändern*
-|Die Aktion ändert den Auftragsstatus eines Hauptauftrages. Wähle aus der Dropdown-Liste den Auftragsstatus aus, den der Hauptauftrag bei Teilung eines Auftrags (Funktion: *Auftrag teilen* in der Auftragsbearbeitung) oder nach *Lieferaufträge generieren* erhalten soll.
+| *Status des Elternauftrags ändern*
+|Die Aktion ändert den Auftragsstatus eines Elternauftrags. Wähle den Auftragsstatus aus der Dropdown-Liste, den der Elternauftrag bei Teilung eines Auftrags (Funktion: *Auftrag teilen* in der Auftragsbearbeitung) oder nach *Lieferaufträge generieren* erhalten soll.
 
 | *Umsatzdaten für Umsatzexport berechnen*
 |Generell werden Umsatzdaten aus Performance-Gründen bei der Rechnungs- bzw. Gutschrifterzeugung in einer eigenen Datenbank abgelegt. Da für manche Zahlungsarten wie *Neckermann* oder *Quelle* keine internen Rechnungen generiert werden dürfen, enthält diese Datenbank jedoch keine Daten für Aufträge dieser Zahlungsarten. Es besteht aber die Möglichkeit, die Exportdaten für solche Aufträge (Collmex, DATEV etc.) über eine Ereignisaktion anhand dieser Aktion zu erzeugen. +
@@ -659,9 +677,6 @@ Details findest du auf der Handbuchseite xref:crm:kontakt-bearbeiten.adoc#kontak
 
 | *"Auftrag Abgeschlossen" an DaWanda senden*
 |Die Aktion sendet die Information *Auftrag abgeschlossen* an DaWanda.
-
-| *Stornierung an Flubit senden*
-|Die Aktion meldet die Stornierung eines Auftrags an den Marktplatz xref:maerkte:flubit.adoc#[Flubit]. Wähle aus der Dropdown-Liste den Grund der Stornierung aus (Artikel nicht vorrätig, Artikel nicht mehr im Sortiment, Ungültige Lieferadresse, Stornierung durch Kunden, gesetzliche Beschränkung, Sonstiges).
 
 | *Auftragsbestätigung an idealo senden*
 |Die Aktion sendet eine Auftragsbestätigung an den Marktplatz xref:maerkte:idealo-einrichten.adoc#[idealo].

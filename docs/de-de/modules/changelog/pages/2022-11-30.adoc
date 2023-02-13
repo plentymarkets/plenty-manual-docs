@@ -1,0 +1,371 @@
+= Changelog 30. November 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 17. November 2022
+:endWeekDate: 30. November 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/prozesse-einzelnes-dokument-als-sammeldokument-drucken-processes-print-single-document-as-multi-document/703439
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/neue-auftragsanlage-fixes-fuer-mengen-und-auftragseigenschaften-new-order-creation-fixes-for-amounts-and-order-item-properties/703288
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/neue-auftragsanlage-und-neue-auftrags-ui-testphase-teilsuche-fuer-variantennummer-new-order-creation-and-new-order-ui-test-phase-allow-partial-search-for-variation-number/703310
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Änderungshistorie
+
+* Der Änderungshistorie wurde die Komponente speicherbare Filter hinzugefügt. Damit kannst du ab sofort Filter speichern und wiederverwenden.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI wurde der Filter für das Kundenzeichen zu den Filtern in der Auftragssuche hinzugefügt. Dieser Filter ist optional und kann in den *MyView*-Einstellungen aktiviert werden.
+* In der neuen Auftrags-UI kannst du im Bereich Allgemein eines Auftrags ab sofort den Handelsvertreter wählen. Außerdem kannst du das Feld Handelsvertreter in der Tabelle der Auftragsübersicht hinzufügen und somit nach Aufträgen eines Handelsvertreters filtern.
+* In der neuen Auftragsanlage wurden die folgenden Felder zum ersten Schritt eines neuen Auftrags hinzugefügt:
+** Skontofrist (Tage)
+** Skonto (%)
+** Valuta (Tage)
+** Zahlungsziel (Tage)
+
+[discrete]
+=== CRM
+
+* Bei der Auswahl von E-Mail-Vorlagen in Nachbestellungen, Ereignisaktionen (Aufträge und Ticketsystem), Aktionsmanager (Aufträge und Ticketsystem), Gruppenfunktionen, Messenger, Ticketsystem, Aufträge-UI, Assistenten *E-Mail-Konten* und *Messenger-Konfiguration* und in den Prozessen wurde die Anzeige der E-Mail-Vorlagen nach folgendem Muster vereinheitlicht:
++
+----
+[ID] [NEW] Name der Vorlage
+----
++
+Die Sortierung der Vorlagen erfolgt anhand des Vorlagennamens. Die neuen Vorlagen ([NEW]) werden vor den alten Vorlagen ([OLD]) angezeigt.
+* Wenn im EmailBuilder der Betreff einer Vorlage zu lang ist, wird der Text ab sofort gekürzt, um zu vermeiden, dass die Schaltflächen am Ende der Zeile in eine neue Zeile rutschen. Die drei Punkte (...) am Ende der gekürzten Betreffzeile weisen darauf hin, dass der Betreff länger ist als dargestellt. Außerdem wurde ein Tooltip eingebaut, damit man den kompletten Betreff auf einen Blick sehen kann.
+* Im EmailBuilder wurden im Bereich *Globals* die Variablen *Mandantenname* und *Mandanten-ID* hinzugefügt.
+
+[discrete]
+=== Datenlog
+
+* In der Log-UI gibt es ab sofort eine Schnellsuche über der Tabelle, damit du diese schneller filtern kannst. Außerdem wurde der Log-UI die Komponente speicherbare Filter hinzugefügt. Damit kannst du ab sofort Filter bzw. Filter-Sets speichern und wiederverwenden.
+
+[discrete]
+=== Etsy
+
+* Für den Marktplatz Etsy wurde ein Menü zur OAuth2-Authentifizierung hinzugefügt. Du findest das Menü unter *Einrichtung » Märkte » Etsy » OAuth2*. In diesem Menü authentifizierst du dein Etsy-Konto für OAuth2. Diese Authentifizierung wird benötigt, damit plentymarkets Zugriff auf dein Etsy-Konto gewährt wird und damit Daten zwischen plentymarkets und Etsy ausgetauscht werden können.
++
+[IMPORTANT]
+.To-Do
+======
+Durch ein notwendiges Update der Etsy API-Version wurde die Authentifizierungsmethode für Etsy geändert. In Zukunft wird die OAuth2-Authentifizierung für Etsy verpflichtend sein und die alte Authentifizierungsmethode ersetzen. Die Umstellung wird voraussichtlich am 16.01.2023 erfolgen.
+
+Wir empfehlen dir deshalb, schon jetzt dein Etsy-Konto für OAuth zu authentifizieren. Öffne dazu das Menü *Einrichtung » Märkte » Etsy » OAuth2*.
+
+Weitere Informationen zur Authentifizierung findest du auf der Handbuchseite xref:maerkte:etsy.adoc#konto-freischalten[Etsy].
+======
+* Für Etsy wurden zwei neue Ereignisaktionen hinzugefügt:
+** *Zahlungsbestätigung an Etsy senden (neu)*
+** *Versandbestätigung an Etsy senden (neu)*
+
++
+Die alten Ereignisaktionen *Zahlungsbestätigung an Etsy senden (veraltet)* und *Versandbestätigung an Etsy senden (veraltet)* sind noch verfügbar und funktionieren weiterhin. Sie wurden mit "veraltet" gekennzeichnet.
++
+_Hintergrund:_ Für die Einrichtung von Etsy wird in Zukunft kein Plugin mehr nötig sein. Die Umstellung wird voraussichtlich am 16.01.2023 erfolgen. Aufgrund dieser Umstellung müssen von uns auch die Ereignisaktionen angepasst werden, damit sie weiterhin funktionieren werden.
++
+[IMPORTANT]
+.To-Do
+======
+Zurzeit benötigst du noch die alten Etsy-Ereignisaktionen (*Zahlungsbestätigung an Etsy senden (veraltet)* und *Versandbestätigung an Etsy senden (veraltet)*). Nach der Umstellung werden diese Ereignisaktionen aber nicht mehr funktionieren. Deshalb solltest du schon jetzt die neuen Ereignisaktionen für Etsy einrichten.
+
+Damit deine Ereignisaktionen für Etsy auch in Zukunft funktionieren, solltest du jetzt schon die neuen Ereignisaktionen einrichten. Konkret bedeutet dies, dass du für Etsy Ereignisaktionen mit diesen Aktionen einrichten musst:
+
+* *Zahlungsbestätigung an Etsy senden (neu)*
+* *Versandbestätigung an Etsy senden (neu)*
+
+Öffne dazu das Menü *Einrichtung » Aufträge » Ereignisse*. Weitere Informationen zur Einrichtung von Ereignisaktionen findest du auf der Handbuchseite xref:maerkte:etsy.adoc#10001[Etsy].
+======
+
+[discrete]
+=== plentyBI
+
+* Mit dem Element *Meine Aufgaben* kannst du dir deine unerledigten Aufgaben nun auch auf dem neuen Dashboard anzeigen lassen. Weitere Informationen findest du auf der Handbuchseite xref:willkommen:system-personalisieren.adoc#190[Dein System personalisieren].
+* Im Dashboard lassen sich globalen Filter nun speichern. Außerdem hast du die Möglichkeit einen Filter als Standard festzulegen.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel-UI (Neu)
+
+* Die Art und Weise, wie Eigenschaften zu Varianten hinzugefügt werden, wurde komplett überarbeitet. Es wird nun zur Auswahl der gewünschten Eigenschaften die reguläre Eigenschaften Übersicht verwendet. Dadurch ist ein deutlich schnelleres Arbeiten beim Hinzufügen von Eigenschaften möglich.
+
+[discrete]
+=== Kaufland.de
+
+* Die verknüpfbaren Kategorien von Kaufland.de unter *Einrichtunge » Märkte » Kaufland.de » Kategorieverknüpfung* wurden aktualisiert.
+
+[discrete]
+=== Plugins
+
+* Es ist nun möglich, dass Plugins über die Backend-URL auf den SDK-Server zugreifen können. Das bedeutet du musst nicht mehr Plugins, welche über eine Route auf den SDK-Server zugreifen im Plugin-Set deines Hauptmandanten installieren.
+
+[discrete]
+=== Prozesse
+
+* Es gab eine Anpassung in den Prozessen, sodass folgende Auftragsdokumente nun über eine neue Schnittstelle generiert und abgerufen werden:
+** Rechnung
+** Lieferschein
+** Gutschrift
+** Korrekturbeleg
+** Reparaturschein
+** Auftragsbestätigung
+** Angebot
+** Rücksendeschein
+** Gelangensbestätigung
+** Abhol-/Lieferschein
+** Stornobeleg Mahnung
+** Stornobeleg Rechnung
+** Stornobeleg Gutschrift
+** Proformarechnung
+
++
+[NOTE]
+.Kein To-Do
+======
+Eine Anpassung in den Prozessen ist nicht notwendig.
+======
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel-UI (Neu)
+
+* Ein Fehler in der Komponente zur Auswahl von Werten von Mehrfachauswahleigenschaften in der neuen Artikel-Ui führte dazu, dass speicherbare Änderungen nur mit sehr großer Verzögerung registriert wurden und der Button zum Speichern deaktiviert blieb.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI wurden beim Ändern der Zahlungsbedingungen in den Auftragsdetails nur die geänderten Werte gespeichert. Dieser Fehler wurde behoben und die Daten werden nun korrekt gespeichert.
+* In der Auftrags-UI (Testphase) wurden Einträge in der Seitennavigation nicht korrekt sortiert, wenn ein neuer Auftrag erstellt wurde. Dieser Fehler wurde behoben.
+* In der neuen Auftrags-UI wurde die Info *Gastbestellung* permanent in der Fußzeile der Seitennavigation angezeigt. Dieser Fehler wurde behoben.
+* In der neuen Auftrags-UI kam es beim Öffnen von Reparaturen zu einem Fehler. Dies wurde behoben.
+* In der neuen UI zur Auftragsanlage wurde die Spalte Barcode in der Artikeltabelle nicht angezeigt. Dieser Fehler wurde behoben.
+* In der Auftragsanlage wurden die Dimensionen von der Variante übernommen. Dies wurde entfernt und somit werden nun keine Dimensionen vorgegeben.
+* Im letzten Schritt der neuen Auftragsanlage wurde die Nettomenge eines Artikels nach manueller Eingabe eines Preises in die Bruttomenge geändert.
+* In der neuen Auftrags-UI (Testphase) kam es beim Formatieren und Anzeigen einer Adresse zu einem Fehler. Dies wurde behoben.
+* Beim Einlösen von Aktionsgutscheinen konnte es zu einem Fehler kommen. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Bei einigen Systemen war das Speichern von Tags im Messenger nicht möglich. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Datenlog
+
+* Die Filter *Datum* und *Uhrzeit* in der Log-UI haben nicht korrekt funktioniert. Dieser Fehler wurde jetzt behoben.
+
+[discrete]
+=== Payment
+
+* Bei dem Import von EBICS Zahlungen konnte es, bei Mehrfachzahlungen, dazu kommen das neben dem Vormerkposten auch alle weiteren Zahlungen einem Auftrag zugeordnet wurden. Dies führte dazu das entsprechend einem Auftrag mehrere Zahlungen zugeordnet waren, der Auftrag jedoch nicht als überbezahlt galt. Ab sofort wird mit jedem Vormerkposten nur genau eine Zahlung verknüpft und alle weiteren Zahlungen werden nicht mehr automatisch dem Auftrag zugeordnet und bleiben somit unzugeordnet.
+
+'''
+
+[discrete]
+== Entfernt
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* entfernt.
+
+[discrete]
+=== CRM
+
+* Wie in diesem link:https://forum.plentymarkets.com/t/ankuendigung-abschaltung-von-einigen-ereignissen-im-automatischen-versand-announcement-deactivation-of-some-automatic-despatch-events/699311[Forumsbeitrag^] angekündigt, wurden im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* die folgenden Ereignisse entfernt:
+** Neue Bestellung über den Webshop
+** Neue Bestellung über eBay
+** Neue Bestellung über Amazon
+** Neue Bestellung über Amazon FBA
+** Neue Bestellung über Yatego
+** Neue Bestellung über Kauflux
+** Neue Bestellung über Mercateo
+** Neue Bestellung über pixmania
+** Neue Bestellung über ricardo
+** Neue Bestellung über Rakuten
+** Neue Bestellung über Kaufland.de
+** Neue Bestellung über Interfaces
+** Tell-a-friend
+** Gewinnspielanmeldung
+** Forum-Benachrichtigung
+** Neuer Link zur Bestellbestätigung
+
++
+Diese Ereignisse kannst du ab sofort nur noch über Ereignisaktionen einbinden, um zum Beispiel bei Eingang einer neuen Bestellung über einen der oben genannten Marktplätze automatisch eine Auftragsbestätigung an deine Kund:innen zu senden.
+
++
+[IMPORTANT]
+.To-Do
+======
+Wenn du im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* E-Mail-Vorlagen mit einem der oben genannten Ereignisse verknüpft hast, erstelle für diese Fälle Ereignisaktionen im Menü *Einrichtung » Aufträge » Ereignisse*.
+======
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel-UI (Neu)
+
+* Es ist jetzt möglich Artikeletiketten in der neuen Artikel-UI zu erstellen. Zusätzlich hat man auf der Variantendetailansicht die Möglichkeit einen spezifischen Lagerort für das Etikett zu wählen.
+* Es ist jetzt möglich, eine Variante zur neuen Hauptvariante zu machen.
+
+[discrete]
+=== Aufträge
+
+* In der Detailansicht der neuen Auftrags-UI können jetzt die verwendeten Umsatzsteuersätze angezeigt werden.
+* In der Auftragsanlage wird nun die Kundenbewertung angezeigt.
+* Im letzten Schritt der neuen Auftragsanlage wurde im Feld *Gutscheincodes* ein neuer Button hinzugefügt, über den man externe und interne Gutscheincodes einlösen kann.
+* Die *Auftragsherkunft* ist nun ein Standardfilter in der Auftragsübersicht.
+* Die Spalte *Externe Auftrags-ID* ist nun eine Standardspalte in der Tabelle der Auftragsübersicht.
+* In den Auftragsdetails ist nun standardmäßig auch der Bereich *Messenger* verfügbar, der direkt neben den Notizen zu finden ist. Diese Änderung gilt für alle Auftragstypen.
+* In der neuen Auftrags-UI werden bei den Auftragsreferenzen nun nicht mehr nur direkte Eltern- und Kindaufträge, sondern alle verwandten Aufträge angezeigt.
+* m Menü *Einrichtung » Aufträge » Auftragstypen » Lieferauftrag* wurde bei der Einstellung *Aufträge in Lieferaufträge splitten nach* die neue *Option Lager- und Netto-Warenbestand >= Menge Auftragsposition* hinzugefügt. In diesen Schritt wurde außerdem die Option *Lager- und Netto-Warenbestand* in *Lager- und Netto-Warenbestand > 0* umbenannt.
+
+[discrete]
+=== CRM
+
+* Im Assistenten Messenger-Konfiguration wurde im Schritt Einstellungen für den E-Mail-Empfang eine Einstellung hinzugefügt, mit der man die Benachrichtigungen über neue Nachrichten über den Messenger aktivieren bzw. deaktivieren kann. Wenn diese Einstellung deaktiviert ist, erhältst du über das Glocken-Symbol oben rechts im plentymarkets Backend keine Benachrichtigungen mehr bei Erhalt neuer Nachrichten über den Messenger.
+* Wenn man im EmailBuilder eine bestehende Vorlage von einem Ordner in einen anderen Ordner verschiebt, wird ab sofort der Zielordner aufgeklappt.
+
+[discrete]
+=== Prozesse
+
+* In der Prozessbearbeitung kannst du jetzt den *Namen* und die *ID* als Überschrift sehen. Damit kannst du bei mehreren Prozessen einfacher den Überblick behalten und es ist außerdem möglich, den Namen und die ID zu kopieren.
+* Wir haben in den Prozessen die neue Subaktion *Generieren* eingeführt, mit der ihr die Möglichkeit habt, folgende Dokumente vorab zu generieren:
+** Rechnung
+** Mahnung
+** Lieferschein
+** Gutschrift
+** Korrekturbeleg
+** Reparaturschein
+** Auftragsbestätigung
+** Angebot
+** Rücksendeschein
+** Gelangensbestätigung
+** Abhol-/Lieferschein
+** Stornobeleg Mahnung
+** Stornobeleg Rechnung
+** Stornobeleg Gutschrift
+** Proformarechnung
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel-UI (Neu)
+
+* Wenn man in der neuen Artikel-UI Bestelleigenschaften verknüpfen möchte, dann werden im Dialog zur Auswahl der gewünschten Eigenschaften jetzt ausschließlich Bestelleigenschaften angezeigt.
+
+[discrete]
+=== Aufträge
+
+* Im zweiten Schritt der neuen Auftragsanlage wurde eine Warnmeldung mehrfach für dieselbe Varianten-ID angezeigt, wenn der Preis niedriger war als der Verkaufspreis. Die Warnmeldung wird nun lediglich im letzten Schritt angezeigt und auch die mehrfache Anzeige wurde behoben.
+* In der Artikeltabelle der neuen Auftragsanlade wurden die Spalten *System-EK*, *Lager* und *Nettobestand* nicht richtig angezeigt. Dieser Fehler wurde behoben.
+* In der Übersicht der neuen Auftrags-UI wurde immer die Systemwährung angezeigt - auch wenn der Auftrag eine andere Währung hatte. Dies wurde behoben.
+* In der neuen Auftrags-UI (Testphase) wurde das Dokumenten-Widget nach der Erstellung neuer Dokumente nicht neu geladen. Dieser Fehler wurde behoben.
+* In der neuen Auftrags-UI (Testphase) wurden Aktionsgutscheine und Mehrzweckgutscheine in der Artikeltabelle nicht angezeigt. Dieser Fehler wurde behoben.
+* In der UI für Bestellungen wurden Tags nicht gespeichert wenn eine neue Umbuchung erstellt oder eine bestehende Umbuchung bearbeitet wurde. Dieser Fehler wurde behoben.
+* Der Filter *Kontaktdaten* in der Auftragssuche hat nicht funktioniert. Dies wurde behoben.
+* In der neuen UI zur Auftragsanlage wurden Varianten bei der Wahl einer Vorlage im ersten Schritt in der falschen Menge zum Warenkorb hinzugefügt. Dies wurde behoben, sodass nun die korrekte Varianten-Menge aus der Auftragsvorlage übernommen wird.
+
+[discrete]
+=== CRM
+
+* Die Variable *Tracking-URL* im EmailBuilder hat keinen klickbaren Link ausgegeben, der zur Seite des Versanddienstleisters führt. Dieses Verhalten wurde behoben.
+* Bestehende Kontaktoptionen im Kontaktdatensatz konnten nicht aktualisiert und dann gespeichert werden, wenn man die Portlets *Tags*, *Eigenschaften* oder *Optionen* aus der MyView entfernt hat. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Bei der Anmeldung des Versands in den Prozessen konnte es zu einer Fehlermeldung (`Response is NOT a valid JSON document`) im Backend-Log kommen. Dieses Verhalten wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/dhlwunschpaket_5435[DHL Wunschzustellung^]
+|1.2.1
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.14.0
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportidealode_4723[idealo.de^]
+|3.3.40
+|-
+
+|link:https://marketplace.plentymarkets.com/metro_6600[Metro^]
+|2.3.1
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.14.0
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.8
+|-
+
+|link:https://marketplace.plentymarkets.com/woocommerce_5102[woocommerce.com^]
+|3.1.2
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====

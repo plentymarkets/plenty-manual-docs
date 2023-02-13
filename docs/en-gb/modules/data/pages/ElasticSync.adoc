@@ -1,7 +1,6 @@
 = Using the import tool
 :keywords: Importing data, Data import, Import, ElasticSync, synchronise, Synchronisation, Data format, matching, Import options, mapping, Import data, create Sync, Data typ, manual upload, upload data manually, own value, RegEx function, Regular Expressions, regex, FTP, HTTPS, SFTP, Mathematical calculations, own mapping, filter import file, manipulate import file, cancel import, backup, import Backup
-:description: Find out how to import data in plentymarkets using the import tool.
-:id: 6Z40YCT
+:description: Our import tool: Find out how to import data in plentymarkets.
 :author: team-plenty-channel
 
 This manual page describes how to import data using the import tool. Importing data is recommended in may situations. For example, it is useful if you want to add new items, customer data or stock etc. to your plentymarkets system and this data is available in a digital format. You can import data manually or automate the process.
@@ -37,11 +36,6 @@ Creating an import:
 | *Name*
 | Enter a name for the import. This name is displayed in the overview and can be used for the search.
 
-| *Interval*
-| Select an interval for carrying out imports. +
-By choosing the option *Schedule* you can determine how often and at what time the imports shall be started. +
-*_Important:_* Only set an import interval when you have finished all import settings. Otherwise, the first import might start while you are still working on the settings for the import matching or mapping.
-
 | *Type*
 | Which type of data do you want to import?
 
@@ -64,6 +58,31 @@ By choosing the option *Schedule* you can determine how often and at what time t
 * xref:data:elasticSync-stock.adoc#[Stock] = Imports stock data
 * xref:data:elasticSync-incoming-items.adoc#[Incoming items] = Imports incoming item data
 
+*_Something missing?_* Find a list of the available import types xref:page$import-types.adoc#[here].
+
+| *Interval*
+| In what intervals do you want to import the data? +
+
+*_Important:_* Only set an import interval when you have finished all import settings. Otherwise, the first import might start while you are still working on the settings for the import matching or mapping.
+
+[cols="1a,3a"]
+!===
+! *Inactive*
+! No data is imported.
+
+! *20 minutes*; +
+ *Hourly*; +
+*Daily*
+! The file's data is imported in the selected interval.
+
+! *Schedule*
+! Adds a new option to the menu. This option allows you to select one or more times at which the import is started.
+!===
+
+| *Schedule* +
+(for option *Schedule*)
+| Click into the field. From the drop-down list shown, select one or more points in time. The import starts at these times.
+
 2+^| *Import*
 
 | *Data type*
@@ -81,7 +100,7 @@ By choosing the option *Schedule* you can determine how often and at what time t
 | *Use global cache*
 | Determine whether the global cache should be used for the file or not.
 
-material:check_box_outline_blank[] = All data of the file is reimported during the import process. +
+material:check_box_outline_blank[] = During each import process, all data rows are reimported. +
 material:check_box[] = Only changed records are imported.
 
 | *Automatic mapping*
@@ -100,8 +119,14 @@ Alternatively, you can set the field separator manually. Possible separators are
 | *Delimiter*
 | What delimiter is used in the file in cases where the same field/the same column contains more than one value?
 
-" = Individual values within one field are separated by double quotation marks. +
-' = Individual values within one field are separated by single quotation marks.
+[cols="1a,7a"]
+!===
+! *"*
+! Individual values within one field are separated by double quotation marks. 
+
+! *'*
+! Individual values within one field are separated by single quotation marks. 
+!===
 
 2+^| *Source*
 
@@ -109,7 +134,7 @@ Alternatively, you can set the field separator manually. Possible separators are
 | Select *Manual upload*, *FTP*, *HTTPS* or *SFTP*. +
 Depending on the selected option, the following settings are shown:
 
-[cols="1,3a"]
+[cols="1,5a"]
 !===
 ! *Manual upload*
 !
@@ -123,12 +148,12 @@ Depending on the selected option, the following settings are shown:
 ! *FTP*
 !  *_Important:_* plentymarkets no longer provides an FTP server. As such, only use this option if the import file is saved on an external FTP server.
 
-* *Host (mandatory field)* = Enter the host of the FTP server.
+* *Host* (mandatory field) = Enter the host of the FTP server.
 * *Port* = Enter the port of the FTP server. If no port is entered, the default port 22 is used.
 * *User name (mandatory field)* = Enter the user name for the FTP access.
 * *Password (mandatory field)* = Enter the password for the FTP access.
 * *File name* = Enter the path and the name of the file from which the data is to be imported. The file name has to end with .csv or .txt. +
-  *_Note:_* You can use wildcards in the field *File name*. For example, replace a part of the file name with an asterisk (*).
+  *_Note:_* You can use wildcards in the field *File name*. For example, replace a part of the file name with an asterisk (∗).
 However, only use wildcard characters in combination with the option *Move file to archive when import was successful*.
 * *Move file to archive when import was successful* = If this option is activated, the import file is automatically moved to a new *Archive* folder in the FTP directory after the import.
 
@@ -143,14 +168,14 @@ However, only use wildcard characters in combination with the option *Move file 
 . If you selected *HTTP authentication*, enter the *User name* and *Password* for the server.
 
 ! *SFTP*
-!  *_Important:_* plentymarkets no longer provides an FTP server. As such, only use this option if the import file is saved on an external FTP server.
+! *_Important:_* plentymarkets no longer provides an FTP server. As such, only use this option if the import file is saved on an external FTP server.
 
 * *Host* (mandatory field) = Enter the host of the FTP server.
 * *Port* (mandatory field) = Enter the port of the FTP server. If no port is entered, the default port 22 is used.
 * *User name* (mandatory field) = Enter the user name for the FTP access.
 * *Password* (mandatory field) = Enter the password for the FTP access.
 * *File name* = Enter the path and the name of the file from which the data is to be imported. The file name has to end with .csv or .txt. +
-  *_Note:_* You can use wildcards in the field *File name*. For example, replace a part of the file name with an asterisk (*).
+  *_Note:_* You can use wildcards in the field *File name*. For example, replace a part of the file name with an asterisk (∗).
 However, only use wildcard characters in combination with the option *Move file to archive when import was successful*.
 * *Move file to archive when import was successful* = If this option is activated, the import file is automatically moved to a new *Archive* folder in the FTP directory after the import.
 
@@ -181,17 +206,33 @@ Setting the import options:
 | *Import options*
 | How do you want to import the data?
 
-* *Import new data, update existing* = If data can be found by means of the matching fields, a new data record is added, for example a new item or a new order. Existing records are updated.
-* *Only update existing data* = Existing records are updated. If no record can be found based on the matching fields, the record is not imported.
-* *Only import new data* = Only new records are imported, i.e. any records for which no matching data is found based on the matching fields.
+[cols="1a,2a"]
+!===
+! *Import new data, update existing*
+! If data can be found by means of the matching fields, a new data record is added, for example a new item or a new order. Existing records are updated.
+
+! *Only update existing data*
+! Existing records are updated. If no record can be found based on the matching fields, the record is not imported.
+
+! *Only import new data*
+! Only new records are imported, i.e. any records for which no matching data is found based on the matching fields.
+!===
 
 | *Decimal number*
 | How are decimal numbers formatted in the import files?
 
-* *German spelling* = Decimal numbers are formatted with commas. A period is used as thousands separator. +
-  *_Examples:_* 13,95 Pound, 15.000 pieces
-* *English spelling* = Decimal numbers are formatted with periods. A comma is used as thousands separator. +
-  *_Examples:_* 13.95 Euro, 15,000 units
+[cols="1a,3a"]
+!===
+! *German spelling*
+! Decimal numbers are formatted with commas. A period is used as thousands separator.
+
+*_Examples:_* 13,95 Pound, 15.000 pieces
+
+! *English spelling*
+! Decimal numbers are formatted with periods. A comma is used as thousands separator.
+
+*_Examples:_* 13.95 Euro, 15,000 units
+!===
 
 | *Date format*
 | How are calendar dates formatted in the import files? +
@@ -199,6 +240,21 @@ Setting the import options:
 If the calendar dates in the file are formatted in the standard format Y-m-d H:i:s, you do not need to enter any format. All other formats must be specified. All link:http://php.net/manual/de/function.date.php[php-compliant date formats^] are allowed.
 
 |===
+
+[#import-preview]
+== Show the first five rows of the import file
+
+//tag::import-preview[]
+Use the preview function to view the first five rows of the import file in a table. For example, this is useful if you are not quite sure how the file is structured.
+
+[.instruction]
+Showing a preview:
+
+. Go to *Data » Import » [Open import]*.
+. In the toolbar, click on *Preview* (icon:eye[role="blue"]). +
+→ In a new window *Preview*, the first five rows of the import file are shown in a table.
+. Click outside the window to close it.
+//end::import-preview[]
 
 [#1400]
 == Specifying matching fields
@@ -210,7 +266,7 @@ You can specify one, multiple or all matching fields. The matching fields are di
 [NOTE]
 .Matching fields are optional
 ====
-Matching fields are optional settings. However, if you do not select a matching field, the data in your file cannot be assigned to existing data in your system. So new records are saved during the import. This can result in duplicate records in your system.
+The matching fields are optional. However, if you do not select a matching field, the data in your file cannot be assigned to existing data in your system. So new data records are saved during each import. This can result in duplicate records in your system.
 ====
 
 [.instruction]
@@ -219,8 +275,7 @@ Specifying matching fields:
 . Go to *Data » Import » [Open import]*. +
 → The view *Settings* opens.
 . Open the view *Matching*.
-. Carry out the settings. +
-*_Tip:_* Every xref:page$import-types.adoc#[import type has different matching fields].
+. Carry out the settings. These settings depend on the xref:page$import-types.adoc#[import typ] you selected.
 . Save (material:save[]) the settings.
 
 // TODO: Add example
@@ -228,28 +283,12 @@ Specifying matching fields:
 [#1500]
 == Mapping fields
 
-Mappings allow you to specify which columns of your file are imported to which plentymarkets data fields. So without any mappings, no data can be imported. You can create new mappings in the view *Mapping*. A position is automatically assigned to each new mapping. You can change this position in the view *Settings*.
+Mappings allow you to specify which columns of your file are imported to which plentymarkets data fields. So without any mappings, no data can be imported. However, you do not need to map all sources of the import file. Only map the sources that you want to import.
 
 [#understand-mappings]
-=== Understanding mappings
+=== Procedure
 
-*_What is a mapping?_*
-
-With your mappings, you specify what data of the import file is saved in which plentymarkets data fields.
-
-As such, you "map" the sources of the import file to the plentymarkets data fields in which you want to save the data.
-
-You do not need to map all sources of the import file. Instead, only map the sources that you want to import.
-
-*_What is a source?_*
-
-In CSV files, each column is a source. TXT files are structured differently. However, for simplicity think of the data in TXT files also as columns.
-
-image::data:import-mapping-colour.png[]
-
-*_Workflow:_*
-
-. Create the mapping. (<<#create-mappings, How?>>)
+. Create the mapping. In other words, you specify in which plentymarkets data fields you want to save the data of the import file. (<<#create-mappings, How?>>)
 . You map the sources of the import file to the plentymarkets data fields in which you want to save the data. (<<#do-mappings, How?>>) +
 *_Tip:_* You can also manipulate the data from the import file in different ways during the import:
   * You specify your own value. By doing this, you will save the same value in a plentymarkets data field for all data records. (<<#own-value, How?>>)
@@ -258,10 +297,22 @@ image::data:import-mapping-colour.png[]
   * You create your own mappings to replace the values of a source with other values during the import. (<<#1520a, How?>>)
 . You activate the sources to be imported. (<<#1510, How?>>)
 
-[#1710]
-=== Processing jobs in the queue
+[.collapseBox]
+.What is a source?
+--
+In CSV files, each column is a source. TXT files are structured differently. However, it makes it easier to also imagine the data they contain as columns.
+--
 
-The queue enables the import of large amounts of data. Before being imported, the import file is broken down into packages. Each of these packages is a job. A job consists of 750 lines of a CSV or TXT file. However, import files with less than 750 lines also make a job. Whenever an import is started, the file is split up into the respective jobs and is put into the queue. In the queue, new jobs are permanently retrieved and the imports are processed. There are two different statuses. The status *Open jobs* means that there are jobs in the queue waiting to be processed. *Completed jobs* on the contrary have already been processed and the data have been imported.
+[#8448399216]
+=== Understanding the "Mapping" menu
+
+* The column *Import data* is a list of all columns in the import file. There is one row per column.
+* The column *Preview* shows the first 6 values of each column of the file.
+* In the column *plentymarkets data fields*, select the plentymarkets data field to be filled with the data of the column.
+
+image::daten:import-mapping-colour.png[]
+
+// TODO: List mappings
 
 [#create-mappings]
 === Creating a mapping
@@ -277,8 +328,7 @@ Creating a mapping:
 . Enter a name for the mapping.
 . Save the setting. +
 → The mapping is created and opened. +
-→ New mappings are active automatically.
-
+→ The new mapping is active automatically. +
 *_Tip:_* The position of the mapping is assigned in ascending order automatically. In other words, the first mapping of the import has the position 1, the second mappings has the position 2, etc.
 
 [.collapseBox]
@@ -297,11 +347,11 @@ You can change the name and the position of mappings at any time:
 
 In the view *Mapping*, decide which column in your file is imported to which data field in plentymarkets.
 
-* The column *Import data* is a list of all columns in the import file.
-* The column *Preview* shows the first 6 values in each column of the file.
-* In the column *plentymarkets data fields*, select the plentymarkets data field to be filled with the data of the column.
-
-image::data:import-mapping-colour.png[]
+[.collapseBox]
+.*_Tip:_* Show a table of the first five rows of the import file
+--
+include::data:page$ElasticSync.adoc[tag=import-preview]
+--
 
 [.instruction]
 Mapping data fields:
@@ -310,8 +360,10 @@ Mapping data fields:
 . Select a plentymarkets data field for each column that you want to import.
 . Save (material:save[]) the mappings.
 
+// TODO: Activate as well?
+
 [#own-value]
-=== Custom mapping: Own value
+==== Custom mapping: Own value
 
 The option *Own value* allows to import a fix value for the data field. Thus, this fixed value is identical for each data record that is imported during this import.
 
@@ -338,18 +390,18 @@ Mapping your own value:
 . Save (material:save[]) the mapping.
 
 [#1520]
-=== Custom mapping: Regular expressions
+==== Custom mapping: Regular expressions
 
 In order to consider a CSV or TXT file during the import as desired, the so-called RegEx function (Regular Expression) can be applied. This functionality manipulates data during the import based on commands. This means that no changes need to be made in the import file.
 
-[NOTE]
+[IMPORTANT]
 .Handle regular expressions with care!
 ====
-Regular expressions are a powerful tool. However, they can also be tricky. As such, use regular expressions carefully and only if you are confident that they will work as expected. Some examples for resources are:
+Regular expressions are a powerful tool. However, they can also be tricky. As such, use regular expressions carefully and only if you are confident that they will work as expected. Some examples of external resources:
 
 * link:http://php.net/manual/en/reference.pcre.pattern.syntax.php[http://php.net/manual/en/reference.pcre.pattern.syntax.php^]
 * link:https://regexr.com/[https://regexr.com/^] +
-  On this page, you need to change the RegEx engine setting to PCRE first. To do so, use the drop-down list at the top right. This is preset to *Javascript*.
+  On this page, change the RegEx engine setting to *PCRE* first. To do so, use the drop-down list in the top right corner. In this drop-down list, the option *Javascript* is preselected.
 ====
 
 [.collapseBox]
@@ -367,8 +419,7 @@ video::329761682[vimeo]
 Replacing values with the RegEx function:
 
 . Go to *Data » Import » [Open import] » [Open mapping]*.
-. Click on material:add[] *FIELD*. +
-→ A new line is added.
+. Navigate to the row of the source that you want to map.
 . In the field *Source*, select the value *Regular expression*. +
 → The options for *Regular expression* are shown.
 . In the field *Value*, select the column name of the import file.
@@ -382,11 +433,11 @@ Replacing values with the RegEx function:
 .*_RegEx example 1:_* "TT.MM.YYYY" to "YYYY-MM-TT"
 --
 
-*Value*: “24.12.2017” +
+*Value*: "24.12.2017" +
 *Search*: /^(\\d+).(\\d+).(\\d+)$/ +
 *Replace*: $3﹣$2﹣$1 +
 
-*_Result:_* “2017-12-24”
+*_Result_*: "2017-12-24"
 
 --
 
@@ -403,7 +454,7 @@ Replacing values with the RegEx function:
 --
 
 [#formula]
-=== Custom mapping: Mathematical calculations
+==== Custom mapping: Mathematical calculations
 
 In the mapping overview, select the option *Mathematical calculations* in order to recalculate numerical values during the import.
 
@@ -420,8 +471,7 @@ The following calculation methods are available:
 Updating values using mathematical calculations:
 
 . Go to *Data » Import » [Open import] » [Open mapping]*.
-. Click on material:add[] *FIELD*. +
-→ A new line is added.
+. Navigate to the row of the source that you want to map.
 . In the field *Source*, select the option *Mathematical calculations*. +
 → The options for *Mathematical calculations* are shown.
 . From the drop-down list *CSV columns*, select the column name of the import file.
@@ -445,13 +495,15 @@ Updating values using mathematical calculations:
 --
 
 [#1520a]
-=== Custom mapping: Own mapping
+==== Custom mapping: Own mapping
 
 With the own assignment you can assign existing values of a CSV or TXT file to other values in the system. This enables to define, which value is supposed to be imported for which ID. In addition, for values in the CSV or TXT file that are not assigned, you can specify a default value. If no default value is specified, the original value is imported.
 
 Own mappings are particularly helpful when internal plentymarkets ID are at play.
 Examples are characteristic names, item flags, payment methods, countries/states, ISO codes, etc.
 Take a look at the video for own mappings to get to know the principle.
+
+// TODO: WHAT!?!?!?
 
 [.collapseBox]
 .Video: Own assignments
@@ -467,6 +519,7 @@ video::329761532[vimeo]
 Defining an own assignment:
 
 . Go to *Data » Import » [Open import] » [Open mapping]*.
+. Navigate to the row of the source that you want to map.
 . In the dropdown menu of the *Source* field, select the option *Own assignment*.
 . Fill in the fields. Pay attention to the explanations given in <<table-own-assignment>>.
 . Save (material:save[]) the settings.
@@ -584,10 +637,10 @@ Activating/deactivating mappings:
 . In the column *Inactive/Active*, click on the toggle button. +
 * material:toggle_off[role="darkGrey"] = The mapping is inactive. During the import, the settings of this mapping are not applied. +
 * material:toggle_on[role="blue"] = The mapping is active. During the import, the settings of this mapping are applied. +
-*_Important:_* If more than one mapping is active, the mapping with the lowest ID is imported first. All other active mappings are also imported in ascending order based on the position.
+*_Important:_* If more than one mapping is active, the mapping with the lowest position is imported first. All other active mappings are also imported in ascending order based on the position.
 
 [#1611]
-== Filtering import data
+== *_Optional:_* Filtering import data
 
 You can use filters to limit the data to be imported. To view the filters, open the view *Mapping*.
 
@@ -608,18 +661,8 @@ Adding a filter:
 → The filters are saved. +
 → Only data that meets these filter criteria is exported.
 
-[#import-preview]
-== Showing a preview
-
-Use the preview function to view the first five rows of the import file in a table. For example, this is useful if you are not quite sure how the file is structured.
-
-[.instruction]
-Showing a preview:
-
-. Go to *Data » Import » [Open import]*.
-. In the toolbar, click on *Preview* (icon:eye[role="blue"]). +
-→ In a new window *Preview*, the first five rows of the import file are shown in a table.
-. Click outside the window to close it.
+[#3362886156]
+== Running the import
 
 [#1610]
 === Checking imports for errors before the run
@@ -652,31 +695,28 @@ Testing the import:
 . Open the menu that the data was imported to.
 . Check if the data was imported as expected.
 . Modify the import settings as needed.
+. If necessary, delete the data that was imported as part of the test.
 
 [#import-manual]
 === Manually running the import
 
-If you specified an interval in the import settings, the file is regularly imported automatically. However, you can also start an import manually at any time.
-
-[.instruction]
-Manually running the import:
-
-. Go to *Data » Import » [Open import]*.
-. In the toolbar, click on *Run import* (icon:play-circle[role="grey"]). +
-→ The data is imported.
-. Open the menu that the data was imported to.
-. Check if the data was imported as expected.
+include::partial$import-live-import.adoc[]
 
 [#1645]
-== Cancelling an import
+=== Cancelling an import
 
-In the menu *Data » Status*, you can cancel an import that has already started. That means that this function is only available while the import is being processed.
+You can stop an import that you started. This function is only available while the import is being processed.
 
-*_Important:_* When you cancel a running import, the records that were already imported are not deleted. If necessary, you need to delete these records yourself.
+*_Important:_* When you cancel a running import, the records that were already imported are not deleted. If necessary, delete this data yourself.
 
+[tabs]
+====
+Stopping an import::
++
+--
 
 [.instruction]
-Cancelling an import:
+Stopping an import:
 
 . Go to *Data » Status*. +
 → The status overview opens. +
@@ -685,6 +725,21 @@ Cancelling an import:
 . Click on *Cancel import*. +
 → The import is cancelled. +
 → Only those data records are in the system that were already imported at the time you cancelled the import.
+--
+
+Stopping a live import::
++
+--
+
+[.instruction]
+Stopping a live import:
+
+* In the tab *Data import*, click on material:close[] *Cancel import* at the top right. +
+→ The import is stopped. +
+*_Important:_* Any data already imported will _not_ be deleted. If necessary, delete this data manually. +
+*_Tip:_* Go to *Data » Status* to resume the import. To do so, click on *Resume import*.
+--
+====
 
 [#1650]
 == Replacing import files of manual imports
@@ -722,127 +777,17 @@ Filtering and checking log entries:
 . Focus on entries for the levels *warning* and *error*. +
 *_Tip:_* Click on the entry to see details.
 
-[#manage-imports]
-== Managing imports
-
-Learn how to manage existing imports.
-
-[#import-rights]
-=== Assigning rights for back end users
-
-:rights-purpose: work with imports and mappings
-:right-one: pass:quotes[*Data > Sync > Update*]
-:right-two: pass:quotes[*Data > Sync > Show*]
-:right-three: pass:quotes[*Data > Sync > Create*]
-:right-four: pass:quotes[*Data > Sync > Delete*]
-:right-five: pass:quotes[*Data > Sync > Mapping > Update*]
-:right-six: pass:quotes[*Data > Sync > Mapping > Show*]
-:right-seven: pass:quotes[*Data > Sync > Mapping > Create*]
-:right-eight: pass:quotes[*Data > Sync > Mapping > Delete*]
-:right-nine: pass:quotes[*Data > Data log*]
-
-include::_includes:partial$rights.adoc[]
-
-[#1730]
-=== Restoring older/deleted imports
-
-Did you delete an import by mistake? Or somebody made changes to a well configured import that need to be reverted? You can do both using the backup functionality.
-
-*_Important:_*
-
-* These settings reset the imports to an earlier state. You _cannot reset data imported into the system_ doing this. That's possible too, xref:data:backup.adoc#[but in a different way].
-* Backups are only created once a day during the night. When you import a backup, the data is reset to this state.
-* All imports are reset. As such, you cannot reset only one import. +
-*_Example:_* Somebody changed the settings for an item data import by mistake. However, an import for coupons was also created on the same day. When you run the backup of last night, both imports are reset to the state they were in last night. The import for item data is repaired. However, the import for coupons is deleted because it did not yet exist at the time the backup was created. The solution? Export the import settings of any imports that were created or updated since the last update. After the backup, you can then import these into your system.
-
-[.instruction]
-Restoring backups of imports:
-
-. Go to *Setup » Settings » Hosting » Backup*. +
-→ The backup overview opens.
-. In the line of the backup that you want to import, click on *Restore backup* (material:open_in_browser[]) on the right. +
-→ The window *Import backup* is shown.
-. For the setting *Import backup*, select the option *Partially import data base*.
-. Activate the option *ElasticSync*. +
-*_Tip:_* The import tool used to be called *ElasticSync*. That is why this option still has this name.
-. Click on *Restore backup*. +
-→ All imports are reset to the state they were in at the time the backup was created. +
-→ There is no going back!
-
-
-[#1630]
-=== Copying imports
-
-You can copy one or more imports. That way, you can use well configured imports to quickly create a new import.
-
-[.instruction]
-Copying imports:
-
-. Go to *Data » Import*. +
-→ The import overview opens.
-. In the column to the very left, check one or more imports.
-. In the toolbar, click on *Copy import* (material:content_copy[]). +
-→ The import is copied. +
-→ The name of the copied import is `Copy of [name of original import]`.
-
-[#import-export]
-=== Exporting import settings
-
-You can export imports to a JSON file. This allows you to save imports on your computer or share them with other people.
-
-[.instruction]
-Exporting import settings:
-
-. Go to *Data » Import*. +
-→ The import overview opens.
-. Select one or multiple imports.
-. Click on *Export format* (material:system_update_alt[]). +
-→ The import settings are saved to your computer as a JSON file.
-
-[#import-import]
-=== Importing import templates
-
-Our support team might provide you with an import template. The manual also offers a few best practice files. Or a nice person published a well-configured import in the forum.
-
-You can import these templates into plentymarkets.
-
-[.collapseBox]
-.Video: Importing import templates
---
-This video shows how to use preconfigured imports in order to safe time when importing data.
-
-*_Note:_* The term *ElasticSync* is outdated and has been replaced by *import*.
-
-video::336295238[vimeo]
---
-
-[.instruction]
-Importing import templates:
-
-. Save the import template on your computer. +
-*_Tip:_* Import templates are always JSON files.
-. Go to *Data » Import*. +
-→ The import overview opens.
-. Click on *Import format* (material:open_in_browser[]). +
-→ A list of the files in your webspace is shown.
-. Click on *Upload file* (material:upload[]).
-. Click on the import template. +
-→ The file is uploaded to the webspace.
-. In plentymarkets, click on the file. +
-→ You are asked to confirm: "Do you really want to start the import?"
-. Click on *Yes* to confirm. +
-→ Because the import template comes from a different client, you are asked to adjust settings.
-. Click on *OK*. +
-→ The import template is imported to plentymarkets.
-. Open the import.
-. Check the import settings.
-. Specify <<#1400, matching fields>>.
-. Create <<#1500, the mappings>>.
-
 [#1715]
 == Tracking the status of imports
 
 Go to *Data » Data import » Status* to check the status of your import processes. This shows which imports started and are complete. A progress bar visualises how the import process is going. In addition, you can check if any errors occurred and if all rows of data of the file were imported.
+
+[#1710]
+=== Processing jobs in the queue
+
+//TODO: Move!
+
+The queue enables the import of large amounts of data. Before being imported, the import file is broken down into packages. Each package is a job. A job consists of 750 lines of a CSV or TXT file. However, import files with less than 750 lines also make a job. Whenever an import is started, the file is split up into the respective jobs and is put into the queue. In the queue, new jobs are permanently retrieved and the imports are processed. There are two different statuses. The status *Open jobs* means that there are jobs in the queue waiting to be processed. *Completed jobs* on the contrary have already been processed and the data have been imported.
 
 [#1715a]
 === Viewing the status of imports
@@ -988,3 +933,120 @@ In the toolbar, click on *Status* (material:playlist_play[]).
 . At the top left of the toolbar, click on *Log* (material:playlist_play[]). +
 → The log is shown in a new window.
 . *_Optional:_* Click on *Copy to clipboard* (material:content_copy[]). Add the information in the forum when you post a support request.
+
+[#manage-imports]
+== Managing imports
+
+Learn how to manage existing imports.
+
+[#import-rights]
+=== Assigning rights for back end users
+
+:rights-purpose: work with imports and mappings
+:right-one: pass:quotes[*Data > Sync > Update*]
+:right-two: pass:quotes[*Data > Sync > Show*]
+:right-three: pass:quotes[*Data > Sync > Create*]
+:right-four: pass:quotes[*Data > Sync > Delete*]
+:right-five: pass:quotes[*Data > Sync > Mapping > Update*]
+:right-six: pass:quotes[*Data > Sync > Mapping > Show*]
+:right-seven: pass:quotes[*Data > Sync > Mapping > Create*]
+:right-eight: pass:quotes[*Data > Sync > Mapping > Delete*]
+:right-nine: pass:quotes[*Data > Data log*]
+
+include::_includes:partial$rights.adoc[]
+
+[#1730]
+=== Restoring older/deleted import settings
+
+Did you delete an import by mistake? Or somebody made changes to a well configured import that need to be reverted? You can do both using the backup functionality.
+
+*_Important:_*
+
+* These settings reset the imports to an earlier state. You _cannot reset data imported into the system_ doing this. That's possible too, xref:data:backup.adoc#[but in a different way].
+* Backups are only created once a day during the night. When you import a backup, the data is reset to this state.
+* All imports are reset. As such, you cannot reset only one import. +
+*_Example:_* Somebody changed the settings for an item data import by mistake. However, an import for coupons was also created on the same day. When you run the backup of last night, both imports are reset to the state they were in last night. The import for item data is repaired. However, the import for coupons is deleted because it did not yet exist at the time the backup was created. The solution? Export the import settings of any imports that were created or updated since the last update. After the backup, you can then import these into your system.
+
+[.instruction]
+Restoring backups of imports:
+
+. Go to *Setup » Settings » Hosting » Backup*. +
+→ The backup overview opens.
+. In the line of the backup that you want to import, click on *Restore backup* (material:open_in_browser[]) on the right. +
+→ The window *Import backup* is shown.
+. For the setting *Import backup*, select the option *Partially import data base*.
+. Activate the option *ElasticSync*. +
+*_Tip:_* The import tool used to be called *ElasticSync*. That is why this option still has this name.
+. Click on *Restore backup*. +
+→ All imports are reset to the state they were in at the time the backup was created. +
+→ There is no going back!
+
+
+[#1630]
+=== Copying import settings
+
+You can copy one or more imports. That way, you can use well configured imports to quickly create a new import.
+
+[.instruction]
+Copying import settings:
+
+. Go to *Data » Import*. +
+→ The import overview opens.
+. In the column to the very left, check one or more imports.
+. In the toolbar, click on *Copy import* (material:content_copy[]). +
+→ The import is copied. +
+→ The name of the copied import is `Copy of [name of original import]`.
+
+[#import-export]
+=== Exporting import settings
+
+You can export imports to a JSON file. This allows you to save imports on your computer or share them with other people.
+
+[.instruction]
+Exporting import settings:
+
+. Go to *Data » Import*. +
+→ The import overview opens.
+. Select one or multiple imports.
+. Click on *Export format* (material:system_update_alt[]). +
+→ The import settings are saved to your computer as a JSON file.
+
+[#import-import]
+=== Exporting import settings
+
+Our support team might provide you with an import template. The manual also offers a few best practice files. Or a nice person published a well-configured import in the forum.
+
+You can import these templates into plentymarkets.
+
+[.collapseBox]
+.Video: Importing import templates
+--
+This video shows how to use preconfigured imports in order to safe time when importing data.
+
+*_Note:_* The term *ElasticSync* is outdated and has been replaced by *import*.
+
+video::336295238[vimeo]
+--
+
+[.instruction]
+Importing import templates:
+
+. Save the import template on your computer. +
+*_Tip:_* Import templates are always JSON files.
+. Go to *Data » Import*. +
+→ The import overview opens.
+. Click on *Import format* (material:open_in_browser[]). +
+→ A list of the files in your webspace is shown.
+. Click on *Upload file* (material:upload[]).
+. Click on the import template. +
+→ The file is uploaded to the webspace.
+. In plentymarkets, click on the file. +
+→ You are asked to confirm: "Do you really want to start the import?"
+. Click on *Yes* to confirm. +
+→ Because the import template comes from a different client, you are asked to adjust settings.
+. Click on *OK*. +
+→ The import template is imported to plentymarkets.
+. Open the import.
+. Check the import settings.
+. Specify <<#1400, matching fields>>.
+. Create <<#1500, the mappings>>.
