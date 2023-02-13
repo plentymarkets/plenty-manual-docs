@@ -3,8 +3,6 @@
 :description: Learn how to set up the price search engine idealo in your plentymarkets system. If you use idealo Checkout, you can list your items on idealo and your customers can buy your products directly on idealo without having to enter your shop.
 :author: team-plenty-channel
 
-:market: idealo
-
 On this page, you will find information about the settings you need to carry out in order to set up the market and price comparison portal idealo Checkout in plentymarkets. Learn how to set up the interface, how to export items to idealo Checkout and how to define sales prices.
 
 [#2300]
@@ -28,29 +26,35 @@ Inform idealo about how item data should be transferred before setting up idealo
 
 [[item-export-idealo-1]]
 .idealo data transfer
-[cols="1,1"]
+[cols="1,1,1"]
 |===
-| Item data export via API (PWS 2.0) | Item data export via elastic export
+| Item data export via API (PWS 2.0) | Item data export via elastic export | Item export via catalogue
 
 //tag::table-comparison[]
-|Item data export via interface
-|Item data export via CSV file
+| Item data export via interface
+| Item data export via CSV file
+| Item data export via xref:data:catalogues-first-contact.adoc#[catalogue]
 
 | Unlimited number of items can be transferred
 | To transfer more than 9999 items to idealo, the option *Generate cache file* must be activated in the Elastic Export settings. If the option *Generate cache file* is activated, the output file will only be generated every 24 hours. This is to save resources. +
 *_Note:_* We recommend that you do not activate the option *Generate cache file* for more than 20 export formats. This is to ensure a high performance of the elastic export.
+| Unlimited number of items can be transferred
 
-|Items are created once a day
-|Retrieval of item data via URL that is saved at idealo
+| Items are created once a day
+| Retrieval of item data via URL that is saved at idealo
+| Items are created once a day
 
-|Price updates every 15 minutes
-|Time interval for retrieval of item data is defined by idealo
+| Price updates every 15 minutes
+| Time interval for retrieval of item data is defined by idealo
+| Daily price update
 
-|Stock updates every 15 minutes
-|Time interval for retrieval of item data is defined by idealo
+| Stock updates every 15 minutes
+| Time interval for retrieval of item data is defined by idealo
+| Daily stock update
 
-|Orders are imported to the selected client
-|Orders are always imported to the default client
+| Orders are imported to the selected client
+| Orders are always imported to the default client
+| Orders are imported to the selected client
 
 //end::table-comparison[]
 |===
@@ -449,7 +453,11 @@ If you want to use idealo Checkout, also add SKUs with the referrer *idealo Chec
 [#800]
 == Setting up the item export
 
-Items can be transferred to idealo with the automatic item data export via API (PWS 2.0 interface) or via a CSV file with the elastic export. Depending on how you want to transfer your items to idealo, different settings are required.
+Items can be transferred to idealo with the automatic item data export via API (PWS 2.0 interface), via catalogue, or via a CSV file with the elastic export. Depending on how you want to transfer your items to idealo, different settings are required.
+
+* <<#850, _Alternative 1:_ Item export via API (PWS 2.0 interface)>>
+* <<#catalogue-export, _Alternative 2:_ Catalogue export>>
+* <<#900, _Alternative 3:_ Item data export via elastic export>>
 
 [IMPORTANT]
 .Data transfer to idealo
@@ -461,9 +469,9 @@ Information about the different types of data transfer is available in <<#item-e
 
 [[item-export-idealo]]
 .idealo data transfer
-[cols="1,1"]
+[cols="1,1,1"]
 |===
-| Item data export via API (PWS 2.0) | Item data export via elastic export
+| Item data export via API (PWS 2.0) | Item data export via elastic export | Item export via catalogue
 
 include::page$idealo-setup.adoc[tag=table-comparison]
 
@@ -476,6 +484,67 @@ If you want to transfer your items to idealo via API, go through the *idealo Bas
 
 If you transfer your items via API, items will be created at idealo once per day. Prices and stock are updated every 15 minutes. Items can also be deleted every 15 minutes.
 
+[#catalogue-export]
+=== _Alternative 1:_ Catalogue export
+
+You can now export item data to idealo using catalogue formats. Go to *Data » Catalogues* to create catalogues.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+[#catalogue-creation]
+==== Creating a catalogue
+
+Item data is exported to idealo via catalogue using the marketplace format *idealo*. To export your items to idealo, create a catalogue in the *Data » Catalogues* menu. Link the idealo data fields with item data saved in plentymarkets in the marketplace format afterwards. +
+
+*_Note:_* You can create one catalogue for every account for idealo. +
+
+After you activate the catalogue, the item data is automatically exported to idealo in regular intervals.
+
+:catalogue-template-name: idealo
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Mapping data fields in the catalogue
+
+Now, map the idealo data fields to the item data saved in plentymarkets.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.List of recommended data field mappings for *idealo*
+--
+include::partial$idealo-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Exporting specific items
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Setting up the catalogue export
+
+:csv-txt:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Activating the catalogue
+
+:interval: once a day
+
+include::partial$catalogue-activation.adoc[]
+
+[#change-ee-catalogue]
+=== Changing from Elastic Export to catalogue export
+
+If you already list your items on idealo and now want to use the catalogue export, you can find a detailed instruction on how to do this xref:markets:idealo-switch-to-catalogue.adoc#[here].
 
 [#900]
 === Item data export via elastic export
@@ -753,7 +822,7 @@ Characteristic of type *Text*, *Selection* or *float* and the link to the idealo
 
 | *disposalFee*
 | *Requirement*: checkoutApproved is true and fulfillmentType is “Spedition”. +
-Characteristic of type *Text*, *Selection* or *decimal number* and the link to the idealo Checkout characteristic *disposalFee*.
+Characteristic of type *Text*, *Selection *or *decimal number* and the link to the idealo Checkout characteristic *disposalFee*.
 
 | *Payment methods*
 | *Requirement*: at least one payment method +
