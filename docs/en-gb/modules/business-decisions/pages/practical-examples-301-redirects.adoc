@@ -1,0 +1,64 @@
+= Practical example: 301 forwarding
+:tags: Practical example, 301, forwarding, redirects
+:description: These practical examples show you different ways to implement 301 redirects.
+:author: Dennis Schulze
+
+On this page you find different practical examples on the topic of 301 forwarding. This page assumes that you have basic knowledge about 301 forwarding. If you are not familiar with the basics yet, check out xref:business-decisions:domains.adoc#265[Domains]. Extend the **URL forwarding** box under **7. Choosing additional settings**.
+
+[#100]
+== Example for an explicit redirect
+
+An explicit redirect only forwards the source URL if it stands directly after the domain name and is the end of the URL: `your-domain.com/fashion/men`.
+
+The circumflex ^ symbolises the start of the string and the dollar sign $ the end of the string. Use this syntax if you have multiple lines of redirects that have e.g. /fashion/trousers/ as the source URL and you want to avoid undesired redirects or endless redirects. In this case, the redirect looks like this:
+`^/fashion/trousers/$;/mode/men/trousers/;301;L`
+
+[#200]
+== Trailing slash examples
+
+Would the following redirect also apply for `/emotion-personality/connoisseur`?
+
+`^/emotion-personality/connoisseur/*;/topics/food-drinks-enjoyment;301;L`
+
+The answer is no, it wouldn't. If there is only one link that starts with `/emotion-personality/connoisseur` that should also work as a redirect, you can use a more general redirect:
+
+`^/emotion-personality/connoisseur*;/topics/food-drinks-enjoyment;301;L`
+
+The difference between both redirects is the trailing slash after `connoisseur`that was left out in the second redirect. The trailing slash is an optional symbol, but if it's missing every URL that begins with `/emotion-personality/connoisseur` will be forwarded:
+
+* `/emotion-personality/connoisseur`**-lorem-ipsum**
+
+* `/emotion-personality/connoisseur`**loremimpsum**
+
+In our example, these URLs would forward to `/topics/food-drinks-enjoyment;301;L`.
+
+[#300]
+== Examples for an asterisk in source URL and target URL
+
+If you put an asterisk behind the source and target URL: `^/emotion-personality/connoisseur*;/topics/food-drinks-enjoyment*;301;L`
+
+[cols="2"]
+|====
+|Source
+|Target
+
+|/emotion-personality/connoisseur
+|/topics/food-drinks-enjoyment
+
+|/emotion-personality/connoisseur/
+|/topics/food-drinks-enjoyment/
+
+|/emotion-personality/connoisseur-something
+|/topics/food-drinks-enjoyment-something
+
+|/emotion-personality/connoisseur abcdefg
+|/topics/food-drinks-enjoyment abcdefg
+|====
+
+[#400]
+== Forwarding with URL encoding
+
+URL encoding within a redirect will cause problems, because a redirect uses semicolons as delimiter to separate source and target URL for example. The syntax of the redirect would be defective due to the semicolons of the URL encoding. Additionally, the redirects do not recognize parameter within the URL.
+
+
+

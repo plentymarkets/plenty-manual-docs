@@ -228,7 +228,6 @@ a| Activate if offers should be transferred to and updated on Kaufland. Offers a
 Only if both this setting and the setting *Data exchange* are activated, the daily complete offer update and the hourly update for offers that were changed is carried out. +
 
 *_Note:_* You can *deactivate* this setting if you export your items to Kaufland using <<#catalogue-export, catalogues>>. +
-
 However, make sure that all of the variations which you want to offer on Kaufland are <<#link-variations-to-product-category, mapped in a Kaufland catalogue>> before you deactivate this setting. If a variation is not mapped in a Kaufland catalogue, then it will not be exported to Kaufland.
 
 | *Inventory cache*
@@ -238,7 +237,6 @@ However, make sure that all of the variations which you want to offer on Kauflan
 
 | *Max. quantity for items with no stock limit*
 | Enter an integer. Items for which *No limitation* has been selected in the *Settings* tab in the *Availability* area of an item are offered on Kaufland with the quantity entered here. This means that a maximum of the number entered here can be bought of this item on Kaufland at once. +
-
 As soon as an item has been sold, the quantity saved here is newly transferred for sale at the next full hour.
 
 | *Minimum price*
@@ -265,7 +263,7 @@ For example, if all of your items are handmade, you could enter the text “hand
 | *Match shipping profiles*
 | Match your shipping profiles in plentymarkets with shipping groups from Kaufland. +
 
-First, click on *Update shipping groups* (material:refresh[]) so that the latest Kaufland shipping groups are available in the drop-down list. +
+First, click on *Update Kaufland shipping groups* (material:refresh[]) so that the latest Kaufland shipping groups are available in the drop-down list. +
 *_Important:_* If you change the shipping groups on Kaufland, then you can update them in plentymarkets by clicking on *Update shipping groups*. +
 *_Note:_* The page will be refreshed if you update the Kaufland shipping groups. All unsaved changes will be lost. Therefore, the settings are automatically saved before the Kaufland shipping groups are updated. +
 
@@ -344,7 +342,7 @@ material:circle[] = The account is not active. Data is not exchanged with Kaufla
 2+! material:settings[] *Item settings*
 
 ! material:refresh[] *Update items*
-! Creates a product file with all items that should be transferred to Kaufland. This file can be viewed via *Item preview* (icon:preview[]).
+! Creates a product file with all items that should be transferred to Kaufland. This file can be viewed via *Item preview* (material:preview[]).
 
 ! material:preview[] *Item preview*
 ! Display the item file preview. +
@@ -424,7 +422,7 @@ This setting is not relevant for new Kaufland accounts which can be added in the
 | *Order status for orders with failed shipping confirmations*
 | Select a status. If no shipping confirmation could be sent to Kaufland.de, the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#create-status[new status].
 
-*_Background:_* The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
+*_Background:_* The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have been shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
 
 //| *Order status for orders with failed in fulfilment confirmations*
 //| Select a status. If no in fulfilment confirmation could be sent to Kaufland.de, the order is moved to this status.
@@ -488,7 +486,7 @@ a| Select *Yes* or *No*. +
 
 | *Minimum price*
 | Select a sales price for the minimum price to set up repricing (Tiefpreisautomatik) for Kaufland.de. +
-If other sellers offer the same product, your price is automatically reduced. Your price plus shipping is then always once cent cheaper than the prices of your competitors. As such, the minimum price is the lowest price that can be used to undercut the competition. +
+If other sellers offer the same product, your price is automatically reduced. Your price plus shipping is then always one cent cheaper than the prices of your competitors. As such, the minimum price is the lowest price that can be used to undercut the competition. +
 *_Note:_* For the minimum price, select a different price than the normal sales price that you <<#400, set for Kaufland.de>>. The Kaufland order referrer must be activated for the sales price that you select as the minimum price. +
 Activate the repricing by linking the sales price that you selected as the minimum price with the variation and entering the lowest possible price. +
 *_Important:_* The minimum price does not apply to item variations which have surcharges for attributes. In this case, *deactivate* this option. If you would like to use the minimum price, then create each variation as a separate item with a defined minimum price.
@@ -499,7 +497,7 @@ Activate the repricing by linking the sales price that you selected as the minim
 | *Global item comment*
 |Enter text. The entered text is displayed with every offer.
 
-| *Linking shipping profiles*
+| *Match shipping profiles*
 |This option enables you to link the Kaufland.de shipping groups to the plentymarkets shipping profiles. If an item has more than one shipping profile, the shipping profile with the lowest category and the highest priority is exported. The category and the priority of a shipping profile are configured within *Setup » Orders » Shipping » Settings » Tab: Shipping profiles* in the *Base* tab of each shipping profile. +
 *_Important:_* If the shipping groups are changed on Kaufland.de, you can update them by clicking on *Update shipping groups*.
 
@@ -866,7 +864,6 @@ Every market structures item data differently. As such, there are some particula
 ===== Stock buffer
 
 In the catalogues for Kaufland, you can use a *stock buffer*. A stock buffer is the amount of an item that should not be sold, but kept as a buffer. +
-
 In order to use a stock buffer for Kaufland, map the data field *Stock buffer* in your Kaufland catalogues. The stock buffer is applied when the stock is updated and when a new offer is created.
 
 Recommended mappings for the data field *Stock buffer*:
@@ -878,13 +875,14 @@ _or_
  * Property linked to variation, type *Text* or *whole number*
 
 [#size-unit-kaufland]
-===== Specifying the size unit as own value for Length, Width, and Height
+===== Specifying the size unit as own value for Length, Width, Height, and Weight
 
-In many Kaufland catalogues, the data fields *Length*, *Width*, and *Height* are mandatory and have to be mapped. We recommend the following mappings for these data fields:
+In many Kaufland catalogues, the data fields *Length*, *Width*, *Height*, and *Weight* are mandatory and have to be mapped. We recommend the following mappings for these data fields:
 
 * *Length*: *Variation » Length*, _specify size unit_
 * *Width*: *Variation » Width*, _specify size unit_
 * *Height*: *Variation » Height*, _specify size unit_
+* *Weight*: *Variation » Gross weight in g*, _specify size unit_
 
 For these data fields, only the value is transferred to Kaufland. The size unit is not transferred to Kaufland. However, in order for your variations to be correctly exported to Kaufland, you have to specify the size unit. You should therefore additionally specify the size unit as an *own value*. +
 An example of how to specify the size unit as own value for the data field *Length* is provided below.
@@ -904,7 +902,7 @@ Specifying the size unit as own value:
 . Select *Null* as *Fallback condition*.
 . Select *Space* as *Separator*.
 . *Save* the settings.
-. Repeat the steps above for the data fields *Width* and *Height*.
+. Repeat the steps above for the data fields *Width*, *Height*, and *Weight*.
 
 [#language-product-data]
 ===== Language of product data
@@ -915,6 +913,11 @@ This field is not mandatory. However, it is relevant for the Kaufland country pl
 * If the field *Language of plentymarkets product data* is not mapped and remains empty, then the system assumes that the product data in plentymarkets are saved in the language of each market.
 
 * Thus, if the product data in plentymarkets are saved in German, this field must be mapped so that the product data will be translated into the market’s language when they are exported.
+
+* If the *Language of plentymarkets product data* is set to `de` in the catalogue, then the system checks using the EAN whether a product with the language German already exists. If yes, an offer for the market *SK* or *CZ* is created and the product data are translated into the appropriate language. +
+If no product with the language German exists, then the product is created in German and translated into the appropriate language afterwards.
+
+* Product data will also be updated on the country platforms Kaufland CZ and Kaufland SK if the product language is either set to `cz` _or_ `sk`. Hence, the language in the catalogue does not necessarily have to be the language of the country platform. Products will be updated anyway.
 
 * *_allowed values:_* +
 
@@ -956,6 +959,8 @@ Invoices for Kaufland.de need to show the following payment note:
  Achtung! Bitte veranlassen Sie keine Zahlungen auf unser Konto. Die Bezahlung erfolgt an die real,- Digital Payment & Technology Services GmbH. Sollten Sie per Klarna bezahlt haben, erhalten Sie eine separate Zahlungsanweisung von Klarna. Für weitere Informationen zu Klarna besuchen Sie link:https://www.klarna.com/de/[www.klarna.de^].
 --
 
+*_Note:_* For legal reasons, the payment method on Kaufland invoices is displayed as *Payment via real.de*.
+
 [.instruction]
 Entering a note for the payment method Kaufland.de Payment:
 
@@ -973,6 +978,8 @@ Entering a note for the payment method Kaufland.de Payment:
 === Hiding bank details on invoices
 
 The payment is processed by Kaufland.de. To prevent customers from paying money directly to you, do not show any bank details on invoices for Kaufland.de. +
+
+*_Note:_* For legal reasons, the payment method on Kaufland invoices is displayed as *Payment via real.de*.
 
 How you hide bank details on {market} invoices depends on how your bank details are shown on invoices:
 
@@ -1268,7 +1275,7 @@ This chapter contains answers to frequently asked questions.
 .No shipping confirmation was sent. What now?
 --
 
-The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
+The event procedure <<#shipping-confirmation, Send shipping confirmation to Kaufland.de>> automatically informs {market} that the items of an order have been shipped. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed shipping confirmations*.
 
 Check orders in this status:
 
