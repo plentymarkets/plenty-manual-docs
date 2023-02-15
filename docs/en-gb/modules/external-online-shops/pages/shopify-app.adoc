@@ -1,4 +1,4 @@
-= Connecting Shopify
+= Connecting to Shopify app
 :keywords: Shopify, plentymarkets app, shopify assistant, shopify shops, connect shopify, link shopify
 :description: Learn how to connect your plentymarkets account with Shopify in order to synchronise your data.
 :author: team-plenty-channel
@@ -50,7 +50,7 @@ video::4D_3vFrVBIQ[youtube]
 [#shopify-configuration-assistant]
 === Using the Shopify Configuration assistant
 
-The *Shopify Configuration* assistant will guide you through the required steps to set up your Shopify connection. <<table-shopify-configuration-assistant>> shows which settings you can carry out in the individual steps of the assistant. You can find the Shopify configuration assistant in the *Setup » Assistants* menu in the *Omni-Channel* area.
+The assistant *Shopify configuration* will guide you through the required steps to set up your Shopify connection.
 
 [.instruction]
 Using the *Shopify Configuration* assistant:
@@ -61,7 +61,8 @@ Using the *Shopify Configuration* assistant:
 → The assistant opens.
 . Follow the instructions on the screen. If you need additional information about one of the options, expand the info box below this description (icon:chevron-down[role="darkGrey"]).
 . If everything is as it should be, click on icon:check[role="green"] *Finalise*. +
-→ The assistant is completed. The connection to Shopify has been set up.
+→ The assistant is completed. +
+→ The connection to Shopify is set up.
 
 [.collapseBox]
 .Options in the assistant
@@ -92,8 +93,8 @@ a| Item management
 2+^| Step *Warehouse to location mapping*
 
 | Warehouse mappings
-| Link your plentymarkets warehouses to Shopify locations. You can link multiple plentymarkets warehouses to one and the same Shopify location. The selection in this step will affect stock imports and exports as well as order fulfilment notifications to Shopify. +
-*_Note:_* Only stock from mapped warehouses and locations will be exported and imported.
+| Link your plentymarkets sales warehouses to Shopify locations. You can link multiple plentymarkets sales warehouses to one and the same Shopify location. The selection in this step will affect stock imports and exports as well as order fulfilment notifications to Shopify. +
+*_Note:_* Only stock from mapped sales warehouses and locations will be exported and imported.
 
 2+^| Step *Order management*
 
@@ -117,6 +118,8 @@ a| Item management
 
 The *Input field mappings* assistant helps you to create custom mappings between Shopify input fields and plentymarkets data fields. These mappings are used for the item export.
 
+*_Note:_* You can only create one input field mapping each time you go through the assistant. Therefore, you have to go through the assistant again each time you want to create a new mapping.
+
 [.instruction]
 Using the input field mapping assistant:
 
@@ -126,7 +129,8 @@ Using the input field mapping assistant:
 → The assistant opens.
 . Follow the instructions on the screen. If you need additional information about one of the options, expand the info box below this description (icon:chevron-down[role="darkGrey"]).
 . If everything is as it should be, click on icon:check[role="green"] *Finalise*. +
-→ The assistant is completed. The input field mappings have been created.
+→ The assistant is completed. +
+→ The input field mappings are created.
 
 [.collapseBox]
 .Options in the assistant
@@ -150,29 +154,70 @@ Using the input field mapping assistant:
 2+^| Step *Creating a new field mapping*
 
 | *Creating a new field mapping*
-| Select the Shopify field that contains the exported data. If you do not want to create a new mapping at this point, leave this field empty.
+| Select the Shopify field to which you want to map a plentymarkets data source in the next step. If you do not want to create a new mapping at this point, leave this field empty.
 
-*_Note:_* You can only create one input field mapping each time you go through the assistant. Therefore, you have to go through the assistant again each time you want to create a new mapping. Choosing a meta field will trigger a new assistant step.
+*_Note:_* You can only create one input field mapping each time you go through the assistant. Therefore, you have to go through the assistant again each time you want to create a new mapping. Choosing *metafield* will create a new assistant step.
 
-
-2+| Step *Metafield configuration* (optional)
+2+^| Step *Metafield configuration* (optional)
 
 | *Metafield configuration*
-| This step is only available if you choose the option *Metafield* in the *Create new field mapping* step. Specify the namespace and the name of the Shopify Metafield. +
+| This step is only available if you choose the option *Metafield* in the *Create new field mapping* step. Specify the namespace and the name of the Shopify metafield.
 
-*_Note:_* Shopify Metafields are not visible in the Shopify back end without a specific Shopify app. For more details regarding Shopify Metafields, consult the link:https://help.shopify.com/en/manual/metafields[Shopify Help Center^] and enter the keyword *Metafield*.
+*_Note:_* Shopify Metafields are not visible in the Shopify back end without a specific Shopify app. For more details regarding Shopify metafields, consult the link:https://help.shopify.com/en/manual/metafields[Shopify Help Center^]. Enter the search term *metafield*.
 
-2+| Step *plentymarkets source input field*
+2+^| Step *plentymarkets source input field*
 
 | *plentymarkets source input field*
 | Select the plentymarkets source field that will be used to export the customised data. +
 *_Note:_* Source input field mappings are only available for *Item export* processes.
 
-2+| Step *Property* (optional)
+2+^| Step *Property* (optional)
 
 | *Property*
 | This step is only available if you chose the option *Property* in the *plentymarkets source input field* step. Select the property you want to use as export data source.
+
 |======
+--
+
+[.collapseBox]
+.*_Example configuration:_* Mapping the base price
+--
+
+In Shopify, unit price details are handled using metafields. These metafields are created automatically during the item export. As such, you do not have to create these metafields in Shopify yourself.
+
+To export the unit price to Shopify, you will run through the assistant *Shopify: Input field mapping* three times. During these three run-throughs, you map the following plentymarkets data fields to Shopify metafields:
+
+* Unit price
+* Unit price: content
+* Unit price » Unit
+
+The steps and settings for each run-through are only described once.
+
+[.instruction]
+Mapping plentymarkets data fields for unit price details:
+
+. Go to *Setup » Assistants » Omni-Channel*.
+. Open the assistant *Shopify: Input field mapping*.
+. Select the Shopify account for which you want to create the mappings. +
+→ The step *New input field mapping* is shown.
+. From the drop-down list *Mappable Shopify input fields*, select the option *Metafield*.
+. Click on *Next*. +
+The step *Metafield configuration* is shown.
+. Carry out the metafield settings:
+    * *_Run-through 1:_* Enter a *metafield namespace* and *metafield name* for the unit price.
+    * *_Run-through 2:_* Enter a *metafield namespace* and *metafield name* for the content of the unit price.
+    * *_Run-through 3:_* Enter a *metafield namespace* and *metafield name* for the unit of the unit price. +
+*_Tip:_* Metafield namespace and metafield name must be unique.
+. Click on *Next*. +
+The step *plentymarkets source input field* is shown.
+. Select an option.
+    * *_Run-through 1:_* Select the option *Unit price*.
+    * *_Run-through 2:_* Select the option *Unit price: content*.
+    * *_Run-through 3:_* Select the option *Unit price: unit*.
+. Click on *Next*.
+. Click on *Complete*. +
+→ The metafields are created on Shopify with the next item export.
+
 --
 
 [#further-shops]
@@ -224,9 +269,9 @@ In the Shopify back end, the option *Continue selling when out of stock* determi
 
 Depending on which *Limitation* you selected for a variation in plentymarkets, the checkbox *Continue selling when out of stock* is either activated or not:
 
-[cols="2,3"]
+[cols="2,2"]
 |====
-| Option *"Limitation"* in plentymarkets | Option *Continue selling when out of stock* in Shopify
+| plentymarkets option *"Limitation"* | Shopify option *"Continue selling when out of stock"*
 
 | *None*
 | Activated
@@ -358,7 +403,7 @@ include::markets:partial$checklist-variations.adoc[tag=checklist-market-client]
 Find out how orders are processed.
 
 [#event-procedures]
-== Setting up event procedures
+=== Setting up event procedures
 
 Use xref:automation:event-procedures.adoc#[plentymarkets event procedures] to automate order communication with Shopify.
 
@@ -447,7 +492,7 @@ Checking export conditions for variations:
 *_The following conditions are checked:_*
 
 * Is the variation active? +
-→ In the menu *Item » Variation » Settings*, area *Availability*, the checkbox *Active* must be set.
+→ In the menu *Item » Variation » Settings » Area: Availability*, the checkbox *Active* must be set.
 * Is the variation available for Shopify? +
 → *Item » Variation » Availability » Area: Markets » Option Shopify* must be selected.
 * Does the *Variation » Client* assignment match your *online shop* selection? +
@@ -464,6 +509,8 @@ Checking export conditions for variations:
 * Is an item title and description saved in the selected item export language?
 * Does the item have no more than 100 variations? +
 → Exported items must not contain more than 100 variations. This limit is set by Shopify.
+
+// TODO: Liste besser gestalten.
 
 [#8878636701]
 === Manually exporting items
