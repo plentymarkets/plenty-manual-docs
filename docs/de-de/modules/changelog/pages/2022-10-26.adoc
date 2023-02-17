@@ -1,0 +1,233 @@
+= Changelog 26. Oktober 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 20. Oktober 2022
+:endWeekDate: 26. Oktober 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/auftraege-testphase-artikelname-gewicht-laenge-und-breite-bearbeiten-orders-test-phase-edit-item-name-weight-length-and-width/699222
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+* Du kannst ab jetzt im Menü Einrichtung » Märkte » Amazon » Berichte » Anfordern die Erstellung von Amazon-Berichten anfordern. Hinweise zur Erstellung von Berichten:
+** Der Zeitraum eines angeforderten Berichts darf maximal eine Woche betragen. Wir empfehlen jedoch, den Zeitraum des angeforderten Berichts so klein wie möglich zu halten, da die Verarbeitung sehr großer Berichte aufgrund der Datenmenge zu Problemen führen kann.
+** Es können nicht unbegrenzt viele Berichte angefordert werden. Je nach Berichtstyp ist die Anzahl der Anfragen pro Tag begrenzt.
+** Der angeforderte Bericht wird von Amazon generiert. Sobald der Bericht verfügbar ist, kannst du ihn in deinem plentymarkets System im Menü Einrichtung » Märkte » Amazon » Berichte » Verarbeitung abrufen.
+
++
+Weitere Informationen zur Erstellung von Berichten findest du auf der Handbuchseite xref:maerkte:amazon-einrichten.adoc#berichte-anfordern[Amazon einrichten].
+
+[discrete]
+=== CRM
+
+* Im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten » Grundeinrichtung* wurde im Schritt *Signatur* ein weiteres Textfeld hinzugefügt, in dem du die Signatur im reinen Textformat speichern kannst.
+
+[discrete]
+=== Ereignisaktionen
+
+* In den Ereignisaktionen gibt es nun das neue Ereignis *Auftragsadresse geändert*, das ausgelöst wird, wenn der Inhalt einer Auftragsadresse geändert oder eine andere Adresse zugewiesen wird. Dabei kannst du einstellen, auf welchen Adresstyp im Ereignis reagiert werden soll: Rechnungs-, Lieferadresse oder beide Adressen.
+
+[discrete]
+=== Kaufland
+
+* Der Auftragsimport für Kaufland wird auf eine neue Technologie umgestellt. Die neue Technologie besteht aus verschiedenen Microservices und nicht mehr wie zuvor nur aus einem Cron. Dadurch wird eine höhere Ausfallsicherheit und eine bessere Performance beim Auftragsimport ermöglicht. Dadurch entstehen folgende Änderungen:
+** Aufträge werden nun sofort, nachdem sie auf Kaufland aufgegeben wurden, in plentymarkets importiert. Vor der Umstellung wurden neue Aufträge nur alle 15 Minuten in plentymarkets importiert.
+** Aufträge mit dem Kaufland-Status OPEN werden ohne Adressdaten in Status *[1] Unvollständige Daten* in plentymarkets importiert. Hierbei handelt es sich um Aufträge, die nach der Bestellung noch von der Käufer:in storniert werden können. Die Aufträge verbleiben 15 Minuten in diesem Status, damit Kund:innen die Möglichkeit haben, den Auftrag zu stornieren.
+** Wenn der Auftrag bei Kaufland nach 15 Minuten einen anderen Status bekommt, wechselt der Auftragsstatus in plentymarkets automatisch zu Status *[5] Freigabe Versand*. Alle fehlenden Auftragsdaten werden am Auftrag ergänzt.
+** Aufträge, die von Kaufland abgewickelt werden (FbK = Fulfillment by Kaufland), werden nun auch in plentymarkets importiert. FbK-Aufträge haben die Auftragsherkunft *170.01 Kaufland FBK DE*.
+
++
+[IMPORTANT]
+.To-Do
+======
+Mit der Umstellung auf den neuen Auftragsimport werden Kaufland-Aufträge jetzt entweder mit Status *[1] Unvollständige Daten* oder mit Status *[5] Freigabe Versand* in plentymarkets importiert (und nicht wie bisher mit Status *[3] Warten auf Zahlung*!).
+
+Je nachdem, welche Auftragsstatus du in deinen Ereignisaktionen für Kaufland verwendest, kann es passieren, dass die Ereignisaktionen nach der Umstellung nicht mehr funktionieren. Prüfe deshalb die Status in deinen Ereignisaktionen und ändere die Status gegebenenfalls.
+
+Wenn gewünscht, erstelle außerdem Ereignisaktionen für Aufträge, die von Kaufland abgewickelt werden (FbK).
+======
+
+[discrete]
+=== Prozesse
+
+* In der Aktion *Artikelerfassung* gibt es nun eine neue Option, mit der du einstellen kannst, ob in der Detailansicht die Rechnungs- oder Lieferadresse eines Auftrags angezeigt werden soll.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In den Einstellungen für die Auftragsherkünfte kam es beim Speichern zu einem Validierungsfehler. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Wie im Changelog vom 6. Juli 2022 beschrieben, wurde die Reihenfolge der Anzeige im Suchfeld der Kontakte-UI angepasst (erst Name, dann ID). Aufgrund einer Änderung an der Komponente wurde die geänderte Reihenfolge wieder rückgängig gemacht. Dieses Verhalten wurde nun behoben: Die Reihenfolge im Suchfeld der Kontakte-UI zeigt nun wieder an erster Stelle den Namen und dann die ID.
+* Bei der Anzeige von Kontaktoptionen enthielten einige von ihnen die falschen Informationen (sie hatten den Wert von anderen Optionen). Auch beim Hinzufügen von Werten für eine neue Kontaktoption wurde dieser Wert nicht gespeichert. Dieses Verhalten wurde behoben.
+* Bei einigen Systemen konnten Gastbestellungen in der Schnellsuche nicht gefunden werden. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Beim Öffnen einer Pickliste, die entweder bereits abgeschlossen war oder sich in Bearbeitung befand, konnte man im Dialog zum Bestätigen den Ja-Button mehrfach klicken und somit das Laden der Aufträge mehrmals auslösen. Dieses Verhalten wurde behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Die alte Auftragsherkunft-UI wurde modernisiert. Informationen zu den Neuerungen findest du auf der Handbuchseite xref:auftraege:auftragsherkunft-neu.adoc[Auftragsherkunft^].
+* In der Übersicht der neuen Auftrags-UI ist es jetzt möglich, den Status für einen einzelnen Auftrag zu ändern.
+* In der Übersicht der neuen Auftrags-UI ist es jetzt möglich, den Warenbestand für die Positionen eines Auftrags anzuzeigen.
+* In der neuen Auftrags-UI wurden die Daten eines Auftrags bisher jedes Mal abgerufen, wenn ein Auftrag in der Seitennavigation gewählt wurde. Dies wurde geändert, sodass der Auftrag nur einmal geladen wird und im Cache bleibt, bis:
+** die Schaltfläche *Auftrag neu laden* innerhalb der Detailansicht eines Auftrags geklickt wird,
+** der Auftrag aus der Seitennavigation entfernt wird
+** oder das *Aufträge*-Tab geschlossen wird.
+
+[discrete]
+=== Check24
+
+* In den Katalogen für Check24, Check24 Furniture und Check24 Fashion wurden zwei neue Datenfelder zum Verknüpfen von Bildern hinzugefügt: *Bild-URLs* und *Varianten-Bild-URLs*. Die alten Datenfelder zur Verknüpfung von Bildern (*Bild-URL 1-10*) wurden aus den Katalogen entfernt. Mit den neuen Datenfeldern können nun Bilderlisten verknüpft werden. Wenn ein Artikel beispielsweise 2 Artikelbilder und 3 Variantenbilder hat, werden in der CSV-Exportdatei die Spalten für Bilder 1 bis 5 befüllt.
++
+[IMPORTANT]
+.To-Do
+======
+Prüfe deine Kataloge für *Check24*, *Check24 Furniture* und *Check24 Fashion* und verknüpfe die neuen Datenfelder zur Übertragung von Bildern.
+
+[cols="1,3"]
+.Empfohlene Datenfeld-Zuordnungen
+|========
+|Datenfeld |Empfohlene Zuordnung
+
+|*Bild-URLs*
+|*Bild » Artikel Bilder » Bilderliste*, Bildinformation *Vollbild-URL*
+
+|*Varianten-Bild-URLs*
+|*Bild » Varianten Bilder » Bilderliste*, Bildinformation *Vollbild-URL*
+|========
+
+Wie du Datenfelder im Katalog verknüpfst, findest du auf der Handbuchseite xref:maerkte:check24.adoc#data-field-mappings[Check24].
+======
+
+[discrete]
+=== Import
+
+* Ab sofort kannst du einen Live-Import starten und den den Fortschritt in Echtzeit verfolgen. Weitere Informationen findest du auf der Handbuchseite xref:daten:ElasticSync.adoc#import-manual[Import-Tool nutzen].
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Beim Bearbeiten der Ansicht in der neuen Auftrags-UI konnte der Button zum *Speichern* bei der ersten Anpassung einer Einstellung nicht geklickt werden, sodass die Änderungen nicht gespeichert werden konnten. Dieser Fehler wurde behoben.
+* Alte Zahlungsarten wurden in der neuen Auftragsübersicht und in den Auftragsdetails nicht angezeigt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* In der Aktion *Wareneingang (einfach)* gab es beim Einbuchen von Artikeln sowie beim Drucken von Artikeletiketten ein Problem, wenn am Artikel kein Preis hinterlegt war. Dieses Verhalten wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/blog_6103[Blog^]
+|2.0.4
+|-
+
+|link:https://marketplace.plentymarkets.com/dhlwunschpaket_5435[DHL Wunschzustellung^]
+|1.2.0
+|-
+
+|link:https://marketplace.plentymarkets.com/paymentmethodswitcher_55273[Ereignisaktion - Zahlungsart ändern^]
+|1.0.1
+|-
+
+|link:https://marketplace.plentymarkets.com/feed4ceres_6097[Feed4Ceres^]
+|4.1.3
+|-
+
+|link:https://marketplace.plentymarkets.com/klarna_6731[Klarna^]
+|2.4.6
+|-
+
+|link:https://marketplace.plentymarkets.com/feedback_5115[Kunden-Feedback^]
+|4.0.7
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.4.20
+|-
+
+|link:https://marketplace.plentymarkets.com/mytoys_54776[myToys^]
+|1.0.52
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.21
+|-
+
+|link:https://marketplace.plentymarkets.com/plentyshopltsmodern_55193[plentyShop LTS Modern^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/sofort_5050[Sofort.^]
+|1.3.2
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====

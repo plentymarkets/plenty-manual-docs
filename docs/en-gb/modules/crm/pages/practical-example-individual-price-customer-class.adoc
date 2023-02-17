@@ -1,0 +1,136 @@
+= Practical example: Setting up an individual price for a certain customer class in your plentyShop
+:keywords:
+:description: This practical example describes how to set up an individual price for a certain customer class in your plentyShop.
+:author: team-crm
+
+In contrast to other customers, I want that a certain customer can see an individual price for a certain item in my plentyShop. What can I do?
+
+[discrete]
+== Required steps (short version)
+
+* <<#create-customer-class, Creating a customer class>>
+* <<#create-sales-price, Creating a sales price>>
+** *_Important:_* Customer class and referrer *Client (shop)* have to be activated.
+* <<#sales-price-item, Adding the sales price to an item>>
+
+* Tip: <<#set-up-event-procedure, Setting up an event procedure>>
+
+[#create-customer-class]
+== Creating a customer class
+
+First, create a customer class that you later <<#create-sales-price, activate in the sales price>>.
+
+[.instruction]
+Creating a customer class:
+
+. Go to *Setup » CRM » Customer classes*.
+. Click on the *New customer class* tab.
+. In the *Name* field, enter the name of the customer class, e.g. `Regular customers`.
+. Set the setting *Volume discount* to *include* if you later want to set a volume discount in the <<#create-sales-price, sales price>>.
+. Select (material:radio_button_checked[role=skyBlue]) whether the prices in the online shop should be displayed as *gross* or *net* prices.
+. *Save* (material:save[]) the settings.
+
+[TIP]
+The steps described above list the settings that have to be carried out _at least_ during the creation of a customer class for the purpose of this practical example. Of course, you can carry out further settings in the customer class. For further information, refer to the xref:crm:preparatory-settings.adoc#create-customer-class[Creating a customer class] chapter on the xref:crm:preparatory-settings.adoc#[Carry out preparatory settings] page.
+
+You can set up automated processes in plentymarkets so that certain customers are assigned to a dedicated customer class. +
+You can find a common example of an event procedure further down on this page in the <<#set-up-event-procedure, Setting up an event procedure>> chapter. 
+
+Of course, you can adjust the customer class manually in the xref:crm:edit-contact.adoc#contact-details[contact data record].
+
+[#create-sales-price]
+== Creating a sales price
+
+Create a new sales price. Sales prices define the conditions under which a variation is sold at a specific price. For example, you can sell products for a lower price in the plentyShop than on a marketplace. Or you can sell products cheaper to B2B customers than to B2C customers. +
+In the sales price, you have to activate the <<#create-customer-class, customer class>> that you have just created and the referrer *Client (shop)*.
+
+[.instruction]
+Creating a sales price:
+
+. Go to *Setup » Item » Sales prices*.
+. Click on icon:add[role=green] *New*.
+. Enter a number into the *Position* field. +
+→ *_Note:_* If you link multiple sales prices to a variation, you’ll see these sales prices sorted by their position number in the item data record.
+. In the *Internal name* field, enter a name for the sales price, e.g. `Regular customer price`. +
+→ Such as the internal name, the *External name* field is a mandatory field. Here, you can enter the same name as for the internal name or enter a different name for the sales price.
+. In the *Minimum quantity* field, enter a number, e.g. `3`. +
+→ *_Example:_* If a customer buys multiple copies of your item (e.g. 3), you can determine that the price will be reduced starting from a purchase of 3 copies. +
+*_Important:_* Volume discounts have to be allowed in the <<#create-customer-class, customer class>>. Make sure that the setting *Volume discount* is set to *include* in the customer class.
+. Select (material:check_box[role=skyBlue]) the currency from the list, e.g. `EUR`.
+. Select (material:check_box[role=skyBlue]) the appropriate client from the list.
+. Select (material:check_box[role=skyBlue]) the customer class `Regular customers` from the list.
+. Select (material:check_box[role=skyBlue]) the country from the list.
+. Select (material:check_box[role=skyBlue]) the client from the list, in our case `Client (Shop)`.
+
+[TIP]
+The steps described above list the settings that have to be carried out _at least_ during the creation of a sales price for the purpose of this practical example. Of course, you can carry out further settings in the sales price. For further information on the other settings, refer to the xref:item:prices.adoc#100[Sales prices] chapter on the xref:item:prices.adoc#[Sales prices and price calculation] page.
+
+[TIP]
+.Create a sales price easily and quickly with the help of an assistant
+====
+You can also create your sales price with the help of the xref:item:prices.adoc#200[*Sales price* assistant].
+====
+
+[#sales-price-item]
+== Adding the sales price to an item
+
+In the *Item » Item UI* menu, you have to add the sales price that you have just created to the desired item. In the item, you have to save the actual amount of money of the sales price.
+
+[.instruction]
+Adding the sales price to the item:
+
+. Go to *Item » Item UI*.
+. Search for the item in which you want to activate the sales price. +
+→ The area of the main variation opens automatically.
+. Navigate to the *Sales price* area.
+. In the *Sales price* area, click on *Add sales prices* (material:add[]). +
+→ The *Add sales prices* window opens.
+. Select (material:check_box[role=skyBlue]) the sales price that you have just created from the drop-down list.
+. Click on *Apply*. +
+→ The sales price is added.
+. In the *Price (gross)* column, enter the desired amount of money.
+. *Save* (material:save[]) the settings.
+
+If you have carried out all settings described on this page, customers with the correspondingly assigned customer class will automatically see the price you defined for a certain item in your plentyShop.
+
+[#set-up-event-procedure]
+== Tip: Setting up an event procedure
+
+Set up an event procedure that triggers the customer class change when a customer placed a certain number of orders in your plentyShop that you defined. 
+
+[.instruction]
+Setting up an event procedure:
+
+. Go to *Setup » Orders » Events*.
+. At the bottom left, click on *Add event procedure* (material:add[role=green]). +
+→ The *Create new event procedure* window opens.
+. Enter a name for the event procedure, e.g. `Change customer class after x orders`.
+. Select the event as listed in <<#table-event-procedure-customer-class-number-of-orders>>.
+. *Save* (icon:save[role=green]) the settings.
+. Carry out the settings as listed in <<#table-event-procedure-customer-class-number-of-orders>>.
+. Activate the option *Active*.
+. *Save* (icon:save[role=green]) the settings.
+
+[[table-event-procedure-customer-class-number-of-orders]]
+.Setting up the “Package number generated” event procedure
+[cols="2,4,3"]
+|====
+|Setting |Option |Selection
+
+|Event
+|Order generation > New order
+|
+
+|Filter 1
+|Order > Referrer
+|Client (shop)
+
+|Filter 2
+|Customer > Number of orders
+|Select an operator from the list and enter a number in the field.
+
+|Procedure
+|Customer > Change customer class
+|Select the <<#create-customer-class, customer class>> that you have just created from the drop-down list.
+
+|====

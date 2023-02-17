@@ -1,0 +1,116 @@
+= Praxisbeispiel: Teillieferungen an limango melden
+:author: team-plenty-channel
+:keywords: limango, Artikel verschicken, Teillieferung, einen Artikel an limango schicken, limango Teillieferung, Teil Lieferung
+:description: In diesem Praxisbeispiel erfährst du, wie du eine oder mehrere Auftragspositionen eines limango-Auftrags versenden kannst, ohne den gesamten Auftrag als versendet zu markieren.
+
+Eine Kundin hat etwas bei limango bestellt, du hast jedoch nicht alle Artikel des Auftrags auf Lager. Nun möchtest du zwei Artikel, die auf Lager sind, bereits an deine Kundin verschicken. In diesem Praxisbeispiel erfährst du, wie das geht und wie du limango darüber informieren kannst, dass eine oder mehrere Positionen eines Auftrags bereits verschickt wurden.
+
+Um nur eine oder mehrere Positionen eines Auftrags zu versenden, erstellst du einen Lieferauftrag für die Positionen, die versendet werden sollen. Danach erstellst du die Ereignisaktion *Versandinformation an limango melden*.
+
+[TIP]
+.Mehrere Lieferaufträge erstellen
+====
+Wenn du einen oder mehrere Artikel eines Auftrags versenden willst, musst du mindestens zwei Lieferaufträge erstellen: +
+
+* einen Lieferauftrag für die Artikel, die verschickt werden sollen
+
+_und_
+
+* einen Lieferauftrag für die restlichen Artikel, die noch nicht verschickt werden sollen.
+
+Für jeden Lieferauftrag erstellst du danach eine Ereignisaktion, je nachdem, welche Aktionen für die im Lieferauftrag enthaltenen Artikel ausgelöst werden sollen.
+====
+
+Im Folgenden wird beschrieben, wie du den Lieferauftrag und die Ereignisaktion für die Artikel erstellst, die bereits verschickt werden sollen. Erstelle anschließend einen Lieferauftrag und eine Ereignisaktion für die restlichen Auftragspositionen.
+
+[#lieferauftrag-erstellen]
+== Lieferauftrag erstellen
+
+Erstelle als Erstes einen Lieferauftrag für die Auftragspositionen, die versendet werden sollen.
+
+[.instruction]
+Lieferauftrag erstellen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Öffne den Auftrag, aus dem ein Lieferauftrag erstellt werden soll. +
+→ Es handelt sich hierbei um den Auftrag, aus dem eine oder mehrere Auftragspositionen versendet werden sollen.
+. Wechsele in das Tab *Lief*.
+. Trage in das Feld *LiefAufMenge* (Menge für den Lieferauftrag) die *Menge* ein, die in den Lieferauftrag überführt werden soll.
+. Klicke anschließend auf *Lieferauftrag anlegen* (terra:execute[]). +
+→ Der Lieferauftrag wird angelegt.
+
+*_Hinweis:_* Wenn alle Positionen eines Auftrags - also der gesamte Auftrag - versendet werden sollen, musst du keinen Lieferauftrag anlegen, sondern kannst einfach den gesamten Auftrag als versendet markieren. +
+Lieferaufträge dienen nur dazu, einzelne Positionen eines Auftrags herauszulösen, zum Beispiel wenn einzelne Artikel bereits verschickt oder storniert werden sollen.
+
+[#ereignisaktion-teillieferung]
+== Ereignisaktion einrichten
+
+Erstelle nun eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion], um limango über den Versand der Auftragspositionen zu informieren.
+
+*_Hinweis:_* Achte darauf, dass auch Lieferaufträge in der Ereignisaktion berücksichtigt werden, da du zuvor für die Positionen, die versendet werden sollen, Lieferaufträge erstellt hast.
+
+:table-event-procedure: <<#ereignisaktion-teillieferung-limango>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+*_Hinweis:_* Der Status für die Ereignisaktion wurde beispielhaft gewählt. Wähle einen Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen bereits vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen]. +
+Beachte, dass mit den hier vorgeschlagenen Ereignissen und Filtern auch alle Positionen in Hauptaufträgen als versendet gekennzeichnet werden.
+
+[[ereignisaktion-teillieferung-limango]]
+.Ereignisaktion zum automatischen Melden von Teillieferungen an limango
+[cols="1,3,3"]
+|===
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Auftragsänderung: Warenausgang gebucht*
+|
+
+| *Filter 1*
+| *Auftrag > Herkunft*
+| *Limango*
+
+| *Aktion*
+| *Plugins*
+| *Versandinformation an limango melden*
+|===
+
+[#mehrere-lieferaufträge]
+== _Beispiel:_ Mehrere Lieferaufträge aus einem Auftrag erstellen
+
+Eine Kundin hat 5 Artikel auf limango bestellt:
+
+* eine Jeans
+* ein rotes T-Shirt
+* ein grünes T-Shirt
+* eine Sonnenbrille
+* eine Kinderjacke
+
+Du hast die Jeans und die T-Shirts auf Lager und möchtest diese bereits an die Kundin versenden. Die Kinderjacke hat eine Lieferzeit von 3 Wochen und soll später versendet werden. Die Sonnenbrille hast du nicht mehr auf Lager und musst sie deshalb stornieren.
+
+Weil für diesen Auftrag drei verschiedene Aktionen ausgelöst werden müssen, musst du drei Lieferaufträge mit jeweils unterschiedlichen Ereignisaktionen erstellen:
+
+[[lieferauftraege-limango]]
+.Mehrere Lieferaufträge für limango
+[cols="1a,3a,3a"]
+|===
+|Lieferauftrag |Auftragspositionen |Ereignisaktion
+
+| *Lieferauftrag 1*
+| * eine Jeans +
+* ein rotes T-Shirt +
+* ein grünes T-Shirt +
+→ Diese Artikel sollen bereits versendet werden.
+| *Versandinformation an limango melden*
+
+| *Lieferauftrag 2*
+| * eine Kinderjacke +
+→ Dieser Artikel ist momentan nicht auf Lager und soll später versendet werden.
+| *Versandinformation an limango melden* +
+*_Hinweis:_* Die Ereignisaktion wird erst ausgelöst, wenn die Jacke wieder auf Lager ist und der Auftrag den Status gewechselt hat.
+
+| *Lieferauftrag 3*
+| * eine Sonnenbrille +
+→ Dieser Artikel soll storniert werden.
+| *Auftragsstornierung an limango melden*
+|===

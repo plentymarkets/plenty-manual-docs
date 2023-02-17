@@ -1,0 +1,199 @@
+= Order type: Multi-order
+
+:keywords: multi-order, multi-invoice, multi credit note
+:author: team-order-core
+:description: Learn how to combine unpaid orders in a multi-order and how to generate multi-invoices. Moreover, find out how to create a multi credit note in order to combine all credit notes of a customer class.
+
+You can combine unpaid orders in a multi-order. By opening the *Orders » Orders (Test phase)* menu and using the search filter *Order status*, you can search for such unpaid orders with the status *[3] Waiting for payment*. +
+Go to *Orders » Multi-orders* to add unpaid orders to a multi-order. Multi-invoices are then created in the *Documents* area of a multi-order.
+
+[NOTE]
+======
+Orders should *not* be combined in one multi-order if they:
+
+* do not have the same gross/net statement
+* have different currencies
+* have different tax rates.
+======
+
+[#basic-settings-multi-order]
+== Carrying out basic settings for multi-orders
+
+Carry out the basic settings for multi-orders in the *Setup » Orders » Order types » Multi-order* menu. In this menu, you can define such details as the order types and order statuses for which multi-orders are to be created.
+
+[.instruction]
+Carrying out basic settings for multi-orders:
+
+. Go to *Setup » Orders » Order types » Multi-order*.
+. Carry out the settings according to <<table-multi-order-settings>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-multi-order-settings]]
+.Basic settings for multi-orders
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Order type*
+|Select which order types are to be available for multi-orders. You can select more than one option. Only the listed order types *Order*, *Warranty* and *Repair* can be combined in multi-orders.
+
+| *Item text*
+|Select which options are used for the *Item text* column of the order items that belong to a multi-order. You can select more than one option. The selected options will be listed separately for each individual order within the multi-order. This ensures that the options can easily be assigned to the correct customers and orders.
+
+| *Sort orders by*
+|Select how individual orders are sorted within a multi-order. You can select only one option. Orders can be sorted by their order ID (*Order ID ascending* or *Order ID descending*) or their date of outgoing items (*Outgoing items ascending* or *Outgoing items descending*).
+
+| *Order status of orders*
+|Select the status orders have to be in to be considered for multi-orders. You can select more than one option. Depending on your workflow, we recommend creating an individual order status to determine only those orders that are intended for multi-orders.
+
+| *Order status of credit notes*
+|Select the status xref:orders:order-type-credit-note.adoc#[credit note orders] have to be in to be considered for multi credit notes. You can select more than one option.
+|===
+
+Furthermore, go to *Setup » Orders » Settings* and use the option xref:orders:preparatory-settings.adoc#intable-default-status-multi-order[Standard status for multi-order] to specify which order status should be given to multi-orders when they are generated. By default, the status *[13] Multi-order* is available. In addition, use the option *Standard status for multi credit note* to select a status for multi credit notes. By default, the status *[14] Multi credit note* is available.
+
+[#multi-order-per-customer-class]
+== Creating a multi-order per customer class
+
+Example: A company may not want to receive an invoice every time one of their employees make a purchase in your online shop. Rather, the company prefers one monthly invoice for all of its employees’ purchases. Set up a customer class for this situation. The invoice recipient is specified by saving a customer ID in the customer class. The multi-invoice is generated directly within the corresponding multi-order and sent to this invoice recipient. +
+
+Go to *Orders »Multi-orders* to create a multi-order for a specific customer class and a fixed time period. This way, all unpaid orders belonging to the customer class are combined in one multi-order. Use the option *Customer ID* in the customer class settings to determine a customer who is listed as the owner of the multi-order as well as the recipient of the multi-invoice for a customer class. According to your workflow, we recommend creating specific xref:crm:preparatory-settings.adoc#create-customer-class[customer classes] for multi-orders.
+
+[.instruction]
+Creating a multi-order per customer class:
+
+. Go to *Orders » Multi-orders*.
+. Open the sub-menu *Generate multi-orders*.
+. Select a *Customer class* and as an option a *Period*. The time period refers to the date of the incoming order.
+. Click on terra:execute[]. +
+→ The multi-order is created.
+
+[#multi-order-per-contact]
+== Creating a multi-order per contact
+
+Customers prefer to pay for their orders once a month or once per quarter instead of paying several separate invoices. +
+For these cases, go to *CRM » Contacts* to create a multi-order in the contact data record. To do so, open a contact and go to the *Orders* area. Select the option *New multi-order* by clicking on material:add[]. A multi-order including all unpaid orders of the contact is then automatically created.
+
+[TIP]
+.Checking orders
+======
+To make sure that appropriate orders are available for creating a multi-order, use the filters in the *Orders » Orders (Test phase)* menu to search for unpaid orders of the customer.
+======
+
+[#generate-multi-order]
+== Generating a multi-invoice
+
+Multi-invoices can only be generated in the corresponding multi-order. The first step consists of setting up a xref:orders:order-documents.adoc#[document template] for multi-invoices in the *Setup » Client » [Select client] » Locations » [Select location] » Documents » Multi-invoice* menu. Here, you can specify detailed settings for the document and also save a document template as a PDF file. Customise the template as required. Default values are set in the basic settings of the document template. You can also transfer further settings, e.g. from the document template *Invoice* to complete the values.
+
+After having set up a document template for multi-invoices, you can generate a multi-invoice in the *Receipts* tab of a multi-order. To do so, proceed as follows.
+
+[.instruction]
+Generating a multi-invoice:
+
+. Go to *Orders » Orders (Test phase)*. +
+. Carry out the search (material:search[]) to display orders.
+. On the right in the row of the credit note, click on the context menu (material:more_vert[]).
+. Select *Create document* > *Credit note*. +
+icon:map-signs[] *_Or:_* Open the multi-order for which you want to generate a multi-invoice.
+. Go to the *Documents* area.
+. On the right, click on *Create document* (material:add[]).
+. Select the option *Multi-invoice*. +
+→ The window to create the multi-invoice opens.
+. Carry out the settings, if required. Pay attention to the explanations given in <<table-orders-generate-multi-invoice>>.
+. Click on *Book*. +
+→ The *multi-invoice* is created.
+
+[[table-orders-generate-multi-invoice]]
+.Settings for multi-invoices
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Date*
+|Enter a date to be displayed on the invoice. The present date is set by default.
+
+| *Comment*
+|The text entered here is displayed below the order items on the multi-invoice. Entering a text is optional.
+|===
+
+[IMPORTANT]
+.Incoming payments for multi-orders
+======
+If a customer pays a multi-invoice and the multi-order is marked as paid, the incoming payment is _not_ automatically booked in the separate orders which are combined in the multi-order. You have to book incoming payments manually in the respective orders.
+======
+
+[.discrete]
+=== Generating multi-invoices with an event procedure
+
+Use the event procedures available in your plentymarkets system to automatically generate a multi-invoice as soon as a multi-order is created. To do so, proceed as follows.
+
+:table-event-procedure: <<table-event-procedure-multi-invoice-automatic>>
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-multi-invoice-automatic]]
+.Event procedure “Automatically generating a multi-invoice”
+[cols="1,3"]
+|===
+|Setting |Selection
+
+| *Event*
+
+| *Order generation > New multi-order*
+
+| *Procedure*
+
+| *Documents > Generate multi-invoice* +
+
+|===
+
+[#generate-multi-credit-note]
+== Generating a multi credit note
+
+Multi credit notes are generated in the *Orders » Multi-orders* menu. +
+All credit notes for a customer class are combined in one multi credit note. Just like the multi-orders, you can edit this multi credit note in the order overview after it has been created. According to your workflow, we recommend creating specific xref:crm:preparatory-settings.adoc#create-customer-class[customer classes] for multi credit notes.
+
+[.instruction]
+Generating a multi credit note for a customer class:
+
+. Go to *Orders » Multi-orders*.
+. Open the sub-menu *Generate multi credit notes*.
+. Select the *customer class*.
+. Optionally, select a *Period*. The time period refers to the date when the credit note was created.
+. Click on terra:execute[]. +
+→ The multi credit note is generated.
+
+[#generate-document-multi-credit-note]
+== Generating a multi credit note document
+
+*Multi credit note* documents can only be generated in the corresponding order type multi credit note. The first step consists of setting up a document template for multi credit notes in the *Setup » Client » [Select client] » Locations » [Select location] » Documents » Multi credit note* menu. Here, you can specify detailed settings for the document and also save a document template as a PDF file. Customise the template as required. Default values are set in the basic settings of the document template. You can also transfer further settings, e.g. from the document template *Credit note* to complete the values.
+
+Afterwards, you can generate the document Multi credit note in the *Documents* are of the *multi credit note*. To do so, proceed as follows.
+
+[.instruction]
+Generating a *multi credit note* document:
+
+. Go to *Orders » Orders (Test phase)*. +
+. Carry out the search (material:search[]) to display orders.
+. On the right in the row of the credit note, click on the context menu (material:more_vert[]).
+. Select *Create document* > *Credit note*. +
+icon:map-signs[] *_Or:_* Open the multi credit note for which you want to generate the document *Multi credit note*.
+. Go to the *Documents* area.
+. Click on *Create document* (material:add[]).
+. Select the option *Multi credit note*. +
+→ The window to create the multi credit note opens.
+. Carry out the settings, if required. Pay attention to the explanations given in <<table-orders-generate-multi-credit-note>>.
+. Click on *Book*. +
+→ The document *Multi credit note* is generated.
+
+[[table-orders-generate-multi-credit-note]]
+.Settings for the multi credit note document
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Date*
+|Enter a date to be displayed on the multi credit note document. The present date is set by default.
+
+| *Comment*
+|The text entered here is displayed below the order items on the multi credit note. Entering a text is optional.
+|===

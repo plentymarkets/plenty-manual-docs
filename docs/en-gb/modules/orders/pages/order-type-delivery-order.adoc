@@ -1,0 +1,310 @@
+= Order type: Delivery order
+
+:keywords: delivery order, delivery note, split orders, event procedure for delivery orders
+:author: team-order-core
+:description: Learn how to generate delivery orders with the order type delivery order so you can ship items individually or in parts. Moreover, find out how to manually or automatically create delivery orders.
+
+The order type *Delivery order* allows you to create multiple delivery orders for the items included in the main order. This way, items from the main order can be shipped individually or in parts. Thus, delivery orders allow you to immediately ship items that are in stock and ship unavailable items later. Delivery orders can be shipped using one or several shipping service providers. +
+Delivery orders can be created <<#manually-create-delivery-orders, manually>> or automatically with an <<#create-delivery-orders-via-event-procedure, event procedure>>.
+
+[WARNING]
+.Transfer all order items to delivery orders
+======
+When you create delivery orders from a main order, make sure to transfer _all_ order items into delivery orders. If you do not and leave order items on the main order, stock and warehouse errors will occur.
+======
+
+[#characteristics-delivery-orders]
+== Characteristics of delivery orders
+
+In general, delivery orders have the following characteristics:
+
+* It is _not_ possible to modify the order items included in a delivery order after the delivery order has been created.
+* The *price* and *weight* of an order are taken from the main order.
+* The *order language* is taken from the main order.
+* *Pick-up delivery*, *delivery note*, *pro forma invoice* and *entry certificate* (Gelangensbestätigung) can be created in the *Documents* tab of the respective delivery order.
+* The *invoice* and all other documents are created centrally in the main order.
+* When creating a delivery order, the *stock reservation* for the quantity included in the delivery order is transferred from the main order to the delivery order.
+
+[IMPORTANT]
+.Same order status
+======
+The status of the main order is always identical to the status of the delivery order with the lowest status.
+For example, if a main order with the status *5.0* has two delivery orders, of which one changes to status *6.5*, the status of the main order is not changed. Only when the second delivery order also changes to status *6.5* is the status of the main order also automatically changed to *6.5*.
+======
+
+[#basic-settings-delivery-orders]
+== Carrying out basic settings for delivery orders
+
+[WARNING]
+.Assigning a warehouse for each order item
+======
+To use delivery orders, you have to select the option *b) a warehouse can be assigned for each stock unit* for the xref:orders:preparatory-settings.adoc#intable-warehouse-assignment[Assignment of warehouses] field in the *Setup » Orders » Settings* menu.
+======
+
+Before working with delivery orders, go to *Setup »Orders »Order types » Delivery order* to select an option for splitting up main orders into delivery orders.
+
+[.instruction]
+Selecting an option for splitting up orders into delivery orders:
+
+. Go to *Setup » Orders » Order types » Sales order [Beta]*.
+. Carry out the settings according to <<table-order-types-delivery-order-options>>.
+. *Save* (material:save[]) the settings.
+
+[[table-order-types-delivery-order-options]]
+.Options for *splitting up orders into delivery orders*
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+2+^| *Split up orders into delivery orders by*
+
+| *Off*
+|Orders are *not split up* into delivery orders. +
+*_Note_*: If this option is activated, delivery orders can only be created manually. Automatically creating delivery orders or using event procedures to create delivery orders is not possible with this setting.
+
+| *Warehouse*
+|The delivery orders are created according to the different *Warehouses* of the items included in the order.
+
+| *Shipping profile*
+|The delivery orders are created according to the different *Shipping profiles* of the items included in the order.
+
+| *Warehouse and shipping profile*
+|The delivery orders are created according to the different *Warehouses and shipping profiles* of the items included in the order.
+
+| *Warehouse stock and net stock > 0*
+|The delivery orders are created according to the *Warehouse stock and the net stock* of the order items if the stock is bigger than 0.
+
+| *Warehouse stock and net stock >= order item quantity*
+|The delivery orders are created according to the *Warehouse stock and the net stock* if the stock is bigger than or equals the order item quantity.
+
+|===
+
+[TIP]
+.Defining an end point after completing an order
+======
+Go to *Setup » Orders » Order types » Sales order [Beta]* to determine the view that is shown after an order has been completed. Use the setting *Endpoint after completing an order* for this.
+======
+
+[#manually-create-delivery-orders]
+== Generating delivery orders manually
+
+If necessary, you can manually create delivery orders via the main order. When you do so, you need to select the order items and quantities for each delivery order.
+
+We recommend to generally create delivery orders for _all_ order items in the main order. If one or several order items remain in the main order without being assigned to a delivery order, problems may be caused in your plentymarkets system.
+
+:ordertype: delivery orders
+
+[.instruction]
+Generating delivery orders manually
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. Open the order for which delivery orders should be created.
+. At the top, click on *Create orders* (material:shopping_cart[]) > *Delivery order*.
+. Select the option *For specific order items* to select items.
+. Carry out the settings. Pay attention to the explanations given in <<table-create-delivery-order>>. +
+. *Save* (material:save[]) the settings. +
+→ The delivery order is created.
+
+[[table-create-delivery-order]]
+.Settings for delivery orders
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Status*
+|Select a status from the drop-down list.
+
+| *Owner*
+|Select the owner from the drop-down list.
+
+2+^| *Item information*
+
+| *Add all open order items into the cart* (material:playlist_add[])
+|Adds all open order items to the shopping cart.
+
+| *Item ID*
+|Shows the item ID.
+
+| *Variation ID*
+|Shows the variation ID.
+
+| *Variation no.*
+|Shows the variation number.
+
+| *Quantity*
+|Shows the item quantity. If needed, adjust the quantity.
+
+| *Remaining quantity*
+|Shows the remaining quantity of the item.
+
+| *Open quantity*
+|Shows the open quantity of the item.
+
+| *Available stock*
+|Shows the available stock.
+
+| *Item name*
+|Shows the name of the item.
+
+| *Add items to shopping cart* (material:add_shopping_cart[])
+|Only adds specific items to the delivery order. This button is only displayed if at least 1 item is available. +
+*_Tip:_* If needed, adjust the item quantity in the *Quantity* field.
+
+2+^| *Shopping cart*
+
+| *Remove items from shopping cart* (material:delete[])
+|Removes all items from the shopping cart. If you only want to remove specific items, click on *Remove item from shopping cart* (material:delete[]) on the right of the respective item.
+
+| *Item ID*
+|Shows the item ID.
+
+| *Variation ID*
+|Shows the variation ID.
+
+| *Quantity*
+|Shows the item quantity. If needed, adjust the quantity.
+
+| *Item name*
+|Shows the item name. If needed, adjust the name.
+
+|===
+
+[#automatically-create-delivery-orders]
+== Automatically generating delivery orders
+
+[IMPORTANT]
+.Requirement for automatically creating delivery orders
+======
+Delivery orders can only be created automatically if no delivery order has ben created for the main order yet.
+======
+
+When you automatically create delivery orders, the criteria for splitting up orders into delivery orders described in <<table-order-types-delivery-order-options>> apply. Thus, the items and quantities to be included in the delivery orders do not have to be selected manually. Instead, the system applies the selected option and transfers the order items from the main order to the delivery orders.
+
+[.instruction]
+Automatically generating delivery orders:
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. Open the order or which delivery orders should be created.
+. At the top, click on *Create orders* (material:shopping_cart[]) > *Delivery order*.
+. Select the option *Split automatically*. +
+→ Based on the <<#basic-settings-delivery-orders, basic settings>> that you carried out, the delivery orders are automatically split and created.
+
+[#create-delivery-orders-via-event-procedure]
+== Creating delivery orders via an event procedure
+
+An ideal way to create delivery orders is using an event procedure. As a seller, you are able to determine when and how delivery orders are created from a main order. In the following, you can find 3 examples for creating delivery orders with an event procedure.
+
+=== Example A: Event procedure “Create delivery order when order is received”
+
+Use the event procedure described in <<table-event-procedure-delivery-order-when-new-order>> if you want delivery orders to be generated as soon as a new order enters your plentymarkets system.
+
+Because this event procedure comes into effect directly upon reception of a new order, the status of the main order is not taken into consideration. Thus, delivery orders will also be created for main orders that are in status *3.0* (or *1.0* if you work with auction platforms such as eBay). The delivery orders will adopt the status of the main order.
+
+:table-event-procedure: <<table-event-procedure-delivery-order-when-new-order>>
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-delivery-order-when-new-order]]
+.Event procedure “Create delivery order when order is received”
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *New order*
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Order warehouse*
+| *Multiple warehouses per order*
+
+| *Procedure*
+| *Order > Generate delivery orders*
+|
+
+|===
+
+=== Example B: Event procedure “Create delivery order when order changes to status 5”
+
+Use the event procedure described in <<table-event-procedure-delivery-order-status-5>> if you want delivery orders to be created as soon as an order changes to status 5.0 (Cleared for shipping).
+
+Don’t change anything at the main order when working with this event procedure. Otherwise, the total item quantities included in the delivery orders will not match the item quantity included in the main order.
+
+:table-event-procedure: <<table-event-procedure-delivery-order-status-5>>
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-delivery-order-status-5]]
+.Event procedure “Create delivery order when order changes to status 5”
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *Order change > Status change*
+| *Cleared for shipping*
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Order warehouse*
+| *Multiple warehouses per order*
+
+| *Procedure*
+| *Order > Generate delivery orders*
+|
+
+|===
+
+=== Example C: Event procedure “Create delivery order when generating an invoice”
+
+Use the event procedure described in <<table-event-procedure-invoice-generated>> if you want delivery orders to be created as soon as an invoice is generated for the main order. +
+This allows you to edit the main order as necessary until an invoice is created and the order is cleared for shipping. The following settings can be copied:
+
+:table-event-procedure: <<table-event-procedure-invoice-generated>>
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-invoice-generated]]
+.Event procedure “Create delivery order when generating an invoice”
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *Documents > Invoice generated*
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Order warehouse*
+| *Multiple warehouses per order*
+
+| *Procedure*
+| *Order > Generate delivery orders*
+|
+
+|===
+
+[#edit-delivery-orders]
+== Editing main orders and delivery orders
+
+To be able to open main orders, variable users have to be xref:business-decisions:user-accounts-access.adoc#[authorised] to view all warehouses linked to the delivery orders of the main order. Check the settings in the menu *Setup» Settings » User »Accounts » Tab: Rights* for this.
+
+If you want to delete a main order, the respective delivery orders have to be deleted first. Delivery orders can be deleted individually or with the group function in the order search. The main order can only be deleted after this is done. But note that as soon as tax-relevant documents, e.g. an invoice, exist, orders cannot be deleted any more.
+
+Order items can be added to the main order or deleted from the main order. However, you can only delete order items from the main order if they are not included in the delivery orders. The number of items in the main order can be increased or decreased. Make sure to only delete *quantities that are not assigned to delivery orders*.
+
+[WARNING]
+.Deleting order items of a delivery order
+======
+It is technically possible to delete order items that are already included in a delivery order. But you should avoid this in order to prevent errors.
+======

@@ -1,0 +1,68 @@
+= Best practice: Sending partial cancellations to MyToys
+:author: team-plenty-channel
+:keywords: MyToys, partial cancellation, cancellation, MyToys cancellation, cancelation, cancel orders
+:description: In this best practice you will learn how to cancel one or more order items of a MyToys order without marking the whole order as cancelled.
+
+One or more order items, but not the whole order, should be cancelled? This best practice teaches you how to inform MyToys that one or more order items should be cancelled.
+
+In order to cancel one or more order items, you first create a delivery order for the order item(s) that should be cancelled. Afterwards, you create the event procedure *Report order cancellation to MyToys*.
+
+*_Note:_* You can only cancel one or more order items if those items have not been shipped yet.
+
+[TIP]
+.Create another delivery order for items that should be shipped
+====
+Create an additional delivery order for the items that should be shipped. This delivery order should contain all order items that should not be cancelled.
+====
+
+[#create-delivery-order]
+== Creating a delivery order
+
+First, create a delivery order for the order items that should be cancelled.
+
+[.instruction]
+Creating a delivery order:
+
+. Go to *Orders » Edit orders*.
+. Open the order you want to create a delivery order for. +
+→ This is the order from which one or more order items should be cancelled.
+. Open the *Delivery* tab.
+. Enter the *Quantity* that should be transferred to the delivery order in the field *DelOrdQua* (quantity to be transferred to the delivery order).
+. Click on *Create delivery order* (terra:execute[]). +
+→ The delivery order is created.
+
+*_Note:_* If you want to cancel all order items contained in an order - that is, the whole order - then you do not have to create a delivery order. You can simply cancel the order instead. +
+Delivery orders help you extract individual order items from an order, for example if you want to ship items that are in stock or if you want to cancel individual order items.
+
+[#event-procedure-partial-cancellation]
+== Setting up an event procedure
+
+Set up an xref:automation:event-procedures.adoc#[event procedure] to inform MyToys about the cancellation of the order items.
+
+*_Note:_* Make sure that you include delivery orders when you create the event procedure, as you created delivery orders for the order items which should be cancelled.
+
+:table-event-procedure: <<#event-procedure-partial-cancellation-myToys>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status. +
+Note that all order items contained in main orders will also be marked as cancelled if you use the recommended events and filters.
+
+[[event-procedure-partial-cancellation-myToys]]
+.Event procedure for automatically reporting partial cancellations to MyToys
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| Select a status, for example *[8] Cancelled*.
+
+| *Filter 1*
+| *Order > Referrer*
+| *MyToys*
+
+| *Action*
+| *Plugins*
+| *Report order cancellation to MyToys*
+|===

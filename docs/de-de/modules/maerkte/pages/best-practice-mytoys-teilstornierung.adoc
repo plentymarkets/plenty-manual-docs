@@ -1,0 +1,68 @@
+= Praxisbeispiel: Teilstornierungen an MyToys senden
+:author: team-plenty-channel
+:keywords: MyToys, Teilstornierung, Stornierung, MyToys Stornierung, Stonierung, Teil Stornierung, stornieren, MyToys Stornierung
+:description: In diesem Praxisbeispiel erfährst du, wie du eine oder mehrere Auftragspositionen eines MyToys-Auftrags stornieren kannst, ohne den gesamten Auftrag zu stornieren.
+
+Eine oder mehrere Positionen eines Auftrags sollen storniert werden, ohne den gesamten Auftrag zu stornieren? In diesem Praxisbeispiel erfährst du, wie du MyToys darüber informieren kannst, dass eine oder mehrere Positionen eines Auftrags storniert werden.
+
+Um eine oder mehrere Positionen eines Auftrags zu stornieren, erstellst du einen Lieferauftrag für die Positionen, die storniert werden sollen. Danach erstellst du die Ereignisaktion *Auftragsstornierung an MyToys melden*.
+
+*_Hinweis:_* Eine Teilstornierung eines oder mehrerer Artikel kann nur erfolgen, wenn die Artikel, die storniert werden sollen, noch nicht versendet wurden.
+
+[TIP]
+.Zweiten Lieferauftrag für zu versendende Artikel erstellen
+====
+Erstelle einen zweiten Lieferauftrag für die Artikel, die versendet werden sollen. In diesem Lieferauftrag müssen alle Auftragspositionen enthalten sein, die nicht storniert werden sollen.
+====
+
+[#lieferauftrag-erstellen]
+== Lieferauftrag erstellen
+
+Erstelle als Erstes einen Lieferauftrag für die Auftragspositionen, die storniert werden sollen.
+
+[.instruction]
+Lieferauftrag erstellen:
+
+. Öffne das Menü *Aufträge » Aufträge bearbeiten*.
+. Öffne den Auftrag, aus dem ein Lieferauftrag erstellt werden soll. +
+→ Es handelt sich hierbei um den Auftrag, aus dem eine oder mehrere Auftragspositionen storniert werden sollen.
+. Wechsele in das Tab *Lief*.
+. Trage in das Feld *LiefAufMenge* (Menge für den Lieferauftrag) die *Menge* ein, die in den Lieferauftrag überführt werden soll.
+. Klicke anschließend auf *Lieferauftrag anlegen* (terra:execute[]). +
+→ Der Lieferauftrag wird angelegt.
+
+*_Hinweis:_* Wenn alle Positionen eines Auftrags - also der gesamte Auftrag - storniert werden sollen, musst du keinen Lieferauftrag anlegen, sondern kannst einfach den Auftrag stornieren. +
+Lieferaufträge dienen nur dazu, einzelne Positionen eines Auftrags herauszulösen, zum Beispiel wenn einzelne Artikel bereits verschickt oder storniert werden sollen.
+
+[#ereignisaktion-teilstornierung]
+== Ereignisaktion einrichten
+
+Erstelle nun eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion], um MyToys über die Stornierung der Auftragspositionen zu informieren.
+
+*_Hinweis:_* Achte darauf, dass auch Lieferaufträge in der Ereignisaktion berücksichtigt werden, da du zuvor für die Positionen, die storniert werden sollen, Lieferaufträge erstellt hast.
+
+:table-event-procedure: <<#ereignisaktion-teilstornierung-myToys>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+*_Hinweis:_* Der Status für die Ereignisaktion wurde beispielhaft gewählt. Wähle einen Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen bereits vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen]. +
+Beachte, dass mit den hier vorgeschlagenen Ereignissen und Filtern auch alle Positionen in Hauptaufträgen als storniert gekennzeichnet werden.
+
+[[ereignisaktion-teilstornierung-myToys]]
+.Ereignisaktion zum automatischen Melden von Teilstornierungen an MyToys
+[cols="1,3,3"]
+|===
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Auftragsänderung: Statuswechsel*
+| Status wählen, zum Beispiel *[8] Storniert*
+
+| *Filter 1*
+| *Auftrag > Herkunft*
+| *MyToys*
+
+| *Aktion*
+| *Plugins*
+| *Auftragsstornierung an MyToys melden*
+|===

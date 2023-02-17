@@ -1,6 +1,6 @@
 = Katalogexportstatus prüfen
-:keywords:
-:description:
+:keywords: Katalogstatus, Exportstatus
+:description: Prüfe den Status von Katalogexporten.
 :page-index:
 :author: team-plenty-channel
 
@@ -28,8 +28,9 @@ Du befindest dich im Menü *Daten » Katalogexportstatus*. Wenn du das Menü öf
 * *Vorschau* = Der Export erstellt eine Vorschau der ersten fünf Datensätze des Katalogs.
 * *Direkt* = Der Export wird sofort verarbeitet.
 * *Async* = Der Export wird in Jobs zerlegt. Diese Jobs werden in die Warteschlange eingereiht.
+* *Live* = Der Export wurde als *Live-Download* gestartet. Die Datei wird direkt auf deinen Rechner heruntergeladen.
 * *Dev-Cache* = Eine gecachte Version des Katalogs wird exportiert. Der Cache wird alle 20 Minuten aktualisiert. +
-*_Tipp:_* Exportvorgänge des Typs *Dev-Cache* werden nicht in der Übersicht angezeigt. Du kannst aber nach diesem Typ filtern, um die Exporte anzuzeigen.
+*_Tipp:_* Exportvorgänge des Typs *Dev-Cache* werden nicht automatisch in der Übersichtsliste angezeigt. Du kannst aber nach diesem Typ filtern, um die Exporte anzuzeigen.
 //end::export-types[]
 
 | *Katalogname*
@@ -53,7 +54,7 @@ Du befindest dich im Menü *Daten » Katalogexportstatus*. Wenn du das Menü öf
 [.collapseBox]
 .Was ist ein Job?
 --
-Bei Exporten des Typs *Asynchron* werden die zu exportierenden Daten vor dem Export in Pakete zerlegt. Jedes Paket enthält 500 Zeilen, das letzte Paket ggf. weniger. Jedes dieser Pakete entspricht einem Job. Jeder dieser Jobs wird in die Warteschlange eingereiht.
+Bei Exporten des Typs *Asynchron* werden die zu exportierenden Daten vor dem Export in Pakete zerlegt. Jedes Paket enthält 500 Zeilen. Das letzte Paket enthält ggf. weniger Zeilen. Jedes dieser Pakete entspricht einem Job. Jeder dieser Jobs wird in die Warteschlange eingereiht.
 
 *_Beispiel:_* Mit einem Export sollen 2.300 Zeilen exportiert werden. Der Export wird in 5 Jobs zerlegt: 4 Jobs mit je 500 Zeilen und ein Job mit 300 Zeilen. Der Fortschrittsbalken zählt mit, wie viele dieser 5 Jobs abgearbeitet wurden.
 --
@@ -72,11 +73,13 @@ include::page$catalogues-status.adoc[tag=what-is-a-job]
 | Wie wurde der Export gestartet?
 
 * *Benutzer:in* = Der Exportvorgang wurde von einer Benutzer:in gestartet. Wenn du mit der Maus auf den Namen der Person zeigst, wird auch die ID der Benutzer:in angezeigt.
-* *Cron* = Der Exportvorgang wurde automatisch durch einen Cron gestartet. Wenn du mit der Maus auf das Wort "Cron"zeigst, wird angezeigt, welcher Cron den Export gestartet hat. +
+* *Cron* = Der Exportvorgang wurde automatisch durch einen Cron gestartet. Wenn du mit der Maus auf das Wort "Cron" zeigst, wird angezeigt, welcher Cron den Export gestartet hat. +
   ** *20* = Export läuft alle 20 Minuten. +
   ** *60* = Export läuft einmal pro Stunde. +
   ** *1440* = Export läuft einmal pro Tag.
 * *Debug* = Der Exportvorgang wurde zum Debuggen gestartet.
+
+include::_includes:partial$crons.adoc[]
 
 | *Startzeit*
 | Wann wurde der Exportvorgang gestartet?
@@ -122,6 +125,9 @@ include::page$catalogues-status.adoc[tag=export-types]
 | Reduziert die Liste auf Exporte, die von dieser Person gestartet wurden. +
 *_Tipp:_* Dieser Filter ist nur verfügbar, wenn du den Filter *Initiator:in* auf *Benutzer:in* gestellt hast.
 
+| *Enthält Fehler*
+| Reduziert die Liste auf Exporte, die entweder Fehler oder keine Fehler enthalten.
+
 | *Gestartet von*
 | Reduziert die Liste auf Exporte, die ab diesem Datum gestartet wurden. +
 Du kannst den Status von Exporten der letzten 4 Wochen anzeigen.
@@ -153,12 +159,6 @@ Klicke auf einen Export, um Details zum Exportvorgang anzuzeigen.
 |===
 |Einstellung |Erläuterung
 
-| *Details*
-| Hier werden die Details zum Export noch einmal aufgelistet. Die Informationen werden automatisch alle 20 Sekunden aktualisiert.
-
-| *Fehler*
-| Eine Liste der Fehler. Diese Informationen werden nicht automatisch aktualisiert. Klicke auf material:refresh[], um die Informationen manuell zu aktualisieren.
-
 | *Fortschritt-Logs* +
 (material:playlist_play[])
 | Klicken, um die Logs anzuzeigen.
@@ -166,11 +166,43 @@ Links wird die Liste der Logs angezeigt. Klicke auf eines dieser Logs, um Inform
 
 | *Performance-Logs* +
 (material:bar_chart[])
-| Diese Einstellung hat aktuell noch keine Funktion. Stay tuned.
+| Diese Einstellung hat im Moment noch keine Funktion. Stay tuned.
 
 | *Daten* +
+(material:library_books[]) +
 (erst nach Abschluss des Exports wählbar)
 | Klicken, um die Daten anzuzeigen, die exportiert wurden. Die Daten werden im JSON-Format angezeigt. +
-*_Wichtig:_* Aufgrund der Datenmenge und -komplexität können die Daten nicht als Tabelle angezeigt werden.
+*_Wichtig:_* Wegen der Menge und Komplexität der Daten können die Daten nicht als Tabelle angezeigt werden.
 
+//| *Private Exportdatei herunterladen* +
+//(material:file_download[])
+//| *_Hinweis:_* Verwende diesen Download, wenn du die Exportdatei über einen privaten Link abrufst. +
+//*_Hinweis:_* Der Download-Button ist nur für den Exporttyp *Async* verfügbar.
+
+//. Klicke auf *Private Exportdatei herunterladen* (material:file_download[]). +
+//→ Der Export wird gestartet. +
+//*_Wichtig:_* Der Export läuft im Hintergrund. Es wird _kein_ Fenster angezeigt, über das du die Datei sofort herunterladen kannst. Auch der Export kleiner Datenmengen dauert ca. 30 Minuten. +
+//→ Wenn der Export abgeschlossen ist, wirst in den Notifications (material:notifications_none[]) angezeigt, dass die Exportdatei heruntergeladen werden kann.
+//. Klicke im Notification Center auf material:link[] *Herunterladen*. +
+//*_Tipp:_* Die Notification wird nicht mehr angezeigt? Die Datei kann immer über die URL in den *Download-Einstellungen* abgerufen werden.
+//. Speichere die Datei auf deinem Rechner.
+
+| *Öffentliche Exportdatei herunterladen* +
+(material:file_download[])
+| *_Hinweis:_* Verwende diesen Download, wenn du die Exportdatei über einen öffentlichen Link abrufst. Die Einstellungen zum öffentlichen Link findest du in den *Download-Einstellungen* eines Katalogs. +
+*_Hinweis:_* Der Download-Button ist nur für den Exporttyp *Async* verfügbar.
+
+. Klicke auf *Öffentliche Exportdatei herunterladen* (material:file_download[]). +
+→ Der Export wird gestartet. +
+*_Wichtig:_* Der Export läuft im Hintergrund. Es wird _kein_ Fenster angezeigt, über das du die Datei sofort herunterladen kannst. Auch der Export kleiner Datenmengen dauert ca. 30 Minuten. +
+→ Wenn der Export abgeschlossen ist, wirst in den Notifications (material:notifications_none[]) angezeigt, dass die Exportdatei heruntergeladen werden kann.
+. Klicke im Notification Center auf material:link[] *Herunterladen*. +
+*_Tipp:_* Die Notification wird nicht mehr angezeigt? Die Datei kann immer über die URL in den *Download-Einstellungen* abgerufen werden.
+. Speichere die Datei auf deinem Rechner.
+
+| *Details*
+| Hier werden die Details zum Export noch einmal aufgelistet. Die Informationen werden automatisch alle 20 Sekunden aktualisiert.
+
+| *Fehler*
+| Eine Liste der Fehler. Diese Informationen werden nicht automatisch aktualisiert. Klicke deshalb auf material:refresh[], um die Informationen manuell zu aktualisieren.
 |===

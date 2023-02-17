@@ -1,92 +1,53 @@
 = Fruugo
 :author: team-plenty-channel
 :keywords: Fruugo, Fruugo, Froogo, Frougo, Frugo
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz Fruugo in deinem plentymarkets System ein.
-:id: SSHUJMD
+:description: Hier erfährst du, wie du den Marktplatz Fruugo in plentymarkets einrichtest, damit du deine Artikel auf Fruugo verkaufen kannst. Auf Fruugo können Kund:innen in ihrer Landessprache und Landeswährung einkaufen.
 
-link:https://sell.fruugo.com/[Fruugo^] ist ein globaler Marktplatz, auf dem Kund:innen in ihrer Landessprache und -währung einkaufen können. Artikelbeschreibungen werden automatisch in die Landessprachen übersetzt und in die Landeswährung umgerechnet, damit du deine internationale Präsenz ohne großen zeitlichen und finanziellen Aufwand ausbauen kannst.
+:market: Fruugo
+:fruugo:
 
-IMPORTANT: Hier wird nur beschrieben, wie du die Fruugo-Auftragsschnittstelle einrichtest. Um Artikeldaten und Bestand zu Fruugo zu exportieren benötigst du außerdem das Plugin link:https://marketplace.plentymarkets.com/fruugo_6875[Fruugo].
+// Am 24/10/2022 von Plugin-Beschreibung ins Handbuch umgezogen.
+
+link:https://sell.fruugo.com/[Fruugo^] ist ein globaler Marktplatz, auf dem Kund:innen in ihrer Landessprache und Landeswährung einkaufen können. Artikelbeschreibungen werden automatisch in die Landessprachen übersetzt und in die Landeswährung umgerechnet, damit du deine internationale Präsenz ohne großen zeitlichen und finanziellen Aufwand ausbauen kannst.
 
 [#100]
 == Bei Fruugo registrieren
 
 Bevor du Fruugo in plentymarkets einrichtest, musst du dich auf der link:https://sell.fruugo.com/de/[Website von Fruugo^] registrieren.
 
-[#200]
-== Fruugo in plentymarkets einrichten
+== Informationen zum Datenaustausch
 
-Um Artikel auf Fruugo anzubieten, richte zunächst den Marktplatz in plentymarkets ein. Gehe wie im Folgenden beschrieben vor.
+Die Anbindung des Marktplatzes stellt die folgenden automatisierten Prozesse bereit:
 
-[.instruction]
-Fruugo in plentymarkets einrichten:
-
-. Öffne das Menü *Einrichtung » Märkte » Fruugo*.
-. Nimm die Einstellungen gemäß <<#grundeinstellungen-fruugo>> vor.
-. Speichere (terra:save[]) die Einstellungen.
-
-[[grundeinstellungen-fruugo]]
-.Grundeinstellungen des Marktplatzes Fruugo
-[cols="1,3a"]
-|===
-|Einstellung |Erläuterung
-
-| *Aktiv*
-|Datenaustausch aktivieren. Ist der Datenaustausch aktiviert, findet ein stündlicher Auftragsimport statt.
-
-| *Benutzername* +
-*Passwort*
-|Zugangsdaten eingeben, wie von Fruugo erhalten.
-
-| *Sprache*
-|Sprache wählen, in der Texte an Fruugo übertragen werden sollen. +
-*_Wichtig:_* Beim Artikel müssen Texte in der hier gewählten Sprache eingegeben sein, damit der Artikel zu Fruugo übertragen wird.
-
-| *Artikelname*
-| *Name 1*, *Name 2* oder *Name 3* wählen. Dieser Artikelname wird an Fruugo übertragen.
-
-| *Artikelbeschreibung*
-| *Artikeltext*, *Vorschautext* oder *Technische Daten* aus dem Tab *Texte* des Artikels wählen oder eine der Beschreibungen aus dem Tab *Felder* des Artikels wählen. Diese Artikelbeschreibung wird an Fruugo übertragen.
-
-| *Lagerauswahl*
-|Eine der folgenden Optionen wählen: +
-*Bestandsmenge des Vertriebslagers mit aktuell größtem Bestand übertragen* +
-*Hauptlager des Artikels verwenden* +
-*Summe der Bestandsmengen aller Vertriebslager übertragen*
-
-| *Barcode-Befreiung*
-a|Eine der folgenden Optionen wählen: +
-
-* *Ja* = Artikel werden auch ohne Barcode an Fruugo übermittelt +
-* *Nein* = Artikel werden ohne Barcode nicht übertragen. +
-
-Wenn die Option *Ja* gewählt ist, muss die Barcode-Befreiung im Vorfeld von Fruugo erteilt worden sein.
-
-| *Daten-Export-URL*
-|Wird nach Speichern von Benutzername und Passwort automatisch generiert. Diese URL per E-Mail an Fruugo senden, da sie nicht automatisch übertragen wird.
-|===
-
-Die Anbindung des Marktplatzes stellt folgende automatisierte Prozesse bereit:
-
-* stündlicher Auftragsimport
-* automatisches Erstellen neuer Kund:innen beim Auftragsimport, wenn diese noch nicht in der Datenbank vorhanden sind
-
-[TIP]
-.Währung kann sich bei Import und Export unterscheiden
-====
-Beim Export der Artikelinformationen wird die Standardwährung des Shops an Fruugo übermittelt. Beim Auftragsimport wird der Betrag in der Währung importiert, in der Kund:innen bezahlen.
-====
+* Artikeldaten werden von Fruugo aus einem Feed abgerufen, in dem das Plugin CSV-Dateien veröffentlicht, die von einer speziellen Katalogvorlage generiert wurden. Warenbestände werden über eine separate Fruugo Inventory Status API synchronisiert.
+* Stündlicher Auftragsimport
+* Automatisches Erstellen neuer Kund:innen beim Auftragsimport, wenn diese noch nicht in der Datenbank vorhanden sind
+* Das Plugin verarbeitet Artikeldaten und Warenbestände. Die Auftragsschnittstelle ist im plentymarkets Backend integriert und läuft unabhängig vom Plugin.
 
 [IMPORTANT]
 .Keine Schnittstelle für Bestands- und Preisabgleich
 ====
-Fruugo hat zurzeit keine Schnittstelle für den automatischen Bestands- und Preisabgleich. Stattdessen exportiert Fruugo die Daten aus plentymarkets über die Datenexport-URL, die du nach der Registrierung und Einrichtung an Fruugo übermittelst. Wie häufig der Datenexport stattfindet, entscheidet Fruugo anhand der Daten, die das Unternehmen über deine Verkäufe auf dem Marktplatz sammelt.
+Fruugo hat zurzeit keine Schnittstelle für den automatischen Abgleich von Bestand und Preisen. Stattdessen exportiert Fruugo die Daten aus plentymarkets über die Datenexport-URL, die du nach der Registrierung und Einrichtung an Fruugo übermittelst. Wie häufig der Datenexport stattfindet, entscheidet Fruugo anhand der Daten, die das Unternehmen über deine Verkäufe auf dem Marktplatz sammelt.
 
-Es werden nur Varianten mit Bestand zu Fruugo exportiert.
+Nur Varianten mit Bestand werden zu Fruugo exportiert.
 ====
 
+[#170]
+== Plugin installieren
+
+Um Fruugo in plentymarkets nutzen zu können, installiere zuerst das link:https://marketplace.plentymarkets.com/fruugo_6875[Fruugo-Plugin^] in deinem plentymarkets System. Dieses und andere Plugins findest du im link:https://marketplace.plentymarkets.com/[plentyMarketplace^].
+
+:plugin: Fruugo
+:main-client:
+include::partial$plugin-installation.adoc[]
+
+[#300]
+== Marktplatz in plentymarkets einrichten
+
+Du hast das Fruugo-Plugin installiert? Super. Nun richtest du den Marktplatz in plentymarkets ein.
+
 [#250]
-== Auftragsherkunft aktivieren
+=== Auftragsherkunft aktivieren
 
 :market: Fruugo
 :referrer: Fruugo
@@ -94,26 +55,29 @@ Es werden nur Varianten mit Bestand zu Fruugo exportiert.
 
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
-[#300]
-== Variantenverfügbarkeit einstellen
-
-:market-availability: Fruugo
-:option-availability: Fruugo
-:web-api:
-
-include::partial$variantenverfuegbarkeit.adoc[]
-
-// Web-API erforderlich!
-
 [#350]
-== Verkaufspreis festlegen
+=== Verkaufspreis festlegen
+
+[TIP]
+.Währung kann sich bei Import und Export unterscheiden
+====
+Beim Export der Artikelinformationen wird die Standardwährung des Shops an Fruugo übermittelt. Beim Auftragsimport wird der Betrag in der Währung importiert, in der Kund:innen bezahlen.
+====
 
 :referrer-price: Fruugo
 
 include::partial$verkaufspreis-festlegen.adoc[]
 
+[#600]
+=== Zahlungsart in Kundenklasse erlauben
+
+:market: Fruugo
+:payment-method: Fruugo
+
+include::partial$zahlungsart_aktivieren.adoc[]
+
 [#400]
-== Attribute verknüpfen
+=== Attribute verknüpfen
 
 Wenn du die Attribute *Farbe* und/oder *Größe* in deinem plentymarkets System erstellt hast, müssen diese Attribute mit Fruugo verknüpft werden. Im Folgenden wird beschrieben, wie du das Attribut Farbe mit Fruugo verknüpfst. Verknüpfe anschließend das Attribut Größe auf die gleiche Weise.
 
@@ -124,20 +88,323 @@ Wenn du die Attribute *Farbe* und/oder *Größe* in deinem plentymarkets System 
 include::partial$link-attributes.adoc[]
 
 [#500]
-== Versandkosten senden
+=== Versandkosten senden
 
-Fruugo benötigt von allen Händler:innen eine Liste der Versandkosten. Diese Liste kann nicht über die API übertragen werden. Daher lade eine Datei, die diese Versandinformationen enthält, direkt bei Fruugo hoch. Weitere Informationen und eine Dateivorlage findest du link:https://sell.fruugo.com/de/discover/shipping[hier^].
+Fruugo benötigt von allen Händler:innen eine Liste der Versandkosten. Diese Liste kann nicht über die API übertragen werden. Lade deshalb eine Datei direkt bei Fruugo hoch, die diese Versandinformationen enthält. Weitere Informationen und eine Dateivorlage findest du link:https://sell.fruugo.com/de/discover/shipping[bei Fruugo^].
 
-[#600]
-== Zahlungsart in Kundenklasse erlauben
+[#56004]
+=== Plugin-Assistenten durchlaufen
 
-:market: Fruugo
-:payment-method: Fruugo
+Konfiguriere die Plugin Einstellungen im Menü *Einrichtung » Assistenten » Plugins » [Plugin-Set öffnen] » Fruugo Plugin-Assistent*.
+Die folgende Tabelle enthält eine Liste der verfügbaren Plugin-Funktionen:
 
-include::partial$zahlungsart_aktivieren.adoc[]
+:menu-path: Einrichtung » Assistenten » Plugins » [Plugin-Set öffnen] » Fruugo Plugin-Assistent
+:assistant-name: Fruugo Plugin-Assistent
+:number-of-boxes: Info-Box
+
+include::partial$assistant-basic-instructions.adoc[]
+
+
+[.collapseBox]
+.Einstellungen des Plugin-Assistenten
+--
+
+[[tab-fruugo]]
+.Einstellungen des Plugin-Assistenten
+[cols="2,3a"]
+|===
+|Einstellung |Erläuterung
+
+2+^| *Abschnitt Artikelexport*
+
+|*Sollen Artikel exportiert werden?*
+| Aktiviere den Artikelexport *An* oder *Aus*.
+
+| *Welche Quelle soll für die Fruugo Kategoriepfad-Erstellung verwendet werden ?*
+| * *Aus der Artikel Standardkategorie* = Du kannst den vollständigen Kategoriepfad in eine *Stamm-Kategorie* einfügen oder eine *Kategoriebaum* Struktur verwenden, um den Kategoriepfad darzustellen.
+Das Plugin liest diesen Kategoriepfad von *Artikel »Variante » Kategorien » Standardkategorie*.
+* *Aus der Katalogzuordnung* = Das Plugin liest den Kategoriepfad aus einer zugeordneten *Datenquelle* im Katalog oder aus einem zugewiesenen *Eigenen Wert*.
+Alternativ kannst Du eine *Eigenschaft* verwenden, um den Kategoriepfad zu speichern.
+
+Beachte außerdem die folgenden Hinweise zum Kategoriepfad:
+
+-  Unterscheidet zwischen Groß- und Kleinschreibung.
+-  Muss in Englisch sein.
+-  Muss der vollständige Kategoriepfad für eine von Fruugo akzeptierte Kategorie sein. +
+*_Tipp:_* Eine Liste der Kategoriepfade, die Fruugo akzeptiert, findest du auf der link:https://fruugo.atlassian.net/wiki/spaces/RR/pages/67792527/Mapping+Category+Tree[Fruugo Mapping Category Tree documentation page].
+
+| *Fruugo Artikeldaten-Feed. Durch das Generieren eines neuen Tokens wird das aktuelle Token ungültig.*
+| Klicke auf *Generieren*, um einen neuen Token zu generieren. +
+*_Wichtig:_* Die vom Plugin erstellte *Fruugo Artikeldaten-Feed URL* musst du Fruugo während des Integrationsprozesses zur Verfügung stellen. Auch  wenn du später eine neue URL generierst, musst du Fruugo diese neue URL zukommen lassen.
+
+2+^| *Inventory Status API*
+
+|*Anmeldeinformationen für die Fruugo Inventory Status API*
+| Die *Inventory Status API* ermöglicht einen schnelleren Warenbestandsabgleich. Gib den Benutzernamen und das Passwort ein, die du von Fruugo erhalten hast.
+|===
+
+--
+
+[#200]
+=== Backend-Einstellungen vornehmen
+
+Nimm nun die Backend-Einstellungen im Menü *Einrichtung » Märkte » Fruugo* vor.
+
+[.instruction]
+Backend-Einstellungen vornehmen:
+
+. Öffne das Menü *Einrichtung » Märkte » Fruugo*.
+. Nimm die Einstellungen gemäß <<#grundeinstellungen-fruugo>> vor.
+. Speichere (terra:save[]) die Einstellungen.
+
+[[grundeinstellungen-fruugo]]
+.Backend-Einstellungen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *Aktiv*
+| Datenaustausch aktivieren. Ist der Datenaustausch aktiviert, findet ein stündlicher Auftragsimport statt.
+
+| *Benutzername* +
+*Passwort*
+| Zugangsdaten eingeben, wie von Fruugo erhalten.
+
+| *Sprache*
+| Sprache wählen, in der Texte an Fruugo übertragen werden sollen. +
+*_Wichtig:_* Beim Artikel müssen Texte in der hier gewählten Sprache eingegeben sein, damit der Artikel zu Fruugo übertragen wird.
+
+| *Artikelname*
+| *Name 1*, *Name 2* oder *Name 3* wählen. Dieser Artikelname wird an Fruugo übertragen.
+
+| *Artikelbeschreibung*
+| *Artikeltext*, *Vorschautext* oder *Technische Daten* aus dem Tab *Texte* des Artikels wählen oder eine der Beschreibungen aus dem Tab *Felder* des Artikels wählen. Diese Artikelbeschreibung wird an Fruugo übertragen.
+
+| *Lagerauswahl*
+|Eine der folgenden Optionen wählen:
+
+* *Bestandsmenge des Vertriebslagers mit aktuell größtem Bestand übertragen* +
+* *Hauptlager des Artikels verwenden* +
+* *Summe der Bestandsmengen aller Vertriebslager übertragen*
+
+| *Barcode-Befreiung*
+| Eine der folgenden Optionen wählen: +
+
+* *Nein* = Artikel werden ohne Barcode nicht übertragen.
+* *Ja* = Artikel werden auch ohne Barcode an Fruugo übermittelt. +
+*_Wichtig:_* Die Barcode-Befreiung muss im Vorfeld von Fruugo erteilt worden sein.
+
+| *Daten-Export-URL*
+| Wird nach Speichern von Benutzername und Passwort automatisch generiert. Diese URL per E-Mail an Fruugo senden. +
+*_Wichtig:_* Die URL wird _nicht_ automatisch übertragen.
+|===
+
+[#5409478269]
+== Artikeldatenexport einrichten
+
+Artikeldaten werden über ein Katalog-Format zu Fruugo exportiert. Kataloge erstellst du im Menü *Daten » Kataloge*.
+
+[#902]
+=== Katalog erstellen
+
+Artikeldaten werden über das Marktplatz-Format *Fruugo* zu Fruugo exportiert. Um deine Artikel zu Fruugo zu übertragen, erstellst du im Menü *Daten » Kataloge* einen Katalog. Ordne dann im Marktplatz-Format die von Fruugo vorgegebenen Felder den in plentymarkets gespeicherten Artikeldaten zu.
+
+:catalogue-template-name: Fruugo
+:format-item:
+:catalogue-plugin:
+
+include::partial$catalogue-creation.adoc[]
+
+[#903]
+=== Katalogzuordnungen vornehmen
+
+Nachdem du einen Katalog erstellt hast, ordnest du die Datenfelder des Marktplatzes den in plentymarkets gespeicherten Artikeldaten zu. In diesem Kapitel erfährst du, wie du Datenfelder zuordnest und welche Besonderheiten es bei Fruugo gibt. Außerdem findest du hier Empfehlungen für eine korrekte Zuordnung. Die Informationen sind so aufgebaut:
+
+* <<#907, Datenfelder im Katalog zuordnen>>
+* <<#906, Empfehlungen für Fruugo Datenfeld-Zuordnungen>>
+
+[#907]
+==== Datenfelder im Katalog zuordnen
+
+Ordne nun die Datenfelder von Fruugo den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#906]
+==== Empfehlungen für Datenfeld-Zuordnungen
+
+include::partial$recommendation-text.adoc[]
+
+[[tab-8193907399]]
+.Fruugo-Katalog
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+|*Language*
+|Weise die Exportsprache für deine übersetzbaren Eingabefelder zu. Verwende dazu das plentymarkets Datenfeld *Eigener Wert*. Standardmässig wird die Standard-Sprache des Backends exportiert. Diese Eingabe akzeptiert nur ISO-Sprachcodes, zum Beispiel *DE*, *EN*, *ES*.
+
+|*EAN* +
+(Pflichtfeld)
+| Ein Barcode für den Artikelexport *GTIN / EAN oder UPC*.
+
+* Für Fruugo-Artikeltyp *Media* wird die im Artikel enthaltene *ISBN* exportiert. +
+* Wenn deine Artikel keine Barcodes nutzen, wähle das plentymarkets Datenfeld *Eigener Wert* und gib den Wert *EXCEP* ein.
+
+| *Brand* +
+(Pflichtfeld)
+| Sendet den Markennamen zu Fruugo.
+
+| *Category*
+| Wenn im Assistenten die Option *Aus Artikel Standardkategorie* ausgewählt wurde, wird diese Zuordnung ignoriert. Sonst wird das zugeordnete plentymarkets Datenfeld exportiert.
+
+| *Stock quantity* +
+(Pflichtfeld)
+| Sendet den Warenbestand zu Fruugo.
+
+|*Normal price incl. VAT* +
+(Pflichtfeld)
+| Sendet die Verkaufspreise zu deinen Fruugo Artikeln.
+
+| *Vat Rate (optional)*
+| Wenn hier kein eigener Wert zugewiesen wird, weist das Plugin standardmäßig den Standard-Mehrwertsteuersatz aus der Variantenebene zu.
+
+| *Attribute Size*
+| Fruugo empfiehlt, dass du das Attribut *Size* zum Erstellen von Artikelvarianten einrichtest. Stelle außerdem sicher, dass die relevanten Attributwerte im Attribut enthalten sind.
+
+| *Attribute Color*
+| Fruugo empfiehlt, dass du das Attribut *Color* zum Erstellen von Artikelvarianten einrichtest. Stelle außerdem sicher, dass die relevanten Attributwerte im Attribut enthalten sind.
+
+| *Discount Price incl. VAT*
+|Sendet den Rabattpreis an Fruugo.
+
+| *Manufacturer*
+|Sendet den Herstellernamen an Fruugo.
+
+| *Restock date*
+| Sendet das Wiederbeschaffungsdatum an Fruugo. +
+*_Hinweis:_* Akzeptierte Formate für das Datum sind:
+
+* DD:MM:YY
+* DD:MM:YYYY
+* YY:MM:DD
+* YYYY:MM:DD
+* DDMM-YY
+* DD-MM-YYYY
+* YY-MM-DD
+* YYYY-MM-DD
+
+| *Package weight*
+| Sendet das Brutto-Gewicht an Fruugo.
+
+| *Attributes 1 through 10*
+| Sendet weitere Attribute zu Fruugo. +
+*_Hinweis:_* Du wirst von Fruugo während des Feed-Validierungsprozesses aufgefordert, eine Semantik für die benutzerdefinierten Attribute bereitzustellen.
+
+| *Country*
+| Dieser Wert wird verwendet, um ein Produkt nur auf die aufgelisteten Länder zu beschränken, wenn diese eine andere Einschränkung als deine Standardkonteneinstellungen haben. Weitere Details hierzu siehe link:https://fruugo.atlassian.net/wiki/spaces/RR/pages/67932122/Country+Restrictions[Country+Restrictions].
+
+| *Discount price start date*
+| Ein Startdatum für den festgelegten Rabattpreis wird an Fruugo gesendet.
+
+|*Discount price end date*
+| Ein Enddatum für den festgelegten Rabattpreis wird an Fruugo gesendet.
+|===
+
+== Varianten vorbereiten
+
+Bereite nun deine Varianten vor.
+
+[#6044931914]
+=== Mandantensichtbarkeit festlegen
+
+*_Wichtig:_* Deaktiviere die folgenden Variantenoptionen:
+
+* *Automatisch sichtbar, wenn Netto-WB positiv*
+* *Automatisch unsichtbar, wenn kein Netto-WB*
+
+Diese Optionen findest du im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Tab: Einstellungen » Abschnitt: Verfügbarkeit » Einstellung: Mandant*. Wenn diese Optionen eingesetzt werden und der Warenbestand 0 ist, wird die Variante für das Plugin unsichtbar.
+
+[#7173193990]
+=== Variantenverfügbarkeit einstellen
+
+:market-availability: Fruugo
+:option-availability: Fruugo
+:web-api:
+
+include::partial$variantenverfuegbarkeit.adoc[]
+
+// Web-API erforderlich!
+
+=== Artikelvarianten aktivieren
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Tab: Einstellungen*.
+. Navigiere zum Abschnitt *Verfügbarkeit*.
+. Setze ein *Häkchen* bei *Aktiv*.
+. Speichere die Einstellungen.
+
+=== Bild mit Variante und Marktplatz Fruugo verknüpfen
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » Tab: Bilder*.
+. Klicke auf die Drop-Down-Liste *Verfügbarkeit*.
+. Wähle den *Mandanten*.
+. Wähle die Herkunft *Fruugo*. +
+→ Das Bild ist exportbereit.
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Tab: Bilder*.
+. Bewege den Mauszeiger über das *Bild*.
+. Klicke auf *[√] Verknüpfen*. +
+→ Das Bild ist mit der Variante verknüpft.
+. *Speichere* die Einstellungen.
+
+*_Hinweis:_* Pro Artikel können maximal 5 Bilder zu Fruugo exportiert werden.
+
+=== _Checkliste:_ Warenbestände exportieren
+
+Jede erfolgreich exportierte Variante erhält automatisch eine SKU. Diese SKU basiert auf der Varianten-ID. Die SKU wird als Kennung für die Synchronisierung von Warenbeständen verwendet.
+Der Warenbestand wird alle 15 Minuten exportiert. Für einen erfolgreichen Datenaustausch müssen folgende Details eingerichtet werden:
+
+[.collapseBox]
+.Stelle sicher, dass der WB-NETTO Positiv ist
+--
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Tab: Bestand » Tab: Warenbestand*.
+. Die Spalte *NETTO* muss einen positiven Wert enthalten. +
+*_Wichtig:_* Varianten mit negativen WB-NETTO werden automatisch mit Wert 0 exportiert.
+--
+
+[.collapseBox]
+.Verfügbarkeit 1-10 auswählen
+--
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Abschnitt: Verfügbarkeit*.
+. Setze ein *Häkchen* von *1 - 10*. +
+→ Die zu deiner Auswahl verlinkte *Durchschnittliche Lieferzeit* wird als Fruugo LeadTime exportiert.
+Werte für *Verfügbarkeit 1 bis 10* werden im Menü *Einrichtung » Artikel » Verfügbarkeit » Durchschnittliche Lieferzeit* gespeichert.
+--
+
+[.collapseBox]
+.Mehrsprachige Artikelinformationen verwalten
+--
+
+Mehrere Sprachen können wie folgt verwaltet werden:
+
+. Stelle sicher, dass die übersetzbaren Felder deiner Artikel ausgefüllt sind.
+. Richte für jede Exportsprache einen eigenen Katalog ein.
+. Verwende das Feld *Sprache*, um eine Exportsprache für jeden Katalog einzupflegen.
+. Vergiss nicht, die entsprechende Sprachquelle für übersetzbare Eingabefelder einzupflegen.
+--
+
+[#8ij5VxRfUZ]
+== Auftragsabwicklung automatisieren
+
+Automatisiere die folgenden Aspekte der Auftragsabwicklung:
+
+* Melde Auftragsbestätigungen automatisch (<<#700, Wie?>>)
+* Melde den Warenversand automatisch (<<#800, Wie?>>)
+* Melde Stornierungen automatisch (<<#900, Wie?>>)
+* Melde Retouren automatisch (<<#1000, Wie?>>)
 
 [#700]
-== Auftragsbestätigungen automatisch senden
+=== Auftragsbestätigungen automatisch senden
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um nach Eingang eines Auftrags automatisch eine Auftragsbestätigung an Fruugo zu senden.
 
@@ -169,7 +436,7 @@ include::_includes:partial$event-procedure.adoc[]
 |===
 
 [#800]
-== Versandbestätigungen automatisch senden
+=== Versandbestätigungen automatisch senden
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um automatisch eine Versandbestätigung an Fruugo zu senden, nachdem ein Warenausgang gebucht wurde.
 
@@ -201,7 +468,7 @@ include::_includes:partial$event-procedure.adoc[]
 |===
 
 [#900]
-== Stornierungen automatisch senden
+=== Stornierungen automatisch senden
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Fruugo automatisch über Stornierungen zu informieren.
 
@@ -233,7 +500,7 @@ include::_includes:partial$event-procedure.adoc[]
 |===
 
 [#1000]
-== Retouren automatisch senden
+=== Retouren automatisch senden
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Fruugo automatisch über Retouren zu informieren.
 
@@ -280,3 +547,26 @@ API-Log abrufen:
 . *_Optional:_* Wähle ein *Datum*, um nur Einträge eines bestimmten Tages zu erhalten.
 . Klicke auf *Suchen* (icon:search[role="blue"]), um die Suche auszuführen. +
 → Die Vorgänge werden angezeigt.
+
+[#faq]
+== FAQ
+
+[.collapseBox]
+.Das Plugin ist nicht sichtbar. Was ist hier los?
+--
+Das Plugin wird sichtbar nachdem:
+
+- Das Plugin erfolgreich installiert, aktiviert und breitgestellt ist.
+- Die Auftragsherkunft *Fruugo* im Menü *Einrichtung » Auftrag » Auftragsherkunft* aktiv ist.
+
+*_Wichtig:_* Das Plugin muss auf dem Plugin-Set installiert sein, dass mit dem *Standard-Mandanten* verknüpft ist.
+
+--
+
+////
+Weitere FAQ:
+* URL wird nicht automatisch übertragen.
+
+
+
+////

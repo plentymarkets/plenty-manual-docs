@@ -1,0 +1,177 @@
+= Changelog 17. August 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 11. August 2022
+:endWeekDate: 17. August 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/plentybi-verwendung-von-kennzahlen-einsehen-view-usage-of-key-figures/691488
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Der Filter *Datumstyp* wurde um das Lieferdatum erweitert.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* Der nächtliche Backup-Auftragsimport ignorierte seid der Umstellung auf SP-API die Einstellung *Startdatum Auftragsimport*. Der Auftragsimport wurde zwar nicht gestartet, wenn das Datum in der Zukunft lag, es konnte aber dazu kommen, dass Aufträge vor dem Datum importiert wurden, wenn diese nach dem Startdatum bei Amazon aktualisiert wurden. Dies wurden jetzt ausgeschlossen.
+* Beim Import von Gutschriften über VCS-Berichte konnte es in seltenen Fällen dazu kommen, dass eine Gutschrift doppelt importiert wurde, weil beim Abgleich, ob die Gutschrift bereits vorliegt, keine Gutschrift gefunden werden konnte. Dies hing damit zusammen, dass für diese Prüfung auf einen ES-Index zugegriffen wird, der sich zwar innerhalb von wenigen Minuten aktualisiert, es aber bei kurz aufeinander folgenden Importversuchen der gleichen Gutschrift zu diesem Problem kommen konnte, da diese im Index dann noch fehlen konnte.
+
+[discrete]
+=== CRM
+
+* Wenn man im EmailBuilder in den Feldern *Antwort an*, *CC* und *BCC* E-Mail-Adressen eingegeben hat und die Vorlage speichern wollte, war dies nicht möglich. Es wurde in den 3 Feldern die Fehlermeldung angezeigt, dass die E-Mail-Adressen ungültig sind, obwohl sie korrekt waren. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dynamischer Export
+
+* Beim Versuch, einen Export über den Dynamischen Export durchzuführen, trat ein Fehler auf. Dieses Verhalten wurde behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Das Feld *Eigner* im Bereich *Kontaktdetails* des Kontaktdatensatzes beinhaltet nun eine Vorschlagsliste. Wenn du also einen Buchstaben des Eignernamens in diesem Feld eingibst, schlägt dir das System bereits gespeicherte Eigner zum Auswählen vor.
+
+[discrete]
+=== plentyBI
+
+* Bisher mussten für die Erstellung von Kennzahlen spezielle Rohdatenformate im Menü *Einrichtung » plentyBI » Rohdaten* aktiviert werden. Dieser Schritt ist nun nicht mehr notwendig. Stattdessen werden die benötigten Rohdatenformate automatisch im Hintergrund aktiviert, wenn neue Kennzahlkonfigurationen im Menü *Einrichtung » plentyBI » Kennzahlen* oder aus einer bestehenden Dashboard-Ansicht heraus xref:business-entscheidungen:myview-dashboard.adoc#200[angelegt] und abgespeichert werden.
++
+[NOTE]
+.Kein To-Do
+======
+Die Änderung hat keine Auswirkungen auf bestehende Kennzahlkonfigurationen.
+======
+
+[discrete]
+=== Prozesse
+
+* Wir haben eine die Einstellung xref:automatisierung:aktionen.adoc#380[Etiketten generieren] eingeführt, mit der man bestimmen kann, welche Etiketten gedruckt bzw. gespeichert werden sollen:
+** *Etiketten immer generieren* +
+Dies bildet das bisherige Verhalten ab. Es werden neue Etiketten registriert und sowohl vorhandene als auch neue Etiketten gedruckt/gespeichert.
+** *Etiketten generieren, wenn keine existieren* +
+Existieren bereits Etiketten, werden diese gedruckt/gespeichert. Ansonsten werden neue Etiketten registriert und gedruckt/gespeichert.
+** *Bestehende Etiketten verwenden* +
+Es werden nur vorhandene Etiketten gedruckt/gespeichert. Existieren keine Etiketten, wird eine entsprechende Fehlermeldung angezeigt.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Aufträge können nicht mehr ohne die Berechtigung *Aufträge » Aktualisieren* kopiert werden.
+* In der Statistik der Retourengründe wurde die Versandkostenposition bei *Zurückgesendeten Artikel* in der Daten-Tabelle mit einberechnet diese werden nun korrekt ausgeschlossen.
+
+[discrete]
+=== Prozesse
+
+* Es war bisher nicht möglich, die Aktion *Retoure anlegen/bearbeiten* für Lager zu benutzen, die keine Lagerorte haben. Nun bieten wir die Möglichkeit an, den Standard-Lagerort auszuwählen.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/itemavailabilityinfo_6962[Artikelverfügbarkeit Info^]
+|1.7.0
+|-
+
+|link:https://marketplace.plentymarkets.com/conradextension_6948[Conrad^]
+|1.2.1
+|-
+
+|link:https://marketplace.plentymarkets.com/dhlshipping_4871[DHL Shipping (Versenden)^]
+|3.1.21
+|-
+
+|link:https://marketplace.plentymarkets.com/dhlwunschpaket_5435[DHL Wunschzustellung^]
+|1.1.14
+|-
+
+|link:https://marketplace.plentymarkets.com/emarketing_6198[emarketing - Google Shopping, Microsoft Advertising, Facebook Ads & Instagram^]
+|1.1.8
+|-
+
+|link:https://marketplace.plentymarkets.com/etsy_4689[Etsy^]
+|2.1.30
+|-
+
+|link:https://marketplace.plentymarkets.com/cfourceresfashion5_6864[Fashion Theme^]
+|5.2.0
+|-
+
+|link:https://marketplace.plentymarkets.com/mytoys_54776[MyToys^]
+|1.0.38
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.0.15
+|-
+
+|link:https://marketplace.plentymarkets.com/voelknerextension_6949[Voelkner^]
+|1.2.1
+|-
+
+|link:https://marketplace.plentymarkets.com/wwtransporttrackingnumbertoparentorder_55032[WW-Versandinformation-an-Hauptauftrag^]
+|1.0.3
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====

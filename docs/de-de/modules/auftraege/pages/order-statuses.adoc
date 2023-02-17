@@ -1,0 +1,333 @@
+= Auftragsstatus verwenden
+
+:keywords: Auftragsstatus, Standardstatus, Status wählen, Status hinzufügen, Status bearbeiten
+:author: team-order-core
+:description: Erfahre, wie du Auftragsstatus richtig verwendest, anlegst, bearbeitest und löschst. Auftragsstatus dienen dazu, den Fortschritt der Auftragsabwicklung abzubilden. Lerne außerdem, welche Status bereits in deinem System vorhanden sind.
+
+Mit Auftragsstatus wird der Fortschritt bei der Abwicklung von Aufträgen abgebildet. 19 Status mit je 4 Nachkommastellen, d.h. eine Anzahl von 199999, stehen dir im System zur Verfügung. 28 Status sind bereits vorangelegt. Diese vorangelegten Status stellen einen Grundstock für übliche Abwicklungsschritte dar. Einige der 28 voreingetragenen Status sind mit Systemautomatismen verknüpft und sollten von dir auch nur für die systemseitig vorgesehenen Zwecke verwendet werden. Der Auftragsstatus eines Auftrags ändert sich durch diese Systemautomatismen, durch von dir eingerichtete Automatismen oder kann auch manuell geändert werden. Auftragsstatus dienen außerdem zur besseren Auftragssuche.
+
+Spiele deine Auftragsabwicklung einmal grob durch und überlege dir, wann du Aufträgen einen neuen Status zuordnen möchtest, um den Fortschritt bei der Abwicklung kenntlich zu machen. Richte anschließend die Status ein, indem du Namen für die Status eingibst. Beachte jedoch die zweckgebundenen Status, die in <<table-default-statuses>> erwähnt sind.
+
+[TIP]
+.Berechtigungen beachten
+======
+Beachte, dass dir in Dropdown-Listen etc. nur die *Webshops* und *Auftragsstatus* angezeigt werden, die für dein Benutzerkonto freigegeben wurden. Wenn du einen Status nicht siehst, fehlt dir wahrscheinlich die Berechtigung für den Status. Berechtigungen können durch Admin-Benutzer:innen vergeben werden.
+======
+
+[#preselected-statuses]
+== Voreingestellte Status verstehen
+
+Die folgenden 28 Statuseinträge sind bereits zu Beginn in deinem plentymarkets System vorhanden und sind teilweise mit Systemautomatismen verknüpft. Die mit Systemautomatismen verknüpften Status können nicht gelöscht werden.
+
+[[table-default-statuses]]
+.Standardstatus und Systemautomatismen
+[cols="1,3"]
+|===
+|Status |Erläuterung
+
+| *[1]* Unvollständige Daten
+|Wird automatisch zugeordnet, wenn Daten eines Auftrages unvollständig sind, z.B. Adressdaten noch fehlen. Unvollständige Daten sind teilweise bei Importen von Märkten der Fall. Aufträge in diesem Status dürfen noch nicht weiter bearbeitet werden. Die Daten werden durch nachfolgende Importe noch vervollständigt. Die unvollständigen Daten dienen z.B. der frühzeitigen Bestandsreservierung.
+
+| *[1.1]* Warten auf Zahlung &amp; Freischaltung
+.3+^|Werden nicht automatisch vergeben. Ein Anwendungsfall ist der vorbefüllte Warenkorb. Ein Auftrag wird angelegt und ein Link zum Warenkorb des Auftrags wird zur Bestätigung an Kund:innen geschickt.
+
+| *[1.2]* Freigeschaltet, warten auf Zahlung
+
+| *[2]* Warten auf Freischaltung
+
+| *[3]* Warten auf Zahlung
+|Wird jedem unbezahlten Auftrag vom Typ *Auftrag* automatisch zugeordnet.
+
+| *[3.2]* In Warteposition
+a|Wird automatisch in folgenden Fällen gesetzt: +
+
+* Wenn für einen Auftrag eine Teilzahlung gebucht wird, aber kein Warenbestand vorhanden ist. +
+* Wenn für einen Auftrag eine Anzahlung gebucht wird, aber kein Warenbestand vorhanden ist. +
+* Wenn für einen Auftrag eine Überbezahlung gebucht wird, unabhängig davon, ob Warenbestand vorhanden ist oder nicht.
+
+| *[3.3]* Versandfertig; warten auf Zahlung
+|Wird automatisch einem Auftrag des Typs *Auftrag* zugeordnet, wenn für den Auftrag eine Teil- oder Anzahlung gebucht wird und Warenbestand für den Auftrag vorhanden ist.
+
+| *[3.4]* Mahnung versendet
+|Empfohlen, um zu erkennen, dass eine Mahnung versendet wurde. Mithilfe von Ereignisaktionen oder Prozessen kann hier auch eine Automatisierung eingerichtet werden. Der Status wird jedoch nicht durch einen Systemautomatismus gesetzt.
+
+| *[4]* In Versandvorbereitung
+|Steht in Verbindung mit Bestandsbeschränkung. Wenn du keinen Bestand führst und keine Beschränkung nutzt, dann steht der Status zur freien Verfügung. +
+Wenn die Bestandsbeschränkung genutzt wird, wird der Status automatisch zugeordnet, wenn ein Auftrag vom Typ *Auftrag* bezahlt ist, aber der Bestand der Artikel für den Auftrag nicht ausreicht. Die Beschränkung von Artikeln muss auf Nettowarenbestand eingestellt sein. +
+Wenn du die Bestandsbeschränkung und diesen Status bei fehlendem Bestand nutzt, kannst du z.B. erreichen, dass nur Lieferscheine und Rechnungen für Aufträge erzeugt werden, die auch weiter abgewickelt werden können.
+
+| *[5]* Freigabe Versand
+|Wird automatisch zugeordnet, wenn ein Auftrag vom Typ *Auftrag* bezahlt oder die Zahlungsart z.B. Rechnung oder Vorkasse ist und der Bestand der Artikel für den Auftrag ausreicht oder der Bestand unbeschränkt ist.
+
+| *[5.1]* Abwicklung extern
+|Empfohlen, um zu kennzeichnen, dass die Ware durch einen Fulfillment-Anbieter zusammengestellt und verschickt wird. Der Status wird jedoch nicht durch einen Systemautomatismus gesetzt.
+
+| *[6]* Gerade im Versand
+|Empfohlen, um zu kennzeichnen, dass Aufträge zum Picken und Packen an das Lager übertragen wurden. Mithilfe von Ereignisaktionen oder Prozessen lässt sich hier eine Automatisierung erreichen.
+
+| *[7]* Warenausgang gebucht
+|Wird automatisch zugeordnet, wenn der Warenausgang in einem Auftrag gebucht wurde. Das manuelle Setzen des Status sorgt wiederum nicht dafür, dass der Warenausgang tatsächlich gebucht und der Bestand reduziert wird. Deshalb sollte dieser Status nicht manuell, sondern per Ereignisaktion oder Prozess gesetzt werden.
+
+| *[7.1]* Auftrag exportiert
+|Steht zur freien Verfügung. Möglicher Anwendungsfall ist das Setzen des Status, nachdem Aufträge zur Auswertung exportiert wurden.
+
+| *[8]* Storniert
+|Empfohlen, um zu kennzeichnen, dass ein Auftrag vom Typ *Auftrag* storniert wurde. Status 8 ist als Standard für stornierte Aufträge festgelegt. Du kannst die Standardfestlegung für stornierte Aufträge jedoch im Menü *Einrichtung » Aufträge » Einstellungen* ändern. Die Einstellung hierfür heißt xref:auftraege:preparatory-settings.adoc#intable-default-status-cancelled-orders[Status stornierter Aufträge]. Wenn du einen anderen Status für Stornierungen festgelegt hast, kannst du Status 8 frei nutzen.
+
+| *[8.1]* Storniert durch Kunden
+|Empfohlen, um zu kennzeichnen, dass ein Auftrag durch die Kund:in storniert wurde.
+
+| *[9]* Retoure
+|Ist beim Anlegen eines Auftrags vom Typ *Retoure* automatisch vorausgewählt. Du kannst auch einen anderen xref:auftraege:preparatory-settings.adoc#intable-default-status-return[Status als Standard für Retouren] festlegen. Die Einstellung erfolgt im Menü *Einrichtung » Aufträge » Einstellungen*.
+
+| *[9.1]* Ware wird geprüft
+|Empfohlen, um in einer Retoure anzuzeigen, dass die retournierte Ware geprüft wird.
+
+| *[9.2]* Warten auf Retoure von Großhändler
+|Steht zur freien Verfügung.
+
+| *[9.3]* Gewährleistung eingeleitet
+|Empfohlen, um zu kennzeichnen, dass eine Gewährleistung zur Retoure eingeleitet wurde.
+
+| *[9.4]* Umtausch eingeleitet
+|Empfohlen, um in einer Retoure anzuzeigen, dass ein Umtausch der retournierten Ware eingeleitet wurde.
+
+| *[9.5]* Gutschrift angelegt
+|Empfohlen, um in einer Retoure anzuzeigen, dass eine Gutschrift zur Retoure angelegt wurde.
+
+| *[10]* Gewährleistung
+|Steht zur freien Verfügung. Kann genutzt werden, um eine Gewährleistung als abgeschlossen zu kennzeichnen. Beim Anlegen einer Gewährleistung erhält der Gewährleistungsauftrag je nach Bestandsführung Status 4 oder 5.
+
+| *[11]* Gutschrift
+|Wird einem Auftrag vom Typ *Gutschrift* automatisch zugeordnet, wenn eine Gutschrift angelegt wird. Du kannst auch einen anderen xref:auftraege:preparatory-settings.adoc#intable-default-status-credit-note[Status als Standard für Gutschriften] festlegen. Die Einstellung erfolgt im Menü *Einrichtung » Aufträge » Einstellungen*.
+
+| *[11.1]* Gutschrift ausgezahlt
+|Empfohlen, um zu kennzeichnen, dass die Gutschrift ausgezahlt wurde und abgeschlossen ist.
+
+| *[12]* Reparatur
+|Ist beim Anlegen eines Auftrags vom Typ *Reparatur* automatisch vorausgewählt. Du kannst auch einen anderen xref:auftraege:grundeinstellungen.adoc#intable-default-status-repairs[Status als Standard für Reparaturen] festlegen. Die Einstellung erfolgt im Menü *Einrichtung » Aufträge » Einstellungen*.
+
+| *[13]* Sammelauftrag
+|Wird einem Auftrag vom Typ *Sammelauftrag* automatisch zugeordnet, wenn der Sammelauftrag angelegt wird. Du kannst auch einen anderen xref:auftraege:grundeinstellungen.adoc#intable-default-status-multi-order[Status als Standard für Sammelaufträge] festlegen. Die Einstellung erfolgt im Menü *Einrichtung » Aufträge » Einstellungen*.
+
+| *[14]* Sammelgutschrift
+|Wird einem Auftrag vom Typ *Sammelgutschrift* automatisch zugeordnet, wenn die Sammelgutschrift angelegt wird. Du kannst auch einen anderen xref:auftraege:grundeinstellungen.adoc#intable-default-status-multi-credit-note[Status als Standard für Sammelgutschriften] festlegen. Die Einstellung erfolgt im Menü *Einrichtung » Aufträge » Einstellungen*.
+|===
+
+[TIP]
+.Status-ID in Statusname anzeigen
+======
+Mit der Umschaltfläche *Status-ID im Statusnamen anzeigen* in den Einstellungen legst du fest, ob nur der vergebene Name des Status oder zusätzlich auch die Status-ID angezeigt werden soll.
+======
+
+[#search-for-order-statuses]
+== Nach Auftragsstatus suchen
+
+Verwende eine der folgenden Möglichkeiten, um nach Auftragsstatus zu suchen.
+
+[.instruction]
+Nach Auftragsstatus suchen:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
+.. *_Möglichkeit 1:_* Klicke auf material:search[], um direkt eine Liste aller Status zu sehen.
+.. *_Möglichkeit 2:_* Gib etwas in das Suchfeld ein und klicke auf einen der automatischen Vorschläge.
+.. *_Möglichkeit 3:_* Klicke auf material:tune[], um die Suchergebnisse mit Hilfe von Filtern einzugrenzen.
+
+[#use-filters]
+=== Filter verwenden
+
+Um noch gezielter nach bestimmten Auftragsstatus zu suchen, stehen dir die folgenden Filter zur Verfügung.
+
+[[table-filters-order-status]]
+.Filter für Auftragsstatus
+[cols="1,3"]
+|===
+|Einstellung |Erläuterung
+
+| *Status von*
+|Filtert nach Status ab dieser Statusnummer.
+
+| *Status bis*
+|Filtert nach Status bis zu dieser Statusnummer.
+
+| *Sprache*
+|Filtert nach Status mit dieser Sprache.
+
+|===
+
+[#configure-columns]
+== Spalten in der Übersicht konfigurieren
+
+In der Übersicht kannst du selbst entscheiden, welche Spalten in der Tabelle sichtbar sein sollen und in welcher Reihenfolge diese angezeigt werden. Um die Spalten zu konfigurieren, gehe vor wie folgt.
+
+[.instruction]
+Spalten konfigurieren:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
+. Klicke oben rechts auf *Spalten konfigurieren* (material:settings[]). +
+→ Das Fenster *Spalten konfigurieren* wird geöffnet.
+. Wähle die Spalten, die angezeigt werden sollen (material:done[]). Beachte dazu die Erläuterungen in <<table-order-status-columns>>.
+. Ziehe (material:drag_indicator[]) die Spalten per Drag-and-drop an die gewünschte Stelle, bis sie in der für dich richtigen Reihenfolge angezeigt werden.
+. Füge bei Bedarf Spalten hinzu oder wähle Spalten ab, wenn du sie nicht benötigst.
+. Klicke auf *Bestätigen*. +
+→ Die Einstellungen werden gespeichert.
+
+[[table-order-status-columns]]
+.Spalten in der Statusübersicht
+[cols="1,3"]
+|===
+|Spalte |Erläuterung
+
+| *Checkbox*
+|Zeigt am Anfang der Zeile eine Checkbox an. Hake die Box an, um eine der verfügbaren <<#order-status-group-functions, Gruppenfunktionen>> für diesen Status zu verwenden.
+
+| *Status*
+|Zeigt den Status des Auftrags an.
+
+| *Farbe*
+|Zeigt die Farbe des Auftragsstatus an.
+
+| *Name*
+|Zeigt den Namen des Auftragsstatus an. Wenn du die Umschaltfläche *Status-ID im Statusnamen anzeigen* aktiviert hast (material:toggle_on[]), wird die ID ebenfalls angezeigt.
+
+| *Name (Sprache)*
+|Zeigt den Statusnamen für die in Klammern angegebene Sprache an. Wähle hier die Sprachen, die du benötigst.
+
+| *Löschen*
+|Zeigt am Ende der Zeile die Funktion zum Löschen des Status an (material:delete[]). +
+*_Beachte:_* Status, die aus dem System stammen, können nicht gelöscht werden.
+
+|===
+
+[#order-status-group-functions]
+== Gruppenfunktionen verwenden
+
+Es gibt verschiedene Gruppenfunktionen, mit denen du Aktionen für mehrere Status gleichzeitig durchführen kannst. Sie bieten dir die Möglichkeit, die <<#change-visibility, Sichtbarkeit zu ändern>>, die <<#change-colour, Farbe zu ändern>> oder bestimmte <<#delete-status, Status zu löschen>>.
+
+[#change-visibility]
+=== Sichtbarkeit ändern
+
+Die Sichtbarkeit von Auftragsstatus kann für verschiedene Bereiche eingestellt werden. Um die Sichtbarkeit für einen oder mehrere Status zu ändern, gehe wie im Folgenden beschrieben vor.
+
+[.instruction]
+Sichtbarkeit ändern:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
+. Führe die Suche (material:search[]) aus, um Auftragsstatus anzuzeigen.
+. Setze für einen oder mehrere Status ein Häkchen (material:check_box[]).
+. Klicke oben auf die Funktion *Sichtbarkeit ändern* (material:remove_red_eye[]). +
+→ Das Fenster *Sichtbarkeit ändern* wird geöffnet.
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<table-change-visibility>>.
+. Klicke auf *Sichtbarkeit ändern* (material:remove_red_eye[role=skyBlue]). +
+→ Die Sichtbarkeit wird geändert.
+
+[[table-change-visibility]]
+.Sichtbarkeit für Auftragsstatus
+[cols="1,3"]
+|===
+|Einstellung |Erläuterung
+
+| *Sichtbarkeit im Webshop*
+|Wähle aus der Dropdown-Liste, ob der Auftragsstatus im Webshop sichtbar sein soll.
+
+| *Sichtbarkeit in Nachbestellungen*
+|Wähle aus der Dropdown-Liste, ob der Auftragsstatus in Nachbestellungen sichtbar sein soll.
+
+| *Sichtbarkeit in Umbuchungen*
+|Wähle aus der Dropdown-Liste, ob der Auftragsstatus in Umbuchungen sichtbar sein soll.
+
+|===
+
+[#change-colour]
+=== Farbe ändern
+
+Die Farbe für einen Auftragsstatus kannst du jederzeit anpassen. Um die Farbe für einen oder mehrere Auftragsstatus zu ändern, gehe wie im Folgenden beschrieben vor.
+
+[.instruction]
+Farbe ändern:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
+. Führe die Suche (material:search[]) aus, um Auftragsstatus anzuzeigen.
+. Setze für einen oder mehrere Status ein Häkchen (material:check_box[]).
+. Klicke oben auf die Funktion *Farbe ändern* (material:color_lens[]). +
+→ Das Fenster *Farbe ändern* wird geöffnet.
+. Wähle eine neue Farbe. Gib dazu entweder einen HEX-Code ein oder wähle Werte für RGB (Red, Green, Blue) bzw. HSL (Schattierung, Sättigung und Helligkeit).
+. Klicke auf *Farbe ändern* (material:color_lens[role=skyBlue]). +
+→ Die Farbe wird geändert.
+
+[#delete-status]
+=== Auftragsstatus löschen
+
+Auftragsstatus können auch gelöscht werden. Beachte allerdings, dass dies für Staus, die aus dem System stammen, nicht möglich ist. Um Auftragsstatus zu löschen, gehe wie im Folgenden beschrieben vor.
+
+[.instruction]
+Status löschen:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
+. Führe die Suche (material:search[]) aus, um Auftragsstatus anzuzeigen.
+. Setze für einen oder mehrere Status ein Häkchen (material:check_box[]).
+. Klicke oben auf die Funktion *Status löschen* (material:delete[]). +
+icon:map-signs[] *_Oder:_* Klicke rechts in der Zeile eines Status auf *Löschen* (material:delete[]), um nur diesen Status zu löschen. +
+→ Das Fenster *Status löschen* wird geöffnet.
+. Wenn du dir sicher bist, dass du alle gewählten Status löschen möchtest, bestätige die Sicherheitsabfrage und klicke auf *Status löschen* (material:delete[role=red]). +
+→ Die Status werden gelöscht.
+
+== Neuen Status erstellen
+
+Im Menü *Einrichtung » Aufträge » Auftragsstatus* kannst du neben den in <<table-default-statuses>> aufgeführten Status auch eigene Status hinzufügen. Die bereits vorhandenen Status kannst du bearbeiten. Pflege Status in verschiedenen Sprachen, um deine Kund:innen per E-Mail oder im Kund:innenkonto des Webshops über den Fortschritt zu informieren. Status, die mit Systemautomatismen verbunden sind, kannst du umbenennen. Du solltest die mit Systemautomatismen verbundenen Status jedoch nicht zweckentfremden. Um einen neuen Status zu erstellen, gehe vor wie im Folgenden beschrieben.
+
+[.instruction]
+Neuen Status erstellen:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
+. Klicke auf *Neuen Status erstellen* (material:add[]). +
+→ Das Fenster *Neuen Status erstellen* wird geöffnet.
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<table-create-new-status>>.
+. Klicke auf *Erstellen* (material:add[role=green]). +
+→ Der neue Status wird erstellt.
+
+[[table-create-new-status]]
+.Neuen Status erstellen
+[cols="1,3"]
+|===
+|Einstellung |Erläuterung
+
+| *Neuer Status*
+|Gib eine Statusnummer (z.B. 2.5) ein. Stelle sicher, dass dieser Status einmalig ist. Wenn der eingegebene Status bereits existiert, wird eine Fehlermeldung angezeigt. +
+Dies ist ein Pflichtfeld.
+
+| *Name in Systemsprache (Sprache)*
+|Gib einen Namen für den neuen Status ein. Die Sprache, in der du eingeloggt bist, wird im Eingabefeld angezeigt. +
+Dies ist ein Pflichtfeld.
+
+| *Farbe*
+|Wähle eine Farbe für den neuen Status. Gib dazu entweder einen HEX-Code ein oder wähle Werte für RGB (Red, Green, Blue) bzw. HSL (Schattierung, Sättigung und Helligkeit).
+
+| *Sichtbarkeit*
+|Wähle, ob der neue Status im Webshop, in Nachbesellungen oder in Umbuchungen sichtbar sein soll.
+
+|===
+
+[TIP]
+.Nachkommastellen beachten
+======
+Achte bei der Vergabe der Statusnummern darauf, dass diese nicht auf 0 enden. Besteht die letzte Nachkommastelle aus einer 0, wird diese automatisch vom System gekürzt. In plentymarkets wird somit nicht zwischen einem Status mit der Nummer 1.1 und einem Status mit der Nummer 1.10 unterschieden.
+======
+
+[#edit-status]
+== Status bearbeiten
+
+Status können jederzeit bearbeitet werden. Über die Gruppenfunktion kannst du auch mehrere Status auf einmal öffnen und diese nacheinander bearbeiten. Um Status zu bearbeiten, gehe wie im Folgenden beschrieben vor.
+
+[.instruction]
+Status bearbeiten:
+
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
+. Führe die Suche (material:search[]) aus, um Aufträge anzuzeigen.
+. Setze für alle Status ein Häkchen (material:check_box[]), die du bearbeiten möchtest.
+. Klicke in die Zeile eines gewählten Status. +
+*_Tipp:_* Wenn du mehrere Status auf einmal wählst, werden diese gesammelt geöffnet und du kannst sie nacheinander bearbeiten. +
+→ Die Detailansicht des Status wird geöffnet. Hast du mehrere Status gewählt, werden diese links untereinander angezeigt und du kannst zwischen den Ansichten der Status wechseln.
+. Nimm die gewünschten Änderungen für die *Namen*, die *Farbe* oder die *Sichtbarkeit* vor.
+. *Speichere* (material:save[]) die Einstellungen. +
+→ Die Änderungen werden übernommen.

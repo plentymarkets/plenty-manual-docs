@@ -1,9 +1,9 @@
 = Work steps
 :keywords: Work step, process work step
-:id: 93G3IG4
 :author: team-docs-automation
+:description: Learn how to set up the work steps order group processing, single order processing and incoming items for processes. Moreover, find out which procedures and sub-procedures are available.
 
-This manual page deals with the work steps that can be set up for processes. You can create and configure as many work steps as you want for a process. 
+This manual page deals with the work steps that can be set up for processes. You can create and configure as many work steps as you want for a process.
 
 Depending on which type of work step you select, there are different settings and options to choose from. These primarily consist of procedures and sub-procedures that are carried out one after the other and can either run endlessly or be controlled manually. You can also select filters that allow you to carry out very individual settings for work steps.
 
@@ -95,7 +95,8 @@ Use filters to determine in more detail which orders will be affected by the *Or
 Users xref:automation:faq.adoc#400[will be notified] if they start a round of box picking but do not finish it. If you do not want to continue a previously started round of box picking, you can xref:automation:faq.adoc#400[reset the box picking instead].
 
 | *Number of order items*
-|Select an *operator* from the drop-down list and enter a number into the field next to it. Orders will only be processed if they include this specific number of items.
+|Select an *operator* from the drop-down list and enter a number into the field next to it. Orders will only be processed if they include this specific number of items. +
+*_Note:_* This filter does not filter for item bundles, but only for bundle components.
 
 | *Order type*
 |Select an order type to only apply the process to orders of a certain type.
@@ -123,11 +124,11 @@ Optional: then add the *Storage location* filter afterward.
 |Select if you want to filter orders with express shipping. +
 *Yes* = Orders with express shipping are filtered +
 *No* = Orders without express shipping are filtered +
-*_Important_:* For this filter to function correctly, 
-the option *Express delivery* has to be activated in the xref:fulfilment:preparing-the-shipment.adoc#1000[shipping profile] of the respective orders.
+*_Important_:* For this filter to function correctly, the option *Express delivery* has to be activated in the xref:fulfilment:preparing-the-shipment.adoc#1000[shipping profile] of the respective orders.
 
 | *Total quantity of items*
-|Select an *operator* from the drop-down list and enter a number into the field next to it. This way, orders that include a specific number of unique items are filtered.
+|Select an *operator* from the drop-down list and enter a number into the field next to it. This way, orders that include a specific number of unique items are filtered. +
+*_Note:_* This filter does not filter for item bundles, but only for bundle components.
 
 | *Weight*
 |Orders can be filtered by weight in grams. Enter a value and select the *equals sign* to filter orders with an exact weight. To filter for weight ranges, enter a value and the appropriate operator. You can filter two different ranges by using both text fields at once. +
@@ -153,20 +154,25 @@ First, add the filter *Order warehouse* and select the warehouse from the drop-d
 |Filter orders that have a specific flag. The option *None* will filter orders that do not have a flag.
 
 | *Packstation*
-|Select if you want to filter for orders that are delivered to a Packstation. +
-*Yes* = Orders with a Packstation included in the shipping address are filtered +
-*No* = Orders without a Packstation included in the shipping address are filtered
+|Select if you want to filter for orders that are delivered to a Packstation or a Postfiliale. +
+*Yes* = Orders with a Packstation or a Postfiliale included in the shipping address are filtered. +
+*No* = Orders without a Packstation or a Postfiliale included in the shipping address are filtered.
 
 | *Invoice amount*
 |Orders can be filtered by their invoice amount. Enter a value and select the equals sign to filter orders with an exact invoice amount. Enter a value and select the appropriate operator to filter orders within a certain invoice amount range. You can filter two different ranges by using both text fields at once. +
 *Example*: For an invoice amount of EUR 39.90 and higher, enter *39.90* into the text field and select the operator *>=*.
 
-| *Status*
+| *Order status*
 |Select a xref:orders:managing-orders.adoc#1200[status] to filter for orders with this status.
 
 | *Tag*
 |Select one or more xref:item:flags.adoc#400[tags] to filter for orders with the selected tags. +
-In addition, activate one of the options *Orders with exactly these tags* or *Orders with at least these tags* to determine exactly how tags will be filtered.
+In addition, activate one of the following options to determine exactly how tags should be filtered: +
+*Orders without tags* +
+*Orders without these tags* +
+*Orders with exactly these tags* +
+*Orders with at least these tags* +
+*Orders with at least one of these tags*
 
 | *Loyalty program*
 |Select one, several or no loyalty program to only process orders from this loyalty program or orders without a loyalty program. +
@@ -185,7 +191,7 @@ In addition, activate one of the options *Orders with exactly these tags* or *Or
 | *Shipping region*
 |Select a xref:fulfilment:preparing-the-shipment.adoc#400[shipping region] to only filter for orders with this region.
 
-| *Outgoing items*
+| *Outgoing items date*
 |Select how you want to filter orders according to outgoing items: +
 *Not booked* = only orders where the items have not been booked as outgoing +
 *Booked* = only orders where the items have been booked as outgoing +
@@ -248,6 +254,13 @@ In order for you to recognize those orders that already passed through the proce
 
 | *New flag*
 |Select a flag from the drop-down list if you want this work step to change the flag of the order.
+
+| *Add tags*
+|Select the tags that you want to add to the order.
+
+| *Remove tags*
+|Select the tags that you want to remove from the order.
+
 |====
 
 [#order-group-processing-sorting]
@@ -284,7 +297,7 @@ Only the first item of an order is taken into consideration for the sorting.
 
 Once you have carried out all of the settings, add *procedures* and *sub-procedures* to the work step.
 
-The following xref:automation:procedures.adoc#[procedures] and xref: automation:sub-procedures.adoc#[sub-procedures] can be selected for the *Order group processing* work step. Click on the links to see further information and learn about the settings.
+The following xref:automation:procedures.adoc#[procedures] and xref:automation:sub-procedures.adoc#[sub-procedures] can be selected for the *Order group processing* work step. Click on the links to see further information and learn about the settings.
 
 * xref:automation:procedures.adoc#110[Pick-up/delivery note]
 ** xref:automation:sub-procedures.adoc#180[Print]
@@ -311,7 +324,7 @@ The following xref:automation:procedures.adoc#[procedures] and xref: automation:
 ** xref:automation:sub-procedures.adoc#290[Change status]
 ** xref:automation:sub-procedures.adoc#210[Change flag]
 ** xref:automation:sub-procedures.adoc#190[Change owner]
-** xref: automation:sub-procedures.adoc#250[Scan package number]
+** xref:automation:sub-procedures.adoc#250[Scan package number]
 ** xref:automation:sub-procedures.adoc#340[Change payment method]
 ** xref:automation:sub-procedures.adoc#270[Sounds]
 ** xref:automation:sub-procedures.adoc#320[Change shipping profile]
@@ -436,7 +449,7 @@ The following xref:automation:procedures.adoc#[procedures] and xref: automation:
 ** xref:automation:sub-procedures.adoc#270[Sounds]
 
 * xref:automation:procedures.adoc#420[Serial numbers]
-** xref: automation:sub-procedures.adoc#260[Register serial numbers]
+** xref:automation:sub-procedures.adoc#260[Register serial numbers]
 
 * xref:automation:procedures.adoc#430[Shipping centre]
 ** xref:automation:sub-procedures.adoc#180[Print]
@@ -449,6 +462,7 @@ The following xref:automation:procedures.adoc#[procedures] and xref: automation:
 ** xref:automation:sub-procedures.adoc#170[Reset booking]
 ** xref:automation:sub-procedures.adoc#270[Sounds]
 
+* xref:automation:procedures.adoc#470[Register incoming payment]
 ** None
 
 [#single-order-processing]
@@ -509,7 +523,7 @@ Click on the *green plus* to add a *procedure* or *sub-procedure* by selecting t
 
 Use filters to determine in more detail which orders will be affected by the *Single order processing* work step.
 
-For the *Single order processing* work step, the same filters that are described in <<table-work-step-filter>> are available. 
+For the *Single order processing* work step, the same filters that are described in <<table-work-step-filter>> are available.
 
 Additional filters that you can use specifically in connection with the work step *Single order processing* are described in <<table-additional-filters>>.
 
@@ -531,10 +545,12 @@ Additional filters that you can use specifically in connection with the work ste
 
 | *Number of order items*
 |Select an operator and enter a value in the text field to filter by the total number of order items per order. +
-*Example:* To filter for orders with less than 10 order items, enter *10* in the text field and select the operator *<*. 
+*Example:* To filter for orders with less than 10 order items, enter *10* in the text field and select the operator *<*. +
+*_Note:_* This filter does not filter for item bundles, but only for bundle components.
 
 | *Total quantity of items*
-|Select an operator and enter a value in the text field to filter by the total number of order items per order.
+|Select an operator and enter a value in the text field to filter by the total number of order items per order. +
+*_Note:_* This filter does not filter for item bundles, but only for bundle components.
 
 | *Serial number*
 |Select if you want to filter for order items for which a xref:item:serial-numbers.adoc#[serial number] has been saved. +
@@ -719,6 +735,7 @@ The following xref:automation:procedures.adoc#[procedures] and xref:automation:s
 ** xref:automation:sub-procedures.adoc#170[Reset booking]
 ** xref:automation:sub-procedures.adoc#270[Sounds]
 
+* xref:automation:procedures.adoc#470[Register incoming payment]
 ** None
 
 [#incoming-items]

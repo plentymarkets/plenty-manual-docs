@@ -1,6 +1,6 @@
 = Checking catalogue export statuses
-:keywords:
-:description:
+:keywords: catalogue status, catalog status, export status
+:description: Check the status of catalogue exports
 :page-index:
 :author: team-plenty-channel
 
@@ -28,8 +28,9 @@ You are in the menu *Data » Catalogue export status*. When you open the menu, a
 * *Preview* = The export creates a preview of the first five records of the catalogue.
 * *Direct* = The export is processed immediately.
 * *Async* = The export is split into jobs. These jobs are enqueued.
+* *Live* = The export was started as a *live download*. The file is downloaded to your computer automatically.
 * *Dev cache* = A cached version of the catalogue is exported. The cache is updated every 20 minutes. +
-*_Tip:_* Exports of the type *Dev cache* are not shown in the overview. However, you can filter by this type to show these exports.
+*_Tip:_* Exports of the type *Dev cache* are not shown in the overview list automatically. However, you can filter by this type to show these exports.
 //end::export-types[]
 
 | *Catalogue name*
@@ -38,7 +39,7 @@ You are in the menu *Data » Catalogue export status*. When you open the menu, a
 | *Template*
 | The template
 
-| *State*
+| *Condition*
 | * *Started* = The export has started.
 * *In queue* = The export has been enqueued.
 * *Processed* = The export has been processed.
@@ -53,7 +54,7 @@ You are in the menu *Data » Catalogue export status*. When you open the menu, a
 [.collapseBox]
 .What is a job?
 --
-When exports of the type *Async* are started, the data to be exported is split into packages. Each package contains 500 lines, the last package may contain fewer. Each of these packages is a job. Each of these jobs is enqueued.
+When exports of the type *Async* are started, the data to be exported is split into packages. Each package contains 500 lines. The last package may contain fewer lines. Each of these packages is a job. Each of these jobs is enqueued.
 
 *_Example:_* An export contains 2,300 lines. The export is split into 5 jobs: 4 jobs with 500 lines each and one job with 300 lines. The progress bar shows how many of these 5 jobs have already been exported.
 --
@@ -72,11 +73,13 @@ include::page$catalogues-status.adoc[tag=what-is-a-job]
 | How was the export started?
 
 * *User* = The export was started by a user. Point your mouse at the name of the user to also show the user ID.
-* *Cron* = The export was automatically started by a cron. Point your mouse at the "cron" text to show which cron started the export. +
+* *Cron* = The export was automatically started by a cron. Point your mouse at the word "cron" to show which cron started the export. +
   ** *20* = Export runs every 20 minutes. +
   ** *60* = Export runs once per hour. +
   ** *1440* = Export runs once daily.
 * *Debug* = The export has started for debugging purposes.
+
+include::_includes:partial$crons.adoc[]
 
 | *Start time*
 | When was the export started?
@@ -112,7 +115,7 @@ include::page$catalogues-status.adoc[tag=export-types]
 | *Catalogue ID*
 | Reduces the list to the catalogue with this ID.
 
-| *State*
+| *Condition*
 | Reduces the list to catalogues in this state. 
 
 | *Initiator*
@@ -121,6 +124,9 @@ include::page$catalogues-status.adoc[tag=export-types]
 | *Initiator ID*
 | Reduces the list to exports that were started by this person. +
 *_Tip:_* This filter is only available when the filter *Initiator* is set to *User*.
+
+| *Has errors*
+| Reduces the list to exports that either have or do not have errors.
 
 | *Started from*
 | Reduces the list to exports that were started on or after this date. +
@@ -153,12 +159,6 @@ Click on an export to see details about the export process.
 |===
 |Setting |Explanation
 
-| *Details*
-| This lists detailed information about the export. This information is updated automatically every 20 seconds.
-
-| *Error*
-| A list of errors. This information is not updated automatically. Click on material:refresh[] to manually update the information.
-
 | *Progress logs* +
 (material:playlist_play[])
 | Click to show the logs.
@@ -166,11 +166,43 @@ The list of logs is shown on the left. Click on one of the logs to show more det
 
 | *Performance logs* +
 (material:bar_chart[])
-| This setting is currently without function. Stay tuned.
+| This setting is still without function. Stay tuned.
 
 | *Data* +
+(material:library_books[]) +
 (only available after export is completed)
 | Click to show the data that was exported. The data is shown in JSON format. +
 *_Important:_* Due to the data volume and complexity, the data cannot be shown as a table.
 
+//| *Download private export* +
+//(material:file_download[])
+//| *_Note:_* Use this download if you use a private link. +
+//*_Note:_* The download button is only available for *Async* exports.
+
+//. Click on *Download private export* (material:file_download[]). +
+// → The export starts. +
+//*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes. +
+//→ Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
+//. In the notification centre, click on material:link[] *Download*. +
+//*_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
+//. Save the file on your computer.
+
+| *Download public export* +
+(material:file_download[])
+| *_Note:_* Use this download if you use a public link. You can change the settings for public links in the *Download settings* of the catalogue. +
+*_Note:_* The download button is only available for *Async* exports.
+
+. Click on *Download public export* (material:file_download[]). +
+→ The export starts. +
+*_Important:_* The export runs in the background. Note that there will be _no_ window for downloading the file straight away. Even exporting small amounts of data will take around 30 minutes. +
+→ Once the export is finished, you will be notified (material:notifications_none[]) that the export file can be downloaded.
+. In the notification centre, click on material:link[] *Download*. +
+*_Tip:_* The notification is no longer shown? You can always access the file using the URL shown in the *Download settings*.
+. Save the file on your computer.
+
+| *Details*
+| This lists detailed information about the export. This information is updated automatically every 20 seconds.
+
+| *Error*
+| A list of errors. This information is not updated automatically. So click on material:refresh[] to manually update the information if necessary.
 |===

@@ -1,5 +1,5 @@
 = Praxisbeispiel: Tracking-URL an Kund:innen senden
-:keywords: Paketverfolgung, Tracking-URL, Tracking-Link, Paket verfolgen E-Mail
+:keywords: Paketverfolgung, Tracking-URL, Tracking-Link, Paket verfolgen E-Mail, Sendungsverfolgung, Sendung verfolgen, Sendungstracking, Pakettracking
 :description: Dieses Praxisbeispiel beschreibt, wie du die Tracking-URL automatisch an deine Kund:innen sendest, wenn die Paketnummer des Versanddienstleisters am Auftrag verfügbar ist.
 :author: team-crm
 
@@ -8,10 +8,10 @@ Ich möchte eine Tracking-URL an meine Kund:innen senden, sobald die Paketnummer
 [discrete]
 == Erforderliche Schritte (Kurzform)
 
-* Tracking-URL am Versanddienstleister speichern
-* E-Mail-Vorlage im EmailBuilder einrichten
+* <<#tracking-url-speichern, Tracking-URL am Versanddienstleister speichern>>
+* <<#vorlage-mit-variable-erstellen, E-Mail-Vorlage im EmailBuilder einrichten>>
 ** Variable `Tracking-URL` in Vorlage einfügen
-* Ereignisaktion verknüpfen, die die Vorlage versendet, wenn das Paket beim Dienstleister angemeldet wurde und eine Paketnummer am Auftrag erstellt ist.
+* <<#ereignisaktion-einrichten, Ereignisaktion einrichten>>, die die Vorlage versendet, wenn der Auftrag beim Versanddienstleister angemeldet wurde und eine Paketnummer am Auftrag verfügbar ist.
 
 [#tracking-url-speichern]
 == Tracking-URL am Versanddienstleister speichern
@@ -37,40 +37,49 @@ Wenn du die Tracking-URL des Versanddienstleisters nicht kennst, gehe folgenderm
 [#vorlage-mit-variable-erstellen]
 == E-Mail-Vorlage mit Variable der Tracking-URL erstellen
 
-//// 
-TODO: Dieses Praxisbeispiel auch auf der EmailBuilder-Seite verlinken
-////
-
 Erstelle nun eine E-Mail-Vorlage, die die Variable für die Tracking-URL enthält. Du kannst auch eine der xref:crm:emailbuilder.adoc#standardvorlagen-verwenden[vorhandenen Standardvorlagen verwenden] und diese dann anschließend xref:crm:emailbuilder.adoc#vorlage-bearbeiten[anpassen]. +
 *_Hinweis:_* Wir erläutern im Folgenden, wie du eine neue Vorlage erstellst und nicht, wie du eine vorhandene Vorlage bearbeitest.
 
 [.instruction]
 E-Mail-Vorlage mit dem EmailBuilder erstellen:
 
-. Öffne das Menü *CRM » EmailBuilder (Testphase)*.
+. Öffne das Menü *CRM » EmailBuilder*.
 . Klicke in der Zeile des Ordners, in dem du eine Vorlage erstellen möchtest, auf material:more_vert[]. +
-→ Ein Fenster wird geöffnet.
-. Klicke auf material:add[] *Neue Vorlage*.
+→ Ein Fenster öffnet sich.
+. Klicke auf material:add[] *Hinzufügen* material:play_arrow[].
+. Klicke auf material:description[] *Vorlage*. +
+→ Das Fenster *Neue Vorlage erstellen* öffnet sich.
 . Gib einen Namen für die Vorlage ein, z.B. `Paketverfolgung`.
+. Wähle je einen xref:crm:emailbuilder.adoc#vorlage-header-footer[Header und Footer] aus den Dropdown-Listen.
+. Klicke auf *SPEICHERN*. +
+→ Die Vorlage wird erstellt und öffnet sich.
+. Klicke oben links auf *Hinzufügen* (material:add[]), um die Sprache für die Vorlage hinzuzufügen. +
+→ Das Fenster *Betreff eingeben* öffnet sich.
 . Gib einen Betreff für die Vorlage ein, z.B. `Dein Paket kommt bald`.
-. Wähle je einen xref:crm:emailbuilder.adoc#vorlage-header-footer[Header und Footer] aus den Dropdown-Listen (siehe <<#image-example-practical-example-template-settings>>).
-. *Speichere* die Einstellungen. +
-→ Das Speichern ist erforderlich, damit du nun den Inhalt der Vorlage bearbeiten kannst (siehe <<#image-example-practical-example-template-editor>>).
-. Klicke in der Zeile material:expand_more[] *Inhalt* auf *Bearbeiten* (material:edit[]). +
-→ Der Editor mit den Widgets wird geöffnet.
+. Klicke auf *SPEICHERN*.
+. Klicke in der Zeile des Betreffs auf *Bearbeiten* (material:edit[]). +
+→ Der Editor der Vorlage öffnet sich.
 . Ziehe das Widget *Text* in den schraffierten Bereich.
-. Klicke auf material:edit[].
+. Klicke auf *Bearbeiten* (material:edit[]).
 . Gib im Textfeld den gewünschten Text ein und suche dir über das Textfeld *Suche* in der Spalte *Variablen* die passenden Variablen, die du benötigst.
+. Vergiss nicht, die Variable `Tracking-URL` einzufügen, damit der Link zur Sendungsverfolgung in der E-Mail an deine Kund:innen mit ausgegeben wird.
+. *Speichere* (material:save[]) die Einstellungen.
+
+[discrete]
+=== Beispiel: Vorlage mit Musterdaten in der Vorschau 
 
 [[image-example-practical-example-template-settings]]
-.Beispiel: Einstellungen der Vorlage mit Musterdaten in der Vorschau
-image::praxisbeispiel-vorlage-einstellungen.png[width=640, height=360]
+.Beispiel: Vorlage mit Musterdaten in der Vorschau
+image::praxisbeispiel-vorlage-musterdaten.png[width=640, height=360]
+
+[discrete]
+=== Beispiel: Vorlage mit Variablen im Editor
 
 So sieht der Inhalt der Vorlage im Editor aus, nachdem du auf material:edit[] geklickt hast:
 
 [[image-example-practical-example-template-editor]]
 .Editor-Ansicht der Vorlage
-image::praxisbeispiel-vorlage-editor.png[width=640, height=360]
+image::praxisbeispiel-vorlage-editor-variablen.png[width=640, height=360]
 
 [.collapseBox]
 .E-Mail-Vorlage über den Mandanten erstellen ("alte" Vorgehensweise)

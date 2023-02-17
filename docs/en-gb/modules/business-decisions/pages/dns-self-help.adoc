@@ -1,0 +1,117 @@
+= Checking and modifying DNS settings
+:keywords: DNS, CNAME, www.www., www.www, A-Record, DNS_NAME, NOT_RESOLVED
+:description: Learn more about DNS settings and how to check the DNS settings of your system. 
+:author: team-cloud
+
+DNS (**D**omain **N**ame **S**ystem) is one of the most important services in many IP based networks. Its main task is answering name resolution queries.
+
+Names are easier to memorise than a number combination that is up to 12 digits long. That is why so called domains are used in the internet, like plentymarkets.eu. Calling up this domain within a browser creates a query to different DNS servers that try to dissolve this domain into an IP address, thus reaching the server that is responsible for the content of the plentymarkets.eu domain. 
+
+*_Example:_* IP addresses are, as the name suggests, addresses. If you want to ship a package in the real world, you will need the address of the recipient. Networks are quite similar, only that network packets are shipped and that the address doesn't consist of street name, house number, postcode, and place. Instead, well-defined numerical sequences are used that are called **I**nternet **P**rotocol *addresses* or *IP addresses* for short.
+
+.Structure of IP addresses
+[cols=5*, options="header"]
+|===
+|
+|Address part 1
+|Address part 2
+|Address part 3
+|Address part 4
+
+|Post
+|Street
+|House number
+|POSTCODE
+|Town
+
+|Network
+|192
+|168
+|0
+|1
+|===
+
+*_Note:_* This tab only serves as illustration. The emphasis of the address parts is unrelated.
+
+== Get to know DNS settings
+
+This chapter explains the DNS settings necessary for configuring the domain within plentymarkets. These are the A record and CNAME record.
+
+=== A record
+
+With an A record a DNS name such as an link:https://en.wikipedia.org/wiki/URL[URL^] like plentymarkets.eu is assigned an IPv4 address.
+
+=== CNAME record
+
+The CNAME record within the DNS is designated to assign an additional name to the domain. A CNAME record shall not be used for the actual domain (plentymarkets.eu) but only for subdomains (knowledge.plentymarkets.eu)! A CNAME record principally overrides all other records of the same subdomain.
+
+*_Example:_* Name of a shop is plentymarkets.eu.  We want that this shop is also available under www.plentymarkets.eu. By entering a CNAME for www.plentymarkets.eu its ensured that www.plentymarkets.eu passes the query to display the web page to plentymarkets.eu.
+
+[WARNING]
+====
+To use the system on AutoScaling a CNAME record for the subdomain `**www.**plentymarkets.eu` is mandatory!
+The necessary entry for the respective domain is displayed within the assistant.
+
+Same goes for all other subdomains.
+====
+
+== Check deposited DNS settings
+
+You have different possibilities to check if your DNS settings are correctly deposited within your system.
+
+=== Via web browser
+
+You can check which DNS settings are deposited at your domain provider on link:https://www.whatsmydns.net/[whatsmydns.net^]. Furthermore, this page offers you to track the status of the global distribution of DNS data on all DNS servers.
+
+[.instruction]
+Determine an A record 
+
+1. Enter the domain and top level domain whose A record shall be determined like plentymarkets.eu (**not** `**www.**plentymarkets.eu`) into the text field.
+2. Choose option **A** from the drop-down list.
+3. Click on **search**. +
+→ A list of all global main DNS server with currently registered A records that are known to the server appears in form of a IPv4 address.
+
+[.instruction]
+Determine a CNAME record:
+
+1. Enter the subdomain, main domain, and top level domain whose CNAME record shall be determined into the text field (like wwww.myshop.com).
+2. Choose option **CNAME** from the drop-down list.
+3. Click on **search**. +
+→ A list of all global main DNS server with currently registered CNAME records that are known to the server appears 
+
+=== Linux, MacOS, and Windows command line
+
+You can also determine the records via the command line of your operating system.
+
+[.instruction]
+Determine an A record 
+
+1. Open a Terminal window (Linux/MacOs) or a Command Prompt window (Windows).
+2. To determine the A record run the following command: +
+`nslookup plentymarkets.eu` (*not* `**www.**plentymarkets.eu`)
+→ The following output appears with the corresponding A record.
++
+image::business-decisions:dnsselfhelp_pic004.png[width=640, height=360, alt=determine A-Record]
+
+[.instruction]
+Determine a CNAME record:
+
+1. Open a Terminal window (Linux/MacOs) or a Command Prompt window (Windows).
+2. To determine the CNAME record run the following command: +
+`nslookup -q=CNAME www.plentymarkets.eu` (*Consider the exact way of writing!*)
+→ The following output appears with the corresponding CNAME record.
++
+image::business-decisions:dnsselfhelp_pic005.png[width=640, height=360, alt=determine CNAME-Record]
+
+=== Determine needed DNS records
+
+You find the correct DNS settings within the domain assistant in the menu *Setup » Assistants » Basic setup » Domains » DNS settings to be stored externally*.
+
+== Change externally deposited DNS records
+
+Domain owner - you - are fundamentally responsible for the correct deposit of DNS settings at *extern hosted domains*. plentysystems doesn't offer support for configuring external domains.
+
+[WARNING]
+====
+DNS settings should only be changed by competent staff, because misconfiguration leads to an unavailable domain, thus it could negatively impact the system availability. +
+====

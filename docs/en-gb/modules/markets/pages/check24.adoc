@@ -1,8 +1,7 @@
 = Check24
 :author: team-plenty-channel
 :keywords: Check24, ElasticExportCheck24DE, Check24DE, Check 24, Check24, Check24DE
-:description: Multi-Channel in plentymarkets: Set up the interface to the market Check24 in your plentymarkets system.
-:id: BZ3ZIMQ
+:description: Learn how to set up the market Check24 in plentymarkets to start selling your items on Check24.
 :market: Check24
 :check24:
 :format-item-new:
@@ -35,12 +34,25 @@ Setting up the interface to Check24:
 . Enter the FTP access password.
 . Save (terra:save[]) the settings.
 
-[TIP]
+[#data-exchange-check24]
+== Frequency of data exchange
+
+After you have set up Check24 in plentymarkets, data is exchanged with the market in the intervals described in <<#data-exchange>>.
+
+[[data-exchange]]
 .Frequency of data exchange
-====
-After you have set up Check24 in plentymarkets, data is exchanged with the market in the intervals described below: +
-- Order import every 15 minutes
-====
+[cols="1,1a"]
+|===
+|Data |Interval
+
+| Order import
+| every 15 minutes
+
+| Item export
+| Check24 retrieves item data via an <<#url-check24-catalogue, URL>>. +
+
+*_Note:_* The interval for the data exchange is defined in the <<#catalogue-settings, catalogue settings>>.
+|===
 
 [#250]
 === Activating an order referrer
@@ -83,8 +95,8 @@ include::partial$activate-payment-method.adoc[]
 [#item-export]
 == Exporting item data
 
-* <<#500, _Alternative 1:_ Elastic export _(old method)_>>
-* <<#catalogue-export, _Alternative 2:_ Catalogue export _(recommended method)_>>
+* <<#catalogue-export, _Alternative 1:_ Item export with catalogue formats _(recommended method)_>>
+* <<#500, _Alternative 2:_ Item export with the Elastic Export _(old method)_>>
 * <<#change-elastic-export-catalogue, _Alternative 3:_ Changing from elastic export to catalogue>>
 
 [#check24-offer-product-exports]
@@ -102,8 +114,108 @@ Check24 retrieves item data via an URL. You will find this URL in your Check24 c
 *_Note:_* As there are two exports, the offer export (catalogue format *Check24 Offer*), and the product export (catalogue format *Check24*), there are also two URLs via which item data is retrieved by Check24. However, you can only save _one_ URL at Check24. You should therefore <<#url-check24-catalogue, save the URL for the _offer export_ (catalogue format *Check24 Offer*) at Check24>>. +
 You cannot save the URL for the product export (catalogue format *Check24*) at Check24 yourself. Reach out to your Check24 contact person. They will save the product export URL in your contact data.
 
+[#catalogue-export]
+=== _Alternative 1:_ Catalogue export _(recommended method)_
+
+You can now export item data to Check24 using catalogue formats. Go to *Data » Catalogues* to create catalogues.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+[#catalogue-formats-check24]
+==== Catalogue formats for Check24
+
+For Check24, there are different catalogue formats:
+
+* *Check24*: This catalogue format contains product data.
+* *Check24 Offer*: This catalogue format contains offer data.
+* *Check24 Furniture*: This catalogue format contains item data for the Check24 product category *Furniture*.
+* *Check24 Fashion*: This catalogue format is deprecated, as the fashion category is not in use any longer on Check24. It should only be used as an exception and in consultation with Check24.
+
+For further information about the different formats, refer to the <<#check24-offer-product-exports, Offer and product export at Check24>> chapter.
+
+[#catalogue-creation]
+==== Creating a catalogue
+
+Item data is exported to Check24 via catalogue using the marketplace format *Check24*. To export your items to Check24, create catalogues in the *Data » Catalogue* menu. Link the Check24 data fields with item data saved in plentymarkets in the marketplace format afterwards.
+
+Check24 retrieves item data via an URL. You will find this URL in your Check24 catalogue in the *Data » Catalogues* menu. After you created the catalogue, you have to <<#url-check24-catalogue, copy the URL and save it at Check24>> so that item data can be exported to Check24.
+
+:catalogue-template-name: Check24
+:catalogue-plugin:
+:one-per-category:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Mapping data fields in the catalogue
+
+Now, map the Check24 data fields to the item data saved in plentymarkets.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.List of recommended data field mappings for *Check24*
+--
+include::partial$check24-recommended-mappings.adoc[]
+--
+
+[.collapseBox]
+.List of recommended data field mappings for *Check24 Offer*
+--
+include::partial$check24offer-recommended-mappings.adoc[]
+--
+
+[.collapseBox]
+.List of recommended data field mappings for *Check24 Furniture*
+--
+include::partial$check24-furniture-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Exporting specific items
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Setting up catalogue export
+
+:csv:
+:check24:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Activating the catalogue
+
+:interval: once a day during the night
+
+include::partial$catalogue-activation.adoc[]
+
+[#url-check24-catalogue]
+==== Saving the URL at Check24
+
+Check24 retrieves item data via an URL. You have to save a URL in the Check24 backend so that item data can be exported to Check24. Item data will then automatically be retrieved by Check24 at regular intervals.  +
+Copy the URL of the catalogue in the *Data » Catalogues* menu and save it in the Check24 backend afterwards. +
+*_Note:_* You have to save the URL of the catalogue format *Check24 Offer* for the offer export at Check24. You cannot save the URL for the product export (catalogue format *Check24*) at Check24 yourself. Reach out to your Check24 contact person. They will save the product export URL in your contact data.
+
+[.instruction]
+Copying the URL:
+
+. Go to *Data » Catalogues*. +
+→ The catalogue overview opens.
+. Click on the catalogue for the format *Check24 Offer*. +
+→ The catalogue opens.
+. In the navigation on the left, open the tab *Settings* (material:settings[]).
+. Under *Download settings* in the *Options for public link* section, click on *Copy URL* (material:content_copy[]).
+→ The URL is copied to the clipboard.
+. Save the URL in the Check24 back end.
+
 [#500]
-=== _Alternative 1:_ Elastic Export _(old method)_
+=== _Alternative 2:_ Item export with the Elastic Export _(old method)_
 
 This section explains how to transfer your items to Check24. In the old plugin, the item export for Check24DE is carried out by the elastic export. The data format Check24 is used for this.
 
@@ -118,8 +230,6 @@ NOTE: No new features are planned for the Elastic Export and the export format f
 include::partial$plugin-download.adoc[]
 
 First, create the export format *Check24DE-Plugin*. Then transfer the URL to Check24.
-
-*_Note:_* In addition, there is the export format *Check24DE Fashion*. However, this export format is deprecated, as the fashion category is not in use any longer on Check24. You should therefore only use the export format *Check24DE Fashion* as an exception and only in consultation with Check24.
 
 [#500-1]
 ==== Export format Check24DE
@@ -261,19 +371,22 @@ Create the export format *Check24DE-Plugin* as described below. Note the followi
 | This option does not affect this format.
 
 | *Item availability*
-| Activate the *overwrite* option and enter item availabilities into the fields *1* to *10*. The fields represent the IDs of the availabilities. This overwrites the item availabilities that are saved in the menu *Setup » Item » Item availability*.
+| Activate the *overwrite* option and enter item availabilities into the fields *1* to *10*. The fields represent the IDs of the availabilities. This overwrites the item availabilities that are saved in the *Setup » Item » Availability* menu.
 |===
 
 [#500-2]
-==== Check24DE: Available columns for the export file
+==== Check24DE: Available columns for the export file *Check24DE-Plugin*
 
 :export-format: Check24DE-Plugin
 
 include::partial$download_export-file.adoc[]
 
+[.collapseBox]
+.Available columns of the export file for the export format *Check24DE-Plugin*
+--
 [[columns-export-file-check24]]
-.Check24DE: Available columns for the export file
-[cols="1,3"]
+.Available columns for the export format
+[cols="1,3a"]
 |===
 | Column header | Explanation
 
@@ -333,11 +446,12 @@ _*Allowed file types:*_ jpg, gif, bmp, png
 | weight
 | The *Weight* as set in the menu *Item » Edit item » [Open item] »[Open variation] » Tab: Settings » Dimensions*.
 |===
+--
 
 [#url-check24-elastic-export]
 ==== Saving the URL at Check24
 
-Check24 retrieves item data via an URL. You have to save a URL in the Check24 backend so that item data can be exported to Check24. Item data will then automatically be retrieved by Check24 at regular intervals.  +
+Check24 retrieves item data via an URL. You have to save a URL in the Check24 backend so that item data can be exported to Check24. Item data will then automatically be retrieved by Check24 at regular intervals. +
 Copy the URL of the export format in the *Data » Elastic export* menu and save it in the Check24 backend afterwards. +
 *_Note:_* You have to save the URL of the *Check24DE-Plugin* export format at Check24. This export format contains the data that is required to list your items on Check24.
 
@@ -351,105 +465,6 @@ Copying the URL:
 . Copy the *URL* in the *Settings* section.
 . Save the URL in the Check24 back end.
 
-[#catalogue-export]
-=== _Alternative 2:_ Catalogue export _(recommended method)_
-
-You can now export item data to Check24 using catalogue formats. Go to *Data » Catalogues* to create catalogues.
-
-include::partial$catalogue-new-to-text.adoc[]
-
-[#catalogue-formats-check24]
-==== Catalogue formats for Check24
-
-For Check24, there are different catalogue formats:
-
-* *Check24*: This catalogue format contains product data.
-* *Check24 Offer*: This catalogue format contains offer data.
-* *Check24 Furniture*: This catalogue format contains item data for the Check24 product category *Furniture*.
-* *Check24 Fashion*: This catalogue format is deprecated, as the fashion category is not in use any longer on Check24. It should only be used as an exception and in consultation with Check24.
-
-For further information about the different formats, refer to the <<#check24-offer-product-exports, Offer and product export at Check24>> chapter.
-
-[#catalogue-creation]
-==== Creating a catalogue
-
-Item data is exported to Check24 via catalogue using the marketplace format *Check24*. To export your items to Check24, create catalogues in the *Data » Catalogue* menu. Link the Check24 data fields with item data saved in plentymarkets in the marketplace format afterwards.
-
-Check24 retrieves item data via an URL. You will find this URL in your Check24 catalogue in the *Data » Catalogues* menu. After you created the catalogue, you have to <<#url-check24-catalogue, copy the URL and save it at Check24>> so that item data can be exported to Check24.
-
-:catalogue-template-name: Check24
-:catalogue-plugin:
-:one-per-category:
-
-include::partial$catalogue-creation.adoc[]
-
-[#data-field-mappings]
-==== Mapping data fields in the catalogue
-
-Now, map the Check24 data fields to the item data saved in plentymarkets.
-
-include::partial$catalogue-mapping.adoc[]
-
-[#recommended-mappings]
-==== Recommendations for data field mappings
-
-include::partial$recommendation-text.adoc[]
-
-[.collapseBox]
-.List of recommended data field mappings for *Check24*
---
-include::partial$check24-recommended-mappings.adoc[]
---
-
-[.collapseBox]
-.List of recommended data field mappings for *Check24 Offer*
---
-include::partial$check24offer-recommended-mappings.adoc[]
---
-
-[.collapseBox]
-.List of recommended data field mappings for *Check24 Furniture*
---
-include::partial$check24-furniture-recommended-mappings.adoc[]
---
-
-[#filter-export]
-==== _Optional:_ Exporting specific items
-
-include::partial$catalogue-filters.adoc[]
-
-[#catalogue-settings]
-==== Setting up catalogue export
-
-:csv-txt:
-include::partial$catalogue-settings.adoc[]
-
-[#catalogue-activation]
-==== Activating the catalogue
-
-:interval: once a day during the night
-
-[#url-check24-catalogue]
-==== Saving the URL at Check24
-
-Check24 retrieves item data via an URL. You have to save a URL in the Check24 backend so that item data can be exported to Check24. Item data will then automatically be retrieved by Check24 at regular intervals.  +
-Copy the URL of the catalogue in the *Data » Catalogues* menu and save it in the Check24 backend afterwards. +
-*_Note:_* You have to save the URL of the catalogue format *Check24 Offer* for the offer export at Check24. You cannot save the URL for the product export (catalogue format *Check24*) at Check24 yourself. Reach out to your Check24 contact person. They will save the product export URL in your contact data.
-
-[.instruction]
-Copying the URL:
-
-. Go to *Data » Catalogues*. +
-→ The catalogue overview opens.
-. Click on the catalogue for the format *Check24 Offer*. +
-→ The catalogue opens.
-. In the navigation on the left, open the tab *Settings* (material:settings[]).
-. Under *Download settings* in the *Options for public link* section, click on *Copy URL* (material:content_copy[]).
-→ The URL is copied to the clipboard.
-. Save the URL in the Check24 back end.
-
-include::partial$catalogue-activation.adoc[]
-
 [#change-elastic-export-catalogue]
 === _Alternative 3:_ Changing from elastic export to catalogue
 
@@ -462,7 +477,7 @@ The format Check24 Offer is new. As such, there is no equivalent format availabl
 .Columns and data fields
 [cols="1,1"]
 |===
-|Column in elastic export |Data field in catalogue
+|Column in elastic export |Marketplace data field in catalogue
 
 2+^| Check24
 
@@ -517,6 +532,25 @@ The format Check24 Offer is new. As such, there is no equivalent format availabl
 | Weight
 
 |===
+
+[#check24-delete-items]
+== Removing items from Check24
+
+Offers will only be visible on Check24 if a variation has at least one active offer. If a variation is not contained in the offer export or is exported to Check24 with a stock of *0*, then there will be no offer for this variation on Check24. +
+Check24 recommends that you remove variations from the offer export rather than export a stock of *0* if you do not want to sell a variation on Check24 any more. To remove variations from the offer export, deactivate the availability for the market in the variation as described below.
+
+Thus, variations cannot be sold on Check24 if they do not have stock in plentymarkets. The offer for the variation on Check24 will be removed from Check24 if a stock of *0* is exported. The interval for the data exchange is defined in the <<#catalogue-settings, catalogue settings>>.
+If the variation is in stock again, then it will also be offered on Check24 after the next item data export.
+
+If you do not want to sell a variation which is in stock in plentymarkets on Check24, then you have to delete the availability for the market. 
+
+[.instruction]
+Deleting the availability:
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability*.
+. *Delete* (icon:minus-circle[role="red"]) the availability *Check24*.
+. *Save* (terra:save[]) the settings. +
+→ The variation will not be offered on Check24 any longer.
 
 [#950]
 == Order import

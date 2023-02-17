@@ -1,0 +1,231 @@
+= Changelog 5. Oktober 2022
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 29. September 2022
+:endWeekDate: 5. Oktober 2022
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/behoben-filterfenster-im-zahlungsverkehr-menue-laesst-sich-wieder-nach-unten-scrollen-fix-filters-menu-in-the-payment-ui-can-be-scrolled-down-to-the-bottom-again/696687
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Die alte Auftragsstatus-UI wurde modernisiert.
++
+image:order-menu-september-2022-2.png[width=640, alt=Modernisierte Auftrags-UI]
+* In der Übersicht der neuen Auftrags-UI kann eine Rechnung nun mit Klick auf die Rechnungsnummer direkt geöffnet werden.
+* In der neuen Auftrags-UI (Übersicht) werden Filterwerte nun alphanumerisch sortiert.
+* In der neuen Auftrags-UI wurde in der Toolbar ein Button zum erneuten Laden des Auftrags hinzugefügt.
+* In der neuen Auftragsübersicht wurde die Spalte *Kundenbewertung* hinzugefügt.
+
+[discrete]
+=== bol.com
+
+* Der Schritt *Status nach Ereignisaktionen* wurde dem Assistenten *bol.com-Grundeinstellungen* hinzugefügt. In diesem Schritt kannst du Auftragsstatus festlegen, in die Aufträge wechseln sollen, nachdem eine Ereignisaktion ausgeführt wurde. Du kannst hier jeweils zwei Auftragsstatus festlegen: einen Status, in den Aufträge wechseln sollen, nachdem die Ereignisaktion erfolgreich ausgeführt wurde und einen Status, in den Aufträge wechseln sollen, nachdem die Ereignisaktion fehlgeschlagen ist. Wenn Aufträge nach einer Ereignisaktion ihren Status nicht ändern sollen, wähle *Kein Statuswechsel*. Die Statusänderungen können für alle Ereignisaktionen von bol.com festgelegt werden:
+** *Stornierung an bol.com senden*
+** *Versandbestätigung an bol.com senden*
+** *Retourenstatus an bol.com senden*
+** *Retoure bei bol.com anlegen*
+
++
+[IMPORTANT]
+.To-Do
+======
+Um Statusänderungen nach Ereignisaktionen einzurichten, öffne den Assistenten *bol.com-Grundeinstellungen* und wähle die Auftragsstatus im Schritt *Status nach Ereignisaktionen*.
+======
+
+[discrete]
+=== CRM
+
+* Im Kontaktdatensatz im Bereich *Adressen* kannst du nun über die Spaltenkonfiguration auch die Felder *Telefon* und *E-Mail* in der Adressübersicht anzeigen.
+
+[discrete]
+=== Kataloge
+
+* Bisher konntest du den Export von Katalogdaten in eine Datei starten und die Datei dann über die Notifications herunterladen. Jetzt hast du noch eine zweite Möglichkeit, die Katalogdaten in eine Datei zu exportieren: den Live-Download. Mit direktem Download auf deinen Rechner, Fortschrittsbalken und allem Drum und Dran. Weitere Informationen findest du auf der Handbuchseite xref:daten:standardformate-exportieren.adoc#manual-export[Standardformate nutzen].
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+==== OTTO
+
+:otto-master-date: 30.09.2022
+:otto-master-link: https://forum.plentymarkets.com/uploads/short-url/csbqnDWQRHWqBYAKNJWmu5uLxQ3.xlsx
+
+include::partial$otto-master-file.adoc[]
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== CRM
+
+* Änderungen an Kontakten, welche einen Tag haben, konnten nicht gespeichert werden. Dieser Fehler wurde behoben.
+* Die Vorschau von E-Mail-Vorlagen wurde nicht geöffnet, wenn keine E-Mail-Adresse am Kontakt hinterlegt war. Dieser Fehler wurde behoben.
+* Wenn man im Kontaktdatensatz im Bereich *Kontaktdetails* einmal einen Eigner gewählt hatte, war es nicht möglich, danach eine leere Option zu wählen, sondern nur einen anderen Eigner. Dieses Leerfeld fehlte und wurde nun hinzugefügt.
+* Wenn ein automatisches Versandereignis so konfiguriert wurde, dass keine E-Mail gesendet wird, hat man im Log die folgende Fehlermeldung erhalten: `Vorlagen-ID 0 existiert nicht`. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== DHL (Alte Integration)
+
+* Beim Drucken der DHL Retoure Beilegeretiketten wurde die falsche Adresse verwendet. Das Problem: Wenn ein Rücksendeetikett dieselbe ID hatte wie eine ältere Bestellung, wurde das Rücksendeetikett dieser älteren Bestellung verwendet. Der Fehler ist nun behoben.
+
+[discrete]
+=== Payment
+
+* Beim Filtern nach zugeordneten oder unzugeordneten Zahlungen wurden nicht immer alle Zahlungen korrekt ausgegeben. Es wurden teilweise Zahlungen als zugeordnet angezeigt, die es nicht sind und es wurden Zahlungen nicht als unzugeordnet angezeigt, dies eigentlich unzugeordnet sind. Das Verhalten wurde entsprechend korrigiert.
+
+[discrete]
+=== Plugins
+
+* Beim Bereitstellen von Plugin-Sets mit Plugin Build 2 gab es beim automatischen Pullen von Git-Plugins teilweise Probleme mit den Dateiberechtigungen für die Inbox. Dieses Problem wurde behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* gelöscht.
+
+[discrete]
+=== Amazon
+
+* Nachdem der link:https://forum.plentymarkets.com/t/amazon-selling-partner-api-rollout-phase-1/688462[erste Teil der Umstellung der SP-API^] bereits seit ein paar Wochen abgeschlossen ist, entfernen wir jetzt den zugehörigen Alt-Code der MWS-Schnittstelle, um uns die Pflege zu erleichtern.
+Hierbei werden auch Teile der UI entfernt, die mit der Abschaltung der MWS Schnittstelle ihre Funktion verloren haben.
++
+Betroffen ist der Punkt *Einrichtung » Märkte » Amazon » Datenaustausch » Auftragsimport » Tab: Auftragsimport*. Hier steht jetzt nur noch der Import via CSV-Datei zur Verfügung.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Im *Aufträge*-Portlet im Kontaktdatensatz wurden die folgenden Felder hinzugefügt:
+** Auftragsdatum
+** Herkunfts-ID
+** Herkunftsname
+** Zahlungseingang
+** Warenausgang
+** Versanddatum
+** Mandant
+
++
+Du kannst diese Felder mit einem Klick auf *Spalten konfigurieren* im *Aufträge*-Portlet oben rechts aktivieren.
+
+[discrete]
+=== Ereignisaktionen
+
+* Wir haben die Ereignisaktion *Dokument hochgeladen* hinzugefügt, die ausgelöst wird, wenn ein externes Dokument des neuen Typs *Hochgeladen* am Auftrag generiert wird.
+
+[discrete]
+=== Fulfillment
+
+* In der Auftragsansicht des neuen Versand-Center kannst du einzelne Pakete eines Auftrags jetzt leichter konfigurieren, indem du einfach auf die Zeile mit dem entsprechenden Paket klickst. Es öffnet sich dann ein Fenster, das dir verschiedene Optionen zur Konfiguration bietet. Diese bestätigst du direkt in diesem Fenster mit einem Klick auf den Button *Paket konfigurieren*. Weitere Informationen findest du auf der Handbuchseite xref:fulfillment:versand-center-2-0.adoc#pakete[Versand-Center 2.0 (Testphase)].
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== UI
+
+* Unter dem Menüpunkt *Einrichtung* wurde die Seitennavigation angepasst, so dass eine optische Einheitlichkeit besteht.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der Nachbestellungs-UI wurde der gewählte Filter für *Warenbewegungen* bei Aktualisierung der Tabelle nicht berücksichtigt.
+
+[discrete]
+=== CRM
+
+* Im EmailBuilder im Widget *Auftragspositionen* fehlte die Artikel-ID. Dieses Feld wurde nun ergänzt.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/allegro_6260[Allegro^]
+|2.0.16
+|-
+
+|link:https://marketplace.plentymarkets.com/clc_7017[CLC^]
+|1.0.6
+|-
+
+|link:https://marketplace.plentymarkets.com/intersoft_55302[Intersoft - Royal Mail UK^]
+|1.0.0
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.4.16
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.17
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
