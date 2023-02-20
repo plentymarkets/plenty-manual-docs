@@ -1,0 +1,591 @@
+= Zalando
+:author: team-plenty-channel
+:keywords: Zalando, Zalando, zalando.de, zalando.de, salando, zalando.com
+:description: Learn how to set up the market Zalando in plentymarkets to start selling your items on Zalando.
+
+:ea-queue:
+:market: Zalando
+:zalando:
+
+Thanks to the Zalando partner programme, online sellers and manufacturers can use Zalando as an additional distribution channel for selling their high-quality products and take advantage of the well-known brand name Zalando.
+
+//tag::zalando-countries[]
+Which countries you can sell in with Zalando depends on your contract with Zalando. You can import orders from the following countries into plentymarkets:
+
+*_Important:_* plentymarkets only supports own shipping by sellers. Zalando calls this *Partner Fulfillment (own logistics)*. Shipping by Zalando, also called Zalando Fulfillment Solutions (ZFS), is not supported yet.
+
+* Germany
+* Belgium
+* Estonia
+* Finland
+* France
+* Ireland
+* Latvia
+* Lithuania
+* Netherlands
+* Austria
+* Portugal
+* Slovakia
+* Slovenia
+//end::zalando-countries[]
+
+[#200]
+== Frequency of data exchange
+
+Connecting to this market allows for the following automatic functions to take place:
+
+[[data-exchange]]
+[cols="1,1"]
+|===
+|Data |Interval
+
+| Item export
+| Once a day +
+plentymarkets generates an XML file with the item data once daily during the night. This file is called *artikel.xml*. Zalando usually retrieves this XML once per day.
+
+| Stock synchronisation
+| Every 15 minutes, asynchronous +
+Stock for 1,000 variations is updated per minute. If the API limit set by Zalando is reached, the remaining stock details are sent once the API is unlocked after one minute.
+
+| Price synchronisation
+| Every 15 minutes
+
+| Order import
+| Every 5 minutes
+|===
+
+[#100]
+== Registering with Zalando
+
+Do you want to join the Zalando partner programme? Then link:https://www.zalando.co.uk/partner-programme/[contact Zalando directly^].
+
+[#150]
+== Overview of the necessary steps
+
+There are two ways to proceed. This depends on if you set up Zalando for the first time or already sell on Zalando and want to sell on another Zalando platform.
+
+[tabs]
+====
+Steps after registration::
++
+--
+You have signed a contract with Zalando. Great. What happens now?
+
+This is a list of the steps you are going to take.
+
+[cols="1,5a", grid=none, frame=none, stripes=none]
+|===
+
+| *Step 1*
+| <<#api-user, Create a REST API account>>.
+
+| *Step 2*
+| <<#setup, Carry out the basic settings in the menu *Setup » Markets » bol.com » Settings*.>>
+
+| *Step 3*
+| <<#zalando-csv-form, Request the CSV form for matching items/silhouettes in the plentymarkets forum.>>
+
+  * Enter your user credentials in the CSV file.
+  * Send this form to your Zalando contact person.
+
+| *Step 4*
+| <<#1400, Complete the assistant *Account settings - Zalando* for the first time.>> +
+*_Important:_* When you complete the assistant for the first time, you cannot carry out all the settings of the assistant.
+
+| *Step 5*
+| <<#link-zDirect, Ask our supporters to link your account with your zDirect account.>> +
+*_Important:_* This is only possible after you have completed the assistant for the first time.
+
+| *Step 6*
+| <<#assistant-2, Complete the assistant *Account settings - Zalando* again to complete the remaining settings.>>
+
+| *Step 7*
+| <<#more-setup, Carry out the additional settings.>>
+
+| *Step 8*
+| <<#order-documents, Prepare the order documents.>>
+
+| *Step 9*
+| <<#prepare-variations, Prepare your variations.>>
+
+| *Step 10*
+| <<#1200-1, Automate the order processing.>>
+
+| *Step 11*
+| <<#1500, Activate your Zalando account in the assistant to start exchanging data with Zalando.>>
+|===
+
+--
+ 
+Steps for adding more sales channels::
++
+--
+You already sell on Zalando and now want to offer your products on another country platform? No problem.
+
+As soon as you signed a contract with Zalando for the additional sales channels, the process continues with the following steps:
+
+[cols="1,5a", grid=none, frame=none, stripes=none]
+|===
+
+| *Step 1*
+| In the plentymarkets forum, request the link:https://forum.plentymarkets.com/t/sammelthema-collective-thread-csv-formular-zum-abgleichen-von-artikeln-silhouetten-csv-form-for-synchronization-of-articles-silhouettes/669460[API route for the new sales channel]. +
+*_Important:_* User and password are the same for all Zalando sales channels. As such, Zalando only needs the API route.
+
+| *Step 2*
+| Send the new API route to your Zalando contact with the additional information that all other data is to be sourced from the first sales channel. +
+→ Zalando activates the new sales channel.
+
+| *Step 3*
+| Go to *Setup » Orders » Order referrer* and activate the order referrer for the new country.
+
+| *Step 4*
+| Create a new sales price. Remember to correctly save the *currency* and the *country*. +
+*_Or:_* Activate the referrer *Zalando* in an existing sales price for the country. +
+*_Important:_* Activate the referrer *Zalando*. The sub-referrers for each Zalando platform (Zalando DE, Zalando NL etc.) will be ignored.
+
+| *Step 5*
+| Prepare the order documents for the country.
+
+| *Step 6*
+| Activate the sales price for the variations. +
+*_Important:_* In the variation settings, the sub-referrers for each Zalando platform (Zalando DE, Zalando NL etc.) will be ignored. That is why you do not change the availability settings.
+
+| *Step 7*
+| <<#assistant-2, Complete the assistant to activate the country and to save the settings for prices and stock.>>
+
+|===
+
+--
+====
+
+
+[#setup]
+== Account settings
+
+As soon as Zalando has accepted you into their partner programme, you will receive a user guide from Zalando which helps you setting up the interface. In plentymarkets, carry out the basic settings described here.
+
+[#api-user]
+=== Creating REST API access
+
+Create a REST API account.
+
+[.instruction]
+Creating REST API access:
+
+. Go to *Setup » Settings » User » Accounts*.
+. Click on *New*. +
+→ The *Create new user* window opens.
+. Enter a *user name*.
+. Enter a *real name*.
+. Enter a *password*.
+. Repeat the password.
+. For the setting *Access*, select the option *REST API*.
+. *Save* the settings. +
+→ The account is created. +
+*_Tip:_* You do not need to grant any rights for this account. It is enough that the account exists in the system.
+
+[#base-settings]
+=== Carrying out the basic settings
+
+[.instruction]
+Carrying out the basic settings:
+
+. Go to *Setup » Markets » Zalando » Settings*. +
+→ The *Settings* tab opens.
+. Carry out the settings as described in <<#UABFSCS3>>.
+. Save (terra:save[]) the settings.
+
+[[UABFSCS3]]
+.Basic settings for the market Zalando
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+2+^|Basic configuration
+
+| *User*
+| Select the API account that you <<#api-user, created for Zalando>>.
+
+| *Item name*
+| Select *Name 1*, *Name 2*, or *Name 3*. The name you select will be exported to Zalando.
+
+2+^|Advanced options
+
+| *Standard tax rate*
+| Select *19%* or *7%*.
+
+| *Reduced tax rate*
+| Select *19%* or *7%*.
+|===
+
+[#zalando-csv-form]
+=== Request the CSV form for matching items/silhouettes
+
+Now, request the FTP credentials and API data in the plentymarkets forum. Zalando needs this data to set up a sales channel for you.
+
+. Contact our support team in the forum thread link:https://forum.plentymarkets.com/t/sammelthread-anfrage-des-csv-formulars-zum-abgleich-der-artikel-silhouetten/669460[Request CSV form for matching items and silhouettes^]. +
+→ Our support team will provide you with a CSV file that contains a form. This file contains the following information:
+  * Routes for items
+  * Login details for the plentymarkets FTP server for silhouettes +
+  *_Tip:_* Zalando sends your silhouettes to this FTP server for import into your system. plentymarkets imports these silhouettes every Wednesday.
+. In row 5 of the file, enter the user name that you selected in the menu *Setup » Markets » Zalando » Settings*.
+. In row 6 of the file, enter the password that you set in the menu *Setup » Markets » Zalando » Settings*.
+. Forward the completed form to your Zalando contact. +
+→ Zalando activates the sales channel for you.
+
+[#1400]
+=== Assistant part 1: account settings
+
+include::partial$zalando-assistant.adoc[]
+
+[#more-setup]
+== Continuing the setup
+
+[#400]
+=== Linking categories
+
+Link your plentymarkets categories to the Zalando categories in order to display your variations in these categories.
+
+[.instruction]
+Linking categories:
+
+. Go to *Setup » Markets » Zalando » Category link*. +
+→ A list of your categories is shown in the column *Category*. +
+→ In the column *Zalando category*, you can link a Zalando category to each of your plentymarkets categories.
+. In the column *Zalando category*, select a Zalando category from the drop-down list for all categories that you need.
+. Save (terra:save[]) the settings. +
+→ The categories are linked to the selected Zalando categories. +
+→ New variations that you create for the plentymarkets category are also assigned to the linked Zalando category.
+
+[#250]
+=== Activating an order referrer
+
+:market: Zalando
+:referrer: Zalando
+:referrer-option: pass:quotes[Zalando platforms, for example *Zalando DE*]
+
+include::partial$activate-referrer.adoc[]
+
+
+[.collapseBox]
+.List of referrer IDs
+--
+118 = Zalando +
+118.01 = Zalando DE +
+118.02 = Zalando NL +
+118.03 = Zalando FR +
+118.04 = Zalando IT +
+118.05 = Zalando UK +
+118.06 = Zalando AT +
+118.07 = Zalando CH +
+118.08 = Zalando PL +
+118.09 = Zalando BE +
+118.1 = Zalando SE +
+118.11 = Zalando FI +
+118.12 = Zalando DK +
+118.13 = Zalando ES +
+118.14 = Zalando NO +
+118.15 = Zalando CZ +
+118.16 = Zalando IE +
+118.17 = Zalando PT +
+118.18 = Zalando SK +
+118.19 = Zalando SI +
+118.2 = Zalando LT +
+118.21 = Zalando LV +
+118.22 = Zalando EE +
+118.23 = Zalando HR +
+--
+
+[#350]
+=== Defining a sales price
+
+:referrer-price: Zalando
+
+include::partial$define-sales-price.adoc[]
+
+[#700]
+=== Linking attributes to Zalando
+
+If you have created attributes in your plentymarkets system, you need to link these attributes with Zalando. The following example describes how you can link the attribute “colour” with Zalando. Link further attributes in the same way.
+
+Link at least the following attributes to export your variations to Zalando:
+
+* Größe (size register)
+
+_and/or_
+
+* A colour for the 1st Farbcode (colour code)/Herstellerfarbe (manufacturer colour)
+
+_and/or_
+
+* Länge (length register) for length information (e.g. skirt length)
+
+NOTE: You can only link one size register or one length register to each attribute.
+
+:attribute-option: Zalando
+:attribute: Colour
+:attribute-dropdown:
+:select-attribute-values:
+:attribute-example: pass:quotes[*_Example:_* For the colour Purple, from the first drop-down list select the option *dark purple* and from the second drop-down list select the option *Purple*.]
+
+include::partial$link-attributes.adoc[]
+
+[#500]
+=== Converting silhouettes to characteristics
+
+Zalando groups products into "silhouettes". Zalando also calls these silhouettes "article types". For example, "skirts", "dresses", and "trousers" are all silhouettes. In the *Setup » Markets » Zalando » Settings » Tab: Silhouettes* menu, you convert Zalando silhouettes to item characteristics. Silhouettes are imported into plentymarkets when Zalando is first set up. When Zalando publishes new silhouettes, plentymarkets updates these silhouettes on the following Wednesday. After that, you can convert new silhouettes into characteristics if necessary.
+
+[.instruction]
+Converting silhouettes to characteristics:
+
+. Go to *Setup » Markets » Zalando » Settings*.
+. Click on the *Silhouettes* tab.
+. Select the *Groups* for the characteristics that you want to convert. +
+*_Note:_* No groups? Either Zalando has not provided the silhouettes or you have not sent the FTP credentials to Zalando (see <<#zalando-csv-form, Requesting the CSV form for matching items/silhouettes>>).
+. Save (terra:save[]) the settings. +
+→ Characteristics are created in your plentymarkets system based on the silhouettes.
+
+[#prepare-variations]
+== Preparing variations
+
+Continue with preparing your variations.
+
+[#300]
+=== Setting the variation availability
+
+:market-availability: Zalando
+:option-availability: Zalando
+:web-api:
+
+include::partial$variation-availability.adoc[]
+
+// Web API required!
+
+[#330]
+=== _Optional:_ Saving SKU
+
+:referrer-sku: Zalando
+:referrer-id: 118
+:sku-others:
+
+include::partial$sku-manually.adoc[]
+
+// Marketplace account not required!
+
+[#600]
+=== Linking characteristics to items
+
+Link the Zalando characteristics with the items that you want to sell on Zalando.
+
+Link at least the following mandatory characteristics to export your variations to Zalando:
+
+* 1. Farbcode (colour code)
+* Altersgruppe(n) (age group(s))
+* Form of address (Geschlecht)
+* Größenregister (size list)
+* Hersteller-Code (manufacturer code)
+* Manufacturer colour
+* Jahreszeiten-Code (Seasonal code)
+* Silhouetten-Typ (silhouette type)
+
+[.collapseBox]
+.*_Tip:_* Exporting a file with Zalando item characteristics
+--
+Several hundred characteristics are created in plentymarkets when you convert the Zalando silhouettes to characteristics. To make it easier to work with these characteristics, you can export the characteristics to a file. This gives you quick access to the IDs of your Zalando characteristics. This gives you easy access to the IDs of the Zalando characteristics. For example, this will help you to link the characteristics to your items xref:data:best-practices-elasticsync-property-links.adoc#import_property_links[using the import tool].
+
+[.instruction]
+Exporting Zalando item characteristics:
+
+. Go to *Setup » Markets » Zalando » Settings*.
+. Click on the *Silhouettes* tab.
+. Click on *Export Zalando item characteristics*. +
+→ A file that contains the Zalando characteristics is exported.
+. Save the file on your computer.
+*_Tip:_* <<#zalando-characteristics>> explains the file’s columns. For more information about characteristics, refer to the xref:item:properties.adoc#100[Characteristics and properties] page of the manual.
+
+[[zalando-characteristics]]
+.Zalando characteristics
+[cols="1,3a"]
+|===
+|Column |Explanation
+
+| *Group name*
+|Names of the characteristic groups
+
+| *Silhouette*
+|Values of all silhouettes
+
+| *Characteristic ID*
+|IDs of the characteristics, see also *Setup » Items » Characteristics*
+
+| *Characteristics type*
+a|Characteristic type
+
+* *empty* = No type +
+* *text* = Text +
+* *int* = Whole number +
+* *selection* = Selection ID
+
+| *Mandatory entry*
+a|
+*0* = The characteristic is optional. +
+*1* = The characteristic must be exported. Items that are not linked to this characteristic cannot be exported to Zalando. +
+*_Note:_* Characteristics may also contain the value *1* because links to other selected characteristics exist. Observe the documentation provided by Zalando.
+
+| *Language*
+| The xref:data:internal-IDs.adoc#10[language] of the characteristic. Currently, only German is available.
+|===
+--
+
+[.instruction]
+Linking a characteristic to an item:
+
+. Go to *Item » Edit item*.
+. Open the item.
+. Click on the *Characteristics* tab.
+. Activate the characteristic in the *Activate further characteristics* area.
+. Save (terra:save[]) the settings. +
+→ The characteristics are displayed in the *Characteristics* area.
+. *_Optional:_* Carry out additional settings. Pay attention to the explanations regarding xref:item:managing-items.adoc#80[characteristics].
+. Save (terra:save[]) the settings.
+
+[#1100]
+=== Check list for exporting variations
+
+Zalando expects some mandatory product information. As a result, variations can only be exported to the market if this mandatory information is saved for the variation. The information listed in <<#zalando-variations-mandatory>> must be saved for all variations that you want to export to Zalando.
+
+[[zalando-variations-mandatory]]
+.Mandatory fields for the variation
+[cols="1,3a"]
+|===
+|Mandatory data |Explanation
+
+| EAN
+a| An EAN must be saved for the variation.
+
+* In the *Setup » Item » Barcode* menu, an EAN must be created and linked to the referrer Zalando.
+* The EAN must be added to the *Settings* tab of the variation in the *Barcode* area and a barcode code must be entered.
+
+| Technical data
+a| Technical data must be saved for the item.
+
+* In the *Texts* tab of the item, text must be saved in the *Technical data* field.
+
+| Images
+a| An image must be saved for the variation.
+
+* in the *Images* tab of the item, the option *Zalando* must be selected from the drop-down list *Availability*.
+
+| Price
+a| A price must be saved for the variation.
+
+* The sales price must be activated for the referrer Zalando in the *Setup » Item » Sales prices*.
+* The sales price must be added in the *Settings* tab in the *Sales price* area of the variation.
+* A price must be saved for the sales price.
+
+| Supplier SKU
+a| An supplier SKU must be saved for each variation. Save this supplier SKU in the *Model* field of your variations.
+
+| Properties
+a| As a minimum, the following mandatory characteristics need to be linked to an item:
+
+* 1. Farbcode (colour code)
+* Altersgruppe(n) (age group(s))
+* Form of address (Geschlecht)
+* Größenregister (size list)
+* Hersteller-Code (manufacturer code)
+* Manufacturer colour
+* Jahreszeiten-Code (Seasonal code)
+* Silhouetten-Typ (silhouette type)
+
+| Attributes
+a| As a minimum, the following attributes must be linked to the variation:
+
+* Größe (size register)
+
+_and/or_
+
+* A colour for the 1st Farbcode (colour code)/Herstellerfarbe (manufacturer colour)
+
+_and/or_
+
+* Länge (length register) for length information (e.g. skirt length)
+
+NOTE: You can only link one size register or one length register to each attribute.
+|===
+
+[#removing-items]
+== No longer offering items on Zalando
+
+Variations cannot be sold on Zalando if they do not have stock in plentymarkets. As stock data is transferred to Zalando every 15 minutes, variations without stock are deleted automatically. If a variation has stock again in plentymarkets, it is offered again on Zalando with the next stock export.
+
+If you do not want to sell a variation which is in stock in plentymarkets on Zalando, then you have to delete the availability for the market and update the timestamp for market exports.
+
+*_Note:_* Items cannot be deleted on Zalando. Thus, if you remove the availability and update the timestamp for market exports, your variation will not be deleted on Zalando. It will only be displayed as not in stock.
+
+[.instruction]
+Deleting the availability:
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability*.
+. *Delete* (icon:minus-circle[role="red"]) the availability *Zalando*.
+. *Save* (terra:save[]) the settings.
+
+After you removed the availability, you have to *Update the timestamp for market exports* using the *Item group function*. This ensures that a stock of *0* is transferred to Zalando.
+
+[.instruction]
+Updating the timestamp for market exports:
+
+. Go to *Item » Edit item » Tab: Item group function*.
+. Place a check mark next to *Update timestamp for market exports*.
+. Click on terra:execute[] *Execute*. +
+→ A stock of *0* is transferred to Zalando. +
+→ The variation is displayed as not in stock on Zalando and cannot be bought any longer.
+
+[#order-documents]
+== Preparing order documents
+
+include::partial$zalando-order-documents.adoc[]
+
+[#1200-1]
+== Automating order processing
+
+include::partial$zalando-order-processing.adoc[]
+
+[#1500]
+== Starting data exchange: Activating the Zalando account
+
+Have you completed all the settings? Great. Then you are ready for the next step.
+Activate your Zalando account in the assistant *Account settings - Zalando* to start exchanging data with Zalando.
+
+[.collapseBox]
+.What to do if "This account cannot be activated."
+--
+Data is not exchanged with Zalando. To activate Zalando’s zDirect API interface, your Zalando account must be linked to the plentymarkets developer account. This link is established automatically during the integration. However, plentymarkets also needs to generate additional credentials for the API and then save these credentials in your system. We cannot give you access to these credentials. As such, plentymarkets is not allowed to give you access to these credentials. Ask our support staff to activate your account in link:https://forum.plentymarkets.com/t/sammelthema-aktivierung-neuer-zalando-konten/600409[this thread] of the plentymarkets forum.
+
+In the forum post, provide the following information:
+
+* The company/brand name you used to register with Zalando
+* Your plenty ID
+* The ID of the Zalando account (accountId) in plentymarkets that you want to activate for the Zalando interface +
+*_Note:_* Only one account can be linked in plentymarkets for each Zalando seller account.
+--
+
+[.instruction]
+Activating the Zalando account:
+
+. Go to *Setup » Assistants » Omni-Channel*.
+. Click on the assistant *Account settings - Zalando*.
+. Navigate to the step *Account activation*.
+. Activate the option *Activate user account*.
+. Complete the assistant. +
+→ The data exchange with Zalando is activated.
+
+[#900]
+== Download reports
+
+include::partial$zalando-reports.adoc[]
+
+[#zalando-faq]
+== FAQ
+
+include::partial$zalando-faq.adoc[]
