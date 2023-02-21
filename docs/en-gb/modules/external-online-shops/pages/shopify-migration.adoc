@@ -1,0 +1,232 @@
+= Shopify migration: Switch from plugin to app
+:keywords: Shopify, plentymarkets app, shopify assistant, shopify shops, connect shopify, link shopify
+:description: Find out how you migrate your Shopify connection from plugin to app.
+:author: team-plenty-channel
+:page-index: false
+
+:shopify:
+:market: Shopify
+:referrer-option: Shopify
+:referrer: Shopify
+
+Introduction
+//The Shopify app provides the best connection to Shopify. The old plugin is reaching its End of Life and we ask all our customers to migrate to the app by xx.xx.xxxx.
+// in polite and nice
+
+[#F60YMJPC]
+== Migration process
+
+the migration assistant guides you through the most important steps of the migration. This page shows you an overview of the necessary steps and detailed information about the migration process.
+
+Go to *Setup » Markets » Shopify app » Migration assistant* to complete the migration assistant.
+
+[cols="1,5a", grid=none, frame=none, stripes=none]
+|===
+
+| *Step 1*
+| <<#BICQDCDB, Install the plentymarkets app in your Shopify back end.>>
+
+| *Step 2*
+| <<#BICQDFDB, Check your version of the Shopify plugin.>>
+
+| *Step 3*
+| <<#VWKZZVIE, Migrate your first Shopify connection.>>
+
+*_Important:_* For each connection to Shopify, you carry out the following steps separately.
+
+| *Step 4*
+| <<#ZL8ZTS1E, Migrate the event procedures.>>
+
+*_Important:_* The exact steps depend on how many Shopify connections you have and if you what to migrate them all in the same session or not. As such, read the description carefully before getting started.
+
+| *Step 5*
+| <<#MP5MDAGJ, Check the migrated account settings.>>
+
+| *Step 6*
+| <<#MP5MDABJ, Remove the Shopify plugin from your plentymarkets system.>>
+
+|===
+
+[#BICQDCDB]
+== Step 1: Installing the plentymarkets app in your Shopify back end
+
+First, install the plentymarkets app in your Shopify back end. Find out how in this video:
+
+video::4D_3vFrVBIQ[youtube]
+
+[#BICQDFDB]
+== Step 2: Check the plugin version
+
+You need the current version of the Shopify plugin to migrate.
+
+The migration assistant checks your plugin version for you. If your plugin is deinstalled or not up-to-date , you can update or install the plugin directly from the assistant.
+
+Go to *Setup » Markets » Shopify app » Migration assistant* to complete the migration assistant.
+
+Four different things can happen in the migration assistant:
+
+*_Scenario 1:_* Your plugin is up to date. Great. Great. Then you are ready for the next step. +
+*_Scenario 2:_* You plugin is outdated. The migration assistant asks you to update the plugin before you can continue. +
+*_Scenario 3:_* You have an active plugin connection to Shopify but no plugin is installed. If you want to migrate this connection, follow the steps in the migration assistant to update the plugin. +
+*_Scenario 4:_* You do not have a plugin. You also have no active plugin connections to Shopify. Then you're all done because no migration is necessary.
+
+[#VWKZZVIE]
+== Step 3: Migrating the Shopify account
+
+No, migrate your Shopify connections.
+
+For each active connection to Shopify, you carry out the following steps separately. So if you have more than one connection, you will migrate several databases. You do not need to migrate all your connections in the same session. However, note the instructions regarding event procedures below if you only migrate some of your connections now.
+
+. Go to *Setup » Markets » Shopify app » Migration assistant*.
+. Select the connection from the drop-down list *Connection*.
+. Click on *Migrate*. +
+-> The settings for the Shopify account are updated to the app connection. +
+*_Tip:_* You will check these settings later in the Shopify assistant.
+
+[#ZL8ZTS1E]
+== Step 4: Migrating the event procedures
+
+Now, you migrate the event procedures. How you do that depends on how many Shopify connections you have in your system.
+
+[.collapseBox]
+.How do I know if I have one or several Shopify connections?
+--
+
+. Go to *Setup » Markets » Shopify app » Migration assistant*.
+. Expand the drop-down list *Connection*. +
+-> This list contains your Shopify connections. If the list only contains one entry, then you only have one Shopify connection.
+
+--
+
+[tabs]
+====
+If you only have ONE Shopify connection::
++
+--
+You only have one connection to Shopify. Then follow these simple steps:
+
+* The migration assistant creates the new event procedures for you.
+* You check the new event procedures.
+* You activate the new event procedures.
+* You deactivate the old event procedures.
+
+These steps are described in more detail below:
+
+[.instruction]
+Creating new event procedures:
+
+. Click on *Migrate event procedures*. +
+-> The migration view is shown.
+. Read the text on the screen carefully.
+. Click on *Migrate*. +
+-> New event procedures for Shopify are created. +
+-> A list of the event procedures for Shopify in your system is shown. The old event procedures are shown on the left, the new ones on the right. +
+*_Tip:_* Copy the list of event procedures or take a screenshot to make sure you do not forget any in the next steps.
+
+[.instruction]
+Checking the new event procedures:
+
+. Go to *Setup » Orders » Events*.
+. Open the first new event procedure from the list shown in the migration assistant. +
+*_Tip:_* At this point, take the opportunity to remove the prefix *[MIGRATION]*.
+. Check all settings. Are the settings still correct?
+. If everything is fine, activate the option *Active* (icon:check-square[role="blue"]).
+. Click on *Save* (icon:save[role="green"]).
+. Repeat the steps for all new event procedures.
+
+[.instruction]
+Deactivating the old event procedures:
+
+. Go to *Setup » Orders » Events*.
+. Open the first old event procedure from the list shown in the migration assistant. +
+*_Tip:_* You can identify the old event procedures by their prefix *Shopify plugin:*.
+. Deactivate the option *Active*.
+. Save the setting.
+. Repeat the steps for all old event procedures.
+--
+ 
+If you have SEVERAL Shopify connection::
++
+--
+
+You have more than one Shopify connection. If you only migrate one of your connections now, you need the old and the new event procedures. To ensure that not both event procedures are triggered for the same order, you set filters for the client.
+
+This is how:
+
+*_Important:_* This process only applies if you do not migrate all your Shopify connections in a single session.
+
+* The migration assistant creates the new event procedures for you.
+* You check the new event procedures.
+* In the new even procedures, you add a filter for the client for which you already migrated the Shopify connection.
+* You activate the new event procedures.
+* In the old event procedures, you add a filter for the client(s) for which you have not yet migrated the Shopify connection.
+* Only deactivate the old event procedures after you have migrated *_all_* Shopify connections.
+
+These steps are described in more detail below:
+
+[.instruction]
+Creating new event procedures:
+
+. Click on *Migrate event procedures*. +
+-> The migration view is shown.
+. Read the text on the screen carefully.
+. Click on *Migrate*. +
+-> New event procedures for Shopify are created. +
+-> A list of the event procedures for Shopify in your system is shown. The old event procedures are shown on the left, the new ones on the right. +
+*_Tip:_* Copy the list of event procedures or take a screenshot to make sure you do not forget any in the next steps.
+
+[.instruction]
+Checking the new event procedures:
+
+. Go to *Setup » Orders » Events*.
+. Open the first new event procedure from the list shown in the migration assistant. +
+*_Tip:_* At this point, take the opportunity to remove the prefix *[MIGRATION]*.
+. Check all settings. Are the settings still correct?
+. Add a filter for the client for which you migrated the Shopify connection.
+. Select the *Active* option (icon:check-square[role="blue"]).
+. Click on *Save* (icon:save[role="green"]).
+. Repeat the steps for all new event procedures.
+
+[.instruction]
+Setting a client filter for the old event procedures:
+
+. Go to *Setup » Orders » Events*.
+. Open the first old event procedure from the list shown in the migration assistant. +
+*_Tip:_* You can identify the old event procedures by their prefix *Shopify plugin:*.
+. Add a filter for the client(s) for which you have _not yet_ migrated the Shopify connection.
+. Save the setting.
+. Repeat the steps for all old event procedures.
+
+[.instruction]
+Deactivating old event procedures after all Shopify connections have been migrated:
+
+. Go to *Setup » Orders » Events*.
+. Open the first old event procedure from the list shown in the migration assistant. +
+*_Tip:_* You can identify the old event procedures by their prefix *Shopify plugin:*.
+. Deactivate the option *Active*.
+. Save the setting.
+. Repeat the steps for all old event procedures.
+--
+====
+
+[#MP5MDAGJ]
+== Step 5: Checking the migrated account settings
+
+You have migrated a Shopify connection and have made the necessary settings for the event procedures. Now, make sure that the account settings were migrated correctly.
+
+[.instruction]
+Checking migrated account settings in the assistant *Shopify configuration*:
+
+. Go to *Setup » Assistants » Omni-Channel*.
+. Click on the *Shopify Configuration* assistant.
+. Click on the account that you migrated. +
+→ The assistant opens.
+. Go through all the steps. Were the settings migrated correctly?
+. If everything is as it should be, click on icon:check[role="green"] *Finalise*.
+
+[#MP5MDABJ]
+== Removing the Shopify plugin from plentymarkets
+
+Outer order leads to inner calm. As such, remove the Shopify plugin from your plentymarkets back end after you have migrated all Shopify connections. Find out how xref:plugins:removing-installed-plugins.adoc[here].
+
+// remove after translation
