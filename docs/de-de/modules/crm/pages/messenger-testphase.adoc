@@ -190,15 +190,15 @@ Den Assistenten *E-Mail-Konten* findest du ebenfalls im Menü *Einrichtung » As
 [#typen-status-erstellen]
 === Typen und Status erstellen
 
-// TODO: Nur ein Admin kann Typen und Status erstellen?
+Gehe wie im Folgenden beschrieben vor, um <<#messenger-typ-hinzufuegen, Typen>> und <<#messenger-status-hinzufuegen, Status>> für den Messenger zu erstellen. Beachte, dass nur eine Person mit Admin-Rechten Typen und Status erstellen kann.
 
 [#messenger-typ-hinzufuegen]
 ==== Typ hinzufügen
 
-Du kannst beliebig viele Typen für den Messenger erstellen, z.B. `Kund:innenanfrage` oder `Beschwerde`.
+Du kannst beliebig viele Typen für den Messenger erstellen, z.B. `Kund:innenanfrage` oder `Beschwerde`. Im nächsten Schritte kannst du einen <<#messenger-status-hinzufuegen, Status>> für den Typen in Form einer Farbe und einer Fortschrittsangabe in Prozent hinzufügen.
 // Die Einstellungen zur Standardsprache, weiteren Sprachen und der Position nimmst du wie im Folgenden beschrieben vor.
 // TODO: Einleitung weiter ergänzen
-// TODO: was ist mit Rollen und Statusgruppen? Soll es die auch geben im Messenger oder nicht?
+// TODO: vgl. Beschreibungen auf der Ticketsystem-Handbuchseite.
 
 [.instruction]
 Typ hinzufügen:
@@ -211,10 +211,12 @@ Typ hinzufügen:
 . Gib die Position ein.
 . *Speichere* (material:save[]) die Einstellungen.
 
+// TODO: Konfig prüfen.
+
 [#messenger-status-hinzufuegen]
 ==== Status hinzufügen
 
-Lege zu jedem Nachrichtentyp im Messenger Status in Prozentangaben fest, um den Bearbeitungsfortschritt deiner Konversationen zu verfolgen.
+Lege zu jedem <<#messenger-typ-hinzufuegen, Typ>> im Messenger einen oder mehrere Status mit Prozentangabe fest, um den Bearbeitungsfortschritt deiner Konversationen zu verfolgen.
 
 [.instruction]
 Status hinzufügen:
@@ -223,6 +225,9 @@ Status hinzufügen:
 . Klicke auf material:add[] *Status hinzufügen*. 
 
 // TODO: Konfig ergänzen
+// TODO: Info hier ergänzen, dass man sich die Spalten in der Übersicht anzeigen lassen kann.
+// TODO: Spalten konfigurieren: noch ergänzen in Neue Nachrichten, Meine Nachrichten, Papierkorb.
+// TODO: include-Datei für die Spalten in der Übersicht/Neue Nachrichten/Meine Nachrichten und Papierkorb erstellen.
 
 [#nachricht-erstellen]
 == Neue Nachricht erstellen
@@ -340,6 +345,13 @@ Konversation im Messenger suchen:
 |[#intable-filter-from-to]*Von* / *Bis*
 |Gib ein Datum ein oder wähle die Datumsangaben aus den Kalendern (material:today[]), um nach Konversationen in einem bestimmten Zeitraum zu suchen.
 
+|[#intable-filter-type]*Typ*
+|Wähle einen <<#messenger-typ-hinzufuegen, Typ>> aus der Liste, um nur nach Konversationen mit diesem Typ zu suchen.
+
+|[#intable-filter-status]*Status*
+|Wähle einen <<#messenger-status-hinzufuegen, Status>> aus der Liste, um nur nach Konversationen mit diesem Status zu suchen. +
+*_Hinweis:_* Der Filter *Status* wird erst sichtbar, wenn du zuvor den Filter <<#intable-filter-type, Typ>> gewählt hast.
+
 |[#intable-filter-short-id]*Abgekürzte ID*
 |Gib die ID der Konversation ein, um nach der Konversation mit genau dieser ID zu suchen.
 
@@ -355,9 +367,8 @@ Mögliche Werte:
 |[#intable-filter-has-attachments]*Hat Anhänge*
 |Wähle *Ja*, um nach Konversationen mit Anhängen zu suchen. Wähle *Nein*, um nach Konversationen ohne Anhänge zu suchen. 
 
-|[#intable-filter-status]*Status*
-|Wähle einen Status, um nach Konversationen mit diesem Status zu suchen. +
-Verfügbare Werte: *Erledigt* und *Nicht erledigt*.
+|[#intable-filter-done]*Erledigt*
+|Wähle *Ja*, um nur nach Konversationen zu suchen, die als <<#kontextmenue-als-erledigt-markieren, erledigt>> markiert wurden. Wähle *Nein*, um nur nach Konversationen zu suchen, die noch nicht erledigt sind.
 
 |[#intable-filter-contact-id]*Kontakt-ID*
 |Gib eine ID ein, um nur nach Konversationen zu suchen, die mit dieser Kontakt-ID verknüpft sind.
@@ -477,8 +488,9 @@ Du kannst die Breite der Spalten in dieser Ansicht nach deinen Bedürfnissen anp
 |[#intable-overview-selection]*Auswahl*
 |Zeigt die Checkbox für die <<#gruppenfunktion, Gruppenfunktion>> (material:check_box_outline_blank[]) in der Übersicht an.
 
-|[#intable-overview-status]*Status*
-|Zeigt mit dem Symbol material:circle[role=skyBlue] (Nachricht ungelesen) an, dass sich ungelesene Nachrichten in der Konversation befinden. Zeigt mit dem Symbol material:circle[role=green] (Nachricht abgeschlossen) an, dass die Konversation abgeschlossen ist.
+|[#intable-overview-status]*Erledigt*
+|Zeigt mit dem Symbol material:circle[role=green] an, dass die Konversation als erledigt markiert wurde.
+*_Hinweis:_* Das Symbol material:circle[role=skyBlue] (Nachricht ungelesen) zeigt an, dass sich ungelesene Nachrichten in der Konversation befinden.
 
 |[#intable-overview-short-id]*Abgekürzte ID*
 |Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand der ID zu sortieren.
@@ -543,7 +555,13 @@ Wenn die Konversationen in mehrere Ordner verschoben wurde, werden in der Spalte
 |[#intable-overview-subscribed]*Abonniert*
 |In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob die Konversation <<#konversation-abonnieren, abonniert>> wurde.
 
-// TODO: kann man hier auch sehen, wer die Konv. abonniert hat oder nur, dass sie abonniert wurde. Oder geht es nur darum, ob man sie selbst abonniert hat?
+// TODO: kann man hier nur sehen, dass man die Konversation selbst abonniert hat oder dass die Konversation generell von jemanden abonniert wurde?
+
+|[#intable-overview-type]*Typ*
+|Zeigt den <<#kontextmenue-konversation-typ-status-setzen, Typ>> der Konversation an.
+
+|[#intable-overview-status]*Typ*
+|Zeigt den <<#kontextmenue-konversation-typ-status-setzen, Status>> der Konversation in der gewählten Farbe und mit dem gewählten Fortschritt in Klammern an.
 
 |[#intable-overview-context-menu]*Kontextmenü*
 |Ermöglicht das Bearbeiten von Konversationen in der Übersicht mit Hilfe des <<#kontextmenue, Kontextmenüs>>.
@@ -907,7 +925,7 @@ Du kannst die folgenden Prioritäten an der Konversation speichern:
 
 Die Priorität wird dann in der geöffneten Konversation neben den Tags angezeigt. Du kannst auch nach Konversationen mit bestimmten Prioritäten in der Übersicht <<#intable-filter-priority, suchen>> und die Konversationen nach Priorität in der Übersicht filtern (material:arrow_upward[] und material:arrow_downward[]).
 
-// TODO: Screenshot hinzufügen.
+// TODO: Screenshot hinzufügen, wenn die Icons der Prioritäten geändert wurden.
 
 [#kontextmenue-konversation-typ-status-setzen]
 === Typ und Status setzen
