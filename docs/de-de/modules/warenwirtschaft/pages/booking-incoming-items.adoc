@@ -26,7 +26,7 @@ Einstellungen zum Wareneingang vornehmen:
 . Nimm die Einstellungen für den Wareneingang vor. Beachte dazu die Erläuterungen in <<table-pw-incoming-items-settings>>.
 
 [[table-pw-incoming-items-settings]]
-.Einstellungen zur Umbuchung in plentyWarehouse
+.Einstellungen zum Wareneingang in plentyWarehouse
 [cols="1,3"]
 |===
 |Einstellung |Erläuterung
@@ -65,6 +65,14 @@ Einstellungen zum Wareneingang vornehmen:
 | *Netto-Warenbestand anzeigen*
 |Aktiviere die Option, um während der Umbuchung pro Artikel den jeweiligen xref:glossar:glossar.adoc#netto-warenbestand[Netto-Warenbestand] anzuzeigen.
 
+| [#intable-storage-location-selection]*Lagerort-Auswahl*
+|Wie möchtest du Lagerorte auswählen, wenn Artikel eingebucht werden? Wähle eine der drei verfügbaren Optionen aus. +
+*Keine Auswahl* = Für jeden Artikel, der eingebucht werden soll, musst du manuell einen Lagerort auswählen, auf den er eingebucht wird. +
+*Lagerort auswählen* = Setzt einen spezifischen Lagerort für *alle* Artikel fest, für die der Wareneingang gebucht wird. Diese Auswahl bleibt bestehen, bis du den Lagerort mithilfe dieser Einstellung änderst. Wenn du diese Option wählst, wird die zusätzliche Einstellung <<#intable-storage-location, *Lagerort*>> aktiv. Dort legst du den spezifischen Lagerort fest, auf dem Ware standardmäßig eingebucht wird. +
+*Nachfragen* = Für jeden Artikel, der eingebucht werden soll, erscheint in der App ein Dialog, damit du den Lagerort auswählen kannst.
+
+| [#intable-storage-location]*Lagerort*
+|Diese Einstellung ist nur aktiv, wenn du für die Einstellung <<#intable-storage-location-selection, *Lagerort-Auswahl*>> die Option *Lagerort auswählen* gewählt hast. Gib in diesem Fall einen Lagerort an, in dem du den Barcode des Lagerort-Labels scannst oder nach dem Lagerortnamen suchst.
 
 2+^| Bereich *Artikelsuche*
 
@@ -81,7 +89,7 @@ Einstellungen zum Wareneingang vornehmen:
 | *Einkaufspreis anzeigen*
 |Aktiviere diese Option, wenn du beim Einbuchen den Einkaufspreis anzeigen möchtest, der am Artikel hinterlegt ist.
 
-| *Einkaufspreis bearbeiten*
+| [#intable-edit-purchase-price]*Einkaufspreis bearbeiten*
 |Aktiviere diese Option, wenn du beim Einbuchen den Einkaufspreis bearbeiten möchtest, der am Artikel hinterlegt ist. +
 *_Hinweis:_* Bearbeitest du den Einkaufspreis in der plentyWarehouse App, wird der geänderte Preis in die Artikeldaten übernommen, die du im plentymarkets Backend pflegst. Deshalb wird bei Eingabe eines abweichenden Einkaufspreises ein Dialog angezeigt, in dem du die Änderung bestätigen musst.
 
@@ -115,11 +123,11 @@ Einstellungen zum Wareneingang vornehmen:
 *Datum aufsteigend* = Nachbestellungen werden aufsteigend nach ihrem Erstellungsdatum sortiert. Somit beginnt die Liste mit der ältesten Nachbestellung.
 
 | *Standardverhalten beim Laden von Nachbestellungen*
-|Entscheide, wie du mit bereits erfassten Artikeln umgehen möchtest, wenn du an einem späteren Zeitpunkt eine Nachbestellung mit dem aktuellen Wareneingang verknüpfst.
-*Mit Nachbestellung verknüpfen*: +
-*Aktuelle Artikel beibehalten*: +
-*Entfernen*: +
-*Dialog anzeigen*: als Standard eingestellt
+|Entscheide, wie du mit bereits erfassten Artikeln umgehen möchtest, wenn du an einem späteren Zeitpunkt eine Nachbestellung mit dem aktuellen Wareneingang verknüpfst. +
+*Mit Nachbestellung verknüpfen* = +
+*Aktuelle Artikel beibehalten* = +
+*Entfernen* = +
+*Dialog anzeigen* =
 
 |===
  
@@ -162,53 +170,24 @@ Einfachen Wareneingang buchen:
 . Tippe auf das Menüsymbol (icon:bars[role="darkGrey"]) oben links. +
 icon:map-signs[] *_Oder:_*: Finde die Kachel zum *Wareneingang* im Bereich *Funktionen* auf dem Dashboard.
 . Tippe auf *Wareneingang* (image:warenwirtschaft:icon_incoming_items.png[width=24, height=24]).
-. Erfasse die Artikel, die eingebucht werden sollen. Abhängig von der <<#intable-itemscan, gewählten Einstellung>> scannst du entweder den Barcode auf dem Artikeletikett oder klickst auf *Suchen* (icon:search[role="darkGrey"]), um mithilfe eines passenden Suchkriteriums Artikel manuell hinzuzufügen.
-. *_Optional:_* Bearbeite den Einkaufspreis der Artikel. Tippe dazu auf (icon:material_payments[role="green"])
+. Erfasse die Artikel, die eingebucht werden sollen. Abhängig von der zuvor gewählten Option für die Einstellung <<#intable-itemscan, *Verpflichtender Artikel-Scan*>> scannst du entweder den Barcode auf dem Artikeletikett oder klickst auf *Suchen* (icon:search[role="darkGrey"]), um mithilfe eines passenden Suchkriteriums Artikel manuell hinzuzufügen.
+. Gib die Menge der einzubuchenden Artikel ein. Die Menge erhöht sich immer um *1*, wenn du den Artikel erneut scannst, auf den Eintrag des Artikels in der Liste tippst oder eine Eingabe über das Mengenfeld (material:iso[role="skyBlue"]) vornimmst. Die Möglichkeiten, die zur Verfügung stehen, richten sich nach der Option, die du zuvor für die Einstellung <<#intable-itemscan, *Verpflichtender Artikel-Scan*>> gewählt hast.
+.. *_Optional:_* Bearbeite den Einkaufspreis oder, falls zutreffend, die Rabatte der Artikel. Tippe dazu am Eintrag des Artikels auf (material:payments[role="green"]). Diese Option ist nur sichtbar, wenn du zuvor die Einstellung <<#intable-edit-purchase-price, Einkaufspreis bearbeiten>> aktiviert hast.
+.. *_Optional:_* Erfasse eine Seriennummer für die Artikel. Tippe dazu am Eintrag des Artikels auf (material:pin[role="darkGrey"]). Diese Option ist nur sichtbar, wenn du zuvor am Artikel xref:artikel:seriennummern.adoc#200[Seriennummern gepflegt] und zusätzlich das xref:artikel:seriennummern.adoc#900[Scannen] der Seriennummer erlaubt hast.
+. Tippe auf (material:room[role="purple"]) um einen Lagerort auszuwählen, auf den die Artikel eingebucht werden sollen. Lagerorte kannst du entweder für jeden Artikel manuell suchen und anschließend auswählen oder per Scan des Lagerort-Labels erfassen. Es ist auch möglich, sämtliche Artikel stets auf demselben Lagerort einzubuchen. Die Möglichkeiten, die zur Verfügung stehen, richten sich nach der Option, die du zuvor für die Einstellung <<#intable-storage-location-selection, *Lagerort-Auswahl*>> gewählt hast.
+. Tippe auf (material:done[role="red"]), um den Wareneingang abzuschließen. +
+→ Der Bestand wird eingebucht. Die Bestandsänderungen und Warenbewegungen im plentymarkets Backend im Menü xref:warenwirtschaft:wareneingaenge-verwalten.adoc#1800[*Waren » Wareneingänge*] nachvollziehen und bei Bedarf korrigieren.
 
-. Logge dich in die pW App ein.
-. Wareneingang Feature öffnen
-. Artikel erfassen durch Scannen oder Suchen
-. ggf. Einkaufspreis bearbeiten
-. ggf. Seriennummer erfassen
-. ggf. Nachbestellung zuordnen
+[TIP]
+.Daten zu Wareneingängen exportieren
+====
+Daten zu Wareneingängen kannst du im Menü *Waren » Wareneingänge* in Form einer Datei im CSV oder PDF-Format herunterladen. Weitere Informationen dazu findest du auf der Handbuchseite xref:warenwirtschaft:wareneingaenge-verwalten.adoc#1400[Ware einbuchen].
+====
 
-Alte Anleitung zur blauen App:
-
-[.instruction]
-Ware über die plentymarkets App einbuchen:
-
-. Öffne die plentymarkets App.
-. Tippe in der Menüleiste auf das *Menüsymbol* (icon:bars[role="blue"]).
-. Tippe auf *Lagerverwaltung » Einbuchung*. +
-→ Die Variantensuche wird angezeigt.
-. Gib ein Suchkriterium ein.
-. Tippe auf *Suchen*. +
-→ Die gefundenen Varianten werden angezeigt.
-. Tippe auf die Variante. +
-*_Tipp:_* Bei eindeutigen Suchergebnissen wird die Variante automatisch geöffnet.
-. Gib die Menge ein, die eingebucht werden soll.
-. *_Optional:_* Gib den Einkaufspreis ein.
-. Tippe auf den grünen Balken des Lagerorts, in den der Bestand gebucht werden soll. +
-*_Tipp:_* Wenn du deine Lagerorte gelabelt hast, scanne stattdessen das Label des Lagerortes. Tippe dazu bei Bluetooth-Scannern vorher in das Feld *Barcode*. +
-→ Wenn für die Variante in dem gewählten Lager Mindesthaltbarkeitsdaten und/oder Chargeninformationen gepflegt werden, wirst du aufgefordert, diese Daten einzugeben.
-. *_Optional:_* Wähle das Mindesthaltbarkeitsdatum und/oder gib die Charge ein und tippe auf *Wareneingang buchen*. +
-*_Hinweis:_* Standardmäßig kann Ware mit verschiedenen MHD/Chargen nicht auf denselben Lagerort eingebucht werden. +
-→ Der Bestand wird eingebucht. 
-
-////
-
-[#200a]
+[#300]
 === Wareneingang für eine Nachbestellung buchen
 
 - Warenbezugskosten
 - Lieferant suchen
 - Lieferschein hinzufügen
 - Nachbestellung von Anfang an zuordnen oder wenn schon Artikel zum Einbuchen vorgemerkt sind
-
-[#200b]
-=== Seriennummern erfassen
-
-[#300]
-== Wareneingang abschließen
-
-////
