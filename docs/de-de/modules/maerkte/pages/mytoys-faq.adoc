@@ -1,0 +1,277 @@
+= MyToys FAQ
+:author: team-plenty-channel
+:keywords: MyToys, MyToys FAQ, MyToys Fragen, MyToys Artikelexport, MyToys Aufträge, MyToys Pflichtfelder, MyToys Pflichtwerte, MyToys Auftragsdokumente 
+:description: Hier erhältst du Antworten zu häufigen Fragen rund um MyToys.
+
+Auf dieser Seite findest du eine Liste der häufig gestellten Fragen zu MyToys. +
+Die Liste der Fragen wird laufend aktualisiert. +
+Vermisst du eine Information oder ist etwas unklar?
+Dann sende uns gern eine Nachricht über die Feedback-Funktion unten auf dieser Seite.
+
+[#artikeldatenexport]
+== Artikeldatenexport
+
+[#kein-artikelexport]
+[.collapseBox]
+.*Warum werden meine Artikel nicht zu MyToys exportiert?*
+--
+Damit deine Varianten zu MyToys exportiert werden, müssen folgende Voraussetzungen erfüllt sein:
+
+* Im *Tab: Verfügbarkeit* der Variante muss die Marktplatzverfügbarkeit *myToys* hinzugefügt sein.
+
+* Im *Tab: Eigenschaften* der Variante muss die Eigenschaft *myToys Kategoriegruppe* verknüpft sein. Als Wert wird der Formatname des jeweiligen myToys-Katalogs erwartet. Durch diese Verknüpfung erfolgt die Zuordnung zum myToys-Katalog (dieser entspricht der myToys-Kategoriegruppe). Es wird _nicht_ der von dir gewählte Name des Katalogs, sondern der Name des Formats erwartet! +
+Beachte, dass die Auswahleigenschafts-ID im Katalog mit der Eigenschaft *myToys Kategoriegruppe* (im Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration*) übereinstimmen muss.
+
+* Der Katalog, der exportiert werden soll, ist *aktiv*.
+
+* Die Variante ist *aktiv* (im *Tab: Einstellungen*, Bereich *Verfügbarkeit*).
+
+* Der Zeitstempel der Variante darf nicht älter als 24 Stunden sein. +
+Wie du den Zeitstempel einer Variante aktualisieren kannst, erfährst du <<#zeitstempel-aktualisieren, hier>>.
+
+* Außerdem muss die Variante mindestens mit allen <<#pflichtfelder-mytoys, Pflichtfeldern>> des jeweiligen Katalogs verknüpft sein. Pflichtfelder sind im Katalog mit einem Sternchen (*) gekennzeichnet.
+--
+
+[#artikelexport-pruefen]
+[.collapseBox]
+.*Wie kann ich prüfen, welche Artikel zu MyToys übertragen wurden?*
+--
+Du kannst dich mit deinen SFTP-Anmeldedaten (zum Beispiel aus dem MyToys-Einrichtungsassistenten) auf dem FTP-Server anmelden. Nutze dazu zum Beispiel ein Programm wie FileZilla.
+
+Hier findest du die SFTP-Anmeldedaten:
+
+* Im Menü *Einrichtung » Assistenten » Plugins » [Plugin-Set für MyToys auswählen] » MyToys-Grundeinstellungen » SFTP-Einstellungen* findest du diese Daten (hier Beispieldaten von Anmeldedaten):
+
+image::maerkte:mytoys-faq-sftp-anmeldedaten.png[SFTP-Anmeldedaten]
+
+Die Daten gibst du in ein dafür geeignetes Programm ein.
+
+Wenn du dich angemeldet hast, kannst du den Inhalt der Ordner prüfen.
+
+Die für dich relevanten Ordner kurz erklärt:
+
+* *Archiv*
+Hier liegen die erfolgreich an MyToys übergebenen Artikel im XML-Format. Wenn du den Ordner öffnest und eine Datei herunterlädst, kannst du mithilfe deiner Varianten-ID/EAN nach deinen Artikeln suchen.
+
+* *Error*
+Hier findest du Dateien, die auf einen Fehler gelaufen sind. Meist sind hier Stock-Dateien (also Bestandsdateien) zu finden. Gerade am Anfang deiner Einrichtung werden hier aufgrund von fehlenden Artikeln diese Bestandsfehler ausgegeben. +
+Außerdem findest du fehlerhafte Artikelübertragungen (wenn vorhanden). Für diese Dateien gibt es jedoch in der Regel auch Log-Meldungen in deinem plentymarkets System. +
+Siehe dazu: <<#log-pruefen, Wie überprüfe ich das Log nach möglichen Fehlern?>>
+
+Daneben findest du dort auch Fehlermeldungen für fehlgeschlagene Versandmeldungen an MyToys. Siehe dazu auch <<#versandmeldung, Die Versandmeldung meines Auftrags funktioniert nicht!>>.
+--
+
+[#zeitstempel-aktualisieren]
+[.collapseBox]
+.*Wie aktualisiere ich den Zeitstempel einer Variante?*
+--
+Um für den Produktexport berücksichtigt zu werden, muss der Zeitstempel an der Variante aktuell (→ d.h. nicht älter als 24 Stunden) sein. Der Zeitstempel wird entweder automatisch im Hintergrund aktualisiert, wenn eine Änderung am Artikel vorgenommen wird, also zum Beispiel Änderungen an Preis oder Bestand. Der Zeitstempel kann aber auch manuell über die Gruppenfunktion für mehrere Varianten aktualisiert werden. Um die Gruppenfunktion auszuführen, gehe wie folgt vor:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten*.
+. Markiere alle Artikel, die du bearbeiten willst.
+. Klicke auf *Varianten-Gruppenfunktion*.
+. Setze ein Häkchen bei *Zeitstempel für Marktplatzexporte aktualisieren*.
+. Klicke auf terra:execute[] *Ausführen*.
+
+_1. Varianten-Gruppenfunktion öffnen_
+
+image::maerkte:mytoys-faq-gruppenfunktion.png[Gruppenfunktion öffnen]
+
+_2. Zeitstempel für Marktplatzexporte aktualisieren_
+
+image::maerkte:mytoys-faq-zeitstempel.png[Zeitstempel für Marktplatzexporte aktualisieren]
+--
+
+[#pflichtfelder-mytoys]
+[.collapseBox]
+.*Welche Pflichtfelder gibt es bei MyToys?*
+--
+Um Artikel bei MyToys listen zu können, müssen alle Pflichtfelder korrekt übergeben werden. Hierbei unterscheidet man zwischen kategoriespezifischen und allgemeine Pflichtfeldern:
+
+* kategoriespezifische Pflichtfelder:
+Diese Pflichtfelder sind für jede Kategorie unterschiedlich. Besonders im Bereich *Fashion/Schuhe* gibt es wichtige Pflichtfelder für Materialien. +
+Die Pflichtfelder sind im Katalog mit einem Sternchen (*) gekennzeichnet.
+
+* kategorie-unabhängige Pflichtfelder:
+Hierzu gehören Pflichtfelder, die unabhängig von der Kategorie sind, wie zum Beispiel: +
+
+* *Produktname*
+* *Hersteller*
+* *Geschlecht*
+* *Altersempfehlung von*
+* *Altersempfehlung bis*
+
+Diese Pflichtfelder sind im Katalog mit einem Sternchen (*) gekennzeichnet.
+
+* allgemeine Pflichtfelder:
+Hierbei handelt es sich um Pflichtwerte, die nicht im Katalog zugeordnet werden, sondern hardcoded übergeben werden. +
+Dazu gehören: +
+
+* *EAN* (Barcode in plentymarkets)
+* *Herstellerland*
+* Bilder (diese müssen für MyToys freigeschaltet sein) +
+
+*_Achtung!_* Fehlt einer dieser 3 Werte, erscheint im Log _keine_ Fehlermeldung!
+
+Fehlt einer dieser Werte an der Variante, läuft der Import auf der MyToys-Seite in einen Fehler und wird abgebrochen.
+--
+
+[.collapseBox]
+.*Wie finde ich heraus, ob an meinen Varianten oder Artikeln Pflichtfelder fehlen?*
+--
+Wenn deine Artikel zu MyToys übertragen werden sollen, kannst du im Log prüfen, welche Pflichtfelder für deine Varianten noch fehlen. +
+
+Wie das geht, erfährst du <<#log-pruefen, hier>>.
+--
+
+[.collapseBox]
+.*Wie deaktiviere ich meine Artikel auf MyToys?*
+--
+Wenn ein Artikel bereits an MyToys übertragen wurde, du diesen Artikel aber nicht weiter bei MyToys listen willst, dann reicht es nicht aus, den Artikel vom Export auszuschließen. Der Artikel muss stattdessen einmalig als inaktiv übertragen werden. Gehe dazu wie folgt vor:
+
+* Entferne im *Tab: Verfügbarkeit* der jeweiligen Variante die Marktplatzverfügbarkeit *myToys*.
+
+*_Wichtig!_* Damit der Artikel als inaktiv übertragen wird, muss im *Tab: Eigenschaften* der jeweiligen Variante die Eigenschaft *myToys Kategoriegruppe* hinterlegt bleiben. Bitte lösche keine SKUs!
+--
+
+[#auftragsbearbeitung]
+== Auftragsbearbeitung
+
+[.collapseBox]
+.*Wie erstelle ich Auftragsdokumente für MyToys?*
+--
+Die Rechnungen für MyToys-Aufträge versendet myToys. FürMmyToys-Aufträge benötigst du deshalb nur die folgenden Auftragsdokumente:
+
+* Lieferscheine
+* Rücksendescheine
+
+Diese Auftragsdokumente passt du an die Anforderungen von MyToys an. Wie das geht, erfährst du hier. Die Informationen sind so aufgebaut:
+
+* xref:mytoys-einrichten.adoc#delivery-notes[Lieferscheine vorbereiten]
+* xref:mytoys-einrichten.adoc#return-notes[Rücksendescheine vorbereiten]
+--
+
+[#versandmeldung]
+[.collapseBox]
+.*Die Versandmeldung meines Auftrags funktioniert nicht!*
+--
+Prüfe Folgendes:
+
+* Sind alle Versandprofile für MyToys korrekt verknüpft?
+Prüfe, ob deine im Auftrag genutzten Versandprofile auch für MyToys im Assistenten konfiguriert wurden.
+
+* Gibt es eine oder mehrere Paketnummern?
+Wenn du dich auf dem <<#artikelexport-pruefen, FTP-Server anmeldest>>, kannst du zum Zeitpunkt deiner Versandmeldung (entspricht dem Zeitpunkt der Ereignisaktion am Auftrag) nach einer Fehlermeldung suchen. Unter dem Ordner *Error* werden diese geloggt.
+
+* Gibt es eine Fehlermeldung zum Zeitpunkt deiner Versandmeldung, dann kann diese so aussehen:
+
+image::maerkte:mytoys-faq-fehlermeldung-versandmeldung.png[Fehler bei Versandmeldung]
+
+Lade diese Datei herunter und öffne sie mit einem geeigneten Programm.
+
+* mögliche Fehlermeldungen:
+
+Der Pakettyp für die Position ist für den Kanal nicht aktiviert.
+
+Eine Beispielmeldung:
+
+image::maerkte:mytoys-faq-fehler-pakettyp.png[Pakettyp nicht aktiviert]
+
+Der genutzte Pakettyp muss von MyToys aktiviert werden, damit du diesen nutzen kannst.
+
+Wende dich dazu bitte an MyToys oder deinen Integrationspartner.
+
+Element 'CARRIER_PARCEL_TYPE': (facet 'minLength') The value has a length of '0'
+
+Eine Beispielmeldung:
+
+image::maerkte:mytoys-faq-fehlermeldung-pakettyp_2.png[Beispiel-Fehlermeldung]
+
+Prüfe, ob dein Versandprofil aus dem Auftrag im MyToys-Assistenten konfiguriert wurde.
+--
+
+[.collapseBox]
+.*Die Meldung der Gutschrift/Retoure funktioniert nicht!*
+--
+Prüfe, ob der Versand erfolgreich gemeldet wurde. Siehe <<#versandmeldung, Die Versandmeldung meines Auftrags funktioniert nicht!>>.
+--
+
+[#fehlermeldungen]
+== Fehlermeldungen
+
+[#log-pruefen]
+[.collapseBox]
+.*Wie überprüfe ich das Log nach möglichen Fehlern?*
+--
+Wenn für deine <<#kein-artikelexport, alle Voraussetzungen erfüllt und alle Verknüpfungen hinterlegt sind>>, aber dennoch kein Export der Variante stattfindet, dann findest du im Log mögliche Fehler.
+
+*_Wichtig:_* Für die Anzeige der Logmeldungen für Crons musst du zwingend das Log-Level *Debug* für MyToys aktivieren. Fehlende Pflichtfelder werden ab MyToys Plugin-Version *v1.0.46* standardmäßig ausgegeben.
+
+[.instruction]
+Wie aktiviere ich das Debug-Log?
+
+. Öffne das Menü *Daten » Log*.
+. Klicke auf Logs *konfigurieren* (material:settings[]).
+. Wähle aus der Liste links die Option *myToys*.
+. Aktiviere rechts unter *Einstellungen* die Option *Aktiv*.
+. Wähle die *Dauer*, für die das Log-Level aktiv bleiben soll.
+. Aktiviere im Dropdown-Menü *Log-Level* die Option *Debug*.
+. *Speichere* (material:save[]) die Einstellungen.
+
+Im Folgenden erhältst du eine Übersicht zu (Fehler)Meldungen für MyToys:
+
+* Fehlende Pflichtfelder
+
+Öffne zuerst das Menü *Daten » Log*.
+Filtere deine Suche, indem du unter *Integration* Folgendes auswählst: *MyToys*.
+Unter Identifikator kannst du Folgendes eingeben: `MyToys\Components\Catalog\CatalogComponent::logEmptyRequiredFields`
+
+Klickst du diese Meldung an, dann kannst du per Funktion *Alle Extrahieren* die betroffenen Varianten sowie die fehlenden Pflichtfelder einsehen.
+
+image::maerkte:mytoys-faq-logdetails.png[Logdetails]
+
+Prüfe deine am Artikel hinterlegten Eigenschaften, die für das jeweilige Pflichtfeld gelten sollen.
+
+Prüfe, ob die Verknüpfung im Katalog des Artikels ebenfalls korrekt vorgenommen wurde.
+
+*_Tipp:_* Um sicherzustellen, dass auch die korrekte Eigenschaft am Artikel hinterlegt ist und diese auch mit der Verknüpfung im Katalog übereinstimmt, scrolle über die Eigenschaft im Katalog, die laut Log fehlt und prüfe, ob genau diese Eigenschaft mit dem Pfad auch an der Variante verknüpft ist.
+
+* Falsch konfigurierte Materialzusammensetzung
+
+Öffne zuerst das Menü *Daten » Log*.
+Filtere deine Suche, indem du unter *Integration* Folgendes auswählst: *MyToys*.
+Unter Identifikator kannst du Folgendes eingeben: `MyToys\Components\Catalog\CatalogComponent::setMaterialCompositionIntoTypeList`
+
+Klickst du diese Meldung an, dann wird dir die Meldung sowie die betroffene Varianten-ID (im Screenshot 38361) angezeigt.
+
+image::maerkte:mytoys-faq-logdetails_2.png[Falsch konfigurierte Materialzusammensetzung]
+
+Welche Materialzusammensetzung genau betroffen ist, siehst du in der Meldung (im Screenshot Materialzusammensetzung 2).
+Prüfe deine am Artikel hinterlegten Eigenschaften, für welche die Materialzusammensetzung gelten soll.
+Wie du diese korrekt hinterlegst, findest du auf der xref:mytoys-einrichten.adoc#800[MyToys-Handbuchseite] unter *Materialzusammensetzung*.
+
+Prüfe, ob die Verknüpfung im Katalog des Artikels ebenfalls korrekt vorgenommen wurde.
+--
+
+[.collapseBox]
+.*Es sind weder Fehlermeldungen im Log, noch Daten auf dem FTP angekommen, was jetzt?*
+--
+Wird ein Artikel nicht exportiert und weder der MyToys-FTP noch der Log geben etwas dazu aus, kann es sonst noch an folgender Thematik liegen, warum die Daten nicht übertragen wurden:
+
+Wenn du einen Katalog mehrfach erstellt hast oder wenn du zu irgendeinem Zeitpunkt mehrere Eigenschaftswerte für einen Katalog hattest, liegt es nah, dass die ID des Eigenschaftswertes der *MyToys Kategoriegruppe*-Eigenschaft nicht mehr mit der Eigenschaft des Kataloges übereinstimmt.
+Ist das der Fall, werden auch keine Daten exportiert. Der Katalog exportiert nur die Artikel, welche auch den Eigenschaftswert hinterlegt haben, der mit dem Katalog verknüpft ist. Deshalb gibt es auch keine Fehlermeldung im Log.
+
+* Wie finde ich das nun heraus?
+
+Schau zuerst einmal in den Katalog unter *Daten » Kataloge » [Katalog öffnen]* und klicke links auf *Filter*. Unten steht *Mit Wert der Auswahleigenschaft verknüpft*. Dort ist die ID für den Eigenschaftswert hinterlegt.
+
+image::maerkte:mytoys-faq-auftragseigenschaftswert.png[ID des Auftragseigenschaftswerts]
+
+Diese ID merken wir uns (das ist der Indikator, der bestimmt, welchen Artikel der Katalog zieht, wenn der Export dafür läuft, denn nur der Artikel mit der passenden Eigenschaft wird für diesen Katalog exportiert).
+
+Schau als nächstes im Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration* in der *MyToys-Kategoriegruppe*-Eigenschaft, welcher Eigenschaftswert der oben gemerkten ID entspricht.
+Dieser Eigenschaftswert muss zwingend auch im Artikel genutzt werden, denn sonst wird der Artikel nicht exportiert.
+
+Es kommt oft vor, dass ein Katalog mehrfach angelegt wurde und deshalb auch der Wert einer Kategorie mehrfach in der Eigenschaft vorhanden ist. Wenn dann nicht der passende Wert im Artikel gewählt wird (der Name des Wertes kann zu 100% übereinstimmen) und die ID nicht exakt die aus dem Katalog ist, funktioniert es nicht.
+Sind also mehrere gleiche Werte vorhanden, dann entferne am besten die Werte, die nicht in dem Katalog genutzt werden und verknüpfe die Artikel mit dem entsprechenden Wert.
+--

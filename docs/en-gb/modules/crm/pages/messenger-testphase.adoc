@@ -127,9 +127,9 @@ After having entered the login details, select the encryption method and enter t
 
 In the *Default inbox*, you can activate (material:check_box[role=skyBlue]) the option *Determine as default inbox* to make sure that this inbox is preselected when writing new messages in the messenger.
 
+
 ////
 TODO: ggf. neue Tabelle einfügen mit aktuellen Zahlen analog zu dieser Tabelle hier: https://knowledge.plentymarkets.com/crm/e-mails-versenden#200
-
 ////
 
 Select also in this step an email template for the email despatch.
@@ -149,7 +149,7 @@ We recommend to use the default template *Messenger default NEW* for the Messeng
 
 The template contains the following variables:
 
-* Name of the client in the subject line, displayed as `{{ globals.clientName }}`
+* Name of the client in the subject line, displayed as &#123;&#8288;&#123;globals.clientName&#125;&#8288;&#125;
 ** So called _twig expressions_ in double curly brackets need to be inserted in the template’s subject because it is not possible to use “normal” variables in the subject line. For further information, refer to the xref:crm:emailbuilder.adoc#variables-emailbuilder[Available variables and twig expressions] chapter on the xref:crm:emailbuilder.adoc#[EmailBuilder] page.
 * Full name
 * Signature in HTML format
@@ -351,7 +351,11 @@ Available priorities:
 * material:star[role=yellow] material:star[role=yellow] material:star[role=yellow] material:star[role=yellow] material:star[role=yellow] = Priority 5, highest priority
 
 |[#intable-filter-inbox]*Inbox*
-|Select an inbox from the list to only search for conversations from this inbox. 
+|Select an inbox from the list to only search for conversations from this inbox.
+
+|[#intable-filter-subscriber]*Subscriber*
+|Select a name from the list to only search for conversations with this subscriber. +
+*_Tip:_* Enter at least 3 characters in the field to see a suggestion list with the available subscribers.
 
 |[#intable-filter-reset]*Reset*
 |Resets the selected filter criteria.
@@ -535,94 +539,99 @@ image::crm:messenger-reply-to-message.png[width=640, height=360]
 
 If the option *Subject* is activated (material:toggle_on[role=skyBlue]), you can adjust the subject line. If you have _not_ activated the *Subject* option (material:toggle_off[]), the *Subject* field is not visible when replying to the message. The currently selected subject is then automatically transferred when replying to the message.
 
-//// 
-TODO: wieder einfügen, wenn diese Funktion wieder eingebaut wurde.
 
-[#switch-view]
-=== Switching the view
+////
+[#ansicht-wechseln]
+=== Ansicht wechseln
 
 It is possible to change the view in the Messenger from a table to a list. To do so, click on *Change view* (material:list[]) in the top right of the overview. +
 The table view is selected by default.
- 
+
 The selected conversation with all the messages contained therein is shown in the lower left section and the editor to reply to the messages is shown in the lower right section.
 The selected conversation with all the messages contained therein is shown in the upper right section and the editor to reply to the messages is shown in the lower right section.
 ////
 
-////
-[#zuordnungsparameter]
-== Nachrichten im Messenger zuordnen
+[#assign-messages]
+== Assigning messages in the messenger
 
 Messages in the messenger are assigned with the help of keywords or text parameters that are automatically recognised by your plentymarkets system.
 
 Note the keywords that are used for the assignment as listed in <<#table-assignment-messenger>>. Both upper and lower case letters can be used.
 
 [[table-assignment-messenger]]
-.Assignment parameters and permitted spellings
-[cols="1,3"]
+.Messenger: Assignment parameters, alternative spellings, permitted symbols and examples
+[cols="1,3,3,3"]
 |====
-|Parameter |Alternative spellings
+|Assignment parameters |Alternative spellings |Permitted symbols |Examples
 
+| *Conversation*
+a| * conversation / conversations / konversation / konversationen
 
-| *Ticket ID*
-|Ticket / ID / Nr / No / nummer / number + digits +
-Examples: +
-Ticket ID: 123 +
-Ticket id 123 +
-TicketID #123 +
-ID: #123 +
-ID: 123 +
-Permitted symbols: +
-Space, period, colon, minus, equals sign, hash key, round brackets, square brackets
+&#043;
 
-|*Conversation*
-|conversation / conversations / konversation / konversationen +
-uuid / id / nr / nummer / number / no +
-Permitted symbols: +
-Space, period, colon, minus, equals sign, hash key
+* id / nr / nummer / number / no
+
++ number
+
+| space, period, colon, minus, equals sign, hash key
+|Konversations-ID: 123 +
+conversation ID = 123 +
+Konversationid 123 +
+KonversationID123 +
+conversation id #123
 
 | *Customer data*
-|Customer ID or Customer No.: Kunde / Customer + ID / Nr / No / Nummer / number + digits +
-Customer name: Kunden / Customer + Name + digits +
-Examples: +
-Customer ID: 123 +
-Customer ID 123 +
-Customer id 123 +
-CustomerID123 +
-Customer number 123 +
-Permitted symbols: +
-Space, period, colon, minus, equals sign, hash key
+a| * kunde / kunden / customer / kontakt
 
-| *Customers*
-|kunde / kunden / customer / id / no / number / nummer +
-Permitted symbols: +
-Space, period, colon, minus, equals sign, hash key
+&#043;
+
+* id / nr / no / nummer / number
+
++ number
+| space, period, colon, minus, equals sign, hash key
+|Kunden-ID: 123 +
+Kunden ID = 123 +
+Kunden id 123 +
+KundenID123 +
+Kundennummer #123
 
 | *Order*
-|Auftrag(s) / Order + ID / Nr / No + digits +
-Examples: +
-Order ID: 123 +
-Order ID 123 +
-OrderID123 +
+a| * Auftrags / Auftrag / Order
+
+&#043;
+
+* id / nr / no
+
++ number
+
+| space, period, colon, minus, equals sign, hash key
+| Auftrags-ID: 123 +
+AuftragsID #123 +
 Order id 123 +
-Permitted symbols: +
-Space, period, colon, minus, equals sign, hash key
 
 |*Amazon order*
-|Bestellnummer / Bestellung / Commande / Order / Pedido / Ordine / ID +
-Permitted symbols: +
-Space, colon, hash key
+a| * Bestellnummer / Bestellung / Commande / Order / Pedido / Ordine / ID
 
-| *Invoice No.*
-|Rechnung(s) / invoice + ID / Nr / No / Nummer / number + digits +
-Examples: +
-Invoice ID: 123 +
-invoice ID 123 +
-Invoice No 123 +
-Permitted symbols: +
-Space, period, colon, minus, equals sign, hash key
++ number
+|space, colon, hash key
+|Bestellnummer #123 +
+Order 123 +
+Commande: 123
+
+| *Invoice number*
+a| * Rechnung / Rechnungs / invoice
+
+&#043;
+
+* id / nr / no / nummer / number
+
++ number
+| space, period, colon, minus, equals sign, hash key
+| Rechnungs-ID: 123 +
+Rechnung id 123 +
+Invoice no #123
 
 |====
-////
 
 [#context-menu]
 == Editing conversations in the overview
@@ -851,9 +860,6 @@ You can save the following priorities for the conversation:
 
 The priority is then shown next to the tags in the opened conversation. You can also <<#intable-filter-priority, search>> for conversations with certain priorities in the overview and sort the conversations in the overview (material:arrow_upward[] and material:arrow_downward[]).
 
- 
-
-
 [#context-menu-delete-conversation]
 === Deleting a conversation
 
@@ -977,10 +983,6 @@ Assigning tags to the message:
 . Click on material:local_offer[] *Assign tags to conversation* to see a list of all tags that you have already <<#tags-messenger, created>> for the areas *Messages* and *Messages (billable)*. +
 *_Tip:_* If you have created a lot of tags for the *Messages* or *Messages (billable)* areas, enter the name of the tag in the search field *Search for tag*.
 . Select (material:check_box[role=skyBlue]) the tags that you want to assign to the message. 
-
-////
-TODO: FRAGE: Wenn nur die Nachricht den Tag erhält, wie verhält es sich dann mit den Filtern in der Suche? Wird der Tag an einzelnen Nachrichten in der Suche berücksichtigt? 
-////
 
 [#attachments-single-message]
 === Downloading attachments
@@ -1157,8 +1159,6 @@ The xref:payment:beta-managing-payments-new.adoc#[payment] has a direct link to 
 |[#intable-new-messages-billed-minutes]*Billed minutes*
 |The symbol material:av_timer[] in the *Billed minutes* (material:av_timer[]) column shows whether the conversation has billed minutes. When you hover with your cursor over the symbol, you can see the number of billed minutes. Right next to the title bar, click on material:arrow_upward[] to sort the table by the number of billed minutes.
 
- 
-
 |[#intable-new-messages-priority]*Priority*
 |In the *Priority* column, the star symbols show the priority of the conversation. Right next to the title bar, click on material:arrow_upward[] or material:arrow_downward[] to sort the table in ascending or descending order by the selected priority. +
 For further information about the available priorities, refer to the <<#context-menu-conversation-set-priority, Setting a priority>> chapter.
@@ -1321,7 +1321,7 @@ Do you want to save another name for the folder? To do so, proceed as follows.
 Renaming the folder:
 
 . Go to *CRM » Messenger (Test phase)*.
-. On the left side under material:3p[] *My folders*, click in the line of the folder that you want to delete, on material:more_vert[].
+. On the left side under material:3p[] *My folders*, click in the line of the folder that you want to rename, on material:more_vert[].
 . Click on material:edit[] *Rename*. +
 → The *Rename folder* window opens.
 . Enter an other name for the folder.
@@ -1355,7 +1355,6 @@ The columns listed in <<#table-configure-columns-trash>> can be displayed in the
 ====
 You can adjust the columns’ width in this view according to your needs. When hovering over the respective table columns, blue lines appear which allow you to adjust the size as desired. 
 ====
-
 
 [[table-configure-columns-trash]]
 .Trash: Configure columns
