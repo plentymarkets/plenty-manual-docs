@@ -26,29 +26,35 @@ Kläre vor dem Einrichten in plentymarkets mit idealo, wie Artikeldaten übertra
 
 [[artikelexport-idealo-1]]
 .Datenübertragung bei idealo
-[cols="1,1"]
+[cols="1,1,1"]
 |===
-| Artikelexport per API (PWS 2.0) | Artikelexport mit elastischem Export
+| Artikelexport per API (PWS 2.0) | Artikelexport mit elastischem Export | Artikelexport über Katalog
 
 //tag::table-comparison[]
-|Artikeldatenübertragung per Schnittstelle
-|Artikeldatenübertragung per CSV-Datei
+| Artikeldatenübertragung per Schnittstelle
+| Artikeldatenübertragung per CSV-Datei
+| Artikeldatenübertragung per xref:daten:catalogues-first-contact.adoc#[Katalog]
 
 | Unbegrenzte Anzahl an Artikeln kann übertragen werden
 | Um mehr als 9999 Artikel an idealo zu übertragen, muss in den Einstellungen des Elastischen Export die Option *Cache-Datei generieren* aktiviert sein. Wenn die Option *Cache-Datei generieren* aktiviert ist, wird die Ausgabedatei nur alle 24 Stunden neu generiert, um Ressourcen zu sparen. +
 *_Hinweis:_* Um eine optimale Performance des elastischen Exports zu gewährleisten, darf die Option *Cache-Datei generieren* bei maximal 20 Exportformaten aktiv sein.
+| Unbegrenzte Anzahl an Artikeln kann übertragen werden
 
-|Tägliche Erstellung von Artikeln
-|Abruf von Artikeldaten per URL, die bei idealo gespeichert wird
+| Tägliche Erstellung von Artikeln
+| Abruf von Artikeldaten per URL, die bei idealo gespeichert wird
+| Tägliche Erstellung von Artikeln
 
-|Aktualisierung von Preisen alle 15 Minuten
-|Intervall, in dem Artikeldaten abgerufen werden, wird von idealo festgelegt
+| Aktualisierung von Preisen alle 15 Minuten
+| Intervall, in dem Artikeldaten abgerufen werden, wird von idealo festgelegt
+| Tägliche Aktualisierung von Preisen
 
-|Aktualisierung von Beständen alle 15 Minuten
-|Intervall, in dem Artikeldaten abgerufen werden, wird von idealo festgelegt
+| Aktualisierung von Beständen alle 15 Minuten
+| Intervall, in dem Artikeldaten abgerufen werden, wird von idealo festgelegt
+| Tägliche Aktualisierung von Beständen
 
-|Aufträge werden über den gewählten Mandanten importiert
-|Aufträge werden immer über den Standardmandanten importiert
+| Aufträge werden über den gewählten Mandanten importiert
+| Aufträge werden immer über den Standardmandanten importiert
+| Aufträge werden über den gewählten Mandanten importiert
 
 //end::table-comparison[]
 |===
@@ -395,7 +401,7 @@ Je nachdem, ob du nur den idealo Preisvergleich nutzen möchtest oder deinen Kun
 [#400]
 == Auftragsherkunft aktivieren
 
-:market: dem idealo Preisvergleich
+:market: idealo
 :referrer: idealo Preisvergleich
 :referrer-option: pass:quotes[Option *idealo* mit der ID *121*]
 :idealo-direkt:
@@ -447,7 +453,11 @@ Wenn du idealo Direktkauf nutzen möchtest, füge zusätzlich SKUs mit der Herku
 [#800]
 == Artikelexport einrichten
 
-Artikel werden entweder mit dem automatischen Artikelexport über eine API (PWS 2.0-Schnittstelle) oder mit einer CSV-Datei über den elastischen Export zu idealo übertragen. Je nachdem, welche Art der Datenübertragung du wählst, sind verschiedene Einstellungen notwendig.
+Artikel werden entweder mit dem automatischen Artikelexport über eine API (PWS 2.0-Schnittstelle), mit einem Katalog oder mit einer CSV-Datei über den elastischen Export zu idealo übertragen. Je nachdem, welche Art der Datenübertragung du wählst, sind verschiedene Einstellungen notwendig.
+
+* <<#850, _Möglichkeit 1:_ Artikelexport per API (PWS 2.0-Schnittstelle)>>
+* <<#catalogue-export, _Möglichkeit 2:_ Katalogexport>>
+* <<#900, _Möglichkeit 3:_ Artikelexport mit Elastischem Export>>
 
 [IMPORTANT]
 .Art der Datenübertragung
@@ -459,24 +469,93 @@ Informationen zu den verschiedenen Arten der Datenübertragung findest du in <<#
 
 [[artikelexport-idealo]]
 .Datenübertragung bei idealo
-[cols="1,1"]
+[cols="1,1,1"]
 |===
-| Artikelexport per API (PWS 2.0) | Artikelexport mit elastischem Export
+| Artikelexport per API (PWS 2.0) | Artikelexport mit elastischem Export | Artikelexport über Katalog
 
 include::page$idealo-einrichten.adoc[tag=table-comparison]
 
 |===
 
 [#850]
-=== Artikelexport per API (PWS 2.0-Schnittstelle)
+=== _Möglichkeit 1:_ Artikelexport per API (PWS 2.0-Schnittstelle)
 
 Wenn du deine Artikel per Schnittstelle automatisch zu idealo übertragen möchtest, durchlaufe den Assistenten *idealo Grundeinstellungen* im Menü *Einrichtung » Assistenten » Plugins » [Mandant öffnen]* und aktiviere den automatischen Artikeldatenexport. Für den automatischen Artikelexport sind außerhalb des idealo-Assistenten keine weiteren Einstellungen in plentymarkets nötig. +
 
 Mit dieser Art der Datenübertragung werden Artikel einmal täglich auf idealo erstellt. Preise und Bestände werden alle 15 Minuten aktualisiert. Artikel können zudem alle 15 Minuten gelöscht werden.
 
+[#catalogue-export]
+=== _Möglichkeit 2:_ Katalogexport
+
+Du kannst Artikeldaten jetzt auch über Katalog-Formate zu idealo übertragen. Kataloge erstellst du im Menü *Daten » Kataloge*.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+[#catalogue-creation]
+==== Katalog erstellen
+
+Artikeldaten werden über das Marktplatz-Format *idealo* zu idealo übertragen. Um deine Artikel zu idealo zu übertragen, erstellst du im Menü *Daten » Kataloge* den Katalog. Verknüpfe dann im Marktplatz-Format die von idealo vorgegebenen Felder mit in plentymarkets gespeicherten Artikeldaten. +
+
+[IMPORTANT]
+.Katalog erst ab Plugin-Version 3.3.41 verfügbar
+====
+Damit du einen Katalog für idealo erstellen kannst, muss das idealo-Plugin in der Version *3.3.41* in deinem plentymarkets System installiert sein. Der Katalog für idealo ist erst ab dieser Plugin-Version verfügbar.
+====
+
+*_Hinweis:_* Bei idealo kannst du pro Konto einen Katalog erstellen. +
+
+Wenn du den Katalog aktiviert hast, werden die Artikeldaten in regelmäßigen Abständen automatisch zu idealo exportiert.
+
+:catalogue-template-name: idealo
+:format-item-new:
+
+include::partial$catalogue-creation.adoc[]
+
+[#data-field-mappings]
+==== Datenfelder im Katalog zuordnen
+
+Ordne nun die Datenfelder von idealo den in plentymarkets gespeicherten Artikeldaten zu.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+==== Empfehlungen für Datenfeld-Zuordnungen
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.Liste mit empfohlenen Datenfeld-Zuordnungen für *idealo*
+--
+include::partial$idealo-recommended-mappings.adoc[]
+--
+
+[#filter-export]
+==== _Optional:_ Nur bestimmte Artikel exportieren
+
+include::partial$catalogue-filters.adoc[]
+
+[#catalogue-settings]
+==== Katalogeinstellungen für Export vornehmen
+
+:idealo:
+include::partial$catalogue-settings.adoc[]
+
+[#catalogue-activation]
+==== Katalog aktivieren
+
+:interval: einmal täglich
+
+include::partial$catalogue-activation.adoc[]
+
+*_Hinweis:_* Solange du den Katalog noch nicht aktiviert hast, werden die Artikel weiterhin über die <<#850, PWS 2.0-Schnittstelle>> exportiert (wenn du diese Art des Artikelexports im <<#200, idealo-Assistenten>> aktiviert hast). Sobald der Katalog aktiviert wurde, läuft der Artikelexport über den Katalog.
+
+[#wechsel-ee-katalog]
+=== Wechsel vom Elastischen Export zum Katalogexport
+
+Wenn du deine Artikel bereits auf idealo listest und jetzt den Katalogexport nutzen möchtest, findest du xref:maerkte:idealo-wechsel-katalog.adoc#[hier] eine Anleitung zum Wechsel.
 
 [#900]
-=== Artikelexport mit elastischem Export
+=== _Möglichkeit 3:_ Artikelexport mit elastischem Export
 
 Wenn du Artikel über den elastischen Export zu idealo überträgst, müssen im Menü *Daten » Elastischer Export* Einstellungen vorgenommen werden, um das Exportformat einzurichten. Als Voraussetzung muss das Plugin link:https://marketplace.plentymarkets.com/plugins/sales/marktplaetze/elasticexport_4763[Elastischer Export^] in deinem plentymarkets System installiert sein. Damit idealo deine Artikeldaten abrufen kann, erstelle zunächst das Datenformat IdealoDE und speichere im Anschluss die URL bei idealo.
 
@@ -653,6 +732,9 @@ Wenn *Pauschale Versandkosten übertragen* gewählt wurde, wird nur Vorkasse als
 [#1000]
 ==== Verfügbare Spalten der Exportdatei
 
+[.collapseBox]
+.Verfügbare Spalten der Exportdatei für das Exportformat *IdealoDE-Plugin*
+--
 [[spalten-exportdatei]]
 .Spalten der Exportdatei
 [cols="1,3a"]
@@ -757,6 +839,7 @@ Merkmal vom Typ *Text*, *Auswahl* oder *Kommazahl* und der Verknüpfung zum idea
 | *Pflichtfeld*: (Mindestens eine Zahlungsart) +
 Die Zahlungsarten werden gemäß der Formateinstellung *Versandkosten* in einer eigenen Spalte übermittelt.
 |===
+--
 
 [#idealo-delete-items]
 == Artikel bei idealo löschen
