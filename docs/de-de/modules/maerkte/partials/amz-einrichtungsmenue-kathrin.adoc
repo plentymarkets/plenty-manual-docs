@@ -45,7 +45,28 @@ material:toggle_on[role="blue"] = MFN-Aufträge für dieses Konto werden alle 15
 | Einen xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] wählen. Aufträge, für die keine Erstattung an Amazon übertragen werden konnte, werden in diesen Status verschoben.
 
 | *Ausstehende Aufträge importieren*
-| Wählen, ob ausstehende Aufträge von Amazon importiert werden sollen. Wenn die Option aktiviert ist, werden ausstehenden Aufträge alle 15 Minuten importiert.
+| Wählen, ob ausstehende Aufträge von Amazon importiert werden sollen. 
+
+material:toggle_off[role="darkGrey"] (Standardeinstellung) = Ausstehende Aufträge werden nicht importiert. Es wird also kein Warenbestand reserviert.
+material:toggle_on[role="blue"] = 
+
+
+[cols="1a,3a"]
+!===
+! material:toggle_off[role="darkGrey"] +
+(Standardeinstellung)
+! Ausstehende Aufträge werden nicht importiert. Es wird also kein Warenbestand reserviert.
+
+! material:toggle_on[role="blue"] 
+! Ausstehende Aufträge werden alle 15 Minuten importiert. Der Warenbestand wird reserviert.
+
+*_Ablauf:_*
+
+* Ausstehende Amazon-Aufträge werden mit dem Status *[1] Unvollständige Daten* importiert. Die Aufträge bleiben in diesem Status, bis Amazon den Auftrag freigibt.
+* Bis zur Freigabe werden keine Adressen und keine Artikelpreise am Auftrag gespeichert.
+* Nach der Freigabe durch Amazon wird der Auftrag aktualisiert und die dazugehörigen Adressen und Preise werden gespeichert.
+* Wenn Amazon den Auftrag nicht freigibt, wird der Auftrag automatisch in Status *[8] Storniert* verschoben. Der Warenbestand wird wieder freigegeben.
+!===
 
 | *Versandbestätigung aktivieren*
 | Wählen, ob Versandbestätigungen an Amazon gesendet werden sollen.
@@ -80,6 +101,8 @@ material:toggle_on[role="blue"] = FBA-Aufträge für dieses Konto werden alle 4 
 | *Auftragsstatus für importierte FBA-Aufträge*
 | Mit welchem xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] sollen FBA-Aufträge in plentymarkets importiert werden?
 
+*_Hinweis:_* Wenn du die Einstellung *Aufträge mit gebuchtem Warenausgang importieren* aktivierst, musst du hier mindestens *Status 7* wählen.
+
 | *Aufträge mit gebuchtem Warenausgang importieren*
 | Soll für importierte FBA-Aufträge der Warenausgang als gebucht markiert werden?
 
@@ -96,23 +119,36 @@ material:toggle_off[role="darkGrey"] = Retouren werden nicht importiert.
 | *Gutschein bei Retouren berücksichtigen*
 | Wählen, ob Rabatte von Amazon bei Retouren berücksichtigt werden sollen oder nicht. Dabei wird kein Mindestbestellwert für den Gutschein berücksichtigt.
 
-* Ja = FBA-Retouren enthalten Artikelpositionen für Rabatte oder Zusatzkosten von Amazon. Der Gutschriftsbetrag stimmt also nicht mit dem Betrag des ursprünglichen Auftrags überein. Die Gutschrift muss ggf. über *Stornobeleg » Auftragsanpassung » Neue Gutschrift* korrigiert werden.
-* Nein = Auftragspositionen für Amazon-Gutscheine werden nicht importiert. Rabatte oder zusätzliche Kosten von Amazon werden also ignoriert und bei der Berechnung nicht berücksichtigt. +
-
 *_Wichtig:_* "Gutscheine" können Rabatte aus Amazon Delivery Campaigns, Amazon Campaigns oder sonstige von Amazon gewährte Rabatte sein. Es können aber auch zusätzliche Kosten sein, die Amazon erhebt. Beispiele hierfür sind Kosten für Geschenkverpackungen oder Fälle, in denen Amazon eigene Versandkosten berechnet.
+
+[cols="1a,3a"]
+!===
+! material:toggle_on[role="blue"] +
+(Standard)
+! FBA-Retouren enthalten Artikelpositionen für Rabatte oder Zusatzkosten von Amazon. Der Gutschriftsbetrag stimmt also nicht mit dem Betrag des ursprünglichen Auftrags überein. Die Gutschrift muss ggf. über *Stornobeleg » Auftragsanpassung » Neue Gutschrift* korrigiert werden.
 
 *_Beispiel:_*
 
 * Warenwert des ursprünglichen Auftrags: 50,00 Euro
 * Von Amazon erhobene zusätzliche Portokosten: 5,00 Euro
-* Betrag in der Gutschrift je nach gewählter Option:
-  ** Ja = 55 Euro
-  ** Nein = 50 Euro
+* Betrag in der Gutschrift: 55 Euro
+
+! material:toggle_off[role="darkGrey"]
+! Auftragspositionen für Amazon-Gutscheine werden nicht importiert. Rabatte oder zusätzliche Kosten von Amazon werden also ignoriert und bei der Berechnung nicht berücksichtigt.
+
+*_Beispiel:_*
+
+* Warenwert des ursprünglichen Auftrags: 50,00 Euro
+* Von Amazon erhobene zusätzliche Portokosten: 5,00 Euro
+* Betrag in der Gutschrift: 50 Euro
+!===
   
 | *Artikelrabatte aus Kampagnen beim Import ignorieren*
-| Aus Amazon-Bestellberichten geht nicht hervor, ob Artikelrabatte eines Auftrags von der Händler:in oder von Amazon gewährt wurden. Beim Import wird in beiden Fällen der Rabattbetrag vom Auftragswert abgezogen. Wenn Amazon den Rabatt gibt, weichen dann aber der Auftragswert und der von Amazon an dich ausgezahlte Betrag voneinander ab. In solchen Fällen musst du den Auftrag manuell anpassen, da du sonst zu wenig Umsatzsteuer für den Auftrag abführst.
+| Wähle, wie Rabatte auf Artikel beim Import von Aufträgen behandelt werden sollen.
 
-Wählen, wie Rabatte auf Artikel beim Import von Aufträgen behandelt werden sollen.
+*_Hintergrund:_* Aus Amazon-Bestellberichten geht nicht hervor, ob Artikelrabatte eines Auftrags von der Händler:in oder von Amazon gewährt wurden. Beim Import wird in beiden Fällen der Rabattbetrag vom Auftragswert abgezogen. Wenn Amazon den Rabatt gibt, weichen dann aber der Auftragswert und der von Amazon an dich ausgezahlte Betrag voneinander ab. In solchen Fällen musst du den Auftrag manuell anpassen, da du sonst zu wenig Umsatzsteuer für den Auftrag abführst.
+
+*_Empfehlung:_* Aktiviere diese Einstellung, wenn du selbst keine Rabattkampagnen auf Amazon-Plattformen anbietest.
 
 [cols="1,3a"]
 !===
@@ -121,7 +157,7 @@ Wählen, wie Rabatte auf Artikel beim Import von Aufträgen behandelt werden sol
 
 [.collapseBox]
 .Beispiel
---
+----
 
 *_Ablauf bei Rabatt von Amazon:_*
 
@@ -140,14 +176,14 @@ Wählen, wie Rabatte auf Artikel beim Import von Aufträgen behandelt werden sol
 → Alle Summen sind korrekt.
 
 *_Hinweis:_* Um die Beispiele zu vereinfachen werden darin die Gebühren nicht berücksichtigt, die du an Amazon zahlst.
---
+----
 
 ! *Ja*
 ! Der Rabattbetrag wird beim Import vom Auftragswert abgezogen. Diese Einstellung wird für Händler:innen empfohlen, die selbst keine Rabattkampagnen auf Amazon-Plattformen fahren. Wenn der Rabatt von der Händler:in gewährt wurde, muss der Auftrag manuell angepasst werden.
 
 [.collapseBox]
 .Beispiel
---
+----
 
 *_Ablauf bei Rabatt von Amazon:_*
 
@@ -166,7 +202,7 @@ Wählen, wie Rabatte auf Artikel beim Import von Aufträgen behandelt werden sol
 → Den Auftragswert und der Betrag, den Amazon an dich auszahlt, stimmen nicht übereinstimmen. Der Auftrag muss manuell korrigiert werden.
 
 *_Hinweis:_* Um die Beispiele zu vereinfachen werden darin die Gebühren nicht berücksichtigt, die du an Amazon zahlst.
---
+----
 !===
 
 | *Rabatte aus Versandkampagnen ignorieren*
@@ -181,7 +217,7 @@ Wählen, wie Rabatte auf die Versandkosten beim Import von Aufträgen behandelt 
 
 [.collapseBox]
 .Beispiel
---
+----
 
 Ablauf bei Rabatt von Amazon:
 
@@ -200,7 +236,7 @@ Ablauf bei Rabatt von Händler:in:
 → Alle Summen sind korrekt.
 
 *_Hinweis:_* Um die Beispiele zu vereinfachen werden darin die Gebühren nicht berücksichtigt, die du an Amazon zahlst.
---
+----
 
 ! *Ja*
 ! Der Rabattbetrag wird beim Import vom Auftragswert abgezogen. Diese Einstellung wird für Händler:innen empfohlen, die selbst keine Rabattkampagnen auf Amazon-Plattformen fahren. Wenn der Rabatt von der Händler:in gewährt wurde, muss der Auftrag manuell angepasst werden.
