@@ -33,19 +33,19 @@ Amazon MFN einrichten:
 |===
 | Einstellung | Erläuterung
 
-| *MFN-Auftragsimport aktivieren*
+| *MFN-Aufträge importieren*
 | 
 material:toggle_off[role="darkGrey"] (Standardeinstellung) = MFN-Aufträge für dieses Konto werden nicht importiert. +
-material:toggle_on[role="blue"] = MFN-Aufträge für dieses Konto werden alle XXXX importiert.
+material:toggle_on[role="blue"] = MFN-Aufträge für dieses Konto werden alle 15 Minuten importiert.
 
-| *Status für übertragene Erstattungen*
-| Einen xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] wählen. Aufträge, für die eine Erstattung bei Amazon ausgelöst wurde, werden in diesen Status verschoben.
+| *Auftragsstatus für übertragene Erstattungen*
+| Einen xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] wählen. Aufträge, für die erfolgreich eine Erstattung an Amazon übertragen wurde, werden in diesen Auftragsstatus verschoben.
 
 | *Status für Erstattungen, die nicht übertragen wurden*
 | Einen xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] wählen. Aufträge, für die keine Erstattung an Amazon übertragen werden konnte, werden in diesen Status verschoben.
 
 | *Ausstehende Aufträge importieren*
-| Wählen, ob ausstehende Aufträge von Amazon importiert werden sollen. Wenn die Option aktiviert ist, werden diese ausstehenden Aufträge alle 15 Minuten importiert.
+| Wählen, ob ausstehende Aufträge von Amazon importiert werden sollen. Wenn die Option aktiviert ist, werden ausstehenden Aufträge alle 15 Minuten importiert.
 
 | *Versandbestätigung aktivieren*
 | Wählen, ob Versandbestätigungen an Amazon gesendet werden sollen.
@@ -75,9 +75,9 @@ Amazon FBA einrichten:
 | *FBA-Auftragsimport aktivieren*
 | 
 material:toggle_off[role="darkGrey"] (Standardeinstellung) = FBA-Aufträge für dieses Konto werden nicht importiert. +
-material:toggle_on[role="blue"] = FBA-Aufträge für dieses Konto werden alle XXXX importiert.
+material:toggle_on[role="blue"] = FBA-Aufträge für dieses Konto werden alle 4 Stunden importiert.
 
-| *Status für importierte FBA-Aufträge*
+| *Auftragsstatus für importierte FBA-Aufträge*
 | Mit welchem xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] sollen FBA-Aufträge in plentymarkets importiert werden?
 
 | *Aufträge mit gebuchtem Warenausgang importieren*
@@ -231,20 +231,17 @@ Ablauf bei Rabatt von Händler:in:
 
 2+^| *FBA-Einstellungen: Bestand*
 
-| *FBA-Bestand synchronisieren*
+| *FBA-Bestand importieren*
 | Sollen Bestände bei Amazon in dein FBA-Lager importiert werden?
 // TODO: Warum sollte man das deaktivieren?
 material:toggle_off[role="darkGrey"] (Standardeinstellung) = FBA-Bestände werden nicht mit Amazon ausgetauscht.
 material:toggle_on[role="blue"] = Einmal stündlich werden FBA-Bestände in plentymarkets importiert.
 
 | *Lager*
-| Welches Amazon FBA-Lager soll für den Bestandsabgleich dieses Kontos verwendet werden? 
-
-*_Tipp:_* Wenn für ein Auftragsland kein Lager eingerichtet ist, werden FBA-Aufträge aus diesem Auftragsland diesem Lager zugeordnet.
+| Welches Amazon FBA-Lager soll für den Bestandsabgleich dieses Kontos verwendet werden?
 
 | *Lager (UK)*
-| Welches Amazon FBA-Lager soll für den Bestandsabgleich in Lagern in Großbritannien verwendet werden? 
-// TODO: Warum braucht man ein separates UK-Lager?
+| Welches Amazon FBA-Lager soll für den Bestandsabgleich in Lagern in Großbritannien verwendet werden?
 
 | *Lager für unverkäuflichen Bestand*
 | In welches Amazon FBA-Lager soll unverkäuflicher Bestand des Kontos gebucht werden? Wenn du kein Lager wählst, wird der unverkäufliche Bestand nicht in plentymarkets importiert.
@@ -332,7 +329,9 @@ Produkt-Einstellungen vornehmen:
 | Einstellung | Erläuterung
 
 | SKU-Aufbau
-| Die SKU (Stock Keeping Unit) ist eine eindeutige Referenznummer für alle Artikel und Artikelvarianten bei Amazon.
+| Wie sollen neue SKU erzeugt werden, wenn eine Variante beim Export noch keine SKU hat?
+
+Die SKU (Stock Keeping Unit) ist eine eindeutige Referenznummer für alle Artikel und Artikelvarianten bei Amazon.
 
 Eine der folgenden Optionen wählen:
 
@@ -340,7 +339,7 @@ Eine der folgenden Optionen wählen:
 * *GTIN wenn vorhanden, sonst Varianten-ID* +
 * *Variantennummer wenn vorhanden, sonst Varianten-ID*
 
-Die gewählte Option greift nur für Artikel, die zum ersten Mal zu Amazon exportiert werden.
+Die gewählte Option greift nur für Varianten, die zum ersten Mal zu Amazon exportiert werden und noch keine SKU haben.
 
 [.collapseBox]
 .Du verkaufst schon auf Amazon und möchtest deine Artikel jetzt über plentymarkets auf Amazon verkaufen?
@@ -442,7 +441,7 @@ Einstellungen eines vorhandenen Channels kopieren:
 .Was ist der Unterschied zwischen Produkten und Angeboten?
 --
 
-* *Produkte* sind die gesamten Artikeldaten inklusive Preise und Bestand. 
+* *Produkte* sind die gesamten Artikeldaten inklusive Preise und Bestand, die auf den Amazon-Produktdetailseiten angezeigt werden. Die Produktdetailseite enthält alle wichtigen Informationen über ein Produkt, die für Käufer:innen relevant sind.
 * Bei *Angeboten* werden nur die Preise und der Bestand eines Artikels exportiert. Das eigentliche Produkt "gehört" auf dem Marktplatz einem anderen Anbieter. Du hängst dich also nur an dieses Angebot dran und bietet deinen eigenen Preis an. Bei Amazon bedeutet das auch, dass dein Angebot nicht die Buy-Box erhält, sondern nur weiter unten in der Box "Andere Verkäufer auf Amazon" erscheint.
 
 --
@@ -549,9 +548,9 @@ material:toggle_on[role="blue"] = Nur Varianten werden exportiert, die auch für
 | Die eingestellten Informationen werden exportiert.
 
 | *HTML-Tags erlauben*
-| material:toggle_off[role="darkGrey"] (Standardeinstellung) = HTML-Tags werden nicht erlaubt. +
-material:toggle_on[role="blue"] = HTLM-Tags können verwendet werden. +
-Die folgenden HTLM-Tags sind erlaubt: +
+| material:toggle_off[role="darkGrey"] (Standardeinstellung) = HTML-Tags werden aus Artikelbeschreibungen entfernt. +
+material:toggle_on[role="blue"] = HTML-Tags werden nicht aus Artikelbeschreibungen entfernt. +
+Die folgenden HTLM-Tags werden nicht entfernt: +
 &lt; br &gt;, &lt; b &gt;, &lt; i &gt;, &lt; p &gt; ,&lt; ul &gt;, &lt; li &gt;, &lt; table &gt;, &lt; tr &gt;, &lt; td &gt;, &lt; th &gt;, &lt; tbody &gt; und &lt; strong &gt;
 
 2+^| Listing
