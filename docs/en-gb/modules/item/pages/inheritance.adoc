@@ -4,74 +4,126 @@
 :author: team-item
 
 ////
-zuletzt bearbeitet 09.04.2021
+zuletzt bearbeitet 11.10.2022
 ////
 
-//ToDo - when you rework this page, also rework the preamble and make sure it also answers the question on the item faq page
-
 //tag::inheritance-preamble[]
-An item’s xref:item:structure.adoc#300[main variation] differs from its other variations. The main variation can pass data on, i.e. other variations can inherit its data. As such, the main variation is a parent variation that passes on settings to its children.
+plentymarkets allows you to save lots of information separately for each variation.
+For example, one variation might cost a bit more than the others or it might have different dimensions.
 
-By default, this inheritance function is active. When a new variation is created, this variation inherits settings from the main variation, as long as no other data is saved.
+But don't worry, that doesn't mean you will have to spend a ton of time on maintenance if you have lots of variations.
+To prevent this, the item’s first variation is defined as its main variation.
+The main variation passes its data onto all of the other variations.
+In other words, the data is inherited by default.
+If needed, you can deactivate the inheritance and save different information for individual variations.
 //end::inheritance-preamble[]
 
-[#100]
-== Types of inheritance
-
-There are two types of inheritance in plentymarkets:
-
-* Individual inheritance
-* 1-to-n inheritance
-
-Individual inheritance means the main variation passes individual settings on to the sub-variations. For example, the VAT rate is saved for the main variation. The sub-variations will inherit this VAT rate, assuming you don’t save a different VAT rate for the sub-variation.
-
-1-to-n inheritance means the main variation passes entire data records on to the sub-variations. For example, various xref:item:managing-items.adoc#240[combinations of prices and conditions] are saved for the main variation. As long as you don’t save different prices for a sub-variation, it will inherit all of the prices and conditions from the main variation.
-
-[#200]
-== Controlling inheritance behaviour
-
-When a variation is created, it will inherit settings from the main variation. If you want to use different settings for a variation, then you will need to deactivate the inheritance function and configure new settings.
-
-<<table-inheritance-settings>> shows the different types of settings that can be inherited. The table lists the visual appearance, the behaviour and the process for deactivating the inheritance.
-
-.The following video also explains the different types of inheritance
 video::169064358[vimeo]
 
-[[table-inheritance-settings]]
-.Inheritance settings
-[cols="1,3,3"]
-|====
-|Type of setting |Display |Deactivation
+[TIP]
+.Practical example: Main variation
+====
+
+//tag::what-is-main-variation[]
+An item’s first variation is called its main variation. If an item has multiple variations, then the main variation can either be a saleable product or it can be a virtual data record. A virtual main variation is used to manage the other variations of the item with inheritance.
+
+Imagine you sell a t-shirt in the sizes S, M, L and XL:
+
+* *_Main variation is not saleable_*: The main variation is not for sale and it doesn’t correspond to any of these sizes. The main variation is simply a data container used to manage prices, categories and other product settings.
+* *_Main variation is saleable_*: The main variation is for sale and corresponds to one of these sizes, e.g. S.
+//end::what-is-main-variation[]
+
+====
+
+[#200]
+== Deactivating inheritance
+
+//tag::deactivate-inheritance[]
+When you create a new sub-variation, its settings will initially be taken from the main variation.
+If you want to save different settings for the sub-variation, then you will need to open the sub-variation, deactivate the inheritance and then save a different setting.
+
+[.instruction]
+Deactivating inheritance:
+
+. Go to *Item » Edit item » [Open item] » Tab: Variations*.
+. Open the sub-variation and find the setting that should be changed.
+. Deactivate the inheritance and change the setting.
+How exactly this is done depends on the type of setting.
+The table provides further information.
+. *Save* (terra:save[role="darkGrey"]) the settings.
+
+////
+
+//ToDo - sobald die neue UI zur Standard wird, dann erstens, lösche die Konfig oben und ersetze sie mit dieser Konfig unten, und zweitens, lösche die Tabelle weiter unten, und drittens, prüfe ob die wechsel der Hauptvariante inzwischen in die neue UI möglich ist - beim schreiben war das noch nicht der Fall - und falls es geht, dann auch dokumentieren und die veraltete Anleitung löschen
+
+//interner Kommentar - der Konfig hier ist fast genau das selbe wie in die Verzeichnis Seite für die neue UI - falls hier etwas geändert wird, bitte in der Verzeichnis Seite auch anpassen
+
+. Go to *Item » Item UI » [Open sub-variation]*.
+. Click on the symbol terra:item_variation_inheritance[role="darkGrey"] in the toolbar. +
+→ A pop-up window will open.
+. Decide which settings should be inherited:
+.. Select the settings that should be inherited (icon:check-square[role="blue"]).
+.. Deselect the settings that should not be inherited (icon:square-o[role="darkGrey"]).
+. Click on *Execute*.
+. Change the non-inherited settings as needed.
+. *Save* (terra:save[role="darkGrey"]) the settings.
+
+////
+
+[cols="1,4a"]
+|===
+|Type of setting |Explanation
+
+| *Text field*
+|Inherited values are displayed in grey font.
+Empty fields can also be inherited.
+Inheritance is automatically deactivated if different text is entered.
 
 | *Drop-down list*
-|The first value in the drop-down list is the setting for the main variation. Inherited values are displayed in grey font. Empty fields can also be inherited.
-|Inheritance is deactivated as soon as you select a different value.
+|Inherited values are displayed in grey font.
+Empty fields can also be inherited.
+Inheritance is automatically deactivated if a different value is selected from the drop-down list.
 
 | *Checkbox*
 |Inherited check boxes can have three states: +
-*Activated* = Check mark +
-*Deactivated* = No check mark +
-*Inherited* = Red and crossed out with additional check box showing the main variation's setting
-|Click on the crossed out check mark to deactivate inheritance.
 
-| *Text field*
-|Inherited values are displayed in grey font. Empty fields can also be inherited.
-|Inheritance is automatically deactivated if a text field is cleared, filled with text or if the inherited content is edited. +
-If you want to have an empty value in the variation, you need to leave the field blank in the main variation and manage this data on the variation level instead.
+* *Activated* = Check mark (icon:check-square[role="blue"])
+* *Deactivated* = No check mark (icon:square-o[role="darkGrey"])
+* *Inherited* = Crossed out in red (material:browser_not_supported[role="red"]).
+Next to it, you’ll see another check box showing the main variation’s setting.
+Click on the crossed out check mark to deactivate the inheritance.
 
-| *Text fields with 1:n links*
-|Inherited values are displayed in grey font. +
-Either all or none of the data is inherited. It is not possible to only inherit some of the data.
-|Use the button in the header area to deactivate the inheritance. +
-The inheritance is automatically deactivated if a value is changed or added to the variation. Unchanged values are inherited and saved directly for the variation. If the inheritance is activated again, then all of the values will be deleted and taken from the main variation again.
-|====
+| terra:item_variation_inheritance[role="darkGrey"]
+|This symbol is displayed in the upper right corner of some elements.
+For example, in the upper right corner of the sales price element.
+
+* Click on the symbol to activate/deactivate the inheritance for _all of the settings_ within the element.
+* Change a single setting to deactivate the inheritance _for this setting only_.
+Unchanged values will continue to be taken from the main variation.
+* If the inheritance is activated again, then all of the values will be deleted and taken from the main variation again.
+|===
+//end::deactivate-inheritance[]
 
 [#300]
 == Switching the main variation
 
-You can turn a different variation of an item into the main variation.
 //tag::switch-main-variation[]
-The current main variation will become a normal sub-variation.
+If you’re not happy with the current main variation, you can turn a different variation into the main variation.
+The sub-variation will become the new main variation and the previous main variation will become a sub-variation.
+
+////
+
+//ToDo - neue Artikel-UI - dieser Konfig einblenden und unten den Text löschen - nach dieser Konfig kommt dann die Info-Box
+[.instruction]
+Turning another variation into the main variation:
+
+. Go to *Item » Item UI » [Open item] » Variation overview*.
+. Open the sub-variation that you want to turn into the new main variation.
+. In the toolbar, click on icon:ellipsis-v[role="darkGrey"] and then on material:star[role="darkGrey"] *Make main variation*.
+. Confirm your decision.
+
+////
+
 Sub-variations have the following button:
 
 image::item:main-variation.png[]
@@ -79,21 +131,55 @@ image::item:main-variation.png[]
 [.instruction]
 Turning another variation into the main variation:
 
-. Go to *Item » Edit item*.
-. xref:item:search.adoc#100[Search for] and open the item.
-. Click on the *Variations* tab.
-. Open the variation you want to turn into the new main variation.
-. Click on *Make main variation* (terra:execute[role="darkGrey"]) in the lower row of symbols.
-. Confirm your decision. +
-→ The variation will become the new main variation.
+. Go to *Item » Edit item » [Open item] » Tab: Variations*.
+. Open the sub-variation that you want to turn into the new main variation.
+. In the lower row of symbols, click on *Make main variation* (terra:execute[role="darkGrey"]).
+. Confirm your decision.
 
-[discrete]
-=== Inheritance when the main variation is switched
-
-The inheritable values of the new main variation are compared to the values of the other variations of the item. When you switch the main variation, all values are saved and the following inheritance logic is applied:
+[TIP]
+.Inheritance when the main variation is switched
+====
+The inheritable values of the new main variation will be compared to the values of the sub-variations.
+When you switch the main variation, all values are saved and the following inheritance logic is applied:
 
 * Inheritance is automatically activated for values that are identical to the values of the new main variation.
-* Values that are not identical to those of the new main variation are saved with the variation, i.e. inheritance is not activated.
+* Values that are not identical to those of the new main variation are saved with the sub-variation, i.e. inheritance is not activated.
 
-Open the variations and deactivate inheritance if this behaviour does not meet your needs.
+Open the sub-variations and deactivate inheritance if this behaviour does not meet your needs.
+====
+
 //end::switch-main-variation[]
+
+== FAQ
+
+[.collapseBox]
+.*What is inheritance?*
+--
+
+include::page$inheritance.adoc[tag=inheritance-preamble]
+
+--
+
+[.collapseBox]
+.*What’s a main variation?*
+--
+
+include::page$inheritance.adoc[tag=what-is-main-variation]
+
+--
+
+[.collapseBox]
+.*How do I deactivate the inheritance function?*
+--
+
+include::page$inheritance.adoc[tag=deactivate-inheritance]
+
+--
+
+[.collapseBox]
+.*Can I choose a different main variation?*
+--
+
+include::page$inheritance.adoc[tag=switch-main-variation]
+
+--
