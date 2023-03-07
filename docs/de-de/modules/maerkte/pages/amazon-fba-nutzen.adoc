@@ -147,200 +147,10 @@ Kontaktdaten für FBA-Inbound-Sendungen speichern:
 [#70]
 === Einstellungen für FBA-Outbound-Aufträge vornehmen
 
-Lege nun fest, wie FBA-Aufträge, die über Amazon eingehen, behandelt werden sollen.
+Als du dein Amazon-Konto in plentymarkets eingerichtet hast, hast du wahrscheinlich schon alle erfoderlichen FBA-Einstellungen vorgenommen. Falls du FBA später einrichtest oder eine Einstellung ändern möchtest, findest du hier noch mal Erläuterungen zu den Einstellungen.
 
-[.instruction]
-Einstellungen für FBA-Outbound-Aufträge vornehmen:
-
-. Öffne das Menü *Einrichtung » Märkte » Amazon » Einstellungen*.
-. Wähle das Amazon-Konto, für das du FBA aktivieren möchtest.
-. Wechsele in das Tab *Auftragseinstellungen*.
-. Nimm die Einstellungen vor. Beachte <<#fba-auftragseinstellungen>>.
-. Speichere (terra:save[]) die Einstellungen.
-
-[[fba-auftragseinstellungen]]
-.Einstellungen im Tab *Auftragseinstellungen*
-[cols="1,3a"]
-|===
-| Einstellung | Erläuterung
-
-2+^| Versand durch Amazon (FBA)
-
-| *Aktiv*
-| Häkchen setzen, um den Versand durch Amazon zu aktivieren. Deine FBA-Aufträge werden täglich automatisch in dein plentymarkets System importiert.
-
-| *Herkunft*
-| Wählen, ob nur Aufträge von Amazon mit FBA abgewickelt werden oder ob auch Aufträge von anderen xref:auftraege:auftragsherkunft.adoc#[Herkünften] mit FBA abgewickelt werden können.
-
-| *Status*
-| xref:auftraege:auftraege-verwalten.adoc#1200[Status] wählen, der Aufträgen zugewiesen werden soll, die von Amazon importiert werden.
-
-| *Lager*
-| Wählen, welches <<#60, Amazon FBA-Lager>> für den Bestandsabgleich des Kontos verwendet werden soll. Dieses Lager wird auch für die FBA-Auftragszuordnung des Kontos verwendet, falls kein FBA-Auftrag zugeordnet werden kann, weil für das Auftragsland kein Lager eingerichtet wurde.
-
-| *Lager für unverkäuflichen Bestand*
-| Wählen, in welches <<#60, Amazon FBA-Lager>> unverkäuflicher Bestand des Kontos gebucht werden soll. Wenn du kein Lager wählst, wird der unverkäufliche Bestand nicht importiert. +
-Der unverkäufliche Bestand ist die Anzahl der Einheiten einer SKU, die sich in Amazon-Logistikzentren befinden und den Zustand "nicht verkaufbar" haben. Im Bericht "Lagerbestand mit Versand durch Amazon" entspricht das der Menge in der Spalte *afn-unsellable-quantity*.
-
-| *Warenausgang*
-| Wählen, ob der Warenausgang als gebucht markiert werden soll oder nicht. Die Option *Als gebucht markieren* erzeugt keine Warenbewegung. Um eine Warenbewegung zu erzeugen, muss die Option *Nicht als gebucht markieren* eingestellt sein und eine Ereignisaktion eingerichtet werden.
-
-| *Retourenimport*
-| Option *täglichen* wählen, damit FBA-Retouren automatisch einmal täglich in dein plentymarkets System importiert werden. +
-
-
-| *Gutschein bei Retouren berücksichtigen*
-| Wählen, ob Rabatte von Amazon bei Retouren berücksichtigt werden sollen oder nicht. Dabei wird kein Mindestbestellwert für den Gutschein berücksichtigt.
-
-* Ja = FBA-Retouren enthalten Artikelpositionen für Rabatte oder Zusatzkosten von Amazon. Der Gutschriftsbetrag stimmt also nicht mit dem Betrag des ursprünglichen Auftrags überein. Die Gutschrift muss ggf. über *Stornobeleg » Auftragsanpassung » Neue Gutschrift* korrigiert werden.
-* Nein = Auftragspositionen für Amazon-Gutscheine werden nicht importiert. Rabatte oder zusätzliche Kosten von Amazon werden also ignoriert und bei der Berechnung nicht berücksichtigt. +
-
-*_Wichtig:_* "Gutscheine" können hier Rabatte aus Amazon Delivery Campaigns, Amazon Campaigns oder sonstige von Amazon gewährte Rabatte sein. Es kann sich aber auch um zusätzliche Kosten handeln, die Amazon erhebt. Beispiele hierfür sind Geschenkverpackungen oder wenn Amazon eigene Versandkosten erhebt.
-
-*_Beispiel:_*
-
-* Warenwert des ursprünglichen Auftrags: 50,00 Euro
-* Von Amazon erhobene zusätzliche Portokosten: 5,00 Euro
-* Betrag in der Gutschrift je nach gewählter Option:
-  ** Ja = 55 Euro
-  ** Nein = 50 Euro
-
-| *Bestandsimport*
-| Wählen, ob der Bestandsimport *stündlich* oder nie ausgeführt werden soll.
-
-|*Status für übertragene Aufträge*
-| xref:auftraege:auftraege-verwalten.adoc#1200[Auftragsstatus] für Aufträge wählen, die erfolgreich an FBA übertragen wurden.
-
-| *Artikelrabatte aus Kampagnen beim Import ignorieren*
-| Aus Amazon-Bestellberichten geht nicht hervor, ob Artikelrabatte eines Auftrags von der Händler:in oder von Amazon gewährt wurden. Beim Import wird in beiden Fällen der Rabattbetrag vom Auftragswert abgezogen. Wenn Amazon den Rabatt gibt, weichen dann aber der Auftragswert und der von Amazon an dich ausgezahlte Betrag voneinander ab. In solchen Fällen musst du den Auftrag manuell anpassen, da du sonst zu wenig Umsatzsteuer für den Auftrag abführst.
-
-Wählen, wie Rabatte auf Artikel beim Import von Aufträgen behandelt werden sollen.
-
-[cols="1,3a"]
-!===
-! *Nein* (Standardeinstellung)
-! Der Rabattbetrag wird importiert. Wenn der Rabatt von Amazon gewährt wurde, muss der Auftrag manuell angepasst werden.
-
-Ablauf bei Rabatt von Amazon:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro.
-* Amazon gibt der Kundin einen Rabatt von 1,00 Euro.
-* Der Auftrag wird mit einem Auftragswert von 9,00 Euro importiert.
-* Amazon zahlt dir 10,00 Euro aus. +
-→ Den Auftragswert und der Betrag, den Amazon an dich auszahlt, stimmen nicht übereinstimmen. Der Auftrag muss manuell korrigiert werden.
-
-Ablauf bei Rabatt von Händler:in:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro.
-* Du gibst der Kundin einen Rabatt von 1,00 Euro.
-* Der Auftrag wird mit einem Auftragswert von 9,00 Euro importiert.
-* Amazon zahlt dir 9,00 Euro aus. +
-→ Alle Summen sind korrekt.
-
-! *Ja*
-! Der Rabattbetrag wird beim Import vom Auftragswert abgezogen. Diese Einstellung wird für Händler:innen empfohlen, die selbst keine Rabattkampagnen auf Amazon-Plattformen fahren. Wenn der Rabatt von der Händler:in gewährt wurde, muss der Auftrag manuell angepasst werden.
-
-Ablauf bei Rabatt von Amazon:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro.
-* Amazon gibt der Kundin einen Rabatt von 1,00 Euro.
-* Amazon zahlt dir 10,00 Euro aus.
-* Der Auftrag wird mit einem Auftragswert von 10,00 Euro importiert. +
-→ Alle Summen sind korrekt.
-
-Ablauf bei Rabatt von Händler:in:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro.
-* Du gibst der Kundin einen Rabatt von 1,00 Euro.
-* Der Auftrag wird mit einem Auftragswert von 10,00 Euro importiert.
-* Amazon zahlt dir 9,00 Euro aus. +
-→ Den Auftragswert und der Betrag, den Amazon an dich auszahlt, stimmen nicht übereinstimmen. Der Auftrag muss manuell korrigiert werden.
-
-*_Hinweis:_* Um die Beispiele zu vereinfachen werden die Gebühren, die du an Amazon zahlst, nicht berücksichtigt.
-!===
-
-| *Rabatte aus Versandkampagnen ignorieren*
-| Aus Amazon-Bestellberichten geht nicht hervor, ob Versandrabatte eines Auftrags von der Händler:in oder von Amazon gewährt wurden. Beim Import wird in beiden Fällen der Rabattbetrag vom Auftragswert abgezogen. Wenn Amazon den Rabatt gibt, weichen dann aber der Auftragswert und der von Amazon an dich ausgezahlte Betrag voneinander ab. In solchen Fällen musst du den Auftrag manuell anpassen, da du sonst zu wenig Umsatzsteuer für den Auftrag abführst.
-
-Wählen, wie Rabatte auf die Versandkosten beim Import von Aufträgen behandelt werden sollen.
-
-[cols="1,3a"]
-!===
-! *Nein* (Standardeinstellung)
-! Der Rabattbetrag wird importiert. Wenn der Rabatt von Amazon gewährt wurde, muss der Auftrag manuell angepasst werden.
-
-Ablauf bei Rabatt von Amazon:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro plus 3,00 Euro Versandkosten.
-* Amazon schenkt der Kundin die Versandkosten.
-* Der Auftrag wird mit einem Auftragswert von 10,00 Euro plus 3,00 Euro Versandkosten importiert.
-* Amazon zahlt dir 13,00 Euro aus. +
-→ Den Auftragswert und der Betrag, den Amazon an dich auszahlt, stimmen nicht übereinstimmen. Der Auftrag muss manuell korrigiert werden.
-
-Ablauf bei Rabatt von Händler:in:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro plus 3,00 Euro Versandkosten.
-* Du schenkst der Kundin die Versandkosten.
-* Der Auftrag wird mit einem Auftragswert von 10,00 Euro plus 3,00 Euro Versandkosten importiert.
-* Amazon zahlt dir 13,00 Euro aus. +
-→ Alle Summen sind korrekt.
-
-! *Ja*
-! Der Rabattbetrag wird beim Import vom Auftragswert abgezogen. Diese Einstellung wird für Händler:innen empfohlen, die selbst keine Rabattkampagnen auf Amazon-Plattformen fahren. Wenn der Rabatt von der Händler:in gewährt wurde, muss der Auftrag manuell angepasst werden.
-
-Ablauf bei Rabatt von Amazon:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro plus 3,00 Euro Versandkosten.
-* Amazon schenkt der Kundin die Versandkosten.
-* Der Auftrag wird mit einem Auftragswert von 10,00 Euro plus 3,00 Euro Versandkosten importiert.
-* Amazon zahlt dir 13,00 Euro aus. +
-→ Alle Summen sind korrekt.
-
-Ablauf bei Rabatt von Händler:in:
-
-* Eine Kundin kauft einen deiner Artikel für 10,00 Euro plus 3,00 Euro Versandkosten.
-* Du schenkst der Kundin die Versandkosten.
-* Der Auftrag wird mit einem Auftragswert von 10,00 Euro plus 3,00 Euro Versandkosten importiert.
-* Amazon zahlt dir 13,00 Euro aus. +
-→ Den Auftragswert und der Betrag, den Amazon an dich auszahlt, stimmen nicht übereinstimmen. Der Auftrag muss manuell korrigiert werden.
-
-*_Hinweis:_* Um die Beispiele zu vereinfachen werden die Gebühren, die du an Amazon zahlst, nicht berücksichtigt.
-!===
-
-| *Artikelpakete Multichannel*
-| Welche Auftagspositionen sollen für FBA-Multi-Channel-Aufträge an Amazon übertragen werden? +
-
-*_Hintergrund:_* Welche Option du wählst hängt davon ab, wie du Artikelpakete bei Amazon lagerst. Sind alle Paketbestandteile von Artikelpaketen gemeinsam verpackt bei Amazon eingelagert? Oder stellt Amazon die einzelnen Paketbestandteile selbst zu Artikelpaketen zusammen?
-
-[cols="1,2a"]
-!===
-! *Alle Auftragspositionen übertragen*
-! Als Auftragspositionen werden die Paketposition und die Paketbestandteile an Amazon übertragen. +
-*_Wichtig: Wähle diese Option nicht. Sonst versendet Amazon möglicherweise Positionen doppelt oder erfüllt den Auftrag nicht._*
-
-! *Nur Paketposition übertragen*
-! Nur die Paketposition wird an Amazon übertragen. +
-*_Voraussetzung:_* Alle Paketbestandteile des Artikelpakets sind in einer einzigen Verpackung bei Amazon gelagert. Das Artikelpaket hat nur eine SKU. Amazon pickt also nur eine Position.
-
-! *Ohne Paketposition übertragen*
-! Nur die Paketbestandteile werden an Amazon übertragen. +
-*_Voraussetzung:_* Das Artikelpaket besteht aus einzelnen Artikeln. Bei Amazon sind diese Artikel alle einzeln eingelagert. Jeder Artikel hat eine eigene SKU. Erst durch den Pick-Vorgang wird aus den Einzelartikeln ein Artikelpaket. 
-!===
-
-| *Versandkategorie*
-| Versandpriorität wählen.
-
-[cols="1,3a"]
-!===
-! *Standard*
-! Normaler Versand
-
-! *Expedited*
-! Schnellversand
-
-! *Priority*
-! Bevorzugt (schnellster Versand)
-!===
+include::partial$amz-einrichtungsmenue-kathrin.adoc[tag=amazon-fba-settings]
+// TODO: LINK ANPASSEN!
 |===
 
 [#80]
@@ -410,9 +220,9 @@ Nimm die im Folgenden beschriebenen Einstellungen im Menü für Amazon vor.
 [.instruction]
 Amazon Multi-Channel einrichten:
 
-. Öffne das Menü *Einrichtung » Märkte » Amazon » Einstellungen*.
-. Wechsele in das Tab *Auftragseinstellungen*.
-. Nimm die Einstellungen im Bereich *Versand durch Amazon (FBA)* vor. Beachte dazu die Erläuterungen in <<#amazon-multi-channel>>.
+. Öffne das Menü *Einrichtung » Märkte » Amazon » Einstellungen » [Konto öffnen]*.
+. Klicke links in der Navigation auf *FBA-Einstellungen*.
+. Nimm die Einstellungen im Bereich *Multi-Channel* vor. Beachte dabei die Erläuterungen in <<#amazon-multi-channel>>.
 . Speichere (terra:save[]) die Einstellungen.
 
 [[amazon-multi-channel]]
@@ -420,6 +230,10 @@ Amazon Multi-Channel einrichten:
 [cols="1,3a"]
 |===
 | Einstellung | Erläuterung
+
+include::partial$amz-einrichtungsmenue-kathrin.adoc[tag=amazon-multi-channel-settings]
+// TODO: LINK ANPASSEN!
+
 
 | *Aktiv*
 | Häkchen setzen, um den täglichen Auftragsimport zu aktivieren.
