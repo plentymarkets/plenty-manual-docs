@@ -26,7 +26,9 @@ Go to *Setup » Markets » Shopify app » Migration assistant* to complete the m
 |===
 
 | *Step 1*
-| <<#BICQDCDB, Install the plentymarkets app in your Shopify back end.>> To do so, you need the plentyID, the plentymarkets user name and the password.
+| <<#BICQDCDB, Install the plentymarkets app in your Shopify back end.>>
+
+*_Tip:_* To do so, you need the plentyID, the plentymarkets user name and the password.
 
 | *Step 2*
 | <<#BICQDFDB, Check your version of the Shopify plugin.>>
@@ -77,9 +79,9 @@ Four different things can happen in the migration assistant:
 
 Now, migrate your Shopify connections.
 
-For each active connection to Shopify, you carry out the following steps separately. So if you have more than one connection, you will migrate several databases.
+For each active connection to Shopify, you carry out the following steps separately. So if you have more than one connection, you will migrate several databases. You do not need to migrate all your connections in the same session. However, note the instructions regarding event procedures below if you only migrate some of your connections now. 
 
-NOTE: You do not need to migrate all connections in the same session. However, note the instructions regarding event procedures if you only migrate some of your connections now.
+NOTE: You do not need to migrate all connections in a single session. However, note the instructions regarding event procedures if you only migrate some of your connections now.
 
 . Go to *Setup » Markets » Shopify app » Migration assistant*.
 . Select the connection from the drop-down list *Connection*. +
@@ -109,15 +111,23 @@ If you only have ONE Shopify connection::
 --
 You only have one connection to Shopify. Then follow these simple steps:
 
-* The migration assistant creates the new event procedures for you.
-* You check the new event procedures.
-* You activate the new event procedures.
-* You deactivate the old event procedures.
+[cols="1,5a", grid=none, frame=none, stripes=none]
+|===
 
-These steps are described in more detail below:
+| *Step 4a*
+| <<#TL28U1LR, The migration assistant creates the new event procedures for you.>>
 
+| *Step 4b*
+| <<#NFJEDKJD, You check the new event procedures. If the settings were migrated correctly, you activate the new event procedures.>>
+
+| *Step 4c*
+| <<#4E952CBQ, You deactivate the old event procedures.>>
+
+|===
+
+[#TL28U1LR]
 [.instruction]
-Creating new event procedures:
+Triggering creation of new event procedures:
 
 . Click on *Migrate event procedures*. +
 -> The migration view is shown.
@@ -125,10 +135,11 @@ Creating new event procedures:
 . Click on *Migrate*. +
 -> New event procedures for Shopify are created. +
 -> A list of the event procedures for Shopify in your system is shown. The old event procedures are shown on the left, the new ones on the right. +
-*_Tip:_* Copy the list of event procedures or take a screenshot to make sure you do not forget any in the next steps.
+*_Tip:_* Copy the list of event procedures or take a screenshot to make sure you do not forget any event procedures in the next steps.
 
+[#NFJEDKJD]
 [.instruction]
-Checking the new event procedures:
+Checking and activating the new event procedures:
 
 . Go to *Setup » Orders » Events*.
 . Open the first new event procedure from the list shown in the migration assistant. +
@@ -138,6 +149,7 @@ Checking the new event procedures:
 . Click on *Save* (icon:save[role="green"]).
 . Repeat the steps for all new event procedures.
 
+[#4E952CBQ]
 [.instruction]
 Deactivating the old event procedures:
 
@@ -153,23 +165,30 @@ If you have SEVERAL Shopify connection::
 +
 --
 
-You have more than one Shopify connection. If you only migrate one of your connections now, you need the old and the new event procedures. To ensure that only one of the two event procedures is triggered for the same order, you set filters for the client.
+You have more than one Shopify connection. If you only migrate one of your connections now, you need the old and the new event procedures. To ensure that only one of the two event procedures is triggered for new orders, you set filters for the client. This is how:
 
-This is how:
+*_Important:_* These steps only apply if you do not migrate all your Shopify connections in a single session. If you migrate all Shopify connections in the same session, follow the steps described for *If you only have ONE Shopify connection*.
 
-*_Important:_* This process only applies if you do not migrate all your Shopify connections in a single session.
+[cols="1,5a", grid=none, frame=none, stripes=none]
+|===
 
-* The migration assistant creates the new event procedures for you.
-* You check the new event procedures.
-* In the new even procedures, you add a filter for the client for which you already migrated the Shopify connection.
-* You activate the new event procedures.
-* In the old event procedures, you add a filter for the client(s) for which you have not yet migrated the Shopify connection.
-* Only deactivate the old event procedures after you have migrated *_all_* Shopify connections.
+| *Step 4a*
+| <<#2HSSCB79, The migration assistant creates the new event procedures for you.>>
 
-These steps are described in more detail below:
+| *Step 4b*
+| <<#6BSIXVY2, You check the new event procedures. In the new even procedures, you add a filter for the client for which you already migrated the Shopify connection. Then, you activate the new event procedures.>>
 
+| *Step 4c*
+| <<#4OI6CZGZ, In the old event procedures, you add a filter for the client(s) for which you have not yet migrated the Shopify connection.>>
+
+| *Step 4d*
+| <<#8CEL5TJT, Only deactivate the old event procedures after you have migrated *_all_* Shopify connections.>>
+
+|===
+
+[#2HSSCB79]
 [.instruction]
-Creating new event procedures:
+Triggering creation of new event procedures:
 
 . Click on *Migrate event procedures*. +
 -> The migration view is shown.
@@ -179,8 +198,9 @@ Creating new event procedures:
 -> A list of the event procedures for Shopify in your system is shown. The old event procedures are shown on the left, the new ones on the right. +
 *_Tip:_* Copy the list of event procedures or take a screenshot to make sure you do not forget any in the next steps.
 
+[#6BSIXVY2]
 [.instruction]
-Checking the new event procedures:
+Checking new event procedures, setting client filter and activating event procedures:
 
 . Go to *Setup » Orders » Events*.
 . Open the first new event procedure from the list shown in the migration assistant. +
@@ -191,6 +211,7 @@ Checking the new event procedures:
 . Click on *Save* (icon:save[role="green"]).
 . Repeat the steps for all new event procedures.
 
+[#4OI6CZGZ]
 [.instruction]
 Setting a client filter for the old event procedures:
 
@@ -201,6 +222,7 @@ Setting a client filter for the old event procedures:
 . Save the setting.
 . Repeat the steps for all old event procedures.
 
+[#8CEL5TJT]
 [.instruction]
 Deactivating old event procedures after all Shopify connections have been migrated:
 
