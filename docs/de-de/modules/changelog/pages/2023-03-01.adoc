@@ -52,6 +52,32 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
 [discrete]
+=== Amazon VCS
+
+[IMPORTANT]
+.Wichtig
+======
+Von der folgenden Änderung sind nur Händler:innen betroffen, die reines VCS (oder VCS Amazon) nutzen. Händler:innen die VCS Lite (oder VCS plentymarkets) nutzen sind nicht betroffen.
+======
+
+Bisher wurde bei der Verarbeitung des VCS-Berichts vom Typ `SC_VAT_TAX_REPORT` ein interner Auftragsbeleg (Rechnung oder Gutschrift) erstellt, wenn die Belegnummer N/A lautete.
+Darauf wurde auf einen seltenen, aber existierenden Fall reagiert, wenn Amazon keinen Beleg trotz VCS erzeugt.
+
+In letzter Zeit kam es aber vermehrt vor, dass im Bericht N/A als Belegnummer gegeben war, obwohl Amazon einen Beleg erzeugt hat, wodurch im Endeffekt mehr als ein Beleg für den gleichen Auftrag bzw. die gleiche Gutschrift erzeugt wurde. Einer von Amazon und einer in plenty.
+
+Aus diesem Grund haben wir uns dafür entschieden, diese Funktionalität zu entfernen. Die Auftragswerte werden abgesehen davon weiterhin entsprechend des VCS-Berichts korrigiert.
+
+Für den Fall, dass an einem Auftrag nach vier Tagen immer noch kein Beleg an einem Auftrag vorliegt, obliegt es damit zum aktuellen Zeitpunkt dem Händler den Auftrag bei Amazon auf einen existierenden Beleg zu prüfen und im Zweifel selbstständig den externen Beleg am Auftrag oder der Gutschrift in plenty zu hinterlegen.
+
+Alternativ kann unter *Einrichtung » Märkte » Amazon » Berichte » Anfordern* ein weiterer Bericht des Typs `SC_VAT_TAX_REPORT` für den Zeitraum der betroffenen Aufträge angefordert werden, wenn sichergestellt ist, dass die Einträge dann die Belegnummer enthalten. In dem Fall würde bei der Verarbeitung des Berichts die Belegnummer wie bisher am Auftrag ergänzt werden.
+
+[IMPORTANT]
+.To-Do
+======
+Besprecht mit eurer Buchhaltung bzw. euren Steuerberatern das Vorgehen. Mögliche betroffenen Aufträge und Gutschriften können unter *Aufträge » Aufträge bearbeiten* über die Nutzung der Filter zu Dokumenten und Herkunft gefiltert werden.
+======
+
+[discrete]
 === CRM
 
 * Ab sofort wird im Messenger nur noch neben dem Posteingang die Anzahl der ungelesenen Nachrichten angezeigt. Die Anzahl der ungelesenen Nachrichten wird in Echtzeit angezeigt. Mit einem Klick auf *Neue Nachrichten* sieht man dann alle ungelesenen Nachrichten auf einen Blick. Du siehst ab sofort, wenn eine andere Benutzer:in im System auf eine Nachricht antwortet.
