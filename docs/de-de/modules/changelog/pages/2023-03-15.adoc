@@ -1,0 +1,187 @@
+= Changelog 15. März 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 9. März 2023
+:endWeekDate: 15. März 2023
+
+// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* In der Eigenschaftenansicht ist es nun möglich, sowohl die verknüpften Eigenschaften als auch die Liste der Eigenschaften beim Hinzufügen zu sortieren. Die entsprechenden Einstellungen sind im Editiermodus der Ansicht der Eigenschaften zu finden.
+
+[discrete]
+=== Aufträge
+
+* Textfarbe und Hintergrundfarbe kann jetzt im Editor der Auftragsnotizen verwendet werden.
+
+[discrete]
+=== Fulfillment
+
+* Die Filter-UI im Versand-Center wurde aktualisiert. Die Filter werden nun übersichtlich in zwei Spalten angezeigt. Die häufig benötigten Filter *Auftrags-ID* und *Kontakt-ID* befinden sich oben in der Auflistung.
+Das Datums im Kalender kann nun einfach ausgewählt werden. Neue Features:
+** Mehrere Lieferländer auswählbar
+** Auswahl des Eigners und Anzeige in alphabetischer Reihenfolge
+** Auswahl der Zahlungsarten
+** Mandantenauswahl
+** Lagerauswahl
+** Unter *Auftragsstatus* können mehrere Optionen angezeigt werden.
+** Hauptaufträge können aus der Auswahl ausgeschlossen werden.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Plugins
+
+* Wir ändern eine Funktion in der Git-Benutzeroberfläche. Anstatt ein Git-Plugin mit einem Commit-Hash auf einen bestimmten Zustand zu fixieren, muss es in Zukunft mit einem Tag fixiert werden. Die Branch-Funktionalität bleibt erhalten.
++
+[NOTE]
+.Kein To-Do
+======
+Wenn aktuell ein Commit für ein Git-Plugin gewählt wird, bleibt es so. Erst wenn du das Plugin für die Zukunft auf einen bestimmten Zustand festlegen möchtest, musst du stattdessen ein Tag verwenden.
+======
+
+[discrete]
+=== Rechte
+
+In den vergangenen Monaten haben wir mit dem Großteil des Plattform-Kern-Teams an dem Login- und Rechtesystem von plentymarkets gearbeitet.
+
+Die ersten Projekte, die nun bereitgestellt werden, sind die umgebauten Benutzeroberflächen sowie die Rechtevergabe von Benutzer:innen. Das Ziel hierbei war es, die Rechtevergabe einfacher und verständlicher zu gestalten. Im Kern wurden Daten in neue Strukturen übertragen und alles weitere für zukünftige Schritte vorbereitet.
+
+Dabei wurden nicht nur neue UIs, sondern auch strukturelle Änderungen vorgenommen:
+* API-Rechte, Ressourcen sowie Sichtbarkeiten können nur noch an Rollen hinterlegt werden. Dabei wurden alle vorhandenen Einstellungen der Benutzer:innen in individuelle Rollen hinterlegt. Die Rechte bestehender Benutzer:innen-Konten ändern sich dadurch nicht.
+* Die Session-Verwaltung UI wurde entfernt.
+* Die UIs unter *Einrichtung » Einstellungen » Benutzer* wurden umgezogen zu *Einrichtung » Kontoverwaltung*.
+
+Im Menü *Einrichtung » Kontoverwaltung » Konten* werden die Benutzer:innen-Konten des plentymarkets Systems verwaltet. Die Zuweisung von Berechtigungen erfolgt hierbei nur noch durch das Verknüpfen von Rollen.
+
+Im Menü *Einrichtung » Kontoverwaltung » Rollen* werden die Benutzer:innen-Rollen verwaltet. Die Konfiguration der Rechte erfolgt nicht mehr primär durch die API-Berechtigungen, sondern durch Sichtbarkeiten der jeweiligen Menüpunkte und deren Unterbereiche.
+
+[IMPORTANT]
+.API-Rechte
+======
+Die benötigten API-Berechtigungen werden nun automatisch der Rolle zugewiesen, je nachdem welche Sichtbarkeiten vergeben sind. Die dadurch vergebenen API-Berechtigungen können nicht eingeschränkt werden.
+
+Sollten Komponenten in den sichtbaren UIs hinzugefügt oder entfernt werden, werden die API-Berechtigungen entsprechend automatisch hinzugefügt oder entfernt.
+======
+
+Für dich bedeutet das folgendes:
+
+* Es ist keine manuelle Pflege von API-Berechtigungen mehr notwendig, falls Komponenten in den UIs von uns ergänzt oder umgebaut werden.
+* Sichtbarkeiten von Plugin-Menüpunkten sind ebenfalls im Menü-Baum zu finden.
+* Explizite API-Berechtigungen können weiterhin über den erweiterten Modus zugewiesen werden.
+* Zugriffseinschränkungen für Lager, Kennzahlen, Auftragsherkünfte und Mandanten werden ebenfalls an den Rollen gepflegt.
+* Freigabe für benutzerdefinierte Ansichten (jetzt rollendefinierte Ansichten) erfolgt ebenfalls an den Rollen.
+* Eigner:innenrechte werden jetzt im einfachen Modus der Rollenbearbeitung vergeben, durch das aktivieren von *Bearbeiten* oder *Erstellen*.
+
+Im Menü *Einrichtung » Kontoverwaltung » Sicherheit* befindet sich jetzt die Konfigurationen für Passwortsicherheit.
+
+Weitere Informationen zu den Änderungen und Auswirkungen auf bestehende Abläufe findest du auf der Handbuchseite xref:business-entscheidungen:benutzerkonten-zugaenge.adoc[Benutzer:innen-Konten und Zugänge].
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* In der neuen Artikel-UI kam es zum Fehler, dass beim Varianten erstellen 0 Varianten erzeugt wurden. Dieses Verhalten haben wir nun korrigiert und das Erstellen funktioniert wieder korrekt.
+* Das Hochladen und Aktualisieren von Dateien an Dateieigenschaften funktioniert wieder wie gewohnt.
+
+[discrete]
+=== Aufträge
+
+* Fehlermeldungen werden jetzt angezeigt, wenn das Speichern von Auftragsnotizen fehlschlägt.
+* In den überarbeiten Einstellungs-UIs unter *Einrichtung » Aufträge » Auftragstypen » Reparatur* bzw. *Einrichtung » Aufträge » Auftragstypen » Retouren* können nun bis zu 100 Werte hinterlegt werden (früher waren nur 25 Werte möglich). Beim Erstellen einer neuen Retoure / Reparatur kam es zu einem Validierungsfehler, wenn der dort eingestellte Grund größer als 25 war. Dies wurde nun korrigiert.
+
+[discrete]
+=== Payment
+
+* Für die Währungen KES, ANG, UAH, VND, XCD, BOB, IDR wurden keine Umrechnungskurse von unserer verwendeten API zur Verfügung gestellt. In der Vergangenheit hat dies dazu geführt, dass bei diesen Währungen immer der Umrechnungskurs auf 1 gesetzt wurde, wenn die Einstellung *Umrechnungsfaktoren täglich automatisch aktualisieren* aktiv war. Für diese Währungen ist es nun möglich, im Menü *Einrichtung » Aufträge » Zahlung » Währung* einen Umrechnungskurs zu hinterlegen, auch wenn die Einstellung *Umrechnungsfaktoren täglich automatisch aktualisieren* aktiv ist.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|
+|
+|
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
