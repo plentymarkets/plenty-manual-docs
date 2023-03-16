@@ -167,28 +167,34 @@ Versandprofil erstellen:
 
 === _Optional:_ Versandprofil automatisch festlegen
 
-[.instruction]
-[_Optional_] Versandprofil automatisch festlegen:
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um für Wayfair-Aufträge das Versandprofil automatisch festzulegen.
 
-. Öffne das plentymarkets Menü *Einrichtung » Aufträge » Ereignisse*.
-. Klicke unten links auf *Ereignisaktion hinzufügen*. +
-→ Das Fenster *Neue Ereignisaktion erstellen* wird geöffnet.
-. Gib einen Namen ein, zum Beispiel *Wayfair Versandprofil zuordnen*.
-. Wähle aus der Dropdown-Liste das Ereignis *Neuer Auftrag*.
-. Klicke auf *Speichern*. +
-→ Die Ereignisaktion wird erstellt.
-. Aktiviere im Abschnitt *Einstellungen* das Kontrollkästchen *Aktiv*.
-. Klicke im Bereich *Filter* auf *Filter hinzufügen*.
-. Wähle *Auftrag » Herkunft*.
-. Klicke auf *Hinzufügen*.
-. Aktiviere in der Liste *Herkunft* alle *Wayfair*-Herkünfte.
-. Klicke im Bereich *Aktionen* auf *Aktion hinzufügen*.
-. Wähle *Auftrag » Versandprofil ändern*.
-. Klicke auf *Hinzufügen*. +
-→ Im Bereich *Aktionen* wird die Aktion *Versandprofil ändern* angezeigt.
-. Klicke ganz links in der Zeile *Versandprofil ändern* auf den Pfeil nach unten, um die Details auszuklappen.
-. Wähle in der Dropdown-Liste der Aktion das Versandprofil für *Wayfair*.
-. Klicke oben auf *Speichern*.
+:table-event-procedure: <<#wayfair-shipping-profile>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[wayfair-shipping-profile]]
+.Versandprofil automatisch festlegen
+[cols="1,3,3"]
+|===
+|Einstellung | Option | Auswahl
+
+| *Ereignis*
+| *Neuer Auftrag*
+| 
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Herkunft*
+| *Wayfair*
+
+| *Aktion*
+| *Plugin > Auftrag > Versandprofil ändern*
+| Versandprofil für Wayfair wählen
+|===
 
 ==== Wayfair-Bestellartikel mit plentymarkets Artikeln verknüpfen
 
@@ -220,33 +226,6 @@ Lieferanten, die Bestellungen über ihre eigenen Konten versenden möchten (stat
 
 Wenn die Versanddienste von Wayfair verwendet werden sollen, sollten die ASN-Einstellungen des Wayfair-Plugins in ihren Standardeinstellungen (*Wayfair-Versand*) belassen werden.
 
-===== Ereignis für plentymarkets Bestellungen erstellen, das Versandinformationen an Wayfair sendet
-
-[.instruction]
-Ereignis für plentymarkets Bestellungen erstellen, das Versandinformationen an Wayfair sendet:
-
-. Öffne das plentymarkets Menü *Einrichtung » Aufträge » Ereignisse*.
-. Klicke auf *Ereignisaktion hinzufügen* (die Schaltfläche *+*
-links am Seitenende).
-. Gib  einen beliebigen *Name* ein
-. Wähle im Feld *Ereignis* die Option *Statuswechsel* (in der
-Kategorie *Auftragsänderung*).
-. Wähle im Feld unter *Ereignis* die Statusänderung, die das Senden einer ASN an Wayfair auslösen soll, z.B. *In Versandvorbereitung*.
-. Klicke auf *Speichern*. +
-→ Du wirst automatisch zur neu erstellten Ereignisaktion umgeleitet. 
-. Setze im Abschnitt *Einstellungen* der Ereignisprozedur ein Häkchen neben *Aktiv*.
-. Klicke auf *Filter hinzufügen* und gehe zu *Auftrag* »
-*Herkunft*, um die Herkunft als Filter hinzuzufügen.
-. Klicke auf *+ Hinzufügen*. +
-→ Im Abschnitt *Filter* wird ein Feld mit einer Liste aller
-verfügbaren Auftragsverweise angezeigt. 
-. Setze ein Häkchen neben allen *Wayfair*-Auftragsempfängern.
-. Klicke auf das *+* neben *Aktionen*.
-. Wähle *Versandbestätigungen (ASN) an Wayfair senden* in der
-Kategorie *Plugins*:
-. Klicke auf *Hinzufügen*.
-. Klicke auf *Speichern*.
-
 [#1100]
 === Versandbestätigungen automatisch senden
 
@@ -257,14 +236,15 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 include::_includes:partial$event-procedure.adoc[]
 
 [[wayfair-versandbestaetigung]]
-.Versandbestätigungen automatisch an Etsy senden
+.Versandbestätigungen automatisch an Wayfair senden
 [cols="1,3,3"]
 |===
 |Einstellung | Option | Auswahl
 
 | *Ereignis*
 | *Auftragsänderung > Statuswechsel*
-|
+| Status wählen, der die Versandbestätigung auslösen soll. +
+*_Beispiel:_* *In Versandvorbereitung*
 
 | *Filter 1*
 | *Auftrag > Auftragstyp*
@@ -272,10 +252,10 @@ include::_includes:partial$event-procedure.adoc[]
 
 | *Filter 2*
 | *Auftrag > Herkunft*
-| *Etsy*
+| *Wayfair*
 
 | *Aktion*
-| *Plugin > Versandbestätigung an Etsy senden (neu)*
+| *Plugin > Versandbestätigungen (ASN) an Wayfair senden*
 |
 |===
 
@@ -296,12 +276,41 @@ Leitfaden zur Fehlerbehebung verwendest.
 Das Wayfair-Plugin bietet Nutzern von plentymarkets die Möglichkeit,
 sein Verhalten anzupassen und zu überwachen.
 
-=== Die Home Seite
+== Plugin konfigurieren
 
-Die Home Seite wird durch Klicken auf *Startseite* im Menü auf der
-linken Seite oder durch Klicken auf *Wayfair* in der
-Wayfair-Navigationsleiste aktiviert. Derzeit werden keine Informationen
-bereitgestellt.
+Du hast das Plugin installiert und bereitgestellt und die Auftragherkunft *Wayfair* aktiviert? Super. Dann konfiguriere jetzt das Plugin.
+
+. Öffne das Menü *Einrichtung » Märkte » Wayfair » Startseite*. +
+→ Die Wayfair-Einstellungen werden geöffnet.
+*_Tipp:_* Im Tab *Wayfair* kannst du keine Einstellungen vornehmen.
+. Nimm die Einstellungen vor. Beachte dazu die Hinweise in <<#wayfair-configuration>>.
+
+[[wayfair-configuration]]
+.Plugin konfigurieren
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+2+^| Tab: *Lager*
+
+| *XXX*
+| 
+. Klicke auf *Zuordnung hinzufügen*.
+
+
+2+^| xxx
+
+| *XXX*
+|
+
+| *XXX*
+|
+|===
+
+
+
+
+
 
 === Die Lager Seite
 
