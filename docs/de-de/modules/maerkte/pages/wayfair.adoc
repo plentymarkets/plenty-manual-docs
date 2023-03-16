@@ -67,7 +67,7 @@ Anmeldeinformationen generieren:
 → Du wirst zur Wayfair-Anwendungsverwaltung weitergeleitet.
 . Klicke auf der Seite *Anwendungsverwaltung* unten auf die Schaltfläche *+ Neue Anwendung*. +
 → Das Formular *Neue Anwendung* wird angezeigt.
-. Gib einen nützlichen *Name* für die Anwendung ein, zum Beispiel `[Name deines Unternehmens] plentymarkets Plugin`.
+. Gib einen nützlichen *Namen* für die Anwendung ein, zum Beispiel `[Name deines Unternehmens] plentymarkets Plugin`.
 . Gib eine nützliche *Beschreibung* für die Anwendung ein, zum Beispiel `plentymarkets Plugin-Anwendung für [Name deines Unternehmens] Go-Live im Herbst 2023`.
 . Setze den Schieberegler am unteren Rand des Dialogfelds auf *Produktion*, wenn Wayfair nichts anderes anordnet.
 . Klicke im Dialogfeld auf *Speichern*, um die Anmeldeinformationen der Anwendung anzuzeigen. +
@@ -196,9 +196,7 @@ Um den *Lagerpuffer* zu deaktivieren, lasse diese Einstellung leer oder setze si
 beim Abgleichen der Artikelvarianten von plentymarkets mit den
 Wayfair-Produkten. Es wird verwendet, wenn die Bestandslisten an Wayfair
 gesendet werden und um die angeforderten Produkte in einer
-Wayfair-Bestellung auszuwählen. Der Benutzer von plentymarkets sollte
-diese Einstellung so konfigurieren, dass sie der Art und Weise
-entspricht, in der die Elementvarianten ausgefüllt werden.
+Wayfair-Bestellung auszuwählen.
 
 [cols="1a,3a"]
 !===
@@ -239,6 +237,7 @@ Oben auf der Seite *Inventar* werden immer ein Symbol und eine Meldung
 angezeigt, um den allgemeinen Zustand des
 Inventarsynchronisierungsprozesses zu beschreiben.
 
+//tag::stock-infos[]
 * Ein Kalendersymbol wird angezeigt, wenn das Wayfair-Plugin noch keine
 Bestandssynchronisierung versucht hat.
     ** Dies geschieht direkt nach der Installation des Plugins.
@@ -258,6 +257,7 @@ wurde und die Ersteinrichtung noch nicht abgeschlossen wurde. Beende die Einrich
 * Konsultiere die plentymarkets Logs, um Fehlerdetails zu erhalten.
 * Im Kapitel <<#WOEJONNF, Troubleshooting: Häufige Probleme>> findest du Ideen
 zur Lösung von Problemen bei der Bestandssynchronisierung.
+//end::stock-infos[]
 
 2+^| Tab *Versandsbestätigung (ASN)*
 
@@ -305,7 +305,12 @@ die rechte Spalte *Wayfair-Kennziffer des Versanddienstleisters* ein.
 !===
 |===
 
-=== Versanddienstleister erstellen
+[#STP6NQ]
+=== Versand einrichten
+
+Nun richtest du den Versand ein.
+
+==== Versanddienstleister erstellen
 
 Führe die folgenden Schritte aus, um einen Wayfair-Versanddienstleister zu erstellen.
 
@@ -322,7 +327,7 @@ Versanddienstleister erstellen:
 *_Tipp:_* Die Option *WayfairShipping* ist nicht verfügbar? Dieser Typ wird vom Wayfair-Plugin bereitgestellt. Stelle also sicher, dass du das Plugin korrekt installiert und bereitgestellt hast.
 . Klicke auf *Speichern*.
 
-=== Versandprofil erstellen
+==== Versandprofil erstellen
 
 Jede Bestellung verfügt über ein Versandprofil, das verwendet wird, um Artikel aus einer Bestellung zu versenden. Führe diese Schritte aus, um ein Versandprofil für Wayfair zu erstellen.
 
@@ -345,7 +350,40 @@ Versandprofil erstellen:
 . Setze in der Liste *Auftragsherkunft* ein Häkchen neben allen *Wayfair*-Einträgen.
 . Klicke oben auf der Seite auf *Speichern*.
 
-=== _Optional:_ Versandprofil automatisch festlegen
+[#1100]
+==== Versandbestätigungen automatisch senden
+
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Versandbestätigungen automatisch an Wayfair zu senden, nachdem ein Warenausgang gebucht wurde.
+
+:table-event-procedure: <<#wayfair-versandbestaetigung>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[wayfair-versandbestaetigung]]
+.Versandbestätigungen automatisch an Wayfair senden
+[cols="1,3,3"]
+|===
+|Einstellung | Option | Auswahl
+
+| *Ereignis*
+| *Auftragsänderung > Statuswechsel*
+| Status wählen, der die Versandbestätigung auslösen soll +
+*_Beispiel:_* *In Versandvorbereitung*
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Herkunft*
+| *Wayfair*
+
+| *Aktion*
+| *Plugin > Versandbestätigungen (ASN) an Wayfair senden*
+|
+|===
+
+==== [Optional] Versandprofil automatisch festlegen
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um für Wayfair-Aufträge das Versandprofil automatisch festzulegen.
 
@@ -376,79 +414,39 @@ include::_includes:partial$event-procedure.adoc[]
 | Versandprofil für Wayfair wählen
 |===
 
-==== Wayfair-Bestellartikel mit plentymarkets Artikeln verknüpfen
+[#prepare-variations]
+== Varianten vorbereiten
 
-Um eingehende Bestellungen von Wayfair ordnungsgemäß verarbeiten zu
-können, muss das Wayfair-Plugin die Lieferanten-Teilenummern aus
-Wayfairs Systemen mit einem bestimmten Feld von Artikelvarianten in
-plentymarkets abgleichen. Standardmäßig geht das Wayfair-Plugin davon
-aus, dass die *Variantennummer* *(nicht die ID der Varianten)* der
-Varianten eines Artikels in plentymarkets mit der Teilenummer des
-Wayfair-Lieferanten übereinstimmt.
+Bereite nun deine Varianten vor.
 
-Wenn die Lieferanten-Teilenummern für deine Organisation in einem
-alternativen Feld in deinen plentymarkets Artikelvarianten angezeigt
-werden, ändere den Wert von *Methode zur Artikelzuweisung*.
+[#750]
+=== Variantenverfügbarkeit einstellen
 
-==== Artikel auf Wayfair zum Verkauf anbieten
+:market-availability: Wayfair
+:option-availability: Wayfair
 
-Artikel, die du auf Wayfair verkaufen möchtest, müssen in plentymarkets
-als aktiv markiert werden. Der Benutzer von plentymarkets kann auch
-festlegen, welche Artikel auf Wayfair zum Verkauf stehen. *Beachte,
-dass der Lagerbestand und die bestellten Artikel auf der Ebene der
-Varianten gesteuert werden.*
+include::partial$variantenverfuegbarkeit.adoc[]
 
-[#automate-orders]
-== Auftragsabwicklung automatisieren
+== Ersten Warenbestandsabgleich prüfen
 
-Richte xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen] ein, um Wayfair automatisch über Änderungen des Auftragsstatus zu informieren. Für Wayfair sind die folgenden Ereignisaktionen stehen verfügbar:
+Wenn du den Marktplatz eingerichtet hast, werden deine Varianten automatisch zu Wayfair exportiert. Gehe so vor, um zu prüfen, dass der erste Warenbestandsabgleich stattgefunden hat:
 
-* Versandbestätigungen automatisch senden (<<#1100, Wie?>>)
+. Öffne das Menü *Einrichtung » Märkte » Wayfair » Startseite*. +
+→ Die Wayfair-Einstellungen werden geöffnet.
+. Klicke auf *Inventar*. +
+. Warte eine Minute, während das System die Bestandsinformationen aktualisiert.
+. Überprüfe die auf der Seite angezeigten Informationen.
+. Wenn Probleme für die vollständige Bestandssynchronisierung gemeldet
+werden: +
+Versuche, diese Probleme zu beheben, indem du die Informationen für
+das Tab *Inventur* liest, die plentymarkets Logs prüfst und das Kapitel
+<<#WOEJONNF, Troubleshooting: Häufige Probleme>> nutzt.
 
-[#1100]
-=== Versandbestätigungen automatisch senden
-
-Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Versandbestätigungen automatisch an Wayfair zu senden, nachdem ein Warenausgang gebucht wurde.
-
-:table-event-procedure: <<#wayfair-versandbestaetigung>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[[wayfair-versandbestaetigung]]
-.Versandbestätigungen automatisch an Wayfair senden
-[cols="1,3,3"]
-|===
-|Einstellung | Option | Auswahl
-
-| *Ereignis*
-| *Auftragsänderung > Statuswechsel*
-| Status wählen, der die Versandbestätigung auslösen soll. +
-*_Beispiel:_* *In Versandvorbereitung*
-
-| *Filter 1*
-| *Auftrag > Auftragstyp*
-| *Auftrag*
-
-| *Filter 2*
-| *Auftrag > Herkunft*
-| *Wayfair*
-
-| *Aktion*
-| *Plugin > Versandbestätigungen (ASN) an Wayfair senden*
-|
-|===
-
-==== Erster Warenbestandabgleich
-
-Sobald alles eingerichtet ist, ist es an der Zeit, dass das Wayfair-Plugin Artikel auf Wayfair zum Verkauf anbietet.
-
-* Navigiere zur Inventarseite in den Wayfair-Markteinstellungen.
-* Warte eine Minute, während das System die Inventarinformationen aktualisiert.
-* Überprüfe die auf der Seite angezeigten Informationen.
-* Wenn Probleme für die vollständige Inventarsynchronisierung gemeldet
-werden, versuche, diese Probleme zu beheben, indem du die Anweisungen für
-die Inventarseite liest, die plentymarkets Protokolle anzeigst und den
-Leitfaden zur Fehlerbehebung verwendest.
+[.collapseBox]
+.Informationen zum Tab *Inventur*
+--
+include::page$wayfair[tag=stock-infos]
+--
 
 [#WOEJONNF]
 == Troubleshooting: Häufige Probleme
