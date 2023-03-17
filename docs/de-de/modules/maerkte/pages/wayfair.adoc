@@ -1,0 +1,504 @@
+= Wayfair
+:author: team-plenty-channel
+:keywords: Wayfair
+:description: Hier erfährst du, wie du den Marktplatz Wayfair in plentymarkets einrichtest, damit du deine Artikel auf Wayfair verkaufen kannst. 
+:wayfair:
+:market: Wayfair
+:plugin: Wayfair
+//:main-client:
+:plugin-link: https://marketplace.plentymarkets.com/wayfair_6273
+:page-index: false
+
+Mit dem Wayfair-Plugin verkaufst du deine Varianten über plentymarkets auf dem Marktplatz Wayfair. Das Plugin bietet mehrere Integrationen in die Schnittstellen von Wayfair, einschließlich die folgenden Vorgänge:
+
+* Automatisches Abrufen von Wayfair-Bestellungen mit Umstellung auf plentymarkets Bestellungen​
+* Automatisches Senden von plentymarkets Bestandsinformationen an Wayfair, um die Artikelverfügbarkeit aktuell zu halten​
+* Automatisches Übertragen von Wayfair-generierten Versanddokumenten an plentymarkets
+* Änderungen des Bestellstatus in plentymarkets an Wayfair senden, um Wayfair-Kund:innen und den Wayfair-Kundensupport auf dem neuesten Stand zu halten
+
+== Bei Wayfair registrieren
+
+Wayfair ist ein geschlossener Marktplatz. Deshalb musst du dich als Wayfair-Lieferant:in registrieren, bevor du das Wayfair-Plugin verwenden kannst. ​Wenn du noch nicht auf Wayfair verkaufst, regisitriere dich also als Partner:in auf der Website von Wayfair, um loszulegen.
+
+//TODO: Link zur Registrierung
+
+== Vorbereitungen
+
+Für die Verwendung des Wayfair-Plugins sind Wayfair-API-Anmeldeinformationen erforderlich, denen die entsprechenden Rechte erteilt wurden.
+
+Befolge vor der Installation diese Anweisungen, um Wayfair zu kontaktieren und die API-Schnittstelle einzurichten.​
+
+=== API-Anmeldeinformationen abrufen
+
+Damit das Wayfair-Plugin eine Verbindung zu Wayfair-Systemen herstellen kann, musst du deine eindeutigen API-Anmeldeinformationen angeben.
+
+Gehe folgendermaßen vor, um die API-Anmeldeinformationen für deine Organisation zu erhalten:
+
+==== E-Mail an Wayfair senden
+
+Sende eine E-Mail an deine Wayfair-Account-Manager:in, um Unterstützung anzufordern. Setze außerdem johara1@wayfair.com auf CC.
+
+Die E-Mail muss die folgenden Informationen enthalten:
+
+[cols="1,3a"]
+|===
+| *Betreff*
+| Zugriff auf das plentymarkets Plugin / [Name deines Unternehmens] [deine Wayfair-Lieferanten-ID]
+
+| *Inhalt*
+|
+* Deine Kontaktinformationen
+* Eine kurze Beschreibung, wie du das Wayfair-Plugin von plentymarkets verwenden möchtest
+* Datum, ab dem du bereit bist, das Wayfair-Plugin von plentymarkets zu verwenden
+|===
+
+Du erhältst umgehend eine Antwort mit den folgenden Angaben: 
+
+* Bestätigung deines eingerichteten API-Zugriffs 
+* Lieferanten-ID(s) für deine Lager
+
+==== Anmeldedaten generieren
+
+[.instruction]
+Anmeldeinformationen generieren:
+
+. Gehe zu link:https://partners.wayfair.com/developer/applications[https://partners.wayfair.com/developer/applications].
+. Gib deine Anmeldedaten für Wayfair Partner Home ein. +
+→ Du wirst zur Wayfair-Anwendungsverwaltung weitergeleitet.
+. Klicke auf der Seite *Anwendungsverwaltung* unten auf die Schaltfläche *+ Neue Anwendung*. +
+→ Das Formular *Neue Anwendung* wird angezeigt.
+. Gib einen nützlichen *Namen* für die Anwendung ein, zum Beispiel `[Name deines Unternehmens] plentymarkets Plugin`.
+. Gib eine nützliche *Beschreibung* für die Anwendung ein, zum Beispiel `plentymarkets Plugin-Anwendung für [Name deines Unternehmens] Go-Live im Herbst 2023`.
+. Setze den Schieberegler am unteren Rand des Dialogfelds auf *Produktion*, wenn Wayfair nichts anderes anordnet.
+. Klicke im Dialogfeld auf *Speichern*, um die Anmeldeinformationen der Anwendung anzuzeigen. +
+→ Die *Kunden-ID* und das *Kundengeheimnis* werden angezeigt.
+. Kopiere die *Kunden-ID* und das *Kundengeheimnis*. Diese Anmeldedaten benötigst du, um das Wayfair-Plugin für die Verwendung der Wayfair-Systeme zu autorisieren. +
+*_Wichtig:_* Das *Kundengeheimnis* kann nach diesem Zeitpunkt nicht mehr abgerufen werden. Wenn das Original verloren geht, muss ein neues Kundengeheimnis generiert werden.
+. Schließe das Dialogfeld mit den Anmeldedaten, um die Informationen zu schützen.
+
+== Wayfair-Plugin installieren
+
+Jetzt installierst du das Wayfair-Plugin in deinem plentymarkets System.
+
+=== Voraussetzungen
+
+Die folgenden Voraussetzungen müssen erfüllt sein, damit du das Plugin installieren kannst:
+
+* Du hast ein plentymarkets System.
+* Du hast Administratorrechte für das plentymarkets System, in dem das Wayfair-Plugin installiert werden soll.
+* Du hast wie oben beschrieben die Wayfair API-Anmeldedaten generiert und zur Hand.
+
+[#plugin-download]
+=== Plugin installieren
+
+Um Wayfair in plentymarkets nutzen zu können, musst du das Wayfair-Plugin in deinem plentymarkets System installieren.
+
+include::partial$plugin-installation.adoc[]
+
+=== Zugriff auf Wayfair-Schnittstellen autorisieren
+
+Nachdem du das Plugin in deinem plentymarkets Plugin-Set installiert und bereitgestellt hast, muss das Plugin so konfiguriert werden, dass beim Herstellen einer Verbindung zu den Wayfair-Schnittstellen die richtigen Anmeldedaten verwendet werden.
+
+*_Wichtig:_* Das Autorisierungsverfahren muss für jedes Plugin-Set durchgeführt werden, das das Wayfair-Plugin enthält.
+
+[.instruction]
+Zugriff auf Wayfair-Schnittstelle autorisieren:
+
+. Öffne das plentymarkets Menü *Plugins » Plugin-Set-Übersicht*.
+. Suche das Plugin-Set, das mit dem Mandanten verknüpft ist, mit dem Wayfair verwendet wird. 
+. Klicke auf das gewünschte Plugin-Set.
+. Klicke in der Wayfair-Zeile des Plugin-Sets auf die Schaltfläche *Einstellungen*.
+. Gehe im Menü auf der linken Seite zu *Konfiguration » Globale Einstellungen*.
+. Gib im Bereich *Lieferanteneinstellungen* die Werte *Client ID* und *Client Secret* ein, die deinen Wayfair-API-Anmeldedaten entsprechen.
+. Ändere die Einstellung *Modus* zu *Live*.
+. Klicke in der Symbolleiste über den Einstellungen auf *Speichern*.
+. Wiederhole diese Schritte für jedes Plugin-Set, in dem du das Wayfair-Plugin nutzt.
+
+== Marktplatz in plentymarkets einrichten
+
+Du hast das Wayfair-Plugin installiert? Super. Nun richtest du den Marktplatz in plentymarkets ein.
+
+=== Auftragsherkunft aktivieren
+
+:referrer: Wayfair
+:referrer-option: pass:quotes[Option *Wayfair*]
+
+include::maerkte:partial$auftragsherkunft-aktivieren.adoc[]
+
+=== Plugin konfigurieren
+
+Du hast das Plugin installiert und bereitgestellt und die Auftragherkunft *Wayfair* aktiviert? Super. Dann konfiguriere jetzt das Plugin.
+
+. Öffne das Menü *Einrichtung » Märkte » Wayfair » Startseite*. +
+→ Die Wayfair-Einstellungen werden geöffnet.
+*_Tipp:_* Im Tab *Wayfair* kannst du keine Einstellungen vornehmen.
+. Nimm die Einstellungen vor. Beachte dazu die Hinweise in <<#wayfair-configuration>>. +
+. Klicke auf *Speichern*.
+*_Wichtig:_* Die Einstellungen jedes Tabs werden bei Änderungen nicht automatisch gespeichert. Klicke deshalb unbedingt auf *Speichern*, bevor du in ein anderes Tab wechselst.
+
+[[wayfair-configuration]]
+.Plugin konfigurieren
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+2+^| Tab: *Lager*
+
+| Lager zuordnen
+| 
+In diesem Tab ordnest du die Lager, die du in
+plentymarkets verwendest, den Wayfair-Lieferanten-IDs zu, die du von Wayfair erhalten hast. Die Zuordnungen bestimmen, aus welchen Lagern Bestand an Wayfair gemeldet wird und aus welchen Lagern Wayfair-Aufträge erfüllt werden, die in plentymarkets eingehen.
+
+. Klicke auf *Zuordnung hinzufügen*. +
+→ Eine Zeile für die Zuordnung wird eingeblendet.
+. Wähle aus der Dropdown-Liste links *plentymarkets Lager* ein Lager.
+*_Tipp:_* Wenn du ein neues Lager in plentymarkets erstellt hast, kann es bis zu fünf Minuten dauern, bis das Lager in der Dropdown-Liste verfügbar ist.
+*_Wichtig:_* Versuche nicht, dasselbe plentymarkets Lager mehr als einer Wayfair-Lieferanten-ID zuzuordnen.
+. Gib in das Feld *Wayfair-Lieferanten-ID* deine numerische Lieferanten-ID ein.
+. Klicke auf *Speichern*.
+. Füge bei Bedarf weitere Zuordnungen hinzu. +
+*_Wichtig:_* Du kannst derselben Wayfair-Lieferanten-ID mehrere Lager zuordnen. Prüfe dann aber das Verhalten der Einstellung *Lagerpuffer*. Wenn einer Wayfair-Lieferanten-ID mehr als ein Lager zugeordnet wurde, wird die Artikel-Lager-Zuordnung basierend auf dem Lagerbestand und dem Land des Lagers priorisiert.
+
+[.collapseBox]
+.Lager-Zuordnung entfernen
+--
+
+. Öffne das Menü *Einrichtung » Märkte » Wayfair » Startseite*. +
+→ Die Wayfair-Einstellungen werden geöffnet.
+*_Tipp:_* Im Tab *Wayfair* kannst du keine Einstellungen vornehmen.
+. Klicke auf *Lager*. +
+→ Die zugeordneten Lager werden angezeigt.
+. Suche die zu entfernende Zeile.
+. Klicke in der Zeile auf die Schaltfläche *Löschen*.
+. Klicke auf die Schaltfläche *Speichern*, sobald die gewünschten Zeilen entfernt wurden.
+--
+
+2+^| Tab *Einstellungen*
+
+| Lagerpuffer
+| Die Einstellung *Lagerpuffer* ist eine nicht negative Ganzzahl, die für jede Artikelvariante für jede Wayfair-Lieferanten-ID eine reservierte Lagermenge festlegt. Der Pufferbetrag wird abgezogen, nachdem alle anderen Bestandsberechnungen durchgeführt wurden, einschließlich der Aggregation der Bestände für mehrere plentymarkets Lager, denen dieselbe Wayfair-Lieferanten-ID zugewiesen wurde.
+
+Um den *Lagerpuffer* zu deaktivieren, lasse diese Einstellung leer oder setze sie auf *0*.
+
+| *Standard-Bestellstatus*
+| Die Einstellung *Standard-Bestellstatus* bestimmt, in welchem ​Status sich eine neue plentymarkets Bestellung nach der Erstellung durch das Wayfair-Plugin befinden soll.
+
+*Hinweis:* Die Auftragserstellung gilt nicht als Änderung des Auftragsstatus. Wenn du den Standardbestellstatus auf einen höheren als die Statuswerte für konfigurierten plentymarkets Ereignisse setzt, können einige Ereignisse fehlschlagen.
+
+| *Standardversandanbieter* +
+(veraltet)
+| Die Einstellung *Standardversandanbieter* ist eine veraltete Einstellung, die das Verhalten des Plugins nicht mehr beeinflusst.
+
+*_Wenn diese Einstellung in deinem System angezeigt wird, aktualisiere dein Plugin dringend auf eine neuere Version._*
+
+| Methode zur Artikelzuweisung
+| Die Einstellung *Methode zur Artikelzuweisung* bestimmt das Verhalten
+beim Abgleichen der Artikelvarianten von plentymarkets mit den
+Wayfair-Produkten. Es wird verwendet, wenn die Bestandslisten an Wayfair
+gesendet werden und um die angeforderten Produkte in einer
+Wayfair-Bestellung auszuwählen.
+
+[cols="1a,3a"]
+!===
+! *Variantennummer*
+! Standardmäßig wird das Feld *Variantennummer* für die Zuordnung der
+Artikel von Wayfair-Bestellungen zu Artikelvarianten von plentymarkets
+verwendet. Die anderen Optionen sind *EAN* (Barcode) und *SKU*.
+
+! *EAN*
+! Wenn die *Methode zur Artikelzuweisung* auf *EAN* eingestellt ist,
+sollte jede Artikelvariante in plentymarkets so eingerichtet werden,
+dass sie einen Barcode enthält, der die Wayfair-Lieferanten-Teilenummer
+widerspiegelt, die Wayfair in eingehenden Bestelldaten sendet.
+
+! *SKU*
+! Wenn die *Artikelzuordnungsmethode* auf *SKU* eingestellt ist,
+sollte jede Artikelvariante in plentymarkets so eingerichtet werden,
+dass sie eine Wayfair-spezifische SKU enthält, die die
+Wayfair-Lieferanten-Teilenummer widerspiegelt, die Wayfair in
+eingehenden Bestelldaten sendet.
+!===
+
+| Aufträge importieren ab
+| Die optionale Einstellung *Aufträge importieren ab* bestimmt ein Datum,
+ab dem neue Wayfair-Bestellungen als für den Import in das plentymarkets
+System berechtigt gelten. Diese Einstellung kann die Leistung
+verbessern, indem verhindert wird, dass das Wayfair-Plugin Bestellungen
+anfordert, die vor dem angegebenen Datum erstellt wurden. Es kann auch
+verwendet werden, um zu verhindern, dass das plentymarkets System
+Bestellungen vor einem gewünschten *Go-Live-Datum* annimmt.
+
+2+^| Tab *Inventar*
+
+| Tab *Inventar*
+| Das Tab *Inventar* enthält keine konfigurierbaren Einstellungen. Das Tab wird verwendet, um den Status der Synchronisierung des plentymarkets Bestands mit Wayfair zu überprüfen. Die Daten der Seite werden regelmäßig aktualisiert. Der Zeitstempel zeigt den Zeitpunkt der letzten Aktualisierung.
+
+Oben auf der Seite *Inventar* werden immer ein Symbol und eine Meldung
+angezeigt, um den allgemeinen Zustand des
+Inventarsynchronisierungsprozesses zu beschreiben.
+
+//tag::stock-infos[]
+[.collapseBox]
+.Informationen zu den Symbolen des Tabs *Inventur*
+--
+* Ein *_Kalendersymbol_* wird angezeigt, wenn das Wayfair-Plugin noch keine
+Bestandssynchronisierung versucht hat.
+    ** Dies geschieht direkt nach der Installation des Plugins.
+    ** Dies kann passieren, wenn das Plugin kürzlich aktualisiert wurde.
+    ** Die Seite ändert sich innerhalb von 15 bis 30 Minuten, sobald der Abgleich initialisiert wird.
+* Ein *_Häkchen_* wird angezeigt, wenn das Wayfair-Plugin
+den Bestand regelmäßig synchronisiert, ohne dass Probleme festgestellt
+werden.
+* Eine *_durchgestrichene Wolke_* wird angezeigt, wenn das
+Wayfair-Plugin Unregelmäßigkeiten bei der Bestandssynchronisierung
+feststellt.
+* Ein *_Pfeil nach oben zu einer Wolke_* zeigt an, dass
+ein Ereignis gerade stattfindet. Dieses Ereignis wird beschrieben, sobald es
+abgeschlossen ist.
+
+*_Wichtig:_* Fehler werden erwartet, wenn das Wayfair-Plugin kürzlich installiert
+wurde und die Ersteinrichtung noch nicht abgeschlossen wurde. Beende die Einrichtung des Plugins, bevor du die Seite *Inventar* erneut verwendest. +
+*_Tipp:_* Im Kapitel <<#WOEJONNF, Troubleshooting: Häufige Probleme>> findest du Ideen zur Lösung von Problemen bei der Bestandssynchronisierung.
+--
+//end::stock-infos[]
+
+2+^| Tab *Versandsbestätigung (ASN)*
+
+| Tab *Versandsbestätigung (ASN)*
+| Die Seite *Versandsbestätigung (ASN)* wird zum Konfigurieren der
+Versandinteraktionen zwischen plentymarkets, dem Wayfair Plugin und
+Wayfair verwendet. Die hier bereitgestellten Informationen legen das
+Verhalten für den *Versandsbestätigung (ASN) an Wayfair senden*-Prozess
+für Bestellungen fest.
+
+Das Optionsfeld oben auf der Seite enthält diese Optionen. Wayfair gibt
+Lieferanten Anweisungen zur Auswahl des richtigen Werts.
+
+[cols="1a,3a"]
+!===
+
+! *Wayfair Versand*
+! * Die Sendungen deiner Bestellungen werden von Wayfair arrangiert und
+von einem von Wayfair ausgewählten Spediteur versendet.
+* Das plentymarkets System muss Wayfair mitteilen, wann die Bestellung
+versandbereit ist.
+* Das plentymarkets System muss Tracking-Informationen von Wayfair in
+Ihre plentymarkets Bestellungen zurückerhalten.
+
+! *Selbst Versenden*
+! * Du versendest deine eigenen Bestellungen über deine eigenen Spediteure.
+* Das plentymarkets System muss Wayfair mitteilen, wenn du eine
+Bestellung versendest.
+* Das plentymarkets System muss Wayfair die Tracking-Informationen
+mitteilen (Spediteur und Tracking-Nummer).
+
+Wenn du die Option *Selbst Versende* auswählst, muss Wayfair die
+Versandinformationen von plentymarkets in Daten übersetzen, die es
+versteht. Deshalb ordnest du plentymarkets Versanddienstleistern passende Wayfair-Versanddienstleister zu.
+
+[.instruction]
+plentymarkets Versanddienstleistern passenden Wayfair-Versanddienstleister zuordnen:
+
+. Suche die von Wayfair bereitgestellten Spediteurinformationen. +
+*_Tipp:_* Wende dich bei Bedarf an johara1@wayfair.com.
+. Gib für jeden in der linken Spalte aufgeführten plentymarkets
+*Versanddienstleister* den von Wayfair bereitgestellten *SCAC Code* in
+die rechte Spalte *Wayfair-Kennziffer des Versanddienstleisters* ein.
+. Klicke unten auf der Seite auf *Speichern*.
+!===
+|===
+
+[#STP6NQ]
+=== Versand einrichten
+
+Nun richtest du den Versand ein.
+
+==== Versanddienstleister erstellen
+
+Führe die folgenden Schritte aus, um einen Wayfair-Versanddienstleister zu erstellen.
+
+[.instruction]
+Versanddienstleister erstellen:
+
+. Öffne das plentymarkets Menü *Einrichtung » Aufträge » Versand » Optionen*.
+. Wechsele in das Tab *Versanddienstleister*.
+. Klicke auf *+ Neu*. +
+→ Eine neue Zeile wird eingeblendet.
+. Fülle in dieser Zeile das Feld *Name* aus. +
+*_Tipp:_* Wir empfehlen den Namen *WayfairShipping*.
+. Wähle in der Dropdown-Liste *Versanddienstleister* die Option *WayfairShipping* Alle anderen Felder der Zeile können leer bleiben. +
+*_Tipp:_* Die Option *WayfairShipping* ist nicht verfügbar? Dieser Typ wird vom Wayfair-Plugin bereitgestellt. Stelle also sicher, dass du das Plugin korrekt installiert und bereitgestellt hast.
+. Klicke auf *Speichern*.
+
+==== Versandprofil erstellen
+
+Jede Bestellung verfügt über ein Versandprofil, das verwendet wird, um Artikel aus einer Bestellung zu versenden. Führe diese Schritte aus, um ein Versandprofil für Wayfair zu erstellen.
+
+[.instruction]
+Versandprofil erstellen:
+
+. Öffne das plentymarkets Menü *Einrichtung » Aufträge » Versand » Optionen*.
+. Wechsele in das Tab *Versandprofile*.
+. Wenn schon eine Zeile *Wayfair* vorhanden ist, klicke auf diese Zeile. + *_Oder:_* Klicke auf *Neu*. +
+→ Die Einstellungen des Versandprofils werden angezeigt.
+. Wähle deinen Wayfair-Versanddienstleister aus der angezeigten Dropdown-Liste. +
+*_Tipp:_* wenn du den Versanddienstleister wie empfohlen erstellt hast, heißt dieser Veranddienstleister *WayfairShipping*.
+. Fülle das Feld *Name* aus. +
+*_Tipp:_* Wir empfehlen den Namen *WayfairShipping*.
+. Wähle rechts neben dem Feld *Name* die Sprache aus der Dropdown-Liste.
+. Wähle im Feld *Markierung* das Symbol für Wayfair-Bestellungen (*6* und *126* sind gute Optionen, da sie das Wayfair-Farbschema widerspiegeln).
+. *_Optional:_* Ändere im Feld *Priorität* die Priorität. +
+*_Empfehlung:_* Behalte die Standardpriorität *höchste*.
+. Wähle im Feld *Mandanten (Shops)* alle Mandanten, die für Wayfair eingerichtet werden können.
+. Setze in der Liste *Auftragsherkunft* ein Häkchen neben allen *Wayfair*-Einträgen.
+. Klicke oben auf der Seite auf *Speichern*.
+
+[#1100]
+==== Versandbestätigungen automatisch senden
+
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Versandbestätigungen automatisch an Wayfair zu senden, nachdem ein Warenausgang gebucht wurde.
+
+:table-event-procedure: <<#wayfair-versandbestaetigung>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[wayfair-versandbestaetigung]]
+.Versandbestätigungen automatisch an Wayfair senden
+[cols="1,3,3"]
+|===
+|Einstellung | Option | Auswahl
+
+| *Ereignis*
+| *Auftragsänderung > Statuswechsel*
+| Status wählen, der die Versandbestätigung auslösen soll +
+*_Beispiel:_* *In Versandvorbereitung*
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Herkunft*
+| *Wayfair*
+
+| *Aktion*
+| *Plugin > Versandbestätigungen (ASN) an Wayfair senden*
+|
+|===
+
+==== [Optional] Versandprofil automatisch festlegen
+
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um für Wayfair-Aufträge das Versandprofil automatisch festzulegen.
+
+:table-event-procedure: <<#wayfair-shipping-profile>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[wayfair-shipping-profile]]
+.Versandprofil automatisch festlegen
+[cols="1,3,3"]
+|===
+|Einstellung | Option | Auswahl
+
+| *Ereignis*
+| *Neuer Auftrag*
+| 
+
+| *Filter 1*
+| *Auftrag > Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag > Herkunft*
+| *Wayfair*
+
+| *Aktion*
+| *Plugin > Auftrag > Versandprofil ändern*
+| Versandprofil für Wayfair wählen
+|===
+
+[#prepare-variations]
+== Varianten vorbereiten
+
+Bereite nun deine Varianten vor.
+
+[#750]
+=== Variantenverfügbarkeit einstellen
+
+:market-availability: Wayfair
+:option-availability: Wayfair
+
+include::partial$variantenverfuegbarkeit.adoc[]
+
+== Ersten Warenbestandsabgleich prüfen
+
+Wenn du den Marktplatz eingerichtet hast, werden deine Varianten automatisch zu Wayfair exportiert. Gehe so vor, um zu prüfen, dass der erste Warenbestandsabgleich stattgefunden hat:
+
+. Öffne das Menü *Einrichtung » Märkte » Wayfair » Startseite*. +
+→ Die Wayfair-Einstellungen werden geöffnet.
+. Klicke auf *Inventar*. +
+. Warte eine Minute, während das System die Bestandsinformationen aktualisiert.
+. Überprüfe die auf der Seite angezeigten Informationen.
+. Wenn Probleme für die vollständige Bestandssynchronisierung gemeldet
+werden: +
+Versuche, diese Probleme zu beheben, indem du die Informationen für
+das Tab *Inventur* liest, die plentymarkets Logs prüfst und das Kapitel
+<<#WOEJONNF, Troubleshooting: Häufige Probleme>> nutzt.
+
+include::page$wayfair[tag=stock-infos]
+
+[#WOEJONNF]
+== Troubleshooting: Häufige Probleme
+
+Bevor du sich an Wayfair wendest, verwende die folgende Tabelle, um Probleme im Wayfair-Plugin selbst zu diagnostizieren.
+
+[[troubleshooting-wayfair]]
+.Troubleshooting für Wayfair
+[cols="1,2a"]
+|===
+|Problem |Mögliche Ursachen
+
+|Allgemeiner Mangel an Daten, die von Wayfair stammen oder zu Wayfair
+gehen
+|* link:initial_setupmd#1-autorisierung-des-wayfair-plugins-f%C3%BCr-den-zugriff-auf-wayfair-schnittstellen[Anmeldeinformationen für das Plugin] fehlen oder sind im aktiven Plugin-Set falsch.
+* Probleme mit der Internetverbindung.
+* Vorübergehende Ausfallzeiten bei Wayfair.
+
+|In dem an Wayfair gesendeten Inventar fehlt ein Artikel
+|
+* Die Einstellung link:settings_guide.md#methode-zur-artikelzuweisung[*Methode zur Artikelzuweisung*] in den Einstellungen von Wayfair Plugin ist nicht auf den gewünschten Wert eingestellt.
+* Die Einstellung link:settings_guide.md#vollst%C3%A4ndigen-bestand-an-wayfair-senden[*Vollständigen Bestand an Wayfair senden*] ist *deaktiviert* und die Artikelvariante in plentymarkets ist nicht link:initial_setupmd#5-artikel-auf-wayfair-zum-verkauf-anbieten[als für den Wayfair-Marktplatz verfügbar markiert].
+* Die Artikelvariante in plentymarkets ist einem plentymarkets Lager zugeordnet, das keiner Wayfair-Lieferanten-ID auf der link:settings_guide.md#die-lager-seite[Lager Seite] der Wayfair-Plugin-Einstellungen zugeordnet ist.
+* Die Artikelvariante in plentymarkets hat einen leeren oder falschen Wert in dem Feld, das der Einstellung link:settings_guide.md#methode-zur-artikelzuweisung[*Methode zur Artikelzuweisung*] der Wayfair Plugin Einstellungen ausgewählt ist.
+
+|Ein an Wayfair gesendeter Inventarbetrag für einen Artikel liegt unter dem erwarteten Wert
+|
+* Keines der link:settings_guide.md#die-lager-seite[plentymarkets Lager abgestimmt auf Wayfair] hat positive Lagerbestände für die plentymarkets Artikelvariante.
+* Der Wert der link:settings_guide.md#lagerpuffer[Lagerpuffer] ist größer oder gleich der Bestandsmenge für die plentymarkets Artikelvariante in link:settings_guide.md#die-lager-seite[plentymarkets Lager abgestimmt auf Wayfair].
+
+|Es kommen keine Bestellungen von Wayfair
+|
+* Die Wayfair-Lieferanten-ID für die Wayfair-Bestellung nicht ist einem plentymarkets Lager zugeordnet auf der link:settings_guide.md#die-lager-seite[Lager Seite] der Wayfair Plugin Einstellungen.
+
+|Bestellungen von Wayfair werden nicht ordnungsgemäß mit Artikeln in plentymarkets verknüpft
+|
+* Die Einstellung link:settings_guide.md#methode-zur-artikelzuweisung[*Methode zur Artikelzuweisung*] in den Einstellungen von Wayfair Plugin ist nicht auf den gewünschten Wert eingestellt.
+* Die Artikelvariante in plentymarkets hat einen leeren oder falschen Wert in dem Feld, das der Einstellung link:settings_guide.md#methode-zur-artikelzuweisung[*Methode zur Artikelzuweisung*] der Wayfair Plugin Einstellungen ausgewählt ist.
+
+|Lager zuordnungen fehlen oder sind für Bestellungen von Wayfair falsch
+|
+* Probleme in Lager verbänden auf der link:settings_guide.md#die-lager-seite[Lager Seite] der Wayfair Plugin Einstellungen.
+* Derzeit sind einer Wayfair-Lieferanten-ID mehrere Lager zugeordnet auf der link:settings_guide.md#die-lager-seite[Lager Seite] der Wayfair Plugin Einstellungen.
+
+|Die Schaltfläche zum Herunterladen von Versandetiketten wird nicht auf der Registerkarte *Übersicht* einer Bestellung im *Versand-Center* von plentymarkets angezeigt
+|
+* Der Versand der Bestellung wurde nicht registriert.
+* Die Seite des *Versand-Center* wurde noch nicht neu geladen, nachdem die Versandregistrierung durchgeführt wurde.
+* Das Herunterladen von Dokumenten ist während der Versand Registrierung fehlgeschlagen.
+
+|Inventar Aktualisierungen werden nicht an Wayfair gesendet
+|
+* Das Wayfair-Plugin wurde gerade installiert oder aktualisiert. Verwende die link:settings_guide.md[Wayfair Einstellungen], um link:initial_setup.md#8-ersten-inventar-synchronisation[die erste vollständige Inventarsynchronisierung] zu starten, da Wayfair dies in den ersten 24 Stunden nicht automatisch tun darf.
+* link:settings_guide.md[Wayfair Einstellungen] stimmen nicht mit dem plentymarkets Setup überein. Siehe *In dem an Wayfair gesendeten Inventar fehlt ein Artikel*.
+* Konnektivitätsprobleme - siehe *Allgemeiner Mangel an Daten, die von Wayfair stammen oder zu Wayfair gehen.* oben.
+|===
