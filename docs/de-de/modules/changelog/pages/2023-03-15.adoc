@@ -6,7 +6,7 @@
 :startWeekDate: 9. März 2023
 :endWeekDate: 15. März 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/katalog-auftragsformat-benutzerdefiniertes-limit-wird-jetzt-beruecksichtigt-catalog-order-format-user-defined-limit-is-now-taken-into-account/715132
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -49,6 +49,46 @@ Das Datums im Kalender kann nun einfach ausgewählt werden. Neue Features:
 ** Lagerauswahl
 ** Unter *Auftragsstatus* können mehrere Optionen angezeigt werden.
 ** Hauptaufträge können aus der Auswahl ausgeschlossen werden.
+
+[discrete]
+=== Kaufland
+
+In den Kaufland-Katalogen gibt es nun zwei neue Felder, die dazu dienen, dass eure Varianten-Einstellung zur Warenbestandsbeschränkung berücksichtigt werden kann.
+
+Bei den neuen Feldern handelt es sich um:
+
+* *Warenbestandsbeschränkung*: Das Feld *Warenbestandsbeschränkung* ist gesperrt und fest der Varianten-Einstellung *Beschränkung* im Einstellung-Tab der Variante zugeordnet. Das ist notwendig, damit wir bei den Prozessen, die den Katalog benutzen, wissen, wie der Bestand übermittelt werden soll.
+* *Bestand für Varianten ohne Bestandsführung*: Das Feld *Bestand für Varianten ohne Bestandsführung* könnt ihr eurem Belieben nach zuordnen. Diese Zuordnung greift nur dann, wenn ihr bei der oben genannten Einstellung an der Variante die Werte *Keine* oder *Keinen WB für diese Variante* führen ausgewählt habt. Für diese Warenbestandsbeschränkungstypen könnt ihr hier also bestimmen, was für ein Bestand zu Kaufland übertragen werden soll. Die Logik arbeitet hier wie in folgender Tabelle beschrieben.
+
+[cols="3"]
+|======
+|Beschränkung |Bestand für Varianten ohne Bestandsführung |Übermittelte Zuordnung
+
+|Keine
+|Nicht zugeordnet
+|Bestand
+
+|Keine
+|Zugeordnet
+|Bestand für Varianten ohne Bestandsführung
+
+|Auf Netto-WB
+|Nicht zugeordnet
+|Bestand
+
+|Auf Netto-WB
+|Zugeordnet
+|Bestand
+
+|Keinen WB für diese Variante führen
+|Nicht zugeordnet
+|Bestand
+
+|Keinen WB für diese Variante führen
+|Zugeordnet
+|Bestand für Varianten ohne Bestandsführung
+|======
+
 
 '''
 
@@ -125,9 +165,55 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * In den überarbeiten Einstellungs-UIs unter *Einrichtung » Aufträge » Auftragstypen » Reparatur* bzw. *Einrichtung » Aufträge » Auftragstypen » Retouren* können nun bis zu 100 Werte hinterlegt werden (früher waren nur 25 Werte möglich). Beim Erstellen einer neuen Retoure / Reparatur kam es zu einem Validierungsfehler, wenn der dort eingestellte Grund größer als 25 war. Dies wurde nun korrigiert.
 
 [discrete]
+=== Kaufland
+
+Bisher wurden Produktupdates einmal täglich in einer großen CSV an Kaufland übertragen. Dort waren bis dato Produkte aller Plattformen enthalten, was allerdings dazu führte, dass die Update-Datei durch Kaufland abgelehnt wurde.
+
+Ab jetzt wird pro Plattform eine Produktupdate-CSV an Kaufland übertragen.
+
+* In der CSV für DE sind alle Produkte enthalten, die einem DE-Katalog zugeordnet sind und bei denen das Mapping für die *Sprache der plentymarkets Produktdaten* leer oder auf *DE* gesetzt ist.
+* In der CSV für SK sind alle Produkte enthalten, die einem SK-Katalog zugeordnet sind und bei denen das Mapping für die *Sprache der plentymarkets Produktdaten* leer oder auf *SK* gesetzt ist.
+* In der CSV für CZ sind alle Produkte enthalten, die einem CZ-Katalog zugeordnet sind und bei denen das Mapping für die *Sprache der plentymarkets Produktdaten* leer oder auf *CZ* gesetzt ist.
+
+[NOTE]
+.Teil 1 von 2
+======
+Diese Änderung ist der erste Teil für das funktionierende Produktupdate für alle Plattformen von Kaufland. Im zweiten Teil der Änderung wird dann auch die *Sprache der plentymarkets Produktdaten* berücksichtigt, sodass beispielsweise Produkte aus einem SK-Katalog mit deutschsprachigen Produktdaten ebenfalls in der CSV für DE enthalten sind.
+
+Ein Changelog dafür wird folgen, wenn dieser Teil ausgerollt wurde.
+======
+
+Außerdem kam es bei der Übertragung der Produktupdate-CSV an Kaufland vereinzelt zu dem Fehler `File size is not valid`. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Netto
+
+* Bei der Versandmeldung oder bei der Stornierung eines Auftrags über Lieferaufträge wird jetzt pro Auftragsposition die korrekte Menge berechnet. Dabei wird die Menge der Auftragsposition des aktuellen Lieferauftrags (Angenommene Menge 0 bei Stornierung) mit den Mengen von bereits in anderen Lieferaufträgen als versendet gemeldeten Auftragspositionen addiert.
+
+[discrete]
 === Payment
 
 * Für die Währungen KES, ANG, UAH, VND, XCD, BOB, IDR wurden keine Umrechnungskurse von unserer verwendeten API zur Verfügung gestellt. In der Vergangenheit hat dies dazu geführt, dass bei diesen Währungen immer der Umrechnungskurs auf 1 gesetzt wurde, wenn die Einstellung *Umrechnungsfaktoren täglich automatisch aktualisieren* aktiv war. Für diese Währungen ist es nun möglich, im Menü *Einrichtung » Aufträge » Zahlung » Währung* einen Umrechnungskurs zu hinterlegen, auch wenn die Einstellung *Umrechnungsfaktoren täglich automatisch aktualisieren* aktiv ist.
+
+[discrete]
+=== Prozesse
+
+* Mahnungen konnten über den Prozess nicht mehr erstellt werden. Dieser Fehler wurde behoben.
+* Nach einer Falscheingabe in der Auftragssuche (z.B. Auftrags-ID) wurde die Falscheingabe nicht gelöscht und der Fokus ging verloren. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Zalando
+
+* Im Assistenten für die Grundeinstellung für Zalando unter *Einrichtung » Assistenten » Omni-Channel* wurde in den jeweiligen *Kanal-Einstellungen* der Länder im Abschnitt *Bestandseinstellungen* die Auswahl der Vertriebslager weder korrekt geladen, noch wurden diese korrekt gespeichert.
++
+Die Ursache war, dass die Einstellung den falschen Speicherpunkt angesteuert hat und dadurch die Änderungen keine Auswirkung hatten. Der Bestandsabgleich selbst steuerte den korrekten Speicherpunkt an, wodurch der Bestandsabgleich wie bisher weiterlief und nur Änderungen dieser Einstellungen bzw. neue Kanäle nicht im Bestandsabgleich in Betracht gezogen wurden.
+* Es kam in seltenen Fällen dazu, dass der Cron-Prozess für den Auftragsimport zweimal zeitgleich lief.
++
+Dabei konnte es wiederum dazu kommen, dass der gleiche Auftrag von beiden Prozessen zum selben Zeitpunkt verarbeitet wurde und dadurch zweimal importiert wurde.
++
+Diesem Verhalten wurde nun vorgebeugt, indem der Cron-Prozess eine Markierung in der Datenbank setzt, um den Start weiterer Prozesse zu verhindern. Diese Markierung wird erst beim Abschluss des Prozesses entfernt.
+Zusätzlich wurde für den Fall eines unerwarteten Abbruchs des Prozesses eine Rückfallsicherung eingebaut, sodass diese Markierung nach einer Stunde ihre Gültigkeit verliert.
+* Im Assistenten für die Grundeinstellung für Zalando unter *Einrichtung » Assistenten » Omni-Channel* kam es in den jeweiligen *Kanal-Einstellungen* der Länder im Abschnitt *Einstellung für Eigenversand-Aufträge* zu Problemen, wenn das Startdatum leer war. Wurde der Assistent ohne Eingabe abgeschlossen, wurde automatisch das aktuelle Datum gesetzt. Dies wurde nun behoben.
 
 --
 
@@ -142,7 +228,17 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Es ist jetzt möglich in der neuen Artikel-UI Listings zu erstellen und vorhanden Listings zu öffnen. Neue Listings werden über einen Stepper erstellt.
+* Wir haben den Picker für Lagerorte und Lieferanten an den folgenden Stellen an einer Variante in der neuen Item-UI ausgetauscht:
+** Lagerort-Picker
+*** Lagerkonfiguration
+*** Wareneingang
+*** Umbuchung
+** Lieferanten-Picker
+*** Wareneingang
 
 '''
 
@@ -151,7 +247,15 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== CRM
 
+* Die Symbole für die Prioritäten im Messenger wurden geändert. Statt der Sterne kannst du jetzt die Prioritäten von *Sehr hoch* bis *Sehr niedrig* vergeben.
+
+[discrete]
+=== plentyBI
+
+* Die Begrenzung der Kennzahlen innerhalb einer einzelnen Komponenten wurde für auf 12 erhöht. Diese Änderung ist unabhängig von der verwendeten plentyBI Edition. Wenn die maximale Anzahl an Kennzahlen erreicht wurde, erscheint ein Tooltip beim Versuch eine neue Kennzahl in einer kombinierten Tabelle oder einem Diagramm zu verwenden.
 
 '''
 
@@ -160,7 +264,23 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* In einer Retoure war es unter Umständen nicht möglich, den Warenbestand für Paketbestandteile zurückzubuchen. Dies wurde behoben.
+* Der Fokus des Eingabefelds beim Drücken der Eingabetaste wurde in der Filteransicht behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* entfernt.
+
+[discrete]
+=== Fulfillment
+
+* Die Versanddienstleister CBC Logistics/ParcelOne und NetDespatch wurden nicht verwendet und daher entfernt.
 
 --
 
@@ -174,9 +294,29 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/returnsportal_55342[apoio - plentymarkets Retourenportal^]
+|1.0.2
+|-
+
+|link:https://marketplace.plentymarkets.com/dhlshipping_4871[DHL Shipping (Versenden)^]
+|3.1.24
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.3.0
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.24
+|-
+
+|link:https://marketplace.plentymarkets.com/prepayment_4758[Vorkasse^]
+|3.0.9
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.12
+|-
 
 |===
 
