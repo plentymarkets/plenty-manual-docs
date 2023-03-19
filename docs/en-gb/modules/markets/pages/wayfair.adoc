@@ -1,0 +1,529 @@
+= Wayfair
+:author: team-plenty-channel
+:keywords: Wayfair
+:description: Learn how to set up the market Wayfair in your plentymarkets system to start selling your items on Wayfair.
+:aayfair:
+:market: Wayfair
+:plugin-name: Wayfair
+//:main-client:
+:plugin-link: https://marketplace.plentymarkets.com/en/wayfair_6273
+:page-index: false
+
+The Wayfair plugin is the official plugin for using plentymarkets to
+sell items on the Wayfair marketplace. The plugin provides multiple
+integrations with Wayfair’s interfaces, including - but not limited to -
+the following operations:
+
+* Automatic retrieval of Wayfair orders, with conversion to
+plentymarkets orders
+* Automatic sending of plentymarkets inventory information to Wayfair to
+keep item availability accurate
+* Automatic transfer of Wayfair-generated shipping documents to
+plentymarkets
+* Sending order status changes from plentymarkets to Wayfair, to keep
+Wayfair customers and Wayfair Customer Support up to date.
+
+== Selling on Wayfair
+
+Wayfair is a closed marketplace. Use of the Wayfair plugin is limited to
+organizations that have registered as Wayfair suppliers.
+
+If you are not currently selling on Wayfair, please head to the Wayfair
+website and register as a partner to get started.
+
+== Preparing to use the Wayfair plugin
+
+Use of the Wayfair plugin requires *Wayfair API credentials* that have
+been granted the appropriate rights.
+
+Prior to installation, please use these instructions to contact Wayfair
+and obtain proper API credentials.
+
+=== Wayfair plugin: Getting API Credentials
+
+In order for the Wayfair plugin to connect to Wayfair’s systems, you
+need to provide your unique API credentials. To receive the API
+credentials for you organization, follow these steps:
+
+==== Send an Email to Wayfair
+
+Please send an email to your Wayfair Account Manager, and copy (CC)
+johara1@wayfair.com to request assistance:
+
+Subject : Access to plentymarkets plugin / (Name of your company)
+(Wayfair Supplier ID) Body: Your contact information. Short description
+of how you intend to use the plentymarkets plugin. Date when you are
+ready to use the Wayfair plentymarkets Plugin. You will promptly receive
+a response containing these details:
+
+Confirmation of your API access being set up. Supplier ID(s) for your
+Warehouses.
+
+==== Generate Application Credentials
+
+* Go to https://partners.wayfair.com/developer/applications.
+* Enter your Wayfair Partner Home credentials. You should be redirected
+to the Application Management page for Wayfair.
+* On the Application Management page, click the New Application button
+at the bottom of the page.
+* On the Create Application form, provide the new application’s details:
++
+Name: A useful identifier such as `[My Supplier] plentymarkets
+plugin`. 
+Description: something like `plentymarkets plugin application
+for [My Supplier] Go-Live in Fall 2020`.
+* Use the slider switch at the bottom of dialog to set it to Production,
+unless otherwise instructed by Wayfair.
+* Click Save on the Create Application dialog, which will display the
+application’s credentials - Client ID and Client Secret.
+* Copy the Client ID and Client Secret to a secure location.
++
+The Client Secret cannot be retrieved after this point and a new one
+must be generated if the original is lost. These credentials will be
+used for authorizing the Wayfair plugin for use of Wayfair’s systems.
+* Close the credentials dialog to protect the information.
+
+== Installing and setting up the Wayfair plugin
+
+=== Prerequisites
+
+* A plentymarkets system 
+* Administrative rights on the
+plentymarkets system where the Wayfair plugin will be used 
+* The plentymarkets user’s Access setting must be Admin
+* The plentymarkets user must be able to modify Plugin Sets 
+* Active Wayfair supplier status
+* Wayfair API credentials 
+* Installation of the Wayfair plugin
+
+=== Authorizing the Wayfair Plugin to access Wayfair interfaces
+
+After the plugin is installed in your plentymarkets Plugin Set, the
+plugin must be configured to use the correct credentials when connecting
+to Wayfair’s interfaces.
+
+The authorization procedure must be performed for any Plugin Set that
+contains the Wayfair plugin. *The authorization steps are as follows*:
+
+[.instruction]
+Authorizing the Wayfair Plugin to access Wayfair interfaces:
+
+. From the main plentymarkets page, go to *Plugins » Plugin set overview*.
+. Click on the Plugin Set that is linked to the client with which
+Wayfair will be used to open it.
+. Locate the Wayfair plugin from the list and click on it to open the
+configurations page.
+. In the Supplier Settings area, enter the Client ID and Client Secret
+values that correspond with your Wayfair API credentials.
+. Change the *Mode* setting to *Live*.
+. Click the *Save* button in the toolbar above the settings.
+
+=== 2. Activate order referrer Wayfair
+
+[.instruction]
+Activate order referrer Wayfair:
+
+. Go to *Setup » Orders » Order referrer*.
+. Activate Wayfair
+. Save the settings
+
+=== 3. Setting up plentymarkets for shipping through Wayfair
+
+==== Creating the Shipping Service Provider
+
+In order to create a Shipping Profile to be used for Orders, a Shipping
+Service Provider object must first be set up, which associates the
+Shipping Profile with a carrier. Follow these steps to create the
+Wayfair-specific Shipping Service Provider:
+
+[.instruction]
+Creating the Shipping Service Provider:
+
+. From the main plentymarkets page, go to *Setup » Orders » Shipping » Settings*.
+. Select the Shipping service provider tab
+. Click the New button to add a new row to the table.
+. In the new row that is created, populate the Name fields (we recommend
+`WayfairShipping' for all names).
+. In the Shipping service provider field for the row, choose the
+WayfairShipping option - this reflects the type that is provided by the
+Wayfair plugin. All other fields in the row may be left blank.
+. Click Save button
+
+==== Creating the Shipping Profile
+
+Each order has a Shipping Profile that is used for working with the
+shipping service provider to ship items from an order. Use these steps
+to set up the Wayfair-specific Shipping Profile.
+
+[.instruction]
+Creating the Shipping Profile:
+
+. From the main plentymarkets page, go to *Setup » Orders » Shipping » Settings*.
+. Select the Shipping profiles tab
+. If a Wayfair row already exists, click on it. Otherwise, click the *New*
+button to open the Shipping Profile’s settings page.
+. Select your Wayfair Shipping service provider from the menu provided
+(*WayfairShipping* if you have created the suggested Shipping Service
+Provider).
+. Populate the Name fields (we recommend `WayfairShipping` for all
+names).
+. Set the language using the menu to the right of the Name field
+. In the Flag field, choose the icon that will represent Wayfair orders
+(6 and 126 are good options, as they reflect the Wayfair color scheme)
+. In the Priority field, optionally change the priority (we recommend
+leaving it as the default, *highest* priority).
+. In the Clients (stores) field, make sure to select all stores that may
+be set up for Wayfair.
+. In the Order referrer list, place a check mark next to any
+Wayfair-related entries.
+. Click on the Save button save button. at the top of the page. You may
+need to scroll up in order to reveal the button.
+
+==== _Optional:_ selecting the Wayfair Shipping Profile automatically for Wayfair orders
+
+[.instruction]
+Optionally selecting the Wayfair Shipping Profile automatically for Wayfair orders:
+
+. From the main plentymarkets page, go to *Setup » Orders » Events*.
+. Click on Add event procedure (the + button on the bottom left-hand
+side of the page)
+. Enter a Name such as `Wayfair order Shipping Mapping`.
+. Select the event *New order* from the dropdown list.
+. Click the *Save* button save button on the dialog. The new procedure
+will now be selected, with the Settings section in view.
+. In the Settings section of the event procedure, check the Active
+checkbox
+. Click on *Add Filter* and choose *Referrer: Wayfair* in the Order category.
+. Click the *Add* button plus add button.
+. In the *Filter* section, a box should appear with a list of all available Order referrers. Place a checkmark next to all *Wayfair* order referrers.
+. Click on *Add procedure*.
+. Select *Order » Change shipping profile*.
+. Click the *Add* button to complete the dialog.
+. A *Change shipping profile* Procedure will appear in the
+Procedures area.
+. Click on the left-most carat icon collapsed carat on the left of the
+Change shipping profile Procedure’s row (this is NOT the large square
+button that also happens to have a carat icon on it) to expand the
+Procedure’s details
+. In the drop-down list on the Procedure, choose the Shipping Profile
+created for WayfairShipping
+. Click the *Save* button at the top of the page to complete the creation of the Event Procedure.
+
+=== 4. Matching items ordered on Wayfair with Item Variations in plentymarkets
+
+In order to properly handle incoming orders from Wayfair, the Wayfair
+plugin must match the Supplier Part Numbers in Wayfair’s systems with a
+specific field of Item Variations in plentymarkets. By default, the
+Wayfair plugin operates on the assumption that the Variation Number (not
+to be confused with the Variation’s ID) of an Item’s Variation in
+plentymarkets will match the Wayfair Supplier Part Number.
+
+If the Wayfair Supplier Part Numbers for your organization are to be
+reflected in an alternative field in your plentymarkets Item Variations,
+change the value of the Item Mapping Method setting and update the
+Variations accordingly.
+
+=== 5. Making items available for sale on Wayfair
+
+Items that you want to sell on the Wayfair market must be considered
+active in plentymarkets and have *Referrer: Wayfair*. The plentymarkets
+user may also choose to limit which Items are for sale on Wayfair. Note
+that Inventory and ordered items are controlled at the Variation level.
+
+=== 6. Configuring the Warehouse mappings to match Wayfair Supplier IDs.
+
+In order to update the inventory data in Wayfair’s system, you need to
+map the Warehouses in your plentymarkets system to the Supplier IDs in
+Wayfair’s system, on the Warehouses page of the plugin’s settings.
+
+=== 7. Configuring plentymarkets to send Confirmation of Delivery (ASN) to Wayfair
+
+####Setting the Wayfair Plugin to send the correct shipping information
+to Wayfair Wayfair Plugin users that wish to ship orders by using their
+own accounts (rather than using Wayfair’s shipping services) must update
+the Ship Confirmation (ASN) configuration settings to reflect their
+specific configuration.
+
+If Wayfair’s shipping services are to be used, the Wayfair plugin’s ASN
+settings should be left in their default (Wayfair Shipping) state.
+
+==== Creating an Event for plentymarkets Orders that sends shipment information to Wayfair
+
+[.instruction]
+Creating an Event for plentymarkets Orders that sends shipment information to Wayfair:
+
+. From the main plentymarkets page, go to *Setup » Orders » Events*.
+. Click on *Add event procedure* (the + button on the bottom left-hand
+side of the page).
+. Enter any Name in the appropriate field.
+. In the *Event* drop down list, select *Status change* (in the category Order
+Change).
+. In the field below Event select the status change that should initiate
+the sending of an ASN to Wayfair, such as In preparation for shipping
+. Click the Save button save button
+. You should automatically be redirected to the newly created event
+procedure. In the Settings section of the event procedure, place a
+checkmark next to Active
+. Click on the + symbol next to Filter
+. Choose Referrer in the Order category
+. Click the *Add* button.
+. In the Filter section, a box should appear with a list of all available Order referrers. Place a checkmark next to all *Wayfair* order referrers.
+. Click on the *+* next to *Procedures*.
+. Choose *Send Ship Confirmation (ASN) to Wayfair* in the *Plugins* category.
+. Click the *Add* button plus add button.
+. Click the *Save* button save button.
+
+==== First inventory synchronization
+
+Once everything has been set up, then it is time for the Wayfair plugin
+to start listing items for sale on Wayfair.
+
+* Navigate to the Inventory page in the Wayfair Market Settings.
+* Wait a minute while the system updates inventory information.
+* Review the information displayed on the page.
+* If issues are reported for the full inventory synchronization, attempt to resolve them by reviewing the instructions for the Inventory page, viewing the plentymarkets logs and using the troubleshooting guide.
+
+== Plugin customization and monitoring
+
+The Wayfair plugin presents plentymarkets users with the ability to
+customize and monitor its behavior.
+
+=== Home page
+
+The Home page is activated by clicking Home in the left-side menu or by
+clicking Wayfair in the Wayfair navigation bar. Currently, it provides
+no information.
+
+=== Warehouses page
+
+The Warehouses page is used for associating the Warehouses that the
+supplier is using in plentymarkets with the Wayfair Supplier IDs that
+have been issued to the supplier. The mappings are utilized by the
+Wayfair plugin when it reports inventory to Wayfair and also when it is
+processing Wayfair orders coming into plentymarkets. When choosing a
+relationship between Warehouses and Supplier IDs that is not one-to-one,
+make sure to review the behavior of the Stock Buffer setting. In
+addition, when more than one warehouse has been assigned to a Wayfair
+Supplier ID, item to warehouse assignment will be prioritized based on
+stock and country location of the warehouse.
+
+==== Adding a Warehouse mapping
+
+[.instruction]
+Adding a Warehouse mapping:
+
+. Click on the Add Mapping button add mapping.
+. Use the left column to choose a plentymarkets Warehouse by name.
+* If a Warehouse was recently added to the plentymarkets system, it may
+take up to five minutes to become available for use on this page.
+* Do not attempt to use the same plentymarkets Warehouse for more than
+one row on this page, as that is an unsupported configuration.
+. Use the right column to enter a numeric Supplier ID.
+. Click the Save button save once the new row(s) have been completed.
+
+==== Removing a Warehouse mapping
+
+[.instruction]
+Removing a Warehouse mapping:
+
+. Locate the row to be removed.
+. Click on the delete button delete icon in the row.
+. Click the Save button save once the desired row(s) have been removed.
+
+=== Settings page
+
+The Settings page contains general settings for the operation of the
+Wayfair plugin. Settings do not automatically save when changed. Use the
+Save button save button at the bottom of the page.
+
+==== Stock Buffer
+
+The Stock Buffer setting is a non-negative integer that sets a reserved
+amount of stock for each Item Variation, for each Wayfair Supplier ID.
+The buffer amount is subtracted after all other stock calculations are
+made, including aggregating the stocks for multiple plentymarkets
+Warehouses that have been assigned the same Wayfair Supplier ID.
+
+To disable the Stock Buffer, leave this setting empty, or set it to 0.
+
+==== Default Order Status
+
+The Default Order Status setting determines which state a new
+plentymarkets Order should be in after creation by the Wayfair plugin.
+
+*Notice*: The Order creation does not qualify as an Order status change.
+Setting Default Order Status to a value higher than configured
+plentymarkets Order Actions may prevent said Actions from taking place!
+
+==== Item Mapping Method
+
+The Item Mapping Method setting determines the behavior for matching the
+plentymarkets Item Variations to the Wayfair Products. It is used when
+the inventory listings are sent to Wayfair, and also to select the
+requested products in a Wayfair Purchase Order. The plentymarkets user
+should configure this setting to match the way their Item Variations are
+populated.
+
+* Using Variation Number as the Item Mapping Field. By default, the
+Variation Number field is used for mapping Wayfair Orders’ items to
+plentymarkets Item Variations
+* Using EAN (Barcode) as the Item Mapping Method When the Item Mapping
+Method is set to EAN, each Item Variation in plentymarkets should be set
+up to have a Barcode that mirrors the Wayfair Supplier Part Number that
+Wayfair will send in incoming order data.
+* Using SKU as the Item Mapping Method. When the Item Mapping Method is
+set to SKU, each Item Variation in plentymarkets should be set up to
+have a Wayfair-specific SKU that mirrors the Wayfair Supplier Part
+Number that Wayfair will send in incoming order data.
+
+==== Import orders since
+
+The optional *Import orders since* setting determines a date on which
+new Wayfair purchase orders are considered eligible for being imported
+into the plentymarkets system. This setting can improve performance by
+preventing the Wayfair plugin from requesting orders created before the
+specified date. It can also be used to prevent the plentymarkets system
+from accepting Orders prior to the desired go-live date. *The
+Import orders since* will update after each successful orders import
+process and will constantly reflect up to which date the process ran.
+
+=== Inventory page
+
+The *Inventory* page does not contain any settings to configure. It is
+used for checking the status of syncing the plentymarkets inventory with
+Wayfair. The page’s data refreshes on a regular basis, as denoted by the
+timestamp toward the bottom.
+
+==== Main synchronization status
+
+The top of the Inventory page always displays an icon and message to
+describe the overall health of the inventory synchronization process.
+
+* A calendar icon will appear if the Wayfair plugin has yet to attempt
+inventory synchronizations
+** This happens right after the plugin is installed
+** This may happen if the plugin was recently upgraded
+** The page will change within 15-30 minutes, as the synchronization
+system initializes
+* A cloud with a checkmark will appear if the Wayfair plugin is
+regularly synchronizing inventory without detecting any issues
+* An icon with a crossed-out cloud will appear if the Wayfair plugin
+detects irregularities in inventory synchronization
+** Errors are expected if the Wayfair plugin was recently installed and
+the setup process has not been completed yet. Finish setting up the
+plugin prior to using the Inventory page again
+** Details may appear lower on the page, to help explain what is wrong.
+** View the plentymarkets logs to obtain error details
+** View the Wayfair plugin’s troubleshooting guide for ideas on how to
+solve inventory synchronization issues
+
+===== Synchronization details
+
+* When it is possible to do so, the Inventory page will provide details
+to support the main status that is displayed at the top of the page
+** A calendar icon indicates a piece of information that is not yet
+available
+** A cloud icon with a checkmark indicates a positive event
+** An icon with a crossed-out cloud indicates a negative event
+** An icon with an arrow pointing upwards to a cloud indicates that an
+event is currently happening and will be reported on once it has been
+completed
+
+=== Ship Confirmation (ASN) page
+
+The Ship Confirmation (ASN) page is used for configuring the shipment
+interactions between plentymarkets, the Wayfair Plugin and Wayfair. The
+information set here will inform the Send Ship Confirmation (ASN) to
+Wayfair Order Procedure that the Wayfair Plugin provides.
+
+==== Shipping type
+
+The radio button at the top of the page has these options. During
+Wayfair plugin onboarding, Wayfair will instruct on which option is
+appropriate for the plentymarkets user.
+
+* Wayfair shipping
+** Your orders’ shipments are arranged by Wayfair, to be shipped by a
+carrier chosen by Wayfair
+** Your plentymarkets system needs to Wayfair when the order is ready
+for shipment
+** Your plentymarkets system needs to get tracking information back from
+Wayfair
+* Own account shipping
+** You ship your own orders via your own carriers
+** Your plentymarkets system needs to tell Wayfair when you are shipping
+an order
+** Your plentymarkets system needs to tell Wayfair the tracking
+information (carrier and tracking number)
+
+==== Matching plentymarkets Carriers to Wayfair Carriers
+
+When you choose the Own Account shipping option, Wayfair needs to
+translate the plentymarkets shipping information into data it
+understands.
+
+[.instruction]
+Matching plentymarkets carriers to Wayfair carriers:
+
+. Locate the carrier information provided by Wayfair. Contact johara1@wayfair.com if necessary.
+. For each plentymarkets-side Shipping Carrier listed on the left-side column, enter the Wayfair-provided *SCAC code* in the right-side Wayfair carrier column.
+. Click *Save* at the bottom of the page.
+
+== Troubleshooting: common issues
+
+Is the Wayfair Plugin not working as expected? Here is a list of common
+issues that may occur:
+
+[[troubleshooting-wayfair]]
+.Troubleshooting for Wayfair
+[cols="1,3a"]
+|===
+|Issue |Possible causes
+
+|General lack of data coming from Wayfair or going to Wayfair
+|
+* Missing or incorrect credentials for the Wayfair Plugin in the active Plugin Set.* Internet connectivity issues.
+* Temporary Wayfair downtime.
+
+|An item is missing from inventory sent to Wayfair
+|
+* The Item Mapping Method setting in Wayfair's settings is not set to the desired value.
+* The Variation in plentymarkets is associated with a plentymarkets Warehouse that is not mapped to a Wayfair Supplier ID on the Warehouses page of the Wayfair settings.
+* The plentymarkets Item Variation has an empty or incorrect value in the field that is associated with the Item Mapping Method setting in Wayfair's settings.
+
+|Inventory amount sent to Wayfair for an item is less than the expected
+value
+|
+* None of the plentymarkets Warehouses associated with Wayfair
+currently contain positive inventory for the plentymarkets Item
+Variation.
+* The Stock Buffer setting's value is greater than or equal to
+the current amount of inventory for the plentymarkets Item Variation in
+plentymarkets Warehouses associated with Wayfair .
+
+|No orders coming from Wayfair
+|
+* The Wayfair Supplier ID for the Wayfair Purchase Order is not mapped to a plentymarkets Warehouse on the Warehouses page of the Wayfair settings.
+
+|Orders coming from Wayfair are not properly getting associated with
+Items in plentymarkets
+|
+* The Item Mapping Method setting in Wayfair's settings is set to the incorrect value.
+* The plentymarkets Item Variation has an empty or incorrect value in the field that is associated with the Item Mapping Method setting in Wayfair's settings.
+
+|Warehouses missing or incorrect for Order coming from Wayfair
+|
+* Issues in Warehouse assignments on the Warehouses page of the Wayfair settings.
+* Multiple Warehouses associated with one Wayfair Supplier ID on the Warehouses page of the Wayfair settings.
+
+|Shipping label download button does not appear in the Overview tab of an Order in the plentymarkets Shipping centre
+|
+* Order's shipment has not been registered.
+* Shipping Centre was not yet refreshed after shipment registration was performed.
+* Document downloading failed during the shipment registration process.
+
+|Inventory updates not being sent to Wayfair
+|
+* Wayfair settings do not match the plentymarkets setup - see *An item is missing from inventory sent to Wayfair.*
+* Connectivity issues - see *General lack of data coming from Wayfair or going to Wayfair.*
+|===
