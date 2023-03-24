@@ -33,14 +33,14 @@ In case of certain events, e.g. if a new order is placed in your plentyShop or w
 The following sub-chapters describe which preparatory settings are needed so that you can work with the EmailBuilder.
 
 [#assign-rights]
-=== Assigning rights for back end users
+=== Assigning rights
 
 :rights-purpose: work with the EmailBuilder
-:right-one: pass:quotes[*CRM > EmailBuilder > Show*]
+:right-one: pass:quotes[*CRM > EmailBuilder > Read*]
+:right-two: pass:quotes[*CRM > EmailBuilder > Update*]
 :right-two: pass:quotes[*CRM > EmailBuilder > Create*]
-:right-three: pass:quotes[*CRM > EmailBuilder > Update*]
 :right-four: pass:quotes[*CRM > EmailBuilder > Delete*]
-:right-five: pass:quotes[in the area *Menu visibilities*: *CRM > EmailBuilder*]
+:right-five: pass:quotes[in simple mode: *CRM > EmailBuilder > See*]
 
 include::_includes:partial$rights.adoc[]
 
@@ -107,6 +107,14 @@ All emails are only sent to the saved email address. This allows you to test the
 |====
 --
 
+////
+[TIP]
+.Entering newsletter login details
+====
+Go to *Setup » Client » [Select client] » Email » Newsletter*. Enter the login details to use the newsletter service that is integrated in plentymarkets. For further information, refer to the xref:crm:sending-newsletters.adoc#200[Entering newsletter login details] chapter of the xref:crm:sending-newsletters.adoc#[Newsletters] page of the manual.
+====
+////
+
 [#email-signature]
 === Saving the email signature
 
@@ -115,7 +123,7 @@ Go to the *Email accounts* assistant in the *Setup » Assistants » Basic setup*
 [IMPORTANT]
 .Note the priority of the signature
 ====
-The signature that was saved for a user in his or her user account in the *Setup » Settings » User » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
+The signature that was saved for a user in his or her user account in the *Setup » Account management » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
 *_This means:_* If you insert, for example, the variable `Signature in HTML format` or `Signature in plain text` in the email template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Email accounts* assistant in the *Signature* step is used.
 ====
 
@@ -224,6 +232,13 @@ Further options how to automate the email despatch to your customers are describ
 [#email-messenger-integration]
 === Messenger integration
 
+[IMPORTANT]
+.Step can only be activated when *Messenger configuration* assistant has been completed
+====
+You can only activate the Messenger service in this step once you have completed the *Messenger configuration* assistant before. +
+*_Tip:_* You can finalise the *Email accounts* assistant first and then complete the *Messenger configuration* assistant. Afterwards, come back to this assistant to activate the Messenger service and carry out further setting for the Messenger.
+====
+
 Go to *Setup » Assistants » Basic setup* and open the *Email accounts* assistant. In the *Messenger integration* step, determine whether all sent emails and attachments should be collected in the xref:crm:messenger-testphase.adoc#[Messenger]. Furthermore, you can decide in which inbox the emails should be collected and which tags should be assigned to the conversations.
 
 [.collapseBox]
@@ -235,8 +250,8 @@ Go to *Setup » Assistants » Basic setup* and open the *Email accounts* assista
 |====
 |Setting |Explanation
 
-| *Activate service*
-a| If you want to start collecting the emails in the messenger, activate the button *Activate Messenger integration* (material:toggle_on[role=skyBlue]). +
+| *Activate Messenger integration*
+a| If you want to start collecting the emails in the Messenger, activate the button *Activate service* (material:toggle_on[role=skyBlue]). +
 The emails from the following plentymarkets areas will be saved and shown in the messenger: 
 
 * Automatic despatch
@@ -480,6 +495,12 @@ If you are not satisfied with the result, edit the content of your footer again.
 === Creating a template
 
 Now create the template and save basic settings such as the name, the subject, CC and BCC and select the appropriate <<#create-header, header>> and <<#create-footer, footer>> for the template. Proceed as described below to create a new template.
+
+[IMPORTANT]
+.Important: Add header and footer in the corresponding language
+====
+If you created a template in <<#add-language, multiple languages>>, remember to create also the header and footer in these languages and to link them with the template. Otherwise, the template cannot be sent.
+====
 
 [TIP]
 .Switching between multiple templates
@@ -748,7 +769,9 @@ In the editor, you can find a selection of widgets whose contents are already pr
 
 For example, you will find in the *Order items* widget a pre-defined list with the most important variables around the ordered item such as item name, the number of ordered items, the prices, the shipping costs and the total invoice amount. However, you can adjust the content at any time according to your needs and add further column names and individual items.
 
-//// 
+////
+TODO: Screenshot erneuern und Text wieder einbinden, sobald das Auftragspositionen-Widget gefixed wurde.
+
 <<#image-emailbuilder-widget-order-items>> shows the editing mode of the predefined *Order items* widget.
 
 [[image-emailbuilder-widget-order-items]]
@@ -937,9 +960,9 @@ Creating a default template:
 If you do not want to create the default template within a folder, click on the start page of the *CRM » EmailBuilder* menu in the bottom left on material:add[] *Add* material:play_arrow[] and select material:description[] *Template* afterwards. The template will then be created on the first level and does not belong to a folder.
 
 [#default-template-adjust-subject]
-==== Adjusting the subject
+==== Adjusting the default template’s subject
 
-As soon as the default template is created, you can see the prefilled content in the toolbar. Adjust the subject by clicking on *Language-dependent settings* (material:translate[]) in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. Also in this area, you can adjust the xref:crm:emailbuilder.adoc#examples-custom-styles[custom styles] of the template such as the template width and font size.
+As soon as the default template is created, you can see the prefilled content in the toolbar. Adjust the subject by clicking on *Language-dependent settings* (material:translate[]) in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. Also in this area, you can adjust the xref:crm:emailbuilder.adoc#examples-custom-styles[custom styles] of the template such as the template width and font size and define the <<#intable-template-settings-number-format, number format>>, <<#intable-template-settings-date-format, date format>> and <<#intable-template-settings-time-format, time format>> for your templates.
 
 [#edit-default-template]
 ==== Editing the default template
@@ -956,7 +979,6 @@ Would you like to know which default templates are already available in the Emai
 [.collapseBox]
 .Default templates in the EmailBuilder and their subjects
 --
-
 *English default templates in the EmailBuilder and their subjects*
 
 [[table-default-templates-english]]
@@ -1000,7 +1022,6 @@ Would you like to know which default templates are already available in the Emai
 
 |Shop: Order confirmation
 |Order confirmation for your order with ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125;
-
 |====
 
 *German default templates in the EmailBuilder and their subjects*
@@ -1174,20 +1195,22 @@ Editing a template:
 . Carry out the changes. Note <<#table-emailbuilder-create-template>>.
 . *Save* (material:save[]) the settings.
 
-Besides the language-dependent settings where you can <<#default-template-adjust-subject, adjust the subject>> and select static attachments for your default template, for example, you can also adjust the default template’s content by clicking on material:edit[]. 
+Besides the language-dependent settings where you can <<#adjust-subject, adjust the subject>> and select static attachments for your template, for example, you can also adjust the template’s content by clicking on material:edit[]. 
 
 In the *Settings* area of the template, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 3 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
 
 [#adjust-subject]
-=== Adjusting the subject
+=== Adjusting the template’s subject
 
-As soon as the template is created, you can see the prefilled content in the toolbar. Adjust the subject by clicking on *Language-dependent settings* (material:translate[]) in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. Also in this area, you can adjust the xref:crm:emailbuilder.adoc#examples-custom-styles[custom styles] of the template such as the template width and font size.
+As soon as the template is created, you can see the prefilled content in the toolbar. Adjust the subject by clicking on *Language-dependent settings* (material:translate[]) in the top right corner. In this area, you can also select up to 3 static attachments that are attached to the email template. Also in this area, you can adjust the xref:crm:emailbuilder.adoc#examples-custom-styles[custom styles] of the template such as the template width and font size and define the <<#intable-template-settings-number-format, number format>>, <<#intable-template-settings-date-format, date format>> and <<#intable-template-settings-time-format, time format>> for your templates.
 
 [#add-language]
 === Adding a language to the template
 
 You can add the following languages to your template, your header and your footer:
 
+* All
+** Select *All* if you use your company logo in the header only and therefore don’t need to take into account any content-related adjustments or a translation to another language.
 * German
 * English
 * Bulgarian
@@ -1213,7 +1236,7 @@ Let’s assume, you have created a shipping confirmation in English and added wi
 [IMPORTANT]
 .Important: Add header and footer in the corresponding language
 ====
-If you created a template in multiple languages, remember to create also the header and footer in these languages and to link them with the template.
+If you create a template in <<#add-language, multiple languages>>, remember to create also the header and footer in these languages and to link them with the template. Otherwise, the template cannot be sent.
 ====
 
 [#copy-template]
@@ -2094,27 +2117,6 @@ The QR code is shown as an URL in the email of your customers. After clicking on
 | $ItemWarehouseID
 
 |====
-
-[TIP]
-.More twig expressions for the item list widget
-====
-In the item list widget, you can also use the twig expressions listed in the following. Note that these values are only available as twig expressions and can therefore _not_ be found in the list of available variables for the item list widget in the EmailBuilder.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountGross&#125;&#8288;&#125; 
-
-* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountNet&#125;&#8288;&#125;
-
-* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceGross&#125;&#8288;&#125;
-
-* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceNet&#125;&#8288;&#125;
-
-* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsGross&#125;&#8288;&#125;
-
-* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsNet&#125;&#8288;&#125;
-
-* &#123;&#8288;&#123;order.formattedSubtotals.vats&#125;&#8288;&#125;
-
-====
 
 [#variables-order-shipping]
 ==== Variables: Order / Shipping

@@ -1,0 +1,65 @@
+= Praxisbeispiel: 301-Weiterleitungen
+:tags: Praxisbeispiel, 301, Weiterleitung 
+:description: In diesem Praxisbeispiel werden dir unterschiedliche 301-Weiterleitungen gezeigt.
+:author: Dennis Schulze
+
+Hier findest du weitere Praxisbeispiele zum Thema 301-Weiterleitungen. Diese Seite setzt vorraus, dass du die Grundlagen der 301-Weiterleitungen verstehst. Bist du mit den Grundlagen noch nicht vertraut, findest du diese unter xref:business-entscheidungen:domains.adoc#265[Domains], wenn du die Box URL Weiterleitungen aufklappst.
+
+[#100]
+== Beispiel für eine explizite Weiterleitung
+
+Eine explizite Weiterleitung leitet die Quell-URL dann weiter, wenn sie direkt auf den Domain-Namen und gleichzeitig das Ende der URL darstellt: `deine-domain.de/mode/herren`.
+
+Dabei symbolisiert das Zirkumflex ^ den Stringanfang und das Dollarzeichen $ das Stringende. Durch diese Syntax vermeidest du, dass es zu unerwünschten Weiterleitungen oder Endlosweiterleitungen kommt, wenn du mehrere Zeilen an Weiterleitungen nutzt die z.B. /mode/hosen/ als Quell-URL enthalten. Die Weiterleitung sieht in diesem Fall wie folgt aus:
+`^/mode/hosen/$;/mode/herren/hosen/;301;L`
+
+[#200]
+== Trailing-Slash Beispiele
+
+Würde die folgende Weiterleitung auch `/emotion-persoenlichkeit/geniesser` erfassen?:
+
+`^/emotion-persoenlichkeit/geniesser/*;/thema/essen-trinken-genuss;301;L`
+
+Die Antwort lautet: Nein, diese wäre nicht mit inbegriffen. Wenn es nur einen Link gibt, der mit `/emotion-persoenlichkeit/geniesser` beginnt und dieser auch weiterleiten soll, kann die Weiterleitung etwas allgemeiner gehalten werden:
+
+`^/emotion-persoenlichkeit/geniesser*;/thema/essen-trinken-genuss;301;L`
+
+Der Unterschied zwischen den beiden Weiterleitungen ist das Trailing-Slash hinter `geniesser`, welches in der unteren Weiterleitung weggelassen wurde. Bei dem Trailing-Slash handelt es sich um ein optionales Zeichen, doch wenn es fehlt, würden alle URL's weitergeleitet werden, die mit `/emotion-persoenlichkeit/geniesser` beginnen:
+
+* `/emotion-persoenlichkeit/geniesser`**-lorem-ipsum**
+
+* `/emotion-persoenlichkeit/geniesser`**loremimpsum**
+
+Diese URLs würden in unserem Beispiel auf `/thema/essen-trinken-genuss;301;L` weiterleiten.
+
+[#300]
+== Beispiele für Asterisk in Quell- und Ziel-URL
+
+Wenn du zusätzlich zum Asterisk der Quell-URL ein Asterisk hinter der Ziel-URL setzt: `^/emotion-persoenlichkeit/geniesser*;/thema/essen-trinken-genuss*;301;L`, sieht die Weiterleitung wie folgt aus:
+
+[cols="2"]
+|====
+|Quelle
+|Ziel
+
+|/emotion-persoenlichkeit/geniesser
+|/thema/essen-trinken-genuss
+
+|/emotion-persoenlichkeit/geniesser/
+|/thema/essen-trinken-genuss/
+
+|/emotion-persoenlichkeit/geniesser -irgendwas
+|/thema/essen-trinken-genuss -irgendwas
+
+|/emotion-persoenlichkeit/geniesser abcdefg
+|/thema/essen-trinken-genuss abcdefg
+|====
+
+[#400]
+== Weiterleitung mit URL-Codierung
+
+Beinhaltet eine Weiterleitung URL-Codierungen kommt es zu Problemen, da die Weiterleitung Semikolons als Trennzeichen nutzt, um z.B. Quell- und Ziel-URL von einander zu unterscheiden. Somit würde die Syntax der Weiterleitung durch Semikolons der URL-Codierung fehlerhaft sein. Zudem erkennen die Weiterleitungen keine Parameter in der URL.
+
+
+
+
