@@ -69,6 +69,11 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * In einer Retoure war es unter Umständen nicht möglich, den Warenbestand für Paketbestandteile zurückzubuchen. Dies wurde behoben.
 * Der Fokus des Eingabefelds beim Drücken der Eingabetaste wurde in der Filteransicht behoben.
 
+[discrete]
+=== Prozesse
+
+* Nach der Veröffentlichung der neuen Rechte- und Rollenansicht kam es in den Prozessen bei der Zuweisung und Auswahl von Rollen zu Seiteneffekten. Dieser Fehler wurde behoben. Außerdem wurde die Sortierung der Rollen angepasst, sodass diese nun nach Namen sortiert werden.
+
 '''
 
 [discrete]
@@ -94,7 +99,88 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aktionsmanager
 
+* Im Aktionsmanager gibt es nun die Möglichkeit, nach Tags zu filtern oder diese am Auftrag zu setzen oder zu entfernen.
+
+[discrete]
+=== Amazon
+
+Es wurden zwei neue Typen für Auftragsartikeleigenschaften ergänzt:
+
+. Typ-ID 95: URL zu einer externen Datei mit Kundenanpassungen des Artikels
+. Typ-ID 96: URL zu einer externen Seite mit Kundenanpassungen des Artikels
+
+In diesen werden an Auftragsartikeln jetzt für Custom-Artikel die Links zu den gewählten Anpassungen der/des Endkund:in hinterlegt.
+Über den Link des Typs 95 kann eine Datei heruntergeladen werden, welche die notwendigen Daten in unterschiedlichen Datentypen (XML, JSON, SVG, JPG) bereitstellt.
+Über den Link des Typs 96 gelangt man in die Übersicht zu den gewünschten Anpassungen in der Seller Central.
+
+Typ-ID 96 steht nur zur Verfügung, wenn der Auftrag über einen Auftragsbericht importiert wurde. Wenn der Auftrag über API importiert wurde, z.B. über den nächtlichen Backup-Import, steht der Link nicht zur Verfügung, da er auch in der API nicht zur Verfügung steht.
+
+[IMPORTANT]
+.Nur via REST-API
+======
+Diese beiden Eigenschaftstypen sind zum aktuellen Zeitpunkt nicht über die UI erreichbar. Lediglich via REST können diese Informationen abgerufen werden.
+======
+
+[discrete]
+=== Amazon-MFN
+
+Der Amazon-Bericht für den Amazon-MFN-Auftragsimport (`GET_ORDER_REPORT_DATA_INVOICING`) enthält keine Informationen zum Amazon-Geschenkservice. Deshalb werden ab sofort die folgenden Informationen innerhalb von 5 Minuten über einen separaten Prozess nachträglich importiert:
+* Geschenkpapierart
+* Geschenkpapierpreis
+* Geschenknachricht (optional)
+
+[discrete]
+=== Artikel
+
+* Die Werkzeugleisten der Artikel- sowie Variantenansicht sind nun über die MyView konfigurierbar. Die Werkzeugleisten müssen allen individuellen Ansichten nachträglich hinzugefügt werden. Die Toolbars befinden sich immer ganz oben in den Ansicht und können nicht weggescrollt werden.
++
+[IMPORTANT]
+.To-Do
+======
+Da die Werkzeugleisten nun Teil der MyView sind, müssen sie allen bereits erstellten individuellen Ansichten nachträglich hinzugefügt werden. Im Standard sind sie bereits enthalten. Deshalb musst du im Zuge des Updates folgende Schritte durchführen, wenn du bereits eigene Ansichten verwendest und diesen die Werkzeugleisten hinzufügen möchtest:
+
+. Öffne die Artikelansicht.
+. Wähle deine eigene Ansicht aus.
+. Wechsele in den Editiermodus der Ansicht.
+. Ziehe die Werkzeugleiste in die Ansicht an erste Stelle.
+. Konfiguriere die Werkzeugleiste nach eigenen Vorlieben.
+. Speicher die Ansicht mit der konfigurierten Werkzeugleiste.
+. Wiederhole die Schritte 2-6 für deine anderen eigenen Ansichten.
+. Wiederhole die Schritte 2-6 für deine Ansichten auf Variantenebene.
+======
+* Die Externe ID kann nun in der Artikel/Varianten-Übersicht als Spalte hinzugefügt werden.
+* Die Markierungen in der Übersicht haben jetzt einen Tooltip, der den Namen und die ID der Markierung anzeigt.
+
+[discrete]
+=== CRM
+
+* Im Messenger wurden neue Gruppenaktionen im Kontextmenü integriert:
+** *Typ und Status der Konversationen ändern*
+** *Deadline der Konversationen ändern*
+** *Priorität der Konversationen ändern*
+** *Konversationen abonnieren*
+** *Konversationen nicht mehr abonnieren*
+
+[discrete]
+=== Ereignisaktionen
+
+* In den Ereignisaktionen ist es nun möglich, bestehende Tags eines Auftrags zu ignorieren. Um dies zu tun, müssen ein oder mehrere Tags hinzugefügt werden, die dann am Auftrag gesetzt sind. Diese Option ist verfügbar, sobald man mindestens ein Tag hinzufügt.
+
+[discrete]
+=== Kataloge
+
+* Beim Katalog für Aufträge wurden die folgenden Möglichkeiten hinzugefügt:
+** Tags exportieren
+** Nach Tags filtern
+** Tags als Exportaktion setzen
+
+[discrete]
+=== Prozesse
+
+* In der Auftragsabwicklung sowie in der Subaktion *Tags hinzufügen/entfernen* ist es nun möglich, bestehende Tags eines Auftrags zu ignorieren. Um dies zu tun, müssen ein oder mehrere Tags hinzufügt werden, die dann am Auftrag gesetzt sind. Diese Option ist verfügbar, sobald man mindestens ein Tag hinzufügt.
 
 '''
 
@@ -103,7 +189,46 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== CRM
 
+* Die Suchparameter im Filter *Kontaktdaten* im Menü *CRM » Kontakte* und *CRM » Schnellsuche* wurden angepasst. In diesem Feld kannst du nach den folgenden Werten suchen:
+** Vorname und Nachname des Kontakts
+** Vorname und Nachname aus der Adresse
+** Firmenname aus der Adresse (address.name1)
+** Zusätzliche Adressinformationen (address.name4)
+** Externe Nummer des Kontakts
+** Kundennummer
+** Firmenname
+** UstId-Nr. der Firma
+** eBay-Name des Kontakts
+
+[discrete]
+=== Shopify-App
+
+Am 10. Januar haben wir ein erstes To-do zum Thema neue Shopify-Fullfilment-API veröffentlicht. Darin wurdest du aufgefordert, deiner Shopify-App zusätzliche Berechtigungen zu erteilen.
+
+Jetzt wird es ernst! Denn ab sofort nutzt plentymarkets die neue Shopify-Fullfilment-API. Das heißt, dass deine Fulfillment-Abläufe nicht mehr funktionieren, wenn du die Berechtigungen nicht erteilt hast.
+
+Wenn du die Berechtigungen noch nicht erteilt hast, musst du deiner plentymarkets App für Shopify jetzt DRINGEND diese zusätzlichen Berechtigungen erteilen:
+
+* `read_assigned_fulfillment_orders`
+* `write_assigned_fulfillment_orders`
+* `read_merchant_managed_fulfillment_orders`
+* `write_merchant_managed_fulfillment_orders`
+
+*_Hintergrund_*: Diese Änderung der Berechtigungen ist erforderlich, weil Shopify seine Fulfillment-API aktualisiert und wir die Fulfillment-Informationen deshalb nicht mehr wie bisher an die Shopify-API senden können. Shopify hat link:https://shopify.dev/api/release-notes/2022-07#breaking-changes[diese Änderung^] schon länger link:https://shopify.dev/apps/fulfillment/migrate[angekündigt^].
+
+[IMPORTANT]
+.To-Do
+======
+Damit deine Fulfillment-Abläufe weiterhin funktionieren, führe folgende Schritte aus:
+
+. Melde dich in deinem Shopify-Dashboard an. +
+Du wirst aufgefordert, die App zu aktualisieren.
+. Aktualisiere die App. Klicke dazu auf *App aktualisieren*. +
+Damit ist sichergestellt, dass dein Shopify-Shop für die neue Fulfillment-API bereit ist.
+======
 
 '''
 
@@ -112,7 +237,20 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== CRM
 
+* Wenn man eine mit dem EmailBuilder erstellte Vorlage über die Vorschau im Auftrag geöffnet hat, wurden weder der Empfängername noch die E-Mail-Adresse angezeigt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Kataloge
+
+* Das Limit in den Exporteinstellungen wird nun im Auftragsformat berücksichtigt.
+
+[discrete]
+=== POS
+
+* Wenn zweimal derselbe Artikel in der Rollenden Kommissionierung vorhanden ist, aber mit unterschiedlichen Bestelleigenschaften, wurden diese nicht einzeln angezeigt. Dieses verhalten wurde nun behoben.
 
 --
 
@@ -126,13 +264,66 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/enderecoaddressautocomplete_6622[Adressprüfung und Adresskorrektur mit Endereco^]
+|2.1.4
+|-
+
+|link:https://marketplace.plentymarkets.com/avalex_5588[avalex - Automatisch sichere Rechtstexte^]
+|3.0.2
+|-
+
+|link:https://marketplace.plentymarkets.com/dhlshipping_4871[DHL Shipping (Versenden)^]
+|3.1.25
+|-
+
+|link:https://marketplace.plentymarkets.com/dpdshippingservices_6320[DPD Versand Services^]
+|1.7.17
+|-
+
+|link:https://marketplace.plentymarkets.com/edon_6618[FairGeben^]
+|1.6.1
+|Aktion `EDON \| Fusioniert mehrere Spendenartikel einer Order zu einem einzigen` von allen Ereignissen entfernen (*Einrichtung -> Aufträge -> Ereignisse -> Auftragsanlage -> Neuer Auftrag*)
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.16.0
+|-
+
+|link:https://marketplace.plentymarkets.com/wallee_5038[wallee E-Commerce Hub^]
+|2.0.35
+|-
+
+|link:https://marketplace.plentymarkets.com/couponstatusplugin_55376[Widget - Gutschein Guthaben^]
+|1.0.2
+|-
 
 |===
 
 Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+Warehouse-App::
++
+--
+
+[discrete]
+=== Neu
+
+Folgende Funktionalität wurde in Version 1.0.7 der *plentymarkets Warehouse App* hinzugefügt.
+
+* Eine neue Funktion zur Bestandskorrektur wurde hinzugefügt. Die Funktion muss im Menü *Einstellungen » Sonstiges* aktiviert werden. Danach wird innerhalb der Funktionen *Lagerort inspizieren* und *Artikelsuche im Tab Bestand* jeweils ein Shortcut angezeigt, über den Bestände korrigiert werden können.
+
+[discrete]
+=== Behoben
+
+Folgende Probleme wurden in Version 1.0.7 der *plentymarkets Warehouse App* behoben.
+
+* Innerhalb der Funktion Rollende Kommissionierung wurde keine Fehlermeldung angezeigt, wenn für den Auftrag benötigte Artikelmengen nur teilweise gepickt wurden. Dieses Verhalten wurde behoben, sodass in diesem Fall nun ein Fehlerdialog angezeigt wird.
+* Beim Filtern nach Lagerortzwecken wurden nur die Lagerortvorschläge durchsucht. Dieses Verhalten wurde behoben, sodass nun sämtliche im System vorhandenen Lagerorte durchsucht werden. Diese Fehlerbehebung greift für alle Funktionen, in denen nach Lagerorten gesucht werden kann.
+* Beim Buchen von Wareneingängen aus Nachbestellungen wurden fälschlicherweise auch Artikel in der Liste angezeigt, die im plentymarkets Backend bereits storniert wurden. Dieses Verhalten wurde behoben.
+* Der Eintrag *Konsolidieren* wurde auf dem Menü entfernt.
+* Rabatte im Wareneingang konnten nicht auf 0% gesetzt werden. Dieses Verhalten wurde behoben.
+* Wenn im Wareneingang in der Lagerortsuche für eine Variante nur 1 Lagerort vorgeschlagen werden sollte, wurde dieser nicht angezeigt. Dieses Verhalten wurde behoben.
 
 --
 
