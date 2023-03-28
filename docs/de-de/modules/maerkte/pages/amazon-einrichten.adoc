@@ -83,10 +83,151 @@ Amazon-spezifische Einstellungen in Versandprofil vornehmen:
 *_Hinweis:_* Wenn du keine Werte aus den Dropdown-Listen wählst, werden die Standardwerte aus dem Versandprofil übertragen.
 . Wiederhole diese Einstellungen für alle Versandprofile, die du für Amazon verwendest.
 
+[#3100]
+[#3110]
+== Warenbestand für ausstehende Aufträge reservieren
+
+Ausstehende Amazon-Aufträge werden in Status *[1] Unvollständige Daten* in dein plentymarkets System importiert und verbleiben in diesem Status bis Amazon den Auftrag freigibt. Bis zur Freigabe werden weder die Rechnungs-/Lieferadresse noch Artikelpreise am Auftrag gespeichert. Nach der Freigabe durch Amazon wird der Auftrag aktualisiert und die dazugehörigen Adressen und Preise werden gespeichert. Die Warenbestandsautomatik entscheidet, in welchen Status der Auftrag rutscht.
+
+Falls Amazon den Auftrag nicht freigibt, wird der Auftrag nicht aktualisiert, sondern automatisch in Status *[8] Storniert* verschoben.
+
+Es gibt zwei Möglichkeiten, den Warenbestand für ausstehende Aufträge in plentymarkets zu reservieren: mit einer Ereignisaktion oder direkt in den Auftragsgrundeinstellungen.
+
+[tabs]
+====
+Ereignisaktion einrichten::
++
+--
+Mit der folgenden Ereignisaktion wird der Auftrag von Status 1 in einen Status verschoben, bei dem Warenbestand reserviert wird.
+
+:table-event-procedure: <<#ereignisaktion-auftragsstatus-aktualisieren>>
+
+include::_includes:partial$event-procedure-tabbed.adoc[]
+
+[[ereignisaktion-auftragsstatus-aktualisieren]]
+.Ereignisaktion zum automatischen Aktualisieren von Auftragsstatus
+[cols="1,3,3"]
+|===
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Neuer unvollständiger Auftrag*
+|
+
+| *Filter 1*
+| *Auftrag &gt; Auftragstyp*
+| *Auftrag*
+
+| *Filter 2*
+| *Auftrag &gt; Herkunft*
+| *Amazon-Herkünfte*
+
+| *Aktion*
+| *Auftrag &gt; Status ändern*
+| Status wählen, in dem der Bestand reserviert wird.
+|===
+--
+
+Auftragsgrundeinstellungen::
++
+--
+In den Auftragsgrundeinstellungen wird über die Einstellung *Status Auftragsreservierung* definiert, in welchen Auftragsstatus Warenbestände reserviert werden.
+
+[.instruction]
+Auftragsstatus für Warenbestandsreservierung festlegen:
+
+. Öffne das Menü *Einrichtung » Aufträge » Einstellungen*.
+. Wähle bei der Einstellung *Status Auftragsreservierung* die Status, damit für Aufträge, die in diesen Status kommen, Bestand reserviert wird.
+. Speichere (terra:save[]) die Einstellungen.
+--
+====
+
 [#6800]
 == Rechnungserzeugung für Amazon-Aufträge einrichten
 
 include::partial$rechnungserzeugung.adoc[]
+
+[#CNFFKI]
+== Retourenverwaltung einrichten
+
+Natürlich musst du auch bei Amazon mit einem Widerruf nach der Auslieferung rechnen. Die Artikel müssen Kund:innen direkt an dich zurücksenden. Wie du in plentymarkets eine Retoure erstellst und den Warenausgang wieder zurücksetzt, erfährst du auf der Handbuchseite xref:warenwirtschaft:waren-ausbuchen.adoc#[Waren ausbuchen].
+
+Amazon hat für dich die Zahlung für den Auftrag in Empfang genommen. Deshalb muss die Rückbuchung ebenfalls über Amazon erfolgen. Das musst du im Auftragsordner in der Seller Central erledigen.
+
+[IMPORTANT]
+.Rückbuchung manuell oder per Ereignisaktion ausführen
+====
+Die Erstattung des Kaufpreises durch Amazon wird nicht automatisch über die Schnittstelle angestoßen, sondern muss manuell oder über eine Ereignisaktion ausgeführt werden. Wenn du die manuelle Erstattung oder das Erstellen einer Ereignisaktion zum Erstatten des Kaufpreises vergisst, riskierst du eine Beschwerde bei Amazon und eine schlechte Bewertung.
+====
+
+MFN Retouren (= Händlerversand) kannst du in Form von Gutschriften per Ereignisaktion an Amazon melden. Nur mit Hilfe eines Auftrags vom Typ *Gutschrift* kann die Rückzahlung der Artikelsumme und den Versandkosten garantiert werden. Gehe dazu wie im Folgenden beschrieben vor.
+
+=== Auftragsstatus für Retouren erstellen
+
+Erstelle zuerst einen Auftragsstatus für Amazon-Retouren im Menü *Einrichtung » Aufträge » Status*, zum Beispiel *[9.6] Retoure an Amazon gesendet*. Diesen Auftragsstatus benötigst du für die Amazon-Einstellungen.
+
+[.collapseBox]
+.Tipp: So erstellst du Auftragsstatus
+--
+. Öffne das Menü *Einrichtung » Aufträge » Status*.
+. Klicke auf *Neuen Status erstellen* (icon:plus-square[role="green"]).
+. Gib eine Statusnummer ein. +
+→ Die höchstmögliche Nummer ist 19.9999.
+. Gib einen Namen ein. +
+. Speichere (terra:save[]) die Einstellungen. +
+→ Eingabefelder für weitere Einstellungen werden sichtbar. +
+. Füge bei Bedarf weitere Sprachen für den Auftragsstatus hinzu.
+. Speichere (terra:save[]) die Einstellungen.
+--
+
+=== Auftragsstatus für Retouren in Amazon-Konto speichern
+
+Speichere nun wie hier beschrieben den Auftragsstatus in den Amazon-Einstellungen.
+
+[.instruction]
+Auftragsstatus für Retouren in Amazon-Konto speichern:
+
+. Öffne das Menü *Einrichtung » Märkte » Amazon » Einstellungen*.
+. Öffne das Amazon-Konto.
+. Wechsele in das Tab *Auftragseinstellungen*.
+. Wähle für die Einstellung *Status für übertragene Retouren* den Auftragsstatus für Amazon-Retouren.
+. Speichere (terra:save[]) die Einstellungen.
+
+=== Retouren automatisch an Amazon melden
+
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Retouren in Form von Gutschriften automatisch an Amazon zu senden. Wenn die Ereignisaktion *Retoure bei Amazon anlegen* in plentymarkets ausgelöst wird, wird die bei Amazon erzeugte Gutschrift erstattet.
+
+[TIP]
+.Ereignisaktion und Gutschriftenimport
+====
+Nutze Ereignisaktionen, um Erstattungen aus plentymarkets auszulösen. Der automatische Gutschriftenimport (Option "Gutschriftenimport" in den Auftragseinstellungen) stellt sicher, dass eine Gutschrift nicht zweimal im System existiert. Wenn du aktuell Gutschriften noch manuell oder durch ein Drittsystem auslöst und keine Gutschriften in plentymarkets existieren, wird eine Gutschrift durch den Import erstellt.
+====
+
+:table-event-procedure: <<#ereignisaktion-automatische-retoure>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[ereignisaktion-automatische-retoure]]
+.Ereignisaktion zum automatischen Senden von Retouren an Amazon
+[cols="1,3,3"]
+|===
+| Einstellung | Option | Auswahl
+
+| *Ereignis*
+| Ereignis wählen +
+*_Wichtig:_* Als Ereignis nicht *Auftragsanlage: Neue Gutschrift* wählen. Dadurch kann es passieren, dass Gutschriften mehrfach bei Amazon erstellt werden.
+|
+
+| *Filter*
+| *Auftrag &gt; Herkunft*
+| *Amazon* oder eine geeignete Amazon-Unterherkunft, zum Beispiel Amazon France. +
+*_Hinweis:_* Wähle für den Filter *Auftrag > Herkunft* keine Amazon FBA-Herkunft, wie zum Beispiel Amazon FBA Germany, wenn du den automatischen Gutschriftenimport nutzt.
+
+| *Aktion*
+| *Retoure &gt; Retoure bei Amazon anlegen*
+|
+|===
+
 
 [#1500]
 == _Optional:_ Daten manuell austauschen
@@ -175,7 +316,7 @@ Versandbestätigung manuell an Amazon senden:
 . Klicke auf *Versandbestätigung senden*.
 
 [#amazon-berichte-verwalten]
-== Amazon-Berichte verwalten
+== Amazon-Berichte nutzen
 
 Im Menü *Einrichtung » Märkte » Amazon » Berichte » Verarbeitung* erhältst du einen Überblick über den Verarbeitungsstand deiner Amazon-Berichte.
 
@@ -466,149 +607,6 @@ Amazon-Bericht anfordern:
 [#amazon-berichtstypen]
 include::page$amazon-einrichten.adoc[tag=amazon-report-types]
 |===
-
-[#2700]
-== Amazon-Aufträge abrufen
-
-Wenn du schon mit einem anderen Shopsystem gearbeitet hast, weißt du bestimmt sehr genau, wie zeitaufwändig die tägliche Auftragsbearbeitung im Seller Central-Portal sein kann. Mit plentymarkets wird alles erheblich vereinfacht. Denn hier werden alle Aufträge aus allen angeschlossenen Märkten in einem einzigen Auftragsordner für dich gesammelt. Aus Amazon-Aufträgen werden automatisch plentymarkets Aufträge, die du nach dem gewohnten Fulfillment-Schema schnell und effektiv bearbeiten kannst. Nicht einmal um den Import der Aufträge musst du dich noch kümmern. Das macht die Schnittstelle im Hintergrund für dich. Damit alles korrekt funktioniert, sind ein paar Voraussetzungen und Einstellungen nötig, die hier zusammengefasst sind.
-
-[IMPORTANT]
-.Rabatte auf Rechnungen
-====
-Die Rechnungen, die plentymarkets für Amazon-Aufträge generiert, enthalten nur den Betrag, den Amazon Endkund:innen in Rechnung gestellt hat. Technisch kann nicht unterschieden werden, welche Rabatte von Amazon und welche Rabatte von Händler:innen gewährt werden.
-====
-// TODO: Woanders hin?
-
-[#2800]
-=== Einstellungen der Schnittstelle in plentymarkets vornehmen
-
-Für den Import der Aufträge sind die Einstellungen *Zahlungseingang* sowie *Versandbestätigung* in den Grundeinstellungen relevant. Wir gehen davon aus, dass du Aufträge mit dem Status *[5] Freigabe Versand* übernehmen und die stündliche Versandbestätigung automatisch von deinem plentymarkets System erzeugen lässt. Kontrolliere diese Einstellungen nochmals.
-
-[#CNFFKI]
-== Retouren von Amazon-Aufträgen bearbeiten
-
-Natürlich musst du auch bei Amazon mit einem Widerruf nach der Auslieferung rechnen. Die Artikel müssen Kund:innen direkt an dich zurücksenden. Wie du in plentymarkets eine Retoure erstellst und den Warenausgang wieder zurücksetzt, erfährst du auf der Handbuchseite xref:warenwirtschaft:waren-ausbuchen.adoc#[Waren ausbuchen].
-
-Amazon hat für dich die Zahlung für den Auftrag in Empfang genommen. Deshalb muss die Rückbuchung ebenfalls über Amazon erfolgen. Das musst du im Auftragsordner in der Seller Central erledigen.
-
-[IMPORTANT]
-.Rückbuchung manuell oder per Ereignisaktion ausführen
-====
-Die Erstattung des Kaufpreises durch Amazon wird nicht automatisch über die Schnittstelle angestoßen, sondern muss manuell oder über eine Ereignisaktion ausgeführt werden. Wenn du die manuelle Erstattung oder das Erstellen einer Ereignisaktion zum Erstatten des Kaufpreises vergisst, riskierst du eine Beschwerde bei Amazon und eine schlechte Bewertung.
-====
-
-MFN Retouren (= Händlerversand) kannst du in Form von Gutschriften per Ereignisaktion an Amazon melden. Nur mit Hilfe eines Auftrags vom Typ Gutschrift kann die Rückzahlung der Artikelsumme und den Versandkosten garantiert werden. Gehe dazu wie im Folgenden beschrieben vor.
-
-==== Auftragsstatus für Retouren erstellen
-
-Erstelle zunächst einen Auftragsstatus für Amazon-Retouren im Menü *Einrichtung » Aufträge » Status*, zum Beispiel *[9.6] Retoure an Amazon gesendet*. Diesen Auftragsstatus benötigst du für die Amazon-Einstellungen.
-
-==== Auftragsstatus für Retouren einstellen
-
-Stelle den Auftragsstatus nun in den Amazon-Einstellungen ein wie folgend beschrieben.
-
-[.instruction]
-Auftragsstatus für Retoure einstellen:
-
-. Öffne das Menü *Einrichtung » Märkte » Amazon » Einstellungen*.
-. Öffne das Amazon-Konto.
-. Wechsele in das Tab *Auftragseinstellungen*.
-. Wähle für die Einstellung *Status für übertragene Retouren* den eben eingerichteten Auftragsstatus für Amazon-Retouren.
-. Speichere (terra:save[]) die Einstellungen.
-
-==== Retouren automatisch an Amazon melden
-
-Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Retouren in Form von Gutschriften automatisch an Amazon zu senden. Wenn die Ereignisaktion *Retoure bei Amazon anlegen* in plentymarkets ausgelöst wird, wird die bei Amazon erzeugte Gutschrift erstattet.
-
-:table-event-procedure: <<#ereignisaktion-automatische-retoure>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[TIP]
-.Ereignisaktion und Gutschriftenimport
-====
-Nutze Ereignisaktionen, um Erstattungen aus plentymarkets auszulösen. Der automatische Gutschriftenimport (Option "Gutschriftenimport" in den Auftragseinstellungen) stellt sicher, dass eine Gutschrift nicht zweimal im System existiert. Wenn du aktuell Gutschriften noch manuell oder durch ein Drittsystem auslöst und keine Gutschriften in plentymarkets existieren, wird eine Gutschrift durch den Import erstellt.
-====
-
-[[ereignisaktion-automatische-retoure]]
-.Ereignisaktion zum automatischen Senden von Retouren an Amazon
-[cols="1,3,3"]
-|===
-| Einstellung | Option | Auswahl
-
-| *Ereignis*
-| Ereignis wählen +
-*_Wichtig:_* Als Ereignis nicht *Auftragsanlage: Neue Gutschrift* wählen. Dadurch kann es passieren, dass Gutschriften mehrfach bei Amazon erstellt werden.
-|
-
-| *Filter*
-| *Auftrag &gt; Herkunft*
-| *Amazon* oder eine geeignete Amazon-Unterherkunft, zum Beispiel Amazon France. +
-*_Hinweis:_* Wähle für den Filter *Auftrag > Herkunft* keine Amazon FBA-Herkunft, wie zum Beispiel Amazon FBA Germany, wenn du den automatischen Gutschriftenimport nutzt.
-
-| *Aktion*
-| *Retoure &gt; Retoure bei Amazon anlegen*
-|
-|===
-
-[#3100]
-[#3110]
-=== Warenbestand für ausstehende Aufträge reservieren
-
-Ausstehende Amazon-Aufträge werden in Status *[1] Unvollständige Daten* in dein plentymarkets System importiert und verbleiben in diesem Status bis Amazon den Auftrag freigibt. Bis zur Freigabe werden weder die Rechnungs-/Lieferadresse noch Artikelpreise am Auftrag gespeichert. Nach der Freigabe durch Amazon wird der Auftrag aktualisiert und die dazugehörigen Adressen und Preise werden gespeichert. Die Warenbestandsautomatik entscheidet, in welchen Status der Auftrag rutscht.
-
-Falls Amazon den Auftrag nicht freigibt, wird der Auftrag nicht aktualisiert, sondern automatisch in Status *[8] Storniert* verschoben.
-
-Es gibt zwei Möglichkeiten, den Warenbestand für ausstehende Aufträge in plentymarkets zu reservieren: mit einer Ereignisaktion oder direkt in den Auftragsgrundeinstellungen.
-
-[tabs]
-====
-Ereignisaktion einrichten::
-+
---
-Mit der folgenden Ereignisaktion wird der Auftrag von Status 1 in einen Status verschoben, bei dem Warenbestand reserviert wird.
-
-:table-event-procedure: <<#ereignisaktion-auftragsstatus-aktualisieren>>
-
-include::_includes:partial$event-procedure-tabbed.adoc[]
-
-[[ereignisaktion-auftragsstatus-aktualisieren]]
-.Ereignisaktion zum automatischen Aktualisieren von Auftragsstatus
-[cols="1,3,3"]
-|===
-|Einstellung |Option |Auswahl
-
-| *Ereignis*
-| *Neuer unvollständiger Auftrag*
-|
-
-| *Filter 1*
-| *Auftrag &gt; Auftragstyp*
-| *Auftrag*
-
-| *Filter 2*
-| *Auftrag &gt; Herkunft*
-| *Amazon-Herkünfte*
-
-| *Aktion*
-| *Auftrag &gt; Status ändern*
-| Status wählen, in dem der Bestand reserviert wird.
-|===
---
-
-Auftragsgrundeinstellungen::
-+
---
-In den Auftragsgrundeinstellungen wird über die Einstellung *Status Auftragsreservierung* definiert, in welchen Auftragsstatus Warenbestände reserviert werden.
-
-[.instruction]
-Auftragsstatus für Warenbestandsreservierung festlegen:
-
-. Öffne das Menü *Einrichtung » Aufträge » Einstellungen*.
-. Wähle bei der Einstellung *Status Auftragsreservierung* die Status, damit für Aufträge, die in diesen Status kommen, Bestand reserviert wird.
-. Speichere (terra:save[]) die Einstellungen.
---
-====
 
 [#6600]
 == API-Log abrufen
