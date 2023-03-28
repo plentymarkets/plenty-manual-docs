@@ -1,14 +1,489 @@
 = Customising the order view
 
-:keywords: MyView, design order view, customise order view, adjust order view, adjust columns for order view, configure columns
+:keywords: MyView, design order view, customise order view, adjust order view, adjust columns for order view, configure columns, compact view, list view
 :author: team-order-core
-:description: Learn how to customise the order overview as well as the detail view of your orders. In the editing mode, decide for yourself which columns and settings you need for managing your orders.
+:description: Learn how to customise the order overview as well as the detail view of your orders. In the editing mode, decide for yourself which information and settings you need for managing your orders.
 
-On this manual page you will learn how to customise the order overview as well as the detail view of your orders according to your needs. By using the editing mode you can for example define which columns should be displayed for your orders and in which order you want them to be shown.
-The detail view differs depending on the order type. Thus, there is an individual overview for each type with the respectively relevant information.
+On this manual page you will learn how to customise the order overview as well as the detail view of your orders according to your needs. For this, there are different views and a variety of settings available.
+
+[#compact-vs-list-view]
+==  Compact view vs. list view
+
+In the order UI, you have the choice between the *list view* and the *compact view*, so you can decide how you want to display your orders. When opening the *Orders » Orders (Test phase)* menu, the compact view is displayed by default. For every new login, the view that was last used will be opened. +
+But what is the difference between the two views? While the list view displays one order per line with the selected columns, the compact view also directly shows the selected order details in the overview in a space-saving way. Note however that orders can only be opened in the list view for further editing. +
+Thus, decide for yourself which view meets your needs and switch between them as desired.
+
+[TIP]
+.Switching between the views via one click
+====
+At the top right in the order overview you can use the button *Switch to list view* (material:list[]) or *Switch to compact view* (material:table_rows[]) to switch between the views at any time. In case you set any filters, these will automatically be transferred when switching views.
+====
+
+[#configure-compact-view]
+=== Customising the compact view
+
+You can individually design the compact view and use the editing mode to determine which information should be displayed about your orders. Moreover, you can select how big the different fields of the order information should be displayed and if required, you can also add a colour highlighting to visually separate the fields. +
+In the following chapters you will learn how to customise the compact view according to your needs.
+
+[#compact-view-fields]
+==== Selecting fields for the order overview
+
+At first, select the fields that should be displayed for your orders in the overview. To do so, proceed as follows.
+
+[.instruction]
+Selecting fields for the order overview:
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. In case your are in the list view, click on *Switch to compact view* (material:table_rows[]) at the top right to switch to the compact view.
+. At the top right, click on *Edit view* (terra:design_inline_edit[]) to edit the compact view in the editing mode.
+. At the top right of the main window, click on *Edit* (material:edit[role=skyBlue]). +
+→ The editing mode opens.
+. On the right in the *Compact view fields* section of the settings, select (material:check_box[role=skyBlue]) the fields that should be displayed in the compact view. Further information on the available fields can be found in <<#table-columns-compact-view>>. +
+*_Tip:_* Move material:drag_indicator[] the selected fields via drag-and-drop to the desired position until they are displayed in the desired order. +
+. If you are satisfied with the selected fields, click on *Save view* (material:save[role=skyBlue]) at the top right.
+. Enter a name for the new view and click on *Create view*. +
+→ The new view is created.
+
+[TIP]
+.Do you have admin rights?
+======
+Only xref:business-decisions:user-accounts-access.adoc#[admin users] can create and edit views.
+If you are not an admin:
+
+. Turn to someone with admin rights.
+. Ask the person to create the necessary views for you and to assign them to your user account.
+======
+
+[[table-columns-compact-view]]
+.Fields for the order overview
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Invoice address*
+|Shows the invoice address. +
+This is a default column.
+
+| *Delivery address*
+|Shows the delivery address. +
+This is a default column.
+
+| *Contact ID*
+|Shows the ID of the contact. +
+In order to display an ID, a contact data record needs to exist for this customer. If it is a guest order, *Guest* is displayed. By clicking on the contact ID, the contact data record opens. +
+This is a default column.
+
+| *Invoice number*
+|In case an invoice has already been created for the order, the invoice number is displayed. By clicking on the invoice number, the invoice opens. +
+This is a default column.
+
+| *Tags*
+|Shows the tags that are assigned to this order. +
+This is a default column.
+
+| *Payment method*
+|Shows the payment method that was selected for this order. +
+This is a default column.
+
+| *Payment status*
+a|Shows the payment status of the order. +
+
+* Outstanding = The whole amount is still open.
+* Prepaid = The amount has been paid in advance, either in full or partially.
+* Partly paid = The amount has been partially paid.
+* Paid = The amount has been paid in full.
+* Overpaid = It has been paid more than the outstanding amount. +
+This is a default column.
+
+| *Status*
+|Shows the processing status of the order. +
+This is a default column.
+
+| *Shipping profile*
+|Shows the shipping profile. +
+This is a default column.
+
+| *Gross order value*
+|Shows the total gross sum of the order in the order currency. +
+This is a default column.
+
+| *Order date*
+|Shows the date on which the order was registered in the system. +
+This is a default column.
+
+| *Client*
+|Shows the client that was used to create the order. +
+This is a default column.
+
+| *Item quantity*
+|Shows the amount of items in the order. +
+This is a default column.
+
+| *Outgoing items booked on*
+|Shows the date on which the outgoing items have been booked. +
+This is a default column.
+
+| *Referrer*
+|Shows the referrer of the order, e.g. *Client (store)* or *Manual entry*. The xref:orders:order-referrer.adoc#[order referrer] is the sales channel via which the order is generated. +
+This is a default column.
+
+| *External order ID*
+|Shows the external ID of the order. +
+This is a default column.
+
+| *Lock status*
+a|Shows whether an order is locked (material:lock[]). An order is locked as soon as an invoice has been generated. A credit note is locked as soon as a credit note document has been generated. You can unlock the order or the credit note by generating a reversal document for the respective document. +
+This is an optional column.
+
+| *Order type*
+|Shows the type of the order. +
+This is an optional column.
+
+| *Order ID*
+|Shows the ID of the order.
+This is an optional column.
+
+| *Contact*
+|Shows the name of the contact. +
+This is an optional column.
+
+| *Contact rating*
+|Shows the customer rating of the contact. +
+This is an optional column.
+
+| *Client ID*
+|Shows the ID of the client. +
+This is an optional column.
+
+| *Location*
+|Shows the location of the client that was used to create the order. +
+This is an optional column.
+
+| *Location ID*
+|Shows the location ID of the client that was used to create the order. +
+This is an optional column.
+
+| *Net order value*
+|Shows the total net sum of the order in the order currency. +
+This is an optional column.
+
+| *VAT*
+|Shows the VAT that is applied for this order. +
+This is an optional column.
+
+| *Paid amount (%)*
+|Shows the amount that was paid for the order in percentage. +
+This is an optional column.
+
+| *Payment date*
+|Shows the date on which the last payment for the order was received. +
+This is an optional column.
+
+| *Currency*
+|Shows the order currency. +
+This is an optional column.
+
+| *Delivery country*
+|Shows the country to which the order will be delivered. The displayed delivery country is taken from the given delivery address. +
+This is an optional column.
+
+| *Delivery date*
+|Shows the estimated delivery date of the order. +
+This is an optional column.
+
+| *Source*
+|Shows how the order was created, e.g. manually or via REST. +
+This is an optional column.
+
+| *Owner*
+|Shows the order’s owner. +
+This is an optional column.
+
+| *Referrer ID*
+|Shows the ID of the referrer that was used to create the order. +
+This is an optional column.
+
+| *Warehouse*
+|Shows the main warehouse of the order.  +
+This is an optional column.
+
+| *Warehouse ID*
+|Shows the ID of the main warehouse. +
+This is an optional column.
+
+| *Shipping costs*
+|Shows the shipping costs of the order. +
+This is an optional column.
+
+| *Weight [kg]*
+|Shows the total weight of the order. +
+This is an optional column.
+
+| *Reference*
+|Shows the ID of the referenced order. By clicking on the ID the referenced order opens. +
+This is an optional column.
+
+| *Shipping service provider*
+|Shows the shipping service provider. +
+This is an optional column.
+
+| *Package numbers*
+|Shows the order’s package numbers separated by comma. +
+This is an optional column.
+
+| *Sales representative ID*
+|Shows the ID of the sales representative. +
+This is an optional column.
+
+| *Contact (invoice address)*
+|Shows the contact of the invoice address. +
+This is an optional column.
+
+| *Contact (delivery address)*
+|Shows the contact of the delivery address. +
+This is an optional column.
+
+| *Company*
+|Shows the company that is saved on the order's contact or on the invoice address (guest order). +
+This is an optional column.
+
+|===
+
+[#configure-compact-view-fields]
+==== Configuring fields
+
+For the selected fields, you can carry out further settings and thus for example define the field size, change the title or add a colour highlighting. To do so, proceed as follows.
+
+[.instruction]
+Configuring fields:
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. In case your are in the list view, click on *Switch to compact view* (material:table_rows[]) at the top right to switch to the compact view.
+. At the top right, click on *Edit view* (terra:design_inline_edit[]) to edit the compact view in the editing mode.
+. At the top right of the main window, click on *Edit* (material:edit[role=skyBlue]). +
+→ The editing mode opens.
+. Expand the fields (material:chevron_right[]) to configure them. Pay attention to the information given in <<#table-compact-view-field-settings>>.
+. If you are satisfied with the selected fields, click on *Save view* (material:save[role=skyBlue]) at the top right. +
+→ The changes are saved.
+
+[[table-compact-view-field-settings]]
+.Settings for the compact view fields
+[cols="1,3"]
+|===
+
+| *Custom field name*
+|Here you can enter another title for the respective field if desired.
+
+| *Colour highlighting*
+|Optionally select a colour highlighting that will be shown on the left side of the respective field. This can help to visually separate and highlight the fields. If you don’t select a colour, a grey flag will be displayed on the field by default. +
+The following fields already have the following flag by default: +
+*Invoice address* = red +
+*Delivery address* = red +
+*Contact ID* = blue +
+*Invoice number* = blue
+
+| *Field size (horizontal)*
+|Select how wide the field should be displayed in the overview. Select between the options *small*, *medium* and *large*. +
+*_Note:_* For the fields *Delivery address* and *Invoice address* you can also select the vertical field size.
+
+| *Only show icon*
+|Select whether only the symbol of the field (e.g. for the payment method) should be displayed. +
+Note that this setting is only available for specific fields.
+
+|===
+
+[TIP]
+.Selecting filters
+====
+Underneath the available fields for the compact view you can see the filters. Move the desired filters via drag-and-drop from the list *Available filters* to the list *Displayed filters*.
+====
+
+[#compact-view-functions-and-filters]
+==== Selecting functions and filter settings
+
+In the editing mode you can also decide which functions and filters should be displayed in the order overview. To do so, proceed as follows.
+
+[.instruction]
+Selecting functions and filters:
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. In case your are in the list view, click on *Switch to compact view* (material:table_rows[]) at the top right to switch to the compact view.
+. At the top right, click on *Edit view* (terra:design_inline_edit[]) to edit the compact view in the editing mode.
+. At the top right of the main window, click on *Edit* (material:edit[role=skyBlue]). +
+→ The editing mode opens.
+. At the top right in the *Settings* section, carry out the settings for the compact view. Pay attention to the information given in <<#table-general-settings-compact-view>>.
+. If you are satisfied with the settings for the view, click on *Save view* (material:save[role=skyBlue]) at the top right. +
+→ The changes are saved.
+
+[[table-general-settings-compact-view]]
+.Settings for functions and filters
+[cols="1,3"]
+|===
+
+| *Group functions*
+|Select which group functions should be displayed for orders by default. All remaining group functions will be available in the context menu (material:more_vert[]) right next to it.
+
+| *Order menu functions*
+|Select which menu functions should be displayed for orders by default. All remaining menu functions will be available in the context menu (material:more_vert[]) right next to it.
+
+| *Order items*
+|Select whether the order items of your orders should be collapsed or expanded by default. If you decide to collapse the order items by default, you can expand them at any time by clicking on *Expand order items* (icon:chevron_right[]).
+
+| *Filter settings*
+|Select in how many columns the selected filters should be displayed in the filter selection.
+
+|===
+
+[TIP]
+.Sorting by orders
+====
+In the compact view you can sort your orders by the *Order ID* or the *Order status*. To do so, select one of the two options from the *Sort by* drop-down list and decide whether you want the orders to be displayed in *Descending* (material:arrow_downward[]) or in *Ascending* (material:arrow_upward[]) order.
+====
+
+[#select-order-items-compact-view]
+==== Configuring table columns for order items
+
+Besides defining the fields in the order overview, you can also decide which columns should be displayed for the order items. To do so, proceed as follows.
+
+[.instruction]
+Configuring table columns for order items:
+
+. Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. In case your are in the list view, click on *Switch to compact view* (material:table_rows[]) at the top right to switch to the compact view.
+. At the top right, click on *Configure columns* (material:settings[]) and select the option *Order item table*. +
+→ The available columns for the order items are displayed.
+. Select (material:check_box[role=skyBlue]) which columns should be displayed. Further information on the available columns can be found in <<#table-order-item-columns-compact-view>>. +
+*_Tip:_* Move material:drag_indicator[] the selected fields via drag-and-drop to the desired position until they are displayed in the desired order. +
+. Click on *Confirm*. +
+→ The settings are saved.
+
+[[table-order-item-columns-compact-view]]
+.Order items for the compact view
+[cols="1,3"]
+|===
+|Setting |Explanation
+
+| *Expand*
+|Allows you to show further information about the order items and displays the *Name*, the *Value* and the *Surcharge*.
+
+| *Quantity*
+|Shows the amount that was ordered of this order item. +
+This is a default column.
+
+| *Item ID*
+|Shows the item ID of this order item. You can open the item by clicking on the ID. +
+This is a default column.
+
+| *Variation no.*
+|Shows the variation number of this order item. +
+This is a default column.
+
+| *Variation name*
+|Shows the variation name of this order item. +
+This is a default column.
+
+| *Variation ID*
+|Shows the variation ID of this order item. You can open the variation by clicking on the ID. +
+This is a default column.
+
+| *Item name*
+|Shows the item name of this order item. +
+This is an optional column.
+
+| *Attributes*
+|Shows the attributes of this order item. +
+This is a default column.
+
+| *Net price*
+|Shows the net price of this order item. +
+This is a default column.
+
+| *Original net price*
+|Shows the regular net price of this order item. +
+This is an optional column.
+
+| *Gross price*
+|Shows the gross price of the order item. +
+This is a default column.
+
+| *Discount [%]*
+|Shows the discount that was selected for this order item. +
+This is a default column.
+
+| *Surcharge total*
+|Shows the sum of the surcharges of the order item. +
+This is a default column.
+
+| *Total amount of the order (net)*
+|Shows the total net amount of the order item. +
+This is a default column.
+
+| *Total amount of the order (gross)*
+|Shows the total gross amount of the order item. +
+This is a default column.
+
+| *Warehouse*
+|Shows the warehouse of the order item. +
+This is a default column.
+
+| *VAT [%]*
+|Shows the VAT rate of the order item in percent. +
+This is a default column.
+
+| *External item ID*
+|Shows the external item ID. If the order is an eBay or an Amazon order, you are directed to the marketplace when clicking on the ID. +
+This is an optional column.
+
+| *External order item ID*
+|Shows the external order item ID transferred by the market. +
+This is an optional column.
+
+| *Property ID*
+|Shows the ID of the property. +
+This is an optional column.
+
+| *Storage locations*
+|Shows the storage locations of this order item. +
+This is an optional column.
+
+| *Net profit margin*
+|Shows the net profit margin of the order item. +
+This is an optional column.
+
+| *Note*
+|Shows a note for the order item. +
+This is a default column.
+
+| *Return reason*
+|Shows the return reason of the order item in case of a return. +
+This is a default column.
+
+| *Remaining item value [%]*
+|Shows the remaining item value in %. +
+This is a default column.
+
+| *Item status*
+|Shows the item status of this order item. +
+This is a default column.
+
+| *Reorder ID*
+|Shows the ID of the reorder. You can open the reorder by clicking on the ID. +
+This is a default column.
+|===
+
+
+[#configure-list-view]
+=== Customising the list view
+
+The list view allows you to configure the overview as well as the detail view of orders according to your needs. By using the editing mode you can for example define which columns should be displayed for your orders and in which order you want them to be shown.
+The detail view differs depending on the order type. Thus, there is an individual overview for each type with the respectively relevant information. In the following chapters you will learn how to edit the list view and how to adjust it according to your needs.
 
 [#select-toolbar-buttons]
-== Customising the toolbar
+==== Customising the toolbar
 
 When opening an order, different functions will be available in the toolbar that depend on the order type. Decide for yourself, which buttons you want to see at first sight and which buttons should be available in the context menu (material:more_vert[]). +
 The default toolbar looks as follows:
@@ -20,6 +495,7 @@ Customising the toolbar:
 
 . Go to *Orders » Orders (Test phase)*.
 . Carry out the search (material:search[]) to display orders.
+. In case your are in the compact view, click on *Switch to list view* (material:list[]) at the top right to switch to the list view.
 . Open the order for which you want to adjust the toolbar.
 . At the top right, click on *Edit view* (terra:design_inline_edit[role="darkGrey"]).
 . In the *Default toolbar buttons* section on the right, select the buttons that you want to be displayed by default in the order’s detail view.
@@ -132,13 +608,13 @@ In general, orders should not be deleted. Errors can occur when orders are delet
 [TIP]
 .Show or hide side navigation
 ======
-In the order overview as well as in the detail view of an order, you can show or hide the side navigation. To do so, click on material:menu[] at the top left.
+In the list view, you can decide in the order overview as well as in the detail view of an order whether you want to show or hide the side navigation. To do so, click on material:menu[] at the top left.
 ======
 
 [#configure-columns]
-== Configuring columns in the overview
+==== Configuring columns in the overview
 
-The table columns in the order overview can be configured for both levels. When opening the *Orders » Orders (Test phase)* menu for the first time, the default view of the table is shown. By clicking on *Configure columns* (material:settings[]) on the right, the options *Order overview table* and *Order item table* are displayed. In the *Configure columns* window, you can select the columns that you want to be displayed and also define the order in which they are shown.
+The table columns in the list view can be configured for both levels. When opening the *Orders » Orders (Test phase)* menu for the first time, the default view of the table is shown. By clicking on *Configure columns* (material:settings[]) on the right, the options *Order overview table* and *Order item table* are displayed. In the *Configure columns* window, you can select the columns that you want to be displayed and also define the order in which they are shown.
 
 [.collapseBox]
 .*Configuring columns*
@@ -149,6 +625,8 @@ When you have adapted the table once, these settings are saved. You can change t
 Configuring columns:
 
 . Go to *Orders » Orders (Test phase)*.
+. Carry out the search (material:search[]) to display orders.
+. In case your are in the compact view, click on *Switch to list view* (material:list[]) at the top right to switch to the list view.
 . At the top right, click on *Configure columns* (material:settings[]).
 . Select which level of the table you want to configure. +
 → The window *Configure columns* opens.
@@ -163,19 +641,19 @@ Configuring columns:
 .Resizable table columns
 ====
 For some tables in the Order UI, you have the possibility to adjust the size of the columns according to your needs. When hovering over the respective table columns, blue lines appear which allow you to adjust the size as desired. You can resize the columns of the following tables: +
-* Order overview table
-* Order items table (in the overview as well as in the order details)
-* Order variation search in the *Edit items* view of an order
+* Order overview table +
+* Order items table (in the overview as well as in the order details) +
+* Order variation search in the *Edit items* view of an order +
 * Shopping cart table in the *Edit items* view of an order.
 ====
 
 [#table-columns-orders]
-=== Configuring table columns in the order overview
+===== Configuring table columns in the order overview
 
-The following columns are available for the *order overview*.
+The following columns are available for the *order overview* in the list view.
 
 [[table-order-overview]]
-.Order overview
+.Order overview list view
 [cols="1,3"]
 |===
 |Setting |Explanation
@@ -284,7 +762,7 @@ This is a default column.
 |Shows the order currency. +
 This is a default column.
 
-| *Country of delivery*
+| *Delivery country*
 |Shows the country to which the order will be delivered. The displayed delivery country is taken from the given delivery address. +
 This is a default column.
 
@@ -376,7 +854,7 @@ This is an optional column.
 |===
 
 [#table-columns-order-items]
-=== Configuring table columns for order items
+===== Configuring table columns for order items
 
 Expand the second level (material:chevron_right[]) to see information about the *order items*. For this, the columns listed in the table below are available. +
 *_Note:_* The order items are not the same for all order types.
@@ -384,11 +862,11 @@ Expand the second level (material:chevron_right[]) to see information about the 
 [TIP]
 .Show order items for all orders by default
 ======
-By default, the order items of your orders are not shown in the overview. In the editing mode of the overview, you can however define via the *Order items table default* setting whether to expand or collapse the order items table in the order overview by default. If you select the option *Expanded*, up to 5 order items are shown. By clicking on *Show all order items*, you are forwarded to the detail view of the order where all order items are listed.
+By default, the order items of your orders are not shown in the overview of the list view. In the editing mode of the overview, you can however define via the *Order items table default* setting whether to expand or collapse the order items table in the order overview by default. If you select the option *Expanded*, up to 5 order items are shown. By clicking on *Show all order items*, you are forwarded to the detail view of the order where all order items are listed.
 ======
 
 [[table-order-items]]
-.Order items
+.Order items for the list view
 [cols="1,3"]
 |===
 |Setting |Explanation
@@ -428,7 +906,7 @@ This is a default column.
 |Shows the net price of this order item. +
 This is a default column.
 
-| *Regular net price*
+| *Original net price*
 |Shows the regular net price of this order item. +
 This is an optional column.
 
@@ -502,15 +980,15 @@ This is a default column.
 |===
 
 [#show-order-items]
-=== Display or hide order item properties
+==== Display or hide order item properties
 
-If you want to see the properties of order items, such as *Name* or *Value*, go to the line of the order and click on the arrow icon on the left (material:chevron_right[]). At first, you will see details about the order items, such as the *Quantity*, *Item ID* or *Variation number*. On this level, click on the arrow symbol (material:chevron_right[]) once again too see the properties. +
+If you want to see properties of the order items, such as *Name* or *Value*, go to the line of the order and click on the arrow icon on the left (material:chevron_right[]). At first, you will see details about the order items. On this level, click on the arrow symbol (material:chevron_right[]) once again too see the properties. +
 *_Note:_* If you want to edit the properties of order items, open the desired order, go to the *Order items* area and click on *Edit items* (material:edit[]).
 
 [#editing-mode]
-== Using the editing mode
+==== Using the editing mode
 
-The editing mode allows a high degree of flexibility for positioning content and data in the *Orders » Orders (Test phase)* menu. This works by intuitively positioning elements via drag-and-drop. You can individually adjust and edit each element. <<#table-functions-editing-mode>> contains an overview of the functions available in the editing mode.
+The editing mode allows a high degree of flexibility for positioning content and data in the *Orders » Orders (Test phase)* menu. This works by intuitively positioning elements via drag-and-drop. You can individually adjust and edit each element. <<#table-functions-editing-mode>> contains an overview of the functions available in the editing mode for the list view.
 
 [TIP]
 .Do you have admin rights?
@@ -519,7 +997,7 @@ Only xref:business-decisions:user-accounts-access.adoc#[admin users] can create 
 If you are not an admin:
 
 . Turn to someone with admin rights.
-. Ask them to create the necessary views for you and assign them to your user account.
+. Ask the person to create the necessary views for you and to assign them to your user account.
 ======
 
 [[table-functions-editing-mode]]
@@ -569,7 +1047,7 @@ When you want to edit orders the next time, you can open your preferred view via
 |===
 
 [#create-new-view]
-=== Creating a new view
+===== Creating a new view
 To create a new view, proceed as described below.
 
 [.instruction]
@@ -579,11 +1057,10 @@ Creating a new view:
 . Click on material:add[] *Create new preset...*.
 . Enter a name for the view.
 . Click on *Create view*. +
-→ The new view is created and opens automatically, i.e. it is applied.
-It’s now possible to switch between different views.
+→ The new view is created and opens automatically, i.e. it is applied. It’s now possible to switch between different views.
 
 [#place-elements]
-=== Placing elements
+===== Placing elements
 
 Drag-and-drop the elements to intuitively place them exactly where you want them. In addition, adjust the size of the elements according to your needs. +
 Proceed as described below to add elements.
@@ -599,7 +1076,7 @@ Placing elements:
 *_Tip:_* Do you want to move your elements to another position at a later point in time? You can do so by using drag-and-drop until all elements are placed correctly.
 
 [#complete-editing]
-=== Finalising your work
+===== Finalising your work
 
 Once you carried out all settings, you can save your changes and finalise the editing mode. Check afterwards whether the view fits your needs.
 
@@ -613,7 +1090,7 @@ Finalising your work:
 .. Allow other users to see the view.
 
 [#order-menu-functions]
-== Placing functions in the order overview
+==== Placing functions in the order overview
 
 The order overview offers many different functions that are available in the context menu (material:more_vert[]) of each line by default. If you want to directly place specific functions for orders in the order overview table, you can carry out the corresponding settings in the editing mode.
 
@@ -622,6 +1099,7 @@ Placing functions in the order overview:
 
 . Go to *Orders » Orders (Test phase)*.
 . Carry out the search (material:search[]) to display orders.
+. In case your are in the compact view, click on *Switch to list view* (material:list[]) at the top right to switch to the list view.
 . Click on *Edit view* (terra:design_inline_edit[]) at the top right. +
 → The editing mode opens.
 . In the main window, click on *Edit* (material:edit[role=skyBlue]). +
@@ -631,7 +1109,7 @@ Placing functions in the order overview:
 → All selected functions are now directly available on the right in the order overview.
 
 [#asterisk-unsaved-changes]
-== Noticing unsaved changes
+==== Noticing unsaved changes
 
 If you carried out changes in an order, a star is displayed in the side navigation on the left. The star indicates in which area unsaved changes exist. As soon as you save (material:save[]) the changes or reset the changes to the previous state, the star will disappear.
 

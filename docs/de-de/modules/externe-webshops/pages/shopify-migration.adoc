@@ -26,7 +26,9 @@ Den Migrationsassistenten findest du im Menü *Einrichtung » Märkte » Shopify
 |===
 
 | *Schritt 1*
-| <<#BICQDCDB, Installiere die plentymarkets App im Shopify-Backend.>> Dazu benötigst du die plentyID, den plentymarkets Benutzernamen und das Kennwort.
+| <<#BICQDCDB, Installiere die plentymarkets App im Shopify-Backend.>>
+
+*_Tipp:_* Dazu benötigst du die plentyID, den plentymarkets Benutzernamen und das Kennwort.
 
 | *Schritt 2*
 | <<#BICQDFDB, Prüfe die Version des Shopify-Plugins.>>
@@ -55,6 +57,50 @@ Den Migrationsassistenten findest du im Menü *Einrichtung » Märkte » Shopify
 Zuerst installierst du die plentymarkets App in deinem Shopify-Backend. 
 
 include::shopify-app.adoc[tag=migration-installation]
+
+. Aktiviere den Mandanten, der auch im Shopify-Plugin mit diesem Shopify-Konto verbunden ist. Aktiviere dazu ganz rechts den Toggle *Verbunden*. +
+*_Wichtig:_* Pro Shopify-Shop benötigst du einen eigenen plentymarkets Mandanten. Deshalb kannst du nur einen Mandanten wählen. +
+→ Die Optionen für den Datenaustausch werden wählbar.
+. Aktiviere die Optionen für den Datenaustausch, die auch im Shopify-Plugin für diesen Mandanten aktiviert sind.
+<<#QVFOWWID>> zeigt, welche Einstellung im Shopify-Plugin welcher Einstellung in der plentymarkets App für Shopify entspricht. +
+*_Wichtig:_* Preise, Bestand und Artikel können nur in eine Richtung gesendet werden. Welche Richtung du wählst hängt davon ab, in welche Richtung die Daten bisher mit Shopify ausgetauscht hast.
+. Speichere die Einstellungen.
+
+[[QVFOWWID]]
+.Optionen für den Datenaustausch
+[cols="1a,1a"]
+|===
+| Option in Shopify-Plugin | Option in plentymarkets App für Shopify
+
+| *Auftragsimport*
+| *Von Shopify zu plentymarkets > Aufträge*
+
+| *Kundenimport*
+| *Von Shopify zu plentymarkets > Kunden*
+
+| *Warenbestand und Preisimport (Artikelimport abhängig)*
+| *Von Shopify zu plentymarkets > Preise und Bestand*
+
+| *Warenbestand und Preisexport*
+| *Von plentymarkets zu Shopify > Preise und Bestand*
+
+| *Kategorieimport*
+| *Von Shopify zu plentymarkets > Kategorien*
+
+| *Kategorieexport*
+| *Von plentymarkets zu Shopify > Kategorien*
+
+| *Artikelimport*
+| *Von Shopify zu plentymarkets > Artikel*
+
+| *Artikelexport*
+| *Von plentymarkets zu Shopify > Artikel*
+
+| *Auftragszahlung Aktualisierung*
+| *Von Shopify zu plentymarkets > Zahlungen*
+
+|===
+
 
 [#BICQDFDB]
 == Schritt 2: Plugin-Version prüfen
@@ -109,15 +155,23 @@ Vorgehen bei EINER Shopify-Verbindung::
 --
 Du hast nur eine Verbindung zu Shopify. Dann ist das Vorgehen ziemlich einfach:
 
-* Der Migrationsassistent erstellt die neuen Ereignisaktionen für dich.
-* Du prüfst die neuen Ereignisaktionen.
-* Du aktivierst die neuen Ereignisaktionen.
-* Du deaktivierst die alten Ereignisaktionen.
+[cols="1,5a", grid=none, frame=none, stripes=none]
+|===
 
-Hier werden diese Schritte im Detail beschrieben:
+| *Schritt 4a*
+| <<#TL28U1LR, Der Migrationsassistent erstellt die neuen Ereignisaktionen für dich.>>
 
+| *Schritt 4b*
+| <<#NFJEDKJD, Du prüfst die neuen Ereignisaktionen. Wenn alles passt, aktivierst du die neuen Ereignisaktionen.>>
+
+| *Schritt 4c*
+| <<#4E952CBQ, Du deaktivierst die alten Ereignisaktionen.>>
+
+|===
+
+[#TL28U1LR]
 [.instruction]
-Neue Ereignisaktionen erstellen:
+Neue Ereignisaktionen erstellen lassen:
 
 . Klicke auf *Ereignisaktionen migrieren*. +
 -> Die Migrationsansicht wird ausgeklappt.
@@ -125,10 +179,11 @@ Neue Ereignisaktionen erstellen:
 . Klicke auf *Migrieren*. +
 -> Neue Ereignisaktionen für Shopify werden erstellt. +
 -> Eine Liste der Ereignisaktionen für Shopify in deinem System wird angezeigt. Links siehst du die alten Ereignisaktionen, rechts die neuen. +
-*_Tipp:_* Kopiere die Liste der Ereignisaktionen oder mach einen Screenshot davon, damit du bei den nächsten Schritten keine davon vergisst.
+*_Tipp:_* Kopiere die Liste der Ereignisaktionen oder mach einen Screenshot davon, damit du bei den nächsten Schritten keine Ereignisaktion vergisst.
 
+[#NFJEDKJD]
 [.instruction]
-Neue Ereignisaktionen prüfen:
+Neue Ereignisaktionen prüfen und aktivieren:
 
 . Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
 . Öffne die erste neue Ereignisaktion in der Liste, die im Migrationsassistenten angezeigt wird. +
@@ -138,6 +193,7 @@ Neue Ereignisaktionen prüfen:
 . Klicke auf *Speichern* (terra:save[role="green"]).
 . Wiederhole die Schritte für alle neuen Ereignisaktionen.
 
+[#4E952CBQ]
 [.instruction]
 Alte Ereignisaktionen deaktivieren:
 
@@ -153,23 +209,30 @@ Vorgehen bei MEHREREN Shopify-Verbindung::
 +
 --
 
-Du hast mehrere Shopify-Verbindungen. Wenn du erst einmal nur eine dieser Verbindungen migrierst, brauchst du die alten und die neuen Ereignisaktionen. Damit für einen Auftrag nicht beide Ereignisaktionen ausgelöst werden, setzt du Filter für die Mandanten.
+Du hast mehrere Shopify-Verbindungen. Wenn du erst einmal nur eine dieser Verbindungen migrierst, brauchst du die alten und die neuen Ereignisaktionen. Damit für neue Aufträge nicht beide Ereignisaktionen ausgelöst werden, setzt du Filter für die Mandanten. Du gehst also so vor:
 
-Du gehst also so vor:
+*_Wichtig:_* Diese Schritte gelten nur, wenn du nicht alle deine Shopify-Verbindungen in einer einzigen Sitzung migrierst. Wenn du alle Shopify-Verbindungen in derselben Sitzung migrierst, gehst du so vor, wie unter *Vorgehen bei EINER Shopify-Verbindung* beschrieben.
 
-*_Wichtig:_* Dieses Vorgehen gilt nur, wenn du nicht alle deine Shopify-Verbindungen in einer einzigen Sitzung migrierst.
+[cols="1,5a", grid=none, frame=none, stripes=none]
+|===
 
-* Der Migrationsassistent erstellt die neuen Ereignisaktionen für dich.
-* Du prüfst die neuen Ereignisaktionen.
-* Du setzt in den neuen Ereignisaktionen einen Filter für den Mandanten, für den du die Shopify-Verbindung schon migriert hast.
-* Du aktivierst die neuen Ereignisaktionen.
-* Du setzt in den alten Ereignisaktionen einen Filter für den oder die Mandanten, für die du die Shopify-Verbindung noch nicht migriert hast.
-* Die alten Ereignisaktionen deaktivierst du erst, wenn du *_alle_* Shopify-Verbindungen migriert hast.
+| *Schritt 4a*
+| <<#2HSSCB79, Der Migrationsassistent erstellt die neuen Ereignisaktionen für dich.>>
 
-Hier werden diese Schritte im Detail beschrieben:
+| *Schritt 4b*
+| <<#6BSIXVY2, Du prüfst die neuen Ereignisaktionen. In den neuen Ereignisaktionen setzt du einen Filter für den Mandanten, für den du die Shopify-Verbindung schon migriert hast. Dann aktivierst du die neuen Ereignisaktionen.>>
 
+| *Schritt 4c*
+| <<#4OI6CZGZ, Du setzt in den alten Ereignisaktionen einen Filter für den oder die Mandanten, für die du die Shopify-Verbindung noch nicht migriert hast.>>
+
+| *Schritt 4d*
+| <<#8CEL5TJT, Die alten Ereignisaktionen deaktivierst du erst, wenn du *_alle_* Shopify-Verbindungen migriert hast.>>
+
+|===
+
+[#2HSSCB79]
 [.instruction]
-Neue Ereignisaktionen erstellen:
+Neue Ereignisaktionen erstellen lassen:
 
 . Klicke auf *Ereignisaktionen migrieren*. +
 -> Die Migrationsansicht wird ausgeklappt.
@@ -179,8 +242,9 @@ Neue Ereignisaktionen erstellen:
 -> Eine Liste der Ereignisaktionen für Shopify in deinem System wird angezeigt. Links siehst du die alten Ereignisaktionen, rechts die neuen. +
 *_Tipp:_* Kopiere die Liste der Ereignisaktionen oder mach einen Screenshot davon, damit du bei den nächsten Schritten keine davon vergisst.
 
+[#6BSIXVY2]
 [.instruction]
-Neue Ereignisaktionen prüfen:
+Neue Ereignisaktionen prüfen, Filter für Mandanten setzen und Ereignisaktion aktivieren:
 
 . Öffne das Menü *Einrichtung » Aufträge » Ereignisse*.
 . Öffne die erste neue Ereignisaktion in der Liste, die im Migrationsassistenten angezeigt wird. +
@@ -191,6 +255,7 @@ Neue Ereignisaktionen prüfen:
 . Klicke auf *Speichern* (terra:save[role="green"]).
 . Wiederhole die Schritte für alle neuen Ereignisaktionen.
 
+[#4OI6CZGZ]
 [.instruction]
 Mandant-Filter für alte Ereignisaktionen setzen:
 
@@ -201,6 +266,7 @@ Mandant-Filter für alte Ereignisaktionen setzen:
 . Speichere die Einstellung.
 . Wiederhole die Schritte für alle alten Ereignisaktionen.
 
+[#8CEL5TJT]
 [.instruction]
 Nach Migration aller Shopify-Verbindungen alte Ereignisaktionen deaktivieren:
 
