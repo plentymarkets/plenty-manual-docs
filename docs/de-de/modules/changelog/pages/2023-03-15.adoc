@@ -1,0 +1,334 @@
+= Changelog 15. März 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 9. März 2023
+:endWeekDate: 15. März 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/katalog-auftragsformat-benutzerdefiniertes-limit-wird-jetzt-beruecksichtigt-catalog-order-format-user-defined-limit-is-now-taken-into-account/715132
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* In der Eigenschaftenansicht ist es nun möglich, sowohl die verknüpften Eigenschaften als auch die Liste der Eigenschaften beim Hinzufügen zu sortieren. Die entsprechenden Einstellungen sind im Editiermodus der Ansicht der Eigenschaften zu finden.
+
+[discrete]
+=== Aufträge
+
+* Textfarbe und Hintergrundfarbe kann jetzt im Editor der Auftragsnotizen verwendet werden.
+
+[discrete]
+=== Fulfillment
+
+* Die Filter-UI im Versand-Center wurde aktualisiert. Die Filter werden nun übersichtlich in zwei Spalten angezeigt. Die häufig benötigten Filter *Auftrags-ID* und *Kontakt-ID* befinden sich oben in der Auflistung.
+Das Datums im Kalender kann nun einfach ausgewählt werden. Neue Features:
+** Mehrere Lieferländer auswählbar
+** Auswahl des Eigners und Anzeige in alphabetischer Reihenfolge
+** Auswahl der Zahlungsarten
+** Mandantenauswahl
+** Lagerauswahl
+** Unter *Auftragsstatus* können mehrere Optionen angezeigt werden.
+** Hauptaufträge können aus der Auswahl ausgeschlossen werden.
+
+[discrete]
+=== Kaufland
+
+In den Kaufland-Katalogen gibt es nun zwei neue Felder, die dazu dienen, dass eure Varianten-Einstellung zur Warenbestandsbeschränkung berücksichtigt werden kann.
+
+Bei den neuen Feldern handelt es sich um:
+
+* *Warenbestandsbeschränkung*: Das Feld *Warenbestandsbeschränkung* ist gesperrt und fest der Varianten-Einstellung *Beschränkung* im Einstellung-Tab der Variante zugeordnet. Das ist notwendig, damit wir bei den Prozessen, die den Katalog benutzen, wissen, wie der Bestand übermittelt werden soll.
+* *Bestand für Varianten ohne Bestandsführung*: Das Feld *Bestand für Varianten ohne Bestandsführung* könnt ihr eurem Belieben nach zuordnen. Diese Zuordnung greift nur dann, wenn ihr bei der oben genannten Einstellung an der Variante die Werte *Keine* oder *Keinen WB für diese Variante* führen ausgewählt habt. Für diese Warenbestandsbeschränkungstypen könnt ihr hier also bestimmen, was für ein Bestand zu Kaufland übertragen werden soll. Die Logik arbeitet hier wie in folgender Tabelle beschrieben.
+
+[cols="3"]
+|======
+|Beschränkung |Bestand für Varianten ohne Bestandsführung |Übermittelte Zuordnung
+
+|Keine
+|Nicht zugeordnet
+|Bestand
+
+|Keine
+|Zugeordnet
+|Bestand für Varianten ohne Bestandsführung
+
+|Auf Netto-WB
+|Nicht zugeordnet
+|Bestand
+
+|Auf Netto-WB
+|Zugeordnet
+|Bestand
+
+|Keinen WB für diese Variante führen
+|Nicht zugeordnet
+|Bestand
+
+|Keinen WB für diese Variante führen
+|Zugeordnet
+|Bestand für Varianten ohne Bestandsführung
+|======
+
+[discrete]
+=== Kontoverwaltung
+
+* Der Gruppenfunktion unter *Einstellungen » Kontoverwaltung » Konten* wurden zwei neue Funktionen hinzugefügt: *Rollen zuweisen* und *Rollen entziehen*. Du kannst ab jetzt mehreren Benutzer:innen-Konten eine oder mehreren Rollen zuweisen oder entziehen.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Plugins
+
+* Wir ändern eine Funktion in der Git-Benutzeroberfläche. Anstatt ein Git-Plugin mit einem Commit-Hash auf einen bestimmten Zustand zu fixieren, muss es in Zukunft mit einem Tag fixiert werden. Die Branch-Funktionalität bleibt erhalten.
++
+[NOTE]
+.Kein To-Do
+======
+Wenn aktuell ein Commit für ein Git-Plugin gewählt wird, bleibt es so. Erst wenn du das Plugin für die Zukunft auf einen bestimmten Zustand festlegen möchtest, musst du stattdessen ein Tag verwenden.
+======
+
+[discrete]
+=== Rechte
+
+In den vergangenen Monaten haben wir mit dem Großteil des Plattform-Kern-Teams an dem Login- und Rechtesystem von plentymarkets gearbeitet.
+
+Die ersten Projekte, die nun bereitgestellt werden, sind die umgebauten Benutzeroberflächen sowie die Rechtevergabe von Benutzer:innen. Das Ziel hierbei war es, die Rechtevergabe einfacher und verständlicher zu gestalten. Im Kern wurden Daten in neue Strukturen übertragen und alles weitere für zukünftige Schritte vorbereitet.
+
+Dabei wurden nicht nur neue UIs, sondern auch strukturelle Änderungen vorgenommen:
+* API-Rechte, Ressourcen sowie Sichtbarkeiten können nur noch an Rollen hinterlegt werden. Dabei wurden alle vorhandenen Einstellungen der Benutzer:innen in individuelle Rollen hinterlegt. Die Rechte bestehender Benutzer:innen-Konten ändern sich dadurch nicht.
+* Die Session-Verwaltung UI wurde entfernt.
+* Die UIs unter *Einrichtung » Einstellungen » Benutzer* wurden umgezogen zu *Einrichtung » Kontoverwaltung*.
+
+Im Menü *Einrichtung » Kontoverwaltung » Konten* werden die Benutzer:innen-Konten des plentymarkets Systems verwaltet. Die Zuweisung von Berechtigungen erfolgt hierbei nur noch durch das Verknüpfen von Rollen.
+
+Im Menü *Einrichtung » Kontoverwaltung » Rollen* werden die Benutzer:innen-Rollen verwaltet. Die Konfiguration der Rechte erfolgt nicht mehr primär durch die API-Berechtigungen, sondern durch Sichtbarkeiten der jeweiligen Menüpunkte und deren Unterbereiche.
+
+[IMPORTANT]
+.API-Rechte
+======
+Die benötigten API-Berechtigungen werden nun automatisch der Rolle zugewiesen, je nachdem welche Sichtbarkeiten vergeben sind. Die dadurch vergebenen API-Berechtigungen können nicht eingeschränkt werden.
+
+Sollten Komponenten in den sichtbaren UIs hinzugefügt oder entfernt werden, werden die API-Berechtigungen entsprechend automatisch hinzugefügt oder entfernt.
+======
+
+Für dich bedeutet das folgendes:
+
+* Es ist keine manuelle Pflege von API-Berechtigungen mehr notwendig, falls Komponenten in den UIs von uns ergänzt oder umgebaut werden.
+* Sichtbarkeiten von Plugin-Menüpunkten sind ebenfalls im Menü-Baum zu finden.
+* Explizite API-Berechtigungen können weiterhin über den erweiterten Modus zugewiesen werden.
+* Zugriffseinschränkungen für Lager, Kennzahlen, Auftragsherkünfte und Mandanten werden ebenfalls an den Rollen gepflegt.
+* Freigabe für benutzerdefinierte Ansichten (jetzt rollendefinierte Ansichten) erfolgt ebenfalls an den Rollen.
+* Eigner:innenrechte werden jetzt im einfachen Modus der Rollenbearbeitung vergeben, durch das aktivieren von *Bearbeiten* oder *Erstellen*.
+
+Im Menü *Einrichtung » Kontoverwaltung » Sicherheit* befindet sich jetzt die Konfigurationen für Passwortsicherheit.
+
+Weitere Informationen zu den Änderungen und Auswirkungen auf bestehende Abläufe findest du auf der Handbuchseite xref:business-entscheidungen:benutzerkonten-zugaenge.adoc[Benutzer:innen-Konten und Zugänge].
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* In der neuen Artikel-UI kam es zum Fehler, dass beim Varianten erstellen 0 Varianten erzeugt wurden. Dieses Verhalten haben wir nun korrigiert und das Erstellen funktioniert wieder korrekt.
+* Das Hochladen und Aktualisieren von Dateien an Dateieigenschaften funktioniert wieder wie gewohnt.
+
+[discrete]
+=== Aufträge
+
+* Fehlermeldungen werden jetzt angezeigt, wenn das Speichern von Auftragsnotizen fehlschlägt.
+* In den überarbeiten Einstellungs-UIs unter *Einrichtung » Aufträge » Auftragstypen » Reparatur* bzw. *Einrichtung » Aufträge » Auftragstypen » Retouren* können nun bis zu 100 Werte hinterlegt werden (früher waren nur 25 Werte möglich). Beim Erstellen einer neuen Retoure / Reparatur kam es zu einem Validierungsfehler, wenn der dort eingestellte Grund größer als 25 war. Dies wurde nun korrigiert.
+
+[discrete]
+=== Kaufland
+
+Bisher wurden Produktupdates einmal täglich in einer großen CSV an Kaufland übertragen. Dort waren bis dato Produkte aller Plattformen enthalten, was allerdings dazu führte, dass die Update-Datei durch Kaufland abgelehnt wurde.
+
+Ab jetzt wird pro Plattform eine Produktupdate-CSV an Kaufland übertragen.
+
+* In der CSV für DE sind alle Produkte enthalten, die einem DE-Katalog zugeordnet sind und bei denen das Mapping für die *Sprache der plentymarkets Produktdaten* leer oder auf *DE* gesetzt ist.
+* In der CSV für SK sind alle Produkte enthalten, die einem SK-Katalog zugeordnet sind und bei denen das Mapping für die *Sprache der plentymarkets Produktdaten* leer oder auf *SK* gesetzt ist.
+* In der CSV für CZ sind alle Produkte enthalten, die einem CZ-Katalog zugeordnet sind und bei denen das Mapping für die *Sprache der plentymarkets Produktdaten* leer oder auf *CZ* gesetzt ist.
+
+[NOTE]
+.Teil 1 von 2
+======
+Diese Änderung ist der erste Teil für das funktionierende Produktupdate für alle Plattformen von Kaufland. Im zweiten Teil der Änderung wird dann auch die *Sprache der plentymarkets Produktdaten* berücksichtigt, sodass beispielsweise Produkte aus einem SK-Katalog mit deutschsprachigen Produktdaten ebenfalls in der CSV für DE enthalten sind.
+
+Ein Changelog dafür wird folgen, wenn dieser Teil ausgerollt wurde.
+======
+
+* Außerdem kam es bei der Übertragung der Produktupdate-CSV an Kaufland vereinzelt zu dem Fehler `File size is not valid`. Dieses Verhalten wurde behoben.
+* Beim neuen Auftragsimport war es bisher nicht möglich die Einstellungen unter *Einrichtung » Märkte » Kaufland » Einstellungen* zu berücksichtigen. Das Verhalten hat sich nun geändert und die Einstellungen spielen wieder eine Rolle.
++
+Aktuell betrifft das lediglich das Thema der Zahlungsbuchung. Hattet ihr bisher die Buchung der Zahlung für Aufträge deaktiviert, wurde beim neuen Auftragsimport trotzdem eine Zahlung gebucht. Von jetzt an wird in diesem Fall also wieder keine Zahlung mehr gebucht.
+* Beim Auftragsimport kam es vermehrt zu Problemen bei der Zurodnung von Varianten, sodass Aufträge teilweise keine Variantenzuordnungen hatten. Das Problem wurde behoben. Alle Aufträge, die bis dato keine Variantenzuordnung hatten, müssen leider manuell zugeordnet werden.
+
+[discrete]
+=== Netto
+
+* Bei der Versandmeldung oder bei der Stornierung eines Auftrags über Lieferaufträge wird jetzt pro Auftragsposition die korrekte Menge berechnet. Dabei wird die Menge der Auftragsposition des aktuellen Lieferauftrags (Angenommene Menge 0 bei Stornierung) mit den Mengen von bereits in anderen Lieferaufträgen als versendet gemeldeten Auftragspositionen addiert.
+
+[discrete]
+=== Payment
+
+* Für die Währungen KES, ANG, UAH, VND, XCD, BOB, IDR wurden keine Umrechnungskurse von unserer verwendeten API zur Verfügung gestellt. In der Vergangenheit hat dies dazu geführt, dass bei diesen Währungen immer der Umrechnungskurs auf 1 gesetzt wurde, wenn die Einstellung *Umrechnungsfaktoren täglich automatisch aktualisieren* aktiv war. Für diese Währungen ist es nun möglich, im Menü *Einrichtung » Aufträge » Zahlung » Währung* einen Umrechnungskurs zu hinterlegen, auch wenn die Einstellung *Umrechnungsfaktoren täglich automatisch aktualisieren* aktiv ist.
+
+[discrete]
+=== Prozesse
+
+* Mahnungen konnten über den Prozess nicht mehr erstellt werden. Dieser Fehler wurde behoben.
+* Nach einer Falscheingabe in der Auftragssuche (z.B. Auftrags-ID) wurde die Falscheingabe nicht gelöscht und der Fokus ging verloren. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Zalando
+
+* Im Assistenten für die Grundeinstellung für Zalando unter *Einrichtung » Assistenten » Omni-Channel* wurde in den jeweiligen *Kanal-Einstellungen* der Länder im Abschnitt *Bestandseinstellungen* die Auswahl der Vertriebslager weder korrekt geladen, noch wurden diese korrekt gespeichert.
++
+Die Ursache war, dass die Einstellung den falschen Speicherpunkt angesteuert hat und dadurch die Änderungen keine Auswirkung hatten. Der Bestandsabgleich selbst steuerte den korrekten Speicherpunkt an, wodurch der Bestandsabgleich wie bisher weiterlief und nur Änderungen dieser Einstellungen bzw. neue Kanäle nicht im Bestandsabgleich in Betracht gezogen wurden.
+* Es kam in seltenen Fällen dazu, dass der Cron-Prozess für den Auftragsimport zweimal zeitgleich lief.
++
+Dabei konnte es wiederum dazu kommen, dass der gleiche Auftrag von beiden Prozessen zum selben Zeitpunkt verarbeitet wurde und dadurch zweimal importiert wurde.
++
+Diesem Verhalten wurde nun vorgebeugt, indem der Cron-Prozess eine Markierung in der Datenbank setzt, um den Start weiterer Prozesse zu verhindern. Diese Markierung wird erst beim Abschluss des Prozesses entfernt.
+Zusätzlich wurde für den Fall eines unerwarteten Abbruchs des Prozesses eine Rückfallsicherung eingebaut, sodass diese Markierung nach einer Stunde ihre Gültigkeit verliert.
+* Im Assistenten für die Grundeinstellung für Zalando unter *Einrichtung » Assistenten » Omni-Channel* kam es in den jeweiligen *Kanal-Einstellungen* der Länder im Abschnitt *Einstellung für Eigenversand-Aufträge* zu Problemen, wenn das Startdatum leer war. Wurde der Assistent ohne Eingabe abgeschlossen, wurde automatisch das aktuelle Datum gesetzt. Dies wurde nun behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Es ist jetzt möglich in der neuen Artikel-UI Listings zu erstellen und vorhanden Listings zu öffnen. Neue Listings werden über einen Stepper erstellt.
+* Wir haben den Picker für Lagerorte und Lieferanten an den folgenden Stellen an einer Variante in der neuen Item-UI ausgetauscht:
+** Lagerort-Picker
+*** Lagerkonfiguration
+*** Wareneingang
+*** Umbuchung
+** Lieferanten-Picker
+*** Wareneingang
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Die Symbole für die Prioritäten im Messenger wurden geändert. Statt der Sterne kannst du jetzt die Prioritäten von *Sehr hoch* bis *Sehr niedrig* vergeben.
+
+[discrete]
+=== plentyBI
+
+* Die Begrenzung der Kennzahlen innerhalb einer einzelnen Komponenten wurde für auf 12 erhöht. Diese Änderung ist unabhängig von der verwendeten plentyBI Edition. Wenn die maximale Anzahl an Kennzahlen erreicht wurde, erscheint ein Tooltip beim Versuch eine neue Kennzahl in einer kombinierten Tabelle oder einem Diagramm zu verwenden.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In einer Retoure war es unter Umständen nicht möglich, den Warenbestand für Paketbestandteile zurückzubuchen. Dies wurde behoben.
+* Der Fokus des Eingabefelds beim Drücken der Eingabetaste wurde in der Filteransicht behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* entfernt.
+
+[discrete]
+=== Fulfillment
+
+* Die Versanddienstleister CBC Logistics/ParcelOne und NetDespatch wurden nicht verwendet und daher entfernt.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/returnsportal_55342[apoio - plentymarkets Retourenportal^]
+|1.0.2
+|-
+
+|link:https://marketplace.plentymarkets.com/dhlshipping_4871[DHL Shipping (Versenden)^]
+|3.1.24
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.3.0
+|-
+
+|link:https://marketplace.plentymarkets.com/mollie_6272[Mollie^]
+|2.8.24
+|-
+
+|link:https://marketplace.plentymarkets.com/prepayment_4758[Vorkasse^]
+|3.0.9
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.12
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
