@@ -19,12 +19,6 @@ While the new order UI is still in its beta phase, you can decide for yourself i
 
 Standard values are selected by default in new systems. For example, status [9] for returns and status [11] for credit notes. These settings can be changed. To do so, select another status. Alternatively, go to *Setup » Orders » Status* and create a new xref:orders:order-statuses.adoc#[order status]. Statuses created in this menu are displayed in the *Basic settings* menu and can be selected as default statuses.
 
-[IMPORTANT]
-.Saving the basic settings
-======
-The basic settings in the *Setup » Orders » Settings* menu have to be saved once when the system is first set up. The settings will not go into effect until they have been saved. Thus, save the settings even if you have not made any changes, i.e. even if you want to use the default settings.
-======
-
 [WARNING]
 .User login
 ======
@@ -32,122 +26,102 @@ Whenever you carry out changes in this menu and save the settings, other users a
 ======
 
 [#grant-user-rights]
-== Assigning rights for back end users
+== Assigning rights
 
-To authorise users of the type *back end* to open orders, you have to save default statuses for *returns* and *credit notes* here. No status is saved here by default. +
-Back end users have to be xref:business-decisions:user-accounts-access.adoc#105[authorised to edit orders].
-In addition, back end users also have to be authorised to create orders of the type *return*, *warranty* and *repair*. For this, back end users have to be authorised to edit the default statuses of these order types saved in the *Setup » Orders » Settings* menu. +
-Also, determine which users should be allowed to see which menus in the system. To do so, determine xref:business-decisions:user-accounts-access.adoc#100[visibilities], for example for warehouses and order statuses. +
-The following section lists the rights for all relevant areas. Decide for yourself which rights should be granted for back end users.
+If users without admin rights should be able to work with orders, a person with *admin* access should grant these users the respective rights. +
+The following sections list the rights for all relevant areas. Decide for yourself which rights should be granted for users without admin rights.
 
-[discrete]
-=== Assigning rights
+[#user-rights-contact-data]
+=== Assigning rights for contact data
 
-Note that only *Admin* users can grant rights.
+:rights-purpose: work with contact data
+:right-one: pass:quotes[*CRM > Address > Read*]
+:right-two: pass:quotes[*CRM > Address > Delete*]
+:right-three: pass:quotes[*CRM > Bank details > Read*]
+:right-four: pass:quotes[*CRM > Bank details > Update*]
+:right-five: pass:quotes[*CRM > Bank details > Create*]
+:right-six: pass:quotes[*CRM > Contact > Read*]
 
-[.instruction]
-Assigning rights:
+include::_includes:partial$rights.adoc[]
 
-. Go to *Setup » Settings » User » Rights » User*. +
-→ The user accounts are displayed in an overview.
-. Click on a user account. +
-→ The *Rights* menu item containing the visibilities opens.
-. Assign the rights for the respective area by ticking the check boxes. +
-*_Note_*: You can either grant rights for complete areas or limit the rights you grant the user. To only grant limited rights in a certain area, expand the area.
-. *Save* (icon:save[role="green"]) the settings.
 
-[TIP]
-======
-The *Rights* and *Menu visibilities* are linked. This means that if you grant a right in one of the two areas, plentymarkets automatically grants the corresponding rights in the other area.
-======
+[#user-rights-item-data]
+=== Assigning rights for item data
 
-[.collapseBox]
-.Assigning rights for contact data to back end users
---
+:rights-purpose: see item data
+:right-one: pass:quotes[*Items > Item > Read*]
+:right-two: pass:quotes[*Items > Item > Item image > Read*]
+:right-three: pass:quotes[*Items > Item > Item image > Item image name > Read*]
+:right-four: pass:quotes[*Items > Item > Variation > Read*]
+:right-five: pass:quotes[*Items > Manufacturer > Read*]
+:right-six: pass:quotes[*Items > Sales price > Read*]
 
-*Back end* type users xref:business-decisions:user-accounts-access.adoc#105[can only see certain areas and menus] in plentymarkets. This means they only have limited access to the system. If you want *back end* type users to work with contact data, you have to grant them at least the following rights: +
+include::_includes:partial$rights.adoc[]
 
-* *CRM > Address > Show*
-* *CRM > Address > Delete*
-* *CRM > Bank details > Update*
-* *CRM > Bank details > Show*
-* *CRM > Bank details > Edit*
-* *CRM > Bank details > Create*
-* *CRM > Contact > Show*
---
+[#user-rights-markets]
+=== Assigning rights for markets
 
-[.collapseBox]
-.Assigning rights for item data to back end users
---
+:rights-purpose: see market credentials
+:right-one: pass:quotes[*Markets > Credentials > Read*]
 
-*Back end* type users xref:business-decisions:user-accounts-access.adoc#105[can only see certain areas and menus] in plentymarkets. This means they only have limited access to the system. If you want *back end* type users to see item data, you have to grant them at least the following rights: +
+include::_includes:partial$rights.adoc[]
 
-* *Items > Item > Show*
-* *Items > Item > Item image > Show*
-* *Items > Item > Item image > Item image name > Show*
-* *Items > Item > Variation > Show*
-* *Items > Manufacturer > Show*
-* *Items > Sales price > Show*
---
+[#user-rights-orders-and-order-docs]
+=== Assigning rights for orders and order documents
 
-[.collapseBox]
-.Assigning rights for markets to back end users
---
+:rights-purpose: work with orders and order documents
+:right-one: pass:quotes[*Orders > Read*]
+:right-two: pass:quotes[*Orders > Update*]
+:right-three: pass:quotes[*Orders > Create*]
+:right-four: pass:quotes[*Orders > Delete*]
+:right-five: pass:quotes[*Orders > Order properties > Read*]
+:right-six: pass:quotes[*Orders > Documents > Read*]
+:right-seven: pass:quotes[*Orders > Documents > Create*]
+:right-eight: pass:quotes[*Orders > Documents > Delete*]
 
-*Back end* type users xref:business-decisions:user-accounts-access.adoc#105[can only see certain areas and menus] in plentymarkets. This means they only have limited access to the system. If you want *back end* type users to see credentials of markets, you have to grant them at least the following right: +
+include::_includes:partial$rights.adoc[]
 
-* *Markets > Credentials > Show*
+[#user-rights-outgoing-items]
+=== Assigning rights for outgoing items
 
---
+:rights-purpose: carry out actions for outgoing items
+:right-one: pass:quotes[*Orders > Book outgoing items > Read*]
+:right-two: pass:quotes[*Orders > Book outgoing items > Update*]
+:right-three: pass:quotes[*Orders > Book outgoing items > Create*]
+:right-four: pass:quotes[*Orders > Revert outgoing items > Read*]
+:right-five: pass:quotes[*Orders > Revert outgoing items > Update*]
+:right-six: pass:quotes[*Orders > Revert outgoing items > Create*]
+:right-seven: pass:quotes[*Orders > Revert outgoing items of order item > Read*]
+:right-eight: pass:quotes[*Orders > Revert outgoing items of order item > Update*]
+:right-nine: pass:quotes[*Orders > Revert outgoing items of order item > Create*]
 
-[.collapseBox]
-.Assigning rights for orders and order documents to back end users
---
+include::_includes:partial$rights.adoc[]
 
-*Back end* type users xref:business-decisions:user-accounts-access.adoc#105[can only see certain areas and menus] in plentymarkets. This means they only have limited access to the system. If you want *back end* type users to work with orders and order documents, you have to grant them at least the following rights: +
+[#user-rights-properties-and-tags]
+=== Assigning rights for properties and tags
 
-* *Orders > Show*
-* *Orders > Update*
-* *Orders > Create*
-* *Orders > Delete*
-* *Orders > Order properties > Show*
-* *Orders > Documents > Create*
-* *Orders > Documents > Show*
-* *Orders > Documents > Delete*
---
+:rights-purpose: work with properties and tags
+:right-one: pass:quotes[*Setup > Property > Read*]
+:right-two: pass:quotes[*Setup > Tag > Read*]
+:right-three: pass:quotes[*Setup > Tag > Tag relationship > Create*]
+:right-four: pass:quotes[*Setup > Tag > Tag relationship > Delete*]
 
-[.collapseBox]
-.Assigning rights for outgoing items to back end users
---
+include::_includes:partial$rights.adoc[]
 
-*Back end* type users xref:business-decisions:user-accounts-access.adoc#105[can only see certain areas and menus] in plentymarkets. This means they only have limited access to the system. If you want *back end* type users to carry out actions for outgoing items, you have to grant them at least the following rights: +
+[#user-rights-user-data]
+=== Assigning rights for user data
 
-* *Orders > Book outgoing items*
-* *Orders > Revert outgoing items of order item*
-* *Orders > Revert outgoing items*
---
+:rights-purpose: edit user data
+:right-one: pass:quotes[*User > Edit > Read*]
+:right-two: pass:quotes[*User > Edit > Update*]
+:right-three: pass:quotes[*User > Edit > Create*]
 
-[.collapseBox]
-.Assigning rights for properties and tags to back end users
---
-*Back end* type users xref:business-decisions:user-accounts-access.adoc#105[can only see certain areas and menus] in plentymarkets. This means they only have limited access to the system. If you want *back end* type users to work with properties and tags, you have to grant them at least the following rights: +
+include::_includes:partial$rights.adoc[]
 
-* *Setup > Property > Show*
-* *Setup > Tag > Show*
-* *Setup > Tag > Tag relationship > Create*
-* *Setup > Tag > Tag relationship > Delete*
---
+[#user-rights-order-ui]
+=== Assigning rights for the Order UI
 
-[.collapseBox]
-.Assigning rights for user data to back end users
---
-
-*Back end* type users xref:business-decisions:user-accounts-access.adoc#105[can only see certain areas and menus] in plentymarkets. This means they only have limited access to the system. If you want *back end* type users to edit user data, you have to grant them at least the following right: +
-
-* *User > Edit*
---
-
-In case some of the functions or settings in the Order UI are not displayed, you can check in the following table, which rights are missing.
+In case some of the functions or settings in the Order UI are not displayed, you can check in the following table, which rights are missing. <<#table-required-user-rights>> lists the rights that have to be activated in the xref:business-decisions:user-accounts-access.adoc#105[role] if a person without admin rights cannot see the sections in the Order UI. Afterwards, this role has to be xref:business-decisions:user-accounts-access.adoc#110[assigned] in the user account.
 
 [.collapseBox]
 .Rights for Order UI functions
@@ -163,22 +137,22 @@ In case some of the functions or settings in the Order UI are not displayed, you
 | *Edit order items*
 |Orders > Update +
 Orders > Create +
-Setup > Property > Show +
-Items > Sales price > Show +
-Items > Item > Variation > Show
+Setup > Property > Read +
+Items > Sales price > Read +
+Items > Item > Variation > Read
 
 | *Edit address*
 |Orders > Update +
-CRM > Address > Address option type > Show
+CRM > Address > Address option type > Read
 
 | *Change address*
 |Orders > Update +
-CRM > Address > Show
+CRM > Address > Read
 
 | *Add/update bank data*
 |Orders > Update +
-CRM > Bank details > Create +
-CRM > Bank details > Update
+CRM > Bank details > Update +
+CRM > Bank details > Create
 
 | *Add documents*
 |Orders > Update +
@@ -190,7 +164,7 @@ Orders > Documents > Delete
 
 2+^| *Toolbar*
 
-| *Create/Split/Duplicate orders*
+| *Create/split/duplicate orders*
 |Orders > Update +
 Orders > Create
 
@@ -202,12 +176,12 @@ Orders > Create
 
 | *Book outgoing items*
 |Orders > Update +
-Orders > Book outgoing items
+Orders > Book outgoing items > Read
 
 | *Book back items*
 |Orders > Update +
-Orders > Revert outgoing items +
-Orders > Revert outgoing items of order item
+Orders > Revert outgoing items > Read +
+Orders > Revert outgoing items of order item > Read
 
 | *Delete orders*
 |Orders > Delete
@@ -215,58 +189,57 @@ Orders > Revert outgoing items of order item
 2+^| *Order overview (group functions)*
 
 | *Group orders*
-|Orders > Create +
-Orders > Update +
-Orders > Group function (new Order UI) > Group orders
+|Orders > Update +
+Orders > Create +
+Orders > Group function (new Order UI) > Group orders > Read
 
 | *Change status*
 |Orders > Update +
-Orders > Group function (new Order UI) > Status
+Orders > Group function (new Order UI) > Status > Read
 
 | *Change tag*
 |Orders > Update +
-Orders > Group function (new Order UI) > Tags
+Orders > Group function (new Order UI) > Tags > Read
 
 | *Set order item shipping date*
 |Orders > Update +
-Orders > Group function (new Order UI) > Shipping date
+Orders > Group function (new Order UI) > Shipping date > Read
 
 | *Set order delivery date*
 |Orders > Update +
-Orders > Group function (new Order UI) > Delivery date
+Orders > Group function (new Order UI) > Delivery date > Read
 
 | *Change shipping profile*
 |Orders > Update +
-Orders > Group function (new Order UI) > Shipping profile
+Orders > Group function (new Order UI) > Shipping profile > Read
 
 | *Change owner*
 |Orders > Update +
-Orders > Group function (new Order UI) > Owner
+Orders > Group function (new Order UI) > Owner > Read
 
 | *Delete orders*
-|Orders > Delete +
-Orders > Group function (new Order UI) > Delete
+|Orders > Delete
 
 | *Book outgoing items*
 |Orders > Update +
-Orders > Group function (new Order UI) > Book outgoing items +
-Orders > Book outgoing items
+Orders > Book outgoing items > Read +
+Orders > Group function (new Order UI) > Book outgoing items > Read
 
 | *Reset outgoing items*
 |Orders > Update +
-Orders > Group function (new Order UI) > Reverse outgoing items +
-Orders > Revert outgoing items
+Orders > Revert outgoing items > Read +
+Orders > Group function (new Order UI) > Reverse outgoing items > Read
 
 | *Create documents*
 |Orders > Documents > Create +
-Orders > Group function (new Order UI) > Documents > Credit note +
-Orders > Group function (new Order UI) > Documents > Delivery note +
-Orders > Group function (new Order UI) > Documents > Entry certificate +
-Orders > Group function (new Order UI) > Documents > Invoice +
-Orders > Group function (new Order UI) > Documents > Order confirmation +
-Orders > Group function (new Order UI) > Documents > Return slip +
-Orders > Group function (new Order UI) > Documents > Reversal credit note +
-Orders > Group function (new Order UI) > Documents > Reversal invoice
+Orders > Group function (new Order UI) > Documents > Order confirmation > Read +
+Orders > Group function (new Order UI) > Documents > Entry certificate > Read +
+Orders > Group function (new Order UI) > Documents > Credit note > Read +
+Orders > Group function (new Order UI) > Documents > Delivery note > Read +
+Orders > Group function (new Order UI) > Documents > Invoice > Read +
+Orders > Group function (new Order UI) > Documents > Return slip > Read +
+Orders > Group function (new Order UI) > Documents > Reversal credit note > Read +
+Orders > Group function (new Order UI) > Documents > Reversal invoice > Read
 
 2+^| *Context menu*
 
@@ -275,18 +248,18 @@ Orders > Group function (new Order UI) > Documents > Reversal invoice
 
 | *Book outgoing items*
 |Orders > Update +
-Orders > Book outgoing items
+Orders > Book outgoing items > Read
 
 | *Reset outgoing items*
 |Orders > Update +
-Orders > Revert outgoing items
+Orders > Revert outgoing items > Read
 
 | *Delete orders*
 |Orders > Delete
 
 | *Change status*
 |Orders > Update +
-*_Note:_* In case you cannot see certain statuses in the order overview or in the order details, you need the respective rights for the *Selectable order statuses*. Ask an admin to grant you the required rights in the *Setup » Settings » User » Accounts » [select account] » Tab: Rights* menu.
+*_Note:_* In case you cannot see certain statuses in the order overview or in the order details, you need the respective rights for the *Selectable order statuses*. Ask an admin to give you the necessary rights in the *Setup » Account management » Roles* menu.
 
 |===
 --
@@ -309,62 +282,19 @@ Carrying out the basic settings:
 |===
 |Setting |Explanation
 
-| [#intable-default-referrer]*Default referrer*
-|Select a provider, a market or the *Online store*. This referrer will automatically be set by default for all orders. Select *Manual entry* if you do not want to use a default setting, i.e. if you want to individually save each order referrer.
+2+^| *Settings*
 
-| [#intable-default-status-return]*Standard status for returns*
-|Select which status should automatically be set for xref:orders:order-type-return.adoc#[returns]. The status can be changed when creating the return.
-
-| [#intable-default-status-credit-note]*Standard status for credit notes*
-|Select which status should automatically be set for xref:orders:order-type-credit-note.adoc#[credit notes].
-
-| [#intable-default-status-repairs]*Standard status for repairs*
-|Select which status should automatically be set for xref:orders:order-type-repair.adoc#[repairs].
-
-| [#intable-default-status-multi-order]*Standard status for multi-orders*
-|Select which status should automatically be set for xref:orders:order-type-multi-order.adoc#[multi-orders].
-
-| [#intable-default-status-multi-credit-note]*Standard status for multi credit notes*
-|Select which status should automatically be set for xref:orders:order-type-multi-order.adoc#generate-multi-credit-note[multi credit notes].
-
-| [#intable-default-status-reversal]*Standard status for reversals*
-|Select which status should be automatically set for reversals. +
-_Example:_ user-defined status *[6.4] Outgoing items cancelled*. +
-Select the status *Last status* if you do not need a specific status. This setting returns the status to what it was before outgoing items were booked.
-
-| [#intable-default-status-cancelled-orders]*Status of cancelled orders*
-|Select the status range for cancelled orders. +
-_Background:_ As soon as an order enters this status range, stock will no longer be reserved for the items included in the order. This means that the stock becomes available for other orders. Statuses can be excluded from this automatic function if necessary. For example, if you do not want item to be reversed if they have a particular status. +
-*_Note:_* Save the range of statuses in ascending order, e.g. [8.0] to [8.5].
-
-| [#intable-default-status-order-reservation]*Status for order reservations*
-|As soon as an order enters this status range, stock is automatically reserved for the items included in the order. You can also choose whether the setting should apply to all orders or to paid orders only. For example, select the option *Paid orders only* if stock should not be reserved for unpaid orders.
-
-| [#intable-shipping-costs-in-warranty]*Include shipping costs in warranty*
-| *YES* = Customers receive a refund for the shipping costs of a warranty. +
-*NO* = Customers have to pay the shipping costs themselves even in case of a warranty. The shipping costs are not refunded to the customer.
-
-| [#intable-shipping-costs-in-credit-note]*Include shipping costs in credit note*
-|*YES* = Customers receive a refund for the shipping costs of a warranty. +
-*NO* = Customers have to pay the shipping costs themselves even in case a credit note is created. The shipping costs are not refunded to the customer.
-
-| [#intable-show-address]*Show in the order/order overview*
-|Select whether the *invoice address* or the *delivery address* is displayed in the order and the order overview.
-
-| [#intable-item-price]*Display of item prices*
-|Select whether *gross* or *net* prices should be displayed for the items included in the order.
-
-| [#intable-warehouse-assignment]*Assignment of warehouses*
+| [#intable-warehouse-assignment]*Warehouse assignment*
 |Select the method according to which the warehouse is assigned. +
-*a) a warehouse can be assigned for each order* = Select this option if you only work with one warehouse or one logistics service provider. +
+*a) a warehouse can be assigned for each order* (default setting) = Select this option if you only work with one warehouse or one logistics service provider. +
 *b) a warehouse can be assigned for each stock unit* = Select this option of you work with multiple warehouses or multiple logistics service providers.
 
 | [#intable-warehouse-selection]*Automatic warehouse selection*
-|Choose the criterion according to which the warehouse is selected. +
-*a) depending on the country of delivery* = The warehouse that was saved for the *Country of delivery* in the *Setup » Orders » Shipping » Settings » Tab: Countries of delivery*. +
+|Choose the criterion according to which the warehouse should be selected. +
+*a) depending on the delivery country* (default setting) = The warehouse that was saved for the *Country of delivery* in the *Setup » Orders » Shipping » Settings » Tab: Countries of delivery*. +
 *_Tip:_* If you select this option, make sure to check which warehouse is assigned to the respective delivery countries. +
 *b) depending on the item’s main warehouse* = The warehouse saved as the respective item’s main warehouse is selected. +
-*_Important:_* If no main warehouse has been saved for an item, the warehouse is selected according to the country of delivery. +
+*_Note:_* If no main warehouse has been saved for an item, the warehouse is selected according to the country of delivery. +
 *c) depending on the highest stock level* = The order is assigned to the warehouse with the highest stock for the order item. +
 *c) depending on the warehouse priority and the highest stock level* = The order is assigned to a warehouse according to the following criteria. The following information is checked one after another: +
 1) The *Priority* of the warehouse (option available in the xref:stock-management:setting-up-a-warehouse.adoc#300[warehouse settings]). +
@@ -376,64 +306,78 @@ In case of sufficient or identical stock in all warehouses, the warehouse with t
 In case of sufficient or identical stock in all warehouses, the warehouse with the highest priority. This first criterion does not consider the actual amount of stock. Rather, it checks whether enough stock is available or not. Thus, a warehouse is not favoured because it has more stock than another, but rather because it has a higher priority. Conversely, if a warehouse does not have sufficient stock, it will not be selected. +
 2) The warehouse with the lowest stock level is selected. +
 *g) depending on the warehouse priority and the highest stock level (fallback: main warehouse)* = First, the settings regarding warehouse priority are checked for the warehouse assignment. The second criterion is the stock level, assignment is to the highest stock level. If no warehouse fulfils these criteria, which means that all stock levels are insufficient, the main warehouse of the variation is assigned to the order. +
-*h) depending on the warehouse priority and the lowest stock level (fallback: main warehouse)* = First, the settings regarding warehouse priority are checked for the warehouse assignment. The second criterion is the stock level, assignment is to the lowest stock level. If no warehouse fulfils these criteria, which means that no warehouse has priority and stock levels are insufficient, the main warehouse of the variation is assigned to the order.
-
+*h) depending on the warehouse priority and the lowest stock level (fallback: main warehouse)* = First, the settings regarding warehouse priority are checked for the warehouse assignment. The second criterion is the stock level, assignment is to the lowest stock level. If no warehouse fulfils these criteria, which means that no warehouse has priority and stock levels are insufficient, the main warehouse of the variation is assigned to the order. +
 *_Note:_* If no valid warehouse with exactly those settings can be found, the system will try to find the warehouse with the highest priority that is available for the order referrer. If no warehouse is available for the order referrer in question, the warehouse with the highest priority is picked.
+
+| [#intable-default-status-cancelled-orders-from]*Status of cancelled orders from*
+|Select the status range from which on orders should be cancelled. +
+As soon as an order enters this status range, stock will no longer be reserved for the items included in the order. This means that the stock becomes available for other orders. Statuses can be excluded from this automatic function if necessary. For example, if you do not want items to be reversed if they have a particular status.
+
+| [#intable-default-status-cancelled-orders-to]*Status of cancelled orders to*
+|Select the status range up to which orders should be cancelled.
+
+|[#intable-prefix-bundles]*Prefix for bundles*
+|Define which prefix is to be used in names of bundles. Note that a blank space should be added behind the prefix. The prefix [BUNDLE] is set by default. +
+Note that you need at least version 5.0.40 of plentyShop LTS/IO to use this setting.
+
+|[#intable-prefix-bundle-components]*Prefix for bundle components*
+|Define which prefix is to be used in names of bundle components. Note that a blank space should be added behind the prefix. The prefix [-] is set by default. +
+Note that you need at least version 5.0.40 of plentyShop LTS/IO to use this setting.
+
+| [#intable-default-referrer]*Default referrer*
+|Select a provider, a market or the *Online store*. This referrer will automatically be set by default for all orders. Select *Manual entry* if you do not want to use a default setting, i.e. if you want to individually save each order referrer.
+
+| [#intable-default-variation-id-dunning-fees]*Standard variation ID for dunning fees*
+|Enter a default variation ID for dunning fees. This ID will automatically be preselected for dunning letters.
 
 | [#intable-deposit-production-item]*Deposit payment on production items*
 |Select a value (in percent) for the deposit or select the option *do not offer deposit*.
 
-| [#intable-quantity-bundles]*Allow quantity change for bundle and bundle components*
-| *NO* = The quantities of bundle items and bundle components cannot be changed manually later in order processing. To adjust the quantity manually, the required bundle has to be added to the order again in the appropriate quantity. This setting is preselected. +
-*YES* = he quantities of bundle items and bundle components can be changed manually later in order processing. +
-_Note_: Changing quantities manually after the order is created does not automatically cause an adaption of the quantities of the bundle components or an adaption of the prices.
+| [#intable-display-inactive-payment-plugins]*Show inactive payment methods*
+| *active* = Inactive plugin payment methods are displayed in drop-down lists as well as active ones. +
+*inactive* (default setting) = Only active plugin payment methods are displayed in drop-down lists.
+
+2+^| *Stock*
+
+| [#intable-default-status-order-reservation]*Status for order reservations from*
+|As soon as an order enters this status range, stock is automatically reserved for the items included in the order. You can also choose whether the setting should apply to all orders or to paid orders only. For example, select the option *Paid orders only* further below if stock should not be reserved for unpaid orders.
+
+| [#intable-default-status-order-reservation]*Status for order reservations to*
+|Select the status range up to which stock should automatically be reserved for the items included in the order. You can also choose whether the setting should apply to all orders or to paid orders only. For example, select the option *Paid orders only* further below if stock should not be reserved for unpaid orders.
+
+| [#intable-affected-status-range]*Affected status section in status [4.x] from*
+|Place limits on the status section in case you have created individual variations of status [4]. +
+The default setting is *[4] In preparation for shipping*.
+
+| [#intable-affected-status-range]*Affected status section in status [4.x] to*
+|Place limits on the status section in case you have created individual variations of status [4]. +
+The default setting is *[4] In preparation for shipping*.
+
+| [#intable-order-reservation-paid-orders]*Order reservation for paid orders only*
+|Activate this option if stock should only be reserved for paid orders.
 
 | [#intable-status-change-missing-stock]*Status changes to [4] instead of [5] if stock is missing*
-|Set this option to *YES*if an order should only be cleared for shipping when there is enough stock in the warehouse. As soon as enough stock has been booked into the warehouse, the xref:orders:order-statuses.adoc#[order status] is changed from *[4]* to *[5]*. +
+|Activate this option if an order should only be cleared for shipping when there is enough stock in the warehouse. As soon as enough stock has been booked into the warehouse, the xref:orders:order-statuses.adoc#[order status] is changed from *[4]* to *[5]*. This setting is active by default. +
 *Status [4]* = In preparation for shipping +
 *Status [5]* = Cleared for shipping
 
-| [#intable-affected-status-range]*Affected status section in status [4.x]*
-|Place limits on the status section in case you have created individual variations of status [4]. +
-Default setting: From *[4] In preparation for shipping* to *[4] In preparation for shipping*.
+2+^| *Order UI*
 
-| *Status [3.2] is also affected*
-| *Status [3.2]* indicates that the item is in a waiting position due to outstanding partial payments. The order automatically enters this status instead of status [4] as soon as a partial payment is made. If stock is available, the order changes to status [3.3]. +
-*Status [3.2]* = In waiting position
+| [#intable-show-address]*Show in the order/order overview*
+|Select whether the *invoice address* (default) or the *delivery address* should be displayed in the order and the order overview.
 
-| [#intable-display-inactive-payment-plugins]*Show inactive plugin payment methods*
-| *YES* = Inactive plugin payment methods are displayed in drop-down lists as well as active ones. +
-*NO* = Only active plugin payment methods are displayed in drop-down lists.
+| [#intable-item-price]*Display of item prices*
+|Select whether *gross* or *net* prices should be displayed for the items included in the order.
 
-|[#intable-splitting-behaviour-shipping-costs]*Behaviour of shipping costs when splitting orders*
-|Select from the drop-down list what happens with the shipping costs after xref:orders:working-with-orders.adoc#splitting-orders[splitting an order] into two new orders. +
-*Recalculate shipping costs for both orders (default)* = The is the default behaviour. After splitting an order, the shipping costs are recalculated for both new orders. +
-Take over shipping costs to the first order, the second gets none* = When splitting an order, you are asked how the order items are to be distributed. The order items not selected here are taken over into the first new order. The selected order items are taken over into the second new order. If you choose this option for the shipping costs, they are always taken over for the first new order in case an order is split. The second order does not get any shipping costs. +
-*Take over shipping costs to the order with the highest item value, the other gets none* = he shipping costs of the original order are taken over into the new order with the highest item value. The second order does not get any shipping costs.
+| [#use-new-order-ui]*Use new order UI (beta) and link with other menus*
+| *active* = The new Order UI in the *Orders » Orders (Test phase)* menu will be used for your work in the system and is linked with other menus.
+ By clicking on the *Orders* main entry, you will also be directed to the *Orders » Orders (Test phase)* menu and links from other parts of your plentymarkets system will always lead you there. +
+*Inactive* = The old Order UI in the *Orders » Edit orders* menu will be used for your work in the system (default setting). Note however that this menu will be shut down soon.
 
-| [#intable-behaviour-after-splitting]*Behaviour of original order after splitting*
-|Select from the drop-down list what happens with the original order after it is xref:orders:working-with-orders.adoc#splitting-orders[split] into two new orders. +
-*Delete original order (standard behaviour)* = The standard behaviour is that two new orders are created and the original order is deleted after splitting. You can split orders when they are not locked, outgoing items are not booked yet, no child orders have been created (e.g. returns), no tax-relevant documents have been created and no payments have been assigned to the order yet. +
-*Status change* = By using this option, two new orders are created as well. But the original order remains and is assigned a new order status defined by you. Select this order status from the second drop-down list. We recommend an order status in the cancellation range so that reserved stock does not remain reserved. But depending on your order processing a different order status might be more fitting. +
-With this setting, it is also allowed to split orders with payments already assigned to it and for which tax-relevant documents (important: invoice as well as reversal document) have been created. The assigned payment as well as the documents remain with the original order and are not transferred to the split orders.
-
-|[#intable-order-notes-partial-orders]*Copy order notes to partial orders*
-|*YES* = The order notes in the original order are copied to the new partial orders. +
-*NO* = The order notes in the original order are not copied to the new partial orders.
-
-|[#intable-behaviour-after-grouping]*Behaviour of original orders after grouping*
-|Select from the drop-down list what happens with the original orders after they are xref:orders:working-with-orders.adoc#order-group-functions[grouped] into a new order. +
-*Delete original order (standard behaviour)* = The standard behaviour is that one new order is created and the original orders are deleted after grouping. You can group orders when they are not locked, outgoing items are not booked yet, no tax-relevant documents have been created, no payments have been assigned to the order yet and they have the same plentyID, order type, referrer, owner, contact, address, payment method, currency and exchange rate. +
-*Status change* = By using this option, a new order is created as well after grouping. But the original orders remain and are assigned a new order status defined by you. Select this order status from the second drop-down list. We recommend an order status in the cancellation range so that reserved stock does not remain reserved. But depending on your order processing a different order status might be more fitting. +
-With this setting, it is also allowed to group order with payments already assigned to it and for which tax-relevant documents (important: invoice as well as reversal document) have been created. The assigned payment as well as the documents remain with the original order and are not transferred to the grouped order.
-
-|[#intable-prefix-bundles]*Prefix for bundles*
-|Define which prefix is to be used in names of bundles. Note that a blank space should be added behind the prefix. +
-Note that you need at least version 5.0.40 of plentyShop LTS/IO to use this setting.
-
-|[#intable-prefix-bundle-components]*Prefix for bundle components*
-|Define which prefix is to be used in names of bundle components. Note that a blank space should be added behind the prefix. +
-Note that you need at least version 5.0.40 of plentyShop LTS/IO to use this setting.
+| [#intable-quantity-bundles]*Allow quantity change for bundle items and bundle components*
+| *inactive* (default setting) = The quantities of bundle items and bundle components cannot be changed manually later in order processing. To adjust the quantity manually, the required bundle has to be added to the order again in the appropriate quantity. +
+*active* = he quantities of bundle items and bundle components can be changed manually later in order processing. +
+*_Note:_* Changing quantities manually after the order is created does not automatically cause an adaption of the quantities of the bundle components or an adaption of the prices.
 
 |===
 

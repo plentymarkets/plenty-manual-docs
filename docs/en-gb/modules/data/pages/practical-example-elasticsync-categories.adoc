@@ -5,14 +5,16 @@
 :author: team-item
 
 ////
-zuletzt bearbeitet 14.12.2021
+zuletzt bearbeitet 01.03.2023
 ////
 
-Categories help you group your products. They determine how items are structured in your online store.
+Categories help you group your products.
+For example, they determine how items are structured in your plentyShop.
 
-Generally speaking, there are two different ways to create or update categories. If you only want to create or modify _a few categories_, then we would recommend xref:item:categories.adoc#200[doing this manually]. However, if you have _a lot of categories_, then it will probably be quicker to import your category data.
+Generally speaking, there are two different ways to create or update categories:
 
-That’s what this page is all about. Here you’ll learn how to import category information into plentymarkets. This is useful if you want to create a lot of new categories at once or if you want to update a lot of existing categories at once.
+* If you only want to create or modify _a few categories_, then we would recommend xref:item:categories.adoc#200[doing this manually].
+* If you want to create or modify _a lot of categories_, then it will probably be quicker to import your category data. That’s what this page is all about.
 
 [TIP]
 .Requirements
@@ -22,14 +24,16 @@ This page assumes that you’ve already thought up a xref:item:categories.adoc#1
 
 == Practical example: Initial situation
 
-Imagine you sell clothing in your online store. You’re new to plentymarkets and you want to import all of your category data at once. You want to structure your categories like so:
+Imagine you sell clothing in your online store.
+You’re new to plentymarkets and you want to import all of your category data at once.
+You want to structure your categories like so:
 
 [cols="1a,1a,1a", grid=cols, frame=none, stripes=none]
-|====
+|===
 
 |
 * Women
-** Accessoires
+** Accessories
 ** Shoes
 ** Clothing
 *** Jeans
@@ -37,7 +41,7 @@ Imagine you sell clothing in your online store. You’re new to plentymarkets an
 
 |
 * Men
-** Accessoires
+** Accessories
 ** Shoes
 ** Clothing
 *** Jeans
@@ -45,70 +49,92 @@ Imagine you sell clothing in your online store. You’re new to plentymarkets an
 
 |
 * Kids
-** Accessoires
+** Accessories
 ** Shoes
 ** Clothing
 *** Jeans
 *** Tops
-|====
+|===
 
 == Setting up the CSV file
 
-First, transfer this category structure into a CSV file. This is the file that you’ll import into plentymarkets later. In our example, the categories would look like this in the CSV file:
+[discrete]
+==== Category structure
+
+First, transfer this category structure into a CSV file.
+This is the file that you’ll import into plentymarkets later.
+In this example, the categories would look like this in the CSV file:
 
 image::data:best-practice-category-category-structure-csv.png[]
 
-You are free to choose any names for the column headers. In this example, I’ve put the following category information in the columns:
+You are free to choose any names for the column headers.
+In this example, I’ve put the following category information in the columns:
 
 * *Name* = The name of the category.
-* *Parentname* = If you want this to be a main category, i.e. a top-level category, then leave this field blank. If you want this to be a sub-category, then enter the path of whichever category is directly above it. _Use semicolons_ to separate the individual category levels.
-* *Multiname* = The complete category path, i.e. the Parentname and the Name. Decide which separator you want to use to separate the individual category levels.
+* *Parentname* = If you want this to be a main category, i.e. a top-level category, then leave this field blank.
+If you want this to be a sub-category, then enter the path of whichever category is directly above it.
+Use semicolons (`;`) to separate the individual category levels.
+* *Multiname* = The complete category path, i.e. the Parentname and the Name.
+Decide which separator you want to use to separate the individual category levels.
+In my example, I used the separator `»`.
+In a later step, you’ll select this separator in the xref:data:practical-example-elasticsync-categories.adoc#_choosing_the_matching_settings[matching settings].
+Therefore, only the following separators are permitted: `;` `,` `\->` `.` `»` `/`
 
 [discrete]
-==== Adding further category info
+==== Further category info
 
-You probably want to create much more than just a bare-bones category structure. Perhaps you want to add descriptive texts or SEO-relevant meta data.
-
-Add a few more columns to your CSV file and use them to specify the additional category information. For example, like this:
+You probably want to create much more than just a bare-bones category structure.
+Perhaps you want to add descriptive texts or SEO-relevant meta data.
+Add a few more columns to your CSV file and use them to specify the additional category information.
+For example, like this:
 
 image::data:best-practice-category-category-info-csv.png[]
 
-You are free to choose any names for the column headers. You can add any or all of the xref:data:elasticSync-categories.adoc#20[category information listed here]. In this example, I’ve decided to add the following information:
+You are free to choose any names for the column headers.
+You can add any or all of the xref:data:elasticSync-categories.adoc#20[category information listed here].
+In this example, I’ve decided to add the following information:
 
 * *Description* = A description of each category.
 * *Meta title* = A text that should be displayed as the tab title in the web browser and in the search engine results.
-* *Visible* = Whether I want the individual categories to be included in the sitemap.
+* *Visible* = Should the category be included in the sitemap?
 +
-1 = Yes, the category should be included in the sitemap. +
-0 = No, the category should _not_ be included in the sitemap.
+{nbsp}{nbsp}1 = Yes, the category should be included in the sitemap. +
+{nbsp}{nbsp}0 = No, the category should _not_ be included in the sitemap.
 +
-In this example, I only want the first two category levels to be included in the sitemap. I’ve inserted the numbers 1 and 0 accordingly.
+In my example, I only want the first two category levels to be included in the sitemap. So I insert the numbers 1 and 0 accordingly.
 
 == Choosing the import settings
 
-xref:data:ElasticSync.adoc#1210[Create a new import]. Most of the settings can be chosen freely. However, since you want to import _category data_, make sure you’ve set the *Type* to *Categories*.
+xref:data:ElasticSync.adoc#1210[Create a new import].
+Most of the settings can be chosen freely.
+However, since you want to import _category data_, make sure you’ve set the *Type* to *Categories*.
 
 == Choosing the matching settings
 
-During the import, plentymarkets will check whether the category already exists. This is done with the help of a so-called matching field.
+Configure the settings as follows:
 
-Since we want to import _new categories_ in this example, configure the settings as follows.
-
-[cols="1,3"]
-|====
+[cols="1,3a"]
+|===
 |Setting |Explanation
 
 | *Combined category name*
-|Which column of your CSV file contains the complete category path? Choose this column header from the first drop-down list. In our example, I’ll choose the column *Multiname*. +
-Select the separator from the second drop-down list. In our example, I’ll choose the _semicolon_.
+|Which xref:data:practical-example-elasticsync-categories.adoc#_setting_up_the_csv_file[column of your CSV file] contains the complete category path?
+
+* Select the column header from the first drop-down list.
+In my example, I’ll choose the column *Multiname*.
+* Select the column separator from the second drop-down list.
+In my example, I’ll choose `»`
 
 | *Import options*
 |Since you’ll be importing new categories, choose the option *Only import new data* or *Import new, update existing data*.
-|====
+|===
 
 == Choosing the mapping settings
 
-Your CSV file is already filled with a bunch of category information. Now you’ll decide _where in plentymarkets_ each piece of information should appear when you import the file. xref:data:elasticSync-categories.adoc#20[Take a look at this page] while you map the columns of your CSV file to the fields in plentymarkets. In this example, I’ve configured the settings as follows.
+Your CSV file is filled with a bunch of category information.
+Now you’ll decide _where in plentymarkets_ each piece of information should appear when you import the file.
+xref:data:elasticSync-categories.adoc#20[Take a look at this page] while you map the columns of your CSV file to the fields in plentymarkets.
+In this example, I’ve configured the settings as follows.
 
 image::data:best-practice-category-mapping-settings.png[]
 
@@ -116,7 +142,8 @@ I created the bare-bones category structure by:
 
 * mapping the *Name* column of my CSV file with the *Category settings / Name* data field in plentymarkets.
 * mapping the *Parentname* column of my CSV file with the *Category / Parent category name* data field in plentymarkets.
-* using the *Own value* option and entering *1* for the data field *Category / Create parent category if not found*. In other words, by deciding to create the superior category if it doesn’t already exist.
+* using the *Own value* option and entering *1* for the data field *Category / Create parent category if not found*.
+In other words, by deciding to create the superior category if it doesn’t already exist.
 
 I added extra category information by:
 
@@ -126,12 +153,13 @@ I added extra category information by:
 
 == Did it work?
 
-Ready to import your categories? Start the import and check whether the data was correctly imported into plentymarkets.
+Ready to import your categories?
+Start the import and make sure the data was correctly imported into plentymarkets.
 
 [.instruction]
 Starting the import and checking the result:
 
-. Activate the lines that should be imported (icon:toggle-on[role="green"]).
+. Activate the lines that should be imported (icon:toggle-on[role="blue"]).
 . Test the import (terra:plugin_stage_deploy[]) or start the import (icon:play-circle-o[role="darkGrey"]). +
 *_Note:_* This can take a few minutes.
 . Go to *Item » Category*.

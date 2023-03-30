@@ -33,14 +33,14 @@ In case of certain events, e.g. if a new order is placed in your plentyShop or w
 The following sub-chapters describe which preparatory settings are needed so that you can work with the EmailBuilder.
 
 [#assign-rights]
-=== Assigning rights for back end users
+=== Assigning rights
 
 :rights-purpose: work with the EmailBuilder
-:right-one: pass:quotes[*CRM > EmailBuilder > Show*]
+:right-one: pass:quotes[*CRM > EmailBuilder > Read*]
+:right-two: pass:quotes[*CRM > EmailBuilder > Update*]
 :right-two: pass:quotes[*CRM > EmailBuilder > Create*]
-:right-three: pass:quotes[*CRM > EmailBuilder > Update*]
 :right-four: pass:quotes[*CRM > EmailBuilder > Delete*]
-:right-five: pass:quotes[in the area *Menu visibilities*: *CRM > EmailBuilder*]
+:right-five: pass:quotes[in simple mode: *CRM > EmailBuilder > See*]
 
 include::_includes:partial$rights.adoc[]
 
@@ -107,6 +107,14 @@ All emails are only sent to the saved email address. This allows you to test the
 |====
 --
 
+////
+[TIP]
+.Entering newsletter login details
+====
+Go to *Setup » Client » [Select client] » Email » Newsletter*. Enter the login details to use the newsletter service that is integrated in plentymarkets. For further information, refer to the xref:crm:sending-newsletters.adoc#200[Entering newsletter login details] chapter of the xref:crm:sending-newsletters.adoc#[Newsletters] page of the manual.
+====
+////
+
 [#email-signature]
 === Saving the email signature
 
@@ -115,7 +123,7 @@ Go to the *Email accounts* assistant in the *Setup » Assistants » Basic setup*
 [IMPORTANT]
 .Note the priority of the signature
 ====
-The signature that was saved for a user in his or her user account in the *Setup » Settings » User » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
+The signature that was saved for a user in his or her user account in the *Setup » Account management » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
 *_This means:_* If you insert, for example, the variable `Signature in HTML format` or `Signature in plain text` in the email template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Email accounts* assistant in the *Signature* step is used.
 ====
 
@@ -491,7 +499,7 @@ Now create the template and save basic settings such as the name, the subject, C
 [IMPORTANT]
 .Important: Add header and footer in the corresponding language
 ====
-If you create a template in <<#add-language, multiple languages>>, remember to create also the header and footer in these languages and to link them with the template. Otherwise, the template cannot be sent.
+If you created a template in <<#add-language, multiple languages>>, remember to create also the header and footer in these languages and to link them with the template. Otherwise, the template cannot be sent.
 ====
 
 [TIP]
@@ -762,6 +770,8 @@ In the editor, you can find a selection of widgets whose contents are already pr
 For example, you will find in the *Order items* widget a pre-defined list with the most important variables around the ordered item such as item name, the number of ordered items, the prices, the shipping costs and the total invoice amount. However, you can adjust the content at any time according to your needs and add further column names and individual items.
 
 ////
+TODO: Screenshot erneuern und Text wieder einbinden, sobald das Auftragspositionen-Widget gefixed wurde.
+
 <<#image-emailbuilder-widget-order-items>> shows the editing mode of the predefined *Order items* widget.
 
 [[image-emailbuilder-widget-order-items]]
@@ -1012,7 +1022,6 @@ Would you like to know which default templates are already available in the Emai
 
 |Shop: Order confirmation
 |Order confirmation for your order with ID &#123;&#8288;&#123;order.id&#125;&#8288;&#125;
-
 |====
 
 *German default templates in the EmailBuilder and their subjects*
@@ -1200,6 +1209,8 @@ As soon as the template is created, you can see the prefilled content in the too
 
 You can add the following languages to your template, your header and your footer:
 
+* All
+** Select *All* if you use your company logo in the header only and therefore don’t need to take into account any content-related adjustments or a translation to another language.
 * German
 * English
 * Bulgarian
@@ -1225,7 +1236,7 @@ Let’s assume, you have created a shipping confirmation in English and added wi
 [IMPORTANT]
 .Important: Add header and footer in the corresponding language
 ====
-If you created a template in <<#add-language, multiple languages>>, remember to create also the header and footer in these languages and to link them with the template. Otherwise, the template cannot be sent.
+If you create a template in <<#add-language, multiple languages>>, remember to create also the header and footer in these languages and to link them with the template. Otherwise, the template cannot be sent.
 ====
 
 [#copy-template]
@@ -1353,6 +1364,7 @@ If you want to use a twig expression in the template’s subject line, this expr
 *_Example:_* If you want to display the shipping service provider in your template’s subject line, open the expandable area *Order / Shipping*, search for the variable *Shipping service provider* and insert the corresponding twig expression in the <<#adjust-subject, subject line>> of your template as follows: `&#123;&#8288;&#123;order.formattedShipping.providerName&#125;&#8288;&#125;`.
 
 You can find code examples for the subject line in the <<#code-examples-subject, Code examples for the subject line>> chapter.
+
 
 [#twig-code-widget]
 ==== Twig expression in the code widget
@@ -2105,36 +2117,6 @@ The QR code is shown as an URL in the email of your customers. After clicking on
 | $ItemWarehouseID
 
 |====
-
-////
-[TIP]
-.More twig expressions for the item list widget
-====
-In addition, you can use the twig expressions listed in the following in the item list widget. Note that these values are only available as twig expressions. Therefore, you _cannot_ search for them in the list of available variables for the item list widget in the EmailBuilder.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountGross&#125;&#8288;&#125;
-// ** Returns the gross total amount of the discount.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountNet&#125;&#8288;&#125;
-// ** Returns the net total amount of the discount.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceGross&#125;&#8288;&#125;
-// ** Returns the gross price.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceNet&#125;&#8288;&#125;
-// ** Returns the net price.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsGross&#125;&#8288;&#125;
-// ** Returns the gross shipping costs.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsNet&#125;&#8288;&#125;
-// ** Returns the net shipping costs.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.vats&#125;&#8288;&#125;
-// ** Returns the VAT rates.
-
-====
-////
 
 [#variables-order-shipping]
 ==== Variables: Order / Shipping
