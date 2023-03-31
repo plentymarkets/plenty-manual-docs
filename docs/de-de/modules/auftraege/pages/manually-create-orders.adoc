@@ -93,60 +93,84 @@ Um die Auftragsanlage zu erleichtern und schneller vorgehen zu können, solltest
 Standardeinstellungen vornehmen:
 
 . Öffne das Menü *Einrichtung » Aufträge » Auftragstypen » Auftrag*.
-. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<table-default-settings-order-contact>>.
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<table-default-settings-order>>.
 . *Speichere* (material:save[role=green]) die Einstellungen.
 
-[[table-default-settings-order-contact]]
-.Standardeinstellungen für die Auftragsanlage
+[[table-default-settings-order]]
+.Standardeinstellungen für Aufträge und Angebote
 [cols="1,3"]
 |===
 |Einstellung |Erläuterung
 
-|[#intable-standard-eigner]*Standard-Eigner*
-|Wählst du einen Standard-Eigner, ist dieser Eigner in den Auftragsdetails des neuen Auftrags oder des Angebots standardmäßig vorausgewählt. Der Eigner wird generell nicht aus den Kontaktdaten übernommen.
+2+^| *Einstellungen*
 
-|[#intable-standard-mandant]*Standard-Mandant*
-|Der hier ausgewählte Standard-Mandant ist beim Anlegen des neuen Auftrags oder Angebots vorausgewählt, wenn in den Kontaktdaten kein Mandant hinterlegt ist. Ist in den Kontaktdaten ein Mandant hinterlegt, hat dieser Mandant Priorität.
+|[#intable-splitting-behaviour-shipping-costs]*Verhalten der Versandkosten beim Teilen von Aufträgen*
+|Wähle aus der Dropdown-Liste, wie mit den Versandkosten umgegangen werden soll, wenn du einen Auftrag in zwei neue xref:auftraege:working-with-orders.adoc#splitting-orders[Aufträge teilst]. +
+*Versandkosten in beiden Aufträgen neu ermitteln (Standard)* = Dies ist das Standardverhalten. Nach dem Teilen werden jeweils die Versandkosten für die zwei neu entstandenen Aufträge neu ermittelt. +
+*Versandkosten an den ersten Auftrag übernehmen, der zweite bekommt keine* = Beim Teilen eines Auftrags erfolgt eine Abfrage zur Verteilung der Auftragspositionen. Die nicht ausgewählten Auftragspositionen werden in den ersten Auftrag, die ausgewählten in den zweiten Auftrag übernommen. Wählst du diese Option für die Versandkosten, werden sie beim Teilen eines Auftrags immer für den ersten Auftrag übernommen. Dem zweiten Auftrag werden keine Versandkosten zugeordnet. +
+*Versandkosten an den Auftrag mit dem höchsten Warenwert übernehmen, der andere bekommt keine* = Die Versandkosten des Originalauftrags werden in den neuen Auftrag mit dem höchsten Warenwert übernommen. Dem zweiten durch das Teilen entstandenen Auftrag werden keine Versandkosten zugeordnet.
 
-|[#intable-standard-herkunft]*Standard-Herkunft*
-|Die hier ausgewählte Standard-Herkunft ist beim Anlegen des neuen Auftrags oder des Angebots vorausgewählt, wenn in den Kontaktdaten keine Herkunft hinterlegt ist. Ist in den Kontaktdaten eine Herkunft hinterlegt, hat diese Herkunft Priorität.
+| [#intable-behaviour-after-splitting]*Verhalten des Originalauftrags nach dem Teilen*
+|Wähle aus der Dropdown-Liste, was mit dem Originalauftrag nach der xref:auftraege:working-with-orders.adoc#splitting-orders[Teilung] in zwei neue Aufträge passieren soll. +
+*Originalauftrag löschen (Standardverhalten)* = Es entstehen zwei neue Aufträge und Originalaufträge werden nach dem Teilen gelöscht. Zudem können nur Aufträge geteilt werden, die nicht gesperrt sind, für die kein Warenausgang gebucht wurde, für die keine Kindaufträge existieren (z.B. Retoure), für die keine steuerrelevanten Dokumente erstellt wurden und denen noch keine Zahlung zugeordnet wurde. +
+*Statuswechsel* = Bei dieser Option entstehen ebenfalls zwei neue Aufträge, jedoch bleibt der Originalauftrag erhalten und wird in einen von dir definierten Auftragsstatus verschoben. Wähle diesen Auftragsstatus aus der zweiten Dropdown-Liste. Wir empfehlen dafür einen Auftragsstatus im Bereich Stornierung zu verwenden, damit reservierter Bestand nicht weiterhin reserviert bleibt. Abhängig von deinen Prozessen in der Auftragsabwicklung kann aber auch ein anderer Auftragsstatus passender sein. +
+Mit dieser Einstellung dürfen auch Aufträge geteilt werden, denen bereits eine Zahlung zugeordnet wurde oder für die steuerrelevante Dokumente (Wichtig: Rechnung und Stornobeleg) erstellt wurden. Sowohl die zugeordnete Zahlung als auch die Dokumente bleiben für den Originalauftrag erhalten und werden nicht in die aufgeteilten Aufträge übernommen.
 
-|[#intable-standard-lager]*Standard-Lager*
-|Das hier ausgewählte Standard-Lager ist beim Anlegen des neuen Auftrags oder des Angebots vorausgewählt, wenn in den Kontaktdaten kein Lager hinterlegt ist. Ist in den Kontaktdaten ein Lager hinterlegt, hat dieses Lager Priorität.
+|[#intable-order-notes-partial-orders]*Auftragsnotizen in Teilaufträge übernehmen*
+|*aktiv* = Die Auftragsnotizen vom Originalauftrag werden in die Teilaufträge übernommen. +
+*inaktiv* = Die Auftragsnotizen vom Originalauftrag werden nicht in die Teilaufträge übernommen.
 
-|[#intable-standard-vorlage]*Standard-Auftragsvorlage*
-|Wählst du eine <<#create-and-apply-order-templates, Auftragsvorlage>> als Standard-Auftragsvorlage, ist diese für den neuen Auftrag oder das Angebot standardmäßig vorausgewählt. Die Werte der ausgewählten Auftragsvorlage werden dann automatisch für den Auftrag oder das Angebot übernommen. Es können nur bereits angelegte Auftragsvorlagen ausgewählt werden. +
-Standardmäßig ist *Keine Auftragsvorlage vorausgewählt* gesetzt. Wählst du eine Auftragsvorlage als Standard und wird diese zu irgendeinem Zeitpunkt gelöscht, wird als Standard für diese Einstellung wieder *Keine* gesetzt.
+|[#intable-behaviour-after-grouping]*Verhalten des Originalauftrags nach dem Gruppieren*
+|Wähle aus der Dropdown-Liste, was mit den Originalaufträgen nach dem xref:auftraege:working-with-orders.adoc#order-group-functions[Gruppieren] in einen neuen Auftrag passieren soll. +
+*Originalauftrag löschen (Standardverhalten)* = Es entsteht 1 neuer Auftrag und Originalaufträge werden nach dem Gruppieren gelöscht. Zudem können nur Aufträge gruppiert werden, die nicht gesperrt sind, für die kein Warenausgang gebucht wurde, für die keine steuerrelevanten Dokumente erstellt wurden, denen noch keine Zahlung zugeordnet wurde und für die plentyID, Auftragsherkunft, Auftragstyp, Eigner, Kontakt, Adresse, Zahlungsart, Währung und Wechselkurs übereinstimmen. +
+*Statuswechsel* = Bei dieser Option entsteht ebenfalls ein neuer Auftrag, jedoch bleiben die Originalaufträge erhalten und werden in einen von dir definierten Auftragsstatus verschoben. Wähle diesen Auftragsstatus aus der zweiten Dropdown-Liste. Wir empfehlen dafür einen Auftragsstatus im Bereich Stornierung zu verwenden, damit reservierter Bestand nicht weiterhin reserviert bleibt. Abhängig von deinen Prozessen in der Auftragsabwicklung kann aber auch ein anderer Auftragsstatus passender sein. +
+Mit dieser Einstellung dürfen auch Aufträge gruppiert werden, denen bereits eine Zahlung zugeordnet wurde oder für die steuerrelevante Dokumente (Wichtig: Rechnung und Stornobeleg) erstellt wurden. Sowohl die zugeordnete Zahlung als auch die Dokumente bleiben für die Originalaufträge erhalten und werden nicht in den gruppierten Auftrag übernommen.
 
-|[#intable-endpoint-after-completion]*Endpunkt nach Abschluss eines Auftrags*
-|Wähle, wohin im System du nach Abschluss eines Auftrages geleitet werden möchtest. Du kannst wählen zwischen: +
-*Aktuelle Ansicht* = Leitet dich zur Auftragsansicht des Kontakts, für den du den Auftrag angelegt hast. Dies ist die Standardeinstellung. +
-*Auftragsübersicht* = Leitet dich zur allgemeinen Auftragsübersicht. +
-*Detailansicht des neuen Auftrags* = Leitet dich zur Detailansicht des gerade erstellten Auftrags.
+| [#intable-default-status-reversal]*Standard-Status zum Zurücksetzen des Warenausgangs*
+|Wähle, welcher Status beim Zurücksetzen des Warenausgangs automatisch eingestellt sein soll. +
+_Beispiel:_ benutzerdefinierter Status *[6.4] Warenausgang storniert*. +
+Wenn kein besonderer Status benötigt wird, wähle die Option *Letzter Status*. Dann wird der vor dem Warenausgang durchlaufene Status wieder eingestellt.
 
-|*Filteroption ‚Nur vorrätige Artikel anzeigen‘ in der Artikelsuche vorausgewählt*
-|Aktiviere diese Option, damit sie für die Artikelsuche vorausgewählt ist. In den Suchergebnissen werden dann nur Artikel angezeigt, die einen physischen Warenbestand haben.
+2+^| *Manuelle Auftragsanlage*
 
-|*Filteroption ‚Nur Vertriebslager anzeigen‘ in der Artikelsuche vorausgewählt*
-|Aktiviere diese Option, damit sie für die Artikelsuche vorausgewählt ist. In den Suchergebnissen werden dann nur Artikel angezeigt, die in Vertriebslagern gelagert werden.
+| *Standard-Eigner*
+|Wähle einen Standard-Eigner aus der Dropdown-Liste. Dieser Eigner ist bei neuen Aufträgen automatisch vorausgewählt.
 
-|*Filteroption ‚Nur aktive Artikel anzeigen‘ in der Artikelsuche vorausgewählt*
-|Aktiviere diese Option, damit sie für die Artikelsuche vorausgewählt ist. In den Suchergebnissen werden dann nur xref:artikel:checkliste-artikel-anzeige.adoc#100[aktivierte Artikel] angezeigt.
+| *Standard-Mandant für Gastbestellungen*
+|Wähle einen Standard-Mandanten für Gastbestellungen aus der Dropdown-Liste. Dieser Mandant ist bei neuen Gastbestellungen automatisch vorausgewählt.
 
-|*Filteroption ‚Nur Artikel mit gültigem Preis anzeigen‘ in der Artikelsuche vorausgewählt*
-|Aktiviere diese Option, damit sie für die Artikelsuche vorausgewählt ist. In den Suchergebnissen werden dann nur Artikel angezeigt, für die ein gültiger Preis hinterlegt ist.
+| *Standard-Herkunft*
+|Wähle eine Standard-Herkunft aus der Dropdown-Liste. Diese Herkunft ist bei neuen Aufträgen automatisch vorausgewählt.
 
-|*Änderung der Mehrwertsteuersätze in der Artikelübersichtstabelle im letzten Schritt der Auftragserstellung erlauben.*
-|Durch Aktivierung dieser Option erlaubst du, dass vor dem Abschluss des Auftrags im letzten Schritt der Auftragsanlage Steuersätze geändert werden dürfen. Die Steuersätze richten sich dabei nach der Lieferadresse des Auftrags. +
-Diese Option ist standardmäßig deaktiviert. Lasse sie deaktiviert, wenn du die Mehrwertsteuersätze in der Übersicht nur sichtbar, aber nicht bearbeitbar lassen möchtest.
+| *Standard-Lager*
+|Wähle ein Standard-Lager aus der Dropdown-Liste. Dieses Lager ist bei neuen Aufträgen automatisch vorausgewählt.
 
-|*Anzeige von hinzugefügten Artikeln im Warenkorb*
-|Wähle, wie die Artikel zum Warenkorb hinzugefügt werden sollen. Die Standardeinstellung ist *Als eine Auftragsposition, Mengen werden erhöht*. +
-*Als separate Auftragspositionen* = Auch gleiche Artikel werden einzeln hinzugefügt, d.h. jeder Artikel wird in einer eigenen Zeile dargestellt. +
-*Als eine Auftragsposition, Mengen werden erhöht* = Gleiche Artikel werden in einer Auftragsposition zusammengefasst und die Menge wird entsprechend angepasst.
+| *Endpunkt nach Abschluss eines Auftrags*
+|Wähle, in welche Ansicht du nach Abschluss eines Auftrags gelangen möchtest.
 
-|*Bei Auftragserstellung Preise nur im Warenkorb neu ermitteln*
-|Durch Aktivierung dieser Option legst du fest, dass Preise von Artikeln nur dann neu ermittelt werden, wenn sie in den Warenkorb gelegt werden. Standardmäßig werden Preise schon in der Artikelsuche innerhalb der Auftragsanlage ermittelt und sind dort wählbar.
+| *Standard-Auftragsvorlage*
+|Wähle eine Standard-Auftragsvorlage aus der Dropdown-Liste. Diese Vorlage ist bei neuen Aufträgen automatisch vorausgewählt.
+
+| *Anzeige von hinzugefügten Artikeln im Warenkorb*
+|Wähle, wie hinzugefügte Artikel im Warenkorb angezeigt werden sollen.
+
+| *Filteroption ‘Nur vorrätige Artikel anzeigen’ in der Artikelsuche vorausgewählt*
+|Wähle diese Option, um den Filter in der Artikelsuche standardmäßig zu aktivieren.
+
+| *Filteroption ‘Nur Vertriebslager anzeigen’ in der Artikelsuche vorausgewählt*
+|Wähle diese Option, um den Filter in der Artikelsuche standardmäßig zu aktivieren.
+
+| *Filteroption ‘Nur aktive Artikel anzeigen’ in der Artikelsuche vorausgewählt*
+|Wähle diese Option, um den Filter in der Artikelsuche standardmäßig zu aktivieren.
+
+| *Filteroption ‘Nur Artikel mit gültigem Preis anzeigen’ in der Artikelsuche vorausgewählt*
+|Wähle diese Option, um den Filter in der Artikelsuche standardmäßig zu aktivieren.
+
+| *Änderung der Mehrwertsteuersätze in der Warenkorb-Tabelle im zweiten Schritt der Auftragsanlage und beim Bearbeiten von Auftragspositionen in der neuen Auftrags-UI erlauben*
+|Aktiviere die Umschaltfläche, um Änderungen der Mehrwertsteuersätze in der Auftragsanlage und beim Bearbeiten von Auftragspositionen in der neuen Auftrags-UI zu erlauben.
+
+| *Bei Auftragserstellung Preise nur im Warenkorb neu ermitteln*
+|Aktiviere die Umschaltfläche, um Preise bei der Auftragserstellung nur im Warenkorb neu zu ermitteln.
 
 |===
 
@@ -196,7 +220,7 @@ Wenn der neue Auftrag oder das neue Angebot über die Kontaktübersicht angelegt
 Legst du den Auftrag als *Gast* an, füge hier eine neue Rechnungsadresse hinzu.
 
 | *Lieferadresse*
-|Wenn du in der Box *Wie Rechnung* ein Häkchen setzt, wird die unter *Rechnungsadresse* eingegebene Adresse auch als Lieferadresse übernommen. Ansonsten wird die im Datensatz des Kontaktes hinterlegte Lieferadresse übernommen. Sind mehrere Lieferadressen hinterlegt, wird die als primär definierte Lieferadresse übernommen. Wenn keine Lieferadresse als primäre Adresse definiert ist, kann man aus der Dropdown-Liste die gewünschte Adresse wählen. +
+|Wenn du in der Box *Wie Rechnung* ein Häkchen setzt, wird die unter *Rechnungsadresse* eingegebene Adresse auch als Lieferadresse übernommen. Ansonsten wird die im Datensatz des Kontakts hinterlegte Lieferadresse übernommen. Sind mehrere Lieferadressen hinterlegt, wird die als primär definierte Lieferadresse übernommen. Wenn keine Lieferadresse als primäre Adresse definiert ist, kann man aus der Dropdown-Liste die gewünschte Adresse wählen. +
 In der Dropdown-Liste hast du auch die Möglichkeit, eine neue Lieferadresse einzugeben und im Kontaktdatensatz zu speichern. Beachte dazu die Erläuterungen in der ausklappbaren Box am Ende dieses Abschnitts. +
 Über die Vorschau (material:visibility[]) gelangst du direkt in den Kontaktdatensatz. Die bereits gewählten Einstellungen in den Auftragsdetails gehen nicht verloren. +
 Legst du den Auftrag als *Gast* an, füge hier eine neue Lieferadresse hinzu.
@@ -215,9 +239,9 @@ Es ist ein Rabatt voreingetragen, wenn der Kontakt zu einer Kundenklasse gehört
 | *Lager*
 |Welche Optionen dir angezeigt werden, hängt von den Grundeinstellungen ab, die du für die xref:auftraege:preparatory-settings.adoc#intable-warehouse-assignment[Zuordnung von Lagern] gewählt hast: +
 - Ist *a) pro Auftrag kann ein Lager zugeordnet werden* ausgewählt, kannst du in den Auftragsdetails aus einer Dropdown-Liste ein Lager für den Auftrag wählen oder den Namen eines Lagers eingeben, um danach zu suchen. +
-Hast du im Menü *Einrichtung » Aufträge » Auftragstypen » Auftrag [Beta]* ein Standard-Lager gewählt, ist dieses Lager hier vorausgewählt.
+Hast du im Menü *Einrichtung » Aufträge » Auftragstypen » Auftrag* ein Standard-Lager gewählt, ist dieses Lager hier vorausgewählt.
 - Ist *b) pro Artikelposition kann ein Lager zugeordnet werden* ausgewählt, wird dir *Abhängig von den Auftragspositionen* angezeigt. Im nächsten Schritt werden dem Auftrag Artikel hinzugefügt. Dort kannst du dann für jede Variante ein Lager aus einer Dropdown-Liste wählen. +
-Hast du im Menü *Einrichtung » Aufträge » Auftragstypen » Auftrag [Beta]* ein Standard-Lager gewählt, ist dieses Lager im nächsten Schritt in der Artikeltabelle vorausgewählt.
+Hast du im Menü *Einrichtung » Aufträge » Auftragstypen » Auftrag* ein Standard-Lager gewählt, ist dieses Lager im nächsten Schritt in der Artikeltabelle vorausgewählt.
 
 | *Mandant*
 |Wähle aus der Dropdown-Liste den Mandanten aus, für den dieser Auftrag gelten soll. Vorausgewählt ist entweder der Mandant aus den Kontaktdaten oder als nächste Option ein <<#intable-standard-mandant, Standard-Mandant>>, wenn du diesen festgelegt hast.
@@ -251,7 +275,8 @@ Diese Einstellung ist nur für die Zahlungsarten *Rechnung* und *Vorkasse* verf�
 --
 
 Von der Dropdown-Liste im Feld *Lieferadresse* aus kannst du nicht nur eine bestehende Lieferadresse wählen, du kannst auch eine neue Adresse anlegen. Um eine neue Lieferadresse anzulegen, gehe wie im Folgenden beschrieben vor. +
-*_Tipp:_* Für eine neue Rechnungsadresse sind die Einstellungen identisch.
+*_Tipp:_* Für eine neue Rechnungsadresse sind die Einstellungen identisch. +
+*_Hinweis:_* Wählst du oben in den Adressangaben der Lieferadresse die Option *DHL Packstation* oder *DHL Postfiliale*, werden die Eingabefelder für die Lieferadresse entsprechend angepasst. Beachte die Erläuterungen in diesem xref:crm:kontakt-erstellen.adoc#dhl-packstation-dhl-postfiliale[Kapitel], wenn die Lieferadresse eine DHL Packstation oder DHL Postfiliale ist.
 
 [.instruction]
 Neue Lieferadresse anlegen:
@@ -291,7 +316,8 @@ Nach dem Speichern wird die neue Lieferadresse in den entsprechenden Kontaktdate
 |*Adresse 1 (Straße)* +
 *Adresse 2 (Hausnummer)*
 |Gib die Straße und Hausnummer ein. +
-*Straße* ist ein Pflichtfeld, wenn unter *Hausnummer* und *Adresszusatz* kein Eintrag gemacht wurde. *Hausnummer* ist ein Pflichtfeld, wenn unter *Straße* und *Adresszusatz* kein Eintrag gemacht wurde.
+*Straße* ist ein Pflichtfeld, wenn unter *Hausnummer* und *Adresszusatz* kein Eintrag gemacht wurde. *Hausnummer* ist ein Pflichtfeld, wenn unter *Straße* und *Adresszusatz* kein Eintrag gemacht wurde. +
+*_Hinweis:_* Hast du oben in den Adressangaben der Lieferadresse die Option *DHL Packstation* oder *DHL Postfiliale* gewählt, wird das Feld *DHL Packstation* bzw. *DHL Postfiliale* hier entsprechend sichtbar. Gib in diesem Fall die Adresse der Packstation bzw. der Postfiliale ein und beachte dazu die Erläuterungen in diesem xref:crm:kontakt-erstellen.adoc#dhl-packstation-dhl-postfiliale[Kapitel].
 
 |*Adresse 3 (Adresszusatz)*
 |Gib optional einen Adresszusatz ein, wie z.B. _Appartement 12a_. Wenn unter *Straße* und *Hausnummer* kein Eintrag gemacht wurde, ist dies ein Pflichtfeld.
@@ -421,7 +447,7 @@ Diese Spalte ist eine Standardspalte.
 
 | *Lager*
 |Zeigt das Lager des Artikels an. Wähle bei Bedarf ein anderes Lager aus der Dropdown-Liste oder gib den Namen eines Lagers ein, um danach zu suchen. Beachte, dass dies nur möglich ist, wenn du für die *Zuordnung des Lagers* die Einstellung *b) Pro Artikelposition kann ein Lager zugeornet werden* gewählt hast. +
-Hast du im Menü *Einrichtung » Aufträge » Auftragstypen » Auftrag [Beta]* ein Standard-Lager gewählt, ist dieses Lager hier vorausgewählt. +
+Hast du im Menü *Einrichtung » Aufträge » Auftragstypen » Auftrag* ein Standard-Lager gewählt, ist dieses Lager hier vorausgewählt. +
 Diese Spalte ist eine Standardspalte.
 
 |*Menge*
