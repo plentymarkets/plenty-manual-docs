@@ -3,33 +3,27 @@
 :keywords: Prime, NextDay, SecondDay, Prime NextDay, Prime SecondDay, Prime-Auftrag, Prime Auftrag, Prime Fehler, Amazon Prime, Prime, Prime Aufträge, Amazon Prime Aufträge
 :description: In diesem Praxisbeispiel erfährst du, wie ein Amazon Prime-Auftrag abläuft und welche Einstellungen du bei Prime-Aufträgen beachten musst.
 
-[IMPORTANT]
-.Grundsätzliches
-====
+== Definition: Prime-Aufträge
 Wenn wir von Prime-Aufträgen sprechen, sind nicht nur die Aufträge von Prime-Kund:innen auf Amazon gemeint, sondern auch Aufträge, die mit einem Versandservice (NextDay, SecondDay) von Nicht-Prime-Kund:innen auf Amazon erteilt wurden.
-====
 
 [#100]
-== Wie sieht der Verlauf eines Prime-Auftrags bei uns aus?
+== Ablauf von Prime-Aufträgen
 
-Der Auftrag wird auf Amazon erteilt und wird in unser System importiert. Dabei bekommen wir die Informationen mitgeteilt, ob der Auftrag ein Prime-Auftrag ist oder nicht und ob ein Service Level (NextDay, SecondDay, Standard) vorliegt.
-
-[TIP]
-.Es gibt 5 unterschiedliche Möglichkeiten:
-====
-1. Prime [[symbol-Prime]]
+. Der Auftrag wird auf Amazon erteilt.
+. Der Auftrag wird in plentymarkets importiert. +
+-> In der Auftragsübersicht im Menü *Aufträge » Aufträge bearbeiten* wird angezeigt, ob der Auftrag ein Prime-Auftrag ist oder nicht und ob ein Service Level (NextDay, SecondDay, Standard) vorliegt. +
+Es gibt 5 unterschiedliche Möglichkeiten:
+* Prime [[symbol-Prime]]
 image:maerkte:bp-amazon-prime-ap.png[Prime]
-2. Prime NextDay [[symbol-PrimeNextDay]]
+* Prime NextDay [[symbol-PrimeNextDay]]
 image:maerkte:bp-amazon-prime-ap1.png[Prime NextDay]
-3. Prime SecondDay [[symbol-PrimeSecondDay]]
+* Prime SecondDay [[symbol-PrimeSecondDay]]
 image:maerkte:bp-amazon-prime-ap2.png[Prime SecondDay]
-4. NextDay [[symbol-NextDay]]
+* NextDay [[symbol-NextDay]]
 image:maerkte:bp-amazon-prime-a1.png[NextDay]
-5. SecondDay [[symbol-SecondDay]]
-image:maerkte:bp-amazon-prime-a2.png[SecondDay]
-====
-
-In unserem System könnt ihr dies in der Auftragsübersicht *_Aufträge » Aufträge bearbeiten_* an dem Zeichen in der Statusleiste einsehen. Wenn ihr die Maus über dieses Zeichen zieht, seht ihr genau, welcher Art dieser Auftrag ist.
+* SecondDay [[symbol-SecondDay]]
+image:maerkte:bp-amazon-prime-a2.png[SecondDay] +
+*_Tipp:_* Zeige mit der Maus auf das Symbol in der Statusleiste, um die Art des Auftrags anzuzeigen.
 
 [[symbol-auftrag]]
 .Symbol in der Auftragsübersicht
@@ -107,17 +101,53 @@ image::maerkte:bp-amazon-prime-ablaufdiagramm.jpg[Prime-Auftragsablauf]
 
 [#200]
 == Fehlermeldungen und wie sie gelöst werden können
+
 Zu guter Letzt gibt es natürlich auch Fehlermeldungen bei der Anmeldung dieser Aufträge bei Amazon.
 
-Wenn ein Auftrag nicht angemeldet werden sollte, könnt ihr unter *Datenaustausch » API-Log* in dem Vorgang *Shipment_AmazonPrime* prüfen, was an dieser Stelle von Amazon zurückgemeldet wurde (bei der Anmeldung über das Versand-Center wird die Fehlermeldung auch direkt in rot ausgegeben).
+Wenn ein Auftrag nicht angemeldet wurde, kannst du im Menü *Datenaustausch » API-Log* in dem Vorgang *Shipment_AmazonPrime* prüfen, was an dieser Stelle von Amazon zurückgemeldet wurde. Bei der Anmeldung über das Versand-Center wird die Fehlermeldung auch direkt in rot ausgegeben.
 
-- *Error:TermsAndConditionsNotAccepted, Type: Sender* bedeutet, dass die *Geschäftsbedingungen* zu Prime noch nicht auf Amazon bestätigt wurden. Diese Fehlermeldung könnt ihr "beheben", wenn ihr auf Amazon selbst einmal einen Auftrag zu Prime anmeldet (bei diesem Prozess sollten auch die Geschäftsbedingungen einmal abgefragt werden). Die Geschäftsbedingungen können auch im link:https://sellercentral.amazon.de/sbr/buyShippingPreferences[Amazon Seller Central^] durch Klick auf *Anmeldung zur "Versand durch Händler"-API* bestätigt werden. Hilft dies nicht, müsst ihr euch mit Amazon in Verbindung setzen.
-- *Error:InvalidRequest, Type: Sender* bedeutet, dass die Daten nicht vollständig sind. Dies kann durch nicht gepflegte *Absenderdaten* für die Lager, fehlende Informationen von Kund:innen (*Lieferadresse*) oder ein nicht zugeordnetes/nicht passendes *Versandprofil* im Auftrag resultieren.
+[[errors-amazon-prime]]
+.Fehlermeldungen Amazon Prime
+[cols="1,2a"]
+|===
+|Fehlermeldung |Erläuterung
+
+| *Error:TermsAndConditionsNotAccepted, Type: Sender*
+| Die *Geschäftsbedingungen* zu Prime wurden noch nicht auf Amazon bestätigt. Diese Fehlermeldung könnt ihr "beheben", wenn ihr auf Amazon selbst einmal einen Auftrag zu Prime anmeldet (bei diesem Prozess sollten auch die Geschäftsbedingungen einmal abgefragt werden). Die Geschäftsbedingungen können auch im link:https://sellercentral.amazon.de/sbr/buyShippingPreferences[Amazon Seller Central^] durch Klick auf *Anmeldung zur "Versand durch Händler"-API* bestätigt werden. Hilft dies nicht, müsst ihr euch mit Amazon in Verbindung setzen.
+
+| *Error:InvalidRequest, Type: Sender*
+| Die Daten sind nicht vollständig. Dies kann durch nicht gepflegte *Absenderdaten* für die Lager, fehlende Informationen von Kund:innen (*Lieferadresse*) oder ein nicht zugeordnetes/nicht passendes *Versandprofil* im Auftrag resultieren.
 Weiterhin kann es daran liegen, dass ein Wert aus den *Lagereinstellungen* (wie oben genannt) zu lang ist - zum Beispiel oft schon bei Firma der Fall gewesen. Amazon nimmt in den meisten Feldern nur Werte bis zu einer bestimmten Größe an (welche mir leider nicht exakt bekannt sind).
 Die letzte Möglichkeit wäre, dass keine *Maße* übermittelt werden. Das kann daran liegen, dass in den Grundeinstellungen für die Versandpakete auf *von Artikel beziehen* gestellt ist, aber in den Artikeln keine Maße eingetragen sind.
-- *Error:ShipmentAlreadyExists, Type: Sender* zum Beispiel bedeutet, dass bereits eine Versandanmeldung für den jeweiligen Auftrag besteht.
-- *Error:no AmazonPrime Service selected* bedeutet, dass für das Versandprofil aus dem Auftrag in der Portotabelle kein *Amazon-Versandservice* gespeichert ist.
-- *Error:ShippingServiceNotAvailable, Type: Sender* bedeutet, wie die Fehlermeldung bereits sagt, dass ein Amazon-Service für den Auftrag übermittelt wurde, welcher nicht zur Art (zum Beispiel NextDay) des Auftrags passt. Amazon sieht für die unterschiedlichen Arten unterschiedliche Services vor. Daher kommt der Fehler. Prüfen, ob das passende Versandprofil am Auftrag gespeichert ist und/oder der passende AmazonService in dem Versandprofil eingegeben wurde.
-- *Error:ResourceNotFound, Type: Sender* bedeutet, dass der Auftrag auf Amazon nicht existiert oder er bereits storniert wurde.
-- *No Valid Warehouse Address* bedeutet, dass für das Lager, aus dem versendet wird, keine oder keine gültigen Werte eingetragen sind (*Einstellungen » Aufträge » Versand » Versanddienstleister » Grundeinstellungen*).
-- *Error:InvalidShipFromAddress* bedeutet, dass im Menü *Einrichtung » Aufträge » Versand » Dienstleister » Einstellungen » [Lager aufklappen]* nicht alle notwendigen Daten für das Lager gespeichert wurden. Welche Daten für ein Lager hinterlegt sein müssen, ist <<#180, hier>> beschrieben.
+
+| *Error:ShipmentAlreadyExists, Type: Sender*
+| Für den Auftrag gibt es schon eine Versandanmeldung.
+
+| *Error:no AmazonPrime Service selected*
+| Für das Versandprofil aus dem Auftrag ist in der Portotabelle kein *Amazon-Versandservice* gespeichert.
+
+| *Error:ShippingServiceNotAvailable, Type: Sender*
+| Für den Auftrag wurde ein Amazon-Service übermittelt, der nicht zur Art (zum Beispiel NextDay) des Auftrags passt. Amazon sieht für die unterschiedlichen Arten unterschiedliche Services vor. Daher kommt der Fehler. Prüfen, ob das passende Versandprofil am Auftrag gespeichert ist und/oder der passende AmazonService in dem Versandprofil eingegeben wurde.
+
+| *Error:ResourceNotFound, Type: Sender*
+| Der Auftrag existiert nicht auf Amazon oder wurde schon storniert.
+
+| *No Valid Warehouse Address*
+| Für das Lager, aus dem versendet wird, sind keine oder keine gültigen Werte eingetragen. +
+Prüfe das Menü *Einstellungen » Aufträge » Versand » Versanddienstleister » Grundeinstellungen*.
+
+| *Error:InvalidShipFromAddress*
+| Im Menü *Einrichtung » Aufträge » Versand » Dienstleister » Einstellungen » [Lager aufklappen]* wurden nicht alle notwendigen Daten für das Lager gespeichert.
+
+Die folgenden Daten müssen ausgefüllt sein:
+
+- Firma
+- Straße
+- Hausnummer
+- E-Mail
+- PLZ
+- Ort
+- Land
+- Telefon
+
+|===
