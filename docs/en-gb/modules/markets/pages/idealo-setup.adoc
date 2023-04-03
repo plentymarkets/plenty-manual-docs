@@ -1,18 +1,16 @@
 = Setting up idealo
 :keywords: idealo, idealo, idealo.de, idealo.de, idealo Direktkauf, idealo Checkout, checkoutApproved
-:description: Learn how to set up the price search engine idealo in your plentymarkets system. If you use idealo Checkout, you can list your items on idealo and your customers can buy your products directly on idealo without having to enter your shop.
+:description: Learn how to set up the price search engine idealo in your plentymarkets system.
 :author: team-plenty-channel
 
-On this page, you will find information about the settings you need to carry out in order to set up the market and price comparison portal idealo Checkout in plentymarkets. Learn how to set up the interface, how to export items to idealo Checkout and how to define sales prices.
+:idealo:
+
+On this page, you will find information about the settings you need to carry out in order to set up the price comparison portal idealo in plentymarkets. Learn how to set up the interface, how to export items to idealo Checkout and how to define sales prices.
 
 [#2300]
 == About idealo
 
 idealo started business in 2000 with the vision of helping users to make the right choices when buying products online and, now counting 50,000 sellers and 18 million users per month, has become one of Germany's most important e-commerce websites.
-
-With idealo Checkout, idealo offers a strong sales channel. The "Zum Kauf" (Buy now) button allows users to order a product directly on idealo.de, using a fully integrated checkout function. The sellers remain the contractual partners and take care of fulfilment as usual.
-
-With plentymarkets, you can both use the idealo price comparison and idealo Checkout. idealo Checkout enables your customers to buy items directly on the idealo website without having to enter your plentyShop.
 
 [#100]
 == Registering with idealo
@@ -22,7 +20,7 @@ In order to set up idealo in your plentymarkets system, you have to register as 
 [#3000]
 == Select a method for item data export
 
-Inform idealo about how item data should be transferred before setting up idealo in plentymarkets (creating, updating, and deleting items on idealo). You can either transfer item data to idealo with the automatic item export via an API (PWS 2.0 interface) or with a CSV file using the elastic export. <<#item-export-idealo-1>> shows the most important differences between these two methods of exporting item data. How to set up the different methods of data transfer in plentymarkets is described in the chapter <<#800, Setting up the item export>>.
+Inform idealo about how item data should be transferred before setting up idealo in plentymarkets (creating, updating, and deleting items on idealo). You can either transfer item data to idealo with the automatic item export via an API (PWS 2.0 interface), with a CSV file using the elastic export, or via catalogue export. <<#item-export-idealo-1>> shows the most important differences between these two methods of exporting item data. How to set up the different methods of data transfer in plentymarkets is described in the chapter <<#800, Setting up the item export>>.
 
 [[item-export-idealo-1]]
 .idealo data transfer
@@ -70,8 +68,6 @@ Afterwards, items will only be updated on idealo if the price or stock of an ite
 * *Price*
 * *Stock*
 * *Delivery time*
-* *idealo Checkout (yes/no)*
-
 
 *_Note:_* All other changes to item data will _not_ be automatically transferred to idealo. Thus, if item texts, characteristics, shipping costs etc. are changed, it is currently not possible to automatically transfer those changes to idealo.
 
@@ -102,6 +98,8 @@ Use the assistant *Base settings - idealo* in the *Setup » Assistants » Plugin
 :number-of-boxes: info boxes
 
 include::partial$assistant-basic-instructions.adoc[]
+
+*_Note:_* The idealo assistant currently still contains settings for idealo Checkout. However, those settings are without function as idealo Checkout was closed at the end of 2022.
 
 [.collapseBox]
 .Step *Basic settings*
@@ -382,29 +380,12 @@ material:check_box[] = Data exchange with idealo is started once the assistant i
 |======
 --
 
-[#300]
-== Using idealo price comparison and idealo Checkout
-
-Depending on whether you only want to use the idealo price comparison or whether you want to enable your customers to buy items directly at idealo without having to enter your plentyShop, different settings must be carried out. The overview below lists the settings required for idealo Checkout.
-
-*Settings for idealo Checkout:*
-
-- *Basic settings:* Go through the assistant *Base settings - idealo* in the *Setup » Assistants » Plugins » [Open client]* menu.
-- *Item export:* Set up the <<#850, automatic item export>> or the <<#900, item data export via CSV file>>, depending on how you want to export your items to idealo.
-- *Order referrer:* In addition to the order referrer *idealo*, also activate the <<#400, order referrer>> *idealo Checkout* in the *Setup » Orders » Order referrer* menu.
-- *Variation availability:* In addition to the order referrer *idealo*, also activate the <<#500, order referrer>> *idealo Checkout* in the *Markets* area of the *Item » Edit item » [Open item] » [Open variation] » Tab: Availability* menu.
-- *Sales price:* Set up a <<#600, sales price>>.
-- *SKU:* Add <<#700, SKUs>> if needed.
-- *Characteristics:* Create <<#1200, characteristics>> for idealo Checkout. Item characteristics, shipping methods and fees are transferred to idealo Checkout with characteristics.
-- *Event procedures:* Set up <<#1600, event procedures>> to automatically inform idealo about changes in the order status.
-
 [#400]
 == Activating the order referrer
 
 :market: idealo
 :referrer: idealo price comparison
 :referrer-option: pass:quotes[option *idealo* with the ID *121*]
-:idealo-direkt:
 
 include::partial$activate-referrer.adoc[]
 
@@ -414,7 +395,6 @@ include::partial$activate-referrer.adoc[]
 :market-availability: idealo
 :option-availability: idealo
 :web-api:
-:idealo-direkt:
 
 include::partial$variation-availability.adoc[]
 
@@ -423,7 +403,7 @@ include::partial$variation-availability.adoc[]
 [#600]
 == Defining a sales price
 
-Proceed as described below to define a sales price for the order referrer idealo. This price is displayed on idealo. It is valid for the idealo price comparison and idealo Checkout.
+Proceed as described below to define a sales price for the order referrer idealo. This price is displayed on idealo.
 
 :referrer-price: idealo
 
@@ -432,7 +412,7 @@ include::partial$define-sales-price.adoc[]
 [TIP]
 .Minimum price
 ====
-If you want to use a minimum price for the "price range" feature for idealo, then you have to define at least two sales prices for idealo: a minimum price and a standard sales price. The minimum price must have the price type *Special offer* and must be linked to the referrer *idealo Checkout*. +
+If you want to use a minimum price for the "price range" feature for idealo, then you have to define at least two sales prices for idealo: a minimum price and a standard sales price. The minimum price must have the price type *Special offer*. +
 Which price should be transferred to idealo as minimum price is defined with the setting *Which price would you like to transfer to idealo as minimum price?* in the *Item data* step of the idealo assistant. +
 The "price range" feature must also be activated at idealo.
 ====
@@ -447,8 +427,6 @@ The "price range" feature must also be activated at idealo.
 include::partial$sku-manually.adoc[]
 
 // Marketplace account not required!
-
-If you want to use idealo Checkout, also add SKUs with the referrer *idealo Checkout*.
 
 [#800]
 == Setting up the item export
@@ -599,10 +577,10 @@ The following table lists details for settings, format settings and recommended 
 2+^| *Settings*
 
 | *Name*
-|Enter a name. The export format is listed by this name in the overview within the *Exports* tab.
+| Enter a name. The export format is listed by this name in the overview within the *Exports* tab.
 
 | *Type*
-|Select the type *item* from the drop-down list.
+| Select the type *item* from the drop-down list.
 
 | *Format*
 | Select *IdealoDE-Plugin*.
@@ -841,45 +819,6 @@ All payment methods will be exported according to the format setting *Shipping c
 |===
 --
 
-[#idealo-delete-items]
-== Deleting items on idealo
-
-If a variation is out of stock in plentymarkets, it is deleted on idealo and cannot be bought on the market any longer. As stock data is transferred to idealo every 15 minutes, variations without stock are deleted automatically. If a variation has stock again in plentymarkets, it is offered again on idealo with the next stock export.
-
-If you do not want to sell a variation which is in stock in plentymarkets on idealo, then you have to delete the availability for the market and update the timestamp for market exports.
-
-[.instruction]
-Deleting the availability:
-
-. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability*.
-. *Delete* (icon:minus-circle[role="red"]) the availabilities *idealo* and *idealo Direktkauf*.
-. *Save* (terra:save[]) the settings.
-
-After you removed the availability, you have to *Update the timestamp for market exports* using the *Item group function*. This ensures that a stock of *0* is transferred to idealo.
-
-[.instruction]
-Updating the timestamp for market exports:
-
-. Go to *Item » Edit item » Tab: Item group function*.
-. Place a check mark next to *Update timestamp for market exports*.
-. Click on terra:execute[] *Execute*. +
-→ A stock of *0* is transferred to idealo. +
-→ The variation is deleted on idealo and cannot be bought any longer.
-
-[#1100]
-== Permitting the payment method idealo Checkout in a customer class
-
-:market: idealo
-:payment-method: idealo Checkout
-
-include::partial$activate-payment-method.adoc[]
-
-[IMPORTANT]
-.PayPal payment method
-====
-If you offer the payment method xref:payment:paypal.adoc#[PayPal], it is mandatory to create and configure this payment method in your plentymarkets system. This is to ensure that the payment is imported and assigned to the order correctly.
-====
-
 [#1200]
 == Creating characteristics
 
@@ -1068,218 +1007,6 @@ Creating the characteristic replica:
 . Save (terra:save[]) the settings.
 
 Next, you have to link the characteristic to the item in the *Item » Edit item » [Open item] » [Open variation] » Variation tab: Characteristics* menu.
-
-
-[#1600]
-== Creating event procedures for idealo Checkout
-
-Do you use idealo Checkout? Then set up event procedures to automatically inform idealo about changes in the order status. You can use event procedures to automatically send shipping confirmations, returns, and cancellations to idealo Checkout.
-
-[TIP]
-.Event procedures for idealo Checkout only
-====
-You only have to set up event procedures if you use idealo Checkout.
-====
-
-[#1700]
-=== Automatically sending shipping confirmations
-
-Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send a shipping confirmation to idealo when the outgoing items have been booked.
-
-:table-event-procedure: <<#shipping-confirmation-idealo>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[[shipping-confirmation-idealo]]
-.Event procedure for automatically sending shipping confirmations to idealo
-[cols="1,3,3"]
-|===
-|Setting |Option |Selection
-
-| *Event*
-| Select an event, for example *Order change: Outgoing items booked*
-|
-
-| *Filter 1*
-| *Order > Order type*
-| *Order*
-
-| *Filter 2*
-| *Order > Referrer*
-| *idealo Checkout*
-
-| *Procedure*
-| *Plugins > Send shipping confirmation to idealo*
-|
-|===
-
-[#1750]
-=== Automatically sending returns
-
-Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform idealo about returns.
-
-:table-event-procedure: <<#returns-idealo>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[[returns-idealo]]
-.Event procedure for automatically notifying idealo of returns
-[cols="1,3,3"]
-|===
-|Setting |Option |Selection
-
-| *Event*
-| Select an event, for example *Order generation: New return*
-|
-
-| *Filter 1*
-| *Order > Order type*
-| *Return*
-
-| *Filter 2*
-| *Order > Referrer*
-| *idealo Checkout*
-
-| *Procedure*
-| *Plugins > Send return notification to idealo*
-|
-|===
-
-[#1800]
-=== Automatically sending cancellations
-
-Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform idealo of cancellations. The following actions are available for cancellations:
-
-* Send seller cancellation to idealo
-* Send buyer cancellation to idealo
-
-[#1801]
-==== Automatically sending seller cancellations
-
-:table-event-procedure: <<#cancellations-seller-idealo>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[[cancellations-seller-idealo]]
-.Event procedure for automatically notifying idealo of cancellations by seller
-[cols="1,3,3"]
-|===
-|Setting |Option |Selection
-
-| *Event*
-| Select an event, for example *Order change: Status change*.
-| *[8] Cancelled*
-
-| *Filter 1*
-| *Order > Order type*
-| *Order*
-
-| *Filter 2*
-| *Order > Referrer*
-| *idealo Checkout*
-
-| *Procedure*
-| *Plugins > Send seller cancellation to idealo*
-|
-|===
-
-[#1802]
-==== Automatically sending buyer cancellations
-
-:table-event-procedure: <<#cancellations-buyer-idealo>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[[cancellations-buyer-idealo]]
-.Event procedure for automatically notifying idealo of cancellations by buyer
-[cols="1,3,3"]
-|===
-|Setting |Option |Selection
-
-| *Event*
-| Select an event, for example *Order change: Status change*.
-| *[8.1] Cancelled by customer*
-
-| *Filter 1*
-| *Order > Order type*
-| *Order*
-
-| *Filter 2*
-| *Order > Referrer*
-| *idealo Checkout*
-
-| *Procedure*
-| *Plugins > Send buyer cancellation to idealo*
-|
-|===
-
-[#1803]
-==== Automatically accepting cancellation by buyer
-
-:table-event-procedure: <<#accept-cancellations-buyer-idealo>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[[accept-cancellations-buyer-idealo]]
-.Event procedure for automatically accepting cancellations by buyer
-[cols="1,3,3"]
-|===
-|Setting |Option |Selection
-
-| *Event*
-| Select an event, for example *Order change: Status change*.
-| Select the status that you xref:markets:idealo-setup.adoc#intable-status-cancellation-by-buyer[set in the assistant] for orders that customers want to cancel.
-
-| *Filter 1*
-| *Order > Order type*
-| *Order*
-
-| *Filter 2*
-| *Order > Referrer*
-| *idealo Checkout*
-
-| *Procedure*
-| *Plugins > Accept cancellation by buyer*
-|
-|===
-
-[#1755]
-=== Automatically sending refund notifications
-
-Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform idealo of refunds.
-
-[IMPORTANT]
-.Payment method *idealo Checkout Payments* only
-====
-The event procedure *Send refund notification to idealo* only is triggered for orders that were paid using the payment method *idealo Checkout Payments*. The event procedure cannot be used for orders that were paid for using PayPal.
-====
-
-:table-event-procedure: <<#refund-idealo>>
-
-include::_includes:partial$event-procedure.adoc[]
-
-[[refund-idealo]]
-.Event procedure for automatically notifying idealo of credit notes
-[cols="1,3,3"]
-|===
-|Setting |Option |Selection
-
-| *Event*
-| Select an event, for example *Order generation: New credit note*.
-|
-
-| *Filter 1*
-| *Order > Order type*
-| *Credit note*
-
-| *Filter 2*
-| *Order > Referrer*
-| *idealo Checkout*
-
-| *Procedure*
-| *Plugins > Send refund notification to idealo*
-|
-|===
 
 [#1900]
 == Viewing the log
