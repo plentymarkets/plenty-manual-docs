@@ -1,0 +1,433 @@
+= Changelog 5. April 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 30. März 2023
+:endWeekDate: 5. April 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/aktionen-neue-einstellung-fuer-den-auftragstyp-filter-procedures-new-setting-for-the-order-type-filter/717749
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+Die neue Einstellungs-Oberfläche für Amazon-Konten ist unter *Einrichtung » Märkte » Amazon » Neue Einstellungen* in der Vorschau verfügbar.
+
+Die Oberfläche ist soweit vollständig funktional, außer dass Löschen, Erstellen, Speichern und das Verbinden mit Amazon-Konten deaktiviert wurde, bis auch im Hintergrund sämtliche Prozesse auf die neue Hintergrundstruktur umgezogen wurden.
+
+Die alten Konten, werden per Migration in die neuen Konten überführt und sollten für euch direkt sichtbar sein, sobald die Oberfläche für euch sichtbar ist. Jedes Speichern der alten Einstellungen führt direkt zu einer Migration der neuen Konten, sodass eure Änderungen dort spätestens nach einem erneuten Laden der Einstellungen sichtbar sein sollten.
+
+[IMPORTANT]
+.To-Do
+======
+Prüft bitte unter *Einrichtung » Märkte » Amazon » Neue Einstellungen*, ob die Einstellungen in der neuen Oberfläche den Einstellungen in der alten Oberfläche unter *Einrichtung » Märkte » Amazon » Einstellungen* entsprechen und meldet euch frühzeitig, sollten euch Probleme auffallen.
+======
+
+[NOTE]
+.Feedback
+======
+Gebt uns gerne Feedback zur neuen Einstellungs-Oberfläche link:https://forum.plentymarkets.com/t/amazon-neue-einstellungsoberflaeche-new-settings-user-interface/708645[in diesem Thema im Forum^].
+======
+
+[discrete]
+=== Aufträge
+
+* Ab sofort steht euch im Menü *Aufträge » Aufträge (Testphase)* neben der bisherigen Listenansicht auch die Kompaktansicht für eure Aufträge zur Verfügung.
++
+Diese ermöglicht es euch, bestimmte Auftragsdetails direkt in der Übersicht anzuzeigen. Außerdem könnt ihr bestimmen, wie groß die gewählten Felder angezeigt werden sollen und bei Bedarf eine farbliche Markierung hinzufügen sowie den Titel der Felder ändern. Alle diese Einstellungen findet ihr im Bearbeitungsmodus (MyView).
++
+Um zwischen den Ansichten zu wechseln, steht euch oben rechts in der Übersicht der Button *Zur Listenansicht wechseln* bzw. *Zur Kompaktansicht wechseln* zur Verfügung. Weitere Informationen zur Kompaktansicht findet ihr auf der Handbuchseite xref:auftraege:design-order-view.adoc#compact-vs-list-view[Auftragsansicht gestalten].
+
+[discrete]
+=== CRM
+
+* Im Menü *CRM » Kontakte* wurden die folgenden Anpassungen vorgenommen:
+** In der Übersicht neben der E-Mail-Adresse findest du neben dem Kopieren-Icon nun das Icon *E-Mail senden*. Dieses Icon erscheint, wenn du über die E-Mail-Adresse hoverst. Mit einem Klick auf das Icon öffnet sich dein Standard-E-Mail-Programm mit der bereits vorausgefüllten E-Mail-Adresse des Kontakts im Empfängerfeld und du kannst dem Kontakt direkt eine E-Mail schreiben.
+** In der Übersicht neben der Telefonnummer findest du neben dem Kopieren-Icon das Icon *Anrufen*. Dieses Icon erscheint, wenn du über die Telefonnummer hoverst. Mit einem Klick auf das Icon öffnet sich deine Standard-Telefon-App und du kannst du die dort gespeicherte Telefonnummer z.B. über FaceTime oder Skype anrufen.
+** Diese beiden neuen Funktionen *E-Mail senden* und *Anrufen* findest du ebenso in den Portlets *Optionen*, *Primäre Adresse* und *Adressen*.
+* Im Assistenten *Messenger-Konfiguration* wurde im Schritt *Einstellungen für den E-Mail-Empfang* der Abschnitt *Typ und Status* hinzugefügt. In diesem Abschnitt kannst du einen Standardtypen und einen Standardstatus für den Posteingang festlegen. Neue Nachrichten in diesem Posteingang erhalten dann diesen Typ und Status.
+
+[discrete]
+=== OTTO Market
+
+* OTTO hat neue Zeichenbeschränkungen eingeführt.
+** *Modellname* darf maximal 70 Zeichen enthalten.
+** *Besondere Merkmale* darf maximal 70 Zeichen enthalten.
+** *Set-Info* darf maximal 70 Zeichen enthalten.
+** *Produktbeschreibung* darf ab sofort maximal 2000 Zeichen enthalten.
+** URLs im Bereich *Media assets* dürfen maximal 2083 Zeichen enthalten.
+
++
+Die Prüfung der Zeichenlänge führt OTTO Market durch. Prüfe deshalb die Log-Meldungen des Market-Status im Menü *Daten » Log* mit der Integration `Plenty\Modules\Otto\Item\Commands\MarketplaceStatusImportCommand`. Wenn Variantendaten nicht wie erwartet auf OTTO Market veröffentlicht werden, findest du dort eine Fehlermeldung.
+* Für das Marktplatz-Datenfeld *Versandart* ist die Option *Schwerlasttransport* dazugekommen.
+* Das Marktplatz-Datenfeld *Dauer in Tagen* wurde hinzugefügt. Hier gibst du an, über welchen Zeitraum die *Maximale Bestellmenge* gilt. Es wird eine Ganzzahl erwartet.
+
+[discrete]
+=== plentyBI
+
+* Der Filter *Auftragstyp* für die Kennzahlen *Aufträge* und *Aufträge (Live)* enthält jetzt neben den drei bisherigen Filtermöglichkeiten *Auftrag*, *Sammelauftrag*, *Vorbestellung* noch folgende weitere Auftragstypen:
+** Abonnement
+** Angebot
+** Gewährleistung
+** Gutschrift
+** Lieferauftrag
+** Nachbestellung
+** Reparatur
+** Retoure
+** Sammelgutschrift
+** Umbuchung
+
++
+Bestehende Filter wurde entsprechend migriert, sodass diese noch die gleichen Auftragstypen filtern wie bisher auch.
+* Die Anzeige des Zeitintervalls auf einer Kachel wurde geändert. Die Einstellung Zeitintervall anzeigen wurde entfernt und durch die neue Einstellung Zeitauswahl ersetzt.
++
+Mit der Zeitauswahl kannst du wählen, welche Zeitreferenz du auf der Kachel sehen möchtest. Du hast die Auswahl zwischen dem Zeitintervall (wie bisher auch), dem Zeitraum oder gar keiner Anzeige. Das Entfernen der alten Einstellung hat keine Auswirkungen. Du siehst weiterhin das Zeitintervall, wenn du die Kachel zuvor so konfiguriert hast.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== OTTO Market
+
+* Es wird nicht mehr der Markenname exportiert. Stattdessen wird eine ID übertragen.
++
+*_Wichtig:_* Es kann vorkommen, dass eine Marke mehrere IDs hat. Dann musst du manuell eingreifen und die Zuordnung anpassen. Siehe link:https://forum.plentymarkets.com/uploads/short-url/g6dzDCfOy7DDSJgC7yo352kONMA.html[diese Datei mit den 100 Markennamen^], die doppelt vorkommen, so wie jeweils dem Markenlogo, um es euch einfacher zu machen, die passende Marken-ID zu identifizieren.
++
+[NOTE]
+.To-Dos
+======
+Wir prüfen automatisch, ob es in deinen Katalogen Probleme mit den Marken-IDs gibt. Wenn du die Markenzuordnungen manuell prüfen musst, wirst du über die Notifications darauf hingewiesen. In den Notifications siehst du den betroffenen Katalog und die Marke.
+======
+* Preise müssen ab sofort in Euro und mit 2 Dezimalstellen übertragen werden. plentymarkets nimmt erforderliche Änderungen automatisch vor. Es besteht für dich also kein Handlungsbedarf.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aktionsmanager
+
+* Seit der link:https://forum.plentymarkets.com/t/aktionsmanager-tags-hinzugefuegt-procedure-manager-added-tags/715928[Einführung von Filter und Aktionen für Auftrag-Tags^] gibt es einen Fehler, der verhindert, dass manche Aktionen ausgeführt werden. Dies wurde behoben.
+
+[discrete]
+=== Amazon
+
+Der folgende Prozess wurde temporär implementiert, um zum Thema link:https://forum.plentymarkets.com/t/amazon-fba-fehlende-auftragspositionen-missing-order-items/717116[Amazon FBA - Fehlende Auftragspositionen] Hilfestellung zu leisten.
+
+Es wurde ein Prozess geschaffen, der im 5-Minuten-Intervall läuft. Pro Durchlauf werden 5 Amazon-FBA-Auftragsbericht aus dem Zeitraum 23.03.2023 00:00:00 bis 01.04.2023 00:00:00 Uhr auf Aufträge geprüft, zu denen uns Auftragspositionen fehlen. Die folgenden Informationen werden dann in einer CSV pro Händler-Konto bereitstellt:
+
+. *Spalte SellerID*: Die Verkäufer ID bei Amazon
+. *Spalte ReportID*: Die Berichts-ID des ersten Berichts, in dem der Auftrag aufgetaucht ist.
+. *Spalte AmazonOrderID*: Die Auftragsnummer bei Amazon.
+. *Spalte AmazonShipmentID*: Die ID der Lieferung bei Amazon.
+. *Spalte plentyOrderID*: Die zugehörige Auftrags-ID in plenty.
+
+Log-Einträge zu dem Prozess können mit folgenden Filtern gefunden werden:
+
+* *Identifikator*: Amazon
+* *Referenztyp*: action
+* *Referenzwert*: GenerateReportForIncompleteFBAOrders
+
+Der Bericht kann unter *Einrichtung » Märkte » Amazon » Datenaustausch » Tab: Unvollständige FBA-Aufträge* heruntergeladen werden. In dieser Oberfläche seht ihr eine Tabelle mit folgenden Informationen:
+
+* Die Verkäufer-ID zu der jeweilige Bericht gehört.
+* Die Information, ob die Generierung abgeschlossen wurde oder nicht.
+* Einen Downloadbutton, wenn eine Datei zur Verfügung steht.
+
+[IMPORTANT]
+.Zeitpunkt des Downloads
+======
+Der Downloadbutton steht zur Verfügung, sobald eine Datei verfügbar ist, dies bedeutet nicht, dass die Generierung abgeschlossen wurde. Erst wenn die Generierung abgeschlossen wurde, ist die Datei vollständig und keine neuen Datensätze werden ergänzt. Wenn die Generierung abgeschlossen wurde und keine Datei vorhanden ist, dann solltet ihr keine betroffenen Aufträge haben.
+======
+
+[discrete]
+=== Artikel
+
+Wir haben einen Fix eingespielt, der bewirkt, dass die Prüfung auf Eindeutigkeit beim Anlegen von Attributwerten wie erwartet funktioniert. Vor dem Fix wurden `Küchenmeister` und `Kuchenmeister` als identisch gewertet und das Anlegen des zweiten Attributwertes wurde verhindert.
+
+Jetzt ist der Vergleich strikt und erkennt, dass es zwei verschiedene Zeichenketten sind. `Küchenmeister` und `Kuchenmeister` sind nun also beide gleichzeitig als Attributwerte desselben Attributes möglich.
+
+Der strikte Vergleich ist nun auch case-sensitive. Das bedeutet, dass beispielsweise gleichzeitig `Weiss` und `weiss` als Attributwerte desselben Attributes möglich sind.
+
+[discrete]
+=== Aufträge
+
+* Beim Wechseln zwischen der Kompakt- und der Listenansicht in der Auftragsübersicht und beim Wechseln zwischen den Auftragsdetails und der Auftragsübersicht, war die Auftragsübersicht leer. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Im Messenger-Portlet der neuen Auftrags-UI im Menü *Aufträge » Aufträge (Testphase)* wurden die Tags ohne Namen angezeigt. Dieses Verhalten wurde behoben.
+* In einigen Systemen konnten die Nachrichten im Messenger durch die Grupprnfunktion nicht gelöscht werden. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Netto
+
+* Während der Validierung des Artikelexports zu Netto kam es zu einem sog. Division by zero Fehler, wenn der Inhalt gefehlt hat oder Null war. Zukünftig setzen wir in diesen Fällen automatisch eine `1`.
+* Außerdem wurde die zulässige maximale Anzahl an Zeichen im Beschreibungstext von `12000` auf die zulässige Anzahl von `11700` gekürzt.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen von *{version}* entfernt.
+
+[discrete]
+=== OTTO Market
+
+* Die folgenden Marktplatz-Datenfelder wurden entfernt:
+** UPC
+** ISBN
+** Start des Angebots
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Beim Bearbeiten oder Erstellen von Lieferadressen gibt es nun die Optionen für eine Packstation oder eine Postfiliale.
+* Neue MyView Einstellung *Read-only* für die Eingabefelder in der Detailansicht hinzugefügt, womit eingeschränkt wird, ob der Nutzer die Eingabefelder verändern kann.
+* Die Einstellungen für die verschiedenen Auftragstypen wurden überarbeitet und für einige Auftragstypen wurden neue UIs hinzugefügt. Weitere Informationen dazu findest du auf den Handbuchseite xref:auftraege:order-types.adoc[der Auftragstypen].
+* Das Feld *Treueprogramm* ist für die Auftragsübersicht (Kompakt und Listenansicht) und Detailansicht (Allgemein Widget) verfügbar.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Die Darstellung der Zeitstempel an verschiedenen Stellen der neuen Artikelbenutzeröberfläche wurden angepasst, so dass sie die Uhrzeit anzeigen und die Formatierung der jeweils eingestellten Sprache angemessen ist. Diese Änderung betrifft:
+** Artikelübersicht
+** Artikel Informationselement in der Werkzeugleiste der Artikelansicht
+** Variantenübersicht innerhalb eines Artikels
+** Varianten Informationselement in der Werkzeugleiste der Variantenansicht
+** Warenbewegungen innerhalb der Variantenansicht
+** Varianten Notizen
+
+[discrete]
+=== bol.com
+
+Die verwendeten APIs für unsere Prozesse wurden auf die neuste API Version von bol.com aktualisiert:
+
+[cols="3,1,1"]
+|===
+|Prozess |Alte Version |Neue Version
+
+|Auftragsimport
+|v6
+|v9
+
+|Auftragsverwaltung (Versand, Stornierung, Retoure)
+|v6
+|v9
+
+|Retourenimport
+|v6
+|v9
+
+|Abgleich Angebotsdaten
+|v6
+|v9
+
+|Abgleich Produktdaten
+|v8
+|v9
+|===
+
+[NOTE]
+.Kein To-Do
+======
+Die Änderungen sind minimal und die Prozesse bleiben unverändert. Es gibt keinen weiteren Handlungsbedarf.
+======
+
+[NOTE]
+.Auftragsimport
+======
+Beim Auftragsimport unterscheidet sich die Versionierung von den anderen Prozessen. Dort werden die Änderungen bereits am 03.04.2023 in stable Auswirkungen haben.
+======
+
+
+[discrete]
+=== Fulfillment
+
+* Wenn an einem Auftrag im neuen Versand-Center ein Versandlabel verfügbar war, führt ein Klick auf das Icon direkt dazu, dass das Label heruntergeladen wird. Dies wurde erweitert: Wie im alten Versand-Center gibt es nun ein zusätzliches Icon, sodass sich nach dem Klicken auf das Icon nun zunächst das PDF des Versandlabels öffnet.
+* Im neuen Versand-Center war die Anzahl der aufgelisteten Aufträge auf 100 beschränkt. Diese Zahl wurde auf 200 erhöht.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der Detailansicht der Aufträge kann nun die externe Auftragsnummer gelöscht werden.
+* Die Auftragssuche dauerte lange, wenn Aufträge keine Adressdaten hatten. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Wenn man benutzerdefiniertes Styling in einem Widget in einer EmailBuilder-Vorlage verwendet hatte und dieses Styling wieder entfernen wollte, wurde ein Fehler angezeigt, der besagte, dass das Feld ausgefüllt sein muss. Es war also nicht möglich, das Feld wieder leer zu speichern. Dieses Verhalten wurde behoben.
+* Im Assistenten *E-Mail-Konten* im Menü *Einrichtung » Assistenten » Grundeinrichtung* im Schritt *Infodienst* war es nicht möglich, mehrere E-Mail-Adressen im Feld E-Mails als Blindkopie erhalten zu speichern. Es konnte immer nur eine E-Mail-Adresse dort gespeichert werden. Dieses Verhalten wurde behoben.
+* In manchen EmaillBuilder-Vorlagen hat die Twig-Expression `{{ orderItem.variation.item.ArtNo }}` für die Artikelnummer nicht immer einen Wert in der versendeten E-Mail ausgegeben. Dieses Verhalten wurde behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen von *{version}* entfernt.
+
+[discrete]
+=== Fulfillment
+
+* Die EasyPAK-Schnittstelle ist obsolet, daher wurde dieser Versanddienstleister aus dem Menü entfernt.
+* Das alte Menü für DHL Retoure Online wurde gelöscht: Die alte Schnittstelle wurde von DHL abgeschaltet und die neue ist über das Plugin verfügbar.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/itemavailabilityinfo_6962[Artikelverfügbarkeit Info^]
+|1.8.1
+|Aufgrund von Erweiterung der Einstellungsmöglichkeiten werden in den Einstellungen die Icon-Klassen mit den Default Werten überschrieben. Bitte notieren Sie daher das vorherige Icon-Klassen Konfiguration, um diese nach der Aktualisierung wiederherstellen zu können.
+
+|link:https://marketplace.plentymarkets.com/b2bshop_6574[B2B Shop^]
+|1.7.2
+|-
+
+|link:https://marketplace.plentymarkets.com/ebics_5098[EBICS^]
+|1.2.2
+|-
+
+|link:https://marketplace.plentymarkets.com/edon_6618[FairGeben^]
+|1.7.0
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.15.0
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportidealode_4723[idealo.de^]
+|3.4.1
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.2.5
+|-
+
+|link:https://marketplace.plentymarkets.com/smartsupplivechat_55224[Smartsupp Live-Chat^]
+|1.1.2
+|-
+
+|link:https://marketplace.plentymarkets.com/d2gpmpluginsocialicons_55170[Social Icons Widget^]
+|1.0.2
+|-
+
+|link:https://marketplace.plentymarkets.com/socialshareplugin_54930[SoShare^]
+|1.3.2
+|-
+
+|link:https://marketplace.plentymarkets.com/trustedshops_4962[Trusted Shops Reviews Toolkit^]
+|2.2.2
+|-
+
+|link:https://marketplace.plentymarkets.com/freeshippinggoal_55307[Versandkostenfrei ab Warenwert erreichen^]
+|1.0.7
+|-
+
+|link:https://marketplace.plentymarkets.com/cytitemavailabilitynotification_6906[Wieder auf Lager! - Verfügbarkeitsbenachrichtigung mit Statistik^]
+|1.6.0
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+Warehouse-App::
++
+--
+
+[discrete]
+=== Neu
+
+Folgende Funktionalität wurde in Version 1.0.9 der *plentymarkets Warehouse App* hinzugefügt.
+
+* Durch eine neue Aktion ist es nun möglich, eine Variante aus der Artikelsuche zu übernehmen und in den Wareneingang hinzuzufügen.
+* Für den Wareneingang wurde eine neue Funktion hinzugefügt um Artikel aufzuteilen. Hierfür wurde ein neuer Button in die Aktionsleiste der Listeneinträge aufgenommen mit dem das Aufteilen manuell gestartet werden kann. Desweitern geschieht das Aufteilen auch automatisch, wenn eine Nachbestellung hinterlegt wurde und die noch offene Bestellmenge der Artikel überschritten wird.
++
+Zusätzlich wird so die saubere Darstellung und Einbuchung unterschiedlicher MHD und Chargen des gleichen Artikels einer Nachbestellung ermöglicht.
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in Version 1.0.9 der *plentymarkets Warehouse App* veröffentlicht.
+
+* In der Rollenden Kommissionierung beim Entfernen eines Artikels und für normale Notizen werden nun automatisch Informationen des Artikels und des Lagerorts in die Auftragsnotiz aufgenommen.
+
+[discrete]
+=== Behoben
+
+Folgende Probleme wurden in Version 1.0.9 der *plentymarkets Warehouse App* behoben.
+
+* Es wurden nicht alle Artikelpositionen einer Nachbestellung in den Wareneingang geladen. Dieses Verhalten wurde behoben.
+* Unter Verräumen können in der Quelllagerortansicht nur noch Artikelbarcodes gescannt werden. Lagerort Barcodes werden abgewiesen.
+* Im Bereich der Nachbestellungen innerhalb des Wareneingangs kam es gelegentlich zu fehlerhaften Darstellungen des Bestelldatums. Dieses Problem wurde erfolgreich behoben.
+
+--
+
+====
