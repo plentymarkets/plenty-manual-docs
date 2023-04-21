@@ -81,7 +81,411 @@ Amazon-spezifische Einstellungen in Versandprofil vornehmen:
 . Speichere (terra:save[]) die Einstellungen. +
 → In Versandanmeldungen werden für dieses Versandprofil die gewählten Werte als Versanddienstleister und Versandservice an Amazon übertragen. +
 *_Hinweis:_* Wenn du keine Werte aus den Dropdown-Listen wählst, werden die Standardwerte aus dem Versandprofil übertragen.
-. Wiederhole diese Einstellungen für alle Versandprofile, die du für Amazon verwendest.
+. *_Optional:_* Wiederhole diese Einstellungen für alle Versandprofile, die du für Amazon verwendest.
+
+[#1500]
+== Datenaustausch aktivieren
+
+In diesem Bereich werden die Einstellungen zum Datenaustausch zwischen deinem plentymarkets System und dem Marktplatz Amazon beschrieben. Du kannst Amazon-Aufträge manuell über eine CSV-Datei importieren. Du erfährst zudem, wie du Versandbestätigungen an Amazon sendest, FBA-Bestände synchronisierst und Auftragsberichte von Amazon zurücksetzt.
+
+[#1900]
+=== Amazon-Aufträge importieren
+
+Im Menü *Einrichtung » Märkte » Amazon » Datenaustausch » Auftragsimport* richtest du den Import von Amazon-Aufträgen ein. Aufträge können hier manuell über eine CSV-Datei importiert werden.
+
+Gehe wie im Folgenden beschrieben vor, um den manuellen Import von Amazon-Aufträgen einzurichten.
+
+[.instruction]
+Manuellen Auftragsimport einrichten:
+
+. Öffne das Menü *Einrichtung » Märkte » Amazon » Datenaustausch » Auftragsimport*.
+. Wähle aus der Dropdown-Liste *Verfahren für Auftragsimport* die Option *CSV-Datei importieren*. +
+→ Der Bereich *Einstellungen* wird geöffnet.
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<#auftragsimport-amazon>>.
+. Klicke auf *Vorschau* (icon:search[role="blue"]), um eine Vorschau des Imports anzuzeigen.
+
+[[auftragsimport-amazon]]
+.Auftragsimport des Marktplatzes Amazon
+[cols="1,3a"]
+|===
+| Einstellung | Erläuterung
+
+| *Buche Zahlungseingang*
+| Beim Auftragsimport automatisch den Zahlungseingang buchen.
+
+| *Altes Format verwenden*
+| Wenn noch das alte Amazon-Importformat verwendet wird, diese Option aktivieren.
+
+| *Mandant*
+| Mandanten für den Auftragsimport wählen.
+
+| *Amazon-Account*
+| Amazon-Konto wählen.
+
+| *CSV-Datei*
+| CSV-Datei für den Auftragsimport einstellen.
+|===
+
+[.instruction]
+CSV-Datei für den Auftragsimport einstellen:
+
+. Klicke auf *Datei auswählen*.
+. Wähle die CSV-Datei für den Import.
+. Klicke auf *öffnen*.
+. Klicke dann auf *Vorschau* (icon:search[role="blue"]). +
+→ Die verfügbaren Aufträge werden angezeigt.
+. Aktiviere bei den Aufträgen, die importiert werden sollen, die Option *Importieren*.
+. Klicke auf das *Zahnrad*, um den Import durchzuführen.
+
+[TIP]
+.Tipp: Importierte Aufträge
+====
+Sollten Aufträge von Amazon in dein System importiert werden, die du nicht mit plentymarkets eingestellt hast bzw. Aufträge, für die Artikel bisher nicht in plentymarkets erstellt sind, hast du die Möglichkeit, bei diesen Aufträgen manuell die Artikel zuzuordnen und den Status einzustellen.
+====
+
+[IMPORTANT]
+.Fehlende Rechnungsanschrift
+====
+Wenn bei den von Amazon abgerufenen Aufträgen die Rechnungsanschrift fehlt, wende dich an den Amazon-Support. Die Einstellung muss von Amazon vorgenommen werden.
+====
+
+[TIP]
+.Ursprüngliche Währung und Standardwährung sind unterschiedlich
+====
+Beim Auftragsimport wird zusätzlich die ursprüngliche Währung sowie der ursprüngliche Brutto- und Netto-Betrag an der Artikelposition gespeichert, wenn die Währung nicht die in plentymarkets eingestellte Standardwährung ist.
+====
+
+[#2200]
+=== Versandbestätigungen an Amazon senden
+
+Sobald der Amazon-Auftrag in deinem plentymarkets System bearbeitet und die Ware verschickt wurde, musst du Amazon über den neuen Status informieren, damit Amazon die Umsätze deinem Konto gutschreiben kann. Auch diesen wichtigen Schritt erledigt dein plentymarkets System automatisch über die Schnittstelle.
+
+Folgende Bedingungen müssen bei Aufträgen erfüllt sein, damit die Versandbestätigung automatisch an Amazon gemeldet wird:
+
+*  *Herkunft:* Amazon oder eine Unterherkunft von Amazon
+*  Statusbereich 7 (kleiner als 8)
+*  Externe Auftragsnummer
+*  Importierter Auftrag (nicht manuell erstellt)
+*  Warenausgang gebucht (Uhrzeit darf nicht in der Zukunft liegen)
+
+Sollte die automatische Übermittlung der Versandbestätigung, zum Beispiel aufgrund von kurzfristig nicht erreichbaren Servern, nicht funktionieren oder sollten kurz vor einem Abrechnungsstichtag einzelne Aufträge manuell bestätigt werden, damit diese bei der nächsten Auszahlung berücksichtigt werden, kannst du die Versandbestätigung auch manuell an Amazon senden. Für Prime-Aufträge (Amazon_Prime, Amazon_Prime_SameDay, Amazon_Prime_NextDay und Amazon_Prime_SecondDay) wird keine Versandbestätigung an Amazon gesendet.
+
+[.instruction]
+Versandbestätigung manuell an Amazon senden:
+
+. Öffne das Menü *Einrichtung » Märkte » Amazon » Datenaustausch » Versandbestätigung*.
+. Wähle ein Amazon-Konto aus der Dropdown-Liste.
+. Gib ein Datum bei der Option *Datum Warenausgang* ein. +
+→ Der gesamte Warenausgang des hier eingestellten Datums wird an Amazon übertragen.
+. Klicke auf *Versandbestätigung senden*.
+
+[#amazon-berichte-verwalten]
+=== Amazon-Berichte verwalten
+
+Im Menü *Einrichtung » Märkte » Amazon » Berichte » Verarbeitung* erhältst du einen Überblick über den Verarbeitungsstand deiner Amazon-Berichte. Hier kannst du sehen, welche Berichte bereits verarbeitet wurden und welche Berichte sich noch in der Warteschlange befinden. +
+Du kannst die Amazon-Berichte auch zurücksetzen oder überspringen. So kannst du festlegen, welche Berichte zuerst verarbeitet werden sollen oder auch die Auslastung deines Systems reduzieren, indem du Berichte überspringst. +
+Außerdem kannst du deine Amazon-Berichte in diesem Menü auch herunterladen.
+
+<<#tabelle-amazon-berichte>> enthält eine Übersicht zu den Amazon-Berichten im Menü *Einrichtung » Märkte » Amazon » Berichte » Verarbeitung*.
+
+[[tabelle-amazon-berichte]]
+.Berichte im Menü *Einrichtung » Märkte » Amazon » Berichte » Verarbeitung*
+[cols="1,3a"]
+|===
+| Spalte | Erläuterung
+
+| *Verkäufer-ID*
+| Die Verkäufer-ID deines Amazon-Verkäuferkontos.
+
+| *Berichts-ID*
+| Die Berichts-ID des Berichts.
+
+| *Verarbeitungsstatus*
+| Der Verarbeitungsstatus des Berichts. +
+Berichte können in sich in den folgenden Status befinden: +
+*Ausstehend* (material:circle[role=blue]) = Der Bericht wurde noch nicht verarbeitet. +
+*Übersprungen* (material:circle[]) = Der Bericht wurde übersprungen und nicht verarbeitet. +
+*Abgeschlossen* (material:circle[role=green]) = Der Bericht wurde verarbeitet.
+
+| *Berichtstyp*
+| Der Berichtstyp. Eine Übersicht darüber, welche Berichtstypen es bei Amazon-Berichten gibt, findest du <<#amazon-berichtstypen, hier>>. +
+Wenn du mit der Maus auf einen Berichtstyp zeigst, wird ein Tooltip mit Informationen zu diesem Berichtstyp angezeigt.
+
+| *Bericht erstellt am*
+| Das Datum und die Uhrzeit, an dem der Bericht erstellt wurde.
+
+| *Bericht aktualisiert am*
+| Das Datum und die Uhrzeit, an dem der Bericht zuletzt aktualisiert wurde.
+
+| *Aktionen*
+| *_Hinweis:_* Einige Berichtstypen können nicht zurückgesetzt oder übersprungen werden. +
+
+* *Bericht herunterladen* (material:file_download[]):  Der Bericht wird heruntergeladen. +
+* *Bericht zurücksetzen* (material:history[]): Der Bericht wird zurückgesetzt. Wenn du einen Bericht zurücksetzt, wird der Bericht neu verarbeitet. Das kann zum Beispiel hilfreich sein, wenn der Bericht Auftragsdaten eines neuen Auftrags noch nicht enthält. Wenn der Bericht neu verarbeitet wird, sind darin auch Daten neuer Aufträge enthalten. +
+Achte jedoch darauf, dass die Leistungsfähigkeit deines Systems beeinträchtigt wird, wenn du zu viele oder zu große Berichte zurücksetzt. Neue Berichte werden dann unter Umständen erst später verarbeitet. +
+* *Bericht überspringen* (material:skip_next[]): Der Bericht wird übersprungen. Wenn du einen Bericht überspringst, wird er zunächst nicht verarbeitet. Du kannst den Bericht dann auch nicht herunterladen. +
+Berichte zu überspringen kann sinnvoll sein, wenn du die Auslastung deines Systems reduzieren willst. Außerdem kannst du so bestimmen, welche Berichte als nächstes verarbeitet werden sollen, denn wenn du Berichte überspringst, werden die nächsten Berichte in der Warteschlange verarbeitet. +
+Beachte jedoch, dass Berichte, die im Hintergrund bereits von einem Prozess aufgegriffen wurden, hier nicht übersprungen werden können. +
+
+*_Hinweis:_* Berichte, die älter als 31 Tage (minus 6h) sind, können nicht mehr heruntergeladen, zurückgesetzt oder übersprungen werden.
+|===
+
+[#amazon-berichtstypen]
+[.collapseBox]
+.Welche Berichtstypen für Amazon gibt es?
+--
+Eine Übersicht über alle Berichtstypen von Amazon-Berichten findest du in der folgenden Tabelle.
+
+[[tabelle-amazon-berichtstypen]]
+.Berichtstypen
+[cols="2,2a"]
+|===
+| Berichtstyp | Wozu dient der Bericht?
+
+| Lagerbestand mit Versand durch Amazon
+| * Bestandsabgleich für FBA-Bestand
+
+| GET_FBA_MYI_ALL_INVENTORY_DATA
+| * Bestandsabgleich für FBA-Bestand
+
+| Von Amazon versandter Lagerbestand
+| * Bestandsabgleich für FBA-Bestand
+
+| GET_ORDER_REPORT_DATA_INVOICING
+| * Importieren von Amazon-MFN-Aufträgen +
+*_Wichtig:_* Dieser Bericht enthält keine Informationen zum Amazon-Geschenkservice. Deshalb werden die folgenden Informationen innerhalb von 5 Minuten über einen separaten Prozess nachträglich importiert:
+
+* Geschenkpapierart
+* Geschenkpapierpreis
+* Geschenknachricht (optional)
+
+| „Versand durch Amazon“-Kundenrücksendungen
+| * Importieren von FBA-Retouren
+
+| Von Amazon versandte Sendungen – Steuerabrechnung - EU
+| * Importieren von FBA-Aufträgen für EU-Verkäufer
+
+| Von Amazon versandte Sendungen – Steuerabrechnung - NA
+| * Importieren von FBA-Aufträgen für nordamerikanische Verkäufer
+
+| GET_FLAT_FILE_VAT_INVOICE_DATA_REPORT
+| * Korrigieren von Aufträgen für VCS Lite und VCS plentymarkets +
+* Erzeugung von fehlenden Rechnungen
+
+| GET_VAT_TRANSACTION_DATA
+| * monatlicher Bericht +
+* Korrigieren von Aufträgen +
+* Importieren von externen Rechnungen und Gutschriften auf Basis von VCS/VCS Amazon
+
+| SC_VAT_TAX_REPORT
+| * Korrigieren und Importieren externer Rechnungen und Gutschriften auf Basis von VCS/VCS Amazon
+
+| MFN XML Auftragsbericht - Steuerabrechnung - EU
+| * Importieren von FBM-Aufträgen für EU-Verkäufer
+
+| MFN XML Auftragsbericht - Steuerabrechnung - NA
+| * Importieren von FBM-Aufträgen für nordamerikanische Verkäufer
+
+| GET_ORDER_REPORT_DATA_SHIPPING
+| * Importieren von FBM-Aufträgen für nordamerikanische Verkäufer
+
+|===
+--
+
+[#amazon-berichte-filtern]
+==== Berichte filtern
+
+Wenn du dir nur bestimmte Berichte ansehen willst, kannst du Filter anwenden und damit die angezeigten Berichte eingrenzen. Klicke dazu auf *Filter* (material:tune[]) im oberen Bereich des Menüs.
+Eine Übersicht über alle verfügbaren Filter erhältst du in <<#filter-amazon-berichte>>.
+
+[.instruction]
+Filter anwenden:
+
+. Öffne das Menü *Einrichtung » Märkte » Amazon » Berichte » Verarbeitung*.
+. Klicke auf *Filter* (material:tune[]) im oberen Bereich des Menüs.
+. Wähle einen oder mehrere Filter. Die verfügbaren Filter sind in <<#filter-amazon-berichte>> aufgelistet.
+. Klicke auf *Suchen* (material:search[role=blue]). +
+→ Die gewählten Filter werden angewandt und die passenden Berichte werden angezeigt. +
+→ Alle aktiven Filter werden oben im Menü angezeigt.
+
+*_Tipp:_* Du kannst die gewählten Filter auch *zurücksetzen* (material:refresh[]). Dann werden wieder alle Amazon-Berichte angezeigt.
+
+[[filter-amazon-berichte]]
+.Filter für Amazon-Berichte
+[cols="1,3a"]
+|===
+| Filter | Erläuterung
+
+| *Verkäufer-ID*
+| Verkäufer-ID aus der Dropdown-Liste wählen, um nur Berichte mit dieser Verkäufer-ID anzuzeigen. +
+
+*_Hinweis:_* Du musst eine Verkäufer-ID wählen. Wenn du keine Verkäufer-ID wählst, werden auch keine Berichte angezeigt.
+
+| *Berichts-ID*
+| Berichts-ID eingeben, um einen bestimmten Bericht zu suchen. +
+*_Hinweis:_* Du kannst hier nur eine Berichts-ID eingeben.
+
+| *Bearbeitungsstatus*
+| *Übersprungen*, *Ausstehend* oder *Abgeschlossen* aus der Dropdown-Liste wählen. Nur Berichte mit diesem Status werden angezeigt.
+
+| *Berichtstyp*
+| Berichtstyp aus der Dropdown-Liste wählen, um nur Berichte dieses Typs anzuzeigen.
+
+| *Hinzugefügt von*
+| Datum im Format *D.M.YYYY* eingeben oder über den Kalender (material:today[]) wählen. In der Zeile *Uhrzeit Hinzufügung von* kannst du zusätzlich eine Uhrzeit eingeben oder über (material:schedule[]) wählen. +
+Nur Berichte, die ab diesem Datum und zu dieser Uhrzeit erstellt wurden, werden angezeigt. Berichte, die früher erstellt wurden, werden nicht angezeigt.
+
+| *Hinzugefügt bis*
+| Datum im Format *D.M.YYYY* eingeben oder über den Kalender (material:today[]) wählen. In der Zeile *Uhrzeit Hinzufügung bis* kannst du zusätzlich eine Uhrzeit eingeben oder über (material:schedule[]) wählen. +
+Nur Berichte, die bis zu diesem Datum und zu dieser Uhrzeit erstellt wurden, werden angezeigt. Berichte, die später erstellt wurden, werden nicht angezeigt.
+
+| *Aktualisiert von*
+| Datum im Format *D.M.YYYY* eingeben oder über den Kalender (material:today[]) wählen. In der Zeile *Uhrzeit Aktualisierung von* kannst du zusätzlich eine Uhrzeit eingeben oder über (material:schedule[]) wählen. +
+Nur Berichte, die ab diesem Datum und zu dieser Uhrzeit aktualisiert wurden, werden angezeigt. Berichte, die früher aktualisiert wurden, werden nicht angezeigt.
+
+| *Aktualisiert bis*
+| Datum im Format *D.M.YYYY* eingeben oder über den Kalender (material:today[]) wählen. In der Zeile *Uhrzeit Aktualisierung bis* kannst du zusätzlich eine Uhrzeit eingeben oder über (material:schedule[]) wählen. +
+Nur Berichte, die bis zu diesem Datum und zu dieser Uhrzeit aktualisiert wurden, werden angezeigt. Berichte, die später aktualisiert wurden, werden nicht angezeigt.
+|===
+
+[#berichte-anfordern]
+==== Berichte anfordern
+
+Im Menü *Einrichtung » Märkte » Amazon » Berichte » Anfordern* kannst du die Erstellung von Amazon-Berichten anfordern.
+Dies kann zum Beispiel hilfreich sein, falls einmal Daten in deinen Amazon-Berichten fehlen und du deshalb einen neuen Bericht anfordern möchtest.
+
+*_Hinweise zum Anfordern von Berichten:_*
+
+* Der Zeitraum, über den du Berichte anfordern willst, darf maximal eine Woche sein.
+
+* Der Zeitraum, über den du Berichte anfordern willst, sollte so klein wie möglich sein, da die Verarbeitung sehr großer Berichte aufgrund der Datenmenge zu Problemen führen kann.
+
+* Berichte können nicht beliebig oft angefordert werden. Einige Berichtstypen können beispielsweise nur 2- oder 5-mal pro Tag angefordert werden.
+
+[IMPORTANT]
+.Berichte ohne Daten können nicht erstellt werden
+====
+Falls keine Daten für den angeforderten Zeitraum des Berichts vorliegen, erstellt Amazon den Bericht auch nicht. Derzeit kann plentymarkets leider keine Rückmeldung darüber geben, dass ein Bericht nicht generiert werden konnte.
+====
+
+[.instruction]
+Bericht anfordern:
+
+. Öffne das Menü *Einrichtung » Märkte » Amazon » Berichte » Anfordern*.
+. Nimm die Einstellungen vor. Beachte die Erläuterungen in <<#tabelle-bericht-anfordern>>.
+. Klicke auf *Anfordern*. +
+→ Der angeforderte Bericht wird bei Amazon generiert. Sobald der Bericht verfügbar ist, kannst du ihn in deinem plentymarkets System im Menü *Einrichtung » Märkte » Amazon » Berichte » Verarbeitung* abrufen. +
+→ Es kann mehrere Minuten dauern, bis der angeforderte Bericht in deinem System verfügbar ist.
+
+[[tabelle-bericht-anfordern]]
+.Berichtserstellung anfordern
+[cols="1,3a"]
+|===
+| Einstellung | Erläuterung
+
+| *Startdatum* (Pflichtfeld)
+| Datum im Format *DD.MM.YYYY* eingeben oder über den Kalender (material:today[]) wählen.
+
+| *Startzeitpunkt* (Pflichtfeld)
+| Uhrzeit eingeben oder über (material:schedule[]) wählen.
+
+| *Enddatum*
+| Datum im Format *DD.MM.YYYY* eingeben oder über den Kalender (material:today[]) wählen.
+
+| *Endzeitpunkt*
+| Uhrzeit eingeben oder über (material:schedule[]) wählen.
+
+| *Verkäufer-ID* (Pflichtfeld)
+| Verkäufer-ID des Amazon-Verkäuferkontos wählen, für das Berichte angefordert werden sollen.
+
+| *Berichtstyp* (Pflichtfeld)
+| Berichtstyp wählen. Wenn du mit der Maus auf einen Berichtstyp in der Dropdown-Liste zeigst, wird ein Tooltip mit Informationen zu diesem Berichtstyp angezeigt. +
+*_Hinweis:_* Berichte können nicht beliebig oft angefordert werden. Wenn du den Berichtstyp gewählt hast, wird dir darunter angezeigt, wie oft pro Tag du einen Bericht dieses Typs anfordern kannst. 
+|===
+
+[#2700]
+== Amazon-Aufträge abrufen
+
+Wenn du bereits mit einem anderen Shopsystem gearbeitet hast, weißt du bestimmt sehr genau, wie zeitaufwändig die tägliche Auftragsbearbeitung im Seller Central-Portal sein kann. Mit plentymarkets wird alles erheblich vereinfacht, denn hier werden alle Aufträge aus allen angeschlossenen Märkten in einem einzigen Auftragsordner für dich gesammelt. Aus Amazon-Aufträgen werden automatisch plentymarkets Aufträge, die du nach dem gewohnten Fulfillment-Schema schnell und effektiv bearbeiten kannst. Nicht einmal um den Import der Aufträge musst du dich noch kümmern, das macht die Schnittstelle für dich im Hintergrund. Damit alles korrekt funktioniert, sind ein paar Voraussetzungen bzw. Einstellungen nötig, die hier zusammengefasst sind.
+
+Aufträge werden im Viertelstundentakt abgerufen. Dennoch kann es unter Umständen bis zu 90 Minuten dauern, bis ein in Amazon generierter Auftrag in deinem plentymarkets System angezeigt wird. Das ist keine Fehlfunktion, sondern aus technischen Gründen nicht anders möglich. Meistens wirst du zuvor durch eine E-Mail von Amazon über den Verkauf informiert und kannst den Auftrag im Seller Central bereits ansehen.
+
+[IMPORTANT]
+.Rabatte auf Rechnungen
+====
+Die Rechnungen, die plentymarkets für Amazon-Aufträge generiert, enthalten nur den Betrag, den Amazon Endkund:innen in Rechnung gestellt hat. Technisch kann man nicht unterschieden werden, welche Rabatte von Amazon und welche Rabatte von Händler:innen gewährleistet werden.
+====
+
+[#2800]
+=== Einstellungen der Schnittstelle in plentymarkets vornehmen
+
+Für den Import der Aufträge sind die Einstellungen *Zahlungseingang* sowie *Versandbestätigung* in den Grundeinstellungen relevant. Wir gehen davon aus, dass du Aufträge mit dem Status *[5] Freigabe Versand* übernehmen und die stündliche Versandbestätigung automatisch von deinem plentymarkets System erzeugen lässt. Kontrolliere diese Einstellungen nochmals.
+
+=== Retouren von Amazon-Aufträgen bearbeiten
+
+Natürlich musst du auch bei Amazon gelegentlich mit einem Widerruf nach erfolgter Auslieferung rechnen. Die Artikel müssen Kund:innen direkt an dich zurücksenden. Wie du in plentymarkets eine Retoure erstellst und den Warenausgang wieder zurücksetzt, erfährst du auf der Handbuchseite xref:warenwirtschaft:waren-ausbuchen.adoc#[Waren ausbuchen].
+
+Amazon hat für dich die Zahlung für den Auftrag in Empfang genommen. Deshalb muss die Rückbuchung ebenfalls über Amazon erfolgen. Das musst du im Auftragsordner in der Seller Central erledigen.
+
+[IMPORTANT]
+.Rückbuchung manuell oder per Ereignisaktion ausführen
+====
+Die Erstattung des Kaufpreises durch Amazon wird nicht automatisch über die Schnittstelle angestoßen, sondern muss manuell oder über eine Ereignisaktion automatisch ausgeführt werden. Wenn du die manuelle Erstattung oder das Erstellen einer Ereignisaktion zum Erstatten des Kaufpreises vergisst, riskierst du eine Beschwerde bei Amazon und eine schlechte Bewertung.
+====
+
+MFN Retouren (= Händlerversand) kannst du in Form von Gutschriften per Ereignisaktion an Amazon melden. Nur mit Hilfe eines Auftrags vom Typ Gutschrift kann die Rückzahlung der Artikelsumme und den Versandkosten garantiert werden. Gehe dazu wie im Folgenden beschrieben vor.
+
+==== Auftragsstatus erstellen
+
+Erstelle zunächst einen Auftragsstatus für Amazon-Retouren im Menü *Einrichtung » Aufträge » Auftragsstatus*, zum Beispiel *[9.6] Retoure an Amazon gesendet*. Diesen Auftragsstatus benötigst du für die Amazon-Einstellungen.
+
+==== Auftragsstatus einstellen
+
+Stelle den Auftragsstatus nun in den Amazon-Einstellungen ein wie folgend beschrieben.
+
+[.instruction]
+Auftragsstatus für Retoure einstellen:
+
+. Öffne das Menü *Einrichtung » Märkte » Amazon » Einstellungen*.
+. Öffne das Amazon-Konto.
+. Wechsele in das Tab *Auftragseinstellungen*.
+. Wähle für die Einstellung *Status für übertragene Retouren* den eben eingerichteten Auftragsstatus für Amazon-Retouren.
+. Speichere (terra:save[]) die Einstellungen.
+
+==== Retouren automatisch an Amazon melden
+
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Retouren in Form von Gutschriften automatisch an Amazon zu senden. Wenn die Ereignisaktion *Retoure bei Amazon anlegen* in plentymarkets ausgelöst wird, wird die bei Amazon erzeugte Gutschrift erstattet.
+
+:table-event-procedure: <<#ereignisaktion-automatische-retoure>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[TIP]
+.Ereignisaktion und Gutschriftenimport
+====
+Nutze Ereignisaktionen, um Erstattungen aus plentymarkets auszulösen. Der automatische Gutschriftenimport (Option "Gutschriftenimport" in den Auftragseinstellungen) stellt sicher, dass eine Gutschrift nicht zweimal im System existiert. Wenn du aktuell Gutschriften noch manuell oder durch ein Drittsystem auslöst und keine Gutschriften in plentymarkets existieren, wird eine Gutschrift durch den Import erstellt.
+====
+
+[[ereignisaktion-automatische-retoure]]
+.Ereignisaktion zum automatischen Senden von Retouren an Amazon
+[cols="1,3,3"]
+|===
+| Einstellung | Option | Auswahl
+
+| *Ereignis*
+| Ereignis wählen +
+*_Wichtig:_* Als Ereignis nicht *Auftragsanlage: Neue Gutschrift* wählen. Dadurch kann es passieren, dass Gutschriften mehrfach bei Amazon erstellt werden.
+|
+
+| *Filter*
+| *Auftrag &gt; Herkunft*
+| *Amazon* oder eine geeignete Amazon-Unterherkunft, zum Beispiel Amazon France. +
+*_Hinweis:_* Wähle für den Filter *Auftrag > Herkunft* keine Amazon FBA-Herkunft, wie zum Beispiel Amazon FBA Germany, wenn du den automatischen Gutschriftenimport nutzt.
+
+| *Aktion*
+| *Retoure &gt; Retoure bei Amazon anlegen*
+|
+|===
 
 [#3100]
 [#3110]
