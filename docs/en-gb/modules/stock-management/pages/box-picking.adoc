@@ -54,7 +54,7 @@ Before you <<#800, use box picking>>, you need to carry a few settings one time 
 
 In the warehouse, every item is stored at its own xref:stock-management:setting-up-a-warehouse.adoc#500[storage location]. When picking an order, the warehouse employee goes and gets the item from its storage location and then places the item in a box. The item stays in that box until the warehouse technician has finished packing and shipping the order.
 
-Thus, boxes are essentially temporary storage locations. Just like "normal" storage locations, you'll need to create boxes one time in advance. Specifically, you create one storage location for each box. Then you specify that these storage locations should be used for box picking.
+Thus, boxes are essentially temporary storage locations. Just like regular storage locations, you'll need to create boxes one time in advance. Specifically, you create one storage location for each box. Then you specify that these storage locations should be used for box picking.
 
 [.instruction]
 Making boxes available:
@@ -79,11 +79,28 @@ Before box picking is carried out in plentyWarehouse, make sure that all users w
 
 include::_includes:partial$rights.adoc[]
 
+[#550]
+==== Assigning rights for order statuses
+
+Typically, the orders that are processed during box picking have specific xref:stock-management:box-picking.adoc#intable-source-status[source statuses] assigned to them. Which statuses are used for this depends on the individual workflow of your company.
+
+To use box picking without any errors and move the orders to the desired xref:stock-management:box-picking.adoc#intable-target-status[target status], you have to assign rights for displaying and editing those exact order statuses in the plentymarkets back end.
+
+[.instruction]
+Assigning rights for order statuses:
+
+. Go to *Setup » Account management » Roles » [Select role]*.
+. Scroll down to the *Access rights* area.
+. Expand the menu entry *Changeable order status* (icon:chevron-down[role="darkGrey"]).
+. *Activate* (material:check_box[role=skyBlue]) the order statuses that orders for box picking usually have.
+. Expand the menu entry *Changeable order status* (icon:chevron-down[role="darkGrey"]).
+. *Activate* (material:check_box[role=skyBlue]) the order statuses that orders for box picking usually have.
+. Click on *Save* (material:save[]).
+
 [#600]
 ==== Modifying the order process
 
 You can integrate box picking with plentyWarehouse into your company’s existing xref:automation:setting-up-processes.adoc#[order process]. To do so, add the following procedure and sub-procedure to your existing process in the plentymarkets back end.
-
 
 [IMPORTANT]
 .Identifying the correct point in time for unlinking boxes from orders
@@ -158,21 +175,21 @@ Configuring the settings:
 
 2+^| *Status* area
 
-| *Source status*
+| [#intable-source-status]*Source status*
 |Which orders do you want to pick? When you use the function later, you'll see a list of items to pick. This list only includes items from orders that are currently in this status. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the back end of your plentymarkets system.
 
-[#intable-target-status]*Target status*
+| [#intable-target-status]*Target status*
 |How do you want to flag orders that are currently being picked? Change the order's status, so that it's not possible to accidentally start picking the same order twice. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the back end of your plentymarkets system.
 
 | *Error status*
-|How should the app react if something goes wrong? If an error occurs while picking an order, the app will change the status of the order to whatever is selected here. Later, you can access your plentymarkets back end, search for all the faulty orders with this status and then process these orders separately. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+|How should the app react if something goes wrong? If an error occurs while picking an order, for example because an item cannot be picked, the app will change the status of the order to whatever is selected here. Additionally, a note will be added to the order itself. This note contains more precise information on the item and on the storage location. Later, you can open the *Orders » Edit orders* menu to search for all orders in this status and then process these orders separately. +
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the back end of your plentymarkets system.
 
 2+^| *Item registration* area
 
-|[#intable-itemscan]*Mandatory item scan*
+| [#intable-itemscan]*Mandatory item scan*
 |Use this option to determine which rules should apply when registering items during box picking. +
 *Activated* (icon:toggle-on[role="green"]) = All items _have to be_ scanned via their label to be registered for box picking. It is not possible to select items manually via the search results. +
 *Deactivated* (icon:toggle-off[role="darkGrey"]) = Items can either be registered by scanning them or by selecting them manually.
@@ -217,7 +234,7 @@ Specifying the number of boxes:
 
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon (icon:bars[role="darkGrey"]) in the top left corner. +
-icon:map-signs[] *_Or:_* Find the *Box picking* tile in the *Functions* area on the dashboard.
+icon:map-signs[] *_Or:_* Or: Find the *Box picking* tile in the *Functions* area on the dashboard.
 . Tap on *Box picking* (image:stock-management:icon_box-picking.png[width=24, height=24]). +
 → The start screen is displayed.
 . Tap on the plus or minus icon to increase or decrease the xref:stock-management:box-picking.adoc#intable-default-boxes[previously defined number of boxes].
@@ -232,7 +249,7 @@ plentymarkets automatically creates a list of all the items that are ready to be
 
 The list includes important information on the items that have to be picked. Warehouse employees do not only see how many copies of an item have to be picked, but are also shown the storage location and name of the item.
 
-Now the warehouse employee takes the trolley and walks over to where the first item is stored. Upon arrival, the warehouse employee scans the barcode of the storage location. Then, the barcode of the first item is scanned. Depending on the setting you have selected for the options xref:stock-management:box-picking.adoc#intable-storage-location-scan[Mandatory scan of storage location] and xref:stock-management:box-picking.adoc#intable-item-scan[Mandatory item scan], you can alternatively tap on storage locations and items in the app to select them manually.
+Now the warehouse employee takes the trolley and walks over to where the first item is stored. Upon arrival, the warehouse employee scans the barcode of the storage location. Then, the barcode of the first item is scanned. Depending on the setting you have selected for the options xref:stock-management:box-picking.adoc#intable-storage-location-scan[Mandatory scan of storage location] and xref:stock-management:box-picking.adoc#intable-itemscan[Mandatory item scan], you can alternatively tap on storage locations and items in the app to select them manually.
 
 [.instruction]
 Working with the item list:
@@ -287,7 +304,7 @@ For such cases, the view on each item contains shortcuts which allow you to quic
 
 |[#intable-add-note]*Comment*
 |material:chat[]
-| Opens a window for entering an order note. Use this function to save a comment with the order that contains this item. Later, you can open those orders in the back end of your plentymarkets system and access the comment.
+| Opens a window for entering an order note. Use this function to save a comment with each order that contains this item. Later, you can open those orders in the back end of your plentymarkets system and access the comment.
 
 |[#intable-enter-quantity]*Enter quantity*
 |material:iso[]
@@ -299,11 +316,11 @@ For such cases, the view on each item contains shortcuts which allow you to quic
 
 |[#intable-remove-item]*Remove item*
 |material:cancel[]
-| Removes the item from the item list. Use this function in case the required item is not available at the storage location. Optionally, you can add a comment in this step. The comment will be saved as an order note with the order that contains this item. You can access these order notes in the back end of your plentymarkets system later. In addition, the status of the order will be changed to the error status.
+| Removes the item from the item list. Use this function in case the required item is not available at the storage location. Optionally, you can add a comment in this step. The comment will be saved as an order note with each order that contains this item. You can access these order notes in the back end of your plentymarkets system later. In addition, the status of the order will be changed to the error status.
 
 | *Item information*
 |material:info[]
-| Opens a page with additional information on the item. Depending on the setting you have carried out for the xref:stock-managment:installation-and-initial-setup.adoc#intable-other-settings[Shortcut behaviour] option, you will be asked if you want to automatically return to the item list after viewing the item information.
+| Opens a page with additional information on the item. Depending on the setting you have carried out for the xref:stock-management:installation-and-initial-setup.adoc#intable-other-settings[Shortcut behaviour] option, you will be asked if you want to automatically return to the item list after viewing the item information.
 
 |====
 
