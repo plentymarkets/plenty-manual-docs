@@ -6,7 +6,7 @@
 :startWeekDate: 13. April 2023
 :endWeekDate: 19. April 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/dokumente-fehlerhafte-anzeige-der-mwst-in-artikelliste-documents-incorrect-display-of-vat-in-item-list/718988
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -38,6 +38,17 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 * In der neuen Artikel-UI ist es nun möglich per Variantengruppenfunktion Eigenschaften mehreren Varianten gleichzeitig hinzuzufügen. Diese Gruppenfunktion befindet sich in der allgemeinen Variantenübersicht als auch in der Variantenübersicht innerhalb eines Artikels.
 +
 Ein paar Hinweise zur Funktionsweise: Es werden nur Eigenschaften hinzugefügt, die noch nicht verknüpft sind. Ist die Eigenschaftsvererbung beim Hinzufügen von Eigenschaften aktiv, so wird die Verberbung aufgehoben.
+
+[discrete]
+=== Shopify
+
+Endlich ist es so weit: Bestandskund:innen können ab sofort vom Shopify-Plugin auf die plentymarkets App für Shopify wechseln.
+
+Die plentymarkets App für Shopify gibt es schon länger. Bisher konntest du sie aber nur für neue Verbindungen zu Shopify nutzen. Die Zeiten sind vorbei: Ab jetzt kannst du deine vorhandenen Shopify-Verbindungen migrieren.
+
+Das Shopify-Plugin wird ab sofort nicht mehr weiterentwickelt. Klar, wenn was kaputt ist, wird es gefixt. Aber Neuerungen und Verbesserungen wird es nicht mehr geben. Schon jetzt kannst du zum Beispiel Grundpreisangaben nur mit der App zu Shopify exportieren. Und das ist erst der Anfang. Also nichts wie ran an die Migration!
+
+Wie du die Migration durchführst, erfährst du auf der Handbuchseite xref:externe-webshops:shopify-migration.adoc[Migration zu Shopify-App].
 
 '''
 
@@ -79,6 +90,26 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * Wenn man innerhalb eines Prozesses, eine EmailBuilder-Vorlage versenden wollte, erschien eine Fehlermeldung. Die E-Mail wurde nicht versendet. Dieses Verhalten wurde behoben.
 * Nach der Migration einer E-Mail-Vorlage, die die alte Variable `$OrderProperties` enthielt, hat die Artikelliste zu viele Werte wie zum Beispiel die ID des Versandprofils ausgegeben, die vorher mit der alten Variable nicht ausgegeben wurden. Der Grund dafür lag in der Variable `orderItem.formattedProperties.all | raw`. Dieses Verhalten wurde behoben.
 
+[IMPORTANT]
+.To-Do
+======
+Bei folgenden twig expressions im Code-Widget des EmailBuilder muss `| raw` am Ende eingefügt werden, damit die entsprechenden Werte korrekt in der gesendeten E-Mail dargestellt werden können. Die twig expressions sollten dann folgendermaßen aussehen:
+
+* `{{ globals.legalInformation.termsConditions.html | raw }}``
+* `{{ globals.legalInformation.cancellationRights.html | raw }}``
+* `{{ globals.legalInformation.privacyPolicy.html | raw }}``
+* `{{ globals.legalInformation.withdrawalForm.html | raw }}``
+* `{{ globals.legalInformation.legalDisclosure.html | raw }}``
+* `{{ globals.account.signatureHTML | raw }}``
+* `{{ globals.account.signatureText | raw }}``
+======
+
+[discrete]
+=== Fulfillment
+
+* Wenn im Versand-Center 2.0 eine Paketnummer eingetragen oder aktualisiert wurde oder wenn eine Sendung angemeldet und dadurch eine Paketnummer hinzugefügt wurde, erschien der entsprechende Benutzer nicht in der Statushistorie. Dieses Verhalten wurde behoben.
+* Nach dem Importieren von Adressdaten auf DHL Internetmarke wurden Umlaute nicht richtig dargestellt. Dieser Fehler wurde behoben.
+
 --
 
 early::
@@ -92,7 +123,15 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* Die folgenden Änderungen wurden in der neuen Auftrags-UI implementiert:
+** In der Kompaktansicht wurde in den Feldern für *Rechnungsadresse* und *Lieferadresse* der ISO-Code des Landes neben der Stadt hinzugefügt.
+** In der Kompaktansicht wurde in den Feldern für *Rechnungsadresse* und *Lieferadresse* der eBay-Name vor dem Namen eingefügt.
+** In der Detailansicht des Auftrags wurden die Adressoptionen innerhalb des Adress-Widgets hinzugefügt und können ein- und ausgeklappt werden.
+** In der Detailansicht des Auftrags enthält das Adress-Widget nun auch den eBay-Namen als Adressoption.
+** Die Adressoptionen wurden in den Spalten *Rechnungsadresse* und *Lieferadresse* der Übersichtstabelle in der Auftragsübersicht hinzugefügt.
 
 '''
 
@@ -101,7 +140,14 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* Die folgenden Änderungen wurden an der Kompaktansicht vorgenommen:
+** Die Kompaktansicht ist in neuen Systemen standardmäßig aktiviert.
+** Gesetzte Filter werden automatisch übernommen, wenn man zwischen der Kompaktansicht und der Listenansicht wechselt.
+** Die Suche wird ausgelöst, wenn man zwischen der Kompaktansicht und der Listenansicht wechselt.
+** Die Standardeinstellung für *Farbliche Markierung* wurde zu blau für die Adressfelder und zu grün für die Felder *Rechnungsnummer* und *Kontakt-ID* geändert.
 
 '''
 
@@ -110,7 +156,11 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* In der Kompaktansicht werden die Symbole jetzt korrekt zentriert, wenn die Einstellung *Nur Symbol anzeigen* aktiviert wurde.
+* Es wurde beim Klicken auf den Status im Dashboard kein Filter in der neuen Auftrags-UI gesetzt und die Suche wurde nicht ausgelöst. Das wurde jetzt behoben.
 
 --
 
@@ -124,9 +174,35 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/googleanalytics_4725[GoogleAnalytics^]
+|2.0.1
+a|
+* Diese Plugin-Version kommuniziert ausschließlich mit GA4 Properties. Prüfe daher, ob eine GA4-kompatible link:https://support.google.com/analytics/answer/12270356?hl=de[Mess-ID^] im Format (G-XXXXX) in den Plugin-Einstellungen eingetragen wurde.
+* In den Plugin-Einstellungen muss die Container-Verknüpfung *Google Analytics purchase event code* gesetzt werden.
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.2.6
+|-
+
+|link:https://marketplace.plentymarkets.com/responsivetabswidget_55426[Responsive Tabs Widget^]
+|1.0.2
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.3.2
+|-
+
+|link:https://marketplace.plentymarkets.com/trustedshops_4962[Trusted Shops Reviews Toolkit^]
+|2.2.3
+|-
+
+|link:https://marketplace.plentymarkets.com/vatidcheck_6023[VAT ID Check^]
+|2.2.9
+|-
+
+|link:https://marketplace.plentymarkets.com/cytitemavailabilitynotification_6906[Wieder auf Lager! - Verfügbarkeitsbenachrichtigung mit Statistik^]
+|1.6.2
+|-
 
 |===
 
