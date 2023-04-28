@@ -152,12 +152,10 @@ Konto hinzufügen:
 |===
 |Einstellung |Erläuterung
 
-| *Verbinden*
-| Das Konto mit einem Decathlon-Konto verbinden. +
+| *Verbindung testen*
+| Klicke hier, um zu testen, ob die Verbindung zu Decathlon hergestellt werden konnte. In diesem Schritt wird der API Key überprüft. +
 
-Wenn du auf material:link[role="blue"] *Verbinden* klickst, wirst du zu Decathlon weitergeleitet und in einem neuen Tab wird eine Decathlon-Seite geöffnet. Melde dich mit den Zugangsdaten deines Decathlon-Kontos bei Decathlon an und bestätige, dass plentymarkets auf Daten deines Decathlon-Kontos zugreifen darf. Wenn der Vorgang abgeschlossen ist und alles geklappt hat, erscheint in plentymarkets die Meldung "Autorisierung erfolgreich abgeschlossen". +
-
-Wenn nötig, kann das Konto auch erneut verbunden werden.
+Wenn der API Key geändert wird, muss die Verbindung erneut getestet werden.
 
 2+| Allgemein
 
@@ -191,7 +189,8 @@ Es werden nur Aufträge ab diesem Datum in plentymarkets importiert. Aufträge, 
 | *Erstattungen importieren*
 | Aktivieren, um Erstattungen von Decathlon alle 15 Minuten in plentymarkets zu importieren. +
 
-*_Hinweis:_* Bei Decathlon können Aufträge nicht von Kund:innen storniert werden. Stattdessen wird immer eine Erstattung ausgezahlt, wenn Kund:innen einen Artikel zurückgeben.
+*_Hinweis:_* Bei Decathlon können Aufträge nicht von Kund:innen storniert werden. Stattdessen wird bei Decathlon immer eine Erstattung angelegt, wenn ein Artikel zurückgegeben wurde. +
+In plentymarkets werden Erstattungen von Decathlon in Stornierungen umgewandelt, je nachdem, welcher Status für die Einstellung *Vollständig erstatteten Auftrag automatisch stornieren bis Status* gewählt wurde.
 
 | *Stornierungen für Aufträge mit Rechnung erlauben*
 | Sollen Stornierungen auch noch möglich sein, wenn bereits eine Rechnung für den Auftrag generiert wurde?
@@ -202,13 +201,13 @@ Es werden nur Aufträge ab diesem Datum in plentymarkets importiert. Aufträge, 
 *_Tipp:_* Wähle hier einen Status, in dem der Auftrag noch nicht verschickt wurde. Aufträge, die bereits verschickt wurden, können nicht mehr storniert werden.
 
 | *Auftragsstatus für versendete Aufträge*
-| Welchen xref:auftraege:order-statuses.adoc#preselected-statuses[Auftragsstatus] sollen Aufträge bekommen, die versendet wurden?
+| Mit welchem xref:auftraege:order-statuses.adoc#preselected-statuses[Auftragsstatus] sollen Aufträge importiert werden, die bereits versendet wurden?
 
 | *Auftragsstatus für erstattete Aufträge*
-| Welchen xref:auftraege:order-statuses.adoc#preselected-statuses[Auftragsstatus] sollen Aufträge bekommen, die erstattet wurden?
+| Mit welchem xref:auftraege:order-statuses.adoc#preselected-statuses[Auftragsstatus] sollen Aufträge importiert werden, die von Decathlon erstattet wurden?
 
 | *Auftragsstatus für stornierte Aufträge*
-| Welchen xref:auftraege:order-statuses.adoc#preselected-statuses[Auftragsstatus] sollen Aufträge bekommen, die storniert wurden?
+| Mit welchem xref:auftraege:order-statuses.adoc#preselected-statuses[Auftragsstatus] sollen Aufträge importiert werden, die storniert wurden?
 
 2+| Artikel
 
@@ -224,7 +223,7 @@ Bestände werden alle 15 Minuten exportiert. +
 Preise werden stündlich aktualisiert. +
 
 | *Fulfillment by Decathlon*
-| Aktivieren, wenn du Fulfillment by Decathlon nutzen möchtest. Bei diesem Service übernimmt Decathlon die Lagerung und den Versand deiner Artikel.
+| *_Hinweis:_* Diesen Service kannst du noch nicht nutzen, da das Feature zurzeit noch von Decathlon entwickelt wird.
 
 | *Versandprofile verknüpfen*
 | Ordne deinen Versandprofilen in plentymarkets die Versandprofile von Decathlon aus der Dropdown-Liste zu.
@@ -233,27 +232,17 @@ Preise werden stündlich aktualisiert. +
 *_Wichtig:_* Wenn du die Versandprofile auf Decathlon änderst, kannst du sie über *Decathlon-Versandprofile aktualisieren* in plentymarkets aktualisieren.
 |===
 
+////
 [#auftragsherkunft]
 === Auftragsherkunft aktivieren
+
+* Klären: Kann Auftragsherkunft genutzt werden?
 
 :referrer: Decathlon
 :referrer-option: pass:quotes[Option *Decathlon* mit der ID *173.00*]
 
 include::partial$auftragsherkunft-aktivieren.adoc[]
-
-[#zahlungsart]
-=== Zahlungsart in Kundenklasse erlauben
-
-:payment-method: Decathlon
-
-include::partial$zahlungsart_aktivieren.adoc[]
-
-[#verkaufspreis]
-=== Verkaufspreis festlegen
-
-:referrer-price: Decathlon
-
-include::partial$verkaufspreis-festlegen.adoc[]
+////
 
 [#varianten-vorbereiten]
 == Varianten vorbereiten
@@ -300,7 +289,15 @@ Wenn du den Katalog aktivierst hast, werden die Katalogdaten in regelmäßigen A
 *_Hinweis:_* Für jede Produktkategorie auf Decathlon gibt es ein eigenes Katalog-Format. In jedem Format werden unterschiedliche Artikeldaten exportiert, je nachdem, welche Informationen Decathlon für eine Produktkategorie benötigt. +
 Du musst also für jede Produktkategorie von Decathlon, in der du Artikel verkaufen möchtest, einen eigenen Katalog erstellen. Produktkategorien fügst du im Menü *Einrichtung » Märkte » Decathlon » Datenaustausch » Katalog-Vorlagen hinzufügen* hinzu.
 
-:catalogue-template-name: Decathlon
+[IMPORTANT]
+.Katalog für Angebote erstellen
+====
+Bei Decathlon musst du immer einen Katalog für Angebote erstellen. Dazu wählst du im Menü *Daten » Kataloge* beim Erstellen des Katalogs das Format *Angebot*. +
+Der Angebotskatalog wird immer zusätzlich zu den Katalogen für die verschiedenen Decathlon-Produktkategorien benötigt, damit Angebote auf Decathlon erstellt werden können. 
+====
+
+:format-item-new:
+:one-per-category:
 
 include::partial$catalogue-creation.adoc[]
 
@@ -457,6 +454,8 @@ include::_includes:partial$event-procedure.adoc[]
 * *Auftragsänderung: Statuswechsel*
 
 | Status wählen, zum Beispiel 
+
+*_Hinweis:_* Wähle hier einen Auftragsstatus, in dem die Artikel bereits versendet wurden, zum Beispiel
 
 | *Filter*
 | *Auftrag &gt; Herkunft*
