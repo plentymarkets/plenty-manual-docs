@@ -837,7 +837,9 @@ Mit einem Klick auf material:settings[] öffnen sich die Einstellungen. Hier kan
 
 Klicke auf icon:code[], um die Ansicht zu öffnen.
 
-Mit einem Klick auf material:settings[] öffnen sich die Einstellungen. Hier kannst du das Widget mit einem Klick auf *Widget löschen* (material:delete[]) entfernen. Weitere Einstellungen können hier nicht vorgenommen werden. Klicke auf *Einstellungen schließen* (material:close[]), um die Einstellungen zu schließen.
+Mit einem Klick auf material:settings[] öffnen sich die Einstellungen. Hier kannst du das Widget mit einem Klick auf *Widget löschen* (material:delete[]) entfernen. Weitere Einstellungen können hier nicht vorgenommen werden. Klicke auf *Einstellungen schließen* (material:close[]), um die Einstellungen zu schließen. 
+
+Beachte auch die Code-Beispiele für das Code-Widget in diesem <<#code-beispiele-code-widget, Kapitel>>.
 
 |[#intable-widget-kontaktadresse]*Kontaktadresse*
 |Dieses Widget enthält Musterdaten der Kontaktadresse. Das Layout der Adresse richtet sich nach den Einstellungen, die du im Menü *Einrichtung » CRM » Adress-Layout* gespeichert hast. Das bedeutet, das Layout wird im EmailBuilder genauso ausgegeben, wie das Adress-Layout, das du als xref:crm:vorbereitende-einstellungen.adoc#adress-layout[Standard-Adress-Layout] im Menü *Einrichtung » CRM » Adress-Layout* definiert hast.
@@ -2954,6 +2956,22 @@ Das Code-Beispiel findest du link:https://raw.githubusercontent.com/plentymarket
 Füge in das <<#intable-widget-code, Code-Widget>> einen Code ein, der bewirkt, dass die Artikel-IDs und die Artikelmenge aller Artikel, die im Auftrag enthalten sind, als Liste angezeigt werden.
 
 Das Code-Beispiel findest du link:https://raw.githubusercontent.com/plentymarkets/plenty-manual-docs/main/docs/de-de/modules/crm/examples/emailbuilder-code-beispiel-artikel-liste.txt[unter diesem Link^].
+
+[#code-beispiel-datumsformat]
+=== Code-Beispiel: Datumsformat
+
+Die Einstellung für das Datumsformat, die du im Bereich *Sprachabhängige Einstellungen* vorgenommen hast, greifen _nicht_ für datumsbezogene Variablen, die du im Code-Widget verwendest. Hier musst du die Formatierung also selbst vornehmen.
+
+*_Beispiel:_* Wenn du für die englische Datumsschreibweise in den sprachabhängigen Einstellungen einen Bindestrich gewählt hast, im Code-Widget aber eine der folgenden twig expressions für das Auftragsdatum einfügst, wird in der E-Mail-Vorlage, die im Code-Widget verwendete Schreibweise für das Datum ausgegeben.
+
+* &#123;&#8288;&#123; order.formattedDates.createdOnDateAndTime &#125;&#8288;&#125;
+** Ergebnis: 2023-04-24 07:28:54
+
+* &#123;&#8288;&#123; order.formattedDates.createdOnDateAndTime | date('dd.mm.yyyy') &#125;&#8288;&#125;
+** Ergebnis: 24.04.2023
+
+* &#123;&#8288;&#123; order.formattedDates.createdOnDateAndTime | date('dd.mm.yyyy hh:ii') &#125;&#8288;&#125;
+** Ergebnis: 24.04.2023 07:28
 
 [#code-beispiele-betreff]
 == Code-Beispiele für den Betreff
