@@ -616,7 +616,7 @@ In the *Settings* area on the right side of your screen, you can carry out the g
 *_Important:_* Make sure to select a footer here that has the same language as the template.
 
 |[#intable-template-settings-dynamic-attachments]*Dynamic attachments*
-|This drop-down list provides all xref:orders:order-documents.adoc#100[location-based documents] that you set up in the *Setup » Client » [Select client] » Locations » [Select location] » Documents* menu. Select (material:check_box[role=skyBlue]) up to 3 dynamic attachments from the drop-down list.
+|This drop-down list provides all xref:orders:order-documents.adoc#100[location-based documents] that you set up in the *Setup » Client » [Select client] » Locations » [Select location] » Documents* menu. Select (material:check_box[role=skyBlue]) up to 4 dynamic attachments from the drop-down list.
 
 //| *From*
 //|This is the sender of the email just as it is saved in the email settings of your plentymarkets system.
@@ -964,7 +964,7 @@ As soon as the default template is created, you can see the prefilled content in
 
 Besides the language-dependent settings where you can <<#default-template-adjust-subject, adjust the subject>> and select static attachments for your default template, for example, you can also adjust the default template’s content by clicking on material:edit[].
 
-In the *Settings* area of the template, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 3 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
+In the *Settings* area of the template, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 4 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
 
 [#default-templates-name-and-subject]
 ==== Available default templates
@@ -1193,7 +1193,7 @@ Editing a template:
 
 Besides the language-dependent settings where you can <<#adjust-subject, adjust the subject>> and select static attachments for your template, for example, you can also adjust the template’s content by clicking on material:edit[].
 
-In the *Settings* area of the template, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 3 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
+In the *Settings* area of the template, select an owner, the client and the header and footer, if not done already. In this area, you can also select up to 4 dynamic attachments and fill the fields *Reply to*, *CC* and *BCC*.
 
 [#adjust-subject]
 === Adjusting the template’s subject
@@ -2937,6 +2937,22 @@ Click on link:https://raw.githubusercontent.com/plentymarkets/plenty-manual-docs
 In the <<#intable-widget-code, code widget>>, insert a code that causes the item IDs and quantities of all items that are contained in the order to be shown in a list.
 
 Click on link:https://raw.githubusercontent.com/plentymarkets/plenty-manual-docs/main/docs/en-gb/modules/crm/examples/emailbuilder-code-example-item-list.txt[this link^] to see the code example.
+
+[#code-example-date-format]
+=== Code example: Date format
+
+The setting for the date format that you carried out in the *Language-dependent settings* area, does _not_ apply for date-related twig expressions that you use in the code widget. You have to take care of the formatting yourself. 
+
+*_Example:_* If you selected a hyphen for the English date format in the language-dependent settings, but use one of the following twig expressions for the order date, the notation for the date used in the code widget is returned in the email template. The setting in the *Language-dependent settings* is thus overwritten here.
+
+* `&#123;&#8288;&#123; order.formattedDates.createdOnDateAndTime &#125;&#8288;&#125;`
+** Result: 2023-04-24 07:28:54
+
+* `&#123;&#8288;&#123; order.formattedDates.createdOnDateAndTime | date('d.m.Y') &#125;&#8288;&#125;`
+** Result: 24.04.2023
+
+* `&#123;&#8288;&#123; order.formattedDates.createdOnDateAndTime | date('d.m.Y H:i') &#125;&#8288;&#125;`
+** Result: 24.04.2023 07:28
 
 [#code-examples-subject]
 == Code examples for the subject line
