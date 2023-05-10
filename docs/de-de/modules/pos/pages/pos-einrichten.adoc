@@ -35,12 +35,12 @@ Nutze alternativ die folgenden Links und die Navigation auf der rechten Seite, u
 [#10]
 == Erste Schritte und allgemeine Informationen
 
-Das Kassensystem plentyPOS wird über die xref:app:installation.adoc#[plentymarkets App] bereitgestellt. Wirf einen Blick in unsere Dokumentation und lerne:
+Das Kassensystem plentyPOS wird über die xref:app:installieren.adoc#[plentymarkets App] bereitgestellt. Wirf einen Blick in unsere Dokumentation und lerne:
 
-* welche xref:app:installation.adoc#400[Hardware-Voraussetzungen] für plentyPOS bestehen.
-* wo du die kostenlose xref:app:installation.adoc#500[plentymarkets App herunterladen] kannst.
-* wie du deinen Mitarbeiter:innen xref:app:installation.adoc#600[Zugang zur App] gewährst.
-* wie du dich in die App xref:app:installation.adoc#1100[einloggst und zurechtfindest].
+* welche xref:app:installieren.adoc#400[Hardware-Voraussetzungen] für plentyPOS bestehen.
+* wo du die kostenlose xref:app:installieren.adoc#500[plentymarkets App herunterladen] kannst.
+* wie du deinen Mitarbeiter:innen xref:app:installieren.adoc#600[Zugang zur App] gewährst.
+* wie du dich in die App xref:app:installieren.adoc#1100[einloggst und zurechtfindest].
 
 plentyPOS ist für das Kassieren mit den Währungen Euro (EUR), Schweizer Franken (CHF) und Britische Pfund (GBP) vorbereitet. Du kannst die Kasse allerdings nur in der xref:payment:waehrungen.adoc#30[Systemwährung] betreiben. Die Systemwährung legst du im Menü *Einrichtung » Aufträge » Zahlung » Währungen* fest.
 
@@ -421,7 +421,7 @@ Barcodes helfen also dem Kassenpersonal, Aufträge schneller zu finden. Die manu
 
 Um dem Kassenpersonal den Zugriff auf plentyPOS zu ermöglichen, sind die folgenden Vorbereitungen nötig:
 
-* Benutzerkonto der Benutzerklasse *Backend* erstellen
+* Benutzerkonto für Kassenpersonal ohne Admin-Konto erstellen
 * Berechtigung für Sichtbarkeit von POS aktivieren
 * Berechtigungen für POS-Funktionen aktivieren (optional)
 * Berechtigungen für Kommunikation mit plentymarkets Backend über die REST-API aktivieren
@@ -439,22 +439,20 @@ Um die Rechteverwaltung für Kassenpersonal zu vereinfachen, erstelle eine xref:
 [#140]
 === Konto für Kassenpersonal erstellen
 
-Damit neues Kassenpersonal Zugriff auf plentyPOS erhält, erstelle zunächst im plentymarkets Backend xref:business-entscheidungen:benutzerkonten-zugaenge.adoc#[Benutzerkonten] der Benutzerklasse *Backend* für diese Personen. Gehe dazu wie unten beschrieben vor.
+Damit neues Kassenpersonal Zugriff auf plentyPOS erhält, erstelle zunächst im plentymarkets Backend xref:business-entscheidungen:benutzerkonten-zugaenge.adoc#[Benutzerkonten] für diese Personen. Gehe dazu wie unten beschrieben vor.
 
 [.instruction]
 Benutzerkonto für Kassenpersonal erstellen:
 
-. Öffne das Menü *Einrichtung » Einstellungen » Benutzer » Konten*.
-. Klicke auf *Neu* (icon:plus-square[role="green"]). +
-→ Das Fenster *Neuen Benutzer anlegen* wird geöffnet.
+. Öffne das Menü *Einrichtung » Kontoverwaltung » Konten*.
+. Klicke auf *Neu* (icon:plus-square[]). +
 . Gib den *Benutzernamen* ein.
 . Gib den *realen Namen* ein.
 . Gib das *Passwort* ein.
 . Wiederhole das Passwort.
-. Gib eine *Neue App-PIN* mit 4 bis 12 Ziffern ein.
+. Gib eine *App-PIN* mit 4 bis 12 Ziffern ein.
 . Wiederhole die App-PIN.
 . Gib die E-Mail-Adresse der Kassenkraft ein, damit die Person Benachrichtigungen des Systems empfängt.
-. Wähle die Benutzerklasse *Backend*.
 . *Speichere* (icon:save[role="darkGrey"]) die Einstellungen.
 
 [TIP]
@@ -469,29 +467,32 @@ Die App-PIN erlaubt einen schnellen Wechsel des Benutzerkontos in bestimmten Men
 Erteile nun Berechtigungen für die Kommunikation zwischen plentyPOS und dem plentymarkets Backend.
 
 :rights-purpose: die Grundfunktionen von plentyPOS als Kassenpersonal nutzen können
-:right-one: pass:quotes[*POS*]
-:right-two: pass:quotes[*CRM > Kampagne > Code > Anzeigen*]
+:right-one: pass:quotes[*POS > Lesen*]
+:right-two: pass:quotes[*CRM > Kampagne > Code > Lesen*]
 :right-three: pass:quotes[*CRM > Kampagne > Code > Erstellen*]
 :right-four: pass:quotes[*CRM > Kampagne > Code > Löschen*]
 :right-five: pass:quotes[*CRM > Adresse > Anzeigen*]
-:right-six: pass:quotes[*Aufträge > Anzeigen*]
+:right-six: pass:quotes[*Aufträge > Lesen*]
 :right-seven: pass:quotes[*Aufträge > Erstellen*]
-:right-eight: pass:quotes[*Warenbestände > Lager > Lagerort > Anzeigen*]
+:right-eight: pass:quotes[*Warenbestände > Lager > Lagerort > Lesen*]
 
 include::_includes:partial$rights.adoc[]
 
 [#160]
 === POS-Sichtbarkeit für Kassenpersonal aktivieren
 
-Nun legst du fest, welche Bereiche und Kennzahlen für Kassenpersonal der Benutzerklasse *Backend* in der plentymarkets App sichtbar sein sollen.
+Nun legst du fest, welche Bereiche und Kennzahlen für Kassenpersonal ohne Admin-Konto in der plentymarkets App sichtbar sein sollen.
 
 [.instruction]
 App-Berechtigungen aktivieren:
 
-. Öffne das Menü *Einrichtung » Einstellungen » Benutzer » Konten*.
-. Öffne ein Benutzerkonto.
-. Öffne das Tab *Mobile*.
-. Aktiviere im Bereich *Sichtbare Funktionen* die Option *POS*.
+. Öffne das Menü *Einrichtung » Kontoverwaltung » Rollen*. +
+→ Die Übersicht wird geöffnet. +
+. Klicke auf *Suchen* (icon:search[role="blue"]), um alle Rollen zu sehen.
+. Öffne die gewünschte Rolle.
+. Klicke auf *Rechte*.
+. Aktiviere (icon:check-square[role="blue"]) die Option *plentymarkets App / plentyPOS » POS-Funktionen » Betrachten*.
+. *Speichere* (icon:save[role="darkGrey"]) die Einstellungen.
 . Wenn die Kassenkraft auf weitere Bereiche der plentymarkets App zugreifen soll, aktiviere xref:pos:pos-einrichten.adoc#170[weitere Berechtigungen].
 . *Speichere* (icon:save[role="darkGrey"]) die Einstellungen. +
 → Die Kassenkraft hat Zugriff auf plentyPOS und kann Kassenaufträge erstellen.
@@ -506,9 +507,11 @@ Im plentymarkets Backend legst du über das Zuweisen von Rollen fest, welche POS
 [.instruction]
 Berechtigungen für POS-Funktionen aktivieren:
 
-. Öffne das Menü *Einrichtung » Einstellungen » Benutzer » Konten*.
-. Öffne ein Benutzerkonto mit den Zugriffsrechten *Backend* oder *REST-API*.
-. Öffne das Tab *Mobile*.
+. Öffne das Menü *Einrichtung » Kontoverwaltung » Rollen*. +
+→ Die Übersicht wird geöffnet. +
+. Klicke auf *Suchen* (icon:search[role="blue"]), um alle Rollen zu sehen.
+. Öffne die gewünschte Rolle.
+. Klicke auf *Rechte*.
 . Aktiviere die POS-Funktionen, die der Kassenkraft zur Verfügung stehen sollen. Beachte dazu die Erläuterungen in <<table-POS-rights>>.
 . *Speichere* (icon:save[role="darkGrey"]) die Einstellungen.
 
@@ -600,15 +603,14 @@ Zwischenberichte enthalten folgende Informationen: +
 [.instruction]
 Auftragsherkünfte aktivieren:
 
-. Öffne das Menü *Einrichtung » Einstellungen » Benutzer » Rechte » Benutzer*. +
+. Öffne das Menü *Einrichtung » Kontoverwaltung » Rollen*. +
 → Die Übersicht wird geöffnet.
-. *_Optional:_* Gib in den Filtereinstellungen links eine ID oder einen Namen ein, um die Suche einzuschränken.
 . Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ Die gefundenen Konten werden angezeigt. +
-*_Tipp:_* Ausgegraute Konten haben Admin-Rechte.
-. Klicke auf das gewünschte Konto. +
-. Klicke auf *Ressourcen*. +
-→ Eine Liste der verfügbaren Auftragsherkünfte wird angezeigt. Dabei wird jede verfügbare Kasse wird als separate Auftragsherkunft aufgelistet.
+→ Die gefundenen Rollen werden angezeigt.
+. Öffne die gewünschte Rolle.
+. Gehe zum Bereich *Zugriffsrechte*.
+. Öffne den Eintrag *Auftragsherkünfte*. +
+→ Eine Liste der verfügbaren Auftragsherkünfte wird angezeigt. Dabei wird jede verfügbare Kasse als separate Auftragsherkunft aufgelistet.
 . Aktiviere alle Kassen, an denen die Kassenkraft arbeiten soll.
 . *Speichere* (icon:save[role="darkGrey"]) die Einstellungen.
 
@@ -625,8 +627,9 @@ Wenn Kassenbenutzer:innen das Passwort beim Login mehrmals hintereinander falsch
 [.instruction]
 Benutzer entsperren:
 
-. Öffne das Menü *Einrichtung » Einstellungen » Benutzer » Konten » Benutzer öffnen*.
-. Klicke auf *Login entsperren*. +
+. Öffne das Menü *Einrichtung » Kontoverwaltung » Konten*.
+. Öffne ein Konto.
+. Klicke im Bereich *Anmeldedaten* auf *Login entsperren*. +
 → Die Kassenkraft kann sich wieder bei der plentymarkets App anmelden.
 
 [#710]
@@ -644,7 +647,7 @@ Zur Aktivierung der Zahlungsarten für plentyPOS benötigst du das kostenlose Pl
 Zahlungsarten für Kassenaufträge aktivieren:
 
 . Installiere das Plugin link:https://marketplace.plentymarkets.com/pospaymentmethodrenaming_6813[plentyPOS Zahlungsarten^]. +
-*_Hinweis:_* Beachte die Informationen im Bereich *Beschreibung* des Plugins.
+*_Hinweis:_* Beachte die Informationen im Tab *Beschreibung* des Plugins im plentyMarketplace.
 . Öffne das Menü *Einrichtung » Assistenten » Plugins*.
 . Wähle das Plugin-Set, in dem du das Plugin installiert hast.
 . Öffne den Assistenten *plentyPOS Zahlungsarten*.
@@ -1104,7 +1107,7 @@ Die erforderlichen Einstellungen werden in <<table-POS-dummy-item>> kurz erläut
 | *Preisabfrage wenn Artikelpreis 0*
 |Aktiviere die Option.
 
-2+^| *Einrichtung » Einstellungen » Benutzer » Konten » [Konto öffnen] » Tab: Mobile » POS-Funktionen*
+2+^| *Einrichtung » Kontoverwaltung » Rollen » [Rolle öffnen] » Rechte » plentymarkets App / plentyPOS*
 
 | *Preis bearbeiten*
 |Aktiviere das Recht für das Kassenpersonal, damit das Kassenpersonal den Preis anpassen kann.
@@ -1470,10 +1473,10 @@ video::382590675[vimeo]
 [#3800]
 === Berechtigungen für Gutscheinverkauf erteilen
 
-Personen mit Admin-Rechten haben standardmäßig die Berechtigungen, Mehrzweckgutscheine zu erstellen. Benutzern der Benutzerklasse *Backend* müssen diese Berechtigungen separat erteilt werden.
+Personen mit Admin-Rechten haben standardmäßig die Berechtigungen, Mehrzweckgutscheine zu erstellen. Benutzern ohne Admin-Konto müssen diese Berechtigungen separat erteilt werden.
 
 :rights-purpose: Gutscheine verkaufen können
-:right-one: pass:quotes[*CRM > Kampagne > Code > Anzeigen*]
+:right-one: pass:quotes[*CRM > Kampagne > Code > Lesen*]
 :right-two: pass:quotes[*CRM > Kampagne > Code > Erstellen*]
 :right-three: pass:quotes[*CRM > Kampagne > Code > Löschen*]
 
@@ -1528,7 +1531,7 @@ Um Gutscheine für Retouren zu erstellen, sind die folgenden Vorbereitungen im p
 * Gutscheinkampagne mit Gutscheinart *Mehrzweckgutschein* erstellen.
 * Gutscheinartikel mit 0% MwSt. erstellen und mit der Gutscheinkampagne verknüpfen.
 * Gutscheinartikel für Retouren mit der Kasse verknüpfen.
-* Backend Benutzerkonten Berechtigungen erteilen.
+* Berechtigungen für Kassenpersonal ohne Admin-Konto erteilen.
 
 
 Diese Schritte werden nachfolgend kurz erläutert. Eine detaillierte Anleitung zum Erstellen von Kampagnen und Gutscheinen findest du auf der Handbuchseite xref:auftraege:gutscheine.adoc#[Gutscheine].
@@ -1732,10 +1735,10 @@ Gutscheinartikel für Retouren mit Kasse verknüpfen:
 [#3700]
 ==== Berechtigungen für Retourengutscheine erteilen
 
-Personen mit Admin-Rechten haben standardmäßig die Berechtigung, Retourengutscheine zu erstellen. Konten der Benutzerklasse *Backend* müssen diese Berechtigungen separat erteilt werden.
+Personen mit Admin-Rechten haben standardmäßig die Berechtigung, Retourengutscheine zu erstellen. Personen ohne Admin-Konto müssen diese Berechtigungen separat erteilt werden.
 
 :rights-purpose: Retourengutscheine erstellen können
-:right-one: pass:quotes[*CRM > Kampagne > Code > Anzeigen*]
+:right-one: pass:quotes[*CRM > Kampagne > Code > Lesen*]
 :right-two: pass:quotes[*CRM > Kampagne > Code > Erstellen*]
 :right-three: pass:quotes[*CRM > Kampagne > Code > Löschen*]
 

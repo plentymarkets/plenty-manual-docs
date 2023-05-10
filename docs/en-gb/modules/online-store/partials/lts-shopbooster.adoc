@@ -2,8 +2,7 @@ ShopBooster is an additional module which serves to write plentyShop LTS page co
 
 With ShopBooster, pages are stored in the cache after they have been accessed the first time, thereby making each successive access to the page a lot faster.
 Certain events trigger the invalidation of the cached contents.
-This means that they are deleted from the cache, for example if plugin settings are changed.
-Otherwise, plentyShop would load content that is not up to date. +
+This means that they are deleted from the cache, for example if plugin settings are changed. +
 
 ShopBooster writes all online shop contents into the cache, with the exception of the *My Account*, *Checkout*, *Shopping cart*, and *Order confirmation* pages, as well as those pages, that contain customer data.
 
@@ -68,6 +67,7 @@ The following events and actions trigger a partial or full invalidation of the S
 * Saving changes to the legal texts in the *Setup » Client » [Select client] » Online store » Legal* menu +
 * Saving settings in the plentyShop LTS assistant +
 * Editing sales prices in the *Setup » Item » Sales prices* menu +
+* Saving and deploying the plugin set +
 
 ==== How long does the invalidation take?
 
@@ -100,6 +100,74 @@ Manually invalidating the cache:
 . Click the button *Invalidate* in the *Instantly invalidate cache* section. +
 → The cache is deleted and the notification *Cache has been invalidated* is displayed. +
 → The number of *Remaining invalidations* for the day is reduced by 1.
+
+[#shopbooster-parameter]
+=== Additional query parameters  
+
+//überarbeiten sobald die UI online ist
+ShopBooster offers you the possibility to add additional query parameters in order to load plentyShop pages with these query parameters from the ShopBooster cache. 
+You can also exclude certain query parameters from ShopBooster caching. 
+When users access a page with excluded query parameters, the same page without parameters will be loaded from the ShopBooster cache instead. +
+
+You can add or exclude as many query parameters as you like without adversely affecting your shop performance.
+
+==== Adding query parameters
+
+In the **Setup » Client » [Select client] » Webshop » ShopBooster** menu, you can add more parameters in the *Query parameters* section. There is no minimum or maximum number of characters. +
+By default, pages with the following query parameters are cached by ShopBooster: +
+
+* ReferrerID +
+* ShipToCountry +
+* Currency +
+* currency +
+* page +
+* items +
+* sorting +
+* facets +
+* category +
+
+To add additional query parameters, proceed as follows: +
+
+[.instruction]
+Adding query parameters:
+
+. Go to the *Setup » Client » [Select client] » Webshop » ShopBooster*.
+. Click the input field **Included query parameters** in the **Query parameter** section. +
+. Enter the query parameter you want to add to the ShopBooster cache.
+. Click on the **plus** button next to the input field. +
+→ The query parameter will be added and is displayed under the input field. +
+→ Pages whose URL includes this query parameter will now be loaded from ShopBooster cache. +
+
+If you want to remove a paramter, click the *x* button on the parameter in question under the input field.
+
+==== Excluding query parameters from ShopBooster cache
+
+In the **Setup » Client » [Select client] » Webshop » ShopBooster** menu you can exclude certain parameters from caching in the *Query parameters* section. By excluding a query parameter, when a page with this parameter is accessed, the version of the page without this parameter is loaded from the ShopBooster cache instead. For instance, when calling up the URL "plentymarkets.com?gclid=123", the content of the page "plentymarkets.com" is therefore loaded from the cache and displayed. +
+
+There is no minimum or maximum number of characters. +
+By default, the following query parameters are excluded from ShopBooster: +
+
+* gclid +
+* idealoid +
+* vmtrack_id +
+* vmst_id +
+* utm_source +
+* utm_medium +
+* utm_campaign +
+
+To exclude certain query parameters, proceed as follows: +
+
+[.instruction]
+Excluding query parameters:
+
+. Go to the *Setup » Client » [Select client] » Webshop » ShopBooster*.
+. Click the input field **Excluded query parameters** in the **Query parameter** section. +
+. Enter the query parameter you want to exclude from the ShopBooster cache.
+. Click on the **plus** button next to the input field. +
+→ The query parameter will be added and is displayed under the input field. +
+→ Pages whose URL includes this query parameter will now be loaded without this parameter from ShopBooster cache. +
+
+If you want to remove a paramter, click the *x* button on the parameter in question under the input field.
 
 [#cache-state]
 === Checking the cache status of a page
