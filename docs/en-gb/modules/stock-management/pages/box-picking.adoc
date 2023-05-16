@@ -12,7 +12,7 @@ The plentyWarehouse app offers a new and improved function for box picking. You 
 [IMPORTANT]
 .Use labels for storage locations
 ====
-For mobile box picking with plentyWarehouse, we recommend that you create one label for each storage location and <<#400, box>> and attach it to the respective storage location. During box picking, you use your device to scan the barcode on the label to select the appropriate storage locations and box storage locations.
+For mobile box picking with plentyWarehouse, we recommend that you create one label for each storage location and <<#400, box>> and that you attach it to the respective storage location. During box picking, you use your device to scan the barcode on the label to select the appropriate storage locations and box storage locations.
 Have you not created labels for storage locations yet? Refer to the xref:stock-management:setting-up-a-warehouse.adoc#800[Setting up a warehouse] page of the manual.
 ====
 
@@ -30,7 +30,7 @@ Warehouse employees have trolleys that they take through the warehouse. Any numb
 
 The warehouse employee takes the trolley through the warehouse and looks at a mobile device that shows which items have to be picked. In this overview, duplicate items are grouped together. For example, if the same item is included in two different orders, then the warehouse employee will see that two copies of the item have to be picked. The warehouse employee picks the item and then places it in the box that represents the respective order. This way, each item is automatically assigned to the correct order while it is picked.
 
-Once all of the boxes are filled with items, the warehouse employee returns to the packing table. The first box is scanned and the corresponding order is loaded. The warehouse employee processes the order as usual. At the end of this process, the box is unlinked from the order. The box is then available again and the warehouse emmployee can re-use it on the next trip through the warehouse.
+Once all of the boxes are filled with items, the warehouse employee returns to the packing table. The first box is scanned and the corresponding order is loaded. The warehouse employee processes the order as usual. At the end of this process, the box is unlinked from the order. The box is then available again and the warehouse employee can re-use it on the next trip through the warehouse.
 --
 
 [IMPORTANT]
@@ -54,7 +54,7 @@ Before you <<#800, use box picking>>, you need to carry a few settings one time 
 
 In the warehouse, every item is stored at its own xref:stock-management:setting-up-a-warehouse.adoc#500[storage location]. When picking an order, the warehouse employee goes and gets the item from its storage location and then places the item in a box. The item stays in that box until the warehouse technician has finished packing and shipping the order.
 
-Thus, boxes are essentially temporary storage locations. Just like "normal" storage locations, you'll need to create boxes one time in advance. Specifically, you create one storage location for each box. Then you specify that these storage locations should be used for box picking.
+Thus, boxes are essentially temporary storage locations. Just like regular storage locations, you'll need to create boxes one time in advance. Specifically, you create one storage location for each box. Then you specify that these storage locations should be used for box picking.
 
 [.instruction]
 Making boxes available:
@@ -68,22 +68,39 @@ Making boxes available:
 [#500]
 ==== Assigning rights for box picking
 
-Before box picking is carried out in plentyWarehouse, make sure that all users have been assigned the appropriate rights. This is necessary to make sure that the picking process is carried out correctly.
+Before box picking is carried out in plentyWarehouse, make sure that all users without admin accounts have been assigned the appropriate rights. This is necessary to make sure that the picking process is carried out correctly.
 
 :rights-purpose: carry out box picking in plentyWarehouse
-:right-one_ pass:quotes[*Item > Item > Item image > Item image name > Show*]
-:right-two: pass:quotes[*Orders > Show*]
+:right-one: pass:quotes[*Item > Item > Item image > Item image name > Read*]
+:right-two: pass:quotes[*Orders > Read*]
 :right-three: pass:quotes[*Orders > Update*]
-:right-four: pass:quotes[*Comments > Show*]
+:right-four: pass:quotes[*Comments > Read*]
 :right-five: pass:quotes[*Comments > Create*]
 
 include::_includes:partial$rights.adoc[]
+
+[#550]
+==== Assigning rights for order statuses
+
+Typically, the orders that are processed during box picking have specific xref:stock-management:box-picking.adoc#intable-source-status[source statuses] assigned to them. Which statuses are used for this depends on the individual workflow of your company.
+
+To use box picking without any errors and move the orders to the desired xref:stock-management:box-picking.adoc#intable-target-status[target status], you have to assign rights for displaying and editing those exact order statuses in the plentymarkets back end.
+
+[.instruction]
+Assigning rights for order statuses:
+
+. Go to *Setup » Account management » Roles » [Select role]*.
+. Scroll down to the *Access rights* area.
+. Expand the menu entry *Changeable order status* (icon:chevron-down[role="darkGrey"]).
+. *Activate* (material:check_box[role=skyBlue]) the order statuses that orders for box picking usually have.
+. Expand the menu entry *Changeable order status* (icon:chevron-down[role="darkGrey"]).
+. *Activate* (material:check_box[role=skyBlue]) the order statuses that orders for box picking usually have.
+. Click on *Save* (material:save[]).
 
 [#600]
 ==== Modifying the order process
 
 You can integrate box picking with plentyWarehouse into your company’s existing xref:automation:setting-up-processes.adoc#[order process]. To do so, add the following procedure and sub-procedure to your existing process in the plentymarkets back end.
-
 
 [IMPORTANT]
 .Identifying the correct point in time for unlinking boxes from orders
@@ -123,7 +140,7 @@ Configuring the settings:
 
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon (icon:bars[role="darkGrey"]) in the top left corner.
-. Scroll down and tap on *Settings* (material:settings[]). +
+. Tap on *Settings* (material:settings[]). +
 → The settings menu opens.
 . Tap on *Box picking* (image:stock-management:icon_box-picking.png[width=24, height=24]).
 . Carry out the settings. Pay attention to the explanations given in <<table-pw-settings-box-picking>>.
@@ -158,21 +175,21 @@ Configuring the settings:
 
 2+^| *Status* area
 
-| *Source status*
+| [#intable-source-status]*Source status*
 |Which orders do you want to pick? When you use the function later, you'll see a list of items to pick. This list only includes items from orders that are currently in this status. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the back end of your plentymarkets system.
 
-|[#intable-target-status]*Target status*
+| [#intable-target-status]*Target status*
 |How do you want to flag orders that are currently being picked? Change the order's status, so that it's not possible to accidentally start picking the same order twice. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the back end of your plentymarkets system.
 
 | *Error status*
-|How should the app react if something goes wrong? If an error occurs while picking an order, the app will change the status of the order to whatever is selected here. Later, you can access your plentymarkets back end, search for all the faulty orders with this status and then process these orders separately. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+|How should the app react if something goes wrong? If an error occurs while picking an order, for example because an item cannot be picked, the app will change the status of the order to whatever is selected here. Additionally, a note will be added to the order itself. This note contains more precise information on the item and on the storage location. Later, you can open the *Orders » Edit orders* menu to search for all orders in this status and then process these orders separately. +
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the back end of your plentymarkets system.
 
 2+^| *Item registration* area
 
-|[#intable-itemscan]*Mandatory item scan*
+| [#intable-itemscan]*Mandatory item scan*
 |Use this option to determine which rules should apply when registering items during box picking. +
 *Activated* (icon:toggle-on[role="green"]) = All items _have to be_ scanned via their label to be registered for box picking. It is not possible to select items manually via the search results. +
 *Deactivated* (icon:toggle-off[role="darkGrey"]) = Items can either be registered by scanning them or by selecting them manually.
@@ -186,7 +203,7 @@ Configuring the settings:
 | *Box search fields*
 |Use the toggle buttons to determine which criteria can be used for the box search while using the box picking function. The options *Barcode* and *Storage location name* are available. +
 *Activated* (icon:toggle-on[role="green"]) = You will be able to use this criterion when searching for storage locations. +
-*_Tip:_* Tap on (material:drag_handle[]) for each activated search criterion and drag it to the desired position to determine the order of the search fields.
+*_Tip:_* Tap on and hold (material:drag_handle[]) for each activated search criterion and drag it to the desired position to determine the order of the search fields.
 
 | *Focus on box search field*
 |Will you typically select a box by scanning the barcode of the box or by searching for the name of the box and then selecting the appropriate entry from a list? If you want to scan the barcode, then this setting can speed up the job. +
@@ -217,7 +234,7 @@ Specifying the number of boxes:
 
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon (icon:bars[role="darkGrey"]) in the top left corner. +
-icon:map-signs[] *_Or:_* Find the *Box picking* tile in the *Functions* area on the dashboard.
+icon:map-signs[] *_Or:_* Or: Find the *Box picking* tile in the *Functions* area on the dashboard.
 . Tap on *Box picking* (image:stock-management:icon_box-picking.png[width=24, height=24]). +
 → The start screen is displayed.
 . Tap on the plus or minus icon to increase or decrease the xref:stock-management:box-picking.adoc#intable-default-boxes[previously defined number of boxes].
@@ -319,7 +336,7 @@ This screen contains information on the orders that have been processed during b
 * how many orders have not been picked completely
 * how much time was needed for mobile box picking.
 
-Tap on material:done[] to finish box picking.
+Tap on material:done[] finish box picking.
 
 [#1500]
 === Packing items

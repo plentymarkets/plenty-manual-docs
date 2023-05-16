@@ -63,6 +63,17 @@ Creating key figures in the setup menu:
 | [#intable-keyfigure]*Key figure*
 | Select the key figure you want to create. For further information, refer to the xref:business-decisions:key-figures.adoc#[Key figures] page of the manual.
 
+| [#intable-calculation]*Calculation type*
+| Decide in more detail how the results of the key figure should be calculated. For example, if you select the key figure *Revenue*, you can decide here if the revenue is calculated in gross or net.
+
+| [#intable-dimension]*Dimension*
+| This setting determines the criteria for creating the data basis for the calculation of the key figure. +
+*_Example:_* If you select the dimension *Item category, creation date* for the key figure *Revenue*, the key figure results are grouped by those order characteristics in the background.
+
+| [#intable-unit]*Result unit*
+| Select which unit should be applied to the results of the key figure. This setting has *_no_* influence on the actual calculation of the key figure results, but affects the text for the unit that will later be displayed on the dashboard elements for this key figure. +
+*_Note:_* The input field *Unit* is automatically prefilled by the system depending on the selection you have made for the option <<#intable-calculation, Calculation type>>. However, you can also enter an individual name for the unit. No more than 8 characters are allowed. The field must not be empty.
+
 | *ID*
 | After you have created a key figure configuration, this field displays an ID assigned by the system. This ID cannot be edited.
 
@@ -162,21 +173,18 @@ Editing key figure configurations from the dashboard::
 === Assigning rights
 
 When working with key figures, you should decide which of your employees should be allowed to view which key figures. Users with admin access to your plentymarkets system can view all key figures and create new key figures by default.
-Users with a *Back end* account have to be assigned those rights by a user with an admin account.
+Users without an admin account have to be assigned those rights by a user with an admin account.
 
 Proceed as described below to determine which key figures should be visible for users.
 
 [.instruction]
 Assigning rights for viewing key figures:
 
-. Go to *Setup » Settings » User » Rights » User*. +
+. Open the menu  *Setup » Account management » Roles*. +
 → The overview opens. +
-*_Optional:_* In the filter settings on the left, enter an ID or a name to limit the search results.
-. Click on *Search* (icon:search[role="blue"]). +
-→ The user accounts that correspond to the search criteria are displayed. +
-*_Tip:_* Accounts that are greyed out have admin rights.
-. Click on the appropriate account.
-. Click on *Resources*.
+. Click on *Search* (icon:search[role="blue"]) to search for roles.
+. Open the desired role.
+. Click on *Access rights*.
 . Click on *Key figures*.
 . Activate all key figures that should be visible for the user. +
 *_Optional:_* Click on *All key figures* if all existing key figures should be visible for the user.
@@ -185,10 +193,10 @@ Assigning rights for viewing key figures:
 Do you want to allow employees without admin access to your system to create key figures? Then carry out the following additional settings.
 
 [discrete]
-==== Assigning rights for back end users
+==== Assigning rights for users without admin accounts
 
 :rights-purpose: can create key figures
-:right-one: pass:quotes[*plentyBI > Key figures*]
+:right-one: pass:quotes[*plentyBI > Key figures > Read*]
 
 include::_includes:partial$rights.adoc[]
 
@@ -198,7 +206,7 @@ include::_includes:partial$rights.adoc[]
 [IMPORTANT]
 .Function only available for admins
 ====
-Dashboard views can only be set up by users of the type *Admin*. However, users of the type *Back end* may be able to see the view later if they have been assigned the necessary <<#408, rights for dashboard views>>.
+Dashboard views can only be set up by users of the type *Admin*. However, users without admin accounts may be able to see the view later if they have been assigned the necessary <<#408, rights for dashboard views>>.
 ====
 
 As soon as you have carried out the <<#100, preparatory settings>>, you are ready to set up your dashboard.
@@ -213,7 +221,7 @@ In addition to the default view available in the *plentymarkets logo (Start) » 
 [IMPORTANT]
 .Function only available for admins
 ====
-New dashboard views can only be set up by users of the type *Admin*. However, users of the type *Back end* may be able to see the view later if they have been assigned the necessary <<#408, rights for dashboard views>>.
+New dashboard views can only be set up by users of the type *Admin*. However, users without admin accounts may be able to see the view later if they have been assigned the necessary <<#408, rights for dashboard views>>.
 ====
 
 [.instruction]
@@ -243,11 +251,11 @@ include::_includes:partial$myview-editing-mode.adoc[]
 [#408]
 === Assigning rights for dashboard views
 
-Decide which users should see the default view.  You can also restrict or allow access for additional dashboard views per user or user role. Note that users or roles of the type *Back end* cannot edit dashboard views or create new views, even if they have been assigned those rights.
+Decide which users should see the default view.  You can also restrict or allow access for additional dashboard views per user or user role. Note that users without admin accounts cannot edit dashboard views or create new views, even if they have been assigned those rights.
 
 Open the editing mode (terra:design_inline_edit[]) for an already existing <<#407, dashboard view>>. Click on *Rights management* to access the settings for users and user roles and decide which dashboard view(s) should be visible for them.
 
-Additional information and instructions on how to assign rights to users or roles are available on the xref;business-decisions:user-accounts-access.adoc#112[User accounts and access] page of the manual.
+Additional information and instructions on how to assign rights to roles are available on the xref;business-decisions:user-accounts-access.adoc#[User accounts and access] page of the manual.
 
 [#409]
 === Determining visibility of dashboard views
@@ -292,7 +300,7 @@ Determining visibility of dashboard views:
 [IMPORTANT]
 .Function only available for admins
 ====
-Dashboard elements can only be added by users of the type *Admin*. However, users of the type *Back end* may be able to see the added elements later if they have been assigned the necessary <<#408, rights for dashboard views>>.
+Dashboard elements can only be added by users of the type *Admin*. However, users without admin accounts may be able to see the added elements later if they have been assigned the necessary <<#408, rights for dashboard views>>.
 ====
 
 The dashboard offers you different possibilities to display key figures and other important information. Thus, you can visualise data in the exact way you need. The following types of elements are available:
@@ -361,10 +369,14 @@ include::partial$new-dashboard-element.adoc[]
 | *Title*
 | Enter an appropriate title for the tile. The title is displayed as name on the tile. Click on (icon:eye[role="lightGrey"]) if no title should be displayed.
 
-| *Period*
+| [#intable-tile-period]*Period*
 | Select the period of time for which the data of the key figure should be considered.
 
-| *Time interval*
+| *Aggregate*
+| Decide how the key figure results calculated by the system for the selected period should be combined with each other. +
+Select the option *Sum* to add all results to each other. The option *Average* calculates the average value of all results accordingly. If you decide to select the option *Min.* or *Max.*, only the lowest or highest result is displayed on the tile.
+
+| [#intable-time-interval]*Time interval*
 | This setting narrows down the values of the selected *Period*. Thus, the time interval always has to be shorter than the selected *Period*. +
 *_Example:_* If you have selected the current month as *Period* and the option *Week* as *Time interval*, only the value for the current week will be displayed on the tile.
 
@@ -379,6 +391,9 @@ include::partial$new-dashboard-element.adoc[]
 
 | *Unit*
 | Decide if the unit of the key figure should be displayed on the tile.
+
+| *Display time reference*
+| Do you want to display the period of time to which the calculated value refers on the tile? Select one of the options *Display period* or *Display time interval* to permanently display the previously selected xref:business-decisions:myview-dashboard.adoc#intable-tile-period[Period] or xref:business-decisions:myview-dashboard.adoc#intable-tile-time-interval[Time interval] at the bottom left of the tile. Select *Do not display* if no time reference should be displayed on the tile.
 
 | *Conditional colouring*
 a| Do you want to display the tile in a particular colour? Select the option *Display* and click on (material:settings[]). A settings window opens. On the left, select the colour for the tile. If you want the colour of the tile to change according to the value of the key figure, select an *Operator* and enter a *Comparison value* before clicking on *Save*. +
@@ -1177,7 +1192,7 @@ In addition to displaying data as tiles, tables, charts and rows, you can includ
 [IMPORTANT]
 .Function only available for admins
 ====
-The elements described in the following chapters can only be added by users of the type *Admin*. However, users of the type *Back end* may be able to see the added elements later if they have been assigned the necessary <<#408, rights for dashboard views>>.
+The elements described in the following chapters can only be added by users of the type *Admin*. However, users without admin accounts may be able to see the added elements later if they have been assigned the necessary <<#408, rights for dashboard views>>.
 ====
 
 [#820]

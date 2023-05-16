@@ -8,6 +8,41 @@ Incoming items can not only be registered xref:stock-management:new-incoming-ite
 
 This way, your warehouse staff can book incoming items on the desired storage locations with the help of mobile devices. The corresponding stock changes are synchronised with your plentymarkets system automatically. Thus, you can maintain an overview of your stock at any time.
 
+[#150]
+== Assigning rights for incoming items
+
+Before your warehouse staff can register incoming items in plentyWarehouse, make sure that all users without admin accounts have been assigned the appropriate rights. Otherwise, items cannot be booked in correctly and the stock changes cannot be saved in the plentymarkets back end.
+
+:rights-purpose: register incoming items in plentyWarehouse
+:right-one: pass:quotes[*Setup > Tag > Read*]
+:right-two: pass:quotes[*Stock > Warehouses > Warehouse location > Read*]
+:right-three: pass:quotes[*Orders > Read*]
+:right-four: pass:quotes[*Orders > Booking > Create*]
+:right-five: pass:quotes[*Orders > Order items > Transactions > Update*]
+:right-six: pass:quotes[*Orders > Order items > Transactions > Read*]
+:right-seven: pass:quotes[*Orders > Order items > Transactions > Create*]
+
+include::_includes:partial$rights.adoc[]
+
+[#160]
+== Assigning rights for order statuses
+
+Typically, reorders whose items should be booked in are in specific xref:orders:managing-orders.adoc#1200[order statuses]. Which statuses are used for this depends on the individual workflow of your company.
+
+To register incoming items without any errors and access all reorders, you have to assign rights for displaying and editing those exact order statuses in the plentymarkets back end.
+
+[.instruction]
+Assigning rights for order statuses:
+
+. Go to *Setup » Account management » Roles » [Select role]*.
+. Scroll down to the *Access rights* area.
+. Expand the menu entry *Changeable order status* (icon:chevron-down[role="darkGrey"]).
+. *Activate* (material:check_box[role=skyBlue]) the order statuses that reorders usually have.
+. Expand the menu entry *Changeable order status* (icon:chevron-down[role="darkGrey"]).
+. *Activate* (material:check_box[role=skyBlue]) the order statuses that reorders usually have.
+. Click on *Save* (material:save[]).
+
+
 [#100]
 == Carrying out settings for incoming items
 
@@ -38,7 +73,7 @@ The settings menu opens.
 
 | *Display dialogue for completing incoming items*
 |Select if the plentyWarehouse app should display a confirmation dialogue as soon as you finish booking in items. +
-*Activated* icon:toggle-on[role="green"]: A confirmation dialogue is displayed.
+*Activated* (icon:toggle-on[role="green"]) = A confirmation dialogue is displayed.
 
 | *Error status*
 |Select a status to which reorders should be moved in case errors occur while incoming items are booked. This way, you can deal with such reorders separately later. In case you have not yet created error statuses for this use case, refer to the xref:orders:managing-orders.adoc#1200[Managing orders] page of the manual.
@@ -115,7 +150,7 @@ The settings menu opens.
 |Tap on the search field to which the cursor jumps automatically when the menu is opened. If no search field is selected, you have to tap on a search field every time before you can enter a search value.
 
 | *Status*
-|Activate the order statuses that you normally assign to reorders in your plentymarkets system. This is necessary to make sure that orders in this status are loaded into the plentyWarehouse app properly when searching for reorders. In case you have not yet created statuses for reorders, refer to the xref:orders:managing-orders.adoc#1200[Managing orders] page of the manual.
+|Activate the order statuses that you normally assign to reorders in your plentymarkets system. This is necessary to make sure that orders in this status are loaded into the plentyWarehouse app properly when searching for reorders. Also, keep in mind to <<#160, assign rights for those order statuses>>.  In case you have not yet created statuses for reorders, refer to the xref:orders:managing-orders.adoc#1200[Managing orders] page of the manual.
 
 | *Sorting*
 |In which order should the reorder search results be displayed? Select one of the following two options. +
@@ -130,24 +165,6 @@ The settings menu opens.
 *Show dialogue* = After the reorder is loaded, a dialogue is displayed. Use this dialogue to select one of the three possibilities described above.
 
 |===
- 
-[#150]
-== Assigning rights for incoming items
-
-Before your warehouse staff can register incoming items in plentyWarehouse, make sure that all users have been assigned the appropriate rights. Otherwise, items cannot be booked in correctly and the stock changes cannot be saved in the plentymarkets back end.
-
-:rights-purpose: register incoming items in plentyWarehouse
-:right-one: pass:quotes[*Setup > Tag > Show*]
-:right-two: pass:quotes[*Stock > Warehouses > Storage location > Show*]
-:right-two: pass:quotes[*Orders > Show*]
-:right-four: pass:quotes[*Orders > Booking > Create*]
-:right-five: pass:quotes[*Orders > Order items > Transactions > Update*]
-:right-six: pass:quotes[*Orders > Order items > Transactions > Show*]
-:right-seven: pass:quotes[*Orders > Order items > Transactions > Create*]
-
-include::_includes:partial$rights.adoc[]
-
-//TODO: Müssen Sichtbarkeiten für Auftragsstatus der Nachbestellungen freigegeben werden?
 
 [#170]
 == Overview: Carrying out actions
@@ -263,6 +280,23 @@ icon:map-signs[] *_Or:_* Find the *Incoming items* tile in the *Functions* area 
 You can export a data record of incoming items as a CSV or PDF file in the *Stock » Incoming items* menu. For more detailed information on these settings, refer to the xref:stock-management:new-incoming-items.adoc#1400[Managing incoming items] page of the manual.
 ====
 
+[#205]
+=== Splitting item positions
+
+Do you wish to book in several identical items that have to be booked in at different target storage locations or that have different best before dates or batch information? plentyWarehouse lets you take care of this use case in one single step, so you don’t have to create multiple incoming item processes for this item.
+
+[.instruction]
+Splitting item positions:
+
+. <<#200, Register the items>> that should be booked in.
+. On the item whose positions should be split, click on material:splitscreen[role=”darkGrey”].
+. Enter the quantity of copies that should be split from the total quantity.
+. Tap on *OK*. +
+→ A new, separate entry for the item is displayed in the list of incoming items. This entry contains the quantity that you have entered before.
+. Tap on the new list entry to edit the desired data. +
+*_Example 1:_* Tap on material:room[role=”purple”] to change the storage location for the item positions. +
+*_Example 2:_* In case BBD or batch information are saved for the item, you can change those as well by tapping on the list entry. Then enter the new data in the respective fields.
+
 [#210]
 === Printing item labels
 
@@ -305,11 +339,10 @@ Assigning barcodes:
 . Tap on image:stock-management:icon_barcode.png[width=24, height=24]. +
 → The *Barcodes* view opens.
 . Select the appropriate barcode type from the drop-down list.
-. Register the barcode in the *Barcode* field.
+. Register the barcode in the *Barcode* field. +
+*_Tip:_* Are you working with a smartphone? Make sure to activate the option xref:stock-management:installation-and-initial-setup.adoc#intable-pw-camera-scan[*Use device camera for scanning*] in the general app settings to register the barcode quickly and without errors. This setting is not necessary for MDE devices.
 . Tap on *Add*. +
 → The barcode is added.
-
-//TODO: Kamera-Scan
 
 //TODO: Lieferant pro Artikel oder Stack zuordnen, ohne eine Nachbestellung zu hinterlegen.
 
@@ -327,6 +360,12 @@ Before you <<#320, search for and select>> reorders, you should be aware of the 
 
 Within the plentyWarehouse app, you can freely decide when you assign a reorder to a list of incoming items. You can either select a reorder before starting the item registration for incoming items or after you have already registered items for the incoming items process. Click on the appropriate tab to learn more on both methods.
 
+[IMPORTANT]
+.Note on registering item quantities
+====
+Have you assigned a reorder to the incoming items *before registering items*? In that case, it’s not possible to add more items than are included in the reorder by tapping on the item’s entry on the item list. Use the field for entering quantities or the item scan to increase the quantity in case more items have been delivered. A separate entry will be added to the item list for those additional items.
+====
+
 [tabs]
 ====
 Before item registration::
@@ -339,7 +378,7 @@ Assigning a reorder before registering items:
 
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon icon:bars[role="darkGrey"] in the top left corner. +
-icon:map-signs[] _*Or:*_ Find the *Incoming items* tile in the *Functions* area on the dashboard.
+icon:map-signs[] *_Or:_* Find the *Incoming items* tile in the *Functions* area on the dashboard.
 . Tap on *Incoming items* image:stock-management:icon_incoming_items.png[width=24, height=24].
 . Tap on material:playlist_add[role="orange"] in the lower right corner of the screen. +
 → The action menu for the whole list of incoming items opens.
@@ -358,6 +397,7 @@ During item registration::
 Proceed as described below to assign a reorder after you have already registered items.
 
 [.instruction]
+Assigning a reorder during item registration:
 
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon icon:bars[role="darkGrey"] in the top left corner. +
@@ -372,7 +412,6 @@ icon:map-signs[] *_Or:_* Find the *Incoming items* tile in the *Functions* area 
 → Depending on which option you have selected for the <<#intable-default-behaviour-reorders, *Standard behaviour when loading reorders*>>, already registered items are either added to the reorder or removed or a dialogue is displayed.
 . Now, register the quantities of the individual items and continue with the remaining steps as <<#200, described above>>.
 --
-
 ====
 
 [TIP]
@@ -396,7 +435,7 @@ The search criteria available for reorders and the order in which search results
 ====
 
 [.instruction]
-Searching for a reorder:
+Searching for reorders:
 
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon icon:bars[role="darkGrey"] in the top left corner. +
@@ -489,6 +528,3 @@ Adding procurement costs:
 . Enter the procurement costs in the respective field.
 . Tap on material:done[role="red"]. +
 → The procurement costs are saved.
-
-
-

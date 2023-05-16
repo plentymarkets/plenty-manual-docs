@@ -68,22 +68,39 @@ Boxen zur Verfügung stellen:
 [#500]
 ==== Rechte für die rollende Kommissionierung vergeben
 
-Bevor die rollende Kommissionierung mit plentyWarehouse durchgeführt wird, muss sichergestellt sein, dass alle Benutzer:innen über die entsprechenden Berechtigungen verfügen. Nur so können die Aufträge korrekt kommissioniert werden.
+Bevor die rollende Kommissionierung mit plentyWarehouse durchgeführt wird, muss sichergestellt sein, dass alle Benutzer:innen ohne Admin-Konto über die entsprechenden Berechtigungen verfügen. Nur so können die Aufträge korrekt kommissioniert werden.
 
 :rights-purpose: die rollende Kommissionierung in plentyWarehouse verwenden können
-:right-one: pass:quotes[*Artikel > Artikel > Artikelbild > Arikelbildname > Anzeigen*]
-:right-two: pass:quotes[*Aufträge > Anzeigen*]
+:right-one: pass:quotes[*Artikel > Artikel > Artikelbild > Arikelbildname > Lesen*]
+:right-two: pass:quotes[*Aufträge > Lesen*]
 :right-three: pass:quotes[*Aufträge > Aktualisieren*]
-:right-four: pass:quotes[*Kommentare > Anzeigen*]
+:right-four: pass:quotes[*Kommentare > Lesen*]
 :right-five: pass:quotes[*Kommentare > Erstellen*]
 
 include::_includes:partial$rights.adoc[]
+
+[#550]
+==== Berechtigungen für Auftragsstatus erteilen
+
+Typischerweise befinden sich Aufträge, die im Rahmen der rollenden Kommissionierung bearbeitet werden sollen, in bestimmten xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-source-status[Quellstatus]. Welche Status das genau sind, hängt individuell vom Workflow deines Unternehmens ab.
+
+Um fehlerfrei mit der rollenden Kommissionierung arbeiten zu können und die Aufträge in den gewünschten xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-target-status[Zielstatus] setzen zu können, musst du im plentymarkets Backend genau diese Auftragsstatus zur Anzeige und zur Bearbeitung freigeben.
+
+[.instruction]
+Berechtigungen für Auftragsstatus freigeben:
+
+. Öffne das Menü *Einrichtung » Kontoverwaltung » Rollen » [Rolle auswählen]*.
+. Scrolle zum Bereich *Zugriffsrechte*.
+. Öffne den Menüpunkt *Änderbare Auftragsstatus* (icon:chevron-down[role="darkGrey"]).
+. *Aktiviere* (material:check_box[role=skyBlue]) die Auftragsstatus, in denen sich Aufträge für die rollende Kommissionierung normalerweise befinden.
+. Öffne den Menüpunkt *Sichtbare Auftragsstatus* (icon:chevron-down[role="darkGrey"]).
+. *Aktiviere* (material:check_box[role=skyBlue]) auch hier die Auftragsstatus, in denen sich Aufträge für die rollende Kommissionierung normalerweise befinden.
+. Klicke auf *Speichern* (material:save[]).
 
 [#600]
 ==== Abwicklungsprozesse anpassen
 
 Du kannst die rollende Kommissionierung mit plentyWarehouse in den bestehenden xref:automatisierung:prozesse-einrichten.adoc#[Auftragsabwicklungsprozess] deines Unternehmens integrieren. Ergänze dazu deinen bestehenden Prozess im plentymarkets Backend um die folgende Aktion und Subaktion.
-
 
 [IMPORTANT]
 .Richtigen Zeitpunkt für die Trennung der Box vom Auftrag finden
@@ -153,22 +170,22 @@ Einstellungen vornehmen:
 | *Sortierung der Aufträge*
 |Diese Einstellung bestimmt genauer, nach welchem Kriterium Aufträge für die Abarbeitung innerhalb der rollenden Kommissionierung sortiert werden sollen. Wähle eine der folgenden Optionen aus: +
 *Auftrags-ID* = Aufträge werden beginnend mit der niedrigsten Auftrags-ID sortiert. +
-*Erstellungsdatum* = Aufträge werden beginnnend mit dem ältesten Erstellungsdatum sortiert. +
+*Erstellungsdatum* = Aufträge werden beginnend mit dem ältesten Erstellungsdatum sortiert. +
 *Zahlungseingang* = Aufträge werden beginnend mit dem ältesten Zahlungsdatum sortiert. *_Hinweis:_* Stelle wie gewohnt sicher, dass du nur Aufträge kommissionierst und somit für den Versand vorbereitest, die vollständig bezahlt sind.
 
 2+^| Bereich *Status*
 
-| *Quellstatus*
+| [#intable-source-status]*Quellstatus*
 |Welche Aufträge möchtest du picken? Wenn du die rollende Kommissionierung später nutzt, werden nur Aufträge, die sich in diesem Status befinden, auf deiner Artikelliste angezeigt. +
-*_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Status*.
+*_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Auftragsstatus*.
 
 |[#intable-target-status]*Zielstatus*
 |Wie möchtest du Aufträge, die sich gerade im Pickvorgang befinden, kennzeichnen? Setze Aufträge in einen neuen Status, damit sie nicht aus Versehen mehrmals für den Pickvorgang zur Verfügung gestellt werden. +
-*_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Status*.
+*_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Auftragsstatus*.
 
 | *Fehlerstatus*
-|Wie soll die App im Fehlerfall vorgehen? Kommt es beim Picken eines Auftrags zu einem Fehler, wird der Auftrag in den hier gewählten Status gesetzt. Später kannst du dann in plentymarkets alle fehlerhaften Aufträge mit diesem Status suchen und diese gesondert abarbeiten. +
-*_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Status*.
+|Wie soll die App im Fehlerfall vorgehen? Kommt es beim Picken eines Auftrags zu einem Fehler, weil beispielsweise ein Artikel nicht gepickt werden kann, wird der Auftrag in den hier gewählten Status gesetzt. Außerdem wird am Auftrag selbst eine Notiz angelegt, die genauere Informationen zum Artikel und zum Lagerort enthält. Später kannst du dann im Menü *Aufträge » Aufträge bearbeiten* nach Aufträgen mit diesem Status suchen und diese gesondert abarbeiten. +
+*_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines plentymarkets System unter *Einrichtung » Aufträge » Auftragsstatus*.
 
 2+^| Bereich *Artikelerfassung*
 
@@ -217,7 +234,7 @@ Anzahl der Boxen festlegen:
 
 . xref:warenwirtschaft:installation-und-ersteinrichtung.adoc#300[Logge dich in plentyWarehouse ein].
 . Tippe auf das Menüsymbol (icon:bars[role="darkGrey"]) oben links. +
-icon:map-signs[] *_Oder:_*: Finde die Kachel *Rollende Kommissionierung* im Bereich *Funktionen* auf dem Dashboard.
+icon:map-signs[] *_Oder:_* Finde die Kachel *Rollende Kommissionierung* im Bereich *Funktionen* auf dem Dashboard.
 . Tippe auf *Rollende Kommissionierung* (image:warenwirtschaft:icon_box-picking.png[width=24, height=24]). +
 → Der Startbildschirm wird angezeigt.
 . Tippe auf das Plus oder Minus, um die xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-default-boxes[vordefinierte Anzahl der Boxen] zu erhöhen oder zu verringern.
@@ -232,7 +249,7 @@ plentymarkets erstellt automatisch eine Auflistung aller Artikel, die nun im Lag
 
 Die Liste enthält wichtige Informationen zu den Artikeln, die gepickt werden sollen. Das Lagerpersonal sieht nicht nur, wie viele Exemplare eines Artikels gepickt werden sollen, sondern auch den Artikelnamen und den Lagerort des Artikels.
 
-Nun läuft das Lagerpersonal mit dem Kommissionierwargen zum Lagerort des ersten Artikels. Dort angekommen, scannt das Lagerpersonal zuerst den Barcode des Lagerorts. Dann wird der Barcode des ersten Artikels gescannt. Je nachdem, welche Einstellung du für die Optionen xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-storage-location-scan[Lagerort-Scan verpflichtend] und xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-item-scan[Artikel-Scan verpflichtend] gewählt hast, kannst du Lagerorte und Artikel alternativ in der App antippen, um sie manuell auszuwählen.
+Nun läuft das Lagerpersonal mit dem Kommissionierwagen zum Lagerort des ersten Artikels. Dort angekommen, scannt das Lagerpersonal zuerst den Barcode des Lagerorts. Dann wird der Barcode des ersten Artikels gescannt. Je nachdem, welche Einstellung du für die Optionen xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-storage-location-scan[Lagerort-Scan verpflichtend] und xref:warenwirtschaft:rollende-kommissionierung.adoc#intable-item-scan[Artikel-Scan verpflichtend] gewählt hast, kannst du Lagerorte und Artikel alternativ in der App antippen, um sie manuell auszuwählen.
 
 [.instruction]
 Mit der Artikelliste arbeiten:
@@ -287,7 +304,7 @@ Für solche Fälle findest du in der Ansicht des jeweiligen Artikels Shortcuts, 
 
 |[#intable-add-note]*Kommentar*
 |material:chat[]
-| Öffnet die Ansicht zur Eingabe einer Auftragsnotiz. Nutze diese Funktion, um einen Kommentar zu speichern, der in der späteren Abwicklung an jedem Auftrag, in dem der Artikel vorhanden ist, im Backend deines plentymarkets System einsehbar ist.
+| Öffnet die Ansicht zur Eingabe einer Auftragsnotiz. Nutze diese Funktion, um einen Kommentar zu speichern, der in der späteren Abwicklung am Auftrag, in dem der Artikel vorhanden ist, im Backend deines plentymarkets System einsehbar ist.
 
 |[#intable-enter-quantity]*Menge eingeben*
 |material:iso[]
@@ -299,7 +316,7 @@ Für solche Fälle findest du in der Ansicht des jeweiligen Artikels Shortcuts, 
 
 |[#intable-remove-item]*Artikel entfernen*
 |material:cancel[]
-| Entfernt den Artikel von der Artikelliste. Nutze diese Funktion, wenn der betreffende Artikel nicht am Lagerort vorhanden ist. Optional kannst du im selben Schritt auch einen Kommentar eingeben, der als Auftragsnotiz gespeichert wird und am jedem Auftrag, in dem der Artikel enthalten ist, im plentymarkets Backend einsehbar ist. Außerdem wird der Auftrag in den Fehlerstatus verschoben.
+| Entfernt den Artikel von der Artikelliste. Nutze diese Funktion, wenn der betreffende Artikel nicht am Lagerort vorhanden ist. Optional kannst du im selben Schritt auch einen Kommentar eingeben, der als Auftragsnotiz gespeichert wird und am Auftrag, in dem der Artikel enthalten ist, im plentymarkets Backend einsehbar ist. Außerdem wird der Auftrag in den Fehlerstatus verschoben.
 
 | *Artikelinformationen*
 |material:info[]
@@ -314,7 +331,7 @@ Sobald alle für die Aufträge benötigten <<1200, Artikel gepickt>> und, falls 
 
 Dieser enthält Informationen zu den Aufträgen, die kommissioniert wurden. Du kannst auf einen Blick sehen,
 
-* wie viele Aufträge kommmissioniert wurden
+* wie viele Aufträge kommissioniert wurden
 * wie viele Artikel und wie viele Exemplare jeweils gepickt wurden
 * wie viele Aufträge unvollständig kommissioniert wurden
 * wie viel Zeit für die rollende Kommissionierung benötigt wurde.

@@ -41,48 +41,42 @@ For example, if a main order with the status *5.0* has two delivery orders, of w
 To use delivery orders, you have to select the option *b) a warehouse can be assigned for each stock unit* for the xref:orders:preparatory-settings.adoc#intable-warehouse-assignment[Assignment of warehouses] field in the *Setup » Orders » Settings* menu.
 ======
 
-Before working with delivery orders, go to *Setup »Orders »Order types » Delivery order* to select an option for splitting up main orders into delivery orders.
+Before working with delivery orders, go to *Setup » Orders » Order types » Delivery order* to select an option for splitting up main orders into delivery orders.
 
 [.instruction]
-Selecting an option for splitting up orders into delivery orders:
+Carrying out the basic settings:
 
 . Go to *Setup » Orders » Order types » Sales order [Beta]*.
 . Carry out the settings according to <<table-order-types-delivery-order-options>>.
 . *Save* (material:save[]) the settings.
 
 [[table-order-types-delivery-order-options]]
-.Options for *splitting up orders into delivery orders*
+.Basic settings for delivery orders
 [cols="1,3"]
 |===
 |Setting |Explanation
 
-2+^| *Split up orders into delivery orders by*
+| *Split up orders into delivery orders by*
+a|For splitting up orders into delivery orders, select one of the following options: +
 
-| *Off*
-|Orders are *not split up* into delivery orders. +
-*_Note_*: If this option is activated, delivery orders can only be created manually. Automatically creating delivery orders or using event procedures to create delivery orders is not possible with this setting.
+* *Off* = Orders are *not split up* into delivery orders. +
+*_Note_*: If this option is activated, delivery orders can only be created manually. Automatically creating delivery orders or using event procedures to create delivery orders is not possible with this setting. +
+* *Shipping profile* = The delivery orders are created according to the different *Shipping profiles* of the items included in the order. +
+* *Storage* = The delivery orders are created according to the different *Warehouses* of the items included in the order. +
+* *Warehouse and shipping profile* = The delivery orders are created according to the different *Warehouses and shipping profiles* of the items included in the order. +
+* *Warehouse stock and net stock > 0* = The delivery orders are created according to the different *Warehouse stock and net stock* of the items included in the order if the stock is bigger than 0. +
+* *Warehouse stock and net stock > = order item quantity* = The delivery orders are created according to the different *Warehouse stock and net stock* if the stock is equal to or bigger than the quantity of order items.
 
-| *Warehouse*
-|The delivery orders are created according to the different *Warehouses* of the items included in the order.
-
-| *Shipping profile*
-|The delivery orders are created according to the different *Shipping profiles* of the items included in the order.
-
-| *Warehouse and shipping profile*
-|The delivery orders are created according to the different *Warehouses and shipping profiles* of the items included in the order.
-
-| *Warehouse stock and net stock > 0*
-|The delivery orders are created according to the *Warehouse stock and the net stock* of the order items if the stock is bigger than 0.
-
-| *Warehouse stock and net stock >= order item quantity*
-|The delivery orders are created according to the *Warehouse stock and the net stock* if the stock is bigger than or equals the order item quantity.
+| *Standard status for resetting outgoing items*
+|Select which status should be automatically set for resetting outgoing items. +
+Select the status *Last status* if you do not need a specific status. This setting returns the status to what it was before outgoing items were booked.
 
 |===
 
 [TIP]
 .Defining an end point after completing an order
 ======
-Go to *Setup » Orders » Order types » Sales order [Beta]* to determine the view that is shown after an order has been completed. Use the setting *Endpoint after completing an order* for this.
+Go to *Setup » Orders » Order types » Sales order* to determine the view that is shown after an order has been completed. Use the setting *Endpoint after completing an order* for this.
 ======
 
 [#manually-create-delivery-orders]
@@ -99,7 +93,7 @@ Generating delivery orders manually
 
 . Go to *Orders » Orders (Test phase)*.
 . Carry out the search (material:search[]) to display orders.
-. Open the order for which delivery orders should be created.
+. Open the order for which delivery orders should be created. Note that orders can only be opened in the list view.
 . At the top, click on *Create orders* (material:shopping_cart[]) > *Delivery order*.
 . Select the option *For specific order items* to select items.
 . Carry out the settings. Pay attention to the explanations given in <<table-create-delivery-order>>. +
@@ -186,7 +180,7 @@ Automatically generating delivery orders:
 
 . Go to *Orders » Orders (Test phase)*.
 . Carry out the search (material:search[]) to display orders.
-. Open the order or which delivery orders should be created.
+. Open the order or which delivery orders should be created. Note that orders can only be opened in the list view.
 . At the top, click on *Create orders* (material:shopping_cart[]) > *Delivery order*.
 . Select the option *Split automatically*. +
 → Based on the <<#basic-settings-delivery-orders, basic settings>> that you carried out, the delivery orders are automatically split and created.
