@@ -111,7 +111,11 @@ include::partial$assistant-basic-instructions.adoc[]
 | Aktivieren, um den Auftragsimport zu aktivieren. Aufträge werden alle 15 Minuten importiert.
 
 | *Cron für Produktexport*
-| Aktivieren, um den Artikelexport zu aktivieren. +
+| Aktivieren, um den Artikelexport für Kataloge, die mit dem alten Katalog-Generator erstellt wurden, zu aktivieren. +
+*_Hinweis:_* Artikel werden ein bis zwei Mal pro Tag exportiert. Der Export beinhaltet auch den Preisabgleich für die enthaltenen Varianten.
+
+| *V2: Cron für Produktexport*
+| Aktivieren, um den Artikelexport für Kataloge, die mit dem *Katalog-Generator V2* erstellt wurden, zu aktivieren. +
 *_Hinweis:_* Artikel werden ein bis zwei Mal pro Tag exportiert. Der Export beinhaltet auch den Preisabgleich für die enthaltenen Varianten.
 
 | *Cron für Warenbestandsexport*
@@ -208,16 +212,18 @@ Variante mit {market}-Kategorie verknüpfen:
 
 === Varianten auf {market} deaktivieren
 
-Eine Variante wurde schon an myToys übertragen, du möchtest diese Variante aber nicht weiter bei myToys listen? Dann reicht es nicht aus, die Variante vom Export auszuschließen. Stattdessen muss die Variante einmalig als inaktiv übertragen werden. Gehe dazu wie folgt vor:
+Eine Variante wurde schon an myToys übertragen, du möchtest diese Variante aber nicht weiter bei myToys listen? Dann hast du die folgenden Möglichkeiten, die Variante nicht mehr zu MyToys zu exportieren:
 
-* Entferne im Tab *Verfügbarkeit* der Variante die Marktplatzverfügbarkeit *myToys*. +
-* Damit die Variante als inaktiv übertragen wird, muss im Tab *Eigenschaften* der Variante die Eigenschaft *myToys Kategoriegruppe* verknüpft bleiben. +
-*_Wichtig:_* Wenn du die Verfügbarkeit später wieder aktivierst, wird die Variante erst mit dem nächsten nächtlichen Artikelexport auf {market} reaktiviert.
+* Entferne im Tab *Verfügbarkeit* der Variante die Marktplatzverfügbarkeit *myToys*. Die Variante wird dann nicht mehr an MyToys übertragen. +
+
+_oder_
+
+* Entferne im Tab *Eigenschaften* die Eigenschaft *myToys-Kategoriegruppe*. Dann wird die Variante nicht mehr in dieser Kategorie auf MyToys veröffentlicht.
 
 [#550]
 == Artikelexport einrichten
 
-Artikeldaten werden über Katalog-Formate zu {market} exportiert. Kataloge erstellst du im Menü *Daten » Kataloge*.
+Artikeldaten werden über Katalog-Formate zu {market} exportiert. Kataloge erstellst du mit dem Assistenten *myToys - Kataloge*.
 
 include::partial$catalogue-new-to-text.adoc[]
 
@@ -241,7 +247,37 @@ Die Struktur der Artikeldaten von {market} gleicht der Struktur in plentymarkets
 :catalogue-note: Für jede {market}-Kategorie benötigst du einen eigenen Katalog.
 :mapping-fields: weitere
 
+:mytoys:
+
 include::partial$catalogue-assistant-config.adoc[]
+
+[.collapseBox]
+.Schritt *Kategorien*
+--
+[[table-mytoys-catalogue-assistant]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
+
+| *Welcher Katalog-Generator soll verwendet werden?*
+| Hier wählst du einen Katalog-Generator, mit dem Kataloge erstellt werden sollen. +
+Der Katalog-Generator V2 wird den alten Katalog-Generator in Zukunft ablösen. Wir empfehlen deshalb, schon jetzt den *Katalog-Generator V2* zu verwenden.
+
+* *Katalog-Generator*
+
+* *Katalog-Generator V2* +
+
+*_Tipp:_* Kataloge, die mit dem Katalog-Generator V2 erstellt werden, werden schneller geladen, enthalten immer die aktuellen MyToys-Datenfelder und werden regelmäßig aktualisiert.
+
+| *myToys-Kategorie*
+| Wähle danach die myToys-Produktkategorie. Die Artikel in diesem Katalog werden dann in dieser Produktkategorie auf MyToys gelistet.
+
+| *myToys-Katalogname*
+| Gib einen Namen für den Katalog ein. +
+Der Name ist nur im Backend deines plentymarkets Systems sichtbar.
+|======
+--
 
 [#700]
 === Katalogzuordnungen vornehmen
@@ -472,6 +508,8 @@ Du arbeitest mit anderen Lieferzeiten? Dann wende dich an deine:n Integrationsma
 === Katalog aktivieren
 
 :interval:
+
+:mytoys:
 
 include::partial$catalogue-activation.adoc[]
 
