@@ -1,0 +1,123 @@
+[[table-offers-recommended-mappings]]
+[cols="2,1,5a"]
+|===
+|Marketplace field |Mandatory? |Recommended plentymarkets mapping
+
+| *ID*
+| yes
+| The variation ID is mapped automatically.
+
+| *Part Number Key*
+| yes
+|
+// Why not hard-coded?
+
+| *Name*
+| yes
+| * *Item text » Name 1*
+
+_or_
+
+* *Item text » Name 2*
+
+_or_
+
+* *Item text » Name 3*
+
+_or_
+
+* Property linked to variation
+
+| *Part number/manufacturer code*
+| yes
+| The variation ID is mapped automatically.
+
+| *Description*
+| no
+| * *Item text » Item text*, language *German*
+
+_or_
+
+* Property of the type *Text*, language *German*
+
+| *Brand*
+| no
+| * *Item » Manufacturer name*
+
+| *Weight (g)*
+| no
+* *Variation » Net weight g*
+
+| *URL*
+| no
+| * *Variation » Ceres Product URL*
+
+| *EAN*
+| yes
+| * *Barcode* » [Select barcode of the type GTIN]
+
+| *Sales price without VAT*
+| yes
+| * *Sales price* » [Sales price for eMAG]
+
+| *Recommended price without VAT*
+| no
+| * *Sales price » *[Sales price of the type RRP]
+
+| *Min. offer sale price without VAT*
+| yes
+| * *Sales price* » [Min. offer price for eMAG]
+
+The minimum offer price must be lower or equal to the *Sales price without VAT*. The minimum offer price is used to validate the sales price. During export, the *Sales price without VAT* is checked against the minimum and maximum offer sales prices. If the *Sales price without VAT* is not within the range resulting from the minimum and maximum offer sales prices, eMAG returns an error to allow you to correct the price.
+
+*_Note:_* Theoretically, you can map the same sales price that you also mapped to the marketplace data field *Sales price without VAT*. However, by doing this, you will bypass the validation. So you might not notice if your price for a variation is too low.
+
+| *Max. offer sale price without VAT*
+| yes
+| * *Sales price* » [Max. offer price for eMAG]
+
+The maximum offer price must be equal to or higher than the *Sales price without VAT*. The maximum offer price is used to validate the sales price. During export, the *Sales price without VAT* is checked against the minimum and maximum offer sales prices. If the *Sales price without VAT* is not within the range resulting from the minimum and maximum offer sales prices, eMAG returns an error to allow you to correct the price.
+
+*_Note:_* Theoretically, you can map the same sales price that you also mapped to the marketplace data field *Sales price without VAT*. However, by doing this, you will bypass the validation. So you might not notice if your price for a variation is too high.
+
+| *Currency type*
+| no
+| ???
+
+| *Stock*
+| yes
+| * *Stock » [Select 1 or more warehouses]* +
+*_Tip:_* Use the data fields in the group *Virtual warehouse* to export the stock quantity sum of all sales warehouses.
+
+| *Warranty*
+| depending on category
+| * Property of the type *Whole number*, *Decimal number* or *Selection*
+
+*_Tip:_* For the variation, save the warranty duration in months.
+
+| *Start date*
+| no
+| * *Variation » Release date*
+
+_or_
+
+* Property of the type *Date*
+
+| *VAT rate*
+| yes
+| Map a plentymarkets VAT rate for each VAT rate of the account. You can map the VAT rates of your country if your products fall into the same VAT class in both the country of the market and in your home country.
+
+| *Processing time*
+| no
+| * *Variation » Availability days*
+
+_or_
+
+* Property of the type *Selection*, selection values corresponding to the eMAG handling times
+
+This is the time until shipping in days. 
+
+*_Important:_* If the order is not shipped after the specified number of days has elapsed, the order is cancelled automatically.
+
+*_Example:_* If the handling time is 0, the order is shipped on the day of the order. As such, the order is cancelled if eMAG is not notified of shipping on the same day.
+|===
