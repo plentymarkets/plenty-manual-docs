@@ -1,16 +1,24 @@
 = Messenger (Testphase)
-:keywords:
-:description: Erfahre, wie du den Messenger in plentymarkets für den E-Mail-Versand und E-Mail-Empfang nutzt.
+:keywords: Messenger, Messenger-Konfiguration, Messenger-Integration, Messenger-Dienst, Messenger Assistent, Messenger aktivieren, E-Mails mit dem Messenger versenden, E-Mails Messenger, E-Mails senden, E-Mails empfangen
+:description: Erfahre, wie du den Messenger in plentymarkets sowohl für den E-Mail-Versand und E-Mail-Empfang als auch für die interne Kommunikation nutzt.
 :author: team-crm
 
-Im Menü *CRM » Messenger (Testphase)* verwaltest du sowohl die externe Kommunikation mit deinen Kund:innen in Form von E-Mails als auch die interne Kommunikation in Form von Nachrichten. Wenn du Nachrichten flüsterst, sind diese Nachrichten nur in deinem plentymarkets System sichtbar und können von deinen Kontakten _nicht_ eingesehen werden. 
+Im Menü *CRM » Messenger (Testphase)* verwaltest du sowohl die externe Kommunikation mit deinen Kund:innen in Form von E-Mails als auch die interne Kommunikation in Form von Nachrichten. Wenn du Nachrichten flüsterst, sind diese Nachrichten nur in deinem plentymarkets System sichtbar und können von deinen Kontakten _nicht_ eingesehen werden.
+
+[#box-assistent-durchlaufen]
+[IMPORTANT]
+.Assistent muss nur für E-Mail-Versand und E-Mail-Empfang über Messenger durchlaufen werden
+====
+Wenn du den Messenger für den E-Mail-Versand und E-Mail-Empfang verwenden möchtest, musst du den <<#assistent-durchlaufen, Assistenten>> *Messenger-Konfiguration* im Menü *Einrichtung » Assistenten » Grundeinrichtung* durchlaufen. +
+Wenn du Nachrichten nur flüstern möchtest, du den Messenger also nur als Notizfunktion verwenden möchtest, ohne E-Mails über den Messenger zu versenden und zu empfangen, musst du den Assistenten *Messenger-Konfiguration* _nicht_ durchlaufen.
+====
 
 Das Menü *CRM » Messenger (Testphase)* ist wie folgt aufgebaut:
 
 image::crm:messenger-menu-structure.png[width=640, height=360]
 
 * *Navigation*: Hier navigierst du durch die einzelnen Bereiche des Menüs. Der aktuell ausgewählte Bereich (blauer Hintergrund) wird im Hauptfenster rechts angezeigt. Klicke auf material:menu[], um die Navigationsleiste ein- und auszublenden. +
-** Verfügbare Bereiche in der Navigation: <<#nachricht-erstellen, Neue Nachricht>>, <<#gruppenfunktion, Posteingang>>, <<#neue-nachrichten, Neue Nachrichten>>, <<#meine-nachrichten, Meine Nachrichten>>, <<#papierkorb, Papierkorb>>.
+** Verfügbare Bereiche in der Navigation: <<#nachricht-erstellen, Neue Nachricht>>, <<#posteingang, Posteingang>>, <<#neue-nachrichten, Neue Nachrichten>>, <<#meine-nachrichten, Meine Nachrichten>>, <<#papierkorb, Papierkorb>>. Die Zahl hinter dem Posteingang zeigt die Anzahl der ungelesenen Nachrichten an.
 * *Toolbar*: Hier kannst du nach <<#konversation-suchen, Konversationen suchen>>, die <<#spalten-konfigurieren, Spalten in der Übersicht anpassen>>, die Ergebnisse, die du pro Seite angezeigt haben möchtest, einstellen, und durch die Seiten mit den Konversationen klicken.
 * *Hauptfenster*: Hier wird der aktuell geöffnete Bereich angezeigt. +
 ** *Übersicht*: Wenn du eine Suche ausführst, siehst du die Ergebnisse in einer Übersicht. Die Übersicht liefert auf einen Blick Informationen zu den gefundenen Konversationen. Zum Beispiel siehst du die E-Mail-Adressen der Absender:innen, den Betreff, das Empfangsdatum der Nachricht, die zugeordneten Tags und anhand des Symbols material:attach_file[], ob die Nachricht Anhänge hat. +
@@ -34,22 +42,24 @@ Du findest die folgenden Neuerungen im neuen Messenger, die es vorher im "alten"
 [#vorbereitende-einstellungen]
 == Vorbereitende Einstellungen
 
-Wenn Benutzer:innen vom Typ *Backend* mit dem Messenger arbeiten sollen, muss eine Person mit *Admin*-Zugang zunächst Rechte für diese Benutzer:innen vergeben. Außerdem musst du Tags erstellen, damit diese für den Messenger zur Verfügung stehen und auch für die Tags bestimmte Rechte vergeben.
+Wenn Benutzer:innen ohne Admin-Rechte mit dem Messenger arbeiten sollen, muss eine Person mit *Admin*-Zugang zunächst Rechte für diese Benutzer:innen vergeben. Außerdem musst du Tags erstellen, damit diese für den Messenger zur Verfügung stehen und auch für die Tags bestimmte Rechte vergeben.
 
-[#benutzerrechte-backend-benutzer]
-=== Rechte für Backend-Benutzer:innen vergeben
-
-// TODO: Berechtigungen anpassen (siehe Sprint-Karte)
+[#benutzerrechte-benutzer]
+=== Rechte vergeben
 
 :rights-purpose: Nachrichten im Messenger sehen und erstellen
-:right-one: pass:quotes[*CRM > Nachricht > Anzeigen*]
+:right-one: pass:quotes[*CRM > Nachricht > Lesen*]
 :right-two: pass:quotes[*CRM > Nachricht > Erstellen*]
-:right-three: pass:quotes[*Kommentare > Anzeigen*]
-:right-four: pass:quotes[*Kommentare > Erstellen*]
-:right-five: pass:quotes[*Einrichtung > Tag > Anzeigen*]
-:right-six: pass:quotes[*Einrichtung > Tag > Erstellen*]
+:right-three: pass:quotes[*CRM > Messenger > Lesen*]
+:right-four: pass:quotes[*CRM > Messenger > Aktualisieren*]
+:right-five: pass:quotes[*CRM > Messenger > Erstellen*]
+:right-six: pass:quotes[*Kommentare > Lesen*]
+:right-seven: pass:quotes[*Kommentare > Erstellen*]
+:right-eight: pass:quotes[*Einrichtung > Tag > Lesen*]
+:right-nine: pass:quotes[*Einrichtung > Tag > Erstellen*]
 
 include::_includes:partial$rights.adoc[]
+
 
 [#tags-messenger]
 === Tags für den Messenger erstellen
@@ -59,7 +69,7 @@ Du hast die Möglichkeit, den Nachrichten im Messenger Tags zuzuordnen und nach 
 Welche Benutzer:innenrechte erforderlich sind und wie du Tags erstellst, ist im Folgenden beschrieben.
 
 [#rechte-tags]
-==== Rechte für Backend-Benutzer:innen vergeben
+==== Rechte vergeben
 
 include::_includes:page$tags-rights.adoc[]
 
@@ -82,6 +92,13 @@ include::_includes:page$tags-search.adoc[]
 [#assistent-durchlaufen]
 === Assistent durchlaufen
 
+[IMPORTANT]
+.Assistent muss nur für E-Mail-Versand und E-Mail-Empfang über Messenger durchlaufen werden
+====
+Wenn du den Messenger für den E-Mail-Versand und E-Mail-Empfang verwenden möchtest, musst du den <<#assistent-durchlaufen, Assistenten>> *Messenger-Konfiguration* im Menü *Einrichtung » Assistenten » Grundeinrichtung* durchlaufen. +
+Wenn du Nachrichten nur flüstern möchtest, du den Messenger also nur als Notizfunktion verwenden möchtest, ohne E-Mails über den Messenger zu versenden und zu empfangen, musst du den Assistenten *Messenger-Konfiguration* _nicht_ durchlaufen.
+====
+
 Um mit dem Messenger Nachrichten senden und empfangen zu können, musst du den Assistenten *Messenger-Konfiguration* im Menü *Einrichtung » Assistenten » Grundeinrichtung* durchlaufen. Im Folgenden werden die einzelnen Schritte, die du in diesem Assistenten durchläufst, beschrieben.
 
 [TIP]
@@ -91,91 +108,151 @@ Du kannst jedem Postfach andere Tags zuweisen, um später nach diesen Tags <<#ko
 [#service-aktivierung]
 ==== Service-Aktivierung
 
-In diesem Schritt aktivierst du den Messenger-Service für diesen Posteingang. Wenn die Schaltfläche blau (material:toggle_on[role=skyBlue]) ist, ist der Service aktiviert. Wenn die Schaltfläche grau (material:toggle_off[]) ist, ist der Service _nicht_ aktiviert.
+Im Schritt *Service-Aktivierung* aktivierst du den Messenger-Service für diesen Posteingang. Wenn die Schaltfläche blau (material:toggle_on[role=skyBlue]) ist, ist der Service aktiviert. Wenn die Schaltfläche grau (material:toggle_off[]) ist, ist der Service _nicht_ aktiviert.
 
 Wenn du spätere mehrere Posteingänge aktiviert hast, also den Assistenten mehrfach für die einzelnen Posteingänge durchlaufen hast, kannst du in diesem Schritt den jeweiligen Posteingang wieder deaktivieren.
 
 [#e-mail-weiterleitung]
 ==== E-Mail-Weiterleitung
 
-In diesem Schritt wird automatisch eine kryptische E-Mail-Adresse, die die weiterleitende E-Mail-Adresse darstellt, erstellt. Verwende diese E-Mail-Adresse, um deinen E-Mail-Client einzurichten, damit deine E-Mails automatisch weitergeleitet werden. Beachte, dass du diese kryptische E-Mail-Adresse _nicht_ ändern kannst.
+Im Schritt *E-Mail-Weiterleitung* wird automatisch eine kryptische E-Mail-Adresse, die die weiterleitende E-Mail-Adresse darstellt, erstellt. Kopiere diese E-Mail-Adresse und richte bei deinem E-Mail-Anbieter eine Weiterleitung an diese Adresse ein. Damit stellst du sicher, dass deine E-Mails automatisch weitergeleitet werden. Beachte, dass du diese kryptische E-Mail-Adresse _nicht_ ändern kannst.
+
+[TIP]
+.E-Mail-Weiterleitung bei gängigen Anbietern einrichten
+====
+Wie du die E-Mail-Weiterleitung bei gängigen Anbietern einrichtest, ist auf der Handbuchseite xref:crm:praxisbeispiel-e-mail-weiterleitung-messenger.adoc#[Praxisbeispiel: E-Mail-Weiterleitung für den Messenger einrichten] beschrieben.
+====
 
 Gib im unteren Bereich alle E-Mail-Adressen ein, die Nachrichten an die kryptische, weiterleitende E-Mail-Adresse oben senden dürfen. Du kannst beliebig viele E-Mail-Adressen mit einem Klick auf *Neuen Eintrag hinzufügen* (material:add[]) hinzufügen. Bestehende E-Mail-Adressen können mit einem Klick auf *Eintrag entfernen* (material:delete[]) gelöscht werden. *_Hinweis:_* Mindestens eine E-Mail-Adresse muss hier eingetragen werden.
-
-//// 
-[#verifizierung-e-mail-adressen]
-==== Verifizierung der E-Mail-Adressen
-
-In diesem Schritt siehst du den Fortschritt des Verifizierungsvorgangs. plentymarkets sendet eine E-Mail an alle E-Mail-Adressen, die du im vorherigen Schritt <<#e-mail-weiterleitung, E-Mail-Weiterleitung>> eingegeben hast. Das System prüft dann, ob die E-Mail-Adressen valide sind und die Weiterleitungen funktionieren.
-////
 
 [#einstellungen-e-mail-versand]
 ==== Einstellungen für den E-Mail-Versand
 
-In diesem Schritt speicherst du die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest. Dies ist erforderlich, damit dein plentymarkets System E-Mails über den Messenger versenden und empfangen kann. 
+Im Schritt *Einstellungen für den E-Mail-Versand* speicherst du die Zugangsdaten des E-Mail-Postfachs, aus dem du E-Mails versenden möchtest. Dies ist erforderlich, damit dein plentymarkets System E-Mails über den Messenger versenden und empfangen kann.
 
 Wähle nach Eingabe der Zugangsdaten die Verschlüsselung und gib die Absender-E-Mail-Adresse sowie den Absendernamen ein. Diese E-Mail-Adresse und dieser Name wird den Empfänger:innen deiner E-Mails aus diesem Postfach angezeigt.
 
 *_Hinweis für Postfächer bei mailbox.org:_* Gib den Port *465* ein und wähle als Verschlüsselung die Einstellung *SSL*.
 
-// TODO: (hier noch mehr erklären) Aktiviere (material:check_box[role=skyBlue]) die Checkbox, um das Standardpostfach zu wählen.
+Im Bereich *Standard-Posteingang* kannst du die Option *Als Standard-Posteingang festlegen* aktivieren (material:check_box[role=skyBlue]), damit dieser Posteingang beim Schreiben neuer Nachrichten aus dem Messenger vorausgewählt ist.
 
 ////
-ggf. neue Tabelle einfügen mit aktuellen Zahlen analog zu dieser Tabelle hier: https://knowledge.plentymarkets.com/crm/e-mails-versenden#200
+TODO: ggf. neue Tabelle einfügen mit aktuellen Daten analog zu dieser Tabelle hier: https://knowledge.plentymarkets.com/crm/e-mails-versenden#200
 
 ggf. Tabelle mit weiteren Beispielen außer mailbox.org: Googlemail, Office365, ionos, sendgrid (Marvin fragen)
 ////
 
-Außerdem wählst du in diesem Schritt eine E-Mail-Vorlage für den E-Mail-Versand, die du vorher bereits im xref:crm:emailbuilder.adoc#[EmailBuilder] erstellt hast. Beachte, dass die hier gewählte Vorlage Messenger-Variablen enthalten sollte. 
+Außerdem wählst du in diesem Schritt eine E-Mail-Vorlage für den E-Mail-Versand.
+
+[IMPORTANT]
+.Live-Modus im Assistenten *E-Mail-Konten* muss aktiviert sein
+====
+Im Assistenten *E-Mail-Konten* im Schritt xref:crm:emailbuilder.adoc#e-mail-server-zugangsdaten[Zugangsdaten] muss im Bereich *Möchtest du den Live-Modus aktivieren?* die Option *Live-Modus aktivieren* aktiviert (material:check_box[role=skyBlue]) sein. Dadurch wird der Testmodus deaktiviert und alle E-Mails werden an die jeweiligen Empfänger:innen versendet. 
+
+Das Aktivieren des Live-Modus gilt global für den gesamten E-Mail-Versand in plentymarkets. Somit auch für den E-Mail-Versand über den Messenger.
+====
 
 [TIP]
-.Nutze die Standardvorlage 
+.Standardvorlage *Messenger default NEW* verwenden
 ====
-Wir empfehlen, die Standardvorlage für den Messenger zu verwenden. Diese Vorlage ist bereits in deinem System vorhanden. 
-====
+Wir empfehlen, die Standardvorlage *Messenger default NEW* für den Messenger zu verwenden. Diese Vorlage ist bereits in deinem System im Menü *CRM » EmailBuilder* im Ordner *Standardvorlagen* vorhanden. Du kannst diese Vorlage nach deinen Wünschen anpassen. Diese Vorlage wird automatisch vorausgewählt, wenn du eine neue Nachricht schreibst.
 
-// TODO: wie heißt die default Vorlage im Deutschen?
+Die Vorlage enthält die folgenden Variablen:
 
-Im EmailBuilder stehen dir die folgenden Messenger-bezogenen Variablen zur Verfügung:
-
-* ID der Nachricht
-* ID der Konversation
-* Inhalt der Nachricht
-* Betreff der Nachricht
-* Vorschau der Nachricht
-* Minuten der Nachricht
-* Hat abgerechnete Minuten
-
-// TODO: Diese Liste auch auf der EmailBuilder-Seite hinzufügen.
-// TODO: stimmt die Info in der folgenden Box?
-
-[TIP]
-.Standardvorlage verwenden
-====
-Im Menü *CRM » EmailBuilder (Testphase)* gibt es bereits eine Standardvorlage für den Messenger. Du kannst diese Vorlage nach deinen Wünschen anpassen. Die Vorlage enthält die folgenden Variablen:
-
-* Betreff der Nachricht in der Betreffzeile, dargestellt als `{{ messenger.title }}`
+* Name des Mandanten in der Betreffzeile, dargestellt als &#123;&#8288;&#123;globals.clientName&#125;&#8288;&#125;
 ** Im Betreff der Vorlage muss eine sogenannte _twig expression_ in doppelt geschweiften Klammern enthalten sein, weil in der Betreffzeile keine "normalen" Variablen verwendet werden können. Weitere Informationen dazu findest du auf der Handbuchseite xref:crm:emailbuilder.adoc#[EmailBuilder] im Kapitel xref:crm:emailbuilder.adoc#variablen-emailbuilder[Verfügbare Variablen und twig expressions].
 * Vollständiger Name
-* Inhalt der Nachricht
 * Signatur im HTML-Format
-* ID der Konversation
-** Die Variable *ID der Konversation* dient als eindeutiges Kennzeichen, damit die Nachricht immer korrekt zugeordnet werden kann. Daher sollte diese Variable _nicht_ aus der Vorlage entfernt werden.
 ====
+
+Du kannst in diesem Schritt selbstverständlich auch eine Vorlage wählen, die du selbst im Menü *CRM » EmailBuilder* erstellt hast.
 
 [#einstellungen-e-mail-empfang]
 ==== Einstellungen für den E-Mail-Empfang
 
-In diesem Schritt wählst du den oder die Tags, die die Nachrichten erhalten sollen, wenn diese von weitergeleiteten Adressen empfangen oder versendet werden.
+Im Schritt *Einstellungen für den E-Mail-Empfang* speicherst du einen Namen für das Postfach. Außerdem wählst du den oder die Tags, die die Nachrichten erhalten sollen, wenn diese von weitergeleiteten Adressen empfangen oder versendet werden.
+Du kannst in diesem Schritt auch einen Standardtyp und Standardstatus wählen, die neue Nachrichten in diesem Postfach erhalten, und festlegen, welche Abonnent:innen bei neuen Nachrichten in diesem Postfach informiert werden sollen.
 
-Im letzten Abschnitt wählst du die Abonnent:innen, die bei neuen Nachrichten informiert werden. Wähle entweder einzelne Benutzer:innen aus der Dropdown-Liste oder wähle Rollen, damit alle dieser Rolle zugewiesenen Benutzer:innen neue Nachrichten in diesem Postfach abonnieren.
+// Wähle entweder einzelne Benutzer: innen aus der Dropdown-Liste oder wähle Rollen, damit alle dieser Rolle zugewiesenen Benutzer: innen neue Nachrichten in diesem Postfach abonnieren.
 
-[#testmodus-inaktiv]
-==== Testmodus auf inaktiv setzen
+Wenn du im letzten Abschnitt die Option *Benachrichtigungen aktivieren* aktivierst (material:check_box[role=skyBlue]), wirst du in deinem plentymarkets Backend oben rechts neben dem Symbol material:notifications[] informiert, sobald eine
+<<#benachrichtigung-neue-nachricht, neue Nachricht im Messenger eingegangen>> ist.
 
-Damit du Nachrichten mit dem Messenger versenden kannst, ist es erforderlich, dass der Live-Modus im Assistenten *E-Mail-Konten* im Schritt *Zugangsdaten* aktiviert (material:check_box[role=skyBlue]) wird. 
+[#zusammenfassung]
+==== Zusammenfassung
 
-Das Setzen des Testmodus auf *inaktiv* kannst du in diesem Schritt erledigen, ohne den Assistenten verlassen zu müssen. Aktiviere (material:check_box[role=skyBlue]) dazu die Einstellung *Live-Modus aktivieren*.
+In diesem Schritt wird eine Zusammenfassung aller getätigten Eingaben in den einzelnen Schritten aufgelistet. Du kannst deine Angaben prüfen, in den einzelnen Schritten ggf. Anpassungen vornehmen und den Assistenten danach über die Zusammenfassung abschließen.
+
+[#nachrichten-sammeln]
+=== Nachrichten im Messenger sammeln
+
+Im Assistenten *E-Mail-Konten* kannst du im Schritt *Messenger-Integration* festlegen, ob alle gesendeten E-Mails und Anhänge im Messenger gesammelt werden sollen. Du entscheidest außerdem, in welchem Posteingang die E-Mails gesammelt werden und welchen Tag die Konversationen erhalten sollen.
+
+Wenn du den Dienst zum Sammeln der E-Mails aktivierst, werden die E-Mails aus den folgenden plentymarkets Bereichen dann im Messenger gespeichert und angezeigt: 
+
+* Automatischer Versand
+* Auftragsereignisse
+* Auftragsaktionen
+* Gruppenfunktion im Kontaktdatensatz
+* Aufträge » Aufträge (Testphase)
+* Gruppenfunktion im Auftrag
+
+Den Assistenten *E-Mail-Konten* findest du ebenfalls im Menü *Einrichtung » Assistenten » Grundeinrichtung*. Weitere Informationen zum Sammeln der E-Mails findest du auf der Seite xref:crm:emailbuilder.adoc#[EmailBuilder] im Kapitel xref:crm:emailbuilder.adoc#e-mail-messenger-integration[Messenger-Integration].
+
+[#typen-status-erstellen]
+=== Typen und Status erstellen
+
+Gehe wie im Folgenden beschrieben vor, um Typen und Status für den Messenger zu erstellen. Beachte, dass nur eine Person mit Admin-Rechten Typen und Status erstellen kann.
+
+[#messenger-typ-hinzufuegen]
+==== Typ und Status hinzufügen
+
+Du kannst beliebig viele Typen für den Messenger erstellen, z.B. `Kund:innenanfrage` oder `Beschwerde`. Im nächsten Schritt kannst du einen Status für den Typen in Form einer Farbe und einer Fortschrittsangabe in Prozent hinzufügen. Typen und Status kannst du in mehreren Sprachen erstellen.
+
+Im Folgenden ist beschrieben, wie du einen Typen und einen Status direkt hintereinander erstellst. Wenn du zu einem späteren Zeitpunkt weitere Status zu einem bestehenden Typen hinzufügen möchtest, hilft dir die Beschreibung im Kapitel <<#messenger-status-hinzufuegen, Neuen Status zu einem bestehenden Typ hinzufügen>> weiter.
+
+[.instruction]
+Typ hinzufügen:
+
+. Öffne das Menü *Einrichtung » CRM » Messenger » Typen und Status*. +
+icon:map-signs[] *_Oder:_* Wenn du dich bereits im Messenger befindest, klappe auf der linken Seite unterhalb des Papierkorbs den Bereich material:settings[] *Einstellungen* auf und klicke auf material:checklist_rtl[] *Typen und Status*, um in das Menü *Einrichtung » CRM » Messenger » Typen und Status* weitergeleitet zu werden.
+. Klicke auf material:add[] *Typ hinzufügen*.
+. Gib im Bereich *Details* eine Zahl für die Position ein.
+. Gib im Bereich *Namen* einen Namen für den Typ ein.
+. Gib einen Namen für den Typ ein. +
+*_Optional:_* Klicke auf material:add[] *Sprache hinzufügen*, um weitere Sprachen für den Typ hinzuzufügen.
+. *Speichere* (material:save[]) die Einstellungen. +
+→ Der Typ wird geöffnet und der Bereich *Status* wird sichtbar.
+. Klicke im Bereich *Status* auf material:add[] *Status hinzufügen*.
+. Wähle im Bereich *Details* eine Prozentzahl aus der Dropdown-Liste *Fortschritt*.
+. Gib im Feld *Farbe* den link:https://html-color-codes.info/webfarben_hexcodes/[Hex-Code^] der Farbe ein oder wähle die Farbe mit einem Klick auf material:rectangle[]. 
+. Gib im Feld *Position* eine Zahl für die Position ein.
+. *Speichere* (material:save[]) die Einstellungen.
+. Gib im Bereich *Namen* einen Namen für den Status ein. +
+*_Optional:_* Klicke auf material:add[] *Sprache hinzufügen*, um weitere Sprachen für den Status hinzuzufügen.
+. *Speichere* (material:save[]) die Einstellungen.
+
+[#messenger-status-hinzufuegen]
+==== Neuen Status zu einem bestehenden Typ hinzufügen
+
+Lege zu jedem <<#messenger-typ-hinzufuegen, Typ>> im Messenger einen oder mehrere Status mit Prozentangabe und Farbauswahl fest, um den Bearbeitungsfortschritt deiner Konversationen zu verfolgen.
+
+[.instruction]
+Neuen Status zu einem bestehenden Typ hinzufügen:
+
+. Öffne das Menü *Einrichtung » CRM » Messenger » Typen und Status*. +
+icon:map-signs[] *_Oder:_* Wenn du dich bereits im Messenger befindest, klappe auf der linken Seite unterhalb des Papierkorbs den Bereich material:settings[] *Einstellungen* auf und klicke auf material:checklist_rtl[] *Typen und Status*, um in das Menü *Einrichtung » CRM » Messenger » Typen und Status* weitergeleitet zu werden.
+. Klicke in die Zeile des Typs, für den du einen Status hinzufügen möchtest.
+. Klicke im Bereich *Status* auf material:add[] *Status hinzufügen*.
+. Wähle im Bereich *Details* eine Prozentzahl aus der Dropdown-Liste *Fortschritt*.
+. Gib im Feld *Farbe* den link:https://html-color-codes.info/webfarben_hexcodes/[Hex-Code^] der Farbe ein oder wähle die Farbe mit einem Klick auf material:rectangle[]. 
+. Gib im Feld *Position* eine Zahl für die Position ein.
+. *Speichere* (material:save[]) die Einstellungen.
+. Gib im Bereich *Namen* einen Namen für den Status ein. +
+*_Optional:_* Klicke auf material:add[] *Sprache hinzufügen*, um weitere Sprachen für den Status hinzuzufügen.
+. *Speichere* (material:save[]) die Einstellungen.
+
+Der gewählte Typ und der gewählte Status werden dann in der geöffneten Konversation neben den Tags angezeigt. Du kannst auch nach Konversationen mit bestimmten <<#intable-filter-type, Typen>> und <<#intable-filter-status, Status>> suchen und die Konversationen in der Übersicht anhand des Typs und Status aufsteigend und absteigend sortieren (material:arrow_upward[] und material:arrow_downward[]).
 
 [#nachricht-erstellen]
 == Neue Nachricht erstellen
@@ -187,8 +264,10 @@ Nachricht erstellen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
 . Klicke oben links auf material:add[] *Neue Nachricht*.
-. Gib im Feld *Empfänger hinzufügen...* einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste. +
+. Gib im Feld *Empfänger:in* einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste. +
 *_Beispiel:_* Wenn du eine Zahl eingibst, werden dir mögliche Empfänger:innen mit dieser Auftrags-ID oder Kontakt-ID vorgeschlagen (siehe <<#image-messenger-new-message-suggestion-list>>).
+. Wähle eine Vorlage aus der Liste.
+. Wähle die Vorlagensprache.
 . Gib den Betreff deiner Nachricht im Feld *Betreff* ein.
 . Wähle den Posteingang aus der Dropdown-Liste.
 . Gib im Textfeld die Nachricht ein.
@@ -201,20 +280,30 @@ Nachricht erstellen:
 .Beispiel: Vorschlagsliste nach Eingabe von "101" im Empfänger:innen-Feld
 image::crm:messenger-new-message-suggestion-list.png[width=640, height=360]
 
+// TODO: Screenshot aktualisieren
+
 [[table-create-new-message]]
 .Neue Nachricht im Messenger erstellen
 [cols="1,3"]
 |====
 |Einstellung |Erläuterung
 
-|[#intable-recipients]*Empfänger:innen*
-|Gib hier einen Namen oder eine ID ein und wähle dann den passenden Wert aus der Vorschlagsliste (siehe <<#image-messenger-new-message-suggestion-list>>).
+|[#intable-recipients]*Empfänger:in*
+|Gib hier einen Namen oder eine ID ein und wähle dann den passenden Wert aus der Vorschlagsliste (siehe <<#image-messenger-new-message-suggestion-list>>). Du kannst mehrere Empfänger:innen hinzufügen.
 
-|[#intable-subject]*Betreff*
-|Gib einen Betreff für die Nachricht ein.
+|[#intable-template]*Vorlage*
+|Wähle eine Vorlage aus der Liste. Du siehst in der Liste alle Vorlagen, die du im xref:crm:emailbuilder.adoc#[EmailBuilder] erstellt hast. +
+*_Tipp:_* Gib mindestens 3 Buchstaben ein, damit dir eine Vorschlagsliste der bereits vorhandenen E-Mail-Vorlagen angezeigt wird. +
 
-|[#intable-inbox]*Posteinang*
-|Wähle einen Posteingang aus der Dropdown-Liste. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten durchlaufen>> hast.
+|[#intable-template-language]*Vorlagensprache*
+|Wähle die Vorlagensprache. +
+Wenn die gewählte Sprache nicht der empfohlenen Sprache (basierend auf den Empfänger:innen) entspricht, wird ein Hinweis angezeigt.
+
+|[#intable-template-subject]*Betreff*
+|Gib den Betreff ein. Dies ist ein Pflichtfeld.
+
+|[#intable-inbox]*Posteingang*
+|Wähle einen Posteingang aus der Dropdown-Liste. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten *Messenger-Konfiguration* durchlaufen>> hast.
 
 |[#intable-text-field]*Textfeld*
 |Gib hier den Inhalt der Nachricht ein.
@@ -231,14 +320,12 @@ In der Übersicht werden geflüsterte Nachrichten in _kursiver Schrift_ dargeste
 
 |[#intable-assign-tags-message]*Der Nachricht Tags zuweisen* (material:local_offer[])
 |Mit einem Klick auf material:local_offer[] kannst du nach Tags suchen und bereits bestehende Tags für die Nachricht wählen (material:check_box[role=skyBlue]), neue Tags hinzufügen (material:add[]) und bestehende Tags bearbeiten (material:edit[]). +
-*_Hinweis:_* Sobald du einen Tag für die Nachricht gewählt hast, wird die Schaltfläche in blau angezeigt: material:local_offer[role=skyBlue]. So erkennst du auf einen Blick, ob der Nachricht Tags zugewiesen sind. +
+*_Hinweis:_* Sobald du ein Tag für die Nachricht gewählt hast, wird die Schaltfläche in blau angezeigt: material:local_offer[role=skyBlue]. So erkennst du auf einen Blick, ob der Nachricht Tags zugewiesen sind. +
 *_Wichtig:_* Damit du die <<#intable-capture-minutes, Minuten für die Nachricht erfassen>> kannst, musst du mindestens ein Tag vom Typ *Nachrichten (kostenpflichtig)* erstellen und dieses Tag der Nachricht zuweisen.
 
 |[#intable-capture-minutes]*Minuten erfassen* (material:more_vert[])
-|Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine <<#intable-whisper-mode, geflüsterte Nachricht>> handelt. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Minuten erfassen* aktivierst (material:toggle_on[role=skyBlue]), werden für diese Nachricht Minuten erfasst. Die Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN* wird geändert in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. +
-*_Hinweis:_* Du kannst die Schaltfläche *Minuten erfassen* nur aktivieren, wenn der <<#intable-whisper-mode, Flüstermodus>> für diese Nachricht aktiviert werden.
-
-// TODO: für minuten erfassen noch erklären, wie sich die schaltflächen ändern, wenn man freiminuten und bezahlte minuten gewählt hat.
+|Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine <<#intable-whisper-mode, geflüsterte Nachricht>> handelt. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Minuten erfassen* aktivierst (material:toggle_on[role=skyBlue]), werden für diese Nachricht Minuten erfasst. Die Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN* wird geändert in material:visibility_off[role=skyBlue] *MINUTEN ERFASSEN*. +
+*_Hinweis:_* Du kannst die Schaltfläche *Minuten erfassen* nur aktivieren, wenn der <<#intable-whisper-mode, Flüstermodus>> für diese Nachricht aktiviert ist.
 
 |[#intable-timer]*Timer anzeigen* (material:more_vert[])
 |Du kannst für jede Nachricht einen Timer starten. Klicke dazu zunächst auf material:more_vert[]. Wenn du dann die Schaltfläche *Timer anzeigen* aktivierst (material:toggle_on[role=skyBlue]), startet automatisch der Timer neben der Schaltfläche material:forward_to_inbox[role=skyBlue] *SENDEN*. +
@@ -247,14 +334,10 @@ Klicke auf material:pause_circle[], um den Timer anzuhalten bzw. auf material:pl
 |[#intable-manage-inboxes]*Posteingänge verwalten* (material:more_vert[])
 |Klicke zunächst auf material:more_vert[] und dann auf material:edit[] *Posteingänge verwalten*. Dadurch wirst du in das Menü *Einrichtung » Assistenten » Grundeinrichtung* weitergeleitet. Hier kannst du die Posteingänge über die dort sichtbaren <<#assistent-durchlaufen, Assistenten>> *Messenger-Konfiguration* bearbeiten.
 
-//|[#intable-name-inbox]_Name des aktuell gewählten Posteingangs_
-//| Mit einem Klick auf material:arrow_drop_down[] kannst du einen anderen Posteingang aus der Dropdown-Liste wählen. In der Liste werden die Namen der Posteingänge angezeigt, für die du jeweils den <<#assistent-durchlaufen, Assistenten durchlaufen>> hast.
-
 |[#intable-send]*SENDEN*
 |Mit einem Klick auf material:forward_to_inbox[role=skyBlue] *SENDEN* wird die Nachricht gesendet. +
-*_Hinweis:_* Wenn du für die Nachricht Minuten erfasst, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. Wenn du die Nachricht flüsterst, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *FLÜSTERN*.
-
-// TODO: hier noch die weiteren Szenarien auflisten. (ERFASSEN und SENDEN etc.
+*_Hinweis:_* Wenn du für die Nachricht <<#intable-capture-minutes, Minuten erfasst>>, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *ERFASSEN UND SENDEN*. +
+Wenn du die Nachricht <<#intable-whisper-mode, flüsterst>>, ändert sich der Name der Schaltfläche in material:visibility_off[role=skyBlue] *FLÜSTERN*.
 
 |====
 
@@ -270,7 +353,7 @@ Konversation im Messenger suchen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*. +
 * *_Möglichkeit 1:_* Klicke auf material:search[], um eine Liste aller Konversationen zu sehen.
-* *_Möglichkeit 2:_* Gib einen Suchbegriff aus dem Betreff der Konversation im Suchfeld ein und wähle dann den passenden Filter aus der Vorschlagsliste. 
+* *_Möglichkeit 2:_* Gib einen Suchbegriff aus dem Betreff der Konversation oder dem Inhalt der Nachricht im Suchfeld ein und wähle dann den passenden Filter aus der Vorschlagsliste. 
 * *_Möglichkeit 3:_* Klicke auf material:tune[], um die Suchergebnisse mit Hilfe von Filtern einzugrenzen.
 . Beachte die Erläuterungen zu den Filtern in <<#table-search-message>>.
 
@@ -281,16 +364,26 @@ Konversation im Messenger suchen:
 |Filter |Erläuterung
 
 |[#intable-filter-subject]*Betreff*
-|Gib ein Wort ein, um nach Konversationen zu suchen, die diesen Begriff im Betreff enthalten.
+|Gib ein Wort ein, um nur nach Konversationen zu suchen, die dieses Wort im Betreff enthalten.
 
-|[#intable-filter-short-id]*Abgekürzte ID*
-|Gib die ID der Konversation ein, um nach der Konversation mit genau dieser ID zu suchen.
+|[#intable-filter-message]*Nachricht*
+|Gib ein Wort ein, um nur nach Inhalten zu suchen, die in der Nachricht enthalten sind.
 
 |[#intable-filter-from-to]*Von* / *Bis*
 |Gib ein Datum ein oder wähle die Datumsangaben aus den Kalendern (material:today[]), um nach Konversationen in einem bestimmten Zeitraum zu suchen.
 
+|[#intable-filter-type]*Typ*
+|Wähle einen <<#messenger-typ-hinzufuegen, Typ>> aus der Liste, um nur nach Konversationen mit diesem Typ zu suchen.
+
+|[#intable-filter-status]*Status*
+|Wähle einen <<#messenger-status-hinzufuegen, Status>> aus der Liste, um nur nach Konversationen mit diesem Status zu suchen. +
+*_Hinweis:_* Der Filter *Status* wird erst sichtbar, wenn du zuvor den Filter <<#intable-filter-type, Typ>> gewählt hast.
+
+|[#intable-filter-short-id]*Abgekürzte ID*
+|Gib die ID der Konversation ein, um nach der Konversation mit genau dieser ID zu suchen.
+
 |[#intable-filter-referrer]*Herkunft*
-a|Wähle eine Herkunft, um nach Konversationen mit dieser Herkunft zu suchen. +
+a|Wähle eine Herkunft, um nur nach Konversationen mit dieser Herkunft zu suchen. +
 Mögliche Werte:
 
 * *Backend*
@@ -298,38 +391,68 @@ Mögliche Werte:
 * *Plugin*
 * *PayPal Plugin* (icon:paypal[])
 
-|[#intable-filter-status]*Status*
-|Wähle einen Status, um nach Konversationen mit diesem Status zu suchen. +
-Verfügbare Werte: *Erledigt* und *Nicht erledigt*.
+|[#intable-filter-short-id]*Abgekürzte ID*
+|Gib die ID der Konversation ein, um nach der Konversation mit genau dieser ID zu suchen.
+
+|[#intable-filter-sender]*Absender:in*
+|Wähle eine Absender:in aus der Liste, um nur nach Konversationen von dieser Absender:in zu suchen.
 
 |[#intable-filter-has-attachments]*Hat Anhänge*
-|Wähle *Ja*, um nach Konversationen mit Anhängen zu suchen. Wähle *Nein*, um nach Konversationen ohne Anhänge zu suchen. 
+|Wähle *Ja*, um nur nach Konversationen mit Anhängen zu suchen. Wähle *Nein*, um nur nach Konversationen ohne Anhänge zu suchen.
 
-|[#intable-filter-has-billed-messages]*Hat abgerechnete Nachrichten*
-|Wähle *Ja*, um nach Konversationen zu suchen, in denen Nachrichten abgerechnet wurden. Wähle *Nein*, um nach Konversationen zu suchen, in denen keine Nachrichten abgerechnet wurden.
+|[#intable-filter-done]*Erledigt*
+|Wähle *Ja*, um nur nach Konversationen zu suchen, die als <<#kontextmenue-als-erledigt-markieren, erledigt>> markiert wurden. Wähle *Nein*, um nur nach Konversationen zu suchen, die noch nicht erledigt sind.
 
 |[#intable-filter-contact-id]*Kontakt-ID*
 |Gib eine ID ein, um nur nach Konversationen zu suchen, die mit dieser Kontakt-ID verknüpft sind.
 
-// TODO: Es ist nicht möglich, nach mehreren IDs kommasepariert zu suchen. Soll das so bleiben?
+|[#intable-filter-has-billed-messages]*Hat abgerechnete Nachrichten*
+|Wähle *Ja*, um nur nach Konversationen zu suchen, in denen Nachrichten abgerechnet wurden. Wähle *Nein*, um nur nach Konversationen zu suchen, in denen keine Nachrichten abgerechnet wurden.
+
+|[#intable-filter-email]*E-Mail*
+|Gib eine E-Mail-Adresse ein, um nur nach Konversationen zu suchen, in denen diese E-Mail-Adresse vorkommt.
 
 |[#intable-filter-order-id]*Auftrags-ID*
 |Gib eine ID ein, um nur nach Konversationen zu suchen, die mit dieser Auftrags-ID verknüpft sind. +
 *_Hinweis:_* Je nachdem, ob es sich um einen normalen xref:auftraege:auftraege-verwalten.adoc#[Auftrag], ein xref:auftraege:abonnement.adoc#[Abonnement] oder eine xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] handelt, wirst du mit einem Klick auf die ID in der gefundenen Konversation in das entsprechende Menü weitergeleitet.
 
-|[#intable-filter-email]*E-Mail*
-|Gib eine E-Mail-Adresse ein, um nach Konversationen zu suchen, in denen diese E-Mail-Adresse vorkommt.
-
-|[#intable-filter-tags]*Tags*
-|Wähle (material:check_box[role=skyBlue]) Tags, um nach Konversationen mit diesen <<#tags-messenger, Tags>> zu suchen.
-
 |[#intable-filter-payment-id]*Zahlungs-ID*
 |Gib eine ID ein, um nur nach Konversationen zu suchen, die mit dieser xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlungs-ID] verknüpft sind.
 
-|[#intable-filter-reset]*Zurücksetzen*
+|[#intable-filter-tags]*Tags*
+|Wähle (material:check_box[role=skyBlue]) Tags, um nur nach Konversationen mit diesen <<#tags-messenger, Tags>> zu suchen.
+
+|[#intable-filter-priority]*Priorität*
+a|Wähle eine <<#kontextmenue-konversation-prioritaet-setzen, Priorität>> aus der Liste, um nur nach Konversationen mit dieser Priorität zu suchen. +
+Verfügbare Prioritäten: 
+
+* material:keyboard_double_arrow_up[role=red] *Sehr hoch*
+* material:arrow_upward[role=red] *Hoch*
+* terra:equals[role=orange] *Mittel*
+* material:arrow_downward[] *Niedrig*
+* material:keyboard_double_arrow_down[] *Sehr niedrig* 
+
+|[#intable-filter-subscriber]*Abonnent:in*
+|Wähle einen Namen aus der Liste, um nur nach Konversationen mit dieser Abonnent:in zu suchen. +
+*_Tipp:_* Gib mindestens 3 Buchstaben in das Feld ein, um eine Vorschlagsliste mit den verfügbaren Abonnent:innen zu sehen.
+
+|[#intable-filter-inbox]*Posteingang*
+|Wähle einen Posteingang aus der Liste, um nur nach Konversationen aus diesem Posteingang zu suchen.
+
+|[#intable-filter-deadline]*Deadline*
+a|Wähle einen Wert aus der Liste, um nur nach Konversationen mit dieser Deadline zu suchen. +
+Verfügbare Werte: 
+
+* Gestern
+* Heute
+* Morgen
+* Überschritten
+* In der Zukunft
+
+| material:replay[]
 |Setzt die gewählten Filtereinstellungen zurück.
 
-|[#intable-filter-search]*Suchen*
+| material:search[] *SUCHEN*
 |Führt die Suche aus. Die gefundenen Konversationen werden in der Übersicht angezeigt. +
 *_Tipp:_* Setze keine Filter, wenn du alle Konversationen in der Übersicht sehen möchtest.
 
@@ -341,7 +464,7 @@ Verfügbare Werte: *Erledigt* und *Nicht erledigt*.
 Wenn du eine Suche ausführst, siehst du deine gewählten Filter oben als so genannte "Chips" dargestellt. Diese Filter kannst du speichern, um sie in Zukunft schneller und einfacher wieder verwenden zu können.
 
 [.instruction]
-Aktuellen Filter speichern: 
+Aktuellen Filter speichern:
 
 . Führe eine Suche aus.
 . Klicke auf *Gespeicherte Filter* (material:bookmarks[]).
@@ -362,11 +485,14 @@ Lege die Reihenfolge der Filter per Drag-and-drop mit einem Klick auf *Verschieb
 Gehe wie im Folgenden vor, um einen gespeicherten Filter in der Suche anzuwenden.
 
 [.instruction]
-Gespeicherte Filter anwenden: 
+Gespeicherte Filter anwenden:
 
 . Klicke auf *Gespeicherte Filter* (material:bookmarks[]).
 . Klicke auf einen bereits erstellten Filter. +
 → Die Suche wird ausgeführt und die verwendeten Filtereinstellungen werden oben als so genannte "Chips" dargestellt.
+
+[TIP]
+Sobald du einen gespeicherten Filter anwendest, wird der Ordner material:bookmarks[] *Meine Filter* in der Seitennavigation auf der linken Seite sichtbar. In dem Ordner <<#meine-filter, Meine Filter>> findest du alle <<#aktuellen-filter-speichern, gespeicherten Filter>>. Mit einem Klick auf den jeweiligen Filter werden die Filtereinstellungen in dem Ordner, in dem du dich gerade befindest, angewendet.
 
 [#filter-als-standard]
 === Filter als Standard festlegen
@@ -377,215 +503,187 @@ Du kannst einen Filter direkt beim Erstellen als Standard festlegen wie im Kapit
 
 Klicke in der Zeile des gespeicherten Filters auf material:star[] *Als Standard festlegen*. Wenn du einen anderen Filter als Standard festlegen möchtest, deaktiviere den aktuell gewählten Standardfilter mit einem Klick auf material:star_outline[] *Nicht als Standard verwenden*.
 
+[#ordner-erstellen]
+== Ordner erstellen
+
+Du kannst beliebig viele Ordner erstellen, um deinen Konversationen mehr Struktur zu geben. Zum Beispiel kannst du einen Ordner `Zahlungen` erstellen, in dem du alle Konversationen, die im Zusammenhang mit Rechnungen stehen, speicherst. Wie du Ordner erstellst, ist im Kapitel <<#eigene-ordner-erstellen, Eigene Ordner erstellen>> beschrieben.
+
 [#spalten-konfigurieren]
 == Spalten konfigurieren
 
-In der Übersicht des Messenger kannst du dir über das Symbol material:settings[] oben rechts die folgenden Spalten anzeigen lassen:
+In jedem Ordner des Messenger kannst du mit einem Klick oben rechts auf *Spalten konfigurieren* (material:settings[]) die Spalten, die du in der Übersicht sehen möchtest, aktivieren (material:check_box[role=skyBlue]). Du kannst aktivierte Spalten auch wieder deaktivieren (material:check_box_outline_blank[]). Klicke auf material:drag_indicator[] und halte das Symbol gedrückt, um die Reihenfolge der Spalten per Drag-and-drop zu verschieben.
 
-[[table-configure-columns-overview]]
-.Übersicht Messenger: Spalten konfigurieren
-[cols="1,3"]
-|====
-|Spalte |Erläuterung
+[TIP]
+.Breite der Tabellenspalten beliebig anpassen
+====
+Du kannst die Breite der Spalten in jedem Ordner nach deinen Bedürfnissen anpassen. Wenn du mit der Maus über die entsprechenden Tabellenspalten fährst, erscheinen blaue Linien, die es dir ermöglichen, die Breite individuell anzupassen.
+====
 
-|[#intable-overview-extend-relations]*Relationen erweitern*
-|Öffnet mit einem Klick auf material:chevron_right[] die vorhandenen Relationen, die mit der Konversation verknüpft sind.
+Weitere Informationen zu den verfügbaren Spalten in den einzelnen Ordnern erhältst du in den jeweiligen Kapiteln:
 
-|[#intable-overview-selection]*Auswahl*
-|Zeigt die Checkbox für die <<#gruppenfunktion, Gruppenfunktion>> (material:check_box_outline_blank[]) in der Übersicht an.
+* <<#posteingang, Posteingang>>
+* <<#neue-nachrichten, Neue Nachrichten>>
+* <<#meine-nachrichten, Meine Nachrichten>>
+* <<#papierkorb, Papierkorb>>
 
-|[#intable-overview-status]*Status*
-|Zeigt mit dem Symbol material:circle[role=skyBlue] (Nachricht ungelesen) an, dass sich ungelesene Nachrichten in der Konversation befinden. Zeigt mit dem Symbol material:circle[role=green] (Nachricht abgeschlossen) an, dass die Konversation abgeschlossen ist.
+Nutze die <<#gruppenfunktion, Gruppenfunktion>>, um bestimmte Funktionen für die Konversationen in jedem Ordner gleichzeitig und somit zeitsparend auszuführen.
 
-|[#intable-overview-short-id]*Abgekürzte ID*
-|Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand der ID zu sortieren.
+[#benachrichtigung-neue-nachricht]
+== Benachrichtigungen über neue Nachrichten 
 
-|[#intable-overview-referrer]*Herkunft*
-a|Zeigt mit einem Symbol die Herkunft der ersten Nachricht in der Konversation an. +
-Mögliche Werte:
+Aktiviere im Assistenten *Messenger-Konfiguration* im Schritt *Einstellungen für den E-Mail-Empfang* die Option *Benachrichtigungen aktivieren* (material:check_box[role=skyBlue]) im Bereich *Möchtest du Benachrichtigungen aktivieren?*, damit du in deinem plentymarkets Backend bei Eingang neuer Nachrichten die Anzahl der neuen Nachrichten neben dem Symbol material:notifications[] sehen kannst. Mit einem Klick auf material:notifications[] öffnet sich das Benachrichtigungsfenster.
 
-* *Backend*
-* *REST*
-* *Plugin*
-* *PayPal Plugin* (icon:paypal[])
+[[image-notifications-new-messages]]
+.Benachrichtigung über neue Nachricht im Messenger im plentymarkets Backend
+image::crm:benachrichtigung-neue-nachricht-messenger.png[width=640, height=360]
 
-|[#intable-overview-relations]*Relationen*
-a|Hier werden die Relationen zur Konversation angezeigt, zum Beispiel:
-
-* material:person[] _Name des Kontakts (Kontakt-ID)_ 
-* material:shopping_cart[] _Auftrags-ID_
-** Je nachdem, ob es sich um einen normalen xref:auftraege:auftraege-verwalten.adoc#[Auftrag], ein xref:auftraege:abonnement.adoc#[Abonnement] oder eine xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] handelt, wirst du mit einem Klick auf die ID in das entsprechende Menü weitergeleitet.
-* material:mail[] _E-Mail-Adresse_
-* material:credit_card[] _Zahlungs-ID_
-* Abonnent:innen der Konversation.
-
-Mit einem Klick auf material:chevron_right[] in der Zeile der Konversation öffnen sich alle verfügbaren Relationen auf einen Blick. Mit einem Klick auf material:expand_more[] schließt du den Bereich der Relationen wieder. +
-
-*_Hinweise:_* +
-Der xref:crm:kontakte.adoc#[Kontakt] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *CRM » Kontakte*. +
-Der xref:auftraege:auftraege-verwalten.adoc#[Auftrag] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Aufträge bearbeiten*. +
-Das xref:auftraege:abonnement.adoc#[Abonnement] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Abonnement (Testphase)*. +
-Die xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Waren » Bestellung*. +
-Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Zahlungsverkehr*.
-
-|[#intable-overview-subject]*Betreff*
-|Zeigt den Betreff der ersten Nachricht innerhalb der Konversation an.
-
-|[#intable-overview-created-at]*Erstellt am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation erstellt wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-overview-updated-at]*Aktualisiert am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation aktualisiert wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-overview-tags]*Tags*
-|Zeigt die <<#kontextmenue-tags-konversation, Tags>> an, die der Konversation zugeordnet sind.
-
-|[#intable-overview-attachments]*Anhänge*
-|In der Spalte *Anzahl der Anhänge* (material:attach_file[]) zeigt das Symbol material:attach_file[] an, ob die Konversation Anhänge enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du, wie viele Anhänge die Konversation hat. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der Anhänge zu sortieren.
-
-|[#intable-overview-billed-messages]*Abgerechnete Nachrichten*
-|In der Spalte *Abgerechnete Nachrichten* (material:credit_card[]) zeigt das Symbol material:credit_card[] an, ob die Konversation abgerechnete Nachrichten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Nachrichten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Nachrichten zu sortieren.
-
-|[#intable-overview-billed-minutes]*Abgerechnete Minuten*
-|In der Spalte *Abgerechnete Minuten* (material:av_timer[]) zeigt das Symbol material:av_timer[] an, ob die Konversation abgerechnete Minuten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Minuten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Minuten zu sortieren.
-
-|[#intable-overview-subscribed]*Abonniert*
-|In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob die Konversation <<#konversation-abonnieren, abonniert>> wurde.
-
-// TODO: kann man hier auch sehen, wer die Konv. abonniert hat oder nur, dass sie abonniert wurde. Oder geht es nur darum, ob man sie selbst abonniert hat?
-
-|[#intable-overview-context-menu]*Kontextmenü*
-|Ermöglicht das Bearbeiten von Konversationen in der Übersicht mit Hilfe des <<#kontextmenue, Kontextmenüs>>.
-
-|====
-
-Über die Schaltfläche *Spalten konfigurieren* (material:settings[]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+Im Bereich material:info[] *Neue Messenger-Nachricht* siehst du den Betreff der Nachricht und wann die Nachricht gesendet wurde. Klicke auf material:link[] *Nachricht öffnen*, um die Nachricht im Messenger zu öffnen. +
+Wenn du die Benachrichtigung für diese Nachricht entfernen möchtest, klicke auf material:more_vert[] und dann auf material:delete[] *Schließen*. Die Zahl neben dem Symbol material:notifications[] reduziert sich dann um 1.
 
 [#auf-nachricht-antworten]
 == Auf eine bestehende Nachricht antworten
 
 Suche die <<#konversation-suchen, Konversation>>, die die Nachricht enthält, auf die du antworten möchtest. Klicke dann auf die Nachricht, um darauf zu antworten.
 
-Der einzige Unterschied zum <<#nachricht-erstellen, Erstellen einer Nachricht>> ist, dass du beim Antworten auf eine bestehende Nachricht über das Symbol material:more_vert[] den Betreff ein- und ausblenden kannst (siehe <<#image-messenger-reply-to-message>>). 
+[TIP]
+Wenn du auf eine Nachricht antworten möchtest und zeitgleich ein:e deiner Kolleg:innen ebenfalls gerade in diesem Moment auf diese Nachricht antwortet, wird dies in der oberen Leiste der Nachricht angezeigt: `Benutzer XY schreibt eine Nachricht...`.
+
+Klicke oben rechts auf *Maximieren* (material:fullscreen[]), um den Vollbildmodus der Nachricht anzuzeigen und die Übersicht auszublenden. Klicke anschließend auf *Minimieren* (material:fullscreen_exit[]), um den Vollbildmodus zu verlassen und zur Übersicht zurückzukehren. +
+Beim Antworten auf eine bestehende Nachricht siehst du alle Empfänger:innen, die diese Nachricht erhalten. Du kannst weitere Empfänger:innen hinzufügen. +
+Falls gewünscht, wähle aus der Dropdown-Liste *Vorlage* eine Vorlage und eine Vorlagensprache. Klicke auf *Vorlage laden* (material:refresh[]), damit der Inhalt und der Betreff der gewählten Vorlage sichtbar werden.
+
+Klicke in der Zeile oben neben material:fullscreen[] auf *Konversation schließen* (material:close[]), um diese Ansicht zu schließen und zur Übersicht zurückzukehren.
+
+Der einzige Unterschied zum <<#nachricht-erstellen, Erstellen einer Nachricht>> ist, dass du beim Antworten auf eine bestehende Nachricht über das Symbol material:more_vert[] den Betreff und die Vorlagenliste ein- und ausblenden und den Vollbildmodus der Nachricht öffnen kannst (siehe <<#image-messenger-reply-to-message>>). 
 
 [[image-messenger-reply-to-message]]
 .Auf eine bestehende Nachricht antworten
 image::crm:messenger-auf-nachricht-antworten.png[width=640, height=360]
 
-Du kannst den Betreff anpassen, wenn die Option *Betreff* aktiviert ist (material:toggle_on[role=skyBlue]). Wenn du die Option *Betreff* _nicht_ aktiviert hast (material:toggle_off[]), ist das Feld *Betreff* beim Antworten auf die Nachricht nicht sichtbar. Der aktuell gewählte Betreff wird dann beim Antworten auf die Nachricht automatisch übernommen.
+Wenn die Option *Betreff* aktiviert ist (material:toggle_on[role=skyBlue]), kannst du den Betreff anpassen. Wenn du die Option *Betreff* _nicht_ aktiviert hast (material:toggle_off[]), ist das Feld *Betreff* beim Antworten auf die Nachricht nicht sichtbar. Der aktuell gewählte Betreff wird dann beim Antworten auf die Nachricht automatisch übernommen.
 
-//// 
+////
 TODO: wieder einfügen, wenn diese Funktion wieder eingebaut wurde.
-
 [#ansicht-wechseln]
 === Ansicht wechseln
 
 Du hast die Möglichkeit, die Ansicht im Messenger von einer Tabelle zu einer Liste zu wechseln. Klicke dazu auf *Ansicht wechseln* (material:list[]) ganz oben rechts in der Übersicht. +
 Standardmäßig ist die Tabellenansicht gewählt.
 
-
 TODO: ggf. Screenshots einfügen?
 Tabellenansicht: im oberen Bereich werden alle gefundenen Konversationen als Tabelle (inklusive Tabellenüberschriften) angezeigt. Die ausgewählte Konversation mit allen darin enthaltenen Nachrichten wird unten links angezeigt und der Editor zum Beantworten der Nachricht unten rechts.
 Listenansicht: im linken Bereich werden alle gefundenen Konversationen als Liste angezeigt (keine (Tabellen-)Überschriften). Die ausgewählte Konversation mit allen darin enthaltenen Nachrichten wird im oberen rechten Bereich angezeigt und der Editor zum Beantworten der Nachricht unten rechts.
 ////
 
-////
-[#zuordnungsparameter]
+[#nachrichten-zuordnen]
 == Nachrichten im Messenger zuordnen
 
 Nachrichten im Messenger werden nach Stichworten bzw. textlichen Parametern, die von deinem plentymarkets System automatisch erkannt werden, zugeordnet.
 
 Beachte die Stichworte, die zu einer Zuordnung führen, in <<#table-assignment-messenger>>. Groß- und Kleinbuchstaben spielen _keine_ Rolle.
 
-// TODO: Ist die emailadresse kein zuordnungsparameter?
-
 [[table-assignment-messenger]]
-.Zuordnungsparameter und mögliche Schreibweisen
-[cols="1,3"]
+.Messenger: Zuordnungsparameter, mögliche Schreibweisen, erlaubte Zeichen und Beispiele
+[cols="1,3,3,3"]
 |====
-|Parameter |Mögliche Schreibweisen
+|Zuordnungsparameter |Mögliche Schreibweisen |Erlaubte Zeichen |Beispiele
 
-| *E-Mail-Adresse*
-|beispiel@mail.de
+| *Konversation*
+a| * conversation / conversations / konversation / konversationen
 
-| *Ticket-ID*
-|Ticket / ID / Nr / No / Nummer / number + Zahl +
-Beispiele: +
-Ticket-ID: 123 +
-Ticket id 123 +
-TicketID &#35;123 +
-ID: &#35;123 +
-ID: 123 +
-Erlaubte Zeichen: +
-Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute, runde Klammern, eckige Klammern
+&#043;
 
-|Conversation:
-|conversation|conversations|konversation|konversationen +
-uuid|id|nr|nummer|number|no|:
+* id / nr / nummer / number / no
+
++ Zahl
+
+| Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+|Konversations-ID: 123 +
+conversation ID = 123 +
+Konversationid 123 +
+KonversationID123 +
+conversation id #123
 
 | *Kundendaten*
-|Kunden-ID bzw. Kunden-Nr.: Kunde / Customer + ID / Nr / No / Nummer / number + Zahl +
-Kunden-Name: Kunden / Customer + Name + Zahl +
-Beispiele: +
-Kunden-ID: 123 +
-Kunden ID 123 +
+a| * kunde / kunden / customer / kontakt
+
+&#043;
+
+* id / nr / no / nummer / number
+
++ Zahl
+
+|Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+|Kunden-ID: 123 +
+Kunden ID = 123 +
 Kunden id 123 +
 KundenID123 +
-Kundennummer 123 +
-Erlaubte Zeichen: +
-Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+Kundennummer #123
 
-|Kunden:
-|(kunde|kunden|customer)(id|no|:|.|=|-|#) +
-(kunden|customer)(nr|nummer|number|:|.|=|-|#)
+| *Auftrag*
+a| * Auftrags / Auftrag / Order
 
-// TODO: soll der name hier auch mit aufgenommen werden?
+&#043;
 
-| *Auftrags-ID*
-|Auftrag(s) / Order + ID / Nr / No + Zahl +
-Beispiele: +
-Auftrags-ID: 123 +
-Auftrag ID 123 +
-AuftragsID123 +
+* id / nr / no
+
++ Zahl
+
+| Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+| Auftrags-ID: 123 +
+AuftragsID #123 +
 Order id 123 +
-Erlaubte Zeichen: +
-Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
 
-|Order:
-|(auftrag|auftrags|order)(id|nr|no|:|.|=|-|#)
+|*Amazon-Bestellung*
+a| * Bestellnummer / Bestellung / Commande / Order / Pedido / Ordine / ID
 
-|AmazonOrder:
-|(Bestellnummer|Bestellung|Commande|Order|Pedido|Ordine)(|:|#|ID)
++ Zahl
 
-| *Rechnungs-Nr.*
-|Rechnung(s) / invoice + ID / Nr / No / Nummer / number + Zahl +
-Beispiele: +
-Rechnung-ID: 123 +
-Rechnung ID 123 +
-Invoice No 123 +
-Erlaubte Zeichen: +
-Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+|Leerzeichen, Doppelpunkt, Raute
+|Bestellnummer #123 +
+Order 123 +
+Commande: 123
 
-|Rechnung:
-|(kunden|customer)(nr|nummer|number|:|.|=|-|#)
+| *Rechnungsnummer*
+a| * Rechnung / Rechnungs / invoice
+
+&#043;
+
+* id / nr / no / nummer / number
+
++ Zahl
+
+| Leerzeichen, Punkt, Doppelpunkt, Minuszeichen, Gleichheitszeichen, Raute
+| Rechnungs-ID: 123 +
+Rechnung id 123 +
+Invoice no #123
 
 |====
-////
 
-[#kontextmenue]
-== Konversationen in der Übersicht bearbeiten
+[#konversation-bearbeiten-uebersicht]
+== Konversation in der Übersicht bearbeiten
 
-In der Messenger-Übersicht stehen dir über das Kontextmenü in der Zeile der Konversation mit einem Klick auf material:more_vert[] die folgenden Funktionen zur Verfügung:
+In der Messenger-Übersicht stehen dir über die Aktionen in der Zeile der Konversation mit einem Klick auf material:more_vert[] die folgenden Funktionen zur Verfügung:
 
 [[image-messenger-context-menu-overview]]
-.Konversation über das Kontextmenü bearbeiten
-image::crm:messenger-context-menu-overview.png[width=640, height=360]
+.Konversation bearbeiten
+image::crm:messenger-kontextmenue-uebersicht.png[width=500, height=300]
 
 * <<#kontextmenue-konversation-als-gelesen-ungelesen-markieren, Konversation als gelesen / ungelesen markieren>>
 * <<#kontextmenue-tags-konversation, Der Konversation Tags zuweisen>>
+* <<#kontextmenue-konversation-in-ordner-verschieben, Konversation in einen Ordner verschieben>>
 * <<#kontextmenue-konversation-als-erledigt-nicht-erledigt-markieren, Konversation als erledigt / nicht erledigt markieren>>
 * <<#kontextmenue-konversation-abonnieren-nicht-abonnieren, Konversation abonnieren / nicht mehr abonnieren>>
+* <<#kontextmenue-konversation-prioritaet-setzen, Priorität setzen>>
+* <<#kontextmenue-konversation-typ-status-setzen, Typ und Status setzen>>
+* <<#kontextmenue-konversation-deadline-setzen, Deadline setzen>>
 * <<#kontextmenue-konversation-loeschen, Konversation löschen>>
+
+[TIP]
+.Gruppenfunktion nutzen
+====
+Nutze die Gruppenfunktion im Messenger, um mehrere Konversationen gleichzeitig zu bearbeiten. Weitere Informationen findest du im Kapitel <<#gruppenfunktion, Gruppenfunktion nutzen>>.
+====
 
 [#kontextmenue-konversation-als-gelesen-ungelesen-markieren]
 === Konversation als gelesen / ungelesen markieren
@@ -601,6 +699,7 @@ Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht h
 Konversation als gelesen markieren:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in der Zeile der Konversation, die du als gelesen markieren möchtest, auf material:more_vert[].
 . Klicke auf material:mark_email_read[] *Konversation als gelesen markieren*. +
 → Die Zeile der Konversation ist nicht mehr in Fettdruck dargestellt und der blaue Punkt material:circle[role=skyBlue] am Zeilenanfang verschwindet.
@@ -614,6 +713,7 @@ Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht h
 Konversation als ungelesen markieren:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in der Zeile der Konversation, die du als ungelesen markieren möchtest, auf material:more_vert[].
 . Klicke auf material:mark_email_unread[] *Konversation als ungelesen markieren*. +
 → Die Zeile der Konversation wird in Fettdruck dargestellt und ein blauer Punkt material:circle[role=skyBlue] erscheint am Zeilenanfang.
@@ -627,6 +727,7 @@ Gehe wie im Folgenden beschrieben vor, um einer Konversation aus der Übersicht 
 Tags einer Konversation zuweisen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in der Zeile der Konversation auf material:more_vert[].
 . Klicke auf material:local_offer[] *Der Konversation Tags zuweisen*, um eine Liste aller bereits für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* <<#tags-messenger, erstellten>> Tags zu sehen. +
 *_Tipp:_* Wenn du sehr viele Tags für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* erstellt hast, gib den Namen des Tags in das Suchfeld *Nach Tag suchen* ein.
@@ -636,7 +737,7 @@ Tags einer Konversation zuweisen:
 [#tag-hinzufuegen]
 ==== Tag hinzufügen
 
-Wenn du den gesuchten Tag nicht gefunden hast, wie im Kapitel <<#kontextmenue-tags-konversation, Tags zuweisen>> beschrieben, kannst du aus der Übersicht des Messengers heraus einen neuen Tag erstellen. Gehe dazu wie im Folgenden beschrieben vor.
+Wenn du den gesuchten Tag nicht gefunden hast, wie im Kapitel <<#kontextmenue-tags-konversation, Der Konversation Tags zuweisen>> beschrieben, kannst du aus der Übersicht des Messengers heraus einen neuen Tag erstellen. Gehe dazu wie im Folgenden beschrieben vor.
 
 [.instruction]
 Neuen Tag erstellen:
@@ -661,6 +762,42 @@ Tag bearbeiten:
 . Klicke auf material:edit[] *Tag bearbeiten*, um ein bestehendes Tag zu bearbeiten. +
 → Du wirst automatisch in das Menü *Einrichtung » Einstellungen » Tags* weitergeleitet. Dort kannst du die Tags bearbeiten.
 
+[#kontextmenue-konversation-in-ordner-verschieben]
+=== Konversation in einen Ordner verschieben
+
+Gehe wie im Folgenden beschrieben vor, um die Konversation in einen Ordner zu verschieben. Beachte, dass du vorher einen <<#eigene-ordner-erstellen, Ordner erstellt>> haben musst. 
+
+[.instruction]
+Konversation in einen Ordner verschieben:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
+. Klicke in der Zeile der Konversation, die du in einen Ordner verschieben möchtest, auf material:more_vert[].
+. Klicke auf material:folder[] *Ordner verwalten*.
+. Wähle (material:check_box[role=skyBlue]) einen oder mehrere Ordner aus der Liste. +
+*_Hinweis:_* Wenn du über die Funktion *Spalten konfigurieren* die Option *Ordner* aktiviert hast, siehst du in der Übersicht, in welchem Ordner die Konversation gespeichert ist.
+
+[#kontextmenue-konversation-aus-ordner-entfernen]
+[discrete]
+=== Konversation aus einem Ordner entfernen
+
+Du kannst eine Konversation jederzeit wieder aus einem Ordner entfernen. 
+
+[.instruction]
+Konversation aus einem Ordner entfernen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
+. Klicke in der Zeile der Konversation, die du aus dem Ordner entfernen möchtest, auf material:more_vert[].
+. Klicke auf material:folder[] *Ordner verwalten*.
+. Klicke auf den aktivierten (material:check_box[role=skyBlue]) Ordner, um die Auswahl zu entfernen (material:check_box_outline_blank[]).
+
+[TIP]
+.Konversation aus allen Ordner entfernen
+====
+Wenn du die Konversation aus allen Ordnern entfernen möchtest, klicke auf material:folder_off[] *Aus allen Ordnern entfernen*.
+====
+
 [#kontextmenue-konversation-als-erledigt-nicht-erledigt-markieren]
 === Konversation als erledigt / nicht erledigt markieren
 
@@ -675,6 +812,7 @@ Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht h
 Konversation als erledigt markieren:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in der Zeile der Konversation, die du als erledigt markieren möchtest, auf material:more_vert[].
 . Klicke auf material:circle[] *Konversation als erledigt markieren*. +
 → Am Zeilenanfang der Konversation wird das Symbol material:circle[role=green] angezeigt.
@@ -688,6 +826,7 @@ Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht h
 Konversation als nicht erledigt markieren:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in der Zeile der Konversation, die du als nicht erledigt markieren möchtest, auf material:more_vert[]
 . Klicke auf material:radio_button_unchecked[] *Konversation als nicht erledigt markieren*. +
 → Am Zeilenanfang der Konversation wird das Symbol material:circle[role=green] entfernt.
@@ -706,13 +845,10 @@ Gehe wie im Folgenden beschrieben vor, um eine Konversation zu abonnieren.
 Konversation abonnieren:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in die Zeile der Konversation, die du abonnieren möchtest, auf material:more_vert[].
 . Klicke auf material:notifications_active[] *Konversation abonnieren*. +
 → In der Spalte material:notifications[] *Abonniert* wird das Symbol material:done[] angezeigt.
-
-////
-TODO: ist das korrekt? → Du erhältst oben rechts in deinem plentymarkets Backend eine Benachrichtigung über das Symbol material:notifications[].
-////
 
 [#konversation-nicht-abonnieren]
 ==== Konversation nicht mehr abonnieren
@@ -723,37 +859,159 @@ Gehe wie im Folgenden beschrieben vor, um das Abonnement einer Konversation abzu
 Konversation nicht mehr abonnieren:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in die Zeile der Konversation, deren Abonnement du abbestellen möchtest, auf material:more_vert[].
 . Klicke auf material:notifications_off[] *Konversation nicht mehr abonnieren*. +
 → In der Spalte material:notifications[] *Abonniert* wird das Symbol material:done[] nicht mehr angezeigt. +
 → Du erhältst ab sofort keine Benachrichtigungen mehr, wenn eine neue Nachricht in dieser Konversation eingeht.
+
+[#kontextmenue-konversation-prioritaet-setzen]
+=== Priorität setzen
+
+Gehe wie im Folgenden beschrieben vor, um der Konversation eine Priorität zuzuweisen.
+
+[.instruction]
+Priorität setzen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
+. Klicke in die Zeile der Konversation, für die du eine Priorität setzen möchtest, auf material:more_vert[].
+. Klicke auf material:star[] *Priorität setzen*.
+. Wähle eine Priorität aus der Liste.
+
+[.collapseBox]
+.Verfügbare Prioritäten und deren Bedeutung
+--
+Du kannst die folgenden Prioritäten an der Konversation speichern:
+
+* material:keyboard_double_arrow_up[role=red] *Sehr hoch*
+* material:arrow_upward[role=red] *Hoch*
+* terra:equals[role=orange] *Mittel*
+* material:arrow_downward[] *Niedrig*
+* material:keyboard_double_arrow_down[] *Sehr niedrig* 
+
+--
+
+Die gewählte Priorität wird dann in der geöffneten Konversation neben den Tags angezeigt. Du kannst auch nach Konversationen mit einer bestimmten Priorität <<#intable-filter-priority, suchen>> und die Konversationen in der Übersicht anhand der Priorität aufsteigend und absteigend sortieren (material:arrow_upward[] und material:arrow_downward[]).
+
+[discrete]
+==== Priorität entfernen
+
+Du möchtest keine Priorität mehr für die Konversation anzeigen? Gehe wie im Folgenden beschrieben vor, um die Priorität von der Konversation zu entfernen.
+
+[.instruction]
+Priorität entfernen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
+. Klicke in die Zeile der Konversation, für die du die Priorität entfernen möchtest, auf material:more_vert[].
+. Klicke auf material:star[] *Priorität setzen*.
+. Klicke auf material:remove_circle_outline[] *Priorität entfernen*.
+
+[#kontextmenue-konversation-typ-status-setzen]
+=== Typ und Status setzen
+
+Gehe wie im Folgenden beschrieben vor, um für die Konversation einen Typ und einen Status zu setzen. Beachte, dass du vorher einen <<#typen-status-erstellen, Typ und Status erstellt>> haben musst.
+
+[.instruction]
+Typ und Status setzen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
+. Klicke in der Zeile der Konversation, für die du einen Typ und einen Status setzen möchtest, auf material:more_vert[].
+. Klicke auf material:checklist_rtl[] *Typ und Status setzen*.
+. Wähle zuerst den Typ und dann den gewünschten Status aus der Liste.
+
+[IMPORTANT]
+.Standardtyp und Standardstatus werden überschrieben
+====
+Der Typ und der dazugehörige Status, den du hier für die Konversation wählst, überschreibt den Standardtyp und Standardstatus, den du im Assistenten *Messenger-Konfiguration* im Schritt <<#einstellungen-e-mail-empfang, Einstellungen für den E-Mail-Empfang>> gewählt hast.
+====
+
+Der gewählte Typ und der gewählte Status werden dann in der geöffneten Konversation neben den Tags angezeigt. Du kannst auch nach Konversationen mit bestimmten <<#intable-filter-type, Typen>> und <<#intable-filter-status, Status>> suchen und die Konversationen in der Übersicht anhand des Typs und Status aufsteigend und absteigend sortieren (material:arrow_upward[] und material:arrow_downward[]).
+
+[#kontextmenue-konversation-deadline-setzen]
+=== Deadline setzen
+
+Gehe wie im Folgenden beschrieben vor, um eine Deadline für die Konversation zu setzen.
+
+[.instruction]
+Deadline setzen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
+. Klicke in der Zeile der Konversation, für die du eine Deadline setzen möchtest, auf material:more_vert[].
+. Klicke auf material:calendar_today[] *Deadline setzen*. +
+→ Das Fenster *Deadline setzen* öffnet sich.
+. Wähle das Datum aus dem Kalender (material:today[]).
+. Klicke auf material:calendar_today[] *Deadline setzen*. +
+→ Die Deadline für die Konversation ist nun gesetzt.
+
+Du kannst auch nach Konversationen mit bestimmten Deadlines in der Übersicht <<#intable-filter-deadline, suchen>> und die Konversationen nach Deadline aufsteigend und absteigend in der Übersicht filtern (material:arrow_upward[] und material:arrow_downward[]).
 
 [#kontextmenue-konversation-loeschen]
 === Konversation löschen
 
 Gehe wie im Folgenden beschrieben vor, um eine Konversation aus der Übersicht heraus zu löschen.
 
+[TIP]
+.Gelöschte Konversationen automatisch entfernen
+====
+Wie du einstellst, dass gelöschte Konversationen automatisch nach einer bestimmten Anzahl an Tagen aus dem Papierkorb entfernt werden, ist im Kapitel <<#papierkorb-automatisch-leeren, Papierkorb automatisch leeren>> beschrieben.
+====
+
 [.instruction]
 Konversation löschen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
 . Klicke in der Zeile der Konversation, die du löschen möchtest, auf material:more_vert[].
 . Klicke auf material:delete[] *Löschen*. +
 → Ein Fenster mit einer Sicherheitsabfrage erscheint.
 . Klicke auf *Ja*. +
 → Die Konversation wird gelöscht und in den <<#papierkorb, Papierkorb>> verschoben.
 
+[#konversation-anheften]
+== Konversationen anheften
+
+Du hast die Möglichkeit, Konversationen im Messenger anzuheften, um noch einfacher und schneller zwischen diesen Konversationen hin- und herzuwechseln. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Konversation anheften:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Suche die Konversation anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#konversation-suchen, Konversation im Messenger suchen>>.
+. Öffne die Konversation.
+. Klicke in der geöffneten Konversation oben rechts auf material:push_pin[] (*Konversation anheften*). +
+→ In der Seitennavigation erscheint der Ordner *Angeheftete Konversationen*, der alle angehefteten Konversationen enthält.
+
+[#einzelne-konversation-loesen]
+=== Einzelne Konversation lösen
+
+Um eine <<#konversation-anheften, angeheftete Konversation>> wieder zu lösen, hast du zwei Möglichkeiten:
+
+* über die Seitennavigation
+** Klicke dazu im Ordner *Angeheftete Konversationen* in der Zeile der Konversation, die du lösen möchtest, auf material:bookmark_remove[] (*Konversation lösen*).
+
+* über die geöffnete Konversation
+** Klicke in der geöffneten Konversation oben rechts auf material:bookmark_remove[] (*Konversation lösen*).
+
+[#alle-konversationen-loesen]
+=== Alle Konversationen lösen
+
+Um alle angehefteten Konversationen auf einmal zu lösen, klicke in der Zeile des Ordners *Angeheftete Konversationen* auf material:more_vert[] (*Weitere Optionen*) und dann auf material:playlist_remove[] (*Konversationen lösen*).
+
 [#minuten-erfassen]
 == Minuten erfassen
 
-Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine geflüsterte Nachricht handelt und wenn du der Nachricht mindestens einen Tag vom Typ *Nachrichten (kostenpflichtig)* zugewiesen hast.
+Du kannst für eine Nachricht immer dann Minuten erfassen, wenn es sich um eine geflüsterte Nachricht handelt und wenn du der Nachricht mindestens ein Tag vom Typ *Nachrichten (kostenpflichtig)* zugewiesen hast.
 
 [.instruction]
 Minuten erfassen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
 . Klicke oben links auf material:add[] *Neue Nachricht*.
-. Gib im Feld *Empfänger* einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste. +
+. Gib im Feld *Empfänger:in* einen Wert ein und wähle dann den passenden Wert aus der Vorschlagsliste. +
 *_Beispiel:_* Wenn du eine Zahl eingibst, werden dir mögliche Empfänger:innen mit dieser Auftrags-ID oder Kontakt-ID vorgeschlagen (siehe <<#image-messenger-new-message-suggestion-list>>).
 . Gib den Betreff deiner Nachricht im Feld *Betreff* ein.
 . Gib im Textfeld die Nachricht ein.
@@ -768,7 +1026,7 @@ Minuten erfassen:
 . Du siehst hier im Feld *Timer anzeigen* die Zeit, die der Timer bisher aufgezeichnet hat. 
 . Im Feld *Minuten* kannst du den Wert ggf. anpassen.
 . Wähle (material:radio_button_checked[role=skyBlue]), ob es sich um *Freiminuten* oder um *Bezahlte Minuten* handelt.
-. Wähle ggf. Tags aus der Liste.
+. Wähle ein passendes Tag oder mehrere Tags aus der Liste.
 . Klicke auf *ERFASSEN UND SPEICHERN*.
 
 [[image-messenger-capture-minutes-window]]
@@ -823,13 +1081,13 @@ In dieser Nachricht sieht sind von links nach rechts die folgenden Informationen
 [#einzelne-nachricht-bearbeiten]
 == Einzelne Nachricht bearbeiten
 
-Das <<#kontextmenue, Kontextmenü für die Konversationen>> hast du weiter oben auf dieser Seite bereits kennengelernt. Du kannst auch einzelne Nachrichten über ein Kontextmenü bearbeiten. Gehe dazu wie in den folgenden Unterkapiteln beschrieben vor.
+Die verschiedenen <<#konversation-bearbeiten-uebersicht, Aktionen für die Konversation>> hast du weiter oben auf dieser Seite bereits kennengelernt. Du kannst auch einzelne Nachrichten bearbeiten. Gehe dazu wie in den folgenden Unterkapiteln beschrieben vor.
 
 [[image-messenger-edit-single-message]]
-.Einzelne Nachricht über das Kontextmenü bearbeiten
+.Einzelne Nachricht über die Aktionen bearbeiten
 image::crm:messenger-edit-single-message-de.png[width=640, height=360]
 
-Sobald du eine Nachricht innerhalb einer Konversation gewählt hast, kannst du mit einem Klick auf material:chevron_right[] am Anfang der Nachricht den Inhalt der Nachricht im reinen Textformat anzeigen. So kannst du bereits eine Vorschau auf den Inhalt der Nachricht sehen, ohne die gesamte Nachricht zu <<#einzelne-nachricht-oeffnen, öffnen>>.
+Innerhalb der Konversation kannst du die einzelnen Nachrichten mit den grundlegenden Formatierungen als Vorschau sehen, ohne die gesamte Nachricht <<#einzelne-nachricht-oeffnen, öffnen>> zu müssen. Hinter dem Betreff der geöffneten Konversation siehst du in Klammern die Anzahl der Nachrichten, die in dieser Konversation enthalten sind.
 
 [#einzelne-nachricht-oeffnen]
 === Nachricht öffnen
@@ -845,9 +1103,9 @@ Gehe wie im Folgenden beschrieben vor, um einer einzelnen Nachricht einen Tag zu
 Der Nachricht Tags zuweisen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
-. Öffne die Konversation, die die Nachricht enthält, der du einen Tag zuweisen möchtest.  
+. Öffne die Konversation, die die Nachricht enthält, der du einen Tag zuweisen möchtest.
 . Öffne die Nachricht mit einem Klick in die Zeile der Nachricht.
-. Klicke auf material:local_offer[] *Der Nachricht Tags zuweisen*, um eine Liste aller bereits für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* <<#tags-messenger, erstellten>> Tags zu sehen. +
+. Klicke oben rechts in der Nachricht auf material:more_vert[] und dann auf material:local_offer[] *Der Nachricht Tags zuweisen*, um eine Liste aller bereits für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* <<#tags-messenger, erstellten>> Tags zu sehen. +
 *_Tipp:_* Wenn du sehr viele Tags für den Bereich *Nachrichten* bzw. *Nachrichten (kostenpflichtig)* erstellt hast, gib den Namen des Tags in das Suchfeld *Nach Tag suchen* ein.
 . Wähle (material:check_box[role=skyBlue]) die Tags, die du der Nachricht zuweisen möchtest. 
 
@@ -864,10 +1122,9 @@ Du kannst entweder die Anhänge der Nachricht einzeln herunterladen oder alle An
 Anhänge herunterladen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
-. Öffne die Konversation, die die Nachricht enthält, deren Anhang bzw. Anhänge du herunterladen möchtest.  
+. Öffne die Konversation, die die Nachricht enthält, deren Anhang bzw. Anhänge du herunterladen möchtest.
 . Öffne die Nachricht mit einem Klick in die Zeile der Nachricht.
-. Klicke auf material:more_vert[].
-. Klicke auf material:attach_file[] *Anhänge*.
+. Klicke oben rechts in der Nachricht auf material:more_vert[] und dann auf material:attach_file[] *Anhänge*.
 . Klicke auf einen Anhang oder auf material:file_download[] *Alle Dateien herunterladen*. +
 → Ein Fenster öffnet sich und du kannst einen Speicherort für die Datei(en) auf deinem Computer wählen.
 
@@ -876,26 +1133,31 @@ Anhänge herunterladen:
 
 Gehe wie im Folgenden beschrieben vor, um eine einzelne Nachricht zu löschen.
 
+[TIP]
+.Gelöschte Nachrichten automatisch entfernen
+====
+Wie du einstellst, dass gelöschte Nachrichten automatisch nach einer bestimmten Anzahl an Tagen aus dem Papierkorb entfernt werden, ist im Kapitel <<#papierkorb-automatisch-leeren, Papierkorb automatisch leeren>> beschrieben.
+====
+
 [.instruction]
 Nachricht löschen:
 
 . Öffne das Menü *CRM » Messenger (Testphase)*.
-. Öffne die Konversation, die die Nachricht enthält, die du löschen möchtest.  
+. Öffne die Konversation, die die Nachricht enthält, die du löschen möchtest.
 . Öffne die Nachricht mit einem Klick in die Zeile der Nachricht.
 . Klicke auf material:more_vert[].
 . Klicke auf material:delete[] *Löschen*. +
 → Ein Fenster mit einer Sicherheitsabfrage erscheint.
 . Klicke auf *Ja*. +
-→ Die Nachricht wird gelöscht und in den <<#papierkorb, Papierkorb>> verschoben.
-
-////
-TODO: FRAGE: Wird die einzelne gelöschte Nachricht auch in den Papierkorb verschoben? Konnte ich im System nicht nachstellen.
-////
+→ Die Nachricht wird gelöscht.
 
 [#paypal-dispute]
 == Verknüpfung zum PayPal Dispute-Plugin
 
 Mit dem link:https://marketplace.plentymarkets.com/paypaldispute_6582[PayPal Dispute^]-Plugin integrierst du PayPal Konfliktlösung in dein plentymarkets System und kannst dann direkt aus deinem System heraus Probleme und Konflikte mit deinen Kund:innen bearbeiten und lösen.
+
+[IMPORTANT]
+Beachte, dass du mindestens die Version 1.1.2 des link:https://marketplace.plentymarkets.com/paypaldispute_6582[PayPal Dispute^]-Plugins benötigst, um PayPal Dispute mit dem Messenger nutzen zu können.
 
 Wenn deine Kund:innen Probleme mit der bestellten Ware haben und PayPal Konfliktlösung nutzen, um an dich heranzutreten, wirst du dank des PayPal Dispute-Plugins direkt in deinem plentymarkets Backend darüber informiert. Im Menü *CRM » Messenger (Testphase)* siehst du alle Fallbenachrichtigungen. Insgesamt haben deine Kund:innen 4 Möglichkeiten ein Problem zu melden. Je nach Problem und Eskalationsstufe kannst du verschiedene Schritte in plentymarkets vornehmen. Es gibt 2 Eskalationsstufen bei Problemen. Diese 2 Eskalationsstufen sind *Dispute* und *Claim*. Die 4 Möglichkeiten deiner Kund:innen sind:
 
@@ -911,17 +1173,18 @@ Welche Voraussetzungen erfüllt sein müssen, wie du das Plugin installierst und
 Innerhalb der Konversation im Messenger siehst du anhand des PayPal-Symbols, dass es sich um einen Fall der PayPal Konfliktlösung handelt. Klicke auf den Fall, um das Plugin *PayPal Dispute* zu öffnen und xref:payment:paypal.adoc#360[auf den Konflikt zu reagieren].
 
 [#gruppenfunktion]
-== Gruppenfunktion im Posteingang nutzen
+== Gruppenfunktion nutzen
 
-Sobald du eine Konversation in der Übersicht im Bereich *Posteingang* markiert hast (material:check_box[role=skyBlue]), werden die verschiedenen Schaltflächen sichtbar (siehe <<#image-messenger-group-functions-conversations>>). In <<#table-group-functions-messenger>> sind die Bedienelemente aus der Gruppenfunktion sowie deren Erläuterungen aufgelistet.
+Statt jede <<#konversation-bearbeiten-uebersicht, Konversation einzeln zu bearbeiten>>, kannst du Zeit sparen und über die Gruppenfunktion mehrere Konversationen gleichzeitig bearbeiten. +
+Sobald du mindestens eine Konversation in der Übersicht in einem der Ordner <<#posteingang, Posteingang>>, <<#neue-nachrichten, Neue Nachrichten>>, <<#meine-nachrichten, Meine Nachrichten>> oder <<#papierkorb, Papierkorb>> markiert (material:check_box[role=skyBlue]) hast, werden die verschiedenen Schaltflächen sichtbar (siehe <<#image-messenger-group-functions-conversations>>). In <<#table-group-functions-messenger>> sind die Bedienelemente aus der Gruppenfunktion sowie deren Erläuterungen aufgelistet.
 
 [[image-messenger-group-functions-conversations]]
-.Gruppenfunktion im Posteingang
-image::crm:messenger-group-function.png[width=640, height=360]
+.Gruppenfunktion
+image::crm:messenger-gruppenfunktion.png[width=640, height=360]
 
 [[table-group-functions-messenger]]
 .Gruppenfunktion im Messenger nutzen
-[cols="2,1,6"]
+[cols="3,1,5"]
 |====
 |Bedienelement |Symbol |Erläuterung
 
@@ -931,11 +1194,11 @@ image::crm:messenger-group-function.png[width=640, height=360]
 
 |[#intable-group-function-mark-conversations-unread]*Konversationen als ungelesen markieren*
 |material:mark_email_unread[]
-|Markiert alle gewählten Konversationen als ungelesen. Die Konversationen werden dann in Fettschrift angezeigt.
+|Markiert alle gewählten Konversationen als ungelesen (material:circle[role=skyBlue]). Die Zeilen der Konversationen werden in Fettschrift angezeigt.
 
 |[#intable-group-function-mark-conversations-done]*Konversationen als erledigt markieren*
 |material:circle[]
-|Markiert alle gewählten Konversationen als erledigt.
+|Markiert alle gewählten Konversationen als erledigt (material:circle[role=green]).
 
 |[#intable-group-function-mark-conversations-not-done]*Konversationen als nicht erledigt markieren*
 |material:radio_button_unchecked[]
@@ -949,280 +1212,737 @@ image::crm:messenger-group-function.png[width=640, height=360]
 |material:delete[]
 |Löscht alle gewählten Konversationen nach dem Bestätigen der Sicherheitsabfrage.
 
+|[#intable-group-function-change-type-status-conversations]*Typ und Status der Konversationen ändern*
+|material:repeat_one[]
+|Ändert den Typ und den Status für alle gewählten Konversationen. +
+*_Hinweis:_* Diese Funktion befindet sich hinter dem Kontextmenü (material:more_vert[]).
+
+|[#intable-group-function-change-deadline-conversations]*Deadline der Konversationen ändern*
+|material:calendar_today[]
+|Ändert die Deadline für alle gewählten Konversationen. +
+*_Hinweis:_* Diese Funktion befindet sich hinter dem Kontextmenü (material:more_vert[]).
+
+|[#intable-group-function-change-priority-conversations]*Priorität der Konversationen ändern*
+|material:low_priority[]
+|Ändert die Priorität für alle gewählten Konversationen. +
+*_Hinweis:_* Diese Funktion befindet sich hinter dem Kontextmenü (material:more_vert[]).
+
+|[#intable-group-function-subscribe-conversations]*Konversationen abonnieren*
+|material:notifications_active[]
+|Abonniert alle gewählten Konversationen. +
+*_Hinweis:_* Diese Funktion befindet sich hinter dem Kontextmenü (material:more_vert[]).
+
+|[#intable-group-function-unsubscribe-conversations]*Konversationen nicht mehr abonnieren*
+|material:notifications_off[]
+|Entfernt das Abonnement für alle gewählten Konversationen. +
+*_Hinweis:_* Diese Funktion befindet sich hinter dem Kontextmenü (material:more_vert[]).
+
 |====
+
+[#posteingang]
+== Posteingang
+
+In der Navigation auf der linken Seite des Messengers findest du den Ordner material:inbox[] *Posteingang*. Außerdem siehst du dahinter die Anzahl neuer Nachrichten. Diese Information wird in Echtzeit aktualisiert.
+
+Klicke im Ordner *Posteingang* oben rechts auf *Spalten konfigurieren* (material:settings[]) und aktiviere (material:check_box[role=skyBlue]) die Spalten, die du in der Übersicht sehen möchtest. Du kannst aktivierte Spalten auch wieder deaktivieren (material:check_box_outline_blank[]). Klicke auf material:drag_indicator[] und halte das Symbol gedrückt, um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Die folgende Tabelle listet die verfügbaren Spalten im Ordner *Posteingang* auf.
+
+Nutze die <<#gruppenfunktion, Gruppenfunktion>>, um bestimmte Funktionen für die Konversationen in diesem Ordner gleichzeitig und somit zeitsparend auszuführen.
+
+[TIP]
+.Breite der Tabellenspalten beliebig anpassen
+====
+Du kannst die Breite der Spalten in dieser Ansicht nach deinen Bedürfnissen anpassen. Wenn du mit der Maus über die entsprechenden Tabellenspalten fährst, erscheinen blaue Linien, die es dir ermöglichen, die Breite individuell anzupassen. 
+====
+
+include::partial$messenger-configure-columns.adoc[]
 
 [#neue-nachrichten]
 == Neue Nachrichten
 
 In der Navigation auf der linken Seite des Messengers findest du unterhalb des Ordners material:inbox[] *Posteingang* den Ordner material:mark_chat_unread[] *Neue Nachrichten*.
 
-Im Ordner *Neue Nachrichten* des Messengers kannst du dir die folgenden Spalten anzeigen lassen:
+Klicke im Ordner *Neue Nachrichten* oben rechts auf *Spalten konfigurieren* (material:settings[]) und aktiviere (material:check_box[role=skyBlue]) die Spalten, die du in der Übersicht sehen möchtest. Du kannst aktivierte Spalten auch wieder deaktivieren (material:check_box_outline_blank[]). Klicke auf material:drag_indicator[] und halte das Symbol gedrückt, um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Die folgende Tabelle listet die verfügbaren Spalten im Ordner *Neue Nachrichten* auf.
 
-[[table-configure-columns-new-messages]]
-.Neue Nachrichten: Spalten konfigurieren
-[cols="1,3"]
-|====
-|Spalte |Erläuterung
-
-|[#intable-new-messages-extend-relations]*Relationen erweitern*
-|Öffnet mit einem Klick auf material:chevron_right[] die vorhandenen Relationen, die mit der Konversation verknüpft sind.
-
-|[#intable-new-messages-selection]*Auswahl*
-|Zeigt die Checkbox für die <<#gruppenfunktion, Gruppenfunktion>> (material:check_box_outline_blank[]) in der Übersicht an.
-
-|[#intable-new-messages-status]*Status*
-|Zeigt mit dem Symbol material:circle[role=skyBlue] (Nachricht ungelesen) an, dass sich ungelesene Nachrichten in der Konversation befinden. Zeigt mit dem Symbol material:circle[role=green] (Nachricht abgeschlossen) an, dass die Konversation abgeschlossen ist.
-
-|[#intable-new-messages-short-id]*Abgekürzte ID*
-|Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand der ID zu sortieren.
-
-|[#intable-new-messages-referrer]*Herkunft*
-a|Zeigt mit einem Symbol die Herkunft der ersten Nachricht in der Konversation an. +
-Mögliche Werte:
-
-* *Backend*
-* *REST*
-* *Plugin*
-* *PayPal Plugin* (icon:paypal[])
-
-|[#intable-new-messages-relations]*Relationen*
-a|Hier werden die Relationen zur Konversation angezeigt, zum Beispiel:
-
-* material:person[] _Name des Kontakts (Kontakt-ID)_
-* material:shopping_cart[] _Auftrags-ID_
-** Je nachdem, ob es sich um einen normalen xref:auftraege:auftraege-verwalten.adoc#[Auftrag], ein xref:auftraege:abonnement.adoc#[Abonnement] oder eine xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] handelt, wirst du mit einem Klick auf die ID in das entsprechende Menü weitergeleitet.
-* material:mail[] _E-Mail-Adresse_
-* material:credit_card[] _Zahlungs-ID_
-* Abonnent:innen der Konversation.
-
-Mit einem Klick auf material:chevron_right[] in der Zeile der Konversation öffnen sich alle verfügbaren Relationen auf einen Blick. Mit einem Klick auf material:expand_more[] schließt du den Bereich der Relationen wieder.  +
-
-*_Hinweise:_* +
-Der xref:crm:kontakte.adoc#[Kontakt] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *CRM » Kontakte*. +
-Der xref:auftraege:auftraege-verwalten.adoc#[Auftrag] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Aufträge bearbeiten*. +
-Das xref:auftraege:abonnement.adoc#[Abonnement] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Abonnement (Testphase)*. +
-Die xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Waren » Bestellung*. +
-Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Zahlungsverkehr*.
-
-|[#intable-new-messages-subject]*Betreff*
-|Zeigt den Betreff der ersten Nachricht innerhalb der Konversation an.
-
-|[#intable-new-messages-created-at]*Erstellt am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation erstellt wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-new-messages-updated-at]*Aktualisiert am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation aktualisiert wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-new-messages-tags]*Tags*
-|Zeigt die <<#kontextmenue-tags-konversation, Tags>> an, die der Konversation zugeordnet sind.
-
-|[#intable-new-messages-attachments]*Anhänge*
-|In der Spalte *Anzahl der Anhänge* (material:attach_file[]) zeigt das Symbol material:attach_file[] an, ob die Konversation Anhänge enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du, wie viele Anhänge die Konversation hat. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der Anhänge zu sortieren.
-
-|[#intable-new-messages-billed-messages]*Abgerechnete Nachrichten*
-|In der Spalte *Abgerechnete Nachrichten* (material:credit_card[]) zeigt das Symbol material:credit_card[] an, ob die Konversation abgerechnete Nachrichten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Nachrichten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Nachrichten zu sortieren.
-
-|[#intable-new-messages-billed-minutes]*Abgerechnete Minuten*
-|In der Spalte *Abgerechnete Minuten* (material:av_timer[]) zeigt das Symbol material:av_timer[] an, ob die Konversation abgerechnete Minuten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Minuten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Minuten zu sortieren.
-
-// TODO: heißt es noch so? oder heißt es jetzt "Bezahlte Minuten"?
-
-|[#intable-new-messages-subscribed]*Abonniert*
-|In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob die Konversation <<#konversation-abonnieren, abonniert>> wurde.
-
-|[#intable-new-messages-context-menu]*Kontextmenü*
-|Ermöglicht das Bearbeiten von Konversationen in der Übersicht mit Hilfe des <<#kontextmenue, Kontextmenüs>>.
-
-|====
-
-Über die Schaltfläche *Spalten konfigurieren* (material:settings[]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+Nutze die <<#gruppenfunktion, Gruppenfunktion>>, um bestimmte Funktionen für die Konversationen in diesem Ordner gleichzeitig und somit zeitsparend auszuführen.
 
 [TIP]
-.Gruppenfunktion nutzen
+.Breite der Tabellenspalten beliebig anpassen
 ====
-Auch im Bereich *Neue Nachrichten* kannst du die Gruppenfunktion nutzen. Die Gruppenfunktion im Bereich *Neue Nachrichten* funktioniert genauso wie die Gruppenfunktion im Bereich *Posteingang*. Weitere Informationen dazu findest du im Kapitel <<#gruppenfunktion, Gruppenfunktion im Posteingang nutzen>>.
+Du kannst die Breite der Spalten in dieser Ansicht nach deinen Bedürfnissen anpassen. Wenn du mit der Maus über die entsprechenden Tabellenspalten fährst, erscheinen blaue Linien, die es dir ermöglichen, die Breite individuell anzupassen. 
 ====
+
+include::partial$messenger-configure-columns.adoc[]
 
 [#meine-nachrichten]
 == Meine Nachrichten
 
 In der Navigation auf der linken Seite des Messengers findest du unterhalb des Ordners material:inbox[] *Posteingang* den Ordner material:3p[] *Meine Nachrichten*. Hier siehst du alle Konversationen, die du <<#konversation-abonnieren, abonniert>> hast. 
 
-Im Ordner *Meine Nachrichten* des Messengers kannst du dir die folgenden Spalten anzeigen lassen:
+Klicke im Ordner *Meine Nachrichten* oben rechts auf *Spalten konfigurieren* (material:settings[]) und aktiviere (material:check_box[role=skyBlue]) die Spalten, die du in der Übersicht sehen möchtest. Du kannst aktivierte Spalten auch wieder deaktivieren (material:check_box_outline_blank[]). Klicke auf material:drag_indicator[] und halte das Symbol gedrückt, um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Die folgende Tabelle listet die verfügbaren Spalten im Ordner *Meine Nachrichten* auf.
 
-[[table-configure-columns-my-messages]]
-.Meine Nachrichten: Spalten konfigurieren
-[cols="1,3"]
-|====
-|Spalte |Erläuterung
-
-|[#intable-my-messages-extend-relations]*Relationen erweitern*
-|Öffnet mit einem Klick auf material:chevron_right[] die vorhandenen Relationen, die mit der Konversation verknüpft sind.
-
-|[#intable-my-messages-selection]*Auswahl*
-|Zeigt die Checkbox für die <<#gruppenfunktion, Gruppenfunktion>> (material:check_box_outline_blank[]) in der Übersicht an.
-
-|[#intable-my-messages-status]*Status*
-|Zeigt mit dem Symbol material:circle[role=skyBlue] (Nachricht ungelesen) an, dass sich ungelesene Nachrichten in der Konversation befinden. Zeigt mit dem Symbol material:circle[role=green] (Nachricht abgeschlossen) an, dass die Konversation abgeschlossen ist.
-
-|[#intable-my-messages-short-id]*Abgekürzte ID*
-|Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand der ID zu sortieren.
-
-|[#intable-my-messages-referrer]*Herkunft*
-a|Zeigt mit einem Symbol die Herkunft der ersten Nachricht in der Konversation an. +
-Mögliche Werte:
-
-* *Backend*
-* *REST*
-* *Plugin*
-* *PayPal Plugin* (icon:paypal[])
-
-|[#intable-my-messages-relations]*Relationen*
-a|Hier werden die Relationen zur Konversation angezeigt, zum Beispiel:
-
-* material:person[] _Name des Kontakts (Kontakt-ID)_
-* material:shopping_cart[] _Auftrags-ID_
-** Je nachdem, ob es sich um einen normalen xref:auftraege:auftraege-verwalten.adoc#[Auftrag], ein xref:auftraege:abonnement.adoc#[Abonnement] oder eine xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] handelt, wirst du mit einem Klick auf die ID in das entsprechende Menü weitergeleitet.
-* material:mail[] _E-Mail-Adresse_
-* material:credit_card[] _Zahlungs-ID_
-* Abonnent:innen der Konversation.
-
-Mit einem Klick auf material:chevron_right[] in der Zeile der Konversation öffnen sich alle verfügbaren Relationen auf einen Blick. Mit einem Klick auf material:expand_more[] schließt du den Bereich der Relationen wieder.  +
-
-*_Hinweise:_* +
-Der xref:crm:kontakte.adoc#[Kontakt] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *CRM » Kontakte*. +
-Der xref:auftraege:auftraege-verwalten.adoc#[Auftrag] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Aufträge bearbeiten*. +
-Das xref:auftraege:abonnement.adoc#[Abonnement] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Abonnement (Testphase)*. +
-Die xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Waren » Bestellung*. +
-Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Zahlungsverkehr*.
-
-|[#intable-my-messages-subject]*Betreff*
-|Zeigt den Betreff der ersten Nachricht innerhalb der Konversation an.
-
-|[#intable-my-messages-created-at]*Erstellt am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation erstellt wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-my-messages-updated-at]*Aktualisiert am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation aktualisiert wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-my-messages-tags]*Tags*
-|Zeigt die <<#kontextmenue-tags-konversation, Tags>> an, die der Konversation zugeordnet sind.
-
-|[#intable-my-messages-attachments]*Anhänge*
-|In der Spalte *Anzahl der Anhänge* (material:attach_file[]) zeigt das Symbol material:attach_file[] an, ob die Konversation Anhänge enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du, wie viele Anhänge die Konversation hat. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der Anhänge zu sortieren.
-
-|[#intable-my-messages-billed-messages]*Abgerechnete Nachrichten*
-|In der Spalte *Abgerechnete Nachrichten* (material:credit_card[]) zeigt das Symbol material:credit_card[] an, ob die Konversation abgerechnete Nachrichten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Nachrichten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Nachrichten zu sortieren.
-
-|[#intable-my-messages-billed-minutes]*Abgerechnete Minuten*
-|In der Spalte *Abgerechnete Minuten* (material:av_timer[]) zeigt das Symbol material:av_timer[] an, ob die Konversation abgerechnete Minuten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Minuten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Minuten zu sortieren.
-
-|[#intable-my-messages-subscribed]*Abonniert*
-|In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob die Konversation <<#konversation-abonnieren, abonniert>> wurde.
-
-|[#intable-my-messages-context-menu]*Kontextmenü*
-|Ermöglicht das Bearbeiten von Konversationen in der Übersicht mit Hilfe des <<#kontextmenue, Kontextmenüs>>.
-
-|====
-
-Über die Schaltfläche *Spalten konfigurieren* (material:settings[]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+Nutze die <<#gruppenfunktion, Gruppenfunktion>>, um bestimmte Funktionen für die Konversationen in diesem Ordner gleichzeitig und somit zeitsparend auszuführen.
 
 [TIP]
-.Gruppenfunktion nutzen
+.Breite der Tabellenspalten beliebig anpassen
 ====
-Auch im Bereich *Meine Nachrichten* kannst du die Gruppenfunktion nutzen. Die Gruppenfunktion im Bereich *Meine Nachrichten* funktioniert genauso wie die Gruppenfunktion im Bereich *Posteingang*. Weitere Informationen dazu findest du im Kapitel <<#gruppenfunktion, Gruppenfunktion im Posteingang nutzen>>.
+Du kannst die Breite der Spalten in dieser Ansicht nach deinen Bedürfnissen anpassen. Wenn du mit der Maus über die entsprechenden Tabellenspalten fährst, erscheinen blaue Linien, die es dir ermöglichen, die Breite individuell anzupassen.
 ====
 
+[TIP]
+Unterhalb dieser Tabelle erfährst du, wie du <<#eigene-ordner-erstellen, eigene Ordner erstellst>>.
+
+include::partial$messenger-configure-columns.adoc[]
+
+[#eigene-ordner-erstellen]
+=== Eigene Ordner erstellen
+
+Um mehr Übersichtlichkeit und Struktur in deinen Konversationen zu haben, kannst du beliebig viele Ordner erstellen. Deine erstellten Ordner werden dann innerhalb des Ordners material:3p[] *Meine Ordner* angezeigt. Gehe dazu wie im Folgenden beschrieben vor.
+
+[.instruction]
+Ordner erstellen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke unten links auf material:add[] *NEUEN ORDNER HINZUFÜGEN*. +
+→ Das Fenster *Neuen Ordner hinzufügen* öffnet sich.
+. Gib einen Namen für den Ordner ein.
+. Klicke auf *Speichern*. +
+→ Der Ordner wird erstellt. Du findest den Ordner unter material:3p[] *Meine Ordner*.
+
+[TIP]
+Der Ordner material:3p[] *Meine Ordner* ist nur sichtbar, wenn du mindestens einen Ordner erstellt hast. Wenn du keine eigenen Ordner erstellst, ist der Ordner material:3p[] *Meine Ordner* _nicht_ sichtbar.
+
+// TODO: Screenshot einfügen, auf dem man ein paar erstellte Ordner sehen kann.
+
+Mit einem Klick auf den Ordner werden dann nur die in diesem Ordner vorhandenen Konversationen in der Übersicht angezeigt.
+
+[#ordner-umbenennen]
+=== Ordner umbenennen
+
+Du möchtest einem Ordner einen anderen Namen geben? Gehe wie im Folgenden beschrieben vor.
+
+[.instruction]
+Ordner umbenennen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke auf der linken Seite unter material:3p[] *Meine Ordner* in der Zeile des Ordners, den du umbenennen möchtest, auf material:more_vert[].
+. Klicke auf material:edit[] *Umbenennen*. +
+→ Das Fenster *Ordner umbenennen* öffnet sich.
+. Gib einen anderen Namen für den Ordner ein.
+. Klicke auf *Speichern*.
+
+[#ordner-loeschen]
+=== Ordner löschen
+
+Gehe wie im Folgenden beschrieben vor, um einen Ordner wieder zu löschen. +
+*_Wichtig:_* Beim Löschen des Ordners wird nur die Relation gelöscht und _nicht_ die im Ordner enthaltenen Konversationen. Wenn du einen Ordner löschst, werden die Konversationen wieder in den Ordner *Posteingang* verschoben.
+
+[.instruction]
+Ordner löschen:
+
+. Öffne das Menü *CRM » Messenger (Testphase)*.
+. Klicke auf der linken Seite unter material:3p[] *Meine Ordner* in der Zeile des Ordners, den du löschen möchtest, auf material:more_vert[].
+. Klicke auf material:delete[] *Löschen*. +
+→ Das Fenster *Ordner löschen* öffnet sich. 
+. Klicke auf material:delete[role=red] *LÖSCHEN*. +
+→ Der Ordner wird gelöscht und die darin enthaltenen Konversationen werden in den Ordner *Posteingang* verschoben.
+
+[#meine-filter]
+== Meine Filter
+
+Sobald du einen Filter <<#aktuellen-filter-speichern, speicherst>> und diesen Filter dann <<#gespeicherte-filter-anwenden, anwendest>>, wird der Ordner material:bookmarks[] *Meine Filter* sichtbar. In diesem Ordner findest du alle gespeicherten Filter. Mit einem Klick auf einen der Filter werden die Filtereinstellungen in dem Ordner, in dem du dich gerade befindest, angewendet.
+
 [#papierkorb]
-== Papierkorb 
+== Papierkorb
 
 In der Navigation auf der linken Seite des Messengers findest du den Ordner material:delete[] *Papierkorb*. Hier werden alle <<#kontextmenue-konversation-loeschen, gelöschten Konversationen>> und alle <<#einzelne-nachricht-loeschen, gelöschten Nachrichten>> abgelegt.
 
-//// 
-TODO: Wird es in Zukunft möglich sein, alle Nachrichten aus dem Papierkorb mit einem Klick zu entfernen (so wie bei "Papierkorb leeren" in E-Mail-Programmen? Oder werden die Nachrichten automatisch nach einem bestimmten Zeitraum gelöscht? Wird es möglich sein, Nachrichten aus dem Papierkorb "zurückzuholen", wenn ich die Konversation bzw. Nachricht auf "nicht abgeschlossen" setze?
-////
+[TIP]
+.Gelöschte Nachrichten automatisch entfernen
+====
+Wie du einstellst, dass gelöschte Nachrichten und Konversationen automatisch nach einer bestimmten Anzahl an Tagen aus dem Papierkorb entfernt werden, ist im Kapitel <<#papierkorb-automatisch-leeren, Papierkorb automatisch leeren>> beschrieben.
+====
 
-Im Papierkorb des Messengers kannst du dir die folgenden Spalten anzeigen lassen:
+Klicke im Papierkorb oben rechts auf *Spalten konfigurieren* (material:settings[]) und aktiviere (material:check_box[role=skyBlue]) die Spalten, die du in der Übersicht sehen möchtest. Du kannst aktivierte Spalten auch wieder deaktivieren (material:check_box_outline_blank[]). Klicke auf material:drag_indicator[] und halte das Symbol gedrückt, um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Die folgende Tabelle listet die verfügbaren Spalten im Papierkorb auf.
 
-[[table-configure-columns-trash]]
-.Papierkorb: Spalten konfigurieren
-[cols="1,3"]
-|====
-|Spalte |Erläuterung
-
-|[#intable-trash-extend-relations]*Relationen erweitern*
-|Öffnet mit einem Klick auf material:chevron_right[] die vorhandenen Relationen, die mit der Konversation verknüpft sind.
-
-|[#intable-trash-selection]*Auswahl*
-|Zeigt die Checkbox für die <<#gruppenfunktion, Gruppenfunktion>> (material:check_box_outline_blank[]) in der Übersicht an.
-
-|[#intable-trash-status]*Status*
-|Zeigt mit dem Symbol material:circle[role=skyBlue] (Nachricht ungelesen) an, dass sich ungelesene Nachrichten in der Konversation befinden. Zeigt mit dem Symbol material:circle[role=green] (Nachricht abgeschlossen) an, dass die Konversation abgeschlossen ist.
-
-|[#intable-trash-short-id]*Abgekürzte ID*
-|Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand der ID zu sortieren.
-
-|[#intable-trash-referrer]*Herkunft*
-a|Zeigt mit einem Symbol die Herkunft der ersten Nachricht in der Konversation an. +
-Mögliche Werte:
-
-* *Backend*
-* *REST*
-* *Plugin*
-* *PayPal Plugin* (icon:paypal[])
-
-|[#intable-trash-relations]*Relationen*
-a|Hier werden die Relationen zur Konversation angezeigt, zum Beispiel:
-
-* material:person[] _Name des Kontakts (Kontakt-ID)_
-* material:shopping_cart[] _Auftrags-ID_
-** Je nachdem, ob es sich um einen normalen xref:auftraege:auftraege-verwalten.adoc#[Auftrag], ein xref:auftraege:abonnement.adoc#[Abonnement] oder eine xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] handelt, wirst du mit einem Klick auf die ID in das entsprechende Menü weitergeleitet.
-* material:mail[] _E-Mail-Adresse_
-* material:credit_card[] _Zahlungs-ID_
-* Abonnent:innen der Konversation.
-
-Mit einem Klick auf material:chevron_right[] in der Zeile der Konversation öffnen sich alle verfügbaren Relationen auf einen Blick. Mit einem Klick auf material:expand_more[] schließt du den Bereich der Relationen wieder. +
-
-*_Hinweise:_* +
-Der xref:crm:kontakte.adoc#[Kontakt] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *CRM » Kontakte*. +
-Der xref:auftraege:auftraege-verwalten.adoc#[Auftrag] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Aufträge bearbeiten*. +
-Das xref:auftraege:abonnement.adoc#[Abonnement] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Abonnement (Testphase)*. +
-Die xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Waren » Bestellung*. +
-Die xref:payment:beta-zahlungen-verwalten-neu.adoc#[Zahlung] hat eine direkte Verknüpfung in den entsprechenden Datensatz im Menü *Aufträge » Zahlungsverkehr*.
-
-|[#intable-trash-subject]*Betreff*
-|Zeigt den Betreff der ersten Nachricht innerhalb der Konversation an.
-
-|[#intable-trash-created-at]*Erstellt am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation erstellt wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-trash-updated-at]*Aktualisiert am*
-|Zeigt das Datum und die Uhrzeit an, wann die Konversation aktualisiert wurde. Klicke rechts neben der Titelleiste auf material:arrow_upward[] oder material:arrow_downward[], um die Tabelle aufsteigend oder absteigend anhand des Datums zu sortieren.
-
-|[#intable-trash-tags]*Tags*
-|Zeigt die <<#kontextmenue-tags-konversation, Tags>> an, die der Konversation zugeordnet sind.
-
-|[#intable-trash-attachments]*Anhänge*
-|In der Spalte *Anzahl der Anhänge* (material:attach_file[]) zeigt das Symbol material:attach_file[] an, ob die Konversation Anhänge enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du, wie viele Anhänge die Konversation hat. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der Anhänge zu sortieren.
-
-|[#intable-trash-billed-messages]*Abgerechnete Nachrichten*
-|In der Spalte *Abgerechnete Nachrichten* (material:credit_card[]) zeigt das Symbol material:credit_card[] an, ob die Konversation abgerechnete Nachrichten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Nachrichten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Nachrichten zu sortieren.
-
-|[#intable-trash-billed-minutes]*Abgerechnete Minuten*
-|In der Spalte *Abgerechnete Minuten* (material:av_timer[]) zeigt das Symbol material:av_timer[] an, ob die Konversation abgerechnete Minuten enthält. Wenn du mit dem Cursor über das Symbol fährst, siehst du die Anzahl der abgerechneten Minuten. Klicke rechts neben der Titelleiste auf material:arrow_upward[], um die Tabelle anhand der Anzahl der abgerechneten Minuten zu sortieren.
-
-|[#intable-trash-subscribed]*Abonniert*
-|In der Spalte material:notifications[] wird durch das Symbol material:done[] angezeigt, ob die Konversation <<#konversation-abonnieren, abonniert>> wurde.
-
-|[#intable-trash-context-menu]*Kontextmenü*
-|Ermöglicht das Bearbeiten von Konversationen in der Übersicht mit Hilfe des <<#kontextmenue, Kontextmenüs>>.
-
-|====
-
-Über die Schaltfläche *Spalten konfigurieren* (material:settings[]) ganz oben rechts in der Übersicht kannst du bereits angezeigte Spalten in der Übersicht wieder deaktivieren.
+Nutze die <<#gruppenfunktion, Gruppenfunktion>>, um bestimmte Funktionen für die Konversationen in diesem Ordner gleichzeitig und somit zeitsparend auszuführen.
 
 [TIP]
-.Gruppenfunktion nutzen
+.Breite der Tabellenspalten beliebig anpassen
 ====
-Auch im Papierkorb kannst du die Gruppenfunktion nutzen. Die Gruppenfunktion im Papierkorb funktioniert genauso wie die Gruppenfunktion im Bereich *Posteingang*. Weitere Informationen dazu findest du im Kapitel <<#gruppenfunktion, Gruppenfunktion im Posteingang nutzen>>.
+Du kannst die Breite der Spalten in dieser Ansicht nach deinen Bedürfnissen anpassen. Wenn du mit der Maus über die entsprechenden Tabellenspalten fährst, erscheinen blaue Linien, die es dir ermöglichen, die Breite individuell anzupassen.
 ====
+
+include::partial$messenger-configure-columns.adoc[]
+
+[#papierkorb-automatisch-leeren]
+== Papierkorb automatisch leeren
+
+Stelle ein, nach wie vielen Tagen <<#einzelne-nachricht-loeschen, gelöschte Nachrichten>> und <<#kontextmenue-konversation-loeschen, gelöschte Konversationen>> automatisch aus dem Papierkorb entfernt werden sollen. Gehe dazu wie im Folgenden beschrieben vor. Beachte, dass nur eine Person mit Admin-Rechten diese Einstellung vornehmen kann.
+
+[.instruction]
+Papierkorb automatisch leeren:
+
+. Öffne das Menü *Einrichtung » CRM » Messenger » Allgemein*. +
+icon:map-signs[] *_Oder:_* Wenn du dich bereits im Messenger befindest, klappe auf der linken Seite unterhalb des Papierkorbs den Bereich material:settings[] *Einstellungen* auf und klicke auf material:folder_open[] *Allgemein*, um in das Menü *Einrichtung » CRM » Messenger » Allgemein* weitergeleitet zu werden.
+. Aktiviere (material:toggle_on[role=skyBlue]) im Bereich *Papierkorb automatisch leeren* die Option *Funktion "Papierkorb automatisch leeren" aktivieren*.
+. Gib im Bereich *Anzahl an Tagen* eine Zahl ein.
+. *Speichere* (material:save[]) die Einstellungen. +
+→ Alle im Papierkorb enthaltenen gelöschten Nachrichten und Konversationen werden automatisch nach der Anzahl der hier eingegebenen Tage aus dem Papierkorb entfernt.
+
+[IMPORTANT]
+.Gelöschte Nachrichten und Konversationen manuell aus dem Papierkorb entfernen
+====
+Du kannst alle gelöschten Nachrichten und Konversationen auch manuell aus dem Papierkorb entfernen. Klicke dazu in der linken Seite der Navigation in der Zeile des Papierkorbs auf *Weitere Optionen* (material:more_vert[]) und dann auf material:delete[] *Leeren*. Nach Bestätigen der Sicherheitsabfrage, dass du wirklich alle Konversationen und dazugehörigen Nachrichten dauerhaft löschen möchtest, wird der Papierkorb geleert.
+====
+
+[#ereignisse-automatisieren]
+== Ereignisse im Messenger automatisieren
+
+Du hast die Möglichkeit, bestimmte Ereignisse im Messenger zu automatisieren. Zum Beispiel kannst du eine Automatisierung erstellen, die bei Eingang einer Nachricht automatisch den Versand einer E-Mail-Vorlage an den Kontakt auslöst. Oder du stellst ein, dass alle Abonnent:innen der Konversation eine Nachricht als Erinnerung erhalten, wenn die Konversation in einen bestimmten Status gelangt. Dir stehen dazu eine Vielzahl an <<#filter-hinzufuegen, Filtern>>, <<#aktionen-hinzufuegen, Aktionen>> und <<#ausloeser-hinzufuegen, Auslösern>> zur Verfügung.
+
+// TODO: Praxisbeispiele für gängige Ereignisse weiter unten auf der Seite hinzufügen und im Forum-FAQ-Beitrag verlinken.
+
+[[image-messenger-automatisierung-uebersicht]]
+.Übersicht im Menü *Einrichtung » CRM » Messenger » Automatisierung*
+image::crm:messenger-automatisierung-uebersicht.png[width=640, height=360]
+
+[#automatisierung-spalten-konfigurieren]
+=== Spalten konfigurieren
+
+Klicke in der Übersicht oben rechts auf *Spalten konfigurieren* (material:settings[]) und aktiviere (material:check_box[role=skyBlue]) die Spalten, die du in der Übersicht sehen möchtest. Du kannst aktivierte Spalten auch wieder deaktivieren (material:check_box_outline_blank[]). Klicke auf material:drag_indicator[] und halte das Symbol gedrückt, um die Reihenfolge der Spalten per Drag-and-drop zu verschieben. Im Folgenden findest du die verfügbaren Spalten in der Übersicht: 
+
+* ID
+* Name
+* Aktiv
+** Du kannst den Status direkt in der Übersicht von *Aktiv* auf *Inaktiv* oder andersherum anpassen.
+* Typ
+** Zeigt den Typ der Automatisierung an: *Zeitbasiert* oder *Ereignisbasiert*.
+* Auslöser
+* Beschreibung
+* Letzte Änderung
+** Datum und Uhrzeit, wann die Automatisierung zuletzt geändert wurde
+* Letzte Ausführung
+** Datum und Uhrzeit, wann die zeitbasierte Automatisierung zuletzt ausgeführt wurde. Wenn der Typ *Ereignisbasiert* ist, werden Datum und Uhrzeit _nicht_ angezeigt.
+* Aktionen
+** Mit einem Klick auf material:more_vert[] kannst du die Automatisierung <<#automatisierung-kopieren, kopieren>> oder <<#automatisierung-loeschen, löschen>>.
+
+[#neue-automatisierung-erstellen]
+=== Neue Automatisierung erstellen
+
+Gehe wie im Folgenden beschrieben vor, um eine neue Automatisierung zu erstellen.
+
+[.instruction]
+Automatisierung erstellen:
+
+. Öffne das Menü *Einrichtung » CRM » Messenger » Automatisierung*. +
+icon:map-signs[] *_Oder:_* Wenn du dich bereits im Messenger befindest, klappe auf der linken Seite unterhalb des Papierkorbs den Bereich material:settings[] *Einstellungen* auf und klicke auf material:auto_mode[] *Automatisierung*, um in das Menü *Einrichtung » CRM » Messenger » Automatisierung* weitergeleitet zu werden.
+. Klicke auf material:add[] *Automatisierung hinzufügen*.
+. Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<#table-automatisierung-erstellen>>.
+. Speichere (material:save[]) die Einstellungen.
+
+[[table-automatisierung-erstellen]]
+.Automatisierung erstellen
+[cols="1,3"]
+|====
+|Einstellung |Erläuterung
+
+2+^| *Details* 
+
+| *Inaktiv* / *Aktiv*
+|Standardmäßig sind alle neu erstellten Automatisierungen bereits auf *Aktiv* (material:toggle_on[role=skyBlue]) gestellt. Wenn du die Automatisierung noch nicht aktivieren möchtest, stelle sie auf *Inaktiv* (material:toggle_off[]).
+
+| *Name*
+|Gib einen Namen für die Automatisierung ein. Dies ist ein Pflichtfeld.
+
+| *Beschreibung*
+|Gib einen Text ein, der kurz zusammenfasst, was diese Automatisierung auslösen soll. Dieses Feld ist optional. Eine Beschreibung kann dir später in der Übersicht hilfreich sein.
+
+| *Typ*
+|Wähle den Typ aus der Dropdown-Liste. Dies ist ein Pflichtfeld. +
+Verfügbare Typen: *Zeitbasiert* und *Ereignisbasiert*. Je nachdem, welchen Typ du wählst, werden dir nachfolgend unterschiedliche Filter und Auslöser angezeigt.
+
+// TODO: Verlinkung für zeitbasierte und ereignisbasierte Filter und Auslöser hinzufügen.
+
+2+^| *Filter* 
+
+| *Filter hinzufügen*
+|Klicke auf material:add[] (*Filter hinzufügen*), um neue Filter für diese Automatisierung hinzuzufügen. Alle verfügbaren Filter und deren Erläuterungen findest du im Kapitel <<#filter-hinzufuegen, Filter hinzufügen>>.
+
+2+^| *Auslöser* 
+
+| *Auslöser hinzufügen*
+|Klicke auf material:add[] (*Auslöser hinzufügen*), um neue Auslöser für diese Automatisierung hinzuzufügen. Alle verfügbaren Auslöser und deren Erläuterungen findest du im Kapitel <<#ausloeser-hinzufuegen, Auslöser hinzufügen>>.
+
+
+2+^| *Aktion* 
+
+| *Aktion hinzufügen*
+|Klicke auf material:add[] (*Aktion hinzufügen*), um neue Aktionen für diese Automatisierung hinzuzufügen. Alle verfügbaren Aktionen und deren Erläuterungen findest du im Kapitel <<#aktionen-hinzufuegen, Aktionen hinzufügen>>.
+
+|====
+
+[#filter-hinzufuegen]
+=== Filter hinzufügen
+
+Erfahre in diesem Kapitel, welche ereignisbasierten und zeitbasierten Filter dir zur Verfügung stehen.
+
+// TODO: ist eine Konfig, wie man einen Filter hinzufügt überhaupt nötig?
+
+[#ereignisbasierte-filter]
+==== Ereignisbasierte Filter
+
+<<#table-messenger-filter-event-based>> listet die verfügbaren Filter auf, die dir zur Verfügung stehen, wenn du den Typ *Ereignisbasiert* gewählt hast.
+
+
+[[table-messenger-filter-event-based]]
+.Verfügbare ereignisbasierte Filter
+[cols="1,3a"]
+|====
+|Filter |Erläuterung
+
+| *Alter der Konversation*
+|Wähle einen Vergleichsoperator aus der Dropdown-Liste und gib im Eingabefeld eine Zahl für das Alter in Tagen ein. +
+Du kannst eine Zahl zwischen 1 und 365 eingeben. +
+Die verfügbaren Vergleichsoperatoren und deren Bedeutung findest du in der folgenden aufklappbaren Box:
+
+[.collapseBox]
+.Verfügbare Vergleichsoperatoren
+--
+
+[cols="1,4a"]
+!===
+!Operator !Erläuterung
+
+! *=*
+!Ist gleich. +
+Es werden nur Konversationen mit dem Alter berücksichtigt, die exakt der eingegebenen Zahl entsprechen.
+
+! *<*
+!Kleiner als. +
+Es werden nur Konversationen berücksichtigt, die jünger sind als die eingegebene Zahl.
+
+! *>*
+!Größer als. +
+Es werden nur Konversationen berücksichtigt, die älter sind als die eingegebene Zahl.
+
+! *\<=*
+!Kleiner oder gleich. +
+Es werden nur Konversationen berücksichtigt, die jünger sind als die eingegebene Zahl oder exakt der eingegebenen Zahl entsprechen.
+
+! *>=*
+!Größer oder gleich. +
+Es werden nur Konversationen berücksichtigt, die älter sind als die eingegebene Zahl oder exakt der eingegebenen Zahl entsprechen.
+
+!===
+
+--
+
+| *Deadline der Konversation*
+|Wähle einen Wert aus der Liste. +
+Verfügbare Werte: *Gestern*, *Heute*, *Morgen*, *Überschritten*, *In der Zukunft*.
+
+| *Abonnent:innen der Konversation*
+|Wähle (material:check_box[role=skyBlue]) eine oder mehrere Abonnent:innen aus der Liste.
+
+| *Priorität der Konversation*
+a|Wähle die Priorität aus der Liste. +
+Verfügbare Werte:
+
+* material:keyboard_double_arrow_up[role=red] *Sehr hoch*
+* material:arrow_upward[role=red] *Hoch*
+* terra:equals[role=orange] *Mittel*
+* material:arrow_downward[] *Niedrig*
+* material:keyboard_double_arrow_down[] *Sehr niedrig* 
+
+| *Status der Konversation*
+|Wähle zunächst den Typ und dann den zum Typ gehörigen Status aus den Listen.
+
+// TODO: überall verlinkungen auf die entsprechenden kapitel weiter oben hinzufügen.
+
+| *Herkunft der Konversation*
+|Wähle (material:check_box[role=skyBlue]) eine oder mehrere Herkünfte aus der Liste. +
+Verfügbare Werte: *Backend*, *REST*, *Plugin*, *System*.
+
+| *Posteingang der Konversation*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Posteingänge aus der Liste.
+
+| *Letzte Änderung der Konversation*
+|Wähle einen Vergleichsoperator aus der Dropdown-Liste und gib im Eingabefeld eine Zahl in Tagen ein. +
+Du kannst eine Zahl zwischen 1 und 365 eingeben. +
+Die verfügbaren Vergleichsoperatoren und deren Bedeutung findest du in der folgenden aufklappbaren Box:
+
+[.collapseBox]
+.Verfügbare Vergleichsoperatoren
+--
+
+[cols="1,4a"]
+!===
+!Operator !Erläuterung
+
+! *=*
+!Ist gleich. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung exakt der eingegebenen Zahl entspricht.
+
+! *<*
+!Kleiner als. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung vor der eingegebenen Zahl liegt.
+
+! *>*
+!Größer als. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung nach der eingegebenen Zahl liegt.
+
+! *\<=*
+!Kleiner oder gleich. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung vor der eingegebenen Zahl liegt oder exakt der eingegebenen Zahl entspricht.
+
+! *>=*
+!Größer oder gleich. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung nach der eingegebenen Zahl liegt oder exakt der eingegebenen Zahl entspricht.
+
+!===
+
+--
+
+| *Tags der Konversation*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Tags aus der Liste. 
+
+| *Konversation gehört zu einer Gastbestellung*
+|Wähle *Ja* oder *Nein* aus der Liste. Standardmäßig ist die Einstellung auf *Nein*. +
+*Ja* = Die Konversation hat eine Relation zu einem Auftrag, der eine Gastbestellung ist. +
+*Nein* = Die Konversation hat _keine_ Relation zu einem Auftrag, der eine Gastbestellung ist.
+
+| *Mandant des Kontakts*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Mandanten aus der Liste. 
+
+| *Kundenklasse des Kontakts*
+|Wähle (material:check_box[role=skyBlue]) eine oder mehrere Kundenklassen aus der Liste.
+
+| *Typ des Kontakts*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Typen aus der Liste. 
+
+| *Sprache des Kontakts*
+|Wähle (material:check_box[role=skyBlue]) eine oder mehrere Sprachen aus der Liste.
+
+|====
+
+[#zeitbasierte-filter]
+==== Zeitbasierte Filter
+
+<<#table-messenger-filter-time-based>> listet die verfügbaren Filter auf, die dir zur Verfügung stehen, wenn du den Typ *Zeitbasiert* gewählt hast.
+
+[[table-messenger-filter-time-based]]
+.Verfügbare zeitbasierte Filter
+[cols="1,3a"]
+|====
+|Filter |Erläuterung
+
+| *Alter der Konversation*
+|Wähle einen Vergleichsoperator aus der Dropdown-Liste und gib im Eingabefeld eine Zahl für das Alter in Tagen ein. +
+Du kannst eine Zahl zwischen 1 und 365 eingeben. +
+Die verfügbaren Vergleichsoperatoren und deren Bedeutung findest du in der folgenden aufklappbaren Box:
+
+[.collapseBox]
+.Verfügbare Vergleichsoperatoren
+--
+
+[cols="1,4a"]
+!===
+!Operator !Erläuterung
+
+! *=*
+!Ist gleich. +
+Es werden nur Konversationen mit dem Alter berücksichtigt, die exakt der eingegebenen Zahl entsprechen.
+
+! *<*
+!Kleiner als. +
+Es werden nur Konversationen berücksichtigt, die jünger sind als die eingegebene Zahl.
+
+! *>*
+!Größer als. +
+Es werden nur Konversationen berücksichtigt, die älter sind als die eingegebene Zahl.
+
+! *\<=*
+!Kleiner oder gleich. +
+Es werden nur Konversationen berücksichtigt, die jünger sind als die eingegebene Zahl oder exakt der eingegebenen Zahl entsprechen.
+
+! *>=*
+!Größer oder gleich. +
+Es werden nur Konversationen berücksichtigt, die älter sind als die eingegebene Zahl oder exakt der eingegebenen Zahl entsprechen.
+
+!===
+
+--
+
+| *Deadline der Konversation*
+|Wähle einen Wert aus der Liste. +
+Verfügbare Werte: *Gestern*, *Heute*, *Morgen*, *Überschritten*, *In der Zukunft*.
+
+| *Abonnent:innen der Konversation*
+|Wähle (material:check_box[role=skyBlue]) eine oder mehrere Abonnent:innen aus der Liste.
+
+| *Priorität der Konversation*
+a|Wähle die Priorität aus der Liste. +
+Verfügbare Werte:
+
+* material:keyboard_double_arrow_up[role=red] *Sehr hoch*
+* material:arrow_upward[role=red] *Hoch*
+* terra:equals[role=orange] *Mittel*
+* material:arrow_downward[] *Niedrig*
+* material:keyboard_double_arrow_down[] *Sehr niedrig* 
+
+| *Status der Konversation*
+|Wähle zunächst den Typ und dann den zum Typ gehörigen Status aus den Listen.
+
+| *Herkunft der Konversation*
+|Wähle (material:check_box[role=skyBlue]) eine oder mehrere Herkünfte aus der Liste. +
+Verfügbare Werte: *Backend*, *REST*, *Plugin*, *System*.
+
+| *Posteingang der Konversation*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Posteingänge aus der Liste.
+
+| *Letzte Änderung der Konversation*
+|Wähle einen Vergleichsoperator aus der Dropdown-Liste und gib im Eingabefeld eine Zahl in Tagen ein. +
+Du kannst eine Zahl zwischen 1 und 365 eingeben. +
+Die verfügbaren Vergleichsoperatoren und deren Bedeutung findest du in der folgenden aufklappbaren Box:
+
+[.collapseBox]
+.Verfügbare Vergleichsoperatoren
+--
+
+[cols="1,4a"]
+!===
+!Operator !Erläuterung
+
+! *=*
+!Ist gleich. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung exakt der eingegebenen Zahl entspricht.
+
+! *<*
+!Kleiner als. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung vor der eingegebenen Zahl liegt.
+
+! *>*
+!Größer als. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung nach der eingegebenen Zahl liegt.
+
+! *\<=*
+!Kleiner oder gleich. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung vor der eingegebenen Zahl liegt oder exakt der eingegebenen Zahl entspricht.
+
+! *>=*
+!Größer oder gleich. +
+Es werden nur Konversationen berücksichtigt, deren letzte Änderung nach der eingegebenen Zahl liegt oder exakt der eingegebenen Zahl entspricht.
+
+!===
+
+--
+
+| *Tags der Konversation*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Tags aus der Liste.
+
+|====
+
+[#aktionen-hinzufuegen]
+=== Aktionen hinzufügen
+
+Erfahre in diesem Kapitel, welche Aktionen dir zur Verfügung stehen.
+
+// TODO: ist eine Konfig, wie man eine Aktion hinzufügt überhaupt nötig?
+
+// TODO: gibt es hier Bedingungen oder werden immer alle Aktionen angezeigt? Also zum Beispiel: wird irgendeine Aktion nur dann angezeigt, wenn ich einen bestimmten Auslöser oder Filter gewählt habe?
+
+[[table-messenger-aktionen]]
+.Verfügbare Aktionen
+[cols="1,3"]
+|====
+|Aktion |Erläuterung
+
+| *Antwort hinzufügen*
+|Wähle eine E-Mail-Vorlage aus der Liste *Vorlage*. Dies ist eine Pflichteinstellung. +
+Wähle im Feld *Flüstern*, ob die Nachricht geflüstert werden soll. Standardmäßig ist die Einstellung auf *Nein* gesetzt. +
+Gib im Feld *Zusätzliche Empfänger:innen* eine oder mehrere E-Mail-Adressen ein. Die E-Mail wird dann alle eingegebenen E-Mail-Adressen versendet. +
+Wähle (material:check_box[role=skyBlue]) im Feld *Benutzer:innen* die Abonnent:innen aus der Liste, damit diese die Nachricht in Kopie erhalten. +
+Wähle im Feld *Alle Abonnent:innen der Konversation*, ob die Nachricht an alle Abonnent:innen gesendet werden soll. Standardmäßig ist die Einstellung auf *Nein* gesetzt.
+
+| *E-Mail senden*
+|Wähle eine E-Mail-Vorlage aus der Liste *Vorlage*. Dies ist eine Pflichteinstellung. +
+Gib im Feld *Zusätzliche Empfänger:innen* eine oder mehrere E-Mail-Adressen ein. Die E-Mail wird dann alle eingegebenen E-Mail-Adressen versendet. +
+Wähle (material:check_box[role=skyBlue]) im Feld *Benutzer:innen* die Abonnent:innen aus der Liste, damit diese die Nachricht in Kopie erhalten. + 
+Wähle im Feld *Alle Abonnent:innen der Konversation*, ob die Nachricht an alle Abonnent:innen gesendet werden soll. Standardmäßig ist die Einstellung auf *Nein* gesetzt.
+
+| *Deadline ändern*
+|Wähle *+* oder *-* aus der Liste und gib dann eine Zahl in Tagen ein.
+
+| *Abonnent:innen hinzufügen*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Abonnent:innen aus der Liste, um diese der Konversation hinzuzufügen.
+
+| *Priorität setzen*
+a|Wähle die Priorität aus der Liste. +
+Verfügbare Werte:
+
+* material:keyboard_double_arrow_up[role=red] *Sehr hoch*
+* material:arrow_upward[role=red] *Hoch*
+* terra:equals[role=orange] *Mittel*
+* material:arrow_downward[] *Niedrig*
+* material:keyboard_double_arrow_down[] *Sehr niedrig* 
+
+| *Typ und Status setzen*
+|Wähle aus der ersten Liste den Typ und aus der zweiten Liste den zum Typ gehörigen Status.
+
+| *Zu Ordner hinzufügen*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Ordner aus der Liste, um die Konversation diesen Ordnern hinzuzufügen.
+
+| *Aus Ordner entfernen*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Ordner aus der Liste, um die Konversation aus diesen Ordnern zu entfernen.
+
+| *Tags hinzufügen*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Tags aus der Liste, um diese der Konversation hinzuzufügen.
+
+| *Tags entfernen*
+|Wähle (material:check_box[role=skyBlue]) einen oder mehrere Tags aus der Liste, um diese Tags von der Konversation zu entfernen.
+
+|====
+
+[#ausloeser-hinzufuegen]
+=== Auslöser hinzufügen
+
+Im Folgenden findest du die verfügbaren Auslöser.
+
+* *Neue Konversation*
+* *Neue Antwort auf Konversation*
+* *Neue E-Mail vom Kontakt*
+* *Neue Antwort vom Kontakt*
+* *Deadline der Konversation wurde geändert*
+* *Priorität der Konversation wurde geändert*
+* *Status der Konversation wurde geändert*
+* *Tag wurde zur Konversation hinzugefügt*
+* *Tag wurde von Konversation entfernt*
+
+[#automatisierung-suchen]
+=== Automatisierung suchen
+
+In der Übersicht im Menü *Einrichtung » CRM » Messenger » Automatisierung* kannst du alle erstellten Automatisierungen in einer Liste öffnen oder du wählst Filter (material:tune[]), um die Suchergebnisse einzugrenzen.
+
+[.instruction]
+Automatisierung suchen:
+
+. Öffne das Menü *Einrichtung » CRM » Messenger » Automatisierung*. +
+icon:map-signs[] *_Oder:_* Wenn du dich bereits im Messenger befindest, klappe auf der linken Seite unterhalb des Papierkorbs den Bereich material:settings[] *Einstellungen* auf und klicke auf material:auto_mode[] *Automatisierung*, um in das Menü *Einrichtung » CRM » Messenger » Automatisierung* weitergeleitet zu werden.
+* *_Möglichkeit 1:_* Klicke auf material:search[], um eine Liste aller Automatisierungen zu sehen.
+* *_Möglichkeit 2:_* Gib die ID oder den Namen der Automatisierung im Suchfeld ein und wähle dann den passenden Filter aus der Vorschlagsliste.
+* *_Möglichkeit 3:_* Klicke auf material:tune[], um die Suchergebnisse mit Hilfe von Filtern einzugrenzen.
+. Beachte die Erläuterungen zu den Filtern in <<#table-automatisierung-suchen>>.
+
+[[table-automatisierung-suchen]]
+.Filteroptionen
+[cols="1,3"]
+|====
+|Filter |Erläuterung
+
+| *ID*
+|Gib die ID der Automatisierung ein, um nach der Automatisierung mit genau dieser ID zu suchen.
+
+| *Aktiv*
+|Wähle *Aktiv*, um nur nach aktiven Automatisierungen zu suchen. +
+Wähle *Inaktiv*, um nur nach inaktiven Automatisierungen zu suchen.
+
+| *Name*
+|Gib ein Wort ein, um nur nach Automatisierungen zu suchen, die dieses Wort im Namen enthalten.
+
+| *Beschreibung*
+|Gib ein Wort ein, um nur nach Automatisierungen zu suchen, die dieses Wort in der Beschreibung enthalten.
+
+| *Typ*
+|Wähle *Ereignisbasiert*, um nur nach Automatisierungen mit diesem Typ zu suchen. +
+Wähle *Zeitbasiert*, um nur nach Automatisierungen mit diesem Typ zu suchen.
+
+| *Auslöser*
+a|Wähle einen Auslöser aus der Liste, um nur nach Automatisierungen, die diesen Auslöser enthalten, zu suchen. Verfügbare Auslöser: 
+
+* Ereignisbasiert
+** Neue Konversation
+** Neue Antwort auf Konversation
+** Neue E-Mail vom Kontakt
+** Neue Antwort vom Kontakt
+** Deadline der Konversation wurde geändert
+** Priorität der Konversation wurde geändert
+** Status der Konversation wurde geändert
+** Tag wurde zur Konversation hinzugefügt
+** Tag wurde von Konversation entfernt
+
+* Zeitbasiert
+** Zeitbasiertes Ereignis
+
+| *Filter*
+a|Wähle einen Filter aus der Liste, um nur nach Automatisierungen, die diesen Filter enthalten, zu suchen. Verfügbare Filter:
+
+* Alter der Konversation
+* Deadline der Konversation
+* Abonnent:innen der Konversation
+* Priorität der Konversation
+* Status der Konversation
+* Herkunft der Konversation
+* Posteingang der Konversation
+* Letzte Änderung der Konversation
+* Tags der Konversation
+* Konversation gehört zu einer Gastbestellung
+* Mandant des Kontakts
+* Kundenklasse des Kontakts
+* Typ des Kontakts
+* Sprache des Kontakts
+
+
+| *Aktion*
+a|Wähle eine Aktion aus der Liste, um nur nach Automatisierungen, die diese Aktion enthalten, zu suchen. Verfügbare Aktionen:
+
+* Antwort hinzufügen
+* E-Mail senden
+* Deadline ändern
+* Abonnent:innen hinzufügen
+* Priorität setzen
+* Typ und Status setzen
+* Zu Ordner hinzufügen
+* Aus Ordner entfernen
+* Tags hinzufügen
+* Tags entfernen
+
+| material:replay[]
+|Setzt die gewählten Filtereinstellungen zurück.
+
+| material:search[] *SUCHEN*
+|Führt die Suche aus. Die gefundenen Automatisierungen werden in der Übersicht angezeigt. +
+*_Tipp:_* Setze keine Filter, wenn du alle Automatisierungen in der Übersicht sehen möchtest.
+
+
+|====
+
+[#automatisierung-kopieren]
+=== Automatisierung kopieren
+
+Wenn du eine vorhandene Automatisierung anpassen möchtest, zum Beispiel einen anderen Auslöser wählen möchtest, die Filter und Aktionen aber gleich bleiben sollen, ist es nicht notwendig eine neue Automatisierung von Grund auf neu zu erstellen. Du kannst eine vorhandene Automatisierung stattdessen auch kopieren und dann die gewünschte Änderung vornehmen.
+
+[.instruction]
+Automatisierung kopieren:
+
+. Öffne das Menü *Einrichtung » CRM » Messenger » Automatisierung*.
+. Suche die Automatisierung anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#automatisierung-suchen, Automatisierung suchen>>.
+. Klicke in der Übersicht in der Zeile der Automatisierung, die du kopieren möchtest, auf material:more_vert[] und dann auf material:content_copy[] *Kopieren*. +
+→ Das Fenster *Automatisierung "_Name der Automatisierung_" kopieren* öffnet sich.
+. Gib den Namen für die Kopie ein.
+. Klicke auf *Speichern*. +
+→ Nimm die gewünschten Änderungen in der kopierten Automatisierung vor.
+
+[#automatisierung-loeschen]
+=== Automatisierung löschen
+
+Gehe wie im Folgenden beschrieben vor, um eine Automatisierung zu löschen.
+
+[.instruction]
+Automatisierung löschen:
+
+. Öffne das Menü *Einrichtung » CRM » Messenger » Automatisierung*.
+. Suche die Automatisierung anhand der Filtereinstellungen. Beachte dazu die Erläuterungen zu den Filtern im Kapitel <<#automatisierung-suchen, Automatisierung suchen>>.
+. Klicke in der Übersicht in der Zeile der Automatisierung, die du löschen möchtest, auf material:more_vert[] und dann auf material:delete[] *Löschen*. +
+→ Ein Fenster mit einer Sicherheitsabfrage erscheint.
+. Klicke auf material:delete[role=red] *Löschen*. +
+→ Die Automatisierung wird gelöscht und aus der Übersicht entfernt.

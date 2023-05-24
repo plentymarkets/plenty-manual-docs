@@ -1,11 +1,10 @@
 = Orders
 :lang: en
 :keywords: order export, export orders, exporting orders, exporting order items, order item export, orderItem, order catalogue, order data fields
-:description: This page describes the data fields and filters that are available when exporting order and order item data with the catalogue tool.
 :position: 30
 :url: data/exporting-data/catalogues-data-fields-orders
-:id: 9KBC1RQ
 :author: team-order-core
+:description: Catalogues: Order and order item data can be exported from plentymarkets. This page serves as a reference and lists the available data fields.
 
 ////
 zuletzt bearbeitet 11.02.2022
@@ -16,6 +15,12 @@ This page serves purely as a reference and it assumes that you already have a ba
 
 You can find a practical example how to export orders and order items on the manual page xref:data:catalogues-orders.adoc#[Practical example: orders and order items].
 
+[NOTE]
+.Limit for order export
+======
+The order export via the catalogue is limited to 60,000 lines.
+======
+
 [discrete]
 ==== Format type: Order
 
@@ -24,6 +29,23 @@ When creating a new catalogue, you’ll select the standard format from the uppe
 Then you can select the format type *Order* from the middle drop-down list.
 
 image::data:catalogue-order.png[]
+
+==== Available actions for the format type Order
+
+In the *Actions* section of the basic settings, you can select actions that should be carried out after the export. The following table lists the available actions.
+
+[[table-actions-order-format]]
+.Actions after the export
+[cols="1,3"]
+|===
+|Action |Explanation
+
+| *Change order status*
+|Select whether a status change should be carried out after the export. If so, select the status to which the order should be changed.
+
+| *Add order tag*
+|Select whether a tag should be added to the order after the export. If so, select the tag from the drop-down list.
+|===
 
 [.collapseBox]
 .*What’s a standard format?
@@ -146,7 +168,11 @@ If you don’t make a selection, this field remains empty in the export file.
 
 | *Order comments*
 | Exports the notes of an order. The automatically generated export key for this data field is *order.orderComment*. +
-Select a delimiter that separates the notes from each other if more than one note are saved in an order. You can select every character. You can enter several characters.
+Select a delimiter that separates the notes from each other if several notes are saved in an order. You can select any character and also enter several characters.
+
+| *Order tags*
+| Exports the tags of an order. The automatically generated export key for this data field is *order.orderTag*. +
+Select a delimiter that separates the order tags from each other if several tags are saved in an order. You can select any character and also enter several characters.
 
 |====
 
@@ -881,7 +907,11 @@ In this subfolder, data fields for *Item* data are grouped.
 The IDs are listed in the manual chapter xref:data:internal-IDs.adoc#20[Countries].
 
 | *Revenue account*
-| Exports the item’s revenue account. This *revenue account* is saved on the item in the menu *Item » Edit item » [select item] » Tab: Global*. The automatically generated export key for this data field is *variation.item.revenueAccount*.
+| Exports the item’s revenue account.
+This revenue account is saved under *Item » Edit item » [Open item] » Tab: Global » Entry field: Revenue account*.
+//ToDo - sobald die neue Artikel-UI standard ist, dann diesen Satz einblenden und dafür den alten Satz löschen
+//This revenue account is saved under *Item » Items » [Open item] » Element: Settings » Entry field: Revenue account*.
+The automatically generated export key for this data field is *variation.item.revenueAccount*.
 
 |====
 
@@ -892,7 +922,7 @@ This chapter lists all of the filters that you can use to limit which orders and
 
 [[catalogue-order-filters]]
 .Filters for order export
-[cols="1,3"]
+[cols="1,3a"]
 |====
 |Filter |Explanation
 
@@ -924,6 +954,9 @@ This chapter lists all of the filters that you can use to limit which orders and
 
 | *Owner*
 | Limits the export to orders with the selected owner. You can select more than one owner for this filter.
+
+| *Tag*
+| Limits the export to orders with one of the selected tags. You can select more than one tag for this filter.
 
 | *Order referrer*
 | Limits the export to orders from the selected order referrers. You can select more than one order referrers for this filter.

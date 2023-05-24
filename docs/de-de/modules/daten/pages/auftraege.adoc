@@ -1,9 +1,8 @@
 = Aufträge
 :keywords: Auftragsexport, Aufträge exportieren, order export, Auftragspositionen exportieren, Auftragspositionsexport, orderItem, Auftragsdatenfelder, Datenfelder Auftrag, Auftrag exportieren, Auftragsposition, Auftragsposition exportieren, Auftragskatalog, Katalog Auftrag
-:description: Diese Seite beschreibt die Datenfelder und Filter, die dir beim Export von Auftrags- und Auftragspositionsdaten über das Katalog-Tool zur Verfügung stehen.
 :page-aliases: katalog-datenfelder-auftraege.adoc
-:id: 9KBC1RQ
 :author: team-order-core
+:description: Kataloge: Auftrags- und Auftragspositionsdaten können aus plentymarkets exportiert werden. Diese Seite dient als Referenz und listet die dafür verfügbaren Datenfelder.
 
 ////
 zuletzt bearbeitet 11.02.2022
@@ -14,6 +13,12 @@ Diese Seite dient lediglich als Referenz und setzt voraus, dass du bereits Grund
 
 Ein Praxisbeispiel zum Export von Aufträgen und Auftragspositionen findest du auf der Handbuchseite xref:daten:katalog-auftraege.adoc#[Praxisbeispiel Aufträge und Positionen].
 
+[NOTE]
+.Limit für Auftragsexport
+======
+Der Auftragsexport über den Katalog ist auf 60.000 Zeilen beschränkt.
+======
+
 [discrete]
 ==== Format-Typ: Auftrag
 
@@ -22,6 +27,23 @@ Beim Erstellen eines neuen Katalogs wählst du zuerst das Standardformat aus der
 Danach kannst du den Format-Typ *Auftrag* aus der mittleren Dropdown-Liste wählen.
 
 image::daten:katalog-auftraege.png[]
+
+==== Verfügbare Aktionen für den Format-Typ Aufträge
+
+In den Grundeinstellungen im Bereich *Aktionen* kannst du für den Format-Typ *Aufträge* Aktionen wählen, die nach dem Export ausgeführt werden sollen. Die folgende Tabelle listet die verfügbaren Aktionen.
+
+[[table-actions-order-format]]
+.Aktionen nach dem Export
+[cols="1,3"]
+|===
+|Aktion |Erläuterung
+
+| *Auftragsstatus ändern*
+|Wähle, ob nach dem Export eine Statusänderung vorgenommen werden soll und wenn ja, in welchen Status der Auftrag wechseln soll.
+
+| *Auftrags-Tag hinzufügen*
+|Wähle, ob nach dem Export ein Tag zum Auftrag hinzugefügt werden soll. Wenn ja, wähle das Tag aus der Dropdown-Liste.
+|===
 
 [.collapseBox]
 .*Was ist ein Standardformat?*
@@ -144,7 +166,11 @@ Triffst du keine Auswahl, bleibt dieses Feld in der Exportdatei leer.
 
 | *Auftragsnotizen*
 | Exportiert die Auftragsnotizen eines Auftrags. Der automatisch generierte Export key für dieses Feld ist *order.orderComment*. +
-Wähle ein Trennzeichen aus, das die Auftragsnotizen voneinander trennt, falls mehrere Notizen an einem Auftrag gespeichert sein sollten. Es kann jedes Zeichen gewählt werden. Es können mehrere Zeichen eingegeben werden.
+Wähle ein Trennzeichen aus, das die Auftragsnotizen voneinander trennt, falls mehrere Notizen an einem Auftrag gespeichert sein sollten. Du kannst jedes Zeichen wählen und auch mehrere Zeichen eingeben.
+
+| *Auftrags-Tags*
+| Exportiert die Tags eines Auftrags. Der automatisch generierte Export key für dieses Feld ist *order.orderTag*. +
+Wähle ein Trennzeichen aus, das die Auftrags-Tags voneinander trennt, falls mehrere Tags an einem Auftrag gespeichert sein sollten. Du kannst jedes Zeichen wählen und auch mehrere Zeichen eingeben.
 
 |===
 
@@ -879,7 +905,11 @@ In diesem Unterordner sind Datenfelder zu Artikeldaten gruppiert.
 Die IDs sind im Kapitel xref:daten:interne-IDs.adoc#20[Länder] aufgelistet.
 
 | *Erlöskonto*
-| Exportiert das Erlöskonto des Artikels. Dieses Erlöskonto ist direkt im Artikel im Feld *Erlöskonto* im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » Tab: Global* hinterlegt. Der automatisch generierte Export key für dieses Datenfeld ist *variation.item.revenueAccount*.
+| Exportiert das Erlöskonto des Artikels.
+Dieses Erlöskonto ist unter *Artikel » Artikel bearbeiten » [Artikel öffnen] » Tab: Global » Eingabefeld: Erlöskonto* hinterlegt.
+//ToDo - sobald die neue Artikel-UI standard ist, dann diesen Satz einblenden und dafür den alten Satz löschen
+//Dieses Erlöskonto ist unter *Artikel » Artikel » [Artikel öffnen] » Element: Einstellungen » Eingabefeld: Erlöskonto* hinterlegt.
+Der automatisch generierte Export key für dieses Datenfeld ist *variation.item.revenueAccount*.
 
 |===
 
@@ -890,7 +920,7 @@ Dieses Kapitel enthält eine Liste der Filter, mit denen du einschränken kannst
 
 [[katalog-auftrag-filter]]
 .Filter für den Auftragsexport
-[cols="1,3"]
+[cols="1,3a"]
 |===
 |Filter |Erläuterung
 
@@ -922,6 +952,9 @@ Dieses Kapitel enthält eine Liste der Filter, mit denen du einschränken kannst
 
 | *Eigner*
 | Beschränkt den Export auf Aufträge, die einen der gewählten Eigner haben. Du kannst für diesen Filter mehrere Eigner auswählen.
+
+| *Tag*
+| Beschränkt den Export auf Aufträge, die eines der gewählten Tags haben. Du kannst für diesen Filter mehrere Tags wählen.
 
 | *Auftragsherkunft*
 | Beschränkt den Export auf Aufträge, die eine der gewählten Auftragsherkünfte haben. Du kannst für diesen Filter mehrere Auftragsherkünfte auswählen.

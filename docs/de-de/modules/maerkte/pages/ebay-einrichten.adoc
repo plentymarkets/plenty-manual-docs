@@ -1,11 +1,10 @@
 = eBay einrichten
-:keywords: eBay, eBay, eBay einrichten, eBay-Listing, eBay Listing, eBay Plus, ePID, eBay-Token, eBay-Shop-Kategorien, Second Chance Offer, SCO, eBay-Plattform, wiedereinstellen
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz eBay in deinem plentymarkets System ein.
-:id: DWYPTTK
+:keywords: eBay, eBay, eBay einrichten, eBay-Listing, eBay Listing, eBay Plus, eBay-Token, eBay-Shop-Kategorien, Second Chance Offer, SCO, eBay-Plattform, wiedereinstellen
+:description: Auf dieser Seite erfährst du, wie du eBay in plentymarkets einrichtest, damit du deine Artikel auf eBay verkaufen kannst.
 :author: team-plenty-channel
 
 :ebay:
-:market: ebay
+:market: eBay
 :listings-sales-planner: 2700
 :listings-edit: 3800
 
@@ -109,12 +108,12 @@ Beim Freischalten oder Aktualisieren eines Kontos wird ein Token erzeugt. Dieser
 
 Im Menü *Einrichtung » Märkte » eBay » Konten » OAuth2* hast du die Möglichkeit, Konten umzubenennen, zu aktualisieren oder zu löschen. Du musst zum Beispiel das Konto in plentymarkets umbenennen, wenn du bei eBay deinen Mitgliedsnamen geändert hast.
 
-==== Berechtigungen vergeben
+==== Rechte vergeben
 
 :rights-purpose: Konten mit OAuth2 authentifizieren können
 
-:right-one: pass:quotes[*Berechtigungen > Märkte > Zugangsdaten* und alle untergeordneten Berechtigungen]
-:right-two: pass:quotes[*Berechtigungen > Märkte > eBay > Marktplatz > Anzeigen*]
+:right-one: pass:quotes[*Rechte > Märkte > Zugangsdaten*]
+:right-two: pass:quotes[*Rechte > Märkte > eBay > Marktplatz > Lesen*]
 
 
 include::_includes:partial$rights.adoc[]
@@ -263,7 +262,7 @@ a| Wählen, ob <<Retouren abwickeln, eBay-Retouren>> abgerufen werden sollen. +
 | Wählen, ob bei der erfolgreichen Rückerstattung eines eBay-Payments-Auftrags bei einem Auftrag des Typs *Gutschrift* eine Zahlung gebucht werden soll.
 
 | *Auftragsstatus für Aufträge mit fehlgeschlagener Rückerstattung*
-| In welchen Status sollen Aufträge verschoben werden, für die keine Rückerstattung durchgeführt werden konnte? Erstelle bei Bedarf einen xref:auftraege:auftraege-verwalten.adoc#1230[neuen Status]. +
+| In welchen Status sollen Aufträge verschoben werden, für die keine Rückerstattung durchgeführt werden konnte? Erstelle bei Bedarf einen xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[neuen Status]. +
 
 *_Hintergrund:_* Mit der Ereignisaktion <<#8300, eBay-Rückerstattung veranlassen>> veranlasst du eine Rückerstattung für einen Auftrag. Mit der Einstellung *Auftragsstatus für Aufträge mit fehlgeschlagener Rückerstattung* legst du fest, in welchen Status Aufträge geschoben werden sollen, wenn diese Ereignisaktion nicht ausgeführt werden konnte.
 
@@ -370,7 +369,7 @@ Retourenstatus verknüpfen:
 . Öffne das Menü *Einrichtung » Märkte » eBay » Einstellungen » Tab: Retoureneinstellungen*.
 . Öffne das Tab *Retourenstatusverknüpfungen*.
 . Wähle für jeden *eBay-Retourenstatus* einen passenden Retourenstatus aus den Dropdown-Listen. +
-→ Du kannst einen bereits vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen], der am besten zu deinem Arbeitsablauf passt.
+→ Du kannst einen bereits vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen], der am besten zu deinem Arbeitsablauf passt.
 . Speichere (terra:save[]) die Einstellungen.
 
 Wie du eBay-Retouren weiter bearbeitest und über Ereignisaktionen teilweise automatisierst, wird im Kapitel <<Retouren abwickeln, Retouren abwickeln>> beschrieben.
@@ -531,6 +530,7 @@ Gehe wie im Folgenden beschrieben vor, um für die Länderplattformen einen Verk
 Verkaufspreis für Länderplattformen festlegen:
 
 . Öffne das Menü *Einrichtung » Artikel » Verkaufspreise » [Verkaufspreis öffnen] » Tab: Einstellungen*.
+. Aktiviere im Bereich *Mandant* den Standard-Mandanten.
 . Aktiviere im Bereich *Herkunft* die gewünschte eBay-Länderplattform.
 . Aktiviere im Bereich *eBay-Konten* das gewünschte eBay-Konto.
 . Speichere (terra:save[]) die Einstellungen.
@@ -566,7 +566,6 @@ _oder_
 Automatische E-Mail an E-Mail-Adresse::
 +
 --
-
 [discrete]
 ===== E-Mail-Vorlage anpassen:
 
@@ -581,16 +580,33 @@ Automatische E-Mail an E-Mail-Adresse::
 [discrete]
 ===== Automatischen E-Mail-Versand einrichten:
 
-. Öffne das Menü *Einrichtung » Assistenten » Grundeinrichtung*. 
-. Öffne den Assistenten *E-Mail-Konten*..
-. Wähle im Schritt *Automatischer Versand* aus der Dropdown-Liste *Neue Bestellung über eBay* die E-Mail-Vorlage. Beachte dazu die Erläuterungen in xref:crm:emailbuilder.adoc#table-events-automatic-email-dispatch[dieser Tabelle].
-. Speichere (terra:save[]) die Einstellungen.
+:table-event-procedure: <<#automatischer-email-versand>>
+
+include::_includes:partial$event-procedure-tabbed.adoc[]
+
+[[automatischer-email-versand]]
+.Ereignisaktion zum automatischen E-Mail-Versand
+[cols="1,3,3"]
+|===
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| *Neuer Auftrag*
+| 
+
+| *Filter 1*
+| *Auftrag &gt; Herkunft*
+| *eBay*
+
+| *Aktion*
+| *Kunde &gt; E-Mail versenden*
+| *[zuvor erstellte E-Mail-Vorlage für eBay hinzufügen]*
+|===
 --
 
 Automatische Nachricht an eBay-Benutzerkonto::
 +
 --
-
 [discrete]
 ===== Texte für Nachrichten nach dem Kauf eingeben:
 
@@ -1112,6 +1128,12 @@ Mit dieser Option müssen Käufer:innen die Kaufabwicklung bereits vor dem Kauf 
 
 In diesem Menü legst du Bedingungen für den nationalen und internationalen Versand fest. Du wählst neben der Versandregion auch landesspezifische xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofile] oder Dienstleister für den internationalen Versand. Prüfe im Menü *Einrichtung » Aufträge » Versand » Optionen » Tab: Lieferländer* die Spracheinstellungen für die Lieferländer, in die du deine eBay-Artikel versenden möchtest. Weitere Informationen findest du bei eBay unter link:https://verkaeuferportal.ebay.de/internationalen-versand-anbieten[Internationalen Versand anbieten^].
 
+[TIP]
+.Sperrgutversand
+====
+Du kannst auf eBay jetzt auch Sperrgutversand anbieten. Um den Service für Sperrgutversand (eBay Seller Managed Services) nutzen zu können, musst du von eBay dafür freigeschaltet werden. Weitere Informationen zu dem Service und wie du Sperrgutversand für eBay in plentymarkets einrichtest, findest du in unserem xref:maerkte:best-practice-ebay-sms.adoc#[Praxisbeispiel].
+====
+
 [.instruction]
 Einstellungen für nationalen Versand vornehmen:
 
@@ -1410,16 +1432,6 @@ include::partial$manage-listings.adoc[tag=link-layout]
 [#3050]
 ==== Template-Variablen und -Funktionen
 
-Fülle deine HTML-Vorlage mit den benötigten Template-Variablen und -Funktionen und lasse so die Inhalte des Listings in das Layout laden. Achte bei der Schreibweise der Template-Variablen und -Funktionen auf Groß- und Kleinschreibung.
-
-Lasse die Artikelbeschreibung *{% GetItemDescription() %}* und nicht die bei dem Listing gespeicherte Beschreibung einfügen. Auf diese Weise musst du für deinen plentyShop und für deine Listings nur einen Beschreibungstext pflegen.
-
-[IMPORTANT]
-.Option Platzhalter in Layout-Vorlage (eBay) für Merkmale aktivieren
-====
-Wenn du Template-Variablen verwendest, die Merkmale enthalten, wie zum Beispiel *{% GetItemPropertyById() %}* und *{% GetItemPropertyByName() %}*, muss an dem gewählten Merkmal die Option *Platzhalter in Layout-Vorlage (eBay)* im Menü *Einrichtung » Artikel » Merkmale* aktiviert sein, damit das Merkmal in der Layout-Vorlage angezeigt wird.
-====
-
 :ebay:
 
 include::partial$template-variables.adoc[]
@@ -1480,7 +1492,7 @@ include::partial$manage-listings.adoc[tag=description-layout]
 [#4200]
 ==== Marktplatzeinstellungen bearbeiten
 
-include::partial$manage-listings.adoc[tag=edit-market-settings]
+include::partial$manage-listings.adoc[tag=edit-market-settings-ebay]
 
 [#4300]
 === Mehrere Listings bearbeiten
@@ -1691,6 +1703,50 @@ Prüfe besonders die Einstellungen der eBay-Merkmale. Diese Prüfung ist sehr wi
 Klicke auf den Link *eBay-Merkmale* in den Grundeinstellungen des Listings und prüfe, ob für die Attributnamen, die für die Artikelvarianten benutzt werden, zum Beispiel: Größe oder Farbe, hier keine Werte eingetragen sind. Falls die Werte eingetragen sein sollten, lösche den Inhalt der entsprechenden Textfelder.
 ====
 
+[#eigenschaften-verwenden]
+=== Eigenschaften für eBay aktivieren
+
+Du möchtest weitere Informationen zu deinen eBay-Listings hinzufügen, die du nicht über eBay-Merkmale angeben kannst? Dann verwende Eigenschaften, um deine Listings detaillierter zu beschreiben. Dazu xref:artikel:eigenschaften.adoc#600[erstellst du eine neue Eigenschaft] oder aktivierst eine bestehende Eigenschaft für den Marktplatz eBay.
+
+[.instruction]
+Eigenschaft aktivieren:
+
+. Öffne das Menü *Einrichtung » Einstellungen » Eigenschaften » Konfiguration*.
+. Klicke auf die Eigenschaft, die du für eBay aktivieren willst.
+. Wähle im Bereich *Sichtbarkeiten* die *Herkunft* der gewünschten eBay-Plattform, zum Beispiel *eBay Germany*.
+. Speichere (terra:save[]) die Einstellungen.
+
+[TIP]
+.Eigenschaften in Layout-Vorlage verwenden
+====
+Wenn du Eigenschaften in einer Layout-Vorlage verwenden willst, musst du folgende Template-Funktionen in die Layout-Vorlage einfügen: *GetItemPropertyV2ById()*, *GetItemPropertyV2ByName()* und *PropertyListV2()*. +
+Weitere Informationen zum Erstellen von Layout-Vorlagen findest du im Kapitel <<#2800, Layout-Vorlagen verwalten>>.
+====
+
+[.collapseBox]
+.eBay-Merkmale, Eigenschaften und Merkmale?
+--
+Bei eBay hast du die Möglichkeit, Informationen zu deinen Listings auf verschiedenen Wegen anzugeben: über eBay-Merkmale, Eigenschaften oder plentymarkets Merkmale. Alle drei Möglichkeiten erfüllen dieselbe Funktion - sie dienen dazu, deinen Listings weitere Informationen hinzuzufügen und sie detaillierter zu beschreiben. +
+
+Wenn du beispielsweise ein eBay-Merkmal, eine Eigenschaft und ein plentymarkets Merkmal hast und alle drei dieselben Informationen enthalten, werden nicht alle drei zu eBay übertragen. plentymarkets prüft immer zuerst, ob ein eBay-Merkmal vorhanden ist und wenn ja, wird das eBay-Merkmal übertragen. Wenn du zusätzlich noch eine Eigenschaft und ein Merkmal mit denselben Informationen mit einem Listing verknüpft hast, werden die Eigenschaft und das Merkmal nicht übertragen. +
+
+Die Priorisierung sieht also folgendermaßen aus:
+
+1. eBay-Merkmal
+2. Eigenschaft
+3. plentymarkets Merkmal
+
+Wenn du eBay-Merkmal, Eigenschaft und plentymarkets Merkmal mit denselben Informationen hast, wird also immer nur die höchste Priorität zu eBay übertragen.
+
+*Soll ich eBay-Merkmale, Eigenschaften oder plentymarkets Merkmale verwenden?*
+
+Wenn du deinen Listings weitere Informationen hinzufügen willst, solltest du entweder eBay-Merkmale oder Eigenschaften verwenden. Neue plentymarkets Merkmale solltest du nicht mehr erstellen, da die Merkmale nicht mehr weiterentwickelt und in Zukunft komplett durch Eigenschaften ersetzt werden.
+
+Du kannst beispielsweise auch nur Eigenschaften an deinen Artikeln pflegen und diese Eigenschaften dann auch für deine Listings verwenden. Wenn du willst, dass Kund:innen deine Listings auf eBay über die eBay-Filter in der Suche finden können, müssen die Eigenschaften und deren Werte exakt so heißen wie die eBay-Merkmale. +
+
+Du kannst natürlich auch Eigenschaften verwenden, die anders heißen als die eBay-Merkmale. Beachte aber, dass diese dann nicht über die eBay-Suchfilter gefunden werden.
+--
+
 [#6500]
 === Eigene Merkmale aktivieren
 
@@ -1786,83 +1842,6 @@ Beispiel-Code Tab: CSS
 include::example$css_cross-selling.html[]
 
 ----
-
-[#6550]
-== Varianten mit ePIDs verknüpfen
-
-Seit dem 15. August 2018 verpflichtet eBay Händler:innen dazu, Produkte aus bestimmten Kategorien, die sie auf eBay zum Verkauf anbieten möchten, mit ePIDs zu verknüpfen. Eine ePID (eBay Product ID) ist eine von eBay vorgegebene, eBay-spezifische Produktkennzeichnung. Durch die Verwendung von ePIDs soll sichergestellt werden, dass identische Produkte gebündelt auf eBay angezeigt werden. Nachdem Käufer:innen das Produkt angeklickt haben, können sie sich für ein Angebot entscheiden. +
-
-Für ein Produkt, das auf eBay einzeln und in einem Set verkauft wird, kann es mehrere ePIDs geben.
-
-[TIP]
-.Automatische ePID-Verknüpfung
-====
-Wenn du neue Listings startest, werden diese Listings automatisch mit einer ePID verknüpft. Wenn es mehrere verfügbare ePIDs zu einem Listing gibt, wird automatisch die erste vorgeschlagene ePID verknüpft. Weitere ePIDs werden in einer Logmeldung gespeichert. +
-Für bestehende Listings findet keine automatische Verknüpfung statt und du musst ePIDs manuell verknüpfen.
-====
-
-Im Menü *Einrichtung » Märkte » eBay » ePID-Verknüpfung* verknüpfst du Varianten mit ePIDs.
-
-Voraussetzungen, um Varianten mit ePIDs zu verknüpfen:
-
-- Die Variante, die du verknüpfen möchtest, muss ein aktives oder ausgeblendetes Listing haben.
-- Im Listing muss unter *Listings » Listings bearbeiten » [Listing-ID öffnen] » Listing bearbeiten* für die Option *Als Artikelnummer übertragen* die Auswahl *ePID übertragen* eingestellt sein.
-- Für die Variante muss unter *Artikel » Artikel bearbeiten » [Artikel öffnen] »  Tab: Varianten-ID* im Bereich *Barcode* eine EAN gespeichert sein.
-- Im Menü *Einrichtung » Märkte » eBay » Einstellungen » Tab: Basiseinstellungen* muss für die Option *Produktdetails aus dem eBay-Katalog hinzufügen* *Ja* eingestellt sein.
-- Momentan ist die ePID-Verknüpfung nur für die eBay-Plattformen eBay Germany, eBay UK, eBay United States, eBay Canada und eBay Australia verfügbar.
-- Momentan können nur Produkte aus bestimmten eBay-Kategorien mit ePIDs verknüpft werden. Weitere Informationen zu diesen Kategorien findest du link:https://developer.ebay.com/api-docs/sell/static/inventory/pbse-phase1-categories.html[hier^].
-
-[IMPORTANT]
-.OAuth2-Authentifizierung erforderlich
-====
-Damit ePIDs verknüpft werden können, musst du dein eBay-Konto im Menü *Einrichtung » Märkte » eBay » Konten » OAuth2* für OAuth2 freischalten.
-====
-
-[.instruction]
-Varianten mit ePIDs verknüpfen:
-
-. Öffne das Menü *Einrichtung » Märkte » eBay » ePID-Verknüpfung*.
-. Klicke auf *Suchen* (icon:search[role="blue"]). +
-→ In der Übersicht werden alle Varianten ohne ePID-Verknüpfung des vorherigen Tages angezeigt.
-. Klicke die Variante an, die du mit einer ePID verknüpfen möchtest. +
-→ Verfügbare ePIDs für diese Variante werden angezeigt.
-. Klicke im Feld der ePID, die du mit der Variante verknüpfen möchtest, auf *ePID verknüpfen*.
-
-[discrete]
-===== Varianten ohne ePID-Verknüpfung filtern
-
-Im Menü *Einrichtung » Märkte » eBay » ePID-Verknüpfung* hast du die Möglichkeit, Varianten ohne ePID-Verknüpfung zu filtern. Du kannst beispielsweise nach MLID oder Artikel-ID suchen oder nur Varianten anzeigen lassen, die einem bestimmten Verzeichnis angehören. Weitere Informationen zu Filteroptionen für Varianten ohne ePID-Verknüpfung findest du in <<#filter-epid>>.
-
-[[filter-epid]]
-.Filteroptionen für Varianten ohne ePID-Verknüpfung
-[cols="1,3a"]
-|===
-| Filter | Erläuterung
-
-| *MLID*
-| Eine Market-Listing-ID eingeben, um Market-Listings ohne ePID-Verknüpfung zu suchen.
-
-| *Externe Listing-ID*
-| Eine externe Listing-ID eingeben, um Listings ohne ePID-Verknüpfung mit dieser externen Listing-ID zu suchen.
-
-| *Artikel-ID*
-| Eine Artikel-ID eingeben, um Listings ohne ePID-Verknüpfung mit dieser Artikel-ID zu suchen.
-
-| *Varianten-ID*
-| Eine Varianten-IDs eingeben, um Varianten mit dieser Varianten-ID ohne ePID-Verknüpfung zu suchen.
-
-| *Konto*
-| Ein Konto oder *ALLE* wählen, um Varianten zu suchen, bei denen das gewählte Konto eingestellt ist.
-
-| *Plattform*
-| Eine Plattform oder *ALLE* wählen, um Varianten zu suchen, die auf der gewählten Plattform eingestellt sind.
-
-| *Kategorie-ID*
-| eBay-Kategorie eingeben, um Varianten in dieser Kategorie zu suchen.
-
-| *Verzeichnis*
-| Verzeichnis eingeben, um Varianten zu suchen, die in dieses Verzeichnis eingeordnet sind.
-|===
 
 [#6600]
 == eBay Plus einrichten
@@ -2123,7 +2102,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-retouren-akzeptieren]]
 .Ereignisaktion zum automatischen Akzeptieren von Retouren mit eBay-Etikett
@@ -2163,7 +2142,7 @@ Retouren mit eigenem Etikett kannst du Kund:innen aktuell nur auf ebay.de, ebay.
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-retoure-eigenes-etikett]]
 .Ereignisaktion zum automatischen Akzeptieren von Retouren mit eigenem Etikett
@@ -2203,7 +2182,7 @@ Lehne nur Retouren ab, die gegen die Retourenbedingungen verstoßen, die du im M
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-retouren-ablehnen]]
 .Ereignisaktion zum automatischen Ablehnen von Retouren
@@ -2237,7 +2216,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-teilrückerstattung]]
 .Ereignisaktion zum automatischen Anbieten von Teilrückerstattungen
@@ -2268,16 +2247,16 @@ include::_includes:partial$event-procedure.adoc[]
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um das eigene Etikett an eBay zu übermitteln.
 
 [TIP]
-.Retourenetikett erstellen
+.Retourenlabel erstellen
 ====
-Ein Retourenetikett kannst du entweder wie unten beschrieben per Ereignisaktion direkt bei eBay hochladen oder xref:fulfillment:versand-center.adoc#retourenetikett-abrufen[in plentymarkets erstellen] und abrufen.
+Ein Retourenlabel kannst du entweder wie unten beschrieben per Ereignisaktion direkt bei eBay hochladen oder xref:fulfillment:versand-center-2-0.adoc#retourenlabel-abrufen[in plentymarkets erstellen] und abrufen.
 ====
 
 :table-event-procedure: <<#ereignisaktion-eigenes-etikett>>
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-eigenes-etikett]]
 .Ereignisaktion zum Übermitteln des eigenen Etiketts
@@ -2311,7 +2290,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-retoure-markieren]]
 .Ereignisaktion zum automatischen Markieren von erhaltenen Retouren
@@ -2364,7 +2343,7 @@ Die Ereignisaktion kann für eBay Managed Payments in drei verschiedenen Fällen
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-automatische-rückerstattung]]
 .Ereignisaktion zum automatischen Veranlassen von Rückerstattungen über PayPal
@@ -2403,7 +2382,7 @@ Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um 
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#1220[erstellen].
+*_Hinweis:_* Der Status in der Ereignisaktion wurde beispielhaft gewählt. Wähle den Status, der am besten zu deinem Arbeitsablauf passt. Dazu kannst du einen vorhandenen Status wählen oder einen eigenen Status xref:auftraege:auftraege-verwalten.adoc#_neuen_status_erstellen[erstellen].
 
 [[ereignisaktion-versendete-rückerstattungen]]
 .Ereignisaktion zum automatischen Markieren von versendeten Rückerstattungen (ohne PayPal)
@@ -2562,9 +2541,9 @@ Bei der Bearbeitung von Kaufabbrüchen im eBay-Backend werden Kaufabbruchstatus 
 Die Nummern für diese Status hängen davon ab, welchen Status du für Stornierungen nutzt. Wenn du den Standardstatus *[8] Storniert* für Stornierungen nutzt, solltest du Nummern im Bereich [8.xx] zuordnen.
 
 [.collapseBox]
-.Tipp: So erstellst du Auftragsstatus
+.Tipp: So erstellst du einen Auftragsstatus
 --
-. Öffne das Menü *Einrichtung » Aufträge » Status*.
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
 . Klicke auf *Neuen Status erstellen* (icon:plus-square[role="green"]).
 . Gib eine Statusnummer ein. +
 → Die höchstmögliche Nummer ist 19.9999.
@@ -2860,9 +2839,9 @@ Um Kaufabbrüche auf eBay zu starten, must du einen Grund angeben. Lege für jed
 Du kannst entweder vorhandene Auftragsstatus verwenden oder xref:auftraege:auftraege-verwalten.adoc#1200[neue Auftragsstatus erstellen].
 
 [.collapseBox]
-.Tipp: So erstellst du Auftragsstatus
+.Tipp: So erstellst du einen Auftragsstatus
 --
-. Öffne das Menü *Einrichtung » Aufträge » Status*.
+. Öffne das Menü *Einrichtung » Aufträge » Auftragsstatus*.
 . Klicke auf *Neuen Status erstellen* (icon:plus-square[role="green"]).
 . Gib eine Statusnummer ein. +
 → Die höchstmögliche Nummer ist 19.9999.

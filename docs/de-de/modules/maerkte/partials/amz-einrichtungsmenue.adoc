@@ -77,8 +77,7 @@ Eine der folgenden Optionen wählen: +
 *GTIN wenn vorhanden, sonst Varianten-ID* +
 *Variantennummer wenn vorhanden, sonst Varianten-ID* +
 Die hier gewählte Einstellung greift nur für Artikel, die zum ersten Mal zu Amazon exportiert werden. SKUs sind die Basis, auf der Amazon und plentymarkets Daten austauschen. +
-*_Wichtig:_* Diese Einstellung nicht mehr ändern, nachdem Artikel an Amazon übertragen wurden, da sonst die Kommunikation zwischen plentymarkets und Amazon (zum Beispiel für Bestands-Updates) nicht mehr funktioniert. +
-*_Wichtig:_* Wenn du bereits auf Amazon verkaufst und nun anfangen möchtest, deine Artikel über plentymarkets auf Amazon zu verkaufen, ordne deine bestehenden SKU-Nummern im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Einstellungen » Tab: Verfügbarkeit* zu.
+*_Wichtig:_* Wenn du bereits auf Amazon verkaufst und nun anfangen möchtest, deine Artikel über plentymarkets auf Amazon zu verkaufen, ordne deine vorhandenen Amazon-SKU-Nummern im Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Einstellungen » Tab: Verfügbarkeit* zu.
 
 | *Katalog wurde mit SSW gelistet*
 a| * *Ja* = Artikel werden auf Amazon mit link:https://ssw.starsellersworld.com/[starsellersworld^] gelistet. Beim Auftragsimport wird dann die SKU des Artikels nach dem letzten "-" abgeschnitten, um eine Zuordnung des Artikels im System zu ermöglichen. +
@@ -265,7 +264,7 @@ Auftragseinstellungen vornehmen:
 [cols="1,3a"]
 !===
 ! *Nein* (Standard)
-! Gutschriften werden nicht importiert. Wenn du *Nein* wählst, erstelle eine Ereignisaktion, um Retouren als Gutschriften in dein plentymarkets System zu importieren.
+! Gutschriften werden nicht importiert.
 
 ! *Ja*
 ! Amazon-Gutschriften werden alle 4 Stunden in dein plentymarkets System importiert.
@@ -285,11 +284,13 @@ Auftragseinstellungen vornehmen:
 |xref:auftraege:auftraege-verwalten.adoc#1200[Status] der Aufträge wählen, die von Amazon importiert wurden.
 
 | *Lager*
-| Wählen, welches Amazon FBA-Lager für den Bestandabgleich des Kontos verwendet werden soll. Dieses Lager wird auch für die FBA-Auftragszuordnung des Kontos verwendet, falls kein FBA-Auftrag aufgrund eines nicht eingerichteten Lagers für das Auftragsland zugeordnet werden konnte.
+| Wählen, welches Amazon FBA-Lager für den Bestandsabgleich des Kontos verwendet werden soll. Dieses Lager wird auch für die FBA-Auftragszuordnung des Kontos verwendet, falls kein FBA-Auftrag aufgrund eines nicht eingerichteten Lagers für das Auftragsland zugeordnet werden konnte.
 
 | *Lager für unverkäuflichen Bestand*
 | Wählen, in welches Amazon FBA-Lager unverkäuflicher Bestand des Kontos gebucht werden soll. Wenn du kein Lager wählst, wird der unverkäufliche Bestand nicht importiert. +
-Der unverkäufliche Bestand ist die Anzahl der Einheiten einer SKU, die sich in Amazon-Logistikzentren befinden und den Zustand "nicht verkaufbar" haben. Im Bericht "Lagerbestand mit Versand durch Amazon" entspricht das der Menge in der Spalte *afn-unsellable-quantity*.
+Der unverkäufliche Bestand ist die Anzahl der Einheiten einer SKU, die sich in Amazon-Logistikzentren befinden und den Zustand "nicht verkaufbar" haben. Im Bericht "Lagerbestand mit Versand durch Amazon" entspricht das der Menge in der Spalte *afn-unsellable-quantity*. +
+
+*_Hinweis:_* Wähle für diese Einstellung nicht das gleiche Lager, das du bereits für die Einstellung *Lager* (FBA-Lager) gewählt hast, da die Bestände ansonsten überschrieben werden.
 
 | *Warenausgang*
 | Wählen, ob der Warenausgang als gebucht markiert werden soll oder nicht. Die Option *Als gebucht markieren* erzeugt keine Warenbewegung. Um eine Warenbewegung zu erzeugen, muss die Option *Nicht als gebucht markieren* eingestellt sein und eine Ereignisaktion eingerichtet werden.
@@ -298,7 +299,20 @@ Der unverkäufliche Bestand ist die Anzahl der Einheiten einer SKU, die sich in 
 | Keine Übertragung oder *täglichen* Import von Retouren wählen.
 
 | *Gutschein bei Retouren berücksichtigen*
-| Wählen, ob Gutscheine bei Retouren berücksichtigt werden sollen oder nicht. Wurde der FBA-Auftrag komplett oder teilweise mit einem Gutschein beglichen, wird der Gutschein bei der Retoure hinzugefügt und verrechnet. Dabei wird kein Mindestbestellwert für den Gutschein berücksichtigt.
+| Wählen, ob Rabatte von Amazon bei Retouren berücksichtigt werden sollen oder nicht. Dabei wird kein Mindestbestellwert für den Gutschein berücksichtigt.
+
+* Ja = FBA-Retouren enthalten Artikelpositionen für Rabatte oder Zusatzkosten von Amazon. Der Gutschriftsbetrag stimmt also nicht mit dem Betrag des ursprünglichen Auftrags überein. Die Gutschrift muss ggf. über *Stornobeleg » Auftragsanpassung » Neue Gutschrift* korrigiert werden.
+* Nein = Auftragspositionen für Amazon-Gutscheine werden nicht importiert. Rabatte oder zusätzliche Kosten von Amazon werden also ignoriert und bei der Berechnung nicht berücksichtigt. +
+
+*_Wichtig:_* "Gutscheine" können hier Rabatte aus Amazon Delivery Campaigns, Amazon Campaigns oder sonstige von Amazon gewährte Rabatte sein. Es kann sich aber auch um zusätzliche Kosten handeln, die Amazon erhebt. Beispiele hierfür sind Geschenkverpackungen oder wenn Amazon eigene Versandkosten erhebt.
+
+*_Beispiel:_*
+
+* Warenwert des ursprünglichen Auftrags: 50,00 Euro
+* Von Amazon erhobene zusätzliche Portokosten: 5,00 Euro
+* Betrag in der Gutschrift je nach gewählter Option:
+  ** Ja = 55 Euro
+  ** Nein = 50 Euro
 
 | *Bestandsimport*
 | Wählen, ob der Bestandsimport *stündlich* oder nie ausgeführt werden soll.
@@ -403,18 +417,23 @@ Ablauf bei Rabatt von Händler:in:
 !===
 
 | *Artikelpakete Multichannel*
-| Wählen, welche Positionen an Amazon übertragen werden sollen. +
+| Welche Auftagspositionen sollen für FBA-Multi-Channel-Aufträge an Amazon übertragen werden? +
 
-[cols="1,3a"]
+*_Hintergrund:_* Welche Option du wählst hängt davon ab, wie du Artikelpakete bei Amazon lagerst. Sind alle Paketbestandteile von Artikelpaketen gemeinsam verpackt bei Amazon eingelagert? Oder stellt Amazon die einzelnen Paketbestandteile selbst zu Artikelpaketen zusammen?
+
+[cols="1,2a"]
 !===
 ! *Alle Auftragspositionen übertragen*
-! Alle Positionen, die sich im Auftrag befinden, an Amazon übertragen. Wenn diese Option gewählt wird, werden die Paketposition und die Paketbestandteile an Amazon übertragen.
+! Als Auftragspositionen werden die Paketposition und die Paketbestandteile an Amazon übertragen. +
+*_Wichtig: Wähle diese Option nicht. Sonst versendet Amazon möglicherweise Positionen doppelt oder erfüllt den Auftrag nicht._*
 
 ! *Nur Paketposition übertragen*
-! Nur die Paketposition wird an Amazon übertragen.
+! Nur die Paketposition wird an Amazon übertragen. +
+*_Voraussetzung:_* Alle Paketbestandteile des Artikelpakets sind in einer einzigen Verpackung bei Amazon gelagert. Das Artikelpaket hat nur eine SKU. Amazon pickt also nur eine Position.
 
 ! *Ohne Paketposition übertragen*
-! Nur die Paketbestandteile werden an Amazon übertragen.
+! Nur die Paketbestandteile werden an Amazon übertragen. +
+*_Voraussetzung:_* Das Artikelpaket besteht aus einzelnen Artikeln. Bei Amazon sind diese Artikel alle einzeln eingelagert. Jeder Artikel hat eine eigene SKU. Erst durch den Pick-Vorgang wird aus den Einzelartikeln ein Artikelpaket. 
 !===
 
 | *Versandkategorie*
@@ -444,7 +463,7 @@ a| Die folgenden Einstellungen befinden sich zwar im Bereich *Eigener Versand (M
 ! *Gutschriftenimport*
 ! Wählen, ob Amazon-Gutschriften für MFN- und FBA-Aufträge in dein plentymarkets System importiert werden sollen.
 
-* *Nein* (Standard) = Gutschriften werden nicht importiert. Wenn du *Nein* wählst, erstelle eine Ereignisaktion, um Retouren als Gutschriften in dein plentymarkets System zu importieren. +
+* *Nein* (Standard) = Gutschriften werden nicht importiert. +
 * *Ja* = Amazon-Gutschriften werden alle 4 Stunden in dein plentymarkets System importiert.
 
 !===

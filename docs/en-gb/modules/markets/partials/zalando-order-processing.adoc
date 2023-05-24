@@ -1,0 +1,123 @@
+The following event procedures are available for automating order processing:
+
+* Automatically send shipping confirmations (<<#1200, How?>>)
+* Automatically sending cancellations (<<#1300, How?>>)
+* Automatically sending returns (<<#1600, How?>>)
+
+[#1200]
+=== Automatically sending shipping confirmations
+
+A shipping confirmation can only be sent if an order meets the following conditions:
+
+* A package number must be saved for the order. +
+*_Note:_* Only one package number can be exported per order. If more than one package number is associated with an order, only the first package number is exported.
+* The tracking ID of the return label must be saved for the order.
+
+[.collapseBox]
+.*_Tip:_* How to save the tracking ID
+--
+You can save the tracking ID in several different ways:
+
+* xref:fulfilment:shipping-centre-2-0.adoc#retrieve-return-label[Create a return label via the shipping centre.]
+* xref:automation:procedures.adoc#380[Create a return label with a process procedure.]
+* link:https://developers.plentymarkets.com/rest-doc#/Returns/put_rest_orders__orderId__shipping_returns_assign_label__returnsId_[Add the return label via REST.^]
+* link:https://developers.plentymarkets.com/rest-doc#/Order/put_rest_orders__orderId__shipping_packages__orderShippingPackageId_[Add the tracking ID of the return to a package at the order via REST.^]
+--
+
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send shipping confirmations to Zalando when the outgoing items are booked.
+
+:table-event-procedure: <<#event-procedure-shipping-confirmation-zalando>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[event-procedure-shipping-confirmation-zalando]]
+.Event procedure for automatically sending shipping confirmations to Zalando
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Outgoing items booked* +
+*_Note:_* You can select a different event. However, ensure that the selected event is only triggered once the order contains all information necessary to send a shipping confirmation.
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Referrer*
+| *Zalando*
+
+| *Action*
+| *Plugins > Send shipping confirmation to Zalando*
+|
+|===
+
+[#1300]
+=== Automatically sending cancellations
+
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform Zalando of cancellations. Note that orders marked as shipped can no longer be cancelled.
+
+:table-event-procedure: <<#event-procedure-cancellations-zalando>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[event-procedure-cancellations-zalando]]
+.Event procedure for automatically sending cancellations to Zalando
+[cols="1,3,3"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change* +
+*_Note:_* You can select a different event. However, ensure that the selected event is not triggered for orders that are flagged as shipped or that are cancelled by customers.
+| Select a status, for example *[8.0] Cancelled*
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Referrer*
+| *Zalando*
+
+| *Action*
+| *Plugins > Send cancellation to Zalando*
+|
+|===
+
+[#1600]
+=== Automatically sending returns
+
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform Zalando about returns. Note that the order must be flagged as shipped.
+
+IMPORTANT: Return reasons will only be transmitted if the event procedure is used in combination with a return order and if <<#1400, the return reasons were mapped in the assistant>>.
+
+:table-event-procedure: <<#event-procedure-returns-zalando>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[event-procedure-returns-zalando]]
+.Event procedure for automatically sending returns to Zalando
+[cols="1,3,3"]
+|===
+| Setting | Option | Selection
+
+| *Event*
+| *Order generation: New return* +
+*_Note:_* You can select a different event. However, if you also want to communicate the return reason to Zalando, ensure that the return reasons are saved for the return.
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Return*
+
+| *Filter 2*
+| *Order > Referrer*
+| *Zalando*
+
+| *Action*
+| *Plugins > Send return to Zalando*
+|
+|===

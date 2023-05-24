@@ -1,0 +1,692 @@
+= Accounting
+:keywords: accounting, VAT, VAT rates, currencies, exchange rates, price calculation, booking keys, finances, revenue account, account, debtor account, accounting location, decimal place, VAT amount, rounded price, rounding prices, rounding single variation price, rounded order item sums, rounded totals, rounding, round totals, VAT amount single unit, EU country, non-EU, delivery, export, export shipping, VAT ID, delivery threshold, small business owner regulation, entry certificate, gross invoice, net invoice, VAT number, export shipping, export shipment, tax, taxes, revenue, revenues, B2C, B2B, posting key, DATEV, DATEV exports, tax key, Collmex, account, accounting data, data export, differing VAT rate, lowered rate, taric, taric number, taric code, taric table, customs, customs tariff number, OSS, OneStopShop, one-stop-shop, One-Stop-Shop, onestopshop, Reverse-Charge, reverse charge, reverse charge procedure
+:author: team-order-core
+:description: Learn more about settings in plentymarkets that are relevant for your accounting. These settings include among others VAT rates, rounding settings, booking keys, revenue accounts, debtor accounts but also taric numbers.
+
+Learn more about settings in plentymarkets that are relevant for your accounting. These settings include among others VAT rates, rounding settings, booking keys, revenue accounts, debtor accounts but also taric numbers.
+
+[#100]
+== Basic information about price calculation in plentymarkets
+
+The calculation of prices is based on the gross prices of variations. Based on this gross price, the net price of a variation is calculated for the order. To get the sums of the order items, the individual price of a variation is multiplied by the purchased quantity of the variation.  This means that the gross sum of an order item is calculated by multiplying the individual gross price of an item by the quantity. The net sum of an order item is calculated from the determined net price rounded to 4 or 2 decimal places, multiplied by the purchased quantity of an item. The number of decimal places of the single net price is defined by your accounting settings. To get the VAT amount for an order item, the net sum must be subtracted from the gross sum. +
+Your settings determine when the price is rounded to 2 decimal places. Subsequent calculations are based on these rounded values. The settings in plentymarkets can lead to the following results:
+
+* Rounded individual prices
+* Rounded order item sums
+* Rounded totals
+
+[#150]
+== Setting up how prices are saved and rounded
+
+You carry out settings for saving and rounding prices in the *Setup » Client » [Select client] » Locations » [Select location] » Accounting* menu. These settings are dependent on the client and the location. For the calculation of prices in orders, the settings configured at the time of order creation are applied. This means that adaptations to the settings for saving and rounding prices are not applied to already existing orders.
+
+[.instruction]
+Setting up how prices are saved and rounded:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Carry out the settings according to the information provided in <<table-rounding-and-saving-prices>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-rounding-and-saving-prices]]
+.Settings for saving and rounding prices
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| [#intable-prices-decimal-places]*Number of decimal places for prices*
+|Select 2 or 4 decimal places. +
+*2* = he prices in an order are saved with 2 decimal places. The indirect result of this setting is that the price of a single variation is rounded. The sums and totals of an order are then calculated based on the rounded individual prices of a variation. +
+*4* = The prices in an order are saved with 4 decimal places. Selecting 4 decimal places has the effect that the sum of an order item is rounded by default. However, in the background the sums are saved with 4 decimal places without rounding, so that it is still possible to only round the totals later. If you do not want that the sums are rounded by default, you need to additionally activate the setting *Round totals only*.
+
+[#intable-rounding-prices]*Round totals only*
+|Activate this option if you want that only the totals of an order are rounded. The sums of order items are no longer rounded by default if this setting is active. Totals refer to the total value of an order. When you look at the settings of the document template for invoices the settings that are affected are the ones that are listed under the *sums* heading. +
+If the option is not activated and 4 decimal places are selected, the sum of each order item is rounded. +
+However, if 2 decimal places are selected, this setting has no impact on the rounding of prices.
+|====
+
+[#200]
+=== Example calculations
+
+The following section compares the different calculation methods and the results with the help of an example. +
+In our example fabrics were sold. Several panels of the same fabric were bought, but with different widths. The widths are 50 cm and 30 cm. The 50 cm panel was bought 8 times and the 30 cm panel 7 times. 30 centimetres cost € 2.187 and 50 centimetres cost € 3.645. The prices are calculated based on a price of € 7.29 per metre. The settings that have be carried out to get one of the results are also listed in the table.
+
+[[image-comparison-price-rounding]]
+.Comparing price rounding methods
+image::order-processing:CalculationMethodsCompared.png[Rounding_prices,849,417]
+
+[#300]
+== Carrying out VAT settings
+
+The VAT settings are location-based. This means that you set different settings for each location. Locations are required for your registered business addresses or for countries that you ship from. There are two locations per default in your system. These locations are Germany and United Kingdom. However, for the productive mode of your system, you need your own locations. +
+Your system differentiates between countries that are members of the European Union and non-EU countries. If you set up a location which is not within the EU, every delivery to another country is treated as export shipping. If your location is within the EU, it is differentiated between intra-community shipping and export shipping. +
+The basic VAT relevant settings include settings that define how the system reacts for export shipping and how the VAT amount for shipping costs are displayed. For EU locations you can also define how the system reacts if a VAT ID is given in the order.
+
+[WARNING]
+.Do not use the example locations for real orders
+====
+The two locations Germany and United Kingdom are examples and are not meant for use in productive mode. It is best if you set up our own locations or at least edit the existing locations. When editing the existing locations you need to add at least a new VAT configuration with your correct VAT number and the correct VAT rates.
+====
+
+[#320]
+=== Creating a new location
+
+Proceed as described below to create a new location. Furthermore, you need to set one location as your xref:online-store:setting-up-clients.adoc#basic-settings[default location]. Your default location is your head office, so to speak.
+
+[.instruction]
+Creating a new location:
+
+. Go to *Setup » Client » [Select client] » Locations*.
+. Select the menu entry *New location*. +
+→ An editing window will open.
+. Enter the *Name* of the new location.
+. Select the *Country* of the new location. You can only choose from countries that are already defined as delivery countries in your plentymarkets system.
+. *Save* (icon:save[role="green"]) the settings. +
+→ The location is added to the list of locations.
+
+Each location is divided into the following 3 submenus:
+
+* Settings
+* Accounting
+* Documents
+
+The submenu *Settings* contains the ID, the name and the country of the location. The *Accounting* submenu is divided into several tabs. The different possibilities are further explained on this page starting in chapter <<#350, Using the German small business owner regulation>>. In the *Documents* submenu you can set up documents per accounting location, such as delivery notes or invoices. Fur further information, refer to the xref:orders:order-documents-new.adoc#[Order documents] page of the manual.
+
+[#330]
+=== Deleting a location
+
+You can only delete a location if another location exists. It is not possible to delete the xref:online-store:setting-up-clients.adoc#basic-settings[default location].
+
+[.instruction]
+Deleting a location:
+
+. Go to *Setup » Client » [Select client] » Locations*.
+. Open the submenu *Settings* of the location you want to delete.
+. Click on *Delete* (icon:minus-square[role="red"]). +
+→ Confirm the security question to delete the location.
+
+[#350]
+=== Using the German small business owner regulation
+
+If you are a small business owner in Germany and you do not want that VAT is applied to your invoices, then activating a setting in your location settings is all you need to do. However, even though the VAT is not applied, you still need to save the correct VAT rates in your settings for a correctly functioning system. .
+
+[TIP]
+.Small business owner setting only for systems with Germany as system country
+====
+The *small business owner* setting is only available if your system was set up with *Germany* as system country. The system country is a setting that you cannot access and that is selected based on the information that you provide when you order your plentymarkets system.
+====
+
+[.instruction]
+Using the German small business owner regulation:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Activate the option *Small business owners (Germany only)*.
+. *Save* (icon:save[role="green"]) the settings.
+
+[IMPORTANT]
+.Displaying small business owner information on invoices
+====
+As a small business owner you need to place information on your invoice why no VAT has been applied.  You can use the note field on your invoice template for this information. The setting for small business owners does not automatically place a note on your invoice.
+====
+
+[#400]
+=== Setting up how invoices are issued for deliveries within the EU
+
+For deliveries within the EU, you can choose whether customers with a VAT number should receive a net invoice or a gross invoice. In many cases the information of the delivery’s recipient are of higher priority than the ones of the invoice’s recipient.  The delivery address has to be in another EU country if you want to issue a net invoice. For deliveries within the same member state of the EU the VAT is always applied regardless of the selected setting. To prevent this, you have to enclose an entry certificate in the delivery and have to select this option in the order within the delivery address. If the customer does not have a VAT number, this means that it is a private purchase and that VAT is applied anyway. The only time VAT is not applied for private purchases is if you are a small business owner as described above.
+
+[.instruction]
+Setting up gross or net invoices for deliveries within the EU:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Select an option from the *VAT number* drop-down list. Pay attention to the explanations given in <<table-intra-EU-invoices>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-intra-EU-invoices]]
+.Issuing invoices for deliveries within the EU
+[cols="1,3"]
+|====
+|Setting|Explanation
+
+| *VAT rate ID*
+|Only applies to deliveries within the EU. +
+This setting does not have any effect for non-EU locations. +
+*Gross invoice* = All invoices for deliveries within the EU are issued as gross. +
+*Net invoice* = Invoices are issued without VAT for customers who have a VAT number. +
+However, if the customer’s delivery address is in the same country as the accounting location, the VAT is calculated for the order regardless of the setting that you have chosen. The German law permits orders to be issued as net for customers from other European countries who have a valid VAT number and provide a German delivery address, if an xref:orders:entry-certificate-new.adoc#[entry certificate] is provided with the order. For this reason, the delivery address in an order as well as in the customer data includes the option *Entry certificate*. Activating this option in the order means that the entry certificate is applied once for this order. Activating the option in the customer data means that the entry certificate is always applied for this delivery address of the customer. If you activate the *Entry certificate* option, then orders that are placed by customers in other European countries but shipped to a German delivery address is treated like shipments to foreign EU countries. The settings *VAT number* and *Export shipping* in this menu then determine whether the invoice is issued as gross or net. If the *entry certificate* is not active, then these orders are calculated as gross.
+|====
+
+[#450]
+==== Examples with the settings’ effect
+
+In the following section, 6 possible setting combinations and the effects are described.
+
+[.collapseBox]
+.What is the result if the sender, the delivery’s recipient and the invoice recipient are in the same member state of the European Union and if the setting net invoice is selected?
+--
+In this case, the invoice is always provided as gross, even if the setting *Net invoice* has been selected.
+--
+
+[.collapseBox]
+.What is the result if the sender and the delivery’s recipient are in the same member state of the European Union, but the invoice recipient is in a different member state and if the setting net invoice is selected?
+--
+In this case, the invoice is provided as gross, even if the setting *Net invoice* has been selected. However, a net invoice is actually allowed if the invoice recipient has a VAT number. An additional setting has be carried out to issue a net invoice. The entry certificate must be activated in the delivery address data of the order. The invoice is gross as long as the entry certificate setting is not activate. The entry certificate is an individual delivery address setting.
+--
+
+[.collapseBox]
+.What is the result if the sender and the invoice recipient are in the same member state of the European Union, but the delivery’s recipient is in a different member state and if the setting net invoice is selected?
+--
+The invoice is net if the recipient of the delivery has a VAT number. The invoice recipient does not play a role in this scenario.
+--
+
+[.collapseBox]
+.What is the result if the sender is in one member state of the European Union, but the invoice recipient and the delivery’s recipient are in a different member state and if the setting net invoice is selected?
+--
+The invoice is net as soon as either the recipient of the delivery or the recipient of the invoice has a VAT number. The invoice is gross if neither the recipient of the delivery nor the recipient of the invoice has a VAT number.
+--
+
+[.collapseBox]
+.What is the result if the sender is in one member state of the European Union, but the delivery’s recipient is in a different member state and the invoice recipient is in a country outside of the EU and if the setting net invoice is selected?
+--
+The invoice is net as soon as either the recipient of the delivery or the recipient of the invoice has a VAT number. The invoice is gross if neither the recipient of the delivery nor the recipient of the invoice has a VAT number.
+--
+
+[.collapseBox]
+.What is the result if the sender is in one member state of the European Union, but the invoice recipient is in a different member state and the delivery’s recipient is in a country outside of the EU and if the setting net invoice is selected?
+--
+In this case the delivery is an export shipment and the setting for an *export shipping* is applied. The settings for export shippings are explained in the next section on this page.
+--
+
+[#500]
+=== Issuing an invoice for export shipments
+
+For each accounting location you can individually define whether the invoice for export shipments should be net or gross. The basic assumption is that your business is based in the European Union. The setting is applied if the delivery is sent to a country outside the European Union. If the invoice is a net invoice, your customers receive an invoice without VAT.
+
+[.instruction]
+Setting up gross or net invoices for export shipping:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Select an option from the *export shipping* drop-down list. Pay attention to the explanations given in <<table-export-shipping-invoices>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-export-shipping-invoices]]
+.Invoice settings for export shipping
+[cols="1,3"]
+|====
+|Setting|Explanation
+
+| *Export shipping*
+| *Net invoice* = Invoices for export shipping are issued without VAT. +
+This setting is ignored if VAT rates are saved for the export country.  This means that the invoice is gross. + +
+*Gross invoice* = Invoices for export shipping are issued with VAT. +
+Which VAT rate is applied depends on whether a VAT rate was set up for the delivery country. If you have set up VAT rates for the country of delivery, then these VAT rates are applied. If no VAT rates are set up for the country of delivery, the VAT rates of the location are used.
+|====
+
+[#510]
+=== Applying the Reverse charge procedure
+
+The *Reverse charge procedure in accordance  with article 194 of the VAT Directive* is a special VAT tax regulation. If the procedure is applied, the recipients (= your customers) are liable for the VAT and not the merchant or company providing the service (= you as a merchant or your company). The reverse charge procedure is only applicable to B2B deliveries. If it is applied, it is necessary that
+
+* the VAT ID of the customer is added in the order.
+* a net invoice is issued for this customer.
+* a note stating that the reverse charge procedure is applied is displayed on this net invoice.
+
+This setting is dependent on location, which means that you can decide separately for each location if the procedure is to be applied. The Reverse charge procedure is *deactivated* by default, i.e. *No* is selected for every location. If you want to activate this option, go to the *Setup » Client » [Select client] » Locations » [Select location] » Accounting » Tab: Basic settings* menu and select *Yes* from the drop-down list. Also consider the explanations in <<table-reverse-charge-procedure>>.
+
+[[table-reverse-charge-procedure]]
+.Reverse charge procedure
+[cols="1,3"]
+|====
+|Setting|Explanation
+
+| *Reverse charge procedure in accordance with article 194 of the VAT Directive *
+| *No (default)* =  The reverse charge mechanism isn’t applied. +
+
+*Yes* = The reverse charge mechanism is applied. The prerequisite is that it is a B2B order and the customer’s VAT number is stated in the order. If you select *Yes*, the system automatically determines whether the requirements are met. The invoice will then be issued as a net invoice and the tax note that the reverse charge procedure is applied will be displayed on the invoice. +
+*_Important_*: You need to save this tax note in your xref:orders:order-documents-new.adoc#intable-tax-note-three[document template for invoices] in advance. Enter the note in the document field *Tax note 3*. If you have document templates for different languages, you have to add hints separately to each of the templates.
+|====
+
+[#525]
+=== Delivery threshold and OSS
+
+From 01/07/2021 on, there are no more different delivery thresholds within the EU. Instead, a common delivery threshold of *€ 10.000* for all B2C deliveries applies. +
+If you sell to other EU countries and exceed this delivery threshold, you are liable for VAT in other countries. How much VAT you have to pay in which countries depends on the individual transactions. The settlement of VAT for B2C deliveries can be handled centrally via the One-Stop-Shop (OSS) procedure and is then no longer carried out individually for each EU country. The reporting period here is always per quarter and the payment period ends 30 days after the end of the reporting period. +
+In Germany, the Federal Central Tax Office is responsible for the OSS procedure. You can also link:https://www.elster.de/bportal/start?locale=en_US[register for OSS]{nbsp}icon:external-link[] directly with them. You can find all information about OSS link:https://www.bzst.de/EN/Businesses/businesses_node.html;jsessionid=145464722DEC78A89CDA8E5E3A86E335.live831[here]{nbsp}icon:external-link[]. Participating in the OSS is not compulsory. We recommend to discuss with your tac office whether participation makes sense for you.
+
+To represent all this in plentymarkets, you need to implement two things in particular:
+
+* Set up <<#550, VAT rates>> for your delivery countries. This is not to be confused with creating a new <<#320, location>>. You can create VAT rates as described in the <<#550, following chapter>> or you can use the VAT rate assistant. +
+Either way, it is very important that you make sure to enter the correct data. Otherwise, wrong VAT rates and incorrect configurations could be created which cannot be reversed.
+* Enter and maintain <<#620, taric codes>>, as these are central for mapping the different taxation of items. Add the taric codes on the variations and then link these with the corresponding VAT rates of the individual EU countries in the taric code table.
+
+
+
+[#550]
+=== Setting up VAT rates
+
+In plentymarkets, the disctinction between locations and delivery countries in which you are liable to pay tax is important. An accounting location is a registered business address. 2 accounting locations exist per default in plentymarkets. The default locations are Germany and United Kingdom. You need one location at the very least and you can add further locations for each of your subsidiaries. The 2 default locations include default VAT configurations with VAT rates etc. However, do not use these configurations for the productive mode of your system. Add your own configurations and delete the default ones. You need to set up at least one configuration. +
+You can use this configuration to ship worldwide. However, you need to add further configurations for your delivery countries within the EU as soon as you exceed the <<#525, delivery threshold>> for a EU country. You add locations for company headquarters and the country of the location with VAT configurations for correct accounting.
+
+[TIP]
+.Official tax information
+====
+For Germany, the link:https://www.bzst.de/EN/Home/home_node.html[Federal Central Tax Office]{nbsp}icon:external-link[] provides tax information about the European countries of delivery as well as information about VAT. +
+For information about different VAT rates in EU countries, refer to the link:https://ec.europa.eu/taxation_customs/online-services/online-services-and-databases-taxation/tedb-taxes-europe-database_en[TEDB ("Taxes in Europe" database)].
+====
+
+[.instruction]
+Setting up VAT rates:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Change to the *VAT rates* tab.
+. Click on *New configuration*.
+. Select a *Country*.
+. Enter the *Tax rates* for the selected country. +
+→ Regarding this, especially note the table entry about <<#intable-enter-tax-rate, entering tax rates>>.
+. Enter your *VAT number*.
+. Select a starting date from which on the rates will be valid.
+. Pay attention to the explanations given in <<table-setting-up-VAT-configuration>>.
+. *Save* (icon:save[role="green"]) the settings. +
+→ The new configuration opens and an additional setting for the margin scheme is displayed.
+
+[IMPORTANT]
+.Changing VAT configurations afterwards not possible
+====
+As soon as a VAT configuration is active, only the *Invalid from* date is editable. Therefore, make sure to enter the correct data when you create VAT configurations.
+====
+
+[[table-setting-up-VAT-configuration]]
+.Settings of a VAT configuration
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Country*
+|Select the country in which you have become liable for taxation. +
+*_Important_*: The country cannot be changed later.
+
+| [#intable-enter-tax-rate]*Tax rate A in %* +
+*Tax rate B in %* +
+*Tax rate C in %* +
+*Tax rate D in %* +
+*Tax rate E in %* +
+*Tax rate F in %*
+|Enter the tax rates for the country selected in the field *Country*. Use the same structure of entering tax rates for every country. For example: +
+Tax rate A = Standard rate (e.g. Germany 19%, France 20 %) +
+Tax rate B = First reduced rate (e.g. Germany 7%, France 10%) +
+Tax rate C = Second reduced rate (e.g. France 5,5%) +
+Tax rate D = super reduced rate / special rates (e.g. France 2,1%)
+
+*_Important_*: +
+- You can only change the VAT rates as long as they are not valid. Once the rates are valid they cannot be changed or extended. +
+- Do not enter the same tax rate twice in one configuration, as this leads to errors. +
+- Use the <<#620, taric codes>> for the different taxation of items. +
+- The *names* are only relevant for the accounting software Xero.
+
+| [#intable-revenue-account-optional]*Revenue account (optional)*
+| This is an optional field that can also be filled later. Only enter a revenue account for a tax rate if the tax rate differs from the one assigned to an account under <<#800, revenue accounts>>, but the differing one is the valid tax rate. +
+To do this, enter the corresponding revenue accounts in the tax rate configuration which represents the lowered tax rates. By doing this, these have priority. +
+_Note_ that the values entered here take precedence over those entered under *Accounts* for the determination of revenue accounts.
+
+| *Margin scheme*
+|Specify which tax rate should to be used for order items to which the margin scheme applies. If no tax rate is selected, order items for which the margin scheme applies cannot be displayed on invoices (= basic setting). +
+The margin scheme setting is not visible until you save a VAT configuration. +
+*_Important_*: The *margin scheme* setting in plentymarkets is an older customised implementation. The tax rate will be applied to the entire amount of the order items that the margin scheme applies to. In other words, the tax rate will not be applied to the difference between sales price and purchase price.
+
+| *VAT rate ID*
+| Enter your VAT number.
+
+| *Valid from*
+|Select the date from the calendar. The VAT rates will go into effect on this date. +
+*_Important_*: When entering the date manually instead of picking it from the calendar, make sure that you enter the year as a four digit value. Entering only two digits for the year may cause errors.
+
+| *Invalid from*
+|Select the date from the calendar. The VAT rates will no longer be applied from this date on. +
+Enter a date if you are no longer liable to VAT in this country or a configuration should only be valid until a certain date. +
+*_Important_*: When entering the date manually instead of picking it from the calendar, make sure that you enter the year as a four digit value. Entering only two digits for the year may cause errors.
+
+| *For digital items only*
+|Activate if the VAT rate should only apply to digital items. For further information, refer to the chapter <<#600, VAT for digital items>>.
+
+|====
+
+[#600]
+=== VAT for digital items
+
+The buyer's VAT rate must be used for digital items. An EU regulation put these VAT rates into effect on 01/01/2015. If a VAT rate is already available for a country of delivery it is not necessary to create an additional VAT rate for digital items only. The existing VAT rate is used. If no VAT rate is set up for one or more countries of delivery, then set up your accounting procedures in plentymarkets as described below. +
+The EU regulation applies to B2C revenues. B2B revenues without VAT are not affected
+
+[.instruction]
+Identifying the VAT for digital items:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Change to the *VAT rates* tab.
+. Create a VAT configuration for every country of delivery where digital items are sold.
+. Open the VAT configuration and activate the option *For digital items only*.
+. Create a xref:item:managing-items.adoc#80[characteristic] for digital items and give it a name, e.g. *Digital*. The characteristic cannot be an order characteristic.
+. Go to *Setup » Item » Settings* and select the characteristic for the option *Item characteristic for identifying digital items*.
+. Open every item that should be sold as digital media and save the characteristic in the characteristics tab.
+
+
+
+[#620]
+== Taric codes
+
+Taric codes, also called taric numbers, are used in EU-wide trading. These are unique and fixed numbers which are assigned to a specific commodity and have to be included in tax relevant documents.
+
+Taric codes are relevant for you if you are trading EU-wide and have exceeded the <<#525, delivery threshold>> of 10.000 EUR for B2C sales. In this case you should enter the taric codes in good time. We recommend to clarify all details regarding the taxation of your goods in other EU countries with your tax consultant.
+
+Goods are charged with different taxes in different EU countries. In order to take this into account and thus also have a correct basis for the calculation of orders, the taric codes have to be entered into the system and also checked against the VAT rates which are set for different countries.
+Thus, as a first step, you have to maintain the taric codes in your system. The xref:item:managing-items.adoc#280[taric codes] are entered in the *variations* of an item. Moreover, you need to set <<#550, VAT rates>> for the required countries. These VAT rates can also be entered later, but we recommend setting these up in the system in time.
+
+The table in the *Setup » Client » Setting » Taric code* menu then enables the linking of taric code, VAT rate and country. Thus, this taric code table is a basis for the calculation of orders and has to be maintained as well. It is important to note that no tax rates are directly entered here. Instead, you select the ID (A, B, C, etc.) of the tax rate of the corresponding tax rate configuration. Therefore, it is essential to be careful in the maintenance of the <<#550, VAT settings>>.
+
+[.collapseBox]
+.This happens in the background when orders are calculated*
+--
+
+Imagine that an order with the delivery country France enters the system. VAT rate A is set for the variation of the order item in the order. But in France, this item is taxed with the VAT rate B. That is why there is an entry in the taric code table with the same taric code as the one entered in the variation. The difference is that in the table, this taric code is linked with France and the VAT rate B. The order logic recognises these cases and uses the VAT rate set in the taric code table.
+
+--
+
+In case there is no taric code entered in the variation or in the table, no differing VAT rate is used for the calculation. This means that you only have to enter the corresponding taric codes in the table if a variation is _taxed differently_ in other countries.
+
+In order to import taric codes you can either use the import tool or enter them manually.  We recommend to the import tool and to enter only single taric codes or carry out small adaptations manually.
+_Note_ that only numbers up to 14 characters are allowed. Entering special or blank characters is not allowed.
+
+The sync type xref:data:elasticSync-assignment-taric-code.adoc#[Assignment taric codes] is available for importing taric codes. You can find general information about imports via the import tool on the manual page xref:data:ElasticSync.adoc[Using the import tool].
+
+To fill the table manually, proceed as follows.
+
+[.instruction]
+Filling the taric code table manually:
+
+. Go to *Setup » Client » Settings » Taric codes*.
+. Click on *Create new assignment* (icon:plus-square[role="green"]). +
+→ A new row is added to the table.
+. Enter the *taric code*.
+. Select the corresponding *country*.
+. Select the corresponding *VAT rate*.
+. Click on *Save* (icon:save[role="green"]) at the end of the row. +
+→ The changes are saved.
+
+In the table, found variation links are marked with a green dot. This means that this taric code is currently in use in a variation. If a red dot is displayed, no variation link was found, i.e. this taric code is not in use in any variation.
+
+More editing options are available. For this, pay attention to the information given in the following table.
+
+[[table-editing-options-taric-code]]
+.Editing options for the taric code table
+[cols="1,3"]
+|====
+|Function|Explanation
+
+| *Search*
+|You can *search* (icon:search[role="blue"]) for assignments. For this, the filters *taric code* and *country* are available to you.
+
+| *Editing an assignment*
+|To *edit* an existing assignment, click on the appropriate row and carry out the necessary adaptations. Afterwards, click on *save* (icon:save[role="green"]) to update them.
+
+| *Deleting an assignment*
+|To delete an existing assignment, click on *delete* (icon:minus-square[role="red"]) in the column *Actions*  at the end of the row. Confirm the deletion in order to delete the assignment.
+
+|====
+
+[#650]
+== Setting up posting keys, revenue and debtor accounts
+
+Posting keys are only relevant for DATEV exports. You can ignore the posting key settings if you do not work with DATEV. You set up revenue accounts to book your revenues. You set up debtor accounts to book your pending amounts.
+
+[#700]
+=== Setting up posting keys
+
+Posting keys are relevant for DATEV exports. If you do not work with DATEV, you can skip this chapter. Posting keys are called tax key in DATEV and are required for the correct transfer of posting information. here are some standard tax keys in DATEV. he standard tax key from the two standard charts of accounts 03 and 04 for 19 % VAT in Germany is 3. plentymarkets automatically determines whether it is dealing with a debit (D) or credit (C) posting. This information is included in the export. The information is displayed in a separate column in the export.
+
+[.instruction]
+Setting up posting keys:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Click on the *Accounts* tab. +
+→ The *Posting key* tab opens.
+. Enter a posting key for each tax rate.
+. *Save* (icon:save[role="green"]) the settings.
+
+[#750]
+=== Setting up debtor accounts
+
+You set up debtor accounts to book your pending amounts. You can choose a criterion that is used to book pending amounts on debtor accounts. As a criterion you can for example use the names of the debtors or the country of delivery. Choose a criterion first and then enter the actual accounts.
+
+[.instruction]
+Setting up debtor accounts:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Click on the *Accounts* tab. +
+→ The *Posting key* tab opens.
+. Click on the *Debtor accounts* tab.
+. Carry out the settings according to the information provided in <<table-debtor-account-setup>>.
+. *Save* (icon:save[role="green"]) the settings.
+
+[[table-debtor-account-setup]]
+.Setting up debtor accounts
+[cols="1,3"]
+|====
+|Setting|Explanation
+
+| *Standard debtor account*
+|Enter a standard debtor account that is used if no other debtor account is set up or no other account applies. +
+*_Important:_* The debtor account in the customer's data set is always applied and exported if the customer's data set contains a specific debtor account. +
+The debtor account is saved in the customer data as soon as it has been identified for the first time. The identification of debtor accounts is carried out if revenue information are exported. The DATEV or Collmex export are exports that will trigger the identification of debtor accounts.
+
+| *Save debtor account in the customer master data record*
+|Activate this option to save a debtor account in the customer's master data if no debtor account has been saved yet. The debtor account is saved according to the option that is selected for the *automatic assignment of debtor accounts*. +
+If no debtor account is saved for the selected process, then the standard debtor account is used.
+
+| *Automatic assignment of debtor accounts based on*
+|Select a criterion from the drop-down list that should be used to assign the debtor accounts. +
+The actual account information must be filled according to the selected criterion. +
+*Initial letter* = The debtor account is assigned based on the initial letters of the customer information. Choose the customer information and the order of the information from the second drop-down list. +
+If you choose the order *Company, surname, first name*, the name of the company has the highest priority. If no company name was entered, then the last name is used and so on.
+*Payment method* = The debtor account is assigned based on the payment method that is saved in an order. +
+*Country of delivery* = The debtor account is assigned based on the country of delivery that an order is shipped to. +
+*Country of delivery, but payment method for domestic* = The debtor account is assigned based on the country of delivery that an order is shipped to. If the shipment is a home country shipping, the payment method applies as a further criterion. +
+*_Note:_* Consult with your financial accounting department or your tax office when deciding which process to use.
+
+| *Initial letters (A - Z or 0 - 9 Debtor account)*
+|Enter debtor accounts depending on the *initial letter*. Do not enter debtor accounts here if you have selected another criterion.
+
+| *Countries of delivery*
+|Save debtor accounts for the delivery countries that are activated in your system. Do not enter debtor accounts here if you have selected another criterion.
+
+| *Payment methods*
+|Save debtor accounts for the payment methods that are saved in your system. Do not enter debtor accounts here if you have selected another criterion.
+
+|====
+
+[#800]
+=== Setting up revenue accounts
+
+You set up revenue accounts to book your revenues and to assign them to accounts. You can enter accounts for revenues that are liable to VAT and for revenues that are exempt from VAT.
+
+[.instruction]
+Setting up revenue accounts for revenues that are liable to VAT:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Click on the *Accounts* tab. +
+→ The *Posting key* tab opens.
+. Click on the *Revenue accounts* tab.
+. Enter an account for each VAT rate that you use.
+. *Save* (icon:save[role="green"]) the settings.
+
+With this configuration for revenue accounts for revenues liable to VAT, selected VAT rates are assigned to a specific revenue account. But what do you do if a VAT rate temporarily differs or changes, as was the case for the temporarily lowered VAT rates in Germany in 2020, for example? In this case, you enter the corresponding revenue account directly in the VAT rate configuration which displays the differing VAT rate. In the system, these then have priority in the determination of revenue accounts. For this, pay attention to the table entry <<#intable-revenue-account-optional, Revenue account (optional)>> in the chapter about setting up VAT rates.
+
+[.instruction]
+Setting up revenue accounts for revenues that are exempt from VAT:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*. +
+→ The *Settings* tab opens.
+. Click on the *Accounts* tab. +
+→ The *Posting key* tab opens.
+. Click on the *Revenue exempt from VAT* tab.
+. Enter an account for revenues that are sold within the EU and that are exempt from VAT into the *Revenue from EU* field.
+. Enter an account for revenues that are sold to countries outside the EU and that are exempt from VAT into the *Revenue from export* field.
+. *Save* (icon:save[role="green"]) the settings.
+
+[#820]
+=== Saving booking accounts for plentymarkets POS events (from plentymarkets App version 1.7.3 and higher)
+
+Orders generated in plentyPOS are assigned to the <<#800, revenue accounts>> saved in plentymarkets. Because deposits, withdrawals and till count discrepancies are not orders, you can save booking accounts for these POS events. For further information on how to save booking accounts for POS events, refer to the xref:pos:integrating-plentymarkets-pos.adoc#950[Integrating plentyPOS] page of the manual.
+
+[#850]
+== Copying settings to other locations
+
+Use the *Copy settings* function to copy the settings of the current location and apply these settings to one or more other locations. You can copy all of the settings or only specific settings.
+
+The following settings can be copied:
+
+* *Basic settings*
+* *VAT rates*
+* *Accounts*
+
+Proceed as described below to copy settings to one or more locations.
+
+[.instruction]
+Copying settings to one or more locations:
+
+. Go to *Setup » Client » [Select client] » Locations » [Select location] » Accounting*.
+. Click on the *Copy settings to another location*.
+. Under *Location*, select one or more locations that the settings should be applied to.
+. Select the *Options* you want to copy.
+. Click on *Copy*. +
+→ The settings are applied to the locations.
+
+[#900]
+== Exporting accounting data
+
+plentymarkets allows you to export accounting data. You can use the export to transfer the data to your accounting software. When you export your accounting data the system automatically assigns debtor accounts, revenue accounts and posting keys according to the settings that you have set up prior to the export.
+
+The *Data » Custom export* menu contains predefined export formats which can be used to export accounting data. The data fields that are exported are predefined for those export formats. Nevertheless, there are a few settings that you need to carry out. These settings have an effect on the export’s data volume.
+
+Go to *Data » Data export* and select the data format that you want to export.
+
+<<table-predefined-export-formats>> explains the predefined data formats that are available in the *Data » Custom export* menu. Below the table you can find the steps that are required to export a predefined data format. The settings that require additional information are not listed for every data format, but summarised in <<table-settings-exporting-data-formats>>.
+
+[[table-predefined-export-formats]]
+.Predefined export formats in the *Data » Custom export* menu
+[cols="1,3"]
+|====
+| Data format | Explanation
+
+| *Order data for customs*
+|The exported CSV file contains order data relating to exportation, e.g. shipping costs.
+
+| *BMECat*
+|link:https://www.bme.de/en/start/[BMECat] is a standardised, XML-based exchange format for catalogue data and product classification systems in the B2B field.
+
+| *CleverReach*
+|The export transmits data of all orders with status 7 of the previous day to the email marketing software xref:crm:sending-newsletters.adoc#1700[CleverReach].
+
+| *Collmex accounting*
+|The export is optimised for the ERP solution link:http://www.collmex.de/[Collmex] and exports sales or customer data. You can export data of one or multiple locations in order to link:http://collmex.de/cgi-bin/cgi.exe?1005,1,help,daten_importieren[import] this data in Collmex. When you export sales data, Collmex uses link:http://www.collmex.de/handbuch_basic.html#zahlungsbedingung_anlegen[payment condition IDs] for the correct assignment. Note that the Collmex website is only available in German.
+
+| *Financial accounting*
+| The CSV file may either only contain the data from outgoing item invoices or from the plentyPOS receipts or it may contain data from both sources. The export is link:https://www.datev.de/web/de/startseite/startseite-n/[DATEV] compliant. You can export data of one or multiple locations. Select *UTF-8* as the import character set and select the *semicolon* as separator. +
+*_Tip:** Use a software for the CSV import that allows you to select these parameters before importing the file.
+
+| *Manufacturer commissions*
+|The exported CSV file contains commissions that are saved in the xref:item:manufacturers.adoc#100[manufacturer data].
+
+| *Price list*
+|The exported CSV file contains item data and the corresponding prices.
+
+| *Invoice book*
+|The exported CSV file contains a list of all invoices and credit notes that were generated on the selected date or within a month. Select *Latin* as the import character set and *semicolon* as separator.
+
+| *Revenue by order date*
+|The exported CSV file contains sales data by the date the order was received. +
+*_Note:_* If you want to use a data export for the advance return for tax on sales/purchases, then we recommend that you use the export *Outgoing item invoices*, as the case of entitlement first goes into effect when the goods are delivered. A further advantage is that it does not result in as many credit notes/cancelled invoices, when services are not paid for or when changes are made to the order before the invoice has been issued.
+
+| *VAT number check*
+| The exported CSV file contains customer data of checked customers as well as their VAT number. The entry in the *valid* column of the exported CSV file tells you whether or not the customer has a valid VAT number. The entry *0* stands for invalid and *1* stands for valid. +
+The VAT number is automatically checked during the order process in your store. You can manually check the VAT number of customers who bought your items on other markets. For further information about the VAT number check, refer to the xref:crm:edit-contact.adoc#check-vat-number[Checking the VAT number] chapter of the manual. +
+*_Important:_* Place a check mark next to the option *Active*. If you do not place a check mark, then all of the VAT number check data will be exported and the time period that was selected will be ignored.
+
+| *Sold quantities of items*
+|The exported CSV file contains a list of all sold items and of the sold quantity within a certain time period. You choose the information that you want to include in the export.
+
+| *Outgoing item invoices*
+|The exported CSV file contains a list of invoice data that was generated on the selected date or within a month. A memo is saved for every invoice according to the VAT rate. In addition, the memo that belongs to the order will be exported. Select *Latin* as the import character set and *comma* as separator.
+
+| *Xero*
+|The exported CSV file contains sales data from UK orders for the data exchange with the accounting software link:https://www.xero.com/[Xero]. You can export data of one or multiple locations. +
+VAT rates have to be given the exact same names that Xero uses. Go to *Setup » Client » [select client] » Locations » [select location] » Accounting » Tab: VAT rates* to enter a name behind the VAT rate.
+
+| *Payment documents*
+|The exported CSV file contains incoming payments that are assigned to an order. The invoice data is retrieved according to the payment method.
+|====
+
+Next, you will learn how to export the data formats mentioned above.
+
+[.instruction]
+Exporting a predefined data format:
+
+. Go to *Data » Custom export*.
+. Select a data format from the drop-down list. Pay attention to the explanations given in <<table-predefined-export-formats>>.
+. Click on *Add* (icon:plus-square[role="green"]). +
+→ The export format is created and added to the list.
+. Carry out the settings. Pay attention to the information given in <<table-settings-exporting-data-formats>>. The table only lists settings that require additional explanation.
+. *Save* (icon:save[role="green"]) the settings.
+. Click on the gear-wheel icon *Export data*. +
+→ The export file is created.
+. Save the file on your computer so that you can use it later.
+
+[IMPORTANT]
+.Column header names
+====
+If you change the names of the column headers after the export, then the data cannot be correctly assigned when importing the file. This is because plentymarkets uses the column header names for assignment. When you import your data into other external systems, it might be necessary to adapt the column header names to ensure a correct assignment.
+====
+
+[[table-settings-exporting-data-formats]]
+.Settings; exporting data formats
+[cols="1,3"]
+|====
+| Setting | Explanation
+
+| *Name*
+|Use the default name or enter another name.
+
+| *Company No.*
+|The company number is only relevant if you use the *Collmex* data format. In case you manage the data of several companies, select a number. Number 1 is selected by default.
+
+| *Free text field*
+|The free text field is only relevant for the data format *Financial accounting*. It refers to the xref:main@manual:item:import-export-create-directory.adoc#70[free text fields] linked with the item and their content. If you selected a free text field here, select the option *One data record per stock unit (standard)* for the format. This option is described below.
+
+| *Format*
+|The format is only relevant for the data format *Financial accounting*. +
+*One data record per invoice and VAT rate* = One posting line per invoice and VAT rate. If an invoice only contains one VAT rate, only one posting line will be exported. +
+*One data record per stock unit (standard)* One posting line per stock unit. The option *One data record per stock unit (standard)* is useful if you have saved individual <<#650, revenue accounts>> for items in plentymarkets.
+
+| *Item category to the level*
+|The item category to the level is only relevant for the data format *Price list*. Select a level to define up to which level items should be exported.
+
+| *Date*; +
+*Time period*
+|Select the day, month and year to only export data of this specific date. Instead of a specific date, you can also export data of an entire month. +
+*Sold quantities of items*: The setting *Date* defines whether the data contained in the export is based on the date when the order was received or when the payment was received.
+
+| *AccountCode*
+|The AccountCode is only relevant for the data format *Xero*. Enter the AccountCode as saved in Xero.
+
+| *Company location*
+|The Company location is only relevant for the data format *Xero*. Select the country where the company is located, as saved in Xero. This setting defines how prices and dates will be formatted and thus fulfils the import requirements for Xero.
+
+| *Additionally retrieve and include the interim transaction report*
+|This setting is only relevant for the data format *Payment documents*. Activate the setting to retrieve and export interim transaction reports. +
+In the interim transaction report, you can see payments that have not been booked yet but that the bank already knows of and that will be booked soon. This type of information allows you to send items even earlier and make your service even better. +
+*_Important:_* You may have to contact your bank in order to see interim transaction reports.
+|====

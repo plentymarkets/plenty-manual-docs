@@ -1,0 +1,609 @@
+= WooCommerce
+:author: team-plenty-channel
+:keywords: woocommerce, woocommerce.com
+:description: Set up the interface to the open-source eCommerce solution WooCommerce in your plentymarkets system.
+
+:woocommerce:
+:market: WooCommerce
+:price-search-engine: WooCommerce
+:plugin-name: WooCommerce
+:main-client:
+:plugin-link: https://marketplace.plentymarkets.com/en/woocommerce_5102
+
+WooCommerce is a flexible, open-source eCommerce solution built on WordPress. Whether you’re launching a business, taking an existing brick and mortar store online, or designing sites for clients you can get started quickly and build exactly the store you want.
+
+== Installing WordPress
+
+link:https://wordpress.org/[WordPress.org] serves as a content management system and launch platform for your online trading with WooCommerce. For details on installing WordPress consult the link:https://wordpress.org/support/article/how-to-install-wordpress/[How to install WordPress] page.
+
+== Installing the WooCommerce plugin by WordPress
+
+Once you have WordPress up and running, install Wordpress's WooCommerce plugin link:https://docs.woocommerce.com/document/installing-uninstalling-woocommerce/[Installing and Uninstalling WooCommerce].
+
+
+== Generating the WooCommerce API credentials
+
+Generate WooCommerce API credentials from your WooCommerce dashboard. You need these credentials to connect plentymarkets to WooCommerce.
+
+. Open the *WooCommerce dashboard*.
+. Open *WooCommerce » Settings » Advanced » REST API*.
+. Click on *Add key*.
+. Create a *Description*. +
+*_Important:_* Ensure that all *Permissions* are set to *Read / Write*.
+. Click on *Generate API key*.
+. Copy the API key. +
+*_Important:_* Copy the API key straight away. The API key will be hidden once you leave the page.
+
+== Assigning a supported permalink structure
+
+. Open the *WooCommerce dashboard*.
+. Go to *Settings » Permalinks*.
+. Select one of the supported URL structures.
+. *Save* the settings. +
+*_Important:_* The plugin supports all URL structures except *Plain*.
+
+== Installing the plugin in plentymarkets
+
+To connect to WooCommerce in plentymarkets, first install the link:https://marketplace.plentymarkets.com/en/woocommerce_5102[WooCommerce plugin^] in your plentymarkets system. You can download this and other plugins in the link:https://marketplace.plentymarkets.com/en[plentyMarketplace^].
+
+:plugin: WooCommerce
+:main-client:
+include::markets:partial$plugin-installation.adoc[]
+
+== Activating the order referrer
+
+:referrer: WooCommerce
+:referrer-option: pass:quotes[option *WooCommerce*]
+
+include::markets:partial$activate-referrer.adoc[]
+
+*_Important:_* Note that the plugin cannot use order referrers that were created manually.
+
+== Setting up the interface in plentymarkets
+
+Carry out the following settings in plentymarkets to set up the interface to WooCommerce. Keep the credentials to hand that you received from WooCommerce during the registration process.
+
+=== Connecting to the WooCommerce API
+
+Connect to the WooCommerce API. To do so, you need the credentials you received from WooCommerce.
+
+[.instruction]
+Connecting to the WooCommerce API:
+
+. Go to *Setup » Markets » WooCommerce » Tab: Connection*. +
+*_The menu is not there?_* Then go to *Setup » Orders » Order referrer* to activate the order referrer.
+. Assign the plentymarkets *client* through which this connection runs.
+. Enter the *Host name*. +
+*_Example:_* http://yourWebShopName.domain/ +
+*_Important:_* The slash [ / ] at the end of the URL is mandatory.
+. Enter the *Customer key*.
+. Enter the *Customer secret*.
+. Click on *Test connection*.
+. Save the settings. +
+→ Your plugin is connected to the WooCommerce API. +
+*_Important:_* If you change the WooCommerce shop in this connection later, you need to select a new plentymarkets client. Select a client that has never been connected to a different WooCommerce webshop before. Otherwise, orders that are imported using the new connection might be assigned to existing customers that were created with the old connection.
+
+[additional-shops]
+=== _Optional:_ Connecting additional WooCommerce webshops
+
+Each new connection requires a separate plentymarkets client and WooCommerce account. As such, you need a separate plentymarkets client for each WooCommerce shop.
+
+*_Important:_* You also need to select a new plentymarkets client when you change the WooCommerce shop in an existing connection.
+
+[.instruction]
+Connecting additional WooCommerce webshops:
+
+. Go to *Setup » Markets » WooCommerce » Tab: Connection*.
+. Click on *[+] Add*.
+. Configure the connection as you did with the previous one. +
+*_Tip:_* You can swap between plugin configurations by selecting the corresponding WooCommerce webshop from the *Client* section.
+
+=== Setting up Germanized Readiness
+
+Germanized extends WooCommerce to technically match specific german legal requirements. The plugin adapts your WooCommerce plugin to the special conditions of the German market.
+
+[.instruction]
+Setting up Germanized Readiness:
+
+. Use the installation guide on link:https://wordpress.org/plugins/woocommerce-germanized/[WooCommerce] to install and set up the *Germanized* plugin.
+. In plentymarkets, go to *Setup » Markets » WooCommerce » Settings » Section: Data Exchange*.
+. Activate the option *Export data to 'Germanized plugin' specific input fields*.
+. Save the setting.
+
+Below is a list of the Germanized fields that are processed during the item export/update:
+
+* The *Variation » Costs » Customs Tarif number* to the WooCommerce *Item » Shipping » HS code*.
+* The *Variation » Model* to the WooCommerce *Item » Variations » Variation » MPN*.
+* The *Variation » First barcode with referrer WooCommerce* to the WooCommerce *Variations » Variation » GTIN*.
+* The *Item » Global » Manufacturing country* to the WooCommerce *Item » Shipping » Manufacturing country*.
+* During *order import*: At Order Import, the WooCommerce *DHL post number* is imported as *Contact » Address » Option Type: Post number*
+* The variation's *Base price*. This price is generated as follows: +
+*_Important:_* The exported Base price is calculated from the variant assigned WooCommerce sales price.  If your variant also has a special offer price defined for WooCommerce, a base price will be generated and exported for it as well. +
+  ** *Size*: Meters, centimetres and millimetres are expressed as meter values at export time. Inches are expressed as inches.
+  ** *Weight*: Kilograms, grams and milligrams are expressed as kilogram values at export time. Ounces are expressed as ounces.
+  ** *Volume*: Litres and millilitres up to *_250ml_* are expressed as millilitres at export time. *_From 250ml up_*, the exported value is expressed as litres. Exported values you defined in litres abide by the same rule as litre and millilitre.
+
+=== Configuring the plugin
+
+*_Important:_* Item related import and export processes cannot be active at the same time.
+
+[.instruction]
+Configuring the plugin:
+
+. Go to *Setup » Markets » WooCommerce » Tab: Connection*. +
+*_The menu is not there?_* Then go to *Setup » Orders » Order referrer* to activate the order referrer.
+
+[[table-plugin-settings]]
+.Plugin settings
+[cols="1,2a"]
+|===
+|Setting |Explanation
+
+| *Webshops*
+| Switch between different WooCommerce connections.
+
+2+^| *Processes*
+
+| *Order import*
+| Runs every 15 minutes.
+
+Imports only orders from the statuses you select under *Order Import status*.
+
+The following data is imported:
+
+* *Order type*
+* *Status*
+* *Currency*
+* *External order ID*
+* *Invoice address*
+* *Delivery address*
+* *Contact* +
+→ Marked as buyer
+* *Item* and *Variation ID*
+* *Order referrer*
+* *Item description*
+* *Ordered quantities*
+* *VAT*
+* *VAT rate*
+* *Sales price* +
+→ excluding surcharges and discounts
+* *Discounts*
+* *Customer notes*
+
+The correct plentymarkets shipping profile is assigned during the order import only if the names of the shipping profiles are the same in WooCommerce and plentymarkets.
+
+The Plugin only recognises discount items contained on imported WooCommerce orders. Discount campaigns are not supported. The discounted value from the WooCommerce order is imported as a separate order item on your plentymarkets order.
+
+The order import process also performs a *Payment status update* for already imported orders.
+
+|*Stock export*
+| The stock export runs dynamically based on the number of variations to update:
+
+* Every 15 minutes for up to *500* variations.
+* Hourly for *500 to 1500* variations.
+* Once a day for more than *1500* variations.
+
+*_Important:_* SKU must be identical in plentymarkets and WooCommerce for this process to work.
+
+| *Price export*
+| Runs every 15 minutes.
+
+*_Important:_* SKU must be identical in plentymarkets and WooCommerce for this process to work. The plugin uses the WooCommerce setting *Settings » TAX » Prices entered with tax* to decide if the exported price is *GROSS* or *NET*.
+
+| *Customers Import*
+| Runs once a day.
+
+Imports the WooCommerce customer base into plentymarkets.
+
+*_Note:_* During the order import process, the plugin also imports contact details. To comply with GDPR requirements, the following policies regarding customer accounts and orders have been implemented:
+
+[cols="2a,3a"]
+!===
+! *Scenario*
+! *Scenarios*
+
+! Customer is imported as guest
+!
+* The customer has no plentymarkets account.
+* The authenticity of the customer is not guaranteed by either part, even if the contact details on several orders are the same. +
+*_Note:_* You can convert contacts of the type *Guest* to regular contacts if required.
+
+! Customer is imported as plentymarkets contact
+!
+* The plugin creates a regular account if the authenticity of the WooCommerce contact is guaranteed by a unique external contact ID.
+
+! An existing plentymarkets contact is linked to the imported order
+!
+* The plugin checks if a WooCommerce contact with this external contact ID has already been imported in the past.
+* If a contact exists, the new order is attached to this contact.
+!===
+
+|*Category export*
+| Runs once a day. Exports all categories activated for the referrer WooCommerce.
+
+*_Note:_* Do not use this feature to export categories that are linked to items. For that purpose, use the item export instead. This feature is meant to be used for an easy export of your entire plentymarkets category tree.
+
+Note that the plugin may delete specific WooCommerce categories if:
+
+* the corresponding plentymarkets category is deleted.
+* the corresponding plentymarkets category's client assignment is removed.
+
+|*Category import*
+|Runs once a day. Imports all WooCommerce categories to plentymarkets.
+
+*_Note:_* Categories linked to items can also be exported with the *item import* process.
+
+|*Item export*
+| * Runs once a day for the first export.
+* Hourly for subsequent item updates. +
+*_Important:_* The plugin only works with WooCommerce item types *Simple Product* and *Variable Product*.
+
+The following data is exported:
+
+* *Name 1* as *Product name*
+* *Preview Text* as *Short Description*
+* *Item text *as *Product Description*
+* *Creation Date* as *Published Date*
+* *Sales Price* as *General » Regular Price* +
+*_Note:_* The sales price with the lowest position activated for the referrer WooCommerce of the variation is exported.
+* *Special Offer Price* as *General » Sale Price*
+* *Categories* linked to items that are activated for WooCommerce.
+* *Gross weight* as *Weight*
+* *Dimensions* as *Shipping » Dimensions*
+* *VAT rate*
+* *Item Images* to *Product Gallery*
+* The linked *Variation image* with the lowest position.
+* *Linked Attributes* as *Attributes*
+* *Characteristics* as *Attributes * Visible on the product page*
+* *Properties* as *Attributes * Visible on the product page*
+* *Meta keywords* as *Tags*
+* *SKU* as *SKU*
+* *Stock NET* as *Stock*
+
+|*Item import*
+| Runs once a day.
+
+The plugin only works with WooCommerce item types *Simple Product* and *Variable Product*.
+
+The following data is imported:
+
+* *Product name* as *Name 1*
+* *Short Description* as *Preview Text*
+* *Linked categories* as *Item assigned categories*
+* *Regular Price* as *Sales Price* +
+→ A sales price for the order referrer WooCommerce will be created if it does not already exist.
+* *Sale Price* as *Sales Price (Special Offer)*
+* *Weight* as *Gross Weight**Measurements* as *Measurements*
+* *Product images*
+* *Variation Image* as *Variation linked Image*
+* *Attributes * linked attributes visible on Webshop* as *Properties*
+* *Tags* as *Meta keywords*
+* *Stock quantity* as *Physical Stock*
+* *SKU* as *SKU*
+
+2+^| *Data exchange*
+
+| *Export manufacturer as attribute*
+| Enable / Disable the export of the item linked manufacturer as *Attribute * Visible on the product page*.
+
+| *Export item characteristics*
+| Enable / Disable the export of the item linked characteristics as *Attributes * Visible on the product page*.
+
+| *Export new items as 'Draft'*
+| Enable / Disable the export of new items as *Drafts*.
+
+| *Automatically generate SKU based on:*
+| Generates SKUs for exported variations.
+
+Available options are:
+
+* *Empty* (creates no SKU)
+* *Variation number*
+* *Variation ID*
+* *Barcode*
+
+*_Recommendation:_* Use the same input field for SKU generation on all Woocommerce webshops that you manage through the plugin.
+
+| *Export/import items to language*
+| Select a language for the item import and item export.
+
+*_Important:_* All translatable input fields have to be set up for this function to work.
+
+| *Deactivate WooCommerce item if linked plentymarkets item is deactivated*
+| Enable / Disable the deletion of WooCommerce items which have been deactivated on plentymarkets.
+
+| *Export properties as WooCommerce attributes*
+| Decide how item linked properties are to be exported with the item export process.
+
+Available options are:
+
+* *None* = No properties are exported.
+* *All* = All properties are exported.
+* *Only selected properties* = Only properties are exported that you activated in the tab *Properties export*.
+
+| *Tags for export / import*
+| Export tags from source:
+
+* Meta Keywords
+* Tags linked to variations
+
+|*Stock buffer*
+| Whenever stock is exported to WooCommerce, the plugin will subtract the amount entered as stock buffer.
+
+2+^| *Import and export item stocks from:*
+
+| *All warehouses*
+| Exports stock quantities from all warehouses of the type *Sales* which are linked to the item.
+
+| *The warehouses of my choice*
+| Select the warehouses of the type *Sales* from which the stock quantities are exported.
+
+2+^| *Order import options*
+
+| *Order import start date*
+| The order import date is updated with each order import run to reflect the date of its last run. To import older orders, enter the start date of the oldest mist order.
+
+| *Order import status*
+| Select which orders are imported to plentymarkets.
+
+Available options are:
+
+* *Pending payment*
+* *Processing*
+* *On hold*
+* *Completed*
+
+| *Identify house number from WooCommerce 'Address line 1'*
+| Enable / Disable the extraction of the *House Number* from WooCommerce *Address line 1*. This value is imported to plentymarkets input field *ADDRESS 2*.
+
+2+^|*Order import status*
+
+| *Order status for incoming cancelation requests*
+| Select an order status for incoming cancelation requests.
+
+| *Automatically deny incoming cancelation requests from status*
+| Incoming cancel requests are automatically denied for orders with this status or higher.
+
+|*Contact import options*
+| Select which customer class is assigned to imported customers.
+
+|===
+
+=== Whitelisting properties for the item export
+
+Now, select which plentymarkets properties to export as WooCommerce attributes.
+
+*_Important:_* WooCommerce does not accept properties with more than 28 characters.
+
+[.instruction]
+Whitelisting properties for the item export:
+
+. Go to *Setup » Markets » WooCommerce » Tab: Properties Export*.
+. Select the online shop that you want to configure this function for.
+. Click on *[+] Add*.
+. Select a *Property*.
+. Save the settings. +
+→ The whitelisted property is shown on the list.
+
+=== Linking plentymarkets VAT rates to WooCommerce tax classes
+
+Link the plentymarkets VAT rates with the tax classes in WooCommerce. This ensures that VAT rates are assigned correctly during the item export.
+
+[.instruction]
+Linking plentymarkets VAT rates to WooCommerce tax classes:
+
+. Go to *Setup » Markets » WooCommerce » VAT rate mapping*.
+. Click on *[+] Add*. +
+→ The window *Link plentymarkets VAT rates with WooCommerce tax classes* opens.
+. Select a *plentymarkets VAT rate*.
+. Select a *WooCommerce tax class*.
+. Save the settings. +
+→ The new mapping is shown in the list.  +
+*_Note:_* The mapped VAT rate from *Item » variation » settings » Costs » VAT.* is saved in the WooCommerce menu *Product » General » TAX Class*.
+
+== Using the plugin help
+
+The plentymarkets back end provides the menu *Setup » Markets » WooCommerce » Help*.  This plugin help enables you to:
+
+* <<#1830035111, Check the plugin’s health>>
+* <<#9185536759, check the variation export conditions>>
+* <<#1819187541, adjust the start date for stock and price exports>>
+* <<#4095862038, Manually export an item every 10 minutes>>
+* <<#9054492717, Export the stock of a variation or an item every 5 minutes>>
+
+[#1830035111]
+=== Checking the plugin’s health
+
+[.instruction]
+Checking the plugin’s health:
+
+. Go to *Setup » Markets » WooCommerce » Help » Plugin health*.
+. Click on *Check*. +
+→ The check is carried out. +
+Conditions that are met are marked with a green OK. +
+Conditions that have failed are marked with a red X.
+
+*_What is checked?_*
+
+* Is the referrer *WooCommerce* activate in the menu *Setup » Orders » Order referrer*?
+* Is there more than one referrer *WooCommerce* in the menu *Setup » Orders » Order referrer*? Make sure that the ID with the highest number is active.
+* Could a connection to WooCommerce.com be established?
+* Is the SDK file deployed correctly?
+
+[#9185536759]
+=== Checking export conditions for variations
+
+[.instruction]
+Checking export conditions for variations:
+
+. Go to *Setup » Markets » WooCommerce » Help » Export conditions*.
+. Select the online shop that you want to use this function for.
+. Enter a valid *variation ID*.
+. Click on *Check*. +
+→ The check is carried out. +
+Conditions that are met are marked with a green *OK*. +
+Conditions that have failed are marked with a red *X*.
+
+*_What is checked?_*
+
+* The variation must be activate. +
+  ** *Item » Variation » Settings » Area: Availability*, the checkbox *Active* must be set.
+* The variation must be available for the market WooCommerce. +
+  ** *Item » Variation » Availability » Area: Markets*, *WooCommerce* must be assigned.
+* The variation must have an SKU for WooCommerce. +
+  ** *Item » Variation » Availability » Area: SKU* must contain an *SKU* for the referrer *WooCommerce*.
+* Variation must have a wooCommerce sales price that uses the default system currency and is activated for the selected webshop.
+* The item must have a *Name 1*. +
+  ** *Item » Texts » Name 1* must be saved.
+* The variation's *Client (store)* assignment matches the webshop selection in the plugin configuration.
+* The variation must have at least one linked category with a translation for the selected export language.
+* Attribute names exist for the selected item export language.
+* Attribute values exist for the selected item export language.
+* The selected variation contains no recent changes and is excluded from the next item export/update.
+
+[#1819187541]
+=== Adjusting the start date for stock and price exports
+
+If you find that the stock/price export does not contain all expected item variations, you can reset the stock and price export start date to any date. The plugin bases the next run on your defined start date instead of on the normal *last-run* time stamp.
+
+[#4095862038]
+=== Manually exporting items
+
+For testing purposes, you can manually export an item every 10 minutes.
+
+*_Note:_* Use this function to test how the export will look before you export large amounts of item data.
+
+[.instruction]
+Manually exporting an item:
+
+. Go to *Setup » Markets » WooCommerce » Help » Item export*.
+. Select the online shop for which you want to export the item.
+. Enter a valid *Item ID*.
+. Click on *Run*. +
+→ If all export requirements are met, the item and its variations will be exported.
+
+*_Note:_* Have you deleted one or more items on WooCommerce in order to export them again? The next export only clears the plugin database. As a result, your item will only be exported to WooCommerce with the export after this one.
+
+[#9054492717]
+== Tab: Stock export
+
+For testing purposes, you can manually export an item’s stock every 5 minutes. You can manually export a variation every 3 minutes.
+
+[tabs]
+====
+Manually exporting stock and sales price for one variation::
++
+--
+[.instruction]
+Manually exporting stock and sales price for one variation:
+
+. Go to *Setup » Markets » WooCommerce » Help » Stock export*.
+. Select the online shop that you want to update stock for.
+. Enter a valid *variation ID*.
+. Click on *Execute*. +
+→ If all export requirements are met, the stock is exported.
+--
+ 
+Manually exporting stock and sales price for one item::
++
+--
+
+[.instruction]
+Manually exporting stock and sales price for one item:
+
+. Go to *Setup » Markets » WooCommerce » Help » Stock export*.
+. Select the online shop that you want to update stock for.
+. Enter a valid *item ID*.
+. Click on *Execute*. +
+→ If all export requirements are met, the stock is exported.
+--
+====
+
+[#8522072389]
+== Automating order processing
+
+The xref:automation:event-procedures.adoc[event procedures] provided by the plugin allow you to send information about your orders to WooCommerce.
+
+[#5583680407]
+=== Available event procedures
+
+[[table-woocommerce-event-procedures]]
+.Event procedures for WooCommerce
+[cols="1,1a"]
+|===
+|Event procedure |Explanation
+
+| *Send order "Payment pending" to WooCommerce*
+| Moves the order to status *Payment pending* on WooCommerce.
+
+| *Send order "Processing" to WooCommerce*
+| Moves the order to status *Processing* on WooCommerce.
+
+| *Send order "On hold" to WooCommerce*
+| Moves the order to status *On hold* on WooCommerce.
+
+| *Send order "Completed" to WooCommerce*
+| Moves the order to status *Completed* on WooCommerce.
+
+| *Send order "Cancelled" to WooCommerce*
+| Moves the order to status *Cancelled* on WooCommerce.
+
+| *Send order "Refunded" to WooCommerce*
+| Moves the order to status *Refunded* on WooCommerce.
+
+| *Send order "Failed" to WooCommerce*
+|Moves the order to status *Failed* on WooCommerce.
+
+|===
+
+[#0746212710]
+=== Example: Setting up the event procedure "Processing"
+
+:table-event-procedure: <<#event-procedure-processing-woocommerce>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[event-procedure-processing-woocommerce]]
+.Event procedure "Processing"
+[cols="1,2,2"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| *Order change: Status change*
+| Select a status, for example *[4] In preparation for shipping* or *[5] Cleared for shipping*.
+
+| *Filter 1*
+| *Order &gt; Order type*
+| *Order*
+
+| *Filter 2*
+| *Order &gt; Referrer*
+| *WooCommerce*
+
+| *Procedure*
+| *Plugin &gt; Send order "Processing" to WooCommerce*
+| 
+|===
+
+[#faq]
+== FAQ and troubleshooting
+
+[.collapseBox]
+.A customer number was assigned more than once. The wrong contact was assigned to an order. What's happening?
+--
+
+*_Problem:_*
+
+You probably used a plentymarkets client for a WooCommerce webshop that is or was already connected to a different WooCommerce webshop at some point. So you either changed existing connection settings or you had a WooCommerce webshop in the past that you deleted.
+That is a problem because you need to use a fresh plentymarkets client for each new WooCommerce webshop. Fresh means that the client has _never_ been used for a WooCommerce webshop.
+
+*_Solution:_*
+
+Create a new client and link this client to the WooCommerce webshop.
+
+*_Background:_*
+
+For each WooCommerce webshop, external contact IDs are assigned in ascending order. If an order is imported for the new connection with a contact ID that was already assigned for this client, the order is assigned to the existing contact.
+
+--

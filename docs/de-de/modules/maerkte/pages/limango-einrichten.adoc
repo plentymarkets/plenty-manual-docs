@@ -1,8 +1,7 @@
 = limango einrichten
 :author: team-plenty-channel
 :keywords: limango, limango, limango.de, limango.de
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz limango in deinem plentymarkets System ein.
-:id: ZG3WRBH
+:description: Auf dieser Seite erfährst du, wie du limango in plentymarkets einrichtest, damit du deine Artikel auf limango verkaufen kannst. limango ist ein Marktplatz, der Produkte für junge Familien anbietet.
 
 :market: limango
 :limango:
@@ -43,6 +42,9 @@ Nachdem du das Plugin installiert und eingerichtet hast, stehen die in <<#datena
 | Auftragsimport
 | viertelstündlich +
 *_Hinweis:_* Kund:innen zahlen an limango. Trotzdem werden alle Aufträge mit dem Status *[3] Warten auf Zahlung* importiert.
+
+| Löschen von Artikeln
+| einmal täglich
 |===
 
 [#220]
@@ -245,7 +247,6 @@ Für Produktnamen gelten die folgenden Regeln:
 
 | Beschreibung
 | plentymarkets Datenfeld *Artikeltext* + bei bestimmten Kategorien zusätzliche Produktinformationen in einer Eigenschaft des Typs *Text*. +
-*_Beispiel:_* Bei Schuhen benötigst du das Feld *Artikeltext* + eine Materialbeschreibung.
 
 *_Hintergrund:_* Für bestimmte Kategorien erwartet limango besondere Produktinformationen. Je nach Kategorie sind das zum Beispiel technische Daten oder der Lieferumfang. Für solche Informationen gibt es standardmäßig kein Feld an den Varianten. Wir empfehlen dir deshalb, diese Produktinformationen in einer Eigenschaft des Typs *Text* zu speichern. Nenne diese Eigenschaft zum Beispiel `Zusätzliche Produktinformationen limango`. Im Katalog ordnest du dem Marktplatz-Datenfeld *Beschreibung* dann das plentymarkets Datenfeld *Artikeltext* und die Eigenschaft für zusätzliche Produktinformationen kombiniert zu. +
 *_Tipp:_* Vor Integrationsstart erhältst du von limango kategorienspezifische Richtlinien, damit du die Beschreibung an die rechtlichen und inhaltlichen Anforderungen anpassen kannst.
@@ -621,6 +622,34 @@ include::partial$catalogue-activation.adoc[]
 
 Wenn du Änderungen an den Zuordnungen im Katalog vornimmst, wird ein vollständiger Artikelexport ausgelöst. Dieser Export erfolgt im nächsten regulären Lauf und nicht sofort, wenn du die Änderungen speicherst.
 
+[#limango-artikel-loeschen]
+== Artikel auf limango löschen
+
+Wenn du eine Variante nicht mehr auf limango anbieten willst, kannst du die Marktplatzverfügbarkeit für limango entfernen oder die Variante deaktivieren. Die Variante wird dann vom nächtlichen Artikelexport zu limango ausgeschlossen und auf limango gelöscht.
+
+*_Hinweis:_* Varianten werden auch dann vom Artikelexport ausgeschlossen und auf limango gelöscht, wenn sie die Validierung nicht bestehen. Warum eine Variante nicht exportiert werden konnte, kannst du in der <<#validierungsdatei, Validierungsdatei>> im Menü *Daten » Log* prüfen.
+
+*Varianten auf limango löschen:*
+
+_Möglichkeit 1:_
+
+[.instruction]
+Marktplatzverfügbarkeit entfernen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Verfügbarkeit*.
+. *Entferne* (icon:minus-circle[role="red"]) die Verfügbarkeit *Limango*.
+. *Speichere* (terra:save[]) die Einstellungen.
+
+_Möglichkeit 2:_
+
+[.instruction]
+Variante deaktiveren:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Einstellungen*.
+. Entferne im Bereich *Verfügbarkeit* das Häkchen bei *Aktiv*. +
+*_Hinweis:_* Beachte, dass die Variante unter Umständen auch auf anderen Märkten nicht mehr verkauft werden kann, wenn du sie deaktivierst.
+. *Speichere* (terra:save[]) die Einstellungen.
+
 [#1600]
 == Lieferscheine für limango vorbereiten
 
@@ -735,6 +764,8 @@ Automatisiere die folgenden Aspekte der Auftragsabwicklung:
 === Stornierungen automatisch melden
 
 Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um limango automatisch über Stornierungen zu informieren.
+
+*_Hinweis:_* Ein Auftrag kann nicht mehr storniert werden, wenn der Auftrag bereits verschickt wurde und eine Versandmeldung versendet wurde.
 
 :table-event-procedure: <<#ereignisaktion-stornierung-limango>>
 
@@ -881,7 +912,8 @@ Richte nun die Verwaltung von Retouren für limango ein.
 Der Lieferschein ist gleichzeitig Retourenschein. Eine Retoure läuft bei limango wie folgt ab:
 
 . Kund:innen senden die Ware an dich zurück.
-. Du führst die Retoure in plentymarkets aus.
+. Du führst die Retoure in plentymarkets aus. +
+  *_Hinweis:_* Eine Retoure kann nur gebucht werden, wenn der Auftrag vorher per Versandmeldung als versendet gemeldet wurde.
 . Du informierst limango darüber, dass du die Ware erhalten hast.
 . limango erstattet Käufer:innen den Kaufpreis zurück. +
 *_Hinweis:_* Wenn du limango mitteilst, dass die Retoure abgeschlossen ist, wird bei limango eine Gutschrift ausgelöst und Endkund:innen erhalten eine Rückerstattung. Achte deshalb darauf, dass du limango erst über den Abschluss der Retoure informierst, nachdem du die Ware erhalten und geprüft hast.

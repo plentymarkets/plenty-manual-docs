@@ -1,7 +1,6 @@
 = Amazon: Using the FBA service
 :keywords: Amazon FBA, FBA, Amazon Multi-Channel, Amazon FBA Multi-Channel, shipping by Amazon, Amazon ships, Fulfillment by Amazon, Fulfilment by Amazon, Amazon Fulfilment, Amazon Fulfillment
-:description: Multi-Channel in plentymarkets: Amazon ships your items with Amazon FBA.
-:id: VKWEAOP
+:description: Learn how to set up Amazon FBA in plentymarkets. FBA means that Amazon stores and ships your items.
 :author: team-plenty-channel
 
 The abbreviation FBA stands for Fulfilment by Amazon. Instead of dealing with the orders yourself, packaging the items and sending them, you let Amazon take care of this task for you with the FBA programme. Of course, you then have to store at least some of your items with Amazon.
@@ -874,7 +873,7 @@ Printing a pick list:
 [#170]
 ==== Opening the package content list
 
-A xref:orders:package-content-list.adoc#[packet content list] lists the content of pallets, packages and items. The package content list informs Amazon about what items are in the packages that it stores and ships for you.
+A xref:fulfilment:package-content-list-test-phase.adoc[packet content list] lists the content of pallets, packages and items. The package content list informs Amazon about what items are in the packages that it stores and ships for you.
 
 The package content list prepares the packages based on the settings in the variation. You can change these settings. To do so, go to *Item » Edit item » [Open item] » Tab: Settings » Area: Shipping* and change the option in the drop-down list *Packages*.
 
@@ -895,7 +894,7 @@ Opening the package content list:
 → The options for editing the order are shown.
 . Click on *FBA Inbound Package content list*. +
 → The order is shown in the *Orders » Packet content list*.
-. Pick and pack the order based on the xref:orders:package-content-list.adoc#[package content list].
+. Pick and pack the order based on the xref:fulfilment:package-content-list-test-phase.adoc[package content list].
 
 [#180]
 ==== Registering the FBA Inbound order with Amazon
@@ -1052,6 +1051,8 @@ Outbound orders have the following workflow:
 *_Note:_* Amazon only generates the reports once every 4 hours.
 *  From the information contained in these reports, orders and contacts are generated in plentymarkets:
  ** Amazon FBA outbound orders are imported with the parameters *Status* and *Referrer*. Select the *Status* that is most appropriate for your process. For example, this could be status *[7] Outgoing items booked*. The referrer is automatically set to Amazon FBA or an Amazon FBA sub-referrer, e.g. Amazon FBA USA. The date when items are shipped is saved directly in plentymarkets. Therefore, stock is not reserved for items that are included in the order.
+ ** The contact details of customers are imported. +
+ *_Exception:_* Reports from North America do not contain customer addresses. As a result, orders from these reports are created as incomplete orders with the status [1]. Missing addresses are then imported every 5 minutes.
 * 30 days after the order is created in plentymarkets, the contacts are anonymised. The customer data in the contact is anonymized and the link between the order and the contact is deleted. The customer details in the order remain unchanged. +
   ** First name and last name of the contact is anonymized.
   ** The following details are deleted from the contact:
@@ -1080,25 +1081,3 @@ Amazon only generates FBA reports once every 4 hours. Because it can take up to 
 
 Amazon will send Amazon FBA partial deliveries if the items ordered by the customer are stored in separate warehouses. Hence, the customer receives multiple packages for one order.
 In plentymarkets, each FBA Outbound partial delivery is saved as a separate order, depending on the FBA warehouse which sends the item. You can import one tracking number from Amazon for each partial delivery and then assign it to the according partial delivery. You can generate a separate invoice for each partial delivery. This is necessary if the Amazon warehouses are located in different countries due to differing taxes.
-
-[#460]
-=== Troubleshooting: Manually generating FBA reports
-
-Amazon generates FBA reports once every 4 hours. FBA order details are then imported into plentymarkets automatically. However, to check orders or if there are problems with the import, you can manually generate a report of your FBA orders in the plentymarkets back end. Unlike the report that you can manually generate in Seller Central, this plentymarkets FBA report also contains personally identifiable information of your end customers. When you generate a report in the plentymarkets back end, any missing, deleted or corrected FBA orders are also imported into plentymarkets.
-
-IMPORTANT: Generating FBA reports requires a lot of processing power. As such, the API of your system is temporarily deactivated if you generate too many reports. This can also negatively affect other processes in your system. To avoid this, only generate an FBA report if problems occurred with the automatic import.
-
-[.instruction]
-Manually generating FBA reports:
-
-. Go to *Setup » Markets » Amazon » Data exchange » Reports*.
-. Click on the *FBA reports* tab.
-. Select an *Amazon account* from the drop-down list.
-. Select a starting date. +
-*_Tip:_* The start date must not be more than one year ago and must be before the end date.
-. Select an ending date. +
-*_Tip:_* The end date must not be in future. Also, start date and end date must not be more than one week in apart. +
-*_Note:_* The FBA reports contain orders from 00:00 AM on the start date to 00:00 AM on the end date. As such, the reports do not contain any orders of the selected end date. The time zone of the plentymarkets system is applied.
-. Click on *Generate report* (terra:execute[]). +
-→ The FBA report is generated. +
-→ Missing, deleted or incorrect FBA orders are imported into plentymarkets.

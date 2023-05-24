@@ -10,7 +10,7 @@ To export a variation to {market}, this variation has to meet the following requ
 [.collapseBox]
 .Was the catalogue exported?
 --
-. Open the menu xref::data:catalogues-status.adoc#[Data » Catalogue export status]. +
+. Open the menu xref:data:catalogues-status.adoc#[Data » Catalogue export status]. +
 . In the list, check the state and progress of the export.
 --
 //end::checklist-variation-export-status[]
@@ -83,9 +83,6 @@ The variation must be available for the market.
 --
 //end::checklist-categories-bol[]
 
-
-
-
 //tag::checklist-net-stock[]
 [.collapseBox]
 .Does the variation have positive net stock?
@@ -106,7 +103,7 @@ The catalogue that the variation is associated with must be activated.
  . Go to *Data » Catalogues*. +
 → The catalogues are listed.
 . Scroll to the {market} catalogue.
-. In the *Active/Inactive* column, move the toggle button (icon:toggle-on[role="green"]) to the right.
+. In the *Active* column, move the toggle button (icon:toggle-on[]) to the right.
 --
 //end::checklist-catalogue-active[]
 
@@ -163,6 +160,9 @@ endif::bol.com[]
 .Are the sales price and price settings correct?
 --
 [.instruction]
+
+ifdef::shopify[The variation must be linked to a sales price that is activated for Shopify. This sales price must have the default currency of the system.]
+
 Check the sales price:
 
 . Go to *Setup » Item » Sales prices*.
@@ -259,7 +259,7 @@ Checking filters:
 
 . Go to *Data » Catalogues » [Open catalogue]*. +
 . On the left in the side navigation, click on the view *Filters* (material:filter_alt[]). +
-*_Tip:_* The number next to the word *Filter* shows how many filters have been set. The template filters are included in this number. +
+*_Tip:_* The number next to the word *Filter* shows how many filters have been set. The template filters are _not_ included in this number. +
 → The filter overview opens. +
 . Check the logic of the filters.
 . If necessary, remove one or more filters.
@@ -267,6 +267,129 @@ Checking filters:
 --
 //end::checklist-check-filters[]
 
+//tag::checklist-number-of-variations[]
+[.collapseBox]
+.Does the item have no more than 100 variations?
+--
+
+Exported items must not contain more than {number-of-variations} variations. This limit is set by Shopify.
+
+[.instruction]
+Checking the number of variations of an item:
+
+. Go to *Item » Edit item » [Open item]*. +
+→ The main variation of the item opens.
+. Click on the *Variations* tab. +
+→ The variations of the item are shown. +
+*_Tip:_* The tool bar shows how many variations the item has. For example, it might say "Variations 1-7 of 7".
+--
+//end::checklist-number-of-variations[]
+
+//tag::checklist-name-text-shopify[]
+[.collapseBox]
+.Are a "Name 1" and an "Item text" saved for the item?
+--
+
+The text that you save in the field *Name 1* is exported as the item name to Shopify. As such, this field cannot be empty.
+Also, an *Item text* must be saved in the same menu.
+
+[.instruction]
+Checking Name 1:
+
+. Go to *Item » Edit item » [Open item]*.
+. Switch to the tab *Texts*.
+. In the toolbar, select the *Language* in which you export item data to Shopify.
+. Check the content of the field *Name 1*.
+. If necessary, enter a name for the item.
+. Check the content of the field *Item text*.
+. If necessary, enter an item text.
+. Click on *Sav* if you have made changes.
+-- 
+//end::checklist-name-text-shopify[]
+
+//tag::checklist-attributes-shopify[]
+[.collapseBox]
+.Are an attribute name and an attribute value saved for the variation?
+--
+
+An attribute name and an attribute value must be saved for the variation in the language you use for the item export.
+
+[.instruction]
+Checking the variation's attributes:
+
+. Go to *Item » Edit item » [Open item] » [Open variation]*.
+. In the tab *Settings*, navigate to the area *Basic settings*. +
+→ The attributes that are linked to the variation are listed underneath the setting *Position*.
+
+Now, you can check the settings of the attributes. Are the attribute name and the attribute value saved in the language you need?
+
+[.instruction]
+Checking name and value of an attribute:
+
+. Go to *Setup » Item » Attributes » [Open attribute] » Tab: Values*.
+. Click on the *Name* tab.
+. Check the content of the field for the language.
+. If necessary, enter a name for the attribute.
+. Click on the *Values* tab.
+. In the toolbar, select the *Language* in which you export item data to Shopify. +
+→ The values of the attribute are shown.
+. If necessary, enter a name for the attribute value.
+. Click on *Sav* if you have made changes.
+
+--
+//end::checklist-attributes-shopify[]
+
+//tag::checklist-market-sku[]
+[.collapseBox]
+.Is an SKU for {market} saved for the variation?
+--
+
+Only variations with an SKU for the referrer *{market}* are exported. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability* to save the SKU in the area *SKU*.
+
+[.instruction]
+Checking the SKU:
+
+. Go to *Item » Edit item » [Open item] » [Open variation]*.
+. Click on the variation tab *Availability*.
+. In the are *SKU*, check if an SKU is saved for the referrer *{market}*.
+. If necessary, save an SKU for the referrer. 
+--
+//end::checklist-market-sku[]
+
+//tag::checklist-market-client[]
+[.collapseBox]
+.Is the client (store) that you use to sell items on {market} active for the variation?
+--
+
+Only variations that are activated for the client (store) that you use to sell on {market} are exported. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability* to activate the client in the area *Client (store)*.
+
+[.instruction]
+Checking the client (store):
+
+. Go to *Item » Edit item » [Open item] » [Open variation]*.
+. Click on the variation tab *Availability*.
+. In the area *Client (store)*, check if the client (store) is active that you use to sell on {market}.
+. If necessary, activate the client. +
+*_Important:_* Also check if the inheritance feature is active. If so, does it lead to the expected result? 
+--
+//end::checklist-market-client[]
+
+//tag::checklist-variations-otto[]
+[.collapseBox]
+.Did you stick to all character limits?
+--
+
+Check the following character limits:
+
+- **Model name** can contain up to 70 characters.
+- **Special Features** can contain up to 70 characters.
+- **Set Info** can contain up to 70 characters.
+- **Product description** can contain up to 2000 characters.
+- All URLs in the **Media assets** area can contain up to 2083 characters.
+
+*_Important:_* The character limits are checked by OTTO Market. As such, go to *Data » Log* to check the log messages. Select the integration *Plenty\Modules\Otto\Item\Commands\MarketplaceStatusImportCommand*. Check the error messages if variation data is not published on OTTO Market as expected.
+--
+//end::checklist-variations-otto[]
 
 ////
 include::partial$checklist-variations.adoc[tag=checklist-intro]

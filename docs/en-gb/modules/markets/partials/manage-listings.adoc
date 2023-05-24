@@ -66,7 +66,9 @@ Carrying out the basic settings for listings:
 
 | *Create new market listing*
 | What should happen if you try to create a second listing for the same item? +
+ifdef::ebay[]
 *_Note:_* eBay does not allow you to list an identical item in more than one active fixed price offer at a time.
+endif::ebay[]
 
 [cols="1,3a"]
 !===
@@ -223,7 +225,9 @@ Unknown order items are imported with the item ID *-2*. Unknown means: No relate
 !===
 
 | *Down-selling in the checkout process*
-| Should customers be able to reduce the quantity purchased on eBay in plentymarkets?
+| *_Note:_* This setting only applies to the market eBay. +
+
+Should customers be able to reduce the quantity purchased on eBay in plentymarkets?
 
 * *Enable* = Customers can reduce the quantity purchased on eBay in plentymarkets.
 * *Disable* = Customers are not able to reduce the quantity purchased on eBay in plentymarkets. +
@@ -231,12 +235,16 @@ Unknown order items are imported with the item ID *-2*. Unknown means: No relate
 //support
 
 | *The quantity purchased at eBay listings (no fixed price items) can be changed by the customer during checkout (up-selling and down-selling)*
-| Select *Yes* or *No*. +
+| *_Note:_* This setting only applies to the market eBay. +
+
+Select *Yes* or *No*. +
 *_Important:_* Neither up-selling nor down-selling is possible if you selected *No*. This is even true if you selected *Enable* for the option *Down-selling in the checkout process*.
 //support
 
 | *Shipping costs for new orders coming from eBay*
-a| Select *Transfer from eBay* or *Have it calculated by plentymarkets*. +
+a| *_Note:_* This setting only applies to the market eBay. +
+
+Select *Transfer from eBay* or *Have it calculated by plentymarkets*. +
 
 * *Transfer from eBay* = New orders are transferred as open transactions. +
 * *Have it calculated by plentymarkets* = New orders are automatically imported every 15 minutes and the shipping costs are calculated.
@@ -259,7 +267,9 @@ If a listing could not be assigned or should not be assigned, the item ID *-2* i
 | *Also import orders with incomplete checkout process* +
  +
 (previously *Automatically combine open eBay orders*)
-| Should orders where the customer has not completed the checkout process be imported? If so, after what period? +
+| *_Note:_* This setting only applies to the market eBay. +
+
+Should orders where the customer has not completed the checkout process be imported? If so, after what period? +
 *_Important:_* The setting is only visible if the option *Shipping costs for new orders coming from eBay* is set to *transfer from eBay*. +
 *_Note:_* If you use eBay's checkout process (eBay Payments), we recommend to select the option *Never* because the information required for a smooth checkout process will only be transferred from eBay after the customer completed the checkout process. +
 *_Tip:_* You also have the possibility to manually import open orders.
@@ -275,11 +285,15 @@ With plentymarkets, you can automatically place listings on the market at a cert
 If you want plentymarkets to automatically start listings at a certain time, you can define time intervals in the listing scheduler. Either select *days of the week* or up to three *days of the month* in the listing scheduler. In both cases, you also have to choose *starting times* for the listing.
 
 * The listing scheduler only adds a listing to the future listings if no entry exists for the MLID and if there is no active or hidden listing for this MLID.
+
+ifdef::ebay[]
 * On eBay, a maximum of one auction with 0 bids can be visible at once. +
+
 *_Example:_* +
 You have 10 active listings for a MLID. All listings have 0 bids. As such, only one of the 10 listings is visible to end customers. +
 As soon as the offer receives its first bid, a new offer is published. +
 As such, you then have 1 auction with 1 bid and 1 auction with 0 bids.
+endif::ebay[]
 
 [.instruction]
 Setting up the listing scheduler:
@@ -510,7 +524,9 @@ plentymarkets provides you with multiple possibilities for creating listings:
 * in the item overview
 * using batch processing
 * with an already existing listing
+ifdef::ebay[]
 * using the data format xref:data:itemlistingmarketebay.adoc#[ItemListingMarketEbay] to automatically create large quantities of items
+endif::ebay[]
 
 IMPORTANT: You can only create listings for completely created items.
 
@@ -547,7 +563,8 @@ Creating a new listing:
 | The ID appears automatically. It is the same ID that the item has. Click on the ID to open the item in the background.
 
 | *Type*
-| Select the listing type. For eBay, the listing types *Auction* and *Fixed price* are available.
+| Select the listing type. +
+For eBay, the listing types *Auction* and *Fixed price* are available.
 
 | *Number per lot*
 | Define the quantity of items offered in a single listing. The listing price applies to the entire quantity.
@@ -571,7 +588,6 @@ a| Select one of the following options which is transferred as the *item number*
 * *do not transmit* = No item number is transferred. +
 * *transmit EAN* = The International Article Number (EAN) is transferred. +
 * *transmit ISBN* = The ISBN is transferred. +
-* *transmit ePID* = The eBay Product ID is transferred. +
 * *transmit UPC* = The Universal Product Code is transferred. In order to use this option, an EAN has to be selected for the *UPC from EAN field* setting. +
 * *transmit MPN* = The Manufacturer's Part Number is transferred. +
 * *transmit GTIN* = The Global Trade Item Number is transferred. +
@@ -618,7 +634,7 @@ Create multiple listings with the *Group function* or the *Batch processing* fun
 [IMPORTANT]
 .Save a listing template for an item
 ====
-You can define a listing template in the *Listing default settings* area of the *Multi-Channel* tab of an item. An eBay listing is created for an *item* using the group function or batch processing if no *listing template* was defined in the item’s settings.
+You can define a listing template in the *Listing default settings* area of the *Multi-Channel* tab of an item. A listing is created for an *item* using the group function or batch processing if no *listing template* was defined in the item’s settings.
 ====
 
 [.instruction]
@@ -771,7 +787,7 @@ __Image 1: A market listing's toolbar__
 | Open the item associated to the market listing.
 
 | *Check*
-| Check whether the market listing is ready to be uploaded to eBay.
+| Check whether the market listing is ready to be uploaded to the market.
 
 | *Delete*
 | Delete the market listing.
@@ -836,7 +852,7 @@ The *Base* tab of a market listing includes settings that apply to all markets a
 | Select the *country* and the *VAT rate*. If the options *No country* and *No VAT* are selected, then no VAT is displayed in the listing.
 
 | *Add unit price specification*
-| Should the unit price be displayed? If so, where? For listings of the *Fixed price* type or *Buy it now* listings with *Weight* or *Volume* options, the link:https://www.ebay.co.uk/help/selling/selling/pricing-items?id=4133[unit price^] must be entered. Values for *units* which are saved for an item are automatically transferred to eBay.
+| Should the unit price be displayed? If so, where? For listings of the *Fixed price* type or *Buy it now* listings with *Weight* or *Volume* options, the link:https://www.ebay.co.uk/help/selling/selling/pricing-items?id=4133[unit price^] must be entered. Values for *units* which are saved for an item are automatically transferred.
 
 | *Order status*
 | Which status is to be assigned to the sold listing during import?
@@ -849,7 +865,8 @@ The *Base* tab of a market listing includes settings that apply to all markets a
 
 | *List with all variations*
 | Activate to upload the listing with all variations. +
-Uploading listings with variations is only possible on certain platforms, for example Germany, USA, United Kingdom and Italy. Additionally, the function is restricted to certain categories (for example clothes). For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/creating-listings-variations?id=4150[Creating listings with variations^] page.
+Uploading listings with variations is only possible on certain platforms, for example Germany, USA, United Kingdom and Italy. +
+Additionally, the function is restricted to certain categories (for example clothes). For further information, refer to eBay’s link:https://www.ebay.co.uk/help/selling/listings/creating-managing-listings/creating-listings-variations?id=4150[Creating listings with variations^] page.
 
 | *Variations*
 | Select an item's variation that should be uploaded to the market.
@@ -890,11 +907,12 @@ The *Set up editor* function is available for editing the description in the syn
 |===
 //end::description-layout[]
 
-[#4200]
+[#tab-market-ebay]
 ==== Changing the market settings
 
-//tag::edit-market-settings[]
-In the *Market* tab you can change the settings for the market eBay.
+//tag::edit-market-settings-ebay[]
+
+In the *Market* tab you can change the settings for the market {market}.
 
 [[tab-marketplace]]
 .A market listing's *Market* tab
@@ -971,7 +989,113 @@ a| Select *Basic settings*, *Yes* or *No*. +
 | *Properties*
 | Edit properties. All properties for the selected category are displayed in the *eBay properties* window. Click on *Add* to create your own property. Enter a name for the property into the left-hand text field. Enter a value for the property of no more than 128 characters into the right-hand text field. The properties saved here take priority over an item’s properties when transferring to eBay. You will receive the error message *Code: 046 In this category, item properties are deactivated by eBay* if there are faulty entries or if no item properties are available. For further information about characteristics, refer to the xref:markets:ebay-setup.adoc#6000[Uploading offers with variations] chapter and eBay’s link:https://www.ebay.co.uk/help/listings/creating-managing-listings/creating-managing-listings?id=6000[Create a listing^] page.
 |===
-//end::edit-market-settings[]
+//end::edit-market-settings-ebay[]
+
+[#tab-market-hood]
+==== Changing the market settings
+
+//tag::edit-market-settings-hood[]
+In the *Market* tab you can change the settings for the market {market}.
+
+[[tab-marketplace]]
+.A market listing's *Market* tab
+[cols="1,3a"]
+|===
+| Setting | Explanation
+
+| *Category 1 ID*; +
+*Category 2 ID*
+| Enter a category ID or click on *Search* to select a category.
+
+| *Shop category 1-3*
+| Select a shop category. Store categories are only available if you have created a store for the market.
+
+| *Payment conditions*
+| Select one or more payment conditions which you want to offer for the listing.
+
+| *Additional options*
+| *_Possible options:_* *Subtitle*, +
+*Bold for item lists*, +
+*Background colour for item lists*, +
+*Gallery premium in item lists*, +
+*Best offer in category and search*, +
+*Best offer on homepage*, +
+*Best offer on homepage plus image*, +
+*Do not show adverts*, +
+*XXL photo*,
+
+| *Display on store homepage*
+| *_Possible options:_* *Do not display on store homepage*, +
+*Display on store homepage*, +
+*Display on store homepage with picture*
+|===
+//end::edit-market-settings-hood[]
+
+[#tab-market-ricardo]
+==== Changing the market settings
+
+//tag::edit-market-settings-ricardo[]
+In the *Market* tab you can change the settings for the market {market}.
+
+[[tab-marketplace]]
+.A market listing's *Market* tab
+[cols="1,3a"]
+|===
+| Setting | Explanation
+
+| *Category 1 ID*
+| Enter a category ID or click on *Search* to select a category.
+
+| *Condition*
+| Select the item's condition.
+
+| *Warranty*
+| Select a warranty.
+
+| *Payment conditions*
+| Select the payment conditions for the listing.
+
+| *Payment methods*
+| Select one or more payment methods which you want to allow for this listing.
+
+| *Delivery costs*
+| Enter the delivery costs in the format `0,00`.
+
+| *Individual shipping costs for each item*
+| Place a check mark if shipping costs have to be paid separately for each item.
+
+| *Delivery conditions*
+| Select the delivery conditions for the listing.
+
+| *Package size*
+| Select the package size.
+
+| *Availability*
+| Select the availability of the listing.
+
+| *Additional options*
+| *_Possible options:_* *Promo-package small* +
+*Promo-package middle*, +
+*Promo-package big*, +
+*Homepage*
+
+| *Increment*
+| Enter the icrement in the format `0,00`. +
+The increment defines in which steps customers have to bid on the listing in auctions.
+
+| *Number of reactivations*
+| Select how many times the listing should be restarted after it has expired.
+
+| *Reactivate until sold out*
+| Place a check mark if the listing should be restarted until it is sold out.
+
+| *Use secondary language*
+| Place a check mark if a secondary language should be used.
+
+| *Link to template*
+| Select a template that you want to use for this listing.
+|===
+//end::edit-market-settings-ricardo[]
 
 [#4300]
 === Editing multiple listings
@@ -1001,7 +1125,7 @@ Using the group function:
 |===
 | Setting | Explanation
 
-2+^| Procedures
+2+^| Actions
 
 | *Start listing*
 a| Activate this option to start the listings. +
@@ -1039,9 +1163,12 @@ a| Activate this option to start the listings. +
 | Select which number should be transferred as the *item number*.
 
 | *Type*
-| Select the listing type. For eBay, the listing types *Auction* and *Fixed price* are available.
+| Select the listing type. +
 
-2+^| eBay
+For eBay, the listing types *Auction* and *Fixed price* are available.
+
+2+^| eBay +
+*_Note:_* These settings only apply to the market eBay.
 
 | *Platform*
 | The platform that the listing is set up for. The platform can be changed.

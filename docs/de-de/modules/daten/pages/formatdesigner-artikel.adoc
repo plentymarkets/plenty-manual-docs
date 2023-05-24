@@ -1,6 +1,7 @@
 = Artikel
 :keywords: Artikel herunterladen, Artikel runterladen, Artikel exportieren, Exportieren Artikel, Artikel Export, Artikel-Export, Export Artikel, Artikelexport, Variant exportieren, Variante exportieren, Varianten exportieren, Exportieren Variant, Exportieren Variante, Exportieren Varianten, Variant Export, Variante Export, Varianten Export, Variant-Export, Variante-Export, Varianten-Export, Export Variant, Export Variante, Export Varianten, Variantexport, Varianteexport, Variantenexport, Artikelverknüpfung exportieren, Artikelverknüpfungen exportieren, Produkt exportieren, Produkte exportieren, Ware exportieren, Waren exportieren
 :author: team-item
+:description: FormatDesigner: Artikel- und Variantendaten können aus plentymarkets exportiert werden. Diese Seite dient als Referenz und listet die dafür verfügbaren Datenfelder.
 
 Diese Seite erläutert die Datenfelder, die dir beim Exportieren von Artikel- und Variantendaten zur Verfügung stehen.
 Diese Seite dient lediglich als Referenz und setzt voraus, dass du bereits Grundkenntnisse über xref:daten:FormatDesigner.adoc#[FormatDesigner] und den xref:daten:elastischer-export.adoc#[elastischer Export] hast.
@@ -380,7 +381,7 @@ Die URLs und Positionsnummern für alle Bilder des Artikels.
 
 *_Format_*: `urlImage1;positionImage1,urlImage2;positionImage2`
 
-*_Beispiel_*: `https://www.beispiel.de/bild1.png;1,https://www.beispiel.de/bild2.png;2`
+*_Beispiel_*: `\https://www.beispiel.de/bild1.png;1,https://www.beispiel.de/bild2.png;2`
 
 '''
 [#560]
@@ -1594,31 +1595,72 @@ Für den Export von Marktplatzverfügbarkeiten stehen die in <<tabelle-felder-ma
 [#1800]
 == VariationMarketIdentNumber
 
-Für den Export von ASIN und ePID stehen die in <<tabelle-felder-asin-epid>> aufgelisteten Felder zur Verfügung.
+Die folgenden Felder werden für den Export von ASINs und ePIDs verwendet.
 
-[[tabelle-felder-asin-epid]]
-.Felder für Export von ASIN und ePID
-[cols="1,3"]
-|===
-|Feld |Erläuterung
+=== countryId
 
-|countryId
-|ID des Landes
+Gibt die ID des Landes an.
+Das heißt, dieses Feld gibt die Länderplattform an, z.B. Amazon Deutschland, eBay Frankreich, eBay UK, usw.
 
-|id
-|ID der ASIN. Diese ID brauchst du, wenn du xref:daten:elasticSync-artikel.adoc#2430[ASINs mit Hilfe des Import-Tools löschen] möchtest. Die ID ist im plentymarkets Backend nicht sichtbar.
+Die Länder-IDs findest du als xref:daten:interne-IDs.adoc#20[Liste im Handbuch] oder im Menü *Einrichtung » Aufträge » Versand » Optionen » Tab: Lieferländer*.
 
-|position
-|Position der ASIN. Die Position ist im plentymarkets Backend nicht sichtbar.
-
-|type
-|Typ (ASIN oder ePID)
-
-|value
-|Wert
-|===
+[TIP]
+Klicke auf icon:sign-in[role="darkGrey"] und wähle den passenden Markt.
 
 '''
+=== id
+
+Gibt die interne ID der ASIN oder ePID an.
+
+Entspricht der Option im Menü: *Artikel » Artikel » [Variante öffnen] » Element: ASIN/ePID/MOIN » Spalte: ID*.
+
+*_Anwendungsfall_*:
+Die ID brauchst du, wenn du xref:daten:elasticSync-artikel.adoc#2430[ASINs oder ePIDs mit Hilfe des Import-Tools löschen] möchtest.
+
+[TIP]
+Klicke auf icon:sign-in[role="darkGrey"] und wähle den passenden Markt.
+
+'''
+=== position
+
+Gibt die Positionsnummer der ASIN oder ePID an.
+
+Entspricht der Option im Menü: *Artikel » Artikel » [Variante öffnen] » Element: ASIN/ePID/MOIN » Spalte: Position*.
+
+[TIP]
+Klicke auf icon:sign-in[role="darkGrey"] und wähle den passenden Markt.
+
+'''
+=== type
+
+Gibt den Typ an, d.h. ob es sich um eine ASIN oder eine ePID handelt.
+
+[cols="1,1"]
+|===
+|Wert in der Exportdatei |Bedeutung
+
+|`ASIN`
+|Es handelt sich um eine ASIN.
+
+|`EPID`
+|Es handelt sich um eine EPID.
+|===
+
+Entspricht der Option im Menü: *Artikel » Artikel » [Variante öffnen] » Element: ASIN/ePID/MOIN » Spalte: Typ*.
+
+[TIP]
+Klicke auf icon:sign-in[role="darkGrey"] und wähle den passenden Markt.
+
+'''
+=== value
+
+Gibt die eigentliche ASIN oder ePID an, d.h. die numerische oder alphanumerische Produktkennzeichnung.
+
+Entspricht der Option im Menü: *Artikel » Artikel » [Variante öffnen] » Element: ASIN/ePID/MOIN » Spalte: Wert*.
+
+[TIP]
+Klicke auf icon:sign-in[role="darkGrey"] und wähle den passenden Markt.
+
 [#1900]
 == VariationProperty
 
@@ -1701,6 +1743,17 @@ Für den Export von SKUs stehen die in <<tabelle-felder-sku>> aufgelisteten Feld
 |sku
 |SKU
 |===
+
+[TIP]
+.Was ist der Unterschied zwischen SKU und Parent-SKU?
+====
+Die Parent-SKU ist nur dann notwendig, wenn du mit Varianten-Artikeln arbeitest.
+
+* Die Parent-SKU ist für die Hauptvariante.
+* Die SKU ist für die Untervarianten.
+
+Bei Artikeln ohne Varianten ist nur die SKU maßgeblich.
+====
 
 '''
 [#2200]

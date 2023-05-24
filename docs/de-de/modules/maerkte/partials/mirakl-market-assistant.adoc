@@ -1,19 +1,17 @@
 Mit dem Assistenten *{assistant-name}* im Menü *Einrichtung » Assistenten » Plugins » [Plugin-Set wählen]* richtest du dein {market}-Konto in plentymarkets ein.
 
 :menu-path: pass:quotes[*Einrichtung » Assistenten » Plugins » [Plugin-Set wählen]*]
-:number-of-boxes: Info-Box
+:number-of-boxes: Info-Boxen
 include::partial$assistant-basic-instructions.adoc[]
 
 [.collapseBox]
-.Erläuterungen zu den Optionen des Assistenten
+.Schritt *Authentifizierung*
 --
-[[table-{market}-basic-settings-assistant]]
+[[table-authentication]]
 [width="100%"]
 [cols="1,3a"]
 |======
 |Einstellung |Erläuterung
-
-2+^| Schritt *Authentifizierung*
 
 | API Environment
 | Wähle eine API-Umgebung aus der Dropdown-Liste. Welche API-Umgebung du wählen solltest, erfährst du von deinen Ansprechpartner:innen bei {market}.
@@ -27,20 +25,50 @@ include::partial$assistant-basic-instructions.adoc[]
 
 | Mandantenauswahl
 | Wähle den Mandanten (Shop), dem die Aufträge zugeordnet werden sollen.
+|======
+--
 
-2+^| Schritt *Datenaustausch*
+[.collapseBox]
+.Schritt *Datenaustausch*
+--
+[[table-data-exchange]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
 
 | Datenaustausch
-| Wähle die Prozesse, für die du den Datenaustausch zwischen plentymarkets und Mirakl aktivieren möchtest. +
+| Wähle die Prozesse, für die du den Datenaustausch zwischen plentymarkets und Mirakl aktivieren möchtest.
 
-*Bestand synchronisieren* = Aktivieren, um Angebotsdaten zu übertragen. +
-*Produkte exportieren* = Aktivieren, um Produktdaten zu übertragen.
-
-ifdef::mediamarkt[]
+ifdef::mediamarkt,voelkner[]
 *_Wichtig:_* Der Import und der Export für Auftragsrechnungen darf _nicht_ aktiviert werden.
-endif::mediamarkt[]
+endif::mediamarkt,voelkner[]
 
-2+^| Schritt *Zuordnung der Rückerstattung*
+* *Produkte exportieren* = Aktivieren, um Produktdaten zu übertragen. +
+ifdef::mediamarkt[]
+* *Auftragsrechnung importieren/exportieren* = Rechnungen werden per Ereignisaktion an Mediamarkt gesendet. Aktiviere diese Option deshalb _nicht_. +
+endif::mediamarkt[]
+ifdef::voelkner[]
+* *Auftragsrechnung importieren/exportieren* = Rechnungen werden per Ereignisaktion an Voelkner gesendet. Aktiviere diese Option deshalb _nicht_. +
+endif::voelkner[]
+ifdef::conrad[]
+* *Auftragsrechnung importieren/exportieren* = Conrad erstellt die Rechnungen. Aktivieren, um diese Rechnungen in plentymarkets zu importieren. +
+endif::conrad[]
+* *Auftrag importieren* = Aktivieren, um Aufträge zu importieren. +
+* *Auftrag aktualisieren* = Aktivieren, um Aufträge zu aktualisieren. +
+* *Rückerstattungen importieren* = Aktivieren, um Rückerstattungen zu importieren. +
+* *Bestand synchronisieren* = Aktivieren, um Angebotsdaten zu übertragen.
+|======
+--
+
+[.collapseBox]
+.Schritt *Zuordnung der Rückerstattung*
+--
+[[table-map-credit-notes]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
 
 |Zuordnung der Rückerstattung
 |
@@ -63,8 +91,17 @@ endif::conrad,voelkner[]
 ifdef::mediamarkt[]
 Diese Einstellung hat bei {market} keine Auswirkungen.
 endif::mediamarkt[]
+|======
+--
 
-2+^| Schritt *Zuordnung der Stornierung*
+[.collapseBox]
+.Schritt *Zuordnung der Stornierung*
+--
+[[table-map-cancellation]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
 
 | Zuordnung der Stornierung
 |
@@ -86,25 +123,68 @@ ifdef::conrad,voelkner[]
 * `37` = Stornierung: Zu lange Lieferzeit
 * `39` = Vereinbarung zwischen Käufer und Verkäufer getroffen
 endif::conrad,voelkner[]
+|======
+--
 
-2+^| Schritt *Lagerauswahl*
+[.collapseBox]
+.Schritt *Lagerauswahl*
+--
+[[table-warehouse-selection]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
 
 | Lagerauswahl
-| Wähle das Lager, das für den Bestandsexport verwendet werden soll. Bestände aus dem gewählten plentymarkets Lager werden an {market} übertragen.
+| Aus welchen Lagern soll Bestand an {market} exportiert werden? +
+
+. Wähle ein *Lager* aus der Dropdown-Liste, das für den Bestandsexport verwendet werden soll. +
 ifdef::voelkner[]
-Gib für jedes Versandlager, aus dem Ware versendet wird, die Adresse im folgenden Format ein: +
+. Gib in der Dropdown-Liste *Adresse des Versandlagers* die Adresse des Lagers im folgenden Format ein: +
 `Name des Versandlagers, Teststraße 1, 12345 Musterstadt`
 endif::voelkner[]
+ifdef::conrad[]
+*_Wichtig:_* Die Adressdaten des Lagers müssen in deinem Conrad-Backend gespeichert sein.
+. Gib in das Feld *Adresse des Versandlagers* die ID des Lagers ein, die dieses Lager in deinem Conrad-Backend hat. +
+*_Tipp:_* Du kannst im Conrad-Backend bis zu 5 Lager speichern.
+endif::conrad[]
+. *_Optional:_* Um weitere Lager hinzuzufügen:
+  .. Klicke auf das Plus.
+  .. Wähle ein weiteres *Lager* aus der Dropdown-Liste. +
+  → Der Bestand der Lager wird addiert.
 
-2+^| Schritt *Zuordnung des Versandprofils*
+|======
+--
+
+[.collapseBox]
+.Schritt *Zuordnung des Versandprofils*
+--
+[[table-map-shipping-profiles]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
 
 | Zuordnung des Versandprofils
 | Trage für jedes Versandprofil in plentymarkets die entsprechende ID des Versanddienstleisters ein. Die ID findest du auf Mirakl im Menü *{mirakl-menu-shipping}*.
 
-2+^| Schritt *Zuordnung der Angebots-Eigenschaften*
+|======
+--
+
+[.collapseBox]
+.Schritt *Zuordnung der Angebots-Eigenschaften*
+--
+[[table-map-offer-properties]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
 
 | *Abzugsverfahren*
-| Das sogenannte _Reverse-Charge-Verfahren_. Die Eigenschaft wird automatisch erstellt und zugeordnet. Gültige Werte sind `true` oder `false`.
+| Das sogenannte _Reverse-Charge-Verfahren_. Die Eigenschaft wird automatisch erstellt und zugeordnet. Gültige Werte sind:
+
+* `true`
+* `false`
 
 | *Versandvorlaufzeit*
 | Die sogenannte _leadtime-to-ship_. Also die Zeit in Tagen, die Händler:innen von der Auftragsannahme bis zur Versandmeldung benötigt. Die Eigenschaft wird automatisch erstellt und zugeordnet. Hier muss eine ganze Zahl zwischen 1 und 45 übermittelt werden.
@@ -129,7 +209,13 @@ endif::voelkner[]
 
 ifdef::voelkner[]
 | *Einheit der Grundpreisangabe*
-| Hier definierst du die Einheit der Grundpreisangabe an der Variante. Gültige Werte sind `KG`, `L`, `M`, `M2` oder `M3`.
+| Hier definierst du die Einheit der Grundpreisangabe an der Variante. Gültige Werte sind:
+
+* `KG`
+* `L`
+* `M`
+* `M2`
+* `M3`
 endif::voelkner[]
 
 ifdef::voelkner[]
@@ -142,7 +228,17 @@ ifdef::voelkner[]
 | Eine Eigenschaft *Voelkner Rabatt Endzeit* wird automatisch erstellt und zugeordnet. Über diese Eigenschaft legst du fest, wann <<discount-prices, Rabattzeiträume>> enden.
 endif::voelkner[]
 
-2+^| Schritt *Optionen für Angebots-Export*
+|======
+--
+
+[.collapseBox]
+.Schritt *Optionen für Angebots-Export*
+--
+[[table-offer-export]]
+[width="100%"]
+[cols="1,2a"]
+|======
+|Einstellung |Erläuterung
 
 | *Bestandsmenge für Varianten ohne Bestandsbindung ersetzen* +
 

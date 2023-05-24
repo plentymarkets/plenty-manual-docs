@@ -1,0 +1,802 @@
+= SPoCC-Anbindung
+:keywords: SPoCC, SPoCC-Anbindung, SPoCC-Connector, SPoCC-Erweiterung, Apollon, Single Point of Content and Communication
+:description: Lerne, wie du dein SPoCC-System mit plentymarkets verbindest.
+:page-index: false
+:author: team-plenty-channel
+
+////
+erstellt am 28.06.2022
+Project Manager: Tina Gerber
+https://docs.google.com/presentation/d/12mym8JIQqPc1BhJEeYFlxQfGqoQC9IiBvyt1mDx3fJo/edit#slide=id.g1321ed4c3cb_0_86
+////
+
+//ToDo when the page can be made visible in the left navigation - remove the attribute :page-index: false from the header and add the page to the navigation file in the ROOT folder
+
+SPoCC und plentymarkets – eine unschlagbare Kombination.
+Nutzt du schon SPoCC als Warenwirtschaftslösung für den Schuh-Einzelhandel?
+Und bist du bereit, mit plentymarkets im Online-Handel durchzustarten?
+Dann bist du hier genau richtig.
+Das SPoCC-Plugin verbindet dein SPoCC-System mit plentymarkets.
+
+* Nutze SPoCC weiterhin für deine Verkäufe.
+* Importiere deine in der SPoCC-Datenbank gespeicherten Artikeldaten in plentymarkets.
+* Ergänze bei Bedarf die Artikeldaten in plentymarkets und vertreibe deine Produkte dann auf verschiedenen Marktplätzen, Vertriebskanälen und Webshops.
+* Exportiere Auftragsdaten an SPoCC.
+
+NOTE: Diese Anleitung ist das Richtige für dich, wenn du SPoCC-Kund:in bist, aber plentymarkets noch nicht produktiv nutzt.
+Du verwendest plentymarkets schon und möchtest SPoCC nutzen? Dann wende dich an unser Einrichtungsteam.
+
+[#6600540000]
+== Informationen zum Datenaustausch
+
+Nachdem du die Schnittstelle zu SPoCC in plentymarkets eingerichtet hast, stehen die in <<#data-exchange>> gelisteten automatisierten Abläufe bereit.
+
+[[data-exchange]]
+.Informationen zum Datenaustausch
+[cols="3a,3a"]
+|===
+|Daten |Intervall
+
+| Import neuer Artikel in plentymarkets +
+Stammdaten: EAN, Name, Art.Nummern, Farbe, Größe usw.
+| Alle 24 Stunden
+
+| Import erweiterter Artikeldaten in plentymarkets: +
+SPoCC-Attribute in Eigenschaften
+| Alle 60 Minuten
+
+| Import von Bildern in plentymarkets
+| Alle 60 Minuten
+
+| Import von Preisen in plentymarkets
+| * Vollständiger Import alle 24 Stunden
+* Geänderte Daten alle 15 Minuten
+
+| Import von Beständen in plentymarkets
+| * Vollständiger Import alle 24 Stunden
+* Geänderte Daten alle 15 Minuten
+
+| Export von Aufträgen zu SPoCC:
+
+* Bestellung anlegen, anmelden, Bestand reservieren
+* Auftrag aktualisieren wenn ready4shipping
+| Bei Auslösen der Ereignisaktion
+
+| Auftragstatus anfragen:
+
+* Storno
+| Alle 20 Minuten
+
+| Versanddokumente bereitstellen
+| Bei Auslösen der Ereignisaktion
+|===
+
+[#5733676376]
+== Voraussetzungen
+
+Diese Seite geht davon aus, dass du schon Kund:in von link:https://www.SPoCC.io/[SPoCC] und link:https://www.plentymarkets.com/[plentymarkets] bist.
+Halte deine Zugangsdaten für beide Systeme bereit.
+Während du die Schnittstelle einrichtest, gibt du deine Zugangsdaten ein, um die Verbindung herzustellen.
+
+Außerdem wirst du deine SPoCC Barcodes, Verkaufspreise, Kategorien usw. denen in plentymarkets zuordnen.
+Falls du dein plentymarkets System noch nicht eingerichtet hast, solltest du deshalb folgende Daten erstellen, bevor du fortfährst:
+
+* xref:warenwirtschaft:lager-einrichten.adoc#[Lager]
+* xref:auftraege:auftragsherkunft.adoc#[Auftragsherkünfte]
+* xref:artikel:markierungen.adoc#400[Tags]
+* xref:artikel:barcodes.adoc#[Barcodes]
+* xref:artikel:attribute.adoc#[Attribute]
+* xref:artikel:eigenschaften.adoc#[Eigenschaften]
+* xref:artikel:preise.adoc#[Verkaufspreise]
+* xref:artikel:kategorien.adoc#[Kategorien]
+
+[#6203207193]
+== Plugin herunterladen und installieren
+
+Das SPoCC-Plugin steht im plentyMarketplace zur Verfügung.
+Das Plugin verbindet dein SPoCC-System mit plentymarkets.
+
+Das kann das SPoCC-Plugin:
+
+* *_Artikel importieren_*:
+Artikeldaten werden von SPoCC zu plentymarkets exportiert.
+Du entscheidest, welche Artikeldaten an plentymarkets gesendet und wie die Artikel dort strukturiert werden.
+* *_Aufträge exportieren_*:
+Auftragsdaten werden von plentymarkets nach SPoCC übertragen.
+plentymarkets meldet den Umsatz an SPoCC und bucht den Umsatz automatisch in die richtige SPoCC-Umsatzfiliale.
+* *_Bestände und Preise aktualisieren_*:
+Wenn in SPoCC Bestände oder Preise aktualisiert werden, dann wird diese Information an plentymarkets übermittelt.
+
+[.collapseBox]
+.*Schritt-für-Schritt-Anleitung*
+--
+
+. Lade das SPoCC-Plugin von plentyMarketplace herunter. +
+→ Falls aufgefordert, melde dich bei plentyMarketplace an.
+Verwende die gleichen Zugangsdaten wie für den Bereich "Mein Konto".
+. Öffne das Menü *Plugins » Plugin-Set-Übersicht*.
+Plugins können nur als Teil eines Plugin-Sets genutzt werden. Daher:
+.. *_Option A_*: Erstelle ein komplett neues Plugin-Set.
+Klicke dazu auf icon:plus[role="darkGrey"] *Plugin-Set hinzufügen* und gib einen Namen ein.
+.. *_Option B_*: Erstelle eine Kopie eines vorhandenen Plugin-Sets.
+Klicke dazu in der Spalte *Aktionen* auf die Schaltfläche *Plugin-Set kopieren* (terra:copy[]).
+.. *_Option C_*: Entscheide, in welches bestehende Plugin-Set du das SPoCC-Plugin installieren willst.
+. Öffne das Plugin-Set, indem du auf die Zeile in der Tabelle klickst. +
+→ Das Plugin-Set wird geöffnet.
+. Klicke auf icon:plus[role="darkGrey"] *Plugin hinzufügen*.
+. Wähle das SPoCC-Plugin aus der Liste. +
+→ Es werden Informationen zu dem Plugin angezeigt.
+. Wähle aus der Dropdown-Liste *Version auswählen* die Version des Plugins, die du installieren möchtest.
+Standardmäßig ist die neuste Version vorausgewählt.
+. Um das Plugin zu installieren, klicke auf icon:arrow-down[role="darkGrey"] *Installieren*. +
+→ Das Plugin wird installiert. +
+→ Nachdem das Installieren abgeschlossen ist, wird das Plugin-Set angezeigt.
+. Ändere den Zustand des Plugins zu aktiv (icon:toggle-on[role="blue"]).
+. Stelle das Plugin-Set bereit (icon:cloud-upload[role="darkGrey"]).
+
+Ist das Thema Plugins neu für dich?
+Im xref:plugins:plugins.adoc#[Plugins-Kapitel] des Handbuchs erfährst du mehr über Plugins und wie sie in plentymarkets funktionieren.
+
+--
+
+[TIP]
+.Schnittstelle wird im Assistenten eingerichtet
+====
+Du musst keine Einstellungen direkt im Plugin vornehmen.
+Durchlaufe stattdessen den Assistenten.
+Der Assistent führt dich durch den Einrichtungsprozess.
+====
+
+[#8286334278]
+== Assistent durchlaufen
+
+Im Assistenten legst du fest, wie plentymarkets und SPoCC miteinander kommunizieren sollen.
+Im Assistenten entscheidest du zum Beispiel, welche Artikeldaten an plentymarkets gesendet und wie die Artikel dort strukturiert werden.
+
+[.instruction]
+Einstellungen im Assistenten konfigurieren:
+
+. Öffne das Menü *Einrichtung » Assistenten » Plugins » [Plugin-Set öffnen]*.
+. Klicke auf *SPoCC-Assistent*.
+. Folge den Anweisungen auf dem Bildschirm.
+Informationen zu den einzelnen Schritten findest du unter dieser Anleitung.
+. Prüfe im Schritt *Zusammenfassung* deine Einstellungen noch einmal auf mögliche Fehler.
+. Wenn alle Einstellungen korrekt sind, klicke auf icon:check[role="green"] *Abschließen*. +
+→ Die Einstellungen werden gespeichert.
+
+[#8232754027]
+=== Schritt "Verbindung"
+
+In diesem Schritt stellst du die Verbindung zwischen plentymarkets und SPoCC her.
+Du gibst also deine Zugangsdaten ein, damit plentymarkets und SPoCC miteinander kommunizieren können.
+
+[[table-connection-settings]]
+.Schritt "Verbindung"
+[cols="1,2"]
+|===
+|Einstellung |Erläuterung
+
+2+^| *Testmodus*
+
+| *Testmodus*
+| Aktiviere diese Option, um den Austausch zwischen SPoCC und plentymarkets in den Testmodus zu versetzen.
+
+2+^| *Zugangsdaten*
+
+| *Global Stock API Key* +
+(Pflichtfeld)
+| Gib den Schlüssel für die Global Stock API ein, den du von SPoCC erhalten hast.
+
+| *Transaction Service API Key* +
+(Pflichtfeld)
+| Gib den Schlüssel für die Transaction Service API ein, den du von SPoCC erhalten hast.
+
+| *Content Article API Key* +
+(Pflichtfeld)
+| Gib den Schlüssel für die Content Article API ein, den du von SPoCC erhalten hast.
+
+| *Retailer ID* +
+(Pflichtfeld)
+| Gib die Händler:innen-ID ein, die du von SPoCC erhalten hast.
+
+//| *Kundennummer* +
+//(Pflichtfeld)
+//| Gib deine SPoCC-Kundennummer ein.
+
+//| *Channel ID* +
+//(Pflichtfeld)
+//| Gib die Zahl *4* ein. Bei SPoCC hat plentymarkets immer diese Channel-ID.
+|===
+
+[#9643799177]
+=== Schritt "Artikelimport"
+
+In diesem Schritt entscheidest du, wie die Daten, die aus SPoCC kommen, in plentymarkets aussehen sollen.
+Das heißt, wo die Daten in plentymarkets gespeichert werden sollen.
+
+[[table-item-import-field-mappings]]
+.Optionen für den Artikelimport
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *Vollständiger Artikelimport*
+| Aktiviere diese Option, um einen vollständigen Artikelimport zu aktivieren. +
+*_Wichtig:_* Nach dem ersten vollständigen Artikelimport wird diese Option automatisch deaktiviert. Es werden also nur noch neue und geänderte Artikeldaten importiert. Falls du später irgendwann wieder einen vollständigen Artikelimport benötigst, aktiviere diese Funktion noch einmal und schließe den Assistenten wie gewohnt ab.
+
+| *Tag für Import erweiterter Artikeldaten*
+| Mit welchem Tag willst du Varianten versehen, für die zusätzliche Daten aus SPoCC importiert werden sollen? Für Varianten, die du mit diesem Tag versiehst, werden aus SPoCC Daten wie EAN, Bilder und Eigenschaften ergänzt. 
+
+*_Voraussetzung_*:
+Hast du schon die nötigen xref:artikel:markierungen.adoc#400[Tags in plentymarkets angelegt]?
+Diese Dropdown-Liste enthält nur Tags, die schon erstellt und für den Bereich "Variante" aktiviert wurden.
+
+| *Standardkategorie*
+| Stell dir vor, du hast eine neue SPoCC-Warengruppe erstellt.
+Du hast aber vergessen, die Warengruppe einer Kategorie in plentymarkets zuzuordnen.
+Wenn Artikel aus der nicht zugeordneten Warengruppe importiert werden, landen sie in der Standardkategorie, die du hier festlegst.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:kategorien.adoc#[Kategorien in plentymarkets erstellt]?
+Diese Dropdown-Liste enthält nur die Kategorien, die schon in plentymarkets vorhanden sind.
+
+| *Barcode*
+| Welcher plentymarkets Barcode-Typ passt zu deinem SPoCC-Barcode?
+Wähle den Barcode-Typ aus der Dropdown-Liste.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:barcodes.adoc#100[Barcode-Typen in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Barcode-Typen, die schon in plentymarkets vorhanden sind.
+
+| *Barcode als SPoCC-ID*
+| Bei Neuanlage von Varianten wird eine eindeutige SPoCC-ID als Variantennummer gespeichert. Diese ID setzt sich aus der achstelligen ECC-Variantennummer und der dreistelligen Größennummer zusammen. Damit aber auch vorhandene Varianten korrekt zugeordnet werden können, benötigst du einen weiteren Barcode-Typen, in dem diese ID für alle Varianten gespeichert werden kann. 
+
+*_Voraussetzung_*: Hast du schon xref:artikel:barcodes.adoc#100[Barcode-Typen in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Barcode-Typen, die schon in plentymarkets vorhanden sind.
+
+| Attribute: *Farbattribut*
+| Welches plentymarkets Attribut passt zu deinem SPoCC-Farbattribut?
+Wähle das Attribut aus der Dropdown-Liste.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:attribute.adoc#[Attribute in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Attribute, die schon in plentymarkets vorhanden sind.
+
+| Attribute: *Größenattribut*
+| Welches plentymarkets Attribut passt zu deiner SPoCC-Größe?
+Wähle das Attribut aus der Dropdown-Liste.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:attribute.adoc#[Attribute in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Attribute, die schon in plentymarkets vorhanden sind.
+|===
+
+[#3309305166]
+=== Schritt "Verkaufspreise"
+
+Bei SPoCC gibt es drei Preise:
+
+* Verkaufspreis
+* Zielpreis
+* Unverbindlicher Verkaufspreis
+
+[[table-sales-prices]]
+.Zuordnung der Verkaufspreise
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *Verkaufspreis* +
+(retailPrice)
+| Welchen plentymarkets Verkaufspreis möchtest du für den Verkaufspreis in SPoCC verwenden?
+Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste.
+
+* Der Preis inkl. MwSt., den Kund:innen zu zahlen haben.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
+Diese Dropdown-Liste enthält nur die Verkaufspreise, die schon in plentymarkets vorhanden sind.
+
+| *Zielpreis* +
+(targetPrice)
+| Welchen plentymarkets Verkaufspreis möchtest du für den Zielpreis in SPoCC verwenden?
+Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste.
+
+* Der Zielpreis ist der Preis inkl. MwSt., den du als deinen reguären Preis nutzt.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
+Diese Dropdown-Liste enthält nur die Verkaufspreise, die schon in plentymarkets vorhanden sind.
+
+| *Unverbindlicher Verkaufspreis* +
+(recommendedRetailPrice)
+| Welchen plentymarkets Verkaufspreis möchtest du für den unverbindlichen Verkaufspreis in SPoCC verwenden?
+Wähle den passenden plentymarkets Verkaufspreis aus der Dropdown-Liste.
+
+* Der unverbindliche Verkaufspreis ist der empfohlene Preis inkl. MwSt., den Lieferant:in oder Hersteller:in als reguären Preis vorschlägt.
+* Der unverbindliche Verkaufspreis wird normalerweise nur angezeigt, wenn der Zielpreis unterhalb des unverbindlichen Verkaufspreises liegt und somit einen Hauspreis darstellen soll.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:preise.adoc#[Verkaufspreise in plentymarkets eingerichtet]?
+Diese Dropdown-Liste enthält nur die Verkaufspreise, die schon in plentymarkets vorhanden sind.
+|===
+
+[#5583100996]
+=== Schritt "Eigenschaften zuordnen"
+
+SPoCC-Attribute bildest du in plentymarkets als Eigenschaften ab.
+Ordne deinen SPoCC-Attributen in diesem Schritt deshalb plentymarkets Eigenschaften zu.
+
+// TODO: Erklären, was Attribute bei SPoCC sind.
+
+. Klicke ganz rechts auf icon:plus[].
+. Wähle aus der Dropdown-Liste *plentymarkets Eigenschaft* links eine Eigenschaft. +
+*_Voraussetzung_*: Hast du schon xref:artikel:eigenschaften.adoc#[Eigenschaften in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Eigenschaften, die schon in plentymarkets vorhanden sind.
+. Wähle aus der Dropdown-Liste *SPoCC-Attribut* rechts ein Attribut. +
+→ Die beiden Datensätze werden einander zugeordnet.
+. Ordne weitere Eigenschaften genauso zu.
+
+[[table-property-mapping]]
+.Zuordnung der Eigenschaften
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *plentymarkets Eigenschaft*
+| Diese Dropdown-Liste enthält die Kategorien, die du in plentymarkets eingerichtet hast.
+Wähle die passende Eigenschaft aus der Dropdown-Liste.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:eigenschaften.adoc#[Eigenschaften in plentymarkets konfiguriert]?
+Diese Dropdown-Liste enthält nur die Eigenschaften, die schon in plentymarkets vorhanden sind.
+
+| *SPoCC-Attribut*
+| Diese Dropdown-Liste enthält deine Attribute bei SPoCC.
+Wähle das passende Attribut aus der Dropdown-Liste.
+
+| icon:plus[role="green"]
+| Fügt eine weitere Zeile hinzu.
+Auf diese Weise kannst du weitere Eigenschaften zuordnen.
+
+| icon:minus-circle[role="red"]
+|Löscht eine Zeile.
+Auf diese Weise kannst du eine nicht mehr benötigte Zuordnung löschen.
+|===
+
+// TODO: Beispiel einfügen mit Screenshot
+
+[#3055919608]
+=== Schritt "Kategorien"
+
+In diesem Schritt ordnest du deine in SPoCC verwendeten Produktgruppen den Kategorien in plentymarkets zu.
+So werden deine Artikel schon in die richtigen plentymarkets Kategorien einsortiert, wenn sie von SPoCC importiert werden.
+
+*_Wichtig:_* Artikel in SPoCC-Kategorien, die du in diesem Schritt nicht zugeordnet hast, werden in eine Standardkategorie einsortiert. Diese Standardkategorie wählst du im Schritt *Optionen des Artikelimports*.
+
+[[table-category-mapping]]
+.Zuordnung der Kategorien
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *SPoCC-Produktgruppe*
+| Dies sind deine Produktgruppen in SPoCC.
+Wähle die passende Produktgruppe aus der Dropdown-Liste.
+
+| *plentymarkets Kategorie*
+| Dies sind die Kategorien, die du in plentymarkets eingerichtet hast.
+Wähle die passende Kategorie aus der Dropdown-Liste.
+
+*_Voraussetzung_*: Hast du schon xref:artikel:kategorien.adoc#[Kategorien in plentymarkets erstellt]?
+Diese Dropdown-Liste enthält nur die Kategorien, die schon in plentymarkets vorhanden sind.
+
+| icon:plus[role="green"]
+| Fügt eine weitere Zeile hinzu.
+Auf diese Weise kannst du mehrere Kategorien zuordnen.
+
+| icon:minus-circle[role="red"]
+| Löscht eine Zeile.
+Auf diese Weise kannst du eine nicht mehr benötigte Zuordnung löschen.
+|===
+
+[TIP]
+.Alternativer Ablauf ohne Kategoriezuordnung
+====
+Technisch gesehen kannst du auch nur im Schritt "Auftragsimport" eine Standard-Artikelkategorie wählen und den Rest der Kategoriezuordnung überspringen.
+Als Folge landen deine Artikel beim Import immer nur in der Standardkategorie.
+Bei Bedarf musst du dann Artikel manuell in andere plentymarkets Kategorien verschieben.
+====
+
+[#5582523636]
+=== Schritt "Lager"
+
+In diesem Schritt ordnest du deine Channel Store Number von SPoCC deinen plentymarkets Lagern zu.
+
+[[table-warehouse-mapping]]
+.Zuordnung von Lagern
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *SPoCC Channel Store Number*
+| Dies sind deine Lager in SPoCC.
+Wähle die passende Channel Store Number aus der Dropdown-Liste.
+
+| *plentymarkets Lager*
+| Dies sind deine Lager im plentymarkets Menü *Einrichtung » Waren » Lager*.
+
+| icon:plus[role="green"]
+| Fügt eine weitere Zeile hinzu.
+Auf diese Weise kannst du mehrere Lager zuordnen.
+
+| icon:minus-circle[role="red"]
+| Löscht eine Zeile.
+Auf diese Weise kannst du eine nicht mehr benötigte Zuordnung löschen.
+|===
+
+[#5725666131]
+=== Schritt "Marktplatz-Zuordnungen"
+
+[[table-market-mapping]]
+.Zuordnung von Marktplätzen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *plentymarkets Herkünfte*
+| Die Dropdown-Liste enthält deine Marktplätze in plentymarkets.
+Wähle einen Marktplatz aus der Dropdown-Liste.
+
+| *SPoCC-Herkünfte*
+| Die Dropdown-Liste enthält deine Marktplätze in SPoCC. Wähle denselben Marktplatz aus der Dropdown-Liste.
+
+| icon:plus[role="green"]
+| Fügt eine weitere Zeile hinzu.
+Auf diese Weise kannst du mehrere Marktplätze zuordnen.
+
+| icon:minus-circle[role="red"]
+| Löscht eine Zeile.
+Auf diese Weise kannst du einen nicht mehr benötigte Marktplatz löschen.
+|===
+
+[#8356545049]
+=== Schritt "Retourengründe"
+
+[[table-return-reason-mapping]]
+.Zuordnung von Retourengründen
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
+
+| *plentymarkets Retourengründe*
+| Die Dropdown-Liste enthält deine Retourengründe in plentymarkets.
+Wähle einen Retourengrund aus der Dropdown-Liste.
+
+*_Wichtig:_* Bei Retouren erwartet SPoCC grundsätzlich die Angabe eines Retourengrunds. Wenn du für einen plentymarkets Retourengrund keinen SPoCC-Retourengrund zugeordnet hast, wird deshalb der Retourengrund *[1] No reason* an SPoCC übertragen.
+
+| *SPoCC-Retourengründe*
+| Die Dropdown-Liste enthält deine Retourengründe in SPoCC. Wähle aus der Dropdown-Liste einen Retourengrund, der zu dem Grund passt, den du in der Spalte *plentymarkets Retourengründe* gewählt hast.
+
+| icon:plus[role="green"]
+| Fügt eine weitere Zeile hinzu.
+Auf diese Weise kannst du mehrere Retourengründe zuordnen.
+
+| icon:minus-circle[role="red"]
+| Löscht eine Zeile.
+Auf diese Weise kannst du einen nicht mehr benötigte Retourengrund löschen.
+|===
+
+[#2236081566]
+=== Schritt "Prozesse"
+
+Der Datenaustausch zwischen SPoCC und plentymarkets erfolgt mit sogenannten Crons.
+
+include::_includes:partial$crons.adoc[]
+
+In diesem Schritt aktivierst du die Prozesse, die automatisch ausgeführt werden sollen (icon:check-square[role="blue"]).
+
+[[table-cron-settings]]
+.Wann werden die Prozesse ausgeführt?
+[cols="1,1,3a"]
+|===
+|Prozess |Intervall |Erläuterung
+
+| *Import von SPoCC-Attributen*
+| Stündlich
+| Importiert die SPoCC-Attribute in plentymarkets.
+
+| *Artikelimport*
+| Täglich
+|
+* Nachdem du den Assistenten abgeschlossen hast, werden alle Artikel erstmalig von SPoCC nach plentymarkets übertragen.
+Dieser erstmalige vollständige Import kann, je nach Anzahl der Produkte, einige Tage dauern.
+* Nach dem ersten Import werden nur noch Teilimporte durchgeführt, die auf den zuvor gewählten Importeinstellungen basieren.
+* Importiert werden nur neue Artikel, neue Varianten zu bestehenden Artikeln und Änderungen an Artikeln.
+* Der Artikelimport erfolgt am Ende des Tages bzw. in der Nacht.
+
+| *Import erweiterter Artikeldaten*
+| ???
+| Importiert EAN, Bilder und Eigenschaften von Varianten, die mit dem Tag gekennzeichnet sind, das du in der Einstellung *Tag für Import erweiterter Artikeldaten* gewählt hast.
+
+| *Import von Bildern*
+| Alle 60 Minuten
+| Importiert SPoCC-Bilder in plentymarkets.
+
+| *Vollständiges Bestands- und Preisupdate*
+| Alle 24 Stunden
+| Alle Bestände und Preise werden aktualisiert.
+
+| *Abgleich geänderter Bestands- und Preisdaten*
+| Alle 15 Minuten
+| Nur geänderte Bestände und Preise werden aktualisiert.
+|===
+
+
+[#4201942886]
+== Neu importierte Artikeldaten öffnen und ergänzen
+
+Deine Artikeldaten werden bei der nächsten Ausführung des Prozesses von SPoCC nach plentymarkets übertragen.
+Dies setzt voraus, dass du:
+
+* den Prozess *Artikelimport* aktiviert hast (icon:check-square[role="blue"]).
+* den Assistenten abgeschlossen hast.
+* das Plugin im Set aktiviert hast.
+
+[#7263303278]
+=== Neu importierte Artikel öffnen
+
+Öffne einige Artikeldatensätze und prüfe stichprobenartig, ob deine Artikeldaten korrekt importiert wurden.
+
+. Öffne das Menü *Artikel » Artikel bearbeiten*.
+. Lege mit den xref:artikel:suche.adoc#[Suchfiltern] in der linken Spalte fest, welche Artikel du abrufen willst.
+Zum Beispiel:
+.. Setze den Filter *Aktiv* auf *ALLE* oder *Nein*, da Artikel beim Import inaktiv sind.
+. Klicke auf *Suchen* (icon:search[role="blue"]). +
+→ Die Suchergebnisse werden in der Übersicht rechts angezeigt.
+. Klicke auf einen Artikel in der Übersicht, um den Artikeldatensatz zu öffnen.
+
+[TIP]
+.Hauptvariante vs. Untervariante
+====
+Prüfe die übertragenen Daten sowohl für die Hauptvariante als auch für die Untervarianten:
+
+* *_Hauptvariante_*: Die erste Variante eines Artikels wird als Hauptvariante bezeichnet.
+Sie steht nicht zum Verkauf, sondern ist rein virtuell und dient dazu, die weiteren Untervarianten des Artikels anhand von xref:artikel:vererbung.adoc#[Vererbung] zu verwalten.
+Wenn du einen Artikeldatensatz öffnest, öffnet sich automatisch auch die Hauptvariante.
+* *_Untervariante_*: Die Untervarianten sind die verkaufbaren Ausführungen des Produkts.
+Wird zum Beispiel ein T-Shirt in den Farben Blau und Rot und den Größen S, M, L angeboten, dann ist jede einzelne Kombination (Blau S, Blau M, Blau L, Rot S, Rot M, Rot L) eine Untervariante.
+Um eine Untervariante zu öffnen, klicke auf den Tab *Varianten* und dann auf *Suchen* (icon:search[role="blue"]).
+Klicke anschließend in der Übersicht auf eine Untervariante.
+====
+
+[#9285917774]
+=== Artikeldaten ergänzen
+
+Wenn du mit den übertragenen Artikeldaten zufrieden bist, dann kannst du deine Artikel für den Online-Verkauf vorbereiten.
+Zum Beispiel kannst du:
+
+* xref:artikel:artikel-verwalten.adoc#50[Beschreibungstexte], xref:artikel:artikel-verwalten.adoc#90[Produktbilder] und relevante xref:artikel:artikel-verwalten.adoc#50[Metadaten] hinzufügen.
+* angeben, wo deine Produkte verkauft werden sollen, d.h. xref:artikel:artikel-verwalten.adoc#340[Auftragsherkünfte] und xref:artikel:artikel-verwalten.adoc#340[Mandanten] wählen.
+* deine Varianten xref:artikel:artikel-verwalten.adoc#200[aktivieren], sobald sie veröffentlicht werden sollen.
+
+Eine vollständige Liste aller Artikeldatenfelder in plentymarkets findest du auf der Handbuchseite xref:artikel:artikel-verwalten.adoc#[Verzeichnis der Datenfelder].
+
+[#9632625453]
+== Aufträge abwickeln
+
+Wenn ein Produkt verkauft wird, landen die Auftragsdaten zunächst im plentymarkets Menü *Aufträge » Aufträge bearbeiten*.
+Hier kann der Auftrag abgewickelt werden und sein Fortschritt mit Hilfe eines Status verfolgt werden.
+
+Weitere Informationen zur Auftragsbearbeitung in plentymarkets findest du auf der Handbuchseite xref:auftraege:auftraege-verwalten.adoc#[Aufträge verwalten].
+
+[#2728429959]
+== Ereignisaktionen einrichten
+
+Natürlich sollen die Auftragsdaten nicht nur in plentymarkets bleiben, sondern auch zu SPoCC übertragen werden.
+Dazu musst du sogenannte Ereignisaktionen einrichten.
+Diese Ereignisaktionen müssen nur einmal im Voraus eingerichtet werden, damit der Auftragsexport korrekt funktioniert.
+
+Für SPoCC sind die folgenden Ereignisaktionen verfügbar:
+
+* <<#5454333207, SPoCC über neue Aufträge informieren>>
+* <<#8993901978, SPoCC über Bezahlung informieren>>
+* <<#0414974358, SPoCC über erstellte Auftragsdokumente informieren>>
+* <<#1052999368, SPoCC über Retouren informieren>>
+* <<#UI7TSJAK, Aufträge nach Versandmeldung weiterverarbeiten>>
+* <<#VOQ82RU7, Nicht an SPoCC gemeldete Aufträge weiterverarbeiten>>
+* <<#KZ1UJ2CB, Aufträge nach Stornierungsanfrage weiterverarbeiten>> 
+
+Weitere Informationen zur allgemeinen Verwendung von Ereignisaktionen findest du auf der Handbuchseite xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktionen].
+
+[#5454333207]
+=== SPoCC über neue Aufträge informieren
+
+Sobald ein neuer Auftrag in plentymarkets landet, soll SPoCC über den Auftrag informiert werden.
+So wird der nötige Bestand in SPoCC reserviert, damit es nicht zu Überverkäufen kommt.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-one>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-one]]
+[cols="1,3a"]
+|===
+
+| Ereignis
+| Neuer Auftrag
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| Plugins > SPoCCConnector: Auftrag anmelden +
+→ In SPoCC wird ein Auftrag mit der SPoCC-Status-ID 1 erstellt. +
+→ Der Bestand wird bei SPoCC reserviert.
+|===
+
+[#8993901978]
+=== SPoCC über Bezahlung informieren
+
+Sobald der Auftrag bezahlt ist, soll SPoCC darüber informiert werden. 
+Erst dann wird der Auftrag für die SPoCC-Filiale sichtbar und der Auftrag kann dort von Lagermitarbeiter:innen kommissioniert werden.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-8993901978>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-8993901978]]
+[cols="1,3a"]
+|===
+
+| Ereignis
+| *Statuswechsel > [Status wählen, bei dem das Ereignis ausgelöst werden soll]*
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| Plugins > SPoCCConnector: Auftrag bezahlt +
+→ In SPoCC wird der Auftrag in den SPoCC-Status ??? verschoben. +
+→ Der Auftrag wird für die SPoCC-Filiale sichtbar und kann von Lagermitarbeiter:innen kommissioniert werden.
+|===
+
+[#0414974358]
+=== SPoCC über erstellte Auftragsdokumente informieren
+
+Informiere SPoCC automatisch darüber, dass die Versanddokumente erstellt wurden. Damit gibst du der Filiale grünes Licht für den Versand.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-0414974358>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-0414974358]]
+[cols="1,3a"]
+|===
+
+| Ereignis
+| *Statuswechsel > [Status wählen, bei dem das Ereignis ausgelöst werden soll]* +
+*_Beispiel:_* *Statuswechsel > [5] Freigabe Versand*
+
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| Plugins > SPoCCConnector: Versanddokumente erstellt +
+→ Auftragsdokumente werden an SPoCC übertragen. +
+|===
+
+[#1052999368]
+=== SPoCC über Retouren informieren
+
+Informiere SPoCC automatisch darüber, dass eine Variante retourniert wird. So weiß die Filiale, dass sie mit der Retoure rechnen kann.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-1052999368>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-1052999368]]
+[cols="1,3a"]
+|===
+
+| Ereignis
+| *Statuswechsel > [Status wählen, bei dem das Ereignis ausgelöst werden soll]* +
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| Plugins > SPoCCConnector: Retoure melden +
+→ In SPoCC wird der Auftrag in die SPoCC-Status-ID 18 verschoben. +
+→ Der Retourengrund wird übertragen. Wenn du für einen plentymarkets Retourengrund keinen SPoCC-Retourengrund zugeordnet hast, wird der Retourengrund *[1] No reason* an SPoCC übertragen.
+
+|===
+
+[#UI7TSJAK]
+=== Aufträge nach Versandmeldung weiterverarbeiten
+
+Lege fest, was mit Aufträgen passiert, nachdem SPoCC den Versand bestätigt hat.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-UI7TSJAK>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-UI7TSJAK]]
+[cols="1,3a"]
+|===
+
+| Ereignis
+| SpoccConnector \| Auftrag versendet
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| [Aktion wählen.] +
+*_Beispiel:_* *Status ändern* > *[7] Warenausgang gebucht*]
+
+|===
+
+[#VOQ82RU7]
+=== Nicht an SPoCC gemeldete Aufträge weiterverarbeiten
+
+Lege fest, was mit Aufträgen passiert, die nicht an SPoCC gemeldet werden konnten. Das sind neue Aufträge, bei denen die Aktion *SPoCCConnector: Auftrag anmelden* nicht ausgelöst wurde.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-VOQ82RU7>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-VOQ82RU7]]
+[cols="1,3a"]
+|===
+
+| Ereignis
+| SpoccConnector \| Anmeldung fehlgeschlagen
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| [Aktion wählen.] +
+*_Beispiel:_* *Status ändern > *[Status für manuelle Prüfung wählen]*
+
+|===
+
+[#KZ1UJ2CB]
+=== Aufträge nach Stornierungsanfrage weiterverarbeiten
+
+Lege fest, was mit Aufträgen passiert, die in SPoCC storniert wurden.
+
+Richte dazu eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein.
+
+:table-event-procedure: <<#table-event-procedure-KZ1UJ2CB>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[table-event-procedure-KZ1UJ2CB]]
+[cols="1,3a"]
+|===
+
+| Ereignis
+| SpoccConnector \| Stornierung beantragt
+
+|Filter (optional)
+|Auftrag > Herkunft +
+Auftrag > Mandant (Shop)
+
+| Aktion
+| [Aktion wählen.] +
+*_Beispiel:_* *Status ändern* > *[8.1] Storniert durch Kunden*]
+
+|===

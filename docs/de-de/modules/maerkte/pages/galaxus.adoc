@@ -1,7 +1,7 @@
 = Galaxus
 :author: team-plenty-channel
 :keywords: Galaxus
-:description: Multi-Channel in plentymarkets: Richte die Schnittstelle zum Marktplatz Galaxus in deinem plentymarkets System ein.
+:description: Hier erfährst du, wie du den Marktplatz Galaxus in plentymarkets einrichtest, damit du deine Artikel auf Galaxus verkaufen kannst. 
 :galaxus:
 :market: Galaxus
 :price-search-engine: Galaxus
@@ -17,7 +17,7 @@ Der Schweizer Onlinemarktführer Galaxus ist Spezialist für IT, Unterhaltungsel
 Registriere Dich online für das link:https://www.galaxus.ch/de/page/werden-sie-haendler-12462[Digitec Galaxus Händler Programm^] oder kontaktiere Galaxus über die E-Mail-Adresse mailto:anmelden@digitecgalaxus.ch[anmelden@digitecgalaxus.ch].
 
 [#order-workflow]
-== Bestellungen über Galaxus
+== Bestellungen bei Firmensitz in Deutschland
 
 Du hast deinen Firmensitz in Deutschland und lieferst an Galaxus-Endkund:innen in die Schweiz.
 Daraus ergeben sich drei mögliche Szenarien:
@@ -173,7 +173,7 @@ Diese Händler:innen müssen eine Person mit Wohnsitz in der Schweiz als Mehrwer
 --
 //TODO !!!
 
-2+| FTP-Konfiguration
+2+^| FTP-Konfiguration
 
 | *Gastgeber*
 | Gastgeber-Namen nach dem Muster *ftp.dg.ch* eingeben.
@@ -194,7 +194,7 @@ Diese Händler:innen müssen eine Person mit Wohnsitz in der Schweiz als Mehrwer
 → Das Plugin liest neue Aufträge und Galaxus-Anfragen von hier. +
 *_Wichtig:_* Die gepflegten Ordnerpfade beginnen immer mit *(/... /...)*, nur wenn der eingetragene Gastgeber-Name aus *Schritt 3.* nicht mit *( / )* endet.
 
-2+| Auftrag Status-Konfiguration
+2+^| Auftrag Status-Konfiguration
 
 | *Auftrag-Status für Stornierungsanforderungen*
 | Mit welchem Auftragsstatus sollen neue Stornoanfragen importiert werden?
@@ -209,6 +209,7 @@ Diese Händler:innen müssen eine Person mit Wohnsitz in der Schweiz als Mehrwer
 
 |===
 
+[#VTBU7EUA]
 == Artikelexport einrichten
 
 Der Artikelexport läuft über die folgenden Elastic-Export-Formate. Wenn du das Plugin bereitstellst, werden diese Formate automatisch installiert.
@@ -305,7 +306,7 @@ Whitelist-Element erstellen:
 * An
 * Aus
 
-*_Hinweis:_* Für ein besseres Verständnis, folge der Standard-Export-Matrix für aktive Varianten aus *Tabelle 5*.
+*_Hinweis:_* Für ein besseres Verständnis, folge der Standard-Export-Matrix für aktive Varianten aus <<#standard-export-matrix>>.
 
 | *Verkaufspreis der als Einkaufspreis excl. MwSt. exportiert wird*
 | Wähle einen relevanten, bereits eingerichteten Verkaufspreis. Diese Option wird von *Berechne Verkaufspreis excl. MwSt.anhand Elastic Export Einstellungn 'Zielland'* auch beeinflusst.
@@ -321,6 +322,7 @@ Whitelist-Element erstellen:
 
 |===
 
+[#27QWIBEH]
 === Standard-Export-Matrix für aktive Varianten
 
 Die Grundlogik von Galaxus funktioniert wie folgt:
@@ -369,6 +371,7 @@ Die folgende Tabelle zeigt eine Standard-Export-Matrix für aktive Varianten.
 
 |===
 
+[#4JCZZBS0]
 == Verkaufspreis einrichten
 
 Mit Verkaufspreisen legst du die Bedingungen fest, unter denen eine Variante zu einem bestimmten Preis und über einen bestimmten Verkaufskanal verkauft wird.
@@ -378,7 +381,7 @@ Mit Verkaufspreisen legst du die Bedingungen fest, unter denen eine Variante zu 
 . Öffne das Menü *Einrichtung » Artikel » Verkaufspreise*.
 . Klick auf *[+] Neu*.
 . Gib eine *Position-Nummer* ein.
-. Fülle den *Internen* und *Externen* *Namen*.
+. Gib einen *Internen* und einen *Externen Namen* ein.
 . Setze einen Wert für *Ab Menge*.
 . Wähle *CHF* oder *EUR* als *Währung*.
 . Wähle den zuständigen *Mandanten*.
@@ -386,44 +389,93 @@ Mit Verkaufspreisen legst du die Bedingungen fest, unter denen eine Variante zu 
 . Wähle die Herkunft *Galaxus*.
 . Speichere die Einstellungen.
 
-*_Hinweis:_* Alternativ kannst du die Herkunft *Galaxus* in einem schon existierenden Verkaufspreis aktivieren lassen.
+*_Hinweis:_* Alternativ kannst du die Herkunft *Galaxus* in einem schon existierenden Verkaufspreis aktivieren.
 
+[#W1ZE4G8E]
+== Kategorien für den Export vorbereiten
+
+Bei Galaxus bietest du deine Varianten über deinen Standard-Mandanten an. Deshalb muss die Kategorie der Variante mit dem Standard-Mandanten verknüpft sein.
+
+[.instruction]
+Standard-Mandant mit der Kategorie verknüpfen:
+
+. Öffne das Menü *Artikel » Kategorien*.
+. Klicke auf die Kategorie im Verzeichnisbaum links. +
+→ Die Kategorie wird geöffnet und das Tab *Einstellungen* ist sichtbar.
+. Navigiere zur Einstellung *Mandant (Shop)*. 
+. Aktiviere die Option *Standard* (icon:check-square[role="blue"]).
+. *Speichere* (terra:save[role="green"]) die Einstellungen.
+
+image::artikel:Checkliste_Kategorie_Mandant.png[]
+
+[#W1ZE4G9E]
 == Varianten für den Export vorbereiten
 
-* Die Varianten müssen *Aktiv* sein: +
-  . Öffne das Menü *Artikel » Variante » Einstellungen » Bereich Verfügbarkeit*, setze das Kontrollkästchen *Aktiv*.
+[[prep-variations]]
+.Varianten für den Export vorbereiten
+[cols="1,3a"]
+|===
+|Einstellung |Erläuterung
 
-* Die *Artikelverfügbarkeit* für den Marktplatz *Galaxus* muss gesetzt sein. +
-  . Öffne das Menü *Artikel » Variante » Tab: Verfügbarkeit » Bereich Märkte*.
-  . Wähle den Martkplatz *Galaxus*.
+| Standardkategorie festlegen
+| Zu Galaxus wird immer die Standard-Kategorie der Variante exportiert. Lege deshalb an der Variante eine Standard-Kategorie fest, die mit dem Standard-Mandanten verknüpft ist.
 
-* Eine Galaxus *SKU* muss gesetzt sein. +
-  . Öffne das Menü *Artikel » Variante » Tab: Verfügbarkeit » Bereich SKU*.
-  . Erstelle eine *SKU* für Herkunft *Galaxus*.
+[.instruction]
+Standardkategorie festlegen:
 
-* Ein Galaxus *Verkaufspreis* muss gesetzt sein. +
-  . Öffne das Menü *Artikel » Variante » Tab: Einstellungen » Bereich Verkaufspreise*.
-  . Öffne den Verkaufspreis.
-  . Aktiviere die Herkunft *Galaxus*.
+. Öffne das Menü *Artikel » Artikel » [Variante öffnen] » Element: Kategorien*.
+. Klicke im Element auf icon:ellipsis-v[role="darkGrey"] und dann auf material:link[role="darkGrey"] *Standardkategorien verknüpfen*. +
+→ Es öffnet sich ein Pop-up-Fenster.
+. Wähle für jeden Mandanten eine Standardkategorie aus der Dropdown-Liste. +
+*_Wichtig:_* Diese Kategorie muss <<#W1ZE4G8E, mit dem Standard-Mandanten verknüft sein>>.
+. Klicke auf *Speichern*. +
+→ Die Daten werden als Tabelle dargestellt.
+. *Speichere* (terra:save[role="darkGrey"]) die Einstellungen.
 
-* Erlaubte *Merkmale* und/oder *Eigenschaften* müssen mit den Varianten verknüpft sein. +
-  . Öffne das Menü *Artikel » Merkmale » Galaxus Merkmale*.
-  . Verknüpfe die relevanten Elemente.
-  . *_Oder:_* Öffne das Menü *Einstellungen » Eigenschaften*.
-  . Verknüpfe die relevanten Elemente.
+| Variante aktivieren
+| Die Variante muss aktiv sein:
 
-* Mit dem Artikel verknüpfte *Attribute* werden auch exportiert.
+. Öffne das Menü *Artikel » Variante » Einstellungen » Bereich: Verfügbarkeit*.
+. Aktiviere das Kontrollkästchen *Aktiv*.
+. Speichere (terra:save[role="darkGrey"]) die Einstellungen.
 
-* Die *Verfügbarkeiten 1-10* müssen an der Variante gepflegt sein. +
-  . Öffne das Menü *Einrichtung » Artikel » Verfügbarkeit*.
-  . Pflege Business-Relevante *Durchschnittliche Lieferzeiten*.
-  . Stelle sicher, dass für Galaxus aktivierte Varianten die relevante *Verfügbarkeit 1-10* verknüpft ist. +
-  *_Wichtig:_* Die Einstellung *Positive Bestände sollen immer exportiert werden, unabhängig von der durchschnittlichen Lieferzeit* funktioniert ohne eine *Verfügbarkeit 1-10* nicht.
+| Marktplatzverfügbarkeit aktivieren
+| Die *Artikelverfügbarkeit* für den Marktplatz *Galaxus* muss aktiviert sein:
 
+. Öffne das Menü *Artikel » Variante » Tab: Verfügbarkeit » Bereich: Märkte*.
+. Aktiviere den Marktplatz *Galaxus*.
+. Speichere (terra:save[role="darkGrey"]) die Einstellungen.
+
+| Verkaufspreis verknüpfen und Preis speichern
+|
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen] » [Variante öffnen] » Varianten-Tab: Einstellungen*.
+. Füge im Bereich *Verkaufspreise* den Verkaufspreis für Galaxus hinzu (icon:plus-square[role="green"]).
+. Gib einen Preis ein.
+. Speichere (terra:save[]) die Einstellungen.
+
+| Merkmale/Eigenschaften verknüpfen
+| * Erlaubte *Merkmale* und/oder *Eigenschaften* müssen mit den Varianten verknüpft sein.
+
+. Öffne das Menü *Artikel » Merkmale » Galaxus Merkmale*.
+. Verknüpfe die relevanten Elemente. +
+*_Oder:_* Öffne das Menü *Einstellungen » Eigenschaften*.
+. Verknüpfe die relevanten Elemente.
+
+| Verfügbarkeit speichern
+| Die *Verfügbarkeiten 1-10* müssen an der Variante gepflegt sein.
+
+. Öffne das Menü *Einrichtung » Artikel » Verfügbarkeit*.
+. Pflege Business-Relevante *Durchschnittliche Lieferzeiten*.
+. Stelle sicher, dass bei für Galaxus aktivierte Varianten die relevante *Verfügbarkeit 1-10* verknüpft ist. +
+*_Wichtig:_* Die Einstellung *Positive Bestände sollen immer exportiert werden, unabhängig von der durchschnittlichen Lieferzeit* funktioniert ohne eine *Verfügbarkeit 1-10* nicht.
+|===
+
+[#ONK1TUKE]
 == Artikel zu Galaxus exportieren
 
 Das Galaxus Plugin exportiert die Artikeldaten über das *Elastic Export Plugin*. Weitere Details zum *Elastic Export Plugin* findest du auf der Handbuchseite xref:daten:elastischer-export.adoc#[Elastischer Export].
 
+[#6BDAE4XD]
 === Elastic Export Formate einrichten
 
 Der Artikelexport läuft über die folgenden Elastic-Export-Formate. Wenn du das Plugin bereitstellst, werden diese Formate automatisch installiert.
@@ -707,6 +759,7 @@ Beispielsweise haben wir eine Eigenschaft *Property1* welche in 3 Gruppen existi
 |===
 --
 
+[#LQPQ0MM4]
 === Formate im Elastischen Export einrichten
 
 //TODO: Optionen durchgehen.
@@ -790,7 +843,6 @@ Artikelfilter aus der Dropdown-Liste wählen und *Hinzufügen*. Standardmäßig 
 | Exportierter Verkaufspreis ist immer der *Verkaufspreis-Netto*. Auswahl von *Verkaufspreis-Brutto* wird beim Export ignoriert.
 
 |===
-
 
 [#order-documents]
 == Auftragsdokumente vorbereiten
@@ -892,7 +944,7 @@ Vorlage für Rechnungen anpassen:
 
 [[table-invoices-no-fiscal-rep]]
 .EU-Hub ohne Fiskalvertretung: Einstellungen für Rechnungen
-[cols="2,3a"]
+[cols="1,3a"]
 |===
 |Anforderung |Einstellungen in der Vorlage
 
@@ -1023,7 +1075,7 @@ Vorlage für Rechnungen anpassen:
 
 [[table-invoices-fiscal-rep]]
 .EU-Hub mit Fiskalvertretung: Einstellungen für Rechnungen
-[cols="2,3a"]
+[cols="1,3a"]
 |===
 |Anforderung |Einstellungen in der Vorlage
 
@@ -1135,7 +1187,7 @@ Für Galaxus sind die in <<#galaxus-event-procedures>> aufgeführten Ereignisakt
 //TODO: Tabelle checken
 [[galaxus-event-procedures]]
 .Galaxus Ereignisaktionen
-[cols="1,1,3a"]
+[cols="2,1,3a"]
 |===
 |Ereignisaktion Name |Empfohlenes Ereignis |Erläuterung
 
@@ -1204,6 +1256,7 @@ Richte, Beispielsweise, eine Ereignisaktion ein, um die Auftragsbestätigung Aut
 . Füge eine *Aktion* mit Auswahl *Plugins » Auftragsbestätigung an Galaxus senden* hinzu.
 . *Speichere* die Einstellungen.
 
+[#PEHWFNZB]
 == Besonderheiten der Galaxus-Auftragsabwicklung
 
 * Galaxus Retoure-Anfragen generieren neue plentymarkets Aufträge vom Typ *Retoure*. Diese Aufträge werden mit dem Initial-Auftrag verknüpft. Die resultierenden Aufträge müssen separat bearbeitet werden.
@@ -1213,9 +1266,8 @@ Richte, Beispielsweise, eine Ereignisaktion ein, um die Auftragsbestätigung Aut
 
 * Ein Versanddatum wird außerdem nicht gesetzt, wenn die zur Auftragserfüllung benötigte Warenmenge nicht als Netto-Warenbestand vorhanden ist. Das geplante Lieferdatum kann aufgrund der Plugin-Option *Positive Bestände sollen immer exportiert werden...* im Menü *Einrichtung » Märkte » Galaxus » Product Stock Price Tab*  weiteren Änderungen unterliegen.
 
-* In allen Szenarien, in denen nur ein Teil der Bestellung weiterbearbeitet werden soll, muss die importierte Bestellung aufgeteilt werden. Die resultierenden Aufträge müssen separat bearbeitet werden.
-
-* So teilst du einen Auftrag:
+* In allen Szenarien, in denen nur ein Teil der Bestellung weiterbearbeitet werden soll, muss die importierte Bestellung aufgeteilt werden. Die resultierenden Aufträge müssen separat bearbeitet werden. +
+  So teilst du einen Auftrag:
   . Öffne das Menü *Auftrag » [Auftrag öffnen]*.
   . Teile den Auftrag unter *Auftrag » Übersicht » Zahnrad » (Teilen)*. +
   → Das Fenster *Auftrag teilen* wird geöffnet.
@@ -1223,13 +1275,16 @@ Richte, Beispielsweise, eine Ereignisaktion ein, um die Auftragsbestätigung Aut
   *_Wichtig:_* Die Versandkosten des ursprünglichen Auftrags werden nicht geändert. +
   → Das Plugin kann nach dem Aufteilen eines Auftrags, ohne zusätzliche Benutzereingaben, zum korrekten Galaxus Auftrag zurückmelden.
 
+  * Aufträge, mit einer Rechnungsadresse in Liechtenstein und einer Lieferadresse in der EU werden als Nettoaufträge importiert.
 
+[#5JRKNOXB]
 == Auftragsdatenaustausch: Szenarien
 
 Folgende Szenarien werden vom Galaxus Plugin unterstützt.
 
 *_Wichtig:_* Ausser Storno-Anfragen können alle Szenarien für komplette und für Teilaufträge ausgeführt werden. Um doppelte Inhalte zu minimieren werden deshalb Szenarien, in denen der ganze Auftrag bearbeitet wird, nicht separat beschrieben.
 
+[#9KO6USYT]
 === Importierter Auftrag ist versandbereit
 
 Der importierte Auftrag enthält alle erforderlichen Angaben und ist versandbereit:
@@ -1237,6 +1292,7 @@ Der importierte Auftrag enthält alle erforderlichen Angaben und ist versandbere
 . Der Auftragsimport wurde automatisch durch die Ereignisaktion *Auftragsbestätigung an Galaxus melden* zurückgemeldet.
 . Wenn der Auftrag versandbereit ist, löse die Ereignisaktion *Versandbestätigung an Galaxus melden* aus.
 
+[#2NNFPG4P]
 === Nur ein Teil des importierten Auftrags kann erfüllt werden
 
 Nur ein Teil des importierten Auftrags kann zu diesem Zeitpunkt erfüllt werden. Die Kund:in erklärt sich damit einverstanden, die Hälfte der Bestellung jetzt zu erhalten. Die andere Hälfte wird zu einem späteren Zeitpunkt versendet:
@@ -1249,7 +1305,8 @@ Nur ein Teil des importierten Auftrags kann zu diesem Zeitpunkt erfüllt werden.
 . Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus, um Galaxus über das neue Lieferdatum zu informieren.
 . Wenn soweit, löse die Ereignisaktion *Versandbestätigung an Galaxus senden* aus.
 
-=== Teil der Auftrag enthaltenen Artikel kann nicht erfüllt werden
+[#6T87DOXB]
+=== Teil der im Auftrag enthaltenen Artikel kann nicht erfüllt werden
 
 Du hast festgestellt, dass ein Teil des Auftrags nicht erfüllt werden kann, zum Beispiel weil der Artikel keinen Bestand hat.
 
@@ -1260,6 +1317,7 @@ Du hast festgestellt, dass ein Teil des Auftrags nicht erfüllt werden kann, zum
 . Galaxus antwortet automatisch mit einer *Storno-Anfrage*.
 . Die Storno-Anfrage kann *Abgelehnt* oder *Angenommen* werden, indem die Ereignisaktion *Galaxus Storno-Anfrage akzeptiert* oder *Galaxus Storno-Anfrage abgelehnt, mit Begründung* ausgelöst wird.
 
+[#2CI84ZDL]
 === Die Kund:in hat eine Teilretoure beantragt
 
 Die Kund:in hat beantragt, dass ein Teil ihres Auftrags an dich zurückgegeben wird.
@@ -1269,6 +1327,7 @@ Die Kund:in hat beantragt, dass ein Teil ihres Auftrags an dich zurückgegeben w
 . Löse die Ereignisaktion *Auftragsbestätigung an Galaxus senden* aus.
 . Löse die Ereignisaktion *Galaxus Retourenanfrage akzeptieren* oder *Galaxus Retourenanfrage ablehnen mit Begründung* aus.
 
+[#Q7LT0ZU3]
 === Die Kund:in hat das Paket abgelehnt
 
 Die Kund:in hat die Lieferung aus einem ungerechtfertigten Grund nicht akzeptiert. Das Paket ist zurückgekommen.
@@ -1302,4 +1361,36 @@ Voraussetzungen: EU-Hub mit Fiskalvertretung
 * Du hast im Menü *Einrichtung » Mandant » Standard Shop » Standorte » Standort: Deutschland » Dokumente » Rechnung* für die Einstellung *Währung des Dokumentes* die Option *Währung des Auftrags* eingestellt. +
 *_Wichtig:_* Diese Einstellung gilt für alle Rechnungen des Standorts, nicht nur für Galaxus.
 * Du hast im Standort *Deutschland* deine Umsatzsteuer-ID und die Steuersätze für die Schweiz gespeichert.
+--
+
+[.collapseBox]
+.Im Export ist die Spalte Category leer. Es wird keine Kategorie exportiert. Was nun?
+--
+
+* Bei Galaxus bietest du deine Varianten über deinen Standard-Mandanten an. Prüfe deshalb, dass der Standard-Mandant mit der Kategorie verknüpft ist.
+* Es wird immer die Standard-Kategorie der Variante exportiert. Prüfe deshalb, dass an der Variante eine Standard-Kategorie gespeichert ist, die für den Standard-Mandanten freigegeben ist.
+
+[.instruction]
+Standard-Mandant mit der Kategorie verknüpfen:
+
+. Öffne das Menü *Artikel » Kategorien*.
+. Klicke auf die Kategorie im Verzeichnisbaum links. +
+→ Die Kategorie wird geöffnet und das Tab *Einstellungen* ist sichtbar.
+. Navigiere zur Einstellung *Mandant (Shop)*. 
+. Aktiviere die Option *Standard* (icon:check-square[role="blue"]).
+. *Speichere* (terra:save[role="green"]) die Einstellungen.
+
+image::artikel:Checkliste_Kategorie_Mandant.png[]
+
+[.instruction]
+Standardkategorie festlegen:
+
+. Öffne das Menü *Artikel » Artikel » [Variante öffnen] » Element: Kategorien*.
+. Klicke im Element auf icon:ellipsis-v[role="darkGrey"] und dann auf material:link[role="darkGrey"] *Standardkategorien verknüpfen*. +
+→ Es öffnet sich ein Pop-up-Fenster.
+. Wähle für jeden Mandanten eine Standardkategorie aus der Dropdown-Liste aus.
+. Klicke auf *Speichern*. +
+→ Die Daten werden als Tabelle dargestellt.
+. *Speichere* (terra:save[role="darkGrey"]) die Einstellungen.
+
 --

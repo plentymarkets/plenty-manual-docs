@@ -1,8 +1,7 @@
 = Standardformate nutzen
 :keywords:
-:description: Standardformate für den Export von plentymarkets Daten erstellen
+:description: Erfahre, wie du Standardformate für den Export von plentymarkets Daten in eine Datei erstellst.
 :page-aliases: dateiexport.adoc
-:id: Z14A1MY
 :author: team-plenty-channel
 :file-export:
 
@@ -317,7 +316,8 @@ Protokoll-Präfixe sind zum Beispiel `ftp://` und `ftps://`.
 | Testet die Servereinstellungen, die du eingegeben hast:
 
 * Kann eine Verbindung zu dem Server hergestellt werden?
-* Kann eine Exportdatei an dem Speicherort gespeichert werden? +
+* Kann eine Exportdatei an dem Speicherort gespeichert werden?
+
 *_Tipp:_* Am Speicherort wird eine Testdatei gespeichert. Diese Testdatei heißt `plentymarkets_ConnectionTestFile.txt`.
 
 ifdef::marketplace-export[*_Hinweis:_* Getestet wird nur, ob mit den aktuellen Exporteinstellungen ein Dateiexport möglich ist. Die Option prüft _nicht_, ob eine Verbindung zu einem Marktplatz hergestellt werden kann.]
@@ -331,17 +331,29 @@ ifdef::marketplace-export[*_Hinweis:_* Getestet wird nur, ob mit den aktuellen E
 ! Es werden keine Daten exportiert.
 
 ! *Alle 20 Minuten*; +
-*Stündlich*; +
-*Täglich* +
+*Einmal pro Stunde*; +
+*Einmal pro Tag* +
 ! Der aktuelle Stand wird im gewählten Intervall exportiert.
 
-! *Zeitplan*
-! Die Option *Zeitplan* wird eingeblendet.
+! *Zeitplan: Uhrzeiten*
+! Die Option *Zeitplan: Uhrzeiten* wird eingeblendet.
 !===
 
-| *Zeitplan* +
+| *Zeitplan: Uhrzeiten* +
 (bei Option *Zeitplan*)
-| Klicke in das Feld. Wähle in der eingeblendeten Dropdown-Liste einen oder mehrere Zeitpunkte, zu denen ein Export gestartet werden soll.
+| Klicke in das Feld. Wähle in der eingeblendeten Dropdown-Liste einen oder mehrere Uhrzeiten. Exporte werden zu diesen Zeiten gestartet.
+
+| *Wochentage* +
+(bei **Übertragung** &ne; **Nie**)
+| Standardmäßig sind alle Wochentage aktiviert. Um an bestimmten Wochentagen keinen Export auszuführen:
+
+. Klicke in das Feld *Wochentage*. +
+→ Eine Dropdown-Liste mit den Wochentagen wird angezeigt.
+. Deaktiviere das Kontrollkästchen für einen oder mehrere Wochentage (icon:check_box_outline_blank). +
+→ Exporte werden nur an den Wochentagen mit aktiviertem Kontrollkästchen (icon:check-square[role="blue"]) gestartet.
+
+*_Tipp:_* Die Einstellung *Wochentage* wird erst angezeigt, wenn du für die Einstellung *Übertragung* ein Intervall oder Zeitplan wählst.
+
 //end::table-export-settings[]
 
 |===
@@ -368,7 +380,7 @@ Download-Einstellungen vornehmen:
 . Navigiere zum Bereich *Download-Einstellungen*.
 . Nimm die Einstellungen vor. Beachte die Erläuterungen in <<#tabelle-url-generieren>>.
 . Speichere die Einstellungen. +
-→ Die URL für den Download der Datei wird angezeigt. Über diese URL ist der Export verfügbar, nachdem der erste Export abgeschlossen ist. +
+→ Die URL für den Download der Datei wird angezeigt. Über diese URL ist die Exportdatei nach dem ersten Export verfügbar. +
 → Im Menü wird immer die URL der zuletzt exportierten Datei angezeigt.
 . Klicke auf die URL oder kopiere die URL (material:content_copy[]), um sie zu verwenden.
 
@@ -498,9 +510,12 @@ Datenfeld zum Export hinzufügen:
 *_Tipp:_* Gib alternativ den Namen des Datenfelds in das Suchfeld ein. Wähle das Datenfeld aus den Suchergebnissen. +
 → Das Datenfeld wird zum Export hinzugefügt. +
 . Prüfe, ob der Export Key deine Anforderungen erfüllt. +
-  ** *_Was ist ein Export Key?_* +
-  Der "Export Key" ist der Name der Spaltenüberschrift, der in deiner Exportdatei erscheinen wird. Jeder "Export Key" darf in diesem Katalog nur einmal vorkommen. Export Keys dürfen außerdem keine Leerzeichen enthalten. +
+*_Was ist ein Export Key und wie muss er aufgebaut sein?_* +
+Der Export Key ist der Name der Spaltenüberschrift, der in deiner Exportdatei erscheinen wird.
+  ** Jeder Export Key darf in diesem Katalog nur einmal vorkommen. +
   *_Wichtig:_* Wenn mehrere Datenfelder denselben Export Key haben, wird nur eines der Datenfelder exportiert.
+  ** Export Keys dürfen keine Leerzeichen enthalten.
+  ** Wenn der Export Key einen Punkt enthält, werden die Daten als Baumstruktur exportiert. In den meisten Anwendungsfällen werden die Daten dann nicht wie erwartet exportiert. Wir empfehlen dir deshalb, in Export Keys keine Punkte zu verwenden.
 . Füge alle Datenfelder hinzu, die du exportieren möchtest.
 . *Speichere* (material:save[]) die Einstellungen. +
 → Die Datenfelder werden mit diesem Katalog exportiert. +
@@ -693,8 +708,6 @@ Datenfelder aus Export entfernen:
 
 Mit Filtern kannst du die Daten eingrenzen, die exportiert werden sollen.
 
-* Je nach Standardformat sind unterschiedliche Filter verfügbar. Die verfügbaren Filter sind auf den Handbuchseiten der einzelnen Standardformate erklärt.
-
 [.instruction]
 Filter hinzufügen:
 
@@ -705,6 +718,14 @@ Filter hinzufügen:
 → Die Filter-Übersicht wird geöffnet.
 . Wähle einen Filter aus der Dropdown-Liste. +
 *_Tipp:_* Je nach Standardformat sind unterschiedliche Filter verfügbar.
+Beschreibungen der einzelnen Filter findest du hier:
+* xref:daten:artikel.adoc#170[Artikel (Neu)]
+* xref:daten:auftraege.adoc#400[Aufträge]
+* xref:daten:hersteller.adoc#200[Hersteller]
+* xref:daten:lager-exportieren.adoc#20[Lager]
+* xref:daten:warenbestand-exportieren.adoc#20[Warenbestände]
+* xref:daten:warenbewegung-exportieren.adoc#20[Warenbewegungen]
+* xref:daten:zahlungen-exportieren.adoc#20[Zahlungen]
 . Klicke rechts auf *Filter hinzufügen* (material:add[]). +
 → Der Filter wird hinzugefügt.
 . Wenn für den Filter ein Operator verfügbar ist:
@@ -761,7 +782,7 @@ Vorschau in Katalogübersicht erstellen:
 . Öffne das Menü *Daten » Kataloge*. +
 → Die Katalog-Übersicht wird geöffnet.
 . Navigiere zur Zeile des Katalogs.
-. Öffne die weiteren Aktionen (icon:ellipsis-v[]) in der Zeile des Katalogs.
+. Öffne die weiteren Aktionen (icon:ellipsis-v[]).
 . Klicke auf *Vorschau* (material:preview[]). +
 → Im Fenster *Vorschau* wird eine Vorschau der ersten 5 Datenzeilen des Exports angezeigt.
 . Prüfe die Daten. Wurden die Daten so exportiert, wie du es erwartest?
@@ -789,7 +810,7 @@ Automatischen Katalogexport aktivieren:
 → Die Daten werden zu dem Speicherort und in dem Intervall exportiert, die du in den Katalogeinstellungen festgelegt hast.
 
 [#manual-export]
-=== Manuellen Export in Katalog starten
+=== Manuellen Export starten
 
 include::partial$catalogue-manual-download.adoc[]
 

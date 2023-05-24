@@ -1,8 +1,7 @@
 = bol.com
 :author: team-plenty-channel
 :keywords: bol.com, bol.com, bol, bol, blo, blo.com, BolItemExport, setting up bol.com, bol.com, bol, Netherlands, Holland, bol.nl, bol.com setup, set up bol.com
-:description: Multi-Channel in plentymarkets: Set up the interface to the market bol.com in your plentymarkets system.
-:id: 0WQSMLF
+:description: Learn how to set up the market bol.com in plentymarkets to start selling your items on bol.com.
 :bol.com:
 :market: bol.com
 
@@ -16,7 +15,7 @@ After you have set up the interface to bol.com, the automatic processes describe
 [[data-exchange]]
 .Frequency of data exchange
 [cols="1,1a"]
-|====
+|===
 |Data |Interval
 
 | Item export
@@ -40,7 +39,7 @@ After you have set up the interface to bol.com, the automatic processes describe
 | Import of returns registered on bol.com
 | Hourly +
 *_Note:_* Returns are imported with the status [9.00] by default.
-|====
+|===
 
 [#100]
 == Registering with bol.com
@@ -73,8 +72,8 @@ include::partial$assistant-basic-instructions.adoc[]
 a| From the drop-down list *Client*, select a client. This client is used to generate the item URL in the catalogue and bol.com orders are assigned to this client.
 
 | *Would you like to activate your bol.com user account?*
-a| _Account not activated_ = The settings are saved but the data exchange with bol.com is not started. +
-_Account activated_ = Data exchange with bol.com is started once the assistant is completed. +
+a| material:check_box_outline_blank[] = The settings are saved but the data exchange with bol.com is not started. +
+material:check_box[] = Data exchange with bol.com is started once the assistant is completed. +
 *_Recommendation:_* Check all settings before activating the user account.
 
 2+^|Step *Access data*
@@ -84,6 +83,23 @@ a| The API access data can be generated in the seller section at bol.com.
 
 * *Client ID* (mandatory) = Enter the user ID for the API interface you received from bol.com.
 * *Client Secret* (mandatory) = Enter the password for the API interface that you received from bol.com.
+
+2+^|Step *Validating access data*
+
+| *Is the access data correct?*
+a| It is checked whether your API access data for bol.com is correct. The field *Status of validation* shows whether the access data is correct. If the access data is invalid, then enter it once again in the step *Access data*.
+
+2+^|Step *Event procedure status changes*
+
+| _Select an order status after an event procedure was executed_
+a| Select an order status that orders should move to after an event procedure was executed. Select two order statuses for each event procedure: one status that orders should move to after a successful event procedure and one status that orders should move to after an event procedure has failed. If orders should not change their statuses after an event procedure, then select *No status change*. +
+
+Select statuses for the following event procedures: +
+
+* *Send order cancellation to bol.com*
+* *Send order shipping confirmation to bol.com*
+* *Send return status to bol.com*
+* *Create a return at bol.com*
 
 2+^|Step *Warehouse*
 
@@ -109,7 +125,7 @@ a| Select the stock quantity for the offer export. Select one of the following o
 
 :market: bol.com
 :referrer: bol.com
-:referrer-option: pass:quotes[option *bol.com*]
+:referrer-option: pass:quotes[option *bol.com* with ID *152*]
 
 include::partial$activate-referrer.adoc[]
 
@@ -121,7 +137,7 @@ include::partial$activate-referrer.adoc[]
 include::partial$define-sales-price.adoc[]
 
 [#650]
-=== Permitting payment method in a customer class
+=== Permitting the payment method in a customer class
 
 :market: bol.com
 :payment-method: Bol.com
@@ -174,7 +190,8 @@ include::partial$catalogue-new-to-text.adoc[]
 [#create-catalogue]
 === Creating a catalogue in the assistant
 
-You need to create a separate catalogue for each combination of a bol.com category and a language.
+You need to create a separate catalogue for each combination of a bol.com category and a language. +
+*_Tip:_* In the catalogue, the language is shown in brackets behind the category name.
 
 :catalogue-assistant-name: Create catalogues - bol.com
 :number-of-boxes: info box
@@ -190,16 +207,16 @@ include::partial$catalogue-assistant-config.adoc[]
 [[table-catalogue-assistant]]
 [width="100%"]
 [cols="1,2a"]
-|====
+|===
 | Setting | Explanation
 
 | *Select a category for your catalogue.*
 | Select a product category from the drop-down list. +
 → The catalogue is created with the name of the category and shown in the *Data » Catalogues* menu. +
-→ A property with the name of the bol.com category is created. Link this property with the variations that you want to sell on bol.com. +
 *_Tip:_* Enter a few names of the category name to get suggestions. +
+→ In the menu *Data » Catalogues*, the catalogue is shown with the name of the category. +
 *_Note:_* You need to create a separate catalogue for each combination of a bol.com category and a language.
-|====
+|===
 --
 
 [#data-field-mappings]
@@ -218,7 +235,7 @@ Every market structures item data differently. As such, there are some particula
 [[special-mappings]]
 .Notes on mapping data fields
 [cols="1,3a"]
-|====
+|===
 | Marketplace data field | plentymarkets data field
 
 | *bol_used*
@@ -232,7 +249,7 @@ Every market structures item data differently. As such, there are some particula
 * Own value `0` or `false` or `n` = All variations are new.
 * Own value `1` or `true` or `y` = All variations are used.
 
-|====
+|===
 ////
 
 [#prepare-variations]
@@ -248,7 +265,7 @@ In order to list a variation as an offer on bol.com, you need to save at least t
 [[table-bol-variation-checklist]]
 .Mandatory fields for the variation
 [cols="1,3a"]
-|====
+|===
 | Mandatory data | Explanation
 
 | EAN or ISBN
@@ -299,7 +316,18 @@ a| The variation must be available for the market.
   ** Referrer *bol.com* = You ship orders yourself. +
   ** Referrer *bol.com FBB* = bol.com ships the order.
 
-|====
+| Condition
+| * In the tab *Global* of the item, a *Condition for API* must be saved. This condition for API is automatically exported during the offer export.
+
+The plentymarkets conditions are mapped to the bol.com API conditions like this:
+
+* *0 New* = NEW
+* *1 Used but as new* = AS_NEW
+* *2 Used but very good* = GOOD
+* *3 Used but good* = MODERATE
+* *4 Used but acceptable* = REASONABLE
+
+|===
 
 [#link-category-property]
 === Linking variations to the property value of the bol.com category
@@ -358,7 +386,7 @@ To sell a variation with Fulfilment by bol.com (FBB or LVB), you need to activat
 [#automate-orders]
 == Automating order processing
 
-Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform bol.com about order status changes. The following event procedures can be set up for bol.com:
+Set up xref:automation:event-procedures.adoc#[event procedures] to automatically inform bol.com about changes to the order status. The following event procedures are available for bol.com:
 
 * Send shipping confirmation to bol.com (<<#700, How?>>)
 * Send order cancellation to bol.com (<<#900, How?>>)
@@ -377,7 +405,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[event-procedure-shipping-confirmation-bol]]
 .Event procedure for automatically sending shipping confirmations to bol.com
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -395,12 +423,12 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Shipping > Send shipping confirmation to bol.com*
 |
-|====
+|===
 
 [#900]
 === Automatically sending cancellations
 
-Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform bol.com of cancellations. Whenever you are dealing with cancellations, you need to send bol.com a reason for the cancellation. Open the *Setup » Orders » Status* menu and create additional order statuses as needed. The following cancellation reasons can be transferred to bol.com:
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform bol.com of cancellations. Whenever you are dealing with cancellations, you need to send bol.com a reason for the cancellation. Open the *Setup » Orders » Order status* menu and create additional order statuses as needed. The following cancellation reasons can be transferred to bol.com:
 
 * *Out of stock*
 * *Cancellation requested by customer*
@@ -422,7 +450,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[event-procedure-cancellations-bol]]
 .Event procedure for automatically sending cancellations to bol.com
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -440,7 +468,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Order > Send cancellation to bol.com*
 | *Customer cancellation*
-|====
+|===
 
 [#800]
 === Automatically sending the return status
@@ -463,7 +491,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[event-procedure-return-status-bol]]
 .Event procedure for automatically sending return statuses to bol.com
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -481,7 +509,7 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Order > Send return status to bol.com*
 |Select a status.
-|====
+|===
 
 [#810]
 === Sending information on direct returns to bol.com
@@ -502,7 +530,7 @@ include::_includes:partial$event-procedure.adoc[]
 [[event-procedure-return-bol]]
 .Event procedure to inform bol.com about returns
 [cols="1,3,3"]
-|====
+|===
 |Setting |Option |Selection
 
 | *Event*
@@ -519,8 +547,8 @@ include::_includes:partial$event-procedure.adoc[]
 
 | *Procedure*
 | *Order > Create a return at bol.com*
-|Select a status.
-|====
+| Select a status.
+|===
 
 [#activate-catalogue]
 == Starting the item export: Activating catalogue export
@@ -575,7 +603,7 @@ Use the reference types and reference values listed in <<#table-reference-types>
 [[table-reference-types]]
 .Reference types and reference values for bol.com
 [cols="1,1,3"]
-|====
+|===
 |Reference type |Explanation |Reference value
 
 | *action*
@@ -605,4 +633,4 @@ a| Select a reference type to filter for specific events. +
 | *externalOrderItemId*
 | Filters by the ID of the bol.com order item.
 |
-|====
+|===
