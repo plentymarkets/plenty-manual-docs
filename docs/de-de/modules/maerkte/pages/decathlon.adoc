@@ -87,7 +87,7 @@ Standardmäßig werden die Spalten *ID*, *Name*, *Aktiv*, *Mandant*, *Auftragsim
 |Spalte |Erläuterung
 
 | *ID*
-| Die ID deines Decathlon-Kontos. Die ID wird automatisch vergeben.
+| Die ID deines Decathlon-Kontos. Die ID wird automatisch vergeben, wenn du ein neues Konto erstellst.
 
 | *Name*
 | Der Name deines Decathlon-Kontos.
@@ -133,7 +133,7 @@ material:close[] = Angebote werden nicht exportiert.
 
 Nimm zunächst im Menü *Einrichtung » Märkte » Decathlon » Einstellungen* die Grundeinstellungen für den Marktplatz vor.
 
-Füge zunächst ein neues Konto für Decathlon hinzu.
+Füge als erstes ein neues Konto für Decathlon hinzu.
 
 [.instruction]
 Konto hinzufügen:
@@ -143,7 +143,7 @@ Konto hinzufügen:
 → Das Fenster *Konto hinzufügen* wird geöffnet.
 . Gib einen *Kontonamen* ein.
 . Speichere (terra:save[]) die Einstellungen. +
-→ Eine Ansicht mit weiteren Einstellungen wird geöffnet.
+→ Eine Ansicht mit Kontoeinstellungen wird geöffnet.
 . Nimm die weiteren Einstellungen vor. Beachte dazu die Erläuterungen in <<#einstellungen-decathlon>>.
 . Speichere (terra:save[]) die Einstellungen.
 
@@ -248,7 +248,7 @@ Preise werden stündlich aktualisiert. +
 :decathlon:
 
 :referrer: Decathlon
-:referrer-option: gewünschten Decathlon-Plattform, zum Beispiel *Decathlon Germany*
+:referrer-option: pass:quotes[gewünschten Decathlon-Plattform, zum Beispiel *Decathlon Germany*]
 
 include::partial$auftragsherkunft-aktivieren.adoc[]
 
@@ -288,6 +288,32 @@ Produktkategorien hinzufügen:
 . Speichere (terra:save[role="blue"]) die Einstellungen. +
 → Die Kategorie wurde hinzugefügt. Du kannst nun im Menü *Daten » Kataloge* einen Katalog für diese Kategorie erstellen.
 
+////
+[#produktkategorie-verknuepfen]
+=== Varianten mit Decathlon-Produktkategorie verknüpfen
+
+Wenn du einen Katalog für Decathlon erstellt hast, wird in deinem plentymarkets System die Eigenschaft *Kaufland.de-Kategorie* erstellt. Mit dieser Eigenschaft legst du fest, in welcher Kategorie deine Varianten auf Kaufland angeboten werden.
+
+Im Assistenten *Kaufland - Kataloge erstellen* wählst du für jeden Katalog eine Kaufland-Produktkategorie. Jede dieser Produktkategorien wird als Auswahlwert zu der Eigenschaft *Kaufland.de-Kategorie* hinzugefügt.
+
+Damit deine Varianten in der gewünschten Kategorie auf Kaufland angeboten werden, müssen sie im Tab *Eigenschaften* der Variante mit der Eigenschaft *Kaufland.de-Kategorie* verknüpft werden. Für diese Eigenschaft wählst du dann die Produktkategorie, in der deine Varianten angeboten werden sollen.
+
+[.instruction]
+Variante mit Produktkategorie verknüpfen:
+
+. Öffne das Menü *Artikel » Artikel bearbeiten » [Artikel öffnen]*.
+. Wechsele in das *Tab: Varianten*.
+. Öffne die Variante, die du verknüpfen möchtest.
+. Wechsele in das *Tab: Eigenschaften*.
+. Wähle im Bereich *Varianteneigenschaften* aus der Dropdown-Liste *Eigenschaften* die Eigenschaft *Kaufland.de-Kategorie* und klicke auf *Hinzufügen* (icon:plus-square[role="green"]). +
+→ Die Eigenschaft wird hinzugefügt.
+. Wähle für die Eigenschaft *Kaufland.de-Kategorie* aus der Dropdown-Liste *Wert* die gewünschte Kategorie. +
+→ Die Variante wird im zugehörigen Katalog exportiert. +
+*_Beispiel:_* Wählst du den Wert *T-Shirts*, wird die Variante auf Kaufland in der Kategorie *T-Shirts* angeboten.
+. Wiederhole die Schritte 5 und 6 für alle Kategorien, in denen du die Variante verkaufen möchtest.
+. Speichere (terra:save[]) die Einstellungen.
+////
+
 [#katalog-erstellen]
 === Katalog erstellen
 
@@ -304,6 +330,7 @@ Bei Decathlon musst du immer einen Katalog für Angebote erstellen. Dazu wählst
 Der Angebotskatalog wird immer zusätzlich zu den Katalogen für die verschiedenen Decathlon-Produktkategorien benötigt, damit Angebote auf Decathlon erstellt werden können. 
 ====
 
+:catalogue-template-name: Decathlon
 :format-item-new:
 :one-per-category:
 :decathlon:
@@ -322,8 +349,12 @@ include::partial$catalogue-mapping.adoc[]
 
 include::partial$recommendation-text.adoc[]
 
+*_Hinweis:_* Für jede Produktkategorie, in der du deine Artikel auf Decathlon anbieten möchtest, muss ein eigener Katalog erstellt werden. +
+Kataloge für verschiedene Produktkategorien haben unterschiedliche Datenfelder, da in jeder Decathlon-Produktkategorie andere Artikeldaten angegeben werden müssen. +
+Deshalb werden hier nur Empfehlungen zur Zuordnung für den Angebotskatalog gegeben.
+
 [.collapseBox]
-.Liste mit empfohlenen Datenfeld-Zuordnungen
+.Liste mit empfohlenen Datenfeld-Zuordnungen für das Format *Angebot*
 --
 include::partial$decathlon-recommended-mappings.adoc[]
 --
@@ -339,14 +370,14 @@ include::partial$catalogue-activation.adoc[]
 [#menue-datenaustausch]
 == Datenaustausch manuell verwalten
 
-Im Menü *Einrichtung » Märkte » Decathlon » Datenaustausch* hast du die Möglichkeit, manuell den Datenaustausch zwischen plentymarkets und Decathlon zu verwalten. Du kannst beispielsweise nur bestimmte Artikel- und Angebotsdaten exportieren oder einzelne Aufträge in plentymarkets importieren. Das kann nützlich sein, wenn du den Export testen willst oder wenn du fehlende Aufträge noch einmal importieren musst.
+Im Menü *Einrichtung » Märkte » Decathlon » Datenaustausch* hast du die Möglichkeit, Daten manuell zu im- und exportieren. Dieses Menü ist vor allem für Testzwecke gedacht. Du kannst beispielsweise nur bestimmte Artikel- und Angebotsdaten exportieren oder einzelne Aufträge in plentymarkets importieren. Das kann nützlich sein, wenn du den Export testen willst oder wenn du fehlende Aufträge noch einmal importieren musst.
 
 [#artikeldatenexport]
 === Artikeldaten manuell exportieren
 
 Im Menü *Einrichtung » Märkte » Decathlon » Datenaustausch » Datenexport* kannst du einzelne Artikel und Angebote zu Decathlon exportieren. Dies kann zum Beispiel nützlich sein, wenn du den Export zu Decathlon testen willst oder wenn du nur einzelne Artikel übertragen willst.
 
-*_Hinweis:_* Im Menü *Datenexport* kannst du bereits Daten exportieren, auch wenn das Konto noch nicht aktiviert wurde.
+*_Hinweis:_* Im Menü *Datenexport* kannst du auch schon Daten exportieren, wenn das Konto noch nicht aktiv ist. So kannst du den Export mit einzelnen Artikeln und Angeboten testen, bevor du das Konto aktivierst und deine Artikeldaten zu Decathlon exportierst.
 
 [.instruction]
 Artikel manuell exportieren:
@@ -474,11 +505,11 @@ include::_includes:partial$event-procedure.adoc[]
 | *Ereignis*
 | Ereignis wählen, zum Beispiel:
 
-* *Auftragsänderung: Statuswechsel*
+* *Dokumente: Rechnung generiert* +
 
-| Status wählen, zum Beispiel 
+*_Hinweis:_* Wähle hier ein Ereignis, nach dem die Artikel bereits versendet wurden.
 
-*_Hinweis:_* Wähle hier einen Auftragsstatus, in dem die Artikel bereits versendet wurden, zum Beispiel
+| 
 
 | *Filter*
 | *Auftrag &gt; Herkunft*
@@ -518,15 +549,15 @@ include::_includes:partial$event-procedure.adoc[]
 | *Ereignis*
 | Ereignis wählen, zum Beispiel:
 
+*Auftragsanlage: Neue Gutschrift*
 
-
-| Status wählen, zum Beispiel 
+| 
 
 | *Filter*
-| 
-| 
+| *Auftrag &gt; Herkunft*
+| *Decathlon*
 
 | *Aktion*
-| 
-| *Gutschrift für Decathlon erstellen*
+| *Plugin*
+| Ereignisaktion *Erstattung an Decathlon melden* mit passendem Grund wählen
 |===
