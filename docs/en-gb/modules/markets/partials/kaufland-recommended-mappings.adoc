@@ -9,6 +9,29 @@ However, some data fields are the same in each category. Only the recommended ma
 
 * A list of mandatory fields for the different Kaufland product categories can be found link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/Kaufland_mandatory-attributes.xlsx[here^].
 
+[TIP]
+.Export multiple values for one data field
+====
+In Kaufland catalogues, you can export multiple values for one data field if the data field accepts multiple values.
+
+To export multiple values for one Kaufland data field, link the assigned plentymarkets data fields (material:link[]). In addition, you have to set a *separator*.
+
+[.instruction]
+Exporting multiple values:
+
+. Go to *Data » Catalogues*.
+. Open the Kaufland catalogue.
+. Add a plentymarkets data field to the desired data field (material:add[]).
+. Add more plentymarkets data fields (material:link[]). +
+*_Note:_* You can only add and link multiple data fields if the Kaufland data fields accepts multiple values.
+. Open the settings (material:settings[]) in the line of the data field.
+. As *separator*, select the option *Add own separator*.
+. Enter the value &#95;&#95;SEPARATOR&#95;&#95; as own separator.
+. *Save* the settings.
+
+*_Note:_* You can add multiple plentymarkets data fields to the data field *Image*. However, you do not have to enter a separator here because this field is based on a different background logic.
+====
+
 [[table-recommended-mappings]]
 [cols="2,1,4a"]
 |===
@@ -51,13 +74,15 @@ _or_
 
 | Sales price
 | yes
-| * *Sales price »* [Sales price for Kaufland]
+| * *Sales price »* [Select sales price for Kaufland]
+
+*_Note:_* In catalogues for the country platform Kaufland.cz (Czech Republic), you have to set the *Currency Czech koruna*.
 
 | Minimum price
 | yes
 | * *Sales price »* [Sales price for Kaufland] +
 *_Note:_* The sales price linked here has to be lower than the sales price for the _listing_price_ to use repricing (Tiefpreisautomatik) for Kaufland. +
-If other sellers offer the same product, your price is automatically reduced. Your price plus shipping is then always once cent cheaper than the prices of your competitors.
+If other sellers offer the same product, your price is automatically reduced. Your price plus shipping is then always one cent cheaper than the prices of your competitors.
 
 | Stock
 | yes
@@ -87,12 +112,27 @@ image::markets:kaufland-kontoname-versandprofil.png[]
 
 | Kaufland shipping group ID
 | yes
-a| Here you assign Kaufland shipping groups to your shipping profiles in plentymarkets. This data field contains a complex mapping. This means that you can select from different values of the marketplace data field. The values are then assigned to a plentymarkets data field. For *Kaufland shipping group ID*, first select the Kaufland shipping group and then assign the appropriate plentymarkets shipping profile. +
+a| Here you assign Kaufland shipping groups. This data field contains a complex mapping. This means that you can select from different values of the marketplace data field. The values are then assigned to a plentymarkets data field. For *Kaufland shipping group ID*, first select the Kaufland shipping group and then assign the appropriate item data saved in plentymarkets. +
 *_Note:_* The ID of the Kaufland shipping group is shown here. +
 
 recommended mapping:
 
-* *Shipping profile »* [Select shipping profile]
+_If only one Kaufland shipping group is displayed in the catalogue:_
+
+* *own value* +
+
+Enter the ID of the Kaufland shipping group as value. +
+
+*_Example:_* If the ID of the Kaufland shipping group is `35`, then enter `35` as own value.
+
+_If more than one Kaufland shipping groups are displayed in the catalogue:_
+
+* *Property* of the type *Text*, *Whole number*, or *Selection* +
+
+For example, the value of the property can be the ID of the selected Kaufland shipping group.
+
+*_Note:_* In some cases, it can be useful to assign a Kaufland shipping group to a plentymarkets shipping profile. +
+However, as this mapping can be prone to errors if you use different shipping methods, such as parcel shipping and shipping company (and if both shipping profiles are linked to an item), we recommend that you rather use a property and only assign a plentymarkets shipping profile if only one shipping profile is linked to each item.
 
 3+a| Warehouse +
 *_Note:_* In the Kaufland catalogues, the mappings for *warehouses* are shown for every Kaufland account. Make sure that you map the data fields for the correct Kaufland account, i.e. the Kaufland account for which you want to use this catalogue. +
@@ -136,15 +176,25 @@ _or_
 
 | Image
 | yes
-a| * *Image » Item images » Single image*, Image information *Full image URL*
+a| * *Image » Item images » Single image*, Image information *Full image URL* +
 
 _or_
 
-for several images:
+* *Image » Variation images » Single image*, image information *Full image URL* +
+
+_or_
+
+for several images: +
 
 * *Image » Item images » Image list*, image information *Full image URL* +
 
-*_Note:_* Enter a *maximum number of images* for the *image list*.
+_or_
+
+* *Image » Variation images » Image list*, image information *Full image URL* +
+
+*_Note:_* Enter a *maximum number of images* for the *image list*. +
+
+*_Tip:_* For the *order referrer*, select the referrer which is saved in the *Availability* tab of an item. You can only select one order referrer.
 
 | Category
 | yes
@@ -156,5 +206,6 @@ for several images:
 
 | Material composition
 | yes
-| Kaufland can only process values with "%" or the value "Keine Angaben erforderlich".
+| Kaufland can only process values with "%" or the value "Keine Angaben erforderlich" [”No information required”].
+
 |===

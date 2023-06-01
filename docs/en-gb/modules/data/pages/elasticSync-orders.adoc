@@ -4,17 +4,17 @@
 :description: Data import: Order data can be imported into plentymarkets. This page serves as a reference and lists the available matching and mapping fields.
 
 //optional - add extra sentences between the brackets in intro-extra-info if you want to have further info in your introduction
-:intro-data: pass:quotes[Orders]
+:intro-data: pass:quotes[]
 :intro-extra-info: pass:quotes[]
 :matching-table: pass:quotes[table-matching-fields-order]
 :matching-data: pass:quotes[]
-:mapping-data: pass:quotes[order data]
-:mapping-default: pass:quotes[your order]
+:mapping-data: pass:quotes[]
+:mapping-default: pass:quotes[]
 
 include::partial$intro.adoc[]
 
 [TIP]
-.Practical example: Order items
+..Practical example: Order items
 ====
 You can find further information about importing and updating order items in the practical example xref:data:best-practices-elasticsync-order-items.adoc#[Order items].
 ====
@@ -25,34 +25,33 @@ You can find further information about importing and updating order items in the
 <<table-matching-fields-order>> explains the fields that are available for matching order data. During the import, plentymarkets checks if the imported data record already exists based on the matching field.
 
 [[table-matching-fields-order]]
-.Matching fields for importing orders
+..Matching fields for importing orders
 [cols="1,3"]
-|====
-|*Setting* |*Explanation*
+|===
+|Setting |Explanation
 
 |*Orders*
 |Which column of your CSV file lists the order IDs? Choose this column here. Optionally, you can decide if you want to define whether you have listed *Order IDs* or *External order IDs*. +
-This option is useful if you want to *update existing orders*. +
+This option is useful if you want to _update existing orders_. +
 
 _Background info_: Every new order automatically receives an ID, which cannot be changed. The ID is used to uniquely identify the order. Because the ID is unique, it’s a good way to check whether the imported order already exists in plentymarkets.
 
-|*Package*
+|*Bundle*
 |Which column of your CSV file lists the shipping package IDs? Choose this column here.
 
 |*Order item*
-| Which column of your CSV file lists the order items? Choose this column here. Then select whether your CSV file contains *Order item IDs*, *External item IDs* or *External token IDs*.
-|====
+| Which column of your CSV file lists the order items? Choose this column here. Then select what exactly it is about. You can choose between *Order item IDs*, *External item IDs* or *External token IDs*.
+|===
 
 [[table-supplement-data]]
 .Supplement data
 [cols="1,3"]
-|====
-|*Setting* |*Explanation*
-
+|===
+|Setting |Explanation
 |*Variation*
-| Which column of your CSV file lists the variation IDs? Choose this column here.  Then select whether your CSV file contains *Marketplace SKUs*, *External variation IDs*, *Variation numbers*, *Manufacturer variation number*, *Barcode: GTIN 13*, *Barcode: GTIN 128*, Barcode: UPC* or *Barcode: ISBN*. +
-If you choose this matching field, the information stored in the system about this variation is loaded and added to the order. This, data is supplemented.
-|====
+| Which column of your CSV file lists the variation IDs? Choose this column here. Then select what exactly it is about. Then select whether your CSV file contains *Marketplace SKUs*, *External variation IDs*, *Variation numbers*, *Manufacturer variation number*, *Barcode: GTIN 13*, *Barcode: GTIN 128*, *Barcode: UPC* or *Barcode: ISBN*. +
+If you choose this matching field, the information stored in the system about this variation is loaded and added to the order. In this way, data is supplemented.
+|===
 
 [TIP]
 .Creating new orders with the import and required fields in the mapping area
@@ -68,8 +67,21 @@ include::partial$mapping.adoc[]
 [#2030]
 === Order
 
+[#2031]
+==== Tag ID
+
+Enter a tag ID into the CSV file.
+This links the tag to the order.
+You can find the tag IDs in the menu *Setup » Settings » Tags » [Open tag]*.
+
+*_Default value_*: No default value
+
+*_Permitted import values_*: Numeric (internal ID)
+
+You can find the result of the import in the backend in the menu *Orders » Orders (Test phase) » [Open order] » Status and tags* .
+
 [#2040]
-==== Type ID
+==== ID of the type
 
 icon:warning[role="red"] [red]#Required field#
 
@@ -84,7 +96,7 @@ The different order types are represented numerically by an ID in the import. Wh
 [cols="1,1"]
 |===
 
-|*Permitted import values in CSV file* |*Result in the back end*
+|Permitted import values in CSV file |Result in the back end
 
 |`1`
 |Order
@@ -128,25 +140,25 @@ The different order types are represented numerically by an ID in the import. Wh
 ==== Status ID
 
 Which status do you want to assign the order? Enter this status into your CSV file. +
-28 order statuses are set in the system but you can define additional statuses. Available for this are 19 statuses with 4 decimal places each. Go to the *Setup » Orders » Status* menu to edit the statuses. For more information go to the section xref:orders:managing-orders.adoc#1200[Using the order status] of the manual.
+28 order statuses are set in the system but you can define additional statuses. Available for this are 19 statuses with 4 decimal places each. Go to the *Setup » Orders » Order status* menu to edit the statuses For more information go to the section xref:orders:managing-orders.adoc#1200[Using the order status] of the manual.
 
 *_Default value_*: No default value
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Settings » field: Status* as well as in the order overview.
+You can find the result of the import in the back end menu *Orders » Edit orders » _open order_ » tab: Settings » field: Status* as well as in the order overview.
 
 [#2060]
-==== Owner ID
+==== Owner ID (plentymarkets user ID)
 
 To which owner should the order be assigned? Enter the owner ID into your CSV file. +
-You can find the owner IDs in the back end menu *Setup » Settings » User » Accounts*. Make sure that the assigned owner has the required user rights for the are *Orders*.
+You can find the owner IDs in the back end menu *Setup » Settings » User » Accounts*. Make sure that the assigned owner has the required user rights for the area *Orders*.
 
 *_Default value_*: No default value
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import  in the back end menu *Orders » Edit orders » [open order] » tab: Settings » field: Owner* as well as in the order overview.
+You can find the result of the import  in the back end menu *Orders » Edit orders » [Open order] » tab: Settings » Field: Owner* as well as in the order overview.
 
 [#2070]
 ==== Referrer ID
@@ -158,7 +170,7 @@ Referrers are stored in the system with IDs. Some referrers are not editable. Yo
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import  in the back end menu *Orders » Edit orders » [open order] » tab: Settings » field: Referrer* as well as in the order overview.
+You can find the result of the import  in the back end menu *Orders » Edit orders » [Open order] » tab: Settings » Field: Referrer* as well as in the order overview.
 
 [#2080]
 ==== PlentyID
@@ -182,7 +194,7 @@ You can find the location IDs in the *Setup » Client » [Select client] » Loca
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import  in the back end menu *Orders » Edit orders » [open order] » tab: Settings » field: Location* as well as in the order overview.
+You can find the result of the import  in the back end menu *Orders » Edit orders » [Open order] » tab: Settings » Field: Location* as well as in the order overview.
 
 [#2120]
 ==== Parent order ID
@@ -214,7 +226,7 @@ The order item types represent different cost positions of an order. The costs i
 [cols="1,1"]
 |===
 
-|*Permitted import values in CSV file* |*Result in the back end*
+|Permitted import values in CSV file |Result in the back end
 
 |`1`
 |Variation
@@ -265,7 +277,7 @@ Referrers are stored in the system with IDs. Some referrers are not editable. Yo
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import  in the back end menu *Orders » Edit orders » [open order] » tab: Settings » field: Referrer* as well as in the order overview.
+You can find the result of the import  in the back end menu *Orders » Edit orders » [Open order] » tab: Settings » Field: Referrer* as well as in the order overview.
 
 [#2160]
 ==== Name
@@ -273,13 +285,13 @@ You can find the result of the import  in the back end menu *Orders » Edit orde
 icon:warning[role="red"] [red]#Required field#
 
 Which name does the order item have? Enter the name into your CSV file. +
-It is assumed by default that the name is entered in the system language. You can assign names to items in the *Item » [open item] » item tab: Texts » Field: Name* menu.
+It is assumed by default that the name is entered in the system language. You can assign names to items in the *Item » [Open item] » Item tab: Texts » Field: Name*.
 
 *_Default value_*: No default value
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the *order items table* in the back end menu *Orders » Edit orders » [open order] » tab: Overview* or in the order overview.
+You can find the result of the import in the order items table in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview* in the *Item table* and in the order overview.
 
 [#2170]
 ==== Attribute value
@@ -291,7 +303,7 @@ It is assumed by default that the attribute value is entered in the system langu
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the *order items table* in the back end menu *Orders » Edit orders » [open order] » tab: Overview* or in the order overview.
+You can find the result of the import in the order items table in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview* in the *Item table* and in the order overview.
 
 [#2180]
 ==== VAT rate
@@ -303,10 +315,10 @@ Enter the percentage value of the VAT rate without the percentage sign. Whether 
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Overview* as well as in the order overview.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview* as well as in the order overview.
 
 [#2190]
-==== VAT value
+==== Total VAT amount of the order
 
 Which VAT value does the order item have? Enter the amount into your CSV file. +
 
@@ -316,7 +328,7 @@ The VAT amount for the quantity 1 is expected by default. Whether the amount has
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Overview*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview*.
 
 [#2200]
 ==== Quantity
@@ -329,7 +341,7 @@ In which quantity is the order item added to the order? Enter the quantity into 
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Overview* as well as in the order overview.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview* as well as in the order overview.
 
 [#2210]
 ==== Variation ID
@@ -340,7 +352,7 @@ Enter the ID of the variation into your CSV file. You can find the ID for exampl
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the *order items table* in the back end menu *Orders » Edit orders » [open order] » tab: Overview* or in the order overview.
+You can find the result of the import in the order items table in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview* in the *Item table* and in the order overview.
 
 [#2220]
 ==== Position
@@ -351,7 +363,7 @@ Enter the position of the order item into your CSV file. The position reflects t
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the *order items table* in the back end menu *Orders » Edit orders » [open order] » tab: Overview* or in the order overview.
+You can find the result of the import in the order items table in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview* in the *Item table* and in the order overview.
 
 [#2230]
 ==== Currency
@@ -365,7 +377,7 @@ You can find an overview of the currencies and their ISO codes that are availabl
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import  in the back end menu *Orders » Edit orders » [open order] » tab: Overview » field: Currency* as well as in the order overview.
+You can find the result of the import  in the back end menu *Orders » Edit orders » [Open order] » Tab: Settings » Field: Currency* as well as in the order overview.
 
 [#2240]
 ==== Exchange rate
@@ -377,7 +389,7 @@ You can find the default currency in the *Setup » Orders » Payment » Currenci
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Settings » field: Exchange rate*.
+You can find the result of the import  in the back end menu *Orders » Edit orders » [Open order] » Tab: Settings » Field: Exchange rate*.
 
 [#2250]
 ==== Purchase price
@@ -389,9 +401,9 @@ Whether the price has to be entered separated by commas or points depends on the
 
 *_Permitted import values_*: Numeric
 
-The purchase price is not displayed in the order. But the purchase price enables the calculation of the profit margin which you can find in the *Orders » Edit orders » [open order] » tab: Overview » field: Return on sale net* menu.
+The purchase price is not displayed in the order. But the purchase price enables the calculation of the profit margin which you can find in the *Orders » Edit orders » [Open order] » Tab: Overview » Field: Return on sale net* menu.
 
-[#2260]
+[#2260a]
 ==== Gross price
 
 Which gross price does the order item have? Enter the price for the quantity 1 into your CSV file. +
@@ -401,9 +413,9 @@ Whether the price has to be entered separated by commas or points depends on the
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import  in the back end menu in the order items table in the *Orders » Edit orders* menu.The total gross value is displayed in the *Orders » Edit orders » tab: Overview » field: Gross value of items* menu.
+You can find the result of the import  in the back end menu in the order items table in the *Orders » Edit orders* menu.The total gross value is displayed in the *Orders » Edit orders » Tab: Overview » Field: Gross value of items* menu.
 
-[#2265]
+[#2260]
 ==== Net price
 
 Which net price does the order item have? Enter the price for the quantity 1 into your CSV file. +
@@ -413,7 +425,7 @@ Whether the price has to be entered separated by commas or points depends on the
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import  in the back end menu in the order items table in the *Orders » Edit orders* menu.The total net value is displayed in the *Orders » Edit orders » tab: Overview » field: Net value of items* menu.
+You can find the result of the import  in the back end menu in the order items table in the *Orders » Edit orders* menu.The total gross value is displayed in the *Orders » Edit orders » Tab: Overview » Field: Net value of items* menu.
 
 [#2270]
 ==== Surcharge
@@ -440,13 +452,13 @@ You can find the result of the import in the back end menu in the order items ta
 [#2290]
 ==== Percentual discount
 
-Is there a percentual discount for the order item? Then enter 1 into your CSV fileIf there is no percentual rebate, enter 0 into your CSV file.
+Is there a percentual discount for the order item? Then enter 1 into your CSV file. If there is no percentual rebate, enter 0 into your CSV file.
 
 *_Default value_*: No default value
 
-You can find the result of the import in the back end menu in the order items table in the *Orders » Edit orders* menu.
+You can find the result of the import
 
-[#2300]
+ in the back end menu in the order items table in the *Orders » Edit orders* menu.[#2300]
 === Order item properties
 
 [#2310]
@@ -459,7 +471,7 @@ You can enter several property types. You have to add a column to your CSV file 
 
 *_Permitted import values_*: Alpha-numeric
 
-Available property types:
+*_Available property types_*:
 
 * Warehouse
 * Weight
@@ -476,7 +488,7 @@ Available property types:
 * Item status
 * External order item ID
 
-Own property types for order items can be created via the link:https://developers.plentymarkets.com/api-doc/Order#element_113[Interface^] or via link:https://developers.plentymarkets.com/rest-doc#/Order/post_rest_orders_properties_types[REST^]. However, they are not displayed in the UI. +
+Own prpoerty types for order items can be created via the link:https://developers.plentymarkets.com/api-doc/Order#element_113[Interface^] or via link:https://developers.plentymarkets.com/rest-doc#/Order/post_rest_orders_properties_types[REST^]. However, they are not displayed in the UI. +
 
 [#2320]
 === Order note
@@ -490,22 +502,22 @@ Is there an order note for the order? Enter the text that should be assigned to 
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import  in the back end menu *Orders » Edit orders » [open order] » tab: Overview » field: Order note*
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview » Field: Order note*
 
 [#2340]
 === Address relation
 
 [#2350]
-==== Address ID
+==== ID of the invoice address
 
 There already is an existing address for this contact? Enter the ID of the address into your CSV file and define in the mapping whether it is the *Invoice address* or the *Delivery address*. +
-You can find the address ID in the menu *CRM » Contacts » [open contact] » area: Details » field: addresses*, for example.  If you want to import a new address, use the mapping fields for xref:data:elasticSync-orders.adoc#2420[Address].
+You can find the address ID in the menu *CRM » Contacts » [Open contact] » area: Details » Field: addresses* If you want to import a new address, use the mapping fields for xref:data:elasticSync-orders.adoc#2420[Address].
 
 *_Default value_*: No default value
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Overview » fields: Invoice address or delivery address* as well as in the order overview.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » tab: Overview » Fields: Invoice address or delivery address* as well as in the order overview.
 
 [#2360]
 === Order property
@@ -520,7 +532,7 @@ You can enter several property types. You have to add a column to your CSV file 
 
 *_Permitted import values_*: Alpha-numeric
 
-*_Available property types_*:
+Available property types:
 
 * Warehouse
 * Shipping profile
@@ -533,9 +545,9 @@ You can enter several property types. You have to add a column to your CSV file 
 * Seller account
 * Flag
 * Document number
-* Sales tax identification number
+* VAT identification number of the customer
 
-Own property types for orders can be created via the link:https://developers.plentymarkets.com/api-doc/Order#element_113[Interface^] oder per link:https://developers.plentymarkets.com/rest-doc#/Order/post_rest_orders_properties_types[REST^].
+Own property types for orders can be created via link:https://developers.plentymarkets.com/api-doc/Order#element_113[Interface^]  or via link:https://developers.plentymarkets.com/rest-doc#/Order/post_rest_orders_properties_types[REST^].
 
 [#2380]
 === Order date
@@ -552,16 +564,16 @@ You want to assign a specific date to the order? Enter the date in the format yo
 *_Available date types_*:
 
 * Deleted on
-* Created on
+* Created at
 * Paid on
-* Last update
+* Last updated
 * Outgoing items booked on
-* Returned date
+* Return date
 * Payment due date
 * Estimated shipping date
-* Estimated delivery date
+* Possible delivery date
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Overview » field: Input* as well as in the order overview.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview » Field: Input* as well as in the order overview.
 
 [#2400]
 === Order relation
@@ -579,7 +591,7 @@ Do you want to assign a specific relation to the order? Enter the ID of the refe
 [cols="1,1"]
 |===
 
-|*Selection in mapping* |*Explanation*
+|Selection in mapping |Explanation
 
 |*Contact - Sender*
 |The ID you have to enter is the ID of an existing contact. This contact is then taken the sender of the order. You can find the ID of the contact in the back end in the overview table of the *CRM » Contacts* menu.
@@ -594,10 +606,10 @@ Do you want to assign a specific relation to the order? Enter the ID of the refe
 |The ID you have to enter is the ID of an existing account. This account is then taken as the receiver of the order. You can find the ID of the account in the back end when you click on *Edit* in the *Account* area in the *CRM » Contacts* menu. The ID of the account is displayed in the header of the opened window.
 
 |*Warehouse - Sender*
-|The ID you have to enter is the ID of an existing warehouse. This warehouse is then taken as the sender of the order. You can find the ID of a warehouse in the back end menu *Setup » Stock » Warehouse » [select warehouse] » Settings*.
+|The ID you have to enter is the ID of an existing warehouse. This warehouse is then taken as the sender of the order. You can find the ID of a warehouse in the back end menu *Setup » Stock » Warehouse » [Select warehouse] » Settings*.
 
 |*Warehouse - Receiver*
-|The ID you have to enter is the ID of an existing warehouse. This warehouse is then taken as the receiver of the order. You can find the ID of a warehouse in the back end menu *Setup » Stock » Warehouse » [select warehouse] » Settings*.
+|The ID you have to enter is the ID of an existing warehouse. This warehouse is then taken as the receiver of the order. You can find the ID of a warehouse in the back end menu *Setup » Stock » Warehouse » [Select warehouse] » Settings*.
 
 |===
 
@@ -608,7 +620,7 @@ Do you want to assign a new address to the order? Then use the mapping fields in
 If you want to assign an already existing address use the mapping fields xref:data:elasticSync-orders.adoc#2350[Address ID].
 
 [#2430]
-==== Name 1 (Company)
+==== Name 1 (Account)
 
 Enter the company name of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*.
 
@@ -616,7 +628,7 @@ Enter the company name of the contact you want to assign to the order into your 
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2440]
 ==== Name 2 (First name)
@@ -627,21 +639,21 @@ Enter the first name of the contact you want to assign to the order into your CS
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2450]
 ==== Name 3 (Last name)
 
-Enter the last name of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*.
+Enter the surname of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*.
 
 *_Default value_*: No default value
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2460]
-==== Name 4 (Additional)
+==== Name 4 (Additional information)
 
 Enter the additional names of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*.
 
@@ -649,7 +661,7 @@ Enter the additional names of the contact you want to assign to the order into y
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2470]
 ==== Address 1 (Street)
@@ -660,7 +672,7 @@ Enter the street of the contact you want to assign to the order into your CSV fi
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2480]
 ==== Address 2 (House number)
@@ -671,10 +683,10 @@ Enter the house number of the contact you want to assign to the order into your 
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2490]
-==== Address 3 (Additional)
+==== Address 3 (additional information)
 
 Enter additional address information of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*.
 
@@ -682,7 +694,7 @@ Enter additional address information of the contact you want to assign to the or
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2500]
 ==== Address 4 (Free)
@@ -693,18 +705,18 @@ Enter free address information of the contact you want to assign to the order in
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2510]
 ==== Postcode
 
-Enter the postcode of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*.
+Enter the postal code of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*.
 
 *_Default value_*: No default value
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2520]
 ==== Town
@@ -715,7 +727,7 @@ Enter the town of the contact you want to assign to the order into your CSV file
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2530]
 ==== Country ID
@@ -727,22 +739,22 @@ The ID of the delivery country is expected by default. You can find the country 
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2540]
 ==== State ID
 
 Enter the state ID of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*. +
-List of all countries for which states/provinces are available, including the IDs of the states/provinces: link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/ElasticSync_BestPractice/Allgemein/Bundeslaender-Bundesstaaten-Provinzen.pdf[PDF file including a list of states and provinces]
+The list of all countries for which states/provinces are available, including the IDs of the states/provinces: link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/ElasticSync_BestPractice/Allgemein/Bundeslaender-Bundesstaaten-Provinzen.pdf[PDF file including a list of states and provinces]
 
 *_Default value_*: No default value
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2550]
-==== VAT number
+==== VAT rate ID
 
 Enter the VAT number of the contact you want to assign to the order into your CSV file. Select in the mapping whether this is the *Invoice address* or the *Delivery address*. +
 
@@ -750,7 +762,7 @@ Enter the VAT number of the contact you want to assign to the order into your CS
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2560]
 ==== Telephone
@@ -761,7 +773,7 @@ Enter the telephone number of the contact you want to assign to the order into y
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2570]
 ==== Email
@@ -772,7 +784,7 @@ Enter the Email of the contact you want to assign to the order into your CSV fil
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Customer*.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Customer*.
 
 [#2580]
 === Shipping package
@@ -789,7 +801,7 @@ Enter the weight of the package in gram into your CSV file. Select in the mappin
 
 *_Permitted import values_*: Numeric
 
-You can find the result of the import  in the back end menu *Orders » Edit orders » [open order] » tab: Overview » field: Weight* as well as in the order overview table.
+You can find the result of the import in the back end menu *Orders » Edit orders » [Open order] » Tab: Overview » Field: Weight* as well as in the order overview table.
 
 [#2600]
 ==== Package number
@@ -800,13 +812,13 @@ Enter the package number of the package into your CSV file. You can enter more t
 
 *_Permitted import values_*: Alpha-numeric
 
-You can find the result of the import in the back end menu *Orders » Edit orders » [open order] » tab: Settings » field: Package number*.
+You can find the result of the import  in the back end menu *Orders » Edit orders » [Open order] » Tab: Settings » Field: Package number*.
 
 [#2610]
 ==== Return package number
 
 Enter the return package number of the package  into your CSV file. You can enter more than one return package number in one row by dividing them by comma or you add them with one return package number per row. Select in the mapping what kind of shipping package it is. +
-You can find the return package numbers in the back end menu *Orders » Shipping centre » tab: Returns*.
+You can find the return package numbers in the back end menu *Orders » Shipping centre » Tab: Returns*.
 
 *_Default value_*: No default value
 
@@ -825,7 +837,7 @@ Enter the ID of the Packing unit type into your CSV file. Select in the mapping 
 [cols="1,1"]
 |===
 
-|*Permitted import values in CSV file* |*Result in the back end*
+|Permitted import values in CSV file |Result in the back end
 
 |`0`
 | No packaging
@@ -912,13 +924,13 @@ Enter the ID of the Packing unit type into your CSV file. Select in the mapping 
 |Ring
 
 |`28`
-|Role
+|Roll
 
 |`29`
 |Sack
 
 |`30`
-|Piece
+|One
 
 |`31`
 |Tank
@@ -939,7 +951,7 @@ Enter the ID of the Packing unit type into your CSV file. Select in the mapping 
 |Bin
 
 |`38`
-|One-way pallet
+|Single-use pallet
 
 |`39`
 |Foil bag
@@ -950,7 +962,7 @@ Enter the ID of the Packing unit type into your CSV file. Select in the mapping 
 ==== Pallet ID
 
 Enter the pallet ID into your CSV file. Select in the mapping what kind of shipping package it is. +
-You can find the pallet ID in the back end menu *Orders » Package content*.
+You can find the pallet ID in the back end menu *Orders » Package content list*.
 
 *_Default value_*: No default value
 
@@ -959,21 +971,21 @@ You can find the pallet ID in the back end menu *Orders » Package content*.
 [#2640]
 ==== Is closed
 
-Decide, whether the shipping package is closed or nor. Select in the mapping what kind of shipping package it is.
+Decide, whether the shipping package is closed or not. Select in the mapping what kind of shipping package it is.
 
 *_Default value_*: No default value
 
 [[table-is-closed]]
 [cols="1,1"]
-|====
-|*Permitted import values in CSV file* |*Explanation*
+|===
+|Permitted import values in CSV file |Explanation
 
 |`0`
 |The shipping package is still open. Changes can still be made.
 
 |`1`
 |The shipping package is closed. Changes cannot be made.
-|====
+|===
 
 [#2680]
 === Link to order item
@@ -997,16 +1009,16 @@ With this mapping field, the identifier is set to the order item. Use the mappin
 
 *_Default value_*: No default value
 
-*_Permitted import values_*: Alphanumeric
+*_Permitted import values_*: Alpha-numeric
 
-[#2725]
+[#2730a]
 ==== Link to own identifier
 
 Enter the identifier chosen by you into your CSV file. With this mapping field, the identifier is set to the order property or component you want to import. Use the mapping field *Set own identifier* to also set the identifier to the order item to which the imported values are to be added. The identifier is then used to link the order item and order property or component. Because of this, you need both mapping fields in your CSV file.
 
 *_Default value_*: No default value
 
-*_Permitted import values_*: Alphanumeric
+*_Permitted import values_*: Alpha-numeric
 
 
 [#2730]
@@ -1014,6 +1026,6 @@ Enter the identifier chosen by you into your CSV file. With this mapping field, 
 
 image::data:order-set-identifier.png[]
 
-In this example CSV file, you can see the order item in the first row and the order property you want to link to it in the second row. +
-In the columns *OwnIdentifier* and *LinkToOwnIdentifier* of the CSV file, you can see the identifier *ABC123E*. This identifier can be freely chosen by you. The fields are outlined in red. Because of this identifier, the system knows which order property belongs to which order item. +
+In this example CSV file, you can see the order item in the first row. The order property can be seen in the second line. +
+In the columns *OwnIdentifier* and *LinkToOwnIdentifier* of the CSV file, you can see the identifier *ABC123E*.This identifier can be freely chosen by you. The fields are outlined in red. Because of this identifier, the system knows which order property belongs to which order item. +
 The identifier itself is not imported and is therefore not visible in the system after the import. By importing it, the order property is added with all the values given in the CSV file to the order item.

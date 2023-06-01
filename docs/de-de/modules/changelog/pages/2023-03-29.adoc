@@ -1,0 +1,362 @@
+= Changelog 29. März 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 23. März 2023
+:endWeekDate: 29. März 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/new-order-ui-test-phase-deleting-external-order-id-neue-auftrags-ui-testphase-loeschen-von-externer-auftragsnummer/717032
+// Auch diesen Eintrag beachten: https://forum.plentymarkets.com/t/otto-market-aenderungen-am-katalog-otto-market-changes-to-catalogues/716749
+// Auch diesen Eintrag beachten: https://forum.plentymarkets.com/t/geloescht-easypak-und-altes-menue-fuer-dhl-retoure-online-delete-easypak-and-old-menu-for-dhl-retoure-online/716919
+// Auch diesen Eintrag beachten: https://forum.plentymarkets.com/t/anpassungen-im-versand-center-shipping-center-adaptations/716922
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aktionsmanager
+
+* Im Aktionsmanager gibt es nun die Möglichkeit, nach Tags zu filtern oder diese am Auftrag zu setzen oder zu entfernen.
+
+[discrete]
+=== Amazon
+
+Es wurden zwei neue Typen für Auftragsartikeleigenschaften ergänzt:
+
+. Typ-ID 95: URL zu einer externen Datei mit Kundenanpassungen des Artikels
+. Typ-ID 96: URL zu einer externen Seite mit Kundenanpassungen des Artikels
+
+In diesen werden an Auftragsartikeln jetzt für Custom-Artikel die Links zu den gewählten Anpassungen der/des Endkund:in hinterlegt.
+Über den Link des Typs 95 kann eine Datei heruntergeladen werden, welche die notwendigen Daten in unterschiedlichen Datentypen (XML, JSON, SVG, JPG) bereitstellt.
+Über den Link des Typs 96 gelangt man in die Übersicht zu den gewünschten Anpassungen in der Seller Central.
+
+Typ-ID 96 steht nur zur Verfügung, wenn der Auftrag über einen Auftragsbericht importiert wurde. Wenn der Auftrag über API importiert wurde, z.B. über den nächtlichen Backup-Import, steht der Link nicht zur Verfügung, da er auch in der API nicht zur Verfügung steht.
+
+[IMPORTANT]
+.Nur via REST-API
+======
+Diese beiden Eigenschaftstypen sind zum aktuellen Zeitpunkt nicht über die UI erreichbar. Lediglich via REST können diese Informationen abgerufen werden.
+======
+
+[discrete]
+=== Amazon-MFN
+
+Der Amazon-Bericht für den Amazon-MFN-Auftragsimport (`GET_ORDER_REPORT_DATA_INVOICING`) enthält keine Informationen zum Amazon-Geschenkservice. Deshalb werden ab sofort die folgenden Informationen innerhalb von 5 Minuten über einen separaten Prozess nachträglich importiert:
+* Geschenkpapierart
+* Geschenkpapierpreis
+* Geschenknachricht (optional)
+
+[discrete]
+=== Artikel
+
+* Die Werkzeugleisten der Artikel- sowie Variantenansicht sind nun über die MyView konfigurierbar. Die Werkzeugleisten müssen allen individuellen Ansichten nachträglich hinzugefügt werden. Die Toolbars befinden sich immer ganz oben in den Ansicht und können nicht weggescrollt werden.
++
+[IMPORTANT]
+.To-Do
+======
+Da die Werkzeugleisten nun Teil der MyView sind, müssen sie allen bereits erstellten individuellen Ansichten nachträglich hinzugefügt werden. Im Standard sind sie bereits enthalten. Deshalb musst du im Zuge des Updates folgende Schritte durchführen, wenn du bereits eigene Ansichten verwendest und diesen die Werkzeugleisten hinzufügen möchtest:
+
+. Öffne die Artikelansicht.
+. Wähle deine eigene Ansicht aus.
+. Wechsele in den Editiermodus der Ansicht.
+. Ziehe die Werkzeugleiste in die Ansicht an erste Stelle.
+. Konfiguriere die Werkzeugleiste nach eigenen Vorlieben.
+. Speicher die Ansicht mit der konfigurierten Werkzeugleiste.
+. Wiederhole die Schritte 2-6 für deine anderen eigenen Ansichten.
+. Wiederhole die Schritte 2-6 für deine Ansichten auf Variantenebene.
+======
+* Die Externe ID kann nun in der Artikel/Varianten-Übersicht als Spalte hinzugefügt werden.
+* Die Markierungen in der Übersicht haben jetzt einen Tooltip, der den Namen und die ID der Markierung anzeigt.
+
+[discrete]
+=== CRM
+
+* Im Messenger wurden neue Gruppenaktionen im Kontextmenü integriert:
+** *Typ und Status der Konversationen ändern*
+** *Deadline der Konversationen ändern*
+** *Priorität der Konversationen ändern*
+** *Konversationen abonnieren*
+** *Konversationen nicht mehr abonnieren*
+* Im Firmendatensatz im Menü *CRM » Firmen* kannst du im Bereich *Verknüpfte Kontakte* das Erstellungsdatum und das letzte Aktualisierungsdatum der verknüpften Kontakte anzeigen lassen.
+
+[discrete]
+=== Ereignisaktionen
+
+* In den Ereignisaktionen ist es nun möglich, bestehende Tags eines Auftrags zu ignorieren. Um dies zu tun, müssen ein oder mehrere Tags hinzugefügt werden, die dann am Auftrag gesetzt sind. Diese Option ist verfügbar, sobald man mindestens ein Tag hinzufügt.
+
+[discrete]
+=== Kataloge
+
+* Beim Katalog für Aufträge wurden die folgenden Möglichkeiten hinzugefügt:
+** Tags exportieren
+** Nach Tags filtern
+** Tags als Exportaktion setzen
+
+[discrete]
+=== Prozesse
+
+* In der Auftragsabwicklung sowie in der Subaktion *Tags hinzufügen/entfernen* ist es nun möglich, bestehende Tags eines Auftrags zu ignorieren. Um dies zu tun, müssen ein oder mehrere Tags hinzufügt werden, die dann am Auftrag gesetzt sind. Diese Option ist verfügbar, sobald man mindestens ein Tag hinzufügt.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* Die Suchparameter im Filter *Kontaktdaten* im Menü *CRM » Kontakte* und *CRM » Schnellsuche* wurden angepasst. In diesem Feld kannst du nach den folgenden Werten suchen:
+** Vorname und Nachname des Kontakts
+** Vorname und Nachname aus der Adresse
+** Firmenname aus der Adresse (address.name1)
+** Zusätzliche Adressinformationen (address.name4)
+** Externe Nummer des Kontakts
+** Kundennummer
+** Firmenname
+** UstId-Nr. der Firma
+** eBay-Name des Kontakts
+
+[discrete]
+=== Shopify-App
+
+Am 10. Januar haben wir ein erstes To-do zum Thema neue Shopify-Fullfilment-API veröffentlicht. Darin wurdest du aufgefordert, deiner Shopify-App zusätzliche Berechtigungen zu erteilen.
+
+Jetzt wird es ernst! Denn ab sofort nutzt plentymarkets die neue Shopify-Fullfilment-API. Das heißt, dass deine Fulfillment-Abläufe nicht mehr funktionieren, wenn du die Berechtigungen nicht erteilt hast.
+
+Wenn du die Berechtigungen noch nicht erteilt hast, musst du deiner plentymarkets App für Shopify jetzt DRINGEND diese zusätzlichen Berechtigungen erteilen:
+
+* `read_assigned_fulfillment_orders`
+* `write_assigned_fulfillment_orders`
+* `read_merchant_managed_fulfillment_orders`
+* `write_merchant_managed_fulfillment_orders`
+
+*_Hintergrund_*: Diese Änderung der Berechtigungen ist erforderlich, weil Shopify seine Fulfillment-API aktualisiert und wir die Fulfillment-Informationen deshalb nicht mehr wie bisher an die Shopify-API senden können. Shopify hat link:https://shopify.dev/api/release-notes/2022-07#breaking-changes[diese Änderung^] schon länger link:https://shopify.dev/apps/fulfillment/migrate[angekündigt^].
+
+[IMPORTANT]
+.To-Do
+======
+Damit deine Fulfillment-Abläufe weiterhin funktionieren, führe folgende Schritte aus:
+
+. Melde dich in deinem Shopify-Dashboard an. +
+Du wirst aufgefordert, die App zu aktualisieren.
+. Aktualisiere die App. Klicke dazu auf *App aktualisieren*. +
+Damit ist sichergestellt, dass dein Shopify-Shop für die neue Fulfillment-API bereit ist.
+======
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* Bei dem FBA Warenbestandsimport konnte es dazu kommen, dass nicht alle Bestände aus dem Bericht korrekt übernommen wurden. Der FBA Bestand eines Artikels stimmte damit also nicht mit dem aus dem Seller-Central überein. Das Verhalten wurde heute behoben.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Einige `Oder`-Filter (wie z.B. der Kategoriefilter) in der neuen Artikel-UI verhielten sich wie ein `Und`-Filter, obwohl es in der UI anders ersichtlich war. Wir haben dieses Verhalten korrigiert, sodass nun korrekt gefiltert wird.
+
+[discrete]
+=== Aufträge
+
+* Wenn man in der Übersicht im Menü *Aufträge » Aufträge bearbeiten* eine Notiz zum Kunden hinzufügen wollte, hat dies nicht funktioniert. Dieses Verhalten wurde behoben. Man wird nun in den Messenger weitergeleitet. Die ID des Kontakts ist dann bereits vorausgefüllt.
+
+[discrete]
+=== bol.com
+
+* Bei den Ereignisaktionen für bol.com konnte es vorkommen, dass die Aufträge trotz API-Fehlers nicht in den Fehlerstatus verschoben wurden, der in den Einstellungen definiert wurde.
+
+[discrete]
+=== CRM
+
+* Wenn man eine mit dem EmailBuilder erstellte Vorlage über die Vorschau im Auftrag geöffnet hat, wurden weder der Empfängername noch die E-Mail-Adresse angezeigt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Fulfillment
+
+* Im Versand-Center konnte es durch mehrfache Ausführung der Suche, dazu kommen das Versandpakete für einen Auftrag mehrfach erstellt wurden. Dies wurde behoben.
+* Im Versand-Center konnte es dazu kommen, dass nach dem Erstellen der Polling-Datei der Auftragsstatus nicht geändert wurde. Dies wurde behoben.
+
+[discrete]
+=== Kataloge
+
+* Das Limit in den Exporteinstellungen wird nun im Auftragsformat berücksichtigt.
+
+[discrete]
+=== Netto
+
+Als Folge der link:https://forum.plentymarkets.com/t/netto-probleme-bei-meldung-von-teilieferungen-und-stornos-issues-with-notification-for-partial-shipping-confirmations-and-cancelations/714724[Korrektur zur korrekten Aufsummierung der Gesamtmenge in Versandbestätigungen zu Teilieferungen an Netto^] kam es zu einem Fehler, weil auch die Angabe der Menge des in der Versandmeldung enthaltenen Paketes mit der Sendungsnummer die Menge aufsummiert wurde, obwohl diese nur der Menge der tatsächlich versendeten Teillieferung entsprechen sollte.
+
+Dies hat keine schwerwiegenden Auswirkungen, kann aber zur Verwirrung beim Endkunden geführt haben, wenn dieser von Netto mehrere Versandbestätigungen mit der jeweiligen Menge erhalten hat.
+
+Dies wurde nun korrigiert.
+
+[discrete]
+=== OTTO Market
+
+* Durch die Nutzung abgelaufener Zugangsschlüssel für OTTO Market wurden teilweise Übertragungen an OTTO abgebrochen.
+
+[discrete]
+=== POS
+
+* Wenn zweimal derselbe Artikel in der Rollenden Kommissionierung vorhanden ist, aber mit unterschiedlichen Bestelleigenschaften, wurden diese nicht einzeln angezeigt. Dieses verhalten wurde nun behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+Die neue Einstellungs-Oberfläche für Amazon-Konten ist unter *Einrichtung » Märkte » Amazon » Neue Einstellungen* in der Vorschau verfügbar.
+
+Die Oberfläche ist soweit vollständig funktional, außer dass Löschen, Erstellen, Speichern und das Verbinden mit Amazon-Konten deaktiviert wurde, bis auch im Hintergrund sämtliche Prozesse auf die neue Hintergrundstruktur umgezogen wurden.
+
+Die alten Konten, werden per Migration in die neuen Konten überführt und sollten für euch direkt sichtbar sein, sobald die Oberfläche für euch sichtbar ist. Jedes Speichern der alten Einstellungen führt direkt zu einer Migration der neuen Konten, sodass eure Änderungen dort spätestens nach einem erneuten Laden der Einstellungen sichtbar sein sollten.
+
+[IMPORTANT]
+.To-Do
+======
+Prüft bitte unter *Einrichtung » Märkte » Amazon » Neue Einstellungen*, ob die Einstellungen in der neuen Oberfläche den Einstellungen in der alten Oberfläche unter *Einrichtung » Märkte » Amazon » Einstellungen* entsprechen und meldet euch frühzeitig, sollten euch Probleme auffallen.
+======
+
+[NOTE]
+.Feedback
+======
+Gebt uns gerne Feedback zur neuen Einstellungs-Oberfläche link:https://forum.plentymarkets.com/t/amazon-neue-einstellungsoberflaeche-new-settings-user-interface/708645[in diesem Thema im Forum^].
+======
+
+[discrete]
+=== Aufträge
+
+* Ab sofort steht euch im Menü *Aufträge » Aufträge (Testphase)* neben der bisherigen Listenansicht auch die Kompaktansicht für eure Aufträge zur Verfügung.
++
+Diese ermöglicht es euch, bestimmte Auftragsdetails direkt in der Übersicht anzuzeigen. Außerdem könnt ihr bestimmen, wie groß die gewählten Felder angezeigt werden sollen und bei Bedarf eine farbliche Markierung hinzufügen sowie den Titel der Felder ändern. Alle diese Einstellungen findet ihr im Bearbeitungsmodus (MyView).
++
+Um zwischen den Ansichten zu wechseln, steht euch oben rechts in der Übersicht der Button *Zur Listenansicht wechseln* bzw. *Zur Kompaktansicht wechseln* zur Verfügung. Weitere Informationen zur Kompaktansicht findet ihr auf der Handbuchseite xref:auftraege:design-order-view.adoc#compact-vs-list-view[Auftragsansicht gestalten].
+
+[discrete]
+=== CRM
+
+* Im Menü *CRM » Kontakte* wurden die folgenden Anpassungen vorgenommen:
+** In der Übersicht neben der E-Mail-Adresse findest du neben dem Kopieren-Icon nun das Icon *E-Mail senden*. Dieses Icon erscheint, wenn du über die E-Mail-Adresse hoverst. Mit einem Klick auf das Icon öffnet sich dein Standard-E-Mail-Programm mit der bereits vorausgefüllten E-Mail-Adresse des Kontakts im Empfängerfeld und du kannst dem Kontakt direkt eine E-Mail schreiben.
+** In der Übersicht neben der Telefonnummer findest du neben dem Kopieren-Icon das Icon *Anrufen*. Dieses Icon erscheint, wenn du über die Telefonnummer hoverst. Mit einem Klick auf das Icon öffnet sich deine Standard-Telefon-App und du kannst du die dort gespeicherte Telefonnummer z.B. über FaceTime oder Skype anrufen.
+** Diese beiden neuen Funktionen *E-Mail senden* und *Anrufen* findest du ebenso in den Portlets *Optionen*, *Primäre Adresse* und *Adressen*.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Beim Wechseln zwischen der Kompakt- und der Listenansicht in der Auftragsübersicht und beim Wechseln zwischen den Auftragsdetails und der Auftragsübersicht, war die Auftragsübersicht leer. Dies wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/returnsportal_55342[apoio - plentymarkets Retourenportal^]
+|1.0.3
+|-
+
+|link:https://marketplace.plentymarkets.com/avocado_55217[AvocadoStore Connector^]
+|1.1.9
+|-
+
+|link:https://marketplace.plentymarkets.com/axytosinvoice_54780[axytos Rechnungskauf 3.0^]
+|1.1.6
+|-
+
+|link:https://marketplace.plentymarkets.com/googletagmanagerultimate_54789[Google Tag Manager + Conversions API - 18 Tools in einem^]
+|1.3.1
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexportidealode_4723[idealo.de^]
+|3.3.42
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.4.29
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.3.1
+|-
+
+|link:https://marketplace.plentymarkets.com/wishlistwidgets_55040[Optimierte Wunschliste + Widget^]
+|1.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.2.4
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+Warehouse-App::
++
+--
+
+[discrete]
+=== Behoben
+
+Folgende Probleme wurden in Version 1.0.8 der *plentymarkets Warehouse App* behoben.
+
+* Wenn im Wareneingang in der Lagerortsuche ein unbekannter Ziellagerort gescannt wurde, wurde der Fehler nicht vollständig abgefangen. Dieses Verhalten wurde behoben.
+* Wenn in der Rollenden Kommissionierung eine bereits verwendete Box gescannt wurde, dann führte das dazu, dass der Fehlerdialog mehrmals geöffnet wurde. Dieses Verhalten wurde nun behoben.
+* Innerhalb der Umbuchung für Ziellagerorte war der Filter *Zweck* nicht sichtbar. Dieses Verhalten wurde behoben.
+* Es konnte passieren, dass das Mindesthaltbarkeitsdatum von dem Mindesthaltbarkeitsdatum des danach gewählten Lagerorts überschrieben wurde wenn beim Wareneingang die Einstellung *Nachfragen* für den Lagerort gesetzt wurde. Dieses Verhalten wurde behoben.
+* Auf dem Dashboard wurde innerhalb der letzten Aktivitäten kein Icon für den Wareneingang angezeigt. Ein Icon wurde hinzugefügt.
+* In der Inventur konnte es bei der Eingabe von MHD / Charge nach einem Barcodescan mit mehreren Ergebnissen dazu kommen, dass die Inventur beendet wird. Das wurde nun behoben.
+* Es wurden maximal 50 Artikelpositionen aus einer Nachbestellung nachgeladen. Dieses Verhalten wurde behoben - es werden nun alle Positionen nach und nach geladen.
+
+--
+
+====

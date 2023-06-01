@@ -4,9 +4,8 @@
 :description: The plentyWarehouse app includes a function for reshelving items. You can find information about it on this page.
 
 include::partial$note-requirements.adoc[]
-include::partial$note-open-beta.adoc[]
 
-The plentyWarehouse app includes a function for reshelving items. You can find information about it on this page. First, you'll read a short description of the function to help you understand the concept. Then you’ll learn about the xref:app:reshelving.adoc#200[settings], which need to be carried out once in advance. These settings go into effect when you begin using the function.
+The plentyWarehouse app includes a function for reshelving items. You can find information about it on this page. First, you'll read a short description of the function to help you understand the concept. Then you’ll learn about the <<#200, settings>> which need to be carried out once in advance. These settings go into effect when you begin using the function.
 
 [#100]
 == How are items reshelved?
@@ -25,10 +24,34 @@ Afterwards, the app lists all of the items that are currently at the selected st
 The plentyWarehouse app automatically switches back to the list of items waiting to be reshelved. The warehouse staff repeat this process until all items have been reshelved or the reshelving function is exited manually.
 --
 
+[#250]
+== Assigning rights for reshelving items
+
+Before items are reshelved in plentyWarehouse, make sure that all users without admin accounts have been assigned the appropriate rights. Otherwise, items cannot be reshelved correctly and the stock changes cannot be saved in the plentymarkets back end.
+
+:rights-purpose: reshelve items in plentyWarehouse
+:right-one: pass:quotes[*Items > Item > Variation > Warehouse data > Read*]
+:right-two: pass:quotes[*Stock > Warehouses > Warehouse location > Read*]
+
+include::_includes:partial$rights.adoc[]
+
+[#155]
+== Determining visibility of the function in the plentyWarehouse app
+
+Now, assign rights so that the function for reshelving items is visible and usable for the respective users of the plentyWarehouse app.
+
+:rights-purpose: use the Reshelving function in plentyWarehouse
+
+:right-one: pass:quotes[*plentyWarehouse > Reshelving*]
+
+include::_includes:partial$rights-simple-mode.adoc[]
+
 [#200]
 == Carrying out settings for reshelving items
 
 With the help of a few basic settings, you can customise the reshelving function in plentyWarehouse so that it fits your needs and workflows.
+
+include::partial$plentywarehouse-rights-settings.adoc[]
 
 For example, you can determine how items are registered and which target storage locations should be available.
 
@@ -37,15 +60,15 @@ Carrying out settings for reshelving items:
 
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon (icon:bars[role="darkGrey"]) in the top left corner.
-. Scroll down and tap on *Settings* (material:settings[]). +
+. Tap on *Settings* (material:settings[]). +
 → The settings menu opens.
-. Tap on *Reshelving*  (image:stock-management:icon_reshelving.png[width=24, height=24]).
+. Tap on *Reshelving* (image:stock-management/plentywarehouse/assets/icon_reshelving.png[width=24, height=24]).
 . Carry out the settings for reshelving items. Pay attention to the explanations given in <<table-pw-reshelving-settings>>.
 
 [[table-pw-reshelving-settings]]
 .Settings for reshelving items in plentyWarehouse
 [cols="1,3"]
-|====
+|===
 |Setting |Explanation
 
 2+^| *General settings* area
@@ -60,20 +83,20 @@ Carrying out settings for reshelving items:
 *_Example:_* If you enter the number *5* in the quantity field, the total quantity is inserted automatically after you have scanned the variation five times.
 
 | *Show net stock*
-|Activate this option to display the respective xref:glossary:glossary.adoc#net-stock[net stock] when reshelving items.
+|Activate this option to display the respective xref:glossary:glossary.adoc#net-stock[net stock] of each item when reshelving items.
 
 2+^| *Source storage location* area
 
 | *Storage location search fields*
 |Use the toggle buttons to determine which criteria can be used for the storage location search while using the reshelving function. +
-*Activated* (icon:toggle-on[role="green"]) = You will be able to use this criterion when searching for storage locations.. +
-*_Tip:_* Tap on (material:drag_handle[]) for each activated search criterion and drag it to the desired position to determine the order of the search fields.
+*Activated* (icon:toggle-on[role="green"]) = You will be able to use this criterion when searching for storage locations. +
+*_Tip:_* Tap on and hold (material:drag_handle[]) for each activated search criterion and drag it to the desired position to determine the order of the search fields.
 
 | *Focus on storage location search field*
 |Will you typically <<#400, select the source storage location>> by scanning its barcode or by searching for the storage location name and selecting the storage location from a list? If you want to scan the barcode, then this setting can speed up the job. +
 *None* = There will be no focus on any field. Of course, you can still place the cursor in another search field manually.
 *Barcode* = The cursor will automatically start out in the barcode field when you reshelve items. You can scan the source storage location right away. +
-*Storage location name* = The cursor is automatically placed in the storage location name field.
+*Storage location* = The cursor is automatically placed in the storage location name field.
 
 | *Number of storage locations to be loaded*
 |Select the number of search results you want to see at once.
@@ -93,7 +116,7 @@ Carrying out settings for reshelving items:
 | *Item search fields*
 |Use the toggle buttons to determine which criteria can be used for the item search while using the reshelving function. +
 *Activated* (icon:toggle-on[role="green"]) = You will be able to use this criterion when searching for items. +
-*_Tip:_* Tap on (material:drag_handle[]) for each activated search criterion and drag it to the desired position to determine the order of the search fields.
+*_Tip:_* Tap on and hold (material:drag_handle[]) for each activated search criterion and drag it to the desired position to determine the order of the search fields.
 
 | *Focus on item search field*
 |Do you typically search for items using a specific criterion? Tap on the criterion that you use most frequently. When you search for items later, the cursor will automatically be placed in this field at the beginning. Of course, you can still place the cursor in another search field manually.
@@ -103,8 +126,8 @@ Carrying out settings for reshelving items:
 
 2+^| *Target storage location* area
 
-| *Mandatory item scan*
-|Use this option to determine which rules should apply when registering target storage locations when reshelving items. +
+| *Mandatory storage location scan*
+|Use this option to determine which rules should apply when registering target storage locations for reshelving items. +
 *Activated* (icon:toggle-on[role="green"]) = All target storage locations _must_ be scanned via their label to be registered for reshelving. It is not possible to select storage locations manually via the search results. +
 *Deactivated* (icon:toggle-off[role="darkGrey"]) = Storage locations can either be registered by scanning them or by selecting them manually.
 
@@ -117,21 +140,10 @@ Carrying out settings for reshelving items:
 *_Use case:_* During reshelving, the app will suggest storage locations that you might want to reshelve. You’ll only be suggested the source storage locations that meet these criteria. If you want to use a storage location that _was not suggested_, then you’ll have to scan the storage location rather than select it from the list of suggestions in the app.
 
 | *Purpose*
-|Use this option to exclude storage locations with specific xref:stock-management:setting-up-a-warehouse.adoc#intable-purpose[purposes] from the list of suggested storage locations. +
+|Use this option to exclude storage locations with specific xref:stock-management:setting-up-a-warehouse.adoc#intable-purpose[purposes] from the list of suggested target storage locations. +
 *_Example:_* Deactivate (icon:toggle-off[role="darkGrey"]) the purpose *Incoming items* so that items are not reshelved to storage locations with this purpose and do not get confused with other stock when incoming items are booked.
 
-|====
-
-[250]
-== Assigning rights for reshelving items
-
-Before items are reshelved in plentyWarehouse, make sure that all users have been assigned the appropriate rights. Otherwise, items cannot be reshelved correctly and the stock changes cannot be saved in the plentymarkets back end.
-
-:rights-purpose: reshelve items in plentyWarehouse
-:right-one: pass:quotes[*Items > Item > Variation > Warehouse data > Show*]
-:right-two: pass:quotes[*Stock > Warehouses > Warehouse location > Show*]
-
-include::_includes:partial$rights.adoc[]
+|===
 
 [#300]
 == Reshelving items
@@ -155,7 +167,7 @@ Selecting the source storage location:
 . xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
 . Tap on the menu icon (icon:bars[role="darkGrey"]) in the top left corner. +
 icon:map-signs[] *_Or:_* Find the *Reshelving* tile in the *Functions* area on the dashboard.
-. Tap on *Reshelving* (image:stock-management:icon_reshelving.png[width=24, height=24]).
+. Tap on *Reshelving* (image:stock-management/plentywarehouse/assets/icon_reshelving.png[width=24, height=24]).
 . Search for the storage location whose items should be reshelved. To do so, enter the name of the storage location or scan the barcode on the storage location label. +
 *_Optional:_* Tap on (icon:chevron-down[role="darkGrey"]) to filter the search results by the *Purpose* of the storage location.
 . Tap on *Search* (icon:search[role="darkGrey"]). +
@@ -167,7 +179,7 @@ icon:map-signs[] *_Or:_* Find the *Reshelving* tile in the *Functions* area on t
 After you have <<#400, selected a source storage location>>, plentyWarehouse automatically displays a list of all items that are available at this storage location.
 plentymarkets automatically makes a list of all the items currently at this storage location. Duplicate items are grouped together. For example, if two copies of an item need to go back on the shelf, then the employee can specify the item quantity directly during reshelving.
 
-The list includes important information about the items that are ready to be reshelved. For example, the employee sees the item ID and the item name. You can control which information is displayed on the list. Simply create a xref:app:reshelving.adoc#200[template].
+The list includes important information about the items that are ready to be reshelved. For example, the employee sees the item ID and the item name.
 
 [.instruction]
 Working with the item list:

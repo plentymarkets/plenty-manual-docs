@@ -111,7 +111,11 @@ include::partial$assistant-basic-instructions.adoc[]
 | Activate to activate the order import. Orders are imported every 15 minutes.
 
 | *Product export cron*
-| Activate to activate the item export. +
+| Activate in order to activate the item export for catalogues which were created using the old catalogue generator. +
+*_Note:_* Item data is exported once or twice a day. The export also triggers the price update for the variations included.
+
+| *V2: product export cron*
+| Activate in order to activate the item export for catalogues which were created using the *catalogue generator V2*. +
 *_Note:_* Item data is exported once or twice a day. The export also triggers the price update for the variations included.
 
 | *Stock export cron*
@@ -208,16 +212,18 @@ Linking a variation to a {market} category:
 
 === Deactivating variations on {market}
 
-A variation has already been exported to myToys, but you do not want to offer this variation on myToys any longer? In this case, it is not enough to exclude this variation from the export. Instead, the variation has to be transferred as inactive once. To do so, proceed as follows.
+A variation has already been exported to myToys, but you do not want to offer this variation on myToys any longer? Then carry out one of the following steps in order to not export a variation to MyToys any longer:
 
-* In the *Availability* tab of the variation, de-select the market availability *myToys*. +
-* To deactivate the variation, the property *myToys category group* has to remain saved in the *Properties* tab of the respective variation.
-*_Important:_* If you reactivate the availability of such a variation, the variation is only reactivated on {market} during the nightly item export.
+* In the *Availability* tab of the variation, de-select the market availability *myToys*. The variation will then not be exported to MyToys any longer. +
+
+_or_
+
+* In the variation’s *Properties* tab, remove the property *myToys category group*. The variation will then not be released in this category on MyToys any longer.
 
 [#550]
 == Setting up the item export
 
-Item data is exported to {market} using catalogue formats. Go to *Data » Catalogues* to create catalogues.
+Item data is exported to {market} using catalogue formats. Catalogues are created with the assistant *myToys - Catalogues*.
 
 include::partial$catalogue-new-to-text.adoc[]
 
@@ -241,7 +247,37 @@ The structure of {market} item data differs from the structure in plentymarkets.
 :catalogue-note: You need a separate catalogue for each category on {market}.
 :mapping-fields: more
 
+:mytoys:
+
 include::partial$catalogue-assistant-config.adoc[]
+
+[.collapseBox]
+.Step *Categories*
+--
+[[table-mytoys-catalogue-assistant]]
+[width="100%"]
+[cols="1,2a"]
+|===
+|Setting |Explanation
+
+| *Select a catalogue generator.*
+| In this step, you select the catalogue generator that should be used to create catalogues. +
+The catalogue generator V2 will replace the old catalogue generator in the future. We therefore recommend that you start using the *catalogue generator V2* now.
+
+* *Catalogue generator*
+
+* *Catalogue generator V2* +
+
+*_Tip:_* Catalogues which were created using the catalogue generator V2 are loaded faster, always contain the latest MyToys data fields, and are updated regularly.
+
+| *myToys category*
+| Afterwards, select the myToys product category. The items in this catalogue will then be listed in this product category on MyToys.
+
+| *myToys catalogue name*
+| Enter a name for the catalogue. +
+The name will only be visible in the back end of your plentymarkets system.
+|===
+--
 
 [#700]
 === Mapping catalogue fields
@@ -473,6 +509,8 @@ Do you work with other delivery times? Then contact your integration manager.
 
 :interval:
 
+:mytoys:
+
 include::partial$catalogue-activation.adoc[]
 
 [#order-documents]
@@ -513,7 +551,7 @@ To ensure this, carry out the steps described in this chapter:
 [.collapseBox]
 .*_Layout:_* This is how a myToys delivery note should look
 --
-image::markets:mytoys-delivery-note-20220303.png[]
+image::markets:MyToys_example-delivery-return-slip.png[]
 --
 
 [#1300]
@@ -525,7 +563,7 @@ image::markets:mytoys-delivery-note-20220303.png[]
 Uploading a PDF template for delivery notes:
 
 . Download the PDF template for {market} delivery notes to your computer:
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-01-Lieferschein-Vorlage-20220303.pdf[Download PDF template (as of 03/03/2022)]
+  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/MyToys_2023/MyToys_Liefer_Retourenschein_leer.pdf[Download PDF template (as of 15/02/2023)]
 . Go to *Setup » Client » Select client » Locations » Location: Germany » Documents » Delivery note*.
 . Click on the tab *PDF template*.
 . Click on *Add template*. +
@@ -648,27 +686,22 @@ To ensure this, carry out the steps described in this chapter:
 [.collapseBox]
 .*_Layout:_* This is how a myToys return slip should look
 --
-image::markets:myToys-return-20220303.png[]
+image::markets:MyToys_example-delivery-return-slip.png[]
 --
 
 [#1150]
 ==== Uploading a PDF template for return slips
 
 The {market} letterhead has to be included on return slips for {market} orders.
-Proceed as described below to upload a xref:orders:order-documents.adoc#1700[PDF template] for return slips for {market} in plentymarkets.
+Proceed as described below to upload a xref:orders:order-documents.adoc#1700[PDF template] for return slips for {market} to plentymarkets.
 
 NOTE: Return slips also need to contain the return note that myToys specifies. As such, we recommend that you upload the template that already contains the return reasons. Alternatively, you can also use the template that does not contain the return reasons. If so, go to *Setup » Client » [Open client] » Locations » Deutschland » Documents » Return slip » Tab: Template* and enter the return note for the payment method *Plugin: myToys Payment*. However, the layout won’t conform to the layout specified by myToys. As such, have your documents approved by myToys in advance.
 
 [.instruction]
 Uploading template for return slips:
 
-. Download the template for {market} return slips to your computer. You can download the template as a PDF or a DOCX file:
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-mit-gruenden-20220303.pdf[Download PDF template with return reasons (as of 03/03/2022)]
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-mit-gruenden-20220303.docx[Download DOCX template with return reasons (as of 03/03/2022)] +
-  *_Important:_* Download this template as a PDF file after editing.
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-ohne-gruenden-20220303.pdf[Download PDF template without return reasons (as of 03/03/2022)]
-  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/myToys-20220303/myToys-retourenschein-ohne-gruenden-20220303.docx[Download DOCX template without return reasons (as of 03/03/2022)] +
-  *_Important:_* Download this template as a PDF file after editing.
+. Download the template for {market} return slips to your computer.
+  * link:https://cdn02.plentymarkets.com/pmsbpnokwu6a/frontend/MyToys_2023/MyToys_Liefer_Retourenschein_leer.pdf[Download PDF template (as of 15/02/2023)]
 . Go to *Setup » Client » Select client » Locations » Location: Germany » Documents » Return slip*.
 . Click on the tab *PDF template*.
 . Click on *Add template*. +
