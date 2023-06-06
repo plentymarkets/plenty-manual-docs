@@ -6,8 +6,6 @@
 :market: eMAG
 :emag:
 
-// Wer das Produkt als erstes listet ist Eigentümerin. Nur Eigentümer dürfen die Artikeldaten aktualisieren. Die Aktualisierungen werden manuell von eMAG geprüft. Deshalb nicht zu oft updaten. eMAG prüft alle neuen Angebote manuell.
-
 Der rumänische Marktplatz eMAG ist der größte Marktplatz Südosteuropas.
 
 eMAG bietet 3 landesspezifische Marktplätze an. Jeder dieser Marktplätze ist eigenständig.
@@ -25,8 +23,10 @@ Registriere dich zuerst bei eMAG als Verkäufer:in. Die Registrierung nimmst du 
 [#JRFA0MUV]
 == Produkte vs. Angebote
 
-* Wer ein Produkt als erstes auf dem {market}-Marktplatz listet, ist Eigentümerin. Nur Eigentümer:innen dürfen die Artikeldaten des Produkts aktualisieren. Der Preis der Eigentümerin wird rechts neben der Artikelbeschreibung angezeigt.
-* Alle anderen Händler:innen können nur Preise und Bestände zu einem Produkt veröffentlichen. Diese Informationen werden unterhalb der Artikelbeschreibung als "andere Angebote" angezeigt.
+* Wer Artikeldaten als Erstes auf dem {market}-Marktplatz listet, ist Eigentümerin des *_Produkts_*. Nur Eigentümer:innen dürfen die Artikeldaten des Produkts aktualisieren. Der Preis der Eigentümerin wird rechts neben der Artikelbeschreibung angezeigt.
+* Alle anderen Händler:innen können nur Preise und Bestände zu einem Produkt veröffentlichen. Sie veröffentlichen also kein Produkt, sondern ein *_Angebot_*. Diese Informationen werden unterhalb der Artikelbeschreibung als "andere Angebote" angezeigt.
+
+*_Wichtig:_* Bei eMAG werden alle Produktdaten und Angebotsdaten manuell geprüft, bevor sie veröffentlicht werden.
 
 image:maerkte:emag-owner-vs-offer.png[]
 
@@ -37,20 +37,17 @@ image:maerkte:emag-owner-vs-offer.png[]
 
 * Du exportierst die Artikeldaten zum ersten Mal. Dazu verwendest du das Katalogformat *eMAG Products*.
 * {market} prüft alle Artikeldaten manuell. Geduld ist also gefragt.
-* {market} weist dem Produkt einen Part Number Key zu. {market} nennt das auch PNK-Code.
-* Du wirst zur Eigentümerin der Produktseite. Das heißt: Nur du darfst die Artikeldaten dieses Produkts aktualisieren. Alle anderen Händler:innen können für dieses Produkt nur Preise und Bestände exportieren.
-* Jedes Mal, wenn du die Artikeldaten aktualisierst, erfolgt eine erneute manuelle Prüfung durch {market}. +
-*_Tipp:_* eMAG prüft _alle_ neuen Produkte manuell. Aktualisiere deine Produktdaten deshalb nicht zu oft.
+* {market} weist dem Produkt einen einzigartigen Part Number Key zu. {market} nennt diesen Key auch PNK-Code. Die PNK wird automatisch in plentymarkets als SKU gespeichert und dient ab sofort als eindeutiger Identifikationsschlüssel.
+* Du wirst zur Eigentümerin der Produktseite. Das heißt: Nur du darfst die Artikeldaten dieses Produkts aktualisieren. Alle anderen Händler:innen können für dieses Produkt nur Angebote veröffentlichen. Sie können also nur Preise und Bestände exportieren.
+* Jedes Mal, wenn du die Artikeldaten aktualisierst, prüft jemand bei {market} die Daten erneut manuell.
 
 image:maerkte:emag-owner.png[]
 
 *_Szenario 2: Du möchtest ein Produkt auf {market} listen, das schon auf dem Marktplatz angeboten wird._*
 
 * Du exportierst die Artikeldaten zum ersten Mal. Dazu verwendest du das Katalogformat *eMAG Offers*.
-* {market} prüft alle Angebotsdaten manuell. Auch hier ist deshalb Geduld gefragt.
-* Dein Angebot wird auf der Produktseite unterhalb der Artikelbeschreibung als anderes Angebot veröffentlicht. 
-* Jedes Mal, wenn du die Angebotsdaten aktualisierst, erfolgt eine erneute manuelle Prüfung durch {market}. +
-*_Tipp:_* eMAG prüft auch alle neuen Angebote manuell. Aktualisiere deine Angebotsdaten deshalb nicht zu oft.
+* Wenn du ein Angebot zum ersten Mal exportierst, verwendet {market} die EAN, um das Angebot dem richtigen Produkt zuzuordnen. Danach wird in plentymarkets automatisch die PNK als SKU gespeichert und dient ab sofort als eindeutiger Identifikationsschlüssel.
+* Dein Angebot wird auf der Produktseite unterhalb der Artikelbeschreibung als weiteres Angebot veröffentlicht.
 
 image:maerkte:emag-offer.png[]
 
@@ -62,11 +59,11 @@ So laufen Bestellungen bei {market} ab:
 * Deine Produkte werden auf {market} gelistet.
 * Kund:innen geben eine Bestellung auf {market} auf.
 * Kund:innen zahlen an {market}.
-* Der Auftrag wird in plentymarkets importiert.
-* Du wickelst den Auftrag in plentymarkets ab.
-* Du informiert {market} per Ereignisaktionen über die Auftragsabwicklung.
-
-//*_Hinweis:_* Kund:innen zahlen an {market}. Deshalb werden Aufträge mit dem Status *[5] Freigabe Versand* importiert.
+* Der Auftrag wird in plentymarkets importiert. +
+*_Hinweis:_* Kund:innen zahlen an {market}. Deshalb werden Aufträge mit dem Status *[5] Freigabe Versand* importiert.
+* Du versendest den Auftrag.
+* Du informiert {market} per Ereignisaktionen über den Versand.
+// Bisher wird die Rechnung noch nicht importiert. Entwicklung kümmert sich.
 
 [#QEAWJPZJ]
 == Marktplatz in plentymarkets einrichten
@@ -146,14 +143,7 @@ icon:toggle-on[role="blue"] = Auftragsdaten werden alle 15 Minuten in plentymark
 :referrer: eMAG
 :referrer-option: pass:quotes[Option *eMAG* oder zu einer der Unterherkünften]
 
-169.00 eMAG
-169.01 eMAG Romania
-169.02 eMAG Bulgaria
-169.03 eMAG Hungary
-
 include::partial$auftragsherkunft-aktivieren.adoc[]
-
-// Warum gibt es die Über-Herkunft? Wann braucht man die?
 
 [#QAQEBFHI]
 === Verkaufspreis festlegen
@@ -162,8 +152,6 @@ include::partial$auftragsherkunft-aktivieren.adoc[]
 
 include::partial$verkaufspreis-festlegen.adoc[]
 
-// Währung? Standort? MwSt.-Sätze?
-
 [#KUDP69PU]
 === Häufigkeit des Datenaustauschs
 
@@ -171,21 +159,35 @@ Nachdem du eMAG in plentymarkets eingerichtet hast, findet der Datenaustausch in
 
 [[datenaustausch]]
 .Häufigkeit des Datenaustauschs
-[cols="2,3a"]
+[cols="1,1a,3a"]
 |===
-|Daten |Intervall
+|Daten |Intervall |Erläuterung
 
 | Artikelexport
 | einmal täglich
+| --
 
-| Bestandsabgleich
+| Angebotsexport
 | einmal täglich
+| Nur neue Angebote werden exportiert. Neue Angebote sind Angebote, für die im SKU-Datenfeld noch keine PNK gespeichert ist. +
+Der Prozess exportiert die neuen Angebote und speichert die PNK als SKU.
 
-| Preisabgleich
-| einmal täglich
+| Angebotsaktualisierung
+| alle 15 Minuten +
+| Angebote werden exportiert, bei denen sich seit dem letzten Durchlauf entweder der Preis oder der Bestand geändert hat.
+
+| Angebotsentfernung
+| einmal täglich +
+| Angebote werden unter folgenden Bedingungen von eMAG entfernt:
+
+* Variante wurde aus plentymarkets gelöscht
+* Variante ist nicht mehr aktiv
+* Die Herkunft *eMAG* wurde aus der Variante entfernt
+* Der für eMAG verwendete Mandant wurde aus der Variante entfernt
 
 | Auftragsimport
-| stündlich
+| alle 20 Minuten
+| --
 |===
 
 [#THBDPCE9]
@@ -228,18 +230,73 @@ Verkaufspreis verknüpfen und Preis speichern:
 == Artikelexport einrichten
 
 Artikeldaten werden über Kataloge zu eMAG übertragen.
-// Ein Katalog oder mehrere?
 
 [#L8371H8B]
 === Katalog erstellen
 
-Artikeldaten werden über das Marktplatz-Format *eMAG* zu eMAG übertragen. Um deine Artikel zu eMAG zu übertragen, erstellst du im Menü *Daten » Kataloge* einen Katalog. Verknüpfe anschließend im Marktplatz-Format die von eMAG vorgegebenen Felder mit in plentymarkets gespeicherten Artikeldaten. Die Katalogdaten werden automatisch einmal täglich zu eMAG exportiert, wenn du unter *Einrichtung » Märkte » eMAG » Einstellungen* den *Artikelexport* aktiviert hast.
+Um deine Artikel zu eMAG zu übertragen, erstellst du im Menü *Daten » Kataloge* Kataloge. Es gibt zwei Export-Typen für eMAG: Den Export-Typ *eMAG Products* und den Export-Typ *eMAG Offers*.
 
 include::partial$catalogue-new-to-text.adoc[]
 
-:catalogue-template-name: eMAG
+[tabs]
+====
+Katalog für Produkte erstellen::
++
+--
+Produkte exportierst du über den Export-Typ *eMAG Products*. Als Format wählst du die Kategorie aus, in der du die Produkte des Katalogs veröffentlichen möchtest. Beachte, dass eMAG dich für jede Kategorie freischalten muss. Wenn du für eine Kategorie nicht freigeschaltet bist, werden deine Produkte in der Kategorie nicht veröffentlicht.
 
-include::partial$catalogue-creation.adoc[]
+[.instruction]
+Katalog erstellen:
+
+. Öffne das Menü *Daten » Kataloge*.
+. Klicke auf *Katalog erstellen* (material:add[]).
+. Gib einen Namen für den Katalog ein.
+. Wähle in der Dropdown-Liste *Export-Typ* die Option *eMAG Products*.
+. Wähle in der Dropdown-Liste *Format-Typ* die Option *Artikel (neu)*.
+. Wähle in der Dropdown-Liste *Format* die Kategorie des Marktplatzes, für die du den Katalog erstellen möchtest. +
+*_Wichtig:_* eMAG muss dich für jede Kategorie freischalten, in der du deine Artikel verkaufen möchtest.
+. Speichere (terra:save[]) die Einstellungen. +
+→ Der Katalog wird erstellt. +
+→ Der Katalog wird zur weiteren Bearbeitung geöffnet. +
+. Klicke auf der linken Seite des Menüs auf material:settings[] *Einstellungen*.
+. Wähle in den *Grundeinstellungen* das *Konto*, für das der Katalog verwendet werden soll.
+. Speichere (terra:save[]) die Einstellungen.
+
+--
+ 
+Katalog für Angebote erstellen::
++
+--
+Deine Angebote exportierst du über den Export-Typ *eMAG Offers*. Für diesen Export-Typ gibt es nur ein Format. Alle Angebote werden also mit nur einem Katalog exportiert.
+
+[.instruction]
+Katalog erstellen:
+
+. Öffne das Menü *Daten » Kataloge*.
+. Klicke auf *Katalog erstellen* (material:add[]).
+. Gib einen Namen für den Katalog ein.
+. Wähle in der Dropdown-Liste *Export-Typ* die Option *eMAG Offers*. +
+. Wähle in der Dropdown-Liste *Format-Typ* die Option *Artikel (neu)*. +
+. Wähle in der Dropdown-Liste *Format* die Option *Angebote*.
+. Speichere (terra:save[]) die Einstellungen. +
+→ Der Katalog wird erstellt. +
+→ Der Katalog wird zur weiteren Bearbeitung geöffnet.
+. Klicke auf der linken Seite des Menüs auf material:settings[] *Einstellungen*.
+. Wähle in den *Grundeinstellungen* das *Konto*, für das der Katalog verwendet werden soll.
+. Speichere (terra:save[]) die Einstellungen.
+
+--
+====
+
+[discrete]
+===== Weitere Katalogeinstellungen
+
+Weitere Katalogeinstellungen sind optional. Wenn du die auf dieser Seite beschriebenen Einstellungen vorgenommen hast, wird dein Katalog automatisch zu {market} exportiert. Du kannst also die Einstellungen für *Formateinstellungen*, *Exporteinstellungen* und *Download-Einstellungen* in den Katalogeinstellungen ignorieren.
+
+Mit den *Formateinstellungen*, *Exporteinstellungen* und *Download-Einstellungen* kannst du xref:daten:marktplatzexport.adoc#file-export[einmalig oder regelmäßig die Variantendaten des Katalogs in eine Datei exportieren]. Diese Datei enthält aber keine Informationen darüber, ob die darin enthaltenen Varianten erfolgreich zu {market} exportiert wurden.
+endif::url-export,price-search-engine[]
+
+*_Hinweis:_* Ändere in den *Formateinstellungen* des Katalogs nicht das *Format*. Beim Erstellen eines Katalogs sind alle nötigen Einstellungen bereits voreingestellt, damit der Export zum Marktplatz funktioniert. Wenn du die Einstellungen änderst, kann es zu Fehlern beim Export kommen.
 
 [#PILMA5UF]
 === Datenfelder im Katalog zuordnen
@@ -247,6 +304,23 @@ include::partial$catalogue-creation.adoc[]
 Nachdem du einen Katalog erstellt hast, ordnest du die Datenfelder des Marktplatzes den in plentymarkets gespeicherten Artikeldaten zu. Informationen dazu, welche Daten für welches Datenfeld des Marktplatzes übertragen werden müssen, findest du in der Dokumentation des Marktplatzes.
 
 include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+=== Empfehlungen für Datenfeld-Zuordnungen
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.eMAG Products: Liste mit empfohlenen Datenfeld-Zuordnungen
+--
+include::partial$emag-products-recommended-mappings.adoc[]
+--
+
+[.collapseBox]
+.eMAG Offers: Liste mit empfohlenen Datenfeld-Zuordnungen
+--
+include::partial$emag-offers-recommended-mappings.adoc[]
+--
 
 [#YQ4WUU84]
 === Katalog aktivieren
@@ -294,13 +368,6 @@ include::_includes:partial$event-procedure.adoc[]
 | *{market}: Versandbestätigung an {market} senden*
 |
 |===
-
-// Wer erzeugt die Auftragsdokumente?
-// Muss man Standorte einrichten?
-// Versand über Hub in Rumänien?
-// In welcher Sprache sind die Artikeldaten zu schicken?
-// Assistent: Einmal durchlaufen oder einmal pro Land?
-// Artikel vs. Angebote
 
 [#9SC8FQYA]
 == Fehlerbehebung
