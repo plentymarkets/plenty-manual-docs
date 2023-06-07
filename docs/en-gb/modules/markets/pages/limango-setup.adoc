@@ -29,7 +29,7 @@ After installing and setting up the plugin, the automatic processes described in
 |Data |Interval
 
 | Item export
-| once every 4 hours if changes were made to the item or the catalogue
+| daily at 7:00 h, 11:00 h, 15:00 h, and 19:00 h
 
 | Stock synchronisation
 | Hourly +
@@ -42,6 +42,9 @@ After installing and setting up the plugin, the automatic processes described in
 | Order import
 | Every 15 minutes +
 *_Note:_* Customers make their payments to limango. Nevertheless, all orders are imported with the status *[3] Waiting for payment*.
+
+| Deletion of items
+| once a day at night
 |===
 
 [#220]
@@ -178,7 +181,7 @@ If you do not enter a client, the default client is used for importing orders. +
 |===
 
 [#600]
-=== Activating an order referrer
+=== Activating the order referrer
 
 :referrer: limango
 :referrer-option: pass:quotes[option *limango*]
@@ -186,7 +189,7 @@ If you do not enter a client, the default client is used for importing orders. +
 include::partial$activate-referrer.adoc[]
 
 [#payment-method]
-=== Permitting payment method in customer classes
+=== Permitting the payment method in a customer class
 
 :payment-method: limango
 
@@ -209,7 +212,7 @@ include::partial$shipping-profile-activate.adoc[]
 [#prepare-variations]
 == Preparing variations
 
-Continue with preparing your variations.
+Now, prepare your variations.
 
 [#750]
 === Setting the variation availability
@@ -619,6 +622,34 @@ include::partial$catalogue-activation.adoc[]
 
 When you make changes to the mappings in the catalogue, a complete item export is triggered. This export is started when the next regular run is due. In other words, the export is not started when you save your changes.
 
+[#limango-delete-items]
+== Deleting items on limango
+
+If you do not want to offer a variation on limango any longer, then you can either delete the market availability for limango or deactivate the variation. The variation will then be excluded from the nightly item export to limango and it will be deleted on limango.
+
+*_Note:_* Variations will also be excluded from the item export and be deleted on limango if they cannot be validated. To find out why a variation could not be exported, check the <<#validation-file, validation file>> in the *Data » Log* menu.
+
+*Deleting items on limango:*
+
+_Alternative 1:_
+
+[.instruction]
+Deleting the market availability:
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Availability*.
+. *Delete* (icon:minus-circle[role="red"]) the availability *Limango*.
+. *Save* (terra:save[]) the settings.
+
+_Alternative 2:_
+
+[.instruction]
+Deactivating the variation:
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Settings*.
+. In the *Availability* area, remove the checkmark for the option *Active*. +
+*_Note:_* Note that the variation can possibly not be sold on other markets either if it is deactivated.
+. *Save* (terra:save[]) the settings.
+
 [#1600]
 == Preparing delivery notes for limango
 
@@ -733,6 +764,8 @@ Automate the following aspects of limango order processing:
 === Automatically sending cancellations
 
 Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically inform limango of cancellations.
+
+*_Note:_* An order cannot be cancelled any longer after it was shipped and a shipping confirmation was sent.
 
 :table-event-procedure: <<#event-procedure-cancellations-limango>>
 
@@ -879,7 +912,8 @@ Now set up the processing of returns for limango.
 The delivery note also functions as the return form. The workflow of limango returns is as follows:
 
 . Customers return the items to you.
-. You process the return in plentymarkets.
+. You process the return in plentymarkets. +
+  *_Note:_* A return can only be issued if the order was shipped and a shipping confirmation was sent.
 . You notify limango when you have received the items.
 . limango reimburses the customer. +
 *_Note:_* When you notify limango that the return is completed, limango triggers a credit note and the buyer receives a refund. As such, only notify limango about completing the return after you have received and checked the returned items.
