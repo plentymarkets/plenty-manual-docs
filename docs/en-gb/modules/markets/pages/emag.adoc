@@ -1,0 +1,398 @@
+= eMAG
+:author: team-plenty-channel
+:keywords: emag, EMAG, Emag
+:description: Learn how to set up the market eMAG in your plentymarkets system to start selling your items on eMAG. eMAG is the largest online marketplace of South Eastern Europe.
+:page-index: false
+:market: eMAG
+:emag:
+
+The Rumanian market eMAG is the largest market in Southeast Europe.
+
+eMAG offers 3 country-specific markets. Each of these markets is a stand-alone platform.
+
+* Romania
+* Bulgaria
+* Hungary
+
+[#VKXXC7OT]
+== Registering with eMAG
+
+First, register as a seller with eMAG. You can register link:https://marketplace-leads.emag.ro/[on the eMAG website]. +
+*_Tip:_* Click on the arrow next to the Rumanian flag to change the language to English.
+
+[#JRFA0MUV]
+== Products vs. Offers
+
+* Whoever lists item data for a product first on {market} becomes the owner of this *_product_*. Only owners can update the item data of the product. The owner's price is displayed to the right of the item description.
+* All other merchants can only publish prices and stocks for the product. As such, they do not publish a product. Instead, they publish an *_offer_*. This information is shown below the item description as "other offers".
+
+*_Important:_* eMAG checks all product and offer data manually before publication on the market.
+
+image:markets:emag-owner-vs-offer.png[]
+
+[#JRFA6MUV]
+== Workflow item data export
+
+*_Scenario 1: You want to list a product on {market} that no one else is offering on the market._*
+
+* You export the item data for the first time. To do so, you use the catalogue format *eMAG Products*.
+* {market} checks all item data manually. Patience is a virtue.
+* {market} assigns a unique Part Number Key to the product. {market} also calls this key a PNK code. The PI is automatically saved in plentymarkets as an SKU and now serves as the unique identification key.
+* You become the owner of the product page. This means that only you are allowed to update the item data of this product. All other sellers can only publish offers for this product. As such, they can only export prices and stock information.
+* Every time you update the item data, someone at {market} manually checks the data again.
+
+image:markets:emag-owner.png[]
+
+*_Scenario 2: You want to list a product on {market} that is already offered on the market._*
+
+* You export the item data for the first time. To do so, you use the catalogue format *eMAG Offers*.
+* When you export an offer for the first time, {market} uses the EAN to match the offer to the correct product. Afterwards, the PNK is automatically saved as an SKU in plentymarkets and now serves as the unique identification key.
+* Your offer is published on the product page below the item description as an additional offer.
+
+image:markets:emag-offer.png[]
+
+[#JRBA6MUV]
+== Workflow of an order
+
+This is the order workflow for {market}:
+
+* Your products are listed on {market}.
+* Customers place an order on {market}.
+* Customers make their payments to {market}.
+* → The order is imported to plentymarkets. +
+*_Note:_* Customers make their payments to {market}. As such, orders are imported with *Status [5] Cleared for shipping*.
+* You ship the order.
+* You notify {market} about shipping by triggering an event procedure.
+// Invoices are currently not imported. Developers will look into it.
+
+[#QEAWJPZJ]
+== Setting up the market in plentymarkets
+
+Now set up the market in plentymarkets.
+
+[#8IXIY1FC]
+=== Completing the assistants
+
+Use the assistant *Base settings - eMAG* in the *Setup » Assistants » Omni-Channel* menu to quickly and conveniently set up eMAG in plentymarkets. Moreover, you set up the data transfer to OTTO Market. Keep the credentials of your eMAG account at hand. You have received these credentials from eMAG.
+
+*_Reminder:_* eMAG offers 3 independent markets for the countries Romania, Bulgaria and Hungary. You create a separate connection to eMAG for each of these markets. So if you want to sell on several eMAG markets, you need to complete the assistant several times.
+
+:menu-path: pass:quotes[*Setup » Assistants » Omni-Channel*]
+:assistant-name: Base settings - eMAG
+:number-of-boxes: info box
+
+include::partial$assistant-basic-instructions.adoc[]
+
+[.collapseBox]
+.Options in the assistant
+--
+[[table-emag-basic-settings-assistant]]
+[width="100%"]
+[cols="1,2a"]
+|===
+|Setting |Explanation
+
+2+^| Step *eMAG connection*
+
+| *User name*
+| Enter the user name of your eMAG account.
+
+| *Password*
+| Enter the password for your eMAG account.
+
+| *Which eMAG marketplace do want to connect to?*
+| The market eMAG consists of 3 separate markets:
+
+* Romania
+* Bulgaria
+* Hungary
+
+You create a separate connection to eMAG for each of these markets. So if you want to sell on several eMAG markets, you need to complete the assistant several times.
+
+| *Which plentymarkets client do you want to connect to this eMAG account?*
+| Which eMAG marketplace do want to connect to? +
+From the drop-down list *Client*, select a client. +
+→ This client is used to export your items to {market} and import your {market} orders into plentymarkets. +
+*_Tip:_* |The default client is already selected.
+
+2+^| *Data exchange*
+
+| *Do you want to activate this connection now?*
+|
+icon:toggle-off[role="darkGrey"] = No connection to eMAG. No data is exchanged. +
+icon:toggle-on[role="blue"] = The connection to eMAG is activated. Item data and order details are exchanged with eMAG.
+
+| *Would you like to export item data to eMAG once per day?*
+| material:toggle_off[] = No item data is exported to {market}. +
+icon:toggle-on[role="blue"] = Item data is exported to {market}. 
+
+| *Would you like to export offer data to eMAG?*
+| material:toggle_off[] = No offer data is exported to {market}. +
+icon:toggle-on[role="blue"] New offers are exported once a day. Changed offers are exported every 20 minutes.
+
+| Would you like to import orders from eMAG every 15 minutes?
+| material:toggle_off[] = No order details are imported to plentymarkets. +
+icon:toggle-on[role="blue"] = Order details are imported into plentymarkets every 15 minutes.
+|===
+--
+
+[#K4DWEQNC]
+=== Activating the order referrer
+
+:market: eMAG
+:referrer: eMAG
+:referrer-option: pass:quotes[option *eMAG* or one of the sub-referrers]
+
+include::partial$activate-referrer.adoc[]
+
+[#QAQEBFHI]
+=== Defining a sales price
+
+:referrer-price: eMAG
+
+include::partial$define-sales-price.adoc[]
+
+[#KUDP69PU]
+=== Frequency of data exchange
+
+After you have set up eMAG in plentymarkets, data is exchanged with the market in the intervals described in <<#data-exchange>>.
+
+[[data-exchange]]
+.Frequency of data exchange
+[cols="1,1a,3a"]
+|===
+|Data |Interval |Explanation
+
+| Item export
+| once a day
+| --
+
+| Offer export
+| once a day
+| Only new offers are exported. New offers are variations for which no PNK is saved in the SKU data field yet. +
+The process exports the new offers and saves the PNK as an SKU.
+
+| Offer update
+| every 15 minutes +
+| Offers are exported if either the price or the stock has changed since the last run.
+
+| Offer removal
+| once a day +
+| Offers are removed from eMAG under the following conditions:
+
+* The variation was deleted from plentymarkets
+* The variation is no longer active
+* The referrer *eMAG* was removed from the variation
+* The client used for eMAG was removed from the variation
+
+| Order import
+| Every 20 minutes
+| --
+|===
+
+[#THBDPCE9]
+== Preparing variations
+
+Now, prepare your variations for the export.
+
+[#Y035MF19]
+=== Activating variations
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Tab: Settings*.
+. Go to the *Availability* section.
+. Place a check mark for the option *Active*.
+. Save (terra:save[role="darkGrey"]) the settings.
+
+[#Y033MF19]
+=== Setting the variation availability
+
+:market-availability: eMAG
+:option-availability: eMAG
+
+include::partial$variation-availability.adoc[]
+
+[#A033MF19]
+=== Link sales price and save price
+
+Now, link the sales price for {market} to your variations and enter the actual monetary amounts.
+
+[.instruction]
+Linking the sales price and saving a price:
+
+. Go to *Item » Edit item » [Open variation] » Tab: Settings » Area: Sales prices*.
+. Select the sales price for {market} from the drop-down list on the left.
+. Click on *Add* (icon:plus[role="green"]). +
+→ The sales price is added and displayed in the list.
+. Enter the monetary price into the *Price* field.
+. *Save* (terra:save[role="green"]) the settings.
+
+[#6PU6K85E]
+== Setting up the item export
+
+Item data is exported to eMAG via catalogues.
+
+[#L8371H8B]
+=== Creating a catalogue
+
+To export your items to eMAG, create catalogues in the *Data » Catalogue* menu. There are two export types for eMAG: The export type *eMAG Products* and the export type *eMAG Offers*.
+
+include::partial$catalogue-new-to-text.adoc[]
+
+[tabs]
+====
+Creating a catalogue for products::
++
+--
+Products are exported using the export type *eMAG Products*. As the format, you select the category in which you want to publish the products of the catalogue. Note that eMAG has to activate you for each category. If you are not activated for a category, your products will not be published in the category.
+
+[.instruction]
+Creating a catalogue:
+
+. Go to *Data » Catalogues*.
+. Click on *Create catalogue* (material:add[]).
+. Enter a name for the catalogue.
+. In the drop-down list *Export type*, select the option *eMAG Products*.
+. In the drop-down list *Format type*, select the option *Item (new)*.
+. In the drop-down list *Format*, select a category of the marketplace. +
+*_Important:_* eMAG has to activate you for each category in which you want to sell your items.
+. Save (terra:save[]) the settings. +
+→ The catalogue is created. +
+→ The catalogue is opened for editing. +
+. On the left-hand side of the menu, click on material:settings[] *Settings*.
+. In the *Basic settings*, select the *account* that you want to use this catalogue for.
+. Save (terra:save[]) the settings.
+
+--
+ 
+Creating a catalogue for offers::
++
+--
+Offers are exported using the export type *eMAG Offers*. There is only one format for this export type. All offers are therefore exported with only one catalogue.
+
+[.instruction]
+Creating a catalogue:
+
+. Go to *Data » Catalogues*.
+. Click on *Create catalogue* (material:add[]).
+. Enter a name for the catalogue.
+. In the drop-down list *Export type*, select the option *eMAG Offers*. +
+. In the drop-down list *Format type*, select the option *Item (new)*. +
+. From the drop-down list *Format*, select the option *Offers*.
+. Save (terra:save[]) the settings. +
+→ The catalogue is created. +
+→ The catalogue is opened for editing.
+. On the left-hand side of the menu, click on material:settings[] *Settings*.
+. In the *Basic settings*, select the *account* that you want to use this catalogue for.
+. Save (terra:save[]) the settings.
+
+--
+====
+
+[discrete]
+===== Other catalogue settings
+
+Other catalogue settings are optional. Once you carried out the settings described on this page, your catalogue is automatically exported to {market}. That means you can ignore the catalogue settings for *Format settings*, *Export settings* and *Download settings*.
+
+The *Format settings*, *Export settings*, and *Download settings* allow you xref:data:export-marketplace-formats.adoc#file-export[to create a file with the variation data contained in the catalogue]. However, this file does not contain information about whether the data export to {market} was successful.
+endif::url-export,price-search-engine[]
+
+*_Note:_* You should not change the *format* in the catalogue's *Format settings*. To ensure that the export to the market works, all required settings are already configured when you create a catalogue. If you change the settings, errors might occur during the export.
+
+[#PILMA5UF]
+=== Mapping data fields in the catalogue
+
+After you have created a catalogue, map the market's data fields to item data saved in plentymarkets. Check the documentation of the sales channel to find out what data the market expects for the individual data fields.
+
+include::partial$catalogue-mapping.adoc[]
+
+[#recommended-mappings]
+=== Recommendations for data field mappings
+
+include::partial$recommendation-text.adoc[]
+
+[.collapseBox]
+.eMAG products: List of recommended data field mappings
+--
+include::partial$emag-products-recommended-mappings.adoc[]
+--
+
+[.collapseBox]
+.eMAG offers: list of recommended data field mappings
+--
+include::partial$emag-offers-recommended-mappings.adoc[]
+--
+
+[#YQ4WUU84]
+=== Activating the catalogue
+
+:interval: once a day during the night
+:market: eMAG
+
+include::partial$catalogue-activation.adoc[]
+
+[#9SC8LQYA]
+== Automating order processing
+
+The following event procedures are available for automating order processing:
+
+* Send shipping confirmation to eMAG
+
+[#1100]
+=== Automatically sending shipping confirmations
+
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send shipping confirmations to {market} when the outgoing items are booked.
+
+:table-event-procedure: <<#emag-shipping-confirmation>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+[[emag-shipping-confirmation]]
+.Automatically sending shipping confirmations
+[cols="1,3,3"]
+|===
+|Setting | Option | Selection
+
+| *Event*
+| *Order change: Outgoing items booked*
+|
+
+| *Filter 1*
+| *Order > Order type*
+| *Order*
+
+| *Filter 2*
+| *Order > Referrer*
+| *{market}*
+
+| *Action*
+| *{market}: Send fulfilment notification to {market}*
+|
+|===
+
+[#9SC8FQYA]
+== Troubleshooting
+
+[#MYSEBF12]
+=== _Check list:_ Variation export
+
+include::partial$checklist-variations.adoc[tag=checklist-intro]
+
+include::partial$checklist-variations.adoc[tag=checklist-variation-referrer]
+
+include::partial$checklist-variations.adoc[tag=checklist-availability-active]
+
+include::partial$checklist-variations.adoc[tag=checklist-variation-active]
+
+include::partial$checklist-variations.adoc[tag=checklist-net-stock]
+
+include::partial$checklist-variations.adoc[tag=checklist-sales-price]
+
+include::partial$checklist-variations.adoc[tag=checklist-images]
+
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-mapped-multi]
+
+include::partial$checklist-variations.adoc[tag=checklist-catalogue-active]
+
+:checklist-log-integration: pass:quotes[*Integration* = *eMAG*]
+
+include::partial$checklist-variations.adoc[tag=checklist-check-log]
