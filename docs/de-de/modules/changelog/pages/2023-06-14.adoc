@@ -6,7 +6,7 @@
 :startWeekDate: 8. Juni 2023
 :endWeekDate: 14. Juni 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/messenger-testphase-tag-entfernt-messenger-testphase-tag-removed/725005
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -134,6 +134,15 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
 [discrete]
+=== Amazon
+
+Auf beta und early und stable-Systemen wurden Artikel weder in den manuellen, noch in den automatischen Artikeldatenexport übernommen, wenn die Variante nicht mit dem Mandanten verknüpft war, obwohl die Auswahl *Alle Artikel* bei der Option *Shop-Artikel* unter *Einrichtung » Märkte » Amazon » Einstellungen » Konto öffnen » Tab: Artikeleinstellungen » Bereich: Exportfilter* gewählt war.
+
+Dazu kam es frühstens seit dem 07.06.2023 auf stable.
+
+Das Problem entstand durch das falsche Aufrufen einer Funktion bei der Umstellung auf die neuen Einstellungen im Hintergrund.
+
+[discrete]
 === Artikel (Neue UI)
 
 * Das Bearbeiten von Netto-Preisen in der neuen Artikel-UI ist wieder wie gewohnt möglich.
@@ -144,12 +153,17 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * In der Detailansicht von Abonnements wurde das Datum *Letzter Durchlauf* falsch angezeigt. Dies wurde behoben.
 * Die Filter werden nun überschrieben, wenn man von einer anderen UI in die Auftragsübersicht mit vorgegebenen Filtern weitergeleitet wird.
 * Der Fehler wurde behoben, dass die UI manchmal keine Aufträge anzeigt und leer bleibt, nach dem Tab-Wechsel.
+* In der Artikelliste in der Auftragsübersicht werden wieder die Gutscheinpositionen angezeigt.
+* Bei der Erstellung von Nachbestellungen aus einen Auftrag, ist es bei vererbten Lieferanteninformation (Varianten) zu den Fehler `Wrong variation supplier given for order item` gekommen. Dies wurde behoben.
+* Es wurde ein Problem behoben, wenn mehrere Positionen in einen Auftrag bei einen Lieferanten nachbestellt wurden. Dabei wurde teilweise die Lieferanten-Informationen (z.B. Lieferantenartikelnummer) für alle Positionen von der ersten gesendeten Position genutzt.
+* Wenn bei der editieren der Auftragspositionen in der neuen OrderUI der Steuersatz geändert wurde. Ist dieser auf den alten Wert zurückgesprungen. Dieses Verhalten wurde behoben.
 
 [discrete]
 === CRM
 
 * Das Menü *Einrichtung » CRM » Buchhaltung*, in dem man Einstellungen für die Anzeige in der OP-Liste vornehmen kann, war für einige Admin-Benutzer:innen nicht mehr sichtbar. Dieses Verhalten wurde behoben.
 * Obwohl die Berechtigung für die Sichtbarkeit der alten E-Mail-Vorlagen erteilt war, wurden diese bei Benutzern ohne Admin Rechte nicht angezeigt. Dieses Verhalten wurde behoben.
+* Die Variable für das voraussichtliche Versanddatum `order.formattedDates.estimatedShippingDate` wurde nicht immer mit einem Wert in der versendeten E-Mail befüllt. Dieses Verhalten wurde behoben.
 
 [discrete]
 === Prozesse
@@ -169,7 +183,12 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== plentyBI
 
+* Mit der neuen Berechnungsart *Retourenquote Artikel* bei der Kennzahl *Retourenquote* lässt sich nun die Quote auf Artikelebene berechnen. Die Retourenquote für Artikel wird berechnet, indem die Anzahl aller retournierten Artikel zusammengezählt wird. Dieses Ergebnis wird dann durch die Anzahl der insgesamt bestellten Artikel geteilt und mit 100 multipliziert.
++
+Diese Kennzahl steht euch als kostenlose Standard-Kennzahl zur Verfügung.
 
 '''
 
@@ -178,7 +197,30 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Amazon
 
+* Es wurde ein neues Pattern der SKU-Konfiguration für Amazon Accounts in der Benutzeroberfläche implementiert.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Das bisherige Verhalten des Scrollens (per Mausraud) innerhalb eines Eingabefeldes für Zahlen wurde geändert. Bisher erhöhte oder verringerte sich durch das Scrollen der Zahlwert des Eingebefeldes und gleichzeitig scrollte die Seite selbst. Nach dieser Änderung scrollt nur noch die Seite selbst. Dieses neue Verhalten wurde implementiert in folgenden UIs:
+** Neue Artikel UI
+** Preiskalkulationen
+** Barcodes
+** Einheiten
+** Suchsprachen
+** Bildereinstellungen
+** Eigenschaften
+** Eigenschaftengruppen
+** Tags
+** Lager
+
+[discrete]
+=== CRM
+
+* Du kannst jetzt direkt im Messenger-Portlet Konversationen öffnen, auf diese antworten und neue Nachrichten senden.
 
 '''
 
@@ -187,7 +229,19 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Wir haben das Verhalten korrigiert, dass man einzelne Eigenschaften in gewissen Konstellationen mehrfach hinzufügen konnte.
+* Eine Bestandskorrektur ist nun auch möglich, wenn der Bestand einer Variante in einem Lager 0 ist.
+* Der Warenbestands-Korrektur-Dialog im Bestandsbereich eines Artikels lässt sich wieder wie gewohnt öffnen.
+
+[discrete]
+=== Aufträge
+
+* In der Übersicht der Auftrags-UI erschien nach dem Zusammenklappen der Seitennavigation ein weißer Stelle neben der Tabelle der Auftragspositionen. Dies wurde behoben.
+* In der Auftrags-UI kann der Auftragstitel im Kompaktansicht angepasst werden, indem der Sperrstatus, der Referenzauftrag und die Mahnstufe hinzugefügt werden. Diese Informationen können in den MyView-Einstellungen hinzugefügt werden.
+* In der neuen Auftrags-UI waren bei der Filterung nach Herkünften die inaktiven Herkünfte, die nicht verfügbar sein sollten, in der Herkunftsliste sichtbar. Dies wurde behoben.
 
 --
 
@@ -201,9 +255,65 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/conradextension_6948[Conrad^]
+|1.3.0
+|-
+
+|link:https://marketplace.plentymarkets.com/dpdshippingservices_6320[DPD Versand Services^]
+|1.7.20
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexport_4763[Elastischer Export^]
+|1.7.2
+|-
+
+|link:https://marketplace.plentymarkets.com/fruugo_6875[Fruugo.com^]
+|1.3.7
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.15.1
+|-
+
+|link:https://marketplace.plentymarkets.com/googletagmanagerultimate_54789[Google Tag Manager + Conversions API - 18 Tools in einem^]
+|1.3.2
+|-
+
+|link:https://marketplace.plentymarkets.com/headerandmegamenu_55406[Header mit Mega Menü^]
+|2.1.1
+|-
+
+|link:https://marketplace.plentymarkets.com/mediamarkt_6918[Mediamarkt^]
+|1.1.1
+|-
+
+|link:https://marketplace.plentymarkets.com/metro_6600[Metro^]
+|2.3.4
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.4.0
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.2.8
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.17.2
+|-
+
+|link:https://marketplace.plentymarkets.com/voelknerextension_6949[Voelkner^]
+|1.3.0
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.14
+|-
+
+|link:https://marketplace.plentymarkets.com/woocommerce_5102[woocommerce.com^]
+|3.2.2
+|-
 
 |===
 
