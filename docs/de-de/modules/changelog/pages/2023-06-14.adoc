@@ -1,0 +1,324 @@
+= Changelog 14. Juni 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 8. Juni 2023
+:endWeekDate: 14. Juni 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/messenger-testphase-tag-entfernt-messenger-testphase-tag-removed/725005
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Das Feld *Mahnstufe* steht jetzt in der Kompakt und Tabellenansicht verfügbar.
+* In der Übersicht der neuen Auftrags-UI wurden Filter für Externe Artikel-ID (z.B. eBay-Artikelnummer), Externe Token-ID und Auftragspositionstyp hinzugefügt.
+* In der Detailansicht der neuen Auftrags-UI wird eine vorhandene Umsatzsteuer-ID an der Rechnungsadresse dargestellt.
+* In der Übersicht der neuen Auftrags-UI wird nun am Icon eingeblendet, wieviele Notizen für einen Auftrag bereits existieren.
+* Bei der Erstellung von Kindaufträgen werden nun die Attribute der Auftragsposition angezeigt.
+
+[discrete]
+=== Dokumente
+
+Ab sofort kann jede:r selbst entscheiden, wann und in welchem Umfang der DocumentBuilder zur Erstellung der Dokumentvorlagen genutzt wird. Unter dem Menüpunkt *Einrichtung » Dokumente* sind dann der DocumentBuilder und die Nummernkreise sowie die UI-Einstellungen in allen Systemen verfügbar. Über diese Einstellungs-UI kann man pro Dokumenttyp entscheiden, ob die alten Dokumentvorlagen oder der DocumentBuilder verwendet werden sollen.
+
+Was ist zu beachten?
+
+* Es wird sofort auf die Umstellung des Schalters in der Einstellungs-UI reagiert. Stellt also sicher, dass die Vorlagen für den entsprechenden Dokumenttyp vorhanden und (im Falle des DocumentBuilders) aktiviert sind, bevor ihr wechselt.
+* Es gibt Standardvorlagen für Rechnung, Gutschrift, Mahnung, dazugehörige Storno- und Korrekturbelege sowie den Lieferschein. Diese sind immer aktiv und sind als letzter Fallback eingebaut, falls keine andere passende Vorlage gefunden wird. Das heißt, selbst wenn noch keine eigene Vorlage erstellt wurde, kann eine Standardvorlage zur Erstellung von Dokumenten genutzt werden, falls für den entsprechenden Dokumenttyp der DocumentBuilder in der Einstellungs-UI ausgewählt wurde.
+* Nummernkreise werden ab sofort über die neue Nummernkreis UI für alle Dokumente erstellt und bearbeitet werden. Bestehende Nummernkreise wurden überführt und der alte Einstellungspunkt innerhalb der Dokumente wurde entfernt.
+* Mit dem Wechsel zum DocumentBuilder wird auch die neue Logik im Hintergrund aktiviert und die Dokumente werden asynchron erstellt.
+* Für alle neuen UIs stehen neue Benutzerrechte zur Verfügung. Alle Benutzerrechte und Sichtbarkeiten könnt ihr wie gewohnt im Backend einstellen.
+
+[IMPORTANT]
+.To-Do
+======
+Die asynchrone Erstellung erfordert Anpassungen an Ereignisaktionen und Prozessen.
+
+* Prozesse: In Prozessen, in denen Dokumente gedruckt werden sollen, muss die xref:automatisierung:subaktionen.adoc#192[Subaktion Generieren] vorher eingefügt werden. So wird sichergestellt, dass das Dokument zur Verfügung steht.
+* Ereignisaktionen: Sobald ein Dokument für eine Aktion zur Verfügung stehen muss, sollte dafür eine eigene Ereignisaktionen erstellt werden. Bestehende Ereignisaktionen sollten in diesem Fall voneinander getrennt werden. Habt ihr zum Beispiel eine gemeinsame Ereignisaktion für die Erstellung eines Dokuments und den Mailversand dieses Dokuments, solltet ihr diese Ereignisaktion trennen. So wird die Mail erst versendet, wenn das Dokument zur Verfügung steht.
+======
+
+link:https://forum.plentymarkets.com/t/ankuendigung-offene-beta-documentbuilder-ab-01-juni-announcement-open-beta-documentbuilder-from-june-1st/721015[Ankündigung]
+
+xref:auftraege:nummernkreise-festlegen.adoc[Handbuchseite Nummernkreise]
+
+xref:auftraege:document-builder.adoc[Handbuchseite DocumentBuilder]
+
+[discrete]
+=== Einrichtung
+
+Unser Ziel ist es, für euch die Einrichtung eures plentymarkets Systems deutlich zu vereinfachen. In diesem Zuge gibt es folgende Anpassungen.
+
+[discrete]
+==== Assistenten
+
+Mit Assistenten konnten wir die Einrichtung einzelner Bereiche vereinfachen. Dennoch sind wir mit dieser Technologie an Grenzen gestoßen. Nicht alle einzurichtenden Bereiche konnten gut mit Assistenten abgebildet werden. Wir haben uns dazu entschlossen, nicht weiter auf Assistenten zu setzen. Einige Assistenten haben wir bereits ersetzt, die restlichen werden schrittweise folgen. Übergangsweise werden die verbleibenden Assistenten in der Seitennavigation der Einstellungen in die thematisch passenden Menüpunkte umgezogen.
+
+Zudem erhalten Assistenten, die durch Plugins erstellt werden, einen eigenen Menüpunkt.
+
+[discrete]
+==== Umbau der Einrichtungs-Benutzeroberflächen
+
+Anstelle von Assistenten fahren wir zukünftig eine Doppelstrategie: Zum einen werden die Einrichtungs-Benutzeroberflächen neu gebaut und weiterhin nehmen wir euch durch Touren an die Hand, damit ihr schneller und Schritt für Schritt alle nötigen Einstellungen vornehmen könnt.
+
+Da wir nicht alles direkt umsetzen konnten, haben wir uns im ersten Schritt auf die Bereiche fokussiert, die euch den größten Wert bringen: Die Einrichtung der drei umsatzstärksten Verkaufskanäle über alle unsere Händler hinweg. Es handelt sich um Amazon, plentyShop und OTTO Market.
+
+Durch den Umbau der Benutzeroberflächen, die geführten Touren und den Wegfall der Assistenten schaffen wir ein einheitliches und klares Bild für unsere Einrichtung. Wir nutzen hiermit die vollen Möglichkeiten, die uns das aktuelle UI Framework bietet und geben euch gleichzeitig die notwendige Hilfestellung, das System zielgerichtet einzurichten.
+
+[discrete]
+==== Geführte Touren für Einrichtungen (neues Feature)
+
+Mit geführten Touren erreichen wir zwei Ziele. Zum einen helfen sie dabei, sich einfacher in Einrichtungs-Benutzeroberflächen zurechtzufinden, weil diese Touren euch Schritt für Schritt die Oberflächen erklären. Zum anderen haben wir die Touren einem höheren Ziel, wir haben es intern "Reise" genannt, zugeordnet. Eine dieser möglichen Reisen ist zum Beispiel Amazon Eigenversand (MFN) einrichten. Somit erreichen wir, dass ihr euch einfacher in unseren Einrichtungs-Benutzeroberflächen zurecht findet und zum anderen wisst ihr auch genau, was alles zu erledigen ist, um den Zweck der Reise zu erfüllen.
+
+Die Touren werden als erledigt angezeigt, sobald ihr diese komplett durchlaufen habt. Ihr könnt Touren aber auch als erledigt markieren, ohne sie zu durchlaufen oder auch wieder zurückzusetzen. Touren können in jedem Zustand beliebig oft gestartet oder auch zwischendurch geschlossen werden. Eine geschlossene Tour wird dann bei erneutem Aufrufen von vorne gestartet.
+
+Die geführten Touren findet ihr unter *Einrichtung » Geführte Touren*.
+
+Wenn ihr während einer Tour in eine andere Oberfläche wechseln müsst (z.B. Aufträge), z.B. weil ein Telefonat euch unterbricht und ihr etwas nachschauen müsst, dann könnt ihr über den Tab Einrichtung wieder zur Tour zurückkehren.
+
+Wir werden diese geführten Touren nach und nach ausbauen, um euch bei weiteren Einrichtungen zu unterstützen.
+
+[discrete]
+==== Geführte Touren für täglich genutzte Benutzeroberflächen
+
+Mit den geführten Touren für die Einrichtung haben wir einen ersten großen Schritt getan, um die Einrichtung deutlich zu vereinfachen. Als nächsten Schritt wollen wir diese Technologie verwenden, um euch damit die Nutzung von täglich verwendeten Benutzeroberflächen wie Artikel oder Aufträge näherzubringen und zu erklären. Hierfür haben die Planungen bereits begonnen.
+
+[discrete]
+=== plentyBI
+
+* Im Bearbeitungsmenü für Tabellen im Menü *plentymarkets Logo (Start) » Dashboard* kannst du nun auswählen, wie viele Nachkommastellen für die Kennzahlergebnisse angezeigt werden. Dazu haben wir die neue Option *Nachkommastellen* hinzugefügt. Per Klick auf diese Option kannst du bis zu 4 Nachkommastellen für Ergebnisse von Kennzahlen in Tabellen anzeigen lassen. Weitere Informationen zur Einstellung findest du auf der Handbuchseite xref:business-entscheidungen:myview-dashboard.adoc#intable-decimal-places[Dashboard] (klappe die Box namens "Einstellungen für Tabellen vornehmen" auf).
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Die Felder *Lager* und *Lager-ID* wurden zu einem Feld verbunden. Per MyView-Einstellung lässt sich nun auswählen, ob ID, Name oder ID und Name angezeigt werden soll.
+* In der neuen Auftrags-UI war der Umrechnungskurs nicht mehr änderbar über die Benutzeroberfläche. Diese Möglichkeit wurde wieder zur Verfügung gestellt.
+
+[discrete]
+=== CRM
+
+* Wenn für einen Kontakt mehr als 2 Bankdatensätze gespeichert sind, werden die Bankdaten in Form einer Tabelle angezeigt. In der Tabelle kannst du die Reihenfolge der Spalten nach deinen Wünschen anzeigen lassen. Wenn maximal 2 Bankdatensätze für den Kontakt gespeichert sind, werden diese weiterhin in Form von Kacheln angezeigt.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+Auf beta und early und stable-Systemen wurden Artikel weder in den manuellen, noch in den automatischen Artikeldatenexport übernommen, wenn die Variante nicht mit dem Mandanten verknüpft war, obwohl die Auswahl *Alle Artikel* bei der Option *Shop-Artikel* unter *Einrichtung » Märkte » Amazon » Einstellungen » Konto öffnen » Tab: Artikeleinstellungen » Bereich: Exportfilter* gewählt war.
+
+Dazu kam es frühstens seit dem 07.06.2023 auf stable.
+
+Das Problem entstand durch das falsche Aufrufen einer Funktion bei der Umstellung auf die neuen Einstellungen im Hintergrund.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Das Bearbeiten von Netto-Preisen in der neuen Artikel-UI ist wieder wie gewohnt möglich.
+
+[discrete]
+=== Aufträge
+
+* In der Detailansicht von Abonnements wurde das Datum *Letzter Durchlauf* falsch angezeigt. Dies wurde behoben.
+* Die Filter werden nun überschrieben, wenn man von einer anderen UI in die Auftragsübersicht mit vorgegebenen Filtern weitergeleitet wird.
+* Der Fehler wurde behoben, dass die UI manchmal keine Aufträge anzeigt und leer bleibt, nach dem Tab-Wechsel.
+* In der Artikelliste in der Auftragsübersicht werden wieder die Gutscheinpositionen angezeigt.
+* Bei der Erstellung von Nachbestellungen aus einen Auftrag, ist es bei vererbten Lieferanteninformation (Varianten) zu den Fehler `Wrong variation supplier given for order item` gekommen. Dies wurde behoben.
+* Es wurde ein Problem behoben, wenn mehrere Positionen in einen Auftrag bei einen Lieferanten nachbestellt wurden. Dabei wurde teilweise die Lieferanten-Informationen (z.B. Lieferantenartikelnummer) für alle Positionen von der ersten gesendeten Position genutzt.
+* Wenn bei der editieren der Auftragspositionen in der neuen OrderUI der Steuersatz geändert wurde. Ist dieser auf den alten Wert zurückgesprungen. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== CRM
+
+* Das Menü *Einrichtung » CRM » Buchhaltung*, in dem man Einstellungen für die Anzeige in der OP-Liste vornehmen kann, war für einige Admin-Benutzer:innen nicht mehr sichtbar. Dieses Verhalten wurde behoben.
+* Obwohl die Berechtigung für die Sichtbarkeit der alten E-Mail-Vorlagen erteilt war, wurden diese bei Benutzern ohne Admin Rechte nicht angezeigt. Dieses Verhalten wurde behoben.
+* Die Variable für das voraussichtliche Versanddatum `order.formattedDates.estimatedShippingDate` wurde nicht immer mit einem Wert in der versendeten E-Mail befüllt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* In den Prozessen konnte es vorkommen, dass ein altes nicht mehr gültiges Storno-Dokument geladen wurde, anstatt ein neues zu erstellen. Dieses Verhalten wurde behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== plentyBI
+
+* Mit der neuen Berechnungsart *Retourenquote Artikel* bei der Kennzahl *Retourenquote* lässt sich nun die Quote auf Artikelebene berechnen. Die Retourenquote für Artikel wird berechnet, indem die Anzahl aller retournierten Artikel zusammengezählt wird. Dieses Ergebnis wird dann durch die Anzahl der insgesamt bestellten Artikel geteilt und mit 100 multipliziert.
++
+Diese Kennzahl steht euch als kostenlose Standard-Kennzahl zur Verfügung.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+* Es wurde ein neues Pattern der SKU-Konfiguration für Amazon Accounts in der Benutzeroberfläche implementiert.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Das bisherige Verhalten des Scrollens (per Mausraud) innerhalb eines Eingabefeldes für Zahlen wurde geändert. Bisher erhöhte oder verringerte sich durch das Scrollen der Zahlwert des Eingebefeldes und gleichzeitig scrollte die Seite selbst. Nach dieser Änderung scrollt nur noch die Seite selbst. Dieses neue Verhalten wurde implementiert in folgenden UIs:
+** Neue Artikel UI
+** Preiskalkulationen
+** Barcodes
+** Einheiten
+** Suchsprachen
+** Bildereinstellungen
+** Eigenschaften
+** Eigenschaftengruppen
+** Tags
+** Lager
+
+[discrete]
+=== CRM
+
+* Du kannst jetzt direkt im Messenger-Portlet Konversationen öffnen, auf diese antworten und neue Nachrichten senden.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Wir haben das Verhalten korrigiert, dass man einzelne Eigenschaften in gewissen Konstellationen mehrfach hinzufügen konnte.
+* Eine Bestandskorrektur ist nun auch möglich, wenn der Bestand einer Variante in einem Lager 0 ist.
+* Der Warenbestands-Korrektur-Dialog im Bestandsbereich eines Artikels lässt sich wieder wie gewohnt öffnen.
+
+[discrete]
+=== Aufträge
+
+* In der Übersicht der Auftrags-UI erschien nach dem Zusammenklappen der Seitennavigation ein weißer Stelle neben der Tabelle der Auftragspositionen. Dies wurde behoben.
+* In der Auftrags-UI kann der Auftragstitel im Kompaktansicht angepasst werden, indem der Sperrstatus, der Referenzauftrag und die Mahnstufe hinzugefügt werden. Diese Informationen können in den MyView-Einstellungen hinzugefügt werden.
+* In der neuen Auftrags-UI waren bei der Filterung nach Herkünften die inaktiven Herkünfte, die nicht verfügbar sein sollten, in der Herkunftsliste sichtbar. Dies wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/conradextension_6948[Conrad^]
+|1.3.0
+|-
+
+|link:https://marketplace.plentymarkets.com/dpdshippingservices_6320[DPD Versand Services^]
+|1.7.20
+|-
+
+|link:https://marketplace.plentymarkets.com/elasticexport_4763[Elastischer Export^]
+|1.7.2
+|-
+
+|link:https://marketplace.plentymarkets.com/fruugo_6875[Fruugo.com^]
+|1.3.7
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.15.1
+|-
+
+|link:https://marketplace.plentymarkets.com/googletagmanagerultimate_54789[Google Tag Manager + Conversions API - 18 Tools in einem^]
+|1.3.2
+|-
+
+|link:https://marketplace.plentymarkets.com/headerandmegamenu_55406[Header mit Mega Menü^]
+|2.1.1
+|-
+
+|link:https://marketplace.plentymarkets.com/mediamarkt_6918[Mediamarkt^]
+|1.1.1
+|-
+
+|link:https://marketplace.plentymarkets.com/metro_6600[Metro^]
+|2.3.4
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.4.0
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.2.8
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.17.2
+|-
+
+|link:https://marketplace.plentymarkets.com/voelknerextension_6949[Voelkner^]
+|1.3.0
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.14
+|-
+
+|link:https://marketplace.plentymarkets.com/woocommerce_5102[woocommerce.com^]
+|3.2.2
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
