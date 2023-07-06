@@ -6,7 +6,8 @@
 :startWeekDate: 29. Juni 2023
 :endWeekDate: 5. Juli 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab dem Eintrag nach diesem weitermachen: https://forum.plentymarkets.com/t/new-order-ui-saved-order-changes-are-propagated-neue-auftrags-ui-gespeicherte-auftragsaenderungen-werden-weitergegeben/727658
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/shop-sperren-jetzt-pro-mandant-moeglich-lock-store-setting-becomes-client-specific/727176
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -51,6 +52,16 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
 [discrete]
+=== Dokumente
+
+* Auch bei aktiven Nummernkreisen können in der Detailansicht nun die einzelnen Optionen der Grundeinstellungen geöffnet werden um eine bessere Übersicht der ausgewählten Einstellungen wie Standorte, Herkünfte, Rechnung- und Lieferländer zu haben.
+* Das alte Setup der Nummernkreise ist nun wieder sichtbar, kann aber nicht mehr aktualisiert / verändert werden. Diese Ansicht dient alleine dem Abgleich bzw. der Nachvollziehbarkeit.
++
+Zusätzlich wurde in der Nummernkreis-UI ein neuer Aktionsbutton eingeführt, mit dem die Migration der (alten) bestehenden Nummernkreise manuell erneut ausgeführt werden kann. Wird dieser genutzt, werden alle (aktive und inaktive) Nummernkreise die in der neuen UI gesehen werden können bereinigt und danach die (alten) bestehenden neu angelegt.
+* In der Auswahl für Rechnungs- und Lieferland waren bisher nur *aktive* Länder aufgelistet.
+Hier wurde die Auswahl um die *Backoffice aktiven* Länder erweitert.
+
+[discrete]
 === Ereignisaktionen
 
 * Ab sofort wird folgendes Recht benötigt, um Tags zu laden: *Einrichtung > Einstellungen > Tags Betrachten*
@@ -74,15 +85,43 @@ Da dies eine Änderung im Hintergrund ist, besteht kein To Do für Händler:inne
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
 [discrete]
+=== Amazon
+
+Bisher haben wir für alle Plattformen die Daten für die VCS lite abgefragt. Dies ist bis vor kurzem nicht mehr von Amazon so gewollt und gab uns deshalb in den Berichten folgende Fehlermeldung zurück:
+
+`Your marketplaceIdList is invalid. Currently we only support DE BE IT FR ES SE GB PL NL`
+
+[IMPORTANT]
+.Betroffen
+======
+Betroffen waren Händler, bei denen im Seller-Central TR aktiviert ist (ob es genutzt wird oder nicht).
+======
+
+Deshalb gab es ggf. keine VCS Werte in den Berichten und dadurch auch keine Rechnungen in betroffenen Systemen.
+
+Wir rufen jetzt nur noch die vorgesehenen Plattformen ab und bekommen daher auch wieder alle Daten. Da in den Berichten die Werte aller Aufträge/Gutschriften etc. aus den letzten 60 Tagen enthalten sind, für welche Amazon noch eine Forderung an euch Händler hat (also Rechnungsdokument, Gutschriftsdokument) sollten die bisher fehlenden Dokumente nachgeholt werden und kein Handlungsbedarf eurerseits bestehen.
+
+[discrete]
 === CRM
 
 * In der Auftragstabelle am Kontakt wurde in der Spalte *Zahlungsarten* kein Wert angegeben.
 Dieser Fehler wurde nun behoben.
 
 [discrete]
+=== Dokumente
+
+* Bei der Anlage mehrerer Nummernkreise nacheinander konnte es dazu kommen, dass der Button zum Speichern deaktiviert bliebt und nicht genutzt werden konnte. Dies wurde behoben.
+* In einigen Fälle wurde die *Aktionen*-Spalte nicht angezeigt und konnte nur über aus- und einblenden sichtbar gemacht werden. Dies wurde behoben.
+
+[discrete]
 === Ereignisaktionen
 
 * Es gab in den Ereignisaktionen das Problem, dass nach dem Ändern des Namens eines Tags, immer noch der alte Name angezeigt wurde. Dieses Verhalten wurde behoben. Des Weiteren wird nun auch die korrekte Farbe des Tags angezeigt.
+
+[discrete]
+=== Fulfillment
+
+* Nach einer erfolgreichen Stornierung oder einem Zurücksetzen einer Sendung, wurde der Anmeldestatus nicht direkt aktualisiert und eine Sendung stand weiterhin als registriert in der Übersicht. Dieses Verhalten wurde behoben.
 
 [discrete]
 === Rechteverwaltung
@@ -114,7 +153,41 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* In der Auftrags UI werden nach dem Speichern von Änderungen an einem Auftrag diese auch in der Auftragsübersicht dargestellt. Dieses Verhalten wurde auch für die Bearbeitung der Auftragspositionen implementiert. Wenn Änderungen an Auftragspositionen gespeichert werden, werden diese sowohl in der Übersichtstabelle als auch in den Auftragsdetails dargestellt.
+
+[discrete]
+=== CRM
+
+* Du kannst nun in EmailBuilder-Vorlagen Variablen für die URL zum Variantenbild in vier verschiedenen Bildgrößen verwenden:
+** *Variantenbild URL (Vorschau Größe)*: `orderItem.formattedImageUrlSize.preview`
+** *Variantenbild URL (2. Vorschau Größe)*: `orderItem.formattedImageUrlSize.secondPreview`
+** *Variantenbild URL (Mittlere Größe)*: `orderItem.formattedImageUrlSize.middle`
+** *Variantenbild URL (Volle Größe)*: `orderItem.formattedImageUrl`
++
+[NOTE]
+.Neue Benennung
+======
+Die Variable *Variantenbild URL (Volle Größe)* hieß bisher *URL zum Variantenbild*.
+======
+
+[discrete]
+=== Kataloge
+
+* Du kannst im Artikel-Katalog nun einen Varianten-IDs Filter nutzen.
+
+[discrete]
+=== plentyBI
+
+* Ab sofort steht im Menü *Einrichtung » plentyBI » Kennzahlen* die neue kostenlose Kennzahl *Listings (Live)* zur Verfügung. Diese Kennzahl erlaubt es euch, Daten zu im System vorhandenen Listings mithilfe verschiedener Kriterien auszuwerten. Wie auch das Widget auf dem alten Dashboard beschränkt sich die Auswertung auf den Zeitraum des Vortages bis zum aktuellen Tag. Folgende Filtermöglichkeiten stehen zur Verfügung:
+** Marktplatz (eBay, Hood, Ricardo)
+** Erfolgreich ( ja / nein)
+** Prüfung (Erfolgreich / Fehlgeschlagen)
+
++
+*_Hinweis:_* Aufgrund der Konzeption und Besonderheiten dieser Kennzahl solltet ihr die Kennzahl auf dem Dashboard in Form von Tabellen oder Kacheln und nicht als Diagramme einbinden.
 
 '''
 
@@ -123,7 +196,17 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Dokumente
 
+* Durch das Löschen von externen Rechnungen und Gutschriften wurde bisher die Dokumentnummer nicht von dem zugehörigen Auftrag entfernt. Dies wurde angepasst.
++
+Zusätzlich wird nun beim Löschen geprüft ob noch eine ältere externe Rechnungen / Gutschriften existierenden und wenn vorhanden wird die Dokumentnummer am Auftrag entsprechend der nun aktuellsten externen Rechnung / Gutschrift an dem Auftrag hinterlegt.
+
+[discrete]
+=== Fulfillment
+
+* Wenn in der Übersicht des Versand-Center verschiedene Aufträge ausgewählt werden, wird diese Auswahl nun erhalten, wenn man wieder zurück wechselt, z.B. von der Detailansicht oder Auftrags-UI zurück zur Versand-Center Übersicht.
 
 '''
 
@@ -132,7 +215,24 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Die Gruppenfunktion zum Verknüpfen von Eigenschaften in der neuen Artikel-UI verknüpft nun korrekt alle gewählten Eigenschaften.
+
+[discrete]
+=== Aufträge
+
+* Wurden bei der Anlage oder beim Bearbeiten von Aufträgen fehlerhafte Tag Daten übergeben, so wurden die vorhandenen Tags gelöscht. Dies wurde behoben.
+* Die Tabelle der Auftragspositionen lädt nun nicht mehr endlos, wenn keine Auftragspositionen vorhanden sind.
+* Der *Zahlungsstatus* wird bei Auftragsarten die keine Zahlung besitzen können nicht mehr angezeigt: *Lieferungsauftrag*, *Angebot*, *Retoure*, *Vorbestellung* und *Teil-Lieferung*.
+* Die *Alles auswählen*-Logik wurde so angepasst, dass nur noch alle gefilterten Einträge ausgewählt werden und nicht mehr alle Einträge.
+
+[discrete]
+=== CRM
+
+* Im E-Mail-Service der Nachbestellungen wurde auch nach dem Wechsel der Sprache immer die Vorlagensprache deutsch angezeigt. Dieser Fehler wurde nun behoben.
+* In einigen Systemen kam es in EmailBuilder vor, dass die Variable `orderItem.formattedImageUrl` keinen Wert ausgegeben hat. Dieses Verhalten wurde behoben.
 
 --
 
@@ -146,13 +246,47 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/dhlshipping_4871[DHL Shipping (Versenden)^]
+|3.1.26
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.3.3
+|-
 
 |===
 
 Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+plentyWarehouse-App::
++
+--
+
+[discrete]
+=== Geändert
+
+Folgende Änderungen wurden in Version 1.0.13 der *plentymarkets Warehouse App* veröffentlicht.
+
+* Wenn die Option *Einkaufspreis abfragen* in den Einstellungen zur Funktion *Wareneingang* aktiviert war, wurden User zur Eingabe des Einkaufspreises aufgefordert. Der entsprechende Dialog wurde auch angezeigt, wenn die vorgegebenen Preise zuvor bestätigt wurden. Dieses Verhalten wurde geändert, sodass die Abfrage des Einkaufspreises nur einmalig stattfindet, wenn ein Artikel zum Wareneingang hinzugefügt wird.
+* Bei Verbindungsabbrüchen konnten Artikel in einer Pickliste nicht weiter gepickt werden. Wir haben im Hintergrund eine Änderung vorgenommen, sodass der Pickvorgang auch ohne Internetverbindung fortgesetzt werden kann.
+* Ab sofort werden die im Backend hinterlegten Rechte für die plentyWarehouse App berücksichtigt. Weitere Informationen findet ihr link:https://forum.plentymarkets.com/t/to-do-neue-rechte-fuer-rollen-in-plentywarehouse-new-rights-for-roles-in-plentywarehouse/721648[in dieser Ankündigung].
+
+'''
+
+[discrete]
+=== Behoben
+
+Folgende Probleme wurden in Version 1.0.13 der *plentymarkets Warehouse App* behoben.
+
+* In der Artikelansicht der Funktion *Rollende Kommissionierung* wurden Felder für Attribute angezeigt, auch wenn keine Attribute für den Artikel gesetzt sind. Dieses Verhalten wurde behoben.
+* Nachdem über einen Shortcut Artikel umgebucht wurden, wurden die Anzeige der Artikeldaten innerhalb der App nicht korrekt aktualisiert. Dieses Verhalten wurde behoben.
+
+Folgende Probleme wurden in Version 1.0.14 der *plentymarkets Warehouse App* behoben.
+
+* Innerhalb der Funktion *Picklisten* wurde die Auswahl, die zuvor für die Einstellung *Einzelerfassung bis Menge* getroffen wurde, falsch berücksichtigt. Dieses Verhalten wurde behoben.
+* Innerhalb der Funktion *Picklisten* war es nicht mehr möglich, bereits gepickte Artikel wieder zurückzulegen. Dieses Verhalten wurde behoben.
 
 --
 
