@@ -1,0 +1,270 @@
+= Changelog 12. Juli 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 6. Juli 2023
+:endWeekDate: 12. Juli 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/prozesse-retouren-mit-tag-konnten-nicht-bearbeitet-werden-returns-with-tag-could-not-be-handled/728645
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* In der Auftrags UI werden nach dem Speichern von Änderungen an einem Auftrag diese auch in der Auftragsübersicht dargestellt. Dieses Verhalten wurde auch für die Bearbeitung der Auftragspositionen implementiert. Wenn Änderungen an Auftragspositionen gespeichert werden, werden diese sowohl in der Übersichtstabelle als auch in den Auftragsdetails dargestellt.
+
+[discrete]
+=== CRM
+
+* Du kannst nun in EmailBuilder-Vorlagen Variablen für die URL zum Variantenbild in vier verschiedenen Bildgrößen verwenden:
+** *Variantenbild URL (Vorschau Größe)*: `orderItem.formattedImageUrlSize.preview`
+** *Variantenbild URL (2. Vorschau Größe)*: `orderItem.formattedImageUrlSize.secondPreview`
+** *Variantenbild URL (Mittlere Größe)*: `orderItem.formattedImageUrlSize.middle`
+** *Variantenbild URL (Volle Größe)*: `orderItem.formattedImageUrl`
++
+[NOTE]
+.Neue Benennung
+======
+Die Variable *Variantenbild URL (Volle Größe)* hieß bisher *URL zum Variantenbild*.
+======
+
+[discrete]
+=== Kataloge
+
+* Du kannst im Artikel-Katalog nun einen Varianten-IDs Filter nutzen.
+
+[discrete]
+=== plentyBI
+
+* Ab sofort steht im Menü *Einrichtung » plentyBI » Kennzahlen* die neue kostenlose Kennzahl *Listings (Live)* zur Verfügung. Diese Kennzahl erlaubt es euch, Daten zu im System vorhandenen Listings mithilfe verschiedener Kriterien auszuwerten. Wie auch das Widget auf dem alten Dashboard beschränkt sich die Auswertung auf den Zeitraum des Vortages bis zum aktuellen Tag. Folgende Filtermöglichkeiten stehen zur Verfügung:
+** Marktplatz (eBay, Hood, Ricardo)
+** Erfolgreich ( ja / nein)
+** Prüfung (Erfolgreich / Fehlgeschlagen)
+
++
+*_Hinweis:_* Aufgrund der Konzeption und Besonderheiten dieser Kennzahl solltet ihr die Kennzahl auf dem Dashboard in Form von Tabellen oder Kacheln und nicht als Diagramme einbinden.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* In der Auftrags-UI wurden eine Reihe von Verbesserungen unter der Haube vorgenommen, damit die UI schneller lädt. Eine Änderung wird jedoch auch in der UI sichtbar sein. Eine Reihe von Spalten in der Tabelle der Auftragspositionen, die nur Zahlen enthalten (z.B. IDs), sind nicht mehr größenveränderbar, aber die Breite der Spalten ist gerade so, dass sowohl der Titel als auch der Wert hineinpassen. Die Größe folgender Spalten kann nicht mehr geändert werden:
+** Länge
+** Varianten-ID
+** Nachbestellungs-ID
+** Breite
+** Bruttopreis
+** Nettopreis
+** Gewicht
+** Mehrwertsteuer
+** Rabatt
+** Artikel-ID
+** Menge
+** Aufpreis
+** Eigenschafts-ID
+** Gesamtnettobetrag
+** Gesamtbruttobetrag
+** Originalpreis netto
+** Gewinnspanne
+
+[discrete]
+=== Dokumente
+
+* Durch das Löschen von externen Rechnungen und Gutschriften wurde bisher die Dokumentnummer nicht von dem zugehörigen Auftrag entfernt. Dies wurde angepasst.
++
+Zusätzlich wird nun beim Löschen geprüft ob noch eine ältere externe Rechnungen / Gutschriften existierenden und wenn vorhanden wird die Dokumentnummer am Auftrag entsprechend der nun aktuellsten externen Rechnung / Gutschrift an dem Auftrag hinterlegt.
+
+[discrete]
+=== Fulfillment
+
+* Wenn in der Übersicht des Versand-Center verschiedene Aufträge ausgewählt werden, wird diese Auswahl nun erhalten, wenn man wieder zurück wechselt, z.B. von der Detailansicht oder Auftrags-UI zurück zur Versand-Center Übersicht.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* In manchen Fällen konnten Adressen für Amazon Aufträge aus der Region Nordamerika nicht importiert werden, wenn das Lieferland Japan ist. Dieses Verhalten wurde behoben.
++
+[IMPORTANT]
+.To-Do
+======
+Aufträge, die dies betrifft, müssten erneut in Status 1 geschoben werden bzw. der Auftrag muss eine Aktualisierung des Änderungszeitstempels erhalten.
+======
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Die Gruppenfunktion zum Verknüpfen von Eigenschaften in der neuen Artikel-UI verknüpft nun korrekt alle gewählten Eigenschaften.
+
+[discrete]
+=== Aufträge
+
+* Wurden bei der Anlage oder beim Bearbeiten von Aufträgen fehlerhafte Tag Daten übergeben, so wurden die vorhandenen Tags gelöscht. Dies wurde behoben.
+* Die Tabelle der Auftragspositionen lädt nun nicht mehr endlos, wenn keine Auftragspositionen vorhanden sind.
+* Der *Zahlungsstatus* wird bei Auftragsarten die keine Zahlung besitzen können nicht mehr angezeigt: *Lieferungsauftrag*, *Angebot*, *Retoure*, *Vorbestellung* und *Teil-Lieferung*.
+* Die *Alles auswählen*-Logik wurde so angepasst, dass nur noch alle gefilterten Einträge ausgewählt werden und nicht mehr alle Einträge.
+* Es wurde ein Fehler behoben, bei dem die Preise beim Bearbeiten von Auftragspositionen manchmal auf 0 springen.
+* In der neuen Auftrags-UI hat der kompakte Modus die Scroll-Position verloren, wenn man außerhalb der Auftragsübersichts-UI navigierte. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Im E-Mail-Service der Nachbestellungen wurde auch nach dem Wechsel der Sprache immer die Vorlagensprache deutsch angezeigt. Dieser Fehler wurde nun behoben.
+* In einigen Systemen kam es in EmailBuilder vor, dass die Variable `orderItem.formattedImageUrl` keinen Wert ausgegeben hat. Dieses Verhalten wurde behoben.
+* Beim Empfangen von externen Mails im Messenger hat die Zuordnung von Kontakt, Auftrag und Konversation nicht in allen Fällen funktioniert. Dieser Fehler wurde behoben.
+* Beim Versenden einer Vorlage von einem Auftrag der dem zweiten Mandanten zugeordnet ist wurde für den Versand das E-Mail-Konto des ersten Mandanten genommen und als Absender angezeigt. Ebenso wurde die falsche Signatur durch die Variable ausgegeben. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Folgende Problem wurden in DocumentBuilder behoben:
+** Wert der Variable für `Lieferant-Artikelbezeichnung` wurde nicht korrekt gefüllt
+** Datumsfelder von Auftragspositionen wurden nicht als Datum formatiert
+** Formatierung von den Variablen `Attributwerte` von Auftragspositionen wurde teilweise nicht korrekt angewendet
+** Der Lagerparameter bei Erstellung von Lieferscheinen wurde nicht beachtet
+
+[discrete]
+=== OTTO Market
+
+* Durch einen Fehler bei der Verarbeitung von OTTOs Belegdaten, wurden nach Auslösen der Versandbestätigung Belege nicht automatisch importiert. Dieses Verhalten wurde korrigiert.
++
+[IMPORTANT]
+.To-Do
+======
+Ein nachträglicher Import von fehlenden Belegen findet nicht statt. Bitte wende dich im Forum an einen Customer Success Engineer für einen nachträglichen Import.
+======
+
+[discrete]
+=== Prozesse
+
+* In den Prozessen kam es dazu, dass nicht alle Fehlermeldungen angezeigt wurden. Dieser Fehler wurde behoben.
+* Es ist vorgekommen das mehr Dokumente gedruckt oder gespeichert wurden als gewünscht über die Prozesse. Hier sind die Subaktionen Speichern und Drucken betroffen mit und ohne der Funktion Sammeldokument. Wenn mehrere Subaktionen nacheinender genutzt wurden wir z.B. Drucken oder Speichern. Dieser Fehlern wurde behoben.
+
+[discrete]
+=== Shopify-App
+
+* Im Falle einer Packstation als Lieferadresse bei Aufträgen von Shopify, wird die Lieferadresse des Auftrags nun ordnungsgemäß als Packstation importiert. Die Shopify-App erkennt eine Lieferadresse als Packstation, wenn das Wort "Packstation" und die Packstationsnummer im Feld `address1` durch Shopify bereitgestellt wird. In diesem Fall wird die Lieferadresse als DHL Packstation in plentysystems angelegt. Die Postnummer wird aus dem Shopify Feld `address2` importiert. Die Packstationsnummer wird im Feld `DHL Packstation` und die Postnummer im gleichnamigen Feld gespeichert.
+
+[discrete]
+=== Tags
+
+* Nach einer Zeicheneingabe in einer Tag-Suche wurden die vorgeschlagenen Tags nicht aktualisiert. Dieser Fehler ist jetzt behoben. Folgende Bereiche waren Betroffen:
+** alte Artikel UI
+** Prozesse
+** Ereignisse
+** Kontakt / Ticket
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* In der Auftrags-UI werden nach dem Speichern von Änderungen an einem Auftrag diese auch in der Auftragsübersicht dargestellt. Dieses Verhalten wurde auch für die Bearbeitung der Auftragspositionen implementiert. Wenn Änderungen an Auftragspositionen gespeichert werden, werden diese sowohl in der Übersichtstabelle als auch in den Auftragsdetails dargestellt.
+* Die Felder im Kompaktmodus haben jetzt ein neues Aussehen.
++
+Um den Kompaktmodus weiter zu verbessern und die Felder besser zu unterscheiden, haben die Kompaktfelder jetzt ein neues Aussehen. Jedes Feld wird mit einem grauen Hintergrund und abgerundeten Ecken dargestellt.
++
+Die Standardfarbe für die Hervorhebung der Felder bleibt unverändert und sorgt für Vertrautheit und Benutzerfreundlichkeit. Sowohl das Standard-Ansichten-Set als auch alle zuvor gespeicherten Ansichten-Sets behalten ihre ursprünglichen Farben. Die neuen Designverbesserungen fügen sich nahtlos in die bestehenden Ansichtssätze ein.
+
+[discrete]
+=== Fulfillment
+
+* Du kannst ab jetzt im Versand-Center den Filter für die externe Auftragsnummer finden. Um die externe Auftragsnummer in der Übersicht sehen zu können, füge die Spalte über die Konfiguration (material:settings[]) hinzu.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== plentyShop
+
+* Die Einstellung *Shop sperren* kann jetzt genutzt werden um plentyShops von individuellen Mandanten zu sperren. Das entsprechende Menü wurde vorher nur beim Hauptmandanten angezeigt. Es ist nun für alle Mandanten an dieser Stelle auffindbar: *Einrichtung » Mandant » Mandanten wählen » Webshop » Shop sperren*.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.15.2
+|Die Übergabe einer Sendungsnummer ist bei Versandbestätigungen an Galaxus ab sofort verpflichtend. Die Ereignisaktion *Versandbestätigung an Galaxus melden* wirft ab jetzt einen Fehler und hinterlegt eine entsprechende Auftragsnotiz, wenn die Paketnummer im Auftrag nicht hinterlegt ist.
+
+|link:https://marketplace.plentymarkets.com/elasticexportidealode_4723[idealo.de^]
+|3.4.6
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.5.4
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.3.2
+|Aktive PayPal-Konten müssen wieder das Onboarding durchlaufen in dem auf *Konto Verbinden* in der Kontodetailansicht geklickt wird.
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
