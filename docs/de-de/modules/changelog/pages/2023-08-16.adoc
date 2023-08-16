@@ -1,0 +1,203 @@
+= Changelog 16. August 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 10. August 2023
+:endWeekDate: 16. August 2023
+
+// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+In der neuen Artikel-UI ist es nun möglich, Artikel- und Variantendaten direkt in der Tabelle zu bearbeiten. Dieser Bearbeitungsmodus beinhaltet zudem eine Undo / Redo Funktionalität und vor dem Speichern werden die Änderungen noch einmal zur Überprüfung angezeigt.
+
+Dieser Bearbeitungsmodus ist in der Standardansicht der Übersicht nicht automatisch vorhanden, sondern muss in einer eigenen Ansicht aktiviert werden.
+
+*Wie greife ich auf den Bearbeitungsmodus zu?*
+
+Dazu müsst ihr eine eigene Ansicht erstellen und konfigurieren:
+
+. Erstellt eine neue Ansicht.
+. In der neuen Ansicht, gebt den Button für das Wechseln zum Editiermodus frei.
+. Nun könnt ihr in eurer Ansicht zum Bearbeitungsmodus wechseln.
+
+*Welche Daten lassen sich in der Übersicht bearbeiten?*
+
+Steht sofort zu Verfügung:
+
+* Markierung 1
+* Markierung 2
+* Hersteller
+* Variante ist aktiv
+* Variantennummer
+* Variantenname
+* Externe Id
+* Position
+* Verfügbarkeit (Angezeigte Lieferzeit)
+
+Befindet sich in Entwicklung:
+
+* Barcodes
+* Artikelnamen 1, 2 und 3
+* Verkaufspreise
+
+*Welche Besonderheiten gibt es?*
+
+* Vererbte Felder und Vererbungsstatus werden als solche im jeweiligen Element sichtbar gemacht.
+* Änderungen von vererbbaren Feldern an der Hauptvariante werden für jede aufgelistete zugehörige Variante angezeigt, wenn diese die Vererbung dafür aktiv hat.
+* Änderungen in Feldern, die gerade geerbt sind, deaktivieren die Vererbung für dieses Feld.
+* Änderungen von Artikeldaten (Markierungen, Name 1, 2, 3 und Hersteller) werden für jede aufgelistete Variante dieses Artikels angezeigt.
+* Beim Speichern gibt es eine bestimmte Reihenfolge: Zuerst werden die Hauptvarianten gespeichert, dann alle nicht-Hauptvarianten. Parallel dazu werden die Artikeländerungen gespeichert.
+
+Gespeicherte Artikeländerungen können einen manuellen Refresh erfordern, dass sie nach dem Speichern auch korrekt angezeigt werden. Wir untersuchen dieses unerwünschte Verhalten derzeit.
+
+[discrete]
+=== Aufträge
+
+* In der Toolbar der Detailansicht von Aufträgen gibt es jetzt den Button **Warenbestand ermitteln**.
+Ausserdem wurde das Icon für die Lagerortzuweisung geändert.
+* In der Auftrags-UI können nun Dokumente vom Typ *Benutzerdefiniertes Auftragsdokument* erstellt werden. Dabei stehen folgende Möglichkeiten zur Verfügung:
+** Gruppenfunktion in der Übersicht
+** Aktion in der Übersicht pro Auftrag
+** Dokument-Widget in der Detail-Ansicht eines Auftrages
+* In der Kompaktansicht können nun die Farben des Bestellstatus und des Zahlungsstatus als Hintergrundfarbe für die jeweiligen Felder festlegen. Die neue Einstellung finden ihr in den MyView-Einstellungen unter den Feldern *Status* und *Zahlungsstatus*.
+* Es ist nun möglich das voraussichtliches Versanddatum der Auftragspositionen in den Listen anzuzeigen und im Bearbeitungsmodus auch zu editieren.
+* Es ist jetzt möglich Markierungen über die Gruppenfunktion zu setzen. Das Overlay ist aktuell ohne Farben, diese werden nachgeliefert.
+
+[discrete]
+=== Dokumente
+
+* Im DocumentBuilder steht neben der *Menge* einer Artikelposition nun auch die Variable *Menge (ganze Zahl)* zur Verfügung. Diese stellt die Menge ohne Nachkommastellen dar, wenn möglich.
++
+Die *Menge* 2.00 würde mit *Menge (ganze Zahl)* mit 2 dargestellt werden, 2.50 hingegen würde unverändert angezeigt werden.
+* In den Ausgabeeinstellungen einer Vorlage kann nun das *XML-Format* gewählt werden. Dabei stehen die Formate *X-Rechnung* und *Factur-X-Basic* zur Auswahl. Im Standard ist das XML-Format *X-Rechnung*. Diese Einstellung nimmt Einfluss wenn das *Dateiformat* auf *PDF/A3* bzw. *XML* gestellt ist und kann auch nur in diesen Fällen geändert werden.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== App
+
+* Die Einstellung *Von Pickliste ausschließen* zur Option *Kommissionierung* im Einstellungsbereich *Versand* einer Variante greift nun auch für die Rollende Kommissionierung in plentyWarehouse. Ist diese Option für die Variante ausgewählt, kann die Variante nun nicht mehr über die rollende Kommissionierung gepickt werden.
++
+[IMPORTANT]
+.Achtung
+======
+Artikel die in von der Rollenden Kommissionierung ausgeschlossen werden, dürfen keinen Bestand führen, da es ansonsten nicht möglich ist den Warenausgang vom Transfer-Lagerort zu buchen. Artikel die Bestand führen, müssen also wie bisher auch gepickt werden.
+======
+
+[discrete]
+=== Dokumente
+
+* Im DocumentBuilder wird der Vorlagenname von Standardvorlagen ab sofort in Systemsprache angelegt, bisher war dieser immer in Englisch.
+* Die bestehende Variable `Einheit der Variante` beinhaltet ab jetzt ausschließlich die Einheit selbst ohne informationen über die Menge. Zusätzlich wurden die Variable `VPE` und `VPE * Artikelmenge` äquivalent zu den alten Dokumenteinstellungen eingeführt.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Das Ticket-Widget wurde für Gastbestellungen nicht angezeigt. Das wurde behoben.
+* In der neuen Auftrags-UI wird der Rabatt zurückgesetzt, wenn ein neuer Artikel hinzugefügt wird oder wenn die gültigen Verkaufspreise aktualisiert werden. Dies wurde behoben.
+
+[discrete]
+=== MyView
+
+* Im Texteditor in MyViews konnte es beim Scrollen in Dropdowns dazu kommen, dass dies nicht wie erwartet funktioniert hat, sowie dass sich Dropdowns überlappen. Dieses Verhalten wurde nun behoben.
+
+[discrete]
+=== plentyBI
+
+* Wurde die Kennzahl *Artikel unter Meldebestand (Live)* innerhalb eines Elements vom Typ *Tabelle* auf dem Dashboard dargestellt, funktionierte beim Klicken auf die Tabelleinträge in der Spalte *Dimension* die Weiterleitung in das Tab *Waren » Warenbestände* des entsprechenden Lagers nicht mehr. Dieses Verhalten wurde behoben, sodass diese Links nun wieder ordnungsgemäß funktionieren.
+
+[discrete]
+=== Prozesse
+
+* Es konnte vorkommen das die Prozessen zum stillstand kommen wenn man in der Subaktion *Speichern / Drucken* die Sammeldokumente aktiviert hat. Dieser Fehler wurde behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|
+|
+|
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
