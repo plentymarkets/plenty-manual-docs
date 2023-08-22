@@ -6,7 +6,9 @@
 :startWeekDate: 10. August 2023
 :endWeekDate: 16. August 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/auftrags-ui-weiterleitung-nach-erstellung-eines-kindauftrags-order-ui-redirect-after-child-order-creation/733183
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/amazon-neue-versandarten-treueprogramme-priority-und-standard-new-shipping-types-loyalty-programs-priority-and-standard/732905
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/aenderung-release-des-neuen-login-und-multi-faktor-authentifizierung-change-release-of-the-new-login-and-multi-factor-authentication/732424
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -84,6 +86,7 @@ Ausserdem wurde das Icon für die Lagerortzuweisung geändert.
 * In der Kompaktansicht können nun die Farben des Bestellstatus und des Zahlungsstatus als Hintergrundfarbe für die jeweiligen Felder festlegen. Die neue Einstellung finden ihr in den MyView-Einstellungen unter den Feldern *Status* und *Zahlungsstatus*.
 * Es ist nun möglich das voraussichtliches Versanddatum der Auftragspositionen in den Listen anzuzeigen und im Bearbeitungsmodus auch zu editieren.
 * Es ist jetzt möglich Markierungen über die Gruppenfunktion zu setzen. Das Overlay ist aktuell ohne Farben, diese werden nachgeliefert.
+* In der neuen Auftrag UI ist es jetzt möglich beliebig viele Gewährleistungen für einen Auftrag anzulegen.
 
 [discrete]
 === Dokumente
@@ -117,6 +120,15 @@ Artikel die in von der Rollenden Kommissionierung ausgeschlossen werden, dürfen
 * Im DocumentBuilder wird der Vorlagenname von Standardvorlagen ab sofort in Systemsprache angelegt, bisher war dieser immer in Englisch.
 * Die bestehende Variable `Einheit der Variante` beinhaltet ab jetzt ausschließlich die Einheit selbst ohne informationen über die Menge. Zusätzlich wurden die Variable `VPE` und `VPE * Artikelmenge` äquivalent zu den alten Dokumenteinstellungen eingeführt.
 
+[discrete]
+=== Zalando
+
+Das Log-Level des Log-Eintrags für die Bestandsdaten einzelner Varianten wurde auf *debug* geändert, sodass dieser Log-Eintrag jetzt aktiviert werden muss, damit dieser geschrieben wird. Auf diesen Log-Eintrag wurde in unserem link:https://forum.plentymarkets.com/t/671111/5#fragen-antworten-zum-bestandsabgleich-1[Zalando-FAQ^] bei *Wie kann ich die Übertragung der Bestände überprüfen?* verwiesen, welches noch entsprechend angepasst wird.
+
+Grund hierfür ist, dass in einigen Systemen eine extrem große Anzahl von Einträgen generiert hat, was dazu führte, dass die Last auf dem Elastic Search Index unnötig hoch war, was die Performance anderer Prozesse beeinflussen konnte.
+
+Um den Log-Eintrag temporär zu aktivieren, muss man unter *Daten » Log* unterhalb der Suche über den Einstellungs-Button die Logs konfigurieren und dort unter dem Pfad *Plenty » Modules » Zalando » Stock » Services » StockUpdateService* das Log-Level *DEBUG* aktivieren.
+
 '''
 
 [discrete]
@@ -129,6 +141,17 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
 * Das Ticket-Widget wurde für Gastbestellungen nicht angezeigt. Das wurde behoben.
 * In der neuen Auftrags-UI wird der Rabatt zurückgesetzt, wenn ein neuer Artikel hinzugefügt wird oder wenn die gültigen Verkaufspreise aktualisiert werden. Dies wurde behoben.
+* Der Filter *offen und bestellt* bei den Nachbestellungen hatte nicht funktioniert. Dies wurde behoben.
+* In der neuen Auftrag UI wurden große Artikel-IDs abgeschnitten. Dies wurde behoben.
+* Beim Erstellen von einem Auftrag aus einem Angebot in der neuen Order UI wurde nicht geprüft, ob ein Bundle oder eine Bundle-Komponente schon im Warenkorb liegt. Dies wurde behoben.
+* In der Kompakt-UI wurde bei POS Aufträgen, in bestimmten fällen mit einer Straße dargestellt.
+Dies ist nun behoben.
+* In der neuen Auftrags-UI, wurde der Status in bestimmten Situationen nach dem Speichern in der UI nicht korrekt angezeigt. Erst durch einen Hard-Reload, wurde vom Auftrag der korrekte Status dargestellt. Zu diesen Verhalten ist es gekommen, wenn der Status beim speichern durch eine Ereignisaktion geändert wurde. Dies ist nun behoben.
+
+[discrete]
+=== Ereignisaktionen
+
+* Das Ereignis *Wechsel der Auftragsart* wurde nicht korrekt ausgelöst, wenn der Auftragstyp zwischen Auftrag und Vorbestellung gewechselt wurde. Dies wurde behoben.
 
 [discrete]
 === MyView
@@ -158,7 +181,44 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* In der Variantenansicht der neuen Artikel-UI werden im Bilderpanel nun zuerst die mit der Variante verknüpften Bilder angezeigt, danach die nicht verknüpften. Zusätzlich sind die verknüpften als auch die unverknüpften Bilder nach Position sortiert.
+
+[discrete]
+=== Aufträge
+
+* Es ist nun möglich über die Toolbar der Detailansicht von Aufträgen einen neuen Auftrag zu erstellen. Man kann zwischen den Typen Auftrag, Angebot und Abonnement wählen. Der Punkt Abonnement steht bei Gastbestellungen nicht zur Verfügung.
+* In der Kompaktansicht der neuen Auftrag UI ist es jetzt möglich den bezahlten Betrag in Prozent im Titel anzeigen zu lassen.
+* In der neuen Auftrag UI werden beim Zurückbuchen von Bestand jetzt auch die Lagerorte mit Bestand und die an der Variante konfigurierten Lagerorte vorgeschlagen.
+* Bei der Erstellung eines neuen Auftrags oder bei der Bearbeitung von Auftragspositionen, wurde der Filtern *Lieferanten-Artikel-Nummer* bei der Artikelsuche hinzugefügt.
+* Die Eigenschaft *Externe Quellauftrags-ID* wurde für den Export für Aufträge über den Katalog freigegeben.
+* In der Auftragsdetailansicht kann jetzt über die Adresse die UmsatzsteuerID geprüft werden.
+Dazu einfach zur Adresse navigieren, dort auf das Drei-Punkte Menü klicken und *UmStID überprüfen* auswählen.
+
+[discrete]
+=== Dokumente
+
+* In der Nummernkreis-UI wurde ein Filter für aktive/inaktive Nummernkreise hinzugefügt.
+
+[discrete]
+=== plentyBI
+
+* Ab sofort steht im Menü *Einrichtung » plentyBI » Kennzahlen* die neue kostenlose Kennzahl *Wareneingänge* zur Verfügung. Diese Kennzahl erlaubt es euch, Daten zu im System vorhandenen Wareneingängen mithilfe verschiedener Kriterien auszuwerten.
+** Berechnungsgrundlagen:
+*** Umsatz
+*** Absatz
+** Dimensionen:
+*** Erstellungsdatum
+*** Lieferant, Erstellungsdatum
+*** Lager, Erstellungsdatum
+** Filter:
+*** Lieferant
+*** Lager
+*** Artikel ID
+*** Varianten ID
+* Wird die Kennzahl xref:business-entscheidungen:live-payments.adoc[Zahlungen (Live)] innerhalb einer xref:business-entscheidungen:myview-dashboard.adoc#600[Tabelle] auf dem Dashboard dargestellt, gelangt man per Klick auf den Eintrag in der Spalte *Dimension* nun in das Menü *Aufträge » Zahlungsverkehr*. Dort werden die Zahlungen automatisch nach den entsprechenden Dimensionswerten gefiltert angezeigt.
 
 '''
 
@@ -167,7 +227,30 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* Es ist nun auch bei Gutschriften möglich die Variante zuzuordnen oder die Zuordnung aufzuheben.
+* Wir haben das Compact View Template *Classic* mit den neuen Features, die wir in den letzten Wochen implementiert haben, wie z.B. die Toolbar im Header, angepasst, so dass es mehr wie das alte UI aussieht.
+* Folgende Änderungen wurden an den Gruppenfunktionen vorgenommen:
+** Status ändern
+*** Man kann nun nach dem Status suchen
+*** Die Farben der Statuswerte werden berücksichtigt und angezeigt
+** E-Mail-Service
+*** Man kann nun nach den Vorlagen suchen
+** Markierung ändern
+*** Die Färbung der Markierungen wurde implementiert
+
+[discrete]
+=== Kaufland
+
+Die SKUs für Kaufland wurden angepasst. Seit der Änderung erhalten alle neu angelegten Varianten über Katalog pro Marktplatz die SKU mit der Endung des jeweiligen Storefronts.
+
+* Für den deutschen Marktplatz wird die SKU mit der Endung `_de` versehen.
+* Für den slowakischen Marktplatz wird die SKU mit der Endung `_sk` versehen.
+* Für den tschechischen Marktplatz wird die SKU mit der Endung `_cz` versehen.
+
+Die Anpassung der SKUs für Kaufland erfolgt aufgrund der Vorgabe, dass Kaufland ausschließlich eindeutige SKUs über alle Storefronts hinweg erlaubt. Demnach kann dieselbe SKU nicht für alle drei Storefronts (DE, SK und CZ) verwendet werden.
 
 '''
 
@@ -176,7 +259,27 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Artikel
 
+* Unter bestimmten Bedingung kam es vor, dass im Bilderpanel in der Artikel- und Variantenansicht die Bilder nicht gerendert hat. Dieses Problem wurde behoben.
+
+[discrete]
+=== Aufträge
+
+* Versuchte man etwas an der Adresse zu ändern, z.B. die E-Mail entfernen, so wurde eine neue identische Adresse mit neuer ID erstellt und zugewiesen. Nun wird in der Regel auch weiterhin eine neue Adresse erstellt, sofern die aktuelle Adresse auch von anderer Stelle referenziert wird, aber die Änderungen werden korrekt übernommen.
+* In der Variantensuche (sowohl in der Auftragsbearbeitung als auch in der Auftragserstellung) wurden Artikel, die auch Teil eines Bundels waren, mit einem falschen Wert für den Nettobestand angezeigt. Dies ist nun behoben.
+* Wenn während der Auftragsanlage von einem *Angebot* den Tab gewechselt wurde, wurde der Auftragstyp wieder auf *Auftrag* geändert. Dies wurde behoben.
+* In der neuen Auftrags-UI wurden die folgenden Fixes hinzugefügt:
+** Wenn einige Felder in der KompaktUI entfernt werden und nur die Hälfte des Containers für die Felder im Kompaktmodus verbleibt, bleibt aufgrund einer festen Höhe ein weißer Raum unter den Feldern. Dies wurde behoben.
+** Beim Hinzufügen einer Paketnummer für eine Bestellung in der Auftrags-Detailansicht und anschließendem Navigieren zur Auftragsübersicht und Neuladen der Auftragsübersicht wird die Schaltfläche *Sendungsverfolgungslink öffnen* nicht angezeigt. Dies wurde behoben.
+** In der Auftragsdetailansicht werden die Auftragspositionen aufgrund einer in der Anfrage verwendeten Beziehung geladen, obwohl sie nicht mehr benötigt werden. Dies wurde behoben.
+** In der Auftragsdetailansicht, wurde das Menü *Waren zurückbuchen* in der Toolbar nicht geschlossen, wenn ein Eintrag gewählt wurde. Dies wurde behoben.
+** In einer duplizierten Registerkarte der Order-UI wurden nicht alle Elemente korrekt angezeigt. Dies wurde behoben.
+* Die folgenden Korrekturen wurden für die Tabelle des Warenkorbs bei der Erstellung eines neuen Auftrags und bei der Bearbeitung von Auftragspositionen hinzugefügt:
+** In der neuen Bestell-UI war beim Bearbeiten der Bestellpositionen oder beim Anlegen einer neuen Bestellung das in der Artikeltabelle verfügbare Mengenfeld immer für Änderungen verfügbar, auch für Bundleartikel und Bundle-Komponenten. Dies wurde behoben, und jetzt ist die Menge sichtbar oder schreibgeschützt, je nachdem, welche Einstellung unter *Setup » Aufträge » Einstellungen » Änderung der Menge für Bundle-Artikel und Bundle-Komponenten zulassen* verfügbar ist.
+** Wenn die Menge einer Bundle-Komponente geändert wird, wird die Schaltfläche *Verkaufspreise aktualisieren* nach dem erneuten Laden der gültigen Verkaufspreise nicht ausgeblendet. Dies wurde behoben.
+* Beim erstellen einer Umbuchung wurden Artikel, die auch Teil eines Bundels waren, teilweise mit einen Einkaufspreis von 0 gespeichert. Dies ist nun behoben.
 
 --
 
@@ -190,13 +293,73 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/returnsportal_55342[apoio - plentymarkets Retourenportal^]
+|1.0.5
+|-
+
+|link:https://marketplace.plentymarkets.com/pluginsolutetracking_55135[billiger.de Tracking Plugin^]
+|1.0.6
+|-
+
+|link:https://marketplace.plentymarkets.com/edon_6618[FairGeben^]
+|1.9.0
+|-
+
+|link:https://marketplace.plentymarkets.com/mirakl_6917[Mirakl Connector^]
+|1.4.4
+|-
+
+|link:https://marketplace.plentymarkets.com/multicontentwidget_6082[Multicontent Toolbox^]
+|4.7.26
+|-
+
+|link:https://marketplace.plentymarkets.com/ndshopvote_55594[Shop-Bewertungen Performance-optimiert anzeigen^]
+|1.0.4
+|-
 
 |===
 
 Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+Warehouse-App::
++
+--
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in Version 1.0.22 der *plentymarkets Warehouse App* veröffentlicht.
+
+* In den Einstellungen jeder Funktion, in der Artikel angezeigt werden, kann nun bestimmt werden, in welcher Reihenfolge Informationen innerhalb des Artikelnamens angezeigt werden. Dazu ist die Option *Priorisierung von Artikelnamen* in den Einstellungen der jeweiligen Funktion nun standardmäßig aktiviert. Dort kann auch die gewünschte Reihenfolge der Namensbestandteile festgelegt werden.
+* Für die Funktion *Wareneingang* wurde die Option *Einzelerfassung bis Menge* hinzugefügt. Ab der im Menü *Einstellungen » Wareneingang* festgelegten Menge wird der Mengendialog geöffnet, über den dann weitere Artikelmengen eingegeben werden können.
+* Innerhalb der Funktion *Picklisten* wurden neue Suchfilter hinzugefügt. So ist es nun möglich, Picklisten nach dem *Mandanten*, dem *Lager*, der *Eigner-ID* und der *Benutzer-ID* zu filtern.
+* Ab sofort kannst du dich zwischen zwei Designs für die plentyWarehouse App entscheiden. Folgende Themes wurden dazu integriert:
+** **plentyWarehouse Classi**: Das bereits bekannte und vorhandene Standard-Theme
+** **plentymarkets**: Ein neues, petrol- und blaufarbenes Theme
+
++
+Im Menü *Einstellungen » Anzeige » Farbschema* der plentyWarehouse App kannst du ganz einfach auswählen, welches Theme angewendet werden soll.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in Version 1.0.22 der *plentymarkets Warehouse App* veröffentlicht.
+
+* Bei der Suche nach dem Namen werden nun die gleichen Ergebnisse wie in der Volltextsuche der neuen Artikel-UI im Backend geliefert.
+* Picklisten können ab jetzt nur noch bei vorhandener Verbindung zum Internet abgeschlossen werden, also wenn die App online ist. Ein Abbruch, indem auf *Zurück* getippt wird, ist weiterhin auch offline möglich.
+
+'''
+
+[discrete]
+=== Behoben
+
+Folgende Probleme wurden in Version 1.0.22 der *plentymarkets Warehouse App* behoben.
+
+* 
 
 --
 
