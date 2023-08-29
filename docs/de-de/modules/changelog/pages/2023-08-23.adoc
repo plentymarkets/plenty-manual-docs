@@ -6,7 +6,7 @@
 :startWeekDate: 17. August 2023
 :endWeekDate: 23. August 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/aenderung-import-von-unterschiedlichen-myview-ansichten-change-import-of-different-views/733864
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -126,6 +126,25 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 ** In der neuen Bestell-UI war beim Bearbeiten der Bestellpositionen oder beim Anlegen einer neuen Bestellung das in der Artikeltabelle verfügbare Mengenfeld immer für Änderungen verfügbar, auch für Bundleartikel und Bundle-Komponenten. Dies wurde behoben, und jetzt ist die Menge sichtbar oder schreibgeschützt, je nachdem, welche Einstellung unter *Setup » Aufträge » Einstellungen » Änderung der Menge für Bundle-Artikel und Bundle-Komponenten zulassen* verfügbar ist.
 ** Wenn die Menge einer Bundle-Komponente geändert wird, wird die Schaltfläche *Verkaufspreise aktualisieren* nach dem erneuten Laden der gültigen Verkaufspreise nicht ausgeblendet. Dies wurde behoben.
 * Beim erstellen einer Umbuchung wurden Artikel, die auch Teil eines Bundels waren, teilweise mit einen Einkaufspreis von 0 gespeichert. Dies ist nun behoben.
+* In der Auftrags-UI ist es zu den Problem gekommen, das beim Speichern die Tags entfernt wurden.
+Dies ist nun behoben.
+
+[discrete]
+=== CRM
+
+* In manchen Fällen kam es vor, dass im Messenger Amazon Nachrichten nicht komplett und ohne horizontalen Scrollbalken angezeigt wurden. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Plugins
+
+* Beim Kopieren eines Plugin-Sets und dem anschließenden Bereitstellen wurde die Mehrsprachigkeit teilweise mit den default-Werten im Frontend dargestellt.
++
+Dieses Verhalten ist nun behoben. Nach dem Bereitstellen eines kopierten Plugin-Sets wird nun die Mehrsprachigkeit korrekt mit bereitgestellt.
+
+[discrete]
+=== Prozesse
+
+* Wenn es beim Generieren eines Dokuments einen Fehler gab, ist der Prozess eingefroren. Dieses Verhalten wurde behoben.
 
 --
 
@@ -140,7 +159,32 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* Du kannst jetzt das Ziel auswählen, nachdem eine untergeordneter Auftrag direkt im Erstellungsbildschirm der untergeordneten Bestellung erstellt wurde, indem du den neu hinzugefügten Toggle in der Toolbar änderst.
++
+Wenn Sie den Toggle aktiviert lassen, werden Sie zu den Details der neu erstellten Bestellung weitergeleitet. Wenn du den Toggle deaktivierst, wirst du zu den Details der übergeordneten Bestellung weitergeleitet und die neu erstellte untergeordnete Bestellung wird der seitlichen Navigationsleiste hinzugefügt.
+* In der neuen Auftrag UI wird jetzt in der Ansicht *Warenbestand ermitteln* auch die Menge der Positionen im Auftrag angezeigt.
+* In der Übersicht der neuen Auftrag UI wird jetzt für die Summe der Aufträge noch zusätzlich der Mehrwertsteueranteil angezeigt.
+* In der neuen Auftrag UI wurde für die Filter *Externe Auftrags-ID* und *Zeichen Kunde* der Operator *Enthält* freigeschaltet.
+* In der neuen Auftrags-UI wurde die Spalte Herkunft, die den Namen der Herkunft enthält, für Auftragspositionen als optionale Spalte hinzugefügt. Betroffene UIs sind die neuen UIs für das Anlegen von Aufträgen, das Bearbeiten von Auftragspositionen, das Anlegen von Kind Aufträgen und das Teilen von Aufträgen.
+* Du kannst ab jetzt in den MyView Einstellungen festlegen, dass die Kopfzeile eines Auftrags farblich markiert wird. Hierzu kann eine benutzerdefinierte Farbe festgelegt werden, oder die Option ausgewählt werden, die Farbe vom aktuellen Auftragsstatus zu nehmen.
+
+[discrete]
+=== Dokumente
+
+* Im DocumentBuilder sind ab sofort folgende Variablen verfügbar:
+** Artikelgesamtmenge
+** Umsatzsteuerbetrag (A)
+** Umsatzsteuerbetrag (B)
+** Umsatzsteuerbetrag (C)
+** Umsatzsteuerbetrag (D)
+** Umsatzsteuerbetrag (E)
+** Umsatzsteuerbetrag (F)
+* In der Auftrags UI steht nun eine neue Gruppenfunktion *Dokumente zusammenfügen* zur Verfügung.
++
+Mit dieser können die PDF Dokumente eines ausgewählten Dokumenttyp aller ausgewählten Aufträge in einem Dokument zusammengefügt werden. Das resultierende Dokument wird geöffnet, wodurch es gespeichert oder gedruckt werden kann.
 
 '''
 
@@ -149,7 +193,120 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Amazon
 
+Nachdem die neuen Amazon Versandarten *Standard* und *Priority* link:https://forum.plentymarkets.com/t/prime-1d-2d-prioritaet-standard-update/725790/118[von unseren Kollegen aus den Bereichen Order und Fulfillment für Ereignisaktionen, Versandprofile und die Order-UI seit dem 09.08.2023 zur Verfügung stehen^], werden die neuen Versandarten nun auch für den Auftragsimport ausgerollt.
+
+Der Rollout wird dabei den regulären Zyklus durchlaufen, um betroffenen Händler:innen Zeit für notwendige Anpassungen an deren Versandprofile und Ereignisaktionen vorzunehmen. Da es sonst zu zusätzlichen Problemen in der Abwicklung kommen kann.
+
+Dies liegt daran, dass aktuell alle Prime-Sendungen als reguläres Prime markiert werden, nach der Änderung aber als *Prime Standard* oder *Prime Priority* markiert werden und damit Ereignisaktionen bzw. Versandprofile, welche *Prime* filtern, nicht mehr korrekt zugeordnet werden. Zusätzliche Informationen erhaltet ihr im Abschnitt To-Do.
+
+[IMPORTANT]
+.To-Do
+======
+Folgende Szenarien müssen in den folgenden Punkten beachtet werden:
+
+[cols="5"]
+|========
+|Szenario |Vor oder nach Update? |Prime? |Versandart |Verhalten
+
+|1
+|Vor
+|Nein
+|Standard
+|Auftrag hat kein Treueprogramm.
+
+|2
+|Nach
+|Nein
+|Standard
+|Auftrag hat kein Treueprogramm.
+
+|3
+|Vor
+|Nein
+|Priority
+|Auftrag hat kein Treueprogramm.
+
+|4
+|Nach
+|Nein
+|Priority
+|Auftrag hat *Amazon Priority* Treueprogramm.
+
+|5
+|Vor
+|Ja
+|Standard
+|Auftrag hat *Amazon Prime* Treueprogramm.
+
+|6
+|Nach
+|Ja
+|Standard
+|Auftrag hat *Amazon Prime Standard* Treueprogramm.
+
+|7
+|Vor
+|Ja
+|Priority
+|Auftrag hat *Amazon Prime* Treueprogramm.
+
+|8
+|Nach
+|Ja
+|Priority
+|Auftrag hat *Amazon Priority* Treueprogramm.
+
+|========
+
+*1. Ereignisaktionen*
+
+Ereignisaktionen, welche den Filter *Treueprogramm* verwenden, müssen so angepasst werden, dass sie die neuen Treueprogramme abdecken oder es müssen zusätzliche Ereignisaktionen erstellt werden, wenn die Treueprogramme unterschiedliche behandelt werden sollen.
+
+Betroffene Ereignisaktionen könnt ihr unter *Einrichtung » Aufträge » Ereignisse* finden, indem ihr unten links in die Übersicht wechselt und über die Suche nach Treueprogramm sucht.
+
+*2. Versandprofile*
+
+Versandprofile, welche Amazon Treueprogrammen zugeordnet sind, müssen angepasst werden, um auch die neuen Treueprogramme abzudecken und/oder es müssen neue Versandprofile angelegt werden, um neue Szenarien abzudecken.
+
+Die aktuell gewählten Treueprogramme findet ihr unter *Einrichtung » Aufträge » Versand » Optionen » Tab: Versandprofile » Öffne Versandprofil » Tab: Base » Bereich: eBay » Treueprogramm*.
+======
+
+[discrete]
+=== Login
+
+In den letzten Monaten haben wir an einem neuen Login für plentymarkets Systeme gearbeitet.
+
+Die Änderungen bestehen dabei aus einer neuen zentralen Benutzeroberfläche, die Teile der Sicherheitseinstellungen sowie die neue Multi-Faktor-Authentifizierung beinhaltet.
+
+Im neuen Login musst du dich nicht mehr über den Benutzernamen einloggen, sondern über E-Mail-Adresse. Für den neuen Login brauchst du ein neues Benutzer:innen-Konto, welches du in der neuen Benutzeroberfläche erstellen kannst. Dieses Konto kannst du für mehrere plentymarkets Systeme verwenden. Administrator:innen eines Systems laden Benutzer:innen über eine E-Mail-Adresse ein. Dafür wurde ein neues E-Mail-Feld an den Benutzern hinzugefügt, das je System einzigartig ist und nur für die Verknüpfung verwendet wird.
+
+Auch bestehende Benutzer:innen können mit einem neuen plentymarkets-Konto verknüpft werden. Doch keine Sorge, in der Einführungsphase von heute bis zum 31.10.23 kannst du dich selbst wie gehabt über den alten Login und somit über deinen Benutzernamen einloggen.
+
+*_Wichtig:_* Diese Frist gilt nicht für die Rest-API, Partner- und Lehrer-Login.
+
+REST-API-User müssen ebenfalls weiterhin den bestehenden REST-Login-Endpunkt nutzen, die neuen Accounts sind nicht mit den vorhandenen `/rest/login` Endpunkten kompatibel. Dafür wird an einer gesonderten Lösung gearbeitet.
+
+Ab dem 30.08.2023 wird die Buchung von Test-Systemen nur noch in Verbindung mit einem plentymarkets-Konto möglich sein. Dieses wird auch direkt für den Login zu dem Test-System verknüpft.
+
+Die Änderungen im Überblick:
+* Login findet jetzt über einen zentralen Bereich mit E-Mail-Adresse statt, nicht mehr über den Benutzernamen
+* Multi-Faktor-Authentifizierung lässt sich nun über die Sicherheitseinstellungen aktivieren
+* Dabei wird ein QR-Code zur Verfügung gestellt, der mit jeder MFA-App kompatibel ist
+* Ein Login über externe ID-Provider ist nun möglich. Vorerst nur mit Google-Konten.
+Nachdem du dich das erste Mal eingeloggt hast, musst du deine Profil- und Sicherheitseinstellungen konfigurieren.
+** Unter den Einstellungen findest du *Profil*, wo du deinen Vor- und Nachnamen, die Zeitzone deines Systems sowie die Sprache deines Systems ändern kannst
+** Unter *Sicherheit* kannst du dein Passwort ändern und die Multi-Faktor-Authentifizierung aktivieren
+* Diese Einstellungen kannst du jederzeit in der neuen Account-Übersicht oder in der gewohnten Benutzeroberfläche oben rechts im Kontextmenü deines Users unter *plentymarkets Konto* ändern.
+* Neue Benutzer:innen, die über eine Einladung angelegt wurden, haben eine angepasste Benutzeroberfläche in den Kontoeinstellungen. Einige Einstellungen werden nun zentral gepflegt und sind nicht mehr systembezogen:
+** Passwort
+** Zeitzone
+** Sprache
+** Name und Vorname
+
+link:https://account.plentysystems.com[Unter diesem Link könnt ihr einen plentysystems Account erstellen.^]
 
 '''
 
@@ -158,7 +315,18 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* In der neuen Auftrags-UI und der neuen Auftrags-Erstellungs-UI wird beim Hinzufügen einer neuen Variante in den Warenkorb der Rabatttyp auf den Betragstyp umgeschaltet, während standardmäßig der Prozentsatztyp ausgewählt sein sollte. Dies wurde behoben.
+* Bei größeren Schriftarten kam es im Notizen-Widget dazu, dass die Texte sich überschnitten haben.
+* Nachdem der Auftrag z.B. in den Auftragsdetails aktualisiert wurde, ging die Auswahl der Gruppenfunktionen beim Zurückschalten in die Übersicht verloren.
+* Der Fehler, dass ein Auftrag nicht mehr abwählbar ist wurde auch behoben.
+
+[discrete]
+=== Fulfillment
+
+* In einigen Fällen konnte es da führen, dass auf dem Adressetikett der Lagerort beim Bundle-Artikel mit aufgeführt wird, welches keinen eigenen Bestand besitzt.
 
 --
 
@@ -172,9 +340,9 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/wwdoofinder_55395[WWDooFinder^]
+|1.0.3
+|-
 
 |===
 
