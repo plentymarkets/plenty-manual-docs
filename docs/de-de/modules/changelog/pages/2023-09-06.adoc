@@ -1,0 +1,279 @@
+= Changelog 6. September 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 31. August 2023
+:endWeekDate: 6. September 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/auftrags-ui-zeitraum-filter-operator-fuer-datumsfelder-order-ui-period-filter-operator-for-date-fields/736057
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/documentbuilder-neue-einstellungen-fuer-das-auftragspositionen-widget-documentbuilder-new-settings-for-the-order-items-widget/735966
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Das Feld *eBay Konto* wurde zu dem Allgemein-Widget in den Auftragsdetails als optionales Feld hinzufügt.
+
+[discrete]
+=== Dokumente
+
+* Die Einstellungen für *Variableneinschränkungen*, um festzulegen, ob ein Text Widget angezeigt werden soll, werden nun in einer neuen Komponente abgebildet.
++
+Diese stellt die verfügbaren Variablen gruppiert dar. Ebenso ist nun eine einfache Suche über alle verfügbaren Variablen möglich.
+
+[discrete]
+=== plentyBI
+
+* Wir haben die Möglichkeit geschaffen, einer Rolle Anzeigerechte für die Ergebnisse aller im System vorhandenen Kennzahlkonfigurationen zu vergeben. Dazu wurde im Menü *Einrichtung » Kontoverwaltung » Rollen » [Rolle öffnen] » Zugriffsrechte » Kennzahlen* die Checkbox *ALLE* hinzugefügt. Wird diese Checkbox aktiviert und die Einstellung anschließend gespeichert, kann die ausgewählte Rolle die Ergebnisse aller Kennzahlkonfigurationen sehen.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Geändert
+
+* Die Texte zum Aktivieren bzw. Deaktivieren von Nummernkreisen sowie Vorlagen im DocumentBuilder wurden überarbeitet und werden nun nicht mehr in Abhängigkeit des Status selbst geändert. Der Text ist nun statisch *Vorlage aktiv* bzw. *Nummernkreis aktiv*.
+
+[discrete]
+=== MyView
+
+* Bisher konnten nur MyView-Ansichten aus derselben Benutzeroberfläche importiert werden, im Bereich Dashboard konnten also nur Dashboard-Ansichten importiert werden. Dieses Verhalten wurde nun verändert. Ab jetzt können Ansichten aus unterschiedlichen Benutzeroberflächen importiert werden, dabei werden inkompatible Elemente aus der Ansicht entfernt, um zu garantieren, dass die Benutzeroberfläche mit dem Import funktioniert.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* In manchen Fällen wurden Sonderzeichen von Aufträgen der Plattform Amazon.pl nicht korrekt enkodiert und importiert. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Aufträge
+
+* Bei Gruppenfunktionen wurde die Selectbox-Komponente mit der des Filters ausgetauscht. Diese Änderung wurde auch für die Einzelaktionen wie Status ändern vorgenommen, da dort z.B. der aktuelle Status nicht vorausgewählt wurde, was nun behoben ist.
+* Unter bestimmten Umständen wurde die Mehrwertsteuer der Versandkosten von Gutschriften falsch berechnet. Dies wurde behoben.
+* Der Speicher-Button beim Bearbeiten in der Status-UI war immer deaktiviert, nachdem einmalig gespeichert wurde.
+* In der Erstellung von Kindaufträgen werden die Felder wie z.B. Lager oder Eigner nun alphabetisch sortiert.
+* Das Treueprogramm-Feld in den Auftragsdetails konnte nicht per MyView hinzugefügt werden, wenn es nicht am Auftrag gesetzt war.
+* In der neuen Auftrags-UI wurde beim Bearbeiten einer Gewährleistung eine Warnung angezeigt, wenn der Verkaufspreis niedriger war als der Einkaufspreis. Dies wurde behoben und die Warnung wurde für Gewährleistungen entfernt.
+* Bei der Einlösung von einem Mehrzweckgutschein in der Auftrag UI für einen Auftrag mit Fremdwährung, wurde der Gutscheinbetrag nicht richtig berechnet. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Beim öffnen der Vorschau im E-Mail-Service in der Auftrags-UI wurde immer die erste Sprache in der Sprachauswahl anstatt der Auftragssprache ausgewählt. Dieses Verhalten wurde nun behoben.
+* Im Auftrags-Portlet in der Kontakt-UI wurde die Zahlungsmethode nicht korrekt angezeigt.
+Dieser Fehler wurde nun behoben.
+* Für Systeme ab PID 61800 wurde die Newsletter-Kontoeinstellungen deaktiviert, aber die Opt-In-/Double-Opt-In-E-Mails verwendeten immer noch die Zugangsdaten aus diesem Bereich.
++
+Dieses Verhalten wurde geändert: bei einer PID > 61800 werden die Zugangsdaten des Standard-Webshops verwendet, bei einer PID <= 61800 werden die Newsletter-Zugangsdaten verwendet.
+Zudem kann die Auswahl der Vorlage für die Opt-In / Double Opt-In Newsletter-Ereignisse jetzt nur noch über den E-Mail-Konten Assistenten des Standard-Webstores erfolgen.
+* Wenn in der Kontakt E-Mail-Suche Leerzeichen enthalten waren wurde in einigen Fällen nicht der korrekte Datensatz gefunden. Diese Leerzeichen werden nun automatisch entfernt und das Verhalten damit behoben.
+* Wenn ein Benutzer nur eingeschränkte Benutzerrechte hatte wurden über den Messenger keine E-Mails versendet, obwohl die Nachricht erstellt wurde. Dieser Fehler wurde nun behoben.
+* Wenn ein Gast-Auftrag storniert wurde in welchem ein Gutschein verwendet wurde, wurde ein kritischer Fehler im Log erzeugt und der Gutschein wurde nicht aktualisiert. Dieser Fehler wurde nun behoben.
+* Zeitbasierte Automatisierungen im Messenger wurden 2 Stunden verspätet ausgelöst. Dieses Verhalten wurde nun in allen Systemen behoben. Weiterhin wurde auf beta7-Systemen in der Automatisierungs-Übersicht die Zeitzone hinzugefügt, sodass eindeutig erkennbar ist zu welcher Zeit eine Automatisierung ausgeführt wird.
+
+[discrete]
+=== Dokumente
+
+* Die Werte für Bestelleigenschaften vom Typ *Auswahl*, *Mehrfachauswahl* und *Datum* wurden auf den Dokumenten generiert mit dem DocumentBuilder nicht korrekt formatiert. Das wurde behoben.
+
+[discrete]
+=== eBay
+
+* Die Werte von Auswahl- und Mehrfachauswahl-Eigenschaften werden nun auch in der Sprache der jeweiligen eBay Plattform übertragen. Durch einen Fehler wurde zuvor immer der erste gepflegte Wert übertragen.
+
+[discrete]
+=== Ereignisaktionen
+
+* Wenn für die Generierung von Gutschriftdokumenten die neue asynchrone Logik über den DocumentBuilder eingestellt ist, so kommt es bei der Aktion *Gutschrift (Dokument) erzeugen* zu einem Validierungsfehler des Dokumentdatums. Dies wurde behoben.
+
+[discrete]
+=== Netto/Marktkauf
+
+* *_Optionale Zolltarifnummer:_* Die Zolltarifnummer und das Herkunftsland im intrastat-Element der XML sind jetzt optional, wenn das Herkunftsland Deutschland ist.
+* *_Leere Dimensionen:_* Wenn keine Dimensionen für die Variante übergeben werden, wird jetzt kein leeres dimensions-Element mehr in dem XML hinzugefügt.
+* *_Kommissions-Elemente, obwohl Einkaufspreis definiert wurde:_* Man regelt vertraglich mit Netto, ob man die Produkte für einen Provisionssatz oder zu einem festen Preis verkauft. Dies wird in dem XML pro Produkt definiert. Bisher war es so, dass wenn ein Einkaufspreis gesetzt ist, trotzdem auch das Provisions-Element übertragen wurde, dies wurde korrigiert.
+* *_Fehlende Übersetzung mancher Fehler bei der Varianten-Validierung:_* Für manche Fehler, welche beim Öffnen der Log-Einträge pro Variante angezeigt werden, fehlte die Übersetzung. Dadurch waren die Fehler nur schwer auswertbar. Diese wurden nun ergänzt, die richtige Fehlermeldungen werden aber erst in neuen Log-Nachrichten nach der Verteilung der Übersetzung sichtbar sein.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Es ist jetzt möglich, die Spalten der neuen Artikel-UI selber zu konfigurieren.
+
+[discrete]
+=== Aufträge
+
+* Die Anzahl der erstellten Kinderaufträge ist in der Toolbar der Auftragsdetails neben dem Button *Auftrag erstellen* als Badge zu sehen. Wenn Sie auf die Button *Auftrag erstellen* klicken, werden die Kinderauftragstypen die bereits existieren mit einer grünen Linie unterstrichen.
+* In der neuen Auftrags-UI zeigt der Tooltip für den Namen der Auftragsposition, jetzt die Zeilenumbrüche an. Dies wurde sowohl für die Auftragsübersicht als auch für die Detailansicht umgesetzt.
+* Für die neue Auftragsoberfläche wurden neue Einstellungen mit dem Namen *Verbieten, dass Kindaufträge mit mehr Autragspositionen als im Hauptauftrag angelegt werden* für die Auftragstypen *Kaufauftrag*, *Garantie* und *Gutschrift* hinzugefügt. Wenn die Einstellung aktiviert ist, wird die Erstellung eines dieser Auftragstypen auf die offene Menge begrenzt, und wenn sie deaktiviert ist, können mehrere Kindaufträge ohne Begrenzung auf die offene Menge erstellt werden. In der Standardeinstellung ist diese Einstellung aktiviert.
+
+[discrete]
+=== CRM
+
+Im EmailBuilder wurden neue Messenger bezogene Variablen hinzugefügt.
+
+[cols="1,3"]
+|======
+|Variable |Twig-Expression
+
+|Konversations Historie
+|`messenger.formattedMessage.conversationHistory\|raw`
+
+|Letzte geflüsterte Nachricht der Konversation
+|`messenger.formattedMessage.conversationLastWhisperedMessage\|raw`
+
+|Letzte Nachricht der Konversation
+|`messenger.formattedMessage.conversationLastMessage\|raw`
+
+|Erste geflüsterte Nachricht der Konversation
+|`messenger.formattedMessage.conversationFirstWhisperedMessage\|raw`
+
+|Erste Nachricht der Konversation
+|`messenger.formattedMessage.conversationFirstMessage\|raw`
+
+|Titel der Konversation
+|`messenger.title`
+
+|ID der Konversation
+|`messenger.uuid`
+|======
+
+
+[discrete]
+=== Dokumente
+
+* Der DocumentBuilder wurde um ein Code Widget erweitert. Mit diesem Widget kann, genauso wie im EmailBuilder, individuelles Styling wie zB. fett gedruckte Mengen von Auftragspositionen umgesetzt, wie auch komplexere Darstellungen / Aufbereitung von Daten gemacht werden.
+* Die verfügbaren Variablen im DocumentBuilder wurden erweitert. Für Datumsvariablen steht nun sowohl das Datum mit als auch ohne Uhrzeit zur Verfügung.
+
+[discrete]
+=== Ereignisaktionen
+
+* Es ist nun möglich benutzerdefinierte Auftragsdokumente über eine Aktion zu generieren.
+
+[discrete]
+=== Kontoverwaltung
+
+* Ab heute hast du die Möglichkeit Benutzer:innen erneut in dein System einzuladen. Diese Funktion befindet sich im Menü *Einrichtung » Kontoverwaltung » Konten* im Kontextmenü *Mehr* oder in der Detailansicht des/der Benutzer:in im Kontextmenü *Mehr*.
+
+[discrete]
+=== Prozesse
+
+* Ab sofort steht euch auch in den Prozessen der neue Dokumententyp *Benutzerdefiniertes Dokument* zur Verfügung.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Die Sortieroptionen in den Einstellungen der Eigenschaften und beim Hinzufügen von Eigenschaften in der neuen Artikel-UI haben nicht richtig funktioniert. Das haben wir nun korrigiert.
+
+[discrete]
+=== Aufträge
+
+* In den Auftragsdetails können die Versandkosten ab jetzt nur noch 2 Nachkommastellen haben.
+* Wenn in der neuen AuftragsUI, nach dem Ändern der Versandkosten die Enter-Taste gedrückt wurde, wurde der Auftrag nicht mit den neuen Versandkosten aktualisiert. Dies wurde behoben.
+* In der Detailansicht, im Bereich *Allgemein*, wurden zwei neue Felder hinzugefügt. Sie enthalten die Auftrags-ID und Kunden-ID. Beide Felder sind nicht änderbar, sie verfügen über eine Button zum kopieren der Werte.
+* In der neue AuftragsUI zum Anlegen eines neuen Auftrags enthielt die Abfrage der gültigen Verkaufspreise beim erneuten Laden nach einer Mengenänderung nicht den Währungsparameter. Dies wurde behoben.
+* Bei der Erstellung eines neuen Auftrags über die UI, es es machmal zu den Problem gekommen, das der Auftragstyp nicht gesetzt gewesen ist. Dies wurde behoben.
+* In einem duplizierten Auftragstab, wurde nach der Änderung eines Auftragsstatus in der Detailansicht nach dem Wechsel zurück in die Übersicht die Statusänderung nicht dargestellt. Dies wurde behoben.
+* In den Auftragsdetails zeigte das Tag-Feld nicht den internen Tag-Namen, wie in der Übersicht an. Dies wurde behoben.
+* In der Benutzeroberfläche der Bestellungsdetails waren die Pfeile zum Aufklappen und Zuklappen der Portlets nicht konsistent. Dies wurde behoben.
+* Optimierung der Nutzung der Preview-Route, bei der Erstellen eines Auftrags oder bei Änderungen an den Auftragspositionen. Es ist bei vielen Positionen vorgekommen das es zu einen Fehler gekommen ist, daraufhin konnte der Auftrag nicht angelegt werden -da der Button ausgegraut gewesen ist-.
+* In der Auftrags-UI und bei der Anlage eines neuer Aufträge wurde in der Tabelle für die Auftragsposition in der Spalte *Aufpreis gesamt* nicht der Aufpreis der Bestellmerkmale angezeigt. Dies wurde behoben.
+* In der Auftrag UI wurde bei Änderungen am Auftrag, die den Bestand betreffen (z.B. Lager) nicht die Warenbestandsautomatik ausgelöst (automatischer Statuswechsel zu 4 oder 5). Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Wenn im EmailBuilder im Betreff einer Vorlage eine ungültige Twig-Expression enthalten war konnte die Vorlage zwar gespeichert, jedoch nicht versendet werden. Ab sofort wird bei ungültigen Twig-Expressions eine Fehlermeldung angezeigt und die Vorlage nicht gespeichert.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/klarna_6731[Klarna^]
+|2.4.11
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.17.5
+|-
+
+|link:https://marketplace.plentymarkets.com/sofort_5050[Sofort.^]
+|1.3.3
+|-
+
+|link:https://marketplace.plentymarkets.com/woocommerce_5102[woocommerce.com^]
+|3.2.3
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
