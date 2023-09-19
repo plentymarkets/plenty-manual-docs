@@ -1,0 +1,311 @@
+= Changelog 13. September 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 7. September 2023
+:endWeekDate: 13. September 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/order-ui-fix-rights-for-showing-stock-button-in-order-details-rechte-fuer-die-anzeige-des-warenbestand-ermitteln-buttons-in-den-auftragsdetails-korrigiert/736967
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/fix-weiterleitung-zur-auftragsuebersicht-mit-vorausgefuellten-filtern-fix-navigation-with-prefilled-filters-to-the-order-overview/736940
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Es ist jetzt möglich, die Spalten der neuen Artikel-UI selber zu konfigurieren.
+
+[discrete]
+=== Aufträge
+
+* Die Anzahl der erstellten Kinderaufträge ist in der Toolbar der Auftragsdetails neben dem Button *Auftrag erstellen* als Badge zu sehen. Wenn Sie auf die Button *Auftrag erstellen* klicken, werden die Kinderauftragstypen die bereits existieren mit einer grünen Linie unterstrichen.
+* In der neuen Auftrags-UI zeigt der Tooltip für den Namen der Auftragsposition, jetzt die Zeilenumbrüche an. Dies wurde sowohl für die Auftragsübersicht als auch für die Detailansicht umgesetzt.
+* Für die neue Auftragsoberfläche wurden neue Einstellungen mit dem Namen *Verbieten, dass Kindaufträge mit mehr Autragspositionen als im Hauptauftrag angelegt werden* für die Auftragstypen *Kaufauftrag*, *Garantie* und *Gutschrift* hinzugefügt. Wenn die Einstellung aktiviert ist, wird die Erstellung eines dieser Auftragstypen auf die offene Menge begrenzt, und wenn sie deaktiviert ist, können mehrere Kindaufträge ohne Begrenzung auf die offene Menge erstellt werden. In der Standardeinstellung ist diese Einstellung aktiviert.
+
+[discrete]
+=== CRM
+
+Im EmailBuilder wurden neue Messenger bezogene Variablen hinzugefügt.
+
+[cols="1,3"]
+|======
+|Variable |Twig-Expression
+
+|Konversations Historie
+|`messenger.formattedMessage.conversationHistory\|raw`
+
+|Letzte geflüsterte Nachricht der Konversation
+|`messenger.formattedMessage.conversationLastWhisperedMessage\|raw`
+
+|Letzte Nachricht der Konversation
+|`messenger.formattedMessage.conversationLastMessage\|raw`
+
+|Erste geflüsterte Nachricht der Konversation
+|`messenger.formattedMessage.conversationFirstWhisperedMessage\|raw`
+
+|Erste Nachricht der Konversation
+|`messenger.formattedMessage.conversationFirstMessage\|raw`
+
+|Titel der Konversation
+|`messenger.title`
+
+|ID der Konversation
+|`messenger.uuid`
+|======
+
+* Im Bereich Dokumente des Kontatkdatensatzes wurde im Drei-Punkte-Menü der Eintrag *Bearbeiten* hinzugefügt, der für Dokumentenlinks sichtbar ist. Beim Klick auf *Bearbeiten* öffnet sich ein Fenster mit dem Dokumentenlink und falls vorhanden dem Titel. Du kannst den Link und den Titel hier aktualisieren. Außerdem wurde in der Dokumentenübersicht der Tooltip *Dokumententyp: Link* hinzugefügt.
+
+
+[discrete]
+=== Dokumente
+
+* Der DocumentBuilder wurde um ein Code Widget erweitert. Mit diesem Widget kann, genauso wie im EmailBuilder, individuelles Styling wie zB. fett gedruckte Mengen von Auftragspositionen umgesetzt, wie auch komplexere Darstellungen / Aufbereitung von Daten gemacht werden.
+* Die verfügbaren Variablen im DocumentBuilder wurden erweitert. Für Datumsvariablen steht nun sowohl das Datum mit als auch ohne Uhrzeit zur Verfügung.
+
+[discrete]
+=== Ereignisaktionen
+
+* Es ist nun möglich benutzerdefinierte Auftragsdokumente über eine Aktion zu generieren.
+
+[discrete]
+=== Kontoverwaltung
+
+* Ab heute hast du die Möglichkeit Benutzer:innen erneut in dein System einzuladen. Diese Funktion befindet sich im Menü *Einrichtung » Kontoverwaltung » Konten* im Kontextmenü *Mehr* oder in der Detailansicht des/der Benutzer:in im Kontextmenü *Mehr*.
+
+[discrete]
+=== Prozesse
+
+* Ab sofort steht euch auch in den Prozessen der neue Dokumententyp *Benutzerdefiniertes Dokument* zur Verfügung.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Die Sortieroptionen in den Einstellungen der Eigenschaften und beim Hinzufügen von Eigenschaften in der neuen Artikel-UI haben nicht richtig funktioniert. Das haben wir nun korrigiert.
+
+[discrete]
+=== Aufträge
+
+* In den Auftragsdetails können die Versandkosten ab jetzt nur noch 2 Nachkommastellen haben.
+* Wenn in der neuen AuftragsUI, nach dem Ändern der Versandkosten die Enter-Taste gedrückt wurde, wurde der Auftrag nicht mit den neuen Versandkosten aktualisiert. Dies wurde behoben.
+* In der Detailansicht, im Bereich *Allgemein*, wurden zwei neue Felder hinzugefügt. Sie enthalten die Auftrags-ID und Kunden-ID. Beide Felder sind nicht änderbar, sie verfügen über eine Button zum kopieren der Werte.
+* In der neue AuftragsUI zum Anlegen eines neuen Auftrags enthielt die Abfrage der gültigen Verkaufspreise beim erneuten Laden nach einer Mengenänderung nicht den Währungsparameter. Dies wurde behoben.
+* Bei der Erstellung eines neuen Auftrags über die UI, es es machmal zu den Problem gekommen, das der Auftragstyp nicht gesetzt gewesen ist. Dies wurde behoben.
+* In einem duplizierten Auftragstab, wurde nach der Änderung eines Auftragsstatus in der Detailansicht nach dem Wechsel zurück in die Übersicht die Statusänderung nicht dargestellt. Dies wurde behoben.
+* In den Auftragsdetails zeigte das Tag-Feld nicht den internen Tag-Namen, wie in der Übersicht an. Dies wurde behoben.
+* In der Benutzeroberfläche der Bestellungsdetails waren die Pfeile zum Aufklappen und Zuklappen der Portlets nicht konsistent. Dies wurde behoben.
+* Optimierung der Nutzung der Preview-Route, bei der Erstellen eines Auftrags oder bei Änderungen an den Auftragspositionen. Es ist bei vielen Positionen vorgekommen das es zu einen Fehler gekommen ist, daraufhin konnte der Auftrag nicht angelegt werden -da der Button ausgegraut gewesen ist-.
+* In der Auftrags-UI und bei der Anlage eines neuer Aufträge wurde in der Tabelle für die Auftragsposition in der Spalte *Aufpreis gesamt* nicht der Aufpreis der Bestellmerkmale angezeigt. Dies wurde behoben.
+* In der Auftrag UI wurde bei Änderungen am Auftrag, die den Bestand betreffen (z.B. Lager) nicht die Warenbestandsautomatik ausgelöst (automatischer Statuswechsel zu 4 oder 5). Dies wurde behoben.
+
+[discrete]
+=== bol.com
+
+* Wenn wir von bol.com zusätzlich zur Hausnummer noch eine Hausnummererweiterung erhalten haben, wurde diese bisher direkt an die Hausnummer angehängt. Dies wurde korrigiert, sodass ein Leerzeichen zwischen Hausnummer und Hausnummererweiterung steht. Dies sollte Probleme beim Versand vorbeugen.
+
+[discrete]
+=== CRM
+
+* Wenn im EmailBuilder im Betreff einer Vorlage eine ungültige Twig-Expression enthalten war konnte die Vorlage zwar gespeichert, jedoch nicht versendet werden. Ab sofort wird bei ungültigen Twig-Expressions eine Fehlermeldung angezeigt und die Vorlage nicht gespeichert.
+
+[discrete]
+=== Kontoverwaltung
+
+* Durch das Abspeichern einer Änderung am eigenen Backend-User konnte es passieren, dass dieser deaktiviert wurde. Dieses Verhalten wurde gefixt.
+
+[discrete]
+=== Netto
+
+* Wenn einer Variante die Steuerklasse 0 zugeordnet wurde, dann wurde dieser Wert nicht exportiert, weil dies als "leer" interpretiert wurde. Durch das fehlende Pflichtfeld konnte dann die Variante nicht exportiert werden. Dies wurde behoben.
+
+[discrete]
+=== OTTO Market
+
+Es trat ein Fehler bei der Versandmeldung von Aufträgen mit mehreren Auftragspositionen auf, wodurch bei jedem Auslösen der Versandmeldung immer nur eine Auftragsposition gemeldet wurde, aber nie dieselbe nochmal.
+
+Dieses Problem trat abhängig von der Version des Systems in folgendem Zeitraum auf:
+
+* In stable seit dem 06.09.2023.
+* In early seit dem 30.08.2023.
+* In beta seit dem 23.08.2023.
+
+Falls nicht im OPC möglich, können betroffene Aufträge unter *Daten » Log* identifiziert werden, indem man mit den folgenden Suchfiltern sucht:
+
+* *Identifikator*: OTTO Market
+* *Level*: critical
+* *Referenztyp*: action
+* *Referenzwert*: orderShipping
+
+Die gesuchten Log-Einträge haben die Nachricht `Versand nicht gemeldet.` und wenn man die Details öffnet, dann steht dort am Anfang `message:"validation error found"`.
+
+[IMPORTANT]
+.To-Do
+======
+Die Aufträge bzw. Auftragspositionen müssen entweder manuell im OPC gemeldet werden.
+======
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Du kannst ab jetzt den Operator *Zeitraum* für jeden Datumsfilter in der Auftragsübersicht verwenden.
+Es stehen die Optionen *Heute*, *Gestern*, *Letzte 7 Tage* und *Letzte 30 Tage* zur Verfügung.
+* Die Auftrags-UI zeigt jetzt eine Warnung nach dem Speichern an, wenn der Status sich nicht aktualisiert hat. Beispielsweise wenn der Warenausgang gebucht wurde und der Status zurück geändert werden sollte.
+* In den Detailansicht der Auftrags-UI wurde den Elementen Notizen, Dokumente und Auftragshistorie eine maximale Höhe von 30% der Bildschirmhöhe gegeben. Wenn der Inhalt zu groß ist, wird eine Scollbalken angezeigt und der Inhalt kann gescrollt werden.
+* In der Auftrag UI wird nun die Einstellung für das Format von Gewichten (*Einrichtung » Einstellungen » Zahlenformate*) beachtet.
+* In den Bearbeitungsansicht der Auftragsposition in der Auftrag-UI ist es nun möglich, die Variante zu ändern, ohne sie vorher zu lösen und danach neu zu zuweisen.
+* In der Auftrag UI wurde der Button *Kaufabwicklung* für Gutschriften hinzugefügt.
+
+[discrete]
+=== CRM
+
+* In den sprachabhängigen Einstellungen des EmailBuilder gibt es jetzt einen Upload-Button, mit dem du statische Anhänge direkt von deinem Computer hochladen kannst.
+
+[discrete]
+=== Dokumente
+
+* Es stehen zwei neue Einstellungen für das Auftragspositionen-Widget:
+** *Tabellenüberschrift auf Folgeseiten wiederholen*: Wird diese Checkbox gesetzt, so wiederholt sich die Tabellenüberschrift der Artikeltabelle auf jeder neuen Seite. Standard: keine Wiederholung der Tabellenüberschrift.
+** *Unterbinde Seitenumbruch in Tabellenzeilen*: Wird diese Checkbox gesetzt, werden Tabellenzeilen nicht auf zwei Seiten geteilt, wenn der Platz auf einer Seite nicht für die volle Zeile reicht, sondern komplett auf der neuen Seite ausgegeben. Standard: Zeile wird geteilt.
+* Für die Einstellung *Dateiname* der DocumentBuilder Vorlagen steht nun die Variable `$orderId` zur Verfügung.
+
+[discrete]
+=== Prozesse
+
+* In der Aktion *Artikelerfassung* konnte es dazu kommen, dass die Tabelle in der Detailansicht eines Auftrags zu gross geworden ist und man Felder nur durch Scrollen lesen konnte. Wir haben die Möglichkeit geschaffen, dass Tabellenfelder der Detailansicht jetzt verschoben werden können.
++
+Möglicherweise muss bei manchen Benutzern nach der Verteilung die Auftrags-Detailansicht in der Artikelerfassung einmalig neu eingestellt werden.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Die Standardsortierung der Artikelübersicht in der neuen Artikel-UI findet nun nach Artikel-ID absteigend statt. So sieht man den neuesten angelegten Artikel immer ganz oben.
+* Der Filter nach Verkaufskanälen zeigt nur noch tatsächlich sichtbar geschaltete Marktplätze zur Auswahl an.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Die Gruppenfunktion *Rabatt* in der Auftragspositionen bearbeiten Ansicht erlaubt es nun, den Rabatt auf 0 zu setzen.
+* Bei der Auftragserstellung konnte es dazu kommen, dass man nicht zum letzten Schritt springen konnte, obwohl die Verkaufspreise schon aktualisiert wurden, dies wurde behoben.
+* Beim Löschen von Sammelaufträgen und Sammelgutschriften in der Detailansicht der Auftrag UI kam es zu einem Fehler. Dies wurde behoben.
+* In der Auftrag UI konnte es beim Bearbeiten von Adressen zu dem Fehler `order.orderUI.details.addresses.addressFormIsInvalid` kommen. Dies wurde behoben.
+* Wenn aus einem Auftrag heraus eine Nachbestellung angelegt wurde, konnten die Attribute in der Nachbestellung nicht angezeigt werden. Dies ist nun behoben.
+* In der Auftrag UI kam es bei Reparaturen beim Zuweisen und Lösen von Varianten zu einem Fehler. Dies wurde behoben.
+* Wenn eine Auswahleigenschaft keinen Namen hat, wird der Name der Auswahl als Eigenschaftsname im Dialogfeld „Eigenschaften der Auftragsposition bearbeiten“ verwendet. Dies wurde behoben und ein Fallback wurde hinzugefügt, um den ersten Namen für ein solches Szenario zu erhalten.
+* In der UI für die Bearbeitung von Auftragspositionen verhindert der Mechanismus für gültige Verkaufspreise das Speichern der Auftragspositionen, wenn einem Artikel keine Variante zugeordnet ist. Dies wurde behoben.
+* Wenn ein Dokument von der Übersichts-UI aus erstellt wird, wird die Scrollposition zurückgesetzt, da die Auftragssuche durchgeführt wird. Dies wurde behoben.
+* Der Zahlungsstatus in Prozent wurde auch bei den Auftragstypen Angebot, Lieferauftrag, Retoure, erweiterte Aufträge und Teillieferung angezeigt. Dies wurde behoben.
+* Wenn in der neuen Auftrags-UI versucht wurde, die Auftragsreferenzen von der Fußzeile der Seitennavigation aus zu öffnen, während die Auftragsdetails in einem duplizierten Tab geöffnet waren, führte der Redirect zu einem Fehler. Dieser Fehler wurde behoben.
+
+[discrete]
+=== CRM
+
+* Beim Wechseln zwischen zwei Gastbesteller Adressen wurde das Adress-Portlet nicht aktualisiert.
+Dieses Verhalten wurde behoben.
+* Beim Klicken auf den Firmennamen eines Gastbestellers in der Kontaktübersicht wurde man auf das Dashboard und nicht in die Firmen-UI geleitet. Dieses Verhalten wurde behoben.
+* Wenn im Messenger-Assistenten ein Posteingang als Standard bestimmt war, wurde das in der in der Zusammenfassung falsch angezeigt. Dieses Verhalten wurde behoben.
+* Beim Einfügen eines HTML-Textblocks im Messenger-Editor wurde statt des formatierten Textes der HTML-Code im Textbereich angezeigt. Dieses Verhalten wurde nun behoben.
+
+[discrete]
+=== Dokumente
+
+* Die Variable *Retourengrund* hat die ID des Grundes und nicht den Grund selbst ausgegeben. Das wurde behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/fruugo_6875[Fruugo.com^]
+|1.4.0
+|-
+
+|link:https://marketplace.plentymarkets.com/invoice_4760[Kauf auf Rechnung^]
+|2.0.12
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.6.0
+|-
+
+|link:https://marketplace.plentymarkets.com/easycompliance4plenty_55612[Sanktionslistenprüfung mit Easycompliance^]
+|1.0.0
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.4.1
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
