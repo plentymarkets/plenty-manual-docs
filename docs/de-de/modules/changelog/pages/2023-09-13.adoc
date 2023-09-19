@@ -6,7 +6,8 @@
 :startWeekDate: 7. September 2023
 :endWeekDate: 13. September 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/order-ui-fix-rights-for-showing-stock-button-in-order-details-rechte-fuer-die-anzeige-des-warenbestand-ermitteln-buttons-in-den-auftragsdetails-korrigiert/736967
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/fix-weiterleitung-zur-auftragsuebersicht-mit-vorausgefuellten-filtern-fix-navigation-with-prefilled-filters-to-the-order-overview/736940
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -70,6 +71,8 @@ Im EmailBuilder wurden neue Messenger bezogene Variablen hinzugefügt.
 |`messenger.uuid`
 |======
 
+* Im Bereich Dokumente des Kontatkdatensatzes wurde im Drei-Punkte-Menü der Eintrag *Bearbeiten* hinzugefügt, der für Dokumentenlinks sichtbar ist. Beim Klick auf *Bearbeiten* öffnet sich ein Fenster mit dem Dokumentenlink und falls vorhanden dem Titel. Du kannst den Link und den Titel hier aktualisieren. Außerdem wurde in der Dokumentenübersicht der Tooltip *Dokumententyp: Link* hinzugefügt.
+
 
 [discrete]
 === Dokumente
@@ -129,9 +132,50 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * In der Auftrag UI wurde bei Änderungen am Auftrag, die den Bestand betreffen (z.B. Lager) nicht die Warenbestandsautomatik ausgelöst (automatischer Statuswechsel zu 4 oder 5). Dies wurde behoben.
 
 [discrete]
+=== bol.com
+
+* Wenn wir von bol.com zusätzlich zur Hausnummer noch eine Hausnummererweiterung erhalten haben, wurde diese bisher direkt an die Hausnummer angehängt. Dies wurde korrigiert, sodass ein Leerzeichen zwischen Hausnummer und Hausnummererweiterung steht. Dies sollte Probleme beim Versand vorbeugen.
+
+[discrete]
 === CRM
 
 * Wenn im EmailBuilder im Betreff einer Vorlage eine ungültige Twig-Expression enthalten war konnte die Vorlage zwar gespeichert, jedoch nicht versendet werden. Ab sofort wird bei ungültigen Twig-Expressions eine Fehlermeldung angezeigt und die Vorlage nicht gespeichert.
+
+[discrete]
+=== Kontoverwaltung
+
+* Durch das Abspeichern einer Änderung am eigenen Backend-User konnte es passieren, dass dieser deaktiviert wurde. Dieses Verhalten wurde gefixt.
+
+[discrete]
+=== Netto
+
+* Wenn einer Variante die Steuerklasse 0 zugeordnet wurde, dann wurde dieser Wert nicht exportiert, weil dies als "leer" interpretiert wurde. Durch das fehlende Pflichtfeld konnte dann die Variante nicht exportiert werden. Dies wurde behoben.
+
+[discrete]
+=== OTTO Market
+
+Es trat ein Fehler bei der Versandmeldung von Aufträgen mit mehreren Auftragspositionen auf, wodurch bei jedem Auslösen der Versandmeldung immer nur eine Auftragsposition gemeldet wurde, aber nie dieselbe nochmal.
+
+Dieses Problem trat abhängig von der Version des Systems in folgendem Zeitraum auf:
+
+* In stable seit dem 06.09.2023.
+* In early seit dem 30.08.2023.
+* In beta seit dem 23.08.2023.
+
+Falls nicht im OPC möglich, können betroffene Aufträge unter *Daten » Log* identifiziert werden, indem man mit den folgenden Suchfiltern sucht:
+
+* *Identifikator*: OTTO Market
+* *Level*: critical
+* *Referenztyp*: action
+* *Referenzwert*: orderShipping
+
+Die gesuchten Log-Einträge haben die Nachricht `Versand nicht gemeldet.` und wenn man die Details öffnet, dann steht dort am Anfang `message:"validation error found"`.
+
+[IMPORTANT]
+.To-Do
+======
+Die Aufträge bzw. Auftragspositionen müssen entweder manuell im OPC gemeldet werden.
+======
 
 --
 
@@ -146,7 +190,36 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* Du kannst ab jetzt den Operator *Zeitraum* für jeden Datumsfilter in der Auftragsübersicht verwenden.
+Es stehen die Optionen *Heute*, *Gestern*, *Letzte 7 Tage* und *Letzte 30 Tage* zur Verfügung.
+* Die Auftrags-UI zeigt jetzt eine Warnung nach dem Speichern an, wenn der Status sich nicht aktualisiert hat. Beispielsweise wenn der Warenausgang gebucht wurde und der Status zurück geändert werden sollte.
+* In den Detailansicht der Auftrags-UI wurde den Elementen Notizen, Dokumente und Auftragshistorie eine maximale Höhe von 30% der Bildschirmhöhe gegeben. Wenn der Inhalt zu groß ist, wird eine Scollbalken angezeigt und der Inhalt kann gescrollt werden.
+* In der Auftrag UI wird nun die Einstellung für das Format von Gewichten (*Einrichtung » Einstellungen » Zahlenformate*) beachtet.
+* In den Bearbeitungsansicht der Auftragsposition in der Auftrag-UI ist es nun möglich, die Variante zu ändern, ohne sie vorher zu lösen und danach neu zu zuweisen.
+* In der Auftrag UI wurde der Button *Kaufabwicklung* für Gutschriften hinzugefügt.
+
+[discrete]
+=== CRM
+
+* In den sprachabhängigen Einstellungen des EmailBuilder gibt es jetzt einen Upload-Button, mit dem du statische Anhänge direkt von deinem Computer hochladen kannst.
+
+[discrete]
+=== Dokumente
+
+* Es stehen zwei neue Einstellungen für das Auftragspositionen-Widget:
+** *Tabellenüberschrift auf Folgeseiten wiederholen*: Wird diese Checkbox gesetzt, so wiederholt sich die Tabellenüberschrift der Artikeltabelle auf jeder neuen Seite. Standard: keine Wiederholung der Tabellenüberschrift.
+** *Unterbinde Seitenumbruch in Tabellenzeilen*: Wird diese Checkbox gesetzt, werden Tabellenzeilen nicht auf zwei Seiten geteilt, wenn der Platz auf einer Seite nicht für die volle Zeile reicht, sondern komplett auf der neuen Seite ausgegeben. Standard: Zeile wird geteilt.
+* Für die Einstellung *Dateiname* der DocumentBuilder Vorlagen steht nun die Variable `$orderId` zur Verfügung.
+
+[discrete]
+=== Prozesse
+
+* In der Aktion *Artikelerfassung* konnte es dazu kommen, dass die Tabelle in der Detailansicht eines Auftrags zu gross geworden ist und man Felder nur durch Scrollen lesen konnte. Wir haben die Möglichkeit geschaffen, dass Tabellenfelder der Detailansicht jetzt verschoben werden können.
++
+Möglicherweise muss bei manchen Benutzern nach der Verteilung die Auftrags-Detailansicht in der Artikelerfassung einmalig neu eingestellt werden.
 
 '''
 
@@ -155,7 +228,11 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Die Standardsortierung der Artikelübersicht in der neuen Artikel-UI findet nun nach Artikel-ID absteigend statt. So sieht man den neuesten angelegten Artikel immer ganz oben.
+* Der Filter nach Verkaufskanälen zeigt nur noch tatsächlich sichtbar geschaltete Marktplätze zur Auswahl an.
 
 '''
 
@@ -164,7 +241,34 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* Die Gruppenfunktion *Rabatt* in der Auftragspositionen bearbeiten Ansicht erlaubt es nun, den Rabatt auf 0 zu setzen.
+* Bei der Auftragserstellung konnte es dazu kommen, dass man nicht zum letzten Schritt springen konnte, obwohl die Verkaufspreise schon aktualisiert wurden, dies wurde behoben.
+* Beim Löschen von Sammelaufträgen und Sammelgutschriften in der Detailansicht der Auftrag UI kam es zu einem Fehler. Dies wurde behoben.
+* In der Auftrag UI konnte es beim Bearbeiten von Adressen zu dem Fehler `order.orderUI.details.addresses.addressFormIsInvalid` kommen. Dies wurde behoben.
+* Wenn aus einem Auftrag heraus eine Nachbestellung angelegt wurde, konnten die Attribute in der Nachbestellung nicht angezeigt werden. Dies ist nun behoben.
+* In der Auftrag UI kam es bei Reparaturen beim Zuweisen und Lösen von Varianten zu einem Fehler. Dies wurde behoben.
+* Wenn eine Auswahleigenschaft keinen Namen hat, wird der Name der Auswahl als Eigenschaftsname im Dialogfeld „Eigenschaften der Auftragsposition bearbeiten“ verwendet. Dies wurde behoben und ein Fallback wurde hinzugefügt, um den ersten Namen für ein solches Szenario zu erhalten.
+* In der UI für die Bearbeitung von Auftragspositionen verhindert der Mechanismus für gültige Verkaufspreise das Speichern der Auftragspositionen, wenn einem Artikel keine Variante zugeordnet ist. Dies wurde behoben.
+* Wenn ein Dokument von der Übersichts-UI aus erstellt wird, wird die Scrollposition zurückgesetzt, da die Auftragssuche durchgeführt wird. Dies wurde behoben.
+* Der Zahlungsstatus in Prozent wurde auch bei den Auftragstypen Angebot, Lieferauftrag, Retoure, erweiterte Aufträge und Teillieferung angezeigt. Dies wurde behoben.
+* Wenn in der neuen Auftrags-UI versucht wurde, die Auftragsreferenzen von der Fußzeile der Seitennavigation aus zu öffnen, während die Auftragsdetails in einem duplizierten Tab geöffnet waren, führte der Redirect zu einem Fehler. Dieser Fehler wurde behoben.
+
+[discrete]
+=== CRM
+
+* Beim Wechseln zwischen zwei Gastbesteller Adressen wurde das Adress-Portlet nicht aktualisiert.
+Dieses Verhalten wurde behoben.
+* Beim Klicken auf den Firmennamen eines Gastbestellers in der Kontaktübersicht wurde man auf das Dashboard und nicht in die Firmen-UI geleitet. Dieses Verhalten wurde behoben.
+* Wenn im Messenger-Assistenten ein Posteingang als Standard bestimmt war, wurde das in der in der Zusammenfassung falsch angezeigt. Dieses Verhalten wurde behoben.
+* Beim Einfügen eines HTML-Textblocks im Messenger-Editor wurde statt des formatierten Textes der HTML-Code im Textbereich angezeigt. Dieses Verhalten wurde nun behoben.
+
+[discrete]
+=== Dokumente
+
+* Die Variable *Retourengrund* hat die ID des Grundes und nicht den Grund selbst ausgegeben. Das wurde behoben.
 
 --
 
@@ -178,9 +282,25 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/fruugo_6875[Fruugo.com^]
+|1.4.0
+|-
+
+|link:https://marketplace.plentymarkets.com/invoice_4760[Kauf auf Rechnung^]
+|2.0.12
+|-
+
+|link:https://marketplace.plentymarkets.com/limango_7023[limango^]
+|1.6.0
+|-
+
+|link:https://marketplace.plentymarkets.com/easycompliance4plenty_55612[Sanktionslistenprüfung mit Easycompliance^]
+|1.0.0
+|-
+
+|link:https://marketplace.plentymarkets.com/trackingmanager_54743[TrackingManager^]
+|1.4.1
+|-
 
 |===
 
