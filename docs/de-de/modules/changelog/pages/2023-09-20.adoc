@@ -6,7 +6,7 @@
 :startWeekDate: 14. September 2023
 :endWeekDate: 20. September 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/neue-auftrags-ui-fehler-bei-der-erstellung-von-lieferauftraegen-behoben-new-order-ui-fix-error-on-delivery-order-creation/737906
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -42,6 +42,9 @@ Es stehen die Optionen *Heute*, *Gestern*, *Letzte 7 Tage* und *Letzte 30 Tage* 
 === CRM
 
 * In den sprachabhängigen Einstellungen des EmailBuilder gibt es jetzt einen Upload-Button, mit dem du statische Anhänge direkt von deinem Computer hochladen kannst.
+* Im Menü *Aufträge » Aufträge* im *Messenger-Portlet* stehen dir ab sofort zwei Filter zur Verfügung:
+** Über den Filter *Verknüpft mit* kannst du entweder *Auftrag* oder *Kontakt* wählen.
+** Über den Filter *Flüster-Modus* kannst du entweder *alle*, *geflüsterte* oder *normale Konversationen* wählen.
 
 [discrete]
 === Dokumente
@@ -50,6 +53,8 @@ Es stehen die Optionen *Heute*, *Gestern*, *Letzte 7 Tage* und *Letzte 30 Tage* 
 ** *Tabellenüberschrift auf Folgeseiten wiederholen*: Wird diese Checkbox gesetzt, so wiederholt sich die Tabellenüberschrift der Artikeltabelle auf jeder neuen Seite. Standard: keine Wiederholung der Tabellenüberschrift.
 ** *Unterbinde Seitenumbruch in Tabellenzeilen*: Wird diese Checkbox gesetzt, werden Tabellenzeilen nicht auf zwei Seiten geteilt, wenn der Platz auf einer Seite nicht für die volle Zeile reicht, sondern komplett auf der neuen Seite ausgegeben. Standard: Zeile wird geteilt.
 * Für die Einstellung *Dateiname* der DocumentBuilder Vorlagen steht nun die Variable `$orderId` zur Verfügung.
+* Dokumente werden in der Auftrags UI jetzt in einem neuen Browser-Tab anstatt eines Overlays geöffnet.
+Beachte, dass sich bei der ersten Verwendung eine Browser-Warnung zum Zulassen von Pop-ups und Weiterleitungen öffnen kann.
 
 [discrete]
 === Prozesse
@@ -74,9 +79,41 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 '''
 
 [discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Kontoverwaltung
+
+Wir haben euer Feedback wahrgenommen und es ist ab morgen möglich, sich wie gehabt über PID, Nutzername und Passwort einzuloggen. Das gilt für bestehende Nutzer:innen-Konten sowie neu erstellte. Dabei sind allerdings zwei Ausnahmen zu beachten:
+
+* Der Login ohne E-Mail-Adresse ist nicht für Administratoren möglich
+* sowie für Benutzer:innen-Konten, an die schon eine Einladungs-E-Mail versendet wurde.
+
+Weiterhin zu beachten ist, dass ihr euch über den Login ohne E-Mail-Adresse nur ein System einloggen 
+könnt.
+
+Ihr habt trotzdem die Möglichkeit, die optionale Multi-Faktor-Authentifizierung (MFA) zu nutzen, allerdings kann durch die momentane Migrationsphase nicht euer Gerät für die MFA gemerkt werden. Das wird für Nutzer:innen ohne E-Mail-Adresse erst zu einem späteren Zeitpunkt möglich sein.
+
+Die MFA sowie Passworteinstellungen findet ihr im Menü *plentysystems Konto* unter dem Profilbild oben rechts.
+
+Ab morgen steht euch der Login ohne E-Mail-Adresse hier zur Verfügung:
+https://account.plentysystems.com/login
+
+'''
+
+[discrete]
 == Behoben
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* Aufgrund eines Fehlers wurde die Option für den Amazon Bestandsabgleich nicht korrekt in die neuen Einstellungen überführt. Dieser wurde behoben und falsch migrierte Einstellung automatisiert korrigiert.
+* Aufgrund eines Fehlers wurde die Option für das Amazon FBA-Lager nicht korrekt in die neuen Einstellungen überführt. Dieser wurde behoben und falsch migrierte Einstellung automatisiert korrigiert.
+* Bei Händler:innen, die eine der VCS-Optionen nutzen, kam es bei Aufträgen mit mehr als einem Aktionsartikel zu einem Problem. Es wurde immer nur der erste Aktionsartikel durch VCS korrigiert und erhielt die Summe der Aktionsartikel als neuen Betrag. Dadurch war die Summe der Beträge der Auftragsartikel falsch.
 
 [discrete]
 === Aufträge
@@ -92,6 +129,9 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * Wenn ein Dokument von der Übersichts-UI aus erstellt wird, wird die Scrollposition zurückgesetzt, da die Auftragssuche durchgeführt wird. Dies wurde behoben.
 * Der Zahlungsstatus in Prozent wurde auch bei den Auftragstypen Angebot, Lieferauftrag, Retoure, erweiterte Aufträge und Teillieferung angezeigt. Dies wurde behoben.
 * Wenn in der neuen Auftrags-UI versucht wurde, die Auftragsreferenzen von der Fußzeile der Seitennavigation aus zu öffnen, während die Auftragsdetails in einem duplizierten Tab geöffnet waren, führte der Redirect zu einem Fehler. Dieser Fehler wurde behoben.
+* Wenn man in der AuftragsUI nach dem Speichern von Artikeln oder nach dem Löschen eines Artikels aus der AuftragsUI heraus navigiert und dann zurück zu den Auftragspositionen navigiert, um die Änderungen zu speichern, tritt beim Speichern der Artikel ein Fehler auf. Dies wurde behoben.
+* Das Auftragsreferenzen Overlay hat die Daten nicht geladen, dies wurde behoben.
+* In der Benutzeroberfläche für Aufträge wurde bei der Schaltfläche zum Anlegen von Kinderaufträgen ein Badge mit 0 angezeigt. Dies wurde behoben und das Badge wird nun nur angezeigt, wenn mindestens ein Kinderauftrag angelegt wurde.
 
 [discrete]
 === CRM
@@ -101,11 +141,31 @@ Dieses Verhalten wurde behoben.
 * Beim Klicken auf den Firmennamen eines Gastbestellers in der Kontaktübersicht wurde man auf das Dashboard und nicht in die Firmen-UI geleitet. Dieses Verhalten wurde behoben.
 * Wenn im Messenger-Assistenten ein Posteingang als Standard bestimmt war, wurde das in der in der Zusammenfassung falsch angezeigt. Dieses Verhalten wurde behoben.
 * Beim Einfügen eines HTML-Textblocks im Messenger-Editor wurde statt des formatierten Textes der HTML-Code im Textbereich angezeigt. Dieses Verhalten wurde nun behoben.
+* Wenn eine Person sich für den Newsletter über einen Webshop, der nicht der Standard-Shop ist, angemeldet hat, wurde das Ereignis im automatischen Versand zwar ausgelöst, aber die dort verknüpfte E-Mail-Vorlage wurde nicht versendet. Die Fehlermeldung `The SMTP config is invalid` wurde im Log gespeichert. Dieses Verhalten wurde behoben.
+* Wenn man im Messenger eine Relation zu einem Auftrag erstellen wollte und die Auftrags-ID mindestens 7-stellig war, konnte die Relation zwischen Konversation und Auftrag nicht erstellt werden. Dieses Verhalten wurde behoben.
 
 [discrete]
 === Dokumente
 
 * Die Variable *Retourengrund* hat die ID des Grundes und nicht den Grund selbst ausgegeben. Das wurde behoben.
+* Beim Zusammenfügen von vielen Dokumenten konnte es vorkommen, dass ein Timeout-Fehler (Anfrage benötigt zu viel Zeit) aufgetreten ist und die Dokumente nicht zusammengefügt wurden. Dieser Fehler wurde behoben.
+
+[discrete]
+=== OTTO
+
+Es konnte zu einem mehrfachen Import von Gutschriften kommen, wenn eine der Gutschriften nicht dem Hauptauftrag, sondern stattdessen z.B. einer Retoure zugeordnet war. Der Prozess, der beim Import prüft, ob eine Gutschrift bereits importiert ist, hat nur Gutschriften geprüft, die direkt mit dem Hauptauftrag verknüpft sind.
+
+Dadurch wurden Gutschriften an Retouren ausgeklammert. Beim Hinzufügen des externen Gutschriftsdokuments hat das System allerdings gemerkt, dass diese Nummer bereits vergeben ist und die Dokumentanlage dann abgebrochen.
+
+Es werden jetzt auch alle Kind-Aufträge (und im Zweifel auch deren Kinder) auf Gutschriften geprüft.
+
+[IMPORTANT]
+.To-Do
+======
+Wir können leider nicht automatisiert alle betroffenen Gutschriften identifizieren.
+
+Ein Indikator sind Gutschriften ohne externen Gutschriftsbeleg. Diese sollten im OPC gegengeprüft werden und überschüssige Gutschriften ohne Beleg gelöscht werden.
+======
 
 --
 
@@ -120,7 +180,20 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* In der Auftrags-UI enthielt die MyView Liste einige Pflicht-Widgets, die die Verwendung solcher Widgets erzwangen. Die Deklarierung als Pflicht-Widget wurde von allen Widgets entfernt.
+* Die Buttons, zum Warenausgang zurückbuchen (Übersicht und Detailansicht) haben jetzt eine grüne Markierung, damit man direkt erkennt, dass der Warenausgang gebucht wurde.
+* Der Button zum Warenausgang zurückbuchen wird jetzt Standardmäßig in der Standardansicht und Classic Ansicht angezeigt.
+* In der Auftrags-UI war es bei den Eingabefeldern vom Typ Zahl möglich, den Wert durch Scrollen zu ändern. Dies hat sich nun geändert und die Funktion wurde aus allen Zahlenfeldern entfernt.
+* In der Auftrag UI wurde der Filter *Auftragsadressdaten* in in Standard Ansicht hinzugefügt.
+
+[discrete]
+=== Dokumente
+
+* Bei der Aktivierung der Nummernkreise wurden Hinweise zu möglichen Überschneidungen mit anderen Nummernkreisen eingefügt.
+* In DocumentBuilder werden Einschränkungen der Ausgabe eines Text-Widgets nun bereits im Editor selbst dargestellt. Dies passiert durch Einfärben des Hintergrundes des betroffenen Text-Widgets.
 
 '''
 
@@ -138,7 +211,44 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Aufträge
 
+* Wenn man zur Auftragsübersicht mit vorausgefüllten Filtern navigiert und einige Filter bereits in der Auftragsübersicht gesetzt waren, wurden diese Filter nicht von den neuen Filtern überschrieben. Dies wurde behoben.
+* In der neuen Auftrags-UI war der Button *Warenbestand ermitteln* in der Symbolleiste der Auftragsdetails nicht sichtbar. Dies wurde nun behoben.
+* Wenn in der UI für die Auftragserstellung zu einer anderen Tab oder UI navigiert wird, während der Prozess der Auftragserstellung noch nicht abgeschlossen ist, werden bei der Rückkehr zur Auftragserstellung, um diese abzuschließen, die Kontakdaten oder Auftragspositionen zurückgesetzt und beim Speichern wird ein Fehler ausgegeben. Dies wurde behoben.
+* In der Auftrags-UI hatte die Spalte *Erweitern* in der Tabelle der Auftragspositionen eine doppelte Breite. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Im Ticket-Portlet der Kontakt-UI war die Schaltfläche *Neues Ticket* nur für Administratoren sichtbar, auch wenn der angemeldete Benutzer die Berechtigung *CRM » Ticketsystem » Erstellen* hatte. Dieses Verhalten wurde nun behoben.
+* Die EmailBuilder-Variable `Rechnungsnummer-ID` hat nur die Rechnungsnummer ausgegeben, aber nicht die Nummer mit dem Präfix. Dieses Verhalten wurde behoben.
+* Im Portlet *Primäre Adresse* im Kontaktdatensatz waren unnötige Kommata zwischen der Hausnummer und dem Straßennamen und zwischen der Postleitzahl und dem Ort sichtbar. Diese wurden entfernt.
+
+[discrete]
+=== Dokumente
+
+* Manche Variablen haben die Sprache des Auftrages nicht berücksichtigt. So wurde für das Land der Adressen der Standardname benutzt, anstelle des übersetzten Ländernamens. Auch wurde für den Standard-Lagerort immer *Default* genutzt. Beides wurde behoben, im deutschen wird für den Standard-Lagerort jetzt *Standard* genutzt.
+* Die Variablen `Umsatzsteuerbetrag (X)` haben bei netto Aufträgen einen Wert gehabt. Diese werden nun nicht gesetzt, somit greift die Einschränkung auf diese Variablen wie gewünscht.
+* In der UI der Nachbestellungen wurde beim Hauptdokument anstelle des Dateinamens die Dokumentnummer angezeigt. Dadurch gab es Irritationen mit der Einstellung des Dateinamens in den Vorlagen des DocumentBuilders. Dies wurde behoben.
+
+[discrete]
+=== Prozesse
+
+* Nach der ersten Überarbeitung der Sammeldokumente wurden wir von euch auf Prozesse aufmerksam gemacht, die mit bestimmten Subaktionkobinationen von Drucken und Speichern, mit und ohne der Sammeldokumente, ein mehrfaches Speichern oder einen mehrfacher Ausdruck möglich gemacht haben. Dieser Fehler wurde behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen von *{version}* entfernt.
+
+[discrete]
+=== CRM
+
+* Das Ereignis *Benachrichtigung bei verfügbarem Artikel* war noch im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* sichtbar, obwohl das Ereignis gar nicht mehr ausgelöst wurde. Das Ereignis wurde aus der Liste im Assistenten entfernt.
 
 --
 
@@ -152,9 +262,13 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/dhlshipping_4871[DHL Shipping (Versenden)^]
+|3.1.27
+|-
+
+|link:https://marketplace.plentymarkets.com/formatdesigner_6483[FormatDesigner^]
+|1.3.12
+|-
 
 |===
 
