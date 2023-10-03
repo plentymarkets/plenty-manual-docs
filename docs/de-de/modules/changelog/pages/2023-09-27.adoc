@@ -1,0 +1,312 @@
+= Changelog 27. September 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 21. September 2023
+:endWeekDate: 27. September 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/neu-option-zum-de-aktivieren-der-erstellung-einer-auftragsnotiz-nach-retourenanmeldung-control-order-note-generation-on-return-registration/738532
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/documentbuilder-neue-variablen-documentbuilder-new-variables/738456
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* In der Auftrags-UI enthielt die MyView Liste einige Pflicht-Widgets, die die Verwendung solcher Widgets erzwangen. Die Deklarierung als Pflicht-Widget wurde von allen Widgets entfernt.
+* Die Buttons, zum Warenausgang zurückbuchen (Übersicht und Detailansicht) haben jetzt eine grüne Markierung, damit man direkt erkennt, dass der Warenausgang gebucht wurde.
+* Der Button zum Warenausgang zurückbuchen wird jetzt Standardmäßig in der Standardansicht und Classic Ansicht angezeigt.
+* In der Auftrags-UI war es bei den Eingabefeldern vom Typ Zahl möglich, den Wert durch Scrollen zu ändern. Dies hat sich nun geändert und die Funktion wurde aus allen Zahlenfeldern entfernt.
+* In der Auftrag UI wurde der Filter *Auftragsadressdaten* in in Standard Ansicht hinzugefügt.
+
+[discrete]
+=== Dokumente
+
+* Bei der Aktivierung der Nummernkreise wurden Hinweise zu möglichen Überschneidungen mit anderen Nummernkreisen eingefügt.
+* In DocumentBuilder werden Einschränkungen der Ausgabe eines Text-Widgets nun bereits im Editor selbst dargestellt. Dies passiert durch Einfärben des Hintergrundes des betroffenen Text-Widgets.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Dokumente
+
+* Ab jetzt nutzt der Filter in der DocumentBuilder-UI die Zahlungsart *Suchbar im Backend* statt der Zahlungsart *Aktiv im Backend*.
+
+[discrete]
+=== OTTO Market
+
+OTTO Aufträge, die noch nicht zum Versand freigegeben wurden, werden von uns unvollständig im Status 1 importiert.
+
+Wenn diese Aufträge vom Kunden storniert werden, dann haben wir diese Aufträge bisher nur storniert, wenn die Aufträge im Status-Bereich 1.0000 bis 2.9999 waren.
+
+Leider kam es in diesem Kontext immer wieder zu Fehlkonfigurationen. Um Bestandsreservierungen für diese Aufträge zu bekommen haben Händer:innen den Auftrag in Status 3 verschoben, statt den Statusbereich für reservierte Aufträge zu erweitern, xref:maerkte:otto-market.adoc#1100[wie auf der Handbuchseite OTTO Market beschrieben].
+
+Aus diesem Grund haben wir uns entschieden, den Status-Bereich für den Import der Stornierung auf 1.0000 bis 3.9999 zu erweitern. Dies greift nicht rückwirkend und Aufträge, die nicht automatisch storniert wurden, müssen im Abgleich der Daten aus dem OPC manuell storniert werden.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Wenn man zur Auftragsübersicht mit vorausgefüllten Filtern navigiert und einige Filter bereits in der Auftragsübersicht gesetzt waren, wurden diese Filter nicht von den neuen Filtern überschrieben. Dies wurde behoben.
+* In der neuen Auftrags-UI war der Button *Warenbestand ermitteln* in der Symbolleiste der Auftragsdetails nicht sichtbar. Dies wurde nun behoben.
+* Wenn in der UI für die Auftragserstellung zu einer anderen Tab oder UI navigiert wird, während der Prozess der Auftragserstellung noch nicht abgeschlossen ist, werden bei der Rückkehr zur Auftragserstellung, um diese abzuschließen, die Kontakdaten oder Auftragspositionen zurückgesetzt und beim Speichern wird ein Fehler ausgegeben. Dies wurde behoben.
+* In der Auftrags-UI hatte die Spalte *Erweitern* in der Tabelle der Auftragspositionen eine doppelte Breite. Dies wurde behoben.
+* Innerhalb der neuen Auftrags-UI wurde bei der Erstellung von Lieferaufträgen inkl. Angabe der Artikelgesamtmenge die offene Menge nicht zurückgesetzt. Dies führte zu einem Fehler beim Speichern des Lieferauftrags. Dieses Verhalten wurde behoben.
+* Innerhalb der neuen Auftrags-UI wurde bei jeder Aktualisierung des Auftrags die Route für die Auftragsreferenzen aufgerufen. Dieses Verhalten wurde behoben.
+* Innerhalb der neuen Auftrags-UI wurden - wenn man per Ereignisaktion durch Änderung des Bestellstatus einen Kindauftrag erstellt hat - die Auftragsreferenzen nach Speichern des Auftrags nicht aktualisiert. Dieses Verhalten wurde behoben.
+* In der Auftrag UI wurden unter Umständen bestimmte Parameter bei der Auftragssuche im Hintergrund nicht gelöscht, wenn diese manuell entfernt wurden. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Im Ticket-Portlet der Kontakt-UI war die Schaltfläche *Neues Ticket* nur für Administratoren sichtbar, auch wenn der angemeldete Benutzer die Berechtigung *CRM » Ticketsystem » Erstellen* hatte. Dieses Verhalten wurde nun behoben.
+* Die EmailBuilder-Variable `Rechnungsnummer-ID` hat nur die Rechnungsnummer ausgegeben, aber nicht die Nummer mit dem Präfix. Dieses Verhalten wurde behoben.
+* Im Portlet *Primäre Adresse* im Kontaktdatensatz waren unnötige Kommata zwischen der Hausnummer und dem Straßennamen und zwischen der Postleitzahl und dem Ort sichtbar. Diese wurden entfernt.
+* Wenn du ein Automatisierungsereignis mit einem Filter nach Tags eingestellt hattest und eine neue Konversation erstellen wolltest, trat ein Fehler auf und die Nachricht konnte nicht gesendet werden. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Manche Variablen haben die Sprache des Auftrages nicht berücksichtigt. So wurde für das Land der Adressen der Standardname benutzt, anstelle des übersetzten Ländernamens. Auch wurde für den Standard-Lagerort immer *Default* genutzt. Beides wurde behoben, im deutschen wird für den Standard-Lagerort jetzt *Standard* genutzt.
+* Die Variablen `Umsatzsteuerbetrag (X)` haben bei netto Aufträgen einen Wert gehabt. Diese werden nun nicht gesetzt, somit greift die Einschränkung auf diese Variablen wie gewünscht.
+* In der UI der Nachbestellungen wurde beim Hauptdokument anstelle des Dateinamens die Dokumentnummer angezeigt. Dadurch gab es Irritationen mit der Einstellung des Dateinamens in den Vorlagen des DocumentBuilders. Dies wurde behoben.
+
+[discrete]
+=== OTTO Market
+
+Bei Aufträgen mit Lieferaufträgen konnte es zu irreführenden Fehlermeldungen beim Rechnungsimport kommen. Dabei wurden Validierungsfehler gemeldet, weil bereits ein Dokument mit dieser externen Rechnungsnummer existiere.
+
+Diese Fehlermeldungen findet man unter *Daten » Log* wenn man mit den folgenden Filtern sucht:
+* *Integration*: `Plenty\Modules\Otto\Order\Commands\InvoiceImportCommand`
+* *Level*: `critical`
+
+Die Fehlermeldung lautet: Rechnung nicht importiert.
+
+Und wenn man die Details öffnet, dann findet man eine JSON in der `Number with prefix already exists` steht.
+
+Die Ursache für dieses Problem war, dass bei den Lieferaufträgen die externen Belege am Hauptauftrag hinterlegt werden, aber bei der Prüfung, ob das Dokument bereits importiert wurde, nur der Lieferauftrag geprüft wurde. Deswegen versuchte der Prozess das Dokument nochmals zu importieren und schlug dann mit dieser Meldung fehl.
+
+Dies wurde nun behoben, sodass der Hauptauftrag geprüft wird und es dann nicht zu einem erneuten Importversuch kommt.
+
+[discrete]
+=== Prozesse
+
+* Nach der ersten Überarbeitung der Sammeldokumente wurden wir von euch auf Prozesse aufmerksam gemacht, die mit bestimmten Subaktionkobinationen von Drucken und Speichern, mit und ohne der Sammeldokumente, ein mehrfaches Speichern oder einen mehrfacher Ausdruck möglich gemacht haben. Dieser Fehler wurde behoben.
+
+[discrete]
+=== Zalando
+
+* Adresskorrekturen Frankreich: Wenn keine Hausnummer am Ende der Straße identifiziert wurde, wird eine Hausnummer vom Anfang der Straße gezogen, falls vorhanden.
+* Adresskorrekturen Niederlande: Zwischen die 4 Zahlen und 2 Buchstaben der Postleitzahl wird ein Leerzeichen eingeführt, falls fehlend.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen von *{version}* entfernt.
+
+[discrete]
+=== CRM
+
+* Das Ereignis *Benachrichtigung bei verfügbarem Artikel* war noch im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand* sichtbar, obwohl das Ereignis gar nicht mehr ausgelöst wurde. Das Ereignis wurde aus der Liste im Assistenten entfernt.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* In der Zahlungshistorie im Historie-Widget werden zugeordnete und nicht zugeordnete Zahlungen farblich gekennzeichnet.
+* Beim Ändern des Versandprofils im Bereich Auftragsdetails wirst du ab jetzt per Aufforderung gefragt, ob du die Versandkosten für den Auftrag entsprechend des neu gewählten Versandprofils aktualisieren möchtest.
+
+[discrete]
+=== CRM
+
+* Ab sofort steht dir im Menü *CRM » Kontakte* der Filter *Ist Gast* zur Verfügung. Wenn du im Filter *Ja* wählst, werden alle Gastbestellungen angezeigt. Wenn du *Nein* wählst, werden alle Nicht-Gastbestellungen, also reguläre Kontaktdatensätze, angezeigt.
+* Im EmailBuilder wurde im Variablenbereich *Messenger* die Variable *Abgekürzte ID der Konversation* hinzugefügt. Diese Variable gibt die abgekürzte ID aus dem Messenger aus.
+* Ab sofort steht dir eine Vorschaufunktion für Anhänge im Messenger zur Verfügung. Mit einem Klick auf die angehängte Datei öffnet sich der Anhang in einem neuen Fenster, über das du den Anhang entweder herunterladen oder wieder schließen kannst.
+* Im EmailBuilder kannst du ab sofort die Ordner und Vorlagen jeweils auf- oder absteigend nach ID, Name oder Erstelldatum sortieren. Sortiert wird erst anhand der Ordner, dann nach Vorlagen, Header-Vorlagen und Footer-Vorlagen. Wenn du *ID* als Sortierwert wählst, werden die Ordner anhand des Namens sortiert, weil diese keine ID haben.
+* Der neue Menüpunkt *Einrichtung » CRM » Job-Titel* ist nun verfügbar. 25 Job-Titel sind bereits standardmäßig in deinem System vorhanden. Du kannst natürlich weitere Job-Titel in Deutsch und Englisch speichern und vorhandene Job-Titel löschen.
++
+Das Menü hat die bekannten Standard-Features wie sortieren, suchen, Filter speichern und eine Aktion zum Löschen einzelner Job-Titel.
++
+Für dieses neue Feature wurde auch das neue Benutzerrecht *CRM > Job-Titel* hinzugefügt.
++
+Die im neuen Menü *Einrichtung » CRM » Job-Titel* gespeicherten Job-Titel kannst du dann im Bereich *Kontaktdetails* des Kontaktdatensatzes über MyView hinzufügen und auswählen. Du kannst die Spalte *Job-Titel* auch in der Kontaktübersicht hinzufügen und nach Job-Titeln im Filterbereich suchen.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+* Zur Verbesserung der Nachvollziehbarkeit bei Problemfällen wurden die Logs des Amazon MFN-Auftragsimports ergänzt oder verbessert. Die Logs können zukünftig unter anderem nach folgenden Referenzen durchsucht werden:
+** `legacyAccountId`
+** `orderId`
+** `externalOrderId`
+** `reportId`
+** `sellerId`
+** `processId`
+
+[discrete]
+=== Aufträge
+
+* Das Historie-Widget lädt die Zahlungshistorie nicht mehr standardmäßig, damit die UI schneller lädt. Die Zahlungshistorie, kann mit einem klick auf den neuen Button geladen werden.
+
+[discrete]
+=== POS
+
+* Aufträge, die sich im Quellstatus für die Funktion *Rollende Kommissionierung* befinden, aber keine Artikel enthalten, die gepickt werden können, werden nun in den Fehlerstatus verschoben. Gleichzeitig werden diese Aufträge automatisch mit einer Auftragsnotiz versehen.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Die Spalte *Regulärer Bruttopreis* aus der Auftragspositionstabelle hat in der Übersicht und der Detailansicht gefehlt. Diese wurde hinzugefügt.
+* Beim Hinzufügen von Tags in den Auftragsdetails, wurde der Tag-Name erst nach dem Speichern des Auftrags angezeigt. Dies wurde behoben.
+* Bei der Nutzung von Templates in der Auftragserstellung zeigte sich folgendes Verhalten: Auch wenn das Template so angelegt wurde, dass eine bestimmte Variante mehrfach bestellt werden sollte, wurde diese Variante in dem erstellten Auftrag nur einmal hinzugefügt. Dieses Verhalten wurde behoben.
+* Es wurde eine Classic Ansicht für Auftragstyp: *Auftrag* hinzugefügt.
+* In den Details der Auftrags-UI wurden längere Namen für Zahlungsarten falsch angezeigt. Dies ist nun behoben.
+
+[discrete]
+=== CRM
+
+* In der Kontakt-UI im Bereich *Adressen* fehlte die Übersetzung der Tooltips für die Buttons *Neue Rechnungsadresse ableiten* und *Neue Lieferadresse ableiten*. Dieses Verhalten wurde behoben.
+* Wenn man eine Konversation aus einem Auftrag oder aus dem Kontakt-Portlet heraus begonnen hat, war es möglich, den Empfänger, der automatisch gewählt war, zu entfernen. Dieser Empfänger wurde jedoch immer noch berücksichtigt, wenn man nach dem Entfernen des Empfängers eine E-Mail versendet hat. Dieses Verhalten wurde behoben. Es ist ab sofort nicht mehr möglich, den Empfänger zu entfernen.
+* Die Nachrichtenvorschau hat unnötige Zeilenumbrüche angezeigt. Dieses Verhalten wurde behoben.
+
+Im EmailBuilder wurden die folgenden Variablen und twig expressions als reiner Text generiert und nicht als klickbare Links. Die generierten Werte sind ab sofort klickbar.
+
+Die Variablen wurden geändert. Die alten Variablen funktionieren weiterhin korrekt in bestehenden Vorlagen, aber sie können nicht mehr in neuen Vorlagen eingefügt werden.
+
+[cols="3"]
+|======
+|Variable |Alt |Neu
+
+|URL zum Artikel
+|`{{ orderItem.formattedLink }}`
+|`{{ orderItem.formattedLinkNew \| raw }}`
+
+|DHL Retoure Online QR-Code URL
+|`{{ order.formattedGeneral.DHLRetoureOnlineQRCodeURL }}`
+|`{{ order.formattedGeneral.DHLRetoureOnlineQRCodeURLNew \| raw }}`
+
+|URL zur Auftragsübersicht
+|`{{ globals.links.linkCheckout }}`
+|`{{ globals.links.linkCheckoutNew \| raw }}`
+
+|URL zum Warenkorb
+|`{{ globals.links.linkBasket }}`
+|`{{ globals.links.linkBasketNew \| raw }}`
+
+|URL zu den Geschäftsbedingungen
+|`{{ globals.links.linkTermsConditions }}`
+|`{{ globals.links.linkTermsConditionsNew \| raw }}`
+
+|URL zum Webshop
+|`{{ globals.links.linkWebstore }}`
+|`{{ globals.links.linkWebstoreNew \| raw }}`
+
+|URL zum neuen Passwort
+|`{{ globals.links.linkNewPassword }}`
+|`{{ globals.links.linkNewPasswordNew \| raw }}`
+
+|URL zum Ändern des Passworts
+|`{{ globals.links.linkChangePassword }}`
+|`{{ globals.links.linkChangePasswordNew \| raw }}`
+
+|URL zum Bestätigen der E-Mail-Adresse
+|`{{ globals.account.newCustomerEmail }}`
+|`{{ globals.account.newCustomerEmailNew \| raw }}`
+
+|URL zur Bestätigung des Newsletter-Abonnements
+|`{{ newsletter.formattedConfirmUrl }}`
+|`{{ newsletter.formattedConfirmUrlNew \| raw }}`
+
+|Ticket-URL
+|`{{ ticket.formattedUrl.url }}`
+|`{{ ticket.formattedUrl.urlNew \| raw }}`
+
+|Ticket-Backend-URL
+|`{{ ticket.formattedUrl.backendUrl }}`
+|`{{ ticket.formattedUrl.backendUrlNew \| raw }}`
+|======
+
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/metro_6600[Metro^]
+|2.4.0
+|-
+
+|link:https://marketplace.plentymarkets.com/netseasypay_55565[Nexi Checkout^]
+|1.0.3
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
