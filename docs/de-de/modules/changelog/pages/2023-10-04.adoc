@@ -6,7 +6,8 @@
 :startWeekDate: 28. September 2023
 :endWeekDate: 4. Oktober 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/manuelle-auftragsanlage-externe-auftrags-id-manual-order-creation-external-order-id/739219
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/neue-auftrags-ui-performance-verbesserungen-und-fix-fuer-das-speichern-beim-verlassen-von-eingabefeldern-new-order-ui-performance-improvements-and-fix-for-saving-when-focussing-out-of-input-fields/738667
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -47,6 +48,15 @@ Das Menü hat die bekannten Standard-Features wie sortieren, suchen, Filter spei
 Für dieses neue Feature wurde auch das neue Benutzerrecht *CRM > Job-Titel* hinzugefügt.
 +
 Die im neuen Menü *Einrichtung » CRM » Job-Titel* gespeicherten Job-Titel kannst du dann im Bereich *Kontaktdetails* des Kontaktdatensatzes über MyView hinzufügen und auswählen. Du kannst die Spalte *Job-Titel* auch in der Kontaktübersicht hinzufügen und nach Job-Titeln im Filterbereich suchen.
+* Die MyView-Standardansicht einer Firma beinhaltet ab sofort auch den Messenger. Im Messenger-Portlet werden alle Konversationen aller Kontakte angezeigt, die mit dieser Firma verknüpft sind.
++
+Du kannst über das Messenger-Portlet im Firmendatensatz auch eine neue Nachricht erstellen. In diesem Fall ist kein Kontakt vorausgewählt, die Suche im Empfängerfeld jedoch gibt dann nur Kontakte aus, die mit dieser Firma verknüpft sind.
+* Aktuell kannst du im Assistenten *Messenger-Konfiguration* festlegen, welcher Posteingang der Standard-Posteingang ist, sodass dieser immer bei neuen Konversationen automatisch ausgewählt ist. Wenn man jedoch mit vielen Posteingängen arbeitet, kann dies zu Fehlkonfigurationen führen. In diesem Fall kannst du die Auswahl des Standard-Posteingangs im Assistenten leer lassen. Somit ist bei jeder neuen Konversation die „leere Option“ vorausgewählt und du musst du immer den passenden Posteingang aus der Liste wählen, wenn du eine neue Nachricht versenden möchtest.
+
+[discrete]
+=== Dokumente
+
+* Beim Export einer DocumentBuilder-Vorlage erhält die Exportdatei als Namen den im System hinterlegten *Vorlagenname*, und nicht wie bisher die `template_{ID}`.
 
 '''
 
@@ -72,6 +82,19 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 * Das Historie-Widget lädt die Zahlungshistorie nicht mehr standardmäßig, damit die UI schneller lädt. Die Zahlungshistorie, kann mit einem klick auf den neuen Button geladen werden.
 
 [discrete]
+=== plentyBI
+
+* Ab sofort werden für Nicht-Admins keine gesonderten Berechtigungen benötigt, damit sie Links innerhalb von Dashboard-Elementen öffnen können. Einzig die Berechtigung zur Ansicht der jeweils im Element dargestellten Kennzahl muss wie gehabt vergeben sein.
++
+[NOTE]
+.Beispiel
+======
+Werden in einem Element vom Typ *Tabelle* Aufträge nach Status aufgeschlüsselt dargestellt, sind die Tabelleneinträge nun für alle Nutzer als Link verfügbar und die Auftragsübersicht öffnet sich per Klick auf einen Tabelleneintrag.
+
+User ohne Admin-Rechte benötigen in diesem Beispiel lediglich wie gewohnt die Berechtigung, die Kennzahl *Aufträge (Live)* zu sehen. Dieses Prinzip gilt auch für alle anderen Fälle, in denen das Dashboard Links zu anderen Benutzeroberflächen anzeigt.
+======
+
+[discrete]
 === POS
 
 * Aufträge, die sich im Quellstatus für die Funktion *Rollende Kommissionierung* befinden, aber keine Artikel enthalten, die gepickt werden können, werden nun in den Fehlerstatus verschoben. Gleichzeitig werden diese Aufträge automatisch mit einer Auftragsnotiz versehen.
@@ -84,6 +107,16 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
 [discrete]
+=== Aktionsmanager
+
+* Es gab einen Fehler im Aktionsmanager in der Aktion *Tags entfernen*. Unter gewissen Umständen wurden die ausgewählten Tags nicht entfernt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Bei gewissen Konstellationen in der Artikelübersicht der neuen Artikel-UI, kam es zu dem Problem, dass sich die Übersicht nur sehr langsam aufgebaut hat. Das haben wir korrigiert.
+
+[discrete]
 === Aufträge
 
 * Die Spalte *Regulärer Bruttopreis* aus der Auftragspositionstabelle hat in der Übersicht und der Detailansicht gefehlt. Diese wurde hinzugefügt.
@@ -91,6 +124,8 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * Bei der Nutzung von Templates in der Auftragserstellung zeigte sich folgendes Verhalten: Auch wenn das Template so angelegt wurde, dass eine bestimmte Variante mehrfach bestellt werden sollte, wurde diese Variante in dem erstellten Auftrag nur einmal hinzugefügt. Dieses Verhalten wurde behoben.
 * Es wurde eine Classic Ansicht für Auftragstyp: *Auftrag* hinzugefügt.
 * In den Details der Auftrags-UI wurden längere Namen für Zahlungsarten falsch angezeigt. Dies ist nun behoben.
+* In der *Status ändern* Gruppenfunktion in der Auftrags-UI, wurde ein Fehler angezeigt obwohl der Status am Auftrag korrekt geändert wurde. Diese Problem wurde behoben.
+* In den Dialog von *Referenzierte Bestellungen anzeigen* in der Auftragsübersicht bzw. unter Auftragsreferenzen in der Auftrag Detailansicht wurde teilweise keine Referenzen angezeigt obwohl für einen Auftrag welche existierten. Dieses Problem wurde behoben.
 
 [discrete]
 === CRM
@@ -98,6 +133,7 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * In der Kontakt-UI im Bereich *Adressen* fehlte die Übersetzung der Tooltips für die Buttons *Neue Rechnungsadresse ableiten* und *Neue Lieferadresse ableiten*. Dieses Verhalten wurde behoben.
 * Wenn man eine Konversation aus einem Auftrag oder aus dem Kontakt-Portlet heraus begonnen hat, war es möglich, den Empfänger, der automatisch gewählt war, zu entfernen. Dieser Empfänger wurde jedoch immer noch berücksichtigt, wenn man nach dem Entfernen des Empfängers eine E-Mail versendet hat. Dieses Verhalten wurde behoben. Es ist ab sofort nicht mehr möglich, den Empfänger zu entfernen.
 * Die Nachrichtenvorschau hat unnötige Zeilenumbrüche angezeigt. Dieses Verhalten wurde behoben.
+* Wenn man im Kontaktdatensatz im Bereich *Dokumente* einen neuen Ordner erstellt hat, war dieser Ordner erst sichtbar, nachdem man den Cache geleert hat. Dieses Verhalten wurde behoben.
 
 Im EmailBuilder wurden die folgenden Variablen und twig expressions als reiner Text generiert und nicht als klickbare Links. Die generierten Werte sind ab sofort klickbar.
 
@@ -170,7 +206,41 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* In der Auftragsübersicht erscheint nach dem Anklicken der Schaltfläche zum Ändern des Tabellenstils (Kompaktansicht / Listenansicht aktivieren) eine Bestätigungsmeldung, in der um die Bestätigung der Aktion gebeten wird. Die Änderung wird erst nach Betätigung der Schaltfläche Bestätigen durchgeführt.
+
+[discrete]
+=== CRM
+
+* Im Menü *Einrichtung » CRM » Messenger » Automatisierung* wurde in *Automatisierungen* vom Typ *Ereignisbasiert* der Filter *Job-Titel des Kontakts* hinzugefügt.
+
+[discrete]
+=== Dokumente
+
+* Ab jetzt stehen folgende neuen Variablen im DocumentBuilder zur Verfügung:
+** *Auftrag*: neue Variablen für benutzerdefinierte Eigenschaften (ID >1000)
+** *Auftrag » Kundenwunsch*: Mit dieser Variable können Kundenwünsche, die für einen Auftrag erfasst wurden, auf per Vorlage generierten Dokumenten angegeben werden.
+** *Auftrag » Treueprogramm*: Mit der neuen Variable kann der Namen eines im Auftrag hinterlegten Treueprogramms auf Dokumenten angegeben werden, die über die Vorlage generiert wurden.
+** *Auftragsposition*:  neue Variablen für benutzerdefinierte Eigenschaften (ID >1000)
+** *Auftragsposition » GesamtRabattBrutto*
+** *Auftragsposition » GesamtRabattNetto*
+** *Auftragsposition » RabattBrutto*
+** *Auftragsposition » RabattNetto*
+** *Auftragsposition » UVP*
+** *Gesamtgewicht*: Diese Variable zeigt das Gesamtgewicht des Auftrags an.
+* Du hast jetzt Variablen für deine Eigenschaften in DocumentBuilder. Du musst nur sicherstellen, dass du in den Sichtbarkeitseinstellungen der Eigenschaft *Anzeige auf PDF-Dokumenten* aktiviert hast.
+
+[discrete]
+=== Fulfillment
+
+* Option zum De-/Aktivieren der Erstellung einer Auftragsnotiz nach Retourenanmeldung. Unter *Einrichtung » Aufträge » Einstellung > Retouren* kannst du nun bestimmen, ob eine Auftragsnotiz nach Anmeldung einer Retoure erstellt werden soll. Die vorausgegangene Anpassung war im standardmäßig aktiv, welches wir beibelassen haben.
+
+[discrete]
+=== Import
+
+* Im Import-Typ *Kontakte, Firmen und Adressen* wurde im Zuordnungsfeld *Kontakt* die Option *Job-Titel-ID* hinzugefügt.
 
 '''
 
@@ -188,7 +258,32 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Der Bilderupload in der neuen Artikel-UI findet nun nacheinander statt. Dadurch kann es nicht mehr passieren, dass unterschiedliche Bilder die selbe URL bekommen.
+* Die Werkzeugleiste wurde nach dem Öffnen der MyView-Einstellungen manchmal nicht angezeigt. Dieses Verhalten haben wir korrigiert.
+
+[discrete]
+=== Aufträge
+
+* In der Auftragssuche der Auftrag UI wurde der Filter *Herkunft* unter Umständen nicht korrekt angezeigt. Dies wurde behoben.
+* In der neuen Auftrags-UI waren einige Spalten aus der Tabelle der Auftragspositionen nicht sichtbar, weil das Styling für die Tabellenspalten fehlte. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Bei einigen EmailBuilder-Vorlagen hatte die empfangene E-Mail bei der Vorschau in der Auftrags-UI und beim anschließenden Versand einen anderen Zeilenabstand als beim direkten Versand oder beim Versand aus Ereignissen. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Die Variablen der Gruppe Zahlungsbedingungen funktionieren jetzt insofern korrekt, als dass, wenn ihr Wert gleich 0 ist, der Widget sie als leer erkennt und keinen entsprechenden Inhalt im Dokument anzeigen lässt.
+
+[discrete]
+=== plentyBI
+
+* Die Kennzahl *Aufträge (Live)* hat das Ergebnis `0` angezeigt, wenn der Filter *Lager* innerhalb der Kennzahlkonfiguration verwendet wurde. Dieses Verhalten wurde behoben, sodass wieder korrekte Ergebnisse angezeigt werden.
 
 --
 
@@ -202,9 +297,9 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|-
+|-
+|-
 
 |===
 
