@@ -1,0 +1,405 @@
+= Changelog 30. August 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:startWeekDate: 24. August 2023
+:endWeekDate: 30. August 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/documentbuilder-code-widget-documentbuilder-code-widget/735130
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/ereignisaktionen-neue-aktion-zur-generierung-von-benutzerdefinierten-auftragsdokumenten-event-procedures-new-procedure-for-generating-custom-order-documents/734743
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/fix-validierung-im-emailbuilder-betreff-fix-email-builder-subject-validation/735060
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Du kannst jetzt das Ziel auswählen, nachdem eine untergeordneter Auftrag direkt im Erstellungsbildschirm der untergeordneten Bestellung erstellt wurde, indem du den neu hinzugefügten Toggle in der Toolbar änderst.
++
+Wenn Sie den Toggle aktiviert lassen, werden Sie zu den Details der neu erstellten Bestellung weitergeleitet. Wenn du den Toggle deaktivierst, wirst du zu den Details der übergeordneten Bestellung weitergeleitet und die neu erstellte untergeordnete Bestellung wird der seitlichen Navigationsleiste hinzugefügt.
+* In der neuen Auftrag UI wird jetzt in der Ansicht *Warenbestand ermitteln* auch die Menge der Positionen im Auftrag angezeigt.
+* In der Übersicht der neuen Auftrag UI wird jetzt für die Summe der Aufträge noch zusätzlich der Mehrwertsteueranteil angezeigt.
+* In der neuen Auftrag UI wurde für die Filter *Externe Auftrags-ID* und *Zeichen Kunde* der Operator *Enthält* freigeschaltet.
+* In der neuen Auftrags-UI wurde die Spalte Herkunft, die den Namen der Herkunft enthält, für Auftragspositionen als optionale Spalte hinzugefügt. Betroffene UIs sind die neuen UIs für das Anlegen von Aufträgen, das Bearbeiten von Auftragspositionen, das Anlegen von Kind Aufträgen und das Teilen von Aufträgen.
+* Du kannst ab jetzt in den MyView Einstellungen festlegen, dass die Kopfzeile eines Auftrags farblich markiert wird. Hierzu kann eine benutzerdefinierte Farbe festgelegt werden, oder die Option ausgewählt werden, die Farbe vom aktuellen Auftragsstatus zu nehmen.
+
+[discrete]
+=== Dokumente
+
+* Im DocumentBuilder sind ab sofort folgende Variablen verfügbar:
+** Artikelgesamtmenge
+** Umsatzsteuerbetrag (A)
+** Umsatzsteuerbetrag (B)
+** Umsatzsteuerbetrag (C)
+** Umsatzsteuerbetrag (D)
+** Umsatzsteuerbetrag (E)
+** Umsatzsteuerbetrag (F)
+* In der Auftrags UI steht nun eine neue Gruppenfunktion *Dokumente zusammenfügen* zur Verfügung.
++
+Mit dieser können die PDF Dokumente eines ausgewählten Dokumenttyp aller ausgewählten Aufträge in einem Dokument zusammengefügt werden. Das resultierende Dokument wird geöffnet, wodurch es gespeichert oder gedruckt werden kann.
+
+[discrete]
+=== Prozesse
+
+* In der Aktion *Auftragssuche* und in der Aktion *Retoure anlegen/bearbeiten* wurde die Listenansicht des Auftrags um die Spalte *Lager* erweitert.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Amazon
+
+Nachdem die neuen Amazon Versandarten *Standard* und *Priority* link:https://forum.plentymarkets.com/t/prime-1d-2d-prioritaet-standard-update/725790/118[von unseren Kollegen aus den Bereichen Order und Fulfillment für Ereignisaktionen, Versandprofile und die Order-UI seit dem 09.08.2023 zur Verfügung stehen^], werden die neuen Versandarten nun auch für den Auftragsimport ausgerollt.
+
+Der Rollout wird dabei den regulären Zyklus durchlaufen, um betroffenen Händler:innen Zeit für notwendige Anpassungen an deren Versandprofile und Ereignisaktionen vorzunehmen. Da es sonst zu zusätzlichen Problemen in der Abwicklung kommen kann.
+
+Dies liegt daran, dass aktuell alle Prime-Sendungen als reguläres Prime markiert werden, nach der Änderung aber als *Prime Standard* oder *Prime Priority* markiert werden und damit Ereignisaktionen bzw. Versandprofile, welche *Prime* filtern, nicht mehr korrekt zugeordnet werden. Zusätzliche Informationen erhaltet ihr im Abschnitt To-Do.
+
+[IMPORTANT]
+.To-Do
+======
+Folgende Szenarien müssen in den folgenden Punkten beachtet werden:
+
+[cols="5"]
+|========
+|Szenario |Vor oder nach Update? |Prime? |Versandart |Verhalten
+
+|1
+|Vor
+|Nein
+|Standard
+|Auftrag hat kein Treueprogramm.
+
+|2
+|Nach
+|Nein
+|Standard
+|Auftrag hat kein Treueprogramm.
+
+|3
+|Vor
+|Nein
+|Priority
+|Auftrag hat kein Treueprogramm.
+
+|4
+|Nach
+|Nein
+|Priority
+|Auftrag hat *Amazon Priority* Treueprogramm.
+
+|5
+|Vor
+|Ja
+|Standard
+|Auftrag hat *Amazon Prime* Treueprogramm.
+
+|6
+|Nach
+|Ja
+|Standard
+|Auftrag hat *Amazon Prime Standard* Treueprogramm.
+
+|7
+|Vor
+|Ja
+|Priority
+|Auftrag hat *Amazon Prime* Treueprogramm.
+
+|8
+|Nach
+|Ja
+|Priority
+|Auftrag hat *Amazon Priority* Treueprogramm.
+
+|========
+
+*1. Ereignisaktionen*
+
+Ereignisaktionen, welche den Filter *Treueprogramm* verwenden, müssen so angepasst werden, dass sie die neuen Treueprogramme abdecken oder es müssen zusätzliche Ereignisaktionen erstellt werden, wenn die Treueprogramme unterschiedliche behandelt werden sollen.
+
+Betroffene Ereignisaktionen könnt ihr unter *Einrichtung » Aufträge » Ereignisse* finden, indem ihr unten links in die Übersicht wechselt und über die Suche nach Treueprogramm sucht.
+
+*2. Versandprofile*
+
+Versandprofile, welche Amazon Treueprogrammen zugeordnet sind, müssen angepasst werden, um auch die neuen Treueprogramme abzudecken und/oder es müssen neue Versandprofile angelegt werden, um neue Szenarien abzudecken.
+
+Die aktuell gewählten Treueprogramme findet ihr unter *Einrichtung » Aufträge » Versand » Optionen » Tab: Versandprofile » Öffne Versandprofil » Tab: Base » Bereich: eBay » Treueprogramm*.
+======
+
+[discrete]
+=== Login
+
+In den letzten Monaten haben wir an einem neuen Login für plentymarkets Systeme gearbeitet.
+
+Die Änderungen bestehen dabei aus einer neuen zentralen Benutzeroberfläche, die Teile der Sicherheitseinstellungen sowie die neue Multi-Faktor-Authentifizierung beinhaltet.
+
+Im neuen Login musst du dich nicht mehr über den Benutzernamen einloggen, sondern über E-Mail-Adresse. Für den neuen Login brauchst du ein neues Benutzer:innen-Konto, welches du in der neuen Benutzeroberfläche erstellen kannst. Dieses Konto kannst du für mehrere plentymarkets Systeme verwenden. Administrator:innen eines Systems laden Benutzer:innen über eine E-Mail-Adresse ein. Dafür wurde ein neues E-Mail-Feld an den Benutzern hinzugefügt, das je System einzigartig ist und nur für die Verknüpfung verwendet wird.
+
+Auch bestehende Benutzer:innen können mit einem neuen plentymarkets-Konto verknüpft werden. Doch keine Sorge, in der Einführungsphase von heute bis zum 31.10.23 kannst du dich selbst wie gehabt über den alten Login und somit über deinen Benutzernamen einloggen.
+
+*_Wichtig:_* Diese Frist gilt nicht für die Rest-API, Partner- und Lehrer-Login.
+
+REST-API-User müssen ebenfalls weiterhin den bestehenden REST-Login-Endpunkt nutzen, die neuen Accounts sind nicht mit den vorhandenen `/rest/login` Endpunkten kompatibel. Dafür wird an einer gesonderten Lösung gearbeitet.
+
+Ab dem 30.08.2023 wird die Buchung von Test-Systemen nur noch in Verbindung mit einem plentymarkets-Konto möglich sein. Dieses wird auch direkt für den Login zu dem Test-System verknüpft.
+
+Die Änderungen im Überblick:
+* Login findet jetzt über einen zentralen Bereich mit E-Mail-Adresse statt, nicht mehr über den Benutzernamen
+* Multi-Faktor-Authentifizierung lässt sich nun über die Sicherheitseinstellungen aktivieren
+* Dabei wird ein QR-Code zur Verfügung gestellt, der mit jeder MFA-App kompatibel ist
+* Ein Login über externe ID-Provider ist nun möglich. Vorerst nur mit Google-Konten.
+Nachdem du dich das erste Mal eingeloggt hast, musst du deine Profil- und Sicherheitseinstellungen konfigurieren.
+** Unter den Einstellungen findest du *Profil*, wo du deinen Vor- und Nachnamen, die Zeitzone deines Systems sowie die Sprache deines Systems ändern kannst
+** Unter *Sicherheit* kannst du dein Passwort ändern und die Multi-Faktor-Authentifizierung aktivieren
+* Diese Einstellungen kannst du jederzeit in der neuen Account-Übersicht oder in der gewohnten Benutzeroberfläche oben rechts im Kontextmenü deines Users unter *plentymarkets Konto* ändern.
+* Neue Benutzer:innen, die über eine Einladung angelegt wurden, haben eine angepasste Benutzeroberfläche in den Kontoeinstellungen. Einige Einstellungen werden nun zentral gepflegt und sind nicht mehr systembezogen:
+** Passwort
+** Zeitzone
+** Sprache
+** Name und Vorname
+
+link:https://account.plentysystems.com[Unter diesem Link könnt ihr einen plentysystems Account erstellen.^]
+
+[discrete]
+=== Verträge
+
+* Bislang wurden die Vertragsdaten aller Systeme eines Kunden im Mein Konto-Bereich auf link:https://marketplace.plentymarkets.com/[plentyMarketplace^] aufgelistet. Ab jetzt sind die Vertragsdaten eines Systems zusätzlich im Menü *Einrichtung » Einstellungen » Vertrag* sichtbar. Eine Vertragsänderung ist über diese UI zur Zeit nicht möglich.
++
+Zugriff auf die UI wird über das Recht *Einrichtung » Einstellungen » Verträge* gesteuert. Das bedeutet, dass du mehr Kontrolle darüber hast, wer Vertragsdaten für verschiedene Systeme einsehen kann.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* In der neuen Auftrags-UI und der neuen Auftrags-Erstellungs-UI wird beim Hinzufügen einer neuen Variante in den Warenkorb der Rabatttyp auf den Betragstyp umgeschaltet, während standardmäßig der Prozentsatztyp ausgewählt sein sollte. Dies wurde behoben.
+* Bei größeren Schriftarten kam es im Notizen-Widget dazu, dass die Texte sich überschnitten haben.
+* Nachdem der Auftrag z.B. in den Auftragsdetails aktualisiert wurde, ging die Auswahl der Gruppenfunktionen beim Zurückschalten in die Übersicht verloren.
+* Der Fehler, dass ein Auftrag nicht mehr abwählbar ist wurde auch behoben.
+* Nach dem Speichern der Spalteneinstellungen der sichtbaren Spalten und dem erneuten Laden wurden die Einstellungen nicht beibehalten, sondern die alte Einstellung übernommen.
+* Beim Zurückbuchen von Waren konnte es zu dem Fehler kommen, dass der Lagerort unbekannt ist. Dies wurde behoben.
+* Bei der Erstellung von Gutschriften und Retouren greift bei Aufträgen mit prozentualren plenty Kampagnengutscheine wieder das alte Verhalten. Das sie anteilig in den Artikelpreis gerechnet werden, ausser die Positionen des Gutschein wird bei der Anlage der Retoure / Gutschrift direkt hinzugefügt.
+* In den Auftragsdetails, wurde das Ticket-Element nicht bei den Bookmarks in der Seitennavigation dargestellt. Dies wurde behoben.
+* Bei der Rückbuchung von *Ausgewählte Artikelpositionen* in der Gewährleistung ist es zu einen Fehler gekommen. Dies wurde behoben.
+* Wenn man aus der Bestands-UI über den Link bei resevierten Bestand die Auftrags-UI öffnet, wird nun der Hauptauftrag bei Aufträgen mit Lieferaufträgen wieder herausgefiltert. Desweitern wird nun auch wieder nach dem Auftragstyp Repair gefiltert.
+* Unter *Einrichten » Aufträge » Einstellungen* wurde unter *Auftrags-UI* die Einstellung *Mengenänderung von Bundle-Artikeln und Bundle-Bestandteilen erlauben* nicht mehr angezeigt. Dies wurde behoben.
+* In der *Eigner ändern* Gruppenfunktion für Aufträge, werden keine deaktivierten Eigner mehr angezeigt.
+* Für das Bearbeiten von Abonnements wurde bei den Rechten im einfachen Modus auch das Recht zum Löschen von Aufträgen gesetzt. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* In der Messenger-Konfiguration war es nicht möglich bestehende SMTP Zugangsdaten anzupassen.
+Dieser Fehler wurde behoben.
+* Bei E-Mail-Vorlagen welche nur die Sprache *alle* gesetzt haben, wurde die Vorlage nicht im E-Mail-Service am Auftrag angezeigt. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* In der Vorschau wurden Dokumentnummern von Elterndokumenten nicht angezeigt. Dies wurde behoben.
+* Wenn für einen komplett neuen Nummernkreis der Button *Zuletzt generierte Nummer anzeigen* genutzt wurde, nachdem der Nummernkreis aktiviert ist, wurde der Startwert selbst als letzte Nummer angenommen und das erste Dokument für diesen Nummernkreis hat als Nummer den Startwert plus Eins bekommen.
+Dies wurde behoben sodass nun für das erste Dokument in einem Nummernkreis auch in diesem Fall der Startwert selbst verwendet wird.
+
+[discrete]
+=== Fulfillment
+
+* In einigen Fällen konnte es da führen, dass auf dem Adressetikett der Lagerort beim Bundle-Artikel mit aufgeführt wird, welches keinen eigenen Bestand besitzt.
+
+[discrete]
+=== Spezialexport
+
+* Im *Spezialexport: Finanzbuchhaltung* konnte es zu einem Fehler im Export kommen, wenn bereits der DocumentBuilder zum Erzeugen von Dokumenten verwendet wurde. Dies wurde behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Das Feld *eBay Konto* wurde zu dem Allgemein-Widget in den Auftragsdetails als optionales Feld hinzufügt.
+
+[discrete]
+=== Dokumente
+
+* Die Einstellungen für *Variableneinschränkungen*, um festzulegen, ob ein Text Widget angezeigt werden soll, werden nun in einer neuen Komponente abgebildet.
++
+Diese stellt die verfügbaren Variablen gruppiert dar. Ebenso ist nun eine einfache Suche über alle verfügbaren Variablen möglich.
+
+[discrete]
+=== plentyBI
+
+* Wir haben die Möglichkeit geschaffen, einer Rolle Anzeigerechte für die Ergebnisse aller im System vorhandenen Kennzahlkonfigurationen zu vergeben. Dazu wurde im Menü *Einrichtung » Kontoverwaltung » Rollen » [Rolle öffnen] » Zugriffsrechte » Kennzahlen* die Checkbox *ALLE* hinzugefügt. Wird diese Checkbox aktiviert und die Einstellung anschließend gespeichert, kann die ausgewählte Rolle die Ergebnisse aller Kennzahlkonfigurationen sehen.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== MyView
+
+* Bisher konnten nur MyView-Ansichten aus derselben Benutzeroberfläche importiert werden, im Bereich Dashboard konnten also nur Dashboard-Ansichten importiert werden. Dieses Verhalten wurde nun verändert. Ab jetzt können Ansichten aus unterschiedlichen Benutzeroberflächen importiert werden, dabei werden inkompatible Elemente aus der Ansicht entfernt, um zu garantieren, dass die Benutzeroberfläche mit dem Import funktioniert.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* In manchen Fällen wurden Sonderzeichen von Aufträgen der Plattform Amazon.pl nicht korrekt enkodiert und importiert. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Aufträge
+
+* Bei Gruppenfunktionen wurde die Selectbox-Komponente mit der des Filters ausgetauscht. Diese Änderung wurde auch für die Einzelaktionen wie Status ändern vorgenommen, da dort z.B. der aktuelle Status nicht vorausgewählt wurde, was nun behoben ist.
+* Unter bestimmten Umständen wurde die Mehrwertsteuer der Versandkosten von Gutschriften falsch berechnet. Dies wurde behoben.
+* Der Speicher-Button beim Bearbeiten in der Status-UI war immer deaktiviert, nachdem einmalig gespeichert wurde.
+* In der Erstellung von Kindaufträgen werden die Felder wie z.B. Lager oder Eigner nun alphabetisch sortiert.
+* Das Treueprogramm-Feld in den Auftragsdetails konnte nicht per MyView hinzugefügt werden, wenn es nicht am Auftrag gesetzt war.
+* In der neuen Auftrags-UI wurde beim Bearbeiten einer Gewährleistung eine Warnung angezeigt, wenn der Verkaufspreis niedriger war als der Einkaufspreis. Dies wurde behoben und die Warnung wurde für Gewährleistungen entfernt.
+
+[discrete]
+=== CRM
+
+* Beim öffnen der Vorschau im E-Mail-Service in der Auftrags-UI wurde immer die erste Sprache in der Sprachauswahl anstatt der Auftragssprache ausgewählt. Dieses Verhalten wurde nun behoben.
+* Im Auftrags-Portlet in der Kontakt-UI wurde die Zahlungsmethode nicht korrekt angezeigt.
+Dieser Fehler wurde nun behoben.
+* Für Systeme ab PID 61800 wurde die Newsletter-Kontoeinstellungen deaktiviert, aber die Opt-In-/Double-Opt-In-E-Mails verwendeten immer noch die Zugangsdaten aus diesem Bereich.
++
+Dieses Verhalten wurde geändert: bei einer PID > 61800 werden die Zugangsdaten des Standard-Webshops verwendet, bei einer PID <= 61800 werden die Newsletter-Zugangsdaten verwendet.
+Zudem kann die Auswahl der Vorlage für die Opt-In / Double Opt-In Newsletter-Ereignisse jetzt nur noch über den E-Mail-Konten Assistenten des Standard-Webstores erfolgen.
+* Wenn in der Kontakt E-Mail-Suche Leerzeichen enthalten waren wurde in einigen Fällen nicht der korrekte Datensatz gefunden. Diese Leerzeichen werden nun automatisch entfernt und das Verhalten damit behoben.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/dhlretoureonline_6714[DHL Retoure Online^]
+|1.1.9
+|-
+
+|link:https://marketplace.plentymarkets.com/metro_6600[Metro^]
+|2.3.7
+|-
+
+|link:https://marketplace.plentymarkets.com/paypal_4690[PayPal Checkout^]
+|6.3.7
+|-
+
+|link:https://marketplace.plentymarkets.com/shopify_4944[Shopify.com^]
+|2.17.4
+|-
+
+|link:https://marketplace.plentymarkets.com/wayfair_6273[Wayfair^]
+|1.2.15
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+Warehouse-App::
++
+--
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in Version 1.0.23 der *plentymarkets Warehouse App* veröffentlicht.
+
+* Es ist nun möglich, beim Abschluss eines Wareneingangs den dazugehörigen Wareneingangsbeleg erstellen zu lassen.
+** *_Voraussetzung 1:_* Diese Funktion ist nur verfügbar, wenn die Funktion Wareneingang innerhalb der plentyWarehouse App genutzt wird. Außerdem muss in der plentyWarehouse App die Option *Einstellungen » Wareneingang » Wareneingangsbeleg generieren* aktiviert werden.
+** *_Voraussetzung 2:_* Im DocumentBuilder muss eine Dokumentenvorlage vom Typ *Wareneingangsbeleg* angelegt worden sein.
+
++
+Sind diese beiden Voraussetzungen erfüllt, wird automatisch pro Wareneingang, der in plentyWarehouse abgeschlossen wird, ein Wareneingangsbeleg im plentysystems Backend erzeugt. Nach der Generierung sind die Wareneingangsbelege über das plentysystems Backend abrufbar. Die Belege können im Menü *Daten » Dokumente » Dokumentenarchiv* gesucht und heruntergeladen werden.
+* Im Menü *Einstellungen » Rollende Kommissionierung* haben wir Änderungen an den Einstellungen für die Auftragsstatus vorgenommen, damit ihr den Ablauf der rollenden Kommissionierung besser darstellen könnt.
++
+Zum Einen wurde die Option *Zielstatus* in *Blockstatus* geändert. Aufträge werden in diesen Status gesetzt, sobald der Kommissioniervorgang beginnt. Der Blockstatus verhindert, dass zeitgleich durch einen anderen App-Nutzer ein weiterer Kommissioniervorgang für den selben Auftrag gestartet werden kann.Zweitens haben wir die neue Option *Erfolgsstatus* hinzugefügt.
++
+Bei beiden Änderungen werden mithilfe einer Migration eure ursprünglichen Einstellungen für die vorherige Option *Zielstatus* in die neuen Einstellungen übernommen. Das bedeutet, dass keine bereits vorgenommenen Einstellungen verloren gehen und eure ursprünglich ausgewählten Auftragsstatus auch weiterhin berücksichtigt werden.
++
+Ihr könnt die Status wie zuvor auch je nach euren Bedürfnissen ändern, um Blockstatus und Erfolgsstatus voneinander zu differenzieren.
++
+*_Hinweis:_* Die vorhandenen Optionen *Quellstatus* und *Fehlerstatus* wurden nicht verändert und funktionieren weiterhin wie gewohnt.
+* Für die Funktion *Einzelkommissionierung* wurde die Möglichkeit zum automatischen Abschließen von Picklisten hinzugefügt. Somit ist es nicht mehr notwendig, am Ende des Pickvorgangs manuell den Abschluss-Button zu betätigen. Stattdessen wird die Pickliste automatisch abgeschlossen, sobald alle Artikel gepickt wurden.
++
+Um diesen Workflow zu nutzen, muss im Menü *Einstellungen » Einzelkommissionierung* der plentyWarehouse App die Option *Picklisten automatisch abschließen* aktiviert werden.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in Version 1.0.23 der *plentymarkets Warehouse App* veröffentlicht.
+
+* Innerhalb der Funktion *Rollende Kommissionierung* werden nun die Gesamtmenge sowie die Anzahl der Artikelpositionen im oberen Bereich der Auftragsansicht angezeigt.
+* Die Einträge im Menü zur Auswahl der Gründe für eine Bestandskorrektur werden nun alphabetisch sortiert angezeigt.
+* Lagerort-Zwecke werden nun direkt beim Start der plentyWarehouse App geladen. Somit stehen sie in den Funktionen, in denen sie genutzt werden, sofort zum Filtern bereit und müssen nicht erst vom Server angefragt werden. Diese Änderung wirkt sich nicht auf die Bedienung der App aus und erfordert keine Anpassungen auf Nutzerseite.
+* In den Dialogen zur Eingabe von Artikelmengen wird nun unterhalb des Dialogtitels der Artikelname angezeigt. So ist besser sichtbar, für welchen Artikel die Menge eingegeben wird. Diese Änderung gilt für alle Funktionen der plentyWarehouse App, in denen ein Mengendialog zur Verfügung steht.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in Version 1.2.23 der *plentymarkets Warehouse App* behoben.
+
+* Innerhalb der Funktion *Einzelkommissionierung* wurde der Auftragsstatus in der Sprache, die am Auftrag hinterlegt wurde, angezeigt. Dieses Verhalten wurde korrigiert, sodass der Auftragsstatus nun in der Gerätesprache angezeigt wird.
+
+--
+
+====
