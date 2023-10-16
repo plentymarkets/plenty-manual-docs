@@ -1,0 +1,329 @@
+= Changelog 11. Oktober 2023
+:author: kevin-stederoth
+:sectnums!:
+:page-index: false
+:page-aliases: ROOT:changelog.adoc
+:startWeekDate: 5. Oktober 2023
+:endWeekDate: 11. Oktober 2023
+
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/documentbuilder-und-nummernkreise-laendername-documentbuilder-and-numberranges-country-names/739903
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/decathlon-html-texte-werden-automatisch-in-markdown-umgewandelt-html-texts-are-automatically-converted-into-markdown/739878
+
+Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
+
+Wenn du mehr zu den einzelnen Versionen erfahren oder auf eine andere Version wechseln möchtest, siehe die Handbuchseite xref:business-entscheidungen:versionszyklus.adoc#[Versionszyklus]. Um die Informationen, die auf dieser Seite gesammelt sind, in Echtzeit zu erhalten, abonniere die link:https://forum.plentymarkets.com/c/changelog[Kategorie Changelog in unserem Forum^].
+
+Wähle, welchen Changelog du sehen möchtest.
+
+[tabs]
+====
+stable::
++
+--
+
+:version: stable
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* In der Auftragsübersicht erscheint nach dem Anklicken der Schaltfläche zum Ändern des Tabellenstils (Kompaktansicht / Listenansicht aktivieren) eine Bestätigungsmeldung, in der um die Bestätigung der Aktion gebeten wird. Die Änderung wird erst nach Betätigung der Schaltfläche Bestätigen durchgeführt.
+
+[discrete]
+=== CRM
+
+* Im Menü *Einrichtung » CRM » Messenger » Automatisierung* wurde in *Automatisierungen* vom Typ *Ereignisbasiert* der Filter *Job-Titel des Kontakts* hinzugefügt.
+
+[discrete]
+=== Dokumente
+
+* Ab jetzt stehen folgende neuen Variablen im DocumentBuilder zur Verfügung:
+** *Auftrag*: neue Variablen für benutzerdefinierte Eigenschaften (ID >1000)
+** *Auftrag » Kundenwunsch*: Mit dieser Variable können Kundenwünsche, die für einen Auftrag erfasst wurden, auf per Vorlage generierten Dokumenten angegeben werden.
+** *Auftrag » Treueprogramm*: Mit der neuen Variable kann der Namen eines im Auftrag hinterlegten Treueprogramms auf Dokumenten angegeben werden, die über die Vorlage generiert wurden.
+** *Auftragsposition*:  neue Variablen für benutzerdefinierte Eigenschaften (ID >1000)
+** *Auftragsposition » GesamtRabattBrutto*
+** *Auftragsposition » GesamtRabattNetto*
+** *Auftragsposition » RabattBrutto*
+** *Auftragsposition » RabattNetto*
+** *Auftragsposition » UVP*
+** *Gesamtgewicht*: Diese Variable zeigt das Gesamtgewicht des Auftrags an.
+* Du hast jetzt Variablen für deine Eigenschaften in DocumentBuilder. Du musst nur sicherstellen, dass du in den Sichtbarkeitseinstellungen der Eigenschaft *Anzeige auf PDF-Dokumenten* aktiviert hast.
+
+[discrete]
+=== Fulfillment
+
+* Option zum De-/Aktivieren der Erstellung einer Auftragsnotiz nach Retourenanmeldung. Unter *Einrichtung » Aufträge » Einstellung > Retouren* kannst du nun bestimmen, ob eine Auftragsnotiz nach Anmeldung einer Retoure erstellt werden soll. Die vorausgegangene Anpassung war im standardmäßig aktiv, welches wir beibelassen haben.
+
+[discrete]
+=== Import
+
+* Im Import-Typ *Kontakte, Firmen und Adressen* wurde im Zuordnungsfeld *Kontakt* die Option *Job-Titel-ID* hinzugefügt.
+
+[discrete]
+=== Zalando
+
+* Wie bereits angekündigt, gibt es eine Änderung bei Zalando, die es notwendig macht, eure Versandlager bei Zalando zu registrieren und diese dann bei uns auf eure Vertriebslager in plenty zu mappen. Weitere Details findest du link:https://forum.plentymarkets.com/t/zalando-versandmeldung-neue-pflichtangabe-ausgangslager-shipping-confirmation-new-requirement-outbound-warehouse/735666#de-de-de-1[im Forum^].
++
+[IMPORTANT]
+.To-Do
+======
+*Bei Zalando:*
+
+. Ihr werdet aktiv von Zalando dazu aufgefordert werden, die neuen Pflichtangaben in zDirect zu pflegen.
+. Sobald ein Lager angelegt und von Zalando bestätigt wurde, wird diesem Lager eine eindeutige ID von Zalando zugeordnet, die über einen neuen API-Endpunkt von uns abgerufen werden kann.
+
+*Bei plentysystems:*
+
+. Nachdem ihr die Eingaben bei Zalando getätigt habt, rufen wir die Daten beim Öffnen des Zalando-Assistenten ab und aktualisieren diese alle 24 Stunden.
+. Im Assistenten unter *Einrichtung » Assistenten » Omni-Channel » Zalando-Kontoeinstellungen » [Konto öffnen] » Schritt: Eigenversand (ZSS/ZRS): Lagerzuordnung* findet ihr die Möglichkeit pro Vertriebslager in plenty ein bei Zalando registriertes Lager anhand des Namens zuzuordnen.
+
+Sobald die Zuordnung getroffen ist, wird bei der Versandmeldung automatisch die ID des Lagers mit an Zalando übertragen anhand des Lagers des Auftragsartikels. Wenn der Auftragsartikel keinem Lager zugeordnet ist, wird das Lager des Hauptauftrags genutzt. Wenn das Lager nicht gepflegt ist, werden wir eine Fehlermeldung unter *Daten » Log* ausspielen, aber trotzdem die Versandmeldung trotzdem an Zalando übertragen.
+======
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Kataloge
+
+* Im Katalog des Standardformats *Kontakt* wurde der Filter *Kontakt aktualisiert am* hinzugefügt. Dieser Filter beschränkt den Export auf Kontakte, die an einem bestimmten Datum aktualisiert wurden Wähle aus der linken Dropdown-Liste einen Operator (>= oder <=). Gib das Datum ein oder klicke alternativ auf das Kalendersymbol, um das Datum aus dem Kalender zu wählen.
+** Wenn du den Operator >= (größer oder gleich) wählst, werden nur die Kontakte exportiert, die an oder nach diesem Datum aktualisiert wurden.
+** Wenn du den Operator <= (kleiner oder gleich) wählst, werden nur die Kontakte exportiert, die vor oder an diesem Datum aktualisiert wurden.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Amazon
+
+* Aufgrund eines Fehlers auf Seiten Amazon bei der Generierung von FBA-Auftragsberichten, wurden Berichte mit einem ungültigen Inhalt generiert. Der FBA-Auftragsimport war nicht in der Lage diese Berichte zu überspringen und blockierte den Auftragsimport. Der Prozess wurde angepasst, um diese Berichte zu überspringen.
+* Aufgrund eines Fehlers wurde beim Amazon Bestandsabgleich eine durchschnittliche Lieferzeit von `0` übertragen, obwohl für die Einstellung *durchschnittliche Lieferzeit* die Option *nicht übertragen* gewählt wurde.
+
+[discrete]
+=== Artikel (Neue UI)
+
+* Der Bilderupload in der neuen Artikel-UI findet nun nacheinander statt. Dadurch kann es nicht mehr passieren, dass unterschiedliche Bilder die selbe URL bekommen.
+* Die Werkzeugleiste wurde nach dem Öffnen der MyView-Einstellungen manchmal nicht angezeigt. Dieses Verhalten haben wir korrigiert.
+
+[discrete]
+=== Aufträge
+
+* In der Auftragssuche der Auftrag UI wurde der Filter *Herkunft* unter Umständen nicht korrekt angezeigt. Dies wurde behoben.
+* In der neuen Auftrags-UI waren einige Spalten aus der Tabelle der Auftragspositionen nicht sichtbar, weil das Styling für die Tabellenspalten fehlte. Dies wurde behoben.
+* In der Nachbestellung / Umbuchung / Abos, wurde bei der Tag-Auswahl nicht mehr der Name angezeigt sondern nur noch die ID dies wurde behoben.
+* In der Gruppenfunktion in der Auftragsübersicht für Tag, wurde keine Tags in den Auswahlen angezeigt. Diese Problem wurde behoben.
+
+[discrete]
+=== CRM
+
+* Bei einigen EmailBuilder-Vorlagen hatte die empfangene E-Mail bei der Vorschau in der Auftrags-UI und beim anschließenden Versand einen anderen Zeilenabstand als beim direkten Versand oder beim Versand aus Ereignissen. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Die Variablen der Gruppe Zahlungsbedingungen funktionieren jetzt insofern korrekt, als dass, wenn ihr Wert gleich 0 ist, der Widget sie als leer erkennt und keinen entsprechenden Inhalt im Dokument anzeigen lässt.
+* Wenn eine Variante eine Varianteneigenschaft vom Typ *Auswahl* jedoch ohne Wert besitzt, konnte dies dazu führen, dass keine Dokumente generiert werden konnten. Dieses Verhalten wude behoben.
+
+[discrete]
+=== Kaufland
+
+* War ein Kaufland-Katalog aufgrund eines fehlenden Templates invalide, wurde der Cron `ProductUpdateCron` abgebrochen und es erfolgte kein Produktupdates-Upload an Kaufland. Ab sofort wird der betroffene Katalog deaktiviert und übersprungen, sodass im Anschluss der erfolgreiche Upload des Produktupdates erfolgt.
+
+[discrete]
+=== plentyBI
+
+* Die Kennzahl *Aufträge (Live)* hat das Ergebnis `0` angezeigt, wenn der Filter *Lager* innerhalb der Kennzahlkonfiguration verwendet wurde. Dieses Verhalten wurde behoben, sodass wieder korrekte Ergebnisse angezeigt werden.
+
+[discrete]
+=== Prozesse
+
+* In der Auftragssuche in den Prozessen wurden nicht immer alle zusammengehörenden Aufträge angezeigt. Dieses Verhalten wurde behoben.
+
+--
+
+early::
++
+--
+
+:version: early
+
+[discrete]
+== Neu
+
+Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== Aufträge
+
+* Bei der manuellen Auftragsanlage kann nun die externe Auftrags-ID angegeben werden.
+* In der Detailansicht der Auftrag UI kann nun in der Übersicht der Skonto-Endbetrag angezeigt werden.
+* Bundesland/Provinz wird in den Auftragsdetails im Adress-Widget und in der Auftragsübersicht (Kompaktansicht) im Tooltip der Adresse jetzt angezeigt.
+* In der Auftragssuche der Auftrag-UI ist für den Eigner Filter jetzt der Operator *Existiert* verfügbar.
+* In der Detailansicht der Auftrag UI ist es jetzt möglich die Lieferadresse als Rechnungsadresse und auch die Rechnungsadresse als Lieferadresse zu übernehmen.
+* Die externe Rechnung und die externe Gutschrift sind jetzt in der Gruppenfunktion der Auftrags-UI verfügbar. Du kannst sie dann für das Zusammenführen von Dokumenten auswählen.
+
+[discrete]
+=== CRM
+
+* Im Kontaktdatensatz im Bereich *Aufträge* findest du ab sofort einen Button, über den du in die Auftragsübersicht im Menü *Aufträge » Aufträge* gelangst. Dort sind die Aufträge des Kontakts bereits gefiltert.
+
+[discrete]
+=== Kataloge
+
+Wir haben folgende Felder im Katalogformat *Artikel (Neu)* ergänzt.
+
+ASIN:
+
+* Land Name
+* Land ID
+* Wert
+* Link ID
+* Link Position
+
+Moin:
+
+* Land Name
+* Land ID
+* Wert
+* Link ID
+* Link Position
+
+ePID:
+
+* Land Name
+* Land ID
+* Wert
+* Link ID
+* Link Position
+
+Barcode:
+
+* Code
+* Name
+* ID
+
+Artikel:
+
+* Amazon FBA Plattform
+* Amazon Produkttyp
+* Zustand Name
+* Zustand API Name
+* Aktionsgutschein
+* eBay Kategorie 1
+* eBay Kategorie 2
+* Listing-Vorlage ID
+* eBay Shop Kategorie 1
+* eBay Shop Kategorie 2
+* Markierung 1
+* Markierung 2
+* Seriennummer
+* Amazon FBA
+* Versandpaket
+* Abonnement
+* Artikeltyp
+* Herstellerlogo-URL
+* max. Bestellmenge
+* Erlöskonto
+* Warentyp
+* Shop-Aktion ID
+* Shop-Aktion Name
+
+[discrete]
+=== MyView
+
+* Ab jetzt hast du die Möglichkeit ein Abstandhalter-Element in deine Ansicht einzubauen, welches die anderen Elemente sichtbar voneinander trennt. Die Höhe des Elements lässt sich manuell einstellen und anpassen, die Breite ist vorgegeben und passt sich automatisch der Spaltenbreite an.
+
+[discrete]
+=== plentyBI
+
+* Ab sofort kannst du Daten, die innerhalb einer Tabelle auf dem Dashboard dargestellt werden, im CSV-Format exportieren. Dazu haben wir eine neue Option im Kontextmenü für Tabellen hinzugefügt. Klicke auf Aktionen (drei-Punkte-Symbol) oben rechts an einer Tabelle und dann auf *CSV-Export*. Anschließend wird automatisch eine CSV-Datei mit den entsprechenden Daten heruntergeladen.
+
+'''
+
+[discrete]
+== Geändert
+
+Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
+
+[discrete]
+=== CRM
+
+* In der Kampagne im Bereich *E-Mail-Vorlage* wurde die Auswahl der Variable auf den Gutscheintyp *Gutschein* und die Gutscheinart *Aktionsgutschein* beschränkt. Das heißt, es ist ab sofort nicht mehr möglich, einen Wert für die E-Mail-Variable zu setzen, wenn die Kampagne nicht die zulässigen Kriterien erfüllt.
+
+'''
+
+[discrete]
+== Behoben
+
+Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
+
+[discrete]
+=== Aufträge
+
+* Wenn in der Artikel bearbeiten UI Artikel in den Einkaufswagen gelegt wurden, traten aus folgendem Grund Performance-Probleme auf: Beim Verlassen von Eingabefeldern und beim Klicken auf Enter ohne in den Eingabefeldern Änderungen vorgenommen zu haben, wurde die Vorschau-Route mehrfach ausgelöst. Dieses Verhalten wurde behoben.
+* Wenn in der Artikel bearbeiten UI Text- oder Zahlenangaben in der Tabelle Auftragspositionen geändert wurden, blieb das Speichern-Symbol inaktiv. Dies lag daran, dass der Preview-Call, der beim Verlassen der Eingabefelder ausgelöst werden sollte, nicht ausgeführt wurde. Dieses Verhalten wurde behoben.
+* Das Feld *eBay Konto* in den Auftragsdetails wurde behoben, dass es jetzt immer den Verkäuferaccount anzeigt.
+* Die Filter werden beim Wechseln vom Tab nicht mehr überschrieben.
+* Die Herkunft mit der ID 100 wird nun in der Auswahl der Herkunft angezeigt und kann somit gesetzt werden.
+* Beim Wechsel der Ansicht (Kompaktansicht, Tabellenansicht) wurden die Datumsfilter zurückgesetzt, die Filter bleiben jetzt bestehen.
+
+[discrete]
+=== CRM
+
+* Beim Versuch, eine E-Mail-Vorlage über die Vorschau mit dem Dokument SEPA-Lastschriftmandat im Anhang zu versenden, trat ein Fehler auf. Dieser Fehler wurde behoben.
+* Im EmailBuilder haben die Variablen *Gutschein-Code (1)* bis *Gutschein-Code (10)* keinen Wert in der versendeten E-Mail angezeigt, wenn die Variable als twig expression im Code-Widget des EmailBuilder eingefügt wurde (Beispiel: `{⁠{ globals.coupons.couponCode10 }⁠}`). Dieses Verhalten wurde behoben.
+* Wenn man eine EmailBuilder-Vorlage versendet hat, die Nummernvariablen im Betreff enthielt, wurde die Nummernformatierung nicht korrekt ausgegeben. Dieses Verhalten wurde behoben.
+
+'''
+
+[discrete]
+== Gelöscht
+
+Folgende Funktionalität wurde in den letzten 7 Tagen auf *{version}* entfernt.
+
+[discrete]
+=== Amazon
+
+* Der Assistent für die Amazon-Grundeinstellungen wurde entfernt, um auf den Umzug auf die neuen Amazon-Einstellungen vorzubereiten und den Wartungsaufwand zu reduzieren. Du kannst deine Einstellungen für Amazon-Benutzerkonten weiterhin im Menü *Einrichtung » Märkte » Amazon* setzen.
+
+[discrete]
+=== CRM
+
+* Wie in diesem link:https://forum.plentymarkets.com/t/ankuendigung-eol-kalender/731674/3[Beitrag^] angekündigt, wurde der Kalender aus dem Menü *plentymarkets Logo (Start) » Kalender* entfernt.
+
+--
+
+Plugin-Updates::
++
+--
+Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plentyMarketplace veröffentlicht:
+
+.Plugin-Updates
+[cols="2, 1, 2"]
+|===
+|Plugin-Name |Version |To-do
+
+|link:https://marketplace.plentymarkets.com/sendinblue_6924[Sendinblue]
+|1.0.9
+|-
+
+|===
+
+Wenn du dir weitere neue oder aktualisierte Plugins anschauen möchtest, findest du eine link:https://marketplace.plentymarkets.com/plugins?sorting=variation.createdAt_desc&page=1&items=50[Übersicht direkt auf plentyMarketplace^].
+
+--
+
+====
