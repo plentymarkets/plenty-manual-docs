@@ -6,7 +6,7 @@
 :startWeekDate: 12. Oktober 2023
 :endWeekDate: 18. Oktober 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/neue-artikel-ui-lagerortvorschlag-wird-nicht-korrekt-angezeigt-new-item-ui-storage-location-suggestions-not-beeing-displayed-correctly/740693
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -41,6 +41,19 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 === CRM
 
 * Im Kontaktdatensatz im Bereich *Aufträge* findest du ab sofort einen Button, über den du in die Auftragsübersicht im Menü *Aufträge » Aufträge* gelangst. Dort sind die Aufträge des Kontakts bereits gefiltert.
+* In den Widget-Einstellungen des Widgets *Auftragspositionen* im EmailBuilder kannst du ab sofort die Spaltenbreite manuell anpassen. Du kannst in den Feldern Spaltenbreite jeweils einen Wert in Prozent eingeben.
+* Du kannst jetzt eine eigene CSS-Klasse und eine eigene Element-ID in den Widget-Einstellungen der folgenden Widgets im EmailBuilder speichern:
+** Text
+** Artikelliste
+** Zweispaltiges Layout
+** Dreispaltiges Layout
+** Kontaktadresse
+** Auftragsadresse
+** Auftragspositionen
+** Bild
+
++
+Du kannst die CSS-Klasse und die Element-ID entweder über den Button CSS direkt in der Vorlage speichern oder in den sprachabhängigen Einstellungen in der jeweiligen Sprache der Vorlage. *_Hinweis:_* Diese Funktion richtet sich an erfahrene Händler:innen mit CSS-Kenntnissen.
 
 [discrete]
 === Kataloge
@@ -141,6 +154,8 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * Die Filter werden beim Wechseln vom Tab nicht mehr überschrieben.
 * Die Herkunft mit der ID 100 wird nun in der Auswahl der Herkunft angezeigt und kann somit gesetzt werden.
 * Beim Wechsel der Ansicht (Kompaktansicht, Tabellenansicht) wurden die Datumsfilter zurückgesetzt, die Filter bleiben jetzt bestehen.
+* Bei der Weiterleitung zu den referenzierten Aufträgen gab es ein performance Problem, dies wurde behoben.
+* In der manuellen Auftragsanlage hatte die Validierung von Gutscheinen nicht funktioniert. Dies wurde behoben.
 
 [discrete]
 === CRM
@@ -148,6 +163,27 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 * Beim Versuch, eine E-Mail-Vorlage über die Vorschau mit dem Dokument SEPA-Lastschriftmandat im Anhang zu versenden, trat ein Fehler auf. Dieser Fehler wurde behoben.
 * Im EmailBuilder haben die Variablen *Gutschein-Code (1)* bis *Gutschein-Code (10)* keinen Wert in der versendeten E-Mail angezeigt, wenn die Variable als twig expression im Code-Widget des EmailBuilder eingefügt wurde (Beispiel: `{⁠{ globals.coupons.couponCode10 }⁠}`). Dieses Verhalten wurde behoben.
 * Wenn man eine EmailBuilder-Vorlage versendet hat, die Nummernvariablen im Betreff enthielt, wurde die Nummernformatierung nicht korrekt ausgegeben. Dieses Verhalten wurde behoben.
+* Wenn in den Auftrags-Ereignisaktionen die Aktion *E-Mail an Lager senden* ausgewählt wurde und für das Lager keine E-Mail-Adresse festgelegt war, wurde die E-Mail an den Kontakt aus dem Auftrag gesendet. Dieses Verhalten wurde nun behoben. Von nun an wird keine E-Mail mehr gesendet und der Fehler `Missing email to.` wird zum Log hinzugefügt.
+* Zwei neue Eignerschaftsberechtigungen sind nun im erweiterten Modus der Rollenberechtigungen vorhanden.
+** Eignerschaft für den Bereich *CRM > Firma*
+** Eignerschaft für den Bereich *CRM > EmailBuilder*
+
++
+Nur Benutzer:innen, die die Rollen mit diesen Eignerschaftsberechtigungen haben, sind als Eigner für diese Bereiche verfügbar: in den Filtern, Details oder neuen Einträgen. Bei Kontakten und im Ticketsystem musst du außerdem explizit die Eignerschaftsberechtigung für die Rolle aktivieren, damit die Benutzer:in in der Eignerliste erscheint. *_Hinweis:_* Alle Admin-Benutzer:innen werden in der Eignerliste angezeigt, unabhängig von den Berechtigungen.
+* Einige Anhänge konnten nicht in den Messenger importiert werden, weil die maximale Ausführungszeit überschritten wurde. Dieses Verhalten wurde behoben, indem die Zeit erhöht wurde.
+* Wenn man im Messenger über die Funktion *Spalten konfigurieren* das Drei-Punkte-Menü (*Aktionen*) gewählt hat, erschien dieses auch, war aber beim nächsten Öffnen des Messengers wieder verschwunden. Als Workaround musste man es über die Funktion *Spalten konfigurieren* erst abwählen und dann erneut anwählen. Dieses Verhalten wurde behoben.
+
+[discrete]
+=== Dokumente
+
+* Seit der link:https://forum.plentymarkets.com/t/documentbuilder-variables-for-properties-documentbuilder-variablen-fuer-eigenschaften/738782[Einführung der Variablen für Eigenschaften] gibt es manchmal ein Problem mit der Dokumenterzeugung. Die Dokumente landen in den Status *fehlerhaft* und können nicht weiter bearbeitet.
++
+Das passiert, wenn an einer der Varianten im Auftrag eine Eigenschaft ohne Wert existiert. Dadurch wird versucht einen nicht vorhandenen Wert für die Ausgabe zu formatieren. Dies wurde behoben.
+
+[discrete]
+=== Kataloge
+
+* Die alten Barcode-Felder werden wieder korrekt mit Wert exportiert.
 
 '''
 
@@ -179,7 +215,30 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Es ist jetzt während der Tabellenbearbeitung auch möglich, die Barcodes, Artikelnamen und Preise zu bearbeiten.
+
+[discrete]
+=== Aufträge
+
+* Es wurden in der Auftragsübersicht bei dem Feld Lieferland in der Kompaktansicht, die Einstellung *Anzeigeoption* hinzugefügt. Mit den Optionen ob der Name oder ISO-Code des Lieferland angezeigt werden soll.
+* Es wurden in die Tabelle für die Auftragspositionen die Spalte *Gewinnspanne (netto) gesamt* hinzugefügt.
+* Das Feld *Kundenklasse* wurde in der Übersicht hinzugefügt.
+
+[discrete]
+=== Decathlon
+
+* Texte, die HTML-Formatierungen enthalten, können ab sofort zu Decathlon übertragen werden, da sie beim Export umgewandelt werden. Das bedeutet, dass du in deinen Artikel- und Angebotstexten für Decathlon nun auch HTML verwenden kannst.
++
+Bisher konnten Texte mit HTML-Formatierung nicht zu Decathlon übertragen werden. Stattdessen musste die Auszeichnungssprache markdown verwendet werden. Ab sofort werden HTML-Formatierungen beim Katalogexport aber in markdown konvertiert, sodass die Beschreibungen korrekt auf Decathlon angezeigt werden.
+
+[discrete]
+=== Dokumente
+
+* Analog zur Breite des Barcodes haben wir nun auch die Höhe des Barcodes als Einstellung eingeführt.
+* Für alle Auftragsdokumente steht nun die neue Variable *Dokument » Rechnungsnummer* zur Verfügung.
 
 '''
 
@@ -188,7 +247,22 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 
 Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* Folgende Änderungen wurden an der Artikelsuche in der Auftragserstellung und Auftragpositionsbearbeitung veröffentlicht:
+** Das alte Feld *Volltext* wurde umbenannt in *Artikel-ID / Varianten-ID / Variantennummer*
+** Es wurde eine neue Feld *Artikeldaten* hinzugefügt. Dieses Feld besitzt einen Toggle, für die Auswahl, welcher Suchindex aus *Einrichtung » Artikel » Suche » Backend » Suchindex*. Ist der Toggle nicht aktive wird der *Standard-Index* genutzt, bei aktivierten Toggle wird der *Erweiterte Index* für die Suche verwendet.
+** Änderung des Tag-Filters, von einer Einzelauswahl zu einer Mehrfachauswahl. Desweitern wurde dem Feld ein Toggle hinzugefügt, für die Auswahl ob eine Variante von den ausgewählten Tags eins oder alle besitzen muss.
+* In der Auftrag UI wurde an den Positionen die Spalte *Bruttopreis* in *Rechnungsbetrag* und die Spalte *Gesamtbetrag (brutto)* in *Gesamtrechnungsbetrag* umbenannt. Bei Netto-Aufträgen werden dann dort die Netto-Beträge statt der Brutto-Beträge dargestellt.
+* Bei Abonnements hat jetzt jede Position ein eigenes Startdatum, Enddatum und Kündigungsdatum. In Kindaufträge werden dann nur die Positionen übernommen, die zu diesem Zeitpunkt aktiv sind. Es kann weiterhin am Auftrag ein End- / Kündigungsdatum gesetzt werden. Dieses wird dann aber nur an die Positionen übernommen, die bisher noch kein solches Datum haben.
++
+Weitere Informationen dazu wie die REST-API und Plugins von dieser Änderung betroffen sind, findest du link:https://forum.plentymarkets.com/t/abonnement-startdatum-und-enddatum-per-position-subscription-start-date-and-end-date-per-order-item/740105[im Forum].
+
+[discrete]
+=== Dokumente
+
+* Im DocumentBuilder gibt es jetzt eine Suchfunktion für die Einschränkungen.
 
 '''
 
@@ -197,7 +271,33 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Der Löschen Button innerhalb einer Variante ist nun nicht mehr dauerhaft inaktiv.
+* Es konnte passieren, dass eine Eigenschaft nach dem Hinzufügen erst nach dem Speichern der Variante im entsprechenden Portlet angezeigt wurde. Das haben wir korrigiert, Eigenschaften werten direkt nach dem Hinzufügen angezeigt.
+* Es werden jetzt die korrekten Namen der Markierungen in den Filterchips angezeigt.
+
+[discrete]
+=== Aufträge
+
+* Auftrag UI wurden gelöschte Nachbestellungen weiterhin referenziert. Dies wurde behoben.
+* In der neuen Auftrags-UI wurden Kassenbelege im Dokumente-Portlet nicht unter *Alle Dokumente* angezeigt. Dieses Verhalten wurde behoben. Des Weiteren wurde die Option *Archivieren* für Kassenbelege entfernt.
+* Selectbox mit Suche angepasst, dass diese nach oben springt, wenn man nach etwas sucht.
+
+[discrete]
+=== CRM
+
+* Die Variable *Nachbestellung Lieferdatum* im EmailBuilder hat keinen Wert ausgegeben, obwohl das Datum in der Nachbestellung angegeben war. Dieses Verhalten wurde behoben.
+* Die Variable *Versanddienstleister* im EmailBuilder nutzte den Backend-Namen des Versandprofils, wenn kein Name in der richtigen Sprache gefunden werden konnte.
++
+Dies wurde so behoben, dass in diesem Fall der Versanddienstleister-Name in der ersten verfügbaren Sprache genutzt wird. Sollte auch kein Name in einer anderen Sprache gefunden werden, wird stattdessen der Backend-Name des Versanddienstleisters genutzt.
+
+[discrete]
+=== Dokumente
+
+* Für die Ländernamen in den Filtern und Einstellungen des DocumentBuilders und der Nummernkreise wurde der Standardname genutzt anstelle des Names in der Sprache des Benutzers. Das wurde behoben, der Standardname wird nur genommen, wenn es keine Übersetzung in der Sprache gibt.
+* Selbst mit der Einstellung *Rechnungen der Aufträge integrieren* aktiviert, wurden keine Einzelrechnungen in die Sammelrechnung aufgenommen. Dies wurde behoben.
 
 --
 
@@ -211,9 +311,9 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/ekomifeedback_5253[EkomiFeedback^]
+|3.3.5
+|-
 
 |===
 
