@@ -6,7 +6,8 @@
 :startWeekDate: 2. November 2023
 :endWeekDate: 8. November 2023
 
-// Ab diesem Eintrag weitermachen: LINK EINFÜGEN
+// Ab diesem Eintrag weitermachen: https://forum.plentymarkets.com/t/auftrag-ui-statusauswahl-bei-anlage-von-lieferauftraegen-order-ui-status-selection-for-delivery-order-creation/742676
+// Auch folgenden Eintrag beachten: https://forum.plentymarkets.com/t/documentbuilder-neue-variablen-auftragstyp-und-auftragstyp-id-documentbuilder-new-variables-order-type-and-order-type-id/742473
 
 Erfahre, was sich in der Woche vom {startWeekDate} bis zum {endWeekDate} bei plentymarkets getan hat. Im Folgenden findest du alle Changelog-Einträge der letzten Woche für stable- und early-Systeme.
 
@@ -38,6 +39,21 @@ Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlich
 ** Betreff enthält
 ** Absender-E-Mail enthält
 
+[discrete]
+=== plentyBI
+
+[NOTE]
+.Betroffene Systeme
+======
+Diese Änderung betrifft nur Systeme deren plentyID (PID) kleiner 59600 ist.
+======
+
+Wenn du bereits jetzt deine Mitarbeiter:innen mit dem neuen Dashboard vertraut machen möchtest, hast du nun die Möglichkeit über die Rechteverwaltung zu steuern, welches Dashboard nach dem Login geöffnet werden soll.
+
+Um auf das neue Dashboard zu wechseln, muss du unter *Einrichtung » Kontoverwaltung » Rollen* die gewünschte Rolle auswählen. Anschließend im Bereich Rechte unter Start den Eintrag *Dashboard* aktiveren und *Dashboard (Veraltet)* deaktivieren.
+
+Beachte das die gewählte Rolle zusätzlich auch die Berechtigungen für die jeweiligen Kennzahlen auf dem Dashboard besitzen muss, damit die Ergebnisse der einzelnen Kennzahlen angezeigt werden.
+
 '''
 
 [discrete]
@@ -50,6 +66,11 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 * Der Button zum Warenausgang buchen wird jetzt immer angezeigt, auch wenn der Warenausgang gebucht ist, dann gibt es einen farblichen Hinweis, um zu sehen, dass dieser gebucht ist.
 * Der farbliche Hinweis war vorher nur am Warenausgang zurückbuchen Button zu sehen und wurde dort entfernt.
+
+[discrete]
+=== CRM
+
+* Die Sprachen, die für eine Vorlage hinzugefügt wurden, wurden in den Vorlagendetails in Tabs angezeigt, die alphabetisch nach Sprache sortiert waren. Dieses Verhalten wurde geändert. Von nun an werden die Vorlagen nach dem Datum der letzten Aktualisierung sortiert (die neueste Vorlage zuerst).
 
 '''
 
@@ -68,11 +89,16 @@ Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
 * Beim Drücken von *Enter* in den Auftragsdetails in bestimmten Feldern öffnete sich ein Overlay falsch, dies ist nun behoben.
 * In der Auftrag UI wurde beim Aktualieren eines Auftrags nicht die Einstellung für den betroffen Statusbereich (4.x) für die Warenbestandsautomatik beachtet. Dies wurde behoben.
+* Es kam manchmal vor, dass beim Schließen vom Aufträge-Tab die UI weiterhin angezeigt wurde, dies wurde behoben.
 
 [discrete]
 === CRM
 
 * Wenn ein Messenger-Ereignis eine E-Mail sendete (Aktionen *Antwort hinzufügen* oder *E-Mail senden*), enthielten die E-Mail-Variablen für Auftrag und Kontakt keine Werte, obwohl die Konversation die richtigen Relationen hatte. Dieses Verhalten wurde nun behoben.
+* Der Messenger zeigte einen Fehler für Konversationen an, bei denen die Kontakt-ID und die Auftrags-ID fehlten. Dieses Verhalten wurde behoben.
+* Im EmailBuilder gaben die Variablen *URL zum neuen Passwort*, *URL zum Ändern des Passworts* und *Allgemeine Geschäftsbedingungen* die falsche URL aus. Dieses Verhalten wurde behoben.
+* Die über den Posteingang heruntergeladenen Nachrichtenanhänge hatten nicht den richtigen Inhaltstyp eingestellt bzw. fehlte die Dateiendung. Infolgedessen konnten die Dateien im Messenger nicht in der Vorschau angezeigt und nicht korrekt heruntergeladen werden. Dieses Verhalten wurde behoben.
+* Das Erstellen neuer Gruppen für den Messenger funktionierte nicht mehr. Dieses Verhalten wurde behoben.
 
 [discrete]
 === Ereignisaktionen
@@ -92,7 +118,27 @@ early::
 
 Folgende Neuerungen wurden in den letzten 7 Tagen auf *{version}* veröffentlicht.
 
+[discrete]
+=== Aufträge
 
+* In der Übersicht der Auftrags-UI ist das Abzeichen mit der Anzahl der Notizen jetzt grün.
+
+[discrete]
+=== CRM
+
+* Ab sofort steht dir für jede Konversation im Messenger eine Konversationshistorie zur Verfügung. Du kannst die Historie über das Drei-Punkte-Menü in der Übersicht und über das Drei-Punkte-Menü in der geöffneten Konversation aufrufen.
++
+Du siehst in der Historie den alten und den neuen Wert sowie das Datum und die Uhrzeit der Änderung und den Benutzer oder die Automatisierung, die die Änderung ausgelöst hat.
+* Ab sofort stehen dir im EmailBuilder dir die Variablen für die Adressoptionen aus der Rechnungsadresse und aus der Lieferadresse zur Verfügung. Du findest die neue Variablenliste unter *Kontakte > Adressoptionen*.
+
+[discrete]
+=== Dokumente
+
+* Im Editor des Document Builders sind die folgenden Funktionen nun für das Code-Widget verfügbar:
+** Das Code-Widget kann wie die anderen Widgets per Drag & Drop an die gewünschte Stelle im Editor gezogen werden.
+** Auf der linken Seite ist nun eine Liste der Variablen verfügbar, sobald man in das Widget geklickt hat.
+** Die Variablen können überall dort platziert werden, wo sich der Cursor befindet, indem einfach auf die gewünschte Variable in der Liste auf der linken Seite geklickt wird.
+** Die Schaltfläche „Speichern“ in der Toolbar oben wird aktiviert, sobald Änderungen vorgenommen wurden.
 
 '''
 
@@ -110,7 +156,32 @@ Folgende Änderungen wurden in den letzten 7 Tagen auf *{version}* veröffentlic
 
 Folgende Probleme wurden in den letzten 7 Tagen auf *{version}* behoben.
 
+[discrete]
+=== Artikel (Neue UI)
 
+* Der Tag Name wurde in der Übersicht nicht immer komplett angezeigt, wenn er zu lang gewesen ist. Dieses Verhalten haben wir korrigiert.
+
+[discrete]
+=== Aufträge
+
+* Die Verkaufspreise wurden in der Auftrag UI bisher nicht nach der Position sortiert. Dies wurde behoben.
+
+[discrete]
+=== CRM
+
+* Die Vorschau von PDF-Dokumenten in den Messenger-Anhängen funktionierte nicht mehr. Statt des Dokuments wurde entweder eine leere Seite oder eine 404-Seite des plentyShops angezeigt. Dieses Verhalten wurde behoben.
+* Die folgenden Variablen wurden im EmailBuilder ohne Zeilenumbrüche dargestellt. Dieses Verhalten wurde behoben.
+** Widerrufsrecht im reinen Textformat
+** Datenschutzerklärung im reinen Textformat
+** Impressum im reinen Textformat
+** Widerrufsformular im reinen Textformat
+** Allgemeine Geschäftsbedingungen im reinen Textformat.
+* Ebenso wurden die Pfade der dazugehörigen twig expressions dieser Variablen geändert. Die neue Pfade lauten:
+**Widerrufsrecht im reinen Textformat: `globals.legalInformation.cancellationRights.plainNew | raw`
+**Datenschutzerklärung im reinen Textformat: `globals.legalInformation.privacyPolicy.plainNew | raw`
+**Impressum im reinen Textformat: `globals.legalInformation.legalDisclosure.plainNew | raw`
+**Widerrufsformular im reinen Textformat: `globals.legalInformation.withdrawalForm.plainNew | raw`
+**Allgemeine Geschäftsbedingungen im reinen Textformat: `globals.legalInformation.termsConditions.plainNew | raw`
 
 --
 
@@ -124,9 +195,13 @@ Folgende Plugins wurden in den letzten 7 Tagen in einer neuen Version auf plenty
 |===
 |Plugin-Name |Version |To-do
 
-|
-|
-|
+|link:https://marketplace.plentymarkets.com/energylabel_6160[Energie Label^]
+|1.7.1
+|-
+
+|link:https://marketplace.plentymarkets.com/galaxus_4788[Galaxus.ch^]
+|1.15.3
+|-
 
 |===
 
