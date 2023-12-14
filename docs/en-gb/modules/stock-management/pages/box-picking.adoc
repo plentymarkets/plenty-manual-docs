@@ -56,7 +56,7 @@ include::_includes:partial$rights-simple-mode.adoc[]
 
 Typically, the orders that are processed during box picking have specific xref:stock-management:box-picking.adoc#intable-source-status[source statuses] assigned to them. Which statuses are used for this depends on the individual workflow of your company.
 
-To use box picking without any errors and move the orders to the desired xref:stock-management:box-picking.adoc#intable-target-status[target status], you have to assign rights for displaying and editing those exact order statuses in the plentymarkets back end.
+To use box picking without any errors and move the orders to the desired xref:stock-management:box-picking.adoc#intable-target-status[target status], you have to assign rights for displaying and editing those exact order statuses in the plentysystems back end.
 
 [.instruction]
 Assigning rights for order statuses:
@@ -75,9 +75,9 @@ Assigning rights for order statuses:
 If you are working with the function for box picking for the first time, make sure that the following settings are carried out beforehand. Otherwise, errors will occur during the process.
 
 [#300]
-=== Configuring settings in the plentymarkets back end
+=== Configuring settings in the plentysystems back end
 
-Before you <<#800, use box picking>>, you need to carry a few settings one time only in your plentymarkets system. For example, these settings specify which boxes are available, which warehouse technicians are in charge of box picking and when the order and box should be unlinked.
+Before you <<#800, use box picking>>, you need to carry a few settings one time only in your system. For example, these settings specify which boxes are available, which warehouse technicians are in charge of box picking and when the order and box should be unlinked.
 
 [#400]
 ==== Making boxes available
@@ -89,7 +89,7 @@ Thus, boxes are essentially temporary storage locations. Just like regular stora
 [.instruction]
 Making boxes available:
 
-. Log into your plentymarkets system.
+. Log into your system.
 . Go to *Setup » Stock » Warehouse » [Select a warehouse] » Storage locations*.
 . Create new storage locations for box picking. Refer to the chapter on xref:stock-management:setting-up-a-warehouse.adoc#500[creating storage locations].
 . Set the storage location’s *Purpose* to *Box*.
@@ -98,7 +98,7 @@ Making boxes available:
 [#600]
 ==== Modifying the order process
 
-You can integrate box picking with plentyWarehouse into your company’s existing xref:automation:setting-up-processes.adoc#[order process]. To do so, add the following procedure and sub-procedure to your existing process in the plentymarkets back end.
+You can integrate box picking with plentyWarehouse into your company’s existing xref:automation:setting-up-processes.adoc#[order process]. To do so, add the following procedure and sub-procedure to your existing process in the plentysystems back end.
 
 [IMPORTANT]
 .Identifying the correct point in time for unlinking boxes from orders
@@ -122,7 +122,7 @@ Modifying the existing order process:
 
 | *Procedure: Order search*
 |Add the xref:automation:procedures.adoc#190[*Order search*] procedure to the xref:automation:work-steps.adoc#single-order-processing[Single order processing] work step. This procedure searches for individual orders, with the goal of processing them further afterward. +
-Open the procedure’s settings and set the *Mode* to *Box search*. This specifies that your warehouse technician will scan the box - meaning the temporary storage location - and then plentymarkets will load the corresponding order.
+Open the procedure’s settings and set the *Mode* to *Box search*. This specifies that your warehouse technician will scan the box - meaning the temporary storage location - and then plentysystems will load the corresponding order.
 
 | *Sub-procedure: Remove order from box*
 |Add the xref:automation:sub-procedures.adoc#195[Remove order from box] sub-procedure to the xref:automation:procedures.adoc#170[Order] procedure. This sub-procedure unlinks the order from the box. This makes the box available again, so that it can be re-used on the next trip through the warehouse.
@@ -146,7 +146,7 @@ Configuring the settings:
 . Carry out the settings. Pay attention to the explanations given in <<table-pw-settings-box-picking>>.
 
 [[table-pw-settings-box-picking]]
-.Configuring settings in the plentymarkets app
+.Configuring settings in the plentysystems app
 [cols="1,3"]
 |====
 |Setting |Explanation
@@ -154,7 +154,7 @@ Configuring the settings:
 2+^| *General settings* area
 | *Warehouse*
 |In which warehouse do you want to pick? When you use the function later, you'll see a list of items to pick. This list only includes items from orders that are stored in this warehouse. +
-*_Tip:_* You can manage the xref:stock-management:setting-up-a-warehouse.adoc#200[warehouses] displayed in this drop-down list in the *Setup » Stock » Warehouse* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:stock-management:setting-up-a-warehouse.adoc#200[warehouses] displayed in this drop-down list in the *Setup » Stock » Warehouse* menu in the back end of your system.
 
 |[#intable-default-boxes]*Default number of boxes*
 |Each box represents one order whose items are picked. Select the number of orders you typically pick at once. When you carry out box picking later, this number will be suggested by default. You can manually increase or decrease this number before starting box picking.
@@ -177,18 +177,18 @@ Configuring the settings:
 
 | [#intable-source-status]*Source status*
 |Which orders do you want to pick? When you use the function later, you'll see a list of items to pick. This list only includes items from orders that are currently in this status. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
 
 |[#intable-target-status]*Block status*
 |How do you want to flag orders that are currently being picked? As soon as the picking process is started in the app, orders are moved to this status so that it's not possible to accidentally start picking the same order twice. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
 
 | [#intable-success-status]*Success status*
 |Select the status into which orders should be moved after all the order items have been picked successfully, meaning the picking process is finished.
 
 | *Error status*
 |How should the app react if something goes wrong? If an error occurs while picking an order, for example because an item cannot be picked, the app will change the status of the order to whatever is selected here. Additionally, a note will be added to the order itself. This note contains more precise information on the item and on the storage location. Later, you can open the *Orders » Edit orders* menu to search for all orders in this status and then process these orders separately. +
-*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your plentymarkets system.
+*_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
 
 2+^| *Item registration* area
 
@@ -248,7 +248,7 @@ icon:map-signs[] *_Or:_* Or: Find the *Box picking* tile in the *Functions* area
 [#1000]
 === Finding the items in the warehouse
 
-plentymarkets automatically creates a list of all the items that are ready to be picked in the warehouse. Duplicate items are grouped together. For example, if the same item is included in two different orders, the warehouse employee will see that two copies of the item have to be picked.
+plentysystems automatically creates a list of all the items that are ready to be picked in the warehouse. Duplicate items are grouped together. For example, if the same item is included in two different orders, the warehouse employee will see that two copies of the item have to be picked.
 
 The list includes important information on the items that have to be picked. Warehouse employees do not only see how many copies of an item have to be picked, but are also shown the storage location and name of the item.
 
@@ -286,7 +286,7 @@ Picking items:
 *_Note:_* Every time you scan the item, the number is automatically increased by one.
 . Place the item in the corresponding box.
 . Scan the box that you have just picked or tap the green check mark to finish the picking process. +
-→ plentymarkets links the item to the box. The storage location of the item is changed to this temporary storage location. Your plentymarkets system keeps a record of this xref:stock-management:managing-stocks.adoc#1100[stock movement].
+→ plentysystems links the item to the box. The storage location of the item is changed to this temporary storage location. Your system keeps a record of this xref:stock-management:managing-stocks.adoc#1100[stock movement].
 . Repeat steps 1 through 4 for every order that contains the item. +
 → Once picking is finished for this item, the screen changes. You see the <<#1000, list of items>> again and you can begin picking the next item. +
 → Once you have finished picking all items, a final screen is displayed.
@@ -307,7 +307,7 @@ For such cases, the view on each item contains shortcuts which allow you to quic
 
 |[#intable-add-note]*Comment*
 |material:chat[]
-| Opens a window for entering an order note. Use this function to save a comment with each order that contains this item. Later, you can open those orders in the back end of your plentymarkets system and access the comment.
+| Opens a window for entering an order note. Use this function to save a comment with each order that contains this item. Later, you can open those orders in the back end of your system and access the comment.
 
 |[#intable-enter-quantity]*Enter quantity*
 |material:iso[]
@@ -319,7 +319,7 @@ For such cases, the view on each item contains shortcuts which allow you to quic
 
 |[#intable-remove-item]*Remove item*
 |material:cancel[]
-| Removes the item from the item list. Use this function in case the required item is not available at the storage location. Optionally, you can add a comment in this step. The comment will be saved as an order note with each order that contains this item. You can access these order notes in the back end of your plentymarkets system later. In addition, the status of the order will be changed to the error status.
+| Removes the item from the item list. Use this function in case the required item is not available at the storage location. Optionally, you can add a comment in this step. The comment will be saved as an order note with each order that contains this item. You can access these order notes in the back end of your system later. In addition, the status of the order will be changed to the error status.
 
 | *Item information*
 |material:info[]
@@ -346,7 +346,7 @@ Tap on material:done[] finish box picking.
 
 Once all of the boxes have been filled with items, the warehouse employee returns to the packing table. The first box is scanned and the corresponding order is loaded. The warehouse employee xref:automation:carrying-out-processes.adoc#[processes the order as usual]. Outgoing items are booked from the temporary storage location, meaning from the box.
 
-You can adjust your company’s existing xref:automation:setting-up-processes.adoc#[order process] so that the link between a box and an order is automatically removed as soon as outgoing items are booked for the order. To do so, add the following procedure and sub-procedure to your existing process in the plentymarkets back end.
+You can adjust your company’s existing xref:automation:setting-up-processes.adoc#[order process] so that the link between a box and an order is automatically removed as soon as outgoing items are booked for the order. To do so, add the following procedure and sub-procedure to your existing process in the plentysystems back end.
 
 [.instruction]
 Modifying the existing order process:
