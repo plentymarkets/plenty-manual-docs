@@ -34,6 +34,20 @@ Dokumenttypen wählen:
 *_Hinweis:_* Für alle übrigen Dokumenttypen werden automatisch die alten Dokumenteinstellungen verwendet.
 Dies gilt nicht für benutzerdefinierte Auftragsdokumente, da es sich dabei um einen neuen Dokumenttyp handelt.
 
+[#asynchrone-dokumentenerstellung]
+=== Asynchrone Dokumentenerstellung
+
+Mit dem Wechsel zum DocumentBuilder wird auch die neue Logik im Hintergrund aktiviert und die Dokumente werden asynchron erstellt. Die asymmetrische Logik ermöglicht es dir, das Plentysystem weiter zu nutzen, ohne dass du warten musst, bis die Erstellung der Dokumente abgeschlossen ist. +
+
+Die folgenden Anpassungen an den *Ereignisaktionen* und *Prozessen* sind erforderlich: +
+
+- *Für Ereignisaktionen*: Jede Dokumentaktion muss in *einem einzelnen Ereignis* erstellt werden und darf nicht in einem gruppiert werden. Vorhandene Ereignisaktionen mit mehr als einer Dokumentaktion sollten aufgeteilt werden. +
+Wenn z.B. eine Ereignisaktion für die Erstellung eines Dokuments und den Versand dieses Dokuments per E-Mail gibt, solltest du diese Ereignisaktion in zwei aufteilen. Dann wird die E-Mail nur versendet, wenn das Dokument verfügbar ist. +
+
+- *Für Prozessen*: Die Erstellung von Dokumenten wird durch die Subaktionen *Drucken*, *Speichern* und *Generieren* angestoßen. +
+Du solltest die Subaktion *Generieren* zu Beginn eines Prozesses verwenden, um die Dokumente später mit den Subaktionen *Speichern* und *Drucken* abrufen zu können.
+
+
 [#nummernkreise-festlegen]
 === Nummernkreise festlegen
 
