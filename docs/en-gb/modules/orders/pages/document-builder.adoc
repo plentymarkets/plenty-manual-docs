@@ -1,6 +1,6 @@
 = DocumentBuilder (Test phase)
 
-:keywords: documents template, document template, template, documents, templates, generate documents, documentbuilder, document builder, DocumentBuilder, documentBuilder, Widgets, code widget, widgets
+:keywords: documents template, document template, template, documents, templates, generate documents, documentbuilder, document builder, DocumentBuilder, documentBuilder, widgets, code widget, widgets
 :author: team-automation-docs
 :description: Learn how to use the DocumentBuilder to create templates for different documents and design them according to your wishes.
 
@@ -33,6 +33,19 @@ Select document types:
 → The DocumentBuilder is now activated for the selected document types. +
 *_Note:_*For all other document types, the old document settings are automatically used.
 This does not apply to custom order documents as this is a new document type.
+
+[#asynchronous-document-creation]
+=== Asynchronous document creation
+
+When you switch to DocumentBuilder, the new logic is also activated in the background and the documents are created asynchronously. The asynchronous logic allows you to continue using the plentysystem without having to wait until the document creation is complete. +
+
+The following adjustments to the *Event procedures* and *Processes* are required: +
+
+- *For event procedures*: Each document procedure must be created in *a single event* and not grouped into one. Existing event procedures with more than one document procedure should be splited. +
+For example, if there is one event action for generating a document and sending this document by email, you should separate this event action in two. The e-mail is then only sent when the document is generated. +
+
+- *For processes*: The creation of documents is triggered by the sub-procedures: *Print*, *Save* and *Generate*. +
+You should use the *Generate* sub-procedure at the start of a process in order to be able to retrieve the documents later using the *Save* and *Print* sub-procedures.
 
 [#defining-number-ranges]
 === Defining number ranges
