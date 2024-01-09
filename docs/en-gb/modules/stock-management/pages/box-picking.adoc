@@ -39,6 +39,12 @@ Once all of the boxes are filled with items, the warehouse employee returns to t
 First, decide in which warehouses your warehouse staff should be able to use the mobile box picking function. Then, carry out the <<#200, one-time settings>> individually for each desired warehouse.
 ====
 
+[TIP]
+.Excluding items from box picking
+====
+If needed, you can exclude specific items from box picking. For example, this might make sense in case it is not possible to place labels with barcodes on those items. Activate the option *Exclude from pick list* in the *Item » Item » [Open variation] » Element: Shipping » Drop-down list: Picking* menu. Take a look at our xref:item:directory.adoc#intable-item-picking-settings[additional information on this option].
+====
+
 [#500]
 == Assigning rights for box picking
 
@@ -75,7 +81,7 @@ Assigning rights for order statuses:
 If you are working with the function for box picking for the first time, make sure that the following settings are carried out beforehand. Otherwise, errors will occur during the process.
 
 [#300]
-=== Configuring settings in the plentysystems back end
+=== Carrying out settings in the plentysystems back end
 
 Before you <<#800, use box picking>>, you need to carry a few settings one time only in your system. For example, these settings specify which boxes are available, which warehouse technicians are in charge of box picking and when the order and box should be unlinked.
 
@@ -146,7 +152,7 @@ Configuring the settings:
 . Carry out the settings. Pay attention to the explanations given in <<table-pw-settings-box-picking>>.
 
 [[table-pw-settings-box-picking]]
-.Configuring settings in the plentysystems app
+.Carrying out settings in the plentyWarehouse app
 [cols="1,3"]
 |====
 |Setting |Explanation
@@ -171,7 +177,11 @@ Configuring the settings:
 |This setting determines in more detail which orders will be sorted for processing them with the box picking function. Select one of the following options: +
 *Order ID* = Orders are sorted beginning with the lowest order ID. +
 *Creation date* = Orders are sorted beginning with the earliest creation date. +
-*Paid on* = Orders are sorted beginning with the earliest date of incoming payment. *_Note:_* As usual, make sure that you only prepare shipments for orders that have been fully paid for.
+*Paid on* = Orders are sorted beginning with the earliest date of incoming payment. *_Note:_* As usual, make sure that you only prepare shipments for orders that have been fully paid for. +
+*Priority* = Orders are sorted beginning with the highest priority.
+
+| [#intable-item-name-prio]*Prioritisation of item names*
+|Tap on this option to determine the order in which the components of item names are displayed while you are using the function. Tap and hold (material:drag_handle[]) for each component to adjust the order of the displayed elements.
 
 2+^| *Status* area
 
@@ -180,11 +190,11 @@ Configuring the settings:
 *_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
 
 |[#intable-target-status]*Block status*
-|How do you want to flag orders that are currently being picked? As soon as the picking process is started in the app, orders are moved to this status so that it's not possible to accidentally start picking the same order twice. +
+|How do you want to flag orders that are currently being picked? As soon as the picking process with plentyWarehouse has been started, orders are automatically moved to this status. This way, it's not possible to accidentally start picking the same order twice. +
 *_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
 
-| [#intable-success-status]*Success status*
-|Select the status into which orders should be moved after all the order items have been picked successfully, meaning the picking process is finished.
+|[#intable-success-status]*Success status*
+|Select the status into which orders are moved after they have been successfully processed in box picking, meaning all required items are picked.
 
 | *Error status*
 |How should the app react if something goes wrong? If an error occurs while picking an order, for example because an item cannot be picked, the app will change the status of the order to whatever is selected here. Additionally, a note will be added to the order itself. This note contains more precise information on the item and on the storage location. Later, you can open the *Orders » Edit orders* menu to search for all orders in this status and then process these orders separately. +
@@ -248,7 +258,7 @@ icon:map-signs[] *_Or:_* Or: Find the *Box picking* tile in the *Functions* area
 [#1000]
 === Finding the items in the warehouse
 
-plentysystems automatically creates a list of all the items that are ready to be picked in the warehouse. Duplicate items are grouped together. For example, if the same item is included in two different orders, the warehouse employee will see that two copies of the item have to be picked.
+plentysystems automatically creates a list of all the items that are ready to be picked in the warehouse. In this overview, duplicate items are grouped together. For example, if the same item is included in two different orders, the warehouse employee will see that two copies of the item have to be picked.
 
 The list includes important information on the items that have to be picked. Warehouse employees do not only see how many copies of an item have to be picked, but are also shown the storage location and name of the item.
 
@@ -319,7 +329,7 @@ For such cases, the view on each item contains shortcuts which allow you to quic
 
 |[#intable-remove-item]*Remove item*
 |material:cancel[]
-| Removes the item from the item list. Use this function in case the required item is not available at the storage location. Optionally, you can add a comment in this step. The comment will be saved as an order note with each order that contains this item. You can access these order notes in the back end of your system later. In addition, the status of the order will be changed to the error status.
+| Removes the item from the item list. Use this function in case the required item is not available at the storage location. Optionally, you can add a comment in this step. The comment will be saved as an order note with each order that contains this item. You can access these order notes in the plentysystems back end later. In addition, the status of the order will be changed to the error status.
 
 | *Item information*
 |material:info[]
