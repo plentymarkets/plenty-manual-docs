@@ -18,7 +18,7 @@ Before your warehouse staff can register incoming items in plentyWarehouse, make
 :right-one: pass:quotes[*plentyWarehouse > Incoming items > Incoming items > Edit*]
 :right-two: pass:quotes[*plentyWarehouse > Order information > See*]
 :right-three: pass:quotes[*plentyWarehouse > Incoming items > Purchase price > See*]
-:right-three: pass:quotes[*plentyWarehouse > Incoming items > Purchase price > Edit*]
+:right-four: pass:quotes[*plentyWarehouse > Incoming items > Purchase price > Edit*]
 :right-five: pass:quotes[*plentyWarehouse > Incoming items > Procurement costs > See*]
 :right-six: pass:quotes[*plentyWarehouse > Incoming items > Procurement costs > Edit*]
 
@@ -79,6 +79,20 @@ The settings menu opens.
 | *Error status*
 |Select a status to which reorders should be moved in case errors occur while incoming items are booked. This way, you can deal with such reorders separately later. In case you have not yet created error statuses for this use case, refer to the xref:orders:managing-orders.adoc#1200[Managing orders] page of the manual.
 
+| [#intable-incoming-items-receipt]*Create incoming items receipt*
+|Select if an incoming items receipt should be created automatically and saved in the plentysystems back end as soon as incoming items have been booked. +
+*Activated* (icon:toggle-on[role="green"]) = An incoming items receipt is created. For further information, refer to the chapter <<#400, Creating an incoming items receipt>> below.
+
+| *Assignment of item suppliers*
+|Should the supplier saved for the variation in the plentysystems back end be selected automatically when booking incoming items? You can select one of three options: +
+*No automatic assignment* = The supplier saved for the item in the plentysystems back end is *not* selected automatically. +
+*Unique automatic assignment* = If no supplier is selected while booking incoming items using he app and only one supplier is saved for the item in the plentysystems back end, this supplier is selected automatically. +
+*Assignment based on supplier ID* If no supplier is selected while booking incoming items using he app and several suppliers are saved for the item in the plentysystems back end, the supplier with the lowest ID is selected automatically.
+
+| [#intable-incoming-items-reason]*Reason for incoming items*
+|Select a reason for incoming items that is then preselected by default every time you book incoming items in the app. +
+*_Note:_* The reasons for incoming items themselves are determined by the system and cannot be changed.
+
 2+^| *Target storage location* area
 
 | *Storage location search fields*
@@ -121,7 +135,7 @@ The settings menu opens.
 |Tap on the search field to which the cursor jumps automatically when the menu is opened. If no search field is selected, you have to tap on a search field every time before you can enter a search value.
 
 | [#intable-item-name-prio]*Prioritisation of item names*
-|Tap on this option to determine the order in which the components of item names are displayed. Tap and hold (material:drag_handle[]) for each component to adjust the order of the displayed elements.
+|Tap on this option to determine the order in which the components of item names are displayed while you are using the function. Tap and hold (material:drag_handle[]) for each component to adjust the order of the displayed elements.
 
 2+^| *Purchase price* area
 
@@ -142,6 +156,10 @@ The settings menu opens.
 *No limitations* = Items can either be registered by scanning their barcode or by selecting them manually. +
 *Limit item search* = Items without barcodes can be registered via the item search. Items with barcodes _must_ be registered by scanning the barcode on the item label. +
 *Mandatory item scan* = All items _must_ be registered by scanning the barcode on the item label. It is not possible to select items manually via the search results.
+
+| *Number of items to scan individually*
+|If you are registering items via scanning them, you can use this setting to determine how many variations you have to scan individually until the available total quantity is inserted automatically in the field for entering the quantity. +
+*_Example:_* If you enter the number *5* in the quantity field, the total quantity is inserted automatically after you have scanned the variation five times.
 
 2+^| [#intable-reorder-search-options]*Reorder* area
 
@@ -203,6 +221,10 @@ a| image:stock-management:incoming_items_list_actions.png[width=350]
 | *Open action menu*
 |Displays the symbols for all available actions for the whole list of incoming items.
 
+|material:note_alt[role="darkGrey"]
+| *Select reason for incoming items*
+|Opens a list of possible reasons for incoming items so that the <<#intable-incoming-items-reason, preselected default reason>> can be changed.
+
 |material:pin[role="darkGrey"]
 | *Register serial number*
 |Opens the view for registering a serial number for an individual item.
@@ -244,7 +266,6 @@ a| image:stock-management:incoming_items_list_actions.png[width=350]
 |Finishes the current process of booking incoming items.
 
 |===
-
 
 [#200]
 == Booking incoming items
@@ -532,3 +553,18 @@ Adding procurement costs:
 . Enter the procurement costs in the respective field.
 . Tap on material:done[role="red"]. +
 → The procurement costs are saved.
+
+[#400]
+== Creating an incoming items receipt
+
+To create receipts for incoming items, three conditions have to be met: 
+
+* The incoming items process in question has to be booked using the plentyWarehouse app. It is *not possible* to create incoming item receipts for items that are booked in via the plentysystems back end or using the plentymarkets app. 
+
+* Incoming items receipts are generated based on the xref:orders:document-builder.adoc#[DocumentBuilder]. Thus, you need to create a template for the document type *Incoming items receipt* beforehand. This step is carried out in the *Setup » Documents » DocumentBuilder* menu in the plentysystems back end. For instructions on how to create DocumentBuilder templates, please refer to xref:orders:documentbuilder.adoc#create-template[this chapter].
+
+* The option <<#intable-incoming-items-receipt, Create incoming items receipt>> has to be activated in the *Settings » Incoming items* menu of the plentyWarehouse app.
+
+And that’s it! If all three conditions are met, an incoming items receipt is created automatically every time incoming items are booked. It does not matter if you are booking incoming items <<#300, with>> or <<#200, without>> an assignment to a reorder.
+
+As soon as document generation is finished, you can find the document in the *Data » Documents » Document archive* menu and download it, if needed.
