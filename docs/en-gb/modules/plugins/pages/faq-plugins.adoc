@@ -1,12 +1,12 @@
 = FAQ: Plugins
 :author: team-plugin-core
 :keywords: plugin, addon, extension
-:description: This page provides answers to the most frequently asked questions around plugins.
+:description: On this page you find the answers to all frequently asked questions regarding plugins.
 :id: TMNH3DV
 
 This page contains frequently asked questions about plugins.
 
-[#adding-plugins-system]
+[#add-plugins-to-system]
 == Adding plugins to the system
 
 This section describes solutions to issues that frequently occur when adding plugins to your system.
@@ -14,30 +14,30 @@ This section describes solutions to issues that frequently occur when adding plu
 [.collapseBox]
 .I've purchased a plugin on plentyMarketplace, but it doesn't appear in my list of uninstalled plugins. Where can I find it?
 --
-plentymarkets uses a cache for purchased plugins. If you've purchased a plugin and it doesn't appear in the list of plugins yet, wait a few minutes. The list of plugins is updated every 5{nbsp}minutes.
+plentysystems uses a cache for purchased plugins. If you've purchased a plugin and it doesn't appear in the list of plugins yet, wait a few minutes. The list of plugins is updated every 5 minutes.
 --
 
 [.collapseBox]
-.I get an error message when I try to add a Git repository to my system. What can I do?
+.I get an error message when I try to add a Git repository to my system.  What can I do?
 --
-First, check your login details and ensure that the branch you entered really exists. If the error still occurs, your plugin JSON may be invalid. plentymarkets checks the plugin JSON when adding repositories to the system. Compare your plugin JSON with the requirements specified in our link:https://developers.plentymarkets.com/dev-doc/plugin-information[developer documentation^].
+ First, check your login details and ensure that the branch you entered really exists. If the error still occurs, your plugin JSON may be invalid. plentysystems checks the plugin JSON when adding repositories to the system. Compare your plugin JSON with the requirements specified in our link:https://developers.plentymarkets.com/dev-doc/plugin-information[developer documentation^].
 --
 
-[#installing-plugins]
-== Installing plugins
+[#install-plugins]
+== Installing the plugins
 
 This sections answers questions regarding the use of plugins.
 
 [.collapseBox]
 .Why does my plugin not work?
 --
-Make sure that you've successfully deployed the plugin. You can tell that the plugin has been deployed if the *Deployed* column shows a version number. If there is no version number, deploy the plugin set (icon:save[role=green]).
+Make sure that you've successfully deployed the plugin. You can tell that the plugin has been deployed if the *Deployed* column shows a version number If there is no version number, deploy the plugin set (icon:save[role=green]).
 
 image::plugins:plugin-active-version.png[width=640]
 --
 
 [.collapseBox]
-.I've deployed the plugin set, but there's no deployed version displayed. What's the problem?
+.I've deployed the plugin set, but there's no deployed version displayed. What's the problem? What is the problem?
 --
 There may be multiple causes. First, it's possible that deployment failed. You can see if the deployment process was successful by checking the timestamp in the plugin overview:
 
@@ -45,17 +45,34 @@ image::plugins:plugin-set-timestamp.png[width=640]
 --
 
 [.collapseBox]
-.The deployment has failed and the details say "Plugin MyPlugin requires xy.:" What does this mean?
+.The deployment has failed and the details say "Plugin MyPlugin requires xy.:". What does this mean?
 --
-This entry means the plugin requires another plugin called _xy_ to run properly. You have to install this second plugin in your plugin set before you can deploy _MyPlugin_.
+This entry means the plugin requires another plugin called _xy_ to run properly. .
+
+. You have to install this second plugin in your plugin set before you can deploy MyPlugin. +
+*_Note:If the error message includes a plugin version, install the plugin in the compatible version.
+. Deploy the plugin set.
 --
 
 [.collapseBox]
-.There's neither a timestamp nor an error message. What do I do now?
+.There’s neither a timestamp nor an error message. What now?
 --
-Confirm that your DNS settings are correct and you have a valid SSL certificate.
+Confirm that your DNS settings are correct and you have a valid SSL certificate. 
 
-For further information on ordering SSL certificates, refer to the page xref:business-decisions:ssl-certificate.adoc#[SSL certificates].
+For further information on DNS settings, refer to the page xref:business-entscheidungen:dns-self-help.adoc#[DNS self-help]. +
+For further information on ordering SSL certificates, refer to the page xref:business-entscheidungen:ssl-certificate.adoc#[SSL certificates].
+--
+
+[.collapseBox]
+.Do plugins that are relevant for different clients have to be installed in multiple plugin sets? 
+--
+This depends on the kind of plugin. Plugins that communicate with routes via REST-API (f.e. PayPal, DHL) always have to be installed in the plugin set of the default client, because this client makes the REST-API calls. +
+
+If you want to use this plugin additionally in another client, you have to install the plugin in the plugin set of the respective client, if you don't, you can't use it in the online shop. +
+
+Market places and plugins that enhance the back end only have to be installed in the default client. If the plugin enhances the back end, you have to link the backend plugin set with the system. +
+
+Usually, you will find all information about the installation of the plugin within the user guide of the plugin.  +
 --
 
 [#using-plugins]
@@ -78,7 +95,11 @@ Check that you've selected the plugin set where you've installed the plugin as x
 [.collapseBox]
 .I've checked all the previous points, but the plugin still doesn't work properly. Is there anything else I can do?
 --
-It's possible that the plugin wasn't installed completely. You can re-install the plugin by repairing it. To repair the plugin, open the plugin set. Click on more actions ((material:more_vert[])). Then click on material:construction[] *Repair* button and confirm the query.
+It's possible that the plugin wasn't installed completely. You can re-install the plugin by repairing it. Proceed as follows to repair a plugin:
+
+. Open the plugin set.
+. Click on more actions (material:more_vert[]).
+. Then click on material:construction[] *Repair* and confirm the query.
 
 All your settings are retained when repairing a plugin.
 --
