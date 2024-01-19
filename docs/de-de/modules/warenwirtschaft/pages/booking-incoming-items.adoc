@@ -79,6 +79,20 @@ Einstellungen zum Wareneingang vornehmen:
 | *Fehlerstatus*
 |Wähle einen Status aus, in den Nachbestellungen verschoben werden sollen, falls es bei der Buchung des Wareneingangs zu Fehlern kommt. So kannst du diese Nachbestellungen später gesondert abarbeiten. Falls du noch keinen Fehlerstatus für diesen Anwendungsfall angelegt hast, findest du weitere Informationen auf der Handbuchseite xref:auftraege:auftraege-verwalten.adoc#1200[Aufträge verwalten].
 
+| [#intable-incoming-items-receipt]*Wareneingangsbeleg erstellen*
+|Wähle, ob nach Abschluss der Wareneingangsbuchung automatisch ein Wareneingangsbeleg erzeugt und im plentysystems Backend gespeichert werden soll. +
+*Aktiviert* icon:toggle-on[role="green"] = Es wird ein Wareneingangsbeleg erzeugt. Weitere Informationen findest du weiter unten im Kapitel <<#400, Wareneingangsbeleg erstellen>>.
+
+| *Lieferantenzuordnung für Artikel*
+|Soll bei der Buchung des Wareneingangs automatisch der Lieferant ausgewählt werden, der im plentysystems Backend für den Artikel oder die Variante hinterlegt wird? Du kannst aus insgesamt drei Optionen wählen: +
+*Keine automatische Zuordnung* = Der Lieferant, der im plentysystems Backend für den Artikel gespeichert ist, wird *nicht* automatisch verwendet. +
+*Eindeutige automatische Zuordnung* = Wenn während der Buchung des Wareneingangs mithilfe der App kein Lieferant ausgewählt wird und im plentysystems Backend nur ein einziger Lieferant für den Artikel hinterlegt ist, wird dieser Lieferant automatisch gesetzt. +
+*Zuordnung nach Lieferanten-ID* = Wenn während der Buchung des Wareneingangs mithilfe der App kein Lieferant ausgewählt wird und im plentysystems Backend mehrere Lieferanten für den Artikel gespeichert sind, wird der Lieferant mit der niedrigsten ID automatisch gesetzt.
+
+| [#intable-incoming-items-reason]*Grund für den Wareneingang*
+|Wähle einen Wareneingangsgrund aus, der standardmäßig für jeden Wareneingang vorausgewählt wird, den du mit der App buchst. +
+*_Hinweis:_* Die Wareneingangsgründe selbst sind vom System vorgegeben und können nicht erweitert werden.
+
 2+^| Bereich *Ziellagerort*
 
 | *Lagerortsuchfelder*
@@ -120,6 +134,9 @@ Einstellungen zum Wareneingang vornehmen:
 | *Fokus auf Artikelsuchfeld*
 |Tippe auf das Suchfeld, in das der Cursor beim Öffnen des Menüs automatisch springen soll. Wenn du kein Suchfeld wählst, musst du bei der Suche erst in ein Feld tippen, bevor du den Suchwert eingeben kannst.
 
+| [#intable-item-name-prio]*Priorisierung von Artikelnamen*
+|Tippe auf diese Option, um festzulegen, in welcher Reihenfolge die Bestandteile des Artikelnamens angezeigt werden, während du die Funktion verwendest. Tippe und halte (material:drag_handle[]) für jeden Bestandteil, um die Reihenfolge der angezeigten Bestandteile anzupassen.
+
 2+^| Bereich *Einkaufspreis*
 
 | *Einkaufspreis anzeigen*
@@ -139,6 +156,10 @@ Einstellungen zum Wareneingang vornehmen:
 *Keine Einschränkungen* = Artikel können entweder durch Scannen des Barcodes oder per manueller Auswahl hinzugefügt werden. +
 *Artikelsuche einschränken* = Artikel ohne Barcode können über die Artikelsuche erfasst werden. Artikel mit Barcode _müssen_ durch Scannen des Barcodes auf dem Artikeletikett erfasst werden. +
 *Verpflichtender Artikel-Scan* = Alle Artikel _müssen_ durch Scannen des Barcodes auf dem Artikeletikett erfasst werden. Eine manuelle Auswahl von Artikeln über die Suche ist nicht möglich.
+
+| *Einzelerfassung bis Menge*
+|Wenn du Artikel mit einem Scanner erfasst, kannst du mit dieser Einstellung bestimmen, ab wie vielen gescannten Exemplaren einer Variante automatisch die vorhandene Gesamtmenge in das Mengenfeld eingetragen wird. +
+*_Beispiel:_* Wenn du die Zahl *5* ins Mengenfeld eingibst, wird nach dem fünften Scannen der Variante automatisch die Gesamtmenge eingetragen.
 
 2+^| Bereich [#intable-reorder-search-options]*Nachbestellung*
 
@@ -200,6 +221,10 @@ a| image:warenwirtschaft:incoming_items_list_actions.png[width=350]
 | *Aktionsmenü öffnen*
 |Zeigt die Symbole aller verfügbaren Aktionen für den gesamten Wareneingang an.
 
+|material:note_alt[role="darkGrey"]
+| *Wareneingangsgrund wählen*
+|Öffnet eine Liste von möglichen Wareneingangsgründen, sodass der <<#intable-incoming-items-reason, vorausgewählte Standardgrund>> angepasst werden kann.
+
 |material:pin[role="darkGrey"]
 | *Seriennummer erfassen*
 |Öffnet die Ansicht zur Erfassung einer Seriennummer für einen einzelnen Artikel.
@@ -241,7 +266,6 @@ a| image:warenwirtschaft:incoming_items_list_actions.png[width=350]
 |Schließt den aktuellen Wareneingang ab.
 
 |===
-
 
 [#200]
 == Einfachen Wareneingang buchen
@@ -529,3 +553,18 @@ Warenbezugskosten hinzufügen:
 . Gib die Warenbezugskosten im jeweils passenden Feld ein.
 . Tippe auf material:done[role="red"]. +
 → Die Warenbezugskosten werden gespeichert.
+
+[#400]
+== Wareneingangsbeleg erstellen
+
+Um Wareneingangsbelege zu erstellen, müssen drei Voraussetzungen erfüllt sein: 
+
+* Der betreffende Wareneingang muss mittels der plentyWarehouse App gebucht worden sein. Für Wareneingänge, die über die plentymarkets App oder das plentysystems Backend gebucht werden, können *keine* Wareneingangsbelege erstellt werden. 
+
+* Wareneingangsbelege werden auf Basis des xref:auftraege:document-builder.adoc#[DocumentBuilder] erstellt. Deshalb musst du vorab eine Vorlage für den Dokumententyp *Wareneingangsbeleg* erstellen. Das erledigst du im Menü *Einrichtung » Dokumente » DocumentBuilder* im plentysystems Backend. Wie du Vorlagen für den DocumentBuilder erstellst, ist xref:auftraege:documentbuilder.adoc#vorlage-erstellen[in diesem Kapitel] beschrieben.
+
+* Im Menü *Einstellungen » Wareneingang* der plentyWarehouse App muss die Option <<#intable-incoming-items-receipt, Wareneingangsbeleg erstellen>> aktiviert sein.
+
+Das war's auch schon! Wenn alle drei Voraussetzungen erfüllt sind, wird nach Beendigung einer Wareneingangsbuchung automatisch der Wareneingangsbeleg erzeugt. Dabei macht es keinen Unterschied, ob du einen Wareneingang <<#300, mit>> oder <<#200, ohne>> Bezug zu einer Nachbestellung buchst.
+
+Sobald die Generierung des Wareneingangsbelegs abgeschlossen ist, findest du das Dokument im Menü *Daten » Dokumente » Dokumentenarchiv*, wo du es bei Bedarf auch herunterladen kannst.
