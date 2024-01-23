@@ -162,13 +162,13 @@ Configuring the settings:
 |In which warehouse do you want to pick? When you use the function later, you'll see a list of items to pick. This list only includes items from orders that are stored in this warehouse. +
 *_Tip:_* You can manage the xref:stock-management:setting-up-a-warehouse.adoc#200[warehouses] displayed in this drop-down list in the *Setup » Stock » Warehouse* menu in the back end of your system.
 
-|[#intable-default-boxes]*Default number of boxes*
+| [#intable-default-boxes]*Default number of boxes*
 |Each box represents one order whose items are picked. Select the number of orders you typically pick at once. When you carry out box picking later, this number will be suggested by default. You can manually increase or decrease this number before starting box picking.
 
 | *Display confirmation dialogue before redistribution*
 |If you activate this option, the app will ask you if you really want to put an item into the box every time you pick an item during box picking. You can only proceed with the next item after confirming the dialogue.
 
-|[#intable-storage-location-scan]*Mandatory scan of storage location*
+| [#intable-storage-location-scan]*Mandatory scan of storage location*
 |How do you want to select storage locations and boxes for box picking? +
 *Activated* (icon:toggle-on[role="green"]) = Storage locations and boxes _have to be_ selected by scanning them so that items can be booked afterwards. +
 *Deactivated* (icon:toggle-off[role="darkGrey"]) = Storage locations and boxes can be selected manually by tapping on them in the app.
@@ -180,6 +180,15 @@ Configuring the settings:
 *Paid on* = Orders are sorted beginning with the earliest date of incoming payment. *_Note:_* As usual, make sure that you only prepare shipments for orders that have been fully paid for. +
 *Priority* = Orders are sorted beginning with the highest priority.
 
+|[#intable-box-link]*Box assignment*
+|Use this setting to determine the point at which you want to link the orders for box picking with the required boxes. +
+*During picking*: This option is activated by default. This means that you <<#1100, link  boxes>> during the picking process with orders by scanning the required box. +
+*Preselection*: Activate this option to carry out the assignment of orders to boxes before the start of the picking process. For further information on how this works, refer to the chapter <<#1110, Linking boxes in advance>>. 
+
+| [#intable-automatic-link]*Enable automatic linking*
+|Activate this setting to automatically link boxes with orders. For further information, refer to the <<#1110, Adding a comment>> chapter. +
+*_Important:_* This setting is only available if you have selected the option *Preselection* for the setting <<#intable-box-link, Box assignment>>.  
+
 | [#intable-item-name-prio]*Prioritisation of item names*
 |Tap on this option to determine the order in which the components of item names are displayed while you are using the function. Tap and hold (material:drag_handle[]) for each component to adjust the order of the displayed elements.
 
@@ -189,11 +198,11 @@ Configuring the settings:
 |Which orders do you want to pick? When you use the function later, you'll see a list of items to pick. This list only includes items from orders that are currently in this status. +
 *_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
 
-|[#intable-target-status]*Block status*
+| [#intable-target-status]*Block status*
 |How do you want to flag orders that are currently being picked? As soon as the picking process with plentyWarehouse has been started, orders are automatically moved to this status. This way, it's not possible to accidentally start picking the same order twice. +
 *_Tip:_* You can manage the xref:orders:managing-orders.adoc#1200[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
 
-|[#intable-success-status]*Success status*
+| [#intable-success-status]*Success status*
 |Select the status into which orders are moved after they have been successfully processed in box picking, meaning all required items are picked.
 
 | *Error status*
@@ -202,7 +211,7 @@ Configuring the settings:
 
 2+^| *Item registration* area
 
-|[#intable-itemscan]*Mandatory item scan*
+| [#intable-itemscan]*Mandatory item scan*
 |Use this option to determine which rules should apply when registering items during box picking. +
 *Activated* (icon:toggle-on[role="green"]) = All items _have to be_ scanned via their label to be registered for box picking. It is not possible to select items manually via the search results. +
 *Deactivated* (icon:toggle-off[role="darkGrey"]) = Items can either be registered by scanning them or by selecting them manually.
@@ -283,6 +292,26 @@ Which box do you want to temporarily store this item in? Scan an empty box or ta
 Some orders contain more than just one item. If you've already scanned the first item and linked it to a box, then you won't need to link the second item with a new box too. Instead, you'll continue using the box that you've already linked.
 ====
 
+[#1110]
+=== Linking boxes in advance
+
+Would you rather link all orders to boxes before starting box picking instead of proceeding <<#1100, as described above>>?
+
+In that case, begin by making sure that you have selected the option *Preselection* for the setting <<#intable-box-link, *Box assignment* setting in the *Settings » Box picking* menu of the plentyWarehouse app. As soon as this setting has been activated, your workflow changes as follows:
+
+[.instruction]
+Linking boxes in advance:
+
+. xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
+. Tap on the menu icon (icon:bars[role="darkGrey"]) in the top left corner. +
+icon:map-signs[] *_Or:_* Or: Find the *Box picking* tile in the *Functions* area on the dashboard.
+. Tap on *Box picking* (image:stock-management:icon_box-picking.png[width=24, height=24]). +
+→ The start screen is displayed.
+. . As usual, enter the number of orders to be picked and then tap on *Start*.
+. In the view that is now displayed, you can register boxes by scanning them or by manually selecting them from the list. Repeat this step until the number of boxes equals the number of previously determined orders. +
+*_Note:_* If you have also activated the option <<#intable-automatic-link, *Enable automatic linking*>> in the *Settings » Box picking* menu, a button is displayed at the bottom of the screen during this step. Use this button to link all boxes to orders automatically. If this option is deactivated, each box has to be assigned individually.
+. Tap on *Start* to begin picking. Now, it is no longer necessary to link orders and boxes during the actual picking process. All the following steps of the box picking process remain the same.
+
 [#1200]
 === Picking items
 
@@ -315,11 +344,11 @@ For such cases, the view on each item contains shortcuts which allow you to quic
 |====
 |Element |Symbol |Explanation
 
-|[#intable-add-note]*Comment*
+| [#intable-add-note]*Comment*
 |material:chat[]
 | Opens a window for entering an order note. Use this function to save a comment with each order that contains this item. Later, you can open those orders in the back end of your system and access the comment.
 
-|[#intable-enter-quantity]*Enter quantity*
+| [#intable-enter-quantity]*Enter quantity*
 |material:iso[]
 | Opens a window for entering the item quantity.
 
@@ -327,7 +356,7 @@ For such cases, the view on each item contains shortcuts which allow you to quic
 |material:low_priority[]
 | Moves the item to the end of the pick list. This function if useful if you want to skip an item for the time being, for example if the item is currently not available on the indicated storage location.
 
-|[#intable-remove-item]*Remove item*
+| [#intable-remove-item]*Remove item*
 |material:cancel[]
 | Removes the item from the item list. Use this function in case the required item is not available at the storage location. Optionally, you can add a comment in this step. The comment will be saved as an order note with each order that contains this item. You can access these order notes in the plentysystems back end later. In addition, the status of the order will be changed to the error status.
 
