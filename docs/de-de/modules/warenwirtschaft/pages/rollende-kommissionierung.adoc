@@ -162,13 +162,13 @@ Einstellungen vornehmen:
 |In welchem Lager möchtest du picken? Wenn du die rollende Kommissionierung später nutzt, werden nur Aufträge, die sich in diesem Lager befinden, auf deiner Artikelliste angezeigt. +
 *_Tipp:_* Die xref:warenwirtschaft:lager-einrichten.adoc#200[Lager] in dieser Dropdown-Liste verwaltest du im Backend deines Systems unter *Einrichtung » Waren » Lager*.
 
-|[#intable-default-boxes]*Standardanzahl Boxen*
+| [#intable-default-boxes]*Standardanzahl Boxen*
 |Eine Box steht für einen Auftrag, der kommissioniert wird. Wähle hier aus, wie viele Aufträge du standardmäßig auf einmal picken möchtest. Wenn du die rollende Kommissionierung später nutzt, ist die hier ausgewählte Anzahl voreingestellt. Bevor du mit der rollenden Kommissionierung beginnst, kannst du diese Anzahl manuell erhöhen oder verringern.
 
 | *Bestätigungsdialog vor Umbuchung anzeigen*
 |Wenn du diese Option aktivierst, wirst du bei jedem Artikel, den du während der rollenden Kommissionierung pickst, gefragt, ob der Artikel wirklich in die Box gelegt werden soll. Du kannst erst mit dem nächsten Artikel fortfahren, wenn du diese Abfrage bestätigt hast.
 
-|[#intable-storage-location-scan]*Lagerort-Scan verpflichtend*
+| [#intable-storage-location-scan]*Lagerort-Scan verpflichtend*
 |Wie sollen Lagerorte und Boxen für die rollende Kommissionierung ausgewählt werden? +
 *Aktiviert* (icon:toggle-on[role="green"]) = Lagerorte und Boxen _müssen_ per Scan ausgewählt werden, damit anschließend Artikel gebucht werden können. +
 *Nicht aktiviert* (icon:toggle-off[role="darkGrey"]) = Lagerorte und Boxen können manuell ausgewählt werden, indem du in der App auf sie tippst.
@@ -180,6 +180,15 @@ Einstellungen vornehmen:
 *Zahlungseingang* = Aufträge werden beginnend mit dem ältesten Zahlungsdatum sortiert. *_Hinweis:_* Stelle wie gewohnt sicher, dass du nur Aufträge kommissionierst und somit für den Versand vorbereitest, die vollständig bezahlt sind. +
 *Priorität* = Aufträge werden beginnend mit der höchsten Priorität sortiert.
 
+|[#intable-box-link]*Verknüpfung von Boxen*
+|Mithilfe dieser Einstellung legst du den Zeitpunkt fest, an dem du die Aufträge für die rollende Kommissionierung mit den benötigten Boxen verknüpfst. +
+*Während der Kommissionierung*: Diese Option ist standardmäßig aktiviert. Somit <<#1100, verknüpfst du Boxen>> während des Kommissioniervorgangs mit Aufträgen, indem du die benötigste Box scannst. +
+*Vorauswahl*: Aktiviere diese Option, um bereits vor dem Start des Kommissioniervorgangs die Zuordnung zwischen Aufträgen und Boxen vorzunehmen. Wie das abläuft, wird im Kapitel <<#1110, Boxen im Voraus verknüpfen>> beschrieben. 
+
+| [#intable-automatic-link]*Automatische Verknüpfung ermöglichen*
+|Aktiviere diese Einstellung, um Boxen automatisch mit Aufträgen zu verknüpfen. Weitere Informationen findest du im Kapitel <<#1110, Boxen im Voraus verknüpfen>>. +
+*_Wichtig:_* Diese Einstellung ist nur verfügbar, wenn du für die Einstellung <<#intable-box-link, Verknüpfung von Boxen>> die Option *Vorauswahl* gewählt hast.  
+
 | [#intable-item-name-prio]*Priorisierung von Artikelnamen*
 |Tippe auf diese Option, um festzulegen, in welcher Reihenfolge die Bestandteile des Artikelnamens angezeigt werden, während du die Funktion verwendest. Tippe und halte (material:drag_handle[]) für jeden Bestandteil, um die Reihenfolge der angezeigten Bestandteile anzupassen.
 
@@ -189,11 +198,11 @@ Einstellungen vornehmen:
 |Welche Aufträge möchtest du picken? Wenn du die rollende Kommissionierung später nutzt, werden nur Aufträge, die sich in diesem Status befinden, auf deiner Artikelliste angezeigt. +
 *_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines System unter *Einrichtung » Aufträge » Auftragsstatus*.
 
-|[#intable-target-status]*Blockstatus*
+| [#intable-target-status]*Blockstatus*
 |Wie möchtest du Aufträge, die sich gerade im Pickvorgang befinden, kennzeichnen? Sobald der Kommissioniervorgang mit plentyWarehouse gestartet wird, werden Aufträge automatisch in diesen Status gesetzt. So können sie nicht aus Versehen mehrmals für den Pickvorgang zur Verfügung gestellt werden. +
 *_Tipp:_* Die xref:auftraege:auftraege-verwalten.adoc#1200[Status] in dieser Dropdown-Liste verwaltest du im Backend deines System unter *Einrichtung » Aufträge » Auftragsstatus*.
 
-|[#intable-success-status]*Erfolgsstatus*
+| [#intable-success-status]*Erfolgsstatus*
 |Wähle den Status aus, in den Aufträge gesetzt werden, nachdem sie erfolgreich die rollende Kommissionierung durchlaufen haben, also alle benötigten Artikel gepickt wurden.
 
 | *Fehlerstatus*
@@ -202,7 +211,7 @@ Einstellungen vornehmen:
 
 2+^| Bereich *Artikelerfassung*
 
-|[#intable-item-scan]*Artikel-Scan verpflichtend*
+| [#intable-item-scan]*Artikel-Scan verpflichtend*
 |Verwende diese Option, um festzulegen, welche Regeln für das Erfassen von Artikeln während der rollenden Kommissionierung gelten sollen. +
 *Aktiviert* (icon:toggle-on[role="green"]) = Alle Artikel _müssen_ über ihr Etikett gescannt werden, um kommissioniert zu werden. Eine manuelle Auswahl von Artikeln über die Suche ist nicht möglich. +
 *Deaktiviert* (icon:toggle-off[role="darkGrey"]) = Artikel können entweder per Scan oder per manueller Auswahl hinzugefügt werden.
@@ -283,6 +292,26 @@ In welcher Box willst du diesen Artikel zwischenlagern? Scanne eine leere Box od
 Manche Aufträge enthalten mehr als nur einen Artikel. Hast du bereits den ersten Artikel eines Auftrags gescannt und mit einer Box verknüpft, brauchst du beim zweiten Artikel keine weitere Box zu verknüpfen, sondern kannst die bereits angefangene Box weiter verwenden.
 ====
 
+[#1110]
+=== Boxen im Voraus verknüpfen
+
+Möchtest du lieber alle Aufträgen mit Boxen verknüpfen, bevor du mit der rollenden Kommissionierung startest, anstatt <<#1100, wie oben beschrieben>> vorzugehen?
+
+Dann stelle zuerst sicher, dass du im Menü *Einstellungen » Rollende Kommissionierung* der plentyWarehouse App die Option *Vorauswahl* für die Einstellung <<#intable-box-link, *Verknüpfung von Boxen*>> gewählt hast. Sobald diese Einstellung aktiv ist, ändert sich dein Workflow wie folgt:
+
+[.instruction]
+Boxen im Voraus verknüpfen:
+
+. xref:warenwirtschaft:installation-und-ersteinrichtung.adoc#300[Logge dich in plentyWarehouse ein].
+. Tippe auf das Menüsymbol (icon:bars[role="darkGrey"]) oben links. +
+icon:map-signs[] *_Oder:_* Finde die Kachel *Rollende Kommissionierung* im Bereich *Funktionen* auf dem Dashboard.
+. Tippe auf *Rollende Kommissionierung* (image:warenwirtschaft:icon_box-picking.png[width=24, height=24]). +
+→ Der Startbildschirm wird angezeigt.
+. Gib wie gewohnt die Anzahl der zu kommissionierenden Aufträge ein und tippe anschließend auf *Start*.
+. In der Ansicht, die nun angezeigt wird, erfasst du Boxen per Scan oder wählst sie manuell aus der Liste aus. Wiederhole diesen Vorgang, bis die Anzahl an Boxen der Anzahl an zuvor festgelegten Aufträgen entspricht. +
+*_Hinweis:_* Hast du zusätzlich die Option <<#intable-automatic-link, *Automatische Verknüpfung ermöglichen*>> im Menü *Einstellungen » Rollende Kommissionierung* aktiviert, wird dir in diesem Schritt ein Button am unteren Bildschirmrand angezeigt. Über diesen werden alle Boxen automatisch mit den Aufträgen verknüpft. Ist die Option deaktiviert, muss jede Box einzeln zugeordnet werden.
+. Tippe auf *Start*, um mit der Kommissionierung zu beginnen. Die Verknüpfung von Aufträgen und Boxen ist nun nicht mehr während des Kommissioniervorgangs selbst notwendig. Alle weiteren Schritte der rollenden Kommissionierung laufen wie gewohnt ab.
+
 [#1200]
 === Artikel picken
 
@@ -315,11 +344,11 @@ Für solche Fälle findest du in der Ansicht des jeweiligen Artikels Shortcuts, 
 |====
 |Bedienelement |Symbol |Erläuterung
 
-|[#intable-add-note]*Kommentar*
+| [#intable-add-note]*Kommentar*
 |material:chat[]
 | Öffnet die Ansicht zur Eingabe einer Auftragsnotiz. Nutze diese Funktion, um einen Kommentar zu speichern, der in der späteren Abwicklung am Auftrag, in dem der Artikel vorhanden ist, im Backend deines System einsehbar ist.
 
-|[#intable-enter-quantity]*Menge eingeben*
+| [#intable-enter-quantity]*Menge eingeben*
 |material:iso[]
 | Öffnet die Ansicht zur Eingabe der Artikelmenge.
 
@@ -327,7 +356,7 @@ Für solche Fälle findest du in der Ansicht des jeweiligen Artikels Shortcuts, 
 |material:low_priority[]
 | Verschiebt den Artikel an das Ende der Pickliste. Diese Funktion ist nützlich, wenn du einen Artikel vorerst überspringen möchtest, beispielsweise wenn er momentan nicht am angegebenen Lagerort vorhanden ist.
 
-|[#intable-remove-item]*Artikel entfernen*
+| [#intable-remove-item]*Artikel entfernen*
 |material:cancel[]
 | Entfernt den Artikel von der Artikelliste. Nutze diese Funktion, wenn der betreffende Artikel nicht am Lagerort vorhanden ist. Optional kannst du im selben Schritt auch einen Kommentar eingeben, der als Auftragsnotiz gespeichert wird und am Auftrag, in dem der Artikel enthalten ist, im plentysystems Backend einsehbar ist. Außerdem wird der Auftrag in den Fehlerstatus verschoben.
 
