@@ -246,13 +246,13 @@ Synchronisation is important in certain cases. For example, GTC listings must be
 * *Do not retrieve sales* = No synchronisation with active listings. If this option is selected, then sales cannot be retrieved manually either.
 
 | *Retrieve eBay returns*
-a| Select whether <<Processing returns, eBay returns>> should be retrieved or not. +
+a| Select whether eBay returns should be retrieved or not. +
 
 * *Yes* = Activates the eBay return process in plentymarkets. New eBay returns are imported into plentymarkets every 20 minutes. +
 * *No* = The eBay return process is deactivated in plentymarkets. New eBay returns are not imported into plentymarkets. eBay returns must be edited in the seller’s My eBay area instead.
 
 | *Retrieve eBay purchase cancellations*
-| Select whether <<Processing purchase cancellations, eBay purchase cancellations>> are retrieved and imported into plentymarkets. Purchase cancellations are updated every 15 minutes.
+| Select whether purchase cancellations are retrieved and imported into plentymarkets. Purchase cancellations are updated every 15 minutes.
 
 | *Update eBay return status*
 | Select whether the return status should be updated *In return order*, *In credit note* or *In return order and credit note* when the status is changed by eBay. Return statuses are updated once per hour.
@@ -261,7 +261,7 @@ a| Select whether <<Processing returns, eBay returns>> should be retrieved or no
 | Select whether an incoming payment is booked for orders of the type *credit note* when an eBay Payments order is successfully refunded.
 
 | *Order status for orders with failed refunds*
-| Select a status. If no refund could be issued, then the order is moved to this status. If necessary, create a xref:orders:managing-orders.adoc#create-status[new status]. +
+| Select a status. If no refund could be issued, then the order is moved to this status. If necessary, create a xref:orders:order-statuses.adoc#create-status[new status]. +
 
 *_Background:_* The event procedure <<#8300, Issue eBay refund to customer>> initiates a refund for an order. If the event procedure cannot be completed, the order is moved to the status that you selected for the setting *Order status for orders with failed refunds*.
 
@@ -342,7 +342,7 @@ Before you can link eBay shipping profiles with the shipping profiles saved in p
 [#800]
 === Linking return reasons and statuses
 
-Return reasons and return statuses have to be linked if you would like to process <<Processing returns, eBay returns>> in plentymarkets and ensure the automatic data exchange with eBay. Go to *Setup » Markets » eBay » Settings » Tab: Return settings* in order to link eBay return reasons with the reasons set up in the *Setup » Orders » Order types » Return* menu in plentymarkets. Reasons for return are assigned automatically when returns are imported.
+Return reasons and return statuses have to be linked if you would like to process eBay returns in plentymarkets and ensure the automatic data exchange with eBay. Go to *Setup » Markets » eBay » Settings » Tab: Return settings* in order to link eBay return reasons with the reasons set up in the *Setup » Orders » Order types » Return* menu in plentymarkets. Reasons for return are assigned automatically when returns are imported.
 
 [.instruction]
 Linking return reasons:
@@ -368,10 +368,8 @@ Linking return statuses:
 . Go to *Setup » Markets » eBay » Settings » Tab: Return settings*.
 . Click on the *Return status links* tab.
 . Select a plentymarkets return status for each *eBay return status* from the drop-down lists. +
-→ You can select an already existing status or you can create a xref:orders:managing-orders.adoc#create-status[new status] that best suits your workflow.
+→ You can select an already existing status or you can create a xref:orders:order-statuses.adoc#create-status[new status] that best suits your workflow.
 . Save (terra:save[]) the settings.
-
-For further information about editing eBay returns and using event procedures for partial automation, refer to the <<Processing returns, Processing returns>> chapter.
 
 [IMPORTANT]
 .New or edited reasons for return
@@ -2074,7 +2072,7 @@ Different ways of processing incoming return requests from eBay customers are av
 [#7500]
 === Importing returns
 
-eBay returns and return statuses of the last 14 days are automatically imported from eBay to plentymarkets and updated every hour. When importing, new returns are created with the *Standard status for returns* in the *Orders » Edit orders* menu. The reason for return chosen by the customer on eBay is assigned to a xref:orders:managing-orders.adoc#410[reason for return] in plentymarkets. Imported eBay returns are edited the same way as other xref:orders:managing-orders.adoc#400[returns] in plentymarkets.
+eBay returns and return statuses of the last 14 days are automatically imported from eBay to plentymarkets and updated every hour. When importing, new returns are created with the *Standard status for returns* in the *Orders » Edit orders* menu. The reason for return chosen by the customer on eBay is assigned to a xref:orders:order-type-return.adoc#enter-return-reasons[reason for return] in plentymarkets. Imported eBay returns are edited the same way as other xref:orders:order-type-return.adoc#[returns] in plentymarkets.
 
 [#7600]
 === Editing returns
@@ -2101,7 +2099,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to automatical
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-accepting-returns]]
 .Event procedure for automatically accepting returns with eBay label
@@ -2141,7 +2139,7 @@ Returns with your own label are only available for your customers on ebay.de, eb
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-return-own-label]]
 .Event procedure for automatically accepting returns with your own label
@@ -2181,7 +2179,7 @@ Only reject those returns that violate the terms specified in the *Setup » Mark
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-rejecting-returns]]
 .Event procedure for automatically rejecting returns
@@ -2215,7 +2213,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to offer your 
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-partial-refund]]
 .Event procedure for automatically offering partial refunds
@@ -2255,7 +2253,7 @@ You can upload a return label with an event procedure at eBay as described below
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-own-label]]
 .Event procedure for uploading your own label
@@ -2289,7 +2287,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to inform eBay
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-mark-return]]
 .Event procedure for automatically marking returns as received
@@ -2342,7 +2340,7 @@ The event procedure can be triggered in three different cases if you use eBay Ma
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-automatic-refund]]
 .Event procedure for automatically initiating refunds via PayPal
@@ -2381,7 +2379,7 @@ Set up an xref:automation:event-procedures.adoc#[event procedure] to inform eBay
 
 include::_includes:partial$event-procedure.adoc[]
 
-*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:managing-orders.adoc#create-status[create] a new status.
+*_Note:_* The status in the event procedure below was selected as an example. Select the status that best suits your workflow. To do so, select an already existing status or xref:orders:order-statuses.adoc#create-status[create] a new status.
 
 [[event-procedure-sent-refunds]]
 .Event procedure for automatically marking refunds as sent (non-PayPal)
@@ -2530,7 +2528,7 @@ Basic process:
 [discrete]
 ===== Setting the order statuses
 
-Purchase cancellation statuses are used to process purchase cancellations in the eBay back end. You can either use existing order statuses or xref:orders:managing-orders.adoc#1200[create new order statuses]. To import and manage eBay purchase cancellation requests in plentymarkets, you need the following order statuses:
+Purchase cancellation statuses are used to process purchase cancellations in the eBay back end. You can either use existing order statuses or xref:orders:order-statuses.adoc#create-status[create new order statuses]. To import and manage eBay purchase cancellation requests in plentymarkets, you need the following order statuses:
 
 * Purchase cancellation requested
 * eBay purchase cancellation accepted
@@ -2718,7 +2716,7 @@ Changing the order status to accept purchase cancellation:
 . Save (terra:save[]) the settings. +
 → eBay will be automatically informed about your decision if you have set up the event procedure <<#9700, Accept eBay cancellation request>>.
 
-Use the group function to change multiple orders at once. If you want to accept the request for unpaid orders, then search for all unpaid orders with the appropriate status and change the orders’ status with the xref:orders:managing-orders.adoc#1700[group function].
+Use the group function to change multiple orders at once. If you want to accept the request for unpaid orders, then search for all unpaid orders with the appropriate status and change the orders’ status with the xref:orders:working-with-orders.adoc#order-group-functions[group function].
 
 It might be possible to set up an xref:automation:event-procedures.adoc#[event procedure] based on your specific workflows that accepts requests automatically using certain filters.
 --
@@ -2835,7 +2833,7 @@ You need to specify a reason to start purchase cancellations on eBay. As such, s
 * Buyer wants to cancel the purchase
 * Item cannot be delivered as agreed upon
 
-You can either use existing order statuses or xref:orders:managing-orders.adoc#1200[create new order statuses].
+You can either use existing order statuses or xref:orders:order-statuses.adoc#create-status[create new order statuses].
 
 [.collapseBox]
 .Tip: How to create order statuses
