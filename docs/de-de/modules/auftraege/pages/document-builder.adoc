@@ -7,22 +7,22 @@
 .Geführte Touren verfügbar
 ====
 Für das Menü *Einrichtung » Dokumente » DocumentBuilder* stehen dir die geführten Touren *DocumentBuilder-Grundeinstellungen* und *DocumentBuilder-Editor* zur Verfügung. Die Touren zeigen dir Schritt für Schritt die wichtigsten Funktionen. +
-Du findest die Touren in der unteren linken Ecke des Menüs Einrichtung » Dokumente » DocumentBuilder. Klicke auf material:rocket_launch[] Geführte Touren, um die Tour zu starten.
+Du findest die Touren in der unteren linken Ecke des Menüs *Einrichtung » Dokumente » DocumentBuilder*. Klicke auf material:rocket_launch[] *Geführte Touren*, um die Tour zu starten.
 ====
 
 Du benötigst Dokumentvorlagen, um Dokumente zu erstellen, die genau auf deine Bedürfnisse zugeschnitten sind? Dann ist der DocumentBuilder genau das richtige Tool für dich. Mithilfe des DocumentBuilders im Menü *Einrichtung » Dokumente » DocumentBuilder* kannst du deine Dokumentvorlagen im Handumdrehen erstellen und zentral an einer Stelle verwalten. Somit hast du all deine Vorlagen an einem Ort und zu jeder Zeit griffbereit. Für einige Dokumenttypen stehen dir außerdem Standardvorlagen zur Verfügung, die als Fallback dienen, falls du selbst noch keine Vorlage erstellt hast und auch keine andere passende Vorlage für dein Dokument gefunden werden kann. +
 Lerne auf dieser Seite, wie du bereits erstellte Vorlagen suchst oder neue Vorlagen erstellst und finde heraus, wie du sie an deine Bedürfnisse anpasst.
 
-
 [#vorbereitende-einstellungen]
 == Vorbereitende Einstellungen vornehmen
 
-Bevor du mit dem Erstellen von Dokumentvorlagen beginnst, solltest du entscheiden, für welche Dokumenttypen du den DocumentBuilder verwenden möchtest. Lege außerdem Nummernkreise für deine Dokumente fest und stelle sicher, dass alle notwendigen Rechte vorhanden sind.
+Bevor du mit dem Erstellen von Dokumentvorlagen beginnst, solltest du entscheiden, für welche Dokumenttypen du den DocumentBuilder verwenden möchtest. Lege außerdem <<#nummernkreise-festlegen, Nummernkreise>> für deine Dokumente fest und stelle sicher, dass alle notwendigen <<#benutzerrechte-vergeben, Rechte>> vorhanden sind.
 
 [#dokumenttypen-aktivieren]
 === DocumentBuilder für Dokumenttypen aktivieren
 
-Du kannst entscheiden, für welche Dokumenttypen du den DocumentBuilder verwenden möchtest und für welche Dokumenttypen du vorerst noch die alten Einstellungen im Menü *Einrichtung » Mandant » [Mandant wählen] » Standorte » [Standort wählen] » Dokumente* nutzen möchtest. Beachte allerdings, dass die Aktivierung für den DocumentBuilder greift, sobald du die Umschaltfläche aktiviert hast. Es ist also nicht notwendig, die Einstellung zu speichern. Genauso einfach kannst du durch das Deaktivieren der Umschaltfläche aber auch wieder zur alten UI wechseln. +
+Du kannst entscheiden, für welche Dokumenttypen du den DocumentBuilder verwenden möchtest und für welche Dokumenttypen du vorerst noch die alten Einstellungen im Menü *Einrichtung » Mandant » [Mandant wählen] » Standorte » [Standort wählen] » Dokumente* nutzen möchtest. +
+Beachte, dass die Aktivierung für den DocumentBuilder greift, sobald du die Umschaltfläche aktiviert hast. Es ist also nicht notwendig, die Einstellung zu speichern. Genauso einfach kannst du durch das Deaktivieren der Umschaltfläche aber auch wieder zur alten UI wechseln. +
 Um Dokumenttypen zu wählen, für die du den DocumentBuilder verwenden möchtest, gehe vor wie folgt.
 
 [.instruction]
@@ -33,26 +33,27 @@ Dokumenttypen wählen:
 . Aktiviere (material:toggle_on[role=skyBlue]) die Umschaltfläche für die Dokumenttypen, die mit dem DocumentBuilder generiert werden sollen. +
 → Der DocumentBuilder ist nun für die gewählten Dokumenttypen aktiviert. +
 *_Hinweis:_* Für alle übrigen Dokumenttypen werden automatisch die alten Dokumenteinstellungen verwendet.
-Dies gilt nicht für benutzerdefinierte Auftragsdokumente, da es sich dabei um einen neuen Dokumenttyp handelt.
+Dies gilt nicht für benutzerdefinierte Auftragsdokumente, weil es sich dabei um einen neuen Dokumenttyp handelt.
 
 [#asynchrone-dokumentenerstellung]
 === Asynchrone Dokumentenerstellung
 
-Mit dem Wechsel zum DocumentBuilder wird auch die neue Logik im Hintergrund aktiviert und die Dokumente werden asynchron erstellt. Die asymmetrische Logik ermöglicht es dir, das plentysystem weiter zu nutzen, ohne dass du warten musst, bis die Erstellung der Dokumente abgeschlossen ist. +
+// TODO: im folgenden Absatz steht "asymmetrisch" - soll "asynchron" heißen?
+
+Mit dem Wechsel zum DocumentBuilder wird auch die neue Logik im Hintergrund aktiviert und die Dokumente werden asynchron erstellt. Die asymmetrische Logik ermöglicht es dir, das System weiter zu nutzen, ohne dass du warten musst, bis das Erstellen der Dokumente abgeschlossen ist. +
 
 Die folgenden Anpassungen an den *Ereignisaktionen* und *Prozessen* sind erforderlich: +
 
 - *Für Ereignisaktionen*: Jede Dokumentaktion muss in *einem einzelnen Ereignis* erstellt werden und darf nicht in einem gruppiert werden. Vorhandene Ereignisaktionen mit mehr als einer Dokumentaktion sollten aufgeteilt werden. +
-Wenn z.B. eine Ereignisaktion für die Erstellung eines Dokuments und den Versand dieses Dokuments per E-Mail gibt, solltest du diese Ereignisaktion in zwei aufteilen. Dann wird die E-Mail nur versendet, wenn das Dokument verfügbar ist. +
+Wenn es z.B. eine Ereignisaktion für das Erstellen eines Dokuments und den Versand dieses Dokuments per E-Mail gibt, solltest du diese Ereignisaktion in zwei aufteilen. Dann wird die E-Mail nur versendet, wenn das Dokument verfügbar ist. +
 
-- *Für Prozessen*: Die Erstellung von Dokumenten wird durch die Subaktionen *Drucken*, *Speichern* und *Generieren* angestoßen. +
+- *Für Prozesse*: Das Erstellen von Dokumenten wird durch die Subaktionen *Drucken*, *Speichern* und *Generieren* angestoßen. +
 Du solltest die Subaktion *Generieren* zu Beginn eines Prozesses verwenden, um die Dokumente später mit den Subaktionen *Speichern* und *Drucken* abrufen zu können.
-
 
 [#nummernkreise-festlegen]
 === Nummernkreise festlegen
 
-Bevor du mit der Generierung von Dokumenten beginnst, solltest du Nummernkreise im Menü *Einrichtung » Dokumente » Nummernkreise* erstellen, damit für deine Dokumente direkt die richtige Dokumentnummer vergeben werden kann. Weitere Informationen dazu findest du auf der Handbuchseite xref:auftraege:nummernkreise-festlegen.adoc[Nummernkreise festlegen].
+Bevor du mit dem Generieren von Dokumenten beginnst, solltest du Nummernkreise im Menü *Einrichtung » Dokumente » Nummernkreise* erstellen, damit für deine Dokumente direkt die richtige Dokumentnummer vergeben werden kann. Weitere Informationen dazu findest du auf der Handbuchseite xref:auftraege:nummernkreise-festlegen.adoc#[Nummernkreise festlegen].
 
 [#benutzerrechte-vergeben]
 === Rechte für Backendbenutzer:innen vergeben
@@ -68,7 +69,9 @@ include::_includes:partial$rights.adoc[]
 [#mit-dokumentvorlagen-arbeiten]
 == Mit Dokumentvorlagen arbeiten
 
-Die Übersicht des DocumentBuilders liefert zunächst alle relevanten Informationen auf einen Blick. Hier kannst du beispielsweise sehen, welche Vorlage aktuell aktiviert ist und welche Vorlage als Standardvorlage verwendet wird. Über das Kontextmenü (material:more_vert[]) rechts kannst du außerdem Vorlagen (de)aktivieren, kopieren, exportieren oder löschen.
+Die Übersicht des DocumentBuilders liefert zunächst alle relevanten Informationen auf einen Blick. Hier kannst du beispielsweise sehen, welche Vorlage aktuell aktiviert ist und welche Vorlage als Standardvorlage verwendet wird. Über das Kontextmenü (material:more_vert[]) rechts kannst du außerdem Vorlagen aktivieren, deaktivieren, kopieren, exportieren oder löschen.
+
+// TODO: hier den farblich markierten Screenshot einfügen.
 
 [#standardvorlagen-nutzen]
 === Standardvorlagen nutzen
@@ -77,13 +80,12 @@ Für die folgenden Dokumenttypen stehen dir Standardvorlagen zur Verfügung, die
 Im System gibt es jeweils eine Standardvorlage für Deutsch (DE) und eine für Englisch (EN). +
 Standardvorlagen gibt es auch als Netto- oder Bruttovorlagen.
 
-Die Standardvorlagen sind ideal, um deine erste Vorlage zu erstellen, da sie dir eine Basis bieten, die du dann anpassen kannst.
-Wir empfehlen dir, eine Standardvorlage zu duplizieren und sie dann im *Editor* nach deinen Wünschen zu bearbeiten.
+Die Standardvorlagen sind ideal, um deine erste Vorlage zu erstellen, weil sie dir eine Basis bieten, die du dann anpassen kannst. Wir empfehlen dir, eine Standardvorlage zu duplizieren und sie dann im *Editor* nach deinen Wünschen zu bearbeiten.
 
 [NOTE]
 .Besonderheiten der Standardvorlagen
 ====
-Standardvorlagen sind so konfiguriert, dass sie als Fallback dienen, wenn keine andere Vorlage dieses Dokumententyps vorhanden ist, so dass sie nicht bearbeitet, deaktiviert oder gelöscht werden können.
+Standardvorlagen sind so konfiguriert, dass sie als Fallback dienen, wenn keine andere Vorlage dieses Dokumententyps vorhanden ist. Standardvorlagen können daher nicht bearbeitet, deaktiviert oder gelöscht werden.
 ====
 
 [#spalten-konfigurieren]
@@ -97,9 +99,9 @@ Spalten konfigurieren:
 . Öffne das Menü *Einrichtung » Dokumente » DocumentBuilder*.
 . Klicke oben rechts auf *Spalten konfigurieren* (material:settings[]). +
 → Das Fenster *Spalten konfigurieren* wird geöffnet.
-. Wähle die Spalten, die angezeigt werden sollen (material:done[]). Beachte dazu die Erläuterungen in <<table-document-builder-columns>>.
+. Wähle die Spalten, die angezeigt werden sollen (material:check_box[]). Beachte dazu die Erläuterungen in <<table-document-builder-columns>>.
 . Ziehe (material:drag_indicator[]) die Spalten per Drag-and-drop an die gewünschte Stelle, bis sie in der für dich richtigen Reihenfolge angezeigt werden.
-. Füge bei Bedarf Spalten hinzu oder wähle Spalten ab, wenn du sie nicht benötigst.
+. Füge bei Bedarf Spalten hinzu (material:check_box[]) oder wähle Spalten ab (material:check_box_outline_blank[]), wenn du sie nicht benötigst.
 . Klicke auf *Bestätigen*. +
 → Die Einstellungen werden gespeichert.
 
@@ -110,8 +112,8 @@ Spalten konfigurieren:
 |Spalte |Erläuterung
 
 | *Aktiv*
-|Zeigt an, ob die Vorlage aktiv (blauer Punkt) oder inaktiv (grauer Punkt) ist. +
-*_Hinweis:_* Ist eine Vorlage aktiv, wird sie zum Generieren von Dokumenten verwendet. Ist eine Vorlage hingegen inaktiv, hat diese keine Funktion.
+|Zeigt an, ob die Vorlage aktiv (material:circle[role=skyBlue]) oder inaktiv (material:circle[]) ist. +
+*_Hinweis:_* Wenn eine Vorlage aktiv ist, wird sie zum Generieren von Dokumenten verwendet. Wenn eine Vorlage hingegen inaktiv ist, hat diese keine Funktion.
 
 | *Name der Vorlage*
 |Zeigt den Namen der Vorlage an.
@@ -120,15 +122,15 @@ Spalten konfigurieren:
 |Zeigt den Typ des Dokuments an (z.B. Rechnung, Gutschrift etc.).
 
 | *Standardvorlage*
-|Zeigt an, ob es sich um eine Standardvorlage handelt. Ist dies der Fall, wird ein Häkchen angezeigt. +
-*_Hinweis:_* Standardvorlagen können nicht gelöscht werden.
+|Zeigt an, ob es sich um eine Standardvorlage handelt. Wenn dies der Fall ist, wird ein Häkchen (material:done[]) angezeigt. +
+*_Hinweis:_* Standardvorlagen können _nicht_ gelöscht werden.
 
 | *Dateiname*
 |Zeigt den Namen des Dokuments an.
 
 | *Tags*
 |Zeigt die Tags der Vorlage an. +
-*_Tipp:_* Sind mehrere Tags vorhanden, fahre mit der Maus über das angezeigte Tag, um alle weiteren Tags zu sehen.
+*_Tipp:_* Wenn mehrere Tags vorhanden sind, bewege die Maus über das angezeigte Tag, um alle weiteren Tags zu sehen.
 
 | *Letzte (De)aktivierung*
 |Zeigt das Datum der letzten (De)aktivierung der Vorlage an.
@@ -139,15 +141,14 @@ Spalten konfigurieren:
 |Aktiviert die Vorlage. Sobald du die Sicherheitsabfrage bestätigt hast, wird diese Vorlage zum Generieren von Dokumenten verwendet.
 
 | *Vorlage kopieren* (material:file_copy[])
-|Kopiert die Vorlage. Sobald die Kopie der Vorlage estellt wurde, kannst du sie an deine Bedürfnisse anpassen.
+|Kopiert die Vorlage. Sobald die Kopie der Vorlage erstellt wurde, kannst du sie an deine Bedürfnisse anpassen.
 
 | *Vorlage exportieren* (material:file_download[])
 |Exportiert die Vorlage im Format _.tpl_.
 
 | *Vorlage löschen* (material:delete[])
-|Löscht die Vorlage. Beachte, dass Standardvorlagen oder aktive Vorlagen nicht gelöscht werden können.
+|Löscht die Vorlage. Beachte, dass Standardvorlagen oder aktive Vorlagen _nicht_ gelöscht werden können.
 |===
-
 
 [#vorlagen-suchen]
 === Vorlagen suchen
@@ -160,9 +161,8 @@ Vorlagen suchen:
 
 . Öffne das Menü *Einrichtung » Dokumente » DocumentBuilder*.
 .. *_Möglichkeit 1:_* Klicke auf material:search[], um direkt eine Liste aller Vorlagen zu sehen.
-.. *_Möglichkeit 2:_* Gib etwas in das Suchfeld ein und klicke auf einen der automatischen Vorschläge.
-Klicke dann auf material:search[], um die Suche auszuführen.
-.. *_Möglichkeit 3:_* Klicke auf material:tune[], um die Suchergebnisse mit Hilfe von Filtern einzugrenzen. Die folgende Tabelle listet alle verfügbaren Filter.
+.. *_Möglichkeit 2:_* Gib den Namen der Vorlage in das Suchfeld ein und klicke auf einen der automatischen Vorschläge.
+.. *_Möglichkeit 3:_* Klicke auf material:tune[], um die Suchergebnisse mit Hilfe von Filtern einzugrenzen. <<#table-template-filters>> listet alle verfügbaren Filter auf.
 
 [[table-template-filters]]
 .Filter für Vorlagen
@@ -198,7 +198,7 @@ a|Wähle einen oder mehrere Dokumenttypen aus der Dropdown-Liste, um nach Vorlag
 * Benutzerdefiniertes Auftragsdokument +
 * Wareneingangsbeleg 
 
-*_Wichtig:_* Der Dokumenttyp *Wareneingangsbeleg* ist nur nutzbar, wenn du die plentyWarehouse App nutzt. Weitere Informationen findest du auf der Handbuchseite xref:warenwirtschaft:booking-incoming-items.adoc#400[Wareneingänge verwalten].
+*_Wichtig:_* Du kannst den Dokumenttyp *Wareneingangsbeleg* nur nutzen, wenn du die plentyWarehouse App nutzt. Weitere Informationen findest du auf der Handbuchseite xref:warenwirtschaft:booking-incoming-items.adoc#400[Wareneingänge verwalten].
 
 | *Lieferland*
 |Wähle ein oder mehrere Lieferländer aus der Dropdown-Liste, um nach Vorlagen mit diesen Lieferländern zu filtern.
@@ -298,30 +298,32 @@ Gespeicherte Filter anwenden:
 [#gruppenfunktionen-verwenden]
 == Gruppenfunktionen verwenden
 
-In der Übersicht des DocumentBuilders kannst du Gruppenfunktionen verwenden, um bestimmte Aktionen für mehrere Vorlagen gleichzeitig auszuführen. Die folgende Tabelle listet die verfügbaren Gruppenfunktionen.
+In der Übersicht des DocumentBuilders kannst du Gruppenfunktionen verwenden, um bestimmte Aktionen für mehrere Vorlagen gleichzeitig auszuführen. 
+
+Sobald du mindestens eine Vorlage in der Übersicht markiert (material:check_box[role=skyBlue]) hast, werden die Schaltflächen der Gruppenfunktion sichtbar. <<#table-template-group-functions>> listet die verfügbaren Gruppenfunktionen auf.
 
 [[table-template-group-functions]]
 .Gruppenfunktionen für Vorlagen
 [cols="1,3"]
 |===
 
-| *Vorlagen öffnen* (material:file_open[])
+| *Vorlagen öffnen* (material:edit[])
 |Öffnet alle gewählten Vorlagen und zeigt sie links in der Seitennavigation an.
 
 | *Vorlagen löschen* (material:delete[])
-|Löscht alle gewählten Vorlagen. Beachte, dass aktivierte Vorlagen und Standardvorlagen nicht gelöscht werden können.
+|Löscht alle gewählten Vorlagen. Beachte, dass aktivierte Vorlagen und Standardvorlagen _nicht_ gelöscht werden können.
 
 |===
 
 [#vorlage-erstellen]
-== Vorlagen erstellen
+== Vorlage erstellen
 
-Im DocumentBuilder kannst du für jeden Dokumenttyp eine oder mehrere Vorlagen erstellen und nach deinen Wünschen gestalten. Aktivierst du eine Vorlage anschließend, wird sie zum Generieren von Dokumenten verwendet. Um eine Vorlage zu erstellen, gehe wie im Folgenden beschrieben vor.
+Im DocumentBuilder kannst du für jeden Dokumenttyp eine oder mehrere Vorlagen erstellen und nach deinen Wünschen gestalten. Wenn du eine Vorlage anschließend aktivierst, wird sie zum Generieren von Dokumenten verwendet. Um eine Vorlage zu erstellen, gehe wie im Folgenden beschrieben vor.
 
 [IMPORTANT]
 .Besonderheit: Das benutzerdefinierte Auftragsdokument
 ====
-Mit dem benutzerdefinierten Auftragdokument hast du die Möglichkeit, ein komplett anpassbares Dokument ohne Einschränkungen zu erstellen. Es kann für alle Auftragstypen verwendet werden (einschließlich Bestellwesen).
+Mit dem benutzerdefinierten Auftragsdokument hast du die Möglichkeit, ein komplett anpassbares Dokument ohne Einschränkungen zu erstellen. Es kann für alle Auftragstypen verwendet werden (einschließlich Bestellwesen).
 ====
 
 [.instruction]
@@ -339,7 +341,7 @@ icon:map-signs[] *_Oder:_* Klicke links in der Seitennavigation auf *+ Neue Vorl
 . Nimm die Einstellungen vor. Beachte dazu die Erläuterungen zu den Auftragseinstellungen in <<table-create-template>>.
 . Um die Vorlagenstruktur anzupassen und nach deinen Wünschen zu gestalten, klicke auf *Editor öffnen*.
 . Nimm die Einstellungen vor. Beachte dazu das Kapitel <<#use-editor, Vorlagenstruktur im Editor gestalten>>.
-. *Speichere* (material:save[]) die Einstellungen.
+. *Speichere* (material:save[]) die Einstellungen. +
 → Die Vorlage wird erstellt und zur Übersicht hinzugefügt.
 
 [[table-create-template]]
@@ -351,10 +353,12 @@ icon:map-signs[] *_Oder:_* Klicke links in der Seitennavigation auf *+ Neue Vorl
 2+^|Vorlageneinstellungen
 
 | *Dokumenttyp*
-|Wähle den Typ des Dokuments aus der Dropdown-Liste.
+|Wähle den Typ des Dokuments aus der Dropdown-Liste. +
+Dies ist ein Pflichtfeld.
 
 | *Vorlagenname*
-|Gib einen Namen für die Vorlage ein.
+|Gib einen Namen für die Vorlage ein. +
+Dies ist ein Pflichtfeld.
 
 | *Dateiname*
 |Gib einen Namen für das Dokument ein. Beachte dazu die verfügbaren Variablen. +
@@ -414,12 +418,12 @@ Widget in Vorlage einfügen:
 [#available-widgets]
 === Verfügbare Widgets
 
-In der folgenden Tabelle findest du Informationen zu den verschiedenen Widgets und den Einstellungen, die dir zur Gestaltung deiner Vorlage zur Verfügung stehen.
+In <<table-available-widgets-documentbuilder>> findest du Informationen zu den verschiedenen Widgets und den Einstellungen, die dir beim Gestalten deiner Vorlage zur Verfügung stehen.
 
 [NOTE]
 .Verfügbare Widgets unterscheiden sich je nach Dokumenttyp
 ====
-Beachte, dass sich die verfügbaren Widgets je nach Dokumenttyp unterscheiden. Beim Wechsel des Dokumenttyps in einer inaktiven Dokumentvorlage kann es also sein, dass nicht mehr alle zuvor gewählten Widgets verfügbar sind. Ist dies der Fall, wird eine Fehlermeldung angezeigt.
+Beachte, dass sich die verfügbaren Widgets je nach Dokumenttyp unterscheiden. Beim Wechsel des Dokumenttyps in einer inaktiven Dokumentvorlage kann es also sein, dass nicht mehr alle zuvor gewählten Widgets verfügbar sind. Wenn dies der Fall ist, wird eine Fehlermeldung angezeigt.
 ====
 
 [[table-available-widgets-documentbuilder]]
@@ -502,7 +506,7 @@ Die verfügbaren Variablen für den DocumentBuilder sind in die folgenden Katego
 [NOTE]
 .Verfügbare Variablen unterscheiden sich je nach Dokumenttyp
 ====
-Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden. Beim Wechsel des Dokumenttyps in einer inaktiven Dokumentvorlage kann es also sein, dass nicht mehr alle zuvor gewählten Variablen verfügbar sind. Ist dies der Fall, wird eine Fehlermeldung angezeigt.
+Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden. Beim Wechsel des Dokumenttyps in einer inaktiven Dokumentvorlage kann es also sein, dass nicht mehr alle zuvor gewählten Variablen verfügbar sind. Wenn dies der Fall ist, wird eine Fehlermeldung angezeigt.
 ====
 
 * <<#variablen-auftrag, Auftrag>>
@@ -660,10 +664,10 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 | `Voraussichtliches Lieferdatum (Datum & Uhrzeit)`
 |Datum und Uhrzeit, an dem die Artikel des Auftrags voraussichtlich geliefert werden.
 
-| `Voraussichtlichtes Versanddatum`
+| `Voraussichtliches Versanddatum`
 |Datum, an dem die Artikel des Auftrags voraussichtlich versendet werden.
 
-| `Voraussichtlichtes Versanddatum (Datum & Uhrzeit)`
+| `Voraussichtliches Versanddatum (Datum & Uhrzeit)`
 |Datum und Uhrzeit, an dem die Artikel des Auftrags voraussichtlich versendet werden.
 
 | `Abschlussdatum`
@@ -835,7 +839,7 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 |Die ID der Markierung.
 
 | `Fulfillment-Service`
-|Der Name des Filfillment-Services, wie z.B. Amazon VCS oder eBay Plus.
+|Der Name des Fulfillment-Services, wie z.B. Amazon VCS oder eBay Plus.
 
 | `Amazon VCS ist aktiviert`
 |Zeigt an, dass xref:maerkte:amazon-einrichten.adoc#3150[Amazon VCS] aktiviert ist.
@@ -1136,7 +1140,7 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 | `Lager`
 |Das Lager der Auftragspostion.
 
-| `Positon`
+| `Position`
 |Die Position der Auftragsposition.
 
 | `Seriennummer`
@@ -1215,7 +1219,7 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 |Die unverbindliche Preisempfehlung.
 
 | `Ist prozentualer Rabatt`
-|Gibt an, ob es sich um den prozentualen Rabatt der Auftragspostionssummen handelt.
+|Gibt an, ob es sich um den prozentualen Rabatt der Auftragspositionssummen handelt.
 
 | `Ist Systemwährung`
 |Gibt an, ob die Summen der Auftragsposition in der Systemwährung oder in einer anderen Währung angegeben sind.
@@ -1229,7 +1233,7 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 | `Nettopreis`
 |Der Nettopreis der Auftragsposition.
 
-| `Originalter Bruttopreis`
+| `Originaler Bruttopreis`
 |Der ursprüngliche Bruttopreis der Auftragsposition.
 
 | `Originaler Nettopreis`
@@ -1345,7 +1349,7 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 |Die unverbindliche Preisempfehlung.
 
 | `Ist prozentualer Rabatt`
-|Gibt an, ob es sich um den prozentualen Rabatt der Auftragspostionssummen handelt.
+|Gibt an, ob es sich um den prozentualen Rabatt der Auftragspositionssummen handelt.
 
 | `Ist Systemwährung`
 |Gibt an, ob die Summen der Auftragsposition in der Systemwährung oder in einer anderen Währung angegeben sind.
@@ -1359,7 +1363,7 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 | `Nettopreis`
 |Der Nettopreis der Auftragsposition.
 
-| `Originalter Bruttopreis`
+| `Originaler Bruttopreis`
 |Der ursprüngliche Bruttopreis der Auftragsposition.
 
 | `Originaler Nettopreis`
@@ -1902,7 +1906,7 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 [TIP]
 .Ungespeicherte Änderungen
 ======
-Sind ungespeicherte Änderungen in den Einstellungen einer Vorlage vorhanden, wird links in der Navigation ein Sternchen im jeweiligen Bereich angezeigt.
+Wenn ungespeicherte Änderungen in den Einstellungen einer Vorlage vorhanden sind, wird links in der Navigation ein Sternchen im jeweiligen Bereich angezeigt.
 ======
 
 [#ausgabeeinstellungen-festlegen]
@@ -1961,7 +1965,7 @@ Ausgabeeinstellungen festlegen:
 a|Wähle, in welchem Format die Menge angezeigt werden soll. Dafür stehen dir die folgenden Optionen zur Verfügung: +
 
 * Systemstandard (Sprache des Auftrags) +
-*_Hinweis:_* Ist die Sprache des Auftrags *Deutsch*, wird standardmäßig die Option *Punkt als Dezimaltrennzeichen* verwendet. Für alle anderen Sprachen wird standardmäßig die Option *Komma als Dezimaltrennzeichen* verwendet. +
+*_Hinweis:_* Wenn die Sprache des Auftrags *Deutsch* ist, wird standardmäßig die Option *Punkt als Dezimaltrennzeichen* verwendet. Für alle anderen Sprachen wird standardmäßig die Option *Komma als Dezimaltrennzeichen* verwendet. +
 * Komma als Dezimaltrennzeichen (z.B. 12,003.67)
 * Punkt als Dezimaltrennzeichen (z.B. 12.003,67) +
 
@@ -1969,7 +1973,7 @@ a|Wähle, in welchem Format die Menge angezeigt werden soll. Dafür stehen dir d
 a|Wähle, in welchem Format das Datum angezeigt werden soll. Dafür stehen dir die folgenden Optionen zur Verfügung. +
 
 * Systemstandard (Sprache des Auftrags) +
-*_Hinweis:_* Ist die Sprache des Auftrags Deutsch, wird standardmäßig das Format *dd.mm.yyyy* verwendet. Für alle anderen Sprachen wird standardmäßig das Format *dd-mm-yy* verwendet.
+*_Hinweis:_* Wenn die Sprache des Auftrags Deutsch ist, wird standardmäßig das Format *dd.mm.yyyy* verwendet. Für alle anderen Sprachen wird standardmäßig das Format *dd-mm-yy* verwendet.
 * dd.mm.yyyy
 * dd-mm-yy
 * dd/mm/yyyy
@@ -2009,14 +2013,14 @@ Vorschau anzeigen:
 . Klicke oben auf *Vorschau anzeigen* (material:remove_red_eye[]). +
 → Das Fenster *Vorschau anzeigen* wird geöffnet.
 . Nimm die Einstellungen vor. Beachte dazu die Erläuterungen in <<table-preview-settings>>.
-. Klicke auf *Vorschau anzeigen* (material:remove_red_eye[role=skyBlue]).
+. Klicke auf *Vorschau anzeigen* (material:remove_red_eye[role=skyBlue]). +
 → Die Vorschau wird angezeigt. +
-*_Hinweis:_* In der Vorschau werden nur gespeicherte Änderungen angezeigt. Ist noch kein Inhalt für die Vorlage vorhanden, kann keine HTML-Vorschau angezeigt werden.
+*_Hinweis:_* In der Vorschau werden nur gespeicherte Änderungen angezeigt. Wenn noch kein Inhalt für die Vorlage vorhanden ist, kann keine HTML-Vorschau angezeigt werden.
 
 [TIP]
 .HTML-Vorschau neu laden
 ====
-Falls du im Editor Änderungen an einer Vorlage vornimmst, diese speicherst und anschließend zur HTML-Vorschau der Vorlage zurückkehrst, kannst du die Vorschau mit Klick auf *HTML-Vorschau neu laden* aktualisieren und den neuen Stand sehen.
+Falls du im Editor Änderungen an einer Vorlage vornimmst, diese speicherst und anschließend zur HTML-Vorschau der Vorlage zurückkehrst, kannst du die Vorschau mit Klick auf material:refresh[] (*HTML-Vorschau neu laden*) aktualisieren und den neuen Stand sehen.
 ====
 
 [[table-preview-settings]]
@@ -2031,7 +2035,8 @@ Während die PDF-Vorschau direkt in einem neuen Fenster geöffnet wird, wird die
 *_Tipp:_* Die HTML-Vorschau ist ebenfalls in den Einstellungen der Vorlage sichtbar. Klappe dort den Bereich *Vorlagenstruktur* aus (material:navigate_next[]), um die Vorschau zu sehen.
 
 | *Auftrags-ID*
-|Gib optional eine Auftrags-ID ein, um eine Vorschau für diesen Auftrag zu generieren. Wenn du keine Auftrags-ID eingibst, wird die Vorschau für den zuletzt erstellten Auftrag angezeigt, dem die Einstellungen in der Vorlage entsprechen.
+|Gib optional eine Auftrags-ID ein, um eine Vorschau für diesen Auftrag zu generieren. +
+*_Hinweis:_* Wenn du keine Auftrags-ID eingibst, wird die Vorschau für den zuletzt erstellten Auftrag angezeigt, dem die Einstellungen in der Vorlage entsprechen.
 
 |===
 
@@ -2052,10 +2057,10 @@ Vorlage (de)aktivieren:
 → Die Übersicht des DocumentBuilders wird geöffnet.
 . Führe die Suche (material:search[]) aus, um Dokumentvorlagen anzuzeigen.
 . Klicke rechts in der Zeile einer Vorlage auf das Kontextmenü (material:more_vert[]).
-. Wähle die Option *Vorlage aktivieren* bzw. *Vorlage deaktivieren* (material:task[]).
+. Klicke auf material:task[] *Vorlage aktivieren* bzw. material:task[] *Vorlage deaktivieren*.
 . Bestätige die Sicherheitsabfrage. +
-icon:map-signs[] *_Oder:_* Öffne eine Vorlage und klicke oben auf die Umschaltfläche *Vorlage aktivieren* (material:toggle_on[]) bzw. *Vorlage deaktivieren* (material:toggle_off[]). +
-→ Die Vorlage wird aktiviert bzw. deaktiviert und das Datum in der Spalte *Letze (De)aktivierung* wird aktualisiert. +
+icon:map-signs[] *_Oder:_* Öffne eine Vorlage und klicke oben auf die Umschaltfläche *Vorlage aktiv* (material:toggle_on[role=skyBlue]) bzw. *Vorlage aktiv* (material:toggle_off[]). +
+→ Die Vorlage wird aktiviert bzw. deaktiviert und das Datum in der Spalte *Letzte (De)aktivierung* wird aktualisiert. +
 *_Hinweis:_* Eine Vorlage kann nur aktiviert werden, wenn keine zweite Vorlage mit genau denselben Einstellungen existiert. Beachte außerdem, dass nach der Aktivierung einer Vorlage keine Änderungen (außer am Namen) mehr vorgenommen werden können.
 
 [#vorlage-kopieren]
@@ -2070,9 +2075,9 @@ Vorlage kopieren:
 → Die Übersicht des DocumentBuilders wird geöffnet.
 . Führe die Suche (material:search[]) aus, um Dokumentvorlagen anzuzeigen.
 . Klicke rechts in der Zeile einer Vorlage auf das Kontextmenü (material:more_vert[]).
-. Wähle die Option *Vorlage kopieren* (material:file_copy[]). +
+. Klicke auf material:file_copy[] *Vorlage kopieren*. +
 → Die Vorlage wird kopiert und direkt geöffnet. +
-*_Hinweis:_* Die neue Voralge erhält denselben Namen mit dem Zusatz "Kopie" am Ende. Außerdem sind kopierte Vorlagen standardmäßig deaktiviert.
+*_Hinweis:_* Die neue Vorlage erhält denselben Namen mit dem Zusatz "Kopie" am Ende. Kopierte Vorlagen sind standardmäßig deaktiviert.
 
 [#vorlage-exportieren]
 === Vorlage exportieren
@@ -2086,7 +2091,7 @@ Vorlagen exportieren:
 → Die Übersicht des DocumentBuilders wird geöffnet.
 . Führe die Suche (material:search[]) aus, um Dokumentvorlagen anzuzeigen.
 . Klicke rechts in der Zeile der Vorlage, die du exportieren möchtest, auf das Kontextmenü (material:more_vert[]).
-. Wähle die Option *Vorlage exportieren* (material:file_download[]). +
+. Klicke auf material:file_download[] *Vorlage exportieren*. +
 icon:map-signs[] *_Oder:_* Öffne die Vorlage, die du exportieren möchtest. +
 . Klicke oben auf *Vorlage exportieren* (material:file_download[]). +
 → Die Vorlage wird im Format _.tpl_ exportiert.
@@ -2094,7 +2099,7 @@ icon:map-signs[] *_Oder:_* Öffne die Vorlage, die du exportieren möchtest. +
 [#vorlage-loeschen]
 === Vorlage löschen
 
-Möchtest du eine Vorlage löschen, dann beachte, dass Standardvorlagen und aktive Vorlagen nicht gelöscht werden können. In diesem Fall ist die Option *Vorlage löschen* nicht verfügbar. Um eine Vorlage zu löschen, gehe vor wie folgt.
+Beachte, dass Standardvorlagen und aktive Vorlagen _nicht_ gelöscht werden können. In diesem Fall ist die Option *Vorlage löschen* nicht verfügbar. Um eine Vorlage zu löschen, gehe vor wie folgt.
 
 [.instruction]
 Vorlage löschen:
@@ -2103,7 +2108,7 @@ Vorlage löschen:
 → Die Übersicht des DocumentBuilders wird geöffnet.
 . Führe die Suche (material:search[]) aus, um Dokumentvorlagen anzuzeigen.
 . Klicke rechts in der Zeile einer Vorlage auf das Kontextmenü (material:more_vert[]).
-. Wähle die Option *Vorlage löschen* (material:delete[]).
+. Klicke auf material:delete[] *Vorlage löschen*.
 . Bestätige die Sicherheitsabfrage. +
 → Die Vorlage wird gelöscht.
 
@@ -2117,8 +2122,7 @@ Vorlage importieren:
 
 . Öffne das Menü *Einrichtung » Dokumente » DocumentBuilder*. +
 → Die Übersicht des DocumentBuilders wird geöffnet.
-. Klicke oben links auf *Vorlage importieren* (material:file_upload[]). +
-→ Das Fenster *Vorlage importieren* wird geöffnet.
-. Klicke auf *Vorlage auswählen* (material:more_horiz[]), um eine Vorlage zu wählen.
-. Klicke auf *Importieren* (material:file_upload[role=skyBlue]). +
+. Klicke oben links auf material:file_upload[] (*Vorlage importieren*). 
+. Wähle die Vorlage, die du importieren möchtest, von deinem Computer aus.
+. Klicke auf *Öffnen*. +
 → Die Vorlage wird importiert.
