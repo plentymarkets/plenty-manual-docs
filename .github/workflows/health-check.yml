@@ -9,11 +9,9 @@ jobs:
   html-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
       - name: Checkout UI repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: plentymarkets/plenty-docs-ui
           path: plenty-docs-ui-repo
@@ -27,16 +25,15 @@ jobs:
       # - name: Use htmltest
       #   run: curl https://htmltest.wjdp.uk | bash
 
-      - name: Use Node.js 16
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Build site
         run: |
-          npm i -g @antora/cli@2.3 @antora/site-generator-default@2.3
-          antora antora-playbook-de.yml --fetch --stacktrace
-          antora antora-playbook-en.yml --fetch --stacktrace
+          npm install
+          npm run prod
           
       - name: Assemble site
         run: |
