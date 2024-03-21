@@ -1,6 +1,6 @@
 = Box picking
 :author: team-app
-:keywords: plentyWarehouse box picking, plentyWarehouse mobile box picking, mobile picking, mobile box picking
+:keywords: plentyWarehouse box picking, plentyWarehouse mobile box picking, mobile picking, mobile box picking, trolley, trolleys
 :description: Learn how box picking works in the plentyWarehouse app.
 
 include::partial$note-requirements.adoc[]
@@ -101,6 +101,44 @@ Making boxes available:
 . Set the storage location’s *Purpose* to *Box*.
 . *Save* (icon:save[role="green"]) the settings.
 
+[#450]
+==== Providing and using trolleys
+
+After you have <<#400, made boxes available>>, you can carry out a few settings in your plentysystems back end to represent the trolleys that are used for mobile picking in your warehouse. This step is optional, as it is not required for the box picking process to function correctly. When setting up trolleys, you determine the number of boxes that are available on each trolley. When starting the picking process, you can save some time by scanning the barcode of the trolley rather than scanning each box individually. It’s up to you to think about the processes in your warehouse and decide if this makes sense.
+
+Virtual trolleys are created per warehouse and a barcode is assigned to them during setup. Thus, trolleys themselves are no actual storage locations, but can be traced and identified due to the barcode so that they can ultimately be identified by the plentyWarehouse app.
+
+[.instruction]
+Providing and using trolleys:
+
+. Go to *Setup » Stock » Warehouse » [Selectwarehouse] » Trolley configuration*.
+. Click on *Create new trolley*.
+. Enter a name in the *Name* field.
+. Enter the barcode that you want to specifically assign to the trolley. +
+*_Note:_* If you do not enter a barcode, plentysystems automatically fills this field with a random value as soon as you click on *Save*. You can return any time to change the barcode.
+. Click on *Save* (icon:save[role="green"]). +
+→ The trolley is created.
+. Now, go to the lower area of the menu and click on *New*  (icon:plus[role="darkGrey"]).
+→ A new view opens. Click on *Search* to carry out a search for suitable storage locations. Since only storage locations of the type *Box* can be assigned to trolleys, the search filter is set accordingly by default and cannot be changed. +
+→ The search results are displayed.
+. Activate (icon:check-square[role="blue"]) the box storage locations that should be assigned to the previously created trolley.
+. Click on *Add*. +
+→ The boxes are assigned to the trolley.
+
+Now, you can use the trolleys to your advantage during box picking. There is no need to carry out any additional settings in the plentyWarehouse app - you are ready to go. Follow the steps described below to learn about the required steps.
+
+[.instruction]
+Using trolleys in the plentyWarehouse app:
+
+. xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
+. Tap on the menu icon (icon:bars[role="darkGrey"]) in the top left corner. +
+icon:map-signs[] *_Or:_* Or: Find the *Box picking* tile in the *Functions* area on the dashboard.
+. Tap on *Box picking* (image:stock-management:icon_box-picking.png[width=24, height=24]). +
+→ The start screen is displayed.
+. Instead of <<#900, manually entering the number of boxes>>, scan the barcode that is attached on your physical trolley. +
+→ plentysystems identifies the corresponding virtual trolley in the background. Thus, plentyWarehouse automatically selects the exact number of boxes that are available on the trolley.
+. The next steps of the box picking process remain the same. For more detailed instructions on the next steps, refer to the chapter <<#1000, Finding the items in the warehouse>> and the subsequent sections.
+
 [#600]
 ==== Modifying the order process
 
@@ -196,18 +234,18 @@ Configuring the settings:
 
 | [#intable-source-status]*Source status*
 |Which orders do you want to pick? When you use the function later, you'll see a list of items to pick. This list only includes items from orders that are currently in this status. +
-*_Tip:_* You can manage the xref:orders:order-statuses.adoc#[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
+*_Tip:_* You can manage the xref:orders:order-statuses.adoc#[statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the plentysystems back end.
 
 | [#intable-target-status]*Block status*
 |How do you want to flag orders that are currently being picked? As soon as the picking process with plentyWarehouse has been started, orders are automatically moved to this status. This way, it's not possible to accidentally start picking the same order twice. +
-*_Tip:_* You can manage the xref:orders:order-statuses.adoc#[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
+*_Tip:_* You can manage the xref:orders:order-statuses.adoc#[statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the plentysystems back end.
 
 | [#intable-success-status]*Success status*
 |Select the status into which orders are moved after they have been successfully processed in box picking, meaning all required items are picked.
 
 | *Error status*
 |How should the app react if something goes wrong? If an error occurs while picking an order, for example because an item cannot be picked, the app will change the status of the order to whatever is selected here. Additionally, a note will be added to the order itself. This note contains more precise information on the item and on the storage location. Later, you can open the *Orders » Edit orders* menu to search for all orders in this status and then process these orders separately. +
-*_Tip:_* You can manage the xref:orders:order-statuses.adoc#[order statuses] displayed in this drop-down list in the *Setup » Orders » Status* menu in the back end of your system.
+*_Tip:_* You can manage the xref:orders:order-statuses.adoc#[statuses] displayed in this drop-down list in the *Setup » Orders » Order status* menu in the plentysystems back end.
 
 2+^| *Item registration* area
 
@@ -250,6 +288,12 @@ Orders can only be processed using the box picking function in plentyWarehouse i
 === Specifying the number of boxes
 
 First, enter the number of boxes that you want to work with, meaning the number of orders that you want to pick simultaneously.
+
+[TIP]
+.Determine number of boxes automatically
+====
+If you have <<#450, set up trolleys in the plentysystems back end>>, you can scan the barcode of the trolley. The app then automatically registers how many boxes are available on the trolley and automatically enters this number. Thus, you do not have to enter the number of boxes manually, but you can continue to <<#1000, find the items in the warehouse>>.
+====
 
 [.instruction]
 Specifying the number of boxes:
