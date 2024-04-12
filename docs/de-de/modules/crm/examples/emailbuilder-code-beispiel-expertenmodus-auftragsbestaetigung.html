@@ -1,0 +1,40 @@
+{# 
+    Allgemeines Styling erweitern.
+    Die extends-Anweisung fügt den block *MeineVorlage* in die Vorlage mit der ID 50 ein. Die Vorlagen-ID ist hierbei jedoch nicht relevant, sondern die Sprach-ID der deutschen Vorlage (ID 101).
+#}
+{% extends 101 %}
+
+{% block MeineVorlage %}
+
+    Guten Tag {{ order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3 }}, </br>
+    </br>
+    vielen Dank für das entgegengebrachte Vertrauen und Ihre Bestellung mit der ID {{ order.id }}. </br>
+    </br>
+    Mit dieser Nachricht bestätigen wir, dass Ihre Bestellung bei uns eingegangen ist. Gleichzeitig ist der Kaufvertrag rechtsverbindlich abgeschlossen. </br>
+    </br>
+    </br>
+    <strong>KURZÜBERSICHT</strong> </br>
+    </br>
+    Ihre Kunden-ID: {{ contact.id }} </br>
+    Ihre Auftrags-ID: {{ order.id }} (please specify in case of further questions) </br>
+    Zahlungsart: {{ order.formattedGeneral.methodOfPaymentName }} </br>
+    Versand durch: {{ order.formattedShipping.providerName }} </br>
+    Warenwert: {{ order.formattedGeneral.valueOfItems }} {{ order.formattedSubtotals.currencySymbol }}</br>
+    Versandkosten: {{ order.formattedSubtotals.shippingCostsGross }} {{ order.formattedSubtotals.currencySymbol }}</br>
+    Gesamtbetrag inklusive Versandkosten: {{ order.formattedGeneral.invoiceTotal }} {{ order.formattedSubtotals.currencySymbol }}</br>
+    </br>
+    </br>
+    <strong>ARTIKELÜBERSICHT</strong> </br>
+    </br>
+    
+    {# reguläre Vorlage mit Widget *Auftragspositionen* einfügen (Vorlagen-ID: 51, Sprach-ID für DE: 105)#}
+    {% include 105 %}
+
+    </br>
+    Wir freuen uns darauf, Sie bald wieder in unserem Shop begrüßen zu dürfen!</br>
+    </br>
+    {{ globals.account.signatureHTML | raw }}</br>
+    </br>
+    </br>
+
+{% endblock %}
