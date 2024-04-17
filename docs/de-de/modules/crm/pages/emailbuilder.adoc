@@ -1583,27 +1583,51 @@ Im Kapitel <<#code-beispiele-code-widget, Code-Beispiele für das Code-Widget>> 
 Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorien bzw. Unterkategorien gruppiert. Klicke auf einen Eintrag in der Liste, um direkt zu dem Bereich zu gelangen, in dem die Variablen sowie die dazugehörigen twig expressions für die jeweilige Kategorie bzw. Unterkategorie aufgelistet sind.
 
 * <<#variablen-auftrag, Auftrag>>
-
-** <<#variablen-auftrag, Auftragsvariablen allgemein>>
-** <<#variablen-auftrag-lieferadresse, Lieferadresse>>
-** <<#variablen-auftrag-rechnungsadresse, Rechnungsadresse>>
-** <<#variablen-auftrag-bankdaten-des-auftrags, Bankdaten des Auftrags>>
-** <<#variablen-auftrag-auftragspositionen, Auftragspositionen (nur für Artikellisten-Widget)>>
-*** <<#variablen-auftrag-auftragspositionen-eigenschaften, Eigenschaften>>
-** <<#variablen-auftrag-eigenschaften, Eigenschaften>>
-** <<#variablen-auftrag-versand, Versand>>
 ** <<#variablen-auftrag-abonnement, Abonnement>>
+** <<#variablen-auftrag-allgemein, Allgemein>>
+** <<#variablen-auftrag-auftragsdatum, Auftragsdatum>>
+** <<#variablen-auftrag-auftragspositionen, Auftragspositionen (nur für Artikellisten-Widget)>>
+*** <<#variablen-auftrag-auftragspositionen-allgemein, Allgemein>>
+*** <<#variablen-auftrag-auftragspositionen-barcode, Barcode>>
+*** <<#variablen-auftrag-auftragspositionen-eigenschaften, Eigenschaften>>
+*** <<#variablen-auftrag-auftragspositionen-freitextfelder, Freitextfelder>>
+*** <<#variablen-auftrag-auftragspositionen-verfuegbarkeiten, Verfügbarkeiten>>
+** <<#variablen-auftrag-bankdaten-des-auftrags, Bankdaten des Auftrags>>
+** <<#variablen-auftrag-bestellmerkmale, Bestellmerkmale>>
+** <<#variablen-auftrag-lieferadresse, Lieferadresse>>
+*** <<#variablen-auftrag-lieferadresse-daten, Daten der Lieferadresse>>
+*** <<#variablen-auftrag-lieferadresse-optionen, Optionen der Lieferadresse>>
+** <<#variablen-auftrag-lieferanten, Lieferanten>>
+** <<#variablen-auftrag-rechnungsadresse, Rechnungsadresse>>
+*** <<#variablen-auftrag-rechnungsadresse-daten, Daten der Rechnungsadresse>>
+*** <<#variablen-auftrag-rechnungsadresse-optionen, Optionen der Rechnungsadresse>>
+** <<#variablen-auftrag-rechnungsdaten, Rechnungsdaten>>
+** <<#variablen-auftrag-versand, Versand>>
+** <<#variablen-auftrag-zahlung, Zahlung>>
+// ** <<#variablen-auftrag-eigenschaften, Eigenschaften>>
 
-* <<#variablen-kontakt-allgemein, Kontakt>>
 
-** <<#variablen-kontakt-allgemein, Kontaktvariablen allgemein>>
-** <<#variablen-kontakt-adressoptionen, Adressoptionen>>
-** <<#variablen-kontakt-lieferadresse, Lieferadresse>>
-** <<#variablen-kontakt-rechnungsadresse, Rechnungsadresse>>
+
+* <<#variablen-kontakt, Kontakt>>
+** <<#variablen-kontakt-allgemein, Allgemein>>
+** <<#variablen-kontakt-bankdaten-des-kontakts, Bankdaten des Kontakts>>
 ** <<#variablen-kontakt-eigenschaften, Eigenschaften>>
-** <<#variablen-kontakt-optionen, Optionen>>
+** <<#variablen-kontakt-optionen, Kontaktoptionen>>
+** <<#variablen-kontakt-lieferadresse, Lieferadresse>>
+*** <<#variablen-kontakt-lieferadresse-daten, Daten der Lieferadresse>>
+*** <<#variablen-kontakt-lieferadresse-optionen, Optionen der Lieferadresse>>
+** <<#variablen-kontakt-rechnungsadresse, Rechnungsadresse>>
+*** <<#variablen-kontakt-rechnungsadresse-daten, Daten der Rechnungsadresse>>
+*** <<#variablen-kontakt-rechnungsadresse-optionen, Optionen der Rechnungsadresse>>
 
-* <<#variablen-global, Global>>
+// ** <<#variablen-kontakt-adressoptionen, Adressoptionen>>
+
+* <<#variablen-global, Globale Variablen>>
+** <<#variablen-global-allgemein, Allgemein>>
+** <<#variablen-global-bankdaten-des-mandanten, Bankdaten des Mandanten>>
+** <<#variablen-global-gutscheine, Gutscheine>>
+** <<#variablen-global-links, Links>>
+** <<#variablen-global-rechtstexte, Rechtstexte>>
 
 * <<#variablen-newsletter, Newsletter>>
 
@@ -1614,10 +1638,58 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 * <<#variablen-textbloecke, Textblöcke>>
 
 [#variablen-auftrag]
-==== Variablen: Auftrag allgemein
+==== Variablen: Auftrag
+
+In dieser Kategorie findest du alle auftragsrelevanten Unterkategorien.
+
+[#variablen-auftrag-abonnement]
+===== Variablen: Auftrag / Abonnement
+
+[[table-variables-order-subscription]]
+.Variablen in der Unterkategorie *Auftrag / Abonnement*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Enddatum des Abonnements`
+|Ende des Abonnements.
+| `order.formattedSubscription.endDate`
+| $SchedulerEndDate
+
+| `Abonnement-ID`
+|ID des Abonnements. Wird automatisch vom System vergeben und kann _nicht_ geändert werden.
+| `order.formattedSubscription.id`
+| $SchedulerID
+
+| `Abonnementintervall`
+|Intervall des Abonnements wie im Menü *Einrichtung » Aufträge » Abonnement* festgelegt. Das Intervall legt fest, in welchen Zeitabständen Artikel an Kund:innen versendet werden. + 
+Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
+| `order.formattedSubscription.interval`
+| $SchedulerInterval
+
+| `Abonnement: Anzahl der Ausführungen`
+|Anzahl der Aufträge, die basierend auf einem Abonnement, angelegt wurde. +
+*_Beispiel:_* Wenn das Abonnement im Mai 2021 mit einem Intervall von 3 Monaten gestartet hat, wurden bis Mai 2022 4 Aufträge angelegt. In diesem Fall würde für diese Variable der Wert `4` in der E-Mail-Vorlage ausgegeben werden.
+| `order.formattedSubscription.numberOfExecutions`
+| $SchedulerExecutionCount
+
+| `Startdatum des Abonnements`
+|Beginn des Abonnements.
+| `order.formattedSubscription.startDate`
+| $SchedulerStartDate
+
+| `Gesamtbetrag des Abonnements`
+|
+| `order.formattedSubscription.totalAmount`
+| $SchedulerTotalAmount
+
+|====
+
+[#variablen-auftrag-allgemein]
+===== Variablen: Auftrag  / Allgemein
 
 [[table-variables-order-order]]
-.Variablen in der Kategorie *Auftrag*
+.Variablen in der Unterkategorie *Auftrag / Allgemein*
 [cols="2,4,3,2"]
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[Die Informationen in dieser Spalte sind für dich nur relevant, wenn du bereits E-Mail-Vorlagen im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* erstellt hast und wissen möchtest, wie die alte Variable hieß. Hinweis: Diese Spalte ist nicht vollständig befüllt.]
@@ -1642,16 +1714,7 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 | `order.formattedGeneral.couponValue`
 | $CouponValue
 
-| `Währungscode`
-|Währungscode, z.B. *EUR* oder *USD*.
-| `order.formattedSubtotals.currencyCode`
-| $Currency
-
-
-| `Währungszeichen`
-|Währungssymbol, z.B. *€* oder *$*.
-| `order.formattedSubtotals.currencySymbol`
-| $Currency
+|
 
 | `Kundenzeichen`
 |
@@ -1675,21 +1738,6 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedGeneral.DHLRetoureOnlineQRCodeImage \| raw`
 | -
 
-| `Datum und Uhrzeit des Auftragseingangs`
-|Datum und Uhrzeit des Auftragseingangs wie im Auftrag gespeichert.
-| `order.formattedDates.createdOnDateAndTime`
-|
-
-| `Datum des Auftragseingangs`
-|Datum des Auftragseingangs wie im Auftrag gespeichert.
-| `order.formattedDates.createdOn`
-| $OrderDate
-
-| `Datum des Zahlungseingangs`
-|Datum und Uhrzeit des Zahlungseingangs wie im Auftrag gespeichert.
-| `order.formattedDates.paidOn`
-| $PaymentDate
-
 | `Lieferadresse USt-IdNr.`
 |Umsatzsteuer-Identifikationsnummer aus der Lieferadresse, wie im Auftrag gespeichert.
 | `order.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
@@ -1710,35 +1758,15 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedAddresses.invoiceAddress.formattedOptions.VATNumber`
 | $OrderBillingAddressTaxId
 
-| `Rechnungsdatum`
-|
-| `order.formattedDocuments.invoiceDate`
-| -
 
-| `Rechnungsnummer-ID`
-|
-| `order.formattedDocuments.invoice`
-| -
 
-| `Gesamtrechnungsbetrag netto`
-|
-| `order.formattedGeneral.invoiceTotalNet`
-| $InvoiceTotalNet
-
-| `Gesamtbetrag des Auftrags netto`
-|
-| `order.formattedGeneral.totalNet`
-| $OrderTotalNet
 
 | `Anzahl der Pakete`
 |Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
 | `order.package`
 | 
 
-| `Offener Betrag`
-|
-| `order.formattedGeneral.openAmount`
-| $OpenAmount
+
 
 | `Auftrags-ID`
 |
@@ -1762,10 +1790,7 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedGeneral.orderTypeName`
 | $OrderType
 
-| `Auftrag Lager-ID`
-|
-| `order.formattedProperties.warehouse`
-| $WarehouseID
+
 
 | `ID des Hauptauftrags`
 |ID des obersten Vorgängerauftrags. Dies ist in der Regel ein normaler Auftrag. +
@@ -1773,15 +1798,7 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedOriginOrder.originOrderId`
 | $OriginOrderID
 
-| `Überbezahlter Betrag`
-|
-| `order.formattedGeneral.overpaidAmount`
-| $OverpaidAmount
 
-| `Bezahlter Betrag`
-|
-| `order.formattedGeneral.paidAmount`
-| $PaidAmount
 
 | `ID des Elternauftrags`
 |ID des direkten Vorgängerauftrags +
@@ -1789,35 +1806,7 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedOriginOrder.referenceOrderId`
 | $ParentOrderID
 
-| `PayPal link`
-| Gibt den Link zur PayPal-Bezahlseite aus.
-| `order.formattedGeneral.paypalVariables.link \| raw`
-| -
 
-| `PayPal link Button`
-|Gibt das Bild mit integriertem Link zur PayPal-Bezahlseite aus.
-| `order.formattedGeneral.paypalVariables.linkButton \| raw`
-| -
-
-| `Zahlungsziel`
-|
-| `order.formattedDates.paymentDueDate`
-| 
-
-| `Zahlungsart (Backend)`
-|
-| `order.formattedGeneral.methodOfPaymentName`
-| $MethodOfPaymentName
-
-| `Zahlungsart (Frontend)`
-|
-| `order.formattedGeneral.methodOfPaymentNameFrontend`
-| -
-
-| `Zahlungsart-ID`
-|Die ID wird vom System vergeben. Die IDs der xref:payment:zahlungsarten-verwalten.adoc#65[Zahlungsarten] sind im Menü *Einrichtung » Aufträge » Zahlung » Zahlungsarten* aufgeführt.
-| `order.formattedProperties.paymentMethod`
-| $MethodOfPaymentID
 
 | `Herkunft`
 |Name der xref:auftraege:auftragsherkunft.adoc#[Auftragsherkunft] wie im Menü *Einrichtung » Aufträge » Auftragsherkunft* gespeichert.
@@ -1829,10 +1818,7 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedReferrer.id`
 | $ReferrerID
 
-| `Nachbestellungs-ID`
-|ID der xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung].
-| `order.formattedReorder.id`
-| $ReorderID
+
 
 | `Verkäuferkonto`
 |
@@ -1849,255 +1835,54 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.statusName`
 | $OrderStatusLabel
 
-| `Gesamtrechnungsbetrag`
-|
-| `order.formattedGeneral.invoiceTotal`
-| $InvoiceTotal
 
-| `Gesamtbetrag der Mehrwertsteuer`
-|
-| `order.formattedGeneral.totalVat`
-| $TotalVAT
 
-| `Wert des Artikels`
-|
-| `order.formattedGeneral.valueOfItems`
-| $ValueOfItems
-
-| `eBay-Zahlungs-ID`
-|
-| `order.formattedProperties.ebayUniquePaymentID`
-| $EbayUniquePaymentID
 
 |====
 
-[#variablen-auftrag-lieferadresse]
-==== Variablen: Auftrag / Lieferadresse
+[#variablen-auftrag-auftragsdatum]
+===== Variablen: Auftrag / Auftragsdatum
 
-[[table-variables-order-delivery-address]]
-.Variablen in der Unterkategorie *Auftrag / Lieferadresse*
-[cols="1,3,2"]
+[[table-variables-order-order-date]]
+.Variablen in der Unterkategorie *Auftrag / Auftragsdatum*
+[cols="2,4,3,2"]
 |====
-|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `Lieferadresse Adresszusatz`
-| `order.formattedAddresses.deliveryAddress.address3`
-| $DeliveryAddressAdditionalAddress
-
-| `Lieferadresse Firmenname`
-| `order.formattedAddresses.deliveryAddress.name1`
-| $DeliveryAddressCompany
-
-| `Lieferadresse Kontaktperson`
-| `order.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
-| $DeliveryAddressContactPerson
-
-| `Lieferadresse Land`
-| `order.formattedAddresses.deliveryAddress.country.name`
-| $CustomerCountry
-
-| `Lieferadresse Länder-ID`
-| `order.formattedAddresses.deliveryAddress.country.id`
-| $CustomerCountryID
-
-| `Lieferadresse Länder-ISO-Code 2`
-| `order.formattedAddresses.deliveryAddress.country.isoCode2`
-| $CustomerCountryIsoCode
-
-| `Lieferadresse Länder-ISO-Code 3`
-| `order.formattedAddresses.deliveryAddress.country.isoCode3`
-| $CustomerCountryIsoCode
-
-| `Lieferadresse Vorname`
-| `order.formattedAddresses.deliveryAddress.name2`
-| $DeliveryAddressFirstName
-
-| `Lieferadresse Vorname und Nachname`
-| `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
-| $DeliveryAddressFullName
-
-| `Lieferadresse Hausnummer`
-| `order.formattedAddresses.deliveryAddress.address2`
+| `Datum und Uhrzeit des Auftragseingangs`
+|Datum und Uhrzeit des Auftragseingangs wie im Auftrag gespeichert.
+| `order.formattedDates.createdOnDateAndTime`
 |
 
-| `Lieferadresse Nachname`
-| `order.formattedAddresses.deliveryAddress.name3`
-| $DeliveryAddressLastName
+| `Datum des Auftragseingangs`
+|Datum des Auftragseingangs wie im Auftrag gespeichert.
+| `order.formattedDates.createdOn`
+| $OrderDate
 
-| `Lieferadresse Telefon`
-| `order.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+| `Datum des Zahlungseingangs`
+|Datum und Uhrzeit des Zahlungseingangs wie im Auftrag gespeichert.
+| `order.formattedDates.paidOn`
+| $PaymentDate
+
+| `Rechnungsdatum`
 |
-
-| `Lieferadresse Postleitzahl`
-| `order.formattedAddresses.deliveryAddress.postalCode`
-| $DeliveryAddressZip
-
-| `Lieferadresse Postleitzahl und Ort`
-| `order.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ order.formattedAddresses.deliveryAddress.town`
-|
-
-| `Lieferadresse Bundesland`
-| `order.formattedAddresses.deliveryAddress.state.name`
-| $DeliveryAddressState
-
-| `Lieferadresse Straße`
-| `order.formattedAddresses.deliveryAddress.address1`
-| $DeliveryAddressStreet
-
-| `Lieferadresse Ort`
-| `order.formattedAddresses.deliveryAddress.town`
-| $DeliveryAddressCity
-
-|====
-
-[#variablen-auftrag-rechnungsadresse]
-==== Variablen: Auftrag / Rechnungsadresse
-
-[[table-variables-order-invoice-address]]
-.Variablen in der Unterkategorie *Auftrag / Rechnungsadresse*
-[cols="1,3,2"]
-|====
-|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
-
-| `Rechnungsadresse Adresszusatz`
-| `order.formattedAddresses.invoiceAddress.address3`
-| $BillingAddressAdditionalAddress
-
-| `Rechnungsadresse Firmenname`
-| `order.formattedAddresses.invoiceAddress.name1`
-| $BillingAddressCompany
-
-| `Rechnungsadresse Kontaktperson`
-| `order.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
-| $BillingAddressContactPerson
-
-| `Rechnungsadresse Land`
-| `order.formattedAddresses.invoiceAddress.country.name`
-|
-
-| `Rechnungsadresse Länder-ID`
-| `order.formattedAddresses.invoiceAddress.country.id`
-|
-
-| `Rechnungsadresse Länder-ISO-Code 2`
-| `order.formattedAddresses.invoiceAddress.country.isoCode2`
-| $CustomerCountryIsoCode
-
-| `Rechnungsadresse Länder-ISO-Code 3`
-| `order.formattedAddresses.invoiceAddress.country.isoCode3`
-| $CustomerCountryIsoCode
-
-| `Rechnungsadresse Vorname`
-| `order.formattedAddresses.invoiceAddress.name2`
-| $BillingAddressFirstName
-
-| `Rechnungsadresse Vorname und Nachname`
-| `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
-| $BillingAddressFullName
-
-| `Rechnungsadresse Hausnummer`
-| `order.formattedAddresses.invoiceAddress.address2`
-|
-
-| `Rechnungsadresse Nachname`
-| `order.formattedAddresses.invoiceAddress.name3`
-| $BillingAddressLastName
-
-| `Rechnungsadresse Telefon`
-| `order.formattedAddresses.invoiceAddress.formattedOptions.telephone`
-|
-
-| `Rechnungsadresse Postleitzahl`
-| `order.formattedAddresses.invoiceAddress.postalCode`
-|
-
-| `Rechnungsadresse Postleitzahl und Ort`
-| `order.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ order.formattedAddresses.invoiceAddress.town`
-|
-
-| `Rechnungsadresse Bundesland`
-| `order.formattedAddresses.invoiceAddress.state.name`
-| $CustomerState
-
-| `Rechnungsadresse Straße`
-| `order.formattedAddresses.invoiceAddress.address1`
-|
-
-| `Rechnungsadresse Ort`
-| `order.formattedAddresses.invoiceAddress.town`
-|
-
-|====
-
-[#variablen-auftrag-bankdaten-des-auftrags]
-==== Variablen: Auftrag / Bankdaten des Auftrags
-
-[[table-variables-order-bank-details-of-order]]
-.Variablen in der Unterkategorie *Auftrag / Bankdaten des Auftrags*
-[cols="1,2,3"]
-|====
-|Name der Variable |Erläuterung |Twig expression 
-
-| `Inhaber:in`
-|Name der Kontoinhaber:in wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.accountHolder`
-
-| `Kontonummer`
-|Kontonummer wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.accountNumber`
-
-| `BIC`
-|BIC wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.bic`
-
-| `Bankleitzahl`
-|Bankleitzahl wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.bankCode`
-
-| `Land der Bank`
-|Land der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.bankCountry`
-
-| `Bankname`
-|Name der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.bankName`
-
-| `PLZ und Ort der Bank`
-|Postleitzahl und Ort der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.bankPostalCodeTown`
-
-| `Straße der Bank`
-|Straße der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.bankStreet`
-
-| `IBAN`
-|IBAN der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.iban`
-
-| `SEPA-Lastschriftmandat`
-|SEPA-Lastschriftmandat wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.SEPA`
-
-| `SEPA-Lastschriftmandat erteilt am`
-|Datum, an dem das SEPA-Lastschriftmandat erteilt wurde. Wird im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.SEPADate`
-
-| `SEPA-Art des Mandats`
-|SEPA-Art des Mandats wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.SEPADirectDebitMethod`
-
-| `SEPA-Ausführungsmodalität`
-|SEPA-Ausführungsmodalität wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.SEPAFrequency`
-
-| `SEPA-Typ`
-|SEPA-Typ wie im Bereich *Bankdaten* des Auftrags gespeichert.
-| `order.formattedBankData.SEPADirectDebitType`
+| `order.formattedDocuments.invoiceDate`
+| -
 
 |====
 
 [#variablen-auftrag-auftragspositionen]
-==== Variablen: Auftrag / Auftragspositionen (nur für Artikellisten-Widget)
+===== Variablen: Auftrag / Auftragspositionen (nur für Artikellisten-Widget)
+
+// TODO: hier müssen dann noch weitere unterkategorien ergänzt werden: Allgemein, Barcode, Eigenschaften, Freitextfelder, Verfügbarkeiten
+
+////
+#variablen-auftrag-auftragspositionen-allgemein
+#variablen-auftrag-auftragspositionen-barcode
+#variablen-auftrag-auftragspositionen-eigenschaften, Eigenschaften
+#variablen-auftrag-auftragspositionen-freitextfelder, Freitextfelder
+#variablen-auftrag-auftragspositionen-verfuegbarkeiten, Verfügbarkeiten
+////
 
 [#box-verwendung-variablen-warenbestand]
 [IMPORTANT]
@@ -2468,49 +2253,402 @@ Diese Aussage gilt für die folgenden Variablen:
 
 |====
 
+[#variablen-auftrag-bankdaten-des-auftrags]
+===== Variablen: Auftrag / Bankdaten des Auftrags
+
+[[table-variables-order-bank-details-of-order]]
+.Variablen in der Unterkategorie *Auftrag / Bankdaten des Auftrags*
+[cols="1,2,3"]
+|====
+|Name der Variable |Erläuterung |Twig expression 
+
+| `Inhaber:in`
+|Name der Kontoinhaber:in wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.accountHolder`
+
+| `Kontonummer`
+|Kontonummer wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.accountNumber`
+
+| `BIC`
+|BIC wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.bic`
+
+| `Bankleitzahl`
+|Bankleitzahl wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.bankCode`
+
+| `Land der Bank`
+|Land der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.bankCountry`
+
+| `Bankname`
+|Name der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.bankName`
+
+| `PLZ und Ort der Bank`
+|Postleitzahl und Ort der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.bankPostalCodeTown`
+
+| `Straße der Bank`
+|Straße der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.bankStreet`
+
+| `IBAN`
+|IBAN der Bank wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.iban`
+
+| `SEPA-Lastschriftmandat`
+|SEPA-Lastschriftmandat wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.SEPA`
+
+| `SEPA-Lastschriftmandat erteilt am`
+|Datum, an dem das SEPA-Lastschriftmandat erteilt wurde. Wird im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.SEPADate`
+
+| `SEPA-Art des Mandats`
+|SEPA-Art des Mandats wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.SEPADirectDebitMethod`
+
+| `SEPA-Ausführungsmodalität`
+|SEPA-Ausführungsmodalität wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.SEPAFrequency`
+
+| `SEPA-Typ`
+|SEPA-Typ wie im Bereich *Bankdaten* des Auftrags gespeichert.
+| `order.formattedBankData.SEPADirectDebitType`
+
+|====
+
+[#variablen-auftrag-bestellmerkmale]
+===== Variablen: Auftrag / Bestellmerkmale
+
+// TODO: Einleitung und ggf. Tabelle ergänzen
+
 ////
-[TIP]
-.Weitere twig expressions für das Artikellisten-Widget
-====
-Du kannst zusätzlich die im Folgenden aufgelisteten twig expressions im Artikellisten-Widget verwenden. Beachte, dass diese Werte nur als twig expression verfügbar sind und deshalb _nicht_ in der Liste der verfügbaren Variablen für das Artikellisten-Widget im EmailBuilder gesucht werden können.
-
-* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountGross&#125;&#8288;&#125; 
-// ** gibt den Bruttogesamtbetrag des Rabatts aus
-
-* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountNet&#125;&#8288;&#125;
-// ** gibt den Nettogesamtbetrag des Rabatts aus
-
-* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceGross&#125;&#8288;&#125;
-// ** gibt den Bruttopreis aus
-
-* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceNet&#125;&#8288;&#125;
-// ** gibt den Nettopreis aus
-
-* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsGross&#125;&#8288;&#125;
-// ** gibt die Bruttoversandkosten aus
-
-* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsNet&#125;&#8288;&#125;
-// ** gibt die Nettoversandkosten aus
-
-* &#123;&#8288;&#123;order.formattedSubtotals.vats&#125;&#8288;&#125;
-// ** gibt die Mehrwersteuersätze aus
-
-====
-////
-
-[#variablen-auftrag-auftragspositionen-eigenschaften]
-===== Variablen: Auftrag / Auftragspositionen (nur für Artikellisten-Widget) / Eigenschaften
-
-In diesem Bereich des EmailBuilder werden alle Variablen angezeigt, für die du Eigenschaften für den Bereich *Artikel* im Menü *Einrichtung » Einstellungen » Eigenschaften* erstellt hast. +
-Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.adoc#500[Eigenschaften].
+TODO: prüfen, ob es die jetzt noch gibt oder ob die jetzt Bestellmerkmale heißen.
 
 [#variablen-auftrag-eigenschaften]
 ==== Variablen: Auftrag / Eigenschaften
 
 In diesem Bereich des EmailBuilder werden die Variablen aller auftragsbezogenen Eigenschaften angezeigt.
+////
+
+[#variablen-auftrag-lieferadresse]
+===== Variablen: Auftrag / Lieferadresse
+
+[[table-variables-order-delivery-address]]
+.Variablen in der Unterkategorie *Auftrag / Lieferadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Lieferadresse Adresszusatz`
+| `order.formattedAddresses.deliveryAddress.address3`
+| $DeliveryAddressAdditionalAddress
+
+| `Lieferadresse Firmenname`
+| `order.formattedAddresses.deliveryAddress.name1`
+| $DeliveryAddressCompany
+
+| `Lieferadresse Kontaktperson`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
+| $DeliveryAddressContactPerson
+
+| `Lieferadresse Land`
+| `order.formattedAddresses.deliveryAddress.country.name`
+| $CustomerCountry
+
+| `Lieferadresse Länder-ID`
+| `order.formattedAddresses.deliveryAddress.country.id`
+| $CustomerCountryID
+
+| `Lieferadresse Länder-ISO-Code 2`
+| `order.formattedAddresses.deliveryAddress.country.isoCode2`
+| $CustomerCountryIsoCode
+
+| `Lieferadresse Länder-ISO-Code 3`
+| `order.formattedAddresses.deliveryAddress.country.isoCode3`
+| $CustomerCountryIsoCode
+
+| `Lieferadresse Vorname`
+| `order.formattedAddresses.deliveryAddress.name2`
+| $DeliveryAddressFirstName
+
+| `Lieferadresse Vorname und Nachname`
+| `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressFullName
+
+| `Lieferadresse Hausnummer`
+| `order.formattedAddresses.deliveryAddress.address2`
+|
+
+| `Lieferadresse Nachname`
+| `order.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressLastName
+
+| `Lieferadresse Telefon`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+|
+
+| `Lieferadresse Postleitzahl`
+| `order.formattedAddresses.deliveryAddress.postalCode`
+| $DeliveryAddressZip
+
+| `Lieferadresse Postleitzahl und Ort`
+| `order.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ order.formattedAddresses.deliveryAddress.town`
+|
+
+| `Lieferadresse Bundesland`
+| `order.formattedAddresses.deliveryAddress.state.name`
+| $DeliveryAddressState
+
+| `Lieferadresse Straße`
+| `order.formattedAddresses.deliveryAddress.address1`
+| $DeliveryAddressStreet
+
+| `Lieferadresse Ort`
+| `order.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCity
+
+|====
+
+[#variablen-auftrag-lieferadresse-daten]
+====== Variablen: Auftrag / Lieferadresse / Daten der Lieferadresse
+
+[[table-variables-order-delivery-address-data]]
+.Variablen in der Unterkategorie *Auftrag / Lieferadresse / Daten der Lieferadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+// TODO: Variablen ausschneiden und hier einfügen
+
+|====
+
+[#variablen-auftrag-lieferadresse-optionen]
+====== Variablen: Auftrag / Lieferadresse / Optionen der Lieferadresse
+
+[[table-variables-order-delivery-address-options]]
+.Variablen in der Unterkategorie *Auftrag / Lieferadresse / Optionen der Lieferadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+// TODO: Variablen ausschneiden und hier einfügen
+
+|====
+
+[#variablen-auftrag-lieferanten]
+===== Variablen: Auftrag / Lieferanten
+
+[[table-variables-order-suppliers]]
+.Variablen in der Unterkategorie *Auftrag / Lieferanten*
+[cols="1,2,3"]
+|====
+|Name der Variable |Erläuterung |Twig expression 
+
+| `Auftrag Lager-ID`
+|
+| `order.formattedProperties.warehouse`
+| $WarehouseID
+
+// TODO: Auftrag Lagername fehlt noch.
+
+| `Nachbestellungs-ID`
+|ID der xref:warenwirtschaft:nachbestellungen-verwalten.adoc#[Nachbestellung].
+| `order.formattedReorder.id`
+| $ReorderID
+
+|====
+
+[#variablen-auftrag-rechnungsadresse]
+===== Variablen: Auftrag / Rechnungsadresse
+
+[[table-variables-order-invoice-address]]
+.Variablen in der Unterkategorie *Auftrag / Rechnungsadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Rechnungsadresse Adresszusatz`
+| `order.formattedAddresses.invoiceAddress.address3`
+| $BillingAddressAdditionalAddress
+
+| `Rechnungsadresse Firmenname`
+| `order.formattedAddresses.invoiceAddress.name1`
+| $BillingAddressCompany
+
+| `Rechnungsadresse Kontaktperson`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
+| $BillingAddressContactPerson
+
+| `Rechnungsadresse Land`
+| `order.formattedAddresses.invoiceAddress.country.name`
+|
+
+| `Rechnungsadresse Länder-ID`
+| `order.formattedAddresses.invoiceAddress.country.id`
+|
+
+| `Rechnungsadresse Länder-ISO-Code 2`
+| `order.formattedAddresses.invoiceAddress.country.isoCode2`
+| $CustomerCountryIsoCode
+
+| `Rechnungsadresse Länder-ISO-Code 3`
+| `order.formattedAddresses.invoiceAddress.country.isoCode3`
+| $CustomerCountryIsoCode
+
+| `Rechnungsadresse Vorname`
+| `order.formattedAddresses.invoiceAddress.name2`
+| $BillingAddressFirstName
+
+| `Rechnungsadresse Vorname und Nachname`
+| `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
+| $BillingAddressFullName
+
+| `Rechnungsadresse Hausnummer`
+| `order.formattedAddresses.invoiceAddress.address2`
+|
+
+| `Rechnungsadresse Nachname`
+| `order.formattedAddresses.invoiceAddress.name3`
+| $BillingAddressLastName
+
+| `Rechnungsadresse Telefon`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.telephone`
+|
+
+| `Rechnungsadresse Postleitzahl`
+| `order.formattedAddresses.invoiceAddress.postalCode`
+|
+
+| `Rechnungsadresse Postleitzahl und Ort`
+| `order.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ order.formattedAddresses.invoiceAddress.town`
+|
+
+| `Rechnungsadresse Bundesland`
+| `order.formattedAddresses.invoiceAddress.state.name`
+| $CustomerState
+
+| `Rechnungsadresse Straße`
+| `order.formattedAddresses.invoiceAddress.address1`
+|
+
+| `Rechnungsadresse Ort`
+| `order.formattedAddresses.invoiceAddress.town`
+|
+
+|====
+
+
+[#variablen-auftrag-rechnungsadresse-daten]
+====== Variablen: Auftrag / Rechnungsadresse / Daten der Rechnungsadresse
+
+[[table-variables-order-invoice-address-data]]
+.Variablen in der Unterkategorie *Auftrag / Rechnungsadresse / Daten der Rechnungsadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+// TODO: Variablen ausschneiden und hier einfügen
+
+|====
+
+[#variablen-auftrag-rechnungsadresse-optionen]
+====== Variablen: Auftrag / Rechnungsadresse / Optionen der Rechnungsadresse
+
+[[table-variables-order-invoice-address-options]]
+.Variablen in der Unterkategorie *Auftrag / Rechnungsadresse / Optionen der Rechnungsadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+// TODO: Variablen ausschneiden und hier einfügen
+
+|====
+
+
+[#variablen-auftrag-rechnungsdaten]
+===== Variablen: Auftrag / Rechnungsdaten
+
+[[table-variables-order-invoice-data]]
+.Variablen in der Unterkategorie *Auftrag / Rechnungsdaten*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Währungscode`
+|Währungscode, z.B. *EUR* oder *USD*.
+| `order.formattedSubtotals.currencyCode`
+| $Currency
+
+| `Währungszeichen`
+|Währungssymbol, z.B. *€* oder *$*.
+| `order.formattedSubtotals.currencySymbol`
+| $Currency
+
+| `Rechnungsnummer-ID`
+|
+| `order.formattedDocuments.invoice`
+| -
+
+| `Gesamtrechnungsbetrag netto`
+|
+| `order.formattedGeneral.invoiceTotalNet`
+| $InvoiceTotalNet
+
+| `Gesamtbetrag des Auftrags netto`
+|
+| `order.formattedGeneral.totalNet`
+| $OrderTotalNet
+
+| `Offener Betrag`
+|
+| `order.formattedGeneral.openAmount`
+| $OpenAmount
+
+| `Überbezahlter Betrag`
+|
+| `order.formattedGeneral.overpaidAmount`
+| $OverpaidAmount
+
+| `Bezahlter Betrag`
+|
+| `order.formattedGeneral.paidAmount`
+| $PaidAmount
+
+// TODO: Gesamtrabatt brutto und Gesamtrabatt netto fehlen 
+
+| `Gesamtrechnungsbetrag`
+|
+| `order.formattedGeneral.invoiceTotal`
+| $InvoiceTotal
+
+| `Gesamtbetrag der Mehrwertsteuer`
+|
+| `order.formattedGeneral.totalVat`
+| $TotalVAT
+
+| `Wert des Artikels`
+|
+| `order.formattedGeneral.valueOfItems`
+| $ValueOfItems
+
+| `Warenwert (Brutto)`
+|
+| `order.formattedSubtotals.subtotalPriceGross`
+| -
+
+| `Warenwert (Netto)`
+|
+| `order.formattedSubtotals.subtotalPriceNet`
+| -
+
+|====
 
 [#variablen-auftrag-versand]
-==== Variablen: Auftrag / Versand
+===== Variablen: Auftrag / Versand
 
 [[table-variables-order-shipping]]
 .Variablen in der Unterkategorie *Auftrag / Versand*
@@ -2573,16 +2711,6 @@ In diesem Bereich des EmailBuilder werden die Variablen aller auftragsbezogenen 
 | `order.formattedSubtotals.shippingCostsNet`
 | -
 
-| `Warenwert (Netto)`
-|
-| `order.formattedSubtotals.subtotalPriceNet`
-| -
-
-| `Warenwert (Brutto)`
-|
-| `order.formattedSubtotals.subtotalPriceGross`
-| -
-
 | `Versandprofil`
 | Name des xref:fulfillment:versand-vorbereiten.adoc#1000[Versandprofils] wie im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versandprofile* gespeichert.
 | `order.formattedShipping.profileName`
@@ -2611,72 +2739,75 @@ In diesem Bereich des EmailBuilder werden die Variablen aller auftragsbezogenen 
 
 |====
 
-[#variablen-auftrag-abonnement]
-==== Variablen: Auftrag / Abonnement
+[#variablen-auftrag-zahlung]
+===== Variablen: Auftrag / Zahlung
 
-[[table-variables-order-subscription]]
-.Variablen in der Unterkategorie *Auftrag / Abonnement*
+[[table-variables-order-payment]]
+.Variablen in der Unterkategorie *Auftrag / Zahlung*
 [cols="2,4,3,2"]
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `Enddatum des Abonnements`
-|Ende des Abonnements.
-| `order.formattedSubscription.endDate`
-| $SchedulerEndDate
+| `PayPal Link`
+| Gibt den Link zur PayPal-Bezahlseite aus.
+| `order.formattedGeneral.paypalVariables.link \| raw`
+| -
 
-| `Abonnement-ID`
-|ID des Abonnements. Wird automatisch vom System vergeben und kann _nicht_ geändert werden.
-| `order.formattedSubscription.id`
-| $SchedulerID
+| `PayPal Link Button`
+|Gibt das Bild mit integriertem Link zur PayPal-Bezahlseite aus.
+| `order.formattedGeneral.paypalVariables.linkButton \| raw`
+| -
 
-| `Abonnementintervall`
-|Intervall des Abonnements wie im Menü *Einrichtung » Aufträge » Abonnement* festgelegt. Das Intervall legt fest, in welchen Zeitabständen Artikel an Kund:innen versendet werden. + 
-Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
-| `order.formattedSubscription.interval`
-| $SchedulerInterval
-
-| `Abonnement: Anzahl der Ausführungen`
-|Anzahl der Aufträge, die basierend auf einem Abonnement, angelegt wurde. +
-*_Beispiel:_* Wenn das Abonnement im Mai 2021 mit einem Intervall von 3 Monaten gestartet hat, wurden bis Mai 2022 4 Aufträge angelegt. In diesem Fall würde für diese Variable der Wert `4` in der E-Mail-Vorlage ausgegeben werden.
-| `order.formattedSubscription.numberOfExecutions`
-| $SchedulerExecutionCount
-
-| `Startdatum des Abonnements`
-|Beginn des Abonnements.
-| `order.formattedSubscription.startDate`
-| $SchedulerStartDate
-
-| `Gesamtbetrag des Abonnements`
+| `Zahlungsziel`
 |
-| `order.formattedSubscription.totalAmount`
-| $SchedulerTotalAmount
+| `order.formattedDates.paymentDueDate`
+| 
+
+| `Zahlungsart (Backend)`
+|
+| `order.formattedGeneral.methodOfPaymentName`
+| $MethodOfPaymentName
+
+| `Zahlungsart (Frontend)`
+|
+| `order.formattedGeneral.methodOfPaymentNameFrontend`
+| -
+
+| `Zahlungsart-ID`
+|Die ID wird vom System vergeben. Die IDs der xref:payment:zahlungsarten-verwalten.adoc#65[Zahlungsarten] sind im Menü *Einrichtung » Aufträge » Zahlung » Zahlungsarten* aufgeführt.
+| `order.formattedProperties.paymentMethod`
+| $MethodOfPaymentID
+
+// TODO: Transaktions-ID der Zahlung fehlt an dieser Stelle
+
+| `eBay-Zahlungs-ID`
+|
+| `order.formattedProperties.ebayUniquePaymentID`
+| $EbayUniquePaymentID
 
 |====
+
+
+[#variablen-auftrag-auftragspositionen-eigenschaften]
+===== Variablen: Auftrag / Auftragspositionen (nur für Artikellisten-Widget) / Eigenschaften
+
+In diesem Bereich des EmailBuilder werden alle Variablen angezeigt, für die du Eigenschaften für den Bereich *Artikel* im Menü *Einrichtung » Einstellungen » Eigenschaften* erstellt hast. +
+Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.adoc#500[Eigenschaften].
+
+
+[#variablen-kontakt]
+==== Variablen: Kontakt
+
+In dieser Kategorie findest du alle kontaktbezogenen Unterkategorien.
 
 [#variablen-kontakt-allgemein]
-==== Variablen: Kontakt allgemein
+===== Variablen: Kontakt / Allgemein
 
 [[table-variables-contact]]
-.Variablen in der Kategorie *Kontakt*
+.Variablen in der Unterkategorie *Kontakt / Allgemein*
 [cols="2,4,3,2"]
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
-
-| `Kontoinhaber (Kontakt)`
-| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Kontoinhaber:in] wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.accountOwner`
-|
-
-| `BIC des Kontakts`
-| xref:crm:kontakt-bearbeiten.adoc#bankdaten[BIC] wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.bic`
-| $CustomerBIC
-
-| `Bankname des Kontakts`
-| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Bankname] wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.bankName`
-| $CustomerBankName
 
 | `Klasse`
 | Klasse, die dem Kontakt zugeordnet ist. xref:crm:vorbereitende-einstellungen.adoc#kundenklasse-erstellen[Klassen] erstellst du im Menü *Einrichtung » CRM » Klassen*.
@@ -2714,11 +2845,6 @@ Anzeige, wenn weiblich: *female* +
 Anzeige, wenn divers: leere Option
 | `contact.gender is same as ('diverse') ? '' : contact.gender`
 |
-
-| `IBAN des Kontakts`
-|IBAN wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.iban`
-| $CustomerIBAN
 
 | `Sprache`
 |Sprache wie im Kontaktdatensatz gespeichert. Wenn du eine E-Mail-Vorlage in der gewählten Sprache erstellt hast, werden E-Mail-Vorlagen in dieser Sprache an den Kontakt versendet.
@@ -2776,6 +2902,37 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 |
 | `contact.title`
 | $CustomerTitle
+
+|====
+
+[#variablen-kontakt-bankdaten-des-kontakts]
+===== Variablen: Kontakt / Bankdaten des Kontakts
+
+[[table-variables-contact-bank-details-of-contact]]
+.Variablen in der Unterkategorie *Kontakt / Bankdaten des Kontakts*
+[cols="1,2,3"]
+|====
+|Name der Variable |Erläuterung |Twig expression 
+
+| `Kontoinhaber (Kontakt)`
+| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Kontoinhaber:in] wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.accountOwner`
+|
+
+| `BIC des Kontakts`
+| xref:crm:kontakt-bearbeiten.adoc#bankdaten[BIC] wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.bic`
+| $CustomerBIC
+
+| `Bankname des Kontakts`
+| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Bankname] wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.bankName`
+| $CustomerBankName
+
+| `IBAN des Kontakts`
+|IBAN wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.iban`
+| $CustomerIBAN
 
 |====
 
@@ -3106,14 +3263,71 @@ Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.
 [#variablen-global]
 ==== Variablen: Global
 
-[TIP]
-.Werden die Rechtstexte nicht korrekt in der versendeten E-Mail dargestellt?
-====
-Wenn deine über twig expressions eingebundenen Rechtstexte, die du im Code-Widget eingefügt hast, nicht korrekt in der gesendeten E-Mail dargestellt werden, ist die Lösung `| raw` am Ende der Twig expression einzufügen.
-====
 
-[[table-variables-global]]
-.Variablen in der Kategorie *Global*
+////
+** <<#variablen-global-allgemein, Allgemein>>
+** <<#variablen-global-bankdaten-des-mandanten, Bankdaten des Mandanten>>
+** <<#variablen-global-gutscheine, Gutscheine>>
+** <<#variablen-global-links, Links>>
+** <<#variablen-global-rechtstexte, Rechtstexte>>
+////
+
+
+[#variablen-global-allgemein]
+===== Variablen: Global / Allgemein
+
+// TODO: Tabelle ist komplett, außer Erklärung und twig für E-Mail-Absender.
+
+[[table-variables-global-general]]
+.Variablen in der Unterkategorie *Globale Variablen / Allgemein*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Mandanten-ID`
+|Gibt die ID des Mandanten (Shops) aus.
+| `globals.webshopId`
+| -
+
+| `Mandantenname`
+|Gibt den Namen des Mandanten (Shops) aus.
+| `globals.clientName`
+| -
+
+| `EORI-Nummer`
+|Eindeutige Identifizierungsnummer, die für Zollzwecke benötigt wird.
+| `globals.account.EORINumber`
+|
+
+| `E-Mail-Absender`
+|Gibt den E-Mail-Absender aus.
+| 
+| 
+
+// TODO: E-Mail-Absender / erklärung und twig noch ergänzen.
+
+| `Signatur im HTML-Format`
+|Die Signatur wird im Assistenten *E-Mail-Konten* im Schritt *Signatur* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Mandant » Global » E-Mail-Konten*.
+| `globals.account.signatureHTML \| raw`
+| $SignatureHTML
+
+| `Signatur im reinen Textformat`
+|Die Signatur wird im Assistenten *E-Mail-Konten* im Schritt *Signatur* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Mandant » Global » E-Mail-Konten*.
+| `globals.account.signatureText \| raw`
+| $SignatureText
+
+| `Heutiges Datum`
+|Gibt das heutige Datum im Format `tt-mm-jjjj` aus.
+| `"now"\|date("d-m-Y")`
+| $TodaysDate
+
+|====
+
+[#variablen-global-bankdaten-des-mandanten]
+===== Variablen: Global / Bankdaten des Mandanten
+
+[[table-variables-global-bank-details-of-client]]
+.Variablen in der Unterkategorie *Globale Variablen / Bankdaten des Mandanten*
 [cols="2,4,3,2"]
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
@@ -3133,25 +3347,21 @@ Wenn deine über twig expressions eingebundenen Rechtstexte, die du im Code-Widg
 | `globals.bank.name`
 | $BankName
 
-| `Widerrufsrecht im HTML-Format`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *HTML* gespeichert.
-| `globals.legalInformation.cancellationRights.html \| raw`
-| $CancellationRightsHTML
+| `IBAN (Stammdaten)`
+|IBAN aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+| `globals.bank.iban`
+| $BankIBAN
 
-| `Widerrufsrecht im reinen Textformat`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *Text* gespeichert.
-| `globals.legalInformation.cancellationRights.plain`
-| $CancellationRightsText
+|====
 
-| `Mandanten-ID`
-|Gibt die ID des Mandanten (Shops) aus.
-| `globals.webshopId`
-| -
+[#variablen-global-gutscheine]
+===== Variablen: Global / Gutscheine
 
-| `Mandantenname`
-|Gibt den Namen des Mandanten (Shops) aus.
-| `globals.clientName`
-| -
+[[table-variables-global-coupons]]
+.Variablen in der Unterkategorie *Globale Variablen / Gutscheine*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `Gutschein-Code (1)`
 | xref:auftraege:gutscheine.adoc#[Gutschein-Codes] werden in der Kampagne im Menü *Aufträge » Gutscheine* generiert. Ein Gutschein-Code kann immer nur jeweils einer Kampagne zugeordnet werden, um diesen Gutschein-Code aus der Kampagne in der E-Mail-Vorlage zu versenden.
@@ -3203,60 +3413,16 @@ Wenn deine über twig expressions eingebundenen Rechtstexte, die du im Code-Widg
 | `globals.coupons.couponCode10`
 | $CouponCode10
 
-| `EORI-Nummer`
-|Eindeutige Identifizierungsnummer, die für Zollzwecke benötigt wird.
-| `globals.account.EORINumber`
-|
+|====
 
-| `Allgemeine Geschäftsbedingungen im HTML-Format`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *HTML* gespeichert.
-| `globals.legalInformation.termsConditions.html \| raw`
-|
+[#variablen-global-links]
+===== Variablen: Global / Links
 
-| `Allgemeine Geschäftsbedingungen im reinen Textformat`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *Text* gespeichert.
-| `globals.legalInformation.termsConditions.plain`
-|
-
-| `IBAN (Stammdaten)`
-|IBAN aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
-| `globals.bank.iban`
-| $BankIBAN
-
-| `Impressum im HTML-Format`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *HTML* gespeichert.
-| `globals.legalInformation.legalDisclosure.html \| raw`
-| $LegalDisclosureHTML
-
-| `Impressum im reinen Textformat`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *Text* gespeichert.
-| `globals.legalInformation.legalDisclosure.plain`
-| $LegalDisclosureText
-
-| `Datenschutzerklärung im HTML-Format`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Datenschutzerklärung* und dort im Tab *HTML* gespeichert.
-| `globals.legalInformation.privacyPolicy.html \| raw`
-| $PrivacyPolicyHTML
-
-| `Datenschutzerklärung im reinen Textformat`
-|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Datenschutzerklärung* und dort im Tab *Text* gespeichert.
-| `globals.legalInformation.privacyPolicy.plain`
-| $PrivacyPolicyText
-
-| `Signatur im HTML-Format`
-|Die Signatur wird im Assistenten *E-Mail-Konten* im Schritt *Signatur* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Mandant » Global » E-Mail-Konten*.
-| `globals.account.signatureHTML \| raw`
-| $SignatureHTML
-
-| `Signatur im reinen Textformat`
-|Die Signatur wird im Assistenten *E-Mail-Konten* im Schritt *Signatur* gespeichert. Du findest den Assistenten im Menü *Einrichtung » Mandant » Global » E-Mail-Konten*.
-| `globals.account.signatureText \| raw`
-| $SignatureText
-
-| `Heutiges Datum`
-|Gibt das heutige Datum im Format `tt-mm-jjjj` aus.
-| `"now"\|date("d-m-Y")`
-| $TodaysDate
+[[table-variables-global-links]]
+.Variablen in der Unterkategorie *Globale Variablen / Links*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
 | `URL zum Warenkorb`
 |Gibt die URL zum Warenkorb im Webshop aus.
@@ -3292,6 +3458,63 @@ Wenn deine über twig expressions eingebundenen Rechtstexte, die du im Code-Widg
 |Gibt die URL zu den AGB aus.
 | `globals.links.linkTermsConditions`
 |
+
+|====
+
+[#variablen-global-rechtstexte]
+===== Variablen: Global / Rechtstexte
+
+[TIP]
+.Werden die Rechtstexte nicht korrekt in der versendeten E-Mail dargestellt?
+====
+Wenn deine über twig expressions eingebundenen Rechtstexte, die du im Code-Widget eingefügt hast, nicht korrekt in der gesendeten E-Mail dargestellt werden, ist die Lösung `| raw` am Ende der Twig expression einzufügen.
+====
+
+[[table-variables-global-legal-texts]]
+.Variablen in der Unterkategorie *Globale Variablen / Rechtstexte*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Widerrufsrecht im HTML-Format`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *HTML* gespeichert.
+| `globals.legalInformation.cancellationRights.html \| raw`
+| $CancellationRightsHTML
+
+| `Widerrufsrecht im reinen Textformat`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsrecht* und dort im Tab *Text* gespeichert.
+| `globals.legalInformation.cancellationRights.plain`
+| $CancellationRightsText
+
+| `Allgemeine Geschäftsbedingungen im HTML-Format`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *HTML* gespeichert.
+| `globals.legalInformation.termsConditions.html \| raw`
+|
+
+| `Allgemeine Geschäftsbedingungen im reinen Textformat`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *AGB* und dort im Tab *Text* gespeichert.
+| `globals.legalInformation.termsConditions.plain`
+|
+
+| `Impressum im HTML-Format`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *HTML* gespeichert.
+| `globals.legalInformation.legalDisclosure.html \| raw`
+| $LegalDisclosureHTML
+
+| `Impressum im reinen Textformat`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Impressum* und dort im Tab *Text* gespeichert.
+| `globals.legalInformation.legalDisclosure.plain`
+| $LegalDisclosureText
+
+| `Datenschutzerklärung im HTML-Format`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Datenschutzerklärung* und dort im Tab *HTML* gespeichert.
+| `globals.legalInformation.privacyPolicy.html \| raw`
+| $PrivacyPolicyHTML
+
+| `Datenschutzerklärung im reinen Textformat`
+|Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Datenschutzerklärung* und dort im Tab *Text* gespeichert.
+| `globals.legalInformation.privacyPolicy.plain`
+| $PrivacyPolicyText
 
 | `Widerrufsformular im HTML-Format`
 |Der Text wird im Menü *Einrichtung » Mandant » [Mandant wählen] » Webshop » Rechtliches » [Sprache aufklappen]* im Tab *Widerrufsformular* und dort im Tab *HTML* gespeichert.
@@ -3661,3 +3884,36 @@ include::example$emailbuilder-code-beispiel-expertenmodus-auftragsbestaetigung.h
 ----
 
 // TODO: Schlusssatz einfügen.
+
+
+
+
+////
+[TIP]
+.Weitere twig expressions für das Artikellisten-Widget
+====
+Du kannst zusätzlich die im Folgenden aufgelisteten twig expressions im Artikellisten-Widget verwenden. Beachte, dass diese Werte nur als twig expression verfügbar sind und deshalb _nicht_ in der Liste der verfügbaren Variablen für das Artikellisten-Widget im EmailBuilder gesucht werden können.
+
+* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountGross&#125;&#8288;&#125; 
+// ** gibt den Bruttogesamtbetrag des Rabatts aus
+
+* &#123;&#8288;&#123;order.formattedSubtotals.totalDiscountNet&#125;&#8288;&#125;
+// ** gibt den Nettogesamtbetrag des Rabatts aus
+
+* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceGross&#125;&#8288;&#125;
+// ** gibt den Bruttopreis aus
+
+* &#123;&#8288;&#123;order.formattedSubtotals.subtotalPriceNet&#125;&#8288;&#125;
+// ** gibt den Nettopreis aus
+
+* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsGross&#125;&#8288;&#125;
+// ** gibt die Bruttoversandkosten aus
+
+* &#123;&#8288;&#123;order.formattedSubtotals.shippingCostsNet&#125;&#8288;&#125;
+// ** gibt die Nettoversandkosten aus
+
+* &#123;&#8288;&#123;order.formattedSubtotals.vats&#125;&#8288;&#125;
+// ** gibt die Mehrwersteuersätze aus
+
+====
+////
