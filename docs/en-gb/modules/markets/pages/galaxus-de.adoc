@@ -1,0 +1,986 @@
+= Galaxus
+:author: team-plenty-channel
+:keywords: Galaxus
+:description: Learn how to set up the market Galaxus in your plentymarkets system to start selling your items on Galaxus.
+:galaxus:
+:market: GalaxusDE
+:price-search-engine: Galaxus
+:plugin-name: Galaxus.de
+:plugin-order-referrer-option: GalaxusDE
+:main-client:
+:plugin-link: https://marketplace.plentymarkets.com/en/galaxus_4788
+
+The Galaxus Deutschland GmbH is a German subsidiary of the Swiss e-commerce market leader Digitec Galaxus AG. The Galaxus online shop offers customers quality products by top brands at consistently low prices.
+
+[#register]
+== Registering with Galaxus
+
+Register online for the link:https://www.galaxus.de/de/page/werden-sie-haendler-25764[Digitec Galaxus Merchant Program^] or contact Galaxus using the email address mailto:start@galaxus.de[start@galaxus.de].
+
+[#plugin-download]
+== Installing the plugins
+
+include::partial$plugin-download.adoc[]
+
+[#activate-referrer]
+== Activating the order referrer
+
+:referrer: GalaxusDE
+:referrer-option: pass:quotes[option *GalaxusDE*]
+
+include::partial$activate-referrer.adoc[]
+
+[#market-setup]
+== Setting up the order interface in plentymarkets
+
+Carry out the following settings in plentymarkets in order to set up the order interface to Galaxus.
+Keep the FTP connection details ready that Galaxus emails you after your registration.
+
+include::partial$plugin-market-not-in-menu.adoc[]
+
+[.instruction]
+Setting up the order interface to Galaxus:
+
+. Go to *Setup » Markets » GalaxusDE » Order import*.
+. Carry out the settings. Note the explanations in <<#order-settings>>.
+. Save (terra:save[]) the settings.
+
+[[order-settings]]
+.Galaxus settings
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+| *Client*
+| Allows you to attach clients to imported orders. +
+**Default:** system client.
+
+| *Activate Order Interface*
+| Activate to enable data exchange with Galaxus for orders.
+
+| *Add customer reference number after externalorder number*
+| Activate if you need the customer reference number for customs documents (EU-HUB USER). +
+**Note:** When this option is active, you can only search order numbers by entering the complete string *GalaxusOrderNumber|GalaxusCustomerReferenceNumber
+
+| *Do not send delivery date*
+| Determines if a delivery date is sent to Galaxus when the event procedure _"Send an order confirmation notification to Galaxus"_ is triggered. If this option is inactive (default), orders with manually set delivery dates are sent to Galaxus. For orders without manually set delivery dates, the dates will be calculated based on the item availability of the variation. Also, a list of the order items will be sent. If the option is active, no delivery date and no list of order items are sent. +
+**Default:** inactive.
+--
+//TODO !!!
+
+2+^| FTP configuration
+
+| *Host*
+| Enter the host name based on the pattern *ftp.dg.ch*.
+
+| *User* +
+*Password*
+| Enter the user name and password that you received from Galaxus.
+
+| *Port number*
+| Enter the port number.
+
+| *plentymarkets2DG* +
+| Select the *plentymarkets2DG* folder for the selected host. +
+→ On this FTP-path the plugin responds back to Galaxus.
+
+| *DG2plentymarkets*
+| Select the *DG2plentymarkets* folder for the selected host. +
+→ From this FTP path, the plugin will read new orders and requests from Galaxus. +
+*_Important:_* The specified folder paths begin with *(/... /...)*, only if the hostname submitted on *Step 4* does not end with *( / )*.
+
+2+^| Order status configuration
+
+| *Order status for cancellation requests*
+| Which order status do you want to assign to new cancellation requests during import?
+
+| *Order status for return requests*
+| Which order status do you want to assign to new return requests during import?
+
+| *Automatically reject cancellation requests for orders from this status*
+| From which order status do you want to reject cancellation requests automatically?
+
+*_Important:_* If you do not select a status, the status *[5] Cleared for shipping* is used.
+
+|===
+
+[#VTBU7EUA]
+== Setting up the item export
+
+The following Elastic Export formats are used for the item export. When you provision the plugin, these formats are installed automatically.
+
+* *GalaxusDeProductDataExport*
+* *GalaxusDeProductPropertiesExport*
+* *GalaxusDeStockPricingExport*
+
+For format relevant setup options, go to *Setup » Markets » GalaxusDE » Item export*.
+
+[.instruction]
+Setting up the item export to Galaxus:
+
+. Go to *Setup » Markets » GalaxusDE » Item export » Product data*.
+. Carry out the settings. Note the explanations in <<#export-settings>>.
+. Save (terra:save[]) the settings.
+//TODO: Explain options
+
+[[export-settings]]
+.Settings for the item export
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+2+^| *Product Data* (Format *GalaxusDeProductDataExport*)
+
+| *Description*
+| Possible options:
+
+* *Product Description*
+* *Technical data*
+* *Preview text*
+* *Free text field 1* to *Free text field 20*
+
+| *Export Customs tariff number as*
+| Possible options:
+
+* *TARES*
+* *TARIC*
+
+2+^| *Product Properties » Item Characteristics* (Format *GalaxusDeProductPropertiesExport*)
+
+|*Export activated characteristics*
+|Possible options:
+
+* All
+* Only selected
+
+| *Whitelist*
+|
+
+[.instruction]
+Creating a whitelist element:
+
+. Go to *Setup » Markets » GalaxusDE » Item export » Item Characteristics / Variation Properties*.
+. Click on *Add*.
+. Select a *characteristic* / a *property*.
+. *Save* the settings.
+
+2+^| *Product Properties » Variation Properties* (Format *GalaxusDeProductPropertiesExport*)
+
+| *Export activated properties*
+| Possible options:
+
+* All
+* Only selected properties
+* None
+
+| *Whitelist*
+|
+
+[.instruction]
+Creating a whitelist element:
+
+. Go to *Setup » Markets » GalaxusDE » Item export » Item Characteristics / Variation Properties*.
+. Click on *Add*.
+. Select a *characteristic* / a *property*.
+. *Save* the settings.
+
+2+^| *Product Stock Pricing* (Format *GalaxusDeStockPricingExport*)
+
+| *Currency*
+| Possible settings for exporting the currency:
+
+* CHF
+* EUR
+
+| *Calculate "Sales price excl. VAT" based on Elastic Export setting "Target country"*
+| Activate this option to use Elastic Export setting *Target country*.
+
+| *Positive stock quantities are always exported, independent of the average delivery period*
+| Possible options:
+
+* On
+* Off
+
+*_Note:_* To clarify, check the default export matrix for active variations in <<#standard-export-matrix>>.
+
+| *Sales price that is exported as purchase price excl. VAT*
+| Select a relevant sales price that already exists. This option is also influenced by *Calculate "Sales price excl. VAT" based on Elastic Export setting "Target country"*.
+
+| *Sales price that is exported as purchase price excl. fees and VAT*
+| Select a relevant sales price that already exists. This option is also influenced by *Calculate "Sales price excl. VAT" based on Elastic Export setting "Target country"*.
+
+| *Export stock from:*
+| Possible options:
+
+* All warehouses
+* A warehouse of my choice
+
+|===
+
+[#27QWIBEH]
+=== Default export matrix for active variations
+
+The basic logic of Galaxus is like this:
+
+If positive stock is transmitted, Galaxus uses the default delivery time that is saved for the account in the Galaxus back end. If an item does not have positive stock, the reorder time is used instead.
+
+*_Notes:_*
+
+* Galaxus assumes an average delivery time of 2 days for items that are in stock. If an item has stock and an availability that results in a delivery time of 2 or more days, the item is exported with a stock of 0\. The delivery time is exported as the reorder time. For items with 0 or negative stock and an average delivery time of two days or less, the system assumes a configuration error and the item is not exported.
+
+* Item data is processed irrespective of the stock export conditions for export.
+
+* Bundles are not exported if one of the items in it are not in stock. Also, the exported stock amount is based on the bundle component with the highest stock.
+
+The following table shows a default export matrix for active variations.
+
+[[standard-export-matrix]]
+.Default export matrix for active variations
+[cols="1,1,1"]
+|===
+|Net stock| Average delivery period| Result
+
+| Positive stock
+| Delivery time *<= 2*
+| Stock is exported.
+
+|Positive stock
+| Delivery time *> 2*
+| Only delivery time is exported.
+
+|Positive stock
+| No *Delivery time*
+| Stock is exported.
+
+|Stock 0/negative
+| *Delivery time <= 2*
+| No export.
+
+|Stock 0/negative
+| *Delivery time > 2*
+| Only delivery time is exported.
+
+|Stock 0/negative
+| *No delivery time*
+| No export.
+
+|===
+
+[#4JCZZBS0]
+== Setting up a sales price
+
+Sales prices define the conditions under which a variation is sold at a specific price and on a specific sales channel.
+
+//TODO: Include
+
+. Go to *Setup » Item » Sales prices*.
+. Click on *[+] New*.
+. Enter a *position number*.
+. Enter an *Internal* and an *External name*.
+. Enter a value for *Minimum quantity*.
+. Select *EUR* as the *currency*.
+. Select the *Client*.
+. Select the *sales countries*.
+. Select the referrer *Galaxus*.
+. Save the settings.
+
+*_Note:_* Alternatively, you can activate the referrer *GalaxusDE* in an existing sales price.
+
+[#W1ZE4G8E]
+== Preparing category for the export
+
+On Galaxus, your variations are offered using your default client (store). As such, the category of the variation must be linked to the default client (store).
+
+[.instruction]
+Linking the default client to the category:
+
+. Go to *Item » Category*.
+. Click on the category in the directory tree on the left. +
+→ The category opens and the tab *Settings* is shown.
+. Navigate to the setting *Client (store)*.
+. Activate the option *Standard* (icon:check-square[role="blue"]).
+. *Save* (terra:save[role="green"]) the settings.
+
+image::item:checklist_category_client.png[]
+
+[#W1ZE4G9E]
+== Preparing variations for the export
+
+[[prep-variations]]
+.Preparing variations for the export
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+| Choose the default category
+| The default category of the variation is exported to Galaxus in all cases. As such, define a default variation for the variation. This default category must be linked to the default client (store).
+
+[.instruction]
+Choosing the default category:
+
+. Go to *Item » Items » [Open variation] » Element: Categories*.
+. Within the element, click on icon:ellipsis-v[role="darkGrey"] and then on material:link[role="darkGrey"] *Link default category*. +
+→ A pop-up window will open.
+. Use the drop-down list to select a default category for each client. +
+*_Important:_* This category must be <<#W1ZE4G8E, linked to the default client (store)>>.
+. Click on *Save*. +
+→ The data will be displayed as a table.
+. *Save* (terra:save[role="darkGrey"]) the settings.
+
+| Activate the variation
+| The variation must be active:
+
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Settings » Area: Availability*.
+. Activate the checkbox *Active*.
+. Save (terra:save[role="darkGrey"]) the settings.
+
+| Activate the market availability
+| The *item availability* for the market *GalaxusDE* must be activated:
+
+. Go to *Item » Variation » Tab: Availability » Area: Markets*.
+. Activate the market *GalaxusDE*.
+. Save (terra:save[role="darkGrey"]) the settings.
+
+| Link sales price and save price
+|
+. Go to *Item » Edit item » [Open item] » [Open variation] » Variation tab: Settings*.
+. In the *Sales price* area, add the sales price for GalaxusDE (icon:plus-square[role="green"]).
+. Enter a price.
+. Save (terra:save[]) the settings.
+
+| Link characteristics/properties
+| * Permitted *characteristics* and/or *properties* must be linked to the variations.
+
+. Go to *Item » Characteristics » Galaxus characteristics*.
+. Link the relevant elements. +
+*_Or:_* Go to *Setup » Settings » Properties*.
+. Link the relevant elements.
+
+| Save availability
+| The *Availabilities 1-10* must be saved for the variation.
+
+. Go to *Setup » Item » Availability*.
+. Save business relevant *Average delivery times*.
+. Ensure that variations activated for Galaxus are linked to the relevant *Availability 1-10*. +
+*_Important:_* The setting *Positive stock quantities are always exported, independent of the average delivery period* does not work if no *Availability 1-10* is set.
+|===
+
+[#ONK1TUKE]
+== Exporting items to Galaxus
+
+The GalaxusDE plugin exports the item data using the *Elastic Export plugin*. For more information on the *Elastic Export Plugin*, visit the xref:data:elastic-export.adoc#[Elastic Export] page.
+
+[#6BDAE4XD]
+=== Setting up Elastic Export formats
+
+The following Elastic Export formats are used for the item export. When you provision the plugin, these formats are installed automatically.
+
+* *GalaxusDeProductDataExport*
+* *GalaxusDeProductPropertiesExport*
+* *GalaxusDeStockPricingExport*
+
+. Go to *Data » Elastic Export » New export [+]*. +
+→ Each format works for a specific part of the item export.
+. Select a Galaxus format:
+  * *GalaxusDeProductDataExport*
+  * *GalaxusDeProductPropertiesExport*
+  * *GalaxusDeProductStockPricingExport*
+. Set up the export formats.
+. *Save* the settings.
+
+[.collapseBox]
+.Input fields export format *GalaxusDeProductDataExport*
+--
+
+[[export-format]]
+.The GalaxusProductData export format
+[cols="1,2a"]
+|===
+|Galaxus output |plentymarkets input field
+
+| *Product Key, _Mandatory, Text(100)_*
+| *Item » Edit item » [Open item] » [Open variation] »Variation-ID*
+
+| *GTIN, _mandatory, integer (8-14)_*
+| *Item » Edit item » [Open item] » [Open variation] » Barcode*
+
+Corresponds to barcode type Selection in the elastic export filter of this format
+
+| *ManufacturerKey, _Text(200)_*
+| *Item » Edit item » [Open item] » [Open variation]» Model*
+
+| *Brandname, _mandatory, Text(100)_*
+| *Item » Edit Item » [Open item] » Tab: Global » Manufacturer*
+
+| *ProductTypeIdDigitecGalaxus, _Integer(200)_*
+| *-*
+
+| *Category, _mandatory, Text(200)_*
+| *Item » Edit Item » [Open item] » [Open variation] » Tab: Categories » Standard category*
+
+| *CategoryGroup_1, _Text(200)_*
+| *-*
+
+| *CategoryGroup_2, _Text(200)_*
+| *-*
+
+| *CategoryGroup_3, _Text(200)_*
+| *-*
+
+| *CategoryGroup_4, _Text(200)_*
+| *-*
+
+| *TARESCode, _Text(20)_*
+| *Item » Edit Item » [Open item] » Tab: Basic Settings » Customs tariff number*
+
+| *TARICode, _Text(20)_*
+| *Item » Edit Item » [Open item] » Tab: Basic Settings » Customs tariff number*
+
+| *CountryOfOrigin, _Text(20)_*
+| *Item » Edit Item » [Open item] » Tab: Basic Settings » Manufacturing country*
+
+| *SuggestedRetailPriceIncludingVat, _Mandatory, float(14,4)_*
+| *Item » Edit item » [Open item] » Open variation » Tab: Settings » Sales prices*
+
+PPP Galaxus Salesprice
+
+| *VatRatePercentage, _mandatory, float(2.4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings*
+
+| *ImageURL (1 to 10), _mandatory, text(300)_*
+| *Item » Edit item » [Open item] » Tab: Images*
+
+| *VideoURL (1 to 3), _Text(300)_*
+| *-*
+
+| *ProductLink (1 to 3), _Text(300)_*
+| *-*
+
+| *WeightG, _EU-Hub mandatory, integer(10)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Gross weight*
+
+| *WidthM, _float(14,4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Length/Width/Height*
+
+| *HeightM, _float(14,4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Length/Width/Height*
+
+| *WidthM, _float(14,4)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Measurements: Length/Width/Height*
+
+| *ReleaseDate, _Format (YYYY-MM-DD)_*
+| *-*
+
+| *GlobalSalesRank_integer(10)_*
+| *-*
+
+| *MinimumAge, _integer(10)_*
+| *Item » Edit Item » [Open item] » Tab: Global » Ager rating*
+
+| *ProductTitle_DE, _Mandatory (at least one of four languages), (Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (de) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitle_EN, _(Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (en) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitle_FR, _(Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (fr) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitle_IT, _(Text100)_*
+| *Item » Edit Item » [Open item] » Tab: Texts » Name 1 (it) or Name 2,3* +
+Can be selected in the Elastic Export configuration for this format.
+
+| *ProductTitleTagLine_DE, _Text_*
+| *-*
+
+| *ProductTitleTagLine_EN, _Text_*
+| *-*
+
+| *ProductTitleTagLine_FR, _Text_*
+| *-*
+
+| *ProductTitleTagLine_IT, _Text_*
+| *-*
+
+| *ProductDescription_DE, _mandatory (at least one of four languages), Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (de)* +
+or input field selection under: *Setup » Markets » GalaxusDE » Item export » Product Data » input field mappings*
+
+| *ProductDescription_EN, _Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (en)* +
+or input field selection under: *Setup » Markets » GalaxusDE » Item export » Product Data » input field mappings*
+
+| *ProductDescription_FR, _Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (fr)* +
+or input field selection under: *Setup » Markets » GalaxusDE » Item export » Product Data » input field mappings*
+
+| *ProductDescription_IT, _Text_*
+| Standard: *Item » Edit item » [Open item] » Tab: Texts » Item text (it)* +
+or input field selection under: *Setup » Markets » GalaxusDE » Item export » Product Data » input field mappings*
+
+| *MinimumOrderQuantity, _mandatory, integer(10)_*
+| *Item » Edit item » [Open item] » [Open variation] » Tab: Settings » Availability: Min. order quantity*
+
+| *RetailUnitQuantityPackingUnit, _integer(10_*
+| *-*
+
+| *RetailUnitQuantityOnPallet, _integer(10)_*
+| *-*
+
+| *RetailUnitQuantity, _mandatory, integer(10)_*
+| *Item » Edit item » Open item » Open variation » Tab: Settings » Shipping: Packing units*
+
+| *ProductSuperType*
+| *Item » Item ID*
+
+|===
+--
+
+[.collapseBox]
+.Input fields export format *GalaxusDeProductStockPricingExport*
+--
+
+[[GalaxusProductStockPricingExport]]
+.The GalaxusProductStockPricingExport export format
+[cols="1,3a"]
+|===
+|Galaxus output |plentymarkets input field
+
+| *ProductKey, _Mandatory, Text(100)_*
+| *Item » Edit item » [Open item] » [Open variation] »Variation-ID*
+
+| *QuantityOnStock, _mandatory, integer(10)_*
+| *Item » Edit item » [Open item] » Tab: Stock » Tab: Stock » Net*
+
+| *IsOnStock, _mandatory, boolean(0/1)_*
+| *Item » Edit item » [Open item] » Tab: Stock » Tab: Stock » Net*
+
+| *DeliveryDate, _format (YYYY-MM-DD)_*
+| *Item » Variant » Tab: Settings » Section: Availability » Checkmark selection from 1 to 10*
+
+This selection is equivalent to the settings in the menu *Setup » Item » Availability » Average delivery time*
+
+| *PurchasePriceExcludingVat, _mandatory, fload(14,4)_*
+| *-*
+
+| *SalesPriceExcludingVat, _mandatory, fload(14,4)_*
+| *Item » Edit Item » [Open item] » [Open variation] » Tab: Settings » Sales prices: Net price*
+
+*_Note:_* The exported sales price uses the VAT.rate of the selected export currency only if the *Target country* is specified in the Elastic Export format.
+
+| *SalesPriceIncludingVat, _mandatory, fload(14,4)_*
+| *-*
+
+| *Currency, _mandatory, Text(3)_*
+| *Setup » Item » Sales prices » [Open Galaxus sales price] » Currency EUR / CHF*
+
+| *WarehouseOriginCountry, _Text(2)_*
+| *-*
+
+| *ShipmentType, _mandatory, integer(1)_*
+| *-*
+
+|===
+--
+
+[.collapseBox]
+.Input fields export format *GalaxusProductPropertiesExport*
+--
+
+[[GalaxusProductPropertiesExport]]
+.The GalaxusProductPropertiesExport export format
+[cols="1,3a"]
+|===
+|Galaxus output |plentymarkets input field
+
+| *ProductKey, _Mandatory, Text(100)_*
+| *Item » Edit item » Variation ID*
+
+| *SpecificationKey, _mandatory, Text(80)_*
+| *-*
+
+| *SpecificationGroup_DE, _Text(80)_*
+| *Characteristic group name / Attribute (DE)*
+
+*_Note:_* The plugin selects the first group from the list of property groups in the order in which they were added to the property.
+
+The following workaround should set *GroupWeWantExported* as the first in the list for the export:
+
+For example, the property *Property1* is to exist in the 3 groups *GroupA, GroupWeWantExported* and *GroupB*
+
+* *_Step 1:_* Unlink all groups from the property.
+* *_Step 2:_* Link *GroupWeWantExported* with *Property1* and save the setting.
+* *_Step 3:_* Link all other groups with *Property1* and save the setting.
+
+| *SpecificationGroup_EN, _Text(80)_*
+| *Characteristic group name / Attribute (EN)*
+
+| *SpecificationGroup_FR, _Text(80)_*
+| *Characteristic group name / Attribute (FR)*
+
+| *SpecificationGroup_IT, _Text(80)_*
+| *Characteristic group name / Attribute (IT)*
+
+| *SpecificationKey_DE, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (DE)*
+
+| *SpecificationKey_EN, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (EN)*
+
+| *SpecificationKey_FR, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (FR)*
+
+| *SpecificationKey_IT, _mandatory, Text(80)_*
+| *Characteristic designation / Attribute (IT)*
+
+| *SpecificationValue_DE, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (DE)*
+
+| *SpecificationValue_EN, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (EN)*
+
+| *SpecificationValue_FR, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (FR)*
+
+| *SpecificationValue_IT, _mandatory, Text(80)_*
+| *Characteristic value / Attribute (IT)*
+|===
+--
+
+[#LQPQ0MM4]
+=== Configuring formats in the elastic export
+
+//TODO: Go through options.
+
+[.instruction]
+Configuring the Elastic Export:
+
+. Go to *Data » Elastic Export*.
+. Click on *New export*.
+. Configure the export as described in <<#elastic-export-configuration>>.
+. Save the settings.
+
+[[elastic-export-configuration]]
+.Plugin relevant Elastic Export setup options
+[cols="1,3a"]
+|===
+|Setting |Explanation
+
+| Name
+| Enter a name
+
+* The export format is listed under this name in the overview of the *Exports* tab.
+
+| Type
+| Select the type *item* from the drop-down list.
+
+| Format
+| Select one of the three relevant data export formats.
+
+* *GalaxusProductDataExport*
+* *GalaxusProductPropertiesExpor*
+* *GalaxusProductStockPricingExport*
+
+| Limit
+| Enter a whole number. This number determines how many items are exported at maximum. Enter an integer between *0* and *9999*.
+
+| Generate cache file
+| Place a check mark if you want to export more than 9999 data records to the interface. We recommend that you do not activate this setting for more than 20 export formats. This is to ensure a high performance of the Elastic Export. Depending on the user configuration and amount of data, it can take more than 24 hours to update the cache file.
+
+| Provisioning
+| Privisioning via *URL* or *FTP*. If you select the method *FTP*, the FTP credentials and the export interval *Daily/Hourly* must be specified
+
+| URL
+| If you select the option *URL*, click on *Generate token* to create an access token.
+
+| File name
+| Name your export files as follows:
+
+* GalaxusDeProductDataExport = *ProductData_Merchantname.csv*
+* GalaxusDeProductStockPricingExport = *ProductStockPricing_Merchantname.csv*
+* GalaxusDeProductPropertiesExport = *ProductProperties_Merchantname.csv*
+
+| Item filter
+| Allow you to set up the export more granularly and thus ensure that only a specific subset of items is exported to Galaxus. Note that the plugin cannot use the following *Elastic Export* filters:
+
+* Item creation date
+* Default, Bundle, Bundle component
+* Item type
+* Positive stock for given warehouse
+* Positive physical stock in the selected warehouse
+* Prices
+* Tags AND mode
+* Tags OR mode
+* Item update date
+
+| Add item filters
+| Select an item filter from the drop-down list and click on *Add*. There are no filters selected by default.
+
+| Client
+| Default client
+
+| Order referrer
+| Select the order referrer that should be assigned during the order import from the drop-down list. In this case, this is: *GalaxusDE*
+
+| Barcode
+| Select the ASIN, ISBN or an EAN from the drop-down list. Selection must be linked to the referrer *GalaxusDE*. Otherwise, the barcode selection is not exported
+
+| Sales price
+| The exported sales price is always the *Sales price net*. The select *Sales price gross* is ignored during export.
+
+|===
+
+[#order-documents]
+== Preparing order documents
+
+You need the following order documents for Galaxus:
+
+* Invoice
+* Delivery note
+
+Adjust these order documents to the requirements of {market}. Check the following chapters to find out how. This information is structured like this:
+
+* <<#invoices, Prepare invoices>>
+* <<#delivery-notes, Prepare delivery notes>>
+
+Are you new to order documents? Then refer to the xref:orders:order-documents.adoc#[Order documents] page of the manual before continuing.
+
+[#invoices]
+=== Preparing invoices
+For information on invoices, please refer to the respecting https://confdg.atlassian.net/wiki/spaces/PH/pages/169097168914/What+should+my+invoice+look+like[Digitex Galaxus documentation].
+
+[#delivery-notes]
+=== Preparing delivery notes
+
+Delivery notes for {market} orders must contain specific information. These requirements are listed on link:https://partner.digitecgalaxus.ch/hc/en-us/articles/360016260840-What-documents-do-I-enclose-with-the-delivery-[Galaxus^].
+
+Below, we describe how you show the following information on delivery notes for {market}:
+
+* Galaxus order reference
+* Legal information
+
+To make sure that this information is shown on delivery notes, adjust the template for delivery note as described below.
+
+[.instruction]
+Adjusting template for delivery notes:
+
+. Go to *Setup » Client » Standard » Locations » Location: Germany » Documents » Delivery note » Tab: Template*.
+. Scroll down to the area *Optional elements below stock unit table*.
+. Carry out the settings described in <table-delivery-notes>.
+. Check the link:https://partner.digitecgalaxus.ch/hc/en-us/articles/360016260840-What-documents-do-I-enclose-with-the-delivery-[Galaxus documentation] to see if any other adjustments to your template are required. +
+*_Important:_* The template is used for all delivery notes for this country, not just for {market}.
+. Save (terra:save[]) the settings. +
+→ The necessary information is shown on delivery notes.
+
+[[table-delivery-notes]]
+.Settings for {market} delivery notes
+[cols="2,3a"]
+|===
+|Setting |Option
+
+| Purchase order number of Digitec Galaxus AG
+| . Scroll down to the area *Optional elements below stock unit table*.
+. For the setting *External order number*, select the option *Yes* from the drop-down list.
+
+image::markets:mytoys-delivery-note-settings-2.png[]
+
+| *Payment instruction*
+. Find a field that does not contain any payment instructions.
+. Click on the drop-down list *Payment method* of this field.
+  .. If you _do not_ have fiscal representation in Switzerland:
+  * Select the option *Galaxus Direct Checkout*.
+  .. If you have fiscal representation in Switzerland:
+  * Select the option *Galaxus Direct Checkout Fisc Rep*.
+. Copy the following Galaxus return instructions into the input field (correct as of 15th July 2022):
+
+`Payment has already been made directly to Galaxus Deutschland GmbH.`
+
+`In the event of a return, we kindly ask you to use the returns process in your customer account on galaxus.de.`
+
+`Orders placed via galaxus.de are subject to the Galaxus Deutschland GmbH General Terms and Conditions.`
+
+`If you have any questions or uncertainties, the Galaxus customer care team will be happy to help: marketplace@galaxus.de`
+|===
+
+[#order-processing]
+== Automating order processing
+
+Set up event procedures to notify Galaxus about order changes automatically.
+
+[#event-procedures]
+=== Available event procedures
+
+For Galaxus, the event procedures listed in <<#galaxus-event-procedures>> are available.
+
+//TODO: Check table
+[[galaxus-event-procedures]]
+.Galaxus event procedures
+[cols="2,1,3a"]
+|===
+|Event procedure name |Recommended event |Explanation
+
+| GalaxusDE: Send order confirmation to Galaxus
+| Any
+| * Informs Galaxus about changes made to the plentymarkets order.
+* *_Important:_* The delivery date is either based on availability of the item or it is not sent if the UI option "Do not send delivery date" is active.
+
+| GalaxusDE: Send shipping confirmation to Galaxus
+| Status change
+| Informs Galaxus that the order is ready for shipping.
+
+| GalaxusDE: 'Send a cancel request accepted notification to Galaxus
+| Status change
+| Informs Galaxus that the cancellation request was accepted. +
+Cancellations for individual order items are rejected automatically (Reason given for auto rejection: *Non-refundable*). Cancellations of complete orders are accepted automatically if the initial order does not yet have the status *Shipped*.
+
+| 'Send a cancel request not accepted notification to Galaxus
+| Status change
+| Informs Galaxus that the cancellation request was rejected. +
+A reason for the rejection can be entered in the order note before executing this procedure. +
+Cancellations for individual order items are rejected automatically (Reason given for auto rejection: *Non-refundable*). Cancellations of complete orders are accepted automatically if the initial order does not yet have the status *Shipped*
+
+| 'Merchant Cancels' notification to Galaxus
+| Status change
+| Informs Galaxus that the order was cancelled by the merchant.
+
+| 'Send a 'return registration accepted' response to Galaxus.
+| Status change
+| Informs Galaxus that the return request was accepted.
+
+| 'Send a 'return registration not accepted' response to Galaxus.
+| Status change
+| Informs Galaxus that the return request was rejected.
+
+A reason for the rejection can be entered in the order note before executing this procedure.
+
+| 'Send a 'Return to merchant accepted' notification to Galaxus
+| Status change
+| Informs Galaxus that a return to the merchant was accepted.
+
+| 'Send a 'Return to merchant denied' notification to Galaxus
+| Status change
+| Informs Galaxus that the return request was rejected by the merchant.
+
+A reason for the rejection can be entered in the order note before executing this procedure.
+
+| Send invoice to Galaxus
+| Status change
+| Sends the invoice PDF of the order to Galaxus.
+|===
+
+=== _Example:_ Setting up the event procedure "Send order confirmation to Galaxus"
+
+For example, set up an event procedure to send automatic order confirmations to Galaxus:
+
+. Go to *Setup » Orders » Events*.
+. Click on *Add event procedure*. +
+→ The *Create new event procedure* window opens.
+. Enter a *name*.
+. Select the order event *Order change > Status change*.
+. *Save* the settings. +
+→ The settings of the event procedure are shown.
+. Add a *Filter* with the selection *Order » Order type » Order*.
+. Add a *Filter* with the selection *Order » Referrer » GalaxusDE*.
+. Add an *Action* with the selection *Plugins » Send order confirmation to GalaxuDE*.
+. *Save* the settings.
+
+[#PEHWFNZB]
+== Particularities of the Galaxus order processing
+
+* Galaxus return requests generate new plentymarkets orders of the type *Return*. These orders are linked to the initial order. The resulting orders must be processed separately.
+
+* Go to *Order » Overview » Item » Edit » Delivery date* to enter the delivery date. If no delivery date is saved, a delivery date is calculated based on the following formula: +
+Day the event procedure was triggered + average delivery period corresponding to item availability
+
+* A shipping date is also not set if the item quantity needed to fulfil the order is not available as net stock. The planned delivery date can change based on the plugin option *Positive stock quantities are always exported, independent of the average delivery period* in the menu *Setup » Markets » GalaxuDE » Tab: Product Stock Price*.
+
+* In all scenarios where only a part of the order is to be processed (return/shipping), the imported order must be split. The resulting orders must be processed separately. +
+  How to split an order:
+  . Go to *Order » [Open order]*.
+  . Split the order from *Order » Overview » Gear (split)*. +
+  → The window *Split order* opens.
+  . Select the item quantities for the new order. +
+  *_Important:_* The shipping costs of the original order will not be changed. +
+  → After splitting an order, the plugin can inform Galaxus without any additional user input.
+
+[#5JRKNOXB]
+== Order data exchange: scenarios
+
+The Galaxus plugin supports the following scenarios.
+
+*_Important:_* All scenarios except cancellation requests can be applied to both complete orders and partial orders. As such and to avoid duplicate content, scenarios for complete orders are not described separately.
+
+[#9KO6USYT]
+=== The imported order is ready for shipping
+
+The imported order contains all required information and is ready to be shipped:
+
+. The order import was automatically reported back to Galaxus by the event procedure *Send Order confirmation to Galaxus*.
+. When your order is ready to be shipped, trigger event procedure *Send shipping confirmation to Galaxus*.
+
+[#2NNFPG4P]
+=== Only part of the imported order can be fulfilled
+
+Only part of the imported order can be fulfilled at this time. The customer agrees to receive half of the oder now. The other half will be sent at a later date:
+
+. Go to *Order » [Open order]*.
+. Click on *Split*.
+. If a later delivery date has been agreed upon with the customer, go to *New order » Overview » Item » Edit » Delivery date*.
+. Enter the delivery date.
+. Save the settings.
+. Trigger the event procedure *Send Order Confirmation to Galaxus* to inform Galaxus about the new delivery date.
+. When finished, trigger event procedure *Send Shipping Confirmation to Galaxus*.
+
+[#6T87DOXB]
+=== Parts of an order cannot be fulfilled
+
+You realised that part of the order cannot be fulfilled, for example because the item is out of stock.
+
+. Go to *Order » [Open order]*.
+. Click on *Split*.
+. Trigger the event procedure *Send Order Confirmation to Galaxus*.
+. Trigger the event procedure *Merchant Cancels notification to Galaxus*.
+. Galaxus automatically replies with a *Cancellation request*.
+. The cancellation request can be *rejected* or *accepted* by triggering either the event procedure *Accept Galaxus cancellation request* or *Reject Galaxus cancellation request with justification*.
+
+[#2CI84ZDL]
+=== The customer has requested a partial return
+
+The customer wants to return parts of the order.
+
+. Galaxus receives the return request.
+plentymarkets creates a new order of the type *Return* that is linked to the initial order.
+. Trigger the event procedure *Send Order Confirmation to Galaxus*.
+. Trigger the event procedure *Accept Galaxus Return Request* or *Reject Galaxus Return Request with Explanation*.
+
+[#Q7LT0ZU3]
+=== The customer has rejected the package
+
+The customer did not accept your delivery for an unjustified reason. The package has now been returned to you.
+
+. Open the order.
+. Create a new order of the type *Return*.
+	* Go to *Order » Overview*.
+	* Open the drop-down list *Return*.
+	* Click on *Create*.
+. Create a return for the necessary quantity.
+. Trigger the event *Accept cancellation to merchant* oder *Cancellation to merchant denied with justification*.
+
+*_Note:_*
+
+* Partial cancellation requests and cancellation requests for orders with a status higher than *[5] In preparation for shipping* are automatically rejected with the reason *Non-refundable*.
+* Go to *Setup » Markets » GalaxusDE » Order status configuration* to select a different status for rejecting such requests automatically.
+
+[#faq]
+== FAQ and troubleshooting
+
+include::partial$plugin-market-not-in-menu.adoc[]
+
+[.collapseBox]
+.The column Category is empty in the export. No category is exported. What now?
+====
+The plugin can export default category for any client, if in the ProductDataExport Format Settings, in Client setting, he chooses the client for which he wants the category exported.
+====
