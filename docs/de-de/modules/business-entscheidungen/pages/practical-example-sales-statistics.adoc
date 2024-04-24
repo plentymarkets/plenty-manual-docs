@@ -1,0 +1,212 @@
+= Praxisbeispiel: Nachbau der alten Verkaufsstatistik im neuen Dashboard
+:keywords: BI Dashboard, plentyBI, plenty BI Dashboard, Business Intelligence, Kennzahlen anlegen, Kennzahlen darstellen, Kachel, Kacheln, Tabelle, Tabellen, Abstandshalter, Zeile, Zeilen, Praxisbeispiel, Anwendungsfall, Use Case, Verkaufsstatistik
+:description: Dieses Praxisbeispiel enthält eine Anleitung für den Nachbau der alten Verkaufsstatistik im neuen Dashboard.
+:author: team-bi
+
+Auf dieser Seite findest du eine Anleitung für den Nachbau der alten Verkaufsstatistik im neuen Dashboard.
+
+[#100]
+== Konfigurationen mit den benötigten Kennzahlen anlegen
+
+*_Hinweis_*: Alle genannten Kennzahlkonfigurationen sind entweder bereits auf deinem System vorhanden oder lassen sich kostenlos erstellen. 
+
+Eine xref:business-entscheidungen:myview-dashboard.adoc#200[neue Kennzahlkonfiguration] erstellst du unter *Einrichtung » plentyBI » Kennzahlkonfigurationen*.
+
+Für dieses Beispiel benötigst du fünf Kennzahlkonfigurationen, von denen drei bereits in deinem System vorhanden sind.
+
+Dies sind die Kennzahlkonfigurationen, die bereits in deinem System vorhanden sind: 
+
+** xref:business-entscheidungen:live-auftraege.adoc#[Aufträge (Live)]
+** xref:business-entscheidungen:auftraege.adoc#[Aufträge]
+** xref:business-entscheidungen:umsatz.adoc#[Umsatz]
+
+[.instruction]
+So erstellst du die beiden anderen Kennzahlkonfigurationen:
+
+*Aufträge versandt (Heute)*
+
+. Öffne das Menü *Einrichtung » plentyBI » Kennzahlkonfigurationen*.
+. Klicke auf *+ Neu*.
+. Gib im Feld *Name* einen Namen für die Konfiguration, z.B. `Aufträge versandt (Heute)`.
+. Wähle die *Kennzhal* `Aufträge (Live)` aus der Liste.
+. Als *Berechnung* wähle `Gesamt`.
+. Wähle die *Dimension* `Auftrag`.
+. Setze die folgenden *Filter*: Auftragstyp » Entspricht einem dieser Werte » Auftrag, Sammelauftrag
+*und*
+Warenausgang gebucht » Ist gleich » Warenausgang heute gebucht.
+. Speichere (terra:save[]) die Einstellungen.
+
+*Umsatz heute*
+
+. Öffne das Menü *Einrichtung » plentyBI » Kennzahlkonfigurationen*.
+. Klicke auf *+ Neu*.
+. Gib im Feld *Name* einen Namen für die Konfiguration, z.B. `Umsatz heute`.
+. Wähle die *Kennzhal* `Umsatz heute (Live)` aus der Liste.
+. Als *Berechnung* wähle `Brutto-Umsatz`.
+. Wähle die *Dimension* `Erstellungsdatum`.
+. Setze keine *Filter*.
+. Speichere (terra:save[]) die Einstellungen.
+
+
+[#200]
+== Neue Dashboard-Ansicht erstellen und einrichten
+
+In diesem Schritt ist beschrieben, wie du die benötigten Kennzahlkonfigurationen zu deinem Dashboard hinzufügst. 
+
+Kennzahlkonfigurationen sind in Form verschiedener Elemente im Dashboard angezeigt. 
+
+Die benötigten Elemente kannst du auf einer bereits bestehenden Dashboard-Ansicht anlegen oder dafür xref:business-entscheidungen:myview-dashboard.adoc#330[eine neue Dashboard-Ansicht erstellen]. 
+
+Nutze den xref:business-entscheidungen:myview-dashboard.adoc#405[Bearbeitungsmodus] (terra:design_inline_edit[]), um xref:business-entscheidungen:myview-dashboard.adoc#410[Bereiche und Elemente anzupassen] oder bei Bedarf Änderungen rückgängig zu machen.
+
+[#210]
+=== Dashboard-Layout anpassen
+
+Um das Layout des Dashboards anzupassen, richte die einzelnen Spalten und Zeilen ein.
+
+Um die Trennlinien zu verschieben oder hinzuzufügen, fahre mit der Maus darüber und klicke auf die drei Punkte (material:more_vert[]).
+
+*_Hinweis:_* Dies ist nur ein Beispiel für ein Dashboard-Layout. Du kannst dein Dashboard nach deinen Wünschen gestalten.
+
+[[image-dashboard-layout]]
+.Bearbeitungsmodus des Dashboards, Trennlinien der einzelnen Bereiche farblich hervorgehoben
+image::business-entscheidungen:dashboard-layout.png[width=640, height=369]
+
+
+[#220]
+=== Elemente hinzufügen & bearbeiten
+
+Nachdem die Darstellungsbereiche eingeteilt sind, befüllst du sie im zweiten Schritt mit Daten, die in Form verschiedener Elemente angezeigt werden.
+
+[.collapseBox]
+.*Wie füge ich ein Element zum Dashboard hinzu?*
+--
+include::partial$neues-dashboard-element.adoc[]
+--
+
+In unserem Beispiel haben wir folgende Elemente hinzugefügt: xref:business-entscheidungen:myview-dashboard.adoc#500[Kacheln], xref:business-entscheidungen:myview-dashboard.adoc#760[Abstandshalter], xref:business-entscheidungen:myview-dashboard.adoc#800[Zeilen] und xref:business-entscheidungen:myview-dashboard.adoc#600[Tabellen]. 
+
+
+[#230]
+==== Einstellungen für die einzelnen Elemente
+
+[[image-dashboard-elements]]
+.Platzierung der Elemente
+image::business-entscheidungen:platzierung-elemente.png[width=640, height=532]
+
+Im Folgenden findest du die Einstellungen für die im Bild oben gezeigten Elemente.
+
+*_Hinweis_*: Du kannst den *Titel* und die *Farbe* für jedes Element nach deinen eigenen Vorstellungen festlegen.
+
+*Kachel - 1*
+
+Einstellungen für die Kachel:
+
+* *Kennzahl*: Aufträge (Live)
+* *Titel*: Aufträge - Neu
+* *Zeitraum*: Heute
+* *Aggregierung:* Anzahl
+* *Zeitintervall*: Tag
+* *Hauptwert*: Ergebnis der Kennzahl
+
+*Abstandshalter - 2*
+
+Einstellungen für den Abstandshalter:
+
+* *Höhe*: jeweils 125 px
+
+*Tabelle - 3*
+
+Hier haben wir das Element Tabelle und dann eine Schaltfläche innerhalb der Tabelle hinzugefügt.
+
+Einstellungen für die Schaltfläche:
+
+* *Titel*: Neu
+* *Shortcut Typ*: Link öffnen
+* *Link*: /order/order-ui/overview?createdAt={"value":"today","operator":"period"}&orderTypeId={"value":1,"operator":"in"} +
+*_Hinweis_*: Alle Links zu anderen Benutzeroberflächen können sich jederzeit ändern und sind möglicherweise ungültig, während du dies liest. Wenn dies der Fall ist, empfehlen wir, dass du in der passenden Forumskategorie danach fragst. 
+* *Farbe*: Grün
+
+*Tabelle - 4*
+
+Hier haben wir das Element Tabelle und dann eine Schaltfläche innerhalb der Tabelle hinzugefügt.
+
+Einstellungen für die Schaltfläche:
+
+* *Titel*: Versendet
+* *Shortcut Typ*: Link öffnen
+* *Link*: /order/order-ui/overview?orderDate_5={"value":"today","operator":"period"} +
+*Hinweis*: Alle Links zu anderen Benutzeroberflächen können sich jederzeit ändern und sind möglicherweise ungültig, während du dies liest. Wenn dies der Fall ist, empfehlen wir, dass du in der passenden Forumskategorie danach fragst. 
+* *Farbe*: Grau
+
+*Zeile - 5*
+
+Einstellungen für die Zeile:
+
+* *Kennzahl*: Umsatz heute
+* *Titel*: Umsatz
+* *Zeitraum*: Heute
+* *Aggregierung*: ∑
+* *Hauptwert*: Ergebnis der Kennzahl
+
+*Zeile - 6*
+
+Einstellungen für die Zeile:
+
+* *Kennzahl*: Aufträge (Live)
+* *Titel*: Aufträge
+* *Zeitraum*: Heute
+* *Aggregierung*: Anzahl
+* *Hauptwert*: Ergebnis der Kennzahl
+
+*Tabelle - 7*
+
+Einstellungen für die Tabelle:
+
+* *Kennzahl*: Brutto Umsatz
+* *Titel*: Brutto Umsatz
+* *Zeitraum*: Vor 7 Tage - Gestern
+* *Zeitintervall*: Tag
+* *Sortierung*: Skalenbasis - Absteigend
+* *Aggregierung*: ∑
+* *Einträge pro Seite*: 25
+* *Gruppe nach Dimension*: Aktiviert
+* *Zugeordnete Spalte*: Skalenbasis
+* *Zugeordnete Spalte*: Primäres Ergebnis
+* *Zugeordnete Spalte*: Ergebniseinheit 
+* *Dezimalstellen*: 2
+* *Bedingte Einfärbung*: (material:settings[]) » Datenfeld » Primäres Ergebnis » Kleiner als » Fester Wert » 1 
+
+*Tabelle - 8*
+
+Einstellungen für die Tabelle:
+
+* *Kennzahl*: Aufträge
+* *Titel*: Aufträge
+* *Zeitraum*: Vor 7 Tage - Gestern
+* *Zeitintervall*: Tag
+* *Sortierung*: Skalenbasis - Absteigend
+* *Aggregierung*: ∑
+* *Einträge pro Seite*: 25
+* *Gruppe nach Dimension*: Aktiviert
+* *Zugeordnete Spalte*: Primäres Ergebnis
+* *Dezimalstellen*: 0
+* *Bedingte Einfärbung*: (material:settings[]) » Datenfeld » Primäres Ergebnis » Kleiner als » Fester Wert » 1 
+
+*Kachel - 9*
+
+Einstellungen für die Kachel:
+
+* *Kennzahl*: Aufträge versandt (Heute)
+* *Titel*: Aufträge versandt
+* *Zeitraum*: Vor 30 Jahre - Heute
+
+*_Hinweis_*: In unserem Beispiel haben wir den Zeitraum auf *Vor 30 Jahren - Heute* festgelegt. Der Grund dafür ist, dass wir Aufträge unabhängig vom Erstellungsdatum sehen wollen, insbesondere solche, bei denen die Warenausgangsbuchung heute erfolgt ist. Der Filter, der ursprünglich bei der Konfiguration für den gebuchten Warenausgang angelegt wurde, zusammen mit der Einstellung des *Zeitintervalls* auf *Tag* auf der Kachel, ermöglicht uns dies. Natürlich kannst du selbst entscheiden, welchen Zeitraum du einstellen möchtest. 
+
+* *Zeitintervall*: Tag
+* *Hauptwert*: Ergebnis der Kennzahl
+
+So sieht unser Ergebnis aus:
+
+[[image-final-result]]
+image::business-entscheidungen:ergebnis.png[width=640, height=425]
