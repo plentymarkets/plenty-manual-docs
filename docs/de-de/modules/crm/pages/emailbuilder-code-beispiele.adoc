@@ -1,0 +1,233 @@
+= Code-Beispiele
+:keywords: 
+:description:
+:page-pagination:
+:author: team-crm
+
+// TODO: Einleitung
+
+Klicke auf einen Eintrag in der folgenden Liste, um direkt in das entsprechende Unterkapitel weitergeleitet zu werden:
+
+* <<#code-beispiele-code-widget, Code-Beispiele für das Code-Widget>>
+** <<#code-beispiel-versandprofil, Versandprofil>>
+** <<#code-beispiel-bankdaten, Bankdaten>>
+** <<#code-beispiel-auftragspositionen, Auftragspositionen>>
+** <<#code-beispiel-artikel-liste, Artikel des Auftrags als Liste>>
+** <<#code-beispiel-artikel-liste-kommasepariert, Artikel des Auftrags kommasepariert in einer Zeile>>
+** <<#code-beispiel-header-mandantenabhaengig, Header abhängig vom Mandanten anzeigen>>
+** <<#code-beispiel-datumsformat, Datumsformat>>
+** <<#code-beispiel-zahlenformat, Zahlenformat>>
+* <<#code-beispiele-betreff, Code-Beispiele für den Betreff>>
+* <<#code-beispiel-expertenmodus, Code-Beispiel für den Expertenmodus>>
+
+
+[#code-beispiele-code-widget]
+== Code-Beispiele für das Code-Widget
+
+Setze in deinen E-Mail-Vorlagen Fallunterscheidungen nach den Prinzipien der if-Abfragen ein oder verwende for-Schleifen. In den folgenden Unterkapiteln findest du einige if-Abfragen und for-Schleifen, die du einfach in dein <<#intable-widget-code, Code-Widget>> kopieren kannst.
+
+Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapitel mit dem Code-Beispiel weitergeleitet zu werden:
+
+* <<#code-beispiel-versandprofil, Versandprofil>>
+* <<#code-beispiel-bankdaten, Bankdaten>>
+* <<#code-beispiel-auftragspositionen, Auftragspositionen>>
+* <<#code-beispiel-artikel-liste, Artikel des Auftrags als Liste>>
+* <<#code-beispiel-artikel-liste-kommasepariert, Artikel des Auftrags kommasepariert in einer Zeile>>
+* <<#code-beispiel-header-mandantenabhaengig, Header abhängig vom Mandanten anzeigen>>
+* <<#code-beispiel-datumsformat, Datumsformat>>
+* <<#code-beispiel-zahlenformat, Zahlenformat>>
+
+[#code-beispiel-versandprofil]
+=== Code-Beispiel: Versandprofil
+
+Füge in das <<#intable-widget-code, Code-Widget>> einen Code ein, der bewirkt, dass ein Hinweis bezüglich der Spedition und Kontaktaufnahme in der E-Mail an deine Kund:innen nur angezeigt wird, wenn der Versanddienstleister im Versandprofil eine Spedition ist. In unserem Beispiel hat das Versandprofil mit der Spedition die ID `6`.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-versandprofil.html[]
+
+----
+
+[#code-beispiel-bankdaten]
+=== Code-Beispiel: Bankdaten
+
+Füge in das <<#intable-widget-code, Code-Widget>> einen Code ein, der bewirkt, dass deine Bankdaten in der E-Mail an deine Kund:innen nur angezeigt werden, wenn sie im plentyShop die Zahlungsart *Vorkasse* (ID `0`) gewählt haben.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-bankdaten.html[]
+
+----
+
+[#code-beispiel-auftragspositionen]
+=== Code-Beispiel: Auftragspositionen
+
+Füge in das <<#intable-widget-code, Code-Widget>> einen Code ein, der bewirkt, dass die Auftragspositionen mit den Varianten-IDs, den Artikelnamen, der Artikelanzahl und dem Preis in einer Tabelle angezeigt werden.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-auftragspositionen.html[]
+
+----
+
+[#code-beispiel-artikel-liste]
+=== Code-Beispiel: Artikel des Auftrags als Liste
+
+Füge in das <<#intable-widget-code, Code-Widget>> einen Code ein, der bewirkt, dass die Artikel-IDs und die Artikelmenge aller Artikel, die im Auftrag enthalten sind, als Liste angezeigt werden.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-artikel-liste.html[]
+
+----
+
+[#code-beispiel-artikel-liste-kommasepariert]
+=== Code-Beispiel: Artikel des Auftrags kommasepariert in einer Zeile
+
+Füge in das <<#intable-widget-code, Code-Widget>> einen Code ein, der bewirkt, dass die Artikel-IDs aller Artikel, die im Auftrag enthalten sind, hintereinander kommasepariert in einer Zeile angezeigt werden.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-artikel-liste-kommasepariert.html[]
+
+----
+
+[#code-beispiel-header-mandantenabhaengig]
+=== Code-Beispiel: Header abhängig vom Mandanten anzeigen
+
+Füge in das <<#intable-widget-code, Code-Widget>> im Header einen Code ein, der bewirkt, dass der Header abhängig von der plenty ID für den von dir gewählten Mandanten angezeigt wird. +
+*_Hinweis:_* Vergiss nicht, die plenty IDs im Code-Beispiel durch deine korrekten IDs zu ersetzen und die korrekten Logos einzufügen.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-header-mandantenabhaengig.html[]
+
+----
+
+[IMPORTANT]
+.Gleiche Vorgehensweise beim Footer
+====
+Gehe anhand des Code-Beispiels genauso vor und füge den Code in das Code-Widget im Footer ein, wenn du auch unterschiedliche Footer abhängig von der plenty ID anzeigen möchtest.
+====
+
+[#code-beispiel-datumsformat]
+=== Code-Beispiel: Datumsformat
+
+Die Einstellung für das Datumsformat, die du im Bereich *Spracheinstellungen* vorgenommen hast, greifen _nicht_ für datumsbezogene twig expressions, die du im Code-Widget verwendest. Hier musst du die Formatierung also selbst vornehmen.
+
+*_Beispiel:_* Wenn du für die englische Datumsschreibweise in den Spracheinstellungen einen Bindestrich gewählt hast, im Code-Widget aber eine der folgenden twig expressions für das Auftragsdatum einfügst, wird in der E-Mail-Vorlage die im Code-Widget verwendete Schreibweise für das Datum ausgegeben. Die Einstellung aus dem Bereich *Spracheinstellungen* wird hier also überschrieben.
+
+[#datumsformat-beispiel-eins]
+==== dd.mm.yyyy ohne Uhrzeit
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-datumsformat-eins.html[]
+
+----
+
+* Angezeigtes Ergebnis: 24.04.2023
+
+[#datumsformat-beispiel-zwei]
+==== dd.mm.yyyy mit Uhrzeit (ohne Sekunden)
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-datumsformat-zwei.html[]
+
+----
+
+* Angezeigtes Ergebnis: 24.04.2023 07:28
+
+[#datumsformat-beispiel-drei]
+==== yyyy-mm-dd mit Uhrzeit (mit Sekunden)
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-datumsformat-drei.html[]
+
+----
+
+* Angezeigtes Ergebnis: 2023-04-24 07:28:54
+
+[#code-beispiel-zahlenformat]
+=== Code-Beispiel: Zahlenformat
+
+Die Einstellung für das Zahlenformat, die du im Bereich *Spracheinstellungen* vorgenommen hast, greifen _nicht_ für Zahlenwerte in twig expressions, die du im Code-Widget verwendest. Hier musst du die Formatierung also selbst vornehmen.
+
+*_Beispiel:_* Wenn du für die englische Zahlenschreibweise in den Spracheinstellungen einen Punkt als Dezimaltrennzeichen gewählt hast, im Code-Widget aber eine der folgenden twig expressions für den Gesamtrechnungsbetrag einfügst, wird in der E-Mail-Vorlage die im Code-Widget verwendete Schreibweise für den Betrag ausgegeben. Die Einstellung aus dem Bereich *Spracheinstellungen* wird hier also überschrieben.
+
+[#zahlenformat-beispiel-eins]
+==== Komma als Tausendertrennzeichen und Punkt als Dezimaltrennzeichen
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-zahlenformat-eins.html[]
+
+----
+
+* Angezeigtes Ergebnis: 3,141.59
+
+[#zahlenformat-beispiel-zwei]
+==== Punkt als Tausendertrennzeichen und Komma als Dezimaltrennzeichen
+
+----
+include::example$emailbuilder-code-beispiel-zahlenformat-zwei.html[]
+
+----
+
+* Angezeigtes Ergebnis: 3.141,59
+
+[#zahlenformat-beispiel-drei]
+==== Kein Tausendertrennzeichen und Komma als Dezimaltrennzeichen
+
+----
+include::example$emailbuilder-code-beispiel-zahlenformat-drei.html[]
+
+----
+
+* Angezeigtes Ergebnis: 3141,59
+
+[#code-beispiele-betreff]
+== Code-Beispiele für den Betreff
+
+Füge in den Betreff deiner Vorlage einen Code ein, der bewirkt, dass ein bestimmtes Wort am Anfang des Betreffs angezeigt wird, wenn es sich um bestimmte Auftragsherkünfte handelt. In unserem Beispiel wird immer der Begriff `[WICHTIG]` am Anfang des Betreffs eingefügt, wenn die Herkünfte zwischen `9` und `11` liegen.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-betreff.html[]
+
+----
+
+[#code-beispiel-expertenmodus]
+== Code-Beispiel für den Expertenmodus
+
+In diesem Kapitel zeigen wir dir anhand eines Beispiels, wie du komplexe Vorlagen im Expertenmodus verwenden kannst. 
+
+Als Beispiel erstellen wir eine Auftragsbestätigung im Expertenmodus. Dafür sind die folgenden Schritte notwendig:
+
+1. Ordner erstellen, in dem du die Basisvorlage speicherst
+2. Reguläre Vorlage erstellen, die das Widget *Auftragspositionen* enthält
+3. Basisvorlage mit dem Text für die Auftragsbestätigung erweitern
+
+Erstelle am besten einen Ordner mit dem Namen `Hilfsvorlagen` und erstelle darin eine Vorlage im Expertenmodus und nenne sie zum Beispiel `Basisvorlage`. Die Basisvorlage bildet sozusagen das Grundgerüst für deine Vorlage.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-expertenmodus-basisvorlage.html[]
+
+----
+
+In der Auftragsbestätigung möchten wir außerdem die Auftragspositionen anzeigen. Dazu erstellen wir eine weitere "reguläre" Vorlage, in dem sich ausschließlich das Widget *Auftragspositionen* befindet. In unserem Beispiel hat diese Vorlage die ID 51 und die Sprach-ID für DE ist die 105.
+
+[[image-emailbuilder-expertenmodus-auftragspositionen]]
+.Widget *Auftragspositionen*
+image::crm:emailbuilder-expertenmodus-beispiel-auftragspositionen-widget.png[width=640, height=360]
+
+Im nächsten Schritt erweitern wir die Basisvorlage mit dem Text für die Auftragsbestätigung. In unserem Beispiel hat die Basisvorlage in DE die ID 103.
+
+[source,twig]
+----
+include::example$emailbuilder-code-beispiel-expertenmodus-auftragsbestaetigung.html[]
+
+----
