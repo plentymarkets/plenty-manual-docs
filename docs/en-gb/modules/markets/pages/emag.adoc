@@ -189,6 +189,10 @@ The process exports the new offers and saves the PNK as an SKU.
 | Order import
 | Every 20 minutes
 | --
+
+| Update Orders Payment
+| once a day
+| This cron retrieves all orders from plentysystems that have been imported from eMAG. It then checks if the payment status has changed to _paid_. If yes, plentysystems will import the payment.
 |===
 
 [#THBDPCE9]
@@ -342,6 +346,12 @@ The following event procedures are available for automating order processing:
 === Automatically sending shipping confirmations
 
 Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically send shipping confirmations to {market} when the outgoing items are booked.
+
+When you start the eMAG integration wanting to send the package number to eMAG via our event procedure, you need to request activation of the EXTERNAL AWB service from eMAG beforehand.
+
+*_NOTE_*: Without activating the EXTERNAL AWB service, you will not receive the package number sent by plentysystems. This will cause an error in the plentysystems logs.
+
+You can request activation of the EXTERNAL AWB service by eMAG when creating your eMAG account.
 
 :table-event-procedure: <<#emag-shipping-confirmation>>
 
