@@ -85,7 +85,7 @@ Die Standardvorlagen sind ideal, um deine erste Vorlage zu erstellen, weil sie d
 [NOTE]
 .Besonderheiten der Standardvorlagen
 ====
-Standardvorlagen sind so konfiguriert, dass sie als Fallback dienen, wenn keine andere Vorlage dieses Dokumententyps vorhanden ist. Standardvorlagen können daher nicht bearbeitet, deaktiviert oder gelöscht werden.
+Standardvorlagen sind so konfiguriert, dass sie als Fallback dienen, wenn keine andere Vorlage dieses Dokumententyps vorhanden ist. Standardvorlagen sind daher standardmäßig aktiviert und können nicht bearbeitet oder gelöscht werden. 
 ====
 
 [#spalten-konfigurieren]
@@ -474,6 +474,9 @@ Klicke auf *Widget löschen* (material:delete[]), um das Widget zu entfernen. Kl
 |[#intable-widget-barcode]*Barcode*
 |In diesem Widget kannst du die Anzeige des Barcodes bestimmen. Wähle hier einen *Barcodetyp* (Allgemein/Artikel), einen *Barcode / QR-Code* und das gewünschte *Layout* aus der jeweiligen Dropdown-Liste.
 
+Für das Barcode-Widget sind zwei *Bilddateiformate* verfügbar: *PNG* ist das Standardformat. *SVG* wählst du über die Dropdown-Liste. + 
+*_Hinweis:_* Wenn du in einer bestehenden Vorlage das Bilddateiformat wechselst, kann sich die Größe des Barcodes ändern. Prüfe die Vorlage immer entsprechend.
+
 Klicke auf *Widget löschen* (material:delete[]), um das Widget zu entfernen. Klicke auf *Einstellungen schließen* (material:close[]), um die Einstellungen zu schließen.
 
 |[#intable-widget-text]*Text*
@@ -775,6 +778,10 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 | `Warenwert netto`
 |Der Netto-Warenwert.
 
+| `Warenwert angezeigter Positionen`
+|Gibt den Wert der in der Auftragspositionstabelle angezeigten Positionen aus. 
+Diese Variable steht für Fälle zur Verfügung, in denen eine Vorlage so konfiguriert ist, dass sie nur ausgewählte Auftragspositionen zeigt.
+
 | `Nettobetrag`
 |Der Nettobetrag.
 
@@ -908,11 +915,17 @@ Beachte, dass sich die verfügbaren Variablen je nach Dokumenttyp unterscheiden.
 |===
 |Name der Variable |Erläuterung
 
+| `Aktionsgutschein-Code`
+|Wenn in einem Auftrag  ein Aktionsgutschein verwendet wurde, gibt diese Variable den Code des Aktionsgutscheins aus.
+
 | `Bruttobetrag Gutschein`
 |Der Bruttobetrag des Gutscheins.
 
 | `Nettobetrag Gutschein`
 |Der Nettobetrag des Gutscheins.
+
+| `Geschenkgutschein-Codes`
+|Wenn eine oder mehrere Geschenkgutscheine in einem Auftrag verwendet wurden, gibt diese Variable die entsprechenden Geschenkgutschein-Codes aus
 
 | `Währung`
 |Die Währung des Auftrags.
@@ -2002,10 +2015,57 @@ a|Wähle, in welchem Format das Datum angezeigt werden soll. Dafür stehen dir d
 
 | *Fußzeile anzeigen*
 |Aktiviere die Umschaltfläche (material:toggle_on[role=skyBlue]), um die Fußzeile anzuzeigen.
+ 
+
+|[#intable-globale Kopf- u. Fußzeilen]*Kopfzeile aus Vorlage einfügen / Fußzeile aus Vorlage einfügen*  
+a|Über diese Dropdown-Listen kannst du Vorlagen so einrichten, dass sie automatisch die Kopf- und/oder Fußzeile einer anderen Vorlage verwenden. 
+
+Kopf- und Fußzeilen, mit denen andere Vorlagen verknüpft sind, werden als *globale Kopf- und Fußzeilen* bezeichnet.
+
+Wenn du dich für die Nutzung *globaler* Kopf-/Fußzeilen entscheidest, beachte folgende Hinweise:
+
+* Ist eine Vorlage mit einer *globalen* Kopf-/Fußzeile verknüpft, kann die Kopf-/Fußzeile der Vorlage nicht bearbeitet werden.
+
+* Wird eine Vorlage mit *globaler* Kopf-/Fußzeile gelöscht/deaktiviert, haben die mit ihr verknüpften Vorlagen keine Kopf-/Fußzeile mehr.
+
+* Zwei Spalten in der DocumentBuilder-Übersicht zeigen an, ob eine Vorlage eine *globale* Kopf-/Fußzeile enthält oder mit einer globalen Kopf-/Fußzeile verknüpft ist. 
+
+* Durch die Filteroptionen im DocumentBuilder kannst du nach Vorlagen suchen, die mit einer *globalen* Kopf-/Fußzeile verknüpft sind oder eine solche enthalten.
 
 | *PDF-Hintergrund hochladen*
 |Wähle eine Datei (material:more_horiz[]), die du als PDF-Hintergrund der Vorlage nutzen möchtest und lade sie hoch. Der gewählte Hintergrund wird anschließend in der PDF-Vorschau angezeigt. Bei Bedarf kannst du den gewählten Hintergrund auch wieder löschen (material:delete[]). +
 *_Hinweis:_* Es kann lediglich ein Hintergrund hochgeladen werden.
+
+| *PDF-Hintergrund verwenden*
+a|Wähle in der Dropdown-Liste aus, wie der PDF-Hintergrund verwendet werden soll. Die Auswahlmöglichkeiten sind wie folgt:
+
+*Erste Seite wiederholen* + 
+
+* Besteht der PDF-Hintergrund aus einer Seite, wird das Layout dieser Seite auf jede Dokumentseite angewandt.
+
+* Besteht der PDF-Hintergrund aus mehreren Seiten, wird nur das Layout der ersten Seite auf jede Dokumentseiten angewandt. + 
+*_Beispielsequenzen:_*  Die Zahlen in den folgenden Sequenzen verdeutlichen, wie das Layout auf die Dokumentseiten angewandt wird: 121212; 123123123
+
+*Fortlaufend verwenden*
+
+* Besteht der PDF-Hintergrund aus einer Seite, wird das Layout dieser Seite auf jede Dokumentseite angewandt.
+
+* Besteht der PDF-Hintergrund aus mehreren Seiten, wird das Layout dieser Seiten abwechselnd auf alle Dokumentseiten angewandt, beginnend mit Hintergrundseite eins. + 
+*_Beispielsequenzen:_* 121212; 123123123
+
+*Letzte Seite wiederholen*
+
+* Besteht der PDF-Hintergrund aus einer Seite, wird das Layout dieser Seite auf jede Dokumentseite angewandt.
+
+* Besteht der PDF-Hintergrund aus mehreren Seiten, wird das Layout der ersten Hintergrundseite(n) einmal angewandt; die letzte Hintergrundseite wird auf alle übrigen Seiten des Dokuments angewandt. + 
+*_Beispielsequenzen:_* 12222; 12333
+
+*Einmal verwenden*
+
+* Besteht der PDF-Hintergrund aus einer Seite, wird das Layout dieser Seite nur auf die erste Dokumentseite angewendet; alle übrigen Dokumentseiten haben keinen Hintergrund. 
+* Besteht der PDF-Hintergrund aus mehreren Seiten, wird das Layout jeder Hintergrundseite einmal angewandt; alle verbleibenden Dokumentseiten haben keinen Hintergrund. +
+*_Beispielsequenzen:_* 12----;  123----
+
 
 |===
 
@@ -2077,6 +2137,15 @@ icon:map-signs[] *_Oder:_* Öffne eine Vorlage und klicke oben auf die Umschaltf
 → Die Vorlage wird aktiviert bzw. deaktiviert und das Datum in der Spalte *Letzte (De)aktivierung* wird aktualisiert. +
 *_Hinweis:_* Eine Vorlage kann nur aktiviert werden, wenn keine zweite Vorlage mit genau denselben Einstellungen existiert. Beachte außerdem, dass nach der Aktivierung einer Vorlage keine Änderungen (außer am Namen) mehr vorgenommen werden können.
 
+[NOTE]
+.Standardvorlagen deaktivieren/aktivieren
+====
+Die Standardvorlagen lassen sich nur alle auf einmal deaktivieren/aktivieren. Nutze dazu den Toggle in der DocumentBuilder-Übersicht. + 
+Wenn du alle Standardvorlagen deaktivierst, können sie nicht mehr als Fallback dienen. 
+
+
+====
+
 [#vorlage-kopieren]
 === Vorlage kopieren
 
@@ -2091,7 +2160,8 @@ Vorlage kopieren:
 . Klicke rechts in der Zeile einer Vorlage auf das Kontextmenü (material:more_vert[]).
 . Klicke auf material:file_copy[] *Vorlage kopieren*. +
 → Die Vorlage wird kopiert und direkt geöffnet. +
-*_Hinweis:_* Die neue Vorlage erhält denselben Namen mit dem Zusatz "Kopie" am Ende. Kopierte Vorlagen sind standardmäßig deaktiviert.
+*_Hinweise:_* Die neue Vorlage erhält denselben Namen mit dem Zusatz "Kopie" am Ende. Kopierte Vorlagen sind standardmäßig deaktiviert. + 
+Wenn du eine Vorlage mit ungültiger Kopf-/Fußzeile kopierst, enthält die Kopie ebenfalls eine ungültige Kopf-/Fußzeile.
 
 [#vorlage-exportieren]
 === Vorlage exportieren

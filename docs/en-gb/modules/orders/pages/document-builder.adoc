@@ -83,7 +83,7 @@ We recommend that you duplicate a standard template and then edit it in the *Edi
 [NOTE]
 .Specifics of standard templates
 ====
-Standard templates are configured to serve as a fallback if no other template of this document type exists, so they cannot be edited, deactivated or deleted.
+Standard templates are configured to serve as a fallback if no other template of this document type exists, so they are activated by default and cannot be edited or deleted.
 ====
 
 [#configure-columns]
@@ -465,6 +465,10 @@ Click on *Delete widget* (material:delete[]) to remove the widget. Click on *Clo
 |[#intable-widget-barcode]*Barcode*
 |In this widget you can set the display of the barcode. Select a *Barcode type* here (General/Item), a *Barcode / QR code* and the desired *Layout* from the respective drop-down list.
 
+Two *image file formats* are available for the barcode widget: *PNG*, which is the default format, and *SVG*, which you can select from the drop-down list. 
+
+*_Note:_* Switching image file format in an existing template can cause the size of the barcode to change in the template. Always check the barcode size in the template preview after making such a switch.
+
 Click on *Delete widget* (material:delete[]) to remove the widget. Click on *Close settings* (material:close[]) to close the settings.
 
 |[#intable-widget-text]*Text*
@@ -765,6 +769,9 @@ Note that the available variables differ depending on the document type. When ch
 
 | `Value of items net`
 |The net value of the goods.
+
+| `Value of items shown`
+|Produces the value of the items shown in the order items table. This variable is available for cases in which a template is configured to show only selected items belonging to an order.
 
 | `Net total`
 |The net amount.
@@ -1998,6 +2005,37 @@ a|Select in which format the date is to be displayed. The following options are 
 |Select a file (material:more_horiz[]) that you want to use as the PDF background of the template and upload it. The selected background is then displayed in the PDF preview. If necessary, you can also delete the selected background (material:delete[]). +
 *_Note:_* Only one background can be uploaded.
 
+| *Use PDF background*
+a|Select from the dropdown list. Your options are as follows:
+
+*Repeat first page* + 
+
+* If the PDF background consists of one page, the layout of this page is applied on every page of the document.
+
+* If the PDF background consists of multiple pages, only the layout of the first background page is applied to all document pages. + 
+*_Example sequences:_* The numbers in the following sequences illustrate how the layout is applied to the document pages: 121212; 123123123
+
+*Use continuously*
+
+* If the PDF background consists of one page, the layout of this page is applied on every page of the document.
+
+* If the PDF background consists of multiple pages, the layouts of these are applied in alternation on all document pages, starting with background page one. + 
+*_Example sequences:_* 121212; 123123123
+
+*Repeat last page*
+
+* If the PDF background consists of one page, the layout of this page is applied on every page of the document. 
+
+* If the PDF background consists of multiple pages, the layouts of the first page(s) is/are applied once; the last background page is applied on all remaining pages of the document. + 
+*_Example sequences:_* 12222; 12333
+
+*Use once*
+
+* If the PDF background consists of one page, the layout of this page is applied only on the first page of the document; all remaining document pages have no background. 
+* If the PDF background consists of several pages, the layouts of each background page are applied once; all remaining document pages have no background. +
+*_Example sequences:_* 12----;  123----
+
+
 |===
 
 [#show-preview]
@@ -2067,6 +2105,17 @@ icon:map-signs[] *_Or:_* Open a template and click on the *Activate Template* (m
 → The template is activated or deactivated and the date in the *Last (de)activation* column is updated. +
 *_Note:_* A template can only be activated if no second template exists with exactly the same settings. Also note that once a template has been activated, no more changes (except to the name) can be made.
 
+[NOTE]
+.Deactivating/activating default templates
+====
+The *default* templates can only be deactivated/activated collectively using the toggle in the DocumentBuilder overview. + 
+If you deactivate all default templates, they can no longer serve as fallbacks. 
+
+====
+
+
+
+
 [#copy-template]
 === Copying a template
 
@@ -2081,7 +2130,9 @@ Copying a template:
 . Click on the context menu (material:more_vert[]) on the right in the line of a template.
 . Select the option *Copy Template* (material:file_copy[]). +
 → The template is copied and directly opened. +
-*_Note:_* The new template is given the same name with the addition of "copy" at the end. In addition, copied templates are disabled by default.
+*_Notes:_* + 
+The new template is given the same name with the addition of "copy" at the end. In addition, copied templates are disabled by default. + 
+If the template you copy contains an invalid header/footer, the resulting copy will also have an invalid header/footer.
 
 [#template-export]
 === Exporting templates

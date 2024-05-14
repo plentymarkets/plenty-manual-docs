@@ -1,0 +1,40 @@
+{# 
+    Extend general styling.
+    The extends statement inserts the *MyTemplate* block into the template with ID 50. However, the template ID is not relevant here, but the language ID of the English template (ID 101).
+#}
+{% extends 101 %}
+
+{% block MyTemplate %}
+
+    Hello {{ order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3 }}, </br>
+    </br>
+    Thank you for the trust you have placed in us and your order with the ID {{ order.id }}. </br>
+    </br>
+    With this message, we confirm that we have received your order. At the same time, the purchase contract is legally binding. </br>
+    </br>
+    </br>
+    <strong>SHORT SUMMARY</strong> </br>
+    </br>
+    Your customer ID: {{ contact.id }} </br>
+    Your order ID: {{ order.id }} (please always specify in case of queries) </br>
+    Payment method: {{ order.formattedGeneral.methodOfPaymentName }} </br>
+    Shipped by: {{ order.formattedShipping.providerName }} </br>
+    Value of items: {{ order.formattedGeneral.valueOfItems }} {{ order.formattedSubtotals.currencySymbol }}</br>
+    Shipping costs: {{ order.formattedSubtotals.shippingCostsGross }} {{ order.formattedSubtotals.currencySymbol }}</br>
+    Total amount including shipping costs: {{ order.formattedGeneral.invoiceTotal }} {{ order.formattedSubtotals.currencySymbol }}</br>
+    </br>
+    </br>
+    <strong>ITEM OVERVIEW</strong> </br>
+    </br>
+    
+    {# insert regular template with *Order items* widget (template ID: 51, language ID for EN: 105)#}
+    {% include 105 %}
+
+    </br>
+    We look forward to welcoming you back to our shop soon.</br>
+    </br>
+    {{ globals.account.signatureHTML | raw }}</br>
+    </br>
+    </br>
+
+{% endblock %}
