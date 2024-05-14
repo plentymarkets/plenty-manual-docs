@@ -380,6 +380,21 @@ The offer catalogue is required in addition to the catalogues for the different 
 
 include::partial$catalogue-creation.adoc[]
 
+[#deactivate-offer]
+==== Deactivating offers
+
+To deactivate an offer on Decathlon, a stock of zero is exported to Decathlon for the respective variation. Zero is exported if the variation has an active SKU for Decathlon and at least one of the following cases apply to the variation:
+
+- The variation is inactive.
+- The main order referrer 173.00 Decathlon is deactivated.
+- All subordinate Decathlon order referrers (e.g. 173.01, 173.02…) are deactivated.
+
+This means that if you want to deactivate an offer for a variation on Decathlon, you need to do either of the following:
+
+- deactivate the variation,
+- or deactivate the order referrer 173.00 Decathlon,
+- or deactivate all subordinate Decathlon order referrers.
+
 [#map-data-fields]
 ==== Mapping data fields in the catalogue
 
@@ -410,10 +425,9 @@ include::partial$decathlon-recommended-mappings.adoc[]
 Every market structures item data differently. As such, there are some particularities for each market when mapping data fields. This chapter contains mapping information for important data fields for Decathlon.
 
 [#html]
-===== Do not use HTML formatting
+===== HTML-structured content
 
-Description texts containing HTML formatting cannot be exported to Decathlon. If you want to use formatting for your Decathlon texts, then use the markup language markdown instead. +
-Take care not to use HTML formatting especially for item and offer descriptions so that the texts will be displayed correctly on Decathlon.
+You are free to use HTML to structure content that is intended for use with Decathlon.
 
 [#activate-catalogue]
 ==== Activating the catalogue export
@@ -574,6 +588,41 @@ include::_includes:partial$event-procedure.adoc[]
 | *Procedure*
 | *Plugin*
 | *Upload invoices to Decathlon*
+|===
+
+[#upload-return-label]
+=== Automatically uploading return labels to Decathlon
+
+Set up an xref:automation:event-procedures.adoc#[event procedure] to automatically upload return labels to Decathlon.
+
+:table-event-procedure: <<#return-label-decathlon>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+*_Note:_* The selected statuses and filters in <<#return-label-decathlon>> only serve as an example. Select filters and statuses for the event procedure which best suit your workflow.
+
+[[return-label-decathlon]]
+.Event procedure for uploading invoices to Decathlon
+[cols="1a,3a,3a"]
+|===
+|Setting |Option |Selection
+
+| *Event*
+| Select an event, for example:
+
+* *Documents: Return slip generated* +
+
+*_Note:_* Select an event after which the items have already been shipped.
+
+| 
+
+| *Filter*
+| *Order > Referrer*
+| *Decathlon*
+
+| *Procedure*
+| *Plugin*
+| *Upload return label to Decathlon*
 |===
 
 [#create-refunds]
