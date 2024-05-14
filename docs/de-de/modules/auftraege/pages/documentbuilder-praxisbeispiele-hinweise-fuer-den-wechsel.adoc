@@ -1,0 +1,66 @@
+= Hinweise für den Wechsel auf den DocumentBuilder
+:keywords: Wechseln auf den DocumentBuilder, Umsteigen auf den DocumentBuilder, Umstieg auf DocumentBuilder
+:description: Dieses Praxisbeispiel enthält Informationen dazu, was beim Wechsel von den standortbezogenen Dokumente auf den DocumentBuilder zu beachten ist.
+:author: team-docs-automation
+
+Diese Handbuchseite enthält Informationen dazu, was du beachten musst, wenn du von den standortbezogenen Dokumenten im Menü *Einrichtung » Dokumente » Einstellungen » [Umschaltfläche “DocumentBuilder verwenden”]* auf den DocumentBuilder wechseln möchtest.
+
+[#migration-wie]
+== Vorbereitende Einstellungen vornehmen
+
+Nimm zunächst die auf der Handbuchseite xref:auftraege:documentbuilder-vorbereitende-einstellungen.adoc#[Vorbereitende Einstellungen vornehmen] beschriebenen Einstellungen vor.
+
+[#documentbuilder-freischalten]
+== DocumentBuilder für Dokumenttypen freischalten
+ 
+Um von den standortbezogenen Dokumenten auf den DocumentBuilder umzusteigen, musst du den DocumentBuilder für die jeweiligen Dokumenttypen freischalten. 
+
+[.instruction]
+DocumentBuilder für Dokumenttypen freischalten:
+
+. Öffne das Menü *Einrichtung » Dokumente » Einstellungen*. +
+→ Die Übersicht für die Dokumenteinstellungen wird geöffnet.
+. Aktiviere (material:toggle_on[]) die Umschaltfläche für die Dokumenttypen, die mit dem DocumentBuilder generiert werden sollen. +
+→ Der DocumentBuilder ist nun für die gewählten Dokumenttypen freigeschaltet.
+ 
+
+[NOTE]
+.Systemverhalten bei Nicht-Freischaltung.
+====
+Für alle nicht-freigeschalteten Dokumenttypen werden weiterhin die Einstellungen der standortbezogenen Dokumente im Menü *Einrichtung » Mandant » [Mandant wählen] » Standorte » [Standort wählen]* verwendet. +
+Dies gilt nicht für den neuen Dokumenttyp *Benutzerdefiniertes Auftragsdokument*, der nur im DocumentBuilder verfügbar ist.
+====
+
+
+
+[#documentbuilder-asynchrone-dokumentenerstellung]
+== Asynchrone Dokumentenerstellung
+
+Sobald du eine Vorlage für den DocumentBuilder freischaltest, wird für die Vorlage eine neue Logik im Hintergrund aktiviert, bei der die entsprechenden Dokumente asynchron generiert werden. Durch eine asynchrone Logik können Vorgänge gleichzeitig und unabhängig voneinander, statt nacheinander ausgeführt werden.  +
+Der Vorteil: Du kannst das System weiter nutzen, ohne dass du warten musst, bis die Dokumente generiert sind.
+
+[#documentbuilder-anpassungen-ereignisaktionen]
+=== Erforderliche Anpassungen an den plentysystems Ereignisaktionen
+
+Aufgrund der asynchronen Dokumentenerstellung muss jede Aktion, die mit einem Dokument zu tun hat (Dokumentaktion), in einem einzelnen Ereignis erstellt werden. Vorhandene xref:auftraege:ereignisaktionen.adoc#[Ereignisaktionen], die mehrere Dokumentaktionen beinhalten, müssen entsprechend aufgeteilt werden.
+
+*_Beispiel:_* Du hast eine Ereignisaktion eingerichtet, die sowohl das Erstellen eines Dokuments als auch den Versand dieses Dokuments per E-Mail auslöst. Diese Ereignisaktion musst du in zwei aufeinander folgende Ereignisaktionen aufteilen. So stellst du sicher, dass die E-Mail nur dann versendet wird, wenn das Dokument verfügbar ist.
+
+[#documentbuilder-anpassungen-Prozesse]
+=== Empfohlene Anpassungen an den plentySystems Prozessen
+
+Die Subaktionen *Speichern* und *Drucken* beinhalten jeweils den Schritt der Dokumentengenerierung. Um diesen Schritt im Rahmen der asynchronen Logik auch unabhängig durchzuführen, wurde die Subaktion *Generiert* eingeführt. 
+
+In den Prozessen werden Dokumente nun durch die folgenden Subaktionen erzeugt:
+
+* *Generiert*: Das Dokument wird am Auftrag generiert.
+* *Speichern*: Das Dokument wird am Auftrag generiert und zusätzlich gespeichert. 
+* *Drucken*: Das Dokument wird am Auftrag generiert und zusätzlich ausgedruckt.
+
+[TIP]
+.Empfehlung: Subaktion *Generiert* zu Beginn eines Prozesses verwenden
+====
+Verwende die Subaktion *Generiert* zu Beginn eines Prozesses. So ist der Schritt der Dokumentengenerierung bereits erfolgt, wenn im weiteren Prozessablauf Dokumente gedruckt oder gespeichert werden sollen. Dies kann zu einer verbesserten Geschwindigkeit führen.
+====
+
+
