@@ -1,0 +1,2276 @@
+= Using variables and twig expressions
+:keywords: variable, variables, emailbuilder variables, twig expressions, variable categories
+:description: Find out which variables and twig expressions are available for your EmailBuilder templates.
+:page-pagination:
+:author: team-crm
+
+////
+TODO: Hinweis für TCDs/alle Menschen, die diese Seite bearbeiten: Damit alle twig expressions, die "| raw" am Ende enthalten, korrekt im Handbuch angezeigt werden, muss ein Backslash (\) vor dem Pipe-Zeichen eingefügt werden --> "\ | raw"
+Andernfalls würde es die Tabellen zerschießen. 
+Wenn die übersetzte Datei hochgeladen wird, muss der Backslash manuell eingefügt werden.
+////
+
+In some of the widgets you can insert variables to create the templates you need. In the emails that are sent to your customer, the variables will then be replaced with the correct content.
+
+Besides the variables, the tables in the <<#available-variables, Available variables>> chapter contain also the corresponding twig expressions. You need twig expressions both for the <<#twig-subject, subject line>> of your email template and for the <<#twig-widget-code, code widget>> because it is not possible to use variables in there. And in xref:crm:emailbuilder-expert-mode.adoc#[expert mode], it is of course also possible to use twig expressions.
+
+[#twig-introduction]
+== Twig expressions for the code widget and the subject line
+
+Besides the variables, you can find also the twig expressions in the <<#available-variables, Available variables>> chapter. Twig expressions can be used in the code widget and in a template’s subject line.
+
+[#twig-subject]
+=== Twig expression in the subject line
+
+Variables _cannot_ be inserted in the template’s subject. It has to be the twig expression belonging to the variable. +
+If you want to use a twig expression in the template’s subject line, this expression has to be surrounded by double curly brackets.
+
+*_Example:_* If you want to display the shipping service provider in your template’s subject, insert the corresponding twig expression in the template’s xref:crm:emailbuilder-work-with-emailbuilder.adoc#adjust-subject[subject line] as follows: `&#123;&#8288;&#123;order.formattedShipping.providerName&#125;&#8288;&#125;`.
+
+Click on material:integration_instructions[] (*Show variables*) at the end of the subject line to open the variable list. You can either search for the desired variable using the categories and sub-categories or you enter the variable’s name into the search field. When you click on the desired variable, the corresponding twig expression including the double curly brackets will be inserted in the subject line.
+
+For further code examples for the subject, refer to the xref:crm:emailbuilder-code-examples.adoc#code-examples-subject[Code examples] user manual page.
+
+[#twig-code-widget]
+=== Twig expression in the code widget
+
+If you use link:https://twig.symfony.com/doc/3.x/tags/if.html[if queries^] or link:https://twig.symfony.com/doc/2.x/tags/for.html[for loops^] in your code widget, for example, there is no need to insert double curly brackets in the if query itself, but in the body text. For further information about twig, refer to the link:https://twig.symfony.com/doc/3.x/[Twig documentation^].
+
+[TIP]
+.Insert appropriate twig expression via variable list
+====
+If you have inserted the code widget into your template and open it by clicking on icon:code[], the twig expression will be directly inserted in the code editor once you click on one of the variables from the list.
+====
+
+Refer to the xref:crm:emailbuilder-code-examples.adoc#code-examples-code-widget[Code examples for the code widget] chapter on the xref:crm:emailbuilder-code-examples.adoc#[Code examples] page to find some if queries and for loops that you can simply copy to your code widget.
+
+[#available-variables]
+== Available variables
+
+The available variables for the EmailBuilder are grouped into the following categories and sub-categories: Click on an entry in the list to be directly forwarded to the area where the variables and the corresponding twig expressions for the respective category or sub-category are listed.
+
+* <<#variables-order, Order>>
+** <<#variables-order-subscription, Subscription>>
+** <<#variables-order-general, General>>
+** <<#variables-order-date, Order date>>
+** <<#variables-order-order-items, Order items (only for item list widget)>>
+*** <<#variables-order-order-items-general, General>>
+*** <<#variables-order-order-items-barcodes, Barcodes>>
+*** <<#variables-order-order-items-properties, Properties>>
+*** <<#variables-order-order-items-free-text-fields, Free text fields>>
+*** <<#variables-order-order-items-availabilities, Availabilities>>
+** <<#variables-order-bank-details-of-order, Bank details of the order>>
+** <<#variables-order-order-properties, Order properties>>
+** <<#variables-order-delivery-address, Delivery address>>
+*** <<#variables-order-delivery-address-data, Delivery address data>>
+*** <<#variables-order-delivery-address-options, Delivery address options>>
+** <<#variables-order-suppliers, Suppliers>>
+** <<#variables-order-invoice-address, Invoice address>>
+*** <<#variables-order-invoice-address-data, Invoice address data>>
+*** <<#variables-order-invoice-address-options, Invoice address options>>
+** <<#variables-order-invoice-data, Invoice data>>
+** <<#variables-order-shipping, Shipping>>
+** <<#variables-order-payment, Payment>>
+
+* <<#variables-contact, Contact>>
+** <<#variables-contact-general, General>>
+** <<#variables-contact-bank-details-of-contact, Bank details of the contact>>
+** <<#variables-contact-properties, Properties>>
+** <<#variables-contact-options, Contact options>>
+** <<#variables-contact-delivery-address, Delivery address>>
+*** <<#variables-contact-delivery-address-data, Delivery address data>>
+*** <<#variables-contact-delivery-address-options, Delivery address options>>
+** <<#variables-contact-invoice-address, Invoice address>>
+*** <<#variables-contact-invoice-address-data, Invoice address data>>
+*** <<#variables-contact-invoice-address-options, Invoice address options>>
+
+* <<#variables-global, Global variables>>
+** <<#variables-global-general, General>>
+** <<#variables-global-bank-details-of-client, Bank details of the client>>
+** <<#variables-global-coupons, Coupons>>
+** <<#variables-global-links, Links>>
+** <<#variables-global-legal-texts, Legal texts>>
+
+* <<#variables-messenger, Messenger>>
+* <<#variables-newsletter, Newsletter>>
+* <<#variables-text-blocks, Text blocks>>
+* <<#variables-ticket, Ticket>>
+
+[#variables-order]
+=== Variables: Order
+
+In this category, you can find all order-relevant sub-categories.
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-order-subscription, Subscription>>
+* <<#variables-order-general, General>>
+* <<#variables-order-date, Order date>>
+* <<#variables-order-order-items, Order items (only for item list widget)>>
+** <<#variables-order-order-items-general, General>>
+** <<#variables-order-order-items-barcodes, Barcodes>>
+** <<#variables-order-order-items-images, Images>>
+** <<#variables-order-order-items-properties, Properties>>
+** <<#variables-order-order-items-free-text-fields, Free text fields>>
+** <<#variables-order-order-items-availabilities, Availabilities>>
+* <<#variables-order-bank-details-of-order, Bank details of the order>>
+* <<#variables-order-order-properties, Order properties>>
+* <<#variables-order-delivery-address, Delivery address>>
+** <<#variables-order-delivery-address-data, Delivery address data>>
+** <<#variables-order-delivery-address-options, Delivery address options>>
+* <<#variables-order-suppliers, Suppliers>>
+* <<#variables-order-invoice-address, Invoice address>>
+** <<#variables-order-invoice-address-data, Invoice address data>>
+** <<#variables-order-invoice-address-options, Invoice address options>>
+* <<#variables-order-invoice-data, Invoice data>>
+* <<#variables-order-shipping, Shipping>>
+* <<#variables-order-payment, Payment>>
+
+[#variables-order-subscription]
+==== Order / Subscription
+
+[[table-variables-order-subscription]]
+.Variables in the *Order / Subscription* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[The information in this column is only relevant for you if you have already created in the *Setup » Client » Select client » Email » Templates* menu and want to know the name of the old variable. Note: This column has not yet been filled completely.]
+
+| `End date of the subscription`
+|Date when the subscription ends.
+| `order.formattedSubscription.endDate`
+| $SchedulerEndDate
+
+| `Subscription ID`
+|ID of the subscription. The ID is automatically assigned by the system and _cannot_ be changed.
+| `order.formattedSubscription.id`
+| $SchedulerID
+
+| `Subscription interval`
+|Interval of the subscription as determined in the *Setup » Orders » Subscription* menu. The interval determines the regularly recurrent times at which the items are sent to the customers. +
+Possible values: *1 month*, *3 months*, *6 months*, *12 months*.
+| `order.formattedSubscription.interval`
+| $SchedulerInterval
+
+| `Subscription: Number of executions`
+|Number of orders that were created based on a subscription. +
+*_Example:_* If the subscription was started in May 2021 with an interval of 3 months, 4 orders were created until May 2022. In this case, this variable would return the value `4` in the email template.
+| `order.formattedSubscription.numberOfExecutions`
+| $SchedulerExecutionCount
+
+| `Start date of the subscription`
+|Date when the subscription starts.
+| `order.formattedSubscription.startDate`
+| $SchedulerStartDate
+
+| `Subscription total amount`
+|
+| `order.formattedSubscription.totalAmount`
+| $SchedulerTotalAmount
+
+|====
+
+[#variables-order-general]
+==== Order / General
+
+[[table-variables-order-order-general]]
+.Variables in the *Order / General* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Order access key`
+|This is the hash to uniquely identify the order.
+| `order.access_key`
+|$OrderAccessKey
+
+| `Barcode ID`
+|
+| `order.formattedGeneral.barcodeOrderID`
+| $BarcodeOrderID
+
+| `Plenty ID`
+|The ID is automatically assigned by the system and cannot be changed. You can find the ID in the *Setup » Client » [Select client] » Settings* menu.
+| `order.plentyId`
+|
+
+| `Coupon value`
+|Value of the xref:orders:coupons.adoc#[coupon].
+| `order.formattedGeneral.couponValue`
+| $CouponValue
+
+| `Customer wish`
+|During the checkout via the online shop, the contact can enter a wish regarding the items they ordered. This wish is saved as order note in the order data.
+| `order.formattedComments.customerSpecialWishes`
+| $CustomerSpecialWishes
+
+| `External order ID`
+|
+| `order.formattedProperties.externalOrderId`
+| $ExternalOrderID
+
+| `Flag`
+|Flag that was selected in the order.
+| `order.formattedProperties.flag`
+| $OrderFlag
+
+| `Order ID`
+|
+| `order.id`
+| $OrderID
+
+| `Order responsible`
+|Returns the owner saved in the order.
+| `order.formattedGeneral.ownerName`
+| -
+
+| `ID of the order type`
+|ID of the order type, e.g. `1` for order, `4` for credit note and `6` for repair order. +
+*_Note:_* To see the entire list of the order types and their IDs, refer to this xref:data:internal-IDs.adoc#80[page of the manual].
+| `order.typeId`
+| -
+
+| `Order type name`
+|Name of the order type, e.g. `Order`, `Credit note` and `Repair order`. +
+*_Note:_* To see the entire list of the order types and their IDs, refer to this xref:data:internal-IDs.adoc#80[page of the manual].
+| `order.formattedGeneral.orderTypeName`
+| $OrderType
+
+| `Main order ID`
+|ID of the highest preceding order. Usually, this is a normal order. +
+*_Example:_* In case of a credit note C1 coming from a return R1 from the order O1, the `Parent Order ID` returns the ID of R1 and `$OriginOrderID` returns the ID of O1.
+| `order.formattedOriginOrder.originOrderId`
+| $OriginOrderID
+
+| `Parent order ID`
+|ID of the direct preceding order +
+*_Example:_* In case of a credit note, this could be the ID of the return or of the order from which the credit note was generated.
+| `order.formattedOriginOrder.referenceOrderId`
+| $ParentOrderID
+
+| `Referrer`
+|Name of the xref:orders:order-referrer.adoc#[order referrer] as it is saved in the *Setup » Orders » Referrers* menu.
+| `order.formattedReferrer.name`
+| $ReferrerName
+
+| `Referrer ID`
+|ID of the xref:orders:order-referrer.adoc#[order referrer] as it is saved in the *Setup » Orders » Referrers* menu.
+| `order.formattedReferrer.id`
+| $ReferrerID
+
+| `Seller account`
+|
+| `order.formattedProperties.sellerAccount`
+|
+
+| `Status ID`
+|ID of the xref:orders:order-statuses.adoc#[order status] as it is saved in the *Setup » Orders » Order status* menu.
+| `order.statusId`
+| $OrderStatusID
+
+| `Order status`
+|Name of the order status as it is saved in the *Setup » Orders » Order status* menu.
+| `order.statusName`
+| $OrderStatusLabel
+
+|====
+
+[#variables-order-order date]
+==== Order / Order date
+
+[[table-variables-order-order-date]]
+.Variables in the *Order / Order date* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Date of the incoming order`
+|Date of the incoming order as saved in the order.
+| `order.formattedDates.createdOn`
+| $OrderDate
+
+| `Date of outgoing items`
+|Date and time of the outgoing items as saved in the order.
+| `order.formattedDates.outgoingItemsBookedOn`
+| -
+
+| `Date of incoming payment`
+|Date and time of the incoming payment as saved in the order.
+| `order.formattedDates.paidOn`
+| $PaymentDate
+
+| `Date and time of incoming order`
+|Date and time of the incoming order as saved in the order.
+| `order.formattedDates.createdOnDateAndTime`
+| -
+
+| `Date and time of the outgoing items`
+|Date and time of the outgoing items as saved in the order.
+| `order.formattedDates.outgoingItemsBookedOnDateTime`
+| -
+
+| `Invoice date`
+|
+| `order.formattedDocuments.invoiceDate`
+| -
+
+|====
+
+[#variables-order-order-items]
+==== Order / Order items (only for item list widget)
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-order-order-items-general, General>>
+* <<#variables-order-order-items-barcodes, Barcodes>>
+* <<#variables-order-order-items-images, Images>>
+* <<#variables-order-order-items-properties, Properties>>
+* <<#variables-order-order-items-free-text-fields, Free text fields>>
+* <<#variables-order-order-items-availabilities, Availabilities>>
+
+[#variables-order-order-items-general]
+===== Order / Order items (only for item list widget) / General
+
+[[table-variables-order-order-items-general]]
+.Variables in the *Order / Order items (only for item list widget) / General* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Attribute values`
+| xref:item:attributes.adoc#[Attribute values] as they are saved in the *Setup » Item » Attributes* menu.
+| `orderItem.attributeValues`
+| $VariantName
+
+| `Order item type`
+|
+| `orderItem.typeName`
+| -
+
+| `Order item type ID`
+|
+| `orderItem.typeId`
+| -
+
+| `Codes of a coupon`
+|
+| `orderItem.formattedVoucherCodes`
+| $VoucherCodes
+
+| `Content`
+|
+| `orderItem.formattedUnit.unitContent`
+| $UnitString
+
+| `Discount per order item`
+|
+| `orderItem.formattedAmounts.discount`
+| $RebateAmount
+
+| `External item ID`
+|
+| `orderItem.variation.item.external_article_id`
+| $ExternalItemID
+
+| `External token ID`
+|
+| `orderItem.formattedExternalTokenId`
+| $TransactionID
+
+| `External variation ID`
+|
+| `orderItem.variation.externalId`
+| $ExternalVariationID
+
+| `Item ID`
+|ID of the xref:item:item-search.adoc#580[item]. A consecutive ID is automatically assigned by the system and cannot be changed.
+| `orderItem.variation.itemId`
+| $ItemID
+
+| `URL to the item`
+|Returns the URL to the item in the online shop.
+| `orderItem.formattedLink`
+| 
+
+| `Item name`
+|Name of the xref:item:item-search.adoc#580[item].
+| `orderItem.orderItemName`
+| $ItemName
+
+| `Item number`
+|
+| `orderItem.variation.item.ArtNo`
+| $ItemNumber
+
+| `Order property value`
+|
+| `orderItem.formattedOrderProperty.value`
+| $OrderItemOrderPropertyValue
+
+| `Gross price`
+|Gross price of the item.
+| `orderItem.formattedAmounts.grossPrice`
+| $ItemPrice
+
+| `Item properties`
+|
+| `orderItem.formattedProperties.all`
+| $OrderProperties
+
+| `Item quantity`
+|
+| `orderItem.quantity`
+| $ItemQuantity
+
+| `Item type`
+|Returns the item types as saved in the item’s *Global* tab. Possible values: Default, item set, multipack.
+| `orderItem.formattedStockType`
+|
+
+| `Manufacturer name`
+|Name of the xref:item:manufacturers.adoc#[manufacturer].
+| `orderItem.variation.item.producer`
+| $ItemProducerName
+
+| `Model`
+|Model name of the item
+| `orderItem.variation.model`
+| $ItemModel
+
+| `Net price`
+|Net price of the item.
+| `orderItem.formattedAmounts.netPrice`
+| $ItemPriceNet
+
+| `Order characteristics`
+|
+| `orderItem.formattedOrderCharacteristics.all \| raw`
+| -
+
+| `Referrer`
+|
+| `orderItem.formattedReferrer.referrerName`
+| $ItemReferrer
+
+| `Release date`
+|
+| `orderItem.variation.releasedAt`
+| -
+
+| `Return comment`
+|
+| `orderItem.formattedReturn.comment`
+| $ReturnItemComment
+
+| `Status ID of the returned item`
+|
+| `orderItem.formattedReturn.statusId`
+| $ReturnItemStatusID
+
+| `Status name of the returned item`
+|
+| `orderItem.formattedReturn.statusLabel`
+| $ReturnItemStatusLabel
+
+| `ID of return reason`
+|ID of the xref:orders:order-type-return.adoc#edit-return-reason[return reason] as it is saved in the *Setup » Orders » Order types » Returns* menu.
+| `orderItem.formattedReturn.reasonId`
+| $ReturnReasonID
+
+| `Return reason`
+|Name of the xref:orders:order-type-return.adoc#edit-return-reason[return reason] as it is saved in the *Setup » Orders » Order types » Returns* menu.
+| `orderItem.formattedReturn.reasonLabel`
+| $ReturnReasonLabel
+
+| `Value of the return in percent`
+|
+| `orderItem.formattedReturn.percentage`
+| $ReturnItemValuePercentage
+
+| `Serial numbers`
+|Returns all serial numbers separated by comma when these are assigned to the item.
+| `orderItem.formattedSerialNumbers`
+| -
+
+| `Customs tariff number`
+|
+| `orderItem.variation.customsTariffNumber`
+|
+
+| `Total price (unit price x quantity)`
+|
+| `orderItem.formattedAmounts.totalPrice`
+| -
+
+| `Unit`
+|
+| `orderItem.formattedUnit.unitName`
+| -
+
+| `Unit price`
+|
+| `orderItem.formattedUnit.unitPrice`
+|-
+
+| `VAT rate`
+|
+| `orderItem.vatRate`
+| $ItemVatRate
+
+| `Variation ID`
+|
+| `orderItem.variation.id`
+| $VariationId
+
+| `Variation name`
+|
+| `orderItem.variation.name`
+| $VariationName
+
+| `Variation number`
+|
+| `orderItem.variation.number`
+| $VariationNumber
+
+| `Warehouse ID`
+|ID of the xref:stock-management:setting-up-a-warehouse.adoc#[warehouse] as it is saved in the *Setup » Stock » Warehouse* menu.
+| `orderItem.warehouseId`
+| $ItemWarehouseID
+
+| `Warehouse name`
+|Name of the xref:stock-management:setting-up-a-warehouse.adoc#[warehouse] as it is saved in the *Setup » Stock » Warehouse* menu.
+| `orderItem.warehouseName`
+| -
+
+|====
+
+[#variables-order-order-items-barcodes]
+===== Order / Order items (only for item list widget) / Barcodes
+
+[[table-variables-order-order-items-barcodes]]
+.Variables in the *Order / Order items (only for item list widget) / Barcodes* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `ASIN`
+|Amazon Standard Ident Number (ASIN) of the item
+| `orderItem.formattedBarcodes.ASIN`
+| $ItemASIN
+
+| `GTIN`
+|Global Trade Item Number (GTIN) of the item
+| `orderItem.formattedBarcodes.GTIN`
+| $ItemEAN
+
+| `GTIN image`
+|Returns the barcode based on the GTIN code of the item. The barcode is returned as an image. GTIN = Global Trade Item Number.
+| `orderItem.formattedBarcodes.GTINImage`
+| - 
+
+| `ISBN`
+|ISBN code of the item
+| `orderItem.formattedBarcodes.ISBN`
+| $ItemISBN
+
+|====
+
+[#variables-order-order-items-images]
+===== Order / Order items (only for item list widget) / Images
+
+[[table-variables-order-order-items-images]]
+.Variables in the *Order / Order items (only for item list widget) / Images* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Variation image URL (full size)`
+|Returns the URL to the variation image in full size.
+| `orderItem.formattedImageUrl`
+| $ItemImageURL
+ 
+| `Item image URL (medium size)`
+|Returns the URL to the variation image in medium size.
+| `orderItem.formattedImageUrlSize.middle`
+| -
+
+| `Variation image URL (full size)`
+|Returns the URL to the variation image in preview size.
+| `orderItem.formattedImageUrlSize.preview`
+| -
+
+| `Variation image URL (second preview size)`
+|Returns the URL to the variation image in second preview size.
+| `orderItem.formattedImageUrlSize.secondPreview`
+| -
+
+|====
+
+[#variables-order-order-items-properties]
+===== Order / Order items (only for item list widget) / Properties
+
+In this EmailBuilder area, all variables for which you have created properties of the *Item* area in the *Setup » Settings » Properties* menu are displayed in this area. +
+For further information, refer to the xref:item:properties.adoc#500[Properties] page.
+
+[#variables-order-order-items-free-text-fields]
+===== Order / Order items (only for item list widget) / Free text fields
+
+[[table-variables-order-order-items-free-text-fields]]
+.Variables in the *Order / Order items (only for item list widget) / Free text fields* sub-category
+[cols="3,4,3,1"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Free text field 1`
+| xref:item:fields.adoc#[Free text fields] for the items as they are saved in the *Setup » Item » Free text fields* menu. +
+*_Example:_* `Free text field 3` displays the text that is saved in *Field 3*.
+| `orderItem.variation.item.free1`
+| $Free
+
+| `Free text field 2`
+|
+| `orderItem.variation.item.free2`
+| $Free
+
+| `Free text field 3`
+|
+| `orderItem.variation.item.free3`
+| $Free
+
+| `Free text field 4`
+|
+| `orderItem.variation.item.free4`
+| $Free
+
+| `Free text field 5`
+|
+| `orderItem.variation.item.free5`
+| $Free
+
+| `Free text field 6`
+|
+| `orderItem.variation.item.free6`
+| $Free
+
+| `Free text field 7`
+|
+| `orderItem.variation.item.free7`
+| $Free
+
+| `Free text field 8`
+|
+| `orderItem.variation.item.free8`
+| $Free
+
+| `Free text field 9`
+|
+| `orderItem.variation.item.free9`
+| $Free
+
+| `Free text field 10`
+|
+| `orderItem.variation.item.free10`
+| $Free
+
+| `Free text field 11`
+|
+| `orderItem.variation.item.free11`
+| $Free
+
+| `Free text field 12`
+|
+| `orderItem.variation.item.free12`
+| $Free
+
+| `Free text field 13`
+|
+| `orderItem.variation.item.free13`
+| $Free
+
+| `Free text field 14`
+|
+| `orderItem.variation.item.free14`
+| $Free
+
+| `Free text field 15`
+|
+| `orderItem.variation.item.free15`
+| $Free
+
+| `Free text field 16`
+|
+| `orderItem.variation.item.free16`
+| $Free
+
+| `Free text field 17`
+|
+| `orderItem.variation.item.free17`
+| $Free
+
+| `Free text field 18`
+|
+| `orderItem.variation.item.free18`
+| $Free
+
+| `Free text field 19`
+|
+| `orderItem.variation.item.free19`
+| $Free
+
+| `Free text field 20`
+|
+| `orderItem.variation.item.free20`
+| $Free
+
+|====
+
+[#variables-order-order-items-availabilities]
+===== Order / Order items (only for item list widget) / Availabilities
+
+[#box-usage-variables-stock]
+[IMPORTANT]
+.Important: Usage of variables regarding stock availability
+====
+Note the following explanation about the usage of variables regarding stock availability:
+
+The variable must not be used if the stock falls below a value that leads to a change in the delivery time. The variable takes into account the value after the order was placed and _not_ at the moment the order is triggered in the shopping cart.
+
+This statement applies to the following variables:
+
+* Availability ID
+* Availability ID physical stock
+* Availability text
+* Availability text physical stock
+====
+
+[[table-variables-order-order-items-availabilities]]
+.Variables in the *Order / Order items (only for item list widget) / Availabilities* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Availability ID`
+|ID of the xref:item:availability.adoc#[item availability] of the net stock as it is saved in the *Setup » Item » Availability* menu. A consecutive ID is automatically assigned by the system and cannot be changed. +
+*_Important:_* Note the explanations in the box <<#box-usage-variables-stock, Usage of variables regarding stock availability>> above this table.
+| `orderItem.formattedAvailability.availabilityId`
+| $ItemAvailabilityID
+
+| `Availability ID physical stock`
+|ID of the item availability of the physical stock +
+*_Important:_* Note the explanations in the box <<#box-usage-variables-stock, Usage of variables regarding stock availability>> above this table.
+| `orderItem.formattedAvailability.availabilityPhysicalStockId`
+| $ItemAvailabilityPhysicalStockID
+
+| `Availability text`
+|Name of the item availability of the net stock +
+*_Important:_* Note the explanations in the box <<#box-usage-variables-stock, Usage of variables regarding stock availability>> above this table.
+| `orderItem.formattedAvailability.availabilityName`
+| $ItemAvailabilityLabel
+
+| `Availability text physical stock`
+|Name of the item availability of the physical stock +
+*_Important:_* Note the explanations in the box <<#box-usage-variables-stock, Usage of variables regarding stock availability>> above this table.
+| `orderItem.formattedAvailability.availabilityPhysicalStockName`
+| $ItemAvailabilityPhysicalStockLabel
+
+|====
+
+[#variables-order-bank-details-of-order]
+==== Order / Bank details of the order
+
+[[table-variables-order-bank-details-of-order]]
+.Variables in the sub-category *Order / Bank details of the order*
+[cols="1,2,3"]
+|====
+|Name of the variable |Explanation |Twig expression 
+
+| `Account holder`
+|Name of the account holder as saved in the *Bank details* area of the order.
+| `order.formattedBankData.accountHolder`
+
+| `Account number`
+|Account number as saved in the *Bank details* area of the order.
+| `order.formattedBankData.accountNumber`
+
+| `BIC`
+|BIC as saved in the *Bank details* area of the order.
+| `order.formattedBankData.bic`
+
+| `Bank code`
+|Bank code as saved in the *Bank details* area of the order.
+| `order.formattedBankData.bankCode`
+
+| `Country of the bank`
+|Country of the bank as saved in the *Bank details* area of the order.
+| `order.formattedBankData.bankCountry`
+
+| `Bank name`
+|Name of the bank as saved in the *Bank details* area of the order.
+| `order.formattedBankData.bankName`
+
+| `Postcode and town of the bank`
+|Postcode and town of the bank as saved in the *Bank details* area of the order.
+| `order.formattedBankData.bankPostalCodeTown`
+
+| `Street of the bank`
+|Street of the bank as saved in the *Bank details* area of the order.
+| `order.formattedBankData.bankStreet`
+
+| `IBAN`
+|IBAN of the bank as saved in the *Bank details* area of the order.
+| `order.formattedBankData.iban`
+
+| `SEPA direct debit mandate`
+|SEPA direct debit mandate as saved in the *Bank details* area of the order.
+| `order.formattedBankData.SEPA`
+
+| `SEPA direct debit mandate granted on`
+|Date when the SEPA direct debit mandate was granted. Is saved in the *Bank details* area of the order.
+| `order.formattedBankData.SEPADate`
+
+| `SEPA type of mandate`
+|SEPA type as saved in the *Bank details* area of the order.
+| `order.formattedBankData.SEPADirectDebitMethod`
+
+| `SEPA payment frequency`
+|SEPA payment frequency as saved in the *Bank details* area of the order.
+| `order.formattedBankData.SEPAFrequency`
+
+| `SEPA type`
+|SEPA type as saved in the *Bank details* area of the order.
+| `order.formattedBankData.SEPADirectDebitType`
+
+|====
+
+[#variables-order-order-properties]
+==== Order / Order properties
+
+In this area of the EmailBuilder, all variables of all order-related properties are shown.
+
+[#variables-order-delivery-address]
+==== Order / Delivery address
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-order-delivery-address-data, Delivery address data>>
+* <<#variables-order-delivery-address-options, Delivery address options>>
+
+[#variables-order-delivery-address-data]
+===== Order / Delivery address / Delivery address data
+
+[[table-variables-order-delivery-address-data]]
+.Variables in the *Order / Delivery address / Delivery address data* sub-category
+[cols="1,3,2"]
+|====
+|Name of the variable |Twig expression |Name of the old variablefootnote:1[]
+
+| `Delivery address Additional address information`
+| `order.formattedAddresses.deliveryAddress.address3`
+| $DeliveryAddressAdditionalAddress
+
+| `Delivery address Company name`
+| `order.formattedAddresses.deliveryAddress.name1`
+| $DeliveryAddressCompany
+
+| `Delivery address Country`
+| `order.formattedAddresses.deliveryAddress.country.name`
+| $CustomerCountry
+
+| `Delivery address Country ID`
+| `order.formattedAddresses.deliveryAddress.country.id`
+| $CustomerCountryID
+
+| `Delivery address Country ISO code 2`
+| `order.formattedAddresses.deliveryAddress.country.isoCode2`
+| $CustomerCountryIsoCode
+
+| `Delivery address Country ISO code 3`
+| `order.formattedAddresses.deliveryAddress.country.isoCode3`
+| $CustomerCountryIsoCode
+
+| `Delivery address First name`
+| `order.formattedAddresses.deliveryAddress.name2`
+| $DeliveryAddressFirstName
+
+| `Delivery address First name and last name`
+| `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressFullName
+
+| `Delivery address House number`
+| `order.formattedAddresses.deliveryAddress.address2`
+|
+
+| `Delivery address Last name`
+| `order.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressLastName
+
+| `Delivery address Post number`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.postNumber`
+| -
+
+| `Delivery address Postcode`
+| `order.formattedAddresses.deliveryAddress.postalCode`
+| $DeliveryAddressZip
+
+| `Delivery address Postcode and town`
+| `order.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ order.formattedAddresses.deliveryAddress.town`
+|
+
+| `Delivery address State`
+| `order.formattedAddresses.deliveryAddress.state.name`
+| $DeliveryAddressState
+
+| `Delivery address Street`
+| `order.formattedAddresses.deliveryAddress.address1`
+| $DeliveryAddressStreet
+
+| `Delivery address Town`
+| `order.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCity
+
+|====
+
+[#variables-order-delivery-address-options]
+===== Order / Delivery address / Delivery address options
+
+[[table-variables-order-delivery-address-options]]
+.Variables in the *Order / Delivery address / Delivery address options* sub-category
+[cols="1,3,2"]
+|====
+|Name of the variable |Twig expression |Name of the old variablefootnote:1[]
+
+| `Delivery address Contact person`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
+| $DeliveryAddressContactPerson
+
+| `Delivery address Email`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.email`
+| -
+
+| `Delivery address Telephone`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+| -
+
+| `Delivery address VAT number`
+|VAT number from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
+| $OrderDeliveryAddressTaxId
+
+|====
+
+[#variables-order-suppliers]
+==== Order / Suppliers
+
+[[table-variables-order-suppliers]]
+.Variables in the *Order / Suppliers* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Order warehouse ID`
+|
+| `order.formattedProperties.warehouse`
+| $WarehouseID
+
+| `Order warehouse name`
+|
+| `order.formattedProperties.warehouseName`
+| -
+
+| `Reorder ID`
+|ID of the xref:stock-management:working-with-reorders.adoc#[reorder].
+| `order.formattedReorder.id`
+| $ReorderID
+
+|====
+
+[#variables-order-invoice-address]
+==== Order / Invoice address
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-order-invoice-address-data, Invoice address data>>
+* <<#variables-order-invoice-address-options, Invoice address options>>
+
+[#variables-order-invoice-address-data]
+===== Order / Invoice address / Invoice address data
+
+[[table-variables-order-invoice-address-data]]
+.Variables in the *Order / Invoice address / Invoice address data* sub-category
+[cols="1,3,2"]
+|====
+|Name of the variable |Twig expression |Name of the old variablefootnote:1[]
+
+| `Invoice address Additional address information`
+| `order.formattedAddresses.invoiceAddress.address3`
+| $BillingAddressAdditionalAddress
+
+| `Invoice address Company name`
+| `order.formattedAddresses.invoiceAddress.name1`
+| $BillingAddressCompany
+
+| `Invoice address Country`
+| `order.formattedAddresses.invoiceAddress.country.name`
+|
+
+| `Invoice address Country ID`
+| `order.formattedAddresses.invoiceAddress.country.id`
+|
+
+| `Invoice address Country ISO code 2`
+| `order.formattedAddresses.invoiceAddress.country.isoCode2`
+| $CustomerCountryIsoCode
+
+| `Invoice address Country ISO code 3`
+| `order.formattedAddresses.invoiceAddress.country.isoCode3`
+| $CustomerCountryIsoCode
+
+| `Invoice address First name`
+| `order.formattedAddresses.invoiceAddress.name2`
+| $BillingAddressFirstName
+
+| `Invoice address First name and last name`
+| `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
+| $BillingAddressFullName
+
+| `Invoice address House number`
+| `order.formattedAddresses.invoiceAddress.address2`
+|
+
+| `Invoice address Last name`
+| `order.formattedAddresses.invoiceAddress.name3`
+| $BillingAddressLastName
+
+| `Invoice address Postcode`
+| `order.formattedAddresses.invoiceAddress.postalCode`
+|
+
+| `Invoice address Postcode and town`
+| `order.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ order.formattedAddresses.invoiceAddress.town`
+|
+
+| `Invoice address State`
+| `order.formattedAddresses.invoiceAddress.state.name`
+| $CustomerState
+
+| `Invoice address Street`
+| `order.formattedAddresses.invoiceAddress.address1`
+|
+
+| `Invoice address Town`
+| `order.formattedAddresses.invoiceAddress.town`
+|
+
+|====
+
+[#variables-order-invoice-address-options]
+===== Order / Invoice address / Invoice address options
+
+[[table-variables-order-invoice-address-options]]
+.Variables in the *Order / Invoice address / Invoice address options* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Invoice address Contact person`
+|Contact person from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
+| $BillingAddressContactPerson
+
+| `Invoice address Email`
+|Email address from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.email`
+| - 
+
+| `Invoice address Telephone`
+|Phone number from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.telephone`
+| - 
+
+| `Invoice address Post number`
+|Post number from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.postNumber`
+| -
+
+| `Invoice address VAT number`
+|VAT number from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.VATNumber`
+| $OrderBillingAddressTaxId
+
+|====
+
+[#variables-order-invoice-data]
+==== Order / Invoice data
+
+[[table-variables-order-invoice-data]]
+.Variables in the *Order / Invoice data* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Giro code in order currency`
+|Returns the Giro code in the order currency. Your customers can then scan the Giro code directly with their banking app and pay the bill.
+| `order.formattedGeneral.giroCodeInOrderCurrency \| raw`
+| -
+| `Giro code in system currency`
+|Returns the Giro code in the system currency. Your customers can then scan the Giro code directly with their banking app and pay the bill.
+| `order.formattedGeneral.giroCodeInSystemCurrency \| raw`
+| -
+
+| `Currency code`
+|Currency code, e.g. *EUR* or *USD*.
+| `order.formattedSubtotals.currencyCode`
+| $Currency
+
+| `Currency symbol`
+|Currency symbol, e.g. *€* or *$*.
+| `order.formattedSubtotals.currencySymbol`
+| $Currency
+
+| `Invoice number ID`
+|
+| `order.formattedDocuments.invoice`
+| -
+
+| `Total invoice amount, net`
+|
+| `order.formattedGeneral.invoiceTotalNet`
+| $InvoiceTotalNet
+
+| `Net total order`
+|
+| `order.formattedGeneral.totalNet`
+| $OrderTotalNet
+
+| `Open amount`
+|
+| `order.formattedGeneral.openAmount`
+| $OpenAmount
+
+| `Overpaid amount`
+|
+| `order.formattedGeneral.overpaidAmount`
+| $OverpaidAmount
+
+| `Amount paid`
+|
+| `order.formattedGeneral.paidAmount`
+| $PaidAmount
+
+| `Total discount (gross)`
+|
+| `order.formattedSubtotals.totalDiscountGross`
+| -
+
+| `Total discount (net)`
+|
+| `order.formattedSubtotals.totalDiscountNet`
+| -
+
+| `Total invoice amount`
+|
+| `order.formattedGeneral.invoiceTotal`
+| $InvoiceTotal
+
+| `VAT total`
+|
+| `order.formattedGeneral.totalVat`
+| $TotalVAT
+
+| `Value of the item`
+|
+| `order.formattedGeneral.valueOfItems`
+| $ValueOfItems
+
+| `Value of items (gross)`
+|
+| `order.formattedSubtotals.subtotalPriceGross`
+| -
+
+| `Value of items (net)`
+|
+| `order.formattedSubtotals.subtotalPriceNet`
+| -
+
+|====
+
+[#variables-order-shipping]
+==== Order / Shipping
+
+[[table-variables-order-shipping]]
+.Variables in the *Order / Shipping* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `DHL Retoure Online QR code URL`
+|Sends your customers a QR code for xref:fulfilment:plugin-dhl-retoure-online.adoc#[DHL Retoure Online]. The QR code is shown as an URL in the email of your customers. After clicking on the URL, the QR code appears in a separate window. +
+If your customers want to send back an item, they have to show the QR code on their smartphone to one of the employees in the post office and they will print the return label and attach it to the parcel.   Thus, your customers do no longer need a printer at home and you do no longer have to send the return label attached as PDF. +
+| `order.formattedGeneral.DHLRetoureOnlineQRCodeURLNew \| raw`
+| $DHLRetoureOnlineQRCodeURL
+
+| `DHL Retoure Online QR code image`
+|Sends your customers a QR code for xref:fulfilment:plugin-dhl-retoure-online.adoc#[DHL Retoure Online]. The QR code is shown as an image in the email of your customers. +
+If your customers want to send back an item, they have to show the QR code on their smartphone to one of the employees in the post office and they will print the return label and attach it to the parcel.   Thus, your customers do no longer need a printer at home and you do no longer have to send the return label attached as PDF. +
+| `order.formattedGeneral.DHLRetoureOnlineQRCodeImage \| raw`
+| -
+
+| `Delivery note ID`
+|ID of the xref:orders:generating-delivery-notes.adoc#[delivery note].
+| `order.formattedDocuments.deliveryNote`
+| -
+
+| `Estimated delivery date`
+|
+| `order.formattedDates.estimatedDeliveryDate`
+| $OrderEstimatedDeliveryDate
+
+| `Estimated shipping date`
+|
+| `order.formattedDates.estimatedShippingDate`
+| $OrderEstimatedShipmentDate
+
+| `Number of packages`
+|Shows the number of packages contained in the order.
+| `order.package`
+| -
+
+| `Package number list`
+|Package numbers/tracking numbers are saved at the order after the order was successfully registered with the shipping service provider.
+| `order.formattedShipping.packageNumberList`
+|$PackageCount
+
+| `Package weight`
+|Package weight and unit as saved in the *Orders » Shipping centre* menu in the *Shipping packages* area.
+| `order.formattedShipping.packageWeight`
+| -
+
+| `Possible delivery date`
+|
+| `order.formattedDates.earliestDeliveryDate`
+| $OrderEarliestDeliveryDate
+
+| `Reorder Delivery date`
+|
+| `order.formattedReorder.estimatedDeliveryDate`
+| $ReorderDeliveryDate
+
+| `Date when the return was received`
+|
+| `order.formattedDates.returnDate`
+| $OrderReturnDate
+
+| `Return package number`
+|
+| `order.returns_code`
+| $ReturnsCode
+
+| `Shipping costs (gross)`
+|
+| `order.formattedSubtotals.shippingCostsGross`
+| $ShippingCosts
+
+| `Shipping costs (net)`
+|
+| `order.formattedSubtotals.shippingCostsNet`
+| -
+
+| `Shipping profile`
+| Name of the xref:fulfilment:preparing-the-shipment.adoc#1000[shipping profile] as it is saved in the *Setup » Orders » Shipping » Settings* menu in the *Shipping profiles* tab.
+| `order.formattedShipping.profileName`
+| $ShippingProfileName
+
+| `Shipping profile ID`
+|Is automatically saved by the system. You can find the ID of the xref:fulfilment:preparing-the-shipment.adoc#1000[shipping profile] in the *Setup » Orders » Shipping » Settings* menu in the *Shipping profiles* tab.
+| `order.formattedShipping.profileId`
+| $ShippingProfileID
+
+| `Shipping service provider`
+|Name of the xref:fulfilment:preparing-the-shipment.adoc#800[shipping service provider] as it is saved in the *Setup » Orders » Shipping » Settings* menu in the *Shipping service provider* tab.
+| `order.formattedShipping.providerName`
+| $ShippingServiceProviderName
+
+| `Shipping service provider ID`
+|Is automatically saved by the system. You can find the ID of the xref:fulfilment:preparing-the-shipment.adoc#800[shipping service provider] in the *Setup » Orders » Shipping » Settings* menu in the *Shipping service provider* tab.
+| `order.formattedShipping.providerId`
+| $ShippingServiceProviderID
+
+| `Tracking URL`
+|Returns the link to the website of the shipping service provider that is used to track the shipment. The xref:fulfilment:preparing-the-shipment.adoc#840[tracking URL] of the shipping service provider is saved in the *Setup » Orders » Shipping » Settings* menu in the *Shipping service provider* tab. +
+*_Note:_* Have a look at our xref:crm:practical-example-send-tracking-url.adoc#[practical example about this topic.] Learn which settings you need to carry out to the send the tracking URL to your customers.
+| `order.formattedShipping.trackingURL \| raw`
+| $TrackingURL
+
+|====
+
+[#variables-order-payment]
+==== Order / Payment
+
+[[table-variables-order-payment]]
+.Variables in the *Order / Shipping* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `PayPal Link`
+| Returns the link to the PayPal payment page.
+| `order.formattedGeneral.paypalVariables.link \| raw`
+| -
+
+| `PayPal Link button`
+|Returns the image with an integrated link to the PayPal payment page.
+| `order.formattedGeneral.paypalVariables.linkButton \| raw`
+| -
+
+| `Payment due date`
+|
+| `order.formattedDates.paymentDueDate`
+| 
+
+| `Payment method (back end)`
+|
+| `order.formattedGeneral.methodOfPaymentName`
+| $MethodOfPaymentName
+
+| `Payment method (front end)`
+|
+| `order.formattedGeneral.methodOfPaymentNameFrontend`
+| -
+
+| `Payment method ID`
+|The ID is automatically assigned by the system. The IDs of the xref:payment:managing-payment-methods.adoc#65[payment methods] are listed in the *Setup » Orders » Payment » Payment methods* menu.
+| `order.formattedProperties.paymentMethod`
+| $MethodOfPaymentID
+
+| `Transaction ID of the payment`
+|
+| `order.formattedGeneral.paymentTransactionId`
+| -
+
+| `eBay payment ID`
+|
+| `order.formattedProperties.ebayUniquePaymentID`
+| $EbayUniquePaymentID
+
+|====
+
+[#variables-contact]
+=== Variables: Contact
+
+In this category, you can find all contact-relevant sub-categories.
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-contact-general, General>>
+* <<#variables-contact-bank-details-of-contact, Bank details of the contact>>
+* <<#variables-contact-properties, Properties>>
+* <<#variables-contact-options, Contact options>>
+* <<#variables-contact-delivery-address, Delivery address>>
+** <<#variables-contact-delivery-address-data, Delivery address data>>
+** <<#variables-contact-delivery-address-options, Delivery address options>>
+* <<#variables-contact-invoice-address, Invoice address>>
+** <<#variables-contact-invoice-address-data, Invoice address data>>
+** <<#variables-contact-invoice-address-options, Invoice address options>>
+
+[#variables-contact-general]
+==== Contact / General
+
+[[table-variables-contact]]
+.Variables in the *Contact / General* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Class`
+| Class that is assigned to the contact. xref:crm:preparatory-settings.adoc#create-customer-class[Classes] are created in the *Setup » CRM » Classes* menu.
+| `contact.formattedClass.name`
+| $CustomerClass
+
+| `Company name`
+|Name of the xref:crm:edit-contact.adoc#company[company].
+| `contact.formattedAccounts.companyName`
+| $CustomerCompany
+
+| `External ID`
+|Returns the external number saved in the contact details.
+| `contact.externalId`
+| -
+
+| `Contact ID`
+|ID of the xref:crm:edit-contact.adoc#[contact]. A consecutive ID is automatically assigned by the system and cannot be changed.
+| `contact.id`
+| $CustomerID
+
+| `Customer sign`
+|
+| `order.formattedProperties.customerSign`
+| $CustomerSign
+
+| `First name`
+|
+| `contact.firstName`
+| $CustomerFirstName
+
+| `First and last name of the system user`
+|First name and last name of the system user who is saved as xref:crm:edit-contact.adoc#contact-details[owner] in the contact data record.
+| `contact.formattedUser.realName`
+|
+
+| `Full name`
+|
+| `contact.fullName`
+| $CustomerFullName
+
+| `Gender`
+|If gender is male, *male* is shown. +
+If gender is female, *female* is shown. +
+If gender is diverse, an empty option is shown.
+| `contact.gender is same as ('diverse') ? '' : contact.gender`
+|
+
+| `Language`
+|Language as saved in the contact data record. If you created an email template in the selected language, the email templates are sent to the contact in this language.
+| `contact.lang`
+| $CustomerLang
+
+| `Last name`
+|
+| `contact.lastName`
+| $CustomerLastName
+
+| `Newsletter: Confirmation by contact`
+|Date when the contact has confirmed the newsletter receipt. +
+Date format in the email: `mm-dd-yyyy`. +
+In the contact data record, the timestamp in the format `00:00:00` is also saved in addition to the date in the format `dd-mm-yyyy`.
+| `contact.newsletterAllowanceAt`
+| $IsNewsletterActive
+
+| `Number`
+|Additional number for the contact.
+| `contact.number`
+| $CustomerNumber
+
+| `Number of orders`
+|
+| `contact.formattedOrdersCount`
+| $OrderCount
+
+| `Salutation business`
+|
+| `contact.formattedOptions.salutationWork`
+| $CustomerSalutationLabel
+
+| `Form of address`
+|
+| `contact.formattedSalutation.label`
+| $CustomerSalutationKey
+
+| `Salutation private`
+|
+| `contact.formattedOptions.salutationPrivate`
+| $CustomerSalutationLabel
+
+| `Signature of the system user`
+|First name and last name of the system user who is saved as xref:crm:edit-contact.adoc#contact-details[owner] in the contact data record.
+| `contact.formattedUser.signatureNoHtml`
+| $ContactOwnerSignature
+
+| `Signature of the system user in HTML format`
+|First name and last name of the system user who is saved as xref:crm:edit-contact.adoc#contact-details[owner] in the contact data record, in HTML format.
+| `contact.formattedUser.signatureHtml`
+| $ContactOwnerSignatureHtml
+
+| `Title`
+|
+| `contact.title`
+| $CustomerTitle
+
+|====
+
+[#variables-contact-bank-details-of-contact]
+==== Contact / Bank details of the contact
+
+[[table-variables-contact-bank-details-of-contact]]
+.Variables in the *Order / Bank details of the contact* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Account holder (contact)`
+| xref:crm:edit-contact.adoc#bank-details[Account owner] as saved in the contact data record.
+| `contact.formattedBanks.accountOwner`
+|
+
+| `BIC of the contact`
+| xref:crm:edit-contact.adoc#bank-details[BIC] as saved in the contact data record.
+| `contact.formattedBanks.bic`
+| $CustomerBIC
+
+| `Bank name of the contact`
+| xref:crm:edit-contact.adoc#bank-details[Bank name] as saved in the contact data record.
+| `contact.formattedBanks.bankName`
+| $CustomerBankName
+
+| `IBAN of the contact`
+|IBAN as saved in the contact data record.
+| `contact.formattedBanks.iban`
+| $CustomerIBAN
+
+|====
+
+[#variables-contact-delivery-address]
+==== Contact / Delivery address
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-contact-delivery-address-data, Delivery address data>>
+* <<#variables-contact-delivery-address-options, Delivery address options>>
+
+[#variables-contact-delivery-address-data]
+===== Contact / Delivery address / Delivery address data
+
+[[table-variables-contact-delivery-address-data]]
+.Variables in the *Contact / Delivery address / Delivery address data* sub-category
+[cols="1,3,2"]
+|====
+|Name of the variable |Twig expression |Name of the old variablefootnote:1[]
+
+| `Delivery address Additional address information`
+| `contact.formattedAddresses.deliveryAddress.address3 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address4`
+| $DeliveryAddressAdditionalAddress
+
+| `Delivery address Company name`
+| `contact.formattedAddresses.deliveryAddress.name1`
+| $DeliveryAddressCompany
+
+| `Delivery address Country`
+| `contact.formattedAddresses.deliveryAddress.country.name`
+| $DeliveryAddressCountry
+
+| `Delivery address Country ID`
+| `contact.formattedAddresses.deliveryAddress.country.id`
+| $DeliveryAddressCountryID
+
+| `Delivery address Country ISO code 2`
+| `contact.formattedAddresses.deliveryAddress.country.isoCode2`
+| $DeliveryAddressCountryIsoCode
+
+| `Delivery address Country ISO code 3`
+| `contact.formattedAddresses.deliveryAddress.country.isoCode3`
+| $DeliveryAddressCountryIsoCode
+
+| `Delivery address First name`
+| `contact.formattedAddresses.deliveryAddress.name2`
+| $DeliveryAddressFirstName
+
+| `Delivery address First name and last name`
+| `contact.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressFullName
+
+| `Delivery address House number`
+| `contact.formattedAddresses.deliveryAddress.address2`
+|
+
+| `Delivery address Last name`
+| `contact.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressLastName
+
+| `Delivery address Telephone`
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+| $DeliveryAddressPhone
+
+| `Delivery address Postcode`
+| `contact.formattedAddresses.deliveryAddress.postalCode`
+| $DeliveryAddressZip
+
+| `Delivery address Postcode and town`
+| `contact.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ contact.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCityWithZip
+
+| `Delivery address State`
+| `contact.formattedAddresses.deliveryAddress.state.name`
+| $DeliveryAddressState
+
+| `Delivery address Street`
+| `contact.formattedAddresses.deliveryAddress.address1 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address2`
+| $DeliveryAddressStreet
+
+| `Delivery address Town`
+| `contact.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCity
+
+|====
+
+[#variables-contact-delivery-address-options]
+===== Contact / Delivery address / Delivery address options
+
+[TIP]
+*_Note:_* If it’s a reorder, some of the following variables for the address options in the delivery address are not shown in the email to your customers. This is because the addresses that are saved for a supplier are not taken into account because you can save suppliers without an address in your system.
+
+[[table-variables-contact-delivery-address-options]]
+.Variables in the *Contact / Delivery address / Delivery address options* sub-category
+[cols="1,2,3"]
+|====
+|Name of the variable |Explanation |Twig expression
+
+| `Delivery address Age rating`
+|Age rating from the delivery address as saved in the *Address > Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.BBFC`
+
+| `Delivery address Birthday`
+|Birthday from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.birthday`
+
+| `Delivery address Contact person`
+|Contact person from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
+
+| `Delivery address Email`
+|Email address from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.email`
+
+| `Delivery address Entry certificate`
+|Entry certificate from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.entryCertificate`
+
+| `Delivery address External address ID`
+|External address ID from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
+
+| `Delivery address External customer ID`
+|External customer ID from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalCustomerID`
+
+| `Delivery address Personal number`
+|Personal number from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.personalId`
+
+| `Delivery address Telephone`
+|Phone number from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+
+| `Delivery address Post number`
+|Post number from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.postNumber`
+
+| `Delivery address Title`
+|Title from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.title`
+
+| `Delivery address VAT number`
+|VAT number from the delivery address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
+
+|====
+
+[#variables-contact-invoice-address]
+==== Contact / Invoice address
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-contact-invoice-address-data, Invoice address data>>
+* <<#variables-contact-invoice-address-options, Invoice address options>>
+
+[#variables-contact-invoice-address-data]
+===== Contact / Invoice address / Invoice address data
+
+[[table-variables-contact-invoice-address-data]]
+.Variables in the *Contact / Invoice address / Invoice address data* sub-category
+[cols="1,3,2"]
+|====
+|Name of the variable |Twig expression |Name of the old variablefootnote:1[]
+
+| `Invoice address Additional address information`
+| `contact.formattedAddresses.invoiceAddress.address3 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address4`
+|
+
+| `Invoice address Company name`
+| `contact.formattedAddresses.invoiceAddress.name1`
+|
+
+| `Invoice address Country`
+| `contact.formattedAddresses.invoiceAddress.country.name`
+|
+
+| `Invoice address Country ID`
+| `contact.formattedAddresses.invoiceAddress.country.id`
+|
+
+| `Invoice address Country ISO code 2`
+| `contact.formattedAddresses.invoiceAddress.country.isoCode2`
+|
+
+| `Invoice address Country ISO code 3`
+| `contact.formattedAddresses.invoiceAddress.country.isoCode3`
+|
+
+| `Invoice address First name`
+| `contact.formattedAddresses.invoiceAddress.name2`
+|
+
+| `Invoice address First name and last name`
+| `contact.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.name3`
+|
+
+| `Invoice address House number`
+| `contact.formattedAddresses.invoiceAddress.address2`
+|
+
+| `Invoice address Last name`
+| `contact.formattedAddresses.invoiceAddress.name3`
+|
+
+| `Invoice address Telephone`
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.telephone`
+|
+
+| `Invoice address Postcode`
+| `contact.formattedAddresses.invoiceAddress.postalCode`
+|
+
+| `Invoice address Postcode and town`
+| `contact.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ contact.formattedAddresses.invoiceAddress.town`
+|
+
+| `Invoice address State`
+| `contact.formattedAddresses.invoiceAddress.state.name`
+|
+
+| `Invoice address Street`
+| `contact.formattedAddresses.invoiceAddress.address1 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address2`
+|
+
+| `Invoice address Town`
+| `contact.formattedAddresses.invoiceAddress.town`
+|
+
+|====
+
+[#variables-contact-invoice-address-options]
+===== Contact / Invoice address / Invoice address options
+
+[TIP]
+*_Note:_* If it’s a reorder, some of the following variables for the address options in the delivery address are not shown in the email to your customers. This is because the addresses that are saved for a supplier are not taken into account because you can save suppliers without an address in your system.
+
+[[table-variables-contact-invoice-address-options]]
+.Variables in the *Contact / Invoice address / Invoice address options* sub-category
+[cols="1,3,2"]
+|====
+
+| `Invoice address Age rating`
+|Age rating from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.BBFC`
+
+| `Invoice address Birthday`
+|Birthday from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.birthday`
+
+| `Invoice address Contact person`
+|Contact person from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
+
+| `Invoice address Email`
+|Email address from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.email`
+
+| `Invoice address Entry certificate`
+|Entry certificate from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.entryCertificate`
+
+| `Invoice address External address ID`
+|External address ID from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
+
+| `Invoice address External customer ID`
+|External customer ID from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.externalCustomerID`
+
+| `Invoice address Personal number`
+|Personal number from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.personalId`
+
+| `Invoice address Telephone`
+|Phone number from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.telephone`
+
+| `Invoice address Post number`
+|Post number from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.postNumber`
+
+| `Invoice address Title`
+|Title from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.title`
+
+| `Invoice address VAT number`
+|VAT number from the invoice address as saved in the *Address / Address options* area of the contact data record.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
+
+|====
+
+[#variables-contact-properties]
+==== Contact / Properties
+
+In this EmailBuilder area, all variables for which you have created properties of the *Contact* area in the *Setup » Settings » Properties* menu are displayed in this area. +
+For further information, refer to the xref:item:properties.adoc#500[Properties] page.
+
+[#variables-contact-options]
+==== Contact / Contact options
+
+[[table-variables-contact-options]]
+.Variables in the *Contact / Contact options* sub-category
+[cols="1,3,2"]
+|====
+|Name of the variable |Twig expression |Name of the old variablefootnote:1[]
+
+| `Additional contact person`
+| `contact.formattedOptions.additionalContactPerson`
+| -
+
+| `Email business`
+| `contact.formattedOptions.emailWork`
+| $CustomerEmail
+
+| `PayPal email address`
+| `contact.formattedOptions.emailPayPal`
+| $CustomerEmail
+
+| `Email private`
+| `contact.formattedOptions.emailPrivate`
+| $CustomerEmail
+
+| `Fax business`
+| `contact.formattedOptions.telefaxWork`
+| $CustomerFax
+
+| `Fax private`
+| `contact.formattedOptions.telefaxPrivate`
+| $CustomerFax
+
+| `Mobile business`
+| `contact.formattedOptions.telephoneMobileWork`
+| $CustomerMobilePhone
+
+| `Mobile private`
+| `contact.formattedOptions.telephoneMobilePrivate`
+| $CustomerMobilePhone
+
+| `Phone business`
+| `contact.formattedOptions.telephoneWork`
+| $CustomerPhone
+
+| `Phone private`
+| `contact.formattedOptions.telephonePrivate`
+| $CustomerPhone
+
+| `eBay name`
+| `contact.formattedOptions.marketplaceEbay`
+| $CustomerEbayName
+
+|====
+
+[#variables-global]
+=== Variables: Global
+
+In this category, you can find all global sub-categories.
+
+Click on one of the following links to be forwarded directly to the corresponding sub-chapter:
+
+* <<#variables-global-general, General>>
+* <<#variables-global-bank-details-of-client, Bank details of the client>>
+* <<#variables-global-coupons, Coupons>>
+* <<#variables-global-links, Links>>
+* <<#variables-global-legal-texts, Legal texts>>
+
+[#variables-global-general]
+==== Global / General
+
+[[table-variables-global-general]]
+.Variables in the *Global variables / General* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Client ID`
+|Returns the ID of the client (shop).
+| `globals.webshopId`
+| -
+
+| `Client name`
+|Shows the name of the client (shop).
+| `globals.clientName`
+| -
+
+| `EORI number`
+|Unique identification number that is required for customs-related procedures.
+| `globals.account.EORINumber`
+| -
+
+| `Email sender`
+|Returns the sender of the email.
+| `globals.emailSender`
+| -
+
+| `Signature in HTML format`
+|The signature is saved in the *Email accounts* assistant in the *Signature* step. You can find the assistant in the *Setup » Client » Global » Email accounts* menu.
+| `globals.account.signatureHTML \| raw`
+| $SignatureHTML
+
+| `Signature in plain text`
+|The signature is saved in the *Email accounts* assistant in the *Signature* step. You can find the assistant in the *Setup » Client » Global » Email accounts* menu.
+| `globals.account.signatureText \| raw`
+| $SignatureText
+
+| `Today’s date`
+|Returns today’s date in the format `dd-mm-yyyy`.
+| `"now"\|date("d-m-Y")`
+| $TodaysDate
+
+|====
+
+[#variables-global-bank-details-of-client]
+==== Global / Bank details of the client
+
+[[table-variables-global-bank-details-of-client]]
+.Variables in the *Global variables / Bank details of the client* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Account holder (master data)`
+|Account holder from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your system. Is saved in the *Setup » Settings » Bank* menu.
+| `globals.bank.owner`
+|
+
+| `BIC (master data)`
+|BIC from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your system. Is saved in the *Setup » Settings » Bank* menu.
+| `globals.bank.bic`
+|
+
+| `Bank name (master data)`
+|Bank name from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your system. Is saved in the *Setup » Settings » Bank* menu.
+| `globals.bank.name`
+| $BankName
+
+| `IBAN (master data)`
+|IBAN from the xref:welcome:quick-start-initial-settings.adoc#100[master data] of your system. Is saved in the *Setup » Settings » Bank* menu.
+| `globals.bank.iban`
+| $BankIBAN
+
+|====
+
+[#variables-global-coupons]
+==== Global / Coupons
+
+[[table-variables-global-coupons]]
+.Variables in the *Global variables / Coupons* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Coupon code (1)`
+| xref:orders:coupons.adoc#[Coupon codes] are generated in the campaign in the *Orders » Coupons* menu. A coupon code can always be assigned to only one campaign to send this coupon code from the campaign in an email template.
+| `globals.coupons.couponCode1`
+| $CouponCode1
+
+| `Coupon code (2)`
+|
+| `globals.coupons.couponCode2`
+| $CouponCode2
+
+| `Coupon code (3)`
+|
+| `globals.coupons.couponCode3`
+| $CouponCode3
+
+| `Coupon code (4)`
+|
+| `globals.coupons.couponCode4`
+| $CouponCode4
+
+| `Coupon code (5)`
+|
+| `globals.coupons.couponCode5`
+| $CouponCode5
+
+| `Coupon code (6)`
+|
+| `globals.coupons.couponCode6`
+| $CouponCode6
+
+| `Coupon code (7)`
+|
+| `globals.coupons.couponCode7`
+| $CouponCode7
+
+| `Coupon code (8)`
+|
+| `globals.coupons.couponCode8`
+| $CouponCode8
+
+| `Coupon code (9)`
+|
+| `globals.coupons.couponCode9`
+| $CouponCode9
+
+| `Coupon code (10)`
+|
+| `globals.coupons.couponCode10`
+| $CouponCode10
+
+|====
+
+[#variables-global-links]
+==== Global / Links
+
+[[table-variables-global-links]]
+.Variables in the *Global variables / Links* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `URL to basket`
+|Returns the URL to the basket in the online shop.
+| `globals.links.linkBasket`
+|
+
+| `URL to change password`
+|Returns the URL for the *Change password* area in the online shop. The contact can enter a new password.
+| `globals.links.linkChangePassword`
+| $CustomerPassword
+
+| `URL to order confirmation`
+|Returns the URL of the order confirmation in the online shop.
+| `globals.links.linkCheckout`
+|
+
+| `URL to confirm email address`
+|Returns the URL to confirm the email address change of the contact.
+| `globals.account.newCustomerEmail`
+|$NewCustomerEmail
+
+| `URL to new password`
+|Returns the URL to a form that allows to create a new password. The contact enters their email address in this form.
+| `globals.links.linkNewPassword`
+|
+
+| `URL to online shop`
+|Returns the URL of the online shop.
+| `globals.links.linkWebstore`
+|
+
+| `URL to Terms and Conditions`
+|Returns the URL for the terms and conditions.
+| `globals.links.linkTermsConditions`
+|
+
+|====
+
+[#variables-global-legal-texts]
+==== Global / Legal texts
+
+[TIP]
+.Your legal texts are not displayed correctly in sent emails?
+====
+If your legal texts that you inserted in the code widget as twig expressions are not displayed correctly in sent emails, add  `| raw` at the end of the twig expression to solve this problem.
+====
+
+[[table-variables-global-legal-texts]]
+.Variables in the *Global variables / Legal texts* sub-category
+[cols="2,4,3,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Cancellation rights in HTML format`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Cancellation rights* tab and save the text in the *HTML* tab.
+| `globals.legalInformation.cancellationRights.html \| raw`
+| $CancellationRightsHTML
+
+| `Cancellation rights in plain text`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Cancellation rights* tab and save the text in the *Text* tab.
+| `globals.legalInformation.cancellationRights.plain`
+| $CancellationRightsText
+
+| `General terms and conditions in HTML format`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Terms and conditions* tab and save the text in the *HTML* tab.
+| `globals.legalInformation.termsConditions.html \| raw`
+| - 
+
+| `General terms and conditions in plain text`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Terms and conditions* tab and save the text in the *Text* tab.
+| `globals.legalInformation.termsConditions.plain`
+| - 
+
+| `Legal disclosure in HTML format`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Legal disclosure* tab and save the text in the *HTML* tab.
+| `globals.legalInformation.legalDisclosure.html \| raw`
+| $LegalDisclosureHTML
+
+| `Legal disclosure in plain text`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Legal disclosure* tab and save the text in the *Text* tab.
+| `globals.legalInformation.legalDisclosure.plain`
+| $LegalDisclosureText
+
+| `Privacy policy in HTML format`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Privacy policy* tab and save the text in the *HTML* tab.
+| `globals.legalInformation.privacyPolicy.html \| raw`
+| $PrivacyPolicyHTML
+
+| `Privacy policy in plain text`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Privacy policy* tab and save the text in the *Text* tab.
+| `globals.legalInformation.privacyPolicy.plain`
+| $PrivacyPolicyText
+
+| `Cancellation form in HTML format`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Cancellation form* tab and save the text in the *HTML* tab.
+| `globals.legalInformation.withdrawalForm.html \| raw`
+| $WithdrawalFormHTML
+
+| `Cancellation form in plain text`
+|Go to *Setup » Client » [Select client] » Online store » Legal » [Expand language]*. Click on the *Cancellation form* and save the text in the *Text* tab.
+| `globals.legalInformation.withdrawalForm.plain`
+| $WithdrawalFormText
+
+|====
+
+[#variables-messenger]
+=== Variables: Messenger
+
+[IMPORTANT]
+.Automatic mapping
+====
+The emails that come into your system via the Messenger are assigned according to keywords or textual parameters that are automatically recognised by your system. +
+For further information about the assignment, refer to the xref:crm:messenger.adoc#assign-messages[Assigning messages in the Messenger] chapter on the xref:crm:messenger.adoc#[Messenger] user manual page.
+====
+
+[[table-variables-messenger]]
+.Variables in the *Messenger* category
+[cols="2,5,2"]
+|====
+|Name of the variable |Explanation |Twig expression
+
+| `First message of conversation`
+|Returns the text of the first message within the conversation.
+| `messenger.formattedMessage.conversationFirstMessage \| raw`
+
+| `First whispered message of conversation`
+|Returns the text of the first whispered message within the conversation.
+| `messenger.formattedMessage.conversationFirstWhisperedMessage \| raw`
+
+| `Conversation history`
+|
+| `messenger.formattedMessage.conversationHistory \| raw`
+
+| `Conversation ID`
+|Returns the ID of the conversation.
+| `messenger.uuid`
+
+| `Last message of conversation`
+|Returns the text of the last message within the conversation.
+| `messenger.formattedMessage.conversationLastMessage \| raw`
+
+| `Last whispered message of conversation`
+|Returns the text of the last whispered message within the conversation.
+| `messenger.formattedMessage.conversationLastWhisperedMessage \| raw`
+
+| `Conversation short ID`
+| Returns the short ID of the conversation.
+| `messenger.shortId`
+
+| `Title of conversation`
+|Returns the subject of the conversation.
+| `messenger.title`
+
+|====
+
+[#variables-newsletter]
+=== Variables: Newsletter
+
+[[table-variables-newsletter]]
+.Variables in the *Newsletter* category
+[cols="2,5,2,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Newsletter first name`
+|First name of the person who wants to subscribe for the xref:crm:sending-newsletters.adoc#[newsletter].
+| `newsletter.firstName`
+| -
+
+| `Newsletter last name`
+|Last name of the person who wants to subscribe for the xref:crm:sending-newsletters.adoc#[newsletter].
+| `newsletter.lastName`
+| -
+
+| `URL for confirming the newsletter receipt`
+|Returns the URL to confirm the xref:crm:sending-newsletters.adoc#[newsletter subscription].
+| `newsletter.formattedConfirmUrl`
+| $NewsletterConfirmURL
+
+|====
+
+[#variables-text-blocks]
+=== Variables: Text blocks
+
+In the *Text blocks* area, you can find all text blocks as variables that you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-text-block[created] in the *CRM » EmailBuilder* menu. You can later insert the text blocks in your Messenger messages.
+
+[#variables-ticket]
+=== Variables: Ticket
+
+[[table-variables-ticket]]
+.Variables in the *Ticket* category
+[cols="2,5,2,2"]
+|====
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Ticket backend URL`
+|Links to the ticket in the xref:crm:using-the-ticket-system.adoc#[CRM » Ticket system] menu.
+| `ticket.formattedUrl.backendUrl`
+| $TicketBackendURL
+
+| `Ticket messages history`
+|Returns the text that was last saved in the ticket. This is either the text of a comment or a message.
+| `ticket.formattedMessage.history`
+| $TicketHistory
+
+| `Ticket ID`
+|Displays the ticket ID that the email was sent from.
+| `ticket.id`
+| $TicketID
+
+| `Ticket last comment`
+|Returns the text of the last xref:crm:using-the-ticket-system.adoc#2500[comment]. +
+*_Note:_* Comments serve for internal communication and are _not_ visible to your customers.
+| `ticket.formattedMessage.lastComment`
+| $TicketLastComment
+
+| `Ticket last message`
+|Returns the text of the last xref:crm:using-the-ticket-system.adoc#2400[message].
+| `ticket.formattedMessage.lastMessage`
+| $TicketLastMessage
+
+| `Ticket priority`
+|Returns the priority of the ticket as and ID. The values of the stars are shown in ascending order with numbers from `0` (grey star, lowest priority) to `5` (2 yellow stars, highest priority).
+| `ticket.priorityId`
+| $TicketPriority
+
+| `Ticket status`
+|Returns the status of the ticket.
+| `ticket.formattedStatus`
+| $TicketStatus
+
+| `Ticket tags`
+|Returns the tags of the ticket.
+| `ticket.formattedTags`
+| $TicketTags
+
+| `Ticket title`
+|Returns the title of the ticket.
+| `ticket.title`
+| $TicketTitle
+
+| `Ticket URL`
+|Links to the ticket in the *My account* area. The customer can read the message in the My account area, write an answer and send it. +
+Note also the xref:crm:using-the-ticket-system.adoc#5500[Creating tickets in the My account area] chapter on the xref:crm:using-the-ticket-system.adoc#[Ticket system] page.
+| `ticket.formattedUrl.url`
+| $TicketURL
+
+|====
