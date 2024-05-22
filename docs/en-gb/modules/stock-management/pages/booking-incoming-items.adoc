@@ -72,16 +72,8 @@ The settings menu opens.
 | *Warehouse*
 |Select a warehouse into which items should be booked.
 
-| *Display dialogue for completing incoming items*
-|Select if the plentyWarehouse app should display a confirmation dialogue as soon as you finish booking in items. +
-*Activated* (icon:toggle-on[role="green"]) = A confirmation dialogue is displayed.
-
 | *Error status*
 |Select a status to which reorders should be moved in case errors occur while incoming items are booked. This way, you can deal with such reorders separately later. In case you have not yet created error statuses for this use case, refer to the xref:orders:order-statuses.adoc#[Using order statuses] page of the manual.
-
-| [#intable-incoming-items-receipt]*Create incoming items receipt*
-|Select if an incoming items receipt should be created automatically and saved in the plentysystems back end as soon as incoming items have been booked. +
-*Activated* (icon:toggle-on[role="green"]) = An incoming items receipt is created. For further information, refer to the chapter <<#400, Creating an incoming items receipt>> below.
 
 | *Assignment of item suppliers*
 |Should the supplier saved for the variation in the plentysystems back end be selected automatically when booking incoming items? You can select one of three options: +
@@ -89,7 +81,7 @@ The settings menu opens.
 *Unique automatic assignment* = If no supplier is selected while booking incoming items using he app and only one supplier is saved for the item in the plentysystems back end, this supplier is selected automatically. +
 *Assignment based on supplier ID* If no supplier is selected while booking incoming items using he app and several suppliers are saved for the item in the plentysystems back end, the supplier with the lowest ID is selected automatically.
 
-| [#intable-incoming-items-reason]*Incoming items reason*
+| [#intable-incoming-items-reason]*Reason for incoming items*
 |Select a reason for incoming items that is then preselected by default every time you book incoming items in the app. +
 *_Note:_* The reasons for incoming items themselves are determined by the system and cannot be changed.
 
@@ -172,19 +164,32 @@ The settings menu opens.
 |Tap on the search field to which the cursor jumps automatically when the menu is opened. If no search field is selected, you have to tap on a search field every time before you can enter a search value.
 
 | *Order status*
-|Activate the order statuses that you normally assign to reorders in your system. This is necessary to make sure that orders in this status are loaded into the plentyWarehouse app properly when searching for reorders. Also, keep in mind to <<#160, assign rights for those order statuses>>.  In case you have not yet created statuses for reorders, refer to the xref:orders:order-statuses.adoc#[Using order statuses] page of the manual.
+|Activate the order statuses that you normally assign to reorders in your system. This is necessary to make sure that orders in this status are loaded into the plentyWarehouse app properly when searching for reorders. Also, keep in mind to <<#160, assign rights for those order statuses>>.  In case you have not yet created error statuses for reorders, refer to the xref:orders:order-statuses.adoc#[Using order statuses] page of the manual.
 
 | *Sorting*
 |In which order should the reorder search results be displayed? Select one of the following two options. +
 *Date descending* = Reorders will be sorted in descending order of the date at which they have been created. Thus, the list starts with the newest reorder. +
 *Date ascending* = Reorders will be sorted in ascending order of the date at which they have been created. Thus, the list starts with the oldest reorder.
 
-| [#intable-default-behaviour-reorders]*Standard behaviour when loading reorders*
+| [#intable-default-behaviour-reorders]*Standard behaviour when loading reorders* area
 |Decide how the plentyWarehouse app proceeds if you assign a reorder to an incoming items process after you have already added items to the list of incoming items. Also note the additional information provided in the <<#300, Booking incoming items for a reorder>> chapter. +
 *Link to reorder* = Items that have already been registered and are part of a reorder are linked to the selected reorder. If items that are not part of the reorder are part of the list of already registered items, the supplier of the selected reorder will be linked to those additional items. Other items that are included in the reorder but have not been registered yet are automatically added to the list of incoming items. +
 *Separate* = No changes are made for items that have already been registered. Only the items included in the reorder are added to the list. +
 *Remove* = All items that have already been registered are removed from the list. Then, all items included in the reorder are transferred to the list. +
 *Show dialogue* = After the reorder is loaded, a dialogue is displayed. Use this dialogue to select one of the three possibilities described above.
+
+2+^| [#intable-finish-incoming-items]*Finish incoming items* area
+
+| [#intable-incoming-items-receipt]*Create incoming items receipt*
+|Select if an incoming items receipt should be created automatically and saved in the plentysystems back end as soon as incoming items have been booked. +
+*Activated* (icon:toggle-on[role="green"]) = An incoming items receipt is created. For further information, refer to the chapter <<#400, Creating an incoming items receipt>> below.
+
+| *Display dialogue for completing incoming items*
+|Select if the plentyWarehouse app should display a confirmation dialogue as soon as you finish booking in items. +
+*Activated* (icon:toggle-on[role="green"]) = A confirmation dialogue is displayed.
+
+| [#intable-show-summary]*Show summary*
+|Activate this option to display an overview of all important data after you have finished booking incoming items. If you tap on this option, you are forwarded to an additional settings menu. There, you select if the overview should include *Target storage locations*, *Incoming items receipts* or both information types. For further information, refer to the chapter <<#500, Displaying an incoming items summary>> below.
 
 |===
 
@@ -289,7 +294,7 @@ Booking incoming items:
 icon:map-signs[] *_Or:_* Find the *Incoming items* tile in the *Functions* area on the dashboard.
 . Tap on *Incoming items* image:stock-management:icon_incoming_items.png[width=24, height=24].
 . Register the items that should be booked in. Depending on the previously selected option for the setting <<#intable-itemscan, *Mandatory item scan*>>, you either scan the barcode on the item label or click on *Search* icon:search[role="darkGrey"] to manually add items with the help of an appropriate search criterion.
-. Enter the item quantity that should be booked in. The quantity is always increased by *1* each time you scan the item, tap on the list entry for the item or enter a quantity using the quantity field material:iso[role="skyBlue"]. The possibilities depend on the option you have previously selected for the setting <<#intable-itemscan, *Mandatory item scan>>.
+. Enter the item quantity that should be booked in. The quantity is always increased by *1* each time you scan the item, tap on the list entry for the item or enter a quantity using the quantity field material:iso[role="skyBlue"]. The possibilities depend on the option you have previously selected for the setting <<#intable-itemscan, *Mandatory item scan*>>.
 .. *_Optional:_* Edit the purchase price, or, if required, the discount of the items. To do so, tap on material:payments[role="green"] on the item itself. This option is only visible if you have activated the setting <<#intable-edit-purchase-price, Edit purchase price>> beforehand.
 .. *_Optional:_* Register a serial number for the items. To do so, tap on material:pin[role="darkGrey"] on the item itself. This option is only visible if you have previously xref:item:serial-numbers.adoc#200[saved serial numbers] for the item and if you have additionally allowed for serial numbers to be xref:item:serial-numbers.adoc#900[scanned]. The registered serial number is then applied to the item data record and displayed with the other item data in the plentysystems back end.
 .. *_Optional:_* <<#220, Assign a barcode to the item>>.
@@ -561,10 +566,39 @@ To create receipts for incoming items, three conditions have to be met:
 
 * The incoming items process in question has to be booked using the plentyWarehouse app. It is *not possible* to create incoming item receipts for items that are booked in via the plentysystems back end or using the plentymarkets app. 
 
-* Incoming items receipts are generated based on the xref:orders:document-builder.adoc#[DocumentBuilder]. Thus, you need to create a template for the document type *Incoming items receipt* beforehand. This step is carried out in the *Setup » Documents » DocumentBuilder* menu in the plentysystems back end. For instructions on how to create DocumentBuilder templates, please refer to xref:orders:documentbuilder.adoc#create-template[this chapter].
+* Incoming items receipts are generated based on the xref:orders:document-builder.adoc#[DocumentBuilder]. Thus, you need to create a template for the document type *Incoming items receipt* beforehand. This step is carried out in the *Setup » Documents » DocumentBuilder* menu in the plentysystems back end. For instructions on how to create DocumentBuilder templates, please refer to xref:orders:documentbuilder.adoc#create-template[this manual page].
 
 * The option <<#intable-incoming-items-receipt, Create incoming items receipt>> has to be activated in the *Settings » Incoming items* menu of the plentyWarehouse app.
 
 And that’s it! If all three conditions are met, an incoming items receipt is created automatically every time incoming items are booked. It does not matter if you are booking incoming items <<#300, with>> or <<#200, without>> an assignment to a reorder.
 
 As soon as document generation is finished, you can find the document in the *Data » Documents » Document archive* menu and download it, if needed.
+
+[#500]
+== Displaying an incoming items summary
+
+Do you want to display a summary of all important data regarding the incoming items process after you have finished booking incoming items? In that case, you only need to carry out a few settings to make sure that information on the affected storage locations, reorders and much more are provided as part of a central view directly in the plentyWarehouse app. To do so, proceed as described below.
+
+[.instruction]
+Displaying the summary:
+
+. xref:stock-management:installation-and-initial-setup.adoc#300[Log into plentyWarehouse].
+. Tap on the menu icon icon:bars[role="darkGrey"] in the top left corner.
+. Tap on *Settings* material:settings[]. +
+The settings menu opens.
+. Tap on *Incoming items* image:stock-management:icon_incoming_items.png[width=24, height=24].
+. Scroll down until you see the *Finish incoming items* area.
+. Tap on *Show summary*. +
+→ Another settings menu opens. +
+. Determine if information regarding storage locations and incoming items receipts should be displayed by activating the respective options. +
+*_Note:_* If you do not activate any of the options *Storage locations* and *Incoming items receipts*, the summary will not be displayed.
+
+After you have carried out the settings described above, the following information is displayed in a separate view as soon as you have tapped on *Finish incoming items* for an incoming items process:
+
+* Number of reorders affected (if applicable)
+* Number of storage locations
+* Number of items booked in, including a shortcut for xref:stock-management:printing-labels.adoc#[printing barcode labels] for those items (material:print[role="green"])
+* Names of the storage locations (if activated in the settings), including shortcuts to the functions xref:stock-management:items-and-storage-locations.adoc#500[Inspect storage location] and xref:stock-management:reshelving-items.adoc#[Reshelving items] for the respective storage location
+* Number of generated incoming items receipts (if activated in the settings), including a shortcut for printing the receipts (material:print[role="green"])
+
+
