@@ -5,9 +5,9 @@
 :author: team-crm
 
 ////
-TODO: Hinweis für TCDs/alle Menschen, die diese Seite bearbeiten: Damit alle twig expressions, die "| raw" am Ende enthalten, korrekt im Handbuch angezeigt werden, muss ein Backslash (\) vor dem Pipe-Zeichen eingefügt werden --> "\ | raw"
+TODO: Hinweis für TCDs/alle Menschen, die diese Seite bearbeiten: Damit alle twig expressions, die "| raw" am Ende enthalten, korrekt in den Handbuchtabellen angezeigt werden, muss ein Backslash (\) vor dem Pipe-Zeichen eingefügt werden --> "\ | raw"
 Andernfalls würde es die Tabellen zerschießen. 
-Wenn die übersetzte Datei hochgeladen wird, muss der Backslash manuell eingefügt werden.
+Wenn die übersetzte Datei hochgeladen wird, muss der Backslash manuell in der englischen Datei eingefügt werden.
 ////
 
 In einigen der Widgets kannst du Variablen einfügen und dir auf diese Weise die Vorlagen erstellen, die du benötigst. Die Variablen werden dann in der E-Mail an deine Kund:innen durch den korrekten Inhalt ersetzt.
@@ -58,6 +58,7 @@ Die verfügbaren Variablen für den EmailBuilder sind in die folgenden Kategorie
 *** <<#variablen-auftrag-auftragspositionen-barcodes, Barcodes>>
 *** <<#variablen-auftrag-auftragspositionen-eigenschaften, Eigenschaften>>
 *** <<#variablen-auftrag-auftragspositionen-freitextfelder, Freitextfelder>>
+*** <<#variablen-auftrag-auftragspositionen-lieferanten, Lieferanten>>
 *** <<#variablen-auftrag-auftragspositionen-verfuegbarkeiten, Verfügbarkeiten>>
 ** <<#variablen-auftrag-bankdaten-des-auftrags, Bankdaten des Auftrags>>
 ** <<#variablen-auftrag-bestellmerkmale, Bestellmerkmale>>
@@ -283,20 +284,30 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `Datum und Uhrzeit des Auftragseingangs`
-|Datum und Uhrzeit des Auftragseingangs wie im Auftrag gespeichert.
-| `order.formattedDates.createdOnDateAndTime`
-|
-
 | `Datum des Auftragseingangs`
 |Datum des Auftragseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.createdOn`
 | $OrderDate
 
+| `Datum des Warenausgangs`
+|Datum und Uhrzeit des Warenausgangs wie im Auftrag gespeichert.
+| `order.formattedDates.outgoingItemsBookedOn`
+| -
+
 | `Datum des Zahlungseingangs`
 |Datum und Uhrzeit des Zahlungseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.paidOn`
 | $PaymentDate
+
+| `Datum und Uhrzeit des Auftragseingangs`
+|Datum und Uhrzeit des Auftragseingangs wie im Auftrag gespeichert.
+| `order.formattedDates.createdOnDateAndTime`
+| -
+
+| `Datum und Uhrzeit des Warenausgangs`
+|Datum und Uhrzeit des Warenausgangs wie im Auftrag gespeichert.
+| `order.formattedDates.outgoingItemsBookedOnDateTime`
+| -
 
 | `Rechnungsdatum`
 |
@@ -315,6 +326,7 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 * <<#variablen-auftrag-auftragspositionen-bilder, Bilder>>
 * <<#variablen-auftrag-auftragspositionen-eigenschaften, Eigenschaften>>
 * <<#variablen-auftrag-auftragspositionen-freitextfelder, Freitextfelder>>
+* <<#variablen-auftrag-auftragspositionen-lieferanten, Lieferanten>>
 * <<#variablen-auftrag-auftragspositionen-verfuegbarkeiten, Verfügbarkeiten>>
 
 [#variablen-auftrag-auftragspositionen-allgemein]
@@ -330,6 +342,16 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | xref:artikel:attribute.adoc#[Attributwerte] wie im Menü *Einrichtung » Artikel » Attribute* gespeichert.
 | `orderItem.attributeValues`
 | $VariantName
+
+| `Auftragspositionstyp`
+| 
+| `orderItem.typeName`
+| -
+
+| `ID des Auftragspositionstyps`
+| 
+| `orderItem.typeId`
+| -
 
 | `Codes eines Gutscheins`
 |
@@ -703,6 +725,73 @@ Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.
 
 |====
 
+[#variablen-auftrag-auftragspositionen-lieferanten]
+===== Auftrag / Auftragspositionen (nur für Artikellisten-Widget) / Lieferanten
+
+[[table-variables-order-order-items-suppliers]]
+.Variablen in der Unterkategorie *Auftrag / Auftragspositionen (nur für Artikellisten-Widget) / Lieferanten*
+[cols="3,4,3"]
+|====
+|Name der Variable |Erläuterung |Twig expression
+
+| `Letzte Preisanfrage`
+|
+| `orderItem.formattedSupplierData.supplierLastPriceQuery`
+
+| `Lieferant`
+|
+| `orderItem.formattedSupplierData.supplier`
+
+| `Lieferanten-Artikelbeschreibung`
+|
+| `orderItem.formattedSupplierData.supplierItemDescription`
+
+| `Lieferanten-Artikelnummer`
+|
+| `orderItem.formattedSupplierData.supplierItemNumber`
+
+| `Lieferantenname`
+|
+| `orderItem.formattedSupplierData.supplierName`
+
+| `Lieferzeit in Tagen`
+|
+| `orderItem.formattedSupplierData.supplierDeliveryTimeDays`
+
+| `Mindestabnahme`
+|
+| `orderItem.formattedSupplierData.supplierMinimumPurchase`
+
+| `Preis in Auftragswährung`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceOrderCurrency`
+
+| `Preis in Systemwährung`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceSystemCurrency`
+
+| `Rabatt in Prozent`
+|
+| `orderItem.formattedSupplierData.supplierDiscount`
+
+| `Rabattfähigkeit`
+|
+| `orderItem.formattedSupplierData.supplierIsDiscountable`
+
+| `Symbol der Auftragswährung`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceOrderCurrencySymbol`
+
+| `Symbol der Systemwährung`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceSystemCurrencySymbol`
+
+| `Verpackungseinheit`
+|
+| `orderItem.formattedSupplierData.supplierPackagingUnit`
+
+|====
+
 [#variablen-auftrag-auftragspositionen-verfuegbarkeiten]
 ===== Auftrag / Auftragspositionen (nur für Artikellisten-Widget) / Verfügbarkeiten
 
@@ -921,6 +1010,34 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |====
 |Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
 
+| `Lieferadresse Altersfreigabe`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.BBFC`
+| 
+
+| `Lieferadresse Geburtstag`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.birthday`
+| 
+
+| `Lieferadresse Gelangensbestätigung`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.entryCertificate`
+| 
+
+| `Lieferadresse Externe Adress-ID`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
+| 
+
+| `Lieferadresse Externe Kunden-ID`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.externalCustomerID`
+| 
+
+| `Lieferadresse Personennummer`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.personalId`
+| 
+
+| `Lieferadresse Titel`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.title`
+| 
+
 | `Lieferadresse Kontaktperson`
 | `order.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
 | $DeliveryAddressContactPerson
@@ -1054,6 +1171,34 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
+| `Rechnungsadresse Altersfreigabe`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.BBFC`
+| 
+
+| `Rechnungsadresse Geburtstag`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.birthday`
+| 
+
+| `Rechnungsadresse Gelangensbestätigung`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.entryCertificate`
+| 
+
+| `Rechnungsadresse Externe Adress-ID`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.externalAddressID`
+| 
+
+| `Rechnungsadresse Externe Kunden-ID`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.externalCustomerID`
+| 
+
+| `Rechnungsadresse Personennummer`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.personalId`
+| 
+
+| `Rechnungsadresse Titel`
+| `order.formattedAddresses.invoiceAddress.formattedOptions.title`
+| 
+
 | `Rechnungsadresse Kontaktperson`
 |Kontaktperson aus der Rechnungsadresse, wie im Auftrag gespeichert.
 | `order.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
@@ -1089,6 +1234,15 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 [cols="2,4,3,2"]
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Giro-Code in Auftragswährung`
+|Gibt den Giro-Code in der Auftragswährung aus. Deine Kund:innen können den Giro-Code dann direkt mit ihrer Banking-App scannen und so die Rechnung bezahlen.
+| `order.formattedGeneral.giroCodeInOrderCurrency \| raw`
+| -
+| `Giro-Code in Systemwährung`
+|Gibt den Giro-Code in der Systemwährung aus. Deine Kund:innen können den Giro-Code dann direkt mit ihrer Banking-App scannen und so die Rechnung bezahlen.
+| `order.formattedGeneral.giroCodeInSystemCurrency \| raw`
+| -
 
 | `Währungscode`
 |Währungscode, z.B. *EUR* oder *USD*.

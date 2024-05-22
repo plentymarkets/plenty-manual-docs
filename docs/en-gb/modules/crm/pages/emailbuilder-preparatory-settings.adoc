@@ -1,0 +1,242 @@
+= Carrying out the preparatory settings
+:keywords: assign emailbuilder rights, email server login details, email server access data, email signature, email info service, messenger integration
+:description: Learn which preparatory settings you have to carry out in order to work with the EmailBuilder in plentysystems.
+:page-pagination:
+:author: team-crm
+
+You have to carry out some preparatory settings to be able to optimally use the EmailBuilder in the *CRM » EmailBuilder* menu.
+
+By clicking on an entry in the following list, you will be directly forwarded to the corresponding sub-chapter:
+
+* <<#assign-rights, Assigning rights>>
+* <<#email-server-login-details, Saving the email server login details>>
+* <<#email-signature, Saving the email signature>>
+* <<#email-info-service, Setting up the email information service>>
+* <<#automatic-email-despatch, Setting up the automatic email despatch>>
+* <<#email-messenger-integration, Messenger integration>>
+
+[#assign-rights]
+== Assigning rights
+
+:rights-purpose: work with the EmailBuilder
+:right-one: pass:quotes[*CRM > EmailBuilder > Read*]
+:right-two: pass:quotes[*CRM > EmailBuilder > Update*]
+:right-two: pass:quotes[*CRM > EmailBuilder > Create*]
+:right-four: pass:quotes[*CRM > EmailBuilder > Delete*]
+:right-five: pass:quotes[in simple mode: *CRM > EmailBuilder > See*]
+
+include::_includes:partial$rights.adoc[]
+
+[#email-server-login-details]
+== Saving the email server's login details
+
+In the *Email accounts* assistant in the *Setup » Client » Global » Email accounts* menu, save the login details of a mailbox in the *Login details* step so that plentysystems emails such as order or shipping confirmations can be sent from this email address. +
+Moreover, you can activate the live mode here to ensure that all emails are not only sent to the email address you entered but also to your customers.
+
+[[table-email-server-login-details]]
+.Settings in the *Email accounts* assistant in the *Login details* step
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+2+| Enter the server details of your email provider.
+
+| *Outgoing mail server/SMTP server*
+|Enter the outgoing mail server as specified by the provider (usually smtp.domain.co.uk or mail.domain.co.uk). +
+*_mailbox.org:_* For mailbox.org mailboxes, enter the outgoing mail server *smtp.mailbox.org* and select the encryption method *SSL*.
+
+| *Port (standard port: 25)*
+|Enter the value *25*. This value is correct for nearly all providers. Otherwise, ask your provider about the correct port. +
+*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+
+| *Encryption method*
+| Select *SSL*, *TLS* or *No encryption*. +
+*_mailbox.org:_* For mailbox.org mailboxes, enter port *465* and select the encryption method *SSL*.
+
+2+| Enter the login details of your email account. 
+
+| *Name of sender*
+|Enter your own name or the name of your plentyShop. The name is displayed to the recipient. +
+*_Note:_* Avoid using special characters in order to allow for correct display.
+
+| *Email address*
+|Enter the email address as it is listed in the email programme.
+
+| *User name*
+|Enter the user name that matches the email address. +
+*_mailbox.org:_* The mailbox.org user name is the complete email address of the mailbox.org mailbox.
+
+| *Password*
+|Enter the password that matches the user name and email address.
+
+2+|Would you like to test the email despatch now? +
+
+|material:outgoing_mail[]
+|Click on material:outgoing_mail[] to send a test email to the email address entered above.
+
+2+|Would you like to activate the live mode? 
+
+|material:check_box_outline_blank[]
+|If you do not place a check mark for *Activate live mode* (material:check_box_outline_blank[]), the test mode is activated. +
+All emails are only sent to the saved email address. This allows you to test the settings before switching to the live mode. +
+*_Important:_* The test mode is only applied to this online shop. The settings for additional clients (shops) are carried out in the client’s menu.
+
+|material:check_box[role=skyBlue]
+|If you place a check mark for *Activate live mode* (material:check_box[role=skyBlue]), the live mode is activated.
+
+|====
+
+[TIP]
+Also note the explanations about the encryption of email communication on the user manual page xref:business-decisions:managing-mailbox.adoc#200[Selecting the encryption for email communication].
+
+[#email-signature]
+== Saving the email signature
+
+Go to the *Email accounts* assistant in the *Setup » Client » Global » Email accounts* menu to save the signature in HTML format or plain text in the *Signature* step. The signature is then automatically added to your email templates when you inserted the corresponding xref:crm:emailbuilder-variables-twig-expressions.adoc#[variable] in the template.
+
+[IMPORTANT]
+.Note the priority of the signature
+====
+The signature that was saved for a user in his or her user account in the *Setup » Account management » Accounts* menu takes priority over the signature that is saved in the *Email accounts* assistant in the *Signature* step. +
+*_This means:_* If you insert, for example, the xref:crm:emailbuilder-variables-twig-expressions.adoc#[variable] `Signature in HTML format` or `Signature in plain text` in the email template, the signature is taken from the user account. If no signature is saved in the user account, the signature that is saved in the *Email accounts* assistant in the *Signature* step is used.
+====
+
+[#email-info-service]
+== Setting up the email information service
+
+In the *Email accounts* assistant in the *Setup » Client » Global » Email accounts* menu, you can set in the *Info service* step that a blind copy of all emails is sent by your system to an email address of your choice. This can be particularly helpful in the early stages of your online shop, as it allows you to maintain an overview of all sent emails and recognise where processes can still be improved. You can also set here that you automatically receive an info email when a new order has been placed.
+
+[[table-info-service]]
+.Settings in the *Email accounts* assistant in the *Info service* step
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+2+| Would you like to receive a blind copy of all emails sent by your system?
+
+|*Receive emails as blind copy* (material:toggle_off[role=darkGrey])
+|If you do not want to receive a blind copy, do _not_ activate the button (material:toggle_off[role=darkGrey]).
+
+|*Receive emails as blind copy* (material:toggle_on[role=skyBlue])
+|If you want to receive a blind copy, activate the button (material:toggle_on[role=skyBlue]). Enter in the field that appears below the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+
+|*Receive newsletter as blind copy*
+|If you are using the xref:crm:sending-newsletters.adoc#[newsletter] integrated in plentysystems, you can set here whether you want to receive a blind copy when a newsletter is sent.
+
+2+| Would you like to receive an email when a new order is placed?
+
+|*Receive email in case of a new order* (material:toggle_off[role=darkGrey])
+|If you do not want to receive a blind copy when a new order is placed, do _not_ activate the button (material:toggle_off[role=darkGrey]).
+
+|*Receive email in case of a new order* (material:toggle_on[role=skyBlue])
+|If you want to receive a blind copy when a new order is placed, activate the button (material:toggle_on[role=skyBlue]). Enter in the field that appears below the email address(es). If you enter multiple email addresses, separate them with commas and do not use spaces.
+
+|====
+
+[#email-automatic-despatch]
+== Setting up the automatic despatch
+
+The *Automatic despatch* step of the *Email accounts* assistant contains various events that you can link with a template. You can find the assistant in the Setup » Client » Global » Email accounts menu. Select from the drop-down list the template that you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] before in the *CRM » EmailBuilder* menu. This ensures that the email template is sent to your contacts once the event occurs.
+
+[IMPORTANT]
+.Removing the link before deleting the email template
+====
+Deleting an email template that is linked with an event in the *Automatic despatch* step of the *Email accounts* assistant may lead to undesired effects. Therefore, first go to *Setup » Client » Global » Email accounts* and remove the link in the *Automatic despatch* step by selecting the option *Do not send* from the drop-down list in the line of the event. Afterwards, you xref:crm:emailbuilder-work-with-emailbuilder.adoc#delete-template[delete] the template in the *CRM » EmailBuilder* menu.
+====
+
+.Explanations about the available events for the automatic despatch in the *Automatic despatch* step of the *Email accounts* assistant
+[[table-events-automatic-email-despatch]]
+.Explanations about the events for the automatic despatch
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Send customer email to change password*
+|If you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] the template and link the template with this event, an email with an URL to the new password will be sent to your customers once this event is triggered. This link has to be confirmed. +
+The variable `URL to change password` has to be contained in the template. +
+*_Note 1:_* You can find the variable in the category xref:crm:emailbuilder-variables-twig-expressions.adoc#variables-global[Global variables]. +
+*_Note 2:_* In systems that have been booked since February 2023, the default template *Shop: New password* is already saved for this event. If required, you can select another template here.
+
+| *Confirmation of password change*
+|If you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they change their password. +
+Inserting a variable here is not mandatory. It would be useful, however, to add the URL to your online shop (`URL to online shop`). +
+*_Note:_* You can find the variable in the category xref:crm:emailbuilder-variables-twig-expressions.adoc#variables-global[Global variables].
+
+| *Customer wants to change email address*
+|If you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they change their email address in your online shop and enter the new email address. +
+Therefore, the template should contain the variable `URL to confirm email address`. +
+*_Note:_* You can find the variable in the category xref:crm:emailbuilder-variables-twig-expressions.adoc#variables-global[Global variables].
+
+| *Newsletter opt-in*
+|If you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] the template and link the template with this event, an email will be sent to your customers once they registered for the newsletter. The template should contain the variable `URL for confirming the newsletter receipt`; thus, the confirmation link that the contacts have to click in order to complete the newsletter registration process. +
+*_Note:_* You can find the variable in the category xref:crm:emailbuilder-variables-twig-expressions.adoc#variables-newsletter[Newsletter]. +
+*_Note 2:_* In systems that have been booked since February 2023, the default template *Shop: Newsletter registration* is already saved for this event. If required, you can select another template here.
+
+| *Newsletter opt-in confirmation*
+|If you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they activated the confirmation link that was sent with the email template for the event *Newsletter opt-in*. +
+Inserting a variable here is not mandatory. It would be possible, however, to insert a variable of a coupon code for your online shop to say thank you.
+
+| *Customer registration*
+|If you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] the template and link the template with this event, a confirmation email will be sent to your customers once they created a customer account in your online shop when placing an order, for example. +
+Inserting a variable here is not mandatory. It would be useful, however, to add the URL to your online shop (`URL to online shop`) as well as a short welcome message. +
+*_Note:_* You can find the variable in the category xref:crm:emailbuilder-variables-twig-expressions.adoc#variables-global[Global variables].
+
+| *Email when item becomes available*
+|If you xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[created] the template and link the template with this event, an email will be sent to your customers once a certain item is available again. +
+*_Requirement:_* The contacts have entered their email address in the online shop directly next to the item that could not be delivered at that time. +
+Ideally, the template that you link here contains the variables `URL to item` and `Item name`. +
+*_Note:_* You can find the variable in the xref:crm:emailbuilder-variables-twig-expressions.adoc#variables-order-order-items[Order items (only for item list widget)] category.
+
+| *New order confirmation link*
+| If you want to provide customers who order as guests with the possibility to request a new order confirmation link, you have to xref:crm:emailbuilder-work-with-emailbuilder.adoc#create-template[create] an email template and link it here. +
+The variable `URL to order confirmation` has to be contained in the template. +
+*_Note:_* You can find the variable in the category xref:crm:emailbuilder-variables-twig-expressions.adoc#variables-global[Global variables]. +
+For further information about the softlogin, refer to the xref:online-store:shop-builder.adoc#softlogin[Setting up the ShopBuilder] page.
+
+|====
+
+For further information on how to automate the email despatch to your customers, refer to the chapters xref:crm:emailbuilder-automate-email-despatch.adoc#set-up-event-procedures[Setting up event procedures] and xref:crm:emailbuilder-automate-email-despatch.adoc#email-despatch-to-multiple-email-addresses[Setting up email despatch to multiple email addresses] on the user manual page xref:crm:emailbuilder-automate-email-despatch.adoc#[Automating the email despatch].
+
+[#email-messenger-integration]
+== Messenger integration
+
+[IMPORTANT]
+.Step can only be activated when *Messenger configuration* assistant has been completed
+====
+You can only activate the Messenger service in this step once you have completed the *Messenger configuration* assistant before. +
+*_Tip:_* You can finalise the *Email accounts* assistant first and then complete the *Messenger configuration* assistant. Afterwards, come back to this assistant to activate the Messenger service and carry out further setting for the Messenger.
+====
+
+Go to *Setup » Client » Global » Email accounts*. In the *Messenger integration* assistant step, determine whether all sent emails and attachments should be collected in the xref:crm:messenger.adoc#[Messenger]. Furthermore, you can decide in which inbox the emails should be collected and which tags should be assigned to the conversations. You also select the default group for the email service.
+
+
+[[table-collect-emails]]
+.Settings in the *Email accounts* assistant in the *Messenger integration* step
+[cols="1,3"]
+|====
+|Setting |Explanation
+
+| *Activate Messenger integration*
+a| If you want to start collecting the emails in the Messenger, activate the button *Activate service* (material:toggle_on[role=skyBlue]). +
+The emails from the following plentysystems areas will be saved and shown in the Messenger: 
+
+* Automatic despatch
+* Order events
+* Order procedures
+* Group function in the contact data record
+* Orders » Orders (Test phase)
+* Group function in the order
+
+| *Attachments*
+| If you want to collect the email attachments in the messenger, activate the button *Collect attachments* (material:toggle_on[role=skyBlue]).
+
+| *Inbox*
+| Select the messenger inbox from the drop-down list in which the emails should be collected.
+
+| *Tags*
+| Select (material:check_box[role=skyBlue]) the tags from the list that should be added to the conversation.
+
+| *Groups*
+| Select the default group that should be assigned to conversations in this inbox.
+
+|====
