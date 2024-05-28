@@ -13,7 +13,8 @@ image::crm:company-ui-menu-structure.png[width=640, height=360]
 * *Toolbar*: Here you can <<#search-company, search>> for companies, <<#configure-columns, adjust the columns in the overview>>, set the results to be shown per page and click through the pages with the companies.
 * *Main window*: Here you can see whichever area is currently open.
 ** *Overview*: When you start a search, you’ll see the results in an overview. The overview provides information about the companies found at a glance. For example, you can see the number of linked contacts and the terms of payment that you saved, such as early payment discount and percentage for early payment discount.
-** *Detail view*: When you open a company, its details are displayed in the main window on the right. The detail view of a company is divided into the areas *Details*, *Linked contacts* and *Supplier details*.
+** *Detail view*: When you open a company, its details are displayed in the main window on the right. The detail view of a company is divided into the areas *Company details*, *Linked contacts*, *Supplier details*, *Messenger* and *Orders*. +
+The *Messenger* area shows all conversation of all contacts that are linked with this company. The *Orders* area shows all orders of all contacts that are linked with this company.
 
 [#assign-rights]
 == Assigning rights 
@@ -25,6 +26,7 @@ image::crm:company-ui-menu-structure.png[width=640, height=360]
 :right-four: pass:quotes[*CRM > Company > Delete*]
 
 include::_includes:partial$rights.adoc[]
+
 
 [#create-company]
 == Creating a company
@@ -211,12 +213,19 @@ Click in the line of the saved filter on material:star_border[] *Set as default*
 [#configure-columns]
 == Configuring columns
 
-Decide which columns are shown in the <<#columns-company-overview, company overview>> and in the company data record in the <<#columns-linked-contacts, Linked contacts>> area. 
+For the following areas, you can specify which columns should be displayed there:
+
+* <<#columns-company-overview, Company overview>>
+* <<#columns-linked-contacts, Linked contacts>> area in the company data record
+* <<#columns-messenger, Messenger>> area in the company data record
+* <<#columns-orders, Orders>> area in the company data record
 
 [#columns-company-overview]
 === Company overview
 
-Click in the company overview in the top right on *Configure columns* (material:settings[]) and activate (material:check_box[role=skyBlue]) the columns that you want to see in the overview. You can also deactivate (material:check_box_outline_blank[]) activated columns again. Click on material:drag_indicator[] and hold down the symbol to change the order of the columns with drag-and-drop. The following columns are available:
+Click in the company overview in the top right on *Configure columns* (material:settings[]) and activate (material:check_box[role=skyBlue]) the columns that you want to see in the overview. +
+You can also deactivate (material:check_box_outline_blank[]) activated columns again. +
+Click on material:drag_indicator[] and hold down the symbol to change the order of the columns with drag-and-drop. The following columns are available:
 
 * ID
 * Name
@@ -234,7 +243,9 @@ Click in the company overview in the top right on *Configure columns* (material:
 [#columns-linked-contacts]
 === Linked contacts in the company data record
 
-Click in company data record in the *Linked contacts* area in the top right on *Configure columns* (material:settings[]) and activate (material:check_box[role=skyBlue]) the columns that you want to see in the overview. You can also deactivate (material:check_box_outline_blank[]) activated columns again. Click on material:drag_indicator[] and hold down the symbol to change the order of the columns with drag-and-drop. The following columns are available:
+Click in the company data record in the *Linked contacts* area in the top right on *Configure columns* (material:settings[]) and activate (material:check_box[role=skyBlue]) the columns that you want to see in the overview. +
+You can also deactivate (material:check_box_outline_blank[]) activated columns again. +
+Click on material:drag_indicator[] and hold down the symbol to change the order of the columns with drag-and-drop. The following columns are available:
 
 * ID
 * Form of address
@@ -253,6 +264,68 @@ Click in company data record in the *Linked contacts* area in the top right on *
 
 The following fields are activated by default: first name, last name, email private, phone private, mobile private and action (material:more_vert[]). +
 *_Note:_* By clicking on *Action* (material:more_vert[]) in the line of the linked contact, another window (material:delete[] *Delete contact link*) opens. Via this setting, you can <<#remove-link-company-contact, remove the link between company and contact>>.
+
+[#columns-messenger]
+=== Messenger in the company data record
+
+The *Messenger* area shows all conversation of all contacts that are linked with this company.
+
+Click in the company data record in the *Messenger* area in the top right on *Configure columns* (material:settings[]) and activate (material:check_box[role=skyBlue]) the columns that you want to see in this overview. +
+You can also deactivate (material:check_box_outline_blank[]) activated columns again. +
+Click on material:drag_indicator[] and hold down the symbol to change the order of the columns with drag-and-drop. The following columns are available:
+
+* Extend relations
+* Status
+* Short ID
+* Relations
+* Subject
+* Preview
+* Priority
+* Tags
+* Folder
+* Deadline
+* Created at
+* Updated at
+* Type
+* Status
+* Follow-up date
+* Referrer
+* Attachments
+* Billed messages
+* Billed minutes
+* Subscribed 
+* Actions
+
+You can create a new message in the *Messenger* area of the company data record. In this case, no contact is preselected. The search in the recipients fields only displays contacts that are linked with this company. 
+
+For further information, refer to the xref:crm:messenger.adoc#[Messenger] page.
+
+[#columns-orders]
+=== Orders in the company data record
+
+The *Orders* area shows all orders of all contacts that are linked with this company. +
+Adding new orders is _not_ possible via the company data record. This area is therefore only intended to provide information and an overview.
+
+Click in the company data record in the *Orders* area in the top right on *Configure columns* (material:settings[]) and activate (material:check_box[role=skyBlue]) the columns that you want to see in this overview. +
+You can also deactivate (material:check_box_outline_blank[]) activated columns again. +
+Click on material:drag_indicator[] and hold down the symbol to change the order of the columns with drag-and-drop. The following columns are available:
+
+* Order ID
+* Gross order value
+* Main
+* Order status
+* Order type
+* Invoice number
+* Payment method
+* Order date
+* Referrer
+* Contact ID
+* Contact name
+* Referrer name
+* Client
+* Incoming payment
+* Outgoing items
+* Shipping
 
 [#edit-company]
 == Editing a company
@@ -313,14 +386,16 @@ Removing the link between company and contact:
 → The link to the contact is removed and the contact is deleted from the overview in the *Linked contacts* area.
 
 [#delete-company]
-== Deleting a company
+== Deleting a single company
 
-If you don’t need a company data record any longer, you can delete it any time. The contact data records that are linked with the company will of course _not_ be deleted. Only the assignment of the company to the contact and the company itself will be removed when deleting the company.
+If you don’t need a company data record any longer, you can delete it any time. The contact data records that are linked with the company will _not_ be deleted. Only the assignment of the company to the contact and the company itself will be removed when deleting the company.
 
 *_Note:_* The link to the company will also be removed in the contact data record in the *CRM » Contacts* menu.
 
+If you want to delete multiple companies at the same time, note the explanations in the <<#delete-multiple-companies, Deleting multiple companies>> chapter.
+
 [.instruction]
-Deleting a company:
+Deleting a single company:
 
 . Go to *CRM » Companies*.
 . Search the company that you want to delete by means of the filter settings as described in the <<#search-company, Searching for a company>> chapter. +
@@ -330,3 +405,20 @@ Deleting a company:
 → A window appears and you need to confirm your decision.
 . Click on *Delete*. +
 → The company is deleted and removed from the overview.
+
+[#delete-multiple-companies]
+== Deleting multiple companies
+
+Instead of deleting every company individually, you can save time and delete multiple contacts at the same time by using the group function. Once you selected (material:check_box[role=skyBlue]) at least one company in the overview, the material:more_vert[] button becomes visible. Behind this button, you can find the option to delete the selected companies.
+
+[.instruction]
+Deleting multiple companies at the same time:
+
+. Go to *CRM » Companies*.
+. Search the companies that you want to delete by means of the filter settings as described in the <<#search-company, Searching for a company>> chapter. +
+→ The companies that correspond to the search criteria entered are shown.
+. Select (material:check_box[role=skyBlue]) the companies that you want to delete.
+. In the toolbar at the top, click on material:more_vert[] and then on *Delete* (material:delete[]). +
+→ A window appears and you need to confirm your decision.
+. Click on *Delete*. +
+→ The companies are deleted and removed from the overview.
