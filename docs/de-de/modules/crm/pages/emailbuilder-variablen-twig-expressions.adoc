@@ -235,19 +235,19 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 | `order.typeId`
 | -
 
-| `Name des Auftragstyps`
+| `Auftragstyp`
 |Name des Auftragstyps, z.B. `Auftrag`, `Gutschrift` und `Reparaturauftrag`. +
 *_Hinweis:_* Die komplette Liste der Auftragstypen und deren IDs findest du auf dieser xref:daten:interne-IDs.adoc#80[Handbuchseite].
 | `order.formattedGeneral.orderTypeName`
 | $OrderType
 
-| `ID des Hauptauftrags`
+| `Hauptauftrags-ID`
 |ID des obersten Vorgängerauftrags. Dies ist in der Regel ein normaler Auftrag. +
 *_Beispiel:_* Bei einer Gutschrift G1 aus einer Retoure R1 aus einem Auftrag A1 gibt die Variable `ID des Elternauftrags` die ID von R1 und `ID des Hauptauftrags` die ID von A1 aus.
 | `order.formattedOriginOrder.originOrderId`
 | $OriginOrderID
 
-| `ID des Elternauftrags`
+| `Elternauftrags-ID`
 |ID des direkten Vorgängerauftrags +
 *_Beispiel:_* Bei einer Gutschrift kann es die ID der Retoure oder des Auftrags sein, aus dem die Gutschrift erzeugt wurde.
 | `order.formattedOriginOrder.referenceOrderId`
@@ -273,7 +273,7 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 | `order.statusId`
 | $OrderStatusID
 
-| `Status`
+| `Auftragsstatus`
 |Name des Auftragsstatus wie im Menü *Einrichtung » Aufträge » Auftragsstatus* gespeichert.
 | `order.statusName`
 | $OrderStatusLabel
@@ -289,22 +289,22 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `Datum des Auftragseingangs`
+| `Auftragseingangsdatum`
 |Datum des Auftragseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.createdOn`
 | $OrderDate
 
-| `Datum des Warenausgangs`
+| `Warenausgangsdatum`
 |Datum und Uhrzeit des Warenausgangs wie im Auftrag gespeichert.
 | `order.formattedDates.outgoingItemsBookedOn`
 | -
 
-| `Datum des Zahlungseingangs`
+| `Zahlungseingangsdatum`
 |Datum und Uhrzeit des Zahlungseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.paidOn`
 | $PaymentDate
 
-| `Datum und Uhrzeit des Auftragseingangs`
+| `Auftragseingangsdatum und Uhrzeit`
 |Datum und Uhrzeit des Auftragseingangs wie im Auftrag gespeichert.
 | `order.formattedDates.createdOnDateAndTime`
 | -
@@ -353,7 +353,7 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `orderItem.typeName`
 | -
 
-| `ID des Auftragspositionstyps`
+| `Auftragspositionstyp-ID`
 | 
 | `orderItem.typeId`
 | -
@@ -469,16 +469,16 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | $ReturnItemComment
 
 | `Status-ID des retournierten Artikels`
-|
+|ID des Status, die der retournierte Artikel hat.
 | `orderItem.formattedReturn.statusId`
 | $ReturnItemStatusID
 
-| `Statusname des retournierten Artikels`
-|
+| `Status des retournierten Artikels`
+|Name des Status, den der retournierte Artikel hat.
 | `orderItem.formattedReturn.statusLabel`
 | $ReturnItemStatusLabel
 
-| `ID des Retourengrunds`
+| `Retourengrund-ID`
 |ID des xref:auftraege:order-type-return.adoc#edit-return-reason[Retourengrunds] wie im Menü *Einrichtung » Aufträge » Auftragstypen » Retoure* gespeichert.
 | `orderItem.formattedReturn.reasonId`
 | $ReturnReasonID
@@ -743,8 +743,8 @@ Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.
 |
 | `orderItem.formattedSupplierData.supplierLastPriceQuery`
 
-| `Lieferant`
-|
+| `Lieferantenfirma`
+| Gibt den Namen der Firma aus, der mit dem Lieferanten verknüpft ist.
 | `orderItem.formattedSupplierData.supplier`
 
 | `Lieferanten-Artikelbeschreibung`
@@ -756,7 +756,7 @@ Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.
 | `orderItem.formattedSupplierData.supplierItemNumber`
 
 | `Lieferantenname`
-|
+| Gibt den Vornamen und Nachnamen des Kontakts aus, der mit dem Lieferanten verknüpft ist.
 | `orderItem.formattedSupplierData.supplierName`
 
 | `Lieferzeit in Tagen`
@@ -1326,7 +1326,7 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedGeneral.totalVat`
 | $TotalVAT
 
-| `Wert des Artikels`
+| `Artikelwert`
 |
 | `order.formattedGeneral.valueOfItems`
 | $ValueOfItems
@@ -1404,7 +1404,7 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedReorder.estimatedDeliveryDate`
 | $ReorderDeliveryDate
 
-| `Datum des Retoureneingangs`
+| `Retoureneingangsdatum`
 |
 | `order.formattedDates.returnDate`
 | $OrderReturnDate
@@ -1491,8 +1491,8 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedProperties.paymentMethod`
 | $MethodOfPaymentID
 
-| `Transaktions-ID der Zahlung`
-|
+| `Transaktions-ID`
+|ID der Zahlungstransaktion.
 | `order.formattedGeneral.paymentTransactionId`
 | -
 
@@ -1599,7 +1599,7 @@ Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitst
 | `contact.number`
 | $CustomerNumber
 
-| `Anzahl der Aufträge`
+| `Auftragsanzahl`
 |
 | `contact.formattedOrdersCount`
 | $OrderCount
