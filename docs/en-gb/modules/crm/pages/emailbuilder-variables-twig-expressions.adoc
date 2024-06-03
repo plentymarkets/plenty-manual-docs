@@ -5,9 +5,9 @@
 :author: team-crm
 
 ////
-TODO: Hinweis für TCDs/alle Menschen, die diese Seite bearbeiten: Damit alle twig expressions, die "| raw" am Ende enthalten, korrekt im Handbuch angezeigt werden, muss ein Backslash (\) vor dem Pipe-Zeichen eingefügt werden --> "\ | raw"
+TODO: Hinweis für TCDs/alle Menschen, die diese Seite bearbeiten: Damit alle twig expressions, die "| raw" am Ende enthalten, korrekt in den Handbuchtabellen angezeigt werden, muss ein Backslash (\) vor dem Pipe-Zeichen eingefügt werden --> "\| raw"
 Andernfalls würde es die Tabellen zerschießen. 
-Wenn die übersetzte Datei hochgeladen wird, muss der Backslash manuell eingefügt werden.
+Wenn die übersetzte Datei hochgeladen wird, muss der Backslash manuell in der englischen Datei eingefügt werden.
 ////
 
 In some of the widgets you can insert variables to create the templates you need. In the emails that are sent to your customer, the variables will then be replaced with the correct content.
@@ -52,12 +52,13 @@ The available variables for the EmailBuilder are grouped into the following cate
 * <<#variables-order, Order>>
 ** <<#variables-order-subscription, Subscription>>
 ** <<#variables-order-general, General>>
-** <<#variables-order-date, Order date>>
+** <<#variables-order-order-date, Order date>>
 ** <<#variables-order-order-items, Order items (only for item list widget)>>
 *** <<#variables-order-order-items-general, General>>
 *** <<#variables-order-order-items-barcodes, Barcodes>>
 *** <<#variables-order-order-items-properties, Properties>>
 *** <<#variables-order-order-items-free-text-fields, Free text fields>>
+*** <<#variables-order-order-items-suppliers, Suppliers>>
 *** <<#variables-order-order-items-availabilities, Availabilities>>
 ** <<#variables-order-bank-details-of-order, Bank details of the order>>
 ** <<#variables-order-order-properties, Order properties>>
@@ -209,9 +210,14 @@ Possible values: *1 month*, *3 months*, *6 months*, *12 months*.
 | $ExternalOrderID
 
 | `Flag`
-|Flag that was selected in the order.
+|Returns the flag that was selected in the order.
 | `order.formattedProperties.flag`
 | $OrderFlag
+
+| `Order tags`
+|Returns the tags that are assigned to the order.
+| `order.formattedGeneral.orderTags \| raw`
+| -
 
 | `Order ID`
 |
@@ -325,6 +331,7 @@ Click on one of the following links to be forwarded directly to the correspondin
 * <<#variables-order-order-items-images, Images>>
 * <<#variables-order-order-items-properties, Properties>>
 * <<#variables-order-order-items-free-text-fields, Free text fields>>
+* <<#variables-order-order-items-suppliers, Suppliers>>
 * <<#variables-order-order-items-availabilities, Availabilities>>
 
 [#variables-order-order-items-general]
@@ -723,6 +730,73 @@ For further information, refer to the xref:item:properties.adoc#500[Properties] 
 
 |====
 
+[#variables-order-order-items-suppliers]
+===== Order / Order items (only for item list widget) / Suppliers
+
+[[table-variables-order-order-items-suppliers]]
+.Variables in the *Order / Order items (only for item list widget) / Suppliers* sub-category
+[cols="3,4,3"]
+|====
+|Name of the variable |Explanation |Twig expression
+
+| `Last price query`
+|
+| `orderItem.formattedSupplierData.supplierLastPriceQuery`
+
+| `Supplier`
+|
+| `orderItem.formattedSupplierData.supplier`
+
+| `Supplier item description`
+|
+| `orderItem.formattedSupplierData.supplierItemDescription`
+
+| `Supplier variation number`
+|
+| `orderItem.formattedSupplierData.supplierItemNumber`
+
+| `Supplier name`
+|
+| `orderItem.formattedSupplierData.supplierName`
+
+| `Delivery time in days`
+|
+| `orderItem.formattedSupplierData.supplierDeliveryTimeDays`
+
+| `Minimum purchase`
+|
+| `orderItem.formattedSupplierData.supplierMinimumPurchase`
+
+| `Price in order currency`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceOrderCurrency`
+
+| `Price in system currency`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceSystemCurrency`
+
+| `Discount in percent`
+|
+| `orderItem.formattedSupplierData.supplierDiscount`
+
+| `Discountable`
+|
+| `orderItem.formattedSupplierData.supplierIsDiscountable`
+
+| `Symbol of order curreny`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceOrderCurrencySymbol`
+
+| `Symbol of system currency`
+|
+| `orderItem.formattedSupplierData.supplierPurchasePriceSystemCurrencySymbol`
+
+| `Units contained`
+|
+| `orderItem.formattedSupplierData.supplierPackagingUnit`
+
+|====
+
 [#variables-order-order-items-availabilities]
 ===== Order / Order items (only for item list widget) / Availabilities
 
@@ -846,6 +920,9 @@ This statement applies to the following variables:
 
 In this area of the EmailBuilder, all variables of all order-related properties are shown.
 
+ 
+ 
+
 [#variables-order-delivery-address]
 ==== Order / Delivery address
 
@@ -934,19 +1011,57 @@ Click on one of the following links to be forwarded directly to the correspondin
 
 [[table-variables-order-delivery-address-options]]
 .Variables in the *Order / Delivery address / Delivery address options* sub-category
-[cols="1,3,2"]
+[cols="2,4,3,2"]
 |====
-|Name of the variable |Twig expression |Name of the old variablefootnote:1[]
+|Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Delivery address Age rating`
+|Age rating from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.BBFC`
+| 
+
+| `Delivery address Birthday`
+|Birthday from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.birthday`
+| 
+
+| `Delivery address Entry certificate`
+|Entry certificate from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.entryCertificate`
+| 
+
+| `Delivery address External address ID`
+|External address ID from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
+| 
+
+| `Delivery address External customer ID`
+|External customer ID from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.externalCustomerID`
+| 
+
+| `Delivery address Personal number`
+|Personal number from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.personalId`
+| 
+
+| `Delivery address Title`
+|Title from the delivery address as saved in the order.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.title`
+| 
 
 | `Delivery address Contact person`
+|Contact person from the delivery address as saved in the order.
 | `order.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
 | $DeliveryAddressContactPerson
 
 | `Delivery address Email`
+|Email address from the delivery address as saved in the order.
 | `order.formattedAddresses.deliveryAddress.formattedOptions.email`
 | -
 
 | `Delivery address Telephone`
+|Phone number from the delivery address as saved in the order.
 | `order.formattedAddresses.deliveryAddress.formattedOptions.telephone`
 | -
 
@@ -1070,6 +1185,41 @@ Click on one of the following links to be forwarded directly to the correspondin
 [cols="2,4,3,2"]
 |====
 |Name of the variable |Explanation |Twig expression |Name of the old variablefootnote:1[]
+
+| `Invoice address Age rating`
+|Age rating from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.BBFC`
+| 
+
+| `Invoice address Birthday`
+|Birthday from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.birthday`
+| 
+
+| `Invoice address Entry certificate`
+|Entry certificate from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.entryCertificate`
+| 
+
+| `Invoice address External address ID`
+|External address ID from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.externalAddressID`
+| 
+
+| `Invoice address External customer ID`
+|External customer ID from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.externalCustomerID`
+| 
+
+| `Invoice address Personal number`
+|Personal number from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.personalId`
+| 
+
+| `Invoice address Title`
+|Title from the invoice address as saved in the order.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.title`
+| 
 
 | `Invoice address Contact person`
 |Contact person from the invoice address as saved in the order.
