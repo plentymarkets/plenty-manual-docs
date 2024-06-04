@@ -460,7 +460,8 @@ Beachte, dass Änderungen an den Designeinstellungen ein erneutes Bereitstellen 
 [#207]
 === Einstellungen für Plugin-Entwickler:innen
 
-Im Tab *Logging und Performance* stehen Einstellungsmöglichkeiten für Plugin-Entwickler:innen zur Verfügung. Hier stellst du beispielsweise ein, welche Informationen bei der Plugin-Entwicklung protokolliert werden sollen und welchen Modus du für den plentyShop verwenden möchtest.
+Im Tab *Logging und Performance* stehen Einstellungsmöglichkeiten für Plugin-Entwickler:innen zur Verfügung. 
+Hier stellst du beispielsweise ein, welche Informationen bei der Plugin-Entwicklung protokolliert werden sollen und welchen Modus du für den plentyShop verwenden möchtest.
 
 [.instruction]
 Einstellungen für die Plugin-Entwicklung vornehmen:
@@ -497,6 +498,12 @@ Einstellungen für die Plugin-Entwicklung vornehmen:
 *Live-Modus* = Live-Modus wählen, wenn der plentyShop produktiv verwendet wird. Dateien werden minimiert und gebündelt. +
 *Entwicklungsmodus* = Entwicklungsmodus wählen, um Debugging-Funktionen nutzen zu können. Dateien werden nicht minimiert und gebündelt.
 
+|*Markup vor Initialisierung auf Fehler prüfen*
+|Diese Einstellung prüft, ob HTML vorhanden ist, das inkompatibel mit Vue.js ist und behebt dieses fehlerhafte Markup.
+
+|*State Cloning für Event Propagation in VueX aktivieren*
+|Das Event Propagation-Plugin sendet ein Event für jede Datenänderung in VueX. Diese Events können den neuen und den alten Zustand des VueX Stores enthalten, was die Datenlast des Shops erhöht. Durch das Deaktivieren des State Clonings werden sowohl der alte als auch der neue Zustand als leere Objekte gespeichert, was zu einer verbesserten Performance führen kann. Wichtig: Das Deaktivieren des State Clonings kann dazu führen, dass einige externe Plugins nicht mehr funktionieren.
+
 |====
 
 ==== Vue Server-Side Rendering
@@ -521,6 +528,26 @@ Server-Side Rendering aktivieren:
 . *Speichere* (icon:save[role="green"]) die Einstellungen.
 
 Wenn du SSR verwenden möchtest, solltest du die Bilder-Widgets, die du auf deinen Seiten verwendest, anpassen. Weitere Informationen hierzu findest du in unserem xref:webshop:best-practices.adoc#psi[Best Practice].
+
+=== Automatische Konvertierung in moderne Bildformate (AVIF, WebP)
+
+Artikelbilder im plentyShop können auch in den Formaten WebP und AVIF ausgeliefert werden.
+Die Einstellung *Automatische Konvertierung in moderne Bildformate* sorgt dafür, dass Artikelbilder, die nicht in einem modernen Format vorliegen, automatisch in diesem Format erzeugt werden, sobald sie vom Browser angefragt werden. 
+Um diese Funktion zu nutzen, musst du die Einstellung nur aktivieren und das entsprechende Plugin-Set bereitstellen. Die Konvertierung wird dann automatisch angestoßen, sobald ein Artikelbild aufgerufen wird.
+Dadurch, dass die Bilder initial einmal konvertiert werden müssen, wird die anfängliche Ladezeit erhöht sein. +
+
+Das Verwenden moderner Bildformate verringert die Bildergröße und kann dadurch zu schnelleren Ladezeiten führen.
+Beachte, dass das Aktivieren dieser Einstellung zu zusätzlichen Cloud-Speicher-Kosten für Content und Artikelbilder führen kann. 
+Durch die geringere Bildergröße sind allerdings auch entsprechend niedrigere Traffic-Kosten zu erwarten. +
+
+
+In welchem Format die Bilder ausgeliefert werden, ist dabei abhängig von der Browserkompatibilität mit den Formaten. 
+Wenn der verwendete Browser das AVIF-Format unterstützt, wird dieses Bildformat verwendet. 
+Das ist bei den meisten Browsern der Fall.
+Falls der Browser noch kein AVIF unterstützt, wird stattdessen WebP verwendet.
+Sollte der Browser beide Formate nicht unterstützen, wird das Format des ursprünglichen hochgeladenen Bilds verwendet, was in der Regel PNG oder JPG ist. +
+
+Um die Größe der umgewandelten Bilder etwas zu reduzieren, solltest du die Option *Verlustfreie Komprimierung* im Menü *Einrichtung » Artikel » Bilder » Größen* für die Formate AVIF und WebP deaktivieren.
 
 == Weitere Einstellungen vornehmen
 
@@ -633,12 +660,12 @@ Eine ausführliche Anleitung zur Einrichtung von Bestellmerkmalen findest du auc
 [#650]
 === Automatischen E-Mail-Versand einrichten
 
-Im Menü *Einrichtung » Assistenten » Grundeinrichtung* im Assistenten *E-Mail-Konten* stehen dir im Schritt *Automatischer Versand* verschiedene Ereignisse zur Verfügung, die mit einer E-Mail-Vorlage verknüpft werden können. Wähle aus der Dropdown-Liste die E-Mail-Vorlage, die du zuvor im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* xref:crm:e-mails-versenden.adoc#1200[erstellt] hast. Dadurch wird bei Eintritt des Ereignisses die E-Mail-Vorlage automatisch an die Kund*in versendet.
+Im Menü *Einrichtung » Mandant » Global » E-Mail-Konten* im Assistenten *E-Mail-Konten* stehen dir im Schritt *Automatischer Versand* verschiedene Ereignisse zur Verfügung, die mit einer E-Mail-Vorlage verknüpft werden können. Wähle aus der Dropdown-Liste die E-Mail-Vorlage, die du zuvor im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* xref:crm:e-mails-versenden.adoc#1200[erstellt] hast. Dadurch wird bei Eintritt des Ereignisses die E-Mail-Vorlage automatisch an die Kund*in versendet.
 
 [.instruction]
 Automatischen E-Mail-Versand einrichten:
 
-. Öffne das Menü *Einrichtung » Assistenten » Grundeinrichtung*.
+. Öffne das Menü *Einrichtung » Mandant » Global » E-Mail-Konten*.
 . Öffne den Assistenten *E-Mail-Konten*.
 . Wähle im Schritt *Automatischer Versand* in der Zeile des Ereignisses die gewünschte E-Mail-Vorlage aus der Dropdown-Liste. Beachte dazu die Erläuterungen in <<tabelle-ereignisse-automatischer-e-mail-versand>>.
 . *Speichere* (icon:save[role="green"]) die Einstellungen.
@@ -646,7 +673,7 @@ Automatischen E-Mail-Versand einrichten:
 Mit einem Klick auf *E-Mail-Vorlage bearbeiten* wird die E-Mail-Vorlage im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* geöffnet und kann dort xref:crm:e-mails-versenden.adoc#1700[bearbeitet] werden.
 
 [[tabelle-ereignisse-automatischer-e-mail-versand]]
-.Erläuterungen zu einigen Ereignissen im Menü *Einrichtung » Assistenten » Grundeinrichtung* im Assistenten *E-Mail-Konten* » Schritt: Automatischer Versand*
+.Erläuterungen zu einigen Ereignissen im Menü *Einrichtung » Mandant » Global » E-Mail-Konten* im Assistenten *E-Mail-Konten* » Schritt: Automatischer Versand*
 [cols="1,3"]
 |====
 |Einstellung |Erläuterung
@@ -668,7 +695,7 @@ Mit einem Klick auf *E-Mail-Vorlage bearbeiten* wird die E-Mail-Vorlage im Menü
 [IMPORTANT]
 .Verknüpfung vor Löschen der E-Mail-Vorlage entfernen
 ====
-Das Löschen einer E-Mail-Vorlage, die mit einem Ereignis im Bereich *Automatischer Versand* verknüpft ist, kann zu unerwünschten Effekten führen. Entferne daher zunächst die Verknüpfung im Menü *Einrichtung » Assistenten » Grundeinrichtung* im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand*, indem du in der Zeile des Ereignisses in der Dropdown-Liste die Option *Nicht senden* wählst. Anschließend löschst du die E-Mail-Vorlage im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* bzw. im Menü *CRM » EmailBuilder*.
+Das Löschen einer E-Mail-Vorlage, die mit einem Ereignis im Bereich *Automatischer Versand* verknüpft ist, kann zu unerwünschten Effekten führen. Entferne daher zunächst die Verknüpfung im Menü *Einrichtung » Mandant » Global » E-Mail-Konten* im Assistenten *E-Mail-Konten* im Schritt *Automatischer Versand*, indem du in der Zeile des Ereignisses in der Dropdown-Liste die Option *Nicht senden* wählst. Anschließend löschst du die E-Mail-Vorlage im Menü *Einrichtung » Mandant » Mandant wählen » E-Mail » Vorlagen* bzw. im Menü *CRM » EmailBuilder*.
 ====
 
 [#7001]

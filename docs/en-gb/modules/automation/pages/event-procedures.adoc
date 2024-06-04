@@ -53,13 +53,13 @@ The first steps consists of selecting an *Event* that triggers the *new event pr
 
 |xref:orders:managing-orders.adoc#[New order] +
 *New incomplete order*, +
-xref:orders:managing-orders.adoc#300[New delivery order], +
-xref:orders:managing-orders.adoc#400[New return], +
+xref:orders:order-type-delivery-order.adoc#[New delivery order], +
+xref:orders:order-type-return.adoc#[New return], +
 *New return (by customer)*, +
-xref:orders:managing-orders.adoc#500[New credit note] +
-xref:orders:managing-orders.adoc#700[New repair], +
-xref:orders:managing-orders.adoc#800[New multi-order], +
-xref:orders:managing-orders.adoc#850[New multi credit note]
+xref:orders:order-type-credit-note.adoc#[New credit note] +
+xref:orders:order-type-repair.adoc#[New repair], +
+xref:orders:order-type-multi-order.adoc#[New multi-order], +
+xref:orders:order-type-multi-order.adoc#generate-multi-credit-note[New multi credit note]
 
 |The event procedure is triggered when one of the listed order types is created. +
 The event *New return (by customer)* refers to returns that are initiated by customers in the My account area of the online shop.
@@ -76,7 +76,7 @@ The event *New return (by customer)* refers to returns that are initiated by cus
 |Event |Explanation
 
 | *Status change*
-|The event procedure is triggered when the xref:orders:managing-orders.adoc#1200[order status] of an order changes. Select the appropriate order status from the drop-down list.
+|The event procedure is triggered when the xref:orders:order-statuses.adoc#[order status] of an order changes. Select the appropriate order status from the drop-down list.
 
 | *Package number*
 |The event procedure is triggered when a package number is provided for an order.
@@ -100,7 +100,7 @@ The event *New return (by customer)* refers to returns that are initiated by cus
 |The event procedure is triggered when the order type of an order is changed. You can choose between *Order* and *Advance order* for this event.
 
 | *Change of repair status*
-|The event procedure is triggered when the xref:orders:managing-orders.adoc#710[repair status] of an order changes. You can choose between the created repair statuses for this event.
+|The event procedure is triggered when the xref:orders:order-type-repair.adoc#edit-repair-status[repair status] of an order changes. You can choose between the created repair statuses for this event.
 
 | *Change of payment method*
 |The event procedure is triggered when the xref:payment:payment.adoc#[payment method] of an order is changed.
@@ -130,21 +130,21 @@ xref:orders:generating-invoices.adoc#[Invoice] +
 xref:pos:integrating-plentymarkets-pos.adoc#120[Receipt] +
  xref:orders:generating-delivery-notes.adoc#[Delivery note] +
 xref:fulfilment:generating-documents.adoc#[List of delivery addresses generated] +
-xref:orders:pick-list.adoc#[Pick list] +
-xref:orders:packing-list.adoc#[Packing list] +
-xref:orders:generate-offer.adoc#[Offer] +
+xref:orders:generating-pick-list.adoc#[Pick list] +
+xref:orders:generating-packing-list.adoc#[Packing list] +
+xref:orders:generating-offer.adoc#[Offer] +
 xref:orders:generating-dunning-letters.adoc#[Dunning letter] +
-xref:orders:generating-order-confirmations.adoc#[Order confirmation] +
+xref:orders:generating-order-confirmation.adoc#[Order confirmation] +
  xref:orders:generating-credit-notes.adoc#[Credit note] +
-xref:orders:generating-adjustment-forms.adoc#[Correction document] +
+xref:orders:generating-adjustment-form.adoc#[Correction document] +
 xref:orders:generating-return-slips.adoc#[Return note] +
-xref:orders:managing-orders.adoc#1670[Invoice reversal document] +
-xref:orders:managing-orders.adoc#540[Refund reversal] +
+xref:orders:generating-invoices.adoc#400[Invoice reversal document] +
+xref:orders:order-type-credit-note.adoc#correct-and-cancel-credit-note-document[Refund reversal] +
 xref:orders:generating-pro-forma-invoice.adoc#[Pro forma invoice] +
 xref:fulfilment:shipping-centre-2-0.adoc#retrieve-return-label[Return label] +
 xref:orders:generating-an-entry-certificate-gelangensbestaetigung.adoc#[Entry certificate] +
-xref:orders:managing-orders.adoc#840[Multi-invoice] +
-xref:orders:managing-orders.adoc#860[Multi-credit note] +
+xref:orders:order-type-multi-order.adoc#generate-multi-order[Multi-invoice] +
+xref:orders:order-type-multi-order.adoc#generate-multi-credit-note[Multi-credit note] +
 xref:orders:generating-pick-up-delivery.adoc#200[Pick-up/Delivery note] +
 *Uploaded* +
 
@@ -182,7 +182,7 @@ This event can be triggered several times, for example when a customer makes sev
 
 | *Initial payment complete*
 |The event procedure is triggered when a deposit on a production item has been fully paid. +
-Enter the percentage value for xref:orders:basic-settings.adoc#intable-deposit-production-item[deposits on production items] in the *Setup » Orders » Settings* menu.
+Enter the percentage value for xref:orders:basic-settings.adoc#[deposits on production items] in the *Setup » Orders » Settings* menu.
 
 | *Payment cancelled by the customer*
 |The event procedure is triggered when a payment is cancelled by a customer.
@@ -587,7 +587,7 @@ Order templates are created in the *Setup » Orders » Order template* menu.
 
 | *Generate delivery orders*
 |The procedure automatically creates delivery orders for an order. +
-_Important:_ This option is only displayed if the correct xref:orders:managing-orders.adoc#320[assignment of warehouses] has been carried out beforehand.
+_Important:_ This option is only displayed if the correct xref:orders:basic-settings.adoc#[assignment of warehouses] has been carried out beforehand.
 
 | *Split into delivery orders by gross value of items*
 |The procedure splits the order items of an order into separate delivery orders. The split is done according to a value which the order items in an order should not exceed. Enter the corresponding *Value of items (gross)*. +
@@ -599,7 +599,7 @@ When items with an availability from one of the groups are included in an order,
 _Note_ that you have to have at least two groups for splitting to take place.
 
 | *Split into orders by item availability*
-|The procedure xref:orders:managing-orders.adoc#intable-splitting-orders[splits the orders] according to xref:item:availabilities.adoc#[item availabilities] into orders. Create *Availability groups* for the filtered orders. To do so, drag one or more of the availabilities to the right and create the first group. To create a second group, drag further availabilities to icon:plus-square[role="green"]. If needed, create more groups.
+|The procedure xref:orders:basic-settings.adoc#basic-settings[splits the orders] according to xref:item:availabilities.adoc#[item availabilities] into orders. Create *Availability groups* for the filtered orders. To do so, drag one or more of the availabilities to the right and create the first group. To create a second group, drag further availabilities to icon:plus-square[role="green"]. If needed, create more groups.
 When items with an availability from one of the groups are included in an order, a new order per group is created. +
 _Note_ that you have to have at least two groups for splitting to take place.
 
@@ -614,7 +614,7 @@ _Note_ that you have to have at least two groups for splitting to take place.
 
 | *Change status*
 |The procedure changes the status of an order. Select the order status the orders should get after the event procedure is applied from the drop-down list. +
-*Ignore delivery orders*: The procedure *Change status* changes the status of both the main order and its xref:orders:managing-orders.adoc#300[delivery orders] by default. Activate the option *Ignore delivery orders* if only the order status of the main order and not the order status of the delivery orders is to be changed.
+*Ignore delivery orders*: The procedure *Change status* changes the status of both the main order and its xref:orders:order-type-delivery-order.adoc#[delivery orders] by default. Activate the option *Ignore delivery orders* if only the order status of the main order and not the order status of the delivery orders is to be changed.
 
 | *Change flag*
 |The procedure changes the xref:item:flags.adoc#[flag] in an order. Select either *Delete flag* or the flag the order should get from the drop-down list.
@@ -720,12 +720,12 @@ Note that the documents in this procedure group can only be generated if the cor
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
 
 | *Generate multi-invoice*
-|The procedure generates a xref:orders:managing-orders.adoc#840[multi-invoice] for an order. +
+|The procedure generates a xref:orders:order-type-multi-order.adoc#generate-multi-order[multi-invoice] for an order. +
 Activate the option *Integrate invoices of these orders* if the already generated separate invoices of the included orders are to be added to the multi-invoice generated by this procedure. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
 
 | *Generate order confirmation*
-|The procedure generates an xref:orders:generating-order-confirmations.adoc#[order confirmation] for an order. +
+|The procedure generates an xref:orders:generating-order-confirmation.adoc#[order confirmation] for an order. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
 
 | *Generate credit note (Document)*
@@ -736,11 +736,11 @@ Select which date is to be displayed on the credit note document by using the op
 *Credit note date* = The credit note document is generated with the date on which the original credit note order has been created. +
 
 | *Generate adjustment form*
-|The procedure generates an xref:orders:generating-adjustment-forms.adoc#[adjustment form] for an order. +
+|The procedure generates an xref:orders:generating-adjustment-form.adoc#[adjustment form] for an order. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
 
 | *Generate multi credit note*
-|The procedure generates a xref:orders:managing-orders.adoc#850[multi credit note] for an order. +
+|The procedure generates a xref:orders:order-type-multi-order.adoc#generate-multi-credit-note[multi credit note] for an order. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
 
 | *Generate delivery note*
@@ -749,7 +749,7 @@ Optionally, you can enter a *Comment* which will be added in the document undern
 
 | *Generate dunning letter*
 |The procedure generates a xref:orders:generating-dunning-letters.adoc#[dunning letter] for an order. +
-To display the dunning charge, enter the *Variation ID* of the xref:orders:generating-dunning-letters.adoc#intable-dunning-charge[item representing the dunning charge] which you have created in your plentymarkets system beforehand. +
+To display the dunning charge, enter the *Variation ID* of the xref:orders:generating-dunning-letters.adoc#200[item representing the dunning charge] which you have created in your plentymarkets system beforehand. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items.
 
 | *Generate return label*
@@ -760,12 +760,12 @@ Optionally, you can enter a *Comment* which will be added in the document undern
 |The procedure generates a xref:orders:coupons.adoc#intable-coupon-variety[multipurpose coupon] for an order.
 
 | *Generate invoice reversal document*
-|The procedure generates a xref:orders:managing-orders.adoc#1670[reversal document invoice] for an order. A reversal document cancels the invoice and not the order itself. Thus, the reversal document is only generated if an invoice already exists for the order. +
+|The procedure generates a xref:orders:generating-invoices.adoc#600[reversal document invoice] for an order. A reversal document cancels the invoice and not the order itself. Thus, the reversal document is only generated if an invoice already exists for the order. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items. +
 Use the drop-down list *Date* to select which date is displayed on the document. By selecting *Standard*, the current date is displayed on the document. By selecting *Invoice date*, the same date as on the invoice is displayed on the document.
 
 | *Generate refund reversal document*
-|The procedure generates a xref:orders:managing-orders.adoc#540[refund reversal document] for an order. +
+|The procedure generates a xref:orders:order-type-credit-note.adoc#correct-and-cancel-credit-note-document[refund reversal document] for an order. +
 Optionally, you can enter a *Comment* which will be added in the document underneath the order items. +
 Use the drop-down list *Date* to select which date is displayed on the document. By selecting *Standard*, the current date is displayed on the document. By selecting *Credit note date*, the same date as on the invoice is displayed on the document.
 
@@ -831,7 +831,7 @@ You can delete (icon:minus-circle[role="red"]) the added procedure or you can ad
 |Procedure |Explanation
 
 | *Assign storage location*
-|The procedure assigns a warehouse to an order. The assignment is done according to your xref:orders:basic-settings.adoc#intable-warehouse-selection[warehouse settings]. Activate the option *Unassign old storage location* if you want to detach already assigned warehouses before you assign new ones.
+|The procedure assigns a warehouse to an order. The assignment is done according to your xref:orders:basic-settings.adoc#[warehouse settings]. Activate the option *Unassign old storage location* if you want to detach already assigned warehouses before you assign new ones.
 
 | *Unassign storage location*
 |The procedure detaches already assigned warehouses to an order. +

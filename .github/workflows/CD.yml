@@ -15,10 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Checkout UI repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: plentymarkets/plenty-docs-ui
           path: plenty-docs-ui-repo
@@ -30,18 +29,15 @@ jobs:
           mv ${GITHUB_WORKSPACE}/plenty-docs-ui-repo/src/lang/de-de.json ./lang/de-de.json
       
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
-          node-version: 16
-          # Set this option if you want the action to check for the latest available version that satisfies the version spec
+          node-version: 20
           check-latest: true
 
       - name: Build site
         run: |
-          npm i -g @antora/cli@2.3 @antora/site-generator-default@2.3
-          antora antora-playbook-de.yml --fetch --stacktrace
-          antora antora-playbook-en.yml --fetch --stacktrace
+          npm install
+          npm run prod
           
       - name: Assemble site
         run: |

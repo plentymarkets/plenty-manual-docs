@@ -67,7 +67,7 @@ Auf Decathlon kannst du deine Artikel in Deutschland, Belgien, Frankreich, Groß
 [#konto-uebersicht]
 === Konto-Übersicht
 
-Im Menü *Einrichtung » Märkte » Decathlon » Einstellungen* erhältst du eine Übersicht über deine Decathlon-Konten. In <<tabelle-konto-uebersicht>> sind die einzelnen Spalten und verfügbaren Aktionen der Konto-Übersicht beschrieben.
+Im Menü *Einrichtung » Märkte » Decathlon » Einstellungen* erhältst du eine Übersicht über deine Decathlon-Konten. In <<#tabelle-konto-uebersicht>> sind die einzelnen Spalten und verfügbaren Aktionen der Konto-Übersicht beschrieben.
 
 [TIP]
 .Spalten konfigurieren
@@ -380,6 +380,21 @@ Der Angebotskatalog wird immer zusätzlich zu den Katalogen für die verschieden
 
 include::partial$catalogue-creation.adoc[]
 
+[#angebote-deaktivieren]
+==== Angebote deaktivieren
+
+Um ein Angebot auf Decathlon zu deaktivieren, musst du einen Warenbestand von Null für die entsprechende Variante an Decathlon übertragen. Null wird immer dann an Decathlon übertragen, wenn eine Variante eine aktive SKU für Decathlon hat und mindestens einer der folgenden Fälle zutrifft:
+
+- Die Variante ist inaktiv.
+- Die Aufragsherkunft 173.00 Decathlon ist deaktiviert.
+- Alle untergeordneten Decathlon-Auftragsherkünfte (zum Beispiel 173.01, 173.02…) sind deaktiviert.
+
+Wenn du eine Variante nicht mehr auf Decathlon anbieten möchtest, führe einen der folgenden Schritte aus:
+
+- Entferne die Variante.
+- Entferne die Auftragsherkunft 173.00 Decathlon.
+- Entferne alle untergeordneten Decathlon-Auftragsherkünfte.
+
 [#datenfelder-zuordnen]
 ==== Datenfelder im Katalog zuordnen
 
@@ -413,10 +428,9 @@ include::partial$decathlon-recommended-mappings.adoc[]
 Jeder Marktplatz strukturiert Artikeldaten anders. Deshalb treten beim Zuordnen von Datenfeldern bestimmte Sonderfälle auf. In diesem Kapitel findest du Hinweise dazu, was du beim Zuordnen von Datenfeldern für Decathlon beachten solltest.
 
 [#html]
-===== Keine HTML-Formatierungen verwenden
+===== Texte mit HTML strukturieren
 
-Texte mit HTML-Formatierung können nicht zu Decathlon übertragen werden. Wenn du in deinen Texten für Decathlon Formatierungen verwenden willst, dann nutze stattdessen die Auszeichnungssprache markdown. +
-Achte besonders bei den Artikel- und Angebotsbeschreibungen darauf, kein HTML zu verwenden, damit die Texte korrekt auf Decathlon angezeigt werden.
+Es steht dir frei, HTML für die Strukturierung deiner Texte für Decathlon zu verwenden.
 
 [#katalog-aktivieren]
 ==== Katalogexport aktivieren
@@ -577,6 +591,41 @@ include::_includes:partial$event-procedure.adoc[]
 | *Aktion*
 | *Plugin*
 | *Rechnungen zu Decathlon hochladen*
+|===
+
+[#Retourenlabel-hochladen]
+=== Retourenlabel automatisch zu Decathlon hochladen
+
+Richte eine xref:automatisierung:ereignisaktionen.adoc#[Ereignisaktion] ein, um Retourenlabels automatisch zu {market} hochzuladen.
+
+:table-event-procedure: <<#Retourenlabel-decathlon>>
+
+include::_includes:partial$event-procedure.adoc[]
+
+*_Hinweis:_* Die in <<#Retourenlabel-decathlon>> gewählten Status und Filter dienen nur als Beispiel. Wähle für die Ereignisaktion die Filter und Status, die am besten zu deinem Arbeitsablauf passen.
+
+[[Retourenlabel-decathlon]]
+.Ereignisaktion, um eine Rechnung hochzuladen
+[cols="1a,3a,3a"]
+|===
+|Einstellung |Option |Auswahl
+
+| *Ereignis*
+| Ereignis wählen, zum Beispiel:
+
+* *Dokumente: Retourenlabel generiert* +
+
+*_Hinweis:_* Wähle hier ein Ereignis, nach dem die Artikel bereits versendet wurden.
+
+| 
+
+| *Filter*
+| *Auftrag &gt; Herkunft*
+| *Decathlon*
+
+| *Aktion*
+| *Plugin*
+| *Retourenlabel zu Decathlon hochladen*
 |===
 
 [#gutschriften-erstellen]

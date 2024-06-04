@@ -1,0 +1,212 @@
+= Practical example: Incorporating the old sales statistics into the new dashboard
+:keywords: BI Dashboard, plentyBI, plenty BI Dashboard, Business Intelligence, create key figures, show key figures, tile, tiles, table, tables, spacer, row, rows, practical example, use case, sales statistics
+:description: This practical example contains instructions on how to incorporate the old sales statistics into the new dashboard.
+:author: team-bi
+
+On this page you will find instructions on how to incorporate the old sales statistics into the new dashboard.
+
+[#100]
+== Creating configurations with the necessary key figures
+
+*_Note_*: All the mentioned key figure configurations are either already available on your system or can be created free of charge. 
+
+You can xref:business-decisions:myview-dashboard.adoc#200[create key figure configurations] in the *Setup » plentyBI » Key figure configurations* menu.
+
+For this example, you need five key figure configurations, three of which already exist in your system.
+
+These are the key figure configurations that are already set up in your system: 
+
+** xref:business-decisions:live-orders.adoc#[Orders (Live)]
+** xref:business-decisions:orders-key-figure.adoc#[Orders]
+** xref:business-decisions:revenue.adoc#[Revenue]
+
+[.instruction]
+This is how you create the other two key figure configurations:
+
+*Orders sent (Today)*
+
+. Go to *Setup » plentyBI » Key figure configurations*.
+. Click on *+ New*.
+. Enter a name for the configuration in the *Name* field, e.g. `Orders sent (Today)`.
+. Select the *Key figure* `Orders (Live)` from the list.
+. Select *Total* as `Calculation type`.
+. Select the *Dimension* `Order`.
+. Set the following *Filters*: Order type » Corresponds to one of these values » Order, Multi order
+*and*
+Outgoing items booked »is equal to » Outgoing items booked today.
+. Save (terra:save[]) the settings.
+
+*Revenue today*
+
+. Go to *Setup » plentyBI » Key figure configurations*.
+. Click on *+ New*.
+. Enter a name for the configuration in the *Name* field, e.g. `Revenue today`.
+. Select the *Key figure* `Revenue today (Live)` from the list.
+. Select `Gross revenue` as *Calculation type*.
+. Select the *Dimension* `Creation date`.
+. Do not set any *filters*.
+. Save (terra:save[]) the settings.
+
+
+[#200]
+== Creating and setting up a new dashboard view
+
+This step describes how to add the required key figure configurations to your dashboard. 
+
+Key figure configurations are displayed in the form of various elements in the dashboard. 
+
+You can add the required elements on an already existing dashboard view or xref:business-decisions:myview-dashboard.adoc#330[create a new dashboard view]. 
+
+Use the xref:business-decisions:myview-dashboard.adoc#405[editing mode] (terra:design_inline_edit[]) to xref:business-decisions:myview-dashboard.adoc#410[customize areas and elements] or to undo changes if necessary.
+
+[#210]
+=== Customizing the dashboard layout
+
+To customize the layout of the dashboard, set up the individual columns and rows.
+
+To move or add the dividing lines, hover with the cursor over them and click on the three dots (material:more_vert[]).
+
+*_Note:_* This is just an example of a dashboard layout. You can customize your dashboard according to your preferences.
+
+[[image-dashboard-layout]]
+.Dashboard editing mode, with separators between individual areas highlighted in colour
+image::business-decisions:dashboard-layout.png[width=640, height=369]
+
+
+[#220]
+=== Adding and editing elements
+
+Once the display areas have been divided up, the second step is to fill them with data, which is displayed in the form of various elements.
+
+[.collapseBox]
+.*How do I add an element to the dashboard?*
+--
+include::partial$new-dashboard-element.adoc[]
+--
+
+In our example, we have added the following elements: xref:business-decisions:myview-dashboard.adoc#500[Tiles], xref:business-decisions:myview-dashboard.adoc#760[Spacers], xref:business-decisions:myview-dashboard.adoc#800[Rows] and xref:business-decisions:myview-dashboard.adoc#600[Tables]. 
+
+
+[#230]
+==== Settings for the individual elements
+
+[[image-dashboard-elements]]
+.Placement of the elements
+image::business-decisions:elements-placing.png[width=640, height=531]
+
+Below you will find the settings for the elements shown in the image above.
+
+*_Note_*: You can set your own *title* and *colour* for each element.
+
+*Tile - 1*
+
+Settings for the tile:
+
+* *Key figure*: Orders (Live)
+* *Title*: Orders - New
+* *Period*: Today
+* *Aggregate:* Count
+* *Time interval*: Day
+* *Primary value*: Key figure value
+
+*Spacer - 2*
+
+Settings for spacers:
+
+* *Height*: 125 px each
+
+*Table - 3*
+
+Here we added a table and then a button within the table.
+
+Settings for the button:
+
+* *Title*: New
+* *Shortcut type*: Open link
+* *Link*: /order/order-ui/overview?createdAt={"value":"today","operator":"period"}&orderTypeId={"value":1,"operator":"in"} +
+*_Note_*: All links to other UIs may change at any time and may be invalid while you are reading this. If this is the case, we recommend that you ask about it in the appropriate forum category. 
+* *Colour*: Green
+
+*Table - 4*
+
+Here we added a table and then a button within the table.
+
+Settings for the button:
+
+* *Title*: Sent
+* *Shortcut type*: Open link
+* *Link*: /order/order-ui/overview?orderDate_5={"value":"today","operator":"period"} +
+*_Note*_: All links to other UIs may change at any time and may be invalid while you are reading this. If this is the case, we recommend that you ask about it in the appropriate forum category. 
+* *Colour*: Grey
+
+*Row - 5*
+
+Settings for the row:
+
+* *Key figure*: Revenue today
+* *Title*: Revenue
+* *Period*: Today
+* *Aggregate*: ∑
+* *Primary value*: Key figure value
+
+*Row - 6*
+
+Settings for the row:
+
+* *Key figure*: Orders (Live)
+* *Title*: Orders
+* *Period*: Today
+* *Aggregate*: Count
+* *Primary value*: Key figure value
+
+*Table - 7*
+
+Settings for the table:
+
+* *Key figure*: Gross revenue
+* *Title*: Gross revenue
+* *Period*: 7 days ago - yesterday
+* *Time interval*: Day
+* *Sort order*: Scale basis - Ascending
+* *Aggregate*: ∑
+* *Items per page*: 25
+* *Group by dimension*: Enabled
+* *Mapped column*: Scale basis
+* *Mapped column*: Primary result
+* *Mapped column*: Result unit 
+* *Decimal places*: 2
+* *Conditional colouring*: (material:settings[]) » Data field » Primary result » Lower than » Fixed value » 1 
+
+*Table - 8*
+
+Settings for the table:
+
+* *Key figure*: Orders
+* *Title*: Orders
+* *Period*: 7 days ago - yesterday
+* *Time interval*: Day
+* *Sort order*: Scale basis - Ascending
+* *Aggregate*: ∑
+* *Items per page*: 25
+* *Group by dimension*: Enabled
+* *Mapped column*: Primary result
+* *Decimal places*: 0
+* *Conditional colouring*: (material:settings[]) » Data field » Primary result » Lower than » Fixed value » 1 
+
+*Tile - 9*
+
+Settings for the tile:
+
+* *Key figure*: Orders sent (Today)
+* *Title*: Orders sent
+* *Period*: 30 years ago - today
+
+*_Note_*: In our example, we set the time period to *30 years ago - today*. The reason for this is that we want to see orders regardless of the creation date, especially those for which the goods issue posting was made today. The filter that was originally set in the configuration for the booked goods issue, together with the setting of the *time period* to *day* on the tile, allows us to do this. Of course, you can decide for yourself which time period you want to set. 
+
+* *Time interval*: Day
+* *Primary value*: Key figure value
+
+This is our result:
+
+[[image-final-result]]
+image::business-decisions:ergebnis.png[width=640, height=425]
