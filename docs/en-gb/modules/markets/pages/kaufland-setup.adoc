@@ -47,16 +47,16 @@ If you export data to Kaufland using catalogues, then data are exchanged with Ka
 | once a day
 
 | Updating offers
-| Hourly
+| hourly
 
 | Deleting offers
-| Hourly
+| hourly
 
 | Updating products
 | once a day
 
 | Status of product creation
-| Hourly
+| hourly
 |===
 
 [#data-exchange-old-export]
@@ -71,10 +71,10 @@ If you export data to Kaufland using the old export, then data are exchanged wit
 |Data |Interval
 
 | Price synchronisation
-| Hourly
+| hourly
 
 | Stock synchronisation
-| Hourly
+| hourly
 
 The following fields are exported during stock synchronisation:
 
@@ -114,7 +114,7 @@ The following fields are exported during stock synchronisation:
 [TIP]
 .Reserve stock for orders with the payment method cash in advance
 ====
-*_Important:_* No stock is reserved for orders in status *[1] Invalid data* by default. To make sure that stock is reserved for these orders, go to *Setup » Orders » Settings*. Go to the setting *Status for order reservation (Reservation of stocks)*. For the option *to*, select the status *[1] Incomplete data*. In the drop-down list to the far right, select the option *All orders*.
+*_Important:_* No stock is reserved for orders in status *[1] Incomplete data* by default. To make sure that stock is reserved for these orders, go to *Setup » Orders » Settings*. Go to the setting *Status for order reservation from* and select the status *[1] Incomplete data*. Go to the setting *Status for order reservation to* and select the status up to which stocks are to be reserved.
 ====
 
 * When the order status on Kaufland changes after 15 minutes, the order automatically moves to status *[5] Cleared for shipping* in plentymarkets. All missing order data is added to the order.
@@ -122,16 +122,16 @@ The following fields are exported during stock synchronisation:
 * <<#kaufland-fbk, Orders that are processed by Kaufland (FbK = Fulfillment by Kaufland)>> are imported into plentymarkets with the order referrer *170.01 Kaufland FBK DE*.
 
 [IMPORTANT]
-.Trigger order import for Kaufland CZ and Kaufland SK orders manually
+.Trigger order import for Kaufland AT, Kaufland PL, Kaufland CZ and Kaufland SK orders manually
 ====
-The order import for orders generated on the markets Kaufland CZ (Czech Republic) and Kaufland SK (Slovakia) does not work properly at present. Therefore, you have to trigger the order import manually. To do so, save the settings for Kaufland again. To save the settings, proceed as follows:
+At present, it may happen that the order import for orders generated on the markets Kaufland AT (Austria), Kaufland CZ (Czech Republic), Kaufland PL (Poland) and Kaufland SK (Slovakia) does not work properly. Therefore, you have to trigger the order import manually. To do so, save the settings for Kaufland again. To save the settings, proceed as follows:
 
 [.instruction]
-Triggering the order import for CZ and SK orders manually:
+Triggering the order import for AT, CZ, PL and SK orders manually:
 
 . Go to *Setup » Markets » Kaufland » Settings » [Open Kaufland account]*.
 . In the top left corner, click on *Save* (terra:save[]). +
-→ The configuration for the markets CZ and SK is saved.
+→ The configuration for the markets AT, CZ, PL and SK is saved.
 ====
 
 [#market-setup]
@@ -142,7 +142,7 @@ Set up the market in plentymarkets.
 [TIP]
 .Kaufland country platforms
 ====
-With plentymarkets, you can sell your items on the Kaufland platforms Kaufland.de, Kaufland.cz, and Kaufland.sk.
+With plentymarkets, you can sell your items on the Kaufland platforms Kaufland.de, Kaufland.at, Kaufland.cz, Kaufland.pl, and Kaufland.sk.
 ====
 
 [#settings-kaufland]
@@ -282,7 +282,7 @@ First, click on *Update Kaufland shipping groups* (material:refresh[]) so that t
 If an item has more than one shipping profile, the shipping profile with the lowest category and the highest priority is exported. The category and the priority of a shipping profile are configured within *Setup » Orders » Shipping » Settings » Tab: Shipping profiles* in the *Base* tab of each shipping profile.
 
 | *Match warehouses*
-a| Warehouses located outside the EU have to be linked with a Kaufland warehouse. Use the setting *Match warehouses* for this. Here, all of your plentymarkets warehouses of the type *Sales* are listed. Select your warehouses and link each of them to the correspondent Kaufland warehouse. This way, the stock of your warehouses is linked to the Kaufland warehouses. +
+a| Warehouses located outside the EU have to be mapped with a Kaufland warehouse. Use the setting *Match warehouses* for this. Here, all of your plentymarkets warehouses of the type *Sales* are listed. Select your warehouses and map each of them to the correspondent Kaufland warehouse. This way, the stock of your warehouses is mapped to the Kaufland warehouses. +
 *_Note:_* This setting is not relevant if your warehouses are within the EU. +
 
 * *–* = The warehouse is linked to the Kaufland default warehouse.
@@ -413,7 +413,7 @@ Assign warehouses with the option *Match warehouses* in the menu *Setup » Marke
 
 :market: Kaufland
 :referrer: Kaufland.de
-:referrer-option: pass:quotes[option *Kaufland.de* with ID *102*]
+:referrer-option: pass:quotes[option *Kaufland.de* with ID *102.01*]
 
 include::partial$activate-referrer.adoc[]
 
@@ -452,7 +452,7 @@ Defining a barcode for Kaufland:
 
 . Go to *Setup » Item » Barcode*.
 . Open the barcode.
-. Activate the referrer *Kaufland*.
+. Activate the referrer *Kaufland.de*.
 . Save (terra:save[]) the settings. +
 *_Tip:_* Is this barcode already linked to your variations? If not, don’t forget <<#save-barcode, to link the barcode to your variations and to save a code>>.
 
@@ -487,14 +487,16 @@ Continue with preparing your variations.
 
 include::partial$variation-availability.adoc[]
 
-// Web API required!
+// Web API required! But not for catalogues
 
 [#link-variations-to-product-category]
 === Linking variations to a Kaufland product category
 
 *_Note:_* You only have to link your variations to Kaufland product categories if you use the <<#catalogue-export, catalogue export>> to transfer items to Kaufland.
 
-After you created a catalogue for Kaufland with the assistant *Kaufland - Creating catalogues*, the property *Kaufland.de category* is created in your plentymarkets system. With this property, you define in which category your variations are offered on Kaufland.
+After you created a catalogue for Kaufland.de with the assistant *Kaufland - Creating catalogues*, the property *Kaufland.de category* is created in your plentymarkets system. With this property, you define in which category your variations are offered on Kaufland.
+
+*_Note:_* If you want to sell your items on other Kaufland country platforms, you have to create separate catalogues for each country platform. Select the Kaufland country platform on which you want to offer your items in the *Kaufland - Creating catalogues* assistant. The corresponding property *Kaufland.at category*, *Kaufland.cz category*, *Kaufland.pl category* or *Kaufland.sk category* will be created in your plentymarkets system. The next steps are performed for the Kaufland category of the selected country platform.
 
 In the assistant *Kaufland - Creating catalogues*, you select a Kaufland product category for each catalogue that you create. Each of these product categories is added as a selection value to the property *Kaufland.de category*.
 
@@ -571,12 +573,12 @@ This chapter describes how to export your item data to {market} using the old ex
 [#600]
 ==== Linking categories
 
-Link your plentymarkets categories to the Kaufland.de categories in order to display your items in these categories. Further items from the linked category are assigned automatically.
+Link your plentymarkets categories to the Kaufland categories in order to display your items in these categories. Further items from the linked category are assigned automatically.
 
 [.instruction]
 Linking categories:
 
-. Go to *Setup » Markets » Kaufland.de » Category link*.
+. Go to *Setup » Markets » Kaufland » Category link*.
 . Click on *Search* (icon:search[role="blue"]). +
 → The *Select category* window opens.
 . Select the Kaufland category that best matches your plentymarkets category.
@@ -627,7 +629,7 @@ Creating a characteristic:
 . Enter a name in the *Webshop* field.  +
 → This name is used in the item overview of the plentyShop.
 . Select the *Characteristic type*.
-. Activate the option *Kaufland.de*.
+. Activate the option *Kaufland*.
 . Save (terra:save[]) the settings.
 
 For further information about linking characteristics with Kaufland, refer to the best practice page xref:markets:best-practices-kaufland-linking-characteristics.adoc#[Linking characteristics to attributes].
@@ -768,23 +770,24 @@ Specifying the size unit as own value:
 [#language-product-data]
 ===== Language of product data
 
-The field *Language of plentymarkets product data* was added to the Kaufland catalogues. +
-This field is not mandatory. However, it is relevant for the Kaufland country platforms CZ (Czech Republic) and SK (Slovakia) if the product data in plentymarkets are saved in German.
+For sales on the international markets Kaufland CZ (Czech Republic), Kaufland PL (Poland) and Kaufland SK (Slovakia), the field *Language of plentymarkets product data* was added to the Kaufland catalogues. +
+This field is not mandatory. However, it is relevant for the Kaufland country platforms CZ (Czech Republic), PL (Poland), and SK (Slovakia) if the product data in plentymarkets are saved in German.
 
 * If the field *Language of plentymarkets product data* is not mapped and remains empty, then the system assumes that the product data in plentymarkets are saved in the language of each market.
 
 * Thus, if the product data in plentymarkets are saved in German, this field must be mapped so that the product data will be translated into the market’s language when they are exported.
 
-* If the *Language of plentymarkets product data* is set to `de` in the catalogue, then the system checks using the EAN whether a product with the language German already exists. If yes, an offer for the market *SK* or *CZ* is created and the product data are translated into the appropriate language. +
+* If the *Language of plentymarkets product data* is set to `de` in the catalogue, then the system checks using the EAN whether a product with the language German already exists. If yes, an offer for the market *CZ*, *PL* or *SK* is created and the product data are translated into the appropriate language. +
 If no product with the language German exists, then the product is created in German and translated into the appropriate language afterwards.
 
-* Product data will also be updated on the country platforms Kaufland CZ and Kaufland SK if the product language is either set to `cz` _or_ `sk`. Hence, the language in the catalogue does not necessarily have to be the language of the country platform. Products will be updated anyway.
+* Product data will also be updated on the country platforms Kaufland CZ, Kaufland PL, and Kaufland SK if the product language is either set to `cz` _or_ `pl` _or_ `sk`. Hence, the language in the catalogue does not necessarily have to be the language of the country platform. Products will be updated anyway.
 
 * *_allowed values:_* +
 
 `de` = product data are saved in German and are translated into the language of the catalogue +
-`sk` = product data are saved in Slovak and are transferred in Slovak +
-`cz` = product data are saved in Czech and are transferred in Czech
+`cz` = product data are saved in Czech and are transferred in Czech +
+`pl` = product data are saved in Polish and are transferred in Polish +
+`sk` = product data are saved in Slovak and are transferred in Slovak
 
 [#activate-catalogue]
 ==== Activating the catalogue export
@@ -856,7 +859,7 @@ How you hide bank details on {market} invoices depends on how your bank details 
 
 [[image-kaufland-logo]]
 .Kaufland logo
-image::markets:kaufland_logo.png[]
+image::markets:kaufland_logo_en.png[]
 
 [#automate-orders]
 == Automating order processing
@@ -906,7 +909,7 @@ _or_
 | *Procedure*
 | *Plugin*
 | *Send shipping confirmation to Kaufland.de* +
-*_Note:_* If no shipping confirmation could be sent to {market}, the order is moved to the status that you selected for the option *Order status for orders with failed shipping confirmations*. Go to *Setup » Markets » Kaufland.de » Settings* to set this option.
+*_Note:_* If no shipping confirmation could be sent to {market}, the order is moved to the status that you selected for the option *Order status for orders with failed shipping confirmations*. Go to *Setup » Markets » Kaufland » Settings* to set this option.
 
 * <<#no-shipping-confirmation, How to deal with orders in this status>>
 |===
@@ -1074,7 +1077,7 @@ _or_
 | *Procedure*
 | *Order*
 | *Send in fulfilment confirmation to Kaufland.de* +
-*_Note:_* If no in fulfilment confirmation could be sent to {market}, the order is moved to the status that you selected for the option *Order status for orders with failed in fulfilment confirmations*. Go to *Setup » Markets » Kaufland.de » Settings* to set this option.
+*_Note:_* If no in fulfilment confirmation could be sent to {market}, the order is moved to the status that you selected for the option *Order status for orders with failed in fulfilment confirmations*. Go to *Setup » Markets » Kaufland » Settings* to set this option.
 |===
 ////
 
