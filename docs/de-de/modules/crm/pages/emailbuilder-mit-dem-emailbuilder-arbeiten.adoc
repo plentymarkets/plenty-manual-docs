@@ -462,6 +462,10 @@ Wähle (material:check_box[role=skyBlue]) bis zu 4 dynamische Anhänge aus der D
 |An wen soll die E-Mail als blinde Kopie gesendet werden? Gib die E-Mail-Adresse(n) ein. +
 *_Hinweis:_* Wenn du mehrere E-Mail-Adressen eingibst, trenne diese jeweils durch ein Komma.
 
+|[#intable-template-settings-exclude-from-email-service]*Vom E-Mail-Service ausschließen*
+|Wähle *Ja*, wenn du möchtest, dass diese Vorlage vom E-Mail-Service ausgeschlossen wird. Das bedeutet, dass diese Vorlage in keiner Dropdown-Liste, in der du EmailBuilder-Vorlagen wählen kannst, zur Verfügung stehen wird. +
+Wenn du *Nein* wählst, ist diese Vorlage in allen Dropdown-Listen, in den du EmailBuilder-Vorlagen wählen kannst, sichtbar.
+
 2+^|[#intable-toolbar]*Symbolleiste*
 
 |[#intable-toolbar-save]*Speichern*
@@ -672,24 +676,12 @@ Mit einem Klick auf material:settings[] öffnen sich die Einstellungen. Hier kan
 [#widget-text]
 === Widget: Text
 
-In diesem Widget kannst du Text eingeben und xref:crm:emailbuilder-variablen-twig-expressions.adoc#[Variablen] verwenden. Du hast auch die Möglichkeit, den eingegebenen Text zu formatieren. Mache dazu einen Doppelklick auf das Wort, das du formatieren möchtest.
-
-// TODO: Screenshot von Formatierungsmöglichkeiten einfügen.
+In diesem Widget kannst du Text eingeben und xref:crm:emailbuilder-variablen-twig-expressions.adoc#[Variablen] verwenden. Du hast auch die Möglichkeit, den eingegebenen Text zu formatieren. Mache einen Doppelklick auf das Wort, das du formatieren möchtest, um den Editor zu öffnen. Du kannst den Text zum Beispiel zentrieren oder links- oder rechtsbündig anheften und die Schrift- und Hintergrundfarbe ändern.
 
 Mit einem Klick auf material:edit[] öffnet sich auf der linken Seite die Liste mit den Variablen. Nutze die Suchfunktion, um nach einzelnen Variablen zu suchen oder finde die passenden Variablen, indem du die einzelnen Bereiche aufklappst (material:chevron_right[]). Klicke auf die Variable, die du einfügen möchtest. Gib ggf. zusätzlich Text in das Widget ein.
 
 Mit einem Klick auf material:settings[] öffnen sich die Einstellungen. Hier kannst du über die Felder *Eigenes CSS* und *Eigene Element-ID* das CSS-Styling deiner Vorlage selber anpassen. Weitere Informationen und Beispiele dazu findest du in diesem <<#beispiele-benutzerdefiniertes-styling, Kapitel>>. +
 Mit einem Klick auf *Widget löschen* (material:delete[]) entfernst du das Widget. Klicke auf *Einstellungen schließen* (material:close[]), um die Einstellungen zu schließen.
-
-|[#intable-widget-code]*Code*
-|In diesem Widget kannst du Text im HTML-Format eingeben und mit xref:crm:emailbuilder-variablen-twig-expressions.adoc#twig-code-widget[twig expressions] arbeiten. Hierzu sind einige grundlegende HTML-Kenntnisse erforderlich.
-
-Klicke auf icon:code[], um die Ansicht zu öffnen. +
-Auf der linken Seite des Code-Editors siehst du die xref:crm:emailbuilder-variablen-twig-expressions.adoc#verfuegbare-variablen[Liste mit den verfügbaren Variablen]. Der Unterschied zu der Variablenliste, die sich zum Beispiel im Text-Widget öffnet, ist, dass hier beim Klick auf die Variable automatisch die twig expression in den Code-Editor eingefügt wird.
-
-Mit einem Klick auf material:settings[] öffnen sich die Einstellungen. Hier kannst du das Widget mit einem Klick auf *Widget löschen* (material:delete[]) entfernen. Weitere Einstellungen können hier nicht vorgenommen werden. Klicke auf *Einstellungen schließen* (material:close[]), um die Einstellungen zu schließen. 
-
-Beachte auch die Code-Beispiele für das Code-Widget auf dieser xref:crm:emailbuilder-code-beispiele.adoc#code-beispiele-code-widget[Handbuchseite].
 
 [#widget-code]
 === Widget: Code
@@ -823,7 +815,9 @@ Mit einem Klick auf material:settings[] öffnen sich die Einstellungen. Hier kan
 * Lager
 * Auftragsherkunft
 * Sprache
+* Ist Gast
 * Varianten-ID
+* Kontakt-ID
 
 Nachdem du eine Variable gewählt hast, wählst du einen der folgenden *Vergleichsoperatoren* aus der Liste:
 
@@ -835,7 +829,7 @@ Nachdem du eine Variable gewählt hast, wählst du einen der folgenden *Vergleic
 * Kleiner oder gleich
 
 Nachdem du einen Vergleichsoperator gewählt hast, stehen dir die in deinem System verfügbaren Werte der oben gewählten Variable zur Verfügung. Wähle dort eine Option aus der Liste. +
-*_Hinweis:_* Für die Variable *Varianten-ID* steht ein Eingabefeld zur Verfügung, für alle anderen Variablen eine Dropdown-Liste.
+*_Hinweis:_* Für die Variable *Varianten-ID* und die *Kontakt-ID* steht ein Eingabefeld zur Verfügung, für alle anderen Variablen eine Dropdown-Liste.
 
 Klicke auf *Einstellungen schließen* (material:close[]), um die Einstellungen zu schließen. Klicke auf *Widget löschen* (material:delete[]), um das Widget zu entfernen. +
 *_Hinweis:_* In den Widget-Einstellungen kannst du über die Felder *Eigenes CSS* und *Eigene Element-ID* das CSS-Styling deiner Vorlage selber anpassen. Weitere Informationen und Beispiele dazu findest du in diesem <<#beispiele-benutzerdefiniertes-styling, Kapitel>>.
@@ -916,7 +910,7 @@ Widget bearbeiten:
 
 Bevor du einen <<#ordner-erstellen, neuen Ordner erstellt>> hast, sind dir bestimmt die beiden bereits vorhandenen Ordner *Standardvorlagen* und *Default templates* aufgefallen? Diese Ordner enthalten vordefinierte Vorlagen in deutscher und englischer Sprache. Du kannst die Standardvorlagen entweder verwenden wie sie im System vorhanden sind oder die Inhalte nach deinen Wünschen anpassen.
 
-In einer Standardvorlage ist neben dem Inhalt der E-Mail-Vorlage bereits der Betreff ausgefüllt. Das bedeutet, du musst anschließend noch den Eigner, den Mandant sowie Header und Footer wählen und die Felder *Antwort an* und ggf. *CC* und *BCC* befüllen. Außerdem ist es möglich, den vorausgefüllten Betreff anzupassen und dynamische und statische Anhänge anzuhängen sowie das Zahlenformat, Datumsformat und Zeitformat und die Anzahl der Nachkommastellen zu definieren.
+In einer Standardvorlage ist neben dem Inhalt der E-Mail-Vorlage bereits der Betreff ausgefüllt. Das bedeutet, du musst anschließend noch den Eigner, den Mandant sowie Header und Footer wählen und die Felder *Antwort an* und ggf. *CC* und *BCC* befüllen. Außerdem ist es möglich, den vorausgefüllten Betreff anzupassen und dynamische und statische Anhänge anzuhängen sowie das Zahlenformat, Datumsformat und Zeitformat und die Anzahl der Nachkommastellen zu definieren. Zudem kannst du die Vorlage auch <<#intable-template-settings-exclude-from-email-service, vom E-Mail-Service ausschließen>>.
 
 [TIP]
 .Zwischen mehreren Vorlagen hin- und herwechseln
@@ -966,7 +960,7 @@ Im Bereich *Spracheinstellungen* kannst du bis zu 3 statische Anhänge wählen, 
 
 Neben den Spracheinstellungen, in denen du beispielsweise statische Anhänge für deine Vorlage wählen kannst, kannst du den Inhalt oder den Betreff der Vorlage selbst mit einem Klick auf material:edit[] in der Zeile *Inhalt und Betreff* jederzeit anpassen.
 
-Im Bereich *Allgemeine Einstellungen* der Vorlage wählst du einen Eigner, den Mandanten und den Header und Footer, falls noch nicht geschehen. Dort kannst du auch bis zu 4 dynamische Anhänge wählen und die Felder *Antwort an*, *CC* und *BCC* befüllen.
+Im Bereich *Allgemeine Einstellungen* der Vorlage wählst du einen Eigner, den Mandanten und den Header und Footer, falls noch nicht geschehen. Dort kannst du auch bis zu 4 dynamische Anhänge wählen und die Felder *Antwort an*, *CC* und *BCC* befüllen. Zudem kannst du die Vorlage auch <<#intable-template-settings-exclude-from-email-service, vom E-Mail-Service ausschließen>>.
 
 [#standardvorlagen-name-und-betreff]
 == Verfügbare Standardvorlagen
@@ -1190,7 +1184,7 @@ Vorlage bearbeiten:
 
 Neben den Spracheinstellungen, in denen du beispielsweise statische Anhänge für deine Vorlage wählen kannst, kannst du den Inhalt oder den Betreff der Vorlage selbst mit einem Klick auf material:edit[] in der Zeile *Inhalt und Betreff* jederzeit anpassen.
 
-Im Bereich *Allgemeine Einstellungen* der Vorlage wählst du einen Eigner, den Mandanten und den Header und Footer, falls noch nicht geschehen. Dort kannst du auch bis zu 4 dynamische Anhänge wählen und die Felder *Antwort an*, *CC* und *BCC* befüllen.
+Im Bereich *Allgemeine Einstellungen* der Vorlage wählst du einen Eigner, den Mandanten und den Header und Footer, falls noch nicht geschehen. Dort kannst du auch bis zu 4 dynamische Anhänge wählen und die Felder *Antwort an*, *CC* und *BCC* befüllen. Zudem kannst du die Vorlage auch <<#intable-template-settings-exclude-from-email-service, vom E-Mail-Service ausschließen>>.
 
 [#betreff-aendern]
 == Betreff der Vorlage ändern
@@ -1213,25 +1207,34 @@ Du kannst deiner Vorlage, deinem Header und deinem Footer die folgenden Sprachen
 
 * Alle
 ** Wähle *Alle*, wenn du zum Beispiel ausschließlich dein Firmenlogo im Header verwendest und daher eine inhaltliche Anpassung bzw. eine Übersetzung in eine andere Sprache nicht notwendig ist.
+* Bulgarisch
+* Chinesisch
+* Dänisch
 * Deutsch
 * Englisch
-* Bulgarisch
+* Estnisch
+* Finnisch
 * Französisch
+* Irisch
 * Italienisch
-* Spanisch
-* Türkisch
+* Kroatisch
+* Lettisch
+* Litauisch
 * Niederländisch
+* Norwegisch
 * Polnisch
 * Portugiesisch
-* Norwegisch
 * Rumänisch
-* Dänisch
-* Schwedisch
-* Tschechisch
 * Russisch
+* Schwedisch
 * Slowakisch
-* Chinesisch
+* Spanisch
+* Tschechisch
+* Türkisch
+* Ungarisch
 * Vietnamesisch
+
+// TODO: Hinweis für TCD: In der englischen Datei muss die Reihenfolge der Sprachen manuell angepasst werden.
 
 Angenommen, du hast eine Versandbestätigung in deutscher Sprache verfasst und Widgets und Variablen eingefügt. Nun möchtest du diese Versandbestätigung auch in französischer Sprache für deine französischsprachigen Kund:innen erstellen. Der schnellste Weg ist dann, die Vorlage zu kopieren und anschließend die Übersetzung anzupassen. Wie du dazu vorgehen musst, ist im Kapitel <<#vorlage-kopieren, Vorlage kopieren>> beschrieben.
 
