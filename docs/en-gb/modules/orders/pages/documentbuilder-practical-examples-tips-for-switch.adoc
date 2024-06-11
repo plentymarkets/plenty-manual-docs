@@ -1,0 +1,66 @@
+= Information on switching to DocumentBuilder
+:keywords: Switching to DocumentBuilder, Changing to DocumentBuilder, Swapping to DocumentBuilder
+:description: This page contains information on the steps required to switch from the location-based order documents to DocumentBuilder.
+:author: team-docs-automation
+
+This manual page explains the steps required to switch from the location-based documents in the *Setup » Documents » Settings » [Use DocumentBuilder toggle button]* menu to DocumentBuilder.
+
+[#migration-how]
+== Carrying out the preparatory settings
+
+Refer to the manual page xref:orders:documentbuilder-preparatory-settings.adoc#[Carrying out the preparatory settings] for more information.
+
+[#enabling-documentbuilder]
+== Enabling DocumentBuilder for different document types
+ 
+To switch from the location-based documents to DocumentBuilder, you must first enable DocumentBuilder for the respective document types. 
+
+[.instruction]
+Enabling DocumentBuilder for different document types:
+
+. Open the *Setup » Documents » Settings* menu. +
+→ The document settings overview opens.
+. Enable the toggle button (material:toggle_on[]) for the document types to be generated using DocumentBuilder. +
+→ DocumentBuilder is now enabled for the selected document types.
+ 
+
+[NOTE]
+.System behaviour for document types that are not enabled.
+====
+All non-enabled document types will continue to be generated via the location-based documents in the menu *Setup " Client " [Select client] " Locations " [Select location]*. +
+This does not apply to the new document type *Custom order document*, which is only available in DocumentBuilder.
+====
+
+
+
+[#documentbuilder-asynchronous-document-creation]
+== Asynchronous document creation
+
+When you enable a document type for DocumentBuilder, the system activates a new logic in the background, through which the corresponding documents are generated asynchronously. This asynchronous logic enables processes to be executed simultaneously and independently of each other, instead of one after the other.  +
+The advantage: You can continue to use the system without having to wait until the documents have been generated.
+
+[#documentbuilder-adjustments-event-procedures]
+=== Necessary adjustments to the plentysystems event procedures
+
+Asynchronous document creation requires that every procedure involving a document (document procedure) be created in one single event. Any existing xref:automation:event-procedures.adoc[event procedures] that contain several document procedures must be adjusted accordingly.
+
+*_Example:_* You have set up an event procedure that triggers both the creation of a document and the sending of this document by email. You will need to split this event procedure into two consecutive event procedures. This way, you ensure that the e-mail can only be sent out once the document is available.
+
+[#documentbuilder-adjustments-processes]
+=== Recommended adjustments to the plentysystems processes
+
+The *Save* and *Print* sub-procedures each contain the step document generation. To allow the document generation step to be performed independently and asynchronously, the sub-procedure*Generated* was introduced. 
+
+Since then, the system has had three sub-procedures by which to generate documents:
+
+* *Generated*: The document is generated within the order.
+* *Save*: The document is generated within the order and also saved. 
+* *Print*: The document is generated within the order and also printed.
+
+[TIP]
+.Recommendation: Use the sub-procedure *Generated* at the beginning of a process
+====
+Use the sub-procedure *Generated* at the beginning of a process. This means that, if documents are to be printed or saved in later in the process flow, the process of generating those documents will already have taken place. This can improve process speed.
+====
+
+*_Note:_* To set up processes that access printers and local storage locations, you will need to have installed xref:automation:plentybase-install.adoc[plentyBase]. 
