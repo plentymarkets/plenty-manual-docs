@@ -1,0 +1,2114 @@
+= Using variables
+:keywords: DocumentBuilder insert variables, document builder Variables, DokumentBuilder variables, DocumentBuilder varaibles, use variables,
+:author: team-docs-automation
+:description: Find out about the variables contained in DocumentBuilder.
+
+
+
+
+[#available-variables]
+== Available variables
+
+DocumentBuilder contains a broad range of variables, which you insert into a template using the xref:orders:documentbuilder-creating-template-structure.adoc#intable-widget-text[text widget]. 
+
+The variables are divided into the following categories and subcategories. Click on an entry in the list to access the respective category or subcategory directly.
+
+
+* <<#variables-order, Order>>
+
+** <<#variables-order, General order variables>>
+** <<#variables-order-date, Order date>>
+** <<#variables-order-property, Order property>>
+
+** <<#variables-order-item, Order item>>
+
+*** <<#variables-order-item, General order item variables>>
+
+*** <<#variables-order-item-property, Order item property>>
+*** <<#variables-order-item-foreign-amounts, Order item totals in foreign currency>>
+
+*** <<#variables-order-item-system-amounts, Order item totals in system currency>>
+
+*** <<#variables-order-item-date, Order item date>>
+
+*** <<#variables-variables-order-item-commission, Commission>>
+
+*** <<#variables-order-item-variation, Variation>>
+
+<<#variables-order-items-barcodes, Barcodes>>
+
+** <<#variables-order-foreign-amounts, Order totals in foreign currency>>
+
+** <<#variables-order-system-amounts, Order totals in system currency>>
+
+** <<#variables-order-location, Location>>
+
+** <<#variables-order-vat-rates, VAT rates>>
+
+** <<#variables-order-payment, Payment>>
+
+** <<#variables-order-payment-terms, Payment terms>>
+
+
+
+* <<#variables-document, Document>>
+
+* <<#variables-delivery-address, Delivery address>>
+* <<#variables-invoice-address, Invoice address>>
+
+* <<#variables-contact, Contact>>
+
+* <<#variables-shipping, Shipping>>
+
+* <<#variables-own-company, Own company>>
+
+* <<#variables-bank-details, Bank details>>
+
+* <<#variables-plugin, Plugin>>
+
+* <<#variables-header-footer, Header/footer>>
+
+[#variables-order]
+=== Variables: Order general
+
+[[table-variables-order-order]]
+.Variables in the *Order* category
+[cols="1,3,2"]
+|===
+|Name of the variable |Explanation |Additional information
+
+| `Total item quantity`
+|The total number of items in an order.
+|
+
+| `Order ID`
+|The order ID assigned by the system (visible in the order UI).
+|
+
+| `Order type`
+|The order type (e.g. offer, order, credit note).
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/data/internal-IDs.html#80
+
+| `ID of the order type`
+|The ID of the order type.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/data/internal-IDs.html#80 
+
+| `Debtor account`
+|The debtor account as saved in the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/orders/accounting.html#750
+
+| `Owner`
+|The owner of the order (person responsible for processing the order).
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/data/internal-IDs.html#2060 
+
+| `Owner ID`
+|The ID of the order owner (person responsible for processing the order).
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/data/internal-IDs.html#2060 
+
+| `Parent ID`
+|The ID of the parent order. A parent order is the superordinate order from which an order directly originates.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/data/internal-IDs.html#2060
+
+| `External order ID`
+|The external order ID as saved in the order (if the order has an external. 
+|
+
+| `Total gross weight (g)`
+|The total weight of the order in grams.
+|
+
+| `Total gross weight (kg)`
+|The total weight of the order in kilograms.
+|
+
+| `Total net weight (g)`
+|The total net weight of the order in grams.
+|
+
+| `Total net weight (kg)`
+|The total net weight of the order in kilograms.
+|
+
+| `Referrer`
+|The external channel (e.g. Amazon) through which the order was placed.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/orders/order-referrer.html
+
+| `Referrer ID`
+|The ID of the referrer, i.e. the external channel (e.g. Amazon) through which the order was placed.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/orders/order-referrer.html
+
+| `Main order ID`
+|The ID of the main order (the original incoming order) if the order belongs to a main order.
+|
+
+| `Customer wish`
+|The customer wish as saved in the order.
+|
+
+| `Warehouse`
+|The warehouse name as saved in the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/stock-management/setting-up-a-warehouse.html
+
+| `Warehouse ID`
+|The warehouse ID as saved in the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/stock-management/setting-up-a-warehouse.html
+
+| `Link to the checkout`
+|The link to the checkout page in the online shop.
+|
+
+| `Client`
+|The client (online shop) as saved in the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/online-store/setting-up-clients.html
+
+| `Reorder Messages`
+|All non-whispered messages sent during processing of a reorder (multiple messages are separated by a hyphen).
+|
+
+| `Pick list ID`
+|The ID of the pick list created to pick the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/orders/generating-pick-list.html
+
+| `Plenty ID`
+|The plentyID of the client (online shop) through which the order was generated.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/data/elasticSync-orders.html#2080
+
+| `Status ID`
+|The ID of the order status (e.g. [3] for the status “Waiting for payment”).
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/orders/order-statuses.html
+
+| `Status name`
+|Status of the order (e.g. "Waiting for payment*).
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/orders/order-statuses.html
+
+| `Loyalty program`
+|The loyalty program for eBay Plus or Amazon (e.g. Amazon Prime), as saved in the shipping profile for the order (Menu: Setup » Orders » Shipping » Settings » Shipping profiles).
+|
+
+| `Shipping profile`
+|The shipping profile (e.g. DHL insured package) as saved in the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/welcome/quick-start-shipping-options.html
+
+| `Shipping profile ID`
+|The shipping profile ID automatically assigned by the system.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/welcome/quick-start-shipping-options.html
+
+| `Webshop-URL`
+|The URL of the online shop through which the order was placed.
+|
+
+| `Payment method`
+|The payment method as saved in the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/payment/managing-payment-methods.html
+
+| `Payment method ID`
+|The ID of the payment method as saved in the order.
+|Manual page: https://knowledge.plentymarkets.com/en-gb/manual/main/payment/managing-payment-methods.html
+
+
+|===
+
+[#variables-order, order date]
+=== Variables: Order / Order date
+
+[[table-variables-order-order-date]]
+.Variables in the *Order / Order date* sub-category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Finish date (date & time)`
+|Date and time of completion of the order.
+
+| `Finish date`
+|Date of completion of the order.
+
+| `Updated on (date & time)`
+|Date (and time) on which the order was last updated.
+
+| `Updated on`
+|Date on which the order was last updated.
+
+| `Ordered date (date & time)`
+|Date (and time) on which the purchase order was placed.
+
+| `Ordered on`
+|Date on which the purchase order was placed.
+
+| `Paid on (date & time)`
+|Date (and time) on which the order was paid.
+
+| `Paid at`
+|Date on which the order was paid.
+
+| `Entry date (date & time)`
+|Date and time the order was received.
+
+| `Date of receipt`
+|Date the order was received.
+
+
+| `Created on`
+|Date on which the order was created in the system.
+
+
+| `Created on (date & time)`
+|Date (and time) on which the order was created in the system.
+
+
+| `Booked on (date & time)`
+|Date (and time) on which the order’s outgoing items were booked in the system.
+
+
+| `Booked on`
+|Date on which the order’s outgoing items were booked in the system.
+
+
+| `Payment discount date (date & time)`
+|Date (and time) on which the claim to an early payment discount for the order expires.
+
+
+| `Payment discount date`
+|Date on which the claim to an early payment discount for the order expires.
+
+
+| `Payment valuta date (date & time)`
+|Valuta date (and time) of the order.
+
+| `Payment valuta date`
+|Valuta date of the order.
+
+| `Estimated delivery date (date & time)`
+|The estimated date (and time) on which the order items will be delivered.
+
+| `Estimated delivery date`
+|The estimated date on which the order items will be delivered.
+
+| `Estimated shipping date`
+|The estimated date on which the order will be shipped out.
+
+| `Estimated shipping date (date & time)`
+|The estimated date (and time) on which the order will be shipped out.
+
+| `Payment due date (date & time)`
+|Date (and time) by which the order must have been paid.
+
+| `Payment due date`
+|Date by which the order must have been paid.
+|===
+
+[#variable-order-property]
+=== Variables: Order / Order property
+
+[[table-variables-order-order-property]]
+.Variables in the subcategory *Order / Order Property*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation 
+
+|`Amazon VCS is activated`
+|
+
+| `Document language`
+|The language of the document.
+
+| `External delivery note number`
+|The external delivery note number.
+
+| `External source order ID`
+|The external ID of the source order.
+
+| `External shipping profile`
+|The external shipping profile.
+
+| `Fulfilment-Service`
+|The name of the fulfilment service, such as Amazon VCS or eBay Plus.
+
+| `Small quantity surcharge (procurement costs)`
+|The small quantity surcharge applicable to the cost of goods purchased.
+
+| `Customer tax ID number`
+|The customer's VAT identification number.
+
+| `Customer sign`
+|The customer’s sign.
+
+| `Warehouse`
+|Name of the warehouse
+
+| `Warehouse ID`
+|The ID of the warehouse.
+
+| `Dunning level`
+|The dunning level of the order.
+
+| `Flag ID`
+|The ID of the flag.
+
+| `Marketplace EORI`
+|The EORI number of the marketplace through which the order was placed.
+
+| `Marketplace VAT ID`
+|The VAT ID of the marketplace through which the order was placed.
+
+| `Postage (procurement costs)`
+|The postage incurred on the purchase of goods.
+
+| `Drayage (procurement costs)`
+|The drayage incurred in the procurement of goods.
+
+| `Other costs (procurement costs)`
+|The other costs incurred in connection with the purchase of goods.
+
+| `Transport insurance (procurement costs)`
+|The transport insurance incurred with the goods procurement costs.
+
+| `Seller account`
+|The account of the seller.
+
+| `Brokerage fees (procurement costs)`
+|The brokerage fees incurred in the procurement of goods.
+
+| `Packaging charge (procurement costs)`
+|The packaging costs incurred in the procurement of goods.
+
+| `Payment status`
+|The current status of the payment.
+
+| `Customs duties (procurement costs)`
+|Customs duties incurred in the procurement of goods.
+
+| `eBay Plus is activated`
+|Indicates that xref:markets:ebay-setup.adoc#6600[eBay Plus] is |activated.
+
+
+|===
+[#variables-order-item]
+=== Variables: Order item
+
+[[table-variables-order-item]]
+.Variables in the category *Order item*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Item name`
+|The item name.
+
+
+| `Item name without prefix`
+|The item name.
+
+| `Attribute values`
+|The attribute values of the order item, e.g. red, blue, green or S, M, L, XL.
+
+| `Attribute values (extended)`
+|
+
+| `Attribute values (split)`
+|
+
+| `Attribute values (split) (extended)`
+|
+
+| `Order properties`
+|The order characteristics saved for the order item.
+
+| `Batch`
+| Batch to which the order item belongs.
+
+| `Quantity booked`
+|The order item quantity booked into stock.
+
+| `Total net weight (g)`
+|The total net weight of the order item in grams.
+
+| `Total net weight (kg)`
+|The total net weight of the order item in kilograms.
+
+| `Referrer`
+|The referrer of the order item.
+
+| `Referrer ID`
+|The ID of the referrer.
+
+| `Warehouse`
+|The warehouse stocking the order item.
+
+| `Warehouse ID`
+|The ID of the warehouse stocking the order item.
+
+| `Storage location ID`
+"| The ID of the order item’s storage location. +
+*_Note on dynamic warehousing:_* The variable content will only be displayed in the document if the storage location was assigned before the document is created.
+
+| `Storage location`
+|The name of the order item’s storage location. +
+*_Note on dynamic warehousing:`* The variable content will only be displayed in the document if the storage location was assigned before the document is created.
+
+| `Storage location: Dimension/Storage location name`
+|The name of the order item’s storage location in the format_Dimension/Storage location name_. +
+*_Note on dynamic warehousing:`* The variable content will only be displayed in the document if the storage location was assigned before the document is created.
+
+| `Storage location: Dimension/Storage location name (Quantity)`
+|The name of the order item’s storage location in the format _Dimension/Storage location name (Quantity)_. +
+*_Note on dynamic warehousing:`* The variable content will only be displayed in the document if the storage location was assigned before the document is created.
+
+| `Storage location: Warehouse/Dimensions/Storage location name`
+|The name of the order item’s storage location in the format_Warehouse/Dimensions/Storage location name_. +
+*_Note on dynamic warehousing:`* The variable content will only be displayed in the document if the storage location was assigned before the document is created.
+
+| `Storage location: Warehouse/Dimensions/Storage location name (Quantity)`
+|The name of the order item’s storage location in the format_Warehouse/Dimensions/Storage location name (Quantity)_. +
+*_Note on dynamic warehousing:`* The variable content will only be displayed in the document if the storage location was assigned before the document is created.
+
+| `Storage location: Storage location name (Quantity)`
+|The name of the order item’s storage location in the format_Storage location name (Quantity)`_. +
+*_Note on dynamic warehousing:`* The variable content will only be displayed in the document if the storage location was assigned before the document is created.
+
+| `BBD`
+|Expiration date of the order item.
+
+| `Quantity`
+|The quantity of order items.
+
+| `Quantity (integer)`
+|The integer quantity of the order item.
+
+| `Net weight (g)`
+|The net weight of the order item in grams.
+
+| `Net weight (kg)`
+|The net weight of the order item in kilograms.
+
+| `Open quantity`
+|The open quantity of the order item.
+
+| `Position`
+|The position of the order item.
+
+| `Serial numbers`
+|The serial number of the order item.
+
+| `Tax rate`
+|The tax rate of the order item.
+
+| `VAT (field)`
+|The field for the tax rate of the order item.
+
+| `Cancelled quantity`
+|The quantity cancelled for the order item.
+
+| `Type`
+|  The order item type.
+
+| `Type ID`
+| The ID of the order item type.
+
+| `VariationID`
+|The variation ID of the order item.
+
+| `Shipping profile`
+|The shipping profile of the order item.
+
+| `Shipping profile ID`
+|ID of the shipping profile assigned to the order item
+
+|===
+
+[#variables-order-item-property]
+=== Variables: Order item / Property of the order item
+
+[[table-variables-order-item-property]]
+.Variables in the category *Order item / Order item property*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Item state`
+|The condition of the order item.
+
+
+| `Order property group ID`
+|The ID of the order property group of the order item.
+
+| `Order property ID`
+|The ID of the order property.
+
+| `Width`
+| The width of the order item.
+
+
+| `Weight`
+| The weight of the order item.
+
+
+| `Document number`
+| The number of the document.
+
+| `External item ID`
+|The order item's external item ID.
+
+| `External token ID`
+|The external token ID of the order item.
+
+| `External shipping item ID`
+|The external shipping item ID of the order item.
+
+| `Coupon code`
+|The code of the coupon used for the order item.
+
+| `Credit note reason`
+|The reason for the credit note granted for the order item.
+
+| `Height`
+|The height of the order item.
+
+| `Warehouse`
+|The warehouse of the order item.
+
+| `Warehouse ID`
+|The ID of the warehouse stocking the order item.
+
+| `Length`
+|The length of the order item.
+
+| `Return reason`
+|The reason for returning the order item.
+
+| `Return key ID`
+|The ID of the return key for the order item.
+
+| `Shipping profile`
+|The shipping profile of the order item.
+
+| `Shipping profile ID`
+|The ID of the shipping profile assigned to the order item.
+
+| `Order property value`
+|The value of the order property for the order item.
+
+
+|===
+
+[#variables-order-item-foreign-amounts]
+=== Variables: Order item / Order item in foreign amounts
+
+[[table-variables-order-item-sum-foreign-amount]]
+.Variables in the category *Order item / Order item in foreign amounts*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Surcharge`
+|The surcharge (in foreign currency) for the order item.
+
+| `Surcharge (four decimals)`
+|The surcharge (in foreign currency) for the order item.
+
+| `Gross price`
+|The gross price (in foreign currency) for the order item.
+
+| `Gross price (four decimals)`
+|The gross price (in foreign currency) for the order item.
+
+| `Total gross price`
+|The total gross price (in foreign currency) for the order item.
+
+| `Total gross price (four decimals)`
+|
+
+
+| `Purchase price`
+|The purchase price (in foreign currency) for the order item.
+
+| `Purchase price (four decimals)`
+|The purchase price (in foreign currency) for the order item.
+
+| `Discount total amount gross`
+|The gross value (in foreign currency) of the discount for an order item multiplied by the quantity.
+
+| `Discount amount gross total (four decimals)`
+|
+
+
+| `Discount total amount net`
+|The net value (in system currency) of the discount for an order item multiplied by the quantity.
+
+| `Discount amount net total (four decimals)`
+|The net value (in foreign currency) of the discount for an order item multiplied by the quantity.
+
+| `Is system currency`
+|Indicates whether the order item totals are in the system currency or in another currency.
+
+| `Is percentage discount`
+|Indicates whether this is the percentage discount of the order item totals.
+
+| `Net price`
+|The net price (in foreign currency) for the order item.
+
+| `Net price (four decimals)`
+|
+
+| `Total net price`
+|The total net price (in foreign currency) for the order item.
+
+| `Total net price (four decimals)`
+|
+
+| `Original gross price`
+|The original gross price (in foreign currency) of the order item.
+
+| `Original gross price (four decimals)`
+|The original gross price (in foreign currency) of the order item.
+
+| `Original net price`
+|The original net price (in system currency) of the order item.
+
+| `Original net price (four decimals)`
+|The original net price (in system currency) of the order item.
+
+| `Discount`
+|The discount for the order item.
+
+| `Discount (four decimals)`
+|The discount for the order item.
+
+| `Discount amount gross
+`
+|The gross value (in foreign currency) of the discount for the order item.
+
+| `Discount amount gross total (four decimals)`
+|
+
+
+| `Discount amount net`
+|The net value (in foreign currency) of the discount for the order item.
+
+| `Discount amount net (four decimals)`
+|The net value (in foreign currency) of the discount for the order item.
+
+| `RRP`
+|The recommended retail price (in foreign currency) for the order item.
+
+| `RRP (four decimals)`
+|
+
+| `VAT amount`
+|The amount (in foreign currency) for the order item including VAT.
+
+| `Exchange rate`
+|
+
+| `Currency`
+|
+
+|===
+
+
+[#variables-order-item-system-amounts]
+=== Variables: Order item / Order item in system amounts
+
+[[table-variables-order-item-sum-system-amount]]
+.Variables in the category *Order item / Order item in system amounts*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Surcharge`
+|The surcharge (in system currency) for the order item.
+
+| `Surcharge (four decimals)`
+|The surcharge (in system currency) for the order item.
+
+| `Gross price`
+|The gross price (in system currency) for the order item.
+
+| `Gross price (four decimals)`
+|The gross price (in system currency) for the order item.
+
+| `Total gross price`
+|The total gross price (in system currency) for the order item.
+
+| `Total gross price (four decimals)`
+|
+
+
+| `Purchase price`
+|The purchase price (in system currency) for the order item.
+
+| `Purchase price (four decimals)`
+|The purchase price (in system currency) for the order item.
+
+| `Discount total amount gross`
+|The gross value (in system currency) of the discount for an order item multiplied by the quantity.
+
+| `Discount amount gross total (four decimals)`
+|
+
+
+| `Discount total amount net`
+|The net value (in system currency) of the discount for an order item multiplied by the quantity.
+
+| `Discount amount net total (four decimals)`
+|
+
+| `Is system currency`
+|Indicates whether the order item totals are in the system currency or in another currency.
+
+| `Is percentage discount`
+|Indicates whether this is the percentage discount of the order item totals.
+
+| `Net price`
+|The net price (in system currency) for the order item.
+
+| `Net price (four decimals)`
+|
+
+
+| `Total net price`
+|The total net price (in system currency) of the order item.
+
+| `Total net price (four decimals)`
+|
+
+
+| `Original gross price`
+|The original gross price (in system currency) of the order item.
+
+| `Original gross price (four decimals)`
+|The original gross price (in system currency) of the order item.
+
+| `Original net price`
+|The original net price (in system currency) of the order item.
+
+| `Original net price (four decimals)`
+|The original net price (in system currency) of the order item.
+
+| `Discount`
+|The discount (in system currency) for the order item.
+
+| `Discount (four decimals)`
+|
+
+| `Discount amount gross
+`
+|The gross value (in system currency) of the discount for the order item.
+
+| `Discount amount gross total (four decimals)`
+|
+
+
+| `Discount amount net`
+|The net value (in foreign currency) of the discount for the order item.
+
+| `Discount amount net (four decimals)`
+|The net value (in foreign currency) of the discount for the order item.
+
+| `RRP`
+|The recommended retail price (in system currency) for the order item.
+
+| `RRP (four decimals)`
+|
+
+
+| `VAT amount`
+|The amount (in foreign currency) for the order item including VAT.
+
+| `Exchange rate`
+|
+
+| `Currency`
+|
+
+|===
+
+[#variables-order-item-date]
+=== Variables: Order item / Order item date
+
+[[table-variables-order-item-date]]
+.Variables in the category *Order item / Order item date*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation 
+
+| `Updated on (date & time)`
+|The date (and time) on which the order item was updated in the system.
+
+| `Updated on`
+|The date on which the order item was updated in the system.
+
+| `Created on (date & time)`
+|The date (and time) on which the order item was created in the system.
+
+| `Created on`
+|The date on which the order item was created in the system.
+
+| `Returned on (date & time)`
+|The date (and time) on which the order item was returned.
+
+| `Returned on`
+|The date on which the order item was returned.
+
+| `Latest shipping date (date & time)`
+|The latest shipping date (and time) for the order item.
+
+| `Latest shipping date`
+|The latest shipping date for the order item.
+
+| `Estimated delivery date (date & time)`
+|The estimated delivery date (and time) for the order item.
+
+| `Estimated delivery date`
+|The estimated delivery date for the order item.
+
+| `Estimated shipping date (date & time)`
+|The estimated shipping date (and time) for the order item.
+
+| `Estimated shipping date`
+|The estimated shipping date for the order item.
+|===
+
+[#variable-order-item-variation]
+=== Variables: Order item / Commission
+
+[[table-variables-order-item-commission]]
+.Variables in the category *Order item / Commission*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Pick number`
+|
+
+| `Contact ID`
+|
+
+| `Customer name`
+|
+|===
+
+
+[#variable-order-item-variation]
+=== Variables: Order item / variation
+
+[[table-variables-order-item-variation]]
+.Variables in the category *Order item / Variation*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `ItemID`
+|The item ID of the variation.
+
+| `Variation unit`
+|The unit of the variation
+
+| `External variation ID`
+|The external variation ID of the variation.
+
+| `Field 01 to Field 20`
+|Content of the free text fields (01 to 20). There is 1 variable per text field.
+
+| `Manufacturer country`
+|The country in which the variation was manufactured.
+
+| `Manufacturer name`
+|The name of the company that manufactured the variation.
+
+| `Variation content`
+|
+
+| Supplier item name`
+|
+
+| `Supplier item number`
+|
+
+| `Model`
+|The model of the variation.
+
+| `Units contained`
+|
+
+| `Units contained * quantity`
+|
+
+| `Variation ID`
+|The ID of the variation.
+
+| `Variation name`
+|The name of the variation.
+
+| `Variation number`
+|The variation’s number.
+
+| `Availability`
+|The availability of the variation.
+
+| `Customs tariff number`
+|The variation’s customs tariff number.
+
+|===
+
+
+[#variables-order-order-items-barcodes, Barcodes]
+==== Variables: Order item / Variation / Barcodes
+
+[[table-variables-order-item-variation-barcodes]]
+.Variables in the category *Order item / Variation / Barcodes*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `GTIN 128`
+|
+
+| `GTIN 13`
+|
+
+| `ISBN`
+|
+
+| `UPC`
+|
+
+|===
+
+[#variables-order-foreign amounts]
+=== Variables: order / foreign amounts
+
+[[table-variables-order-order-foreign-amounts]]
+.Variables in subcategory *Order / Order foreign amounts*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Promotional coupon code`
+|The code of the coupon used for the order. +
+*_Note:_* Promotional coupons reduce the order item price and therefore also the VAT charged for the order.
+
+| `Gift card total`
+|The amount (in foreign currency) of the gift card used in the order. +
+*_Note:_* Gift cards reduce the total amount payable. They do not reduce the order item prices and therefore do not reduce the VAT on the order. 
+ 
+
+| `Gross total`
+|The gross total amount (in foreign currency) for the order.
+
+| `Coupon amount gross`
+|The gross value (in foreign currency) of the promotional coupon used in the order.
+
+| `Discount total amount gross`
+|The gross total discount (in foreign currency) granted for the order.
+
+| `Discount total amount net`
+|The net total discount (in foreign currency) granted for the order.
+
+| `Gift card codes`
+|The codes of any gift cards used for the order.
+
+| `Paid amount`
+|The amount paid (in foreign currency).
+
+| `Is foreign currency`
+|Indicates that the currency used here is a foreign currency.
+
+| `Is net`
+|Indicates that the amount (in foreign currency) is a net amount.
+
+| `Dunning fee`
+|The total amount (in foreign currency) of any dunning fees charged for the order.
+
+| `Net total`
+|The total net order amount (in foreign currency).
+
+| `Coupon amount net`
+|The net amount (in foreign currency) of any coupons used for the order
+
+| `Net amount subject to tax rate A`
+|The net order amount (in foreign currency) subject to tax rate A. 
+
+| `Net amount subject to tax rate B`
+|The net order amount (in foreign currency) subject to tax rate B. 
+
+| `Net amount subject to tax rate C`
+|The net order amount (in foreign currency) subject to tax rate C. 
+
+| `Net amount subject to tax rate D`
+|The net order amount (in foreign currency) subject to tax rate D. 
+
+| `Net amount subject to tax rate E`
+|The net order amount (in foreign currency) subject to tax rate E. 
+
+| `Net amount subject to tax rate F`
+|The net order amount (in foreign currency) subject to tax rate F. 
+
+| `Net amount subject to differential taxation`
+|The net order amount (in foreign currency) subject to differential taxation. 
+
+| `Open amount`
+|The amount (in foreign currency) still to be paid for the order.
+
+| `Invoice total`
+|The invoice amount (in foreign currency) for the order.
+
+| `Invoice total minus gift card`
+|
+
+| `Tax less amount`
+|The tax-free amount (in foreign currency) for the order.
+
+| ` Tax rate of shipping costs in %`
+|
+
+| `VAT total`
+|The total VAT amount (in foreign currency) payable for the order.
+
+| `Tax amount (A)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to tax rate A.
+
+| `Tax amount (B)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to tax rate B.
+
+| `Tax amount (C)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to tax rate C.
+
+| `Tax amount (D)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to tax rate D.
+
+| `Tax amount (differential taxation)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to differential taxation.
+
+| `Tax amount (E)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to tax rate E.
+
+| `Tax amount (F)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to tax rate E.
+
+| `Shipping costs gross`
+|The gross shipping costs (in foreign currency) for the order.
+
+| `Shipping costs net`
+|The net shipping costs (in foreign currency) for the order.
+
+| `Value items shown`
+|The value (in foreign currency) of the order items displayed in the order items table.
+*_Note:_*This variable is available for cases in which a template is configured  to show only some of the order items in an order.
+
+| `Value of items gross`
+|The gross value (in foreign currency) of the order items in the order.
+
+| `Value of items net`
+|The net value (in foreign currency) of the order items in the order.
+
+| `Exchange rate`
+|The exchange rate.
+
+| `Currency`
+|The order currency.
+
+|===
+
+
+
+[#variables-order-system amounts]
+=== Variables: Order / order system amounts
+
+[[table-variables-order-order-system-amounts]]
+.Variables in subcategory *Order / Order system amounts*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Promotional coupon code`
+|The code of the coupon used for the order. +
+*_Note:_* Promotional coupons reduce the order item price and therefore also the VAT charged for the order. 
+
+
+| `Gift card total`
+|The amount (in foreign currency) of the gift card used in the order. +
+*_Note:_* Gift cards reduce the total amount payable. They do not reduce the order item prices and therefore do not reduce the VAT on the order. 
+ 
+
+| `Gross total`
+|The gross total amount (in foreign currency) for the order.
+
+| `Coupon amount gross`
+|The gross value (in foreign currency) of the promotional coupon used in the order.
+
+| `Discount total amount gross`
+|The gross total discount (in system currency) granted for the order.
+
+| `Discount total amount net`
+|The net total discount (in system currency) granted for the order.
+
+| `Gift card codes`
+|The codes of any gift cards used for the order.
+
+| `Paid amount`
+|The amount paid (in system currency).
+
+| `Is system currency`
+|Indicates that the currency is the system currency.
+
+| `Is net`
+|Indicates that the amount (in system currency) is a net amount.
+
+| `Dunning fee`
+|The total amount (in system currency) of any dunning fees charged for the order.
+
+| `Net total`
+|The net total amount (in system currency) for the order.
+
+| `Coupon amount net`
+|The net value (in system currency) of any coupons used for the order.
+
+| `Net amount subject to tax rate A`
+|The net order amount (in system currency) subject to tax rate A. 
+
+| `Net amount subject to tax rate B`
+|The net order amount (in system currency) subject to tax rate B. 
+
+| `Net amount subject to tax rate C`
+|The net order amount (in system currency) subject to tax rate C. 
+
+| `Net amount subject to tax rate D`
+|The net order amount (in system currency) subject to tax rate D. 
+
+| `Net amount subject to tax rate E`
+|The net order amount (in system currency) subject to tax rate E. 
+
+| `Net amount subject to tax rate F`
+|The net order amount (in system currency) subject to tax rate F. 
+
+| `Net amount subject to differential taxation`
+|The net order amount (in system currency) subject to differential taxation. 
+
+| `Open amount`
+|The amount (in system currency) still to be paid for the order.
+
+| `Invoice total`
+|The invoice amount (in system currency) for the order.
+
+| `Invoice total minus gift card`
+|
+
+| `Tax less amount`
+|The tax-free amount (in system currency) for the order.
+
+| `Tax rate of shipping costs in %`
+|
+
+| `VAT total`
+|The total VAT amount (in foreign currency) payable for the order.
+
+| `Tax amount (A)`
+|The amount (in foreign currency) of VAT tax due for the order items subject to tax rate A.
+
+| `Tax amount (B)`
+|The amount (in system currency) of VAT tax due for the order items subject to tax rate B.
+
+| `Tax amount (C)`
+|The amount (in system currency) of VAT tax due for the order items subject to tax rate C.
+
+| `Tax amount (D)`
+|The amount (in system currency) of VAT tax due for the order items subject to tax rate D.
+
+| `Tax amount (differential taxation)`
+|The amount (in system currency) of VAT tax due for the order items subject to differential taxation.
+
+| `Tax amount (E)`
+|The amount (in system currency) of VAT tax due for the order items subject to tax rate E.
+
+| `Tax amount (F)`
+|The amount (in system currency) of VAT tax due for the order items subject to tax rate F.
+
+| `Shipping costs gross`
+|The gross shipping costs (in system currency) for the order.
+
+| `Shipping costs net`
+|The net shipping costs (in system currency) for the order.
+
+| `Value items shown`
+|The value (in system currency) of the order items displayed in the order items table.
+*_Note:_*This variable is available for cases in which a template is configured  to show only some of the order items in an order.
+
+| `Value of items gross`
+|The gross value (in system currency) of the order items in the order.
+
+| `Value of items net`
+|The net value (in system currency) of the order items in the order.
+
+| `Exchange rate`
+|The exchange rate.
+
+| `Currency`
+|The order currency.
+
+|===
+
+
+[#variables-order-location, Location]
+=== Variables: Order / location
+
+[[table-variables-order-payment-terms]]
+.Variables in the *Order / Location* sub-category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Country`
+|The country in which the location is located.
+
+| `VAT total`
+|
+
+| `Currency`
+|The currency in place at the location.
+
+|===
+
+
+[#variables-order-vat-rates]
+=== Variables: Order / VAT rates
+
+[[table-variables-order-vat-rates]]
+.Variables in subcategory *Order / VAT rates*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `VAT rate A`
+|The tax rate defined in the system as VAT rate A.
+
+| `VAT rate B`
+|The tax rate defined in the system as VAT rate B.
+
+| `VAT rate C`
+|The tax rate defined in the system as VAT rate C.
+
+| `VAT rate D`
+|The tax rate defined in the system as VAT rate D.
+
+| `Tax rate for differential taxation`
+|The tax rate applied to products subject to differential taxation.
+
+| `VAT rate E`
+|The tax rate defined in the system as VAT rate E.
+
+| `VAT rate F`
+|The tax rate defined in the system as VAT rate F.
+
+| `VAT number`
+|The VAT ID.
+
+|===
+
+[[table-variables-order-payment-terms]]
+.Variables in the *Order / Shipping* sub-category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Transaction ID`
+|
+
+| `Transaction code`
+|
+|===
+
+[#variables-order-payment-terms]
+=== Variables: Order / Payment terms
+
+[[table-variables-order-payment-terms]]
+.Variables in the subcategory *Order / Payment terms*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Discount invoice amount gross foreign currency`
+|The gross portion of the discounted invoice amount in the foreign currency.
+
+| `Discount invoice amount gross system currency`
+|The gross portion of the discounted invoice amount in the system currency.
+
+| `Date of payment (date & time)`
+|The date on which the order was paid.
+
+| `Date of payment`
+|The date on which the order was paid.
+
+| `Discount invoice amount net foreign currency`
+|The net portion of the discounted invoice amount in the foreign currency.
+
+| `Discount invoice amount net system currency`
+|The net portion of the discounted invoice amount in the system currency.
+
+| `Discount invoice amount foreign currency`
+|The discounted invoice amount in foreign currency.
+
+| `Discount invoice amount system currency`
+|The discounted invoice amount in the system currency.
+
+| `Early payment discount date`
+|The discount period.
+
+| `Discount period in days`
+|The discount period in days.
+
+| `Discount rate`
+|The discount rate.
+
+| `Valuta days`
+|The valuta dates.
+
+| `Payment due in days`
+|The payment term in days.
+
+|===
+
+
+[#variables-document]
+== Variables: Document
+
+[[table-variables-document]]
+.Variables in the *Document* category
+[cols="1,3"]
+|===
+
+| `Display date (date & time)`
+|The document's display date and time.
+
+| `Display date`
+|The document's display date.
+
+| `Order confirmation number`
+|
+
+| `Order confirmation date (date & time)`
+|
+
+| `Order confirmation date (date)`
+|
+
+| `Parent document date (date & time)`
+|
+
+| `number
+Parent document date (date)`
+|
+
+| `Referenced document date (date & time)`
+|
+
+| `Referenced document date (date)`
+|
+
+| `Document type`
+|
+
+| `Document number`
+|
+
+| `Parent type`
+|The document's parent type.
+
+| `Created on (date & time)`
+|The date and time on which the document was created.
+
+| `Created on`
+|The date on which the document was created.
+
+| `Created on`
+|
+
+| `Delivery note date (date & time)`
+|
+
+| `Delivery note date (date)`
+|
+
+| `Delivery note number`
+|
+
+| `Delivery note numbers of the delivery orders`
+|
+
+| `Manual Comment`
+|The manual comment in the document.
+
+| `Parent document number`
+|The number of the parent document.
+
+| `Invoice date (date & time)`
+|
+
+| `Invoice date (date)`
+|
+
+| `Invoice number`
+|The document’s invoice number.
+
+| `Reference number`
+|The reference number of the document.
+
+| `Reference type`
+|The reference type of the document.
+
+
+
+|===
+
+
+[#variables-delivery-address]
+=== Variables: Delivery address
+
+[[table-variables-delivery-address]]
+.Variables in the category *Address / Delivery address*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Additional address information`
+|The additional address information in the delivery address.
+
+| `Form of address`
+|The form of address saved in the delivery address
+
+| `Contact person`
+|The contact in the delivery address.
+
+| `State`
+|The state saved in the delivery address
+
+| `Email address`
+|the email address of the contact saved in the delivery address.
+
+| `External address ID`
+|
+
+| `External customer ID`
+|`External customer number`
+
+| `Age rating`
+|The age restriction, if needed.
+
+| `Company name`
+|The name of the company in the delivery address.
+
+| `Free field`
+|A free field for the delivery address.
+
+| `Entry Certificate available`
+|Indicates whether an entry certificate is available.
+
+| `Gender`
+|The gender of the contact.
+
+| `House number`
+|The house number specified in the delivery address.
+
+| `ISO state code`
+|The ISO code for the state specified in the delivery address.
+
+| `ISO country code`
+|The ISO country code for the country specified in the delivery address.
+
+| `Is Packstation`
+|Indicates whether the address is a packing station.
+
+| `Is post office`
+|Indicates whether the address is a post office.
+
+| `Country`
+|The country specified in the delivery address
+
+| `Country ID`
+|The Country ID of the country specified in the delivery address.
+
+| `Last name`
+|The contact’s last name.
+
+| `Packstation number`
+|The packstation’s number.
+
+| `Personal number of the contact`
+|The contact's personal number.
+
+| `PostIdent`
+|The postident number specified in the delivery address
+
+| `Postcode`
+|The postcode specified in the delivery address.
+
+| `City`
+|The town/city specified in the delivery address.
+
+| `Street`
+|The street specified in the delivery address.
+
+| `Phone`
+|The telephone number of the contact specified in the delivery address.
+
+
+| `Title`
+|The title saved in the delivery address
+
+| `Tax ID number`
+|The VAT number
+
+| `First name`
+|The contact’s first name.
+
+| `(c/o)`
+|Further details of the addressee (for the attention of).
+
+
+|===
+
+
+[#variables-delivery-address]
+=== Variables: Supplier address
+
+[[table-variables-supplier-address]]
+.Variables in the category *Address / Supplier address*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Additional address information`
+|The additional address information specified in the supplier address.
+
+| `Form of address`
+|The form of address specified in the supplier address.
+
+| `Contact person`
+|The contact specified in the supplier address.
+
+| `State`
+|The state specified in the supplier address
+
+| `Email address`
+|The email address of the contact specified in the supplier address
+
+| `External address ID`
+|The external address ID specified in the supplier address
+
+| `External customer ID`
+|The external customer number specified in the supplier address.
+
+| `Age rating`
+|The age restriction, if needed.
+
+| `Company name`
+|The name of the company specified in the supplier address
+
+| `Free field`
+|A free field for the supplier address.
+
+| `Entry Certificate available`
+|Indicates whether an entry certificate is available.
+
+| `Gender`
+|The gender of the contact specified in the supplier address
+
+| `House number`
+|The house number specified in the supplier address.
+
+| `ISO state code`
+|The ISO code for the state specified in the supplier address.
+
+| `ISO country code`
+|The ISO country code for the country specified in the supplier address.
+
+| `Is Packstation`
+|Indicates whether the address is a packing station.
+
+| `Is post office`
+|Indicates whether the address is a post office.
+
+| `Country`
+|The country specified in the supplier address
+
+| `Country ID`
+|The Country ID of the country specified in the supplier address.
+
+| `Last name`
+|The surname of the contact specified in the supplier address.
+
+| `Packstation number`
+|The number of the Packstation specified in the supplier address.
+
+| `Personal number of the contact`
+|The personal number of the contact specified in the supplier address.
+
+| `PostIdent`
+|The postident number specified in the supplier address.
+
+| `Postcode`
+|The postcode specified in the supplier address.
+
+| `City`
+|The town/city specified in the supplier address.
+
+| `Street`
+|The street specified in the supplier address.
+
+| `Phone`
+|The telephone number of the contact specified in the supplier address.
+
+
+| `Title`
+|The title specified in the supplier address.
+
+| `Tax ID number`
+|The VAT identification number specified in the supplier address.
+
+| `First name`
+|The first name of the contact specified in the supplier address.
+
+| `(c/o)`
+|Further details of the addressee (for the attention of) specified in the supplier address.
+
+
+|===
+
+[#variables-invoice-address]
+=== Variables: Invoice address
+
+[[table-variables-invoice-address]]
+.Variables in the category *Address / Invoice address*
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Additional address information`
+|The additional address information in the invoice address.
+
+| `Form of address`
+|The form of address specified in the invoice address.
+
+| `Contact person`
+|The contact specified in the invoice address.
+
+| `State`
+|The state specified in the invoice address.
+
+| `Email address`
+|The email address of the contact specified in the invoice address.
+
+| `External address ID`
+|The external address ID specified in the invoice address.
+
+| `External customer ID`
+|The external customer number specified in the invoice address.
+
+| `Age rating`
+|The age restriction, if needed.
+
+| `Company name`
+|The name of the company specified in the invoice address.
+
+| `Free field`
+|A free field for the invoice address.
+
+| `Entry Certificate available`
+|Indicates whether an entry certificate is available.
+
+| `Gender`
+|The gender of the contact specified in the invoice address.
+
+| `House number`
+|The house number specified in the invoice address.
+
+| `ISO state code`
+|The ISO code for the state specified in the invoice address.
+
+| `ISO country code`
+|The ISO country code for the country specified in the invoice address.
+
+| `Is Packstation`
+|Indicates whether the address is a packing station.
+
+| `Is post office`
+|Indicates whether the address is a post office.
+
+| `Country`
+|The state specified in the invoice address.
+
+| `Country ID`
+|The ID for the country specified in the invoice address.
+
+| `Last name`
+|The surname of the contact specified in the invoice address.
+
+| `Packstation number`
+|The number of the Packstation specified in the invoice address.
+
+| `Personal number of the contact`
+|The personal number of the contact specified in the invoice address.
+
+| `PostIdent`
+|The house number specified in the invoice address.
+
+| `Postcode`
+|`Postcode specified in the invoice address.`
+
+| `City`
+|The town/city specified in the invoice address.
+
+| `Street`
+|The street specified in the invoice address.
+
+| `Phone`
+|The telephone number of the contact specified in the invoice address.
+
+| `Title`
+|The title specified in the invoice address.
+
+| `Tax ID number`
+|The VAT identification number specified in the invoice address.
+
+| `First name`
+|The first name of the contact specified in the invoice address.
+
+| `(c/o)`
+|Further details of the addressee (for the attention of) in the invoice address.
+
+|===
+
+[#variables-contact]
+=== Variables: Contact
+
+[[table-variables-contact]]
+.Variables in the *Contact* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Form of address`
+|The form of address of the contact.
+
+| `Contact person`
+|The contact person of the contact.
+
+| `Rating`
+|The contact’s rating.
+
+| `Debtor account`
+|The debtor account of the contact.
+
+| `Email address`
+|The email address of the contact.
+
+| `External contact ID`
+|The external contact ID of the contact.
+
+| `Company`
+|The contact’s company.
+
+| `Gender`
+|The gender of the contact.
+
+| `Contact ID`
+|The contact’s ID.
+
+| `Customer class`
+|The contact’s customer class.
+
+| `Customer class ID`
+|The contact's customer class ID.
+
+| `Customer number`
+|The contact's customer number.
+
+| `Mobile business`
+|The contact’s business mobile phone number?
+
+| `Mobile private`
+|The contact’s private mobile phone number?
+
+| `Last name`
+|The contact’s last name.
+
+| `PayPal payer ID`
+|The contact's PayPal payer ID.
+
+
+| `PayPal email address`
+|The PayPal email address of the contact.
+
+| `Secondary email address`
+|The secondary email address of the contact.
+
+
+| `Phone business`
+|The contact’s business telephone number.
+
+| `Phone`
+|The contact’s private phone number.
+
+| `Title`
+|`The contact’s title`
+
+| `Full name`
+|The full name of the contact.
+
+| `First name`
+|The contact’s first name.
+
+| `eBay name`
+|The contact’s eBay name.
+
+
+|===
+
+[#variables-contact-bank-data]
+=== Variables: Contact / Bank data
+
+[[table-variables-bank-data]]
+.Variables in the *Contact* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `BIC`
+|BIC of the contact
+
+| `Bank code`
+|Bank code of the contact
+
+| `IBAN`
+|The IBAN for the company bank account.
+
+| `IBAN (masked)`
+|The masked IBAN for the company bank account.
+
+| `Holder`
+|The account holder specified for the company.
+
+| `Account number`
+|The company account number.
+
+| `Account number (masked)`
+|The company account number.
+
+| `The name of the bank`
+|The name of the company’s bank.
+
+| `Reason for payment`
+|The reason for payment.
+
+|===
+
+
+[#variables-shipping]
+=== Variables: Shipping
+
+[[table-variables-bank-data]]
+.Variables in the *Shipment* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `All package numbers (incl. delivery orders)`
+|All package numbers of the order including its delivery orders. The individual package numbers are separated by commas.
+
+| `All tracking URLs (incl. delivery orders)`
+|All tracking URLs of the order including its delivery orders. The tracking URLs are separated by commas.
+
+| `Number of delivery orders`
+|The number of delivery orders for the current order.
+
+| `Number of packages`
+|The number of packages in the order.
+
+| `Number of shipping packages (incl. delivery orders)`
+|The number of shipping packages in the order, including any delivery orders.
+
+| `Package numbers`
+|The numbers of the packages.
+
+| `Tracking URL`
+|The package’s tracking URL.
+
+| `Shipping service provider`
+|The package’s shipping service provider.
+
+| `Shipping service provider ID`
+|The package’s shipping service provider ID.
+
+| `Shipping profile`
+|The shipping profile of the package.
+
+| `Shipping profile ID`
+|The shipping profile ID of the package.
+
+|===
+
+[#variables-own-company]
+=== Variables: Own company
+
+[[table-variables-own-company]]
+.Variables in the *Own company* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `CEO`
+|The company’s CEO.
+
+| `Email address`
+|The company’s email address.
+
+| `EORI number`
+|The company’s EORI number.
+
+| `Hotline`
+|The company’s hotline number.
+
+| `Country`
+|The country in which the company is located.
+
+| `Name`
+|The name of the company.
+
+| `Postcode`
+|The company’s postcode.
+
+| `City`
+|The city in which the company is located.
+
+| `Street`
+|The company’s street.
+
+| `Fax`
+|The company’s fax number.
+
+| `Phone number`
+|The company’s telephone number.
+
+| `VAT number`
+|The company’s VAT number.
+
+|===
+
+[#variables-own company-bank-data]
+=== Variables: Own company / Bank data
+
+[[table-variables-bank-details]]
+.Variables in the *Own company / Bank data* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `BIC`
+|The account’s BIC.
+
+| `Bank`
+|The company’s bank.
+
+| `Bank code`
+|The company's bank code.
+
+| `IBAN`
+|The account’s IBAN.
+
+| `Holder`
+|The account holder.
+
+| `Account number`
+|The company’s account number.
+
+|===
+
+[#variables-plugin]
+=== Variables: Plugin
+
+[[table-variables-plugin]]
+.Variables in the *Plugin* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Sum description`
+|The sum’s description.
+
+| `Sum amount`
+|The total amount.
+
+| `Image`
+|Shows the plugin’s image.
+
+| `Note`
+|Shows the note of the plugin.
+
+|===
+
+[#variables-header-footer]
+=== Variables: Header / footer
+
+[[table-variables-header-footer]]
+.Variables in the *Header / Footer* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+| `Total pages`
+|The total number of pages.
+
+| `Page number`
+|The number of pages.
+
+|===
+
+[#variables-messenger]
+=== Variables: Messenger
+
+[[table-variables-header-footer]]
+.Variables in the *Messenger* category
+[cols="1,3"]
+|===
+|Name of the variable |Explanation
+
+|`Abbreviated ID of the last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the abbreviated ID of the last conversation in the order.
+
+|`First message of last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the first message of the last conversation in the order.
+
+|`First whispered message of last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the first message of the last conversation in the order.
+
+|`History of the last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the history of the last conversation in the order.
+
+|`ID of the last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the ID of the last conversation in the order.
+
+|`Last message of last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the last message of the last conversation in the order.
+
+|`Last whispered message of last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the last whispered message of the last conversation in the order.
+
+|`Title of the last conversation in order`
+|If the plentysystems Messenger was used to process the order, this variable produces the title of the last conversation in the order.
+
+|===
+
+
+[TIP]
+.Quick access to the other DocumentBuilder manual pages:
+====
+
+To open *one of the other DocumentBuilder pages,* click on the corresponding link below:
+
+* xref:orders:documentbuilder-preparatory-settings.adoc[Preparatory settings]
+* xref:orders:documentbuilder-creating-new-template.adoc[Creating a new template]
+* xref:orders:documentbuilder-using-default-templates.adoc[Using default templates]
+* xref:orders:documentbuilder-creating-template-structure.adoc[Designing templates using the editor]
+* xref:orders:documentbuilder-practical-examples.adoc[Practical examples].
+
+====
