@@ -252,18 +252,14 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 
 
 | `Ist Gast`
-|
-|
-|
-
-// TODO: Erläuterung + twig expression ergänzen
+| Zeigt an, ob es sich um eine Gastbestellung handelt.
+| `order.formattedGeneral.isGuest`
+| -
 
 | `Kontakt-ID`
 |
-|
-|
-
-// TODO: Erläuterung + twig expression ergänzen
+| `order.formattedGeneral.contactId`
+| -
 
 | `Kundenwunsch`
 |Kund:innen können bei der Bestellung über den Webshop einen Wunsch angeben. Dieser Wunsch wird als Auftragsnotiz in den Auftragsdaten gespeichert.
@@ -282,10 +278,8 @@ Mögliche Werte: *1 Monat*, *3 Monate*, *6 Monate*, *12 Monate*.
 
 | `Späteste Verfügbarkeit`
 |
+| `order.formattedGeneral.maximumAvailabilityName`
 |
-|
-
-// TODO: Erläuterung + twig expression ergänzen
 
 | `Status-ID`
 |ID des xref:auftraege:order-statuses.adoc#[Auftragsstatus] wie im Menü *Einrichtung » Aufträge » Auftragsstatus* gespeichert.
@@ -956,8 +950,6 @@ In diesem Bereich des EmailBuilder werden die Variablen aller auftragsbezogenen 
 
 // TODO: Link auf entsprechende Handbuchseite hier reinpacken.
 
-// TODO: hier weitermachen mit der alphabetischen Sortierung!!!!
-
 [#variablen-auftrag-lieferadresse]
 ==== Auftrag / Lieferadresse
 
@@ -979,9 +971,17 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.deliveryAddress.address3`
 | $DeliveryAddressAdditionalAddress
 
+| `Lieferadresse Bundesland`
+| `order.formattedAddresses.deliveryAddress.state.name`
+| $DeliveryAddressState
+
 | `Lieferadresse Firmenname`
 | `order.formattedAddresses.deliveryAddress.name1`
 | $DeliveryAddressCompany
+
+| `Lieferadresse Hausnummer`
+| `order.formattedAddresses.deliveryAddress.address2`
+|
 
 | `Lieferadresse Land`
 | `order.formattedAddresses.deliveryAddress.country.name`
@@ -999,25 +999,13 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.deliveryAddress.country.isoCode3`
 | $CustomerCountryIsoCode
 
-| `Lieferadresse Vorname`
-| `order.formattedAddresses.deliveryAddress.name2`
-| $DeliveryAddressFirstName
-
-| `Lieferadresse Vorname und Nachname`
-| `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
-| $DeliveryAddressFullName
-
-| `Lieferadresse Hausnummer`
-| `order.formattedAddresses.deliveryAddress.address2`
-|
-
 | `Lieferadresse Nachname`
 | `order.formattedAddresses.deliveryAddress.name3`
 | $DeliveryAddressLastName
 
-| `Lieferadresse Postnummer`
-| `order.formattedAddresses.deliveryAddress.formattedOptions.postNumber`
-| -
+| `Lieferadresse Ort`
+| `order.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCity
 
 | `Lieferadresse Postleitzahl`
 | `order.formattedAddresses.deliveryAddress.postalCode`
@@ -1027,17 +1015,21 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ order.formattedAddresses.deliveryAddress.town`
 |
 
-| `Lieferadresse Bundesland`
-| `order.formattedAddresses.deliveryAddress.state.name`
-| $DeliveryAddressState
+| `Lieferadresse Postnummer`
+| `order.formattedAddresses.deliveryAddress.formattedOptions.postNumber`
+| -
 
 | `Lieferadresse Straße`
 | `order.formattedAddresses.deliveryAddress.address1`
 | $DeliveryAddressStreet
 
-| `Lieferadresse Ort`
-| `order.formattedAddresses.deliveryAddress.town`
-| $DeliveryAddressCity
+| `Lieferadresse Vorname`
+| `order.formattedAddresses.deliveryAddress.name2`
+| $DeliveryAddressFirstName
+
+| `Lieferadresse Vorname und Nachname`
+| `order.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ order.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressFullName
 
 |====
 
@@ -1055,15 +1047,10 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.deliveryAddress.formattedOptions.BBFC`
 | 
 
-| `Lieferadresse Geburtstag`
-|Geburtstag aus der Lieferadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.deliveryAddress.formattedOptions.birthday`
-| 
-
-| `Lieferadresse Gelangensbestätigung`
-|Gelangensbestätigung aus der Lieferadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.deliveryAddress.formattedOptions.entryCertificate`
-| 
+| `Lieferadresse E-Mail`
+|E-Mail-Adresse aus der Lieferadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.email`
+| -
 
 | `Lieferadresse Externe Adress-ID`
 |Externe Adress-ID aus der Lieferadresse, wie im Auftrag gespeichert.
@@ -1075,14 +1062,14 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.deliveryAddress.formattedOptions.externalCustomerID`
 | 
 
-| `Lieferadresse Personennummer`
-|Personennummer aus der Lieferadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.deliveryAddress.formattedOptions.personalId`
+| `Lieferadresse Geburtstag`
+|Geburtstag aus der Lieferadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.birthday`
 | 
 
-| `Lieferadresse Titel`
-|Titel aus der Lieferadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.deliveryAddress.formattedOptions.title`
+| `Lieferadresse Gelangensbestätigung`
+|Gelangensbestätigung aus der Lieferadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.entryCertificate`
 | 
 
 | `Lieferadresse Kontaktperson`
@@ -1090,15 +1077,21 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
 | $DeliveryAddressContactPerson
 
-| `Lieferadresse E-Mail`
-|E-Mail-Adresse aus der Lieferadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.deliveryAddress.formattedOptions.email`
-| -
+
+| `Lieferadresse Personennummer`
+|Personennummer aus der Lieferadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.personalId`
+| 
 
 | `Lieferadresse Telefon`
 |Telefonnummer aus der Lieferadresse, wie im Auftrag gespeichert.
 | `order.formattedAddresses.deliveryAddress.formattedOptions.telephone`
 | -
+
+| `Lieferadresse Titel`
+|Titel aus der Lieferadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.deliveryAddress.formattedOptions.title`
+| 
 
 | `Lieferadresse USt-IdNr.`
 |Umsatzsteuer-Identifikationsnummer aus der Lieferadresse, wie im Auftrag gespeichert.
@@ -1154,9 +1147,17 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.invoiceAddress.address3`
 | $BillingAddressAdditionalAddress
 
+| `Rechnungsadresse Bundesland`
+| `order.formattedAddresses.invoiceAddress.state.name`
+| $CustomerState
+
 | `Rechnungsadresse Firmenname`
 | `order.formattedAddresses.invoiceAddress.name1`
 | $BillingAddressCompany
+
+| `Rechnungsadresse Hausnummer`
+| `order.formattedAddresses.invoiceAddress.address2`
+|
 
 | `Rechnungsadresse Land`
 | `order.formattedAddresses.invoiceAddress.country.name`
@@ -1174,21 +1175,13 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.invoiceAddress.country.isoCode3`
 | $CustomerCountryIsoCode
 
-| `Rechnungsadresse Vorname`
-| `order.formattedAddresses.invoiceAddress.name2`
-| $BillingAddressFirstName
-
-| `Rechnungsadresse Vorname und Nachname`
-| `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
-| $BillingAddressFullName
-
-| `Rechnungsadresse Hausnummer`
-| `order.formattedAddresses.invoiceAddress.address2`
-|
-
 | `Rechnungsadresse Nachname`
 | `order.formattedAddresses.invoiceAddress.name3`
 | $BillingAddressLastName
+
+| `Rechnungsadresse Ort`
+| `order.formattedAddresses.invoiceAddress.town`
+|
 
 | `Rechnungsadresse Postleitzahl`
 | `order.formattedAddresses.invoiceAddress.postalCode`
@@ -1198,17 +1191,17 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ order.formattedAddresses.invoiceAddress.town`
 |
 
-| `Rechnungsadresse Bundesland`
-| `order.formattedAddresses.invoiceAddress.state.name`
-| $CustomerState
-
 | `Rechnungsadresse Straße`
 | `order.formattedAddresses.invoiceAddress.address1`
 |
 
-| `Rechnungsadresse Ort`
-| `order.formattedAddresses.invoiceAddress.town`
-|
+| `Rechnungsadresse Vorname`
+| `order.formattedAddresses.invoiceAddress.name2`
+| $BillingAddressFirstName
+
+| `Rechnungsadresse Vorname und Nachname`
+| `order.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ order.formattedAddresses.invoiceAddress.name3`
+| $BillingAddressFullName
 
 |====
 
@@ -1226,15 +1219,10 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.invoiceAddress.formattedOptions.BBFC`
 | 
 
-| `Rechnungsadresse Geburtstag`
-|Geburtstag aus der Rechnungsadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.invoiceAddress.formattedOptions.birthday`
-| 
-
-| `Rechnungsadresse Gelangensbestätigung`
-|Gelangensbestätigung aus der Rechnungsadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.invoiceAddress.formattedOptions.entryCertificate`
-| 
+| `Rechnungsadresse E-Mail`
+|E-Mail-Adresse aus der Rechnungsadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.email`
+| - 
 
 | `Rechnungsadresse Externe Adress-ID`
 |Externe Adress-ID aus der Rechnungsadresse, wie im Auftrag gespeichert.
@@ -1246,14 +1234,14 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.invoiceAddress.formattedOptions.externalCustomerID`
 | 
 
-| `Rechnungsadresse Personennummer`
-|Personennummer aus der Rechnungsadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.invoiceAddress.formattedOptions.personalId`
+| `Rechnungsadresse Geburtstag`
+|Geburtstag aus der Rechnungsadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.birthday`
 | 
 
-| `Rechnungsadresse Titel`
-|Titel aus der Rechnungsadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.invoiceAddress.formattedOptions.title`
+| `Rechnungsadresse Gelangensbestätigung`
+|Gelangensbestätigung aus der Rechnungsadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.entryCertificate`
 | 
 
 | `Rechnungsadresse Kontaktperson`
@@ -1261,20 +1249,25 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `order.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
 | $BillingAddressContactPerson
 
-| `Rechnungsadresse E-Mail`
-|E-Mail-Adresse aus der Rechnungsadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.invoiceAddress.formattedOptions.email`
-| - 
+| `Rechnungsadresse Personennummer`
+|Personennummer aus der Rechnungsadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.personalId`
+| 
+
+| `Rechnungsadresse Postnummer`
+|Postnummer aus der Rechnungsadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.postNumber`
+| -
 
 | `Rechnungsadresse Telefon`
 |Telefonnummer aus der Rechnungsadresse, wie im Auftrag gespeichert.
 | `order.formattedAddresses.invoiceAddress.formattedOptions.telephone`
 | - 
 
-| `Rechnungsadresse Postnummer`
-|Postnummer aus der Rechnungsadresse, wie im Auftrag gespeichert.
-| `order.formattedAddresses.invoiceAddress.formattedOptions.postNumber`
-| -
+| `Rechnungsadresse Titel`
+|Titel aus der Rechnungsadresse, wie im Auftrag gespeichert.
+| `order.formattedAddresses.invoiceAddress.formattedOptions.title`
+| 
 
 | `Rechnungsadresse USt-IdNr.`
 |Umsatzsteuer-Identifikationsnummer aus der Rechnungsadresse, wie im Auftrag gespeichert.
@@ -1292,54 +1285,30 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `Giro-Code in Auftragswährung`
-|Gibt den Giro-Code in der Auftragswährung aus. Deine Kund:innen können den Giro-Code dann direkt mit ihrer Banking-App scannen und so die Rechnung bezahlen.
-| `order.formattedGeneral.giroCodeInOrderCurrency \| raw`
+| `Artikelwert`
+|
+| `order.formattedGeneral.valueOfItems`
+| $ValueOfItems
+
+| `Betrag Mehrzweckgutschein`
+|
+| `order.formattedGeneral.giftCardAmount`
 | -
-| `Giro-Code in Systemwährung`
-|Gibt den Giro-Code in der Systemwährung aus. Deine Kund:innen können den Giro-Code dann direkt mit ihrer Banking-App scannen und so die Rechnung bezahlen.
-| `order.formattedGeneral.giroCodeInSystemCurrency \| raw`
-| -
-
-| `Währungscode`
-|Währungscode, z.B. *EUR* oder *USD*.
-| `order.formattedSubtotals.currencyCode`
-| $Currency
-
-| `Währungszeichen`
-|Währungssymbol, z.B. *€* oder *$*.
-| `order.formattedSubtotals.currencySymbol`
-| $Currency
-
-| `Rechnungsnummer-ID`
-|
-| `order.formattedDocuments.invoice`
-| -
-
-| `Gesamtrechnungsbetrag netto`
-|
-| `order.formattedGeneral.invoiceTotalNet`
-| $InvoiceTotalNet
-
-| `Gesamtbetrag des Auftrags netto`
-|
-| `order.formattedGeneral.totalNet`
-| $OrderTotalNet
-
-| `Offener Betrag`
-|
-| `order.formattedGeneral.openAmount`
-| $OpenAmount
-
-| `Überbezahlter Betrag`
-|
-| `order.formattedGeneral.overpaidAmount`
-| $OverpaidAmount
 
 | `Bezahlter Betrag`
 |
 | `order.formattedGeneral.paidAmount`
 | $PaidAmount
+
+| `Gesamtbetrag der Mehrwertsteuer`
+|
+| `order.formattedGeneral.totalVat`
+| $TotalVAT
+
+| `Gesamtbetrag des Auftrags netto`
+|
+| `order.formattedGeneral.totalNet`
+| $OrderTotalNet
 
 | `Gesamtrabatt brutto`
 |
@@ -1353,18 +1322,37 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 
 | `Gesamtrechnungsbetrag`
 |
+| `order.formattedGeneral.invoiceTotalIncludingGiftCard`
+| 
+
+| `Gesamtrechnungsbetrag abzgl. Verkaufsgutschein`
+|
 | `order.formattedGeneral.invoiceTotal`
 | $InvoiceTotal
 
-| `Gesamtbetrag der Mehrwertsteuer`
+| `Gesamtrechnungsbetrag netto`
 |
-| `order.formattedGeneral.totalVat`
-| $TotalVAT
+| `order.formattedGeneral.invoiceTotalNet`
+| $InvoiceTotalNet
 
-| `Artikelwert`
+| `Giro-Code in Auftragswährung`
+|Gibt den Giro-Code in der Auftragswährung aus. Deine Kund:innen können den Giro-Code dann direkt mit ihrer Banking-App scannen und so die Rechnung bezahlen.
+| `order.formattedGeneral.giroCodeInOrderCurrency \| raw`
+| -
+| `Giro-Code in Systemwährung`
+|Gibt den Giro-Code in der Systemwährung aus. Deine Kund:innen können den Giro-Code dann direkt mit ihrer Banking-App scannen und so die Rechnung bezahlen.
+| `order.formattedGeneral.giroCodeInSystemCurrency \| raw`
+| -
+
+| `Offener Betrag`
 |
-| `order.formattedGeneral.valueOfItems`
-| $ValueOfItems
+| `order.formattedGeneral.openAmount`
+| $OpenAmount
+
+| `Rechnungsnummer-ID`
+|
+| `order.formattedDocuments.invoice`
+| -
 
 | `Warenwert (Brutto)`
 |
@@ -1375,6 +1363,21 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |
 | `order.formattedSubtotals.subtotalPriceNet`
 | -
+
+| `Währungscode`
+|Währungscode, z.B. *EUR* oder *USD*.
+| `order.formattedSubtotals.currencyCode`
+| $Currency
+
+| `Währungszeichen`
+|Währungssymbol, z.B. *€* oder *$*.
+| `order.formattedSubtotals.currencySymbol`
+| $Currency
+
+| `Überbezahlter Betrag`
+|
+| `order.formattedGeneral.overpaidAmount`
+| $OverpaidAmount
 
 |====
 
@@ -1387,11 +1390,10 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `DHL Retoure Online QR-Code URL`
-|Sendet deinen Kund:innen einen QR-Code für xref:fulfillment:plugin-dhl-retoure-online.adoc#[DHL Retoure Online]. Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach einem Klick auf die URL erscheint dann in einem separaten Fenster der QR-Code. +
-Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Personal in der Postfiliale den QR-Code auf ihrem Smartphone vorzeigen. Das Personal druckt dann das Retourenlabel und bringt es auf dem Paket an. Deine Kund:innen benötigen also keinen Drucker mehr und du musst das Retourenlabel nicht als PDF-Anhang in der E-Mail versenden. +
-| `order.formattedGeneral.DHLRetoureOnlineQRCodeURLNew \| raw`
-| $DHLRetoureOnlineQRCodeURL
+| `Anzahl der Pakete`
+|Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
+| `order.package`
+| -
 
 | `DHL Retoure Online QR-Code Bild`
 |Sendet deinen Kund:innen einen QR-Code für xref:fulfillment:plugin-dhl-retoure-online.adoc#[DHL Retoure Online]. Der QR-Code wird in der E-Mail an deine Kund:innen als Bild ausgegeben. +
@@ -1399,34 +1401,15 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedGeneral.DHLRetoureOnlineQRCodeImage \| raw`
 | -
 
+| `DHL Retoure Online QR-Code URL`
+|Sendet deinen Kund:innen einen QR-Code für xref:fulfillment:plugin-dhl-retoure-online.adoc#[DHL Retoure Online]. Der QR-Code wird in der E-Mail an deine Kund:innen als URL ausgegeben. Nach einem Klick auf die URL erscheint dann in einem separaten Fenster der QR-Code. +
+Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Personal in der Postfiliale den QR-Code auf ihrem Smartphone vorzeigen. Das Personal druckt dann das Retourenlabel und bringt es auf dem Paket an. Deine Kund:innen benötigen also keinen Drucker mehr und du musst das Retourenlabel nicht als PDF-Anhang in der E-Mail versenden. +
+| `order.formattedGeneral.DHLRetoureOnlineQRCodeURLNew \| raw`
+| $DHLRetoureOnlineQRCodeURL
+
 | `Lieferschein-ID`
 |ID des xref:auftraege:lieferscheine-erzeugen.adoc#[Lieferscheins].
 | `order.formattedDocuments.deliveryNote`
-| -
-
-| `Voraussichtliches Lieferdatum`
-|
-| `order.formattedDates.estimatedDeliveryDate`
-| $OrderEstimatedDeliveryDate
-
-| `Voraussichtliches Versanddatum`
-|
-| `order.formattedDates.estimatedShippingDate`
-| $OrderEstimatedShipmentDate
-
-| `Anzahl der Pakete`
-|Gibt die Anzahl der im Auftrag enthaltenen Pakete aus.
-| `order.package`
-| -
-
-| `Paketnummernliste`
-|Paketnummern bzw. Tracking-Nummern werden nach erfolgreicher Auftragsanmeldung beim Versanddienstleister im Auftrag gespeichert.
-| `order.formattedShipping.packageNumberList`
-|$PackageCount
-
-| `Paketgewicht`
-|Paketgewicht und Einheit wie im Menü *Aufträge » Versand-Center* im Bereich *Versandpakete* gespeichert.
-| `order.formattedShipping.packageWeight`
 | -
 
 | `Mögliches Lieferdatum`
@@ -1439,6 +1422,16 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedReorder.estimatedDeliveryDate`
 | $ReorderDeliveryDate
 
+| `Paketgewicht`
+|Paketgewicht und Einheit wie im Menü *Aufträge » Versand-Center* im Bereich *Versandpakete* gespeichert.
+| `order.formattedShipping.packageWeight`
+| -
+
+| `Paketnummernliste`
+|Paketnummern bzw. Tracking-Nummern werden nach erfolgreicher Auftragsanmeldung beim Versanddienstleister im Auftrag gespeichert.
+| `order.formattedShipping.packageNumberList`
+|$PackageCount
+
 | `Retoureneingangsdatum`
 |
 | `order.formattedDates.returnDate`
@@ -1448,6 +1441,22 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 |
 | `order.returns_code`
 | $ReturnsCode
+
+| `Tracking-URL`
+|Gibt den Link zur Sendungsverfolgungsseite des Versanddienstleisters aus. Die xref:fulfillment:versand-vorbereiten.adoc#840[Tracking-URL] des Versanddienstleisters wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert. +
+*_Hinweis:_* Schau auch in unser xref:crm:praxisbeispiel-tracking-url-senden.adoc#[Praxisbeispiel] zu diesem Thema. Dort wird beschrieben, welche Einstellungen du vornehmen musst, um die Tracking-URL an deine Kund:innen zu senden.
+| `order.formattedShipping.trackingURL \| raw`
+| $TrackingURL
+
+| `Versanddienstleister`
+|Name des xref:fulfillment:versand-vorbereiten.adoc#800[Versanddienstleisters] wie im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert.
+| `order.formattedShipping.providerName`
+| $ShippingServiceProviderName
+
+| `Versanddienstleister-ID`
+|Wird automatisch vom System vergeben. Die ID des xref:fulfillment:versand-vorbereiten.adoc#800[Versanddienstleisters] findest du im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister*.
+| `order.formattedShipping.providerId`
+| $ShippingServiceProviderID
 
 | `Versandkosten (Brutto)`
 |
@@ -1469,21 +1478,15 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedShipping.profileId`
 | $ShippingProfileID
 
-| `Versanddienstleister`
-|Name des xref:fulfillment:versand-vorbereiten.adoc#800[Versanddienstleisters] wie im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert.
-| `order.formattedShipping.providerName`
-| $ShippingServiceProviderName
+| `Voraussichtliches Lieferdatum`
+|
+| `order.formattedDates.estimatedDeliveryDate`
+| $OrderEstimatedDeliveryDate
 
-| `Versanddienstleister-ID`
-|Wird automatisch vom System vergeben. Die ID des xref:fulfillment:versand-vorbereiten.adoc#800[Versanddienstleisters] findest du im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister*.
-| `order.formattedShipping.providerId`
-| $ShippingServiceProviderID
-
-| `Tracking-URL`
-|Gibt den Link zur Sendungsverfolgungsseite des Versanddienstleisters aus. Die xref:fulfillment:versand-vorbereiten.adoc#840[Tracking-URL] des Versanddienstleisters wird im Menü *Einrichtung » Aufträge » Versand » Optionen* im Tab *Versanddienstleister* gespeichert. +
-*_Hinweis:_* Schau auch in unser xref:crm:praxisbeispiel-tracking-url-senden.adoc#[Praxisbeispiel] zu diesem Thema. Dort wird beschrieben, welche Einstellungen du vornehmen musst, um die Tracking-URL an deine Kund:innen zu senden.
-| `order.formattedShipping.trackingURL \| raw`
-| $TrackingURL
+| `Voraussichtliches Versanddatum`
+|
+| `order.formattedDates.estimatedShippingDate`
+| $OrderEstimatedShipmentDate
 
 |====
 
@@ -1496,6 +1499,11 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
+| `eBay-Zahlungs-ID`
+|
+| `order.formattedProperties.ebayUniquePaymentID`
+| $EbayUniquePaymentID
+
 | `PayPal Link`
 | Gibt den Link zur PayPal-Bezahlseite aus.
 | `order.formattedGeneral.paypalVariables.link \| raw`
@@ -1506,10 +1514,10 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedGeneral.paypalVariables.linkButton \| raw`
 | -
 
-| `Zahlungsziel`
-|
-| `order.formattedDates.paymentDueDate`
-| 
+| `Transaktions-ID`
+|ID der Zahlungstransaktion.
+| `order.formattedGeneral.paymentTransactionId`
+| -
 
 | `Zahlungsart (Backend)`
 |
@@ -1526,529 +1534,10 @@ Wenn deine Kund:innen einen Artikel zurücksenden möchten, müssen sie dem Pers
 | `order.formattedProperties.paymentMethod`
 | $MethodOfPaymentID
 
-| `Transaktions-ID`
-|ID der Zahlungstransaktion.
-| `order.formattedGeneral.paymentTransactionId`
-| -
-
-| `eBay-Zahlungs-ID`
+| `Zahlungsziel`
 |
-| `order.formattedProperties.ebayUniquePaymentID`
-| $EbayUniquePaymentID
-
-|====
-
-[#variablen-kontakt]
-=== Variablen: Kontakt
-
-In dieser Kategorie findest du alle kontaktbezogenen Unterkategorien.
-
-Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapitel weitergeleitet zu werden:
-
-* <<#variablen-kontakt-allgemein, Allgemein>>
-* <<#variablen-kontakt-bankdaten-des-kontakts, Bankdaten des Kontakts>>
-* <<#variablen-kontakt-eigenschaften, Eigenschaften>>
-* <<#variablen-kontakt-optionen, Kontaktoptionen>>
-* <<#variablen-kontakt-lieferadresse, Lieferadresse>>
-** <<#variablen-kontakt-lieferadresse-daten, Daten der Lieferadresse>>
-** <<#variablen-kontakt-lieferadresse-optionen, Optionen der Lieferadresse>>
-* <<#variablen-kontakt-rechnungsadresse, Rechnungsadresse>>
-** <<#variablen-kontakt-rechnungsadresse-daten, Daten der Rechnungsadresse>>
-** <<#variablen-kontakt-rechnungsadresse-optionen, Optionen der Rechnungsadresse>>
-
-[#variablen-kontakt-allgemein]
-==== Kontakt / Allgemein
-
-[[table-variables-contact]]
-.Variablen in der Unterkategorie *Kontakt / Allgemein*
-[cols="2,4,3,2"]
-|====
-|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
-
-| `Klasse`
-| Klasse, die dem Kontakt zugeordnet ist. xref:crm:vorbereitende-einstellungen.adoc#kundenklasse-erstellen[Klassen] erstellst du im Menü *Einrichtung » CRM » Klassen*.
-| `contact.formattedClass.name`
-| $CustomerClass
-
-| `Firmenname`
-|Name der xref:crm:kontakt-bearbeiten.adoc#firma[Firma].
-| `contact.formattedAccounts.companyName`
-| $CustomerCompany
-
-| `Externe ID`
-|Gibt die externe Nummer aus den Kontaktdetails aus.
-| `contact.externalId`
-| -
-
-| `Kontakt-ID`
-|ID des xref:crm:kontakt-bearbeiten.adoc#[Kontakts]. Die ID wird automatisch vergeben und kann nicht geändert werden.
-| `contact.id`
-| $CustomerID
-
-| `Kundenzeichen`
-|
-| `order.formattedProperties.customerSign`
-| $CustomerSign
-
-| `Vorname`
-|
-| `contact.firstName`
-| $CustomerFirstName
-
-| `Vorname und Nachname des Systembenutzers`
-|Vorname und Nachname des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] am Kontaktdatensatz gespeichert ist.
-| `contact.formattedUser.realName`
-|
-
-| `Vollständiger Name`
-|
-| `contact.fullName`
-| $CustomerFullName
-
-| `Geschlecht`
-|Anzeige, wenn männlich: *male* +
-Anzeige, wenn weiblich: *female* +
-Anzeige, wenn divers: leere Option
-| `contact.gender is same as ('diverse') ? '' : contact.gender`
-|
-
-| `Sprache`
-|Sprache wie im Kontaktdatensatz gespeichert. Wenn du eine E-Mail-Vorlage in der gewählten Sprache erstellt hast, werden E-Mail-Vorlagen in dieser Sprache an den Kontakt versendet.
-| `contact.lang`
-| $CustomerLang
-
-| `Nachname`
-|
-| `contact.lastName`
-| $CustomerLastName
-
-| `Newsletter-Empfang: Zustimmung durch Kontakt`
-|Datum, wann der Kontakt dem Newsletter-Empfang zugestimmt hat. +
-Datumsformat in der E-Mail: `mm-tt-jjjj`. +
-Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitstempel im Format `00:00:00` gespeichert.
-| `contact.newsletterAllowanceAt`
-| $IsNewsletterActive
-
-| `Nummer`
-|Zusätzliche Nummer für den Kontakt
-| `contact.number`
-| $CustomerNumber
-
-| `Auftragsanzahl`
-|
-| `contact.formattedOrdersCount`
-| $OrderCount
-
-| `Anrede geschäftlich`
-|
-| `contact.formattedOptions.salutationWork`
-| $CustomerSalutationLabel
-
-| `Anrede`
-|
-| `contact.formattedSalutation.label`
-| $CustomerSalutationKey
-
-| `Anrede privat`
-|
-| `contact.formattedOptions.salutationPrivate`
-| $CustomerSalutationLabel
-
-| `Signatur des Systembenutzers`
-|Signatur des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] am Kontaktdatensatz gespeichert ist, im Textformat.
-| `contact.formattedUser.signatureNoHtml`
-| $ContactOwnerSignature
-
-| `Signatur des Systembenutzers im HTML-Format`
-|Signatur des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] im Kontaktdatensatz gespeichert ist, im HTML-Format.
-| `contact.formattedUser.signatureHtml`
-| $ContactOwnerSignatureHtml
-
-| `Titel`
-|
-| `contact.title`
-| $CustomerTitle
-
-|====
-
-[#variablen-kontakt-bankdaten-des-kontakts]
-==== Kontakt / Bankdaten des Kontakts
-
-[[table-variables-contact-bank-details-of-contact]]
-.Variablen in der Unterkategorie *Kontakt / Bankdaten des Kontakts*
-[cols="2,4,3,2"]
-|====
-|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
-
-| `Kontoinhaber (Kontakt)`
-| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Kontoinhaber:in] wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.accountOwner`
-|
-
-| `BIC des Kontakts`
-| xref:crm:kontakt-bearbeiten.adoc#bankdaten[BIC] wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.bic`
-| $CustomerBIC
-
-| `Bankname des Kontakts`
-| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Bankname] wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.bankName`
-| $CustomerBankName
-
-| `IBAN des Kontakts`
-|IBAN wie im Kontaktdatensatz gespeichert.
-| `contact.formattedBanks.iban`
-| $CustomerIBAN
-
-|====
-
-[#variablen-kontakt-lieferadresse]
-==== Kontakt / Lieferadresse
-
-Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapitel weitergeleitet zu werden:
-
-* <<#variablen-kontakt-lieferadresse-daten, Daten der Lieferadresse>>
-* <<#variablen-kontakt-lieferadresse-optionen, Optionen der Lieferadresse>>
-
-[#variablen-kontakt-lieferadresse-daten]
-===== Kontakt / Lieferadresse / Daten der Lieferadresse
-
-[[table-variables-contact-delivery-address-data]]
-.Variablen in der Unterkategorie *Kontakt / Lieferadresse / Daten der Lieferadresse*
-[cols="1,3,2"]
-|====
-|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
-
-| `Lieferadresse Adresszusatz`
-| `contact.formattedAddresses.deliveryAddress.address3 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address4`
-| $DeliveryAddressAdditionalAddress
-
-| `Lieferadresse Firmenname`
-| `contact.formattedAddresses.deliveryAddress.name1`
-| $DeliveryAddressCompany
-
-| `Lieferadresse Land`
-| `contact.formattedAddresses.deliveryAddress.country.name`
-| $DeliveryAddressCountry
-
-| `Lieferadresse Länder-ID`
-| `contact.formattedAddresses.deliveryAddress.country.id`
-| $DeliveryAddressCountryID
-
-| `Lieferadresse Länder-ISO-Code 2`
-| `contact.formattedAddresses.deliveryAddress.country.isoCode2`
-| $DeliveryAddressCountryIsoCode
-
-| `Lieferadresse Länder-ISO-Code 3`
-| `contact.formattedAddresses.deliveryAddress.country.isoCode3`
-| $DeliveryAddressCountryIsoCode
-
-| `Lieferadresse Vorname`
-| `contact.formattedAddresses.deliveryAddress.name2`
-| $DeliveryAddressFirstName
-
-| `Lieferadresse Vorname und Nachname`
-| `contact.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.name3`
-| $DeliveryAddressFullName
-
-| `Lieferadresse Hausnummer`
-| `contact.formattedAddresses.deliveryAddress.address2`
-|
-
-| `Lieferadresse Nachname`
-| `contact.formattedAddresses.deliveryAddress.name3`
-| $DeliveryAddressLastName
-
-| `Lieferadresse Telefon`
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.telephone`
-| $DeliveryAddressPhone
-
-| `Lieferadresse Postleitzahl`
-| `contact.formattedAddresses.deliveryAddress.postalCode`
-| $DeliveryAddressZip
-
-| `Lieferadresse Postleitzahl und Ort`
-| `contact.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ contact.formattedAddresses.deliveryAddress.town`
-| $DeliveryAddressCityWithZip
-
-| `Lieferadresse Bundesland`
-| `contact.formattedAddresses.deliveryAddress.state.name`
-| $DeliveryAddressState
-
-| `Lieferadresse Straße`
-| `contact.formattedAddresses.deliveryAddress.address1 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address2`
-| $DeliveryAddressStreet
-
-| `Lieferadresse Ort`
-| `contact.formattedAddresses.deliveryAddress.town`
-| $DeliveryAddressCity
-
-|====
-
-[#variablen-kontakt-lieferadresse-optionen]
-===== Kontakt / Lieferadresse / Optionen der Lieferadresse
-
-[TIP]
-*_Hinweis:_* Wenn es sich um eine Nachbestellung handelt, werden einige der folgenden Variablen für die Adressoptionen der Lieferadresse nicht in der E-Mail an deine Kund:innen ausgegeben. Das liegt daran, dass die Adressen, die an einem Lieferanten gespeichert werden, nicht berücksichtigt werden, weil du einen Lieferanten auch ohne Adresse in deinem System speichern kannst.
-
-[[table-variables-contact-delivery-address-options]]
-.Variablen in der Unterkategorie *Kontakt / Lieferadresse / Optionen der Lieferadresse*
-[cols="1,2,3"]
-|====
-|Name der Variable |Erläuterung |Twig expression
-
-| `Lieferadresse Altersfreigabe`
-|Altersfreigabe aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.BBFC`
-
-| `Lieferadresse Geburtstag`
-|Geburtstag aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.birthday`
-
-| `Lieferadresse Kontaktperson`
-|Kontaktperson aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
-
-| `Lieferadresse E-Mail`
-|E-Mail-Adresse aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.email`
-
-| `Lieferadresse Gelangensbestätigung`
-|Gelangensbestätigung aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.entryCertificate`
-
-| `Lieferadresse Externe Adress-ID`
-|Externe Adress-ID aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
-
-| `Lieferadresse Externe Kunden-ID`
-|Externe Kunden-ID aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalCustomerID`
-
-| `Lieferadresse Personennummer`
-|Personennummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.personalId`
-
-| `Lieferadresse Telefon`
-|Telefonnummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.telephone`
-
-| `Lieferadresse Postnummer`
-|Postnummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.postNumber`
-
-| `Lieferadresse Titel`
-|Titel aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.title`
-
-| `Lieferadresse USt-IdNr.`
-|Umsatzsteuer-Identifikationsnummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
-
-|====
-
-[#variablen-kontakt-rechnungsadresse]
-==== Kontakt / Rechnungsadresse
-
-Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapitel weitergeleitet zu werden:
-
-* <<#variablen-kontakt-rechnungsadresse-daten, Daten der Rechnungsadresse>>
-* <<#variablen-kontakt-rechnungsadresse-optionen, Optionen der Rechnungsadresse>>
-
-[#variablen-kontakt-rechnungsadresse-daten]
-===== Kontakt / Rechnungsadresse / Daten der Rechnungsadresse
-
-[[table-variables-contact-invoice-address-data]]
-.Variablen in der Unterkategorie *Kontakt / Rechnungsadresse / Daten der Rechnungsadresse*
-[cols="1,3,2"]
-|====
-|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
-
-| `Rechnungsadresse Adresszusatz`
-| `contact.formattedAddresses.invoiceAddress.address3 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address4`
-|
-
-| `Rechnungsadresse Firmenname`
-| `contact.formattedAddresses.invoiceAddress.name1`
-|
-
-| `Rechnungsadresse Land`
-| `contact.formattedAddresses.invoiceAddress.country.name`
-|
-
-| `Rechnungsadresse Länder-ID`
-| `contact.formattedAddresses.invoiceAddress.country.id`
-|
-
-| `Rechnungsadresse Länder-ISO-Code 2`
-| `contact.formattedAddresses.invoiceAddress.country.isoCode2`
-|
-
-| `Rechnungsadresse Länder-ISO-Code 3`
-| `contact.formattedAddresses.invoiceAddress.country.isoCode3`
-|
-
-| `Rechnungsadresse Vorname`
-| `contact.formattedAddresses.invoiceAddress.name2`
-|
-
-| `Rechnungsadresse Vorname und Nachname`
-| `contact.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.name3`
-|
-
-| `Rechnungsadresse Hausnummer`
-| `contact.formattedAddresses.invoiceAddress.address2`
-|
-
-| `Rechnungsadresse Nachname`
-| `contact.formattedAddresses.invoiceAddress.name3`
-|
-
-| `Rechnungsadresse Telefon`
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.telephone`
-|
-
-| `Rechnungsadresse Postleitzahl`
-| `contact.formattedAddresses.invoiceAddress.postalCode`
-|
-
-| `Rechnungsadresse Postleitzahl und Ort`
-| `contact.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ contact.formattedAddresses.invoiceAddress.town`
-|
-
-| `Rechnungsadresse Bundesland`
-| `contact.formattedAddresses.invoiceAddress.state.name`
-|
-
-| `Rechnungsadresse Straße`
-| `contact.formattedAddresses.invoiceAddress.address1 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address2`
-|
-
-| `Rechnungsadresse Ort`
-| `contact.formattedAddresses.invoiceAddress.town`
-|
-
-|====
-
-[#variablen-kontakt-rechnungsadresse-optionen]
-===== Kontakt / Rechnungsadresse / Optionen der Rechnungsadresse
-
-[TIP]
-*_Hinweis:_* Wenn es sich um eine Nachbestellung handelt, werden einige der folgenden Variablen für die Adressoptionen der Rechnungsadresse nicht in der E-Mail an deine Kund:innen ausgegeben. Das liegt daran, dass die Adressen, die an einem Lieferanten gespeichert werden, nicht berücksichtigt werden, weil du einen Lieferanten auch ohne Adresse in deinem System speichern kannst.
-
-[[table-variables-contact-invoice-address-options]]
-.Variablen in der Unterkategorie *Kontakt / Rechnungsadresse / Optionen der Rechnungsadresse*
-[cols="1,3,2"]
-|====
-
-| `Rechnungsadresse Altersfreigabe`
-|Altersfreigabe aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.BBFC`
-
-| `Rechnungsadresse Geburtstag`
-|Geburtstag aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.birthday`
-
-| `Rechnungsadresse Kontaktperson`
-|Kontaktperson aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
-
-| `Rechnungsadresse E-Mail`
-|E-Mail-Adresse aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.email`
-
-| `Rechnungsadresse Gelangensbestätigung`
-|Gelangensbestätigung aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.entryCertificate`
-
-| `Rechnungsadresse Externe Adress-ID`
-|Externe Adress-ID aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
-
-| `Rechnungsadresse Externe Kunden-ID`
-|Externe Kunden-ID aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.externalCustomerID`
-
-| `Rechnungsadresse Personennummer`
-|Personennummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.personalId`
-
-| `Rechnungsadresse Telefon`
-|Telefonnummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.telephone`
-
-| `Rechnungsadresse Postnummer`
-|Postnummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.postNumber`
-
-| `Rechnungsadresse Titel`
-|Titel aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.invoiceAddress.formattedOptions.title`
-
-| `Rechnungsadresse USt-IdNr.`
-|Umsatzsteuer-Identifikationsnummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
-| `contact.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
-
-|====
-
-[#variablen-kontakt-eigenschaften]
-==== Kontakt / Eigenschaften
-
-In diesem Bereich des EmailBuilder werden alle Variablen angezeigt, für die du Eigenschaften für den Bereich *Kontakt* im Menü *Einrichtung » Einstellungen » Eigenschaften* erstellt hast. +
-Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.adoc#500[Eigenschaften].
-
-[#variablen-kontakt-optionen]
-==== Kontakt / Kontaktoptionen
-
-[[table-variables-contact-options]]
-.Variablen in der Unterkategorie *Kontakt / Kontaktoptionen*
-[cols="1,3,2"]
-|====
-|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
-
-| `Zusätzlicher Ansprechpartner`
-| `contact.formattedOptions.additionalContactPerson`
-| -
-
-| `E-Mail geschäftlich`
-| `contact.formattedOptions.emailWork`
-| $CustomerEmail
-
-| `E-Mail PayPal`
-| `contact.formattedOptions.emailPayPal`
-| $CustomerEmail
-
-| `E-Mail privat`
-| `contact.formattedOptions.emailPrivate`
-| $CustomerEmail
-
-| `Fax geschäftlich`
-| `contact.formattedOptions.telefaxWork`
-| $CustomerFax
-
-| `Fax privat`
-| `contact.formattedOptions.telefaxPrivate`
-| $CustomerFax
-
-| `Mobiltelefon geschäftlich`
-| `contact.formattedOptions.telephoneMobileWork`
-| $CustomerMobilePhone
-
-| `Mobiltelefon privat`
-| `contact.formattedOptions.telephoneMobilePrivate`
-| $CustomerMobilePhone
-
-| `Telefon geschäftlich`
-| `contact.formattedOptions.telephoneWork`
-| $CustomerPhone
-
-| `Telefon privat`
-| `contact.formattedOptions.telephonePrivate`
-| $CustomerPhone
-
-| `eBay-Name`
-| `contact.formattedOptions.marketplaceEbay`
-| $CustomerEbayName
+| `order.formattedDates.paymentDueDate`
+| 
 
 |====
 
@@ -2074,6 +1563,21 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
+| `E-Mail-Absender`
+|Gibt den E-Mail-Absender aus.
+| `globals.emailSender`
+| -
+
+| `EORI-Nummer`
+|Eindeutige Identifizierungsnummer, die für Zollzwecke benötigt wird.
+| `globals.account.EORINumber`
+| -
+
+| `Heutiges Datum`
+|Gibt das heutige Datum im Format `tt-mm-jjjj` aus.
+| `"now"\|date("d-m-Y")`
+| $TodaysDate
+
 | `Mandanten-ID`
 |Gibt die ID des Mandanten (Shops) aus.
 | `globals.webshopId`
@@ -2082,16 +1586,6 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `Mandantenname`
 |Gibt den Namen des Mandanten (Shops) aus.
 | `globals.clientName`
-| -
-
-| `EORI-Nummer`
-|Eindeutige Identifizierungsnummer, die für Zollzwecke benötigt wird.
-| `globals.account.EORINumber`
-| -
-
-| `E-Mail-Absender`
-|Gibt den E-Mail-Absender aus.
-| `globals.emailSender`
 | -
 
 | `Signatur im HTML-Format`
@@ -2104,11 +1598,6 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `globals.account.signatureText \| raw`
 | $SignatureText
 
-| `Heutiges Datum`
-|Gibt das heutige Datum im Format `tt-mm-jjjj` aus.
-| `"now"\|date("d-m-Y")`
-| $TodaysDate
-
 |====
 
 [#variablen-global-bankdaten-des-mandanten]
@@ -2120,25 +1609,25 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `Kontoinhaber (Stammdaten)`
-|Kontoinhaber:in aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
-| `globals.bank.owner`
-|
+| `Bankname (Stammdaten)`
+|Bankname aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+| `globals.bank.name`
+| $BankName
 
 | `BIC (Stammdaten)`
 |BIC aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
 | `globals.bank.bic`
 |
 
-| `Bankname (Stammdaten)`
-|Bankname aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
-| `globals.bank.name`
-| $BankName
-
 | `IBAN (Stammdaten)`
 |IBAN aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
 | `globals.bank.iban`
 | $BankIBAN
+
+| `Kontoinhaber (Stammdaten)`
+|Kontoinhaber:in aus den xref:willkommen:schnelleinstieg-basiseinstellungen.adoc#100[Stammdaten] deines Systems. Wird im Menü *Einrichtung » Einstellungen » Bank* gespeichert.
+| `globals.bank.owner`
+|
 
 |====
 
@@ -2212,19 +1701,9 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
-| `URL zum Warenkorb`
-|Gibt die URL zum Warenkorb im Webshop aus.
-| `globals.links.linkBasketNew \| raw`
-|
-
-| `URL zum Ändern des Passworts`
-|Gibt die URL zum Bereich *Passwort ändern* im Webshop aus. Dort können Kund:innen ein neues Passwort eingeben.
-| `globals.links.linkChangePasswordNew \| raw`
-| $CustomerPassword
-
-| `URL zur Auftragsübersicht`
-|Gibt die URL zur Auftragsübersicht im Webshop aus.
-| `globals.links.linkCheckoutNew \| raw`
+| `URL zu den Geschäftsbedingungen`
+|Gibt die URL zu den AGB aus.
+| `globals.links.linkTermsConditionsNew \| raw`
 |
 
 | `URL zum Bestätigen der E-Mail-Adresse`
@@ -2237,14 +1716,24 @@ Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapite
 | `globals.links.linkNewPasswordNew \| raw`
 |
 
+| `URL zum Warenkorb`
+|Gibt die URL zum Warenkorb im Webshop aus.
+| `globals.links.linkBasketNew \| raw`
+|
+
 | `URL zum Webshop`
 |Gibt die URL zum Webshop aus.
 | `globals.links.linkWebstoreNew \| raw`
 |
 
-| `URL zu den Geschäftsbedingungen`
-|Gibt die URL zu den AGB aus.
-| `globals.links.linkTermsConditionsNew \| raw`
+| `URL zum Ändern des Passworts`
+|Gibt die URL zum Bereich *Passwort ändern* im Webshop aus. Dort können Kund:innen ein neues Passwort eingeben.
+| `globals.links.linkChangePasswordNew \| raw`
+| $CustomerPassword
+
+| `URL zur Auftragsübersicht`
+|Gibt die URL zur Auftragsübersicht im Webshop aus.
+| `globals.links.linkCheckoutNew \| raw`
 |
 
 |====
@@ -2326,6 +1815,512 @@ Wähle oben aus den Dropdown-Listen die gewünschte Sprache und den Ausgabetyp *
 
 |====
 
+[#variablen-kontakt]
+=== Variablen: Kontakt
+
+In dieser Kategorie findest du alle kontaktbezogenen Unterkategorien.
+
+Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapitel weitergeleitet zu werden:
+
+* <<#variablen-kontakt-allgemein, Allgemein>>
+* <<#variablen-kontakt-bankdaten-des-kontakts, Bankdaten des Kontakts>>
+* <<#variablen-kontakt-eigenschaften, Eigenschaften>>
+* <<#variablen-kontakt-optionen, Kontaktoptionen>>
+* <<#variablen-kontakt-lieferadresse, Lieferadresse>>
+** <<#variablen-kontakt-lieferadresse-daten, Daten der Lieferadresse>>
+** <<#variablen-kontakt-lieferadresse-optionen, Optionen der Lieferadresse>>
+* <<#variablen-kontakt-rechnungsadresse, Rechnungsadresse>>
+** <<#variablen-kontakt-rechnungsadresse-daten, Daten der Rechnungsadresse>>
+** <<#variablen-kontakt-rechnungsadresse-optionen, Optionen der Rechnungsadresse>>
+
+[#variablen-kontakt-allgemein]
+==== Kontakt / Allgemein
+
+[[table-variables-contact]]
+.Variablen in der Unterkategorie *Kontakt / Allgemein*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Anrede`
+|
+| `contact.formattedSalutation.label`
+| $CustomerSalutationKey
+
+| `Anrede geschäftlich`
+|
+| `contact.formattedOptions.salutationWork`
+| $CustomerSalutationLabel
+
+| `Anrede privat`
+|
+| `contact.formattedOptions.salutationPrivate`
+| $CustomerSalutationLabel
+
+| `Auftragsanzahl`
+|
+| `contact.formattedOrdersCount`
+| $OrderCount
+
+| `Externe ID`
+|Gibt die externe Nummer aus den Kontaktdetails aus.
+| `contact.externalId`
+| -
+
+| `Firmenname`
+|Name der xref:crm:kontakt-bearbeiten.adoc#firma[Firma].
+| `contact.formattedAccounts.companyName`
+| $CustomerCompany
+
+| `Geschlecht`
+|Anzeige, wenn männlich: *male* +
+Anzeige, wenn weiblich: *female* +
+Anzeige, wenn divers: leere Option
+| `contact.gender is same as ('diverse') ? '' : contact.gender`
+|
+
+| `Klasse`
+| Klasse, die dem Kontakt zugeordnet ist. xref:crm:vorbereitende-einstellungen.adoc#kundenklasse-erstellen[Klassen] erstellst du im Menü *Einrichtung » CRM » Klassen*.
+| `contact.formattedClass.name`
+| $CustomerClass
+
+| `Kontakt-ID`
+|ID des xref:crm:kontakt-bearbeiten.adoc#[Kontakts]. Die ID wird automatisch vergeben und kann nicht geändert werden.
+| `contact.id`
+| $CustomerID
+
+| `Kundenzeichen`
+|
+| `order.formattedProperties.customerSign`
+| $CustomerSign
+
+| `Nachname`
+|
+| `contact.lastName`
+| $CustomerLastName
+
+| `Newsletter-Empfang: Zustimmung durch Kontakt`
+|Datum, wann der Kontakt dem Newsletter-Empfang zugestimmt hat. +
+Datumsformat in der E-Mail: `mm-tt-jjjj`. +
+Im Kontaktdatensatz wird zusätzlich zum Datum im Format `tt-mm-jjjj` der Zeitstempel im Format `00:00:00` gespeichert.
+| `contact.newsletterAllowanceAt`
+| $IsNewsletterActive
+
+| `Nummer`
+|Zusätzliche Nummer für den Kontakt
+| `contact.number`
+| $CustomerNumber
+
+| `Signatur des Systembenutzers`
+|Signatur des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] am Kontaktdatensatz gespeichert ist, im Textformat.
+| `contact.formattedUser.signatureNoHtml`
+| $ContactOwnerSignature
+
+| `Signatur des Systembenutzers im HTML-Format`
+|Signatur des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] im Kontaktdatensatz gespeichert ist, im HTML-Format.
+| `contact.formattedUser.signatureHtml`
+| $ContactOwnerSignatureHtml
+
+| `Sprache`
+|Sprache wie im Kontaktdatensatz gespeichert. Wenn du eine E-Mail-Vorlage in der gewählten Sprache erstellt hast, werden E-Mail-Vorlagen in dieser Sprache an den Kontakt versendet.
+| `contact.lang`
+| $CustomerLang
+
+| `Titel`
+|
+| `contact.title`
+| $CustomerTitle
+
+| `Vollständiger Name`
+|
+| `contact.fullName`
+| $CustomerFullName
+
+| `Vorname`
+|
+| `contact.firstName`
+| $CustomerFirstName
+
+| `Vorname und Nachname des Systembenutzers`
+|Vorname und Nachname des Systembenutzers, der als xref:crm:kontakt-bearbeiten.adoc#kontaktdetails[Eigner] am Kontaktdatensatz gespeichert ist.
+| `contact.formattedUser.realName`
+|
+
+|====
+
+[#variablen-kontakt-bankdaten-des-kontakts]
+==== Kontakt / Bankdaten des Kontakts
+
+[[table-variables-contact-bank-details-of-contact]]
+.Variablen in der Unterkategorie *Kontakt / Bankdaten des Kontakts*
+[cols="2,4,3,2"]
+|====
+|Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Bankname des Kontakts`
+| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Bankname] wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.bankName`
+| $CustomerBankName
+
+| `BIC des Kontakts`
+| xref:crm:kontakt-bearbeiten.adoc#bankdaten[BIC] wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.bic`
+| $CustomerBIC
+
+| `IBAN des Kontakts`
+|IBAN wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.iban`
+| $CustomerIBAN
+
+| `Kontoinhaber (Kontakt)`
+| xref:crm:kontakt-bearbeiten.adoc#bankdaten[Kontoinhaber:in] wie im Kontaktdatensatz gespeichert.
+| `contact.formattedBanks.accountOwner`
+|
+
+|====
+
+[#variablen-kontakt-eigenschaften]
+==== Kontakt / Eigenschaften
+
+In diesem Bereich des EmailBuilder werden alle Variablen angezeigt, für die du Eigenschaften für den Bereich *Kontakt* im Menü *Einrichtung » Einstellungen » Eigenschaften* erstellt hast. +
+Weitere Information findest du auf der Handbuchseite xref:artikel:eigenschaften.adoc#500[Eigenschaften].
+
+[#variablen-kontakt-optionen]
+==== Kontakt / Kontaktoptionen
+
+[[table-variables-contact-options]]
+.Variablen in der Unterkategorie *Kontakt / Kontaktoptionen*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+| `E-Mail geschäftlich`
+| `contact.formattedOptions.emailWork`
+| $CustomerEmail
+
+| `E-Mail PayPal`
+| `contact.formattedOptions.emailPayPal`
+| $CustomerEmail
+
+| `E-Mail privat`
+| `contact.formattedOptions.emailPrivate`
+| $CustomerEmail
+
+| `eBay-Name`
+| `contact.formattedOptions.marketplaceEbay`
+| $CustomerEbayName
+
+| `Fax geschäftlich`
+| `contact.formattedOptions.telefaxWork`
+| $CustomerFax
+
+| `Fax privat`
+| `contact.formattedOptions.telefaxPrivate`
+| $CustomerFax
+
+| `Mobiltelefon geschäftlich`
+| `contact.formattedOptions.telephoneMobileWork`
+| $CustomerMobilePhone
+
+| `Mobiltelefon privat`
+| `contact.formattedOptions.telephoneMobilePrivate`
+| $CustomerMobilePhone
+
+| `Telefon geschäftlich`
+| `contact.formattedOptions.telephoneWork`
+| $CustomerPhone
+
+| `Telefon privat`
+| `contact.formattedOptions.telephonePrivate`
+| $CustomerPhone
+
+| `Zusätzlicher Ansprechpartner`
+| `contact.formattedOptions.additionalContactPerson`
+| -
+
+|====
+
+[#variablen-kontakt-lieferadresse]
+==== Kontakt / Lieferadresse
+
+Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapitel weitergeleitet zu werden:
+
+* <<#variablen-kontakt-lieferadresse-daten, Daten der Lieferadresse>>
+* <<#variablen-kontakt-lieferadresse-optionen, Optionen der Lieferadresse>>
+
+[#variablen-kontakt-lieferadresse-daten]
+===== Kontakt / Lieferadresse / Daten der Lieferadresse
+
+[[table-variables-contact-delivery-address-data]]
+.Variablen in der Unterkategorie *Kontakt / Lieferadresse / Daten der Lieferadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Lieferadresse Adresszusatz`
+| `contact.formattedAddresses.deliveryAddress.address3 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address4`
+| $DeliveryAddressAdditionalAddress
+
+| `Lieferadresse Bundesland`
+| `contact.formattedAddresses.deliveryAddress.state.name`
+| $DeliveryAddressState
+
+| `Lieferadresse Firmenname`
+| `contact.formattedAddresses.deliveryAddress.name1`
+| $DeliveryAddressCompany
+
+| `Lieferadresse Hausnummer`
+| `contact.formattedAddresses.deliveryAddress.address2`
+|
+
+| `Lieferadresse Land`
+| `contact.formattedAddresses.deliveryAddress.country.name`
+| $DeliveryAddressCountry
+
+| `Lieferadresse Länder-ID`
+| `contact.formattedAddresses.deliveryAddress.country.id`
+| $DeliveryAddressCountryID
+
+| `Lieferadresse Länder-ISO-Code 2`
+| `contact.formattedAddresses.deliveryAddress.country.isoCode2`
+| $DeliveryAddressCountryIsoCode
+
+| `Lieferadresse Länder-ISO-Code 3`
+| `contact.formattedAddresses.deliveryAddress.country.isoCode3`
+| $DeliveryAddressCountryIsoCode
+
+| `Lieferadresse Nachname`
+| `contact.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressLastName
+
+| `Lieferadresse Ort`
+| `contact.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCity
+
+| `Lieferadresse Postleitzahl`
+| `contact.formattedAddresses.deliveryAddress.postalCode`
+| $DeliveryAddressZip
+
+| `Lieferadresse Postleitzahl und Ort`
+| `contact.formattedAddresses.deliveryAddress.postalCode ~ ' ' ~ contact.formattedAddresses.deliveryAddress.town`
+| $DeliveryAddressCityWithZip
+
+| `Lieferadresse Straße`
+| `contact.formattedAddresses.deliveryAddress.address1 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.address2`
+| $DeliveryAddressStreet
+
+| `Lieferadresse Vorname`
+| `contact.formattedAddresses.deliveryAddress.name2`
+| $DeliveryAddressFirstName
+
+| `Lieferadresse Vorname und Nachname`
+| `contact.formattedAddresses.deliveryAddress.name2 ~ ' ' ~ contact.formattedAddresses.deliveryAddress.name3`
+| $DeliveryAddressFullName
+
+|====
+
+[#variablen-kontakt-lieferadresse-optionen]
+===== Kontakt / Lieferadresse / Optionen der Lieferadresse
+
+[TIP]
+*_Hinweis:_* Wenn es sich um eine Nachbestellung handelt, werden einige der folgenden Variablen für die Adressoptionen der Lieferadresse nicht in der E-Mail an deine Kund:innen ausgegeben. Das liegt daran, dass die Adressen, die an einem Lieferanten gespeichert werden, nicht berücksichtigt werden, weil du einen Lieferanten auch ohne Adresse in deinem System speichern kannst.
+
+[[table-variables-contact-delivery-address-options]]
+.Variablen in der Unterkategorie *Kontakt / Lieferadresse / Optionen der Lieferadresse*
+[cols="1,2,3"]
+|====
+|Name der Variable |Erläuterung |Twig expression
+
+| `Lieferadresse Altersfreigabe`
+|Altersfreigabe aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.BBFC`
+
+| `Lieferadresse E-Mail`
+|E-Mail-Adresse aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.email`
+
+| `Lieferadresse Externe Adress-ID`
+|Externe Adress-ID aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
+
+| `Lieferadresse Externe Kunden-ID`
+|Externe Kunden-ID aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalCustomerID`
+
+| `Lieferadresse Geburtstag`
+|Geburtstag aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.birthday`
+
+| `Lieferadresse Gelangensbestätigung`
+|Gelangensbestätigung aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.entryCertificate`
+
+| `Lieferadresse Kontaktperson`
+|Kontaktperson aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.contactPerson`
+
+| `Lieferadresse Personennummer`
+|Personennummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.personalId`
+
+| `Lieferadresse Postnummer`
+|Postnummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.postNumber`
+
+| `Lieferadresse Telefon`
+|Telefonnummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.telephone`
+
+| `Lieferadresse Titel`
+|Titel aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.title`
+
+| `Lieferadresse USt-IdNr.`
+|Umsatzsteuer-Identifikationsnummer aus der Lieferadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
+
+|====
+
+[#variablen-kontakt-rechnungsadresse]
+==== Kontakt / Rechnungsadresse
+
+Klicke auf einen der folgenden Links, um direkt in das entsprechende Unterkapitel weitergeleitet zu werden:
+
+* <<#variablen-kontakt-rechnungsadresse-daten, Daten der Rechnungsadresse>>
+* <<#variablen-kontakt-rechnungsadresse-optionen, Optionen der Rechnungsadresse>>
+
+[#variablen-kontakt-rechnungsadresse-daten]
+===== Kontakt / Rechnungsadresse / Daten der Rechnungsadresse
+
+[[table-variables-contact-invoice-address-data]]
+.Variablen in der Unterkategorie *Kontakt / Rechnungsadresse / Daten der Rechnungsadresse*
+[cols="1,3,2"]
+|====
+|Name der Variable |Twig expression |Name der alten Variablefootnote:1[]
+
+| `Rechnungsadresse Adresszusatz`
+| `contact.formattedAddresses.invoiceAddress.address3 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address4`
+|
+
+| `Rechnungsadresse Bundesland`
+| `contact.formattedAddresses.invoiceAddress.state.name`
+|
+
+| `Rechnungsadresse Firmenname`
+| `contact.formattedAddresses.invoiceAddress.name1`
+|
+
+| `Rechnungsadresse Hausnummer`
+| `contact.formattedAddresses.invoiceAddress.address2`
+|
+
+| `Rechnungsadresse Land`
+| `contact.formattedAddresses.invoiceAddress.country.name`
+|
+
+| `Rechnungsadresse Länder-ID`
+| `contact.formattedAddresses.invoiceAddress.country.id`
+|
+
+| `Rechnungsadresse Länder-ISO-Code 2`
+| `contact.formattedAddresses.invoiceAddress.country.isoCode2`
+|
+
+| `Rechnungsadresse Länder-ISO-Code 3`
+| `contact.formattedAddresses.invoiceAddress.country.isoCode3`
+|
+
+| `Rechnungsadresse Nachname`
+| `contact.formattedAddresses.invoiceAddress.name3`
+|
+
+| `Rechnungsadresse Ort`
+| `contact.formattedAddresses.invoiceAddress.town`
+|
+
+| `Rechnungsadresse Postleitzahl`
+| `contact.formattedAddresses.invoiceAddress.postalCode`
+|
+
+| `Rechnungsadresse Postleitzahl und Ort`
+| `contact.formattedAddresses.invoiceAddress.postalCode ~ ' ' ~ contact.formattedAddresses.invoiceAddress.town`
+|
+
+| `Rechnungsadresse Straße`
+| `contact.formattedAddresses.invoiceAddress.address1 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.address2`
+|
+
+| `Rechnungsadresse Vorname`
+| `contact.formattedAddresses.invoiceAddress.name2`
+|
+
+| `Rechnungsadresse Vorname und Nachname`
+| `contact.formattedAddresses.invoiceAddress.name2 ~ ' ' ~ contact.formattedAddresses.invoiceAddress.name3`
+|
+
+|====
+
+[#variablen-kontakt-rechnungsadresse-optionen]
+===== Kontakt / Rechnungsadresse / Optionen der Rechnungsadresse
+
+[TIP]
+*_Hinweis:_* Wenn es sich um eine Nachbestellung handelt, werden einige der folgenden Variablen für die Adressoptionen der Rechnungsadresse nicht in der E-Mail an deine Kund:innen ausgegeben. Das liegt daran, dass die Adressen, die an einem Lieferanten gespeichert werden, nicht berücksichtigt werden, weil du einen Lieferanten auch ohne Adresse in deinem System speichern kannst.
+
+[[table-variables-contact-invoice-address-options]]
+.Variablen in der Unterkategorie *Kontakt / Rechnungsadresse / Optionen der Rechnungsadresse*
+[cols="1,3,2"]
+|====
+
+| `Rechnungsadresse Altersfreigabe`
+|Altersfreigabe aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.BBFC`
+
+| `Rechnungsadresse E-Mail`
+|E-Mail-Adresse aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.email`
+
+| `Rechnungsadresse Externe Adress-ID`
+|Externe Adress-ID aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.externalAddressID`
+
+| `Rechnungsadresse Externe Kunden-ID`
+|Externe Kunden-ID aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.externalCustomerID`
+
+| `Rechnungsadresse Geburtstag`
+|Geburtstag aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.birthday`
+
+| `Rechnungsadresse Gelangensbestätigung`
+|Gelangensbestätigung aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.entryCertificate`
+
+| `Rechnungsadresse Kontaktperson`
+|Kontaktperson aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.contactPerson`
+
+| `Rechnungsadresse Personennummer`
+|Personennummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.personalId`
+
+| `Rechnungsadresse Postnummer`
+|Postnummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.postNumber`
+
+| `Rechnungsadresse Telefon`
+|Telefonnummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.telephone`
+
+| `Rechnungsadresse Titel`
+|Titel aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.invoiceAddress.formattedOptions.title`
+
+| `Rechnungsadresse USt-IdNr.`
+|Umsatzsteuer-Identifikationsnummer aus der Rechnungsadresse wie im Kontaktdatensatz im Bereich *Adresse > Adressoptionen* gespeichert.
+| `contact.formattedAddresses.deliveryAddress.formattedOptions.VATNumber`
+
+|====
+
 [#variablen-messenger]
 === Variablen: Messenger
 
@@ -2342,33 +2337,33 @@ Weitere Informationen, wie die Zuordnung erfolgt, findest du auf der Handbuchsei
 |====
 |Name der Variable |Erläuterung |Twig expression
 
-| `Erste Nachricht der Konversation`
-|Gibt den Text der ersten Nachricht innerhalb der Konversation aus.
-| `messenger.formattedMessage.conversationFirstMessage \| raw`
-
 | `Erste geflüsterte Nachricht der Konversation`
 |Gibt den Text der ersten geflüsterten Nachricht innerhalb der Konversation aus.
 | `messenger.formattedMessage.conversationFirstWhisperedMessage \| raw`
 
-| `Konversationshistorie`
-|
-| `messenger.formattedMessage.conversationHistory \| raw`
+| `Erste Nachricht der Konversation`
+|Gibt den Text der ersten Nachricht innerhalb der Konversation aus.
+| `messenger.formattedMessage.conversationFirstMessage \| raw`
 
 | `ID der Konversation`
 |Gibt die ID der Konversation aus.
 | `messenger.uuid`
 
-| `Letzte Nachricht der Konversation`
-|Gibt den Text der letzten Nachricht innerhalb der Konversation aus.
-| `messenger.formattedMessage.conversationLastMessage \| raw`
+| `Konversationshistorie`
+|
+| `messenger.formattedMessage.conversationHistory \| raw`
+
+| `Kurz-ID der Konversation`
+| Gibt die Kurz-ID der Konversation aus.
+| `messenger.shortId`
 
 | `Letzte geflüsterte Nachricht der Konversation`
 |Gibt den Text der letzten geflüsterten Nachricht innerhalb der Konversation aus.
 | `messenger.formattedMessage.conversationLastWhisperedMessage \| raw`
 
-| `Abgekürzte ID der Konversation`
-| Gibt die abgekürzte ID der Konversation aus.
-| `messenger.shortId`
+| `Letzte Nachricht der Konversation`
+|Gibt den Text der letzten Nachricht innerhalb der Konversation aus.
+| `messenger.formattedMessage.conversationLastMessage \| raw`
 
 | `Titel der Konversation`
 |Gibt den Betreff der Konversation aus.
@@ -2385,14 +2380,19 @@ Weitere Informationen, wie die Zuordnung erfolgt, findest du auf der Handbuchsei
 |====
 |Name der Variable |Erläuterung |Twig expression |Name der alten Variablefootnote:1[]
 
+| `Newsletter Nachname`
+|Nachname der Person, die den xref:crm:newsletter-versenden.adoc#[Newsletter] abonnieren möchte.
+| `newsletter.lastName`
+| -
+
 | `Newsletter Vorname`
 |Vorname der Person, die den xref:crm:newsletter-versenden.adoc#[Newsletter] abonnieren möchte.
 | `newsletter.firstName`
 | -
 
-| `Newsletter Nachname`
-|Nachname der Person, die den xref:crm:newsletter-versenden.adoc#[Newsletter] abonnieren möchte.
-| `newsletter.lastName`
+| `URL zum Abmelden des Newsletters`
+|Gibt die URL zum Abmelden des xref:crm:newsletter-versenden.adoc#[Newsletters] aus.
+| `newsletter.urlToUnsubscribeFromNewsletter \| raw`
 | -
 
 | `URL zur Bestätigung des Newsletter-Abonnements`
@@ -2421,26 +2421,10 @@ Im Bereich *Textblöcke* findest du alle Textblöcke als Variablen, die du im Me
 | `ticket.formattedUrl.backendUrlNew \| raw`
 | $TicketBackendURL
 
-| `Ticket: Nachrichtenhistorie`
-|Gibt den zuletzt gespeicherten Text im Ticket aus. Das ist entweder der Text eines Kommentars oder einer Nachricht.
-| `ticket.formattedMessage.history`
-| $TicketHistory
-
 | `Ticket-ID`
 |Gibt die ID des Tickets aus, aus dem die E-Mail versendet wurde.
 | `ticket.id`
 | $TicketID
-
-| `Ticket: Letzter Kommentar`
-|Gibt den Text des letzten xref:crm:ticketsystem-nutzen.adoc#2500[Kommentars] aus. +
-*_Hinweis:_* Kommentare dienen der internen Kommunikation und sind für deine Kund:innen _nicht_ sichtbar.
-| `ticket.formattedMessage.lastComment`
-| $TicketLastComment
-
-| `Ticket: Letzte Nachricht`
-|Gibt den Text der letzten xref:crm:ticketsystem-nutzen.adoc#2400[Nachricht] aus.
-| `ticket.formattedMessage.lastMessage`
-| $TicketLastMessage
 
 | `Ticket-Priorität`
 |Gibt die Priorität des Tickets als ID aus. Die Werte der Sterne werden aufsteigend mit Zahlen von `0` (grauer Stern, niedrigste Priorität) bis `5` (2 gelbe Sterne, höchste Priorität) angezeigt.
@@ -2467,5 +2451,21 @@ Im Bereich *Textblöcke* findest du alle Textblöcke als Variablen, die du im Me
 Beachte dazu das Kapitel xref:crm:ticketsystem-nutzen.adoc#5500[Tickets im Mein Konto-Bereich erstellen] auf der Handbuchseite xref:crm:ticketsystem-nutzen.adoc#[Ticketsystem].
 | `ticket.formattedUrl.urlNew \| raw`
 | $TicketURL
+
+| `Ticket: Letzte Nachricht`
+|Gibt den Text der letzten xref:crm:ticketsystem-nutzen.adoc#2400[Nachricht] aus.
+| `ticket.formattedMessage.lastMessage`
+| $TicketLastMessage
+
+| `Ticket: Letzter Kommentar`
+|Gibt den Text des letzten xref:crm:ticketsystem-nutzen.adoc#2500[Kommentars] aus. +
+*_Hinweis:_* Kommentare dienen der internen Kommunikation und sind für deine Kund:innen _nicht_ sichtbar.
+| `ticket.formattedMessage.lastComment`
+| $TicketLastComment
+
+| `Ticket: Nachrichtenhistorie`
+|Gibt den zuletzt gespeicherten Text im Ticket aus. Das ist entweder der Text eines Kommentars oder einer Nachricht.
+| `ticket.formattedMessage.history`
+| $TicketHistory
 
 |====
